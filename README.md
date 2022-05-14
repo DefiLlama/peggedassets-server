@@ -13,7 +13,7 @@ After submitting a PR, you can submit basic info about the pegged asset (website
 
 ## Pegged asset adapters
 
-An adaptor is a Typescript file that exports an object in the following format:
+An adapter is a Typescript file that exports an object in the following format:
 
     const  adapter: PeggedIssuanceAdapter = {
       [chain1]: {
