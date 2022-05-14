@@ -33,7 +33,9 @@ An adaptor is a Typescript file that exports an object in the following format:
     }
 
 The `minted` and `unreleased` properties are required to be present on every chain object. `minted` means pegged assets that have been issued on that chain (not bridged from anywhere). `unreleased` means pegged assets that are in a reserve wallet and have never been circulating. If either of these are 0, you can use `async () => ({})`.
+
 The `bridgedFromChain` properties are optional. The property name should simply be the name of the chain the pegged assets are bridged from.
+
 The async functions should take timestamp, ethBlock, and chainBlocks as parameters, just like Defillama Adapters. They must return an object `{ peggedXYZ: x }`, where `peggedXYZ` is a supported pegged asset type, and `x` is a Number. Currently only `peggedUSD` is supported.
 
 Here is an example adapter:
