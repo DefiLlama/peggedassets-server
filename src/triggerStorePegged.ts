@@ -1,5 +1,5 @@
 import { wrapScheduledLambda } from "./utils/shared/wrap";
-import peggedAssets from "./protocols/peggedData";
+import peggedAssets from "./peggedData/peggedData";
 import invokeLambda from "./utils/shared/invokeLambda";
 
 function shuffleArray(array: number[]) {

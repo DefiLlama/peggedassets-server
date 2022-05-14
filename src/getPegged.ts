@@ -5,7 +5,7 @@ import {
   errorResponse,
 } from "./utils/shared";
 import { getHistoricalValues } from "./utils/shared/dynamodb";
-import peggedAssets from "./protocols/peggedData";
+import peggedAssets from "./peggedData/peggedData";
 import {
   getLastRecord,
   hourlyPeggedBalances,
@@ -19,7 +19,7 @@ import {
   addToChains,
 } from "./utils/normalizeChain";
 import { importAdapter } from "./peggedAssets/utils/importAdapter";
-import getCurrentPeggedPrice from "./DefiLlama-Adapters/peggedAssets/prices";
+import getCurrentPeggedPrice from "./adapters/peggedAssets/prices";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
 type HourlyTvl = AWS.DynamoDB.DocumentClient.AttributeMap | undefined;

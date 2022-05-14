@@ -1,4 +1,4 @@
-import { PeggedAsset } from "../../protocols/peggedData";
+import { PeggedAsset } from "../../peggedData/peggedData";
 import * as Sentry from "@sentry/serverless";
 import { PeggedAssetIssuance, PeggedTokenBalance } from "../../types";
 import {
@@ -111,8 +111,10 @@ async function calcCirculating(
       if (bridgedFromMapping[chain]) {
         bridgedFromMapping[chain].forEach((peggedTokenBalance) => {
           const balance = peggedTokenBalance[pegType];
-          if ((balance == null) || (circulating[pegType] === 0)) {
-            console.error(`Null balance or 0 circulating error on chain ${chain}`);
+          if (balance == null || circulating[pegType] === 0) {
+            console.error(
+              `Null balance or 0 circulating error on chain ${chain}`
+            );
             return;
           }
           circulating[pegType]! -= balance;

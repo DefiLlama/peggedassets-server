@@ -1,5 +1,5 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
-import peggedAssets from "./protocols/peggedData";
+import peggedAssets from "./peggedData/peggedData";
 import dynamodb from "./utils/shared/dynamodb";
 import {
   getLastRecord,
@@ -81,7 +81,7 @@ export async function craftChartsResponse(
     })
   );
   historicalPeggedBalances.forEach((peggedBalance) => {
-    console.log(peggedBalance)
+    console.log(peggedBalance);
     if (peggedBalance === undefined) {
       return;
     }

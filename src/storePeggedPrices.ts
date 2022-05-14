@@ -1,5 +1,5 @@
-import peggedAssets from "./protocols/peggedData";
-import getCurrentPeggedPrice from "./DefiLlama-Adapters/peggedAssets/prices";
+import peggedAssets from "./peggedData/peggedData";
+import getCurrentPeggedPrice from "./adapters/peggedAssets/prices";
 const { getCurrentBlocks } = require("@defillama/sdk/build/computeTVL/blocks");
 import { wrapScheduledLambda } from "./utils/shared/wrap";
 import { store } from "./utils/s3";
@@ -16,7 +16,7 @@ const handler = async (_event: any) => {
       let pricePromises = peggedAssets.map(async (pegged) => {
         const price = await getCurrentPeggedPrice(pegged.gecko_id, chainBlocks);
         if (typeof price !== "number") {
-          throw new Error(`price is NaN. Instead it is ${typeof price}`)
+          throw new Error(`price is NaN. Instead it is ${typeof price}`);
         }
         prices[pegged.gecko_id] = price;
       });

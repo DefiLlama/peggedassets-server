@@ -1,6 +1,9 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import fetch from "node-fetch";
-import peggedAssets, { PeggedAsset } from "./protocols/peggedData";
+import peggedAssets, {
+  PeggedAsset,
+  peggedCategoryList,
+} from "./peggedData/peggedData";
 import {
   getLastRecord,
   hourlyPeggedBalances,
@@ -22,7 +25,6 @@ import {
 } from "./utils/date";
 import dynamodb, { TableName } from "./utils/shared/dynamodb";
 import { craftPeggedChainsResponse } from "./getPeggedChains";
-import { peggedCategoryList } from "./protocols/peggedData";
 
 async function getTVLOfRecordClosestToTimestamp(
   PK: string,

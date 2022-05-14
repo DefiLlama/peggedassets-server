@@ -18,6 +18,6 @@ export type tvlsObject<T> = {
 
 export type PeggedAssetIssuance = {
   [chain: string]: {
-      [issuanceType: string]: PeggedTokenBalance;
+    [issuanceType: string]: PeggedTokenBalance;
   };
 };

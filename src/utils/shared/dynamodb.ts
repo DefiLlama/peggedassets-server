@@ -4,7 +4,7 @@ import sleep from "./sleep";
 const client = new AWS.DynamoDB.DocumentClient({
   region: "us-east-1",
 });
-export const TableName = 'prod-table';
+export const TableName = "prod-table";
 
 const dynamodb = {
   get: (

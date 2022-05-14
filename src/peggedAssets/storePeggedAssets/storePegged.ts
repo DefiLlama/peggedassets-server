@@ -1,6 +1,6 @@
 import { storePeggedAsset } from "./getAndStorePeggedAssets";
 import { getCurrentBlocks } from "@defillama/sdk/build/computeTVL/blocks";
-import peggedAssets from "../../protocols/peggedData";
+import peggedAssets from "../../peggedData/peggedData";
 import { importAdapter } from "../utils/importAdapter";
 
 const maxRetries = 4;
@@ -18,7 +18,7 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
         peggedAsset,
         adapterModule,
         maxRetries,
-        true,
+        true
       );
     });
   await Promise.all(actions);

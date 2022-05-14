@@ -1,5 +1,5 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
-import peggedAssets from "./protocols/peggedData";
+import peggedAssets from "./peggedData/peggedData";
 import {
   getLastRecord,
   hourlyPeggedBalances,

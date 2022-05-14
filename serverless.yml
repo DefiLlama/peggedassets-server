@@ -114,13 +114,6 @@ functions:
       - http:
           path: peggedchains
           method: get
-  config:
-    handler: src/getConfig.default
-    timeout: 10
-    events:
-      - http:
-          path: config
-          method: get
   storePeggedAssets:
     handler: src/storePeggedAssets.default
     timeout: 900
@@ -132,10 +125,6 @@ functions:
       - schedule: cron(0 * * * ? *)
   storePeggedPrices:
     handler: src/storePeggedPrices.default
-    timeout: 900
-    memorySize: 128
-  notifyOutdated:
-    handler: src/notifyOutdated.default
     timeout: 900
     memorySize: 128
   fetchCoingeckoData:
