@@ -16,18 +16,18 @@ After submitting a PR, you can submit basic info about the pegged asset (website
 An adaptor is a Typescript file that exports an object in the following format:
 
     const  adapter: PeggedIssuanceAdapter = {
-    [chain1]: {
+      [chain1]: {
         minted: async fn,
         unreleased: async fn,
         [bridgedFromChain1]: async fn,
         [bridgedFromChain2]: async fn,
         .
         .
-        },
-    [chain2]: {
+      },
+      [chain2]: {
         minted: async fn,
         unreleased: async fn,
-        },
+      },
     .
     .
     }
