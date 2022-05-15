@@ -81,7 +81,6 @@ export async function craftChartsResponse(
     })
   );
   historicalPeggedBalances.forEach((peggedBalance) => {
-    console.log(peggedBalance);
     if (peggedBalance === undefined) {
       return;
     }
@@ -106,12 +105,8 @@ export async function craftChartsResponse(
           itemBalance.unreleased = item.totalCirculating.unreleased;
         }
       } else {
-        itemBalance.circulating = item[normalizeChain(chain)]
-          ? item[normalizeChain(chain)].circulating
-          : 0;
-        itemBalance.unreleased = item[normalizeChain(chain)]
-          ? item[normalizeChain(chain)].unreleased
-          : 0;
+        itemBalance.circulating = item[normalizeChain(chain)]?.circulating ?? 0;
+        itemBalance.unreleased = item[normalizeChain(chain)]?.unreleased ?? 0;
         if (itemBalance.circulating === undefined) {
           if (chain === pegged.chain.toLowerCase()) {
             itemBalance.circulating = item.totalCirculating.circulating;
@@ -123,7 +118,8 @@ export async function craftChartsResponse(
           }
         }
       }
-      // NEED SOME STRICTER CHECKING HERE!!!
+      
+      // need stricter checks here
       if (itemBalance !== null) {
         sumDailyBalances[timestamp] = sumDailyBalances[timestamp] || {};
         sumDailyBalances[timestamp].circulating =
@@ -131,7 +127,6 @@ export async function craftChartsResponse(
         sumDailyBalances[timestamp].circulating[pegType] =
           (sumDailyBalances[timestamp].circulating[pegType] ?? 0) +
           itemBalance.circulating[pegType];
-
         sumDailyBalances[timestamp] = sumDailyBalances[timestamp] || {};
         sumDailyBalances[timestamp].unreleased =
           sumDailyBalances[timestamp].unreleased || {};

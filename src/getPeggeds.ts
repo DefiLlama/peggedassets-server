@@ -57,7 +57,7 @@ export async function craftProtocolsResponse(
     )
       .then((res: any) => res.json())
       .catch(() => {
-        throw new Error("Could not fetch pegged prices");
+        console.error("Could not fetch pegged prices");
       });
   }
 
