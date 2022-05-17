@@ -1,7 +1,10 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import peggedAssets from "./peggedData/peggedData";
 import dynamodb from "./utils/shared/dynamodb";
+import getTVLOfRecordClosestToTimestamp from "./utils/shared/getRecordClosestToTimestamp";
+import { secondsInDay } from "./utils/date";
 import {
+  dailyPeggedPrices,
   getLastRecord,
   hourlyPeggedBalances,
 } from "./peggedAssets/utils/getLastRecord";
@@ -21,6 +24,7 @@ export async function craftChartsResponse(
     [timestamp: number]: {
       circulating: tokenBalance;
       unreleased: tokenBalance;
+      mcap: number;
     };
   };
   const normalizedChain =
@@ -80,80 +84,104 @@ export async function craftChartsResponse(
       };
     })
   );
-  historicalPeggedBalances.forEach((peggedBalance) => {
-    if (peggedBalance === undefined) {
-      return;
-    }
-    let { historicalBalance, pegged, lastTimestamp } = peggedBalance;
-    const pegType = pegged.pegType;
-    const lastBalance = historicalBalance[historicalBalance.length - 1];
-    while (lastTimestamp < lastDailyTimestamp) {
-      lastTimestamp = getClosestDayStartTimestamp(
-        lastTimestamp + 24 * secondsInHour
-      );
-      historicalBalance.push({
-        ...lastBalance,
-        SK: lastTimestamp,
-      });
-    }
-    historicalBalance.forEach((item) => {
-      const timestamp = getClosestDayStartTimestamp(item.SK);
-      let itemBalance: any = {};
-      if (chain === undefined) {
-        itemBalance.circulating = item.totalCirculating.circulating;
-        if (item.totalCirculating.unreleased) {
-          itemBalance.unreleased = item.totalCirculating.unreleased;
-        }
-      } else {
-        itemBalance.circulating = item[normalizeChain(chain)]?.circulating ?? 0;
-        itemBalance.unreleased = item[normalizeChain(chain)]?.unreleased ?? 0;
-        if (itemBalance.circulating === undefined) {
-          if (chain === pegged.chain.toLowerCase()) {
+  await Promise.all(
+    historicalPeggedBalances.map(async (peggedBalance) => {
+      if (peggedBalance === undefined) {
+        return;
+      }
+      let { historicalBalance, pegged, lastTimestamp } = peggedBalance;
+      const pegType = pegged.pegType;
+      const peggedGeckoID = pegged.gecko_id;
+      const lastBalance = historicalBalance[historicalBalance.length - 1];
+      while (lastTimestamp < lastDailyTimestamp) {
+        lastTimestamp = getClosestDayStartTimestamp(
+          lastTimestamp + 24 * secondsInHour
+        );
+        historicalBalance.push({
+          ...lastBalance,
+          SK: lastTimestamp,
+        });
+      }
+      await Promise.all(
+        historicalBalance.map(async (item) => {
+          const timestamp = getClosestDayStartTimestamp(item.SK);
+          let itemBalance: any = {};
+
+          const priceData = await getTVLOfRecordClosestToTimestamp(
+            dailyPeggedPrices(),
+            timestamp,
+            secondsInDay / 2
+          );
+          if (chain === undefined) {
             itemBalance.circulating = item.totalCirculating.circulating;
             if (item.totalCirculating.unreleased) {
               itemBalance.unreleased = item.totalCirculating.unreleased;
             }
           } else {
-            return;
+            itemBalance.circulating =
+              item[normalizeChain(chain)]?.circulating ?? 0;
+            itemBalance.unreleased =
+              item[normalizeChain(chain)]?.unreleased ?? 0;
+            if (itemBalance.circulating === undefined) {
+              if (chain === pegged.chain.toLowerCase()) {
+                itemBalance.circulating = item.totalCirculating.circulating;
+                if (item.totalCirculating.unreleased) {
+                  itemBalance.unreleased = item.totalCirculating.unreleased;
+                }
+              } else {
+                return;
+              }
+            }
           }
-        }
-      }
-      
-      // need stricter checks here
-      if (itemBalance !== null) {
-        sumDailyBalances[timestamp] = sumDailyBalances[timestamp] || {};
-        sumDailyBalances[timestamp].circulating =
-          sumDailyBalances[timestamp].circulating || {};
-        sumDailyBalances[timestamp].circulating[pegType] =
-          (sumDailyBalances[timestamp].circulating[pegType] ?? 0) +
-          itemBalance.circulating[pegType];
-        sumDailyBalances[timestamp] = sumDailyBalances[timestamp] || {};
-        sumDailyBalances[timestamp].unreleased =
-          sumDailyBalances[timestamp].unreleased || {};
-        sumDailyBalances[timestamp].unreleased[pegType] =
-          (sumDailyBalances[timestamp].unreleased[pegType] ?? 0) +
-          itemBalance.unreleased[pegType];
-      } else {
-        console.log(
-          "itemBalance is invalid",
-          itemBalance,
-          item,
-          pegged,
-          lastTimestamp,
-          historicalBalance
-        );
-      }
-    });
-  });
+
+          // need stricter checks here
+          if (itemBalance !== null) {
+            sumDailyBalances[timestamp] = sumDailyBalances[timestamp] || {};
+            sumDailyBalances[timestamp].circulating =
+              sumDailyBalances[timestamp].circulating || {};
+            sumDailyBalances[timestamp].circulating[pegType] =
+              (sumDailyBalances[timestamp].circulating[pegType] ?? 0) +
+              itemBalance.circulating[pegType];
+            sumDailyBalances[timestamp] = sumDailyBalances[timestamp] || {};
+            sumDailyBalances[timestamp].unreleased =
+              sumDailyBalances[timestamp].unreleased || {};
+            sumDailyBalances[timestamp].unreleased[pegType] =
+              (sumDailyBalances[timestamp].unreleased[pegType] ?? 0) +
+              itemBalance.unreleased[pegType];
+            const price = priceData?.prices?.[peggedGeckoID];
+            if (price) {
+              sumDailyBalances[timestamp].mcap =
+                (sumDailyBalances[timestamp].mcap ?? 0) +
+                itemBalance.circulating[pegType] * price;
+            } else {
+              sumDailyBalances[timestamp].mcap =
+                (sumDailyBalances[timestamp].mcap ?? 0) +
+                itemBalance.circulating[pegType];
+            }
+          } else {
+            console.log(
+              "itemBalance is invalid",
+              itemBalance,
+              item,
+              pegged,
+              lastTimestamp,
+              historicalBalance
+            );
+          }
+        })
+      );
+    })
+  );
 
   const response = Object.entries(sumDailyBalances).map(
     ([timestamp, balance]) => ({
       date: timestamp,
       totalCirculating: balance.circulating,
       unreleased: balance.unreleased,
+      mcap: balance.mcap,
     })
   );
-  console.log(JSON.stringify(response));
+
   return response;
 }
 
