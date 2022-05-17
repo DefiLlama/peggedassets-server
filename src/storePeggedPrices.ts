@@ -1,8 +1,12 @@
+import dynamodb from "./utils/shared/dynamodb";
 import peggedAssets from "./peggedData/peggedData";
 import getCurrentPeggedPrice from "./adapters/peggedAssets/prices";
 const { getCurrentBlocks } = require("@defillama/sdk/build/computeTVL/blocks");
 import { wrapScheduledLambda } from "./utils/shared/wrap";
 import { store } from "./utils/s3";
+import getTVLOfRecordClosestToTimestamp from "./utils/shared/getRecordClosestToTimestamp";
+import { getDay, getTimestampAtStartOfDay, secondsInDay } from "./utils/date";
+import { dailyPeggedPrices } from "./peggedAssets/utils/getLastRecord";
 
 type Prices = {
   [coinGeckoId: string]: Number;
@@ -10,7 +14,7 @@ type Prices = {
 
 const handler = async (_event: any) => {
   let prices = {} as Prices;
-  const { chainBlocks } = await getCurrentBlocks();
+  const { timestamp, chainBlocks } = await getCurrentBlocks();
   for (let i = 0; i < 5; i++) {
     try {
       let pricePromises = peggedAssets.map(async (pegged) => {
@@ -30,6 +34,20 @@ const handler = async (_event: any) => {
         continue;
       }
     }
+  }
+
+  const closestDailyRecord = await getTVLOfRecordClosestToTimestamp(
+    dailyPeggedPrices(),
+    timestamp,
+    secondsInDay * 1.5
+  );
+  if (getDay(closestDailyRecord?.SK) !== getDay(timestamp)) {
+    // First write of the day
+    await dynamodb.put({
+      PK: dailyPeggedPrices(),
+      SK: getTimestampAtStartOfDay(timestamp),
+      prices: prices,
+    });
   }
 };
 
