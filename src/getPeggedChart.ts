@@ -27,6 +27,11 @@ export async function craftChartsResponse(
       mcap: number;
     };
   };
+  // quick fix; need to update later
+  if ((chain === "Gnosis") || (chain === "gnosis")) {
+    chain = "xdai";
+  }
+
   const normalizedChain =
     chain === undefined ? undefined : normalizeChain(chain);
   let lastDailyTimestamp = 0;
