@@ -104,7 +104,9 @@ async function terraMinted() {
 
 const adapter: PeggedIssuanceAdapter = {
   terra: {
-    minted: terraMinted(), // this is currently broken
+    minted: async () => {
+      return { peggedUSD: 11278778389 };
+    }, // terraMinted() is currently broken
     unreleased: async () => ({}),
   },
   ethereum: {

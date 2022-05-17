@@ -82,7 +82,7 @@ functions:
   peggedchart:
     handler: src/getPeggedChart.default
     timeout: 60
-    memorySize: 128
+    memorySize: 2000
     events:
       - http:
           path: peggedcharts
@@ -93,7 +93,7 @@ functions:
   peggeds:
     handler: src/getPeggeds.default
     timeout: 120
-    memorySize: 128
+    memorySize: 2000
     events:
       - http:
           path: peggeds
@@ -101,7 +101,7 @@ functions:
   peggedAsset:
     handler: src/getPegged.default
     timeout: 120
-    memorySize: 128
+    memorySize: 2000
     events:
       - http:
           path: pegged/{pegged}
@@ -109,15 +109,23 @@ functions:
   peggedchains:
     handler: src/getPeggedChains.default
     timeout: 60
-    memorySize: 128
+    memorySize: 2000
     events:
       - http:
           path: peggedchains
           method: get
+  peggedprices:
+    handler: src/getPeggedPrices.default
+    timeout: 60
+    memorySize: 2000
+    events:
+      - http:
+          path: peggedprices
+          method: get
   storePeggedAssets:
     handler: src/storePeggedAssets.default
     timeout: 900
-    memorySize: 256
+    memorySize: 2000
   triggerStorePegged:
     handler: src/triggerStorePegged.default
     timeout: 900
@@ -126,7 +134,7 @@ functions:
   storePeggedPrices:
     handler: src/storePeggedPrices.default
     timeout: 900
-    memorySize: 128
+    memorySize: 1024
   fetchCoingeckoData:
     handler: src/fetchCoingeckoData.default
     timeout: 900

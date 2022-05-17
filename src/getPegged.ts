@@ -19,7 +19,6 @@ import {
   addToChains,
 } from "./utils/normalizeChain";
 import { importAdapter } from "./peggedAssets/utils/importAdapter";
-import getCurrentPeggedPrice from "./adapters/peggedAssets/prices";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
 type HourlyTvl = AWS.DynamoDB.DocumentClient.AttributeMap | undefined;
@@ -48,7 +47,6 @@ export async function craftProtocolResponse(
   const [lastBalancesHourlyRecord, historicalPeggedBalances, module] =
     await Promise.all([
       getLastRecord(hourlyPeggedBalances(peggedData.id)),
-      //LOOK AT THIS VVVVV
       getHistoricalValues(
         (useHourlyData ? hourlyPeggedBalances : dailyPeggedBalances)(
           peggedData.id
