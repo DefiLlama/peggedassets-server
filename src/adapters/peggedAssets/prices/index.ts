@@ -46,6 +46,11 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   }, // TUSD-USD ETH
+  "liquity-usd": {
+    address: "0x3D7aE7E594f2f2091Ad8798313450130d0Aba3a0",
+    chain: "ethereum",
+    decimals: 8,
+  },
 };
 
 export default async function getCurrentPeggedPrice(

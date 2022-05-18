@@ -5,6 +5,7 @@ import busd from "./binance-usd";
 import dai from "./dai";
 import frax from "./frax";
 import trueusd from "./true-usd";
+import lusd from "./liquity-usd";
 
 export default {
   tether,
@@ -14,4 +15,5 @@ export default {
   dai,
   frax,
   "true-usd": trueusd,
+  "liquity-usd": lusd,
 };

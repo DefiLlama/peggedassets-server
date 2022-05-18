@@ -976,5 +976,22 @@ export default [
       },
     },
     twitter: "https://twitter.com/tusdio",
+  }, {
+    id: "8",
+    name: "LUSD",
+    address: "0x5f98805a4e8be255a32880fdec7f6728c6568ba0",
+    symbol: "LUSD",
+    url: "https://www.liquity.org/",
+    description:
+      "LUSD is an algorithmic, immutable, governance-free USD-pegged stablecoin used to pay out loans on the Liquity protocol. LUSD can be redeemed against the underlying Ether collateral at face value.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/lusd.png`,
+    gecko_id: "liquity-lusd",
+    cmcId: "9566",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    chains: ["Ethereum"],
+    bridges: {},
+    twitter: "https://twitter.com/LiquityProtocol",
   },
 ] as PeggedAsset[];
