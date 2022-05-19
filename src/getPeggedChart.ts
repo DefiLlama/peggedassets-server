@@ -115,7 +115,7 @@ export async function craftChartsResponse(
           const priceData = await getTVLOfRecordClosestToTimestamp(
             dailyPeggedPrices(),
             timestamp,
-            secondsInDay / 2
+            secondsInDay * 3 / 2,
           );
           if (chain === undefined) {
             itemBalance.circulating = item.totalCirculating.circulating;
