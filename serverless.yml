@@ -82,7 +82,7 @@ functions:
   peggedchart:
     handler: src/getPeggedChart.default
     timeout: 60
-    memorySize: 2000
+    memorySize: 3000
     events:
       - http:
           path: peggedcharts
