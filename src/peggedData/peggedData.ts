@@ -28,6 +28,7 @@ export default [
     cmcId: "825",
     category: "stablecoins", // is for the frontend
     pegType: "peggedUSD", // should match balance key returned by adapter
+    priceSource: "chainlink",
     chains: [
       "Ethereum",
       "Polygon",
@@ -128,8 +129,8 @@ export default [
         link: "https://multichain.org/",
       },
       Optimism: {
-        bridge: "Optimistic Ethereum Gateway",
-        link: "https://gateway.optimism.io/",
+        bridge: "Optimism Bridge",
+        link: "https://app.optimism.io/bridge",
       },
       Moonbeam: {
         bridge: "Multichain Bridge",
@@ -243,6 +244,7 @@ export default [
     cmcId: "3408",
     category: "stablecoins",
     pegType: "peggedUSD",
+    priceSource: "chainlink",
     chains: [
       "Ethereum",
       "Polygon",
@@ -332,8 +334,8 @@ export default [
         link: "https://gateway.boba.network/",
       },
       Optimism: {
-        bridge: "Optimistic Ethereum Gateway",
-        link: "https://gateway.optimism.io/",
+        bridge: "Optimism Bridge",
+        link: "https://app.optimism.io/bridge",
       },
       Metis: {
         bridge: "Metis Andromeda Bridge",
@@ -448,6 +450,7 @@ export default [
     cmcId: "7129",
     category: "stablecoins",
     pegType: "peggedUSD",
+    priceSource: "chainlink",
     chains: [
       "Terra",
       "Ethereum",
@@ -534,6 +537,7 @@ export default [
     cmcId: "4687",
     category: "stablecoins",
     pegType: "peggedUSD",
+    priceSource: "chainlink",
     chains: [
       "Ethereum",
       "BSC",
@@ -689,6 +693,7 @@ export default [
     cmcId: "4943",
     category: "stablecoins",
     pegType: "peggedUSD",
+    priceSource: "chainlink",
     chains: [
       "Ethereum",
       "Solana",
@@ -732,8 +737,8 @@ export default [
         link: "https://www.binance.com/",
       },
       Optimism: {
-        bridge: "Optimistic Ethereum Gateway",
-        link: "https://gateway.optimism.io/",
+        bridge: "Optimism Bridge",
+        link: "https://app.optimism.io/bridge",
       },
       Harmony: {
         bridge: "Horizon Bridge by Harmony",
@@ -843,6 +848,7 @@ export default [
     cmcId: "6952",
     category: "stablecoins",
     pegType: "peggedUSD",
+    priceSource: "chainlink",
     chains: [
       "Ethereum",
       "BSC",
@@ -939,6 +945,7 @@ export default [
     cmcId: "2563",
     category: "stablecoins",
     pegType: "peggedUSD",
+    priceSource: "chainlink",
     chains: [
       "Ethereum",
       "BSC",
@@ -976,5 +983,114 @@ export default [
       },
     },
     twitter: "https://twitter.com/tusdio",
+  },
+  {
+    id: "8",
+    name: "Liquity USD",
+    address: "0x5f98805a4e8be255a32880fdec7f6728c6568ba0",
+    symbol: "LUSD",
+    url: "https://www.liquity.org/",
+    description:
+      "Liquity is a decentralized borrowing protocol that allows you to draw 0% interest loans against Ether used as collateral.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/liquity-usd.png`,
+    gecko_id: "liquity-usd",
+    cmcId: "9566",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "uniswap",
+    chains: ["Ethereum", "Polygon", "Optimism"],
+    bridges: {
+      Polygon: {
+        bridge: "Polygon PoS Bridge",
+        link: "https://polygon.technology/",
+      },
+      Optimism: {
+        bridge: "Optimism Bridge",
+        link: "https://app.optimism.io/bridge",
+      },
+    },
+    twitter: "https://twitter.com/LiquityProtocol",
+  },
+  {
+    id: "9",
+    name: "Fei USD",
+    address: "0x956f47f50a910163d8bf957cf5846d573e7f87ca",
+    symbol: "FEI",
+    url: "https://fei.money/",
+    description:
+      "Fei is a decentralized, scalable, and DeFi-native stablecoin protocol.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/fei-usd.png`,
+    gecko_id: "fei-usd",
+    cmcId: "8642",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "chainlink",
+    chains: ["Ethereum"],
+    bridges: {},
+    twitter: "https://twitter.com/feiprotocol",
+  },
+  {
+    id: "10",
+    name: "Magic Internet Money",
+    address: "0x956f47f50a910163d8bf957cf5846d573e7f87ca",
+    symbol: "MIM",
+    url: "https://abracadabra.money/",
+    description:
+      "Abracadabra.money is a spell book that allows users to produce magic internet money.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/magic-internet-money.png`,
+    gecko_id: "magic-internet-money",
+    cmcId: "162",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "chainlink",
+    chains: [
+      "Ethereum",
+      "Polygon",
+      "Avalanche",
+      "Arbitrum",
+      "Fantom",
+      "BSC",
+      "Moonriver",
+      "Boba",
+      "Metis",
+    ],
+    bridges: {
+      Polygon: {
+        bridge: "Abracadabra Bridge",
+        link: "https://abracadabra.money/",
+      },
+      Avalanche: {
+        bridge: "Abracadabra Bridge",
+        link: "https://abracadabra.money/",
+      },
+      Arbitrum: {
+        bridge: "Abracadabra Bridge",
+        link: "https://abracadabra.money/",
+      },
+      Fantom: {
+        bridge: "Abracadabra Bridge",
+        link: "https://abracadabra.money/",
+      },
+      BSC: {
+        bridge: "Abracadabra Bridge",
+        link: "https://abracadabra.money/",
+      },
+      Moonriver: {
+        bridge: "Multichain Bridge",
+        link: "https://multichain.org/",
+      },
+      Boba: {
+        bridge: "Multichain Bridge",
+        link: "https://multichain.org/",
+      },
+      Metis: {
+        bridge: "Multichain Bridge",
+        link: "https://multichain.org/",
+      },
+    },
+    twitter: "https://twitter.com/MIM_Spell",
   },
 ] as PeggedAsset[];
