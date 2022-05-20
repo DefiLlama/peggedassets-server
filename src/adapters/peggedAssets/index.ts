@@ -9,6 +9,7 @@ import liquity from "./liquity-usd"
 import fei from "./fei-usd"
 import mim from "./magic-internet-money"
 import pax from "./paxos-standard"
+import neutrino from "./neutrino"
 
 export default {
   tether,
@@ -22,4 +23,5 @@ export default {
   "fei-usd": fei,
   "magic-internet-money": mim,
   "paxos-standard": pax,
+  neutrino,
 };

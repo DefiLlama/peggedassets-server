@@ -1104,7 +1104,7 @@ export default [
     chain: "Ethereum",
     logo: `${baseIconsUrl}/paxos-standard.png`,
     gecko_id: "paxos-standard",
-    cmcId: "1",
+    cmcId: "3330",
     category: "stablecoins",
     pegType: "peggedUSD",
     priceSource: "chainlink",
@@ -1116,5 +1116,37 @@ export default [
       },
     },
     twitter: "https://twitter.com/paxosglobal",
+  },
+  {
+    id: "12",
+    name: "Neutrino USD",
+    address: "0x674c6ad92fd080e4004b2312b45f796a192d27a0",
+    symbol: "USDN",
+    url: "https://neutrino.at/",
+    description:
+      "Neutrino USD (USDN) is an algorithmic stablecoin pegged to the US dollar and backed by WAVES.",
+    chain: "Waves",
+    logo: `${baseIconsUrl}/neutrino.png`,
+    gecko_id: "neutrino",
+    cmcId: "5068",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "chainlink",
+    chains: ["Waves", "Ethereum", "Polygon", "BSC"],
+    bridges: {
+      Ethereum: {
+        bridge: "Waves Exchange",
+        link: "https://waves.exchange/",
+      },
+      Polygon: {
+        bridge: "Waves Exchange",
+        link: "https://waves.exchange/",
+      },
+      BSC: {
+        bridge: "Waves Exchange",
+        link: "https://waves.exchange/",
+      },
+    },
+    twitter: "https://twitter.com/neutrino_proto",
   },
 ] as PeggedAsset[];

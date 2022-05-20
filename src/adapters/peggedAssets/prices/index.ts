@@ -78,7 +78,12 @@ const feeds: ChainlinkFeeds = {
     address: "0x3D7aE7E594f2f2091Ad8798313450130d0Aba3a0",
     chain: "ethereum",
     decimals: 8,
-  },
+  }, // LUSD-USD ETH
+  neutrino: {
+    address: "0x7a8544894f7fd0c69cfcbe2b4b2e277b0b9a4355",
+    chain: "ethereum",
+    decimals: 8,
+  }, // USDN-USD ETH
 };
 
 const uniswapPools: UniswapPools = {};
