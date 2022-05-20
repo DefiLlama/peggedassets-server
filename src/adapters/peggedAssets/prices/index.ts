@@ -69,16 +69,19 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   }, // MIM-USD ETH
+  "paxos-standard": {
+    address: "0x09023c0da49aaf8fc3fa3adf34c6a7016d38d5e3",
+    chain: "ethereum",
+    decimals: 8,
+  }, // USDP-USD ETH
+  "liquity-usd": {
+    address: "0x3D7aE7E594f2f2091Ad8798313450130d0Aba3a0",
+    chain: "ethereum",
+    decimals: 8,
+  },
 };
 
-const uniswapPools: UniswapPools = {
-  "liquity-usd": {
-    address: "0x4e0924d3a751bE199C426d52fb1f2337fa96f736",
-    token: 0,
-    chain: "ethereum",
-    decimalsDifference: -12,
-  }, // LUSD-USDC
-};
+const uniswapPools: UniswapPools = {};
 
 export default async function getCurrentPeggedPrice(
   token: string,

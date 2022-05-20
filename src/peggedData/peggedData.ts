@@ -991,14 +991,14 @@ export default [
     symbol: "LUSD",
     url: "https://www.liquity.org/",
     description:
-      "Liquity is a decentralized borrowing protocol that allows you to draw 0% interest loans against Ether used as collateral.",
+      "LUSD is an algorithmic, immutable, governance-free USD-pegged stablecoin used to pay out loans on the Liquity protocol. LUSD can be redeemed against the underlying Ether collateral at face value.",
     chain: "Ethereum",
     logo: `${baseIconsUrl}/liquity-usd.png`,
     gecko_id: "liquity-usd",
     cmcId: "9566",
     category: "stablecoins",
     pegType: "peggedUSD",
-    priceSource: "uniswap",
+    priceSource: "chainlink",
     chains: ["Ethereum", "Polygon", "Optimism"],
     bridges: {
       Polygon: {
@@ -1092,5 +1092,29 @@ export default [
       },
     },
     twitter: "https://twitter.com/MIM_Spell",
+  },
+  {
+    id: "11",
+    name: "Pax Dollar",
+    address: "0x8e870d67f660d95d5be530380d0ec0bd388289e1",
+    symbol: "USDP",
+    url: "https://paxos.com/usdp/",
+    description:
+      "USDP gives customers the ability to store and send US Dollars with freedom, unrestricted by the limits of traditional banking.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/paxos-standard.png`,
+    gecko_id: "paxos-standard",
+    cmcId: "1",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "chainlink",
+    chains: ["Ethereum", "BSC"],
+    bridges: {
+      BSC: {
+        bridge: "BSC Bridge",
+        link: "https://www.binance.com/",
+      },
+    },
+    twitter: "https://twitter.com/paxosglobal",
   },
 ] as PeggedAsset[];
