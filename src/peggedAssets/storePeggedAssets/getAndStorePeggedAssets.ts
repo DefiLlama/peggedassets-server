@@ -53,6 +53,7 @@ async function getPeggedAsset(
           `Pegged balance for ${peggedAsset.name} is not a number, instead it is ${balance[pegType]}`
         );
       }
+
       peggedBalances[chain][issuanceType] = balance;
       if (issuanceType !== "minted" && issuanceType !== "unreleased") {
         // issuanceType must be a chain within peggedBalances, but I check for that when testing adapters.
@@ -124,6 +125,12 @@ async function calcCirculating(
         throw new Error(
           `Pegged asset on chain ${chain} has negative circulating amount`
         );
+      }
+      // Fix this.
+      // Rounding down small balances to avoid dealing with scientific floating points. Will be a problem for non-peggedUSD/peggedBTC.
+      // Also, 'minted' and 'unreleased' values are also used in frontend, need to deal with those too.
+      if (circulating[pegType]! < 10 ** -6) {
+        circulating[pegType] = 0;
       }
       peggedBalances[chain].circulating = circulating;
     }
