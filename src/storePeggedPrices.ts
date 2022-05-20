@@ -18,7 +18,7 @@ const handler = async (_event: any) => {
   for (let i = 0; i < 5; i++) {
     try {
       let pricePromises = peggedAssets.map(async (pegged) => {
-        const price = await getCurrentPeggedPrice(pegged.gecko_id, chainBlocks);
+        const price = await getCurrentPeggedPrice(pegged.gecko_id, chainBlocks, pegged.priceSource);
         if (typeof price !== "number") {
           throw new Error(`price is NaN. Instead it is ${typeof price}`);
         }

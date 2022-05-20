@@ -1,12 +1,25 @@
 const sdk = require("@defillama/sdk");
-import abi from "./abi.json";
+import chainabi from "./chainlink_abi.json";
+import uniabi from "./uniswap_abi.json";
 import { ChainBlocks } from "../peggedAsset.type";
+import { PriceSource } from "../../../peggedData/types";
+
+const TWAPIntervalInSeconds: number = 10;
 
 type ChainlinkFeeds = {
   [coinGeckoID: string]: {
     address: string;
     chain: string;
     decimals: number;
+  };
+};
+
+type UniswapPools = {
+  [coinGeckoID: string]: {
+    address: string;
+    token: 0 | 1;
+    chain: string;
+    decimalsDifference: number; // difference between number of decimals for token1 and number for token0
   };
 };
 
@@ -46,19 +59,71 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   }, // TUSD-USD ETH
+  "fei-usd": {
+    address: "0x31e0a88fecb6ec0a411dbe0e9e76391498296ee9",
+    chain: "ethereum",
+    decimals: 8,
+  }, // FEI-USD ETH
+  "magic-internet-money": {
+    address: "0x7A364e8770418566e3eb2001A96116E6138Eb32F",
+    chain: "ethereum",
+    decimals: 8,
+  }, // MIM-USD ETH
+};
+
+const uniswapPools: UniswapPools = {
+  "liquity-usd": {
+    address: "0x4e0924d3a751bE199C426d52fb1f2337fa96f736",
+    token: 0,
+    chain: "ethereum",
+    decimalsDifference: -12,
+  }, // LUSD-USDC
 };
 
 export default async function getCurrentPeggedPrice(
   token: string,
-  chainBlocks: ChainBlocks
-): Promise<Number> {
-  const feed = feeds[token];
-  const latestRound = await sdk.api.abi.call({
-    abi: abi.latestRoundData,
-    target: feed.address,
-    block: chainBlocks[feed.chain],
-    chain: feed.chain,
-  });
+  chainBlocks: ChainBlocks,
+  priceSource: PriceSource
+): Promise<Number | null> {
+  if (priceSource === "chainlink") {
+    const feed = feeds[token];
+    const latestRound = await sdk.api.abi.call({
+      abi: chainabi.latestRoundData,
+      target: feed.address,
+      block: chainBlocks[feed.chain],
+      chain: feed.chain,
+    });
 
-  return latestRound.output.answer / 10 ** feed.decimals;
+    if (latestRound.output && feed.decimals) {
+      return latestRound.output.answer / 10 ** feed.decimals;
+    }
+    console.error(`Could not get ChainLink price for token ${token}`);
+    return null;
+  }
+  if (priceSource === "uniswap") {
+    const pool = uniswapPools[token];
+    const observe = await sdk.api.abi.call({
+      abi: uniabi.observe,
+      params: [[0, TWAPIntervalInSeconds]],
+      target: pool.address,
+      block: chainBlocks[pool.chain],
+      chain: pool.chain,
+    });
+    if (observe.output && pool.decimalsDifference) {
+      // following follows method given in https://docs.uniswap.org/protocol/concepts/V3-overview/oracle
+      const token0TickCumulative = observe.output.tickCumulatives[0];
+      const token1TickCumulative = observe.output.tickCumulatives[1];
+      const weightedAverage =
+        (token1TickCumulative - token0TickCumulative) / TWAPIntervalInSeconds;
+      const token0token1PriceRatio =
+        1.0001 ** weightedAverage * 10 ** pool.decimalsDifference;
+      if (pool.token === 1) {
+        return token0token1PriceRatio;
+      } else return 1 / token0token1PriceRatio;
+    }
+    console.error(`Could not get Uniswap price for token ${token}`);
+    return null;
+  }
+  console.error(`no method to get price for given priceSource for ${token}`);
+  return null;
 }

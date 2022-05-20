@@ -32,6 +32,7 @@ type Bridges = {
 
 type PeggedCategory = "stablecoins";
 type PegType = "peggedUSD";
+export type PriceSource = 'chainlink' | 'uniswap'
 
 export interface PeggedAsset {
   id: string;
@@ -46,6 +47,7 @@ export interface PeggedAsset {
   cmcId: string;
   category: PeggedCategory;
   pegType: PegType;
+  priceSource: PriceSource;
   chains: string[];
   bridges: Bridges;
   twitter: string;
