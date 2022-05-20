@@ -1,4 +1,3 @@
-import { baseIconsUrl } from "../constants";
 import type { PeggedAsset } from "./types";
 
 export type { PeggedAsset };
@@ -23,7 +22,6 @@ export default [
     description:
       "Tether tokens offer the stability and simplicity of fiat currencies coupled with the innovative nature of blockchain technology, representing a perfect combination of both worlds.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/tether.png`,
     gecko_id: "tether",
     cmcId: "825",
     category: "stablecoins", // is for the frontend
@@ -239,7 +237,6 @@ export default [
     url: "https://www.circle.com/usdc/",
     description: "Digital dollars for global business.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/usd-coin.png`,
     gecko_id: "usd-coin",
     cmcId: "3408",
     category: "stablecoins",
@@ -445,7 +442,6 @@ export default [
     url: "https://www.terra.money/",
     description: "Programmable money for the internet.",
     chain: "Terra",
-    logo: `${baseIconsUrl}/terrausd.png`,
     gecko_id: "terrausd",
     cmcId: "7129",
     category: "stablecoins",
@@ -532,7 +528,6 @@ export default [
     description:
       "BUSD is a 1:1 USD-backed stablecoin approved by the New York State Department of Financial Services (NYDFS), issued in partnership with Paxos.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/binance-usd.png`,
     gecko_id: "binance-usd",
     cmcId: "4687",
     category: "stablecoins",
@@ -688,7 +683,6 @@ export default [
     description:
       "Dai is a stable, decentralized currency that does not discriminate. Any individual or business can realize the advantages of digital money.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/dai.png`,
     gecko_id: "dai",
     cmcId: "4943",
     category: "stablecoins",
@@ -843,7 +837,6 @@ export default [
     url: "https://frax.finance/",
     description: "Frax is the world’s first fractional-algorithmic stablecoin.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/frax.png`,
     gecko_id: "frax",
     cmcId: "6952",
     category: "stablecoins",
@@ -940,7 +933,6 @@ export default [
     description:
       "The first regulated stablecoin fully backed by the US Dollar.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/true-usd.png`,
     gecko_id: "true-usd",
     cmcId: "2563",
     category: "stablecoins",
@@ -993,7 +985,6 @@ export default [
     description:
       "LUSD is an algorithmic, immutable, governance-free USD-pegged stablecoin used to pay out loans on the Liquity protocol. LUSD can be redeemed against the underlying Ether collateral at face value.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/liquity-usd.png`,
     gecko_id: "liquity-usd",
     cmcId: "9566",
     category: "stablecoins",
@@ -1021,7 +1012,6 @@ export default [
     description:
       "Fei is a decentralized, scalable, and DeFi-native stablecoin protocol.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/fei-usd.png`,
     gecko_id: "fei-usd",
     cmcId: "8642",
     category: "stablecoins",
@@ -1040,7 +1030,6 @@ export default [
     description:
       "Abracadabra.money is a spell book that allows users to produce magic internet money.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/magic-internet-money.png`,
     gecko_id: "magic-internet-money",
     cmcId: "162",
     category: "stablecoins",
@@ -1102,7 +1091,6 @@ export default [
     description:
       "USDP gives customers the ability to store and send US Dollars with freedom, unrestricted by the limits of traditional banking.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/paxos-standard.png`,
     gecko_id: "paxos-standard",
     cmcId: "3330",
     category: "stablecoins",
@@ -1126,7 +1114,6 @@ export default [
     description:
       "Neutrino USD (USDN) is an algorithmic stablecoin pegged to the US dollar and backed by WAVES.",
     chain: "Waves",
-    logo: `${baseIconsUrl}/neutrino.png`,
     gecko_id: "neutrino",
     cmcId: "5068",
     category: "stablecoins",
