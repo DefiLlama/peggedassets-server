@@ -27,7 +27,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x14016e85a25aeb13065688cafb43044c2ef86784"],
   },
   avax: {
-    bridgedFromETH: ["0x1c20e891bab6b1727d14da358fae2984ed9b59eb"],
+    issued: ["0x1c20e891bab6b1727d14da358fae2984ed9b59eb"],
   },
   harmony: {
     bridgedFromETH: ["0x553a1151f3df3620fc2b5a75a6edda629e3da350"],
@@ -168,9 +168,8 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
   avalanche: {
-    minted: async () => ({}),
+    minted: chainMinted("avax", 18),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
   },
   /* this has 0 supply?
   harmony: {
