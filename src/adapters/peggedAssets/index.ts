@@ -10,6 +10,8 @@ import fei from "./fei-usd"
 import mim from "./magic-internet-money"
 import pax from "./paxos-standard"
 import neutrino from "./neutrino"
+import yusd from "./yusd-stablecoin"
+
 
 export default {
   tether,
@@ -24,4 +26,5 @@ export default {
   "magic-internet-money": mim,
   "paxos-standard": pax,
   neutrino,
+  "yeti-usd": yusd
 };
