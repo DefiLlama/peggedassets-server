@@ -1,11 +1,20 @@
+import { BridgeIDs } from "../../peggedData/bridgeData";
+
 export type ChainBlocks = {
   [x: string]: number;
 };
 
 export type PeggedAssetType = "peggedUSD";
-export type StringNumber = string;
-export type Balances = {
+
+type StringNumber = string;
+type Balances = {
   [peggedAsset in PeggedAssetType]: StringNumber | number;
+};
+type BridgeBalances = {
+  [bridgeID in BridgeIDs]: StringNumber | number;
+};
+export type BalancesAndBridgedBalances = Balances & {
+  bridges?: BridgeBalances;
 };
 
 export type Fetch = (

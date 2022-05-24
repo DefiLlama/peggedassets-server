@@ -1,28 +1,3 @@
-export interface Protocol {
-  id: string;
-  name: string;
-  address: string;
-  symbol: string;
-  url: string;
-  description: string;
-  chain: string;
-  logo: null | string;
-  audits: null | "0" | "1" | "2" | "3";
-  audit_note: null;
-  gecko_id: string;
-  cmcId: string;
-  category: string;
-  chains: string[];
-  oracles: string[];
-  forkedFrom: string[];
-  module: string;
-  twitter: string;
-  language?: string;
-  audit_links?: string[];
-  listedAt?: number;
-  openSource?: boolean;
-}
-
 type Bridges = {
   [chain: string]: {
     bridge: string;
@@ -32,9 +7,9 @@ type Bridges = {
 
 type PeggedCategory = "stablecoins";
 type PegType = "peggedUSD";
-export type PriceSource = 'chainlink' | 'uniswap'
+export type PriceSource = "chainlink" | "uniswap";
 
-export interface PeggedAsset {
+export type PeggedAsset = {
   id: string;
   name: string;
   address: string;
@@ -51,4 +26,13 @@ export interface PeggedAsset {
   chains: string[];
   bridges: Bridges;
   twitter: string;
-}
+};
+
+type Bridge = {
+  name: string;
+  link?: string;
+};
+
+export type BridgeInfo = {
+  [bridgeID: string]: Bridge;
+};
