@@ -26,5 +26,5 @@ export default {
   "magic-internet-money": mim,
   "paxos-standard": pax,
   neutrino,
-  "yeti-usd": yusd
+  "yusd-stablecoin": yusd
 };

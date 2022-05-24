@@ -1134,4 +1134,22 @@ export default [
     },
     twitter: "https://twitter.com/neutrino_proto",
   },
+  {
+    id: "13",
+    name: "YUSD Stablecoin",
+    address: "0x111111111111ed1d73f860f57b2798b683f2d325",
+    symbol: "YUSD",
+    url: "https://yeti.finance/",
+    description:
+      "Yeti Finance is a cross-margin lending protocol on Avalanche that allows users to borrow up to 21x against their portfolio and receive YUSD, an overcollateralized stablecoin.",
+    chain: "Avalanche",
+    gecko_id: "yusd-stablecoin",
+    cmcId: "19577",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "none",
+    chains: ["Avalanche"],
+    bridges: {},
+    twitter: "https://twitter.com/YetiFinance",
+  },
 ] as PeggedAsset[];
