@@ -8,7 +8,7 @@ export type PeggedAssetType = "peggedUSD";
 
 type StringNumber = string;
 type PeggedBalances = {
-  [peggedAsset in PeggedAssetType]: StringNumber | number;
+  [peggedAssetType: string]: StringNumber | number;
 };
 type BridgeBalances = {
   [bridgeID in BridgeIDs]: StringNumber | number;

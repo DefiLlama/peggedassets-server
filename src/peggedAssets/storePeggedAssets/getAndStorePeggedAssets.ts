@@ -1,6 +1,10 @@
 import { PeggedAsset } from "../../peggedData/peggedData";
 import * as Sentry from "@sentry/serverless";
-import { PeggedAssetIssuance, PeggedTokenBalance } from "../../types";
+import {
+  PeggedAssetIssuance,
+  PeggedTokenBalance,
+  BridgeBalances,
+} from "../../types";
 import {
   hourlyPeggedBalances,
   dailyPeggedBalances,
@@ -14,6 +18,8 @@ type ChainBlocks = {
 type BridgeMapping = {
   [chain: string]: PeggedTokenBalance[];
 };
+
+type EmptyObject = { [key: string]: undefined };
 
 async function getPeggedAsset(
   unixTimestamp: number,
@@ -77,6 +83,27 @@ async function getPeggedAsset(
   }
 }
 
+function mergeBridges(
+  bridgeBalances: BridgeBalances | EmptyObject,
+  bridgeBalancesToMerge: BridgeBalances
+) {
+  if (bridgeBalances && Object.keys(bridgeBalances).length === 0) {
+    bridgeBalances = bridgeBalancesToMerge;
+    return bridgeBalances;
+  }
+  bridgeBalances = bridgeBalances as BridgeBalances;
+  for (let bridgeID in bridgeBalancesToMerge) {
+    if (bridgeBalances[bridgeID]) {
+      const bridgeBalance = bridgeBalances[bridgeID];
+      const bridgeBalanceToMerge = bridgeBalancesToMerge[bridgeID];
+      bridgeBalances[bridgeID] = (bridgeBalance ?? 0) + bridgeBalanceToMerge;
+    } else {
+      bridgeBalances[bridgeID] = bridgeBalancesToMerge[bridgeID];
+    }
+  }
+  return bridgeBalances;
+}
+
 async function calcCirculating(
   peggedBalances: PeggedAssetIssuance,
   bridgedFromMapping: BridgeMapping,
@@ -91,6 +118,7 @@ async function calcCirculating(
       Object.entries(chainIssuances).map(
         ([issuanceType, peggedTokenBalance]) => {
           const balance = peggedTokenBalance[pegType];
+          const bridges = peggedTokenBalance.bridges;
           if (balance == null) {
             return;
           }
@@ -102,6 +130,12 @@ async function calcCirculating(
               if (issuanceType !== "minted" && issuanceType !== "circulating") {
                 peggedBalances[chain].bridgedTo[pegType]! += // issuanceType is a chain here
                   balance;
+                if (bridges) {
+                  peggedBalances[chain].bridgedTo.bridges = mergeBridges(
+                    peggedBalances[chain].bridgedTo.bridges || {},
+                    bridges
+                  );
+                }
               }
               circulating[pegType] = circulating[pegType] || 0;
               circulating[pegType]! += balance; // issuanceType is either "minted" or a chain here

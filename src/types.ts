@@ -1,11 +1,19 @@
+import { BridgeIDs } from "./peggedData/bridgeData";
+
 export interface TokenPrices {
   [token: string]: {
     usd: number;
   };
 }
 
-export type PeggedTokenBalance = {
-  [assetIsPeggedTo: string]: number | null;
+type PeggedBalances = {
+  [peggedAssetType: string]: number | null;
+};
+export type BridgeBalances = {
+  [bridgeID in BridgeIDs]: number;
+};
+export type PeggedTokenBalance = PeggedBalances & {
+  bridges?: BridgeBalances;
 };
 
 export type TokensValueLocked = {
