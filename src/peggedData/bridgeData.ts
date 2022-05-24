@@ -280,7 +280,7 @@ export default {
   "0x03ab98f5dc94996F8C33E15cD4468794d12d41f9": "waves",
 } as BridgeMapping;
 
-const bridgeInfo = {
+export const bridgeInfo = {
   issued: {
     name: "Natively Issued",
   },

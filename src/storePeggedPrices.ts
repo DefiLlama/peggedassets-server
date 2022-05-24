@@ -7,6 +7,7 @@ import { store } from "./utils/s3";
 import getTVLOfRecordClosestToTimestamp from "./utils/shared/getRecordClosestToTimestamp";
 import { getDay, getTimestampAtStartOfDay, secondsInDay } from "./utils/date";
 import { dailyPeggedPrices } from "./peggedAssets/utils/getLastRecord";
+import { bridgeInfo } from "./peggedData/bridgeData";
 
 type Prices = {
   [coinGeckoId: string]: Number | null;
@@ -18,10 +19,14 @@ const handler = async (_event: any) => {
   for (let i = 0; i < 5; i++) {
     try {
       let pricePromises = peggedAssets.map(async (pegged) => {
-        const price = await getCurrentPeggedPrice(pegged.gecko_id, chainBlocks, pegged.priceSource);
+        const price = await getCurrentPeggedPrice(
+          pegged.gecko_id,
+          chainBlocks,
+          pegged.priceSource
+        );
         if (typeof price !== "number") {
           if (price) {
-          throw new Error(`price is NaN. Instead it is ${typeof price}`);
+            throw new Error(`price is NaN. Instead it is ${typeof price}`);
           }
         }
         prices[pegged.gecko_id] = price;
@@ -37,6 +42,8 @@ const handler = async (_event: any) => {
       }
     }
   }
+
+  await store("bridgeInfo.json", JSON.stringify(bridgeInfo));
 
   const closestDailyRecord = await getTVLOfRecordClosestToTimestamp(
     dailyPeggedPrices(),
