@@ -124,7 +124,7 @@ const chainContracts: ChainContracts = {
   },
   syscoin: {
     bridgeOnETH: ["0x8cC49FE67A4bD7a15674c4ffD4E969D94304BBbf"],
-    bridgedFromETH: ["0x2bf9b864cdc97b08b6d79ad4663e71b8ab65c45c"],
+    bridgedFromETH: ["0x2bf9b864cdc97b08b6d79ad4663e71b8ab65c45c"], // multichain
   },
   okexchain: {
     bridgeOnETH: ["0x2c8FBB630289363Ac80705A1a61273f76fD5a161"],
@@ -219,7 +219,7 @@ const chainContracts: ChainContracts = {
      * is minted on Fantom. Assuming most is bridged from ETH for now.
      */
     bridgedFromETH: [
-      "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
+      "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75", // multichain
       "0x2Ec752329c3EB419136ca5e4432Aa2CDb1eA23e6", // wormhole
       "0x1b6382dbdea11d97f24495c9a90b7c88469134a4", // axelar
     ],
