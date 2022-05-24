@@ -6,13 +6,14 @@ type BridgeMapping = {
 
 export type BridgeIDs = keyof typeof bridgeInfo;
 
-// add natively issued addresses not caught in adapters
-
-// fix conflicts
+// add natively issued addresses not caught in adapters (solana issued, others)
 
 // missing TUSD
 
 export default {
+  "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB": "issued",
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "issued",
+  "0xb44a9b6905af7c801311e8f4e76932ee959c663c": "multichain",
   "0xeFAeeE334F0Fd1712f9a8cc375f427D9Cdd40d73": "multichain",
   "0xB44a9B6905aF7c801311e8F4E76932ee959c663C": "multichain",
   "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75": "multichain",
@@ -45,7 +46,6 @@ export default {
   "0x765277eebeca2e31912c9946eae1021199b39c61": "multichain",
   "0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e": "multichain",
   "0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844": "multichain",
-  "0x7B37d0787A3424A0810E02b24743a45eBd5530B2": "multichain", // this is a BUSD multichain address on Theta but a BUSD meter.passport address on Moonbeam
   "0x2bf9b864cdc97b08b6d79ad4663e71b8ab65c45c": "multichain",
   "0x2C78f1b70Ccf63CDEe49F9233e9fAa99D43AA07e": "multichain",
   "0xC931f61B1534EB21D8c11B24f3f5Ab2471d4aB50": "multichain",
@@ -207,6 +207,7 @@ export default {
   "0x24aa189dfaa76c671c279262f94434770f557c35": "passport",
   "0xaBD347F625194D8e56F8e8b5E8562F34B6Df3469": "passport",
   "0x5fa41671c48e3c951afc30816947126ccc8c162e": "passport",
+  "0x7B37d0787A3424A0810E02b24743a45eBd5530B2": "passport", // this is a BUSD multichain address on Theta but a BUSD meter.passport address on Moonbeam
   "0x47ac0Fb4F2D84898e4D9E7b4DaB3C24507a6D503": "bsc",
   "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56": "bsc",
   "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3": "bsc",
