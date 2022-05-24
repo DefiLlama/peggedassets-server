@@ -9,7 +9,7 @@ import { getDay, getTimestampAtStartOfDay, secondsInDay } from "./utils/date";
 import { dailyPeggedPrices } from "./peggedAssets/utils/getLastRecord";
 
 type Prices = {
-  [coinGeckoId: string]: Number;
+  [coinGeckoId: string]: Number | null;
 };
 
 const handler = async (_event: any) => {
@@ -20,7 +20,9 @@ const handler = async (_event: any) => {
       let pricePromises = peggedAssets.map(async (pegged) => {
         const price = await getCurrentPeggedPrice(pegged.gecko_id, chainBlocks, pegged.priceSource);
         if (typeof price !== "number") {
+          if (price) {
           throw new Error(`price is NaN. Instead it is ${typeof price}`);
+          }
         }
         prices[pegged.gecko_id] = price;
       });

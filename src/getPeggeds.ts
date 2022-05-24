@@ -167,7 +167,7 @@ export async function craftProtocolsResponse(
           chain: getDisplayChain(chains),
         } as any;
         if (getPrices) {
-          dataToReturn.price = prices[pegged.gecko_id];
+          dataToReturn.price = prices[pegged.gecko_id] ?? null;
         }
         if (typeof pegged.gecko_id === "string") {
           const coingeckoData = (await coinMarkets)[`asset#${pegged.gecko_id}`];
