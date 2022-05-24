@@ -17,6 +17,7 @@ type ChainContracts = {
   };
 };
 
+// all multichain
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x853d955acef822db058eb8505911ed77f175b99e"],
