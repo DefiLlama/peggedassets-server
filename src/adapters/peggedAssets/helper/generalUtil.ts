@@ -62,8 +62,13 @@ async function mergeBalances(
   balancesToMerge.bridges = balancesToMerge.bridges || {};
   const balance = balances[pegType];
   const balanceToMerge = balancesToMerge[pegType];
-  if (typeof balance === "number" && typeof balanceToMerge === "number") {
-    balances[pegType] = (balance ?? 0) + balanceToMerge;
+  if (!balance) {
+    balances[pegType] = balanceToMerge;
+  } else if (
+    typeof balance === "number" &&
+    typeof balanceToMerge === "number"
+  ) {
+    balances[pegType] = balance + balanceToMerge;
   } else {
     balances[pegType] = BigNumber.from(balance ?? 0)
       .add(BigNumber.from(balanceToMerge))
@@ -71,8 +76,8 @@ async function mergeBalances(
   }
   for (let bridgeID in balancesToMerge.bridges) {
     if (balances.bridges[bridgeID]) {
-      const bridgeBalance = balances.bridges[pegType];
-      const bridgeBalanceToMerge = balancesToMerge.bridges[pegType];
+      const bridgeBalance = balances.bridges[bridgeID];
+      const bridgeBalanceToMerge = balancesToMerge.bridges[bridgeID];
       if (
         typeof bridgeBalance === "number" &&
         typeof bridgeBalanceToMerge === "number"
