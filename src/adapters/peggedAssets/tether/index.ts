@@ -127,7 +127,7 @@ const chainContracts: ChainContracts = {
   },
   syscoin: {
     bridgeOnETH: ["0x8cC49FE67A4bD7a15674c4ffD4E969D94304BBbf"],
-    bridgedFromETH: ["0x922d641a426dcffaef11680e5358f34d97d112e1"],
+    bridgedFromETH: ["0x922d641a426dcffaef11680e5358f34d97d112e1"], // multichain
   },
   kardia: {
     bridgedFromETH: ["0x551a5dcac57c66aa010940c2dcff5da9c53aa53b"],
@@ -148,7 +148,7 @@ const chainContracts: ChainContracts = {
   },
   milkomeda: {
     bridgedFromETH: [
-      "0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844", // where is this from?
+      "0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844", // where is this from? assuming multichain
       "0x3795C36e7D12A8c252A20C5a7B455f7c57b60283", // celer
       "0xab58DA63DFDd6B97EAaB3C94165Ef6f43d951fb2", // nomad
     ],
@@ -162,7 +162,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x4988a896b1227218e4a686fde5eabdcabd91571f"],
   },
   telos: {
-    bridgedFromETH: ["0xefaeee334f0fd1712f9a8cc375f427d9cdd40d73"],
+    bridgedFromETH: ["0xefaeee334f0fd1712f9a8cc375f427d9cdd40d73"], // assuming multichain
   },
   oasis: {
     bridgedFromETH: [
@@ -238,6 +238,7 @@ const chainContracts: ChainContracts = {
 
 /* 
 EOS can't find suitable API, using USDT's API for now.
+pNetwork has USDT, USDC, DAI bridge to EOS, but so far unable to understand the EOS API.
 
 Statemine is using USDT's API.
 

@@ -954,9 +954,6 @@ export default [
       BSC: {
         bridge: "-",
       },
-      Avalanche: {
-        bridge: "-",
-      },
       Polygon: {
         bridge: "-",
       },
@@ -964,7 +961,8 @@ export default [
         bridge: "-",
       },
       Fantom: {
-        bridge: "-",
+        bridge: "Multichain Bridge",
+        link: "https://multichain.org/",
       },
       Syscoin: {
         bridge: "Multichain Bridge",
