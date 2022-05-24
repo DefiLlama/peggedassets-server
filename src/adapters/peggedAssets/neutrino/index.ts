@@ -40,9 +40,8 @@ async function wavesMinted() {
       async (_bail: any) =>
         await axios("https://api.neutrino.at/circulating-supply/USDN")
     );
-    console.log(res.data);
     const totalCirculating = parseInt(res.data);
-    sumSingleBalance(balances, "peggedUSD", totalCirculating);
+    sumSingleBalance(balances, "peggedUSD", totalCirculating, "issued", false);
     return balances;
   };
 }

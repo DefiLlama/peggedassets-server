@@ -90,29 +90,7 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals);
-    }
-    return balances;
-  };
-}
-
-async function chainUnreleased(chain: string, decimals: number, owner: string) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const reserve = (
-        await sdk.api.erc20.balanceOf({
-          target: issued,
-          owner: owner,
-          block: _chainBlocks[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(balances, "peggedUSD", reserve / 10 ** decimals);
+      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
     }
     return balances;
   };

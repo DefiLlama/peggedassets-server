@@ -161,7 +161,7 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals);
+      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
     }
     return balances;
   };

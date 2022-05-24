@@ -39,7 +39,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x4d15a3a2286d883af0aa1b3f21367843fac63e07"],
   },
   fantom: {
-    bridgedFromETH: ["0x9879abdea01a879644185341f7af7d8343556b7a"],
+    bridgedFromETH: ["0x9879abdea01a879644185341f7af7d8343556b7a"], // multichain
   },
   tron: {
     issued: ["TUpMhErZL2fhh4sVNULAbNKLokS4GjC1F4"],

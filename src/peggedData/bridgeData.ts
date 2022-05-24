@@ -224,7 +224,6 @@ export default {
   "0x23001f892c0C82b79303EDC9B9033cD190BB21c7": "polygon",
   "0x2791bca1f2de4661ed88a30c99a7a9449aa84174": "polygon",
   "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9": "arbitrum",
-  "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1": "arbitrum", // this is both Optimism bridged DAI and Arbitrum bridged DAI
   "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8": "arbitrum",
   "0x4988a896b1227218e4a686fde5eabdcabd91571f": "near",
   "0xe3520349f477a5f6eb06107066048508498a291b": "near",

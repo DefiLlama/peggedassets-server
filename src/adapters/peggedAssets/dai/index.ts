@@ -105,8 +105,7 @@ const chainContracts: ChainContracts = {
     ],
   },
   xdai: {
-    bridgedFromETH: ["0xFc8B2690F66B46fEC8B3ceeb95fF4Ac35a0054BC"], // address related to OmniBridge, I don't get what this token is though
-    bridgedFromBSC: ["0xFc8B2690F66B46fEC8B3ceeb95fF4Ac35a0054BC"],
+    bridgedFromBSC: ["0xFc8B2690F66B46fEC8B3ceeb95fF4Ac35a0054BC"], // address related to OmniBridge, I don't get what this token is though
   },
   terra: {
     bridgedFromETH: ["terra1zmclyfepfmqvfqflu8r3lv6f75trmg05z7xq95"], // wormhole
@@ -186,7 +185,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -206,7 +211,7 @@ async function gnosisMinted() {
         )
     );
     const totalSupply = parseInt(res.data);
-    sumSingleBalance(balances, "peggedUSD", totalSupply);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "gnosis", false);
     return balances;
   };
 }
@@ -225,7 +230,7 @@ async function reinetworkMinted(address: string, decimals: number) {
         )
     );
     const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", totalSupply);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
     return balances;
   };
 }
@@ -263,7 +268,8 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "optimism",
       18,
-      chainContracts.optimism.bridgedFromETH
+      chainContracts.optimism.bridgedFromETH,
+      "optimism"
     ),
   },
   harmony: {
@@ -286,7 +292,8 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "arbitrum",
       18,
-      chainContracts.arbitrum.bridgedFromETH
+      chainContracts.arbitrum.bridgedFromETH,
+      "arbitrum"
     ),
   },
   moonriver: {
@@ -353,13 +360,7 @@ const adapter: PeggedIssuanceAdapter = {
   xdai: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
-      [
-        gnosisMinted(),
-        bridgedSupply("xdai", 18, chainContracts.xdai.bridgedFromETH),
-      ],
-      "peggedUSD"
-    ),
+    ethereum: gnosisMinted(),
     bsc: bridgedSupply("xdai", 18, chainContracts.xdai.bridgedFromBSC),
   },
   terra: {

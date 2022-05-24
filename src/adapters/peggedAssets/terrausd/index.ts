@@ -1,10 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { multiFunctionBalance, sumSingleBalance } from "../helper/generalUtil";
-import {
-  bridgedSupply,
-  solanaMintedOrBridged,
-  osmosisSupply,
-} from "../helper/getSupply";
+import { bridgedSupply, solanaMintedOrBridged } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -97,7 +93,13 @@ async function terraMinted() {
         )
     );
     const totalSupply = res.data.uusd[0].total;
-    sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** 6);
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupply / 10 ** 6,
+      "issued",
+      false
+    );
     return balances;
   };
 }
@@ -105,7 +107,7 @@ async function terraMinted() {
 const adapter: PeggedIssuanceAdapter = {
   terra: {
     minted: async () => {
-      return { peggedUSD: 11278778389 };
+      return { peggedUSD: 11278778389, bridges: { issued: 11278778389 } };
     }, // terraMinted() is currently broken
     unreleased: async () => ({}),
   },
