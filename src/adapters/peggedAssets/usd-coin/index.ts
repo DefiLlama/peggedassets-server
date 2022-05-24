@@ -6,7 +6,6 @@ import {
   supplyInEthereumBridge,
   solanaMintedOrBridged,
   terraSupply,
-  osmosisSupply,
 } from "../helper/getSupply";
 import {
   ChainBlocks,
@@ -151,7 +150,7 @@ const chainContracts: ChainContracts = {
   },
   milkomeda: {
     bridgedFromETH: [
-      "0xb44a9b6905af7c801311e8f4e76932ee959c663c",
+      "0xb44a9b6905af7c801311e8f4e76932ee959c663c", // multichain ?
       "0x6a2d262D56735DbA19Dd70682B39F6bE9a931D98", // celer
       "0x5a955FDdF055F2dE3281d99718f5f1531744B102", // nomad
     ],
@@ -267,7 +266,7 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals);
+      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
     }
     return balances;
   };
@@ -315,7 +314,7 @@ async function algorandMinted() {
     );
     const reserves = reserveAccount[0].amount;
     let balance = (supply - reserves) / 10 ** 6;
-    sumSingleBalance(balances, "peggedUSD", balance);
+    sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
     return balances;
   };
 }
@@ -330,7 +329,7 @@ async function tronMinted() {
     const totalSupply = await tronGetTotalSupply(
       chainContracts["tron"].issued[0]
     );
-    sumSingleBalance(balances, "peggedUSD", totalSupply);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
   };
 }
@@ -350,7 +349,7 @@ async function hederaMinted() {
     );
     const supply = issuance.data.total_supply;
     let balance = supply / 10 ** 6;
-    sumSingleBalance(balances, "peggedUSD", balance);
+    sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
     return balances;
   };
 }
@@ -371,12 +370,12 @@ async function circleAPIChainMinted(chain: string) {
       (obj: any) => obj.chain === chain
     );
     const supply = parseInt(filteredChainsData[0].amount);
-    sumSingleBalance(balances, "peggedUSD", supply);
+    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
   };
 }
 
-async function reinetworkMinted(address: string, decimals: number) {
+async function reinetworkBridged(address: string, decimals: number) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -390,7 +389,7 @@ async function reinetworkMinted(address: string, decimals: number) {
         )
     );
     const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", totalSupply);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
     return balances;
   };
 }
@@ -653,7 +652,7 @@ const adapter: PeggedIssuanceAdapter = {
   reinetwork: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: reinetworkMinted(chainContracts.reinetwork.bridgedFromETH[0], 6),
+    ethereum: reinetworkBridged(chainContracts.reinetwork.bridgedFromETH[0], 6),
   },
   loopring: {
     minted: async () => ({}),

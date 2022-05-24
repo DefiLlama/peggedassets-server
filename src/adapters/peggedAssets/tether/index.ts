@@ -283,7 +283,7 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals);
+      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
     }
     return balances;
   };
@@ -342,7 +342,7 @@ async function liquidMinted() {
     );
     const issued = res.data.chain_stats.issued_amount;
     const burned = res.data.chain_stats.burned_amount;
-    sumSingleBalance(balances, "peggedUSD", (issued - burned) / 10 ** 8);
+    sumSingleBalance(balances, "peggedUSD", (issued - burned) / 10 ** 8, "issued", false);
     return balances;
   };
 }
@@ -373,7 +373,7 @@ async function algorandMinted() {
     );
     const reserves = reserveAccount[0].amount;
     const balance = (supply - reserves) / 10 ** 6;
-    sumSingleBalance(balances, "peggedUSD", balance);
+    sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
     return balances;
   };
 }
@@ -395,7 +395,7 @@ async function omniMinted() {
     };
     const res = await retry(async (_bail: any) => await axios(options));
     const totalSupply = parseInt(res.data.properties[6].totaltokens);
-    sumSingleBalance(balances, "peggedUSD", totalSupply);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
   };
 }
@@ -433,7 +433,7 @@ async function tronMinted() {
     const totalSupply = await tronGetTotalSupply(
       chainContracts["tron"].issued[0]
     );
-    sumSingleBalance(balances, "peggedUSD", totalSupply);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
   };
 }
@@ -468,7 +468,7 @@ async function usdtApiMinted(key: string) {
     );
     const issuance = res.data.data.usdt;
     const totalSupply = parseInt(issuance[key]);
-    sumSingleBalance(balances, "peggedUSD", totalSupply);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
   };
 }
@@ -491,7 +491,7 @@ async function usdtApiUnreleased(key: string) {
   };
 }
 
-async function reinetworkMinted(address: string, decimals: number) {
+async function reinetworkBridged(address: string, decimals: number) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -505,7 +505,7 @@ async function reinetworkMinted(address: string, decimals: number) {
         )
     );
     const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", totalSupply);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
     return balances;
   };
 }
@@ -798,7 +798,7 @@ const adapter: PeggedIssuanceAdapter = {
   reinetwork: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: reinetworkMinted(chainContracts.reinetwork.bridgedFromETH[0], 6),
+    ethereum: reinetworkBridged(chainContracts.reinetwork.bridgedFromETH[0], 6),
   },
   loopring: {
     minted: async () => ({}),

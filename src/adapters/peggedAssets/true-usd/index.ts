@@ -75,7 +75,7 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals);
+      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
     }
     return balances;
   };
@@ -91,7 +91,7 @@ async function tronMinted() {
     const totalSupply = await tronGetTotalSupply(
       chainContracts["tron"].issued[0]
     );
-    sumSingleBalance(balances, "peggedUSD", totalSupply);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
   };
 }
@@ -130,7 +130,7 @@ async function bscMinted() {
     if (typeof circulating !== "number") {
       throw new Error("Binance Chain API for TUSD is broken.");
     }
-    sumSingleBalance(balances, "peggedUSD", circulating);
+    sumSingleBalance(balances, "peggedUSD", circulating, "issued", false);
     return balances;
   };
 }
@@ -151,7 +151,6 @@ const adapter: PeggedIssuanceAdapter = {
     minted: multiFunctionBalance(
       [
         bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
-        bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
         bridgedSupply("polygon", 18, chainContracts.polygon.bridgedFromETH),
         bridgedSupply("arbitrum", 18, chainContracts.arbitrum.bridgedFromETH),
         bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),

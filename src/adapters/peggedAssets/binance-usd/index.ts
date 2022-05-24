@@ -319,7 +319,7 @@ const adapter: PeggedIssuanceAdapter = {
   theta: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    bsc: bridgedSupply("theta", 18, chainContracts.theta.bridgedFromBSC),
+    bsc: bridgedSupply("theta", 18, chainContracts.theta.bridgedFromBSC, "multichain"),
   },
 };
 
