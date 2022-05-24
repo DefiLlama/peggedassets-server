@@ -7,13 +7,13 @@ export type ChainBlocks = {
 export type PeggedAssetType = "peggedUSD";
 
 type StringNumber = string;
-type Balances = {
+type PeggedBalances = {
   [peggedAsset in PeggedAssetType]: StringNumber | number;
 };
 type BridgeBalances = {
   [bridgeID in BridgeIDs]: StringNumber | number;
 };
-export type BalancesAndBridgedBalances = Balances & {
+export type Balances = PeggedBalances & {
   bridges?: BridgeBalances;
 };
 

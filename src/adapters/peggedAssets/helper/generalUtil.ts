@@ -1,13 +1,13 @@
 import { BigNumber } from "ethers";
 import type {
-  BalancesAndBridgedBalances,
+  Balances,
   PeggedAssetType,
   ChainBlocks,
 } from "../peggedAsset.type";
 import bridgeMapping, { BridgeIDs } from "../../../peggedData/bridgeData";
 
 export function sumSingleBalance(
-  balances: BalancesAndBridgedBalances,
+  balances: Balances,
   pegType: PeggedAssetType,
   balance: string | number,
   addressForBridgeInfo?: string,
@@ -54,9 +54,9 @@ export function sumSingleBalance(
 }
 
 async function mergeBalances(
-  balances: BalancesAndBridgedBalances,
+  balances: Balances,
   pegType: PeggedAssetType,
-  balancesToMerge: BalancesAndBridgedBalances
+  balancesToMerge: Balances
 ) {
   balances.bridges = balances.bridges || {};
   balancesToMerge.bridges = balancesToMerge.bridges || {};
@@ -96,7 +96,7 @@ export async function multiFunctionBalance(
       timestamp: number,
       ethBlock: number,
       chainBlocks: ChainBlocks
-    ) => Promise<BalancesAndBridgedBalances>
+    ) => Promise<Balances>
   >[],
   pegType: PeggedAssetType
 ) {
@@ -105,7 +105,7 @@ export async function multiFunctionBalance(
     ethBlock: number,
     chainBlocks: ChainBlocks
   ) {
-    let balances = {} as BalancesAndBridgedBalances;
+    let balances = {} as Balances;
     for (let fnPromise of functions) {
       const fn = await fnPromise;
       const balance = await fn(timestamp, ethBlock, chainBlocks);
