@@ -42,7 +42,7 @@ async function chainMinted(chain: string, decimals: number) {
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  avax: {
+  avalanche: {
     minted: chainMinted("avax", 18),
     unreleased: async () => ({}),
   }
