@@ -86,7 +86,14 @@ const feeds: ChainlinkFeeds = {
   }, // USDN-USD ETH
 };
 
-const uniswapPools: UniswapPools = {};
+const uniswapPools: UniswapPools = {
+  usdd: {
+    address: "0x1C5c60bEf00C820274d4938A5e6d04b124D4910B",
+    token: 0,
+    chain: "ethereum",
+    decimalsDifference: -12,
+  }
+};
 
 export default async function getCurrentPeggedPrice(
   token: string,

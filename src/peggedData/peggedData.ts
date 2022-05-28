@@ -1152,4 +1152,35 @@ export default [
     bridges: {},
     twitter: "https://twitter.com/YetiFinance",
   },
+  {
+    id: "14",
+    name: "USDD",
+    address: "TPYmHEhy5n8TCEfYGqW2rPxsghSfzghPDn",
+    symbol: "USDD",
+    url: "https://usdd.io/",
+    description:
+      "USDD is a cryptocurrency issued by the TRON DAO Reserve with a stable price and diverse use cases.",
+    chain: "Tron",
+    gecko_id: "usdd",
+    cmcId: "19891",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "uniswap",
+    chains: ["Tron", "Bittorrent", "Ethereum", "BSC"],
+    bridges: {
+      Bittorrent: {
+        bridge: "Bittorrent Bridge",
+        link: "https://bttc.bittorrent.com/",
+      },
+      Ethereum: {
+        bridge: "Bittorrent Bridge",
+        link: "https://bttc.bittorrent.com/",
+      },
+      BSC: {
+        bridge: "Bittorrent Bridge",
+        link: "https://bttc.bittorrent.com/",
+      },
+    },
+    twitter: "https://twitter.com/usddio",
+  },
 ] as PeggedAsset[];

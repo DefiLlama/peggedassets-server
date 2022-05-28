@@ -3,7 +3,7 @@ import getCurrentPeggedPrice from "./adapters/peggedAssets/prices";
 const { getCurrentBlocks } = require("@defillama/sdk/build/computeTVL/blocks");
 
 type Prices = {
-  [coinGeckoId: string]: Number;
+  [coinGeckoId: string]: Number | null;
 };
 
 const test = async () => {
@@ -11,9 +11,6 @@ const test = async () => {
   const { timestamp, chainBlocks } = await getCurrentBlocks();
       let pricePromises = peggedAssets.map(async (pegged) => {
         const price = await getCurrentPeggedPrice(pegged.gecko_id, chainBlocks, pegged.priceSource);
-        if (typeof price !== "number") {
-          throw new Error(`price is NaN. Instead it is ${typeof price}`);
-        }
         prices[pegged.gecko_id] = price;
       });
       await Promise.all(pricePromises);

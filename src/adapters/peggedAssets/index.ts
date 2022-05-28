@@ -5,13 +5,13 @@ import busd from "./binance-usd";
 import dai from "./dai";
 import frax from "./frax";
 import trueusd from "./true-usd";
-import liquity from "./liquity-usd"
-import fei from "./fei-usd"
-import mim from "./magic-internet-money"
-import pax from "./paxos-standard"
-import neutrino from "./neutrino"
-import yusd from "./yusd-stablecoin"
-
+import liquity from "./liquity-usd";
+import fei from "./fei-usd";
+import mim from "./magic-internet-money";
+import pax from "./paxos-standard";
+import neutrino from "./neutrino";
+import yusd from "./yusd-stablecoin";
+import usdd from "./usdd";
 
 export default {
   tether,
@@ -26,5 +26,6 @@ export default {
   "magic-internet-money": mim,
   "paxos-standard": pax,
   neutrino,
-  "yusd-stablecoin": yusd
+  "yusd-stablecoin": yusd,
+  usdd,
 };
