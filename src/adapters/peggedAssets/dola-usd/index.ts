@@ -1,0 +1,72 @@
+const sdk = require("@defillama/sdk");
+import {
+  ChainBlocks,
+  PeggedIssuanceAdapter,
+} from "../peggedAsset.type";
+
+const chainContracts = {
+    ethereum: {
+        issued: "0x865377367054516e17014CcdED1e7d814EDC9ce4",
+    },
+    fantom: {
+        bridgedFromETH: "0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c",
+    },
+    optimism: {
+        bridgedFromETH: "0x8aE125E8653821E851F12A49F7765db9a9ce7384",
+    },
+};
+
+async function ethereumMinted() {
+return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+) {
+    const totalSupply = (
+      await sdk.api.abi.call({
+        abi: "erc20:totalSupply",
+        target: chainContracts.ethereum.issued,
+        block: _ethBlock,
+        chain: "ethereum",
+      })
+    ).output;
+    return { peggedUSD: totalSupply / 10 ** 18 };
+  };
+}
+
+async function bridgedFromEthereum(chain: string, decimals: number, address: string) {
+return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+) {
+    const totalSupply = (
+      await sdk.api.abi.call({
+        abi: "erc20:totalSupply",
+        target: address,
+        block: _chainBlocks[chain],
+        chain: chain,
+      })
+    ).output;
+    return { peggedUSD: totalSupply / 10 ** decimals };
+  };
+}
+
+const adapter: PeggedIssuanceAdapter = {
+  ethereum: {
+    minted: ethereumMinted(),
+    unreleased: async () => ({}),
+  },
+  fantom: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedFromEthereum("fantom", 18, chainContracts.fantom.bridgedFromETH),
+  },
+  optimism: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedFromEthereum("optimism", 18, chainContracts.optimism.bridgedFromETH),
+  },
+};
+
+export default adapter;
