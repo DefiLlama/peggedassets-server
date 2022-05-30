@@ -1183,4 +1183,46 @@ export default [
     },
     twitter: "https://twitter.com/usddio",
   },
+  {
+    id: "15",
+    name: "Dola",
+    address: "0x865377367054516e17014ccded1e7d814edc9ce4",
+    symbol: "DOLA",
+    url: "https://www.inverse.finance/",
+    description:
+      "DOLA is a stablecoin pegged to the US Dollar.  It can also be used as collateral within the Frontier protocol to achieve high capital efficiency, leverage and native yield.",
+    chain: "Ethereum",
+    gecko_id: "dola-usd",
+    cmcId: "19191",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "uniswap",
+    chains: ["Ethereum", "Fantom"], 
+    bridges: {
+      Fantom: {
+        bridge: "Multichain Bridge",
+        link: "https://multichain.org/",
+      },
+    },
+    twitter: "https://twitter.com/InverseFinance",
+  },
+  {
+    id: "16",
+    name: "Parrot USD",
+    address: "Ea5SjE2Y6yvCeW5dYTn7PYMuW5ikXkvbGdcmSnXeaLjS",
+    symbol: "PAI",
+    url: "https://parrot.fi/",
+    description:
+      "The Parrot Protocol is a DeFi network built on Solana that will include the stablecoin PAI, a non-custodial lending market, and a margin trading vAMM.",
+    chain: "Solana",
+    gecko_id: "parrot-usd",
+    cmcId: "none",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "none",
+    chains: ["Solana"], 
+    bridges: {
+    },
+    twitter: "https://twitter.com/gopartyparrot",
+  },
 ] as PeggedAsset[];

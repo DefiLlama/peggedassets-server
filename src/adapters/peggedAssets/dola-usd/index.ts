@@ -62,11 +62,13 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedFromEthereum("fantom", 18, chainContracts.fantom.bridgedFromETH),
   },
+  /* Circulating is 0, can add it back in when it has a circulating supply.
   optimism: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedFromEthereum("optimism", 18, chainContracts.optimism.bridgedFromETH),
   },
+  */
 };
 
 export default adapter;

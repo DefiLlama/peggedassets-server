@@ -92,7 +92,13 @@ const uniswapPools: UniswapPools = {
     token: 0,
     chain: "ethereum",
     decimalsDifference: -12,
-  }
+  },
+  "dola-usd": {
+    address: "0x7c082BF85e01f9bB343dbb460A14e51F67C58cFB",
+    token: 0,
+    chain: "ethereum",
+    decimalsDifference: -12,
+  },
 };
 
 export default async function getCurrentPeggedPrice(
