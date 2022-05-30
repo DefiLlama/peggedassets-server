@@ -284,6 +284,7 @@ export default [
       "zkSync",
       "Shiden",
       "Fantom",
+      "DFK",
     ],
     bridges: {
       Ethereum: {
@@ -430,6 +431,10 @@ export default [
       Fantom: {
         bridge: "Multichain Bridge",
         link: "https://multichain.org/",
+      },
+      DFK: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
       },
     },
     twitter: "",

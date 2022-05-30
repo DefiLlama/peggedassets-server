@@ -224,14 +224,15 @@ const chainContracts: ChainContracts = {
     ],
     bridgedFromSol: ["0xb8398DA4FB3BC4306B9D9d9d13d9573e7d0E299f"], // wormhole
   },
+  dfk: {
+    bridgedFromETH: ["0x3ad9dfe640e1a9cc1d9b0948620820d975c3803a"], // synapse
+  },
 };
 
 /*
 Sora: cannot find API query that gives supply.
 
 Cronos: they have not provided any proof the circulating USDC is real USDC.
-
-DFK Chain: don't know how to get the supply.
 
 Flow: A.b19436aae4d94622.FiatToken. HTTP API has no info about tokens. Using Circle API for now.
 
@@ -266,7 +267,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -684,6 +691,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromETH),
     solana: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromSol),
+  },
+  dfk: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("dfk", 18, chainContracts.dfk.bridgedFromETH),
   },
 };
 
