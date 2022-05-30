@@ -278,6 +278,10 @@ export default {
   "0x674c6ad92fd080e4004b2312b45f796a192d27a0": "waves",
   "0x013f9c3fac3e2759d7e90aca4f9540f75194a0d7": "waves",
   "0x03ab98f5dc94996F8C33E15cD4468794d12d41f9": "waves",
+  "0x13780e6d5696dd91454f6d3bbc2616687fea43d0": "synapse",
+  "0xfb21b70922b9f6e3c6274bcd6cb1aa8a0fe20b80": "synapse",
+  "0x0b5740c6b4a97f90ef2f0220651cca420b868ffb": "synapse",
+  "0x360d6dd540e3448371876662fbe7f1acaf08c5ab": "synapse",
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -423,5 +427,9 @@ export const bridgeInfo = {
   waves: {
     name: "Waves Exchange",
     link: "https://waves.exchange/",
+  },
+  synapse: {
+    name: "Synapse Bridge",
+    link: "https://synapseprotocol.com/",
   },
 } as BridgeInfo;
