@@ -1208,4 +1208,84 @@ export default [
     },
     twitter: "https://twitter.com/usddio",
   },
+  {
+    id: "15",
+    name: "Nexus USD",
+    address: "0x1b84765de8b7566e4ceaf4d0fd3c5af52d3dde4f",
+    symbol: "nUSD",
+    url: "https://synapseprotocol.com/",
+    description:
+      'nUSD, or "nexus" USD, is a cross-chain stablecoin fully backed by the nexus stablecoin liquidity pool on Ethereum consisting of DAI, USDC, and USDT.',
+    chain: "Ethereum",
+    gecko_id: null,
+    cmcId: null,
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "saddle",
+    chains: [
+      "Ethereum",
+      "BSC",
+      "Polygon",
+      "Avalanche",
+      "Arbitrum",
+      "Fantom",
+      "Harmony",
+      "Boba",
+      "Optimism",
+      "Cronos",
+      "Metis",
+      "DFK",
+    ],
+    bridges: {
+      Ethereum: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      BSC: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Polygon: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Avalanche: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Arbitrum: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Fantom: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Harmony: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Boba: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Optimism: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Cronos: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Metis: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      DFK: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+    },
+    twitter: "https://twitter.com/SynapseProtocol",
+  },
 ] as PeggedAsset[];
