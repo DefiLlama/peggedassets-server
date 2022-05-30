@@ -1,4 +1,5 @@
 const sdk = require("@defillama/sdk");
+import saddleabi from "./saddle_abi.json";
 import chainabi from "./chainlink_abi.json";
 import uniabi from "./uniswap_abi.json";
 import { ChainBlocks } from "../peggedAsset.type";
@@ -20,6 +21,13 @@ type UniswapPools = {
     token: 0 | 1;
     chain: string;
     decimalsDifference: number; // difference between number of decimals for token1 and number for token0
+  };
+};
+
+type SaddlePools = {
+  [coinGeckoID: string]: {
+    address: string;
+    chain: string;
   };
 };
 
@@ -92,7 +100,14 @@ const uniswapPools: UniswapPools = {
     token: 0,
     chain: "ethereum",
     decimalsDifference: -12,
-  }
+  },
+};
+
+const saddlePools: SaddlePools = {
+  nusd: {
+    address: "0x1116898DdA4015eD8dDefb84b6e8Bc24528Af2d8",
+    chain: "ethereum",
+  },
 };
 
 export default async function getCurrentPeggedPrice(
@@ -137,6 +152,22 @@ export default async function getCurrentPeggedPrice(
       } else return 1 / token0token1PriceRatio;
     }
     console.error(`Could not get Uniswap price for token ${token}`);
+    return null;
+  }
+  if (priceSource === "saddle") {
+    const pool = saddlePools[token];
+    const virtualPrice = await sdk.api.abi.call({
+      abi: saddleabi.getVirtualPrice,
+      target: pool.address,
+      block: chainBlocks[pool.chain],
+      chain: pool.chain,
+    });
+
+    if (virtualPrice.output) {
+      // Virtual Price is always given in 1e18.
+      return virtualPrice.output / 1e18;
+    }
+    console.error(`Could not get Saddle price for token ${token}`);
     return null;
   }
   console.error(`no method to get price for given priceSource for ${token}`);
