@@ -104,7 +104,7 @@ const uniswapPools: UniswapPools = {
 };
 
 const saddlePools: SaddlePools = {
-  nusd: {
+  "nexus-usd": {
     address: "0x1116898DdA4015eD8dDefb84b6e8Bc24528Af2d8",
     chain: "ethereum",
   },
