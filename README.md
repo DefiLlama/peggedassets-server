@@ -3,11 +3,12 @@
 ## How to list a new pegged asset
 
 1. Fork this repository.
-2. Create folder in `src/adapters/peggedAssets` with the same name as the CoinGecko id for the pegged asset.
-3. In that folder, write an adapter in Typescript and name it index.ts (see below for spec).
-4. In `src/adapters/peggedAssets`, `npm i` and then test your adapter with `npx ts-node test YOURPEGGEDASSET/index peggedXYZ`, where "peggedXYZ" is the key of the balance object returned by your adapter.
-5. Import your adapter in `src/adapters/peggedAssets/index.ts` and then add it to the exports.
-6. (Optional) if the pegged asset has a ChainLink price feed, you can add the ChainLink smart contract info to `src/adapters/peggedAssets/prices/index.ts`.
+2. `npm i` in root folder.
+3. Create folder in `src/adapters/peggedAssets` with the same name as the CoinGecko id for the pegged asset.
+4. In that folder, write an adapter in Typescript and name it index.ts (see below for spec).
+5. In `src/adapters/peggedAssets`, `npm i` and then test your adapter with `npx ts-node test YOURPEGGEDASSET/index peggedXYZ`, where "peggedXYZ" is the key of the balance object returned by your adapter.
+6. Import your adapter in `src/adapters/peggedAssets/index.ts` and then add it to the exports.
+7. (Optional) if the pegged asset has a ChainLink price feed, you can add the ChainLink smart contract info to `src/adapters/peggedAssets/prices/index.ts`.
 
 After submitting a PR, you can submit basic info about the pegged asset (website, ticker, icon, etc.) in the [Defillama Discord](https://discord.gg/defillama).
 
