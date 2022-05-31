@@ -1225,4 +1225,31 @@ export default [
     },
     twitter: "https://twitter.com/gopartyparrot",
   },
+  {
+    id: "17",
+    name: "HUSD",
+    address: "0xdf574c24545e5ffecb9a659c229253d4111d87e1",
+    symbol: "HUSD",
+    url: "https://www.stcoins.com/",
+    description:
+      "Combining the stability of the U.S. dollar with the efficiency of blockchain technology, HUSD is designed to be secure, liquid and convenient.",
+    chain: "Ethereum",
+    gecko_id: "husd",
+    cmcId: "4779",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "none",
+    chains: ["Ethereum", "Tron", "Heco", "Elastos", "Solana"], 
+    bridges: {
+      Elastos: {
+        bridge: "ShadowTokens",
+        link: "https://tokbridge.net/",
+      },
+      Solana: {
+        bridge: "Portal by Wormhole",
+        link: "https://wormholenetwork.com/",
+      },
+    },
+    twitter: "https://twitter.com/Stablecoin_HUSD",
+  },
 ] as PeggedAsset[];

@@ -231,6 +231,14 @@ export default {
     bridge: "wormhole",
     sourceChain: "BSC",
   },
+  "7VQo3HFLNH5QqGtM8eC3XQbPkJUu7nS9LeGWjerRh5Sw": {
+    bridge: "wormhole",
+    sourceChain: "Ethereum",
+  },
+  "BybpSTBoZHsmKnfxYG47GDhVPKrnEKX31CScShbrzUhX": {
+    bridge: "wormhole",
+    sourceChain: "Ethereum",
+  },
   "0xb8398DA4FB3BC4306B9D9d9d13d9573e7d0E299f": {
     bridge: "wormhole",
     sourceChain: "Solana",
@@ -1054,6 +1062,10 @@ export default {
   "0x9f1d0ed4e041c503bd487e5dc9fc935ab57f9a57": {
     bridge: "elastos",
     sourceChain: "BSC",
+  },
+  "0xF9Ca2eA3b1024c0DB31adB224B407441bECC18BB": {
+    bridge: "elastos",
+    sourceChain: "Heco"
   },
   "0xa06be0f5950781ce28d965e5efc6996e88a8c141": {
     bridge: "elastos",

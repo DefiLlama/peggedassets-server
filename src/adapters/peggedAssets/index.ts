@@ -14,6 +14,7 @@ import yusd from "./yusd-stablecoin";
 import usdd from "./usdd";
 import dola from "./dola-usd";
 import pai from "./parrot-usd";
+import husd from "./husd";
 
 
 export default {
@@ -33,4 +34,5 @@ export default {
   usdd,
   "dola-usd": dola,
   "parrot-usd": pai,
+  husd,
 };
