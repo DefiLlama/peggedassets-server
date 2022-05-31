@@ -8,7 +8,7 @@
 4. In that folder, write an adapter in Typescript and name it index.ts (see below for spec).
 5. In `src/adapters/peggedAssets`, `npm i` and then test your adapter with `npx ts-node test YOURPEGGEDASSET/index peggedXYZ`, where "peggedXYZ" is the key of the balance object returned by your adapter.
 6. Import your adapter in `src/adapters/peggedAssets/index.ts` and then add it to the exports.
-7. (Optional) if the pegged asset has a ChainLink price feed, you can add the ChainLink smart contract info to `src/adapters/peggedAssets/prices/index.ts`.
+7. (Optional) if the pegged asset has a ChainLink price feed or a liquid Uniswap V3 pool, you can add the ChainLink smart contract/Uniswap V3 pool info to `src/adapters/peggedAssets/prices/index.ts`.
 
 After submitting a PR, you can submit basic info about the pegged asset (website, ticker, icon, etc.) in the [Defillama Discord](https://discord.gg/defillama).
 
