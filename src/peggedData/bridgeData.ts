@@ -796,27 +796,27 @@ export default {
     sourceChain: "BSC",
   }, // this is a BUSD multichain address on Theta but a BUSD meter.passport address on Moonbeam
   "0x47ac0Fb4F2D84898e4D9E7b4DaB3C24507a6D503": {
-    bridge: "BSC",
+    bridge: "bsc",
     sourceChain: "Ethereum",
   },
   "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56": {
-    bridge: "BSC",
+    bridge: "bsc",
     sourceChain: "Ethereum",
   },
   "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3": {
-    bridge: "BSC",
+    bridge: "bsc",
     sourceChain: "Ethereum",
   },
   "0xb3c11196A4f3b1da7c23d9FB0A3dDE9c6340934F": {
-    bridge: "BSC",
+    bridge: "bsc",
     sourceChain: "Ethereum",
   },
   "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d": {
-    bridge: "BSC",
+    bridge: "bsc",
     sourceChain: "Ethereum",
   },
   "0xa71EdC38d189767582C38A3145b5873052c3e47a": {
-    bridge: "Heco",
+    bridge: "heco",
     sourceChain: "Ethereum",
   },
   "0xc7198437980c041c805a1edcba50c1ce5db95118": {
