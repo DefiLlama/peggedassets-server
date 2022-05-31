@@ -19,6 +19,10 @@ export default {
   "0x1c20e891bab6b1727d14da358fae2984ed9b59eb": { bridge: "issued" },
   Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB: { bridge: "issued" },
   EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v: { bridge: "issued" },
+  "0x9879abdea01a879644185341f7af7d8343556b7a": {
+    bridge: "multichain",
+    sourceChain: "Ethereum",
+  },
   "0xb44a9b6905af7c801311e8f4e76932ee959c663c": {
     bridge: "multichain",
     sourceChain: "Ethereum",
@@ -72,6 +76,10 @@ export default {
     sourceChain: "Ethereum",
   },
   "0x45c32fA6DF82ead1e2EF74d17b76547EDdFaFF89": {
+    bridge: "multichain",
+    sourceChain: "Ethereum",
+  },
+  "0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c": {
     bridge: "multichain",
     sourceChain: "Ethereum",
   },
@@ -391,6 +399,10 @@ export default {
     bridge: "wormhole",
     sourceChain: "Ethereum",
   },
+  terra1zmclyfepfmqvfqflu8r3lv6f75trmg05z7xq95: {
+    bridge: "wormhole",
+    sourceChain: "Ethereum",
+  },
   "0x3413a030EF81a3dD5a302F4B4D11d911e12ed337": {
     bridge: "wormhole",
     sourceChain: "Ethereum",
@@ -408,6 +420,10 @@ export default {
     sourceChain: "BSC",
   },
   Terra1skjr69exm6v8zellgjpaa2emhwutrk5a6dz7dd: {
+    bridge: "wormhole",
+    sourceChain: "BSC",
+  },
+  terra1skjr69exm6v8zellgjpaa2emhwutrk5a6dz7dd: {
     bridge: "wormhole",
     sourceChain: "BSC",
   },
@@ -911,6 +927,10 @@ export default {
     bridge: "optimism",
     sourceChain: "Ethereum",
   },
+  "0x8aE125E8653821E851F12A49F7765db9a9ce7384": {
+    bridge: "optimism",
+    sourceChain: "Ethereum",
+  },
   "0xc40F949F8a4e094D1b49a23ea9241D289B7b2819": {
     bridge: "optimism",
     sourceChain: "Ethereum",
@@ -1091,6 +1111,26 @@ export default {
     bridge: "waves",
     sourceChain: "Waves",
   },
+  "0x14016e85a25aeb13065688cafb43044c2ef86784": {
+    bridge: "trueusd",
+    sourceChain: "Ethereum",
+  },
+  "0x553a1151f3df3620fc2b5a75a6edda629e3da350": {
+    bridge: "trueusd",
+    sourceChain: "Ethereum",
+  },
+  "0x2e1ad108ff1d8c782fcbbb89aad783ac49586756": {
+    bridge: "trueusd",
+    sourceChain: "Ethereum",
+  },
+  "0x4d15a3a2286d883af0aa1b3f21367843fac63e07": {
+    bridge: "trueusd",
+    sourceChain: "Ethereum",
+  },
+  "0x5eE41aB6edd38cDfB9f6B4e6Cf7F75c87E170d98": {
+    bridge: "trueusd",
+    sourceChain: "Ethereum",
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1237,4 +1277,8 @@ export const bridgeInfo = {
     name: "Waves Exchange",
     link: "https://waves.exchange/",
   },
+  trueusd: {
+    name: "TrueUSD",
+    link: "https://trueusd.com/trueusd"
+  }
 } as BridgeInfo;

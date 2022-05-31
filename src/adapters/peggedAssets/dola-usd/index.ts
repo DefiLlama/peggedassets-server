@@ -9,7 +9,7 @@ const chainContracts = {
         issued: "0x865377367054516e17014CcdED1e7d814EDC9ce4",
     },
     fantom: {
-        bridgedFromETH: "0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c",
+        bridgedFromETH: "0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c", // multichain
     },
     optimism: {
         bridgedFromETH: "0x8aE125E8653821E851F12A49F7765db9a9ce7384",
