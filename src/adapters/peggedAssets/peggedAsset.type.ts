@@ -11,7 +11,10 @@ type PeggedBalances = {
   [peggedAssetType: string]: StringNumber | number;
 };
 type BridgeBalances = {
-  [bridgeID in BridgeIDs]: StringNumber | number;
+  [bridgeID in BridgeIDs]: {
+    amount: StringNumber | number;
+    source: string;
+  };
 };
 export type Balances = PeggedBalances & {
   bridges?: BridgeBalances;

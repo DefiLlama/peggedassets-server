@@ -150,7 +150,7 @@ const chainContracts: ChainContracts = {
   },
   milkomeda: {
     bridgedFromETH: [
-      "0xb44a9b6905af7c801311e8f4e76932ee959c663c", // multichain ?
+      "0xb44a9b6905af7c801311e8f4e76932ee959c663c", // multichain
       "0x6a2d262D56735DbA19Dd70682B39F6bE9a931D98", // celer
       "0x5a955FDdF055F2dE3281d99718f5f1531744B102", // nomad
     ],
@@ -266,7 +266,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -485,7 +491,9 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "moonriver",
       6,
-      chainContracts.moonriver.bridgedFromETH
+      chainContracts.moonriver.bridgedFromETH,
+      "multichain",
+      "Ethereum"
     ),
   },
   moonbeam: {
@@ -527,7 +535,9 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "syscoin",
       6,
-      chainContracts.syscoin.bridgedFromETH
+      chainContracts.syscoin.bridgedFromETH,
+      "multichain",
+      "Ethereum"
     ),
   },
   tomochain: {

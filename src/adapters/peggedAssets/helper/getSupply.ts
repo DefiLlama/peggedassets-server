@@ -13,7 +13,8 @@ export async function bridgedSupply(
   chain: string,
   decimals: number,
   addresses: string[],
-  bridgeSource?: string
+  bridgeSource?: string,
+  bridgedFromChain?: string
 ) {
   return async function (
     _timestamp: number,
@@ -36,7 +37,8 @@ export async function bridgedSupply(
             "peggedUSD",
             totalSupply / 10 ** decimals,
             bridgeSource,
-            false
+            false,
+            bridgedFromChain,
           )
         : sumSingleBalance(
             balances,

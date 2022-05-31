@@ -283,7 +283,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -342,7 +348,13 @@ async function liquidMinted() {
     );
     const issued = res.data.chain_stats.issued_amount;
     const burned = res.data.chain_stats.burned_amount;
-    sumSingleBalance(balances, "peggedUSD", (issued - burned) / 10 ** 8, "issued", false);
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      (issued - burned) / 10 ** 8,
+      "issued",
+      false
+    );
     return balances;
   };
 }
@@ -757,7 +769,20 @@ const adapter: PeggedIssuanceAdapter = {
   oasis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromETH),
+    ethereum: multiFunctionBalance(
+      [
+        bridgedSupply("oasis", 6, [chainContracts.oasis.bridgedFromETH[0]]),
+        bridgedSupply("oasis", 6, [chainContracts.oasis.bridgedFromETH[1]]),
+        bridgedSupply(
+          "oasis",
+          6,
+          [chainContracts.oasis.bridgedFromETH[2]],
+          "celer",
+          "Ethereum"
+        ),
+      ],
+      "peggedUSD"
+    ),
     solana: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromSol),
     bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
     polygon: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromPolygon),

@@ -10,8 +10,9 @@ export function sumSingleBalance(
   balances: Balances,
   pegType: PeggedAssetType,
   balance: string | number,
-  addressForBridgeInfo?: string,
-  useBridgeMapping?: boolean
+  bridgeAddressOrName?: string,
+  useBridgeMapping?: boolean,
+  bridgedFromChain?: string
 ) {
   balances.bridges = balances.bridges || {};
   if (typeof balance === "number") {
@@ -23,30 +24,41 @@ export function sumSingleBalance(
     }
     (balances[pegType] as number) = prevBalance + balance;
 
-    if (addressForBridgeInfo) {
+    if (bridgeAddressOrName) {
       const bridgeID: BridgeIDs = useBridgeMapping
-        ? bridgeMapping[addressForBridgeInfo] ?? "not-found"
-        : addressForBridgeInfo;
-      const prevBridgeIDBalance = balances.bridges[bridgeID] ?? 0;
+        ? bridgeMapping[bridgeAddressOrName]?.bridge ?? "not-found"
+        : bridgeAddressOrName;
+      const sourceChain = useBridgeMapping
+        ? bridgeMapping[bridgeAddressOrName]?.sourceChain ?? "not-found"
+        : bridgedFromChain ?? "not-found";
+      balances.bridges[bridgeID] = balances.bridges[bridgeID] || {};
+      balances.bridges[bridgeID].source = sourceChain;
+      const prevBridgeIDBalance = balances.bridges[bridgeID]?.amount ?? 0;
       if (typeof prevBridgeIDBalance !== "number") {
         throw new Error(
           `Trying to merge string and number token balances for balance ${balance}`
         );
       }
-      (balances.bridges[bridgeID] as number) = prevBridgeIDBalance + balance;
+      (balances.bridges[bridgeID].amount as number) =
+        prevBridgeIDBalance + balance;
     }
   } else {
     const prevBalance = BigNumber.from(balances[pegType] ?? "0");
     balances[pegType] = prevBalance.add(BigNumber.from(balance)).toString();
 
-    if (addressForBridgeInfo) {
+    if (bridgeAddressOrName) {
       const bridgeID = useBridgeMapping
-        ? bridgeMapping[addressForBridgeInfo]
-        : addressForBridgeInfo;
+        ? bridgeMapping[bridgeAddressOrName]?.bridge
+        : bridgeAddressOrName;
+      const sourceChain = useBridgeMapping
+        ? bridgeMapping[bridgeAddressOrName]?.sourceChain ?? "not-found"
+        : bridgedFromChain ?? "not-found";
+      balances.bridges[bridgeID] = balances.bridges[bridgeID] || {};
+      balances.bridges[bridgeID].source = sourceChain;
       const prevBridgeIDBalance = BigNumber.from(
-        balances.bridges[bridgeID] ?? "0"
+        balances.bridges[bridgeID]?.amount ?? "0"
       );
-      balances.bridges[bridgeID] = prevBridgeIDBalance
+      balances.bridges[bridgeID].amount = prevBridgeIDBalance
         .add(BigNumber.from(balance))
         .toString();
     }
@@ -76,16 +88,16 @@ async function mergeBalances(
   }
   for (let bridgeID in balancesToMerge.bridges) {
     if (balances.bridges[bridgeID]) {
-      const bridgeBalance = balances.bridges[bridgeID];
-      const bridgeBalanceToMerge = balancesToMerge.bridges[bridgeID];
+      const bridgeBalance = balances.bridges[bridgeID].amount;
+      const bridgeBalanceToMerge = balancesToMerge.bridges[bridgeID].amount;
       if (
         typeof bridgeBalance === "number" &&
         typeof bridgeBalanceToMerge === "number"
       ) {
-        balances.bridges[bridgeID] =
+        balances.bridges[bridgeID].amount =
           (bridgeBalance ?? 0) + bridgeBalanceToMerge;
       } else {
-        balances.bridges[bridgeID] = BigNumber.from(bridgeBalance ?? 0)
+        balances.bridges[bridgeID].amount = BigNumber.from(bridgeBalance ?? 0)
           .add(BigNumber.from(bridgeBalanceToMerge))
           .toString();
       }
