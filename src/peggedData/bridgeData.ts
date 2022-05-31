@@ -820,19 +820,19 @@ export default {
     sourceChain: "Ethereum",
   },
   "0xc7198437980c041c805a1edcba50c1ce5db95118": {
-    bridge: "Avalanche",
+    bridge: "avalanche",
     sourceChain: "Ethereum",
   },
   "0x19860ccb0a68fd4213ab9d8266f7bbf05a8dde98": {
-    bridge: "Avalanche",
+    bridge: "avalanche",
     sourceChain: "Ethereum",
   },
   "0xd586e7f844cea2f87f50152665bcbc2c279d8d70": {
-    bridge: "Avalanche",
+    bridge: "avalanche",
     sourceChain: "Ethereum",
   },
   "0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664": {
-    bridge: "Avalanche",
+    bridge: "avalanche",
     sourceChain: "Ethereum",
   },
   "0x382bb369d343125bfb2117af9c149795c6c65c50": {
@@ -844,19 +844,19 @@ export default {
     sourceChain: "Ethereum",
   },
   "0xc2132d05d31c914a87c6611c10748aeb04b58e8f": {
-    bridge: "Polygon",
+    bridge: "polygon",
     sourceChain: "Ethereum",
   },
   "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063": {
-    bridge: "Polygon",
+    bridge: "polygon",
     sourceChain: "Ethereum",
   },
   "0x23001f892c0C82b79303EDC9B9033cD190BB21c7": {
-    bridge: "Polygon",
+    bridge: "polygon",
     sourceChain: "Ethereum",
   },
   "0x2791bca1f2de4661ed88a30c99a7a9449aa84174": {
-    bridge: "Polygon",
+    bridge: "polygon",
     sourceChain: "Ethereum",
   },
   "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9": {
@@ -1040,19 +1040,19 @@ export default {
     sourceChain: "Ethereum",
   },
   "0xa47c8bf37f92abed4a126bda807a7b7498661acd": {
-    bridge: "Terra",
+    bridge: "terra",
     sourceChain: "Terra",
   },
   "0x23396cF899Ca06c4472205fC903bDB4de249D6fC": {
-    bridge: "Terra",
+    bridge: "terra",
     sourceChain: "Terra",
   },
   "0x224e64ec1bdce3870a6a6c777edd450454068fec": {
-    bridge: "Terra",
+    bridge: "terra",
     sourceChain: "Terra",
   },
   "0x692597b009d13c4049a947cab2239b7d6517875f": {
-    bridge: "Terra",
+    bridge: "terra",
     sourceChain: "Terra",
   },
   "0x737901bea3eeb88459df9ef1BE8fF3Ae1B42A2ba": {
