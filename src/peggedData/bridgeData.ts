@@ -50,7 +50,7 @@ export default {
   "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d": {
     bridge: "multichain",
     sourceChain: "BSC",
-  }, 
+  },
   "0x818ec0a7fe18ff94269904fced6ae3dae6d6dc0b": {
     bridge: "multichain",
     sourceChain: "Ethereum",
@@ -158,7 +158,7 @@ export default {
   "0x2bf9b864cdc97b08b6d79ad4663e71b8ab65c45c": {
     bridge: "multichain",
     sourceChain: "BSC",
-  }, 
+  },
   "0x2C78f1b70Ccf63CDEe49F9233e9fAa99D43AA07e": {
     bridge: "multichain",
     sourceChain: "Ethereum",
@@ -174,7 +174,7 @@ export default {
   "0x461d52769884ca6235B685EF2040F47d30C94EB5": {
     bridge: "multichain",
     sourceChain: "BSC",
-  }, 
+  },
   "0x375488F097176507e39B9653b88FDc52cDE736Bf": {
     bridge: "multichain",
     sourceChain: "BSC",
@@ -235,7 +235,7 @@ export default {
     bridge: "wormhole",
     sourceChain: "Ethereum",
   },
-  "BybpSTBoZHsmKnfxYG47GDhVPKrnEKX31CScShbrzUhX": {
+  BybpSTBoZHsmKnfxYG47GDhVPKrnEKX31CScShbrzUhX: {
     bridge: "wormhole",
     sourceChain: "Ethereum",
   },
@@ -471,7 +471,15 @@ export default {
     bridge: "wormhole",
     sourceChain: "Avalanche",
   },
+  terra1eqvq3thjhye7anv6f6mhxpjhyvww8zjvqcdgjx: {
+    bridge: "wormhole",
+    sourceChain: "Avalanche",
+  },
   Terra1vlqeghv5mt5udh96kt5zxlh2wkh8q4kewkr0dd: {
+    bridge: "wormhole",
+    sourceChain: "BSC",
+  },
+  terra1vlqeghv5mt5udh96kt5zxlh2wkh8q4kewkr0dd: {
     bridge: "wormhole",
     sourceChain: "BSC",
   },
@@ -479,7 +487,15 @@ export default {
     bridge: "wormhole",
     sourceChain: "Ethereum",
   },
+  terra1ce06wkrdm4vl6t0hvc0g86rsy27pu8yadg3dva: {
+    bridge: "wormhole",
+    sourceChain: "Ethereum",
+  },
   Terra1hd9n65snaluvf7en0p4hqzse9eqecejz2k8rl5: {
+    bridge: "wormhole",
+    sourceChain: "Solana",
+  },
+  terra1hd9n65snaluvf7en0p4hqzse9eqecejz2k8rl5: {
     bridge: "wormhole",
     sourceChain: "Solana",
   },
@@ -594,7 +610,7 @@ export default {
   "0x4Bf769b05E832FCdc9053fFFBC78Ca889aCb5E1E": {
     bridge: "celer",
     sourceChain: "BSC",
-  }, 
+  },
   "0x3b40D173b5802733108E047CF538Be178646b2e4": {
     bridge: "celer",
     sourceChain: "BSC",
@@ -1065,7 +1081,7 @@ export default {
   },
   "0xF9Ca2eA3b1024c0DB31adB224B407441bECC18BB": {
     bridge: "elastos",
-    sourceChain: "Heco"
+    sourceChain: "Heco",
   },
   "0xa06be0f5950781ce28d965e5efc6996e88a8c141": {
     bridge: "elastos",
@@ -1291,6 +1307,6 @@ export const bridgeInfo = {
   },
   trueusd: {
     name: "TrueUSD",
-    link: "https://trueusd.com/trueusd"
-  }
+    link: "https://trueusd.com/trueusd",
+  },
 } as BridgeInfo;
