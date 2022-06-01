@@ -271,7 +271,15 @@ export default {
     bridge: "wormhole",
     sourceChain: "Avalanche",
   },
+  terra1pvel56a2hs93yd429pzv9zp5aptcjg5ulhkz7w: {
+    bridge: "wormhole",
+    sourceChain: "Avalanche",
+  },
   Terra1kkyyh7vganlpkj0gkc2rfmhy858ma4rtwywe3x: {
+    bridge: "wormhole",
+    sourceChain: "Polygon",
+  },
+  terra1kkyyh7vganlpkj0gkc2rfmhy858ma4rtwywe3x: {
     bridge: "wormhole",
     sourceChain: "Polygon",
   },
@@ -279,11 +287,23 @@ export default {
     bridge: "wormhole",
     sourceChain: "BSC",
   },
+  terra1yljlrxvkar0c6ujpvf8g57m5rpcwl7r032zyvu: {
+    bridge: "wormhole",
+    sourceChain: "BSC",
+  },
   Terra1pepwcav40nvj3kh60qqgrk8k07ydmc00xyat06: {
     bridge: "wormhole",
     sourceChain: "Ethereum",
   },
+  terra1pepwcav40nvj3kh60qqgrk8k07ydmc00xyat06: {
+    bridge: "wormhole",
+    sourceChain: "Ethereum",
+  },
   Terra1e6mq63y64zcxz8xyu5van4tgkhemj3r86yvgu4: {
+    bridge: "wormhole",
+    sourceChain: "Solana",
+  },
+  terra1e6mq63y64zcxz8xyu5van4tgkhemj3r86yvgu4: {
     bridge: "wormhole",
     sourceChain: "Solana",
   },

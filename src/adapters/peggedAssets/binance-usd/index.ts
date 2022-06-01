@@ -161,7 +161,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -319,7 +325,13 @@ const adapter: PeggedIssuanceAdapter = {
   theta: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    bsc: bridgedSupply("theta", 18, chainContracts.theta.bridgedFromBSC, "multichain"),
+    bsc: bridgedSupply(
+      "theta",
+      18,
+      chainContracts.theta.bridgedFromBSC,
+      "multichain",
+      "BSC"
+    ),
   },
 };
 
