@@ -2,7 +2,9 @@ const sdk = require("@defillama/sdk");
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
+  Balances
 } from "../peggedAsset.type";
+import { sumSingleBalance } from "../helper/generalUtil";
 
 const chainContracts = {
     ethereum: {
@@ -22,6 +24,7 @@ return async function (
     _ethBlock: number,
     _chainBlocks: ChainBlocks
 ) {
+  let balances = {} as Balances;
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
@@ -30,7 +33,14 @@ return async function (
         chain: "ethereum",
       })
     ).output;
-    return { peggedUSD: totalSupply / 10 ** 18 };
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupply / 10 ** 18,
+      chainContracts.ethereum.issued,
+      true
+    );
+    return balances;
   };
 }
 
@@ -40,6 +50,7 @@ return async function (
     _ethBlock: number,
     _chainBlocks: ChainBlocks
 ) {
+  let balances = {} as Balances;
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
@@ -48,7 +59,14 @@ return async function (
         chain: chain,
       })
     ).output;
-    return { peggedUSD: totalSupply / 10 ** decimals };
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupply / 10 ** decimals,
+      address,
+      true
+    );
+    return balances;
   };
 }
 
