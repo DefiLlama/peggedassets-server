@@ -269,7 +269,8 @@ const adapter: PeggedIssuanceAdapter = {
       "optimism",
       18,
       chainContracts.optimism.bridgedFromETH,
-      "optimism"
+      "optimism",
+      "Ethereum"
     ),
   },
   harmony: {
@@ -293,7 +294,8 @@ const adapter: PeggedIssuanceAdapter = {
       "arbitrum",
       18,
       chainContracts.arbitrum.bridgedFromETH,
-      "arbitrum"
+      "arbitrum",
+      "Ethereum"
     ),
   },
   moonriver: {

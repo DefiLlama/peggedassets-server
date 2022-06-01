@@ -859,6 +859,10 @@ export default {
     bridge: "heco",
     sourceChain: "Ethereum",
   },
+  "0xbA7dEebBFC5fA1100Fb055a87773e1E99Cd3507a": {
+    bridge: "avalanche-old",
+    sourceChain: "Ethereum",
+  },
   "0xc7198437980c041c805a1edcba50c1ce5db95118": {
     bridge: "avalanche",
     sourceChain: "Ethereum",
@@ -1204,6 +1208,9 @@ export const bridgeInfo = {
   avalanche: {
     name: "Avalanche Bridge",
     link: "https://bridge.avax.network/",
+  },
+  "avalanche-old": {
+    name: "Avalanche Bridge (Old)",
   },
   okexchain: {
     name: "OKX Bridge",
