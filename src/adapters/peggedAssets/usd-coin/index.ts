@@ -224,6 +224,13 @@ const chainContracts: ChainContracts = {
     ],
     bridgedFromSol: ["0xb8398DA4FB3BC4306B9D9d9d13d9573e7d0E299f"], // wormhole
   },
+  celo: {
+    bridgedFromETH6Decimals: ["0xef4229c8c3250C675F21BCefa42f58EfbfF6002a"], // optics
+    bridgedFromETH18Decimals: ["0x93DB49bE12B864019dA9Cb147ba75cDC0506190e"], // moss
+    bridgedFromPolygon: ["0x1bfc26cE035c368503fAE319Cc2596716428ca44"], // optics
+    bridgedFromAvax: ["0xb70e0a782b058BFdb0d109a3599BEc1f19328E36"], // allbridge
+    bridgedFromSol: ["0xCD7D7Ff64746C1909E44Db8e95331F9316478817"], // allbridge
+  },
 };
 
 /*
@@ -694,6 +701,24 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromETH),
     solana: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromSol),
+  },
+  celo: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: multiFunctionBalance(
+      [
+        bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
+        bridgedSupply("celo", 18, chainContracts.celo.bridgedFromETH18Decimals),
+      ],
+      "peggedUSD"
+    ),
+    avalanche: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromAvax),
+    polygon: bridgedSupply(
+      "celo",
+      6,
+      chainContracts.celo.bridgedFromPolygon
+    ),
+    solana: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromSol),
   },
 };
 

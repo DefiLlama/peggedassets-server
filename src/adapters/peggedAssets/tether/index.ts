@@ -234,6 +234,14 @@ const chainContracts: ChainContracts = {
       "0xd226392c23fb3476274ed6759d4a478db3197d82", // axelar (0 supply?)
     ],
   },
+  celo: {
+    bridgedFromETH6Decimals: [
+      "0x88eeC49252c8cbc039DCdB394c0c2BA2f1637EA0", // optics
+    ],
+    bridgedFromETH18Decimals: [
+      "0xcfffe0c89a779c09df3df5624f54cdf7ef5fdd5d", // moss
+    ], 
+  },
 };
 
 /* 
@@ -852,6 +860,17 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromETH),
+  },
+  celo: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: multiFunctionBalance(
+      [
+        bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
+        bridgedSupply("celo", 18, chainContracts.celo.bridgedFromETH18Decimals),
+      ],
+      "peggedUSD"
+    ),
   },
 };
 

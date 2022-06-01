@@ -651,6 +651,14 @@ export default {
     bridge: "celer",
     sourceChain: "Ethereum",
   },
+  "0xCD7D7Ff64746C1909E44Db8e95331F9316478817": {
+    bridge: "allbridge",
+    sourceChain: "Solana",
+  },
+  "0xb70e0a782b058BFdb0d109a3599BEc1f19328E36": {
+    bridge: "allbridge",
+    sourceChain: "Avalanche",
+  },
   Bn113WT6rbdgwrm12UJtnmNqGqZjY4it2WoUQuQopFVn: {
     bridge: "allbridge",
     sourceChain: "Ethereum",
@@ -1183,6 +1191,26 @@ export default {
     bridge: "trueusd",
     sourceChain: "Ethereum",
   },
+  "0x88eeC49252c8cbc039DCdB394c0c2BA2f1637EA0": {
+    bridge: "optics",
+    sourceChain: "Ethereum",
+  },
+  "0xef4229c8c3250C675F21BCefa42f58EfbfF6002a": {
+    bridge: "optics",
+    sourceChain: "Ethereum",
+  },
+  "0x1bfc26cE035c368503fAE319Cc2596716428ca44": {
+    bridge: "optics",
+    sourceChain: "Polygon",
+  },
+  "0x93DB49bE12B864019dA9Cb147ba75cDC0506190e": {
+    bridge: "moss",
+    sourceChain: "Ethereum",
+  },
+  "0xcfffe0c89a779c09df3df5624f54cdf7ef5fdd5d": {
+    bridge: "moss",
+    sourceChain: "Ethereum",
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1336,4 +1364,12 @@ export const bridgeInfo = {
     name: "TrueUSD",
     link: "https://trueusd.com/trueusd",
   },
+  optics: {
+    name: "Optics Bridge",
+    link: "https://optics.app/",
+  },
+  moss: {
+    name: "Moss",
+    link: "https://bridge.moss.earth/",
+  }
 } as BridgeInfo;
