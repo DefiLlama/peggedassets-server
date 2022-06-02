@@ -2,14 +2,16 @@ const sdk = require("@defillama/sdk");
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
+  Balances
 } from "../peggedAsset.type";
+import { sumSingleBalance } from "../helper/generalUtil";
 
 const chainContracts = {
     ethereum: {
         issued: "0x865377367054516e17014CcdED1e7d814EDC9ce4",
     },
     fantom: {
-        bridgedFromETH: "0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c",
+        bridgedFromETH: "0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c", // multichain
     },
     optimism: {
         bridgedFromETH: "0x8aE125E8653821E851F12A49F7765db9a9ce7384",
@@ -22,6 +24,7 @@ return async function (
     _ethBlock: number,
     _chainBlocks: ChainBlocks
 ) {
+  let balances = {} as Balances;
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
@@ -30,7 +33,14 @@ return async function (
         chain: "ethereum",
       })
     ).output;
-    return { peggedUSD: totalSupply / 10 ** 18 };
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupply / 10 ** 18,
+      chainContracts.ethereum.issued,
+      true
+    );
+    return balances;
   };
 }
 
@@ -40,6 +50,7 @@ return async function (
     _ethBlock: number,
     _chainBlocks: ChainBlocks
 ) {
+  let balances = {} as Balances;
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
@@ -48,7 +59,14 @@ return async function (
         chain: chain,
       })
     ).output;
-    return { peggedUSD: totalSupply / 10 ** decimals };
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupply / 10 ** decimals,
+      address,
+      true
+    );
+    return balances;
   };
 }
 
@@ -62,11 +80,13 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedFromEthereum("fantom", 18, chainContracts.fantom.bridgedFromETH),
   },
+  /* Circulating is 0, can add it back in when it has a circulating supply.
   optimism: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedFromEthereum("optimism", 18, chainContracts.optimism.bridgedFromETH),
   },
+  */
 };
 
 export default adapter;

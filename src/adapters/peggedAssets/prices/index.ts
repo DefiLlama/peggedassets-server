@@ -101,12 +101,11 @@ const uniswapPools: UniswapPools = {
     chain: "ethereum",
     decimalsDifference: -12,
   },
-};
-
-const saddlePools: SaddlePools = {
-  "nexus-usd": {
-    address: "0x1116898DdA4015eD8dDefb84b6e8Bc24528Af2d8",
+  "dola-usd": {
+    address: "0x7c082BF85e01f9bB343dbb460A14e51F67C58cFB",
+    token: 0,
     chain: "ethereum",
+    decimalsDifference: -12,
   },
 };
 
@@ -152,22 +151,6 @@ export default async function getCurrentPeggedPrice(
       } else return 1 / token0token1PriceRatio;
     }
     console.error(`Could not get Uniswap price for token ${token}`);
-    return null;
-  }
-  if (priceSource === "saddle") {
-    const pool = saddlePools[token];
-    const virtualPrice = await sdk.api.abi.call({
-      abi: saddleabi.getVirtualPrice,
-      target: pool.address,
-      block: chainBlocks[pool.chain],
-      chain: pool.chain,
-    });
-
-    if (virtualPrice.output) {
-      // Virtual Price is always given in 1e18.
-      return virtualPrice.output / 1e18;
-    }
-    console.error(`Could not get Saddle price for token ${token}`);
     return null;
   }
   console.error(`no method to get price for given priceSource for ${token}`);

@@ -75,7 +75,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -136,17 +142,17 @@ async function bscMinted() {
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  /*
+  
   ethereum: {
     minted: chainMinted("ethereum", 18),
     unreleased: async () => ({}),
   },
-  */
   /*
    * This is to get Ethereum balance to be 0.
    * This amount on BSC does match the amount bridged from Ethereum, and frequently exceeds it,
    * causing the circulating value on Ethereum to be negative.
    */
+  /*
   ethereum: {
     minted: multiFunctionBalance(
       [
@@ -161,6 +167,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
     unreleased: async () => ({}),
   },
+  */
   bsc: {
     minted: bscMinted(),
     unreleased: async () => ({}),
@@ -210,7 +217,9 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "syscoin",
       18,
-      chainContracts.syscoin.bridgedFromETH
+      chainContracts.syscoin.bridgedFromETH,
+      "multichain",
+      "Ethereum"
     ),
   },
   heco: {

@@ -234,6 +234,14 @@ const chainContracts: ChainContracts = {
       "0xd226392c23fb3476274ed6759d4a478db3197d82", // axelar (0 supply?)
     ],
   },
+  celo: {
+    bridgedFromETH6Decimals: [
+      "0x88eeC49252c8cbc039DCdB394c0c2BA2f1637EA0", // optics
+    ],
+    bridgedFromETH18Decimals: [
+      "0xcfffe0c89a779c09df3df5624f54cdf7ef5fdd5d", // moss
+    ], 
+  },
 };
 
 /* 
@@ -283,7 +291,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -342,7 +356,13 @@ async function liquidMinted() {
     );
     const issued = res.data.chain_stats.issued_amount;
     const burned = res.data.chain_stats.burned_amount;
-    sumSingleBalance(balances, "peggedUSD", (issued - burned) / 10 ** 8, "issued", false);
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      (issued - burned) / 10 ** 8,
+      "issued",
+      false
+    );
     return balances;
   };
 }
@@ -757,7 +777,20 @@ const adapter: PeggedIssuanceAdapter = {
   oasis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromETH),
+    ethereum: multiFunctionBalance(
+      [
+        bridgedSupply("oasis", 6, [chainContracts.oasis.bridgedFromETH[0]]),
+        bridgedSupply("oasis", 6, [chainContracts.oasis.bridgedFromETH[1]]),
+        bridgedSupply(
+          "oasis",
+          6,
+          [chainContracts.oasis.bridgedFromETH[2]],
+          "celer",
+          "Ethereum"
+        ),
+      ],
+      "peggedUSD"
+    ),
     solana: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromSol),
     bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
     polygon: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromPolygon),
@@ -827,6 +860,17 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromETH),
+  },
+  celo: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: multiFunctionBalance(
+      [
+        bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
+        bridgedSupply("celo", 18, chainContracts.celo.bridgedFromETH18Decimals),
+      ],
+      "peggedUSD"
+    ),
   },
 };
 

@@ -150,7 +150,7 @@ const chainContracts: ChainContracts = {
   },
   milkomeda: {
     bridgedFromETH: [
-      "0xb44a9b6905af7c801311e8f4e76932ee959c663c", // multichain ?
+      "0xb44a9b6905af7c801311e8f4e76932ee959c663c", // multichain
       "0x6a2d262D56735DbA19Dd70682B39F6bE9a931D98", // celer
       "0x5a955FDdF055F2dE3281d99718f5f1531744B102", // nomad
     ],
@@ -226,6 +226,13 @@ const chainContracts: ChainContracts = {
   },
   dfk: {
     bridgedFromETH: ["0x3ad9dfe640e1a9cc1d9b0948620820d975c3803a"], // synapse
+  },
+  celo: {
+    bridgedFromETH6Decimals: ["0xef4229c8c3250C675F21BCefa42f58EfbfF6002a"], // optics
+    bridgedFromETH18Decimals: ["0x93DB49bE12B864019dA9Cb147ba75cDC0506190e"], // moss
+    bridgedFromPolygon: ["0x1bfc26cE035c368503fAE319Cc2596716428ca44"], // optics
+    bridgedFromAvax: ["0xb70e0a782b058BFdb0d109a3599BEc1f19328E36"], // allbridge
+    bridgedFromSol: ["0xCD7D7Ff64746C1909E44Db8e95331F9316478817"], // allbridge
   },
 };
 
@@ -492,7 +499,9 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "moonriver",
       6,
-      chainContracts.moonriver.bridgedFromETH
+      chainContracts.moonriver.bridgedFromETH,
+      "multichain",
+      "Ethereum"
     ),
   },
   moonbeam: {
@@ -534,7 +543,9 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "syscoin",
       6,
-      chainContracts.syscoin.bridgedFromETH
+      chainContracts.syscoin.bridgedFromETH,
+      "multichain",
+      "Ethereum"
     ),
   },
   tomochain: {
@@ -696,6 +707,24 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("dfk", 18, chainContracts.dfk.bridgedFromETH),
+  },
+  celo: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: multiFunctionBalance(
+      [
+        bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
+        bridgedSupply("celo", 18, chainContracts.celo.bridgedFromETH18Decimals),
+      ],
+      "peggedUSD"
+    ),
+    avalanche: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromAvax),
+    polygon: bridgedSupply(
+      "celo",
+      6,
+      chainContracts.celo.bridgedFromPolygon
+    ),
+    solana: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromSol),
   },
 };
 

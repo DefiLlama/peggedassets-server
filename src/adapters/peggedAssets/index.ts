@@ -15,6 +15,7 @@ import usdd from "./usdd";
 import nusd from "./nusd";
 import dola from "./dola-usd";
 import pai from "./parrot-usd";
+import husd from "./husd";
 
 export default {
   tether,
@@ -34,4 +35,5 @@ export default {
   "nexus-usd": nusd,
   "dola-usd": dola,
   "parrot-usd": pai,
+  husd,
 };
