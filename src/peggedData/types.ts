@@ -24,7 +24,6 @@ export type PeggedAsset = {
   pegType: PegType;
   priceSource: PriceSource;
   chains: string[];
-  bridges: Bridges;
   twitter: string;
 };
 

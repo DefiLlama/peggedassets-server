@@ -73,160 +73,6 @@ export default [
       "Shiden",
       "Fantom",
     ],
-    bridges: {
-      Ethereum: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Solana: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      BSC: {
-        bridge: "BSC Bridge",
-        link: "https://www.binance.com/",
-      },
-      Heco: {
-        bridge: "HECO Chain Bridge",
-        link: "https://www.hecochain.com/",
-      },
-      Avalanche: {
-        bridge: "Avalanche Bridge",
-        link: "https://bridge.avax.network/",
-      },
-      OKExChain: {
-        bridge: "OKX Bridge",
-        link: "https://www.okx.com/okx-bridge",
-      },
-      Polygon: {
-        bridge: "Polygon PoS Bridge",
-        link: "https://polygon.technology/",
-      },
-      Arbitrum: {
-        bridge: "Arbitrum L1 Custom Gateway",
-        link: "https://arbitrum.io/",
-      },
-      Aurora: {
-        bridge: "NEAR Rainbow Bridge",
-        link: "https://rainbowbridge.app/",
-      },
-      Harmony: {
-        bridge: "Horizon Bridge by Harmony",
-        link: "https://bridge.harmony.one/",
-      },
-      Metis: {
-        bridge: "Metis Andromeda Bridge",
-        link: "https://www.metis.io/",
-      },
-      KCC: {
-        bridge: "Kucoin Bridge",
-        link: "https://www.Kucoin.io/",
-      },
-      Moonriver: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Optimism: {
-        bridge: "Optimism Bridge",
-        link: "https://app.optimism.io/bridge",
-      },
-      Moonbeam: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Milkomeda: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Boba: {
-        bridge: "Boba Gateway",
-        link: "https://gateway.boba.network/",
-      },
-      IoTeX: {
-        bridge: "ioTube V5",
-        link: "https://iotube.org/",
-      },
-      Kardia: {
-        bridge: "KAI Bridge",
-        link: "https://bridge.kaidex.io/",
-      },
-      Telos: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Fuse: {
-        bridge: "Fuse Bridge",
-        link: "https://voltage.finance/",
-      },
-      TomoChain: {
-        bridge: "TomoBridge",
-        link: "https://bridge.TomoChain.com/",
-      },
-      Meter: {
-        bridge: "Meter Passport",
-        link: "https://passport.meter.io/",
-      },
-      Syscoin: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Oasis: {
-        bridge: "EVODeFi",
-        link: "https://bridge.evodefi.com/",
-      },
-      Bittorrent: {
-        bridge: "Bittorrent Bridge",
-        link: "https://bttc.bittorrent.com/",
-      },
-      Evmos: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Terra: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Crab: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Astar: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Gnosis: {
-        bridge: "Gnosis Chain OmniBridge",
-        link: "https://omni.gnosischain.com/",
-      },
-      Theta: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      RSK: {
-        bridge: "RSK Token Bridge",
-        link: "https://tokenbridge.rsk.co/",
-      },
-      REINetwork: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Loopring: {
-        bridge: "Loopring",
-        link: "https://loopring.org/",
-      },
-      zkSync: {
-        bridge: "zkSync",
-        link: "https://zksync.io/",
-      },
-      Shiden: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Fantom: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-    },
     twitter: "https://twitter.com/Tether_to",
   },
   {
@@ -286,157 +132,6 @@ export default [
       "Fantom",
       "DFK",
     ],
-    bridges: {
-      Ethereum: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Solana: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Polygon: {
-        bridge: "Polygon PoS Bridge",
-        link: "https://polygon.technology/",
-      },
-      BSC: {
-        bridge: "BSC Bridge",
-        link: "https://www.binance.com/",
-      },
-      Avalanche: {
-        bridge: "Avalanche Bridge",
-        link: "https://bridge.avax.network/",
-      },
-      Harmony: {
-        bridge: "Horizon Bridge by Harmony",
-        link: "https://bridge.harmony.one/",
-      },
-      Arbitrum: {
-        bridge: "Arbitrum L1 Custom Gateway",
-        link: "https://arbitrum.io/",
-      },
-      OKExChain: {
-        bridge: "OKX Bridge",
-        link: "https://www.okx.com/okx-bridge",
-      },
-      Moonriver: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Moonbeam: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Boba: {
-        bridge: "Boba Gateway",
-        link: "https://gateway.boba.network/",
-      },
-      Optimism: {
-        bridge: "Optimism Bridge",
-        link: "https://app.optimism.io/bridge",
-      },
-      Metis: {
-        bridge: "Metis Andromeda Bridge",
-        link: "https://www.metis.io/",
-      },
-      KCC: {
-        bridge: "Kucoin Bridge",
-        link: "https://www.Kucoin.io/",
-      },
-      Syscoin: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      TomoChain: {
-        bridge: "TomoBridge",
-        link: "https://bridge.TomoChain.com/",
-      },
-      Ronin: {
-        bridge: "Ronin Bridge",
-        link: "https://bridge.roninchain.com/",
-      },
-      Aurora: {
-        bridge: "NEAR Rainbow Bridge",
-        link: "https://rainbowbridge.app/",
-      },
-      Fuse: {
-        bridge: "Fuse Bridge",
-        link: "https://voltage.finance/",
-      },
-      Meter: {
-        bridge: "Meter Passport",
-        link: "https://passport.meter.io/",
-      },
-      Telos: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Milkomeda: {
-        // may need to be updated
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Elastos: {
-        bridge: "ShadowTokens",
-        link: "https://tokbridge.net/",
-      },
-      Terra: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Oasis: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Crab: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Evmos: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Astar: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Gnosis: {
-        bridge: "Gnosis Chain OmniBridge",
-        link: "https://omni.gnosischain.com/",
-      },
-      Theta: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      RSK: {
-        bridge: "RSK Token Bridge",
-        link: "https://tokenbridge.rsk.co/",
-      },
-      REINetwork: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Loopring: {
-        bridge: "Loopring",
-        link: "https://loopring.org/",
-      },
-      zkSync: {
-        bridge: "zkSync",
-        link: "https://zksync.io/",
-      },
-      Shiden: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Fantom: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      DFK: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-    },
     twitter: "",
   },
   {
@@ -472,76 +167,6 @@ export default [
       "Metis",
       "DFK",
     ],
-    bridges: {
-      Ethereum: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      BSC: {
-        bridge: "Terra Shuttle Bridge",
-        link: "https://bridge.terra.money/",
-      },
-      Harmony: {
-        bridge: "Terra Shuttle Bridge",
-        link: "https://bridge.terra.money/",
-      },
-      Aurora: {
-        bridge: "Allbridge",
-        link: "https://allbridge.io/",
-      },
-      Polygon: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Solana: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Fantom: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Avalanche: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Osmosis: {
-        bridge: "Terra Shuttle Bridge",
-        link: "https://bridge.terra.money/",
-      },
-      Moonbeam: {
-        bridge: "Axelar",
-        link: "https://axelar.network/",
-      },
-      Oasis: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Celo: {
-        bridge: "Allbridge",
-        link: "https://allbridge.io/",
-      },
-      Fuse: {
-        bridge: "Allbridge",
-        link: "https://allbridge.io/",
-      },
-      Arbitrum: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Optimism: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Metis: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      DFK: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-    },
     twitter: "https://twitter.com/terra_money",
   },
   {
@@ -587,116 +212,6 @@ export default [
       "RSK",
       "Theta",
     ],
-    bridges: {
-      Ethereum: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      BSC: {
-        bridge: "BSC Bridge",
-        link: "https://www.binance.com/",
-      },
-      Avalanche: {
-        bridge: "Avalanche Bridge",
-        link: "https://bridge.avax.network/",
-      },
-      Solana: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Harmony: {
-        bridge: "Horizon Bridge by Harmony",
-        link: "https://bridge.harmony.one/",
-      },
-      IoTeX: {
-        bridge: "ioTube V5",
-        link: "https://iotube.org/",
-      },
-      OKExChain: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Moonriver: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Polygon: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Fuse: {
-        bridge: "Fuse Bridge",
-        link: "https://voltage.finance/",
-      },
-      Meter: {
-        bridge: "Meter Passport",
-        link: "https://passport.meter.io/",
-      },
-      Moonbeam: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Milkomeda: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Elastos: {
-        bridge: "ShadowTokens",
-        link: "https://tokbridge.net/",
-      },
-      Aurora: {
-        bridge: "Allbridge",
-        link: "https://allbridge.io/",
-      },
-      Terra: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Oasis: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Shiden: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Astar: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Evmos: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Syscoin: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Boba: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Metis: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Fantom: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      KCC: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      RSK: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Theta: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-    },
     twitter: "https://twitter.com/PaxosGlobal",
   },
   {
@@ -742,116 +257,6 @@ export default [
       "Shiden",
       "Boba",
     ],
-    bridges: {
-      Solana: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      Polygon: {
-        bridge: "Polygon PoS Bridge",
-        link: "https://polygon.technology/",
-      },
-      BSC: {
-        bridge: "BSC Bridge",
-        link: "https://www.binance.com/",
-      },
-      Optimism: {
-        bridge: "Optimism Bridge",
-        link: "https://app.optimism.io/bridge",
-      },
-      Harmony: {
-        bridge: "Horizon Bridge by Harmony",
-        link: "https://bridge.harmony.one/",
-      },
-      Avalanche: {
-        bridge: "Avalanche Bridge",
-        link: "https://bridge.avax.network/",
-      },
-      Arbitrum: {
-        bridge: "Arbitrum L1 Custom Gateway",
-        link: "https://arbitrum.io/",
-      },
-      Moonriver: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Aurora: {
-        bridge: "NEAR Rainbow Bridge",
-        link: "https://rainbowbridge.app/",
-      },
-      Fantom: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Moonbeam: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Syscoin: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Milkomeda: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Astar: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Oasis: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Evmos: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Gnosis: {
-        bridge: "Gnosis Chain OmniBridge",
-        link: "https://omni.gnosischain.com/",
-      },
-      Terra: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      RSK: {
-        bridge: "RSK Token Bridge",
-        link: "https://tokenbridge.rsk.co/",
-      },
-      REINetwork: {
-        bridge: "Celer cBridge",
-        link: "https://cbridge.celer.network/",
-      },
-      Loopring: {
-        bridge: "Loopring",
-        link: "https://loopring.org/",
-      },
-      zkSync: {
-        bridge: "zkSync",
-        link: "https://zksync.io/",
-      },
-      Aztec: {
-        bridge: "Aztec",
-        link: "https://zk.money/",
-      },
-      Velas: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      KCC: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Shiden: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Boba: {
-        bridge: "Boba Gateway",
-        link: "https://gateway.boba.network/",
-      },
-    },
     twitter: "https://twitter.com/MakerDAO",
   },
   {
@@ -885,68 +290,6 @@ export default [
       "zkSync",
       "Milkomeda",
     ],
-    bridges: {
-      BSC: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Avalanche: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Arbitrum: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Aurora: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Boba: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Fantom: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Evmos: {
-        bridge: "Nomad",
-        link: "https://www.nomad.xyz/",
-      },
-      Harmony: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Moonbeam: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Moonriver: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Optimism: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Polygon: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Solana: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-      zkSync: {
-        bridge: "zkSync",
-        link: "https://zksync.io/",
-      },
-      Milkomeda: {
-        bridge: "Nomad",
-        link: "https://www.nomad.xyz/",
-      },
-    },
     twitter: "https://twitter.com/fraxfinance",
   },
   {
@@ -975,28 +318,6 @@ export default [
       "Heco",
       "Cronos",
     ],
-    bridges: {
-      BSC: {
-        bridge: "-",
-      },
-      Polygon: {
-        bridge: "-",
-      },
-      Arbitrum: {
-        bridge: "-",
-      },
-      Fantom: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Syscoin: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Heco: {
-        bridge: "-",
-      },
-    },
     twitter: "https://twitter.com/tusdio",
   },
   {
@@ -1014,16 +335,6 @@ export default [
     pegType: "peggedUSD",
     priceSource: "chainlink",
     chains: ["Ethereum", "Polygon", "Optimism"],
-    bridges: {
-      Polygon: {
-        bridge: "Polygon PoS Bridge",
-        link: "https://polygon.technology/",
-      },
-      Optimism: {
-        bridge: "Optimism Bridge",
-        link: "https://app.optimism.io/bridge",
-      },
-    },
     twitter: "https://twitter.com/LiquityProtocol",
   },
   {
@@ -1041,7 +352,6 @@ export default [
     pegType: "peggedUSD",
     priceSource: "chainlink",
     chains: ["Ethereum"],
-    bridges: {},
     twitter: "https://twitter.com/feiprotocol",
   },
   {
@@ -1069,40 +379,6 @@ export default [
       "Boba",
       "Metis",
     ],
-    bridges: {
-      Polygon: {
-        bridge: "Abracadabra Bridge",
-        link: "https://abracadabra.money/",
-      },
-      Avalanche: {
-        bridge: "Abracadabra Bridge",
-        link: "https://abracadabra.money/",
-      },
-      Arbitrum: {
-        bridge: "Abracadabra Bridge",
-        link: "https://abracadabra.money/",
-      },
-      Fantom: {
-        bridge: "Abracadabra Bridge",
-        link: "https://abracadabra.money/",
-      },
-      BSC: {
-        bridge: "Abracadabra Bridge",
-        link: "https://abracadabra.money/",
-      },
-      Moonriver: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Boba: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-      Metis: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-    },
     twitter: "https://twitter.com/MIM_Spell",
   },
   {
@@ -1120,12 +396,6 @@ export default [
     pegType: "peggedUSD",
     priceSource: "chainlink",
     chains: ["Ethereum", "BSC"],
-    bridges: {
-      BSC: {
-        bridge: "BSC Bridge",
-        link: "https://www.binance.com/",
-      },
-    },
     twitter: "https://twitter.com/paxosglobal",
   },
   {
@@ -1143,20 +413,6 @@ export default [
     pegType: "peggedUSD",
     priceSource: "chainlink",
     chains: ["Waves", "Ethereum", "Polygon", "BSC"],
-    bridges: {
-      Ethereum: {
-        bridge: "Waves Exchange",
-        link: "https://waves.exchange/",
-      },
-      Polygon: {
-        bridge: "Waves Exchange",
-        link: "https://waves.exchange/",
-      },
-      BSC: {
-        bridge: "Waves Exchange",
-        link: "https://waves.exchange/",
-      },
-    },
     twitter: "https://twitter.com/neutrino_proto",
   },
   {
@@ -1174,7 +430,6 @@ export default [
     pegType: "peggedUSD",
     priceSource: null,
     chains: ["Avalanche"],
-    bridges: {},
     twitter: "https://twitter.com/YetiFinance",
   },
   {
@@ -1192,20 +447,6 @@ export default [
     pegType: "peggedUSD",
     priceSource: "uniswap",
     chains: ["Tron", "Bittorrent", "Ethereum", "BSC"],
-    bridges: {
-      Bittorrent: {
-        bridge: "Bittorrent Bridge",
-        link: "https://bttc.bittorrent.com/",
-      },
-      Ethereum: {
-        bridge: "Bittorrent Bridge",
-        link: "https://bttc.bittorrent.com/",
-      },
-      BSC: {
-        bridge: "Bittorrent Bridge",
-        link: "https://bttc.bittorrent.com/",
-      },
-    },
     twitter: "https://twitter.com/usddio",
   },
   {
@@ -1223,12 +464,6 @@ export default [
     pegType: "peggedUSD",
     priceSource: "uniswap",
     chains: ["Ethereum", "Fantom"],
-    bridges: {
-      Fantom: {
-        bridge: "Multichain Bridge",
-        link: "https://multichain.org/",
-      },
-    },
     twitter: "https://twitter.com/InverseFinance",
   },
   {
@@ -1246,7 +481,6 @@ export default [
     pegType: "peggedUSD",
     priceSource: null,
     chains: ["Solana"],
-    bridges: {},
     twitter: "https://twitter.com/gopartyparrot",
   },
   {
@@ -1264,16 +498,6 @@ export default [
     pegType: "peggedUSD",
     priceSource: null,
     chains: ["Ethereum", "Tron", "Heco", "Elastos", "Solana"],
-    bridges: {
-      Elastos: {
-        bridge: "ShadowTokens",
-        link: "https://tokbridge.net/",
-      },
-      Solana: {
-        bridge: "Portal by Wormhole",
-        link: "https://wormholenetwork.com/",
-      },
-    },
     twitter: "https://twitter.com/Stablecoin_HUSD",
   },
   {
@@ -1304,56 +528,6 @@ export default [
       "Metis",
       "DFK",
     ],
-    bridges: {
-      Ethereum: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      BSC: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Polygon: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Avalanche: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Arbitrum: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Fantom: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Harmony: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Boba: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Optimism: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Cronos: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      Metis: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-      DFK: {
-        name: "Synapse Bridge",
-        link: "https://synapseprotocol.com/",
-      },
-    },
     twitter: "https://twitter.com/SynapseProtocol",
   },
   {
@@ -1371,12 +545,6 @@ export default [
     pegType: "peggedUSD",
     priceSource: "chainlink",
     chains: ["Ethereum", "Wanchain"],
-    bridges: {
-      Wanchain: {
-        name: "WanBridge",
-        link: "https://bridge.wanchain.org/",
-      },
-    },
     twitter: "https://twitter.com/gemini",
   },
 ] as PeggedAsset[];
