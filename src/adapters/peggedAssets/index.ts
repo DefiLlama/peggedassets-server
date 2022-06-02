@@ -12,10 +12,11 @@ import pax from "./paxos-standard";
 import neutrino from "./neutrino";
 import yusd from "./yusd-stablecoin";
 import usdd from "./usdd";
-import nusd from "./nusd";
+import nusd from "./nexus-usd";
 import dola from "./dola-usd";
 import pai from "./parrot-usd";
 import husd from "./husd";
+import gusd from "./gemini-dollar";
 
 export default {
   tether,
@@ -36,4 +37,5 @@ export default {
   "dola-usd": dola,
   "parrot-usd": pai,
   husd,
+  "gemini-dollar": gusd,
 };

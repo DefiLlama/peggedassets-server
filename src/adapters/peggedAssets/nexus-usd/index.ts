@@ -50,6 +50,9 @@ const chainContracts: ChainContracts = {
   dfk: {
     bridgedFromETH: ["0x52285d426120ab91f378b3df4a15a036a62200ae"],
   },
+  aurora: {
+    bridgedFromETH: ["0x07379565cD8B0CaE7c60Dc78e7f601b34AF2A21c"],
+  }
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -101,7 +104,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.polygon.bridgedFromETH
     ),
   },
-  avax: {
+  avalanche: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
@@ -153,10 +156,17 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("metis", 18, chainContracts.metis.bridgedFromETH),
   },
+  /* Supply is 0.
   dfk: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("dfk", 18, chainContracts.dfk.bridgedFromETH),
+  },
+  */
+  aurora: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromETH),
   },
 };
 

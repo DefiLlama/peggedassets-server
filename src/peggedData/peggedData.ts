@@ -1172,7 +1172,7 @@ export default [
     cmcId: "19577",
     category: "stablecoins",
     pegType: "peggedUSD",
-    priceSource: "none",
+    priceSource: null,
     chains: ["Avalanche"],
     bridges: {},
     twitter: "https://twitter.com/YetiFinance",
@@ -1222,7 +1222,7 @@ export default [
     category: "stablecoins",
     pegType: "peggedUSD",
     priceSource: "uniswap",
-    chains: ["Ethereum", "Fantom"], 
+    chains: ["Ethereum", "Fantom"],
     bridges: {
       Fantom: {
         bridge: "Multichain Bridge",
@@ -1241,13 +1241,12 @@ export default [
       "The Parrot Protocol is a DeFi network built on Solana that will include the stablecoin PAI, a non-custodial lending market, and a margin trading vAMM.",
     chain: "Solana",
     gecko_id: "parrot-usd",
-    cmcId: "none",
+    cmcId: null,
     category: "stablecoins",
     pegType: "peggedUSD",
-    priceSource: "none",
-    chains: ["Solana"], 
-    bridges: {
-    },
+    priceSource: null,
+    chains: ["Solana"],
+    bridges: {},
     twitter: "https://twitter.com/gopartyparrot",
   },
   {
@@ -1263,8 +1262,8 @@ export default [
     cmcId: "4779",
     category: "stablecoins",
     pegType: "peggedUSD",
-    priceSource: "none",
-    chains: ["Ethereum", "Tron", "Heco", "Elastos", "Solana"], 
+    priceSource: null,
+    chains: ["Ethereum", "Tron", "Heco", "Elastos", "Solana"],
     bridges: {
       Elastos: {
         bridge: "ShadowTokens",
@@ -1276,5 +1275,108 @@ export default [
       },
     },
     twitter: "https://twitter.com/Stablecoin_HUSD",
+  },
+  {
+    id: "18",
+    name: "Nexus USD",
+    address: "0x1b84765de8b7566e4ceaf4d0fd3c5af52d3dde4f",
+    symbol: "NUSD",
+    url: "https://synapseprotocol.com/",
+    description:
+      'nUSD, or "nexus" USD, is a cross-chain stablecoin fully backed by the nexus stablecoin liquidity pool on Ethereum consisting of DAI, USDC, and USDT.',
+    chain: "Ethereum",
+    gecko_id: null,
+    cmcId: null,
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: null,
+    chains: [
+      "Ethereum",
+      "BSC",
+      "Polygon",
+      "Avalanche",
+      "Arbitrum",
+      "Fantom",
+      "Harmony",
+      "Boba",
+      "Optimism",
+      "Cronos",
+      "Metis",
+      "DFK",
+    ],
+    bridges: {
+      Ethereum: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      BSC: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Polygon: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Avalanche: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Arbitrum: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Fantom: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Harmony: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Boba: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Optimism: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Cronos: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Metis: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      DFK: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+    },
+    twitter: "https://twitter.com/SynapseProtocol",
+  },
+  {
+    id: "19",
+    name: "Gemini Dollar",
+    address: "0x056fd409e1d7a124bd7017459dfea2f387b6d5cd",
+    symbol: "GUSD",
+    url: "https://www.gemini.com/dollar",
+    description:
+      "GUSD is a 1:1 USD-backed stablecoin issued by Gemini. Gemini customers can redeem a GUSD for $1 at Gemini.",
+    chain: "Ethereum",
+    gecko_id: "gemini-dollar",
+    cmcId: "3306",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "chainlink",
+    chains: ["Ethereum", "Wanchain"],
+    bridges: {
+      Wanchain: {
+        name: "WanBridge",
+        link: "https://bridge.wanchain.org/",
+      },
+    },
+    twitter: "https://twitter.com/gemini",
   },
 ] as PeggedAsset[];

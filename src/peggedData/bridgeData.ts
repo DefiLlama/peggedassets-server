@@ -1211,6 +1211,70 @@ export default {
     bridge: "moss",
     sourceChain: "Ethereum",
   },
+  "0x13780e6d5696dd91454f6d3bbc2616687fea43d0": {
+    bridge: "synapse",
+    sourceChain: "Terra",
+  },
+  "0xfb21b70922b9f6e3c6274bcd6cb1aa8a0fe20b80": {
+    bridge: "synapse",
+    sourceChain: "Terra",
+  },
+  "0x0b5740c6b4a97f90ef2f0220651cca420b868ffb": {
+    bridge: "synapse",
+    sourceChain: "Terra",
+  },
+  "0x360d6dd540e3448371876662fbe7f1acaf08c5ab": {
+    bridge: "synapse",
+    sourceChain: "Terra",
+  },
+  "0x07379565cD8B0CaE7c60Dc78e7f601b34AF2A21c": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0xcfc37a6ab183dd4aed08c204d1c2773c0b1bdf46": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0x2913e812cf0dcca30fb28e6cac3d2dcff4497688": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0xed2a7edd7413021d440b09d654f3b87712abab66": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0xb6c473756050de474286bed418b77aeac39b02af": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0x6b4712ae9797c199edd44f897ca09bc57628a1cf": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0x67c10c397dd0ba417329543c1a40eb48aaa7cd00": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0x396c9c192dd323995346632581bef92a31ac623b": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0x961318fc85475e125b99cc9215f62679ae5200ab": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0x52285d426120ab91f378b3df4a15a036a62200ae": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0x23b891e5c62e0955ae2bd185990103928ab817b3": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
+  "0xcF422327dDaAa409C2976d01131d8a3457F03251": {
+    bridge: "wan",
+    sourceChain: "Ethereum",
+  }
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1375,5 +1439,9 @@ export const bridgeInfo = {
   moss: {
     name: "Moss",
     link: "https://bridge.moss.earth/",
-  }
+  },
+  wan: {
+    name: "WanBridge",
+    link: "https://bridge.wanchain.org/",
+  },
 } as BridgeInfo;

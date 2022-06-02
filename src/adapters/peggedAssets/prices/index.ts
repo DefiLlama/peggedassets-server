@@ -1,5 +1,4 @@
 const sdk = require("@defillama/sdk");
-import saddleabi from "./saddle_abi.json";
 import chainabi from "./chainlink_abi.json";
 import uniabi from "./uniswap_abi.json";
 import { ChainBlocks } from "../peggedAsset.type";
@@ -92,6 +91,11 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   }, // USDN-USD ETH
+  "gemini-dollar": {
+    address: "0xa89f5d2365ce98B3cD68012b6f503ab1416245Fc",
+    chain: "ethereum",
+    decimals: 8,
+  },
 };
 
 const uniswapPools: UniswapPools = {
