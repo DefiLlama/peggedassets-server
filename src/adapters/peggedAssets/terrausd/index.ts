@@ -69,6 +69,18 @@ const chainContracts: ChainContracts = {
   fuse: {
     bridgedFromTerra: ["0x0D58a44be3dCA0aB449965dcc2c46932547Fea2f"], // allbridge
   },
+  arbitrum: {
+    bridgedFromTerra: ["0x13780e6d5696dd91454f6d3bbc2616687fea43d0"], // synapse
+  },
+  optimism: {
+    bridgedFromTerra: ["0xfb21b70922b9f6e3c6274bcd6cb1aa8a0fe20b80"], // synapse
+  },
+  metis: {
+    bridgedFromTerra: ["0x0b5740c6b4a97f90ef2f0220651cca420b868ffb"], // synapse
+  },
+  dfk: {
+    bridgedFromTerra: ["0x360d6dd540e3448371876662fbe7f1acaf08c5ab"], // synapse
+  },
 };
 
 /*
@@ -219,6 +231,34 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     terra: bridgedSupply("fuse", 18, chainContracts.fuse.bridgedFromTerra),
+  },
+  arbitrum: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    terra: bridgedSupply(
+      "arbitrum",
+      6,
+      chainContracts.arbitrum.bridgedFromTerra
+    ),
+  },
+  optimism: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    terra: bridgedSupply(
+      "optimism",
+      6,
+      chainContracts.optimism.bridgedFromTerra
+    ),
+  },
+  metis: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    terra: bridgedSupply("metis", 6, chainContracts.metis.bridgedFromTerra),
+  },
+  dfk: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    terra: bridgedSupply("dfk", 6, chainContracts.dfk.bridgedFromTerra),
   },
 };
 

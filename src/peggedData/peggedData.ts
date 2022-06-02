@@ -284,6 +284,7 @@ export default [
       "zkSync",
       "Shiden",
       "Fantom",
+      "DFK",
     ],
     bridges: {
       Ethereum: {
@@ -431,6 +432,10 @@ export default [
         bridge: "Multichain Bridge",
         link: "https://multichain.org/",
       },
+      DFK: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
     },
     twitter: "",
   },
@@ -462,6 +467,10 @@ export default [
       "Oasis",
       "Celo",
       "Fuse",
+      "Arbitrum",
+      "Optimism",
+      "Metis",
+      "DFK",
     ],
     bridges: {
       Ethereum: {
@@ -515,6 +524,22 @@ export default [
       Fuse: {
         bridge: "Allbridge",
         link: "https://allbridge.io/",
+      },
+      Arbitrum: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Optimism: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      Metis: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
+      },
+      DFK: {
+        name: "Synapse Bridge",
+        link: "https://synapseprotocol.com/",
       },
     },
     twitter: "https://twitter.com/terra_money",

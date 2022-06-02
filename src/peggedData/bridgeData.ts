@@ -1360,6 +1360,10 @@ export const bridgeInfo = {
     name: "Waves Exchange",
     link: "https://waves.exchange/",
   },
+  synapse: {
+    name: "Synapse Bridge",
+    link: "https://synapseprotocol.com/",
+  },
   trueusd: {
     name: "TrueUSD",
     link: "https://trueusd.com/trueusd",

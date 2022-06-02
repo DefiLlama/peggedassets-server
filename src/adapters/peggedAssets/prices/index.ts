@@ -1,4 +1,5 @@
 const sdk = require("@defillama/sdk");
+import saddleabi from "./saddle_abi.json";
 import chainabi from "./chainlink_abi.json";
 import uniabi from "./uniswap_abi.json";
 import { ChainBlocks } from "../peggedAsset.type";
@@ -20,6 +21,13 @@ type UniswapPools = {
     token: 0 | 1;
     chain: string;
     decimalsDifference: number; // difference between number of decimals for token1 and number for token0
+  };
+};
+
+type SaddlePools = {
+  [coinGeckoID: string]: {
+    address: string;
+    chain: string;
   };
 };
 
