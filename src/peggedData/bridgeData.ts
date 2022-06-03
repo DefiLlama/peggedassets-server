@@ -1271,6 +1271,10 @@ export default {
     bridge: "synapse",
     sourceChain: "Ethereum",
   },
+  "0x3ad9dfe640e1a9cc1d9b0948620820d975c3803a": {
+    bridge: "synapse",
+    sourceChain: "Ethereum",
+  },
   "0xcF422327dDaAa409C2976d01131d8a3457F03251": {
     bridge: "wan",
     sourceChain: "Ethereum",
