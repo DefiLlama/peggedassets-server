@@ -28,7 +28,7 @@ export async function craftChartsResponse(
     };
   };
   // quick fix; need to update later
-  if ((chain === "Gnosis") || (chain === "gnosis")) {
+  if (chain === "Gnosis" || chain === "gnosis") {
     chain = "xdai";
   }
 
@@ -89,6 +89,10 @@ export async function craftChartsResponse(
       };
     })
   );
+  let greatestChainMcap = {
+    gecko_id: "not-found",
+    mcap: 0,
+  };
   await Promise.all(
     historicalPeggedBalances.map(async (peggedBalance) => {
       if (peggedBalance === undefined) {
@@ -98,6 +102,26 @@ export async function craftChartsResponse(
       const pegType = pegged.pegType;
       const peggedGeckoID = pegged.gecko_id;
       const lastBalance = historicalBalance[historicalBalance.length - 1];
+
+      const priceData = await getTVLOfRecordClosestToTimestamp(
+        dailyPeggedPrices(),
+        lastTimestamp,
+        (secondsInDay * 3) / 2
+      );
+      const price = priceData?.prices?.[peggedGeckoID] ?? 1;
+      if (chain) {
+        const chainBalance = lastBalance[normalizeChain(chain)];
+        if (chainBalance) {
+          const mcap = chainBalance.circulating[pegType] * price;
+          if (greatestChainMcap.mcap < mcap) {
+            greatestChainMcap = {
+              gecko_id: peggedGeckoID,
+              mcap: mcap,
+            };
+          }
+        }
+      }
+
       while (lastTimestamp < lastDailyTimestamp) {
         lastTimestamp = getClosestDayStartTimestamp(
           lastTimestamp + 24 * secondsInHour
@@ -115,21 +139,25 @@ export async function craftChartsResponse(
           const priceData = await getTVLOfRecordClosestToTimestamp(
             dailyPeggedPrices(),
             timestamp,
-            secondsInDay * 3 / 2,
+            (secondsInDay * 3) / 2
           );
           if (chain === undefined) {
-            itemBalance.circulating = item.totalCirculating.circulating ?? {[pegType]: 0};
+            itemBalance.circulating = item.totalCirculating.circulating ?? {
+              [pegType]: 0,
+            };
             if (item.totalCirculating.unreleased) {
               itemBalance.unreleased = item.totalCirculating.unreleased;
             }
           } else {
-            itemBalance.circulating =
-              item[normalizeChain(chain)]?.circulating ?? {[pegType]: 0};
-            itemBalance.unreleased =
-              item[normalizeChain(chain)]?.unreleased ?? {[pegType]: 0};
+            itemBalance.circulating = item[normalizeChain(chain)]
+              ?.circulating ?? { [pegType]: 0 };
+            itemBalance.unreleased = item[normalizeChain(chain)]
+              ?.unreleased ?? { [pegType]: 0 };
             if (itemBalance.circulating === undefined) {
               if (chain === pegged.chain.toLowerCase()) {
-                itemBalance.circulating = item.totalCirculating.circulating ?? {[pegType]: 0};
+                itemBalance.circulating = item.totalCirculating.circulating ?? {
+                  [pegType]: 0,
+                };
                 if (item.totalCirculating.unreleased) {
                   itemBalance.unreleased = item.totalCirculating.unreleased;
                 }
@@ -184,9 +212,14 @@ export async function craftChartsResponse(
       totalCirculating: balance.circulating,
       unreleased: balance.unreleased,
       mcap: balance.mcap,
+      greatestChainMcap: null as any,
     })
   );
 
+  const lastChart = response[response.length - 1];
+  lastChart.greatestChainMcap = greatestChainMcap;
+  response[response.length - 1] = lastChart;
+  
   return response;
 }
 
