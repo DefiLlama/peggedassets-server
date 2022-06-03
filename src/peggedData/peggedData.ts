@@ -509,7 +509,7 @@ export default [
     description:
       'nUSD, or "nexus" USD, is a cross-chain stablecoin fully backed by the nexus stablecoin liquidity pool on Ethereum consisting of DAI, USDC, and USDT.',
     chain: "Ethereum",
-    gecko_id: null,
+    gecko_id: "nexus-usd",
     cmcId: null,
     category: "stablecoins",
     pegType: "peggedUSD",
