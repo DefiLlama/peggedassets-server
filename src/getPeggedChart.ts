@@ -118,18 +118,18 @@ export async function craftChartsResponse(
             secondsInDay * 3 / 2,
           );
           if (chain === undefined) {
-            itemBalance.circulating = item.totalCirculating.circulating;
+            itemBalance.circulating = item.totalCirculating.circulating ?? {[pegType]: 0};
             if (item.totalCirculating.unreleased) {
               itemBalance.unreleased = item.totalCirculating.unreleased;
             }
           } else {
             itemBalance.circulating =
-              item[normalizeChain(chain)]?.circulating ?? 0;
+              item[normalizeChain(chain)]?.circulating ?? {[pegType]: 0};
             itemBalance.unreleased =
-              item[normalizeChain(chain)]?.unreleased ?? 0;
+              item[normalizeChain(chain)]?.unreleased ?? {[pegType]: 0};
             if (itemBalance.circulating === undefined) {
               if (chain === pegged.chain.toLowerCase()) {
-                itemBalance.circulating = item.totalCirculating.circulating;
+                itemBalance.circulating = item.totalCirculating.circulating ?? {[pegType]: 0};
                 if (item.totalCirculating.unreleased) {
                   itemBalance.unreleased = item.totalCirculating.unreleased;
                 }
