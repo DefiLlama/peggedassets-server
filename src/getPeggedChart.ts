@@ -24,6 +24,8 @@ export async function craftChartsResponse(
     [timestamp: number]: {
       circulating: tokenBalance;
       unreleased: tokenBalance;
+      bridgedTo: tokenBalance;
+      minted: tokenBalance;
       mcap: number;
     };
   };
@@ -90,7 +92,7 @@ export async function craftChartsResponse(
     })
   );
   let greatestChainMcap = {
-    gecko_id: "not-found",
+    symbol: "not-found",
     mcap: 0,
   };
   await Promise.all(
@@ -101,6 +103,7 @@ export async function craftChartsResponse(
       let { historicalBalance, pegged, lastTimestamp } = peggedBalance;
       const pegType = pegged.pegType;
       const peggedGeckoID = pegged.gecko_id;
+      const peggedSymbol = pegged.symbol;
       const lastBalance = historicalBalance[historicalBalance.length - 1];
 
       const priceData = await getTVLOfRecordClosestToTimestamp(
@@ -115,7 +118,7 @@ export async function craftChartsResponse(
           const mcap = chainBalance.circulating[pegType] * price;
           if (greatestChainMcap.mcap < mcap) {
             greatestChainMcap = {
-              gecko_id: peggedGeckoID,
+              symbol: peggedSymbol,
               mcap: mcap,
             };
           }
@@ -148,11 +151,19 @@ export async function craftChartsResponse(
             if (item.totalCirculating.unreleased) {
               itemBalance.unreleased = item.totalCirculating.unreleased;
             }
+            itemBalance.bridgedTo = { [pegType]: 0 };
+            itemBalance.minted = { [pegType]: 0 };
           } else {
             itemBalance.circulating = item[normalizeChain(chain)]
               ?.circulating ?? { [pegType]: 0 };
             itemBalance.unreleased = item[normalizeChain(chain)]
               ?.unreleased ?? { [pegType]: 0 };
+            itemBalance.bridgedTo = item[normalizeChain(chain)]?.bridgedTo ?? {
+              [pegType]: 0,
+            };
+            itemBalance.minted = item[normalizeChain(chain)]?.minted ?? {
+              [pegType]: 0,
+            };
             if (itemBalance.circulating === undefined) {
               if (chain === pegged.chain.toLowerCase()) {
                 itemBalance.circulating = item.totalCirculating.circulating ?? {
@@ -186,10 +197,36 @@ export async function craftChartsResponse(
               sumDailyBalances[timestamp].mcap =
                 (sumDailyBalances[timestamp].mcap ?? 0) +
                 itemBalance.circulating[pegType] * price;
+
+              sumDailyBalances[timestamp].bridgedTo =
+                sumDailyBalances[timestamp].bridgedTo || {};
+              sumDailyBalances[timestamp].bridgedTo[pegType] =
+                (sumDailyBalances[timestamp].bridgedTo[pegType] ?? 0) +
+                itemBalance.bridgedTo[pegType] * price;
+
+              sumDailyBalances[timestamp].minted =
+                sumDailyBalances[timestamp].minted || {};
+              sumDailyBalances[timestamp].minted[pegType] =
+                (sumDailyBalances[timestamp].minted[pegType] ?? 0) +
+                (itemBalance.minted[pegType] -
+                  (itemBalance.unreleased[pegType] ?? 0)) *
+                  price;
             } else {
               sumDailyBalances[timestamp].mcap =
                 (sumDailyBalances[timestamp].mcap ?? 0) +
                 itemBalance.circulating[pegType];
+
+              sumDailyBalances[timestamp].bridgedTo =
+                sumDailyBalances[timestamp].bridgedTo || {};
+              sumDailyBalances[timestamp].bridgedTo[pegType] =
+                (sumDailyBalances[timestamp].bridgedTo[pegType] ?? 0) +
+                itemBalance.bridgedTo[pegType];
+
+              sumDailyBalances[timestamp].minted =
+                sumDailyBalances[timestamp].minted || {};
+              sumDailyBalances[timestamp].minted[pegType] =
+                (sumDailyBalances[timestamp].minted[pegType] ?? 0) +
+                itemBalance.minted[pegType] - (itemBalance.unreleased[pegType] ?? 0);
             }
           } else {
             console.log(
@@ -212,6 +249,8 @@ export async function craftChartsResponse(
       totalCirculating: balance.circulating,
       unreleased: balance.unreleased,
       mcap: balance.mcap,
+      bridgedTo: balance.bridgedTo,
+      minted: balance.minted,
       greatestChainMcap: null as any,
     })
   );
@@ -219,7 +258,7 @@ export async function craftChartsResponse(
   const lastChart = response[response.length - 1];
   lastChart.greatestChainMcap = greatestChainMcap;
   response[response.length - 1] = lastChart;
-  
+
   return response;
 }
 
