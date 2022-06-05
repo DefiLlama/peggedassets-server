@@ -226,7 +226,8 @@ export async function craftChartsResponse(
                 sumDailyBalances[timestamp].minted || {};
               sumDailyBalances[timestamp].minted[pegType] =
                 (sumDailyBalances[timestamp].minted[pegType] ?? 0) +
-                itemBalance.minted[pegType] - (itemBalance.unreleased[pegType] ?? 0);
+                itemBalance.minted[pegType] -
+                (itemBalance.unreleased[pegType] ?? 0);
             }
           } else {
             console.log(
@@ -256,8 +257,10 @@ export async function craftChartsResponse(
   );
 
   const lastChart = response[response.length - 1];
-  lastChart.greatestChainMcap = greatestChainMcap;
-  response[response.length - 1] = lastChart;
+  if (lastChart) {
+    lastChart.greatestChainMcap = greatestChainMcap;
+    response[response.length - 1] = lastChart;
+  }
 
   return response;
 }
