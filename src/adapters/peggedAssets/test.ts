@@ -58,6 +58,13 @@ async function getPeggedAsset(
       `Pegged balance is not a number, instead it is ${balance[pegType]}. Make sure balance object is exported with key from: ${pegTypes}.`
     );
   }
+  const bridges = balance.bridges;
+  if (!bridges) {
+    console.error(
+      `${errorString}
+      Bridge data not found on chain ${chain}. Use sumSingleBalance from helper/generalUtil to add bridge data.`
+    );
+  }
   peggedBalances[chain][issuanceType] = balance;
   if (issuanceType !== "minted" && issuanceType !== "unreleased") {
     bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
