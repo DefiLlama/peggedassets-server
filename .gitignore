@@ -11,3 +11,4 @@ src/adapters/peggedAssets/addNewPeggedChecklist.md
 src/adapters/peggedAssets/storeCoinGeckoHistory.ts
 src/adapters/peggedAssets/testAdapter.ts
 src/peggedAssets/storePeggedAssets/testGetAndStore.ts
+src/adapters/peggedAssets/testAllAdapters.ts
