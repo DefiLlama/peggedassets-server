@@ -3,6 +3,8 @@ import chainabi from "./chainlink_abi.json";
 import uniabi from "./uniswap_abi.json";
 import { ChainBlocks } from "../peggedAsset.type";
 import { PriceSource } from "../../../peggedData/types";
+const axios = require("axios");
+const retry = require("async-retry");
 
 const TWAPIntervalInSeconds: number = 10;
 
@@ -23,10 +25,9 @@ type UniswapPools = {
   };
 };
 
-type SaddlePools = {
+type AddressesForDexes = {
   [coinGeckoID: string]: {
     address: string;
-    chain: string;
   };
 };
 
@@ -98,18 +99,26 @@ const feeds: ChainlinkFeeds = {
   },
 };
 
-const uniswapPools: UniswapPools = {
+const uniswapPools: UniswapPools = {};
+
+const dexscreener: AddressesForDexes = {
   usdd: {
-    address: "0x1C5c60bEf00C820274d4938A5e6d04b124D4910B",
-    token: 0,
-    chain: "ethereum",
-    decimalsDifference: -12,
+    address: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6",
+  },
+  husd: {
+    address: "0x0298c2b32eaE4da002a15f36fdf7615BEa3DA047",
+  },
+  "yusd-stablecoin": {
+    address: "0x111111111111ed1D73f860F57b2798b683f2d325",
   },
   "dola-usd": {
-    address: "0x7c082BF85e01f9bB343dbb460A14e51F67C58cFB",
-    token: 0,
-    chain: "ethereum",
-    decimalsDifference: -12,
+    address: "0x865377367054516e17014CcdED1e7d814EDC9ce4",
+  },
+};
+
+const birdeye: AddressesForDexes = {
+  "parrot-usd": {
+    address: "Ea5SjE2Y6yvCeW5dYTn7PYMuW5ikXkvbGdcmSnXeaLjS",
   },
 };
 
@@ -120,41 +129,97 @@ export default async function getCurrentPeggedPrice(
 ): Promise<Number | null> {
   if (priceSource === "chainlink") {
     const feed = feeds[token];
-    const latestRound = await sdk.api.abi.call({
-      abi: chainabi.latestRoundData,
-      target: feed.address,
-      block: chainBlocks[feed.chain],
-      chain: feed.chain,
-    });
+    if (feed) {
+      const latestRound = await sdk.api.abi.call({
+        abi: chainabi.latestRoundData,
+        target: feed.address,
+        block: chainBlocks[feed.chain],
+        chain: feed.chain,
+      });
 
-    if (latestRound.output && feed.decimals) {
-      return latestRound.output.answer / 10 ** feed.decimals;
+      if (latestRound.output && feed.decimals) {
+        return latestRound.output.answer / 10 ** feed.decimals;
+      }
     }
     console.error(`Could not get ChainLink price for token ${token}`);
     return null;
   }
   if (priceSource === "uniswap") {
     const pool = uniswapPools[token];
-    const observe = await sdk.api.abi.call({
-      abi: uniabi.observe,
-      params: [[0, TWAPIntervalInSeconds]],
-      target: pool.address,
-      block: chainBlocks[pool.chain],
-      chain: pool.chain,
-    });
-    if (observe.output && pool.decimalsDifference) {
-      // following follows method given in https://docs.uniswap.org/protocol/concepts/V3-overview/oracle
-      const token0TickCumulative = observe.output.tickCumulatives[0];
-      const token1TickCumulative = observe.output.tickCumulatives[1];
-      const weightedAverage =
-        (token1TickCumulative - token0TickCumulative) / TWAPIntervalInSeconds;
-      const token0token1PriceRatio =
-        1.0001 ** weightedAverage * 10 ** pool.decimalsDifference;
-      if (pool.token === 1) {
-        return token0token1PriceRatio;
-      } else return 1 / token0token1PriceRatio;
+    if (pool) {
+      const observe = await sdk.api.abi.call({
+        abi: uniabi.observe,
+        params: [[0, TWAPIntervalInSeconds]],
+        target: pool.address,
+        block: chainBlocks[pool.chain],
+        chain: pool.chain,
+      });
+      if (observe.output && pool.decimalsDifference) {
+        // following follows method given in https://docs.uniswap.org/protocol/concepts/V3-overview/oracle
+        const token0TickCumulative = observe.output.tickCumulatives[0];
+        const token1TickCumulative = observe.output.tickCumulatives[1];
+        const weightedAverage =
+          (token1TickCumulative - token0TickCumulative) / TWAPIntervalInSeconds;
+        const token0token1PriceRatio =
+          1.0001 ** weightedAverage * 10 ** pool.decimalsDifference;
+        if (pool.token === 1) {
+          return token0token1PriceRatio;
+        } else return 1 / token0token1PriceRatio;
+      }
     }
     console.error(`Could not get Uniswap price for token ${token}`);
+    return null;
+  }
+  if (priceSource === "dexscreener") {
+    const address = dexscreener[token]?.address;
+    if (address) {
+      for (let i = 0; i < 5; i++) {
+        try {
+          const res = await axios.get(
+            `https://api.dexscreener.com/latest/dex/tokens/${address}`
+          );
+          const filteredPools = res.data.pairs
+            .filter((obj: any) => obj?.baseToken?.address === `${address}`)
+            .sort((a: any, b: any) => b.liquidity.usd - a.liquidity.usd);
+          const poolWithGreatestLiquidity = filteredPools[0];
+          const price = poolWithGreatestLiquidity?.priceUsd;
+          if (price) {
+            return price;
+          } else {
+            console.error(`Could not get Dexscreener price for token ${token}`);
+            return null;
+          }
+        } catch (e) {
+          console.error(e);
+          continue;
+        }
+      }
+    }
+    console.error(`Could not get Dexscreener price for token ${token}`);
+    return null;
+  }
+  if (priceSource === "birdeye") {
+    const address = birdeye[token]?.address;
+    if (address) {
+      for (let i = 0; i < 5; i++) {
+        try {
+          const res = await axios.get(
+            `https://public-api.birdeye.so/public/price?address=${address}`
+          );
+          const price = res?.data?.data?.value;
+          if (price) {
+            return price;
+          } else {
+            console.error(`Could not get Birdeye price for token ${token}`);
+            return null;
+          }
+        } catch (e) {
+          console.error(e);
+          continue;
+        }
+      }
+    }
+    console.error(`Could not get Birdeye price for token ${token}`);
     return null;
   }
   console.error(`no method to get price for given priceSource for ${token}`);
