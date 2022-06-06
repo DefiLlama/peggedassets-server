@@ -375,11 +375,13 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromETH),
   },
+  /* broken atm
   reinetwork: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: reinetworkMinted(chainContracts.reinetwork.bridgedFromETH[0], 18),
   },
+  */
   loopring: {
     minted: async () => ({}),
     unreleased: async () => ({}),
