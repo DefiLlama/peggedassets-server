@@ -10,7 +10,7 @@ import { dailyPeggedPrices } from "./peggedAssets/utils/getLastRecord";
 import { bridgeInfo } from "./peggedData/bridgeData";
 
 type Prices = {
-  [coinGeckoId: string]: Number | null;
+  [coinGeckoId: string]: number | null;
 };
 
 const handler = async (_event: any) => {

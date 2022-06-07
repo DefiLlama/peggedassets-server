@@ -182,7 +182,7 @@ export default async function getCurrentPeggedPrice(
             .filter((obj: any) => obj?.baseToken?.address === `${address}`)
             .sort((a: any, b: any) => b.liquidity.usd - a.liquidity.usd);
           const poolWithGreatestLiquidity = filteredPools[0];
-          const price = poolWithGreatestLiquidity?.priceUsd;
+          const price = parseFloat(poolWithGreatestLiquidity?.priceUsd);
           if (price) {
             return price;
           } else {
