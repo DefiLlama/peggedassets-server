@@ -1,8 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
-import {
-  bridgedSupply,
-} from "../helper/getSupply";
+import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -23,11 +21,14 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0"], // multichain
   },
   optimism: {
-    bridgedFromETH: ["0xb2c22A9fb4FC02eb9D1d337655Ce079a04a526C7"], // multichain
+    bridgedFromETH: [
+      "0xb2c22A9fb4FC02eb9D1d337655Ce079a04a526C7", // multichain
+      "0xCB8FA9a76b8e203D8C3797bF438d8FB81Ea3326A", // also multichain?
+    ], 
   },
   fantom: {
     bridgedFromETH: ["0xB67FA6deFCe4042070Eb1ae1511Dcd6dcc6a532E"], // has 1.5M more than in multichain bridge contract
-  }
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -46,7 +47,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -78,11 +85,7 @@ const adapter: PeggedIssuanceAdapter = {
   fantom: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply(
-      "fantom",
-      18,
-      chainContracts.fantom.bridgedFromETH
-    ),
+    ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
   },
 };
 
