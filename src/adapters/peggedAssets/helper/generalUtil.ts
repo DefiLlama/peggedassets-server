@@ -4,7 +4,7 @@ import type {
   PeggedAssetType,
   ChainBlocks,
 } from "../peggedAsset.type";
-import bridgeMapping, { BridgeIDs } from "../../../peggedData/bridgeData";
+import bridgeMapping, { BridgeID } from "../../../peggedData/bridgeData";
 
 export function sumSingleBalance(
   balances: Balances,
@@ -25,7 +25,7 @@ export function sumSingleBalance(
     (balances[pegType] as number) = prevBalance + balance;
 
     if (bridgeAddressOrName) {
-      const bridgeID: BridgeIDs = useBridgeMapping
+      const bridgeID: BridgeID = useBridgeMapping
         ? bridgeMapping[bridgeAddressOrName]?.bridge ?? "not-found"
         : bridgeAddressOrName;
       const sourceChain = useBridgeMapping
