@@ -564,4 +564,21 @@ export default [
     chains: ["Ethereum", "Arbitrum", "Optimism", "Fantom"],
     twitter: "https://twitter.com/AlchemixFi",
   },
+  {
+    id: "21",
+    name: "flexUSD",
+    address: "0xa774ffb4af6b0a91331c084e1aebae6ad535e6f3",
+    symbol: "FLEXUSD",
+    url: "https://coinflex.com/",
+    description:
+      "flexUSD is the first interest-earning stablecoin in crypto.",
+    chain: "Ethereum",
+    gecko_id: "flex-usd",
+    cmcId: null,
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "coingecko",
+    chains: ["Ethereum", "smartBCH"],
+    twitter: "https://twitter.com/coinflexdotcom",
+  },
 ] as PeggedAsset[];
