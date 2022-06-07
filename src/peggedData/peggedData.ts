@@ -547,4 +547,21 @@ export default [
     chains: ["Ethereum", "Wanchain"],
     twitter: "https://twitter.com/gemini",
   },
+  {
+    id: "20",
+    name: "Alchemix USD",
+    address: "0xbc6da0fe9ad5f3b0d58160288917aa56653660e9",
+    symbol: "ALUSD",
+    url: "https://alchemix.fi/",
+    description:
+      "alUSD is a yield-backed synthetic stablecoin powered by the Alchemix protocol.",
+    chain: "Ethereum",
+    gecko_id: "alchemix-usd",
+    cmcId: "8614",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "dexscreener",
+    chains: ["Ethereum", "Arbitrum", "Optimism", "Fantom"],
+    twitter: "https://twitter.com/AlchemixFi",
+  },
 ] as PeggedAsset[];

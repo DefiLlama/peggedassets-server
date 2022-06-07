@@ -114,6 +114,9 @@ const dexscreener: AddressesForDexes = {
   "dola-usd": {
     address: "0x865377367054516e17014CcdED1e7d814EDC9ce4",
   },
+  "alchemix-usd": {
+    address: "0xBC6DA0FE9aD5f3b0d58160288917AA56653660E9",
+  },
 };
 
 const birdeye: AddressesForDexes = {

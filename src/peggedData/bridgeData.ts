@@ -22,12 +22,24 @@ const formattedSourceChains = {
   tron: "Tron",
   bttc: "Bittorrent",
   waves: "Waves",
-}
+};
 
 export default {
   "0x1c20e891bab6b1727d14da358fae2984ed9b59eb": { bridge: "issued" },
   Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB: { bridge: "issued" },
   EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v: { bridge: "issued" },
+  "0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0": {
+    bridge: "multichain",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xb2c22A9fb4FC02eb9D1d337655Ce079a04a526C7": {
+    bridge: "multichain",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xB67FA6deFCe4042070Eb1ae1511Dcd6dcc6a532E": {
+    bridge: "multichain",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x9879abdea01a879644185341f7af7d8343556b7a": {
     bridge: "multichain",
     sourceChain: formattedSourceChains.eth,
@@ -1287,7 +1299,7 @@ export default {
   "0xcF422327dDaAa409C2976d01131d8a3457F03251": {
     bridge: "wan",
     sourceChain: formattedSourceChains.eth,
-  }
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {

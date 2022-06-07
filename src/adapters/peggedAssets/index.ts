@@ -17,6 +17,7 @@ import dola from "./dola-usd";
 import pai from "./parrot-usd";
 import husd from "./husd";
 import gusd from "./gemini-dollar";
+import alusd from "./alchemix-usd";
 
 export default {
   tether,
@@ -38,4 +39,5 @@ export default {
   "parrot-usd": pai,
   husd,
   "gemini-dollar": gusd,
+  "alchemix-usd": alusd,
 };
