@@ -225,6 +225,27 @@ export default async function getCurrentPeggedPrice(
     console.error(`Could not get Birdeye price for token ${token}`);
     return null;
   }
+  if (priceSource === "coingecko") {  // only use as last resort
+      for (let i = 0; i < 5; i++) {
+        try {
+          const res = await axios.get(
+            `https://api.coingecko.com/api/v3/simple/price?ids=${token}&vs_currencies=usd`
+          );
+          const price = res?.data?.[token]?.usd;
+          if (price) {
+            return price;
+          } else {
+            console.error(`Could not get Coingecko price for token ${token}`);
+            return null;
+          }
+        } catch (e) {
+          console.error(e);
+          continue;
+        }
+      }
+    console.error(`Could not get Coingecko price for token ${token}`);
+    return null;
+  }
   console.error(`no method to get price for given priceSource for ${token}`);
   return null;
 }
