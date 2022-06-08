@@ -97,6 +97,11 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   },
+  nusd: {
+    address: "0xad35bd71b9afe6e4bdc266b345c198eadef9ad94",
+    chain: "ethereum",
+    decimals: 8,
+  }
 };
 
 const uniswapPools: UniswapPools = {};

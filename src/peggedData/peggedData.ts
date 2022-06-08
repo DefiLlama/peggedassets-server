@@ -581,4 +581,21 @@ export default [
     chains: ["Ethereum", "smartBCH"],
     twitter: "https://twitter.com/coinflexdotcom",
   },
+  {
+    id: "22",
+    name: "sUSD",
+    address: "0x57ab1ec28d129707052df4df418d58a2d46d5f51",
+    symbol: "SUSD",
+    url: "https://synthetix.io/",
+    description:
+      "Synthetix is a protocol for issuing and trading synthetic assets on Ethereum. Each synthetic asset (or Synth) is an ERC20 token which tracks the price of an external asset; for example each sUSD token tracks the price of the US dollar.",
+    chain: "Ethereum",
+    gecko_id: "nusd",
+    cmcId: "2927",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "chainlink",
+    chains: ["Ethereum", "Arbitrum", "Optimism", "Fantom"],
+    twitter: "https://twitter.com/synthetix_io",
+  },
 ] as PeggedAsset[];

@@ -1,4 +1,4 @@
-import { BridgeIDs } from "../../peggedData/bridgeData";
+import { BridgeID } from "../../peggedData/bridgeData";
 
 export type ChainBlocks = {
   [x: string]: number;
@@ -11,7 +11,7 @@ type PeggedBalances = {
   [peggedAssetType: string]: StringNumber | number;
 };
 type BridgeBalances = {
-  [bridgeID in BridgeIDs]: {
+  [bridgeID in BridgeID]: {
     amount: StringNumber | number;
     source: string;
   };

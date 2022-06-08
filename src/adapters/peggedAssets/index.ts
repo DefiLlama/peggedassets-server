@@ -18,7 +18,8 @@ import pai from "./parrot-usd";
 import husd from "./husd";
 import gusd from "./gemini-dollar";
 import alusd from "./alchemix-usd";
-import flexusd from "./flex-usd"
+import flexusd from "./flex-usd";
+import susd from "./nusd";
 
 export default {
   tether,
@@ -42,4 +43,5 @@ export default {
   "gemini-dollar": gusd,
   "alchemix-usd": alusd,
   "flex-usd": flexusd,
+  nusd: susd,
 };
