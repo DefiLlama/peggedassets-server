@@ -20,6 +20,7 @@ import gusd from "./gemini-dollar";
 import alusd from "./alchemix-usd";
 import flexusd from "./flex-usd";
 import susd from "./nusd";
+import ousd from "./origin-dollar";
 
 export default {
   tether,
@@ -44,4 +45,5 @@ export default {
   "alchemix-usd": alusd,
   "flex-usd": flexusd,
   nusd: susd,
+  "origin-dollar": ousd,
 };

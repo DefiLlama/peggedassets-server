@@ -598,4 +598,21 @@ export default [
     chains: ["Ethereum", "Arbitrum", "Optimism", "Fantom"],
     twitter: "https://twitter.com/synthetix_io",
   },
+  {
+    id: "23",
+    name: "Origin Dollar",
+    address: "0x2a8e1e676ec238d8a992307b495b45b3feaa5e86",
+    symbol: "OUSD",
+    url: "https://www.ousd.com/",
+    description:
+      "The first stablecoin that earns a yield while it’s still in your wallet.",
+    chain: "Ethereum",
+    gecko_id: "origin-dollar",
+    cmcId: "7189",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "dexscreener",
+    chains: ["Ethereum"],
+    twitter: "https://twitter.com/originprotocol",
+  },
 ] as PeggedAsset[];

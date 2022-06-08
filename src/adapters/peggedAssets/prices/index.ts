@@ -122,6 +122,9 @@ const dexscreener: AddressesForDexes = {
   "alchemix-usd": {
     address: "0xBC6DA0FE9aD5f3b0d58160288917AA56653660E9",
   },
+  "origin-dollar": {
+    address: "0x2A8e1E676Ec238d8A992307B495b45B3fEAa5e86",
+  },
 };
 
 const birdeye: AddressesForDexes = {
