@@ -13,3 +13,4 @@ src/adapters/peggedAssets/testAdapter.ts
 src/peggedAssets/storePeggedAssets/testGetAndStore.ts
 src/adapters/peggedAssets/testAllAdapters.ts
 src/testGetPeggedChart.ts
+src/adapters/peggedAssets/historical/

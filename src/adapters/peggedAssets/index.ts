@@ -23,6 +23,7 @@ import susd from "./nusd";
 import ousd from "./origin-dollar";
 import cusd from "./celo-dollar";
 import musd from "./musd";
+import usdk from "./usdk";
 
 export default {
   tether,
@@ -50,4 +51,5 @@ export default {
   "origin-dollar": ousd,
   "celo-dollar": cusd,
   musd,
+  usdk,
 };

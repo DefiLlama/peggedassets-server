@@ -96,19 +96,25 @@ const feeds: ChainlinkFeeds = {
     address: "0xa89f5d2365ce98B3cD68012b6f503ab1416245Fc",
     chain: "ethereum",
     decimals: 8,
-  },
+  }, // GUSD-USD ETH
   nusd: {
     address: "0xad35bd71b9afe6e4bdc266b345c198eadef9ad94",
     chain: "ethereum",
     decimals: 8,
-  }
+  }, // NUSD-USD ETH
+  usdk: {
+    address: "0xfac81ea9dd29d8e9b212acd6edbeb6de38cb43af",
+    chain: "ethereum",
+    decimals: 8,
+  }, // USDK-USD ETH
 };
 
 const uniswapPools: UniswapPools = {};
 
 const dexscreener: AddressesForDexes = {
   usdd: {
-    address: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6",
+    address: "0xd17479997F34dd9156Deef8F95A52D81D265be9c", // pools on BSC
+    // address: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6", pools on ETH, but dexscreener rugged them for some reason
   },
   husd: {
     address: "0x0298c2b32eaE4da002a15f36fdf7615BEa3DA047",
@@ -233,24 +239,25 @@ export default async function getCurrentPeggedPrice(
     console.error(`Could not get Birdeye price for token ${token}`);
     return null;
   }
-  if (priceSource === "coingecko") {  // only use as last resort
-      for (let i = 0; i < 5; i++) {
-        try {
-          const res = await axios.get(
-            `https://api.coingecko.com/api/v3/simple/price?ids=${token}&vs_currencies=usd`
-          );
-          const price = res?.data?.[token]?.usd;
-          if (price) {
-            return price;
-          } else {
-            console.error(`Could not get Coingecko price for token ${token}`);
-            return null;
-          }
-        } catch (e) {
-          console.error(e);
-          continue;
+  if (priceSource === "coingecko") {
+    // only use as last resort
+    for (let i = 0; i < 5; i++) {
+      try {
+        const res = await axios.get(
+          `https://api.coingecko.com/api/v3/simple/price?ids=${token}&vs_currencies=usd`
+        );
+        const price = res?.data?.[token]?.usd;
+        if (price) {
+          return price;
+        } else {
+          console.error(`Could not get Coingecko price for token ${token}`);
+          return null;
         }
+      } catch (e) {
+        console.error(e);
+        continue;
       }
+    }
     console.error(`Could not get Coingecko price for token ${token}`);
     return null;
   }

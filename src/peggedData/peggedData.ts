@@ -666,4 +666,21 @@ export default [
     chains: ["Ethereum", "Polygon", "Gnosis"],
     twitter: "https://twitter.com/mstable_",
   },
+  {
+    id: "27",
+    name: "USDK",
+    address: "0x1c48f86ae57291f7686349f12601910bd8d470bb",
+    symbol: "USDK",
+    url: "https://www.oklink.com/en",
+    description:
+      "USDK-Stablecoin Powered by Blockchain and US Licenced Trust Company.",
+    chain: "Ethereum",
+    gecko_id: "usdk",
+    cmcId: "4064",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "chainlink",
+    chains: ["Ethereum", "Polygon", "OKExChain", "Solana"],
+    twitter: "https://twitter.com/OKLink",
+  },
 ] as PeggedAsset[];

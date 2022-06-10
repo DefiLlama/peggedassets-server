@@ -256,6 +256,10 @@ export default {
     bridge: "multichain",
     sourceChain: formattedSourceChains.eth,
   },
+  "43m2ewFV5nDepieFjT9EmAQnc1HRtAF247RBpLGFem5F": {
+    bridge: "wormhole",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xDe60aDfDdAAbaAAC3dAFa57B26AcC91Cb63728c4": {
     bridge: "wormhole",
     sourceChain: formattedSourceChains.bsc,
@@ -946,6 +950,10 @@ export default {
   },
   "0xc946daf81b08146b1c7a8da2a851ddf2b3eaaf85": {
     bridge: "okexchain",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xD07A7FAc2857901E4bEC0D89bBDAe764723AAB86": {
+    bridge: "polygon",
     sourceChain: formattedSourceChains.eth,
   },
   "0xc2132d05d31c914a87c6611c10748aeb04b58e8f": {
