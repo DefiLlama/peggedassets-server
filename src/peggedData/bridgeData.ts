@@ -244,6 +244,10 @@ export default {
     bridge: "multichain",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xCB8FA9a76b8e203D8C3797bF438d8FB81Ea3326A": {
+    bridge: "multichain",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x922d641a426dcffaef11680e5358f34d97d112e1": {
     bridge: "multichain",
     sourceChain: formattedSourceChains.eth,
@@ -676,6 +680,10 @@ export default {
     bridge: "celer",
     sourceChain: formattedSourceChains.eth,
   },
+  EwxNF8g9UfmsJVcZFTpL9Hx5MCkoQFoJi6XNWzKf1j8e: {
+    bridge: "allbridge",
+    sourceChain: formattedSourceChains.celo,
+  },
   "0xCD7D7Ff64746C1909E44Db8e95331F9316478817": {
     bridge: "allbridge",
     sourceChain: formattedSourceChains.sol,
@@ -956,7 +964,7 @@ export default {
     bridge: "polygon",
     sourceChain: formattedSourceChains.eth,
   },
-  "0xa970af1a584579b618be4d69ad6f73459d112f95":{
+  "0xa970af1a584579b618be4d69ad6f73459d112f95": {
     bridge: "arbitrum",
     sourceChain: formattedSourceChains.eth,
   },
@@ -1220,6 +1228,10 @@ export default {
     bridge: "trueusd",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xd8F3208c045DD69D27938346275165998359D8fF": {
+    bridge: "optics",
+    sourceChain: formattedSourceChains.celo,
+  },
   "0x88eeC49252c8cbc039DCdB394c0c2BA2f1637EA0": {
     bridge: "optics",
     sourceChain: formattedSourceChains.eth,
@@ -1231,6 +1243,10 @@ export default {
   "0x1bfc26cE035c368503fAE319Cc2596716428ca44": {
     bridge: "optics",
     sourceChain: formattedSourceChains.polygon,
+  },
+  "0x9b9E2De4cB4ca479943F36DfFc72c7253bb1f66a": {
+    bridge: "moss",
+    sourceChain: formattedSourceChains.celo,
   },
   "0x93DB49bE12B864019dA9Cb147ba75cDC0506190e": {
     bridge: "moss",
@@ -1306,6 +1322,14 @@ export default {
   },
   "0xcF422327dDaAa409C2976d01131d8a3457F03251": {
     bridge: "wan",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xad3E3Fc59dff318BecEaAb7D00EB4F68b1EcF195": {
+    bridge: "wrapped",
+    sourcechain: formattedSourceChains.celo,
+  },
+  "0x0437465dfb5b79726e35f08559b0cbea55bb585c": {
+    bridge: "starkgate",
     sourceChain: formattedSourceChains.eth,
   },
 } as BridgeMapping;
@@ -1476,5 +1500,13 @@ export const bridgeInfo = {
   wan: {
     name: "WanBridge",
     link: "https://bridge.wanchain.org/",
+  },
+  wrapped: {
+    name: "Wrapped",
+    link: "https://www.wrapped.com/",
+  },
+  starkgate: {
+    name: "StarkGate",
+    link: "https://starkgate.starknet.io/",
   },
 } as BridgeInfo;
