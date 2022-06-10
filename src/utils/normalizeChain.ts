@@ -781,6 +781,13 @@ export const chainCoingeckoIds = {
     categories: ["Rollup"],
     parent: "Ethereum",
   },
+  StarkNet: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["Rollup"],
+    parent: "Ethereum",
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -977,6 +984,8 @@ export function getChainDisplayName(
       return "Loopring";
     case "aztec":
       return "Aztec";
+    case "starknet":
+      return "StarkNet";
 
     default:
       return (

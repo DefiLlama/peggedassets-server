@@ -151,6 +151,9 @@ const chainContracts: ChainContracts = {
       "0x74eaE367d018A5F29be559752e4B67d01cc6b151", // celer
     ],
   },
+  starknet: {
+    bridgeOnETH: ["0x0437465dfb5b79726e35f08559b0cbea55bb585c"],
+  },
 };
 
 /*
@@ -436,6 +439,15 @@ const adapter: PeggedIssuanceAdapter = {
     terra: osmosisSupply(DAI),
   },
   */
+  starknet: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.starknet.bridgeOnETH[0],
+      18
+    ),
+  },
 };
 
 export default adapter;
