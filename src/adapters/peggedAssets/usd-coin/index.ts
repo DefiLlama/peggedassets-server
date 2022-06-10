@@ -27,6 +27,7 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"],
+    unreleased: ["0x55fe002aeff02f77364de339a1292923a15844b8"], // circle wallet
     bridgedFromSol: ["0x41f7B8b9b897276b7AAE926a9016935280b44E97"], // wormhole
     bridgedFromBSC: ["0x7cd167B101D2808Cfd2C45d17b2E7EA9F46b74B6"], // wormhole
     bridgedFromPolygon: ["0x566957eF80F9fd5526CD2BEF8BE67035C0b81130"], // wormhole
@@ -286,6 +287,28 @@ async function chainMinted(chain: string, decimals: number) {
   };
 }
 
+async function chainUnreleased(chain: string, decimals: number, owner: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (let issued of chainContracts[chain].issued) {
+      const reserve = (
+        await sdk.api.erc20.balanceOf({
+          target: issued,
+          owner: owner,
+          block: _chainBlocks[chain],
+          chain: chain,
+        })
+      ).output;
+      sumSingleBalance(balances, "peggedUSD", reserve / 10 ** decimals);
+    }
+    return balances;
+  };
+}
+
 async function solanaUnreleased() {
   return async function (
     _timestamp: number,
@@ -411,7 +434,7 @@ async function reinetworkBridged(address: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
-    unreleased: async () => ({}),
+    unreleased: chainUnreleased("ethereum", 6, chainContracts.ethereum.unreleased[0]),
     solana: bridgedSupply(
       "ethereum",
       6,
