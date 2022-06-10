@@ -1342,7 +1342,7 @@ export default {
   },
   "0xad3E3Fc59dff318BecEaAb7D00EB4F68b1EcF195": {
     bridge: "wrapped",
-    sourcechain: formattedSourceChains.celo,
+    sourceChain: formattedSourceChains.celo,
   },
   "0x0437465dfb5b79726e35f08559b0cbea55bb585c": {
     bridge: "starkgate",
