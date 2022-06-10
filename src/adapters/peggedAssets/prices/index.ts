@@ -109,7 +109,14 @@ const feeds: ChainlinkFeeds = {
   }, // USDK-USD ETH
 };
 
-const uniswapPools: UniswapPools = {};
+const uniswapPools: UniswapPools = {
+  reserve: {
+    address: "0x98a19D4954B433Bd315335A05d7d6371D812A492",
+    token: 0,
+    chain: "ethereum",
+    decimalsDifference: -12,
+  }
+};
 
 const dexscreener: AddressesForDexes = {
   usdd: {

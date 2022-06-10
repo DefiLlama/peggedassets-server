@@ -24,6 +24,7 @@ import ousd from "./origin-dollar";
 import cusd from "./celo-dollar";
 import musd from "./musd";
 import usdk from "./usdk";
+import reserve from "./reserve";
 
 export default {
   tether,
@@ -52,4 +53,5 @@ export default {
   "celo-dollar": cusd,
   musd,
   usdk,
+  reserve,
 };
