@@ -21,7 +21,8 @@ import alusd from "./alchemix-usd";
 import flexusd from "./flex-usd";
 import susd from "./nusd";
 import ousd from "./origin-dollar";
-import cusd from "./celo-dollar"
+import cusd from "./celo-dollar";
+import musd from "./musd";
 
 export default {
   tether,
@@ -48,4 +49,5 @@ export default {
   nusd: susd,
   "origin-dollar": ousd,
   "celo-dollar": cusd,
+  musd,
 };
