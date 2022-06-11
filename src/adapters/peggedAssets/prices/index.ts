@@ -109,9 +109,9 @@ const feeds: ChainlinkFeeds = {
   }, // USDK-USD ETH
   vai: {
     address: "0x058316f8bb13acd442ee7a216c7b60cfb4ea1b53",
-    chain: "ethereum",
+    chain: "bsc",
     decimals: 8,
-  }, // VAI-USD ETH
+  }, // VAI-USD BSC
 };
 
 const uniswapPools: UniswapPools = {
