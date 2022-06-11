@@ -146,6 +146,9 @@ const dexscreener: AddressesForDexes = {
   tor: {
     address: "0x74E23dF9110Aa9eA0b6ff2fAEE01e740CA1c642e",
   },
+  spiceusd: {
+    address: "0xaB05b04743E0aeAF9D2cA81E5D3b8385e4BF961e",
+  },
 };
 
 const birdeye: AddressesForDexes = {

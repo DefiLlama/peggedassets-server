@@ -27,6 +27,8 @@ import usdk from "./usdk";
 import reserve from "./reserve";
 import vai from "./vai";
 import tor from "./tor";
+import doc from "./doc";
+import spiceusd from "./spiceusd"
 
 export default {
   tether,
@@ -58,4 +60,6 @@ export default {
   reserve,
   vai,
   tor,
+  doc,
+  spiceusd,
 };
