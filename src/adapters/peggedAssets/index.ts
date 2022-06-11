@@ -31,6 +31,7 @@ import doc from "./doc";
 import spiceusd from "./spiceusd";
 import sperax from "./sperax-usd";
 import usdp from "./usdp";
+import usdb from "./usd-balance";
 
 export default {
   tether,
@@ -66,4 +67,5 @@ export default {
   spiceusd,
   "sperax-usd": sperax,
   usdp,
+  "usd-balance": usdb,
 };

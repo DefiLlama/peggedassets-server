@@ -152,6 +152,9 @@ const dexscreener: AddressesForDexes = {
   "sperax-usd": {
     address: "0xD74f5255D557944cf7Dd0E45FF521520002D5748",
   },
+  "usd-balance": {
+    address: "0x6Fc9383486c163fA48becdEC79d6058f984f62cA",
+  },
 };
 
 const birdeye: AddressesForDexes = {
