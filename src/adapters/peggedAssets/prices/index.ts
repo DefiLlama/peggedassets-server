@@ -107,6 +107,11 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   }, // USDK-USD ETH
+  vai: {
+    address: "0x058316f8bb13acd442ee7a216c7b60cfb4ea1b53",
+    chain: "ethereum",
+    decimals: 8,
+  }, // VAI-USD ETH
 };
 
 const uniswapPools: UniswapPools = {
@@ -137,6 +142,9 @@ const dexscreener: AddressesForDexes = {
   },
   "origin-dollar": {
     address: "0x2A8e1E676Ec238d8A992307B495b45B3fEAa5e86",
+  },
+  tor: {
+    address: "0x74E23dF9110Aa9eA0b6ff2fAEE01e740CA1c642e",
   },
 };
 

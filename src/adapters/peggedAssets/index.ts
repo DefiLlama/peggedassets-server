@@ -25,6 +25,8 @@ import cusd from "./celo-dollar";
 import musd from "./musd";
 import usdk from "./usdk";
 import reserve from "./reserve";
+import vai from "./vai";
+import tor from "./tor";
 
 export default {
   tether,
@@ -54,4 +56,6 @@ export default {
   musd,
   usdk,
   reserve,
+  vai,
+  tor,
 };
