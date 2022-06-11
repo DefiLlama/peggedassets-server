@@ -1116,6 +1116,10 @@ export default {
     bridge: "bittorrent",
     sourceChain: formattedSourceChains.bttc,
   },
+  "0xFe7ed09C4956f7cdb54eC4ffCB9818Db2D7025b8": {
+    bridge: "gnosis",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xD9C31db155a48f3d7304De85EC7AB7B705659bE9": {
     bridge: "gnosis",
     sourceChain: formattedSourceChains.eth,

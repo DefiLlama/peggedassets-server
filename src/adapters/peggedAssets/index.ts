@@ -28,7 +28,9 @@ import reserve from "./reserve";
 import vai from "./vai";
 import tor from "./tor";
 import doc from "./doc";
-import spiceusd from "./spiceusd"
+import spiceusd from "./spiceusd";
+import sperax from "./sperax-usd";
+import usdp from "./usdp";
 
 export default {
   tether,
@@ -62,4 +64,6 @@ export default {
   tor,
   doc,
   spiceusd,
+  "sperax-usd": sperax,
+  usdp,
 };

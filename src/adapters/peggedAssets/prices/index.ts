@@ -149,6 +149,9 @@ const dexscreener: AddressesForDexes = {
   spiceusd: {
     address: "0xaB05b04743E0aeAF9D2cA81E5D3b8385e4BF961e",
   },
+  "sperax-usd": {
+    address: "0xD74f5255D557944cf7Dd0E45FF521520002D5748",
+  },
 };
 
 const birdeye: AddressesForDexes = {
