@@ -155,6 +155,9 @@ const dexscreener: AddressesForDexes = {
   "usd-balance": {
     address: "0x6Fc9383486c163fA48becdEC79d6058f984f62cA",
   },
+  mimatic: {
+    address: "0x3F56e0c36d275367b8C502090EDF38289b3dEa0d",
+  },
 };
 
 const birdeye: AddressesForDexes = {

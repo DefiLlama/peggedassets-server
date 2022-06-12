@@ -32,6 +32,7 @@ import spiceusd from "./spiceusd";
 import sperax from "./sperax-usd";
 import usdp from "./usdp";
 import usdb from "./usd-balance";
+import mimatic from "./mimatic"
 
 export default {
   tether,
@@ -68,4 +69,5 @@ export default {
   "sperax-usd": sperax,
   usdp,
   "usd-balance": usdb,
+  mimatic,
 };

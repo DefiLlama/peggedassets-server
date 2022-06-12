@@ -7,6 +7,9 @@ import {
   PeggedIssuanceAdapter,
   Balances,
 } from "../peggedAsset.type";
+const axios = require("axios");
+const retry = require("async-retry");
+const BigNumber = require("bignumber.js");
 
 type ChainContracts = {
   [chain: string]: {
@@ -14,13 +17,18 @@ type ChainContracts = {
   };
 };
 
+// Using API provided by MAI devs because they do not agree with the values calculated from on-chain contracts.
 const chainContracts: ChainContracts = {
   polygon: {
+    // off of API by ~1M
     issued: ["0xa3fa99a148fa48d14ed51d610c367c61876997f1"],
-    burned: ["0x000000000000000000000000000000000000dead"],
+    burned: [
+      "0x000000000000000000000000000000000000dead",
+      "0x0000000000000000000000000000000000000001",
+    ],
     anyMAI: [
       "0x95dd59343a893637be1c3228060ee6afbf6f0730",
-      "0x25864a712c80d33ba1ad7c23cffa18b46f2fc00c",
+      "0xa3Fa99A148fA48D14Ed51d610c367C61876997F1",
     ],
   },
   bsc: {
@@ -30,13 +38,14 @@ const chainContracts: ChainContracts = {
   },
   avax: {
     // not able to view celer holders
-    // nothing matches API
+    // therefore cannot get it to match API
     bridgedFromPolygon: [
       "0x3b55e45fd6bd7d4724f5c47e0d1bcaedd059263e", // multichain
       "0x5c49b268c9841AFF1Cc3B0a418ff5c3442eE3F3b", // celer
     ],
     anyMAI: ["0x3Cf6A36876BDecadEab420AfF93171439AbF9CA2"],
   },
+  // no value given in API
   solana: {
     bridgedFromPolygon: ["9mWRABuz2x6koTPCWiCPM49WUbcrNqGTHBV9T9k7y1o7"],
     reserveAddress: ["CYEFQXzQM6E5P8ZrXgS7XMSwU3CiqHMMyACX4zuaA2Z4"],
@@ -50,7 +59,7 @@ const chainContracts: ChainContracts = {
     ],
   },
   moonriver: {
-    // much lower than API
+    // 2M lower than API
     bridgedFromPolygon: [
       "0x7f5a79576620c046a293f54ffcdbd8f2468174f1", // multichain
       "0xFb2019DfD635a03cfFF624D210AEe6AF2B00fC2C", // celer
@@ -90,11 +99,12 @@ const chainContracts: ChainContracts = {
     anyMAI: ["0xC931f61B1534EB21D8c11B24f3f5Ab2471d4aB50"],
   },
   fantom: {
-    // does not match API
+    // ~2M off of API value
     bridgedFromPolygon: ["0xfb98b335551a418cd0737375a2ea0ded62ea213b"],
     burned: [
       "0x0000000000000000000000000000000000000000",
       "0x0000000000000000000000000000000000000001",
+      "0x679016b3f8e98673f85c6f72567f22b58aa15a54", // is their multisig
     ],
   },
   cronos: {
@@ -136,26 +146,44 @@ async function polygonMinted(chain: string, decimals: number) {
         chain: chain,
       })
     ).output;
-    const reserve = (
-      await sdk.api.erc20.balanceOf({
-        target: chainContracts.polygon.issued[0],
-        owner: chainContracts.polygon.anyMAI[0],
-        block: _chainBlocks[chain],
-        chain: chain,
-      })
-    ).output;
-    const burned = (
-      await sdk.api.erc20.balanceOf({
-        target: chainContracts.polygon.issued[0],
-        owner: chainContracts.polygon.burned[0],
-        block: _chainBlocks[chain],
-        chain: chain,
-      })
-    ).output;
+    for (let owner of chainContracts.polygon.anyMAI) {
+      const reserve = (
+        await sdk.api.erc20.balanceOf({
+          target: chainContracts.polygon.issued[0],
+          owner: owner,
+          block: _chainBlocks[chain],
+          chain: chain,
+        })
+      ).output;
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        -reserve / 10 ** decimals,
+        "issued",
+        false
+      );
+    }
+    for (let owner of chainContracts.polygon.burned) {
+      const burned = (
+        await sdk.api.erc20.balanceOf({
+          target: chainContracts.polygon.issued[0],
+          owner: owner,
+          block: _chainBlocks[chain],
+          chain: chain,
+        })
+      ).output;
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        -burned / 10 ** decimals,
+        "issued",
+        false
+      );
+    }
     sumSingleBalance(
       balances,
       "peggedUSD",
-      (totalSupply - reserve - burned) / 10 ** decimals,
+      totalSupply / 10 ** decimals,
       "issued",
       false
     );
@@ -176,8 +204,9 @@ async function solanaMAISupply(target: string, reserve: string) {
       balances,
       "peggedUSD",
       totalSupply - reserveBalance,
-      target,
-      true
+      "allbridge",
+      false,
+      "Polygon"
     );
     return balances;
   };
@@ -240,7 +269,176 @@ async function bridgedMAISupply(
   };
 }
 
+async function maiApiPolygon(key: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios("https://api.mai.finance/v2/circulatingMai")
+    );
+    const hexCirculating = res.data[key].hex;
+    const decimalCirculating = BigNumber(hexCirculating).toFixed() / 10 ** 18;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      decimalCirculating,
+      "issued",
+      false
+    );
+    return balances;
+  };
+}
+
+async function maiApiCirculating(key: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios("https://api.mai.finance/v2/circulatingMai")
+    );
+    const hexCirculating = res.data[key].hex;
+    const decimalCirculating = BigNumber(hexCirculating).toFixed() / 10 ** 18;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      decimalCirculating,
+      "multichain",
+      false,
+      "Polygon"
+    );
+    return balances;
+  };
+}
+
+// Using API provided by MAI devs because they do not agree with the values calculated from on-chain contracts.
 const adapter: PeggedIssuanceAdapter = {
+  polygon: {
+    minted: maiApiPolygon("polygonSupply"),
+    unreleased: async () => ({}),
+  },
+  fantom: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: maiApiCirculating("fantomSupply"),
+  },
+  avalanche: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: maiApiCirculating("avalancheSupply"),
+  },
+  moonriver: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: maiApiCirculating("moonriverSupply"),
+  },
+  harmony: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: maiApiCirculating("harmonySupply"),
+  },
+  cronos: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: maiApiCirculating("cronosSupply"),
+  },
+  optimism: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: maiApiCirculating("optimismSupply"),
+  },
+  bsc: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: maiApiCirculating("BNBSupply"),
+  },
+  arbitrum: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: maiApiCirculating("arbitrumSupply"),
+  },
+  xdai: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: maiApiCirculating("gnosisSupply"),
+  },
+  // the following are not given by API
+  solana: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: solanaMAISupply(
+      chainContracts.solana.bridgedFromPolygon[0],
+      chainContracts.solana.reserveAddress[0]
+    ),
+  },
+  iotex: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: bridgedMAISupply(
+      "iotex",
+      18,
+      chainContracts.iotex.bridgedFromPolygon[0],
+      chainContracts.iotex.anyMAI,
+      "multichain",
+      "Polygon"
+    ),
+  },
+  aurora: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: bridgedMAISupply(
+      "aurora",
+      18,
+      chainContracts.aurora.bridgedFromPolygon[0],
+      chainContracts.aurora.anyMAI,
+      "multichain",
+      "Polygon"
+    ),
+  },
+  celo: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: bridgedMAISupply(
+      "celo",
+      18,
+      chainContracts.celo.bridgedFromPolygon[0],
+      chainContracts.celo.anyMAI,
+      "multichain",
+      "Polygon"
+    ),
+  },
+  metis: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: bridgedMAISupply(
+      "metis",
+      18,
+      chainContracts.metis.bridgedFromPolygon[0],
+      chainContracts.metis.anyMAI,
+      "multichain",
+      "Polygon"
+    ),
+  },
+  milkomeda: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: bridgedMAISupply(
+      "milkomeda",
+      18,
+      chainContracts.milkomeda.bridgedFromPolygon[0],
+      chainContracts.milkomeda.anyMAI,
+      "multichain",
+      "Polygon"
+    ),
+  },
+  /*
   polygon: {
     minted: polygonMinted("polygon", 18),
     unreleased: async () => ({}),
@@ -289,7 +487,7 @@ const adapter: PeggedIssuanceAdapter = {
     polygon: bridgedMAISupply(
       "moonriver",
       18,
-      chainContracts.moonriver.bridgedFromPolygon[0],
+      chainContracts.moonriver.bridgedFromPolygon[1],
       chainContracts.moonriver.anyMAI
     ),
   },
@@ -333,13 +531,11 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.xdai.anyMAI
     ),
   },
-  /*
   boba: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     polygon: bridgedMAISupply("boba", 18, chainContracts.boba.bridgedFromPolygon[0], chainContracts.boba.anyMAI),
   },
-  */
   celo: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -400,6 +596,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.optimism.anyMAI
     ),
   },
+  */
 };
 
 export default adapter;
