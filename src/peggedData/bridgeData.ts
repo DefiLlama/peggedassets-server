@@ -22,6 +22,7 @@ const formattedSourceChains = {
   tron: "Tron",
   bttc: "Bittorrent",
   waves: "Waves",
+  rsk: "RSK",
 };
 
 export default {
@@ -1151,6 +1152,10 @@ export default {
   "0x1bda44fda023f2af8280a16fd1b01d1a493ba6c4": {
     bridge: "rsk",
     sourceChain: formattedSourceChains.eth,
+  },
+  "0x69f6d4d4813f8e2e618dae7572e04b6d5329e207": {
+    bridge: "rsk",
+    sourceChain: formattedSourceChains.rsk,
   },
   "0x674bdf20A0F284D710BC40872100128e2d66Bd3f": {
     bridge: "loopring",
