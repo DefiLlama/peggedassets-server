@@ -806,7 +806,7 @@ export default [
     id: "35",
     name: "MAI",
     address: "0xa3fa99a148fa48d14ed51d610c367c61876997f1",
-    symbol: "MIMATIC",
+    symbol: "MAI",
     url: "https://www.mai.finance/",
     description:
       "MAI is a stablecoin backed by collateral, and can only be minted with this collateral backing it. MAI is created when users deposit accepted tokens (currently MATIC) as collateral in vaults and in turn receive a loan against that collateral.",
