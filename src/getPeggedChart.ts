@@ -208,9 +208,7 @@ export async function craftChartsResponse(
                 sumDailyBalances[timestamp].minted || {};
               sumDailyBalances[timestamp].minted[pegType] =
                 (sumDailyBalances[timestamp].minted[pegType] ?? 0) +
-                (itemBalance.minted[pegType] -
-                  (itemBalance.unreleased[pegType] ?? 0)) *
-                  price;
+                itemBalance.minted[pegType] * price;
             } else {
               sumDailyBalances[timestamp].mcap =
                 (sumDailyBalances[timestamp].mcap ?? 0) +
@@ -226,8 +224,7 @@ export async function craftChartsResponse(
                 sumDailyBalances[timestamp].minted || {};
               sumDailyBalances[timestamp].minted[pegType] =
                 (sumDailyBalances[timestamp].minted[pegType] ?? 0) +
-                itemBalance.minted[pegType] -
-                (itemBalance.unreleased[pegType] ?? 0);
+                itemBalance.minted[pegType];
             }
           } else {
             console.log(
