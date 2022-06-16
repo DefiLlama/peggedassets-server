@@ -11,6 +11,27 @@ const axios = require("axios");
 const retry = require("async-retry");
 const BigNumber = require("bignumber.js");
 
+type GetCoingeckoLog = () => Promise<any>;
+
+const locks = [] as ((value: unknown) => void)[];
+function getCoingeckoLock() {
+  return new Promise((resolve) => {
+    locks.push(resolve);
+  });
+}
+function releaseCoingeckoLock() {
+  const firstLock = locks.shift();
+  if (firstLock !== undefined) {
+    firstLock(null);
+  }
+}
+// Rate limit is 50 calls/min for coingecko's API
+// So we'll release one every 1.2 seconds to match it
+setInterval(() => {
+  releaseCoingeckoLock();
+}, 2000);
+const maxCoingeckoRetries = 5;
+
 type ChainContracts = {
   [chain: string]: {
     [contract: string]: string[];
@@ -300,6 +321,7 @@ async function maiApiCirculating(key: string) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
+    await getCoingeckoLock();
     const res = await retry(
       async (_bail: any) =>
         await axios("https://api.mai.finance/v2/circulatingMai")
