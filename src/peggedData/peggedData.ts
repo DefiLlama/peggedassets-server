@@ -836,4 +836,21 @@ export default [
     ],
     twitter: "https://twitter.com/QiDaoProtocol",
   },
+  {
+    id: "36",
+    name: "Ratio Stable Coin",
+    address: "USDrbBQwQbQ2oWHUPfA8QBHcyVxKUq1xHyXsSLKdUq2",
+    symbol: "USDR",
+    url: "https://ratio.finance/",
+    description:
+      "USDr is the first-ever algorithmically risk-adjusted Collateralized Debt Position. Users can mint USDr using stable yield-bearing assets, starting with stablecoin LP from Saber.",
+    chain: "Solana",
+    gecko_id: "ratio-stable-coin",
+    cmcId: null,
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    priceSource: "birdeye",
+    chains: ["Solana"],
+    twitter: "https://twitter.com/ratiofinance",
+  },
 ] as PeggedAsset[];
