@@ -142,10 +142,55 @@ functions:
     handler: src/triggerFetchCoingeckoData.default
 
 resources:
-  # CORS for api gateway errors
-  - ${file(resources/api-gateway-errors.yml)}
-  # DynamoDB
-  - ${file(resources/dynamodb-table.yml)}
+  Resources:
+    # DynamoDB
+    DynamoTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain # Make sure the tables can't be deleted by CloudFormation/Serverless
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: N
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        # Set the capacity to auto-scale
+        BillingMode: PAY_PER_REQUEST
+    # CORS for api gateway errors
+    GatewayResponseDefault4XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+    GatewayResponseDefault5XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_5XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+    # required to enable request path parameter caching in API Gateway
+    ApiGatewayMethodPeggedchartsChainVarGet:
+      Properties:
+        RequestParameters:
+          method.request.path.chain : false
+        Integration:
+          RequestParameters:
+            integration.request.path.chain: method.request.path.chain
+          CacheNamespace: ApiGatewayMethodChainVarGetCacheNS
+          CacheKeyParameters:
+            - method.request.path.chain
 
 plugins:
   - serverless-esbuild
