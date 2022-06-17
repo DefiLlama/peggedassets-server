@@ -164,6 +164,9 @@ const birdeye: AddressesForDexes = {
   "parrot-usd": {
     address: "Ea5SjE2Y6yvCeW5dYTn7PYMuW5ikXkvbGdcmSnXeaLjS",
   },
+  "ratio-stable-coin": {
+    address: "USDrbBQwQbQ2oWHUPfA8QBHcyVxKUq1xHyXsSLKdUq2",
+  },
 };
 
 export default async function getCurrentPeggedPrice(
@@ -224,7 +227,14 @@ export default async function getCurrentPeggedPrice(
           );
           const filteredPools = res.data.pairs
             .filter((obj: any) => obj?.baseToken?.address === `${address}`)
-            .sort((a: any, b: any) => b.liquidity.usd - a.liquidity.usd);
+            .sort((a: any, b: any) => {
+              if (a.liquidity?.usd === undefined) {
+                return 1;
+              } else if (b.liquidity?.usd === undefined) {
+                return -1;
+              } else return b.liquidity.usd - a.liquidity.usd
+            }
+            );
           const poolWithGreatestLiquidity = filteredPools[0];
           const price = parseFloat(poolWithGreatestLiquidity?.priceUsd);
           if (price) {
