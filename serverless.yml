@@ -191,6 +191,16 @@ resources:
           CacheNamespace: ApiGatewayMethodChainVarGetCacheNS
           CacheKeyParameters:
             - method.request.path.chain
+    ApiGatewayMethodPeggedPeggedVarGet:
+      Properties:
+        RequestParameters:
+          method.request.path.pegged : false
+        Integration:
+          RequestParameters:
+            integration.request.path.pegged: method.request.path.pegged
+          CacheNamespace: ApiGatewayMethodPeggedPeggedVarGetCacheNS
+          CacheKeyParameters:
+            - method.request.path.pegged
 
 plugins:
   - serverless-esbuild
