@@ -34,6 +34,8 @@ import usdp from "./usdp";
 import usdb from "./usd-balance";
 import mimatic from "./mimatic";
 import ratio from "./ratio-stable-coin";
+import usdj from "./just-stablecoin";
+import stbl from "./stbl";
 
 export default {
   tether,
@@ -72,4 +74,6 @@ export default {
   "usd-balance": usdb,
   mimatic,
   "ratio-stable-coin": ratio,
+  "just-stablecoin": usdj,
+  stbl,
 };
