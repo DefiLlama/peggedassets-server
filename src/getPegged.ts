@@ -4,6 +4,7 @@ import {
   IResponse,
   errorResponse,
 } from "./utils/shared";
+import fetch from "node-fetch";
 import { getHistoricalValues } from "./utils/shared/dynamodb";
 import peggedAssets from "./peggedData/peggedData";
 import {
@@ -34,6 +35,15 @@ export async function craftProtocolResponse(
   useNewChainNames: boolean,
   useHourlyData: boolean
 ) {
+  let prices = {} as any;
+  prices = await fetch(
+    "https://cocoahomology-datasets.s3.amazonaws.com/peggedPrices.json"
+  )
+    .then((res: any) => res.json())
+    .catch(() => {
+      console.error("Could not fetch pegged prices");
+    });
+
   const peggedName = rawPeggedName?.toLowerCase();
   console.log(peggedName);
   const peggedData = peggedAssets.find(
@@ -72,6 +82,7 @@ export async function craftProtocolResponse(
   response.chains = chains;
   const currentChainBalances: { [chain: string]: object } = {};
   response.currentChainBalances = currentChainBalances;
+  response.price = prices[peggedData.gecko_id] ?? null;
 
   Object.entries(lastBalancesHourlyRecord!).map(([chain, issuances]) => {
     if (nonChains.includes(chain)) {
