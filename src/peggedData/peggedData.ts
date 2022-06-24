@@ -1006,7 +1006,7 @@ export default [
     category: "stablecoins",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
-    priceSource: "dexscreener",
+    priceSource: "coingecko",
     chains: ["Fantom"],
     auditLinks: null,
     twitter: "https://twitter.com/USDB_",

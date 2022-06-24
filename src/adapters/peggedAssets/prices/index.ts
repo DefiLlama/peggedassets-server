@@ -153,7 +153,7 @@ const dexscreener: AddressesForDexes = {
     address: "0xD74f5255D557944cf7Dd0E45FF521520002D5748",
   },
   "usd-balance": {
-    address: "0x6Fc9383486c163fA48becdEC79d6058f984f62cA",
+    address: "0x6Fc9383486c163fA48becdEC79d6058f984f62cA", // this rugged
   },
   mimatic: {
     address: "0x3F56e0c36d275367b8C502090EDF38289b3dEa0d",
