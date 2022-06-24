@@ -1,6 +1,7 @@
 import type {
   Balances,
   ChainBlocks,
+  PeggedAssetType,
 } from "../peggedAsset.type";
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "./generalUtil";
@@ -14,7 +15,8 @@ export async function bridgedSupply(
   decimals: number,
   addresses: string[],
   bridgeSource?: string,
-  bridgedFromChain?: string
+  bridgedFromChain?: string,
+  pegType?: PeggedAssetType,
 ) {
   return async function (
     _timestamp: number,
@@ -22,6 +24,7 @@ export async function bridgedSupply(
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : "peggedUSD" as PeggedAssetType
     for (let address of addresses) {
       const totalSupply = (
         await sdk.api.abi.call({
@@ -34,7 +37,7 @@ export async function bridgedSupply(
       bridgeSource
         ? sumSingleBalance(
             balances,
-            "peggedUSD",
+            assetPegType,
             totalSupply / 10 ** decimals,
             bridgeSource,
             false,
@@ -42,7 +45,7 @@ export async function bridgedSupply(
           )
         : sumSingleBalance(
             balances,
-            "peggedUSD",
+            assetPegType,
             totalSupply / 10 ** decimals,
             address,
             true
@@ -55,7 +58,8 @@ export async function bridgedSupply(
 export async function supplyInEthereumBridge(
   target: string,
   owner: string,
-  decimals: number
+  decimals: number,
+  pegType?: PeggedAssetType,
 ) {
   return async function (
     _timestamp: number,
@@ -63,6 +67,7 @@ export async function supplyInEthereumBridge(
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : "peggedUSD" as PeggedAssetType
     const bridged = (
       await sdk.api.erc20.balanceOf({
         target: target,
@@ -72,7 +77,7 @@ export async function supplyInEthereumBridge(
     ).output;
     sumSingleBalance(
       balances,
-      "peggedUSD",
+      assetPegType,
       bridged / 10 ** decimals,
       owner,
       true
@@ -85,12 +90,14 @@ export async function solanaMintedOrBridged(targets: string[]) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
-    _chainBlocks: ChainBlocks
+    _chainBlocks: ChainBlocks,
+    pegType?: PeggedAssetType, 
   ) {
     let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : "peggedUSD" as PeggedAssetType
     for (let target of targets) {
       const totalSupply = await solanaGetTokenSupply(target);
-      sumSingleBalance(balances, "peggedUSD", totalSupply, target, true);
+      sumSingleBalance(balances, assetPegType, totalSupply, target, true);
     }
     return balances;
   };
