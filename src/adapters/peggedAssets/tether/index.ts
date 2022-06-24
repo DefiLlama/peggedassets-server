@@ -242,6 +242,9 @@ const chainContracts: ChainContracts = {
       "0xcfffe0c89a779c09df3df5624f54cdf7ef5fdd5d", // moss
     ], 
   },
+  kava: {
+    bridgedFromETH: ["0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD"], // celer
+  }
 };
 
 /* 
@@ -873,6 +876,11 @@ const adapter: PeggedIssuanceAdapter = {
       ],
       "peggedUSD"
     ),
+  },
+  kava: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("kava", 6, chainContracts.kava.bridgedFromETH),
   },
 };
 

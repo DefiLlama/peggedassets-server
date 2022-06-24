@@ -235,6 +235,9 @@ const chainContracts: ChainContracts = {
     bridgedFromAvax: ["0xb70e0a782b058BFdb0d109a3599BEc1f19328E36"], // allbridge
     bridgedFromSol: ["0xCD7D7Ff64746C1909E44Db8e95331F9316478817"], // allbridge
   },
+  kava: {
+    bridgedFromETH: ["0x23367BEA9B6931690960d8c59f6e708630f24E58"], // celer
+  }
 };
 
 /*
@@ -750,6 +753,11 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.celo.bridgedFromPolygon
     ),
     solana: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromSol),
+  },
+  kava: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("kava", 6, chainContracts.kava.bridgedFromETH),
   },
 };
 

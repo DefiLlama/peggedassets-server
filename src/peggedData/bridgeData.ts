@@ -621,6 +621,14 @@ export default {
     bridge: "wormhole",
     sourceChain: formattedSourceChains.sol,
   },
+  "0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD": {
+    bridge: "celer",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x23367BEA9B6931690960d8c59f6e708630f24E58": {
+    bridge: "celer",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x81ECac0D6Be0550A00FF064a4f9dd2400585FE9c": {
     bridge: "celer",
     sourceChain: formattedSourceChains.eth,
@@ -971,6 +979,10 @@ export default {
   },
   "0x2791bca1f2de4661ed88a30c99a7a9449aa84174": {
     bridge: "polygon",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x6Ba6f18a290Cd55cf1B00be2bEc5c954cb29fAc5": {
+    bridge: "arbitrum",
     sourceChain: formattedSourceChains.eth,
   },
   "0xa970af1a584579b618be4d69ad6f73459d112f95": {
@@ -1357,6 +1369,14 @@ export default {
     bridge: "starkgate",
     sourceChain: formattedSourceChains.eth,
   },
+  "bnb1skl4n4vrzx3ty9ujaut8rmkhkmtl4t04ysllfm": {
+    bridge: "kava",
+    sourceChain: formattedSourceChains.bsc,
+  },
+  "bnb10zq89008gmedc6rrwzdfukjk94swynd7dl97w8": {
+    bridge: "kava",
+    sourceChain: formattedSourceChains.bsc,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1534,4 +1554,8 @@ export const bridgeInfo = {
     name: "StarkGate",
     link: "https://starkgate.starknet.io/",
   },
+  kava: {
+    name: "Kava",
+    link: "https://app.kava.io/",
+  }
 } as BridgeInfo;

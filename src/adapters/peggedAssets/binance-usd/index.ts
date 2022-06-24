@@ -10,6 +10,8 @@ import {
   PeggedIssuanceAdapter,
   Balances,
 } from "../peggedAsset.type";
+const axios = require("axios");
+const retry = require("async-retry");
 
 type ChainContracts = {
   [chain: string]: {
@@ -129,6 +131,12 @@ const chainContracts: ChainContracts = {
   theta: {
     bridgedFromBSC: ["0x7B37d0787A3424A0810E02b24743a45eBd5530B2"], // multichain
   },
+  kava: {
+    bridgeOnBNB: [
+      "bnb1skl4n4vrzx3ty9ujaut8rmkhkmtl4t04ysllfm", // cold wallets on BNB chain
+      "bnb10zq89008gmedc6rrwzdfukjk94swynd7dl97w8",
+    ],
+  },
 };
 
 /*
@@ -169,6 +177,33 @@ async function chainMinted(chain: string, decimals: number) {
         false
       );
     }
+    return balances;
+  };
+}
+
+async function kavaMinted(owners: string[]) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (let owner of owners) {
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://dex.binance.org/api/v1/account/${owner}`
+        )
+    );
+    const balanceObject = res.data.balances.filter(
+      (obj: any) => obj.symbol === "BUSD-BD1"
+    );
+    const circulating = parseInt(balanceObject[0].free);
+    if (typeof circulating !== "number") {
+      throw new Error("Binance Chain API for TUSD is broken.");
+    }
+    sumSingleBalance(balances, "peggedUSD", circulating, owner, true);
+  }
     return balances;
   };
 }
@@ -333,6 +368,10 @@ const adapter: PeggedIssuanceAdapter = {
       "BSC"
     ),
   },
+  kava: {
+    minted: kavaMinted(chainContracts.kava.bridgeOnBNB),
+    unreleased: async () => ({}),
+  }
 };
 
 export default adapter;
