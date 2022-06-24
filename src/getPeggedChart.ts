@@ -111,7 +111,10 @@ export async function craftChartsResponse(
         lastTimestamp,
         (secondsInDay * 3) / 2
       );
-      const price = priceData?.prices?.[peggedGeckoID] ?? 1;
+      const fallbackPrice = pegType === "peggedUSD" ? 1 : 0; // must be updated with each new pegType added
+      const currentPrice = priceData?.prices?.[peggedGeckoID];
+      const price = currentPrice ? currentPrice : fallbackPrice;
+
       if (chain) {
         const chainBalance = lastBalance[normalizeChain(chain)];
         if (chainBalance) {
@@ -139,11 +142,6 @@ export async function craftChartsResponse(
           const timestamp = getClosestDayStartTimestamp(item.SK);
           let itemBalance: any = {};
 
-          const priceData = await getTVLOfRecordClosestToTimestamp(
-            dailyPeggedPrices(),
-            timestamp,
-            (secondsInDay * 3) / 2
-          );
           if (chain === undefined) {
             itemBalance.circulating = item.totalCirculating.circulating ?? {
               [pegType]: 0,
@@ -192,40 +190,22 @@ export async function craftChartsResponse(
             sumDailyBalances[timestamp].unreleased[pegType] =
               (sumDailyBalances[timestamp].unreleased[pegType] ?? 0) +
               itemBalance.unreleased[pegType];
-            const price = priceData?.prices?.[peggedGeckoID];
-            if (price) {
-              sumDailyBalances[timestamp].mcap =
-                (sumDailyBalances[timestamp].mcap ?? 0) +
-                itemBalance.circulating[pegType] * price;
 
-              sumDailyBalances[timestamp].bridgedTo =
-                sumDailyBalances[timestamp].bridgedTo || {};
-              sumDailyBalances[timestamp].bridgedTo[pegType] =
-                (sumDailyBalances[timestamp].bridgedTo[pegType] ?? 0) +
-                itemBalance.bridgedTo[pegType] * price;
+            sumDailyBalances[timestamp].mcap =
+              (sumDailyBalances[timestamp].mcap ?? 0) +
+              itemBalance.circulating[pegType] * price;
 
-              sumDailyBalances[timestamp].minted =
-                sumDailyBalances[timestamp].minted || {};
-              sumDailyBalances[timestamp].minted[pegType] =
-                (sumDailyBalances[timestamp].minted[pegType] ?? 0) +
-                itemBalance.minted[pegType] * price;
-            } else {
-              sumDailyBalances[timestamp].mcap =
-                (sumDailyBalances[timestamp].mcap ?? 0) +
-                itemBalance.circulating[pegType];
+            sumDailyBalances[timestamp].bridgedTo =
+              sumDailyBalances[timestamp].bridgedTo || {};
+            sumDailyBalances[timestamp].bridgedTo[pegType] =
+              (sumDailyBalances[timestamp].bridgedTo[pegType] ?? 0) +
+              itemBalance.bridgedTo[pegType] * price;
 
-              sumDailyBalances[timestamp].bridgedTo =
-                sumDailyBalances[timestamp].bridgedTo || {};
-              sumDailyBalances[timestamp].bridgedTo[pegType] =
-                (sumDailyBalances[timestamp].bridgedTo[pegType] ?? 0) +
-                itemBalance.bridgedTo[pegType];
-
-              sumDailyBalances[timestamp].minted =
-                sumDailyBalances[timestamp].minted || {};
-              sumDailyBalances[timestamp].minted[pegType] =
-                (sumDailyBalances[timestamp].minted[pegType] ?? 0) +
-                itemBalance.minted[pegType];
-            }
+            sumDailyBalances[timestamp].minted =
+              sumDailyBalances[timestamp].minted || {};
+            sumDailyBalances[timestamp].minted[pegType] =
+              (sumDailyBalances[timestamp].minted[pegType] ?? 0) +
+              itemBalance.minted[pegType] * price;
           } else {
             console.log(
               "itemBalance is invalid",
