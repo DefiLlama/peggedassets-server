@@ -4,6 +4,7 @@ import {
   bridgedSupply,
   solanaMintedOrBridged,
   terraSupply,
+  supplyInEthereumBridge,
 } from "../helper/getSupply";
 import {
   ChainBlocks,
@@ -136,6 +137,9 @@ const chainContracts: ChainContracts = {
       "bnb1skl4n4vrzx3ty9ujaut8rmkhkmtl4t04ysllfm", // cold wallets on BNB chain
       "bnb10zq89008gmedc6rrwzdfukjk94swynd7dl97w8",
     ],
+  },
+  loopring: {
+    bridgeOnETH: ["0x674bdf20A0F284D710BC40872100128e2d66Bd3f"],
   },
 };
 
@@ -371,7 +375,16 @@ const adapter: PeggedIssuanceAdapter = {
   kava: {
     minted: kavaMinted(chainContracts.kava.bridgeOnBNB),
     unreleased: async () => ({}),
-  }
+  },
+  loopring: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.loopring.bridgeOnETH[0],
+      18
+    ),
+  },
 };
 
 export default adapter;
