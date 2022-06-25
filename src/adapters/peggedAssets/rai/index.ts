@@ -55,7 +55,7 @@ async function chainMinted(chain: string, decimals: number) {
       ).output;
       sumSingleBalance(
         balances,
-        "peggedUSD",
+        "peggedVAR",
         totalSupply / 10 ** decimals,
         "issued",
         false
@@ -76,7 +76,10 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "polygon",
       18,
-      chainContracts.polygon.bridgedFromETH
+      chainContracts.polygon.bridgedFromETH,
+      undefined,
+      undefined,
+      "peggedVAR"
     ),
   },
   optimism: {
@@ -85,7 +88,10 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "optimism",
       18,
-      chainContracts.optimism.bridgedFromETH
+      chainContracts.optimism.bridgedFromETH,
+      undefined,
+      undefined,
+      "peggedVAR"
     ),
   },
   arbitrum: {
@@ -94,18 +100,35 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "arbitrum",
       18,
-      chainContracts.arbitrum.bridgedFromETH
+      chainContracts.arbitrum.bridgedFromETH,
+      undefined,
+      undefined,
+      "peggedVAR"
     ),
   },
   avalanche: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
+    ethereum: bridgedSupply(
+      "avax",
+      18,
+      chainContracts.avax.bridgedFromETH,
+      undefined,
+      undefined,
+      "peggedVAR"
+    ),
   },
   xdai: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("xdai", 18, chainContracts.xdai.bridgedFromETH),
+    ethereum: bridgedSupply(
+      "xdai",
+      18,
+      chainContracts.xdai.bridgedFromETH,
+      undefined,
+      undefined,
+      "peggedVAR"
+    ),
   },
   loopring: {
     minted: async () => ({}),
@@ -113,7 +136,8 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.loopring.bridgeOnETH[0],
-      18
+      18,
+      "peggedVAR"
     ),
   },
 };
