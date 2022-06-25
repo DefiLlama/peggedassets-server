@@ -163,6 +163,9 @@ const dexscreener: AddressesForDexes = {
   mimatic: {
     address: "0x3F56e0c36d275367b8C502090EDF38289b3dEa0d",
   },
+  "float-protocol-float": {
+    address: "0xb05097849BCA421A3f51B249BA6CCa4aF4b97cb9",
+  }
 };
 
 const birdeye: AddressesForDexes = {
