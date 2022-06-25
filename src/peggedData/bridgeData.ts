@@ -937,6 +937,10 @@ export default {
     bridge: "avalanche-old",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x97cd1cfe2ed5712660bb6c14053c0ecb031bff7d": {
+    bridge: "avalanche",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xc7198437980c041c805a1edcba50c1ce5db95118": {
     bridge: "avalanche",
     sourceChain: formattedSourceChains.eth,
@@ -961,6 +965,10 @@ export default {
     bridge: "okexchain",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x00e5646f60ac6fb446f621d146b6e1886f002905": {
+    bridge: "polygon",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xD07A7FAc2857901E4bEC0D89bBDAe764723AAB86": {
     bridge: "polygon",
     sourceChain: formattedSourceChains.eth,
@@ -979,6 +987,10 @@ export default {
   },
   "0x2791bca1f2de4661ed88a30c99a7a9449aa84174": {
     bridge: "polygon",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xaeF5bbcbFa438519a5ea80B4c7181B4E78d419f2": {
+    bridge: "arbitrum",
     sourceChain: formattedSourceChains.eth,
   },
   "0x6Ba6f18a290Cd55cf1B00be2bEc5c954cb29fAc5": {
@@ -1035,6 +1047,10 @@ export default {
   },
   "0x980a5afef3d17ad98635f6c5aebcbaeded3c3430": {
     bridge: "kcc",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x7fb688ccf682d58f86d7e38e03f9d22e7705448b": {
+    bridge: "optimism",
     sourceChain: formattedSourceChains.eth,
   },
   "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58": {
@@ -1128,6 +1144,10 @@ export default {
   "0xd17479997f34dd9156deef8f95a52d81d265be9c": {
     bridge: "bittorrent",
     sourceChain: formattedSourceChains.bttc,
+  },
+  "0xd7a28Aa9c470e7e9D8c676BCd5dd2f40c5683afa": {
+    bridge: "gnosis",
+    sourceChain: formattedSourceChains.eth,
   },
   "0xFe7ed09C4956f7cdb54eC4ffCB9818Db2D7025b8": {
     bridge: "gnosis",

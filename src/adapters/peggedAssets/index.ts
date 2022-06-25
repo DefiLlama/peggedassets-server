@@ -36,7 +36,8 @@ import mimatic from "./mimatic";
 import ratio from "./ratio-stable-coin";
 import usdj from "./just-stablecoin";
 import stbl from "./stbl";
-import volt from "./volt-protocol"
+import volt from "./volt-protocol";
+import rai from "./rai";
 
 export default {
   tether,
@@ -78,4 +79,5 @@ export default {
   "just-stablecoin": usdj,
   stbl,
   "volt-protocol": volt,
+  rai,
 };

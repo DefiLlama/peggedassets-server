@@ -112,6 +112,11 @@ const feeds: ChainlinkFeeds = {
     chain: "bsc",
     decimals: 8,
   }, // VAI-USD BSC
+  rai: {
+    address: "0x483d36f6a1d063d580c7a24f9a42b346f3a69fbb",
+    chain: "ethereum",
+    decimals: 8,
+  }, // RAI-USD ETH
 };
 
 const uniswapPools: UniswapPools = {
