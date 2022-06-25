@@ -38,6 +38,7 @@ import usdj from "./just-stablecoin";
 import stbl from "./stbl";
 import volt from "./volt-protocol";
 import rai from "./rai";
+import float from "./float-protocol-float";
 
 export default {
   tether,
@@ -80,4 +81,5 @@ export default {
   stbl,
   "volt-protocol": volt,
   rai,
+  "float-protocol-float": float,
 };
