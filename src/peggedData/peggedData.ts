@@ -888,7 +888,8 @@ export default [
     url: "https://tor.cash/",
     description:
       "TOR is a fully collateralized stablecoin built on the Fantom Opera Chain.",
-    mechanismDescription: "Using the Hector Finance app, users swap DAI to mint TOR 1:1. TOR can be redeemed for DAI 1:1 at any time.",
+    mechanismDescription:
+      "Using the Hector Finance app, users swap DAI to mint TOR 1:1. TOR can be redeemed for DAI 1:1 at any time.",
     chain: "Fantom",
     onCoinGecko: true,
     gecko_id: "tor",
@@ -910,7 +911,8 @@ export default [
     url: "https://moneyonchain.com/doc-bitcoin-backed-stablecoin/",
     description:
       "Dollar on Chain an over-collateralized USD-pegged stablecoin backed by rBTC on the RSK Blockchain.",
-    mechanismDescription: "Using the Money On Chain app, users mint DoC by depositing rBTC into a vault. When the loan is repaid to retrieve the collateral, the paid back DoC is burned.",
+    mechanismDescription:
+      "Using the Money On Chain app, users mint DoC by depositing rBTC into a vault. When the loan is repaid to retrieve the collateral, the paid back DoC is burned.",
     chain: "RSK",
     onCoinGecko: false,
     gecko_id: "doc",
@@ -932,7 +934,8 @@ export default [
     url: "https://app.spicetrade.ai/",
     description:
       "Spice USD (Ticker USDS) is a stablecoin soft-pegged to USD in the Spice Protocol on Avalanche.",
-    mechanismDescription: "Using the Spice Trade app, USDS can be minted by locking USDC and burning SPICE in a proportion determined by the protocol's collateral ratio.",
+    mechanismDescription:
+      "Using the Spice Trade app, USDS can be minted by locking USDC and burning SPICE in a proportion determined by the protocol's collateral ratio.",
     chain: "Avalanche",
     onCoinGecko: true,
     gecko_id: "spiceusd",
@@ -954,7 +957,8 @@ export default [
     url: "https://sperax.io/",
     description:
       "Sperax USD (USDs) is a USD-pegged stablecoin that is primarily backed by crypto collateral which generates organic yield for its holders.",
-    mechanismDescription: "Using the Sperax app, USDs can be minted by locking USDC or USDT and burning SPA in a proportion determined by the protocol's collateral ratio.",
+    mechanismDescription:
+      "Using the Sperax app, USDs can be minted by locking USDC or USDT and burning SPA in a proportion determined by the protocol's collateral ratio.",
     chain: "Arbitrum",
     onCoinGecko: true,
     gecko_id: "sperax-usd",
@@ -976,7 +980,8 @@ export default [
     url: "https://unit.xyz/",
     description:
       "USDP is a decentralized, unbiased, and fully-backed stablecoin whose value is soft-pegged to US Dollar. USDP runs on the Ethereum, BSC, and Fantom networks.",
-    mechanismDescription: "Using the Unit Protocol app, users mint USDP by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back USDP is burned.",
+    mechanismDescription:
+      "Using the Unit Protocol app, users mint USDP by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back USDP is burned.",
     chain: "Ethereum",
     onCoinGecko: true,
     gecko_id: "usdp",
@@ -998,7 +1003,8 @@ export default [
     url: "https://www.usdbalance.com/",
     description:
       "USDB is an algorithmic stablecoin that powers the FantOHM OHM fork.",
-    mechanismDescription: "Using the USD Balance app, $1 worth of FHM can be burned to mint 1 USDB.",
+    mechanismDescription:
+      "Using the USD Balance app, $1 worth of FHM can be burned to mint 1 USDB.",
     chain: "Fantom",
     onCoinGecko: true,
     gecko_id: "usd-balance",
@@ -1020,7 +1026,8 @@ export default [
     url: "https://www.mai.finance/",
     description:
       "MAI is a USD-pegged stablecoin backed by collateral available on many chains.",
-    mechanismDescription: "Using the Mai Finance app, users mint MAI by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back MAI is burned.",
+    mechanismDescription:
+      "Using the Mai Finance app, users mint MAI by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back MAI is burned.",
     chain: "Polygon",
     onCoinGecko: true,
     gecko_id: "mimatic",
@@ -1059,7 +1066,8 @@ export default [
     url: "https://ratio.finance/",
     description:
       "USDr is an algorithmically risk-adjusted Collateralized Debt Position. Users can mint USDr using stable yield-bearing assets, starting with stablecoin LP from Saber.",
-    mechanismDescription: "USDr is minted by depositing an accepted collateral asset into Ratio Finance. The collateral is used to generate yield that pays down the USDr debt. Any USDr used to repay the loan to retrieve the collateral is burned.",
+    mechanismDescription:
+      "USDr is minted by depositing an accepted collateral asset into Ratio Finance. The collateral is used to generate yield that pays down the USDr debt. Any USDr used to repay the loan to retrieve the collateral is burned.",
     chain: "Solana",
     onCoinGecko: true,
     gecko_id: "ratio-stable-coin",
@@ -1081,7 +1089,8 @@ export default [
     url: "https://just.network/",
     description:
       "USDJ is a fully collateral-backed USD-pegged stablecoin on Tron.",
-    mechanismDescription: "Using the JustStable app, users mint USDJ by depositing TRX into a vault. When the loan is repaid to retrieve the collateral, the paid back USDJ is burned.",
+    mechanismDescription:
+      "Using the JustStable app, users mint USDJ by depositing TRX into a vault. When the loan is repaid to retrieve the collateral, the paid back USDJ is burned.",
     chain: "Tron",
     onCoinGecko: true,
     gecko_id: "just-stablecoin",
@@ -1103,7 +1112,8 @@ export default [
     url: "https://www.algofi.org/",
     description:
       "STBL is an algorithmic over-collateralized stablecoin that is native to the Algofi protocol.",
-    mechanismDescription: "Using the Algofi app, users mint STBL by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back STBL is burned.",
+    mechanismDescription:
+      "Using the Algofi app, users mint STBL by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back STBL is burned.",
     chain: "Algorand",
     onCoinGecko: false,
     gecko_id: "stbl",
@@ -1125,7 +1135,8 @@ export default [
     url: "https://www.voltprotocol.io/",
     description:
       "VOLT is a stablecoin that uses a custom oracle system to stay pegged to the purchasing power of the US Dollar.",
-    mechanismDescription: "Using the Volt Protocol app, users swap FEI or USDC to mint VOLT at the current exchange rate. VOLT can be redeemed for FEI or USDC at any time.",
+    mechanismDescription:
+      "Using the Volt Protocol app, users swap FEI or USDC to mint VOLT at the current exchange rate. VOLT can be redeemed for FEI or USDC at any time.",
     chain: "Ethereum",
     onCoinGecko: true,
     gecko_id: "volt-protocol",
@@ -1133,7 +1144,7 @@ export default [
     category: "stablecoins",
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
-    priceSource: "coingecko",  // coingecko not giving correct price atm
+    priceSource: "coingecko", // coingecko not giving correct price atm
     chains: ["Ethereum", "Arbitrum"],
     auditLinks: null,
     twitter: "https://twitter.com/voltprotocol",
@@ -1147,7 +1158,8 @@ export default [
     url: "https://reflexer.finance/",
     description:
       "RAI is a collateralized, non-pegged asset with low volatility compared to its ETH collateral.",
-    mechanismDescription: "Users mint RAI by depositing ETH as collateral into Rai safes. When the loan is repaid to retrieve the collateral, the paid back RAI is burned.",
+    mechanismDescription:
+      "Users mint RAI by depositing ETH as collateral into Rai safes. When the loan is repaid to retrieve the collateral, the paid back RAI is burned.",
     chain: "Ethereum",
     onCoinGecko: true,
     gecko_id: "rai",
@@ -1155,8 +1167,16 @@ export default [
     category: "stablecoins",
     pegType: "peggedVAR",
     pegMechanism: "crypto-backed",
-    priceSource: "chainlink", 
-    chains: ["Ethereum", "Polygon", "Optimism", "Arbitrum", "Avalanche", "Gnosis", "Loopring"],
+    priceSource: "chainlink",
+    chains: [
+      "Ethereum",
+      "Polygon",
+      "Optimism",
+      "Arbitrum",
+      "Avalanche",
+      "Gnosis",
+      "Loopring",
+    ],
     auditLinks: null,
     twitter: "https://twitter.com/reflexerfinance",
     wiki: "https://wiki.defillama.com/wiki/RAI",
@@ -1169,7 +1189,8 @@ export default [
     url: "https://floatprotocol.com/",
     description:
       "FLOAT is a stablecoin that tracks a basket of crypto assets instead of trying to exactly match the price of a dollar.",
-    mechanismDescription: "If the price of FLOAT is away from its target price, the supply is changed by minting (expansion) or buying up and burning FLOAT (contraction). This is done through a dutch auction (in an expansion) and a reverse dutch auction (in a contraction), respectively.",
+    mechanismDescription:
+      "If the price of FLOAT is away from its target price, the supply is changed by minting (expansion) or buying up and burning FLOAT (contraction). This is done through a dutch auction (in an expansion) and a reverse dutch auction (in a contraction), respectively.",
     chain: "Ethereum",
     onCoinGecko: true,
     gecko_id: "float-protocol-float",
@@ -1177,10 +1198,56 @@ export default [
     category: "stablecoins",
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
-    priceSource: "dexscreener", 
+    priceSource: "dexscreener",
     chains: ["Ethereum"],
     auditLinks: null,
     twitter: "https://twitter.com/FloatProtocol",
     wiki: "https://wiki.defillama.com/wiki/Float_Protocol",
+  },
+  {
+    id: "42",
+    name: "USDX",
+    address: null,
+    symbol: "USDX",
+    url: "https://www.kava.io/",
+    description:
+      "USDX is the crypto-backed native stablecoin of the Kava DeFi hub.",
+    mechanismDescription:
+      "Using the Kava app, users mint USDX by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back USDX is burned.",
+    chain: "Ethereum",
+    onCoinGecko: true,
+    gecko_id: "usdx",
+    cmcId: "6651",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    chains: ["Kava"],
+    auditLinks: null,
+    twitter: "https://twitter.com/kava_platform",
+    wiki: "https://wiki.defillama.com/wiki/Kava",
+  },
+  {
+    id: "43",
+    name: "ZUSD",
+    address: "0xc56c2b7e71b54d38aab6d52e94a04cbfa8f604fa",
+    symbol: "ZUSD",
+    url: "https://stablecoin.z.com/zusd/",
+    description:
+      "ZUSD is a 100% fiat-backed USD-pegged stablecoin on Ethereum that is always redeemable 1:1.",
+    mechanismDescription:
+      "GMO-Z.com Trust Company customers who have undergone a verification process can exchange USD for ZUSD and redeem ZUSD for USD.",
+    chain: "Ethereum",
+    onCoinGecko: true,
+    gecko_id: "zusd",
+    cmcId: "8772",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    chains: ["Ethereum"],
+    auditLinks: ["https://stablecoin.z.com/attestation/"],
+    twitter: "https://twitter.com/GMOTrust",
+    wiki: "https://wiki.defillama.com/wiki/ZUSD",
   },
 ] as PeggedAsset[];

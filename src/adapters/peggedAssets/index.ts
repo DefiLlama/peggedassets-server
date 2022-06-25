@@ -39,6 +39,8 @@ import stbl from "./stbl";
 import volt from "./volt-protocol";
 import rai from "./rai";
 import float from "./float-protocol-float";
+import usdx from "./usdx";
+import zusd from "./zusd";
 
 export default {
   tether,
@@ -82,4 +84,6 @@ export default {
   "volt-protocol": volt,
   rai,
   "float-protocol-float": float,
+  usdx,
+  zusd,
 };
