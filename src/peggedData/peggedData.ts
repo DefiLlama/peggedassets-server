@@ -1133,7 +1133,7 @@ export default [
     category: "stablecoins",
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
-    priceSource: null,  // coingecko not giving correct price atm
+    priceSource: "coingecko",  // coingecko not giving correct price atm
     chains: ["Ethereum", "Arbitrum"],
     auditLinks: null,
     twitter: "https://twitter.com/voltprotocol",
@@ -1177,7 +1177,7 @@ export default [
     category: "stablecoins",
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
-    priceSource: "chainlink", 
+    priceSource: "dexscreener", 
     chains: ["Ethereum"],
     auditLinks: null,
     twitter: "https://twitter.com/FloatProtocol",
