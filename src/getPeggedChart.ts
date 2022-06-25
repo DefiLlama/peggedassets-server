@@ -1,5 +1,4 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
-import fetch from "node-fetch";
 import peggedAssets from "./peggedData/peggedData";
 import dynamodb from "./utils/shared/dynamodb";
 import getTVLOfRecordClosestToTimestamp from "./utils/shared/getRecordClosestToTimestamp";
@@ -107,21 +106,19 @@ export async function craftChartsResponse(
       const peggedSymbol = pegged.symbol;
       const lastBalance = historicalBalance[historicalBalance.length - 1];
 
-      const priceData = await fetch(
-        "https://cocoahomology-datasets.s3.amazonaws.com/peggedPrices.json"
-      )
-        .then((res: any) => res.json())
-        .catch(() => {
-          console.error("Could not fetch pegged prices");
-        });
+      const currentPriceData = await getTVLOfRecordClosestToTimestamp(
+        dailyPeggedPrices(),
+        lastTimestamp,
+        (secondsInDay * 3) / 2
+      );
       const fallbackPrice = pegType === "peggedUSD" ? 1 : 0; // must be updated with each new pegType added
-      const currentPrice = priceData?.[peggedGeckoID];
-      const price = currentPrice ? currentPrice : fallbackPrice;
+      const storedCurrentPrice = currentPriceData?.prices?.[peggedGeckoID];
+      const currentPrice = storedCurrentPrice ? storedCurrentPrice : fallbackPrice;
 
       if (chain) {
         const chainBalance = lastBalance[normalizeChain(chain)];
         if (chainBalance) {
-          const mcap = chainBalance.circulating[pegType] * price;
+          const mcap = chainBalance.circulating[pegType] * currentPrice;
           if (greatestChainMcap.mcap < mcap) {
             greatestChainMcap = {
               symbol: peggedSymbol,
@@ -144,6 +141,14 @@ export async function craftChartsResponse(
         historicalBalance.map(async (item) => {
           const timestamp = getClosestDayStartTimestamp(item.SK);
           let itemBalance: any = {};
+
+          const priceData = await getTVLOfRecordClosestToTimestamp(
+            dailyPeggedPrices(),
+            timestamp,
+            (secondsInDay * 3) / 2
+          );
+          const historicalPrice = priceData?.prices?.[peggedGeckoID];
+          const price = historicalPrice ? historicalPrice : fallbackPrice;
 
           if (chain === undefined) {
             itemBalance.circulating = item.totalCirculating.circulating ?? {
