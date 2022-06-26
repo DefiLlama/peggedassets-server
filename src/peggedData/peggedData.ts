@@ -150,7 +150,7 @@ export default [
       "DFK",
     ],
     auditLinks: ["https://www.centre.io/usdc-transparency?hsLang=en"],
-    twitter: null,
+    twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/USDC",
   },
   {
@@ -193,7 +193,7 @@ export default [
     ],
     auditLinks: null,
     twitter: "https://twitter.com/terra_money",
-    wiki: "https://wiki.defillama.com/wiki/Terra",
+    wiki: "https://wiki.defillama.com/wiki/UST",
   },
   {
     id: "4",
@@ -370,7 +370,7 @@ export default [
     ],
     auditLinks: ["https://real-time-attest.trustexplorer.io/truecurrencies"],
     twitter: "https://twitter.com/tusdio",
-    wiki: "https://wiki.defillama.com/wiki/TrueUSD",
+    wiki: "https://wiki.defillama.com/wiki/TUSD",
   },
   {
     id: "8",
@@ -416,7 +416,7 @@ export default [
     chains: ["Ethereum"],
     auditLinks: null,
     twitter: "https://twitter.com/feiprotocol",
-    wiki: "https://wiki.defillama.com/wiki/Fei",
+    wiki: "https://wiki.defillama.com/wiki/FEI",
   },
   {
     id: "10",
@@ -564,7 +564,7 @@ export default [
     chains: ["Ethereum", "Fantom"],
     auditLinks: null,
     twitter: "https://twitter.com/InverseFinance",
-    wiki: "https://wiki.defillama.com/wiki/Inverse_Finance",
+    wiki: "https://wiki.defillama.com/wiki/DOLA",
   },
   {
     id: "16",
@@ -587,7 +587,7 @@ export default [
     chains: ["Solana"],
     auditLinks: null,
     twitter: "https://twitter.com/gopartyparrot",
-    wiki: "https://wiki.defillama.com/wiki/Parrot_Protocol",
+    wiki: "https://wiki.defillama.com/wiki/Parrot_USD_(PAI)",
   },
   {
     id: "17",
@@ -646,7 +646,7 @@ export default [
     ],
     auditLinks: null,
     twitter: "https://twitter.com/SynapseProtocol",
-    wiki: "https://wiki.defillama.com/wiki/Synapse",
+    wiki: "https://wiki.defillama.com/wiki/NUSD",
   },
   {
     id: "19",
@@ -784,7 +784,7 @@ export default [
     chains: ["Celo", "Ethereum", "Solana"],
     auditLinks: null,
     twitter: "https://twitter.com/CeloOrg",
-    wiki: "https://wiki.defillama.com/wiki/Celo",
+    wiki: "https://wiki.defillama.com/wiki/CUSD",
   },
   {
     id: "25",
@@ -807,7 +807,7 @@ export default [
     chains: ["Ethereum", "Gnosis"],
     auditLinks: null,
     twitter: "https://twitter.com/holareserve",
-    wiki: "https://wiki.defillama.com/wiki/Reserve_Protocol",
+    wiki: "https://wiki.defillama.com/wiki/Reserve_(RSV)",
   },
   {
     id: "26",
@@ -830,7 +830,7 @@ export default [
     chains: ["Ethereum", "Polygon", "Gnosis"],
     auditLinks: null,
     twitter: "https://twitter.com/mstable_",
-    wiki: "https://wiki.defillama.com/wiki/mStable",
+    wiki: "https://wiki.defillama.com/wiki/MUSD",
   },
   {
     id: "27",
@@ -878,7 +878,7 @@ export default [
     chains: ["BSC"],
     auditLinks: null,
     twitter: "https://twitter.com/VenusProtocol",
-    wiki: "https://wiki.defillama.com/wiki/Venus",
+    wiki: "https://wiki.defillama.com/wiki/VAI",
   },
   {
     id: "29",
@@ -901,7 +901,7 @@ export default [
     chains: ["Fantom"],
     auditLinks: null,
     twitter: "https://twitter.com/HectorDAO_HEC",
-    wiki: "https://wiki.defillama.com/wiki/Hector_Finance",
+    wiki: "https://wiki.defillama.com/wiki/TOR",
   },
   {
     id: "30",
@@ -924,7 +924,7 @@ export default [
     chains: ["RSK"],
     auditLinks: null,
     twitter: "https://twitter.com/moneyonchainok",
-    wiki: "https://wiki.defillama.com/wiki/Dollar_On_Chain",
+    wiki: "https://wiki.defillama.com/wiki/DOC",
   },
   {
     id: "31",
@@ -947,7 +947,7 @@ export default [
     chains: ["Avalanche", "Ethereum", "Polygon", "BSC"],
     auditLinks: null,
     twitter: "https://twitter.com/spicetradeai",
-    wiki: "https://wiki.defillama.com/wiki/Spice_Protocol",
+    wiki: "https://wiki.defillama.com/wiki/SpiceUSD_(USDS)",
   },
   {
     id: "32",
@@ -970,7 +970,7 @@ export default [
     chains: ["Arbitrum"],
     auditLinks: null,
     twitter: "https://twitter.com/SperaxUSD",
-    wiki: "https://wiki.defillama.com/wiki/Sperax",
+    wiki: "https://wiki.defillama.com/wiki/Sperax_USD_(USDS)",
   },
   {
     id: "33",
@@ -993,7 +993,7 @@ export default [
     chains: ["Ethereum", "Gnosis", "BSC", "Fantom"],
     auditLinks: null,
     twitter: "https://twitter.com/unitprotocol",
-    wiki: "https://wiki.defillama.com/wiki/USDP",
+    wiki: "https://wiki.defillama.com/wiki/USDP_Stablecoin_(USDP)",
   },
   {
     id: "34",
@@ -1056,7 +1056,7 @@ export default [
     ],
     auditLinks: null,
     twitter: "https://twitter.com/QiDaoProtocol",
-    wiki: "https://wiki.defillama.com/wiki/Qi_Dao",
+    wiki: "https://wiki.defillama.com/wiki/MAI",
   },
   {
     id: "36",
@@ -1079,7 +1079,7 @@ export default [
     chains: ["Solana"],
     auditLinks: null,
     twitter: "https://twitter.com/ratiofinance",
-    wiki: "https://wiki.defillama.com/wiki/Ratio_Finance",
+    wiki: "https://wiki.defillama.com/wiki/USDR",
   },
   {
     id: "37",
