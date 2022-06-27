@@ -41,6 +41,7 @@ import rai from "./rai";
 import float from "./float-protocol-float";
 import usdx from "./usdx";
 import zusd from "./zusd";
+import usx from "./dforce-usd";
 
 export default {
   tether,
@@ -86,4 +87,5 @@ export default {
   "float-protocol-float": float,
   usdx,
   zusd,
+  "dforce-usd": usx,
 };
