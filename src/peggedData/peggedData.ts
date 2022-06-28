@@ -1225,7 +1225,7 @@ export default [
     chains: ["Kava"],
     auditLinks: null,
     twitter: "https://twitter.com/kava_platform",
-    wiki: "https://wiki.defillama.com/wiki/Kava",
+    wiki: "https://wiki.defillama.com/wiki/USDX",
   },
   {
     id: "43",
