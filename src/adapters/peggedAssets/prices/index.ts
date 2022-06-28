@@ -16,18 +16,26 @@ type ChainlinkFeeds = {
   };
 };
 
-type UniswapPools = {
+type CurvePools = {
   [coinGeckoID: string]: {
-    address: string;
-    token: 0 | 1;
-    chain: string;
-    decimalsDifference: number; // difference between number of decimals for token1 and number for token0
+    baseURL: string;
+    poolID: string;
+    tokenAddress: string;
   };
 };
 
 type AddressesForDexes = {
   [coinGeckoID: string]: {
     address: string;
+  };
+};
+
+type UniswapPools = {
+  [coinGeckoID: string]: {
+    address: string;
+    token: 0 | 1;
+    chain: string;
+    decimalsDifference: number; // difference between number of decimals for token1 and number for token0
   };
 };
 
@@ -119,12 +127,81 @@ const feeds: ChainlinkFeeds = {
   }, // RAI-USD ETH
 };
 
-const uniswapPools: UniswapPools = {
+const curvePools: CurvePools = {
+  husd: {
+    baseURL: "ethereum/main",
+    poolID: "20",
+    tokenAddress: "0xdF574c24545E5FfEcb9a659c229253D4111d87e1",
+  },
+  "alchemix-usd": {
+    baseURL: "ethereum/main",
+    poolID: "37",
+    tokenAddress: "0xBC6DA0FE9aD5f3b0d58160288917AA56653660E9",
+  },
+  "yusd-stablecoin": {
+    baseURL: "avalanche/factory",
+    poolID: "factory-v2-69",
+    tokenAddress: "0x111111111111ed1D73f860F57b2798b683f2d325",
+  },
+  usdd: {
+    baseURL: "ethereum/factory",
+    poolID: "factory-v2-116",
+    tokenAddress: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6",
+  },
+  "dola-usd": {
+    baseURL: "ethereum/factory",
+    poolID: "factory-v2-27",
+    tokenAddress: "0x865377367054516e17014CcdED1e7d814EDC9ce4",
+  },
+  "nexus-usd": {
+    baseURL: "ethereum/factory",
+    poolID: "factory-v2-21",
+    tokenAddress: "0x1BEf2e5DE862034Fb0ed456DF59d29Ecadc9934C",
+  },
+  "origin-dollar": {
+    baseURL: "ethereum/factory",
+    poolID: "factory-v2-9",
+    tokenAddress: "0x2A8e1E676Ec238d8A992307B495b45B3fEAa5e86",
+  },
   reserve: {
-    address: "0x98a19D4954B433Bd315335A05d7d6371D812A492",
-    token: 0,
-    chain: "ethereum",
-    decimalsDifference: -12,
+    baseURL: "ethereum/main",
+    poolID: "23",
+    tokenAddress: "0x196f4727526eA7FB1e17b2071B3d8eAA38486988",
+  },
+  musd: {
+    baseURL: "ethereum/main",
+    poolID: "22",
+    tokenAddress: "0xe2f2a5C287993345a840Db3B0845fbC70f5935a5",
+  },
+  tor: {
+    baseURL: "fantom/factory",
+    poolID: "factory-v2-62",
+    tokenAddress: "0x74E23dF9110Aa9eA0b6ff2fAEE01e740CA1c642e",
+  },
+  spiceusd: {
+    baseURL: "avalanche/factory",
+    poolID: "factory-v2-78",
+    tokenAddress: "0xaB05b04743E0aeAF9D2cA81E5D3b8385e4BF961e",
+  },
+  usdp: {
+    baseURL: "ethereum/factory",
+    poolID: "factory-v2-59",
+    tokenAddress: "0x8E870D67F660D95d5be530380D0eC0bd388289E1",
+  },
+  mimatic: {
+    baseURL: "polygon/factory",
+    poolID: "factory-v2-7",
+    tokenAddress: "0xa3Fa99A148fA48D14Ed51d610c367C61876997F1",
+  },
+  "token-dforce-usd": {
+    baseURL: "ethereum/factory",
+    poolID: "factory-v2-77",
+    tokenAddress: "0x0a5E677a6A24b2F1A2Bf4F3bFfC443231d2fDEc8",
+  },
+  "dei-token": {
+    baseURL: "ethereum/factory",
+    poolID: "factory-v2-47",
+    tokenAddress: "0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3",
   },
 };
 
@@ -183,6 +260,15 @@ const birdeye: AddressesForDexes = {
   },
 };
 
+const uniswapPools: UniswapPools = {
+  reserve: {
+    address: "0x98a19D4954B433Bd315335A05d7d6371D812A492",
+    token: 0,
+    chain: "ethereum",
+    decimalsDifference: -12,
+  },
+};
+
 export default async function getCurrentPeggedPrice(
   token: string,
   chainBlocks: ChainBlocks,
@@ -204,6 +290,37 @@ export default async function getCurrentPeggedPrice(
     }
     console.error(`Could not get ChainLink price for token ${token}`);
     return null;
+  }
+  if (priceSource === "curve") {
+    const pool = curvePools[token];
+    const poolID = pool?.poolID;
+    const tokenAddress = pool?.tokenAddress;
+    const baseURL = pool?.baseURL;
+    if (poolID) {
+      for (let i = 0; i < 5; i++) {
+        try {
+          const res = await axios.get(
+            `https://api.curve.fi/api/getPools/${baseURL}`
+          );
+          const filteredPools = res.data.data.poolData.filter(
+            (obj: any) => obj?.id === `${poolID}`
+          );
+          const tokenData = filteredPools[0]?.coins?.filter(
+            (obj: any) => obj.address === `${tokenAddress}`
+          );
+          const price = parseFloat(tokenData[0]?.usdPrice);
+          if (price) {
+            return price;
+          } else {
+            console.error(`Could not get Curve price for token ${token}`);
+            return null;
+          }
+        } catch (e) {
+          console.error(e);
+          continue;
+        }
+      }
+    }
   }
   if (priceSource === "uniswap") {
     const pool = uniswapPools[token];

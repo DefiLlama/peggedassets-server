@@ -8,7 +8,7 @@ type Bridges = {
 type PeggedCategory = "stablecoins";
 type PegType = "peggedUSD";
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
-export type PriceSource = "chainlink" | "uniswap";
+export type PriceSource = "chainlink" | "uniswap" | "dexscreener" | "curve" | "coingecko" | "birdeye";
 
 export type PeggedAsset = {
   id: string;
