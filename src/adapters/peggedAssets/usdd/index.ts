@@ -25,9 +25,11 @@ const chainContracts: ChainContracts = {
   },
   ethereum: {
     bridgedFromBttc: ["0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6"],
+    reserves: ["0x9277a463A508F45115FdEaf22FfeDA1B16352433"],
   },
   bsc: {
     bridgedFromBttc: ["0xd17479997f34dd9156deef8f95a52d81d265be9c"],
+    reserves: ["0xCa266910d92a313E5F9eb1AfFC462bcbb7d9c4A9"],
   },
 };
 
@@ -42,6 +44,43 @@ async function tronMinted() {
       chainContracts["tron"].issued[0]
     );
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
+    return balances;
+  };
+}
+
+async function ethereumBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+
+    const totalSupply = (
+      await sdk.api.abi.call({
+        abi: "erc20:totalSupply",
+        target: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6",
+        block: _chainBlocks["ethereum"],
+        chain: "ethereum",
+      })
+    ).output;
+
+    const reserve = (
+      await sdk.api.erc20.balanceOf({
+        target: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6",
+        owner: "0x9277a463A508F45115FdEaf22FfeDA1B16352433", // reserve contract for USDD on Ethereum
+        block: _chainBlocks["ethereum"],
+        chain: "ethereum",
+      })
+    ).output;
+
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      (totalSupply - reserve) / 10 ** 18,
+      "0xd17479997f34dd9156deef8f95a52d81d265be9c",
+      true
+    );
     return balances;
   };
 }
@@ -66,7 +105,7 @@ async function bscBridged() {
     const reserve = (
       await sdk.api.erc20.balanceOf({
         target: "0xd17479997F34dd9156Deef8F95A52D81D265be9c",
-        owner: "0xCa266910d92a313E5F9eb1AfFC462bcbb7d9c4A9",  // reserve contract for USDD on BSC
+        owner: "0xCa266910d92a313E5F9eb1AfFC462bcbb7d9c4A9", // reserve contract for USDD on BSC
         block: _chainBlocks["bsc"],
         chain: "bsc",
       })
@@ -100,11 +139,7 @@ const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    bittorrent: bridgedSupply(
-      "ethereum",
-      18,
-      chainContracts.ethereum.bridgedFromBttc
-    ),
+    bittorrent: ethereumBridged(),
   },
   bsc: {
     minted: async () => ({}),
