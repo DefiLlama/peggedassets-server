@@ -1281,4 +1281,27 @@ export default [
     twitter: "https://twitter.com/dForcenet",
     wiki: "https://wiki.defillama.com/wiki/USX",
   },
+  {
+    id: "45",
+    name: "Acala Dollar",
+    address: null,
+    symbol: "AUSD",
+    url: "https://acala.network/",
+    description:
+      "aUSD is the native decentralized stablecoin of Polkadot pegged to the US Dollar and backed only by decentralized assets in Collateralized Debt Positions (CDP).",
+    mechanismDescription:
+      "Using the Acala app, users mint aUSD by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back aUSD is burned.",
+    chain: "Acala",
+    onCoinGecko: true,
+    gecko_id: "acala-dollar",
+    cmcId: "20411",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    chains: ["Acala", "Karura"],
+    auditLinks: null,
+    twitter: "https://twitter.com/AcalaNetwork",
+    wiki: "https://wiki.defillama.com/wiki/Acala",
+  },
 ] as PeggedAsset[];

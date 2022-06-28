@@ -42,6 +42,7 @@ import float from "./float-protocol-float";
 import usdx from "./usdx";
 import zusd from "./zusd";
 import usx from "./token-dforce-usd";
+import ausd from "./acala-dollar";
 
 export default {
   tether,
@@ -88,4 +89,5 @@ export default {
   usdx,
   zusd,
   "token-dforce-usd": usx,
+  "acala-dollar": ausd,
 };

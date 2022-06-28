@@ -788,6 +788,13 @@ export const chainCoingeckoIds = {
     categories: ["Rollup"],
     parent: "Ethereum",
   },
+  Acala: {
+    geckoId: "acala",
+    symbol: "ACA",
+    cmcId: "6756",
+    categories: ["EVM", "Parachain"],
+    parent: "Polkadot",
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -986,6 +993,8 @@ export function getChainDisplayName(
       return "Aztec";
     case "starknet":
       return "StarkNet";
+    case "acala":
+      return "Acala";
 
     default:
       return (
