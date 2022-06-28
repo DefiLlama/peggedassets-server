@@ -405,8 +405,8 @@ async function circleAPIChainMinted(chain: string) {
       async (_bail: any) =>
         await axios.get("https://api.circle.com/v1/stablecoins")
     );
-    const chainsData = issuance.data.data[0].chains;
-    const filteredChainsData = await chainsData.filter(
+    const usdcData = issuance.data.data.filter((obj: any) => obj.symbol === 'USDC');
+    const filteredChainsData = await usdcData[0].chains.filter(
       (obj: any) => obj.chain === chain
     );
     const supply = parseInt(filteredChainsData[0].amount);
