@@ -1389,13 +1389,21 @@ export default {
     bridge: "starkgate",
     sourceChain: formattedSourceChains.eth,
   },
-  "bnb1skl4n4vrzx3ty9ujaut8rmkhkmtl4t04ysllfm": {
+  bnb1skl4n4vrzx3ty9ujaut8rmkhkmtl4t04ysllfm: {
     bridge: "kava",
     sourceChain: formattedSourceChains.bsc,
   },
-  "bnb10zq89008gmedc6rrwzdfukjk94swynd7dl97w8": {
+  bnb10zq89008gmedc6rrwzdfukjk94swynd7dl97w8: {
     bridge: "kava",
     sourceChain: formattedSourceChains.bsc,
+  },
+  "0x641441c631e2f909700d2f41fd87f0aa6a6b4edb": {
+    bridge: "arbitrum",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xbfD291DA8A403DAAF7e5E9DC1ec0aCEaCd4848B9": {
+    bridge: "optimism",
+    sourceChain: formattedSourceChains.eth,
   },
 } as BridgeMapping;
 
@@ -1577,5 +1585,5 @@ export const bridgeInfo = {
   kava: {
     name: "Kava",
     link: "https://app.kava.io/",
-  }
+  },
 } as BridgeInfo;

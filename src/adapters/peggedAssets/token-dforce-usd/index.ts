@@ -96,8 +96,6 @@ const adapter: PeggedIssuanceAdapter = {
       "optimism",
       18,
       chainContracts.optimism.bridgedFromETH,
-      "optimism",
-      "Ethereum"
     ),
   },
   arbitrum: {
@@ -107,8 +105,6 @@ const adapter: PeggedIssuanceAdapter = {
       "arbitrum",
       18,
       chainContracts.arbitrum.bridgedFromETH,
-      "arbitrum",
-      "Ethereum"
     ),
   },
 };
