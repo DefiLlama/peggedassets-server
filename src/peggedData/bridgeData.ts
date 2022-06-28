@@ -23,6 +23,7 @@ const formattedSourceChains = {
   bttc: "Bittorrent",
   waves: "Waves",
   rsk: "RSK",
+  fantom: "Fantom",
 };
 
 export default {
@@ -1405,6 +1406,14 @@ export default {
     bridge: "optimism",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xde12c7959e1a72bbe8a5f7a1dc8f8eef9ab011b3": {
+    bridge: "deus",
+    sourceChain: formattedSourceChains.fantom,
+  },
+  "0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3": {
+    bridge: "deus",
+    sourceChain: formattedSourceChains.fantom,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1585,5 +1594,9 @@ export const bridgeInfo = {
   kava: {
     name: "Kava",
     link: "https://app.kava.io/",
+  },
+  deus: {
+    name: "DEUS Bridge",
+    link: "https://deus.finance/",
   },
 } as BridgeInfo;

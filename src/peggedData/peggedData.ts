@@ -21,7 +21,7 @@ both `name` and `gecko_id` must be included. `name` is used to fetch icon and as
 export default [
   {
     id: "1",
-    name: "Tether",
+    name: "Tether", // name is normalized to get icon in frontend
     address: "0xdac17f958d2ee523a2206206994597c13d831ec7",
     symbol: "USDT",
     url: "https://tether.to/",
@@ -31,10 +31,10 @@ export default [
       "Tether customers who have undergone a verification process can exchange USD for USDT and redeem USDT for USD.",
     chain: "Ethereum",
     onCoinGecko: true,
-    gecko_id: "tether",
+    gecko_id: "tether", // required: is used as coin's unique id throughout peggedassets-server
     cmcId: "825",
-    category: "stablecoins", // is for the frontend
-    pegType: "peggedUSD", // should match balance key returned by adapter
+    category: "stablecoins", // is for frontend only
+    pegType: "peggedUSD", // must match balance key returned by adapter
     pegMechanism: "fiat-backed",
     priceSource: "chainlink",
     chains: [
@@ -1326,5 +1326,28 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/overnight_fi",
     wiki: "https://wiki.defillama.com/wiki/Overnight",
+  },
+  {
+    id: "47",
+    name: "DEI",
+    address: "fantom:0xde12c7959e1a72bbe8a5f7a1dc8f8eef9ab011b3",
+    symbol: "DEI",
+    url: "https://deus.finance/",
+    description:
+      "DEI is a fractional reserve USD-pegged stablecoin and is the unit of account for all trading within the DEUS Finance ecosystem.",
+    mechanismDescription:
+      "Using the Deus Finance app, DEI can be minted by locking USDC and burning DEUS in a proportion determined by the protocol's collateral ratio.",
+    chain: "Fantom",
+    onCoinGecko: true,
+    gecko_id: "dei-token",
+    cmcId: "12517",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic",
+    priceSource: "dexscreener",
+    chains: ["Fantom", "Ethereum", "Polygon", "BSC", "Metis"],
+    auditLinks: null,
+    twitter: "https://twitter.com/DeusDao",
+    wiki: "https://wiki.defillama.com/wiki/Deus_Finance",
   },
 ] as PeggedAsset[];

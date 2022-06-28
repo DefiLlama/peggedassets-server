@@ -125,7 +125,7 @@ const uniswapPools: UniswapPools = {
     token: 0,
     chain: "ethereum",
     decimalsDifference: -12,
-  }
+  },
 };
 
 const dexscreener: AddressesForDexes = {
@@ -168,6 +168,9 @@ const dexscreener: AddressesForDexes = {
   },
   usd: {
     address: "0x236eeC6359fb44CCe8f97E99387aa7F8cd5cdE1f",
+  },
+  "dei-token": {
+    address: "0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3",
   },
 };
 
@@ -243,9 +246,8 @@ export default async function getCurrentPeggedPrice(
                 return 1;
               } else if (b.liquidity?.usd === undefined) {
                 return -1;
-              } else return b.liquidity.usd - a.liquidity.usd
-            }
-            );
+              } else return b.liquidity.usd - a.liquidity.usd;
+            });
           const poolWithGreatestLiquidity = filteredPools[0];
           const price = parseFloat(poolWithGreatestLiquidity?.priceUsd);
           if (price) {
