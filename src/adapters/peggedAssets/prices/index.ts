@@ -165,7 +165,10 @@ const dexscreener: AddressesForDexes = {
   },
   "float-protocol-float": {
     address: "0xb05097849BCA421A3f51B249BA6CCa4aF4b97cb9",
-  }
+  },
+  usd: {
+    address: "0x236eeC6359fb44CCe8f97E99387aa7F8cd5cdE1f",
+  },
 };
 
 const birdeye: AddressesForDexes = {

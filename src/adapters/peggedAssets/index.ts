@@ -43,6 +43,7 @@ import usdx from "./usdx";
 import zusd from "./zusd";
 import usx from "./token-dforce-usd";
 import ausd from "./acala-dollar";
+import usd from "./usd";
 
 export default {
   tether,
@@ -90,4 +91,5 @@ export default {
   zusd,
   "token-dforce-usd": usx,
   "acala-dollar": ausd,
+  usd,
 };

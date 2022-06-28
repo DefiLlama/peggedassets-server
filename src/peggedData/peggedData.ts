@@ -1304,4 +1304,27 @@ export default [
     twitter: "https://twitter.com/AcalaNetwork",
     wiki: "https://wiki.defillama.com/wiki/Acala",
   },
+  {
+    id: "46",
+    name: "USD+",
+    address: "polygon:0x236eec6359fb44cce8f97e99387aa7f8cd5cde1f",
+    symbol: "USD+",
+    url: "https://overnight.fi/",
+    description:
+      "USD+ is USDC that pays yield daily via rebase. The USD+ stablecoin can be instantly minted and redeemed to USDC 1:1.",
+    mechanismDescription:
+      "Using the Overnight app, users swap USDC to mint USD+ 1:1. USD+ can be redeemed for USDC 1:1 at any time.",
+    chain: "Polygon",
+    onCoinGecko: true,
+    gecko_id: "usd",
+    cmcId: "20317",
+    category: "stablecoins",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "dexscreener",
+    chains: ["Polygon"],
+    auditLinks: null,
+    twitter: "https://twitter.com/overnight_fi",
+    wiki: "https://wiki.defillama.com/wiki/Overnight",
+  },
 ] as PeggedAsset[];
