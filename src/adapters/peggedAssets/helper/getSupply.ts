@@ -14,7 +14,7 @@ export async function bridgedSupply(
   chain: string,
   decimals: number,
   addresses: string[],
-  bridgeSource?: string,
+  bridgeName?: string,
   bridgedFromChain?: string,
   pegType?: PeggedAssetType,
 ) {
@@ -34,12 +34,12 @@ export async function bridgedSupply(
           chain: chain,
         })
       ).output;
-      bridgeSource
+      bridgeName
         ? sumSingleBalance(
             balances,
             assetPegType,
             totalSupply / 10 ** decimals,
-            bridgeSource,
+            bridgeName,
             false,
             bridgedFromChain,
           )
