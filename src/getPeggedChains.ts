@@ -14,7 +14,7 @@ export async function craftPeggedChainsResponse() {
   const chainMcap = {} as { [chain: string]: number };
   let prices = {} as any;
   prices = await fetch(
-    "https://cocoahomology-datasets.s3.amazonaws.com/peggedPrices.json"
+    "https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/peggedPrices.json"
   )
     .then((res: any) => res.json())
     .catch(() => {

@@ -2,9 +2,9 @@ import AWS from "aws-sdk";
 import sleep from "./sleep";
 
 const client = new AWS.DynamoDB.DocumentClient({
-  region: "us-east-1",
+  region: "eu-central-1",
 });
-export const TableName = "prod-table";
+export const TableName = "prod-stablecoins-table";
 
 const dynamodb = {
   get: (

@@ -1,7 +1,7 @@
 import aws from "aws-sdk";
 import type { Readable } from "stream";
 
-const datasetBucket = "cocoahomology-datasets";
+const datasetBucket = "llama-stablecoins-data";
 
 function next21Minutedate() {
   const dt = new Date();

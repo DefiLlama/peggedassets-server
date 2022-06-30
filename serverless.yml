@@ -1,4 +1,4 @@
-service: cocoahomology
+service: llama-stablecoins
 
 package:
   individually: true
@@ -8,7 +8,7 @@ provider:
   name: aws
   runtime: nodejs14.x
   memorySize: 130
-  region: us-east-1
+  region: eu-central-1
   endpointType: REGIONAL # Set to regional because the api gateway will be behind a cloudfront distribution
   stage: dev # Default to dev if no stage is specified
   tracing: # Enable X-Ray tracing (debugging)
@@ -70,7 +70,7 @@ custom:
   prune:
     automatic: true
     number: 5 # Number of versions to keep
-  tableName: prod-table
+  tableName: prod-stablecoins-table
 
 functions:
   fallback:
@@ -130,11 +130,13 @@ functions:
     handler: src/triggerStorePegged.default
     timeout: 900
     events:
-      - schedule: cron(0 * * * ? *)
+      - schedule: cron(20 * * * ? *)
   storePeggedPrices:
     handler: src/storePeggedPrices.default
     timeout: 900
     memorySize: 1024
+    events:
+      - schedule: cron(*/30 * * * ? *)
   fetchCoingeckoData:
     handler: src/fetchCoingeckoData.default
     timeout: 900
@@ -180,27 +182,6 @@ resources:
         ResponseType: DEFAULT_5XX
         RestApiId:
           Ref: 'ApiGatewayRestApi'
-    # required to enable request path parameter caching in API Gateway
-    ApiGatewayMethodPeggedchartsChainVarGet:
-      Properties:
-        RequestParameters:
-          method.request.path.chain : false
-        Integration:
-          RequestParameters:
-            integration.request.path.chain: method.request.path.chain
-          CacheNamespace: ApiGatewayMethodChainVarGetCacheNS
-          CacheKeyParameters:
-            - method.request.path.chain
-    ApiGatewayMethodPeggedPeggedVarGet:
-      Properties:
-        RequestParameters:
-          method.request.path.pegged : false
-        Integration:
-          RequestParameters:
-            integration.request.path.pegged: method.request.path.pegged
-          CacheNamespace: ApiGatewayMethodPeggedPeggedVarGetCacheNS
-          CacheKeyParameters:
-            - method.request.path.pegged
 
 plugins:
   - serverless-esbuild

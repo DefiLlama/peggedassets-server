@@ -15,8 +15,8 @@
     "pretest": "npm run prebuild",
     "build": "sls package",
     "updateAdapters": "cd DefiLlama-Adapters && git pull",
-    "fillOld": "set AWS_REGION='us-east-1' && set tableName='prod-table' && npx ts-node src/cli/fillOld.ts",
-    "fillLast": "export AWS_REGION='eu-central-1' && export tableName='prod-table' && npx ts-node src/cli/fillLast.ts"
+    "fillOld": "set AWS_REGION='eu-central-1' && set tableName='prod-stablecoins-table' && npx ts-node src/cli/fillOld.ts",
+    "fillLast": "export AWS_REGION='eu-central-1' && export tableName='prod-stablecoins-table' && npx ts-node src/cli/fillLast.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",

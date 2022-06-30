@@ -12,7 +12,7 @@ const handler = async () => {
       coins: coins.slice(i, i + step),
       depth: 0,
     };
-    await invokeLambda(`cocoahomology-dev-fetchCoingeckoData`, event);
+    await invokeLambda(`llama-stablecoins-dev-fetchCoingeckoData`, event);
   }
 };
 

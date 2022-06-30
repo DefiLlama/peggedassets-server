@@ -94,7 +94,7 @@ const handler = async (event: any, context: AWSLambda.Context) => {
       return;
     } else {
       await sleep(Math.max(context.getRemainingTimeInMillis() - 10e3, 0)); // Wait until there's 10 seconds left
-      await invokeLambda(`cocoahomology-dev-fetchCoingeckoData`, {
+      await invokeLambda(`llama-stablecoins-dev-fetchCoingeckoData`, {
         coins: rejected,
         depth: depth + 1,
       });
