@@ -10,7 +10,7 @@ provider:
   memorySize: 130
   region: eu-central-1
   endpointType: REGIONAL # Set to regional because the api gateway will be behind a cloudfront distribution
-  stage: dev # Default to dev if no stage is specified
+  stage: prod # Default to prod if no stage is specified
   tracing: # Enable X-Ray tracing (debugging)
     apiGateway: true
     lambda: true
@@ -71,6 +71,9 @@ custom:
     automatic: true
     number: 5 # Number of versions to keep
   tableName: prod-stablecoins-table
+  domain: stablecoins.llama.fi
+  certificateArn: "arn:aws:acm:us-east-1:856461987125:certificate/b4209013-30a6-417e-847e-6e630c3e77fe"
+  hostedZone: llama.fi
 
 functions:
   fallback:
@@ -182,6 +185,8 @@ resources:
         ResponseType: DEFAULT_5XX
         RestApiId:
           Ref: 'ApiGatewayRestApi'
+  # Cloudfront API distribution
+  - ${file(resources/api-cloudfront-distribution.yml)}
 
 plugins:
   - serverless-esbuild
