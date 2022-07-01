@@ -13,7 +13,7 @@ function shuffleArray(array: number[]) {
   }
 }
 
-const step = 10;
+const step = 5;
 const handler = async () => {
   const peggedIndexes = Array.from(Array(peggedAssets.length).keys());
   shuffleArray(peggedIndexes);

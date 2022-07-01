@@ -2,7 +2,7 @@ const TronWeb = require("tronweb");
 
 const tronWeb = new TronWeb({
   fullHost: "https://api.trongrid.io",
-  headers: { "TRON-PRO-API-KEY": "66410e19-c0f6-449c-aae3-78f2581a1a0b" },
+  headers: { "TRON-PRO-API-KEY": "a4e25c66-b143-4d0b-91d2-0d9b2371d397" },
 });
 tronWeb.setAddress("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
 

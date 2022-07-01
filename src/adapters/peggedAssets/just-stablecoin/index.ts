@@ -17,7 +17,25 @@ type ChainContracts = {
     [contract: string]: string[];
   };
 };
-// any bridgeOnETH contracts are not used and are just for info purposes
+
+const locks = [] as ((value: unknown) => void)[];
+function getCoingeckoLock() {
+  return new Promise((resolve) => {
+    locks.push(resolve);
+  });
+}
+
+function releaseCoingeckoLock() {
+  const firstLock = locks.shift();
+  if (firstLock !== undefined) {
+    firstLock(null);
+  }
+}
+
+setInterval(() => {
+  releaseCoingeckoLock();
+}, 2000);
+
 const chainContracts: ChainContracts = {
   tron: {
     issued: ["TMwFHYXLJaRUPeW6421aqXL4ZEzPRFGkGT"],
@@ -43,6 +61,7 @@ async function tronMinted() {
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
 
     for (let owner of chainContracts.tron.reserves) {
+      await getCoingeckoLock();
       const reserveBalance = await tronGetTokenBalance(
         chainContracts["tron"].issued[0],
         owner

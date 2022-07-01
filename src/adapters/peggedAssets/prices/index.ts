@@ -8,6 +8,26 @@ const retry = require("async-retry");
 
 const TWAPIntervalInSeconds: number = 10;
 
+export type GetCoingeckoLog = () => Promise<any>;
+
+const locks = [] as ((value: unknown) => void)[];
+function getCoingeckoLock() {
+  return new Promise((resolve) => {
+    locks.push(resolve);
+  });
+}
+function releaseCoingeckoLock() {
+  const firstLock = locks.shift();
+  if (firstLock !== undefined) {
+    firstLock(null);
+  }
+}
+// Rate limit is 50 calls/min for coingecko's API
+// So we'll release one every 1.2 seconds to match it
+setInterval(() => {
+  releaseCoingeckoLock();
+}, 2000);
+
 type ChainlinkFeeds = {
   [coinGeckoID: string]: {
     address: string;
@@ -410,6 +430,7 @@ export default async function getCurrentPeggedPrice(
     // only use as last resort
     for (let i = 0; i < 5; i++) {
       try {
+        await getCoingeckoLock();
         const res = await axios.get(
           `https://api.coingecko.com/api/v3/simple/price?ids=${token}&vs_currencies=usd`
         );
