@@ -173,11 +173,6 @@ const curvePools: CurvePools = {
     poolID: "factory-v2-27",
     tokenAddress: "0x865377367054516e17014CcdED1e7d814EDC9ce4",
   },
-  "nexus-usd": {
-    baseURL: "ethereum/factory",
-    poolID: "factory-v2-21",
-    tokenAddress: "0x1BEf2e5DE862034Fb0ed456DF59d29Ecadc9934C",
-  },
   "origin-dollar": {
     baseURL: "ethereum/factory",
     poolID: "factory-v2-9",

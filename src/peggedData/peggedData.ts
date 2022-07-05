@@ -629,7 +629,7 @@ export default [
     category: "stablecoins",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "curve",
+    priceSource: null,
     chains: [
       "Ethereum",
       "BSC",
