@@ -5,7 +5,8 @@ type Bridges = {
   };
 };
 
-type PegType = "peggedUSD" | "peggedVAR";
+type PeggedCategory = "stablecoins";
+type PegType = "peggedUSD";
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 export type PriceSource = "chainlink" | "uniswap" | "dexscreener" | "curve" | "coingecko" | "birdeye";
 
@@ -22,6 +23,7 @@ export type PeggedAsset = {
   onCoinGecko: boolean;
   gecko_id: string;
   cmcId: string;
+  category: PeggedCategory;
   pegType: PegType;
   pegMechanism: PegMechanism;
   priceSource: PriceSource;
