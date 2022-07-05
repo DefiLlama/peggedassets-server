@@ -1,6 +1,9 @@
 const sdk = require("@defillama/sdk");
 import { multiFunctionBalance, sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply, terraSupply } from "../helper/getSupply";
+import {
+  bridgedSupply,
+  bridgedSupplySubtractReserve,
+} from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -148,11 +151,26 @@ async function ethereumUnreleased(
     let bridgedTotalFunction = await multiFunctionBalance(
       [
         bridgedSupply("polygon", 18, chainContracts.polygon.bridgedFromETH),
-        bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
-        bridgedSupply("arbitrum", 18, chainContracts.arbitrum.bridgedFromETH),
-        bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
-        bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
-        bridgedSupply("moonriver", 18, chainContracts.moonriver.bridgedFromETH),
+        bridgedSupplySubtractReserve("avax", 18, [
+          chainContracts.avax.bridgedFromETH[0],
+          chainContracts.avax.reserves,
+        ]),
+        bridgedSupplySubtractReserve("arbitrum", 18, [
+          chainContracts.arbitrum.bridgedFromETH[0],
+          chainContracts.arbitrum.reserves,
+        ]),
+        bridgedSupplySubtractReserve("fantom", 18, [
+          chainContracts.fantom.bridgedFromETH[0],
+          chainContracts.fantom.reserves,
+        ]),
+        bridgedSupplySubtractReserve("bsc", 18, [
+          chainContracts.bsc.bridgedFromETH[0],
+          chainContracts.bsc.reserves,
+        ]),
+        bridgedSupplySubtractReserve("moonriver", 18, [
+          chainContracts.moonriver.bridgedFromETH[0],
+          chainContracts.moonriver.reserves,
+        ]),
         bridgedSupply("boba", 18, chainContracts.boba.bridgedFromETH),
         bridgedSupply("metis", 18, chainContracts.metis.bridgedFromETH),
       ],
@@ -209,61 +227,43 @@ const adapter: PeggedIssuanceAdapter = {
   },
   avalanche: {
     minted: async () => ({}),
-    unreleased: chainUnreleased(
-      "avax",
-      18,
+    unreleased: async () => ({}),
+    ethereum: bridgedSupplySubtractReserve("avax", 18, [
       chainContracts.avax.bridgedFromETH[0],
-      chainContracts.avax.reserves
-    ),
-    ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
+      chainContracts.avax.reserves,
+    ]),
   },
   arbitrum: {
     minted: async () => ({}),
-    unreleased: chainUnreleased(
-      "arbitrum",
-      18,
+    unreleased: async () => ({}),
+    ethereum: bridgedSupplySubtractReserve("arbitrum", 18, [
       chainContracts.arbitrum.bridgedFromETH[0],
-      chainContracts.arbitrum.reserves
-    ),
-    ethereum: bridgedSupply(
-      "arbitrum",
-      18,
-      chainContracts.arbitrum.bridgedFromETH
-    ),
+      chainContracts.arbitrum.reserves,
+    ]),
   },
   fantom: {
     minted: async () => ({}),
-    unreleased: chainUnreleased(
-      "fantom",
-      18,
+    unreleased: async () => ({}),
+    ethereum: bridgedSupplySubtractReserve("fantom", 18, [
       chainContracts.fantom.bridgedFromETH[0],
-      chainContracts.fantom.reserves
-    ),
-    ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
+      chainContracts.fantom.reserves,
+    ]),
   },
   bsc: {
     minted: async () => ({}),
-    unreleased: chainUnreleased(
-      "bsc",
-      18,
+    unreleased: async () => ({}),
+    ethereum: bridgedSupplySubtractReserve("bsc", 18, [
       chainContracts.bsc.bridgedFromETH[0],
-      chainContracts.bsc.reserves
-    ),
-    ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
+      chainContracts.bsc.reserves,
+    ]),
   },
   moonriver: {
     minted: async () => ({}),
-    unreleased: chainUnreleased(
-      "moonriver",
-      18,
+    unreleased: async () => ({}),
+    ethereum: bridgedSupplySubtractReserve("moonriver", 18, [
       chainContracts.moonriver.bridgedFromETH[0],
-      chainContracts.moonriver.reserves
-    ),
-    ethereum: bridgedSupply(
-      "moonriver",
-      18,
-      chainContracts.moonriver.bridgedFromETH
-    ),
+      chainContracts.moonriver.reserves,
+    ]),
   },
   boba: {
     minted: async () => ({}),
