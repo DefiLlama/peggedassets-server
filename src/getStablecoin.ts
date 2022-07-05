@@ -12,7 +12,6 @@ import {
   hourlyPeggedBalances,
   dailyPeggedBalances,
 } from "./peggedAssets/utils/getLastRecord";
-import sluggify from "./peggedAssets/utils/sluggifyPegged";
 import {
   nonChains,
   getChainDisplayName,
@@ -31,7 +30,7 @@ function replaceLast(historical: HistoricalTvls, last: HourlyTvl) {
 }
 
 export async function craftProtocolResponse(
-  rawPeggedName: string | undefined,
+  peggedID: string | undefined,
   useNewChainNames: boolean,
   useHourlyData: boolean
 ) {
@@ -44,10 +43,8 @@ export async function craftProtocolResponse(
       console.error("Could not fetch pegged prices");
     });
 
-  const peggedName = rawPeggedName?.toLowerCase();
-  console.log(peggedName);
   const peggedData = peggedAssets.find(
-    (pegged) => sluggify(pegged) === peggedName
+    (pegged) => pegged.id === peggedID
   );
   if (peggedData === undefined) {
     return errorResponse({

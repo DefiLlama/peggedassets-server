@@ -57,15 +57,15 @@ function extractResultOfBinarySearch(ar: any[], binarySearchResult: number) {
 
 export async function craftChartsResponse(
   chain: string | undefined,
-  peggedAsset: string | undefined
+  peggedID: string | undefined
 ) {
   const sumDailyBalances = {} as {
     [timestamp: number]: {
       circulating: tokenBalance;
       unreleased: tokenBalance;
-      circulatingMcap: tokenBalance;
-      mintedMcap: tokenBalance;
-      bridgedToMcap: tokenBalance;
+      totalCirculatingUSD: tokenBalance;
+      totalMintedUSD: tokenBalance;
+      totalBridgedToUSD: tokenBalance;
     };
   };
   // quick fix; need to update later
@@ -87,7 +87,7 @@ export async function craftChartsResponse(
    */
   const historicalPeggedBalances = await Promise.all(
     peggedAssets.map(async (pegged) => {
-      if (peggedAsset && pegged.gecko_id !== peggedAsset) {
+      if (peggedID && pegged.id !== peggedID) {
         return;
       }
       const lastBalance = await getLastRecord(hourlyPeggedBalances(pegged.id));
@@ -241,23 +241,23 @@ export async function craftChartsResponse(
               (sumDailyBalances[timestamp].unreleased[pegType] ?? 0) +
               itemBalance.unreleased[pegType];
 
-            sumDailyBalances[timestamp].circulatingMcap =
-              sumDailyBalances[timestamp].circulatingMcap || {};
-            sumDailyBalances[timestamp].circulatingMcap[pegType] =
-              (sumDailyBalances[timestamp].circulatingMcap[pegType] ?? 0) +
+            sumDailyBalances[timestamp].totalCirculatingUSD =
+              sumDailyBalances[timestamp].totalCirculatingUSD || {};
+            sumDailyBalances[timestamp].totalCirculatingUSD[pegType] =
+              (sumDailyBalances[timestamp].totalCirculatingUSD[pegType] ?? 0) +
               itemBalance.circulating[pegType] * price;
 
-            sumDailyBalances[timestamp].mintedMcap =
-              sumDailyBalances[timestamp].mintedMcap || {};
-            sumDailyBalances[timestamp].mintedMcap[pegType] =
-              (sumDailyBalances[timestamp].mintedMcap[pegType] ?? 0) +
+            sumDailyBalances[timestamp].totalMintedUSD =
+              sumDailyBalances[timestamp].totalMintedUSD || {};
+            sumDailyBalances[timestamp].totalMintedUSD[pegType] =
+              (sumDailyBalances[timestamp].totalMintedUSD[pegType] ?? 0) +
               (itemBalance.minted[pegType] - itemBalance.unreleased[pegType]) *
                 price;
 
-            sumDailyBalances[timestamp].bridgedToMcap =
-              sumDailyBalances[timestamp].bridgedToMcap || {};
-            sumDailyBalances[timestamp].bridgedToMcap[pegType] =
-              (sumDailyBalances[timestamp].bridgedToMcap[pegType] ?? 0) +
+            sumDailyBalances[timestamp].totalBridgedToUSD =
+              sumDailyBalances[timestamp].totalBridgedToUSD || {};
+            sumDailyBalances[timestamp].totalBridgedToUSD[pegType] =
+              (sumDailyBalances[timestamp].totalBridgedToUSD[pegType] ?? 0) +
               itemBalance.bridgedTo[pegType] * price;
           } else {
             console.log(
@@ -279,9 +279,9 @@ export async function craftChartsResponse(
       date: timestamp,
       totalCirculating: balance.circulating,
       totalUnreleased: balance.unreleased,
-      totalCirculatingUSD: balance.circulatingMcap,
-      totalMintedUSD: balance.mintedMcap,
-      totalBridgedToUSD: balance.bridgedToMcap,
+      totalCirculatingUSD: balance.totalCirculatingUSD,
+      totalMintedUSD: balance.totalMintedUSD,
+      totalBridgedToUSD: balance.totalBridgedToUSD,
     })
   );
 
@@ -292,8 +292,8 @@ const handler = async (
   event: AWSLambda.APIGatewayEvent
 ): Promise<IResponse> => {
   const chain = event.pathParameters?.chain?.toLowerCase();
-  const peggedAsset = event.queryStringParameters?.peggedAsset?.toLowerCase();
-  const response = await craftChartsResponse(chain, peggedAsset);
+  const peggedID = event.queryStringParameters?.peggedAsset?.toLowerCase();
+  const response = await craftChartsResponse(chain, peggedID);
   return successResponse(response, 10 * 60); // 10 mins cache
 };
 

@@ -11,7 +11,6 @@ type balance = { [token: string]: number };
 
 export async function craftStablecoinChainsResponse() {
   const chainCirculating = {} as { [chain: string]: balance };
-  const chainMcap = {} as { [chain: string]: number };
   let prices = {} as any;
   prices = await fetch(
     "https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/peggedPrices.json"
@@ -29,7 +28,9 @@ export async function craftStablecoinChainsResponse() {
         return;
       }
       let chainsAdded = 0;
-      const price = prices[pegged.gecko_id] || null;
+      const fallbackPrice = pegType === "peggedUSD" ? 1 : 0; // must be updated with each new pegType added
+      const currentPrice = prices[pegged.gecko_id] || null;
+      const price = currentPrice ? currentPrice : fallbackPrice;
       Object.entries(lastBalances).forEach(([chain, issuances]) => {
         const chainName = getChainDisplayName(chain, true);
         if (chainCoingeckoIds[chainName] === undefined) {
@@ -39,10 +40,8 @@ export async function craftStablecoinChainsResponse() {
         let circulating = issuances.circulating;
         chainCirculating[chainName][pegType] =
           chainCirculating[chainName][pegType] ?? 0;
-        chainCirculating[chainName][pegType] += circulating[pegType];
+        chainCirculating[chainName][pegType] += circulating[pegType] * price;
         chainsAdded += 1;
-
-        chainMcap[chainName] = (chainMcap[chainName] ?? 0) + circulating[pegType] * price;
       });
       if (chainsAdded === 0) {
         const chainName = pegged.chain;
@@ -57,10 +56,8 @@ export async function craftStablecoinChainsResponse() {
   const chainData = Object.entries(chainCirculating).map(
     ([chainName, chainCirculating]) => ({
       gecko_id: chainCoingeckoIds[chainName]?.geckoId ?? null,
-      circulating: chainCirculating,
-      mcap: chainMcap[chainName] ?? null,
+      totalCirculatingUSD: chainCirculating,
       tokenSymbol: chainCoingeckoIds[chainName]?.symbol ?? null,
-      cmcId: chainCoingeckoIds[chainName]?.cmcId ?? null,
       name: chainName,
     })
   );
