@@ -59,14 +59,13 @@ export async function craftChartsResponse(
   chain: string | undefined,
   peggedAsset: string | undefined
 ) {
-  console.time("chart");
   const sumDailyBalances = {} as {
     [timestamp: number]: {
       circulating: tokenBalance;
       unreleased: tokenBalance;
-      bridgedTo: tokenBalance;
-      minted: tokenBalance;
-      mcap: number;
+      circulatingMcap: tokenBalance;
+      mintedMcap: tokenBalance;
+      bridgedToMcap: tokenBalance;
     };
   };
   // quick fix; need to update later
@@ -236,27 +235,30 @@ export async function craftChartsResponse(
               (sumDailyBalances[timestamp].circulating[pegType] ?? 0) +
               itemBalance.circulating[pegType];
 
-              sumDailyBalances[timestamp].unreleased =
+            sumDailyBalances[timestamp].unreleased =
               sumDailyBalances[timestamp].unreleased || {};
             sumDailyBalances[timestamp].unreleased[pegType] =
               (sumDailyBalances[timestamp].unreleased[pegType] ?? 0) +
               itemBalance.unreleased[pegType];
 
-            sumDailyBalances[timestamp].mcap =
-              (sumDailyBalances[timestamp].mcap ?? 0) +
+            sumDailyBalances[timestamp].circulatingMcap =
+              sumDailyBalances[timestamp].circulatingMcap || {};
+            sumDailyBalances[timestamp].circulatingMcap[pegType] =
+              (sumDailyBalances[timestamp].circulatingMcap[pegType] ?? 0) +
               itemBalance.circulating[pegType] * price;
 
-            sumDailyBalances[timestamp].bridgedTo =
-              sumDailyBalances[timestamp].bridgedTo || {};
-            sumDailyBalances[timestamp].bridgedTo[pegType] =
-              (sumDailyBalances[timestamp].bridgedTo[pegType] ?? 0) +
-              itemBalance.bridgedTo[pegType] * price;
+            sumDailyBalances[timestamp].mintedMcap =
+              sumDailyBalances[timestamp].mintedMcap || {};
+            sumDailyBalances[timestamp].mintedMcap[pegType] =
+              (sumDailyBalances[timestamp].mintedMcap[pegType] ?? 0) +
+              (itemBalance.minted[pegType] - itemBalance.unreleased[pegType]) *
+                price;
 
-            sumDailyBalances[timestamp].minted =
-              sumDailyBalances[timestamp].minted || {};
-            sumDailyBalances[timestamp].minted[pegType] =
-              (sumDailyBalances[timestamp].minted[pegType] ?? 0) +
-              itemBalance.minted[pegType] * price;
+            sumDailyBalances[timestamp].bridgedToMcap =
+              sumDailyBalances[timestamp].bridgedToMcap || {};
+            sumDailyBalances[timestamp].bridgedToMcap[pegType] =
+              (sumDailyBalances[timestamp].bridgedToMcap[pegType] ?? 0) +
+              itemBalance.bridgedTo[pegType] * price;
           } else {
             console.log(
               "itemBalance is invalid",
@@ -275,11 +277,11 @@ export async function craftChartsResponse(
   const response = Object.entries(sumDailyBalances).map(
     ([timestamp, balance]) => ({
       date: timestamp,
-      mcap: balance.mcap,
       totalCirculating: balance.circulating,
-      unreleased: balance.unreleased,
-      bridgedTo: balance.bridgedTo,
-      minted: balance.minted,
+      totalUnreleased: balance.unreleased,
+      totalCirculatingUSD: balance.circulatingMcap,
+      totalMintedUSD: balance.mintedMcap,
+      totalBridgedToUSD: balance.bridgedToMcap,
     })
   );
 
