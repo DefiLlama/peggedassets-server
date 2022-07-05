@@ -1,9 +1,6 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import fetch from "node-fetch";
-import peggedAssets, {
-  PeggedAsset,
-  peggedCategoryList,
-} from "./peggedData/peggedData";
+import peggedAssets from "./peggedData/peggedData";
 import {
   getLastRecord,
   hourlyPeggedBalances,
@@ -196,7 +193,6 @@ const handler = async (
     const chainData = await craftPeggedChainsResponse();
     response.chains = chainData;
   }
-  response["peggedCategories"] = peggedCategoryList;
   return successResponse(response, 10 * 60); // 10 mins cache
 };
 
