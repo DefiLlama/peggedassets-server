@@ -133,14 +133,14 @@ export default [
   },
   {
     id: "7",
-    name: "trueUSD",
+    name: "TrueUSD",
     address: "0x0000000000085d4780b73119b644ae5ecd22b376",
     symbol: "TUSD",
     url: "https://trueusd.com/",
     description:
-      "trueUSD (TUSD) is an independently-verified digital asset redeemable 1-for-1 for US Dollars.",
+      "TrueUSD (TUSD) is an independently-verified digital asset redeemable 1-for-1 for US Dollars.",
     mintRedeemDescription:
-      "trueUSD customers who have undergone a verification process can exchange USD for TUSD and redeem TUSD for USD.",
+      "TrueUSD customers who have undergone a verification process can exchange USD for TUSD and redeem TUSD for USD.",
     onCoinGecko: "true",
     gecko_id: "true-usd",
     cmcId: "2563",
