@@ -209,7 +209,7 @@ export async function craftChartsResponse(
               [pegType]: 0,
             };
             if (itemBalance.circulating === undefined) {
-                return
+              return;
             }
           }
 
@@ -246,6 +246,10 @@ export async function craftChartsResponse(
             sumDailyBalances[timestamp].totalBridgedToUSD[pegType] =
               (sumDailyBalances[timestamp].totalBridgedToUSD[pegType] ?? 0) +
               itemBalance.bridgedTo[pegType] * price;
+            if (chain === "all") {
+              sumDailyBalances[timestamp].totalMintedUSD[pegType] = 0;
+              sumDailyBalances[timestamp].totalBridgedToUSD[pegType] = 0;
+            }
           } else {
             console.log(
               "itemBalance is invalid",
@@ -279,7 +283,7 @@ const handler = async (
   event: AWSLambda.APIGatewayEvent
 ): Promise<IResponse> => {
   const chain = event.pathParameters?.chain?.toLowerCase();
-  const peggedID = event.queryStringParameters?.peggedAsset?.toLowerCase();
+  const peggedID = event.queryStringParameters?.stablecoin?.toLowerCase();
   const response = await craftChartsResponse(chain, peggedID);
   return successResponse(response, 10 * 60); // 10 mins cache
 };
