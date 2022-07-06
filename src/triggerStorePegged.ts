@@ -1,5 +1,5 @@
 import { wrapScheduledLambda } from "./utils/shared/wrap";
-import peggedAssets from "./peggedData/peggedData";
+import peggedAssets from "./peggedData/peggedDataTesting";
 import invokeLambda from "./utils/shared/invokeLambda";
 
 function timeout(ms: number) {
