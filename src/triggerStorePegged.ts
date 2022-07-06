@@ -21,7 +21,7 @@ const handler = async () => {
     const event = {
       peggedIndexes: peggedIndexes.slice(i, i + step),
     };
-    await Promise.all([invokeLambda(`llama-stablecoins-dev-storePeggedAssets`, event), timeout(10000)]);
+    await Promise.all([invokeLambda(`llama-stablecoins-dev-storePeggedAssets`, event), timeout(1000)]);
   }
 };
 

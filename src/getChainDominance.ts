@@ -66,8 +66,11 @@ export async function craftChartsResponse(chain: string | undefined) {
     };
   };
   // quick fix; need to update later
-  if (chain === "Gnosis" || chain === "gnosis") {
+  if (chain === "gnosis") {
     chain = "xdai";
+  }
+  if (chain === "terra%20classic") {
+    chain = "terra";
   }
 
   if (chain === undefined) {

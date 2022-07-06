@@ -53,9 +53,9 @@ export default [
   },
   {
     id: "3",
-    name: "TerraUSD",
+    name: "TerraClassicUSD",
     address: null,
-    symbol: "UST",
+    symbol: "USTC",
     url: "https://www.terra.money/",
     description:
       "Terra is a digital currency. The supply of Terra is adjusted in response to changes in demand to keep its price stable. This is achieved using Luna, the mining token whose stable rewards are designed to absorb volatility from changing economic cycles.",

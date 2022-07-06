@@ -1,6 +1,6 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
-import peggedAssets from "./peggedData/peggedData";
-import sluggifyPegged from "./peggedAssets/utils/sluggifyPegged";
+import peggedAssets from "./peggedData/peggedDataTesting";
+import sluggifyPegged from "./peggedAssets/utils/sluggifyPeggedTesting";
 
 const handler = async (
   _event: AWSLambda.APIGatewayEvent
