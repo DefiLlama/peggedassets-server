@@ -1,7 +1,7 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import fetch from "node-fetch";
 import peggedAssets, {
-} from "./peggedData/peggedData";
+} from "./peggedData/peggedDataTesting";
 import {
   getLastRecord,
   hourlyPeggedBalances,
@@ -11,7 +11,6 @@ import {
   getChainDisplayName,
   nonChains,
   addToChains,
-  transformNewChainName,
 } from "./utils/normalizeChain";
 import {
   secondsInDay,
@@ -100,16 +99,7 @@ export async function craftProtocolsResponse(
               : 0;
           addToChains(chains, chainDisplayName);
         });
-        if (chains.length === 0) {
-          const chain = useNewChainNames
-            ? transformNewChainName(pegged.chain)
-            : pegged.chain;
-          if (chainCirculating[chain] === undefined) {
-            chainCirculating[chain] =
-              lastHourlyRecord.totalCirculating.circulating;
-          }
-          chains.push(getChainDisplayName(chain, useNewChainNames));
-        }
+
         const dataToReturn = {
           id: pegged.id,
           name: pegged.name,

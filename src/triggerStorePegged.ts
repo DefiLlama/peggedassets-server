@@ -1,5 +1,5 @@
 import { wrapScheduledLambda } from "./utils/shared/wrap";
-import peggedAssets from "./peggedData/peggedData";
+import peggedAssets from "./peggedData/peggedDataTesting";
 import invokeLambda from "./utils/shared/invokeLambda";
 
 function timeout(ms: number) {
@@ -21,7 +21,7 @@ const handler = async () => {
     const event = {
       peggedIndexes: peggedIndexes.slice(i, i + step),
     };
-    await Promise.all([invokeLambda(`llama-stablecoins-dev-storePeggedAssets`, event), timeout(10000)]);
+    await Promise.all([invokeLambda(`llama-stablecoins-dev-storePeggedAssets`, event), timeout(1000)]);
   }
 };
 

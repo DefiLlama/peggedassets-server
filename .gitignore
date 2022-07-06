@@ -15,3 +15,4 @@ src/adapters/peggedAssets/testAllAdapters.ts
 src/testGetPeggedChart.ts
 src/adapters/peggedAssets/historical/
 package-lock.json
+src/adapters/peggedAssets/storeCoinGeckoPriceHistory.ts

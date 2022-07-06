@@ -115,7 +115,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 137,
   },
-  Terra: {
+  "Terra Classic": {
     geckoId: "terra-luna",
     symbol: "LUNA",
     cmcId: "4172",
@@ -995,6 +995,8 @@ export function getChainDisplayName(
       return "StarkNet";
     case "acala":
       return "Acala";
+    case "terra":
+      return "Terra Classic";
 
     default:
       return (

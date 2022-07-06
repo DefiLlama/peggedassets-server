@@ -6,10 +6,8 @@ import {
 } from "./utils/shared";
 import peggedAssets from "./peggedData/peggedData";
 import dynamodb from "./utils/shared/dynamodb";
-import getTVLOfRecordClosestToTimestamp from "./utils/shared/getRecordClosestToTimestamp";
 import { secondsInDay } from "./utils/date";
 import {
-  dailyPeggedPrices,
   getLastRecord,
   hourlyPeggedBalances,
 } from "./peggedAssets/utils/getLastRecord";
@@ -21,11 +19,45 @@ type tokenBalance = {
   [token: string]: number | undefined;
 };
 
+function compare_fn(a: number, b: number) {
+  if (Math.abs(a - b) < secondsInDay) return 0;
+  return a - b;
+}
+
+// returns index of element or -n-1 where n is index of closest element
+// uses compare_fn to consider timestamps the same if they are within 1 day range
+function timestampsBinarySearch(ar: number[], el: number) {
+  var m = 0;
+  var n = ar.length - 1;
+  while (m <= n) {
+    var k = (n + m) >> 1;
+    var cmp = compare_fn(el, ar[k]);
+    if (cmp > 0) {
+      m = k + 1;
+    } else if (cmp < 0) {
+      n = k - 1;
+    } else {
+      return k;
+    }
+  }
+  return -m - 1;
+}
+
+function extractResultOfBinarySearch(ar: any[], binarySearchResult: number) {
+  if (binarySearchResult < 0) {
+    if (binarySearchResult === -1 || ar.length < -binarySearchResult) {
+      return null;
+    }
+    return ar[-binarySearchResult - 1];
+  }
+  return ar[binarySearchResult];
+}
+
 export async function craftChartsResponse(chain: string | undefined) {
   const sumDailyBalances = {} as {
     [timestamp: number]: {
-      circulating: tokenBalance;
-      mcap: number;
+      totalCirculating: tokenBalance;
+      totalCirculatingUSD: tokenBalance;
       greatestMcap: {
         gecko_id: string;
         symbol: string;
@@ -34,8 +66,11 @@ export async function craftChartsResponse(chain: string | undefined) {
     };
   };
   // quick fix; need to update later
-  if (chain === "Gnosis" || chain === "gnosis") {
+  if (chain === "gnosis") {
     chain = "xdai";
+  }
+  if (chain === "terra%20classic") {
+    chain = "terra";
   }
 
   if (chain === undefined) {
@@ -119,17 +154,35 @@ export async function craftChartsResponse(chain: string | undefined) {
           SK: lastTimestamp,
         });
       }
+      const historicalPriceItems = await dynamodb.query({
+        ExpressionAttributeValues: {
+          ":pk": `dailyPeggedPrices`,
+        },
+        KeyConditionExpression: "PK = :pk",
+      });
+      if (
+        historicalPriceItems.Items === undefined ||
+        historicalPriceItems.Items.length < 1
+      ) {
+        return undefined;
+      }
+      const historicalPrices = historicalPriceItems.Items;
+      const priceTimestamps = historicalPrices?.map((item) => item.SK);
+
       await Promise.all(
         historicalBalance.map(async (item) => {
           const timestamp = getClosestDayStartTimestamp(item.SK);
           let itemBalance: any = {};
-
-          const priceData = await getTVLOfRecordClosestToTimestamp(
-            dailyPeggedPrices(),
-            timestamp,
-            (secondsInDay * 3) / 2
+          
+          const closestPriceIndex = timestampsBinarySearch(
+            priceTimestamps,
+            timestamp
           );
-          const historicalPrice = priceData?.prices?.[peggedGeckoID];
+          const closestPrices = extractResultOfBinarySearch(
+            historicalPrices,
+            closestPriceIndex
+          );
+          const historicalPrice = closestPrices?.prices[peggedGeckoID];
           const price = historicalPrice ? historicalPrice : fallbackPrice;
 
           itemBalance.circulating = item[normalizedChain]?.circulating ?? {
@@ -151,14 +204,17 @@ export async function craftChartsResponse(chain: string | undefined) {
           // need stricter checks here
           if (itemBalance !== null) {
             sumDailyBalances[timestamp] = sumDailyBalances[timestamp] || {};
-            sumDailyBalances[timestamp].circulating =
-              sumDailyBalances[timestamp].circulating || {};
-            sumDailyBalances[timestamp].circulating[pegType] =
-              (sumDailyBalances[timestamp].circulating[pegType] ?? 0) +
+            sumDailyBalances[timestamp].totalCirculating =
+              sumDailyBalances[timestamp].totalCirculating || {};
+            sumDailyBalances[timestamp].totalCirculating[pegType] =
+              (sumDailyBalances[timestamp].totalCirculating[pegType] ?? 0) +
               itemBalance.circulating[pegType];
 
-            sumDailyBalances[timestamp].mcap =
-              (sumDailyBalances[timestamp].mcap ?? 0) + itemBalance.mcap;
+              sumDailyBalances[timestamp].totalCirculatingUSD =
+              sumDailyBalances[timestamp].totalCirculatingUSD || {};
+            sumDailyBalances[timestamp].totalCirculatingUSD[pegType] =
+              (sumDailyBalances[timestamp].totalCirculatingUSD[pegType] ?? 0) +
+              itemBalance.circulating[pegType] * price;
 
             sumDailyBalances[timestamp].greatestMcap = sumDailyBalances[
               timestamp
@@ -195,8 +251,7 @@ export async function craftChartsResponse(chain: string | undefined) {
   const response = Object.entries(sumDailyBalances).map(
     ([timestamp, balance]) => ({
       date: timestamp,
-      totalCirculating: balance.circulating,
-      mcap: balance.mcap,
+      totalCirculatingUSD: balance.totalCirculatingUSD,
       greatestMcap: balance.greatestMcap,
     })
   );

@@ -10,13 +10,15 @@ import { totalSupply as terraGetTotalSupply } from "../llama-helper/terra"; // N
 const axios = require("axios");
 const retry = require("async-retry");
 
+type BridgeAndReserveAddressPair = [string, string[]];
+
 export async function bridgedSupply(
   chain: string,
   decimals: number,
   addresses: string[],
   bridgeName?: string,
   bridgedFromChain?: string,
-  pegType?: PeggedAssetType,
+  pegType?: PeggedAssetType
 ) {
   return async function (
     _timestamp: number,
@@ -24,7 +26,7 @@ export async function bridgedSupply(
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    let assetPegType = pegType ? pegType : "peggedUSD" as PeggedAssetType
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     for (let address of addresses) {
       const totalSupply = (
         await sdk.api.abi.call({
@@ -41,7 +43,7 @@ export async function bridgedSupply(
             totalSupply / 10 ** decimals,
             bridgeName,
             false,
-            bridgedFromChain,
+            bridgedFromChain
           )
         : sumSingleBalance(
             balances,
@@ -55,11 +57,13 @@ export async function bridgedSupply(
   };
 }
 
-export async function supplyInEthereumBridge(
-  target: string,
-  owner: string,
+export async function bridgedSupplySubtractReserve(
+  chain: string,
   decimals: number,
-  pegType?: PeggedAssetType,
+  bridgeAndReserveAddresses: BridgeAndReserveAddressPair,
+  bridgeName?: string,
+  bridgedFromChain?: string,
+  pegType?: PeggedAssetType
 ) {
   return async function (
     _timestamp: number,
@@ -67,7 +71,65 @@ export async function supplyInEthereumBridge(
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    let assetPegType = pegType ? pegType : "peggedUSD" as PeggedAssetType
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
+    let sum = 0;
+    const bridgeAddress = bridgeAndReserveAddresses[0];
+    const reserveAddresses = bridgeAndReserveAddresses[1];
+    const totalSupply = (
+      await sdk.api.abi.call({
+        abi: "erc20:totalSupply",
+        target: bridgeAddress,
+        block: _chainBlocks[chain],
+        chain: chain,
+      })
+    ).output;
+    sum += totalSupply;
+    for (let reserve of reserveAddresses) {
+      const totalReserve = reserve
+        ? (
+            await sdk.api.erc20.balanceOf({
+              target: bridgeAddress,
+              owner: reserve,
+              block: _chainBlocks[chain],
+              chain: chain,
+            })
+          ).output
+        : 0;
+      sum -= totalReserve;
+    }
+    bridgeName
+      ? sumSingleBalance(
+          balances,
+          assetPegType,
+          sum / 10 ** decimals,
+          bridgeName,
+          false,
+          bridgedFromChain
+        )
+      : sumSingleBalance(
+          balances,
+          assetPegType,
+          sum / 10 ** decimals,
+          bridgeAddress,
+          true
+        );
+    return balances;
+  };
+}
+
+export async function supplyInEthereumBridge(
+  target: string,
+  owner: string,
+  decimals: number,
+  pegType?: PeggedAssetType
+) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     const bridged = (
       await sdk.api.erc20.balanceOf({
         target: target,
@@ -91,10 +153,10 @@ export async function solanaMintedOrBridged(targets: string[]) {
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks,
-    pegType?: PeggedAssetType, 
+    pegType?: PeggedAssetType
   ) {
     let balances = {} as Balances;
-    let assetPegType = pegType ? pegType : "peggedUSD" as PeggedAssetType
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     for (let target of targets) {
       const totalSupply = await solanaGetTokenSupply(target);
       sumSingleBalance(balances, assetPegType, totalSupply, target, true);
