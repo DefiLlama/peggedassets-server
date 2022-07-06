@@ -264,6 +264,9 @@ const dexscreener: AddressesForDexes = {
   "dei-token": {
     address: "0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3",
   },
+  "bai-stablecoin": {
+    address: "0x733ebcC6DF85f8266349DEFD0980f8Ced9B45f35",
+  }
 };
 
 const birdeye: AddressesForDexes = {

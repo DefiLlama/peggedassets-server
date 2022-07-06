@@ -6,20 +6,16 @@ import {
 } from "./utils/shared";
 import fetch from "node-fetch";
 import { getHistoricalValues } from "./utils/shared/dynamodb";
-import peggedAssets from "./peggedData/peggedData";
+import peggedAssets from "./peggedData/peggedDataTesting";
 import {
   getLastRecord,
   hourlyPeggedBalances,
   dailyPeggedBalances,
 } from "./peggedAssets/utils/getLastRecord";
-import sluggify from "./peggedAssets/utils/sluggifyPegged";
 import {
-  nonChains,
   getChainDisplayName,
-  transformNewChainName,
-  addToChains,
 } from "./utils/normalizeChain";
-import { importAdapter } from "./peggedAssets/utils/importAdapter";
+import { importAdapter } from "./peggedAssets/utils/importAdapterTesting";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
 type HourlyTvl = AWS.DynamoDB.DocumentClient.AttributeMap | undefined;
@@ -31,7 +27,7 @@ function replaceLast(historical: HistoricalTvls, last: HourlyTvl) {
 }
 
 export async function craftProtocolResponse(
-  rawPeggedName: string | undefined,
+  peggedID: string | undefined,
   useNewChainNames: boolean,
   useHourlyData: boolean
 ) {
@@ -44,10 +40,8 @@ export async function craftProtocolResponse(
       console.error("Could not fetch pegged prices");
     });
 
-  const peggedName = rawPeggedName?.toLowerCase();
-  console.log(peggedName);
   const peggedData = peggedAssets.find(
-    (pegged) => sluggify(pegged) === peggedName
+    (pegged) => pegged.id === peggedID
   );
   if (peggedData === undefined) {
     return errorResponse({
@@ -78,19 +72,13 @@ export async function craftProtocolResponse(
     response.hallmarks = module.hallmarks;
   }
   response.chainBalances = {};
-  const chains: string[] = [];
-  response.chains = chains;
   const currentChainBalances: { [chain: string]: object } = {};
   response.currentChainBalances = currentChainBalances;
   response.price = prices[peggedData.gecko_id] ?? null;
 
   Object.entries(lastBalancesHourlyRecord!).map(([chain, issuances]) => {
-    if (nonChains.includes(chain)) {
-      return;
-    }
     const normalizedChain = chain;
     const displayChainName = getChainDisplayName(chain, useNewChainNames);
-    addToChains(chains, displayChainName);
     if (chain !== "totalCirculating") {
       currentChainBalances[displayChainName] = issuances.circulating;
     }
@@ -120,16 +108,7 @@ export async function craftProtocolResponse(
       }
     }
   });
-  const singleChain = transformNewChainName(peggedData.chain);
-  if (
-    response.chainBalances[singleChain] === undefined &&
-    response.chains.length === 0
-  ) {
-    chains.push(singleChain);
-    response.chainBalances[singleChain] = {
-      tokens: response.tokens,
-    };
-  }
+
   const dataLength = JSON.stringify(response).length;
   if (dataLength > 5.9e6) {
     delete response.tokens;

@@ -99,7 +99,7 @@ functions:
     memorySize: 3000
     events:
       - http:
-          path: stablecoinchart/{chain}
+          path: stablecoincharts/{chain}
           method: get
   stablecoinDominance:
     handler: src/getChainDominance.default
@@ -120,7 +120,7 @@ functions:
   stablecoins:
     handler: src/getStablecoins.default
     timeout: 120
-    memorySize: 2000
+    memorySize: 3000
     events:
       - http:
           path: stablecoins
@@ -184,16 +184,17 @@ functions:
   storePeggedAssets:
     handler: src/storePeggedAssets.default
     timeout: 900
-    memorySize: 2000
+    memorySize: 3000
   triggerStorePegged:
     handler: src/triggerStorePegged.default
     timeout: 900
+    memorySize: 2000
     events:
       - schedule: cron(40 * * * ? *)
   storePeggedPrices:
     handler: src/storePeggedPrices.default
     timeout: 900
-    memorySize: 1024
+    memorySize: 3000
     events:
       - schedule: cron(15/30 * * * ? *)
 

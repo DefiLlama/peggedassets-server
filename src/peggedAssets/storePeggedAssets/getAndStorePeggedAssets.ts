@@ -1,4 +1,4 @@
-import { PeggedAsset } from "../../peggedData/peggedData";
+import { PeggedAsset } from "../../peggedData/peggedDataTesting";
 import * as Sentry from "@sentry/serverless";
 import {
   PeggedAssetIssuance,
