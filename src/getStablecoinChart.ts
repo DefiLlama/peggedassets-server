@@ -4,7 +4,7 @@ import {
   IResponse,
   errorResponse,
 } from "./utils/shared";
-import peggedAssets from "./peggedData/peggedData";
+import peggedAssets from "./peggedData/peggedDataTesting";
 import dynamodb from "./utils/shared/dynamodb";
 import {
   getLastRecord,
@@ -92,13 +92,6 @@ export async function craftChartsResponse(
       }
       const lastBalance = await getLastRecord(hourlyPeggedBalances(pegged.id));
       if (chain !== "all" && !lastBalance?.[normalizedChain]) {
-        return undefined;
-      }
-      if (
-        chain !== "all" &&
-        lastBalance?.[normalizedChain].circulating === undefined &&
-        pegged.chain.toLowerCase() !== chain
-      ) {
         return undefined;
       }
       const earliestTimestamp = chain === "all" ? 0 : 1652241600; // chains have mostly incomplete data before May 11, 2022
@@ -213,16 +206,7 @@ export async function craftChartsResponse(
               [pegType]: 0,
             };
             if (itemBalance.circulating === undefined) {
-              if (chain === pegged.chain.toLowerCase()) {
-                itemBalance.circulating = item.totalCirculating.circulating ?? {
-                  [pegType]: 0,
-                };
-                if (item.totalCirculating.unreleased) {
-                  itemBalance.unreleased = item.totalCirculating.unreleased;
-                }
-              } else {
-                return;
-              }
+                return
             }
           }
 

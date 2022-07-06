@@ -1,5 +1,5 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
-import peggedAssets from "./peggedData/peggedData";
+import peggedAssets from "./peggedData/peggedDataTesting";
 import fetch from "node-fetch";
 import {
   getLastRecord,
@@ -43,14 +43,6 @@ export async function craftStablecoinChainsResponse() {
         chainCirculating[chainName][pegType] += circulating[pegType] * price;
         chainsAdded += 1;
       });
-      if (chainsAdded === 0) {
-        const chainName = pegged.chain;
-        chainCirculating[chainName] = chainCirculating[chainName] || {};
-        let circulating = lastBalances.totalCirculating.circulating;
-        chainCirculating[chainName][pegType] =
-          chainCirculating[chainName][pegType] ?? 0;
-        chainCirculating[chainName][pegType] += circulating[pegType];
-      }
     })
   );
   const chainData = Object.entries(chainCirculating).map(
