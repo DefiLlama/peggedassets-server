@@ -3,11 +3,11 @@ import type { PeggedAsset } from "./typesTesting";
 export type { PeggedAsset };
 
 /*
-both `name` and `gecko_id` must be included. `name` is used to fetch icon and as API slug. `gecko_id` is used to fetch adapters. 
+both `name` and `gecko_id` must be included. `name` is used to fetch icon and in API Config. `gecko_id` is used to fetch adapters and prices. 
 
-`description` should be brief but still include: Issuer (or degree of decentralization), function of asset, and peg mechanism.
+`description` should be brief but still include: Issuer, function of asset, and asset stablecoin is pegged to.
 
-`mintRedeemDescription` should include details on minting and redemption.
+`mintRedeemDescription` should include brief details on minting and redemption.
 */
 
 export default [

@@ -99,7 +99,7 @@ functions:
     memorySize: 3000
     events:
       - http:
-          path: stablecoinchart/{chain}
+          path: stablecoincharts/{chain}
           method: get
   stablecoinDominance:
     handler: src/getChainDominance.default
