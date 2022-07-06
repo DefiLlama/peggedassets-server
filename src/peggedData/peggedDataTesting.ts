@@ -953,4 +953,24 @@ export default [
     twitter: "https://twitter.com/DeusDao",
     wiki: "https://wiki.defillama.com/wiki/Deus_Finance",
   },
+  {
+    id: "48",
+    name: "BAI Stablecoin",
+    address: "astar:0x733ebcc6df85f8266349defd0980f8ced9b45f35",
+    symbol: "BAI",
+    url: "https://astriddao.xyz/",
+    description:
+      "AstridDAO is a decentralized borrowing protocol on Astar that allows you to draw interest-free loans against multiple collateral assets (e.g. ASTR, ETH, BTC, and etc.). Loans are paid out in BAI (a USD pegged stablecoin).",
+    mintRedeemDescription:
+      "Using the AstridDAO app, users mint BAI by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back BAI is burned.",
+    onCoinGecko: "true",
+    gecko_id: "bai-stablecoin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "dexscreener",
+    auditLinks: null,
+    twitter: "https://twitter.com/AstridDAO",
+    wiki: "https://wiki.defillama.com/wiki/AstridDAO",
+  },
 ] as PeggedAsset[];
