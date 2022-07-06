@@ -45,6 +45,7 @@ import usx from "./token-dforce-usd";
 import ausd from "./acala-dollar";
 import usd from "./usd";
 import dei from "./dei-token";
+import bai from './bai';
 
 export default {
   tether,
@@ -94,4 +95,5 @@ export default {
   "acala-dollar": ausd,
   usd,
   "dei-token": dei,
+  bai,
 };
