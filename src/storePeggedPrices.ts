@@ -1,5 +1,5 @@
 import dynamodb from "./utils/shared/dynamodb";
-import peggedAssets from "./peggedData/peggedData";
+import peggedAssets from "./peggedData/peggedDataTesting";
 import getCurrentPeggedPrice from "./adapters/peggedAssets/prices";
 const { getCurrentBlocks } = require("@defillama/sdk/build/computeTVL/blocks");
 import { wrapScheduledLambda } from "./utils/shared/wrap";

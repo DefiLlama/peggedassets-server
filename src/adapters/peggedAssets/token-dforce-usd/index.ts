@@ -2,6 +2,7 @@ const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
+  bridgedSupplySubtractReserve,
 } from "../helper/getSupply";
 import {
   ChainBlocks,
@@ -33,9 +34,10 @@ const chainContracts: ChainContracts = {
   },
   arbitrum: {
     bridgedFromETH: ["0x641441c631e2f909700d2f41fd87f0aa6a6b4edb"],
+    unreleased: ["0x9e8b68e17441413b26c2f18e741eaba69894767c"], // vault
   },
   optimism: {
-    bridgedFromETH: ["0xbfD291DA8A403DAAF7e5E9DC1ec0aCEaCd4848B9"],
+    issued: ["0xbfD291DA8A403DAAF7e5E9DC1ec0aCEaCd4848B9"],
   },
 };
 
@@ -68,10 +70,47 @@ async function chainMinted(chain: string, decimals: number) {
   };
 }
 
+async function ethereumUnreleased(
+  chain: string,
+  decimals: number,
+  target: string,
+  owner: string
+) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const balance = (
+      await sdk.api.erc20.balanceOf({
+        target: target,
+        owner: owner,
+        block: _chainBlocks[chain],
+        chain: chain,
+      })
+    ).output;
+
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      balance / 10 ** decimals,
+      "issued",
+      false
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
+    unreleased: ethereumUnreleased(
+      "arbitrum",
+      18,
+      chainContracts.arbitrum.bridgedFromETH[0],
+      chainContracts.arbitrum.unreleased[0]
+    ),
   },
   polygon: {
     minted: chainMinted("polygon", 18),
@@ -90,22 +129,16 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   optimism: {
-    minted: async () => ({}),
+    minted: chainMinted("optimism", 18),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply(
-      "optimism",
-      18,
-      chainContracts.optimism.bridgedFromETH,
-    ),
   },
   arbitrum: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply(
-      "arbitrum",
-      18,
-      chainContracts.arbitrum.bridgedFromETH,
-    ),
+    ethereum: bridgedSupplySubtractReserve("arbitrum", 18, [
+      chainContracts.arbitrum.bridgedFromETH[0],
+      chainContracts.arbitrum.unreleased,
+    ]),
   },
 };
 
