@@ -46,6 +46,7 @@ import ausd from "./acala-dollar";
 import usd from "./usd";
 import dei from "./dei-token";
 import bai from './bai-stablecoin';
+import usn from './usn';
 
 export default {
   tether,
@@ -96,4 +97,5 @@ export default {
   usd,
   "dei-token": dei,
   "bai-stablecoin": bai,
+  usn,
 };
