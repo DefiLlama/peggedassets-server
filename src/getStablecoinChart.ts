@@ -187,6 +187,18 @@ export async function craftChartsResponse(
           const price = historicalPrice ? historicalPrice : fallbackPrice;
 
           if (chain === "all") {
+            const itemPegType = Object.keys(
+              item.totalCirculating.circulating
+            )?.[0];
+            if (
+              item.totalCirculating.circulating &&
+              !(itemPegType === pegType)
+            ) {
+              throw new Error(
+                `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
+              );
+            }
+
             itemBalance.circulating = item.totalCirculating.circulating ?? {
               [pegType]: 0,
             };
@@ -196,6 +208,18 @@ export async function craftChartsResponse(
             itemBalance.bridgedTo = { [pegType]: 0 };
             itemBalance.minted = { [pegType]: 0 };
           } else {
+            const itemPegType = Object.keys(
+              item[normalizedChain]?.circulating
+            )?.[0];
+            if (
+              item[normalizedChain]?.circulating &&
+              !(itemPegType === pegType)
+            ) {
+              throw new Error(
+                `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
+              );
+            }
+
             itemBalance.circulating = item[normalizedChain]?.circulating ?? {
               [pegType]: 0,
             };
