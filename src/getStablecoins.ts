@@ -106,6 +106,7 @@ export async function craftProtocolsResponse(
           symbol: pegged.symbol,
           gecko_id: pegged.gecko_id,
           pegType: pegged.pegType,
+          priceSource: pegged.priceSource,
           circulating: lastHourlyRecord.totalCirculating.circulating,
           circulatingPrevDay: lastDailyPeggedRecord
             ? lastDailyPeggedRecord.totalCirculating.circulating
