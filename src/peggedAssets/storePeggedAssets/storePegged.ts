@@ -1,5 +1,5 @@
 import { storePeggedAsset } from "./getAndStorePeggedAssets";
-import { getCurrentBlocks } from "@defillama/sdk/build/computeTVL/blocks";
+import { getCurrentBlocks } from "./blocks";
 import peggedAssets from "../../peggedData/peggedDataTesting";
 import { importAdapter } from "../utils/importAdapterTesting";
 
