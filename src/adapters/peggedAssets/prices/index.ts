@@ -228,7 +228,7 @@ const curvePools: CurvePools = {
     poolID: "factory-v2-47",
     tokenAddress: "0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3",
   },
-  "statis-eurs": {
+  "stasis-eurs": {
     baseURL: "ethereum/crypto",
     poolID: "crypto-2",
     tokenAddress: "0xdb25f211ab05b1c97d595516f45794528a807ad8",
