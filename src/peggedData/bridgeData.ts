@@ -24,6 +24,7 @@ const formattedSourceChains = {
   waves: "Waves",
   rsk: "RSK",
   fantom: "Fantom",
+  near: "Near",
 };
 
 export default {
@@ -1017,6 +1018,10 @@ export default {
   "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8": {
     bridge: "arbitrum",
     sourceChain: formattedSourceChains.eth,
+  },
+  "0x5183e1B1091804BC2602586919E6880ac1cf2896": {
+    bridge: "near",
+    sourceChain: formattedSourceChains.near,
   },
   "0x4988a896b1227218e4a686fde5eabdcabd91571f": {
     bridge: "near",

@@ -6,6 +6,7 @@ import {
   Balances,
 } from "../peggedAsset.type";
 import { call } from '../llama-helper/near';
+import { bridgedSupply } from "../helper/getSupply";
 
 type ChainContracts = {
   [chain: string]: {
@@ -16,6 +17,9 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   near: {
     issued: ["usn"],
+  },
+  aurora: {
+    bridgedFromNear: ["0x5183e1B1091804BC2602586919E6880ac1cf2896"],
   },
 };
 
@@ -42,10 +46,15 @@ async function chainMinted(chain: string, decimals: number) {
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  polygon: {
+  near: {
     minted: chainMinted("near", 18),
     unreleased: async () => ({}),
   },
+  aurora: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    near: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromNear)
+  }
 };
 
 export default adapter;

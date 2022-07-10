@@ -59,7 +59,7 @@ export default [
     url: "https://www.terra.money/",
     description:
       "Terra is a digital currency. The supply of Terra is adjusted in response to changes in demand to keep its price stable. This is achieved using Luna, the mining token whose stable rewards are designed to absorb volatility from changing economic cycles.",
-      mintRedeemDescription:
+    mintRedeemDescription:
       "Using Terra Station, $1 worth of LUNA can be burned to mint 1 UST, and vice-versa.",
     onCoinGecko: "true",
     gecko_id: "terrausd",
@@ -1019,8 +1019,7 @@ export default [
     address: "0xdb25f211ab05b1c97d595516f45794528a807ad8",
     symbol: "EURS",
     url: "https://stasis.net/",
-    description:
-      "EURS, an ERC/EIP20 token, is a euro-backed digital asset.",
+    description: "EURS, an ERC/EIP20 token, is a euro-backed digital asset.",
     mintRedeemDescription:
       "Stasis customers who have undergone a verification process can exchange EUR for EURS and redeem EURS for EUR.",
     onCoinGecko: "true",
@@ -1072,5 +1071,24 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/synthetix_io",
     wiki: "https://wiki.defillama.com/wiki/Synthetix",
+  },
+  {
+    id: "54",
+    name: "USN",
+    address: null,
+    symbol: "USN",
+    url: "https://decentral-bank.finance/",
+    description: "USN is a NEAR-native stablecoin.",
+    mintRedeemDescription:
+      "Using the Decentral Bank app, users swap USDT to mint USN 1:1. USN can be redeemed for USDT 1:1 at any time.",
+    onCoinGecko: "true",
+    gecko_id: "usn",
+    cmcId: "19682",
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/DcntrlBank",
+    wiki: "https://wiki.defillama.com/wiki/USN",
   },
 ] as PeggedAsset[];
