@@ -45,8 +45,9 @@ import usx from "./token-dforce-usd";
 import ausd from "./acala-dollar";
 import usd from "./usd";
 import dei from "./dei-token";
-import bai from './bai-stablecoin';
-import eurt from "./tether-eurt"
+import bai from "./bai-stablecoin";
+import eurt from "./tether-eurt";
+import eurc from "./euro-coin";
 
 export default {
   tether,
@@ -98,4 +99,5 @@ export default {
   "dei-token": dei,
   "bai-stablecoin": bai,
   "tether-eurt": eurt,
+  "euro-coin": eurc,
 };
