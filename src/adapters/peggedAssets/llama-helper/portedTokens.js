@@ -1,6 +1,7 @@
 const utils = require("../helper/utils");
 const sdk = require("@defillama/sdk");
-const IOTEX_CG_MAPPING = require("./../xdollar-finance/iotex_cg_mapping.json")
+// Does not exist
+// const IOTEX_CG_MAPPING = require("./../xdollar-finance/iotex_cg_mapping.json")
 const BigNumber = require("bignumber.js");
 
 async function transformFantomAddress() {
@@ -561,15 +562,17 @@ function fixOasisBalances(balances) {
       balances[key] = balances[key] / 10 ** 18;
   })
 }
-async function transformIotexAddress() {
-  return (addr) => {
-    const dstToken = Object.keys(IOTEX_CG_MAPPING).find(token => compareAddresses(addr, token))
-    if (dstToken !== undefined) {
-      return IOTEX_CG_MAPPING[dstToken].contract || IOTEX_CG_MAPPING[dstToken].coingeckoId
-    }
-    return `iotex:${addr}`;
-  };
-}
+
+// Does not exist
+// async function transformIotexAddress() {
+//   return (addr) => {
+//     const dstToken = Object.keys(IOTEX_CG_MAPPING).find(token => compareAddresses(addr, token))
+//     if (dstToken !== undefined) {
+//       return IOTEX_CG_MAPPING[dstToken].contract || IOTEX_CG_MAPPING[dstToken].coingeckoId
+//     }
+//     return `iotex:${addr}`;
+//   };
+// }
 
 async function transformKccAddress() {
   return (addr) => {
@@ -1051,7 +1054,7 @@ const chainTransforms = {
   okex: transformOkexAddress,
   kcc: transformKccAddress,
   arbitrum: transformArbitrumAddress,
-  iotex: transformIotexAddress,
+  // iotex: transformIotexAddress,
   metis: transformMetisAddress,
   near: transformNearAddress,
   moonbeam: transformMoonbeamAddress,
@@ -1198,7 +1201,7 @@ module.exports = {
   fixHarmonyBalances,
   fixBscBalances,
   fixOasisBalances,
-  transformIotexAddress,
+  // transformIotexAddress,
   transformMetisAddress,
   transformBobaAddress,
   transformNearAddress,

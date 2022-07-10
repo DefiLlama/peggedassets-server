@@ -1,6 +1,6 @@
 const axios = require("axios")
 const { default: BigNumber } = require("bignumber.js")
-const { transformNearAddress } = require('../helper/portedTokens')
+const { transformNearAddress } = require('./portedTokens')
 const sdk = require('@defillama/sdk')
 
 const transformAddress = transformNearAddress()
