@@ -174,7 +174,10 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply(
       "polygon",
       6,
-      chainContracts.polygon.bridgedFromETH
+      chainContracts.polygon.bridgedFromETH,
+      "polygon",
+      "Ethereum",
+      "peggedEUR"
     ),
   },
   omni: {
