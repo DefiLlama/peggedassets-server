@@ -480,7 +480,7 @@ export default [
     description:
       "Celo Dollars (cUSD) are stablecoins that follow the US Dollar and are native to the Celo blockchain's Reserve system. The Celo Reserve is a system of smart contracts that uses a portfolio of cryptocurrencies to expand and contract the supply cUSD, similar to MakerDAO's lending protocol.",
     mintRedeemDescription:
-      "Using the Mento app, $1 worth of CELO can be sent to the CELO reserve to mint 1 cUSD, and 1 1 cUSD can be burned to receive $1 worth of CELO.",
+      "Using the Mento app, $1 worth of CELO can be sent to the CELO reserve to mint 1 cUSD, and 1 cUSD can be burned to receive $1 worth of CELO.",
     onCoinGecko: "true",
     gecko_id: "celo-dollar",
     cmcId: "7236",
@@ -1032,5 +1032,25 @@ export default [
     auditLinks: ["https://stasis.net/transparency/"],
     twitter: "https://twitter.com/stasisnet",
     wiki: "https://wiki.defillama.com/wiki/EURS",
+  },
+  {
+    id: "52",
+    name: "Celo Euro",
+    address: "celo:0xd8763cba276a3738e6de85b4b3bf5fded6d6ca73",
+    symbol: "CEUR",
+    url: "https://celo.org/",
+    description:
+      "Celo Euros (cEUR) are stablecoins that follow the Euro and are native to the Celo blockchain's Reserve system. The Celo Reserve is a system of smart contracts that uses a portfolio of cryptocurrencies to expand and contract the supply cEUR, similar to MakerDAO's lending protocol.",
+    mintRedeemDescription:
+      "Using the Mento app, 1 Euro worth of CELO can be sent to the CELO reserve to mint 1 cEUR, and 1 cEUR can be burned to receive 1 Euro worth of CELO.",
+    onCoinGecko: "true",
+    gecko_id: "celo-euro",
+    cmcId: "9467",
+    pegType: "peggedEUR",
+    pegMechanism: "algorithmic",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/CeloOrg",
+    wiki: "https://wiki.defillama.com/wiki/CEUR",
   },
 ] as PeggedAsset[];
