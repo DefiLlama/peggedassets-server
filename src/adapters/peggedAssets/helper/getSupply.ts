@@ -148,12 +148,11 @@ export async function supplyInEthereumBridge(
   };
 }
 
-export async function solanaMintedOrBridged(targets: string[]) {
+export async function solanaMintedOrBridged(targets: string[], pegType?: PeggedAssetType) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks,
-    pegType?: PeggedAssetType
   ) {
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);

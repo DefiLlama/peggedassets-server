@@ -145,6 +145,16 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   }, // RAI-USD ETH
+  "tether-eurt": {
+    address: "0x01d391a48f4f7339ac64ca2c83a07c22f95f587a",
+    chain: "ethereum",
+    decimals: 8,
+  }, // EURT-USD ETH
+  eur: {
+    address: "0xb49f677943bc038e9857d61e7d053caa2c1734c1",
+    chain: "ethereum",
+    decimals: 8,
+  }, // EUR-USD ETH
 };
 
 const curvePools: CurvePools = {
@@ -217,6 +227,16 @@ const curvePools: CurvePools = {
     baseURL: "ethereum/factory",
     poolID: "factory-v2-47",
     tokenAddress: "0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3",
+  },
+  "stasis-eurs": {
+    baseURL: "ethereum/crypto",
+    poolID: "crypto-2",
+    tokenAddress: "0xdB25f211AB05b1c97D595516F45794528a807ad8",
+  },
+  seur: {
+    baseURL: "ethereum/main",
+    poolID: "5",
+    tokenAddress: "0xD71eCFF9342A5Ced620049e616c5035F1dB98620",
   },
 };
 

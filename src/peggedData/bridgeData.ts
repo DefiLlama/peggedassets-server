@@ -694,6 +694,10 @@ export default {
     bridge: "celer",
     sourceChain: formattedSourceChains.eth,
   },
+  "7g166TuBmnoHKvS2PEkZx6kREZtbfjUxCHGWjCqoDXZv": {
+    bridge: "allbridge",
+    sourceChain: formattedSourceChains.celo,
+  },
   EwxNF8g9UfmsJVcZFTpL9Hx5MCkoQFoJi6XNWzKf1j8e: {
     bridge: "allbridge",
     sourceChain: formattedSourceChains.celo,
@@ -964,6 +968,10 @@ export default {
   },
   "0xc946daf81b08146b1c7a8da2a851ddf2b3eaaf85": {
     bridge: "okexchain",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x7BDF330f423Ea880FF95fC41A280fD5eCFD3D09f": {
+    bridge: "polygon",
     sourceChain: formattedSourceChains.eth,
   },
   "0x00e5646f60ac6fb446f621d146b6e1886f002905": {
@@ -1285,6 +1293,14 @@ export default {
   "0x5eE41aB6edd38cDfB9f6B4e6Cf7F75c87E170d98": {
     bridge: "trueusd",
     sourceChain: formattedSourceChains.eth,
+  },
+  "0x2f0173dFE97a7Dc670D5A10b35C4263cfEcFa853": {
+    bridge: "optics",
+    sourceChain: formattedSourceChains.celo,
+  },
+  "0x977453366b8d205f5c9266b6ba271e850a814a50": {
+    bridge: "optics",
+    sourceChain: formattedSourceChains.celo,
   },
   "0xd8F3208c045DD69D27938346275165998359D8fF": {
     bridge: "optics",
