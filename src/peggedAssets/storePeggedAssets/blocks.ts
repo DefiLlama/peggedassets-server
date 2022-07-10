@@ -6,7 +6,7 @@ const chainsForBlocks = [
   "avax",
   "bsc",
   "polygon",
-  "xdai",
+  //"xdai",
   "fantom",
   "arbitrum",
 ] as Chain[];
