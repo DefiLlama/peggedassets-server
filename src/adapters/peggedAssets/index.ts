@@ -48,6 +48,7 @@ import dei from "./dei-token";
 import bai from "./bai-stablecoin";
 import eurt from "./tether-eurt";
 import eurc from "./euro-coin";
+import stasis from "./stasis-eurs";
 
 export default {
   tether,
@@ -100,4 +101,5 @@ export default {
   "bai-stablecoin": bai,
   "tether-eurt": eurt,
   "euro-coin": eurc,
+  "stasis-eurs": stasis,
 };

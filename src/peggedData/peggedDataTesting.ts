@@ -1008,9 +1008,29 @@ export default [
     cmcId: "20641",
     pegType: "peggedEUR",
     pegMechanism: "fiat-backed",
-    priceSource: "coingecko",
+    priceSource: "coingecko", // there is a Curve pool but has no liquidity
     auditLinks: ["https://www.centre.io/usdc-transparency"],
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/EUROC",
+  },
+  {
+    id: "51",
+    name: "Stasis Euro",
+    address: "0xdb25f211ab05b1c97d595516f45794528a807ad8",
+    symbol: "EURS",
+    url: "https://stasis.net/",
+    description:
+      "EURS, an ERC/EIP20 token, is a euro-backed digital asset.",
+    mintRedeemDescription:
+      "Stasis customers who have undergone a verification process can exchange EUR for EURS and redeem EURS for EUR.",
+    onCoinGecko: "true",
+    gecko_id: "stasis-eurs",
+    cmcId: "2989",
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: "curve",
+    auditLinks: ["https://stasis.net/transparency/"],
+    twitter: "https://twitter.com/stasisnet",
+    wiki: "https://wiki.defillama.com/wiki/EURS",
   },
 ] as PeggedAsset[];
