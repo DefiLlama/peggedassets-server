@@ -1053,4 +1053,24 @@ export default [
     twitter: "https://twitter.com/CeloOrg",
     wiki: "https://wiki.defillama.com/wiki/CEUR",
   },
+  {
+    id: "53",
+    name: "sEUR",
+    address: "0xd71ecff9342a5ced620049e616c5035f1db98620",
+    symbol: "SEUR",
+    url: "https://synthetix.io/",
+    description:
+      "Synthetix is a protocol for issuing and trading synthetic assets on Ethereum. Each synthetic asset (or Synth) is an ERC20 token which tracks the price of an external asset; for example each sEUR token tracks the price of the Euro.",
+    mintRedeemDescription:
+      "An SNX holder can mint sEUR by locking their SNX as collateral via the Synthetix smart contract. sEUR can be burned to swap to another synthetic asset or to repay the debt to retrieve the collateral.",
+    onCoinGecko: "true",
+    gecko_id: "seur",
+    cmcId: "10419",
+    pegType: "peggedEUR",
+    pegMechanism: "crypto-backed",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/synthetix_io",
+    wiki: "https://wiki.defillama.com/wiki/Synthetix",
+  },
 ] as PeggedAsset[];

@@ -50,6 +50,7 @@ import eurt from "./tether-eurt";
 import eurc from "./euro-coin";
 import stasis from "./stasis-eurs";
 import ceur from "./celo-euro";
+import seur from "./seur";
 
 export default {
   tether,
@@ -104,4 +105,5 @@ export default {
   "euro-coin": eurc,
   "stasis-eurs": stasis,
   "celo-euro": ceur,
+  seur,
 };
