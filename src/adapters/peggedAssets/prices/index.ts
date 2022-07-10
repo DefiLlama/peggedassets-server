@@ -150,6 +150,11 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   }, // EURT-USD ETH
+  eur: {
+    address: "0xb49f677943bc038e9857d61e7d053caa2c1734c1",
+    chain: "ethereum",
+    decimals: 8,
+  }, // EUR-USD ETH
 };
 
 const curvePools: CurvePools = {

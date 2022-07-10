@@ -46,6 +46,17 @@ const handler = async (_event: any) => {
         }
         prices[pegged.gecko_id] = price;
       });
+      const EurPrice = await getCurrentPeggedPrice(
+        "eur",
+        chainBlocks,
+        "chainlink"
+      );
+      if (typeof EurPrice !== "number") {
+        if (EurPrice) {
+          throw new Error(`price is NaN. Instead it is ${typeof EurPrice}`);
+        }
+      }
+      prices["eur"] = EurPrice;
       await Promise.all(pricePromises);
       await store("peggedPrices.json", JSON.stringify(prices));
       const recordWithinLastAlmostHour = await getTVLOfRecordClosestToTimestamp(
