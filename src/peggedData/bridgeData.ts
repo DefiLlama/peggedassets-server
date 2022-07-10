@@ -966,6 +966,10 @@ export default {
     bridge: "okexchain",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x7BDF330f423Ea880FF95fC41A280fD5eCFD3D09f": {
+    bridge: "polygon",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x00e5646f60ac6fb446f621d146b6e1886f002905": {
     bridge: "polygon",
     sourceChain: formattedSourceChains.eth,

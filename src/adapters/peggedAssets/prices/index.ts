@@ -145,6 +145,11 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   }, // RAI-USD ETH
+  "tether-eurt": {
+    address: "0x01d391a48f4f7339ac64ca2c83a07c22f95f587a",
+    chain: "ethereum",
+    decimals: 8,
+  }, // EURT-USD ETH
 };
 
 const curvePools: CurvePools = {

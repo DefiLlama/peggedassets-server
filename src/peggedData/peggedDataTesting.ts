@@ -973,4 +973,24 @@ export default [
     twitter: "https://twitter.com/AstridDAO",
     wiki: "https://wiki.defillama.com/wiki/AstridDAO",
   },
+  {
+    id: "49",
+    name: "Euro Tether",
+    address: "0xc581b735a1688071a1746c968e0798d642ede491",
+    symbol: "EURT",
+    url: "https://tether.to/",
+    description:
+      "Launched in 2014, Tether tokens pioneered the stablecoin model. Tether tokens are pegged to real-world currencies on a 1-to-1 basis. This offers traders, merchants and funds a low volatility solution when exiting positions in the market.",
+    mintRedeemDescription:
+      "Tether customers who have undergone a verification process can exchange EUR for EURT and redeem EURT for EUR.",
+    onCoinGecko: "true",
+    gecko_id: "tether-eurt",
+    cmcId: "10789",
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: "chainlink",
+    auditLinks: ["https://tether.to/en/transparency/#reports"],
+    twitter: "https://twitter.com/Tether_to",
+    wiki: "https://wiki.defillama.com/wiki/EURT",
+  },
 ] as PeggedAsset[];
