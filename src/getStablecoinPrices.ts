@@ -1,9 +1,19 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import { getHistoricalValues } from "./utils/shared/dynamodb";
-import { dailyPeggedPrices } from "./peggedAssets/utils/getLastRecord";
+import { getLastRecord, dailyPeggedPrices, hourlyPeggedPrices } from "./peggedAssets/utils/getLastRecord";
+import { secondsInHour } from "./utils/date";
 
 export async function craftStablecoinPricesResponse() {
   const historicalPeggedPrices = await getHistoricalValues(dailyPeggedPrices());
+
+  const lastPrices = await getLastRecord(hourlyPeggedPrices())
+
+  const lastDailyItem = historicalPeggedPrices[historicalPeggedPrices.length - 1]
+  if (lastPrices !== undefined && lastPrices.SK > lastDailyItem.SK && (lastDailyItem.SK + secondsInHour * 25) > lastPrices.SK) {
+    lastPrices.SK = lastDailyItem.SK
+    historicalPeggedPrices[historicalPeggedPrices.length - 1] = lastPrices
+  }
+
   let response = historicalPeggedPrices
     ?.map((item) =>
       typeof item === "object"
