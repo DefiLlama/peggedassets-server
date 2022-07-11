@@ -238,6 +238,11 @@ const curvePools: CurvePools = {
     poolID: "5",
     tokenAddress: "0xD71eCFF9342A5Ced620049e616c5035F1dB98620",
   },
+  ageur: {
+    baseURL: "ethereum/factory",
+    poolID: "factory-v2-66",
+    tokenAddress: "0x1a7e4e63778B4f12a199C062f3eFdD288afCBce8",
+  }
 };
 
 const dexscreener: AddressesForDexes = {

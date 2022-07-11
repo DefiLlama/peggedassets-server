@@ -45,14 +45,14 @@ import usx from "./token-dforce-usd";
 import ausd from "./acala-dollar";
 import usd from "./usd";
 import dei from "./dei-token";
-import bai from './bai-stablecoin';
-import usn from './usn';
+import usn from "./usn";
 import bai from "./bai-stablecoin";
 import eurt from "./tether-eurt";
 import eurc from "./euro-coin";
 import stasis from "./stasis-eurs";
 import ceur from "./celo-euro";
 import seur from "./seur";
+import ageur from "./ageur";
 
 export default {
   tether,
@@ -109,4 +109,5 @@ export default {
   "stasis-eurs": stasis,
   "celo-euro": ceur,
   seur,
+  ageur,
 };
