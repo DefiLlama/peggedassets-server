@@ -1047,7 +1047,7 @@ export default [
     cmcId: "9467",
     pegType: "peggedEUR",
     pegMechanism: "algorithmic",
-    priceSource: "coingecko",
+    priceSource: null, // coingecko is very wrong for this, not sure what else to use
     auditLinks: null,
     twitter: "https://twitter.com/CeloOrg",
     wiki: "https://wiki.defillama.com/wiki/CEUR",
