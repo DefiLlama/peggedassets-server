@@ -9,7 +9,6 @@ import {
   getDay,
   getTimestampAtStartOfDay,
   secondsInDay,
-  secondsInHour,
 } from "./utils/date";
 import {
   dailyPeggedPrices,
@@ -59,18 +58,11 @@ const handler = async (_event: any) => {
       prices["eur"] = EurPrice;
       await Promise.all(pricePromises);
       await store("peggedPrices.json", JSON.stringify(prices));
-      const recordWithinLastAlmostHour = await getTVLOfRecordClosestToTimestamp(
-        hourlyPeggedPrices(),
-        timestamp,
-        (secondsInHour * 9) / 10
-      );
-      if (!recordWithinLastAlmostHour.SK) {
-        await dynamodb.put({
-          PK: hourlyPeggedPrices(),
-          SK: timestamp,
-          prices: prices,
-        });
-      }
+      await dynamodb.put({
+        PK: hourlyPeggedPrices(),
+        SK: timestamp,
+        prices: prices,
+      });
     } catch (e) {
       if (i >= 5) {
         throw e;
