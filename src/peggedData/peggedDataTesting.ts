@@ -688,7 +688,7 @@ export default [
     cmcId: "19224",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
-    priceSource: null,  // coingecko not updating
+    priceSource: null, // coingecko not updating
     auditLinks: null,
     twitter: "https://twitter.com/USDB_",
     wiki: "https://wiki.defillama.com/wiki/FantOHM",
@@ -868,7 +868,7 @@ export default [
     cmcId: "8772",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
-    priceSource: "coingecko",
+    priceSource: null, // coingecko inaccurate
     auditLinks: ["https://stablecoin.z.com/attestation/"],
     twitter: "https://twitter.com/GMOTrust",
     wiki: "https://wiki.defillama.com/wiki/ZUSD",
@@ -908,7 +908,7 @@ export default [
     cmcId: "20411",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko",
+    priceSource: null, // coingecko inaccurate
     auditLinks: null,
     twitter: "https://twitter.com/AcalaNetwork",
     wiki: "https://wiki.defillama.com/wiki/Acala",
