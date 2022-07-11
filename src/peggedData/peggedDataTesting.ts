@@ -828,7 +828,7 @@ export default [
     cmcId: "9861",
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
-    priceSource: "dexscreener",
+    priceSource: "coingecko", // has low liquidity Uni pool. had pools on dexscreener but they rugged.
     auditLinks: null,
     twitter: "https://twitter.com/FloatProtocol",
     wiki: "https://wiki.defillama.com/wiki/Float_Protocol",
@@ -1097,7 +1097,8 @@ export default [
     address: "0x1a7e4e63778b4f12a199c062f3efdd288afcbce8",
     symbol: "AGEUR",
     url: "https://www.angle.money/",
-    description: "Angle Protocol aims at creating a sustainable money layer for blockchains. It is currently issuing agEUR, the most liquid Euro stablecoin on Ethereum and other chains.",
+    description:
+      "Angle Protocol aims at creating a sustainable money layer for blockchains. It is currently issuing agEUR, the most liquid Euro stablecoin on Ethereum and other chains.",
     mintRedeemDescription:
       "Using the Angle app, users mint agEUR by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back agEUR is burned.",
     onCoinGecko: "true",
