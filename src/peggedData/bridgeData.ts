@@ -1211,6 +1211,10 @@ export default {
     bridge: "loopring",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xabea9132b05a70803a4e85094fd0e1800777fbef": {
+    bridge: "zksync",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xaBEA9132b05A70803a4E85094fD0e1800777fBEF": {
     bridge: "zksync",
     sourceChain: formattedSourceChains.eth,
