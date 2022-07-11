@@ -1008,7 +1008,7 @@ export default [
     cmcId: "20641",
     pegType: "peggedEUR",
     pegMechanism: "fiat-backed",
-    priceSource: "coingecko", // there is a Curve pool but has no liquidity
+    priceSource: null, // there is a Curve pool but has no liquidity. there is no liquidity anywhere. coingecko is very wrong.
     auditLinks: ["https://www.centre.io/usdc-transparency"],
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/EUROC",
