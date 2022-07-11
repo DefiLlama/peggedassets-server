@@ -627,6 +627,18 @@ export default {
     bridge: "wormhole",
     sourceChain: formattedSourceChains.sol,
   },
+  "0x181002D60d504d30a39601Ae13Af3191cb102580": {
+    bridge: "celer",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xDA0019E7e50Ee4990440b1aa5dFFCAC6E27Ee27B": {
+    bridge: "celer",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x16365b45EB269B5B5dACB34B4a15399Ec79b95eB": {
+    bridge: "celer",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD": {
     bridge: "celer",
     sourceChain: formattedSourceChains.eth,

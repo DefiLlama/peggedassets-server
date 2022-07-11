@@ -1,8 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
-import {
-  bridgedSupply,
-} from "../helper/getSupply";
+import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -25,6 +23,15 @@ const chainContracts: ChainContracts = {
   optimism: {
     bridgedFromETH: ["0xc40F949F8a4e094D1b49a23ea9241D289B7b2819"],
   },
+  bsc: {
+    bridgedFromETH: ["0x181002D60d504d30a39601Ae13Af3191cb102580"], // celer
+  },
+  avax: {
+    bridgedFromETH: ["0xDA0019E7e50Ee4990440b1aa5dFFCAC6E27Ee27B"], // celer
+  },
+  fantom: {
+    bridgedFromETH: ["0x16365b45EB269B5B5dACB34B4a15399Ec79b95eB"], // celer
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -43,7 +50,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -71,6 +84,21 @@ const adapter: PeggedIssuanceAdapter = {
       18,
       chainContracts.optimism.bridgedFromETH
     ),
+  },
+  bsc: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
+  },
+  avalanche: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
+  },
+  fantom: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
   },
 };
 
