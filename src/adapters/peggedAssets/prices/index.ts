@@ -291,6 +291,9 @@ const dexscreener: AddressesForDexes = {
   },
   "bai-stablecoin": {
     address: "0x733ebcC6DF85f8266349DEFD0980f8Ced9B45f35",
+  },
+  "par-stablecoin": {
+    address: "0x68037790A0229e9Ce6EaA8A99ea92964106C4703",
   }
 };
 

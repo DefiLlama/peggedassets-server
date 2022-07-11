@@ -53,6 +53,7 @@ import stasis from "./stasis-eurs";
 import ceur from "./celo-euro";
 import seur from "./seur";
 import ageur from "./ageur";
+import par from "./par-stablecoin";
 
 export default {
   tether,
@@ -110,4 +111,5 @@ export default {
   "celo-euro": ceur,
   seur,
   ageur,
+  "par-stablecoin": par,
 };

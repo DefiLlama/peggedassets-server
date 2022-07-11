@@ -1111,4 +1111,24 @@ export default [
     twitter: "https://twitter.com/AngleProtocol",
     wiki: "https://wiki.defillama.com/wiki/AGEUR",
   },
+  {
+    id: "56",
+    name: "Parallel",
+    address: "0x68037790a0229e9ce6eaa8a99ea92964106c4703",
+    symbol: "PAR",
+    url: "https://mimo.capital/",
+    description:
+      "The PAR token is a price-stable token pegged to the Euro. Users generate PAR by depositing collateral assets into MIMO vaults within the MIMO protocol.",
+    mintRedeemDescription:
+      "Using the MIMO app, users mint PAR by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back PAR is burned.",
+    onCoinGecko: "true",
+    gecko_id: "par-stablecoin",
+    cmcId: "8665",
+    pegType: "peggedEUR",
+    pegMechanism: "crypto-backed",
+    priceSource: "dexscreener",
+    auditLinks: null,
+    twitter: "https://twitter.com/mimodefi",
+    wiki: "https://wiki.defillama.com/wiki/PAR",
+  },
 ] as PeggedAsset[];
