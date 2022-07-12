@@ -486,7 +486,7 @@ export default [
     cmcId: "7236",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
-    priceSource: null, // coingecko not accurate
+    priceSource: "kucoin", // coingecko not accurate
     auditLinks: null,
     twitter: "https://twitter.com/CeloOrg",
     wiki: "https://wiki.defillama.com/wiki/CUSD",
@@ -688,7 +688,7 @@ export default [
     cmcId: "19224",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
-    priceSource: null, // coingecko not updating
+    priceSource: "dexscreener", // dexscreener rugged in past but working now. coingecko is not updating
     auditLinks: null,
     twitter: "https://twitter.com/USDB_",
     wiki: "https://wiki.defillama.com/wiki/FantOHM",
@@ -788,7 +788,7 @@ export default [
     cmcId: null,
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
-    priceSource: null, // curve has no liqudity, and coingecko not giving accurate price
+    priceSource: "coingecko", // curve has no liqudity, and coingecko not giving accurate price
     auditLinks: null,
     twitter: "https://twitter.com/voltprotocol",
     wiki: "https://wiki.defillama.com/wiki/Volt_Protocol",
@@ -828,7 +828,7 @@ export default [
     cmcId: "9861",
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
-    priceSource: null, // has low liquidity Uni pool. had pools on dexscreener but they rugged. coingecko is not updating.
+    priceSource: "dexscreener", // has low liquidity Uni pool. had pools on dexscreener but they rugged. coingecko is not updating.
     auditLinks: null,
     twitter: "https://twitter.com/FloatProtocol",
     wiki: "https://wiki.defillama.com/wiki/Float_Protocol",
@@ -1047,7 +1047,7 @@ export default [
     cmcId: "9467",
     pegType: "peggedEUR",
     pegMechanism: "algorithmic",
-    priceSource: null, // coingecko is very wrong for this, not sure what else to use
+    priceSource: "kucoin", // coingecko is very wrong for this, not sure what else to use
     auditLinks: null,
     twitter: "https://twitter.com/CeloOrg",
     wiki: "https://wiki.defillama.com/wiki/CEUR",

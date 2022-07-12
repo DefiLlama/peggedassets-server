@@ -242,7 +242,7 @@ const curvePools: CurvePools = {
     baseURL: "ethereum/factory",
     poolID: "factory-v2-66",
     tokenAddress: "0x1a7e4e63778B4f12a199C062f3eFdD288afCBce8",
-  }
+  },
 };
 
 const dexscreener: AddressesForDexes = {
@@ -275,13 +275,13 @@ const dexscreener: AddressesForDexes = {
     address: "0xD74f5255D557944cf7Dd0E45FF521520002D5748",
   },
   "usd-balance": {
-    address: "0x6Fc9383486c163fA48becdEC79d6058f984f62cA", // this rugged
+    address: "0x6Fc9383486c163fA48becdEC79d6058f984f62cA",
   },
   mimatic: {
     address: "0x3F56e0c36d275367b8C502090EDF38289b3dEa0d",
   },
   "float-protocol-float": {
-    address: "0xb05097849BCA421A3f51B249BA6CCa4aF4b97cb9",  // this rugged
+    address: "0xb05097849BCA421A3f51B249BA6CCa4aF4b97cb9",
   },
   usd: {
     address: "0x236eeC6359fb44CCe8f97E99387aa7F8cd5cdE1f",
@@ -294,7 +294,7 @@ const dexscreener: AddressesForDexes = {
   },
   "par-stablecoin": {
     address: "0x68037790A0229e9Ce6EaA8A99ea92964106C4703",
-  }
+  },
 };
 
 const birdeye: AddressesForDexes = {
@@ -312,6 +312,15 @@ const uniswapPools: UniswapPools = {
     token: 0,
     chain: "ethereum",
     decimalsDifference: -12,
+  },
+};
+
+const kucoinPairs: AddressesForDexes = {
+  "celo-dollar": {
+    address: "CUSD-USDT",
+  },
+  "celo-euro": {
+    address: "CEUR-USDT",
   },
 };
 
@@ -441,6 +450,30 @@ export default async function getCurrentPeggedPrice(
             return price;
           } else {
             console.error(`Could not get Birdeye price for token ${token}`);
+            return null;
+          }
+        } catch (e) {
+          console.error(e);
+          continue;
+        }
+      }
+    }
+    console.error(`Could not get Birdeye price for token ${token}`);
+    return null;
+  }
+  if (priceSource === "kucoin") {
+    const symbol = kucoinPairs[token]?.address;
+    if (symbol) {
+      for (let i = 0; i < 5; i++) {
+        try {
+          const res = await axios.get(
+            `https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=${symbol}`
+          );
+          const price = res?.data?.data?.price;
+          if (price) {
+            return price;
+          } else {
+            console.error(`Could not get Kucoin price for token ${token}`);
             return null;
           }
         } catch (e) {
