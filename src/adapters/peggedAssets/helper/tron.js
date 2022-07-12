@@ -1,8 +1,14 @@
 const TronWeb = require("tronweb");
 
+const apiKeys = [
+  "a4e25c66-b143-4d0b-91d2-0d9b2371d397",
+  "1b2f1df4-c5bd-40b4-b416-118d7d6d3b51",
+  "394bfb17-915c-4e38-82b0-61be1f8213c0",
+];
+
 const tronWeb = new TronWeb({
   fullHost: "https://api.trongrid.io",
-  headers: { "TRON-PRO-API-KEY": "a4e25c66-b143-4d0b-91d2-0d9b2371d397" },
+  headers: { "TRON-PRO-API-KEY": apiKeys[Math.floor(Math.random() * 3)] },
 });
 tronWeb.setAddress("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
 
