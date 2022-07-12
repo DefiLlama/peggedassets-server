@@ -469,7 +469,7 @@ export default async function getCurrentPeggedPrice(
           const res = await axios.get(
             `https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=${symbol}`
           );
-          const price = res?.data?.data?.price;
+          const price = parseFloat(res?.data?.data?.price);
           if (price) {
             return price;
           } else {
