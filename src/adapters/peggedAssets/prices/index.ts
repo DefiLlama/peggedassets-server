@@ -60,6 +60,26 @@ type UniswapPools = {
 };
 
 const feeds: ChainlinkFeeds = {
+  eur: {
+    address: "0xb49f677943bc038e9857d61e7d053caa2c1734c1",
+    chain: "ethereum",
+    decimals: 8,
+  }, // EUR-USD ETH
+  sgd: {
+    address: "0xe25277ff4bbf9081c75ab0eb13b4a13a721f3e13",
+    chain: "ethereum",
+    decimals: 8,
+  }, // SGD-USD ETH
+  jpy: {
+    address: "0xbce206cae7f0ec07b545edde332a47c2f75bbeb3",
+    chain: "ethereum",
+    decimals: 8,
+  }, // JPY-USD ETH
+  cny: {
+    address: "0xef8a4af35cd47424672e3c590abd37fbb7a7759a",
+    chain: "ethereum",
+    decimals: 8,
+  }, // CNY-USD ETH
   tether: {
     address: "0x3e7d1eab13ad0104d2750b8863b489d65364e32d",
     chain: "ethereum",
@@ -150,11 +170,6 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   }, // EURT-USD ETH
-  eur: {
-    address: "0xb49f677943bc038e9857d61e7d053caa2c1734c1",
-    chain: "ethereum",
-    decimals: 8,
-  }, // EUR-USD ETH
 };
 
 const curvePools: CurvePools = {
