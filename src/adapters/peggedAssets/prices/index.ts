@@ -80,6 +80,16 @@ const feeds: ChainlinkFeeds = {
     chain: "ethereum",
     decimals: 8,
   }, // CNY-USD ETH
+  try: {
+    address: "0xb09fc5fd3f11cf9eb5e1c5dba43114e3c9f477b5",
+    chain: "ethereum",
+    decimals: 8,
+  },
+  gbp: {
+    address: "0x5c0ab2d9b5a7ed9f470386e82bb36a3613cdd4b5",
+    chain: "ethereum",
+    decimals: 8,
+  },
   tether: {
     address: "0x3e7d1eab13ad0104d2750b8863b489d65364e32d",
     chain: "ethereum",

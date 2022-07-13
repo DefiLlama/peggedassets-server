@@ -181,6 +181,12 @@ functions:
       - http:
           path: stablecoinprices
           method: get
+  updatecurrencies:
+    handler: src/updateCurrencies.default
+    timeout: 60
+    memorySize: 3000
+    events:
+      - schedule: cron(30 0 * * ? *)
   storePeggedAssets:
     handler: src/storePeggedAssets.default
     timeout: 900
