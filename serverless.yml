@@ -181,8 +181,8 @@ functions:
       - http:
           path: stablecoinprices
           method: get
-  updatecurrencies:
-    handler: src/updateCurrencies.default
+  storeRates:
+    handler: src/storeRates.default
     timeout: 60
     memorySize: 3000
     events:
