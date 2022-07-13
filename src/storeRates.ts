@@ -1,37 +1,44 @@
+import dynamodb from "./utils/shared/dynamodb";
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import fetch from "node-fetch";
-import { store } from "./utils/s3";
+import { historicalRates } from "./peggedAssets/utils/getLastRecord";
+import { getTimestampAtStartOfDay } from "./utils/date";
 
-export async function updateCurrencies() {
-  const currencies = await fetch(
-    "https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/currencies.json"
-  )
-    .then((res: any) => res.json())
-    .catch(() => {
-      console.error("Could not fetch currencies");
-    });
+export async function storeRates() {
+  for (let i = 0; i < 5; i++) {
+    try {
+      const currentDate = new Date(Date.now() * 1000);
+      const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+      const currentDateFormatted = `${currentDate.getUTCFullYear()}-${month}-${currentDate.getUTCDate()}`;
+      const url = `https://openexchangerates.org/api/historical/${currentDateFormatted}.json?app_id=292b4223032e4b719b10c38f95fb1c90`;
 
-  const currentDate = new Date(Date.now() * 1000);
-  const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
-  const currentDateFormatted = `${currentDate.getUTCFullYear()}-${month}-${currentDate.getUTCDate()}`;
-  const url = `https://openexchangerates.org/api/historical/${currentDateFormatted}.json?app_id=292b4223032e4b719b10c38f95fb1c90`;
+      const response = await fetch(url).then((res) => res.json());
+      const timestamp = response.timestamp;
+      const date = getTimestampAtStartOfDay(timestamp)
+      const rates = response.rates;
 
-  const response = await fetch(url).then((res) => res.json());
-  const date = response.timestamp;
-  const rates = response.rates;
+      await dynamodb.put({
+        PK: historicalRates(),
+        SK: date,
+        rates: rates,
+      });
+    } catch (e) {
+      if (i >= 5) {
+        throw e;
+      } else {
+        console.error(e);
+        continue;
+      }
+    }
 
-  if (!currencies[date]) {
-    currencies[date] = rates;
+    return;
   }
-  await store(`currencies.json`, JSON.stringify(currencies), true, false);
-
-  return;
 }
 
 const handler = async (
   _event: AWSLambda.APIGatewayEvent
 ): Promise<IResponse> => {
-  await updateCurrencies();
+  await storeRates();
   return successResponse({}, 10 * 60); // 10 mins cache
 };
 
