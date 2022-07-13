@@ -1,6 +1,18 @@
-type PegType = "peggedUSD" | "peggedVAR";
+type PegType =
+  | "peggedUSD"
+  | "peggedVAR"
+  | "peggedEUR"
+  | "peggedSGD"
+  | "peggedJPY"
+  | "peggedCNY";
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
-export type PriceSource = "chainlink" | "uniswap" | "dexscreener" | "curve" | "coingecko" | "birdeye";
+export type PriceSource =
+  | "chainlink"
+  | "uniswap"
+  | "dexscreener"
+  | "curve"
+  | "coingecko"
+  | "birdeye";
 
 export type PeggedAsset = {
   id: string;
