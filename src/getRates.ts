@@ -1,13 +1,15 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import { getHistoricalValues } from "./utils/shared/dynamodb";
 import { historicalRates } from "./peggedAssets/utils/getLastRecord";
+import { secondsInWeek } from "./utils/date";
 
 export async function craftRatesResponse() {
   const historicalPeggedPrices = await getHistoricalValues(historicalRates());
 
   let response = historicalPeggedPrices
     ?.map((item) =>
-      typeof item === "object"
+      typeof item === "object" &&
+      item.SK > Date.now() / 1000 - 8 * secondsInWeek
         ? {
             date: item.SK,
             rates: item.rates,
