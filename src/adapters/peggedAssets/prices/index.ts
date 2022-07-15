@@ -3,6 +3,7 @@ import chainabi from "./chainlink_abi.json";
 import uniabi from "./uniswap_abi.json";
 import { ChainBlocks } from "../peggedAsset.type";
 import { PriceSource } from "../../../peggedData/types";
+import { getCurvePrice, OtherTokenTypes } from "./getCurvePrice";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -36,11 +37,17 @@ type ChainlinkFeeds = {
   };
 };
 
+// Calculates price by using exchange rate between token0 and token1.
+// If the other token in the pair is not one included in 'OtherTokenTypes', it's assumed to be priced $1.
 type CurvePools = {
   [coinGeckoID: string]: {
-    baseURL: string;
-    poolID: string;
-    tokenAddress: string;
+    chain: string;
+    address: string;
+    tokenIndex: 0 | 1; // token0 or token1
+    decimalsToken0: number;
+    decimalsToken1: number;
+    otherTokenisType?: OtherTokenTypes;
+    use256abi?: boolean;
   };
 };
 
@@ -154,89 +161,123 @@ const feeds: ChainlinkFeeds = {
 
 const curvePools: CurvePools = {
   husd: {
-    baseURL: "ethereum/main",
-    poolID: "20",
-    tokenAddress: "0xdF574c24545E5FfEcb9a659c229253D4111d87e1",
+    chain: "ethereum",
+    address: "0x3eF6A01A0f81D6046290f3e2A8c5b843e738E604",
+    tokenIndex: 0,
+    decimalsToken0: 8,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   "alchemix-usd": {
-    baseURL: "ethereum/main",
-    poolID: "37",
-    tokenAddress: "0xBC6DA0FE9aD5f3b0d58160288917AA56653660E9",
+    chain: "ethereum",
+    address: "0x43b4FdFD4Ff969587185cDB6f0BD875c5Fc83f8c",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   "yusd-stablecoin": {
-    baseURL: "avalanche/factory",
-    poolID: "factory-v2-69",
-    tokenAddress: "0x111111111111ed1D73f860F57b2798b683f2d325",
+    chain: "avax",
+    address: "0x1da20Ac34187b2d9c74F729B85acB225D3341b25",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 6,
   },
   usdd: {
-    baseURL: "ethereum/factory",
-    poolID: "factory-v2-116",
-    tokenAddress: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6",
+    chain: "ethereum",
+    address: "0xe6b5CC1B4b47305c58392CE3D359B10282FC36Ea",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   "dola-usd": {
-    baseURL: "ethereum/factory",
-    poolID: "factory-v2-27",
-    tokenAddress: "0x865377367054516e17014CcdED1e7d814EDC9ce4",
+    chain: "ethereum",
+    address: "0xAA5A67c256e27A5d80712c51971408db3370927D",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   "origin-dollar": {
-    baseURL: "ethereum/factory",
-    poolID: "factory-v2-9",
-    tokenAddress: "0x2A8e1E676Ec238d8A992307B495b45B3fEAa5e86",
+    chain: "ethereum",
+    address: "0x87650D7bbfC3A9F10587d7778206671719d9910D",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   reserve: {
-    baseURL: "ethereum/main",
-    poolID: "23",
-    tokenAddress: "0x196f4727526eA7FB1e17b2071B3d8eAA38486988",
+    chain: "ethereum",
+    address: "0xC18cC39da8b11dA8c3541C598eE022258F9744da",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   musd: {
-    baseURL: "ethereum/main",
-    poolID: "22",
-    tokenAddress: "0xe2f2a5C287993345a840Db3B0845fbC70f5935a5",
+    chain: "ethereum",
+    address: "0x8474DdbE98F5aA3179B3B3F5942D724aFcdec9f6",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   tor: {
-    baseURL: "fantom/factory",
-    poolID: "factory-v2-62",
-    tokenAddress: "0x74E23dF9110Aa9eA0b6ff2fAEE01e740CA1c642e",
+    chain: "fantom",
+    address: "0x24699312CB27C26Cfc669459D670559E5E44EE60",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "2crv",
   },
   spiceusd: {
-    baseURL: "avalanche/factory",
-    poolID: "factory-v2-78",
-    tokenAddress: "0xaB05b04743E0aeAF9D2cA81E5D3b8385e4BF961e",
+    chain: "avax",
+    address: "0x90D5233b53436767fecACD1a783D3dA8Cc7395ED",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   usdp: {
-    baseURL: "ethereum/factory",
-    poolID: "factory-v2-59",
-    tokenAddress: "0x8E870D67F660D95d5be530380D0eC0bd388289E1",
+    chain: "ethereum",
+    address: "0xc270b3B858c335B6BA5D5b10e2Da8a09976005ad",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   mimatic: {
-    baseURL: "polygon/factory",
-    poolID: "factory-v2-7",
-    tokenAddress: "0xa3Fa99A148fA48D14Ed51d610c367C61876997F1",
+    chain: "polygon",
+    address: "0x447646e84498552e62eCF097Cc305eaBFFF09308",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "am3crv",
   },
   "token-dforce-usd": {
-    baseURL: "ethereum/factory",
-    poolID: "factory-v2-77",
-    tokenAddress: "0x0a5E677a6A24b2F1A2Bf4F3bFfC443231d2fDEc8",
+    chain: "ethereum",
+    address: "0x76264772707c8Bc24261516b560cBF3Cbe6F7819",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   "dei-token": {
-    baseURL: "ethereum/factory",
-    poolID: "factory-v2-47",
-    tokenAddress: "0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3",
+    chain: "ethereum",
+    address: "0x6870F9b4DD5d34C7FC53D0d85D9dBd1aAB339BF7",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
   },
   "stasis-eurs": {
-    baseURL: "ethereum/crypto",
-    poolID: "crypto-2",
-    tokenAddress: "0xdB25f211AB05b1c97D595516F45794528a807ad8",
-  },
-  seur: {
-    baseURL: "ethereum/main",
-    poolID: "5",
-    tokenAddress: "0xD71eCFF9342A5Ced620049e616c5035F1dB98620",
-  },
-  ageur: {
-    baseURL: "ethereum/factory",
-    poolID: "factory-v2-66",
-    tokenAddress: "0x1a7e4e63778B4f12a199C062f3eFdD288afCBce8",
+    chain: "ethereum",
+    address: "0x98a7F18d4E56Cfe84E3D081B40001B3d5bD3eB8B",
+    tokenIndex: 1,
+    decimalsToken0: 6,
+    decimalsToken1: 2,
+    use256abi: true,
   },
 };
 
@@ -343,22 +384,28 @@ export default async function getCurrentPeggedPrice(
   }
   if (priceSource === "curve") {
     const pool = curvePools[token];
-    const poolID = pool?.poolID;
-    const tokenAddress = pool?.tokenAddress;
-    const baseURL = pool?.baseURL;
-    if (poolID) {
+    const {
+      chain,
+      address,
+      tokenIndex,
+      decimalsToken0,
+      decimalsToken1,
+      otherTokenisType,
+      use256abi,
+    } = pool;
+    if (pool) {
       for (let i = 0; i < 5; i++) {
         try {
-          const res = await axios.get(
-            `https://api.curve.fi/api/getPools/${baseURL}`
+          const price = await getCurvePrice(
+            chain,
+            chainBlocks,
+            address,
+            tokenIndex,
+            decimalsToken0,
+            decimalsToken1,
+            otherTokenisType,
+            use256abi
           );
-          const filteredPools = res.data.data.poolData.filter(
-            (obj: any) => obj?.id === `${poolID}`
-          );
-          const tokenData = filteredPools[0]?.coins?.filter(
-            (obj: any) => obj.address === `${tokenAddress}`
-          );
-          const price = parseFloat(tokenData[0]?.usdPrice);
           if (price) {
             return price;
           } else {
@@ -366,7 +413,7 @@ export default async function getCurrentPeggedPrice(
             return null;
           }
         } catch (e) {
-          console.error(e);
+          console.error(token, e);
           continue;
         }
       }
@@ -424,7 +471,7 @@ export default async function getCurrentPeggedPrice(
             return null;
           }
         } catch (e) {
-          console.error(e);
+          console.error(token, e);
           continue;
         }
       }
@@ -448,7 +495,7 @@ export default async function getCurrentPeggedPrice(
             return null;
           }
         } catch (e) {
-          console.error(e);
+          console.error(token, e);
           continue;
         }
       }
@@ -472,7 +519,7 @@ export default async function getCurrentPeggedPrice(
             return null;
           }
         } catch (e) {
-          console.error(e);
+          console.error(token, e);
           continue;
         }
       }
@@ -496,13 +543,15 @@ export default async function getCurrentPeggedPrice(
           return null;
         }
       } catch (e) {
-        console.error(e);
+        console.error(token, e);
         continue;
       }
     }
     console.error(`Could not get Coingecko price for token ${token}`);
     return null;
   }
-  console.error(`no method to get price for given priceSource for ${token}`);
+  console.error(
+    `no priceSource method given or failed to get price for ${token}`
+  );
   return null;
 }

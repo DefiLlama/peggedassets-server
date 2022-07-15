@@ -1,0 +1,31 @@
+{
+  "get_dy": {
+    "inputs": [
+      { "type": "int128", "name": "i" },
+      { "type": "int128", "name": "j" },
+      { "type": "uint256", "name": "dx" }
+    ],
+    "name": "get_dy",
+    "outputs": [{ "type": "uint256", "name": "" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  "get_dy_256": {
+    "inputs": [
+      { "type": "uint256", "name": "i" },
+      { "type": "uint256", "name": "j" },
+      { "type": "uint256", "name": "dx" }
+    ],
+    "name": "get_dy",
+    "outputs": [{ "type": "uint256", "name": "" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  "get_virtual_price": {
+    "name": "get_virtual_price",
+    "outputs": [{ "type": "uint256", "name": "" }],
+    "inputs": [],
+    "stateMutability": "view",
+    "type": "function"
+  }
+}
