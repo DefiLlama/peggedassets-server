@@ -7,14 +7,13 @@ import { getTimestampAtStartOfDay } from "./utils/date";
 export async function storeRates() {
   for (let i = 0; i < 5; i++) {
     try {
-      const currentDate = new Date(Date.now() * 1000);
+      const currentDate = new Date(Date.now());
       const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
       const currentDateFormatted = `${currentDate.getUTCFullYear()}-${month}-${currentDate.getUTCDate()}`;
       const url = `https://openexchangerates.org/api/historical/${currentDateFormatted}.json?app_id=292b4223032e4b719b10c38f95fb1c90`;
-
       const response = await fetch(url).then((res) => res.json());
       const timestamp = response.timestamp;
-      const date = getTimestampAtStartOfDay(timestamp)
+      const date = getTimestampAtStartOfDay(timestamp);
       const rates = response.rates;
 
       await dynamodb.put({
@@ -30,7 +29,6 @@ export async function storeRates() {
         continue;
       }
     }
-
     return;
   }
 }
