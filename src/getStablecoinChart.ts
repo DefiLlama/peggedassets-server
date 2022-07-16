@@ -17,7 +17,7 @@ import {
   getClosestDayStartTimestamp,
 } from "./utils/date";
 
-type tokenBalance = {
+type TokenBalance = {
   [token: string]: number | undefined;
 };
 
@@ -61,11 +61,11 @@ export async function craftChartsResponse(
 ) {
   const sumDailyBalances = {} as {
     [timestamp: number]: {
-      circulating: tokenBalance;
-      unreleased: tokenBalance;
-      totalCirculatingUSD: tokenBalance;
-      totalMintedUSD: tokenBalance;
-      totalBridgedToUSD: tokenBalance;
+      circulating: TokenBalance;
+      unreleased: TokenBalance;
+      totalCirculatingUSD: TokenBalance;
+      totalMintedUSD: TokenBalance;
+      totalBridgedToUSD: TokenBalance;
     };
   };
   // quick fix; need to update later
@@ -134,6 +134,23 @@ export async function craftChartsResponse(
     })
   );
 
+  const historicalRatesItems = await dynamodb.query({
+    ExpressionAttributeValues: {
+      ":pk": `historicalRates`,
+    },
+    KeyConditionExpression: "PK = :pk",
+  });
+  if (
+    historicalRatesItems.Items === undefined ||
+    historicalRatesItems.Items.length < 1
+  ) {
+    return errorResponse({
+      message: "Could not get historical fiat prices.",
+    });
+  }
+  const historicalRates = historicalRatesItems.Items;
+  const rateTimestamps = historicalRates?.map((item) => item.SK);
+
   await Promise.all(
     historicalPeggedBalances.map(async (peggedBalance) => {
       if (peggedBalance === undefined) {
@@ -143,8 +160,6 @@ export async function craftChartsResponse(
       const pegType = pegged.pegType;
       const peggedGeckoID = pegged.gecko_id;
       const lastBalance = historicalBalance[historicalBalance.length - 1];
-
-      const fallbackPrice = pegType === "peggedUSD" ? 1 : 0; // must be updated with each new pegType added
 
       while (lastTimestamp < lastDailyTimestamp) {
         lastTimestamp = getClosestDayStartTimestamp(
@@ -183,7 +198,23 @@ export async function craftChartsResponse(
             historicalPrices,
             closestPriceIndex
           );
+          let fallbackPrice = 1;
           const historicalPrice = closestPrices?.prices[peggedGeckoID];
+          if (pegType === "peggedVAR") {
+            fallbackPrice = 0;
+          } else if (pegType !== "peggedUSD" && !historicalPrice) {
+            const closestRatesIndex = timestampsBinarySearch(
+              rateTimestamps,
+              timestamp
+            );
+            const closestRates = extractResultOfBinarySearch(
+              historicalRates,
+              closestRatesIndex
+            );
+            const ticker = pegType.slice(-3);
+            fallbackPrice = closestRates?.rates?.[ticker] ?? 0;
+          }
+
           const price = historicalPrice ? historicalPrice : fallbackPrice;
 
           if (chain === "all") {
