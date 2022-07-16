@@ -22,7 +22,7 @@ type TokenBalance = {
 };
 
 function compare_fn(a: number, b: number) {
-  if (Math.abs(a - b) < secondsInDay) return 0;
+  if (Math.abs(a - b) <= secondsInDay) return 0;
   return a - b;
 }
 
@@ -212,7 +212,10 @@ export async function craftChartsResponse(
               closestRatesIndex
             );
             const ticker = pegType.slice(-3);
-            fallbackPrice = 1 / closestRates?.rates?.[ticker] ?? 0;
+            fallbackPrice = 1 / closestRates?.rates?.[ticker];
+            if (typeof fallbackPrice !== "number") {
+              fallbackPrice = 0;
+            }
           }
 
           const price = historicalPrice ? historicalPrice : fallbackPrice;
