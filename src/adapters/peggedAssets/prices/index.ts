@@ -340,6 +340,9 @@ const birdeye: AddressesForDexes = {
   "ratio-stable-coin": {
     address: "USDrbBQwQbQ2oWHUPfA8QBHcyVxKUq1xHyXsSLKdUq2",
   },
+  "hedge-usd": {
+    address: "9iLH8T7zoWhY7sBmj1WK9ENbWdS1nL8n9wAxaeRitTa6",
+  },
 };
 
 const uniswapPools: UniswapPools = {

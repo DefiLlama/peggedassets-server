@@ -1047,7 +1047,7 @@ export default [
     cmcId: "9467",
     pegType: "peggedEUR",
     pegMechanism: "algorithmic",
-    priceSource: "kucoin", // coingecko is very wrong for this, not sure what else to use
+    priceSource: "kucoin",
     auditLinks: null,
     twitter: "https://twitter.com/CeloOrg",
     wiki: "https://wiki.defillama.com/wiki/CEUR",
@@ -1130,5 +1130,25 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/mimodefi",
     wiki: "https://wiki.defillama.com/wiki/PAR",
+  },
+  {
+    id: "57",
+    name: "Hedge USD",
+    address: "solana:9iLH8T7zoWhY7sBmj1WK9ENbWdS1nL8n9wAxaeRitTa6",
+    symbol: "USH",
+    url: "https://www.hedge.so/",
+    description:
+      "Hedge is a protocol that enables the minting of USH, a stablecoin soft-pegged to the US dollar. USH is minted on flexible terms and gives users instant access to the USH ecosystem.",
+    mintRedeemDescription:
+      "Using the Hedge app, users mint USH by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back USH is burned.",
+    onCoinGecko: "true",
+    gecko_id: "hedge-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "birdeye",
+    auditLinks: null,
+    twitter: "https://twitter.com/HedgeLabs",
+    wiki: "https://wiki.defillama.com/wiki/USH",
   },
 ] as PeggedAsset[];
