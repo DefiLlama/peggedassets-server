@@ -212,7 +212,7 @@ export async function craftChartsResponse(
               closestRatesIndex
             );
             const ticker = pegType.slice(-3);
-            fallbackPrice = closestRates?.rates?.[ticker] ?? 0;
+            fallbackPrice = 1 / closestRates?.rates?.[ticker] ?? 0;
           }
 
           const price = historicalPrice ? historicalPrice : fallbackPrice;
