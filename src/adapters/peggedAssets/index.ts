@@ -56,6 +56,7 @@ import ageur from "./ageur";
 import par from "./par-stablecoin";
 import ush from "./hedge-usd";
 import threeusd from "./three-usd";
+import sigmausd from "./sigmausd";
 
 export default {
   tether,
@@ -116,4 +117,5 @@ export default {
   "par-stablecoin": par,
   "hedge-usd": ush,
   "three-usd": threeusd,
+  sigmausd,
 };

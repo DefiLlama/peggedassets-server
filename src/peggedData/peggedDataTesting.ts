@@ -1171,4 +1171,24 @@ export default [
     twitter: "https://twitter.com/TaigaProtocol",
     wiki: "https://wiki.defillama.com/wiki/Taiga_Protocol",
   },
+  {
+    id: "59",
+    name: "SigmaUSD",
+    address: null,
+    symbol: "SIGUSD",
+    url: "https://sigmausd.io/",
+    description:
+      "SigmaUSD is a UTxO-based stable coin on the Ergo blockchain - an instantiation of the AgeUSD protocol.",
+    mintRedeemDescription:
+      "Using the SigmaUSD app, users swap ERG for the equivalent value of SigUSD. The SigUSD is backed by collateral ERG provided by Reserve Providers at a reserve ratio of 400% - 800%.",
+    onCoinGecko: "false",
+    gecko_id: "sigmausd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/ergoplatformorg",
+    wiki: "https://wiki.defillama.com/wiki/Ergo",
+  },
 ] as PeggedAsset[];
