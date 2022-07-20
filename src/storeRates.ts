@@ -1,10 +1,10 @@
 import dynamodb from "./utils/shared/dynamodb";
-import { successResponse, wrap, IResponse } from "./utils/shared";
+import { wrapScheduledLambda } from "./utils/shared/wrap";
 import fetch from "node-fetch";
 import { historicalRates } from "./peggedAssets/utils/getLastRecord";
 import { getTimestampAtStartOfDay } from "./utils/date";
 
-export async function storeRates() {
+const handler = async (_event: any) => {
   for (let i = 0; i < 5; i++) {
     try {
       const currentDate = new Date(Date.now());
@@ -33,11 +33,4 @@ export async function storeRates() {
   }
 }
 
-const handler = async (
-  _event: AWSLambda.APIGatewayEvent
-): Promise<IResponse> => {
-  await storeRates();
-  return successResponse({}, 10 * 60); // 10 mins cache
-};
-
-export default wrap(handler);
+export default wrapScheduledLambda(handler);
