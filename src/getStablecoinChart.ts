@@ -97,7 +97,8 @@ export async function craftChartsResponse(
       if (chain !== "all" && !lastBalance?.[normalizedChain]) {
         return undefined;
       }
-      const earliestTimestamp = chain === "all" ? 0 : 1652241600; // chains have mostly incomplete data before May 11, 2022
+      const earliestTimestamp =
+        chain === "all" && peggedID === undefined ? 0 : 1652241600; // chains have mostly incomplete data before May 11, 2022
       const historicalBalance = await dynamodb.query({
         ExpressionAttributeValues: {
           ":pk": `dailyPeggedBalances#${pegged.id}`,
