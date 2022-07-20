@@ -928,7 +928,7 @@ export default [
     cmcId: "20317",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "dexscreener",
+    priceSource: "coingecko", // for all dexscreener pools with high liquidity, dexscreener api does not give their liquidity.
     auditLinks: null,
     twitter: "https://twitter.com/overnight_fi",
     wiki: "https://wiki.defillama.com/wiki/Overnight",
