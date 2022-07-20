@@ -10,7 +10,7 @@ export async function storeRates() {
       const currentDate = new Date(Date.now());
       const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
       const currentDateFormatted = `${currentDate.getUTCFullYear()}-${month}-${currentDate.getUTCDate()}`;
-      const url = `https://openexchangerates.org/api/historical/${currentDateFormatted}.json?app_id=292b4223032e4b719b10c38f95fb1c90`;
+      const url = `https://openexchangerates.org/api/historical/${currentDateFormatted}.json?app_id=019357e37fe74858b56d5a9c30e89dd1`;
       const response = await fetch(url).then((res) => res.json());
       const timestamp = response.timestamp;
       const date = getTimestampAtStartOfDay(timestamp);
