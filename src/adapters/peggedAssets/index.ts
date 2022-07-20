@@ -54,7 +54,8 @@ import ceur from "./celo-euro";
 import seur from "./seur";
 import ageur from "./ageur";
 import par from "./par-stablecoin";
-import ush from "./hedge-usd"
+import ush from "./hedge-usd";
+import threeusd from "./three-usd";
 
 export default {
   tether,
@@ -114,4 +115,5 @@ export default {
   ageur,
   "par-stablecoin": par,
   "hedge-usd": ush,
+  "three-usd": threeusd,
 };

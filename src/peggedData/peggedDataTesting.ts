@@ -1151,4 +1151,24 @@ export default [
     twitter: "https://twitter.com/HedgeLabs",
     wiki: "https://wiki.defillama.com/wiki/USH",
   },
+  {
+    id: "58",
+    name: "3USD",
+    address: "karura:9iLH8T7zoWhY7sBmj1WK9ENbWdS1nL8n9wAxaeRitTa6",
+    symbol: "3USD",
+    url: "https://www.taigaprotocol.io/",
+    description:
+      "3pool on Karura made of aUSD, USDC, USDT is the first stablecoin pool powering the Kusama ecosystem. Liquidity providers will get 3USD token after adding liquidity.",
+    mintRedeemDescription:
+      "Using the Karura app, users receive 3USD LP tokens by adding aUSD, USDC, or USDT liquidity. LP tokens can be redeemed for the underlying assets.",
+    onCoinGecko: "false",
+    gecko_id: "three-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/TaigaProtocol",
+    wiki: "https://wiki.defillama.com/wiki/Taiga_Protocol",
+  },
 ] as PeggedAsset[];
