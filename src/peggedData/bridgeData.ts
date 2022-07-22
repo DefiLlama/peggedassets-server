@@ -259,6 +259,14 @@ export default {
     bridge: "multichain",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x37f750B7cC259A2f741AF45294f6a16572CF5cAd": {
+    bridge: "wormhole",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x1F3a10587A20114EA25Ba1b388EE2dD4A337ce27": {
+    bridge: "wormhole",
+    sourceChain: formattedSourceChains.eth,
+  },
   CbNYA9n3927uXUukee2Hf4tm3xxkffJPPZvGazc2EAH1: {
     bridge: "wormhole",
     sourceChain: formattedSourceChains.eth,

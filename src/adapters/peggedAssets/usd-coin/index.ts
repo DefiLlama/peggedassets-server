@@ -229,7 +229,10 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x3ad9dfe640e1a9cc1d9b0948620820d975c3803a"], // synapse
   },
   celo: {
-    bridgedFromETH6Decimals: ["0xef4229c8c3250C675F21BCefa42f58EfbfF6002a"], // optics
+    bridgedFromETH6Decimals: [
+      "0xef4229c8c3250C675F21BCefa42f58EfbfF6002a", // optics
+      "0x37f750B7cC259A2f741AF45294f6a16572CF5cAd", // wormhole
+    ], 
     bridgedFromETH18Decimals: ["0x93DB49bE12B864019dA9Cb147ba75cDC0506190e"], // moss
     bridgedFromPolygon: ["0x1bfc26cE035c368503fAE319Cc2596716428ca44"], // optics
     bridgedFromAvax: ["0xb70e0a782b058BFdb0d109a3599BEc1f19328E36"], // allbridge
@@ -237,7 +240,10 @@ const chainContracts: ChainContracts = {
   },
   kava: {
     bridgedFromETH: ["0x23367BEA9B6931690960d8c59f6e708630f24E58"], // celer
-  }
+  },
+  karura: {
+    bridgedFromETH: ["0x1F3a10587A20114EA25Ba1b388EE2dD4A337ce27"], // wormhole
+  },
 };
 
 /*
@@ -405,7 +411,9 @@ async function circleAPIChainMinted(chain: string) {
       async (_bail: any) =>
         await axios.get("https://api.circle.com/v1/stablecoins")
     );
-    const usdcData = issuance.data.data.filter((obj: any) => obj.symbol === 'USDC');
+    const usdcData = issuance.data.data.filter(
+      (obj: any) => obj.symbol === "USDC"
+    );
     const filteredChainsData = await usdcData[0].chains.filter(
       (obj: any) => obj.chain === chain
     );
@@ -434,10 +442,33 @@ async function reinetworkBridged(address: string, decimals: number) {
   };
 }
 
+async function karuraMinted(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://blockscout.karura.network/api?module=token&action=getToken&contractaddress=getToken&contractaddress=${address}`
+        )
+    );
+    const supply = res.data.result.totalSupply / 10 ** decimals;
+    sumSingleBalance(balances, "peggedUSD", supply);
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
-    unreleased: chainUnreleased("ethereum", 6, chainContracts.ethereum.unreleased[0]),
+    unreleased: chainUnreleased(
+      "ethereum",
+      6,
+      chainContracts.ethereum.unreleased[0]
+    ),
     solana: bridgedSupply(
       "ethereum",
       6,
@@ -747,17 +778,18 @@ const adapter: PeggedIssuanceAdapter = {
       "peggedUSD"
     ),
     avalanche: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromAvax),
-    polygon: bridgedSupply(
-      "celo",
-      6,
-      chainContracts.celo.bridgedFromPolygon
-    ),
+    polygon: bridgedSupply("celo", 6, chainContracts.celo.bridgedFromPolygon),
     solana: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromSol),
   },
   kava: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("kava", 6, chainContracts.kava.bridgedFromETH),
+  },
+  karura: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: karuraMinted(chainContracts.karura.bridgedFromETH[0], 6),
   },
 };
 
