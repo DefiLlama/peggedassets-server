@@ -12,7 +12,8 @@ export type PriceSource =
   | "dexscreener"
   | "curve"
   | "coingecko"
-  | "birdeye";
+  | "birdeye"
+  | "kucoin"
 
 export type PeggedAsset = {
   id: string;

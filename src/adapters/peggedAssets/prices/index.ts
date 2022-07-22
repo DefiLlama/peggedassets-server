@@ -2,7 +2,7 @@ const sdk = require("@defillama/sdk");
 import chainabi from "./chainlink_abi.json";
 import uniabi from "./uniswap_abi.json";
 import { ChainBlocks } from "../peggedAsset.type";
-import { PriceSource } from "../../../peggedData/types";
+import { PriceSource } from "../../../peggedData/typesTesting";
 import { getCurvePrice, OtherTokenTypes } from "./getCurvePrice";
 const axios = require("axios");
 const retry = require("async-retry");
@@ -48,6 +48,8 @@ type CurvePools = {
     decimalsToken1: number;
     otherTokenisType?: OtherTokenTypes;
     use256abi?: boolean;
+    otherTokenGeckoID?: string,
+    otherTokenPriceSource?: PriceSource
   };
 };
 
@@ -279,6 +281,24 @@ const curvePools: CurvePools = {
     decimalsToken1: 2,
     use256abi: true,
   },
+  seur: {
+    chain: "ethereum",
+    address: "0x0Ce6a5fF5217e38315f87032CF90686C96627CAA",
+    tokenIndex: 1,
+    decimalsToken0: 2,
+    decimalsToken1: 18,
+    otherTokenGeckoID: "stasis-eurs",
+    otherTokenPriceSource: "curve"
+  },
+  ageur: {
+    chain: "ethereum",
+    address: "0xb9446c4Ef5EBE66268dA6700D26f96273DE3d571",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 6,
+    otherTokenGeckoID: "tether-eurt",
+    otherTokenPriceSource: "chainlink"
+  }
 };
 
 const dexscreener: AddressesForDexes = {
@@ -367,7 +387,7 @@ export default async function getCurrentPeggedPrice(
   token: string,
   chainBlocks: ChainBlocks,
   priceSource: PriceSource
-): Promise<Number | null> {
+): Promise<number | null> {
   if (priceSource === "chainlink") {
     const feed = feeds[token];
     if (feed) {
@@ -395,6 +415,8 @@ export default async function getCurrentPeggedPrice(
       decimalsToken1,
       otherTokenisType,
       use256abi,
+      otherTokenGeckoID,
+      otherTokenPriceSource
     } = pool;
     if (pool) {
       for (let i = 0; i < 5; i++) {
@@ -407,7 +429,9 @@ export default async function getCurrentPeggedPrice(
             decimalsToken0,
             decimalsToken1,
             otherTokenisType,
-            use256abi
+            use256abi,
+            otherTokenGeckoID,
+            otherTokenPriceSource
           );
           if (price) {
             return price;

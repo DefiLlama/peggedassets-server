@@ -2,12 +2,14 @@ const sdk = require("@defillama/sdk");
 import curveabi from "./curve_abi.json";
 import BigNumber from "bignumber.js";
 import { ChainBlocks } from "../peggedAsset.type";
+import { PriceSource } from "../../../peggedData/typesTesting";
+import getCurrentPeggedPrice from ".";
 
 export type OtherTokenTypes = "3crv" | "2crv" | "am3crv";
 
-const threePool = "0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7";
-const amThreePool = "0x445FE580eF8d70FF569aB36e80c647af338db351";
-const twoPool = "0x27E611FD27b276ACbd5Ffd632E5eAEBEC9761E40";
+const threePool = "0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7"; // ethereum
+const amThreePool = "0x445FE580eF8d70FF569aB36e80c647af338db351"; // polygon
+const twoPool = "0x27E611FD27b276ACbd5Ffd632E5eAEBEC9761E40"; // fantom
 
 const baseDecimals = 7; // Low values give inaccurate prices, high values increase slippage. If baseDecimals > 8 some calls will revert.
 
@@ -19,7 +21,9 @@ export async function getCurvePrice(
   decimalsToken0: number,
   decimalsToken1: number,
   otherTokenisType?: OtherTokenTypes,
-  use256abi?: boolean
+  use256abi?: boolean,
+  otherTokenGeckoID?: string,
+  otherTokenPriceSource?: PriceSource
 ) {
   let abi = {} as any;
   abi = use256abi ? curveabi["get_dy_256"] : curveabi["get_dy"];
@@ -90,6 +94,19 @@ export async function getCurvePrice(
         10 ** 18;
 
       return price3crv * price.toNumber();
+    }
+  }
+
+  if (otherTokenGeckoID && otherTokenPriceSource) {
+    const otherTokenPrice = await getCurrentPeggedPrice(
+      otherTokenGeckoID,
+      chainBlocks,
+      otherTokenPriceSource
+    );
+    if (otherTokenPrice) {
+      return price.toNumber() * otherTokenPrice;
+    } else {
+      throw new Error(`Could not price token in Curve pool ${pool}. Unable to get price for paired token ${otherTokenGeckoID}.`)
     }
   }
 

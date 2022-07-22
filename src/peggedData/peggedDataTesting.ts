@@ -1067,7 +1067,7 @@ export default [
     cmcId: "10419",
     pegType: "peggedEUR",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko", // curve is paired with another euro coin, haven't coded that pricing case yet
+    priceSource: "curve", 
     auditLinks: null,
     twitter: "https://twitter.com/synthetix_io",
     wiki: "https://wiki.defillama.com/wiki/Synthetix",
@@ -1106,7 +1106,7 @@ export default [
     cmcId: "15024",
     pegType: "peggedEUR",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko", // curve is paired with another euro coin, haven't coded that pricing case yet
+    priceSource: "curve",
     auditLinks: null,
     twitter: "https://twitter.com/AngleProtocol",
     wiki: "https://wiki.defillama.com/wiki/AGEUR",
