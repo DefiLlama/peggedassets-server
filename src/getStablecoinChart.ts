@@ -16,6 +16,7 @@ import {
   secondsInDay,
   getClosestDayStartTimestamp,
 } from "./utils/date";
+import backfilledChains from "./peggedData/backfilledChains";
 
 type TokenBalance = {
   [token: string]: number | undefined;
@@ -98,22 +99,26 @@ export async function craftChartsResponse(
         return undefined;
       }
       const earliestTimestamp =
-        chain === "all" ? 1609372800 : 1652241600; // chains have mostly incomplete data before May 11, 2022
-      let startKey = undefined
-      let historicalBalance = {Items:[]} as any
+        chain === "all" || backfilledChains.includes(chain ?? "")
+          ? 1609372800
+          : 1652241600; // chains have mostly incomplete data before May 11, 2022
+      let startKey = undefined;
+      let historicalBalance = { Items: [] } as any;
       do {
-      const historicalBalancePage = await dynamodb.query({
-        ExpressionAttributeValues: {
-          ":pk": `dailyPeggedBalances#${pegged.id}`,
-          ":sk": earliestTimestamp,
-        },
-        KeyConditionExpression: "PK = :pk AND SK > :sk",
-        ExclusiveStartKey: startKey,
-      }) as any;
-      startKey = historicalBalancePage.LastEvaluatedKey
-      let historicalItems = historicalBalancePage.Items as any
-      historicalBalance.Items = [...historicalBalance.Items, ...historicalItems]
-    } while (startKey)
+        const partialHistoricalBalance = (await dynamodb.query({
+          ExpressionAttributeValues: {
+            ":pk": `dailyPeggedBalances#${pegged.id}`,
+            ":sk": earliestTimestamp,
+          },
+          KeyConditionExpression: "PK = :pk AND SK > :sk",
+          ExclusiveStartKey: startKey,
+        })) as any;
+        startKey = partialHistoricalBalance.LastEvaluatedKey;
+        historicalBalance.Items = [
+          ...historicalBalance.Items,
+          ...partialHistoricalBalance.Items,
+        ];
+      } while (startKey);
       if (
         historicalBalance.Items === undefined ||
         historicalBalance.Items.length < 1
