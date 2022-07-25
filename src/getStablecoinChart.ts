@@ -99,19 +99,28 @@ export async function craftChartsResponse(
       }
       const earliestTimestamp =
         chain === "all" ? 1609372800 : 1652241600; // chains have mostly incomplete data before May 11, 2022
-      const historicalBalance = await dynamodb.query({
+      let startKey = undefined
+      let historicalBalance = {Items:[]} as any
+      do {
+      const historicalBalancePage = await dynamodb.query({
         ExpressionAttributeValues: {
           ":pk": `dailyPeggedBalances#${pegged.id}`,
           ":sk": earliestTimestamp,
         },
         KeyConditionExpression: "PK = :pk AND SK > :sk",
-      });
+        ExclusiveStartKey: startKey,
+      }) as any;
+      startKey = historicalBalancePage.LastEvaluatedKey
+      let historicalItems = historicalBalancePage.Items as any
+      historicalBalance.Items = [...historicalBalance.Items, ...historicalItems]
+    } while (startKey)
       if (
         historicalBalance.Items === undefined ||
         historicalBalance.Items.length < 1
       ) {
         return undefined;
       }
+
       const lastDailyItem =
         historicalBalance.Items[historicalBalance.Items.length - 1];
       if (
@@ -127,6 +136,7 @@ export async function craftChartsResponse(
         historicalBalance.Items[historicalBalance.Items.length - 1].SK
       );
       lastDailyTimestamp = Math.max(lastDailyTimestamp, lastTimestamp);
+
       return {
         pegged,
         historicalBalance: historicalBalance.Items,
@@ -187,7 +197,7 @@ export async function craftChartsResponse(
       const priceTimestamps = historicalPrices?.map((item) => item.SK);
 
       await Promise.all(
-        historicalBalance.map(async (item) => {
+        historicalBalance.map(async (item: any) => {
           const timestamp = getClosestDayStartTimestamp(item.SK);
           let itemBalance: any = {};
 
