@@ -101,14 +101,14 @@ async function terraMinted() {
     const res = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://api.extraterrestrial.money/v1/api/supply?denom=uusd"
+          "https://fcd.terra.dev/v1/totalsupply/ust"
         )
     );
-    const totalSupply = res.data.uusd[0].total;
+    const totalSupply = res.data;
     sumSingleBalance(
       balances,
       "peggedUSD",
-      totalSupply / 10 ** 6,
+      totalSupply,
       "issued",
       false
     );
@@ -118,9 +118,7 @@ async function terraMinted() {
 
 const adapter: PeggedIssuanceAdapter = {
   terra: {
-    minted: async () => {
-      return { peggedUSD: 11278778389, bridges: { issued: 11278778389 } };
-    }, // terraMinted() is currently broken
+    minted: terraMinted(),
     unreleased: async () => ({}),
   },
   ethereum: {
