@@ -57,6 +57,7 @@ import par from "./par-stablecoin";
 import ush from "./hedge-usd";
 import threeusd from "./three-usd";
 import sigmausd from "./sigmausd";
+import home from "./bacon-protocol-home";
 
 export default {
   tether,
@@ -118,4 +119,5 @@ export default {
   "hedge-usd": ush,
   "three-usd": threeusd,
   sigmausd,
+  home,
 };
