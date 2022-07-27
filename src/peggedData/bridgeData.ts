@@ -1463,6 +1463,10 @@ export default {
     bridge: "deus",
     sourceChain: formattedSourceChains.fantom,
   },
+  "0x5bEF2617eCCA9a39924c09017c5F1E25Efbb3bA8": {
+    bridge: "orbit",
+    sourceChain: formattedSourceChains.eth,
+  }
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1648,4 +1652,8 @@ export const bridgeInfo = {
     name: "DEUS Bridge",
     link: "https://deus.finance/",
   },
+  orbit: {
+    name: "Orbit Bridge",
+    link: "https://orbitchain.io/",
+  }
 } as BridgeInfo;

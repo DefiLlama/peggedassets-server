@@ -38,6 +38,7 @@ const chainContracts: ChainContracts = {
       "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
       "0x4318cb63a2b8edf2de971e2f17f77097e499459d", // wormhole
       "0x750e4c4984a9e0f12978ea6742bc1c5d248f40ed", // axelar
+      "0x5bEF2617eCCA9a39924c09017c5F1E25Efbb3bA8", // orbit
     ],
     bridgedFromSol: ["0x576cf361711cd940cd9c397bb98c4c896cbd38de"], // wormhole
   },
