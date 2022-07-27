@@ -40,10 +40,8 @@ const chainContracts: ChainContracts = {
   tron: {
     issued: ["TMwFHYXLJaRUPeW6421aqXL4ZEzPRFGkGT"],
     reserves: [
-      "TL5x9MtSnDy537FXKx53yAaHRRNdg9TkkA",
-      "TKcEU8ekq2ZoFzLSGFYCUY6aocJBX9X31b",
-      "TQcia2H2TU3WrFk9sKtdK9qCfkW8XirfPQ",
-      "TQwh1ZDBdqMKDtGWEeDdrRUUbtgaVL1Se2",
+      "TL5x9MtSnDy537FXKx53yAaHRRNdg9TkkA", // 86% of this is held by Tron Foundation.
+      "TPyjyZfsYaXStgz2NmAraF1uZcMtkgNan5", // Tron Foundation.
     ],
   },
 };
