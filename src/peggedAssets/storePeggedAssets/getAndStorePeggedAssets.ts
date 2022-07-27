@@ -94,12 +94,18 @@ function mergeBridges(
   bridgeBalances = bridgeBalances as BridgeBalances;
   // this is incorrect, doesn't account for different sources, needs to be refactored
   for (let bridgeID in bridgeBalancesToMerge) {
-    if (bridgeBalances[bridgeID]) {
-      const bridgeBalance = bridgeBalances[bridgeID].amount ?? 0;
-      const bridgeBalanceToMerge = bridgeBalancesToMerge[bridgeID].amount;
-      bridgeBalances[bridgeID].amount = bridgeBalance + bridgeBalanceToMerge;
-    } else {
-      bridgeBalances[bridgeID] = bridgeBalancesToMerge[bridgeID];
+    for (let sourceChain in bridgeBalancesToMerge[bridgeID]) {
+      if (bridgeBalances?.[bridgeID]?.[sourceChain]) {
+        const bridgeBalance = bridgeBalances[bridgeID][sourceChain].amount ?? 0;
+        const bridgeBalanceToMerge =
+          bridgeBalancesToMerge[bridgeID][sourceChain].amount;
+        bridgeBalances[bridgeID][sourceChain].amount =
+          bridgeBalance + bridgeBalanceToMerge;
+      } else {
+        bridgeBalances[bridgeID] = bridgeBalances[bridgeID] || {};
+        bridgeBalances[bridgeID][sourceChain] =
+          bridgeBalancesToMerge[bridgeID][sourceChain];
+      }
     }
   }
   return bridgeBalances;

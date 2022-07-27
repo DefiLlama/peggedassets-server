@@ -1,4 +1,4 @@
-import { BridgeIDs } from "./peggedData/bridgeData";
+import { BridgeID } from "./peggedData/bridgeData";
 
 export interface TokenPrices {
   [token: string]: {
@@ -10,9 +10,10 @@ type PeggedBalances = {
   [peggedAssetType: string]: number | null;
 };
 export type BridgeBalances = {
-  [bridgeID in BridgeIDs]: {
+  [bridgeID in BridgeID]: {
+    [source: string]: {
     amount: number;
-    source: string;
+    }
   };
 };
 export type PeggedTokenBalance = PeggedBalances & {

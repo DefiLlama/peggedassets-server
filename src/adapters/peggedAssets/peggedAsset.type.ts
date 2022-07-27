@@ -12,8 +12,9 @@ type PeggedBalances = {
 };
 type BridgeBalances = {
   [bridgeID in BridgeID]: {
+    [source: string]: {
     amount: StringNumber | number;
-    source: string;
+    }
   };
 };
 export type Balances = PeggedBalances & {

@@ -32,14 +32,16 @@ export function sumSingleBalance(
         ? bridgeMapping[bridgeAddressOrName]?.sourceChain ?? "not-found"
         : bridgedFromChain ?? "not-found";
       balances.bridges[bridgeID] = balances.bridges[bridgeID] || {};
-      balances.bridges[bridgeID].source = sourceChain;
-      const prevBridgeIDBalance = balances.bridges[bridgeID]?.amount ?? 0;
+      balances.bridges[bridgeID][sourceChain] =
+        balances.bridges[bridgeID][sourceChain] || {};
+      const prevBridgeIDBalance =
+        balances.bridges[bridgeID][sourceChain].amount ?? 0;
       if (typeof prevBridgeIDBalance !== "number") {
         throw new Error(
           `Trying to merge string and number token balances for balance ${balance}`
         );
       }
-      (balances.bridges[bridgeID].amount as number) =
+      (balances.bridges[bridgeID][sourceChain].amount as number) =
         prevBridgeIDBalance + balance;
     }
   } else {
@@ -54,11 +56,12 @@ export function sumSingleBalance(
         ? bridgeMapping[bridgeAddressOrName]?.sourceChain ?? "not-found"
         : bridgedFromChain ?? "not-found";
       balances.bridges[bridgeID] = balances.bridges[bridgeID] || {};
-      balances.bridges[bridgeID].source = sourceChain;
+      balances.bridges[bridgeID][sourceChain] =
+        balances.bridges[bridgeID][sourceChain] || {};
       const prevBridgeIDBalance = BigNumber.from(
         balances.bridges[bridgeID]?.amount ?? "0"
       );
-      balances.bridges[bridgeID].amount = prevBridgeIDBalance
+      balances.bridges[bridgeID][sourceChain].amount = prevBridgeIDBalance
         .add(BigNumber.from(balance))
         .toString();
     }
@@ -87,22 +90,25 @@ async function mergeBalances(
       .toString();
   }
   for (let bridgeID in balancesToMerge.bridges) {
-    if (balances.bridges[bridgeID]) {
-      const bridgeBalance = balances.bridges[bridgeID].amount;
-      const bridgeBalanceToMerge = balancesToMerge.bridges[bridgeID].amount;
-      if (
-        typeof bridgeBalance === "number" &&
-        typeof bridgeBalanceToMerge === "number"
-      ) {
-        balances.bridges[bridgeID].amount =
-          (bridgeBalance ?? 0) + bridgeBalanceToMerge;
+    for (let sourceChain in balancesToMerge.bridges[bridgeID]) {
+      if (balances?.bridges?.[bridgeID]?.[sourceChain]) {
+        const bridgeBalance = balances.bridges[bridgeID][sourceChain].amount;
+        const bridgeBalanceToMerge = balancesToMerge.bridges[bridgeID][sourceChain].amount;
+        if (
+          typeof bridgeBalance === "number" &&
+          typeof bridgeBalanceToMerge === "number"
+        ) {
+          balances.bridges[bridgeID][sourceChain].amount =
+            (bridgeBalance ?? 0) + bridgeBalanceToMerge;
+        } else {
+          balances.bridges[bridgeID][sourceChain].amount = BigNumber.from(bridgeBalance ?? 0)
+            .add(BigNumber.from(bridgeBalanceToMerge))
+            .toString();
+        }
       } else {
-        balances.bridges[bridgeID].amount = BigNumber.from(bridgeBalance ?? 0)
-          .add(BigNumber.from(bridgeBalanceToMerge))
-          .toString();
+        balances.bridges[bridgeID] = balances.bridges[bridgeID] || {};
+        balances.bridges[bridgeID][sourceChain] = balancesToMerge.bridges[bridgeID][sourceChain];
       }
-    } else {
-      balances.bridges[bridgeID] = balancesToMerge.bridges[bridgeID];
     }
   }
 }
