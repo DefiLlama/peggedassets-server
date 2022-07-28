@@ -119,5 +119,5 @@ export default {
   "hedge-usd": ush,
   "three-usd": threeusd,
   sigmausd,
-  home,
+  "bacon-protocol-home": home,
 };

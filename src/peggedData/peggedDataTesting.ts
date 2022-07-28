@@ -1191,4 +1191,24 @@ export default [
     twitter: "https://twitter.com/ergoplatformorg",
     wiki: "https://wiki.defillama.com/wiki/Ergo",
   },
+  {
+    id: "60",
+    name: "HomeCoin",
+    address: "0xb8919522331c59f5c16bdfaa6a121a6e03a91f62",
+    symbol: "HOME",
+    url: "https://www.homecoin.finance/",
+    description:
+      "A stablecoin backed by U.S. Homes.",
+    mintRedeemDescription:
+      "Using the Bacon app, users swap USDC to mint HOME 1:1. HOME can be redeemed for USDC 1:1 at any time.",
+    onCoinGecko: "true",
+    gecko_id: "bacon-protocol-home",
+    cmcId: "20520",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/homecoinfinance",
+    wiki: "https://wiki.defillama.com/wiki/HomeCoin",
+  },
 ] as PeggedAsset[];

@@ -298,7 +298,15 @@ const curvePools: CurvePools = {
     decimalsToken1: 6,
     otherTokenGeckoID: "tether-eurt",
     otherTokenPriceSource: "chainlink"
-  }
+  },
+  "bacon-protocol-home": {
+    chain: "ethereum",
+    address: "0x5c6A6Cf9Ae657A73b98454D17986AF41fC7b44ee",
+    tokenIndex: 0,
+    decimalsToken0: 6,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
+  },
 };
 
 const dexscreener: AddressesForDexes = {
