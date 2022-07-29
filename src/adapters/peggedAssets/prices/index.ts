@@ -315,6 +315,14 @@ const curvePools: CurvePools = {
     decimalsToken1: 18,
     otherTokenisType: "3crv",
   },
+  "pusd-2": {
+    chain: "ethereum",
+    address: "0x8EE017541375F6Bcd802ba119bdDC94dad6911A1",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
+  },
 };
 
 const dexscreener: AddressesForDexes = {

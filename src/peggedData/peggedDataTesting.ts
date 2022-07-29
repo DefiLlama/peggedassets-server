@@ -1067,7 +1067,7 @@ export default [
     cmcId: "10419",
     pegType: "peggedEUR",
     pegMechanism: "crypto-backed",
-    priceSource: "curve", 
+    priceSource: "curve",
     auditLinks: null,
     twitter: "https://twitter.com/synthetix_io",
     wiki: "https://wiki.defillama.com/wiki/Synthetix",
@@ -1197,8 +1197,7 @@ export default [
     address: "0xb8919522331c59f5c16bdfaa6a121a6e03a91f62",
     symbol: "HOME",
     url: "https://www.homecoin.finance/",
-    description:
-      "A stablecoin backed by U.S. Homes.",
+    description: "A stablecoin backed by U.S. Homes.",
     mintRedeemDescription:
       "Using the Bacon app, users swap USDC to mint HOME 1:1. HOME can be redeemed for USDC 1:1 at any time.",
     onCoinGecko: "true",
@@ -1230,5 +1229,25 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/fiatdao",
     wiki: "https://wiki.defillama.com/wiki/FIATDAO",
+  },
+  {
+    id: "62",
+    name: "PUSd",
+    address: "0x466a756e9a7401b5e2444a3fcb3c2c12fbea0a54",
+    symbol: "PUSD",
+    url: "https://jpegd.io/",
+    description:
+      "PUSd is a synthetic stablecoin minted against NFT collateralized debt positions.",
+    mintRedeemDescription:
+      "Using the JPEG'd app, users mint PUSd by depositing an accepted NFT into a vault. When the loan is repaid to retrieve the NFT, the paid back PUSd is burned.",
+    onCoinGecko: "true",
+    gecko_id: "pusd-2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/JPEGd_69",
+    wiki: "https://wiki.defillama.com/wiki/JPEGd",
   },
 ] as PeggedAsset[];
