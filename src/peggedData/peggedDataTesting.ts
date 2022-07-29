@@ -1211,4 +1211,24 @@ export default [
     twitter: "https://twitter.com/homecoinfinance",
     wiki: "https://wiki.defillama.com/wiki/HomeCoin",
   },
+  {
+    id: "61",
+    name: "Fixed Income Asset Token",
+    address: "0x586Aa273F262909EEF8fA02d90Ab65F5015e0516",
+    symbol: "FIAT",
+    url: "https://fiatdao.com/",
+    description:
+      "The FIAT protocol allows users to mint a single ERC-20 token, $FIAT, against a universe of accepted fixed income asset collateral.",
+    mintRedeemDescription:
+      "Using the FIAT DAO app, users by depositing an accepted fixed income collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back FIAT is burned.",
+    onCoinGecko: "true",
+    gecko_id: "fixed-income-asset-token",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/fiatdao",
+    wiki: "https://wiki.defillama.com/wiki/FIATDAO",
+  },
 ] as PeggedAsset[];

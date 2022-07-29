@@ -307,6 +307,14 @@ const curvePools: CurvePools = {
     decimalsToken1: 18,
     otherTokenisType: "3crv",
   },
+  "fixed-income-asset-token": {
+    chain: "ethereum",
+    address: "0xdb8cc7eced700a4bffde98013760ff31ff9408d8",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
+  },
 };
 
 const dexscreener: AddressesForDexes = {
