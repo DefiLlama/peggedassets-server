@@ -1250,4 +1250,23 @@ export default [
     twitter: "https://twitter.com/JPEGd_69",
     wiki: "https://wiki.defillama.com/wiki/JPEGd",
   },
+  {
+    id: "63",
+    name: "fUSD",
+    address: "0xad84341756bf337f5a0164515b1f6f993d194e1f",
+    symbol: "FUSD",
+    url: "https://fantom.foundation/defi/",
+    description: "fMint is the gateway to Fantom DeFi.",
+    mintRedeemDescription:
+      "Mint fUSD, the stablecoin on Fantom pegged 1:1 to the USD price, using your FTM. Choose the amount you want to mint and rebalance at any time by adding or removing FTM. Repay the fUSD you minted at any time, unlocking your FTM.      ",
+    onCoinGecko: "true",
+    gecko_id: "fantom-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/fantomfdn/",
+    wiki: "https://wiki.defillama.com/wiki/fantom",
+  },
 ] as PeggedAsset[];
