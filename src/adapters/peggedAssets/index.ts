@@ -60,6 +60,7 @@ import sigmausd from "./sigmausd";
 import home from "./bacon-protocol-home";
 import fiat from "./fixed-income-asset-token";
 import pusd from "./pusd-2";
+import fusd from "./fantom-usd";
 
 export default {
   tether,
@@ -124,4 +125,5 @@ export default {
   "bacon-protocol-home": home,
   "fixed-income-asset-token": fiat,
   "pusd-2": pusd,
+  "fantom-usd": fusd,
 };
