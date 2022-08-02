@@ -1289,4 +1289,24 @@ export default [
     twitter: "https://twitter.com/UXDProtocol",
     wiki: "https://wiki.defillama.com/wiki/UXD_Protocol",
   },
+  {
+    id: "65",
+    name: "USDH",
+    address: "solana:USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+    symbol: "USDH",
+    url: "https://hubbleprotocol.io/",
+    description:
+      "USDH is a censorship-resistant, crypto-backed stablecoin on Solana, soft-pegged to the US Dollar. USDH is fully collateralized by a basket of crypto assets, deposited into a Hubble Smart Contract.",
+    mintRedeemDescription:
+      "Using the Hubble Protocol app, users mint USDH by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back USDH is burned.",
+    onCoinGecko: "true",
+    gecko_id: "usdh",
+    cmcId: "19550",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "birdeye",
+    auditLinks: null,
+    twitter: "https://twitter.com/hubbleprotocol",
+    wiki: "https://wiki.defillama.com/wiki/Hubble_Protocol",
+  },
 ] as PeggedAsset[];

@@ -62,6 +62,7 @@ import fiat from "./fixed-income-asset-token";
 import pusd from "./pusd-2";
 import fusd from "./fantom-usd";
 import uxd from "./uxd-stablecoin";
+import usdh from "./usdh";
 
 export default {
   tether,
@@ -128,4 +129,5 @@ export default {
   "pusd-2": pusd,
   "fantom-usd": fusd,
   "uxd-stablecoin": uxd,
+  usdh,
 };

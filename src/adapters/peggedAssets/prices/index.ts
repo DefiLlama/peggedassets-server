@@ -393,6 +393,9 @@ const birdeye: AddressesForDexes = {
   "uxd-stablecoin": {
     address: "7kbnvuGBxxj8AG9qp8Scn56muWGaRaFqxg1FsRp3PaFT",
   },
+  usdh: {
+    address: "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
+  },
 };
 
 const uniswapPools: UniswapPools = {
