@@ -9,7 +9,8 @@ const handler = async (_event: any) => {
     try {
       const currentDate = new Date(Date.now());
       const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
-      const currentDateFormatted = `${currentDate.getUTCFullYear()}-${month}-${currentDate.getUTCDate()}`;
+      const day = ("0" + (currentDate.getUTCDate())).slice(-2);
+      const currentDateFormatted = `${currentDate.getUTCFullYear()}-${month}-${day}`;
       const url = `https://openexchangerates.org/api/historical/${currentDateFormatted}.json?app_id=019357e37fe74858b56d5a9c30e89dd1`;
       const response = await fetch(url).then((res) => res.json());
       const timestamp = response.timestamp;
