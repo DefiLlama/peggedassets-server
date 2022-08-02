@@ -1269,4 +1269,24 @@ export default [
     twitter: "https://twitter.com/fantomfdn/",
     wiki: "https://wiki.defillama.com/wiki/Fantom",
   },
+  {
+    id: "64",
+    name: "UXD Stablecoin",
+    address: "solana:7kbnvuGBxxj8AG9qp8Scn56muWGaRaFqxg1FsRp3PaFT",
+    symbol: "UXD",
+    url: "https://uxd.fi/",
+    description:
+      "UXD Protocol is a fully collateralized decentralized stablecoin on Solana backed by delta-neutral position using derivatives.",
+    mintRedeemDescription:
+      "Using the UXD Protocol app, users mint UXD by depositing SOL into the protocol where it establishes a derivatives trading position on decentralized exchanges. When the loan is repaid to retrieve the collateral SOL, the paid back UXD is burned.",
+    onCoinGecko: "true",
+    gecko_id: "uxd-stablecoin",
+    cmcId: "17535",
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic",
+    priceSource: "birdeye",
+    auditLinks: null,
+    twitter: "https://twitter.com/UXDProtocol",
+    wiki: "https://wiki.defillama.com/wiki/UXD_Protocol",
+  },
 ] as PeggedAsset[];

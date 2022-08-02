@@ -48,8 +48,8 @@ type CurvePools = {
     decimalsToken1: number;
     otherTokenisType?: OtherTokenTypes;
     use256abi?: boolean;
-    otherTokenGeckoID?: string,
-    otherTokenPriceSource?: PriceSource
+    otherTokenGeckoID?: string;
+    otherTokenPriceSource?: PriceSource;
   };
 };
 
@@ -288,7 +288,7 @@ const curvePools: CurvePools = {
     decimalsToken0: 2,
     decimalsToken1: 18,
     otherTokenGeckoID: "stasis-eurs",
-    otherTokenPriceSource: "curve"
+    otherTokenPriceSource: "curve",
   },
   ageur: {
     chain: "ethereum",
@@ -297,7 +297,7 @@ const curvePools: CurvePools = {
     decimalsToken0: 18,
     decimalsToken1: 6,
     otherTokenGeckoID: "tether-eurt",
-    otherTokenPriceSource: "chainlink"
+    otherTokenPriceSource: "chainlink",
   },
   "bacon-protocol-home": {
     chain: "ethereum",
@@ -377,7 +377,7 @@ const dexscreener: AddressesForDexes = {
   },
   "fantom-usd": {
     address: "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
-  }
+  },
 };
 
 const birdeye: AddressesForDexes = {
@@ -389,6 +389,9 @@ const birdeye: AddressesForDexes = {
   },
   "hedge-usd": {
     address: "9iLH8T7zoWhY7sBmj1WK9ENbWdS1nL8n9wAxaeRitTa6",
+  },
+  "uxd-stablecoin": {
+    address: "7kbnvuGBxxj8AG9qp8Scn56muWGaRaFqxg1FsRp3PaFT",
   },
 };
 
@@ -443,7 +446,7 @@ export default async function getCurrentPeggedPrice(
       otherTokenisType,
       use256abi,
       otherTokenGeckoID,
-      otherTokenPriceSource
+      otherTokenPriceSource,
     } = pool;
     if (pool) {
       for (let i = 0; i < 5; i++) {
