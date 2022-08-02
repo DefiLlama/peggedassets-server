@@ -375,6 +375,9 @@ const dexscreener: AddressesForDexes = {
   "par-stablecoin": {
     address: "0x68037790A0229e9Ce6EaA8A99ea92964106C4703",
   },
+  "fantom-usd": {
+    address: "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
+  }
 };
 
 const birdeye: AddressesForDexes = {
