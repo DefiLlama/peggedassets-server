@@ -17,7 +17,7 @@ type BridgeMapping = {
   [chain: string]: PeggedTokenBalance[];
 };
 
-const pegTypes = ["peggedUSD"];
+const pegTypes = ["peggedUSD", "peggedEUR", "peggedVAR"];
 
 async function getLatestBlockRetry(chain: string) {
   for (let i = 0; i < 5; i++) {
