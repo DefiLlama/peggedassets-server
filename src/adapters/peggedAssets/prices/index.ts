@@ -37,7 +37,7 @@ type ChainlinkFeeds = {
   };
 };
 
-// Calculates price by using exchange rate between token0 and token1.
+// Calculates price by using spot exchange rate between token0 and token1.
 // If the other token in the pair is not one included in 'OtherTokenTypes', it's assumed to be priced $1.
 type CurvePools = {
   [coinGeckoID: string]: {
@@ -47,8 +47,9 @@ type CurvePools = {
     decimalsToken0: number;
     decimalsToken1: number;
     otherTokenisType?: OtherTokenTypes;
-    use256abi?: boolean;
-    otherTokenGeckoID?: string;
+    use256abi?: boolean; // curve contracts use 2 different abi's, see ./curve_abi.json
+    baseDecimalsAdjustment?: number; // this is a hack to adjust the number of decimals used for when the method in ./getCurvePrice doesn't work
+    otherTokenGeckoID?: string; // both these should be included if pricing is to be based off other token in pair already having a price from a different price source
     otherTokenPriceSource?: PriceSource;
   };
 };
@@ -323,6 +324,15 @@ const curvePools: CurvePools = {
     decimalsToken1: 18,
     otherTokenisType: "3crv",
   },
+  "frax-price-index": {
+    chain: "ethereum",
+    address: "0xf861483fa7E511fbc37487D91B6FAa803aF5d37c",
+    tokenIndex: 1,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    use256abi: true,
+    baseDecimalsAdjustment: 5,
+  },
 };
 
 const dexscreener: AddressesForDexes = {
@@ -448,6 +458,7 @@ export default async function getCurrentPeggedPrice(
       decimalsToken1,
       otherTokenisType,
       use256abi,
+      baseDecimalsAdjustment,
       otherTokenGeckoID,
       otherTokenPriceSource,
     } = pool;
@@ -463,6 +474,7 @@ export default async function getCurrentPeggedPrice(
             decimalsToken1,
             otherTokenisType,
             use256abi,
+            baseDecimalsAdjustment,
             otherTokenGeckoID,
             otherTokenPriceSource
           );

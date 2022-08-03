@@ -22,19 +22,26 @@ export async function getCurvePrice(
   decimalsToken1: number,
   otherTokenisType?: OtherTokenTypes,
   use256abi?: boolean,
+  baseDecimalsAdjustment?: number,
   otherTokenGeckoID?: string,
   otherTokenPriceSource?: PriceSource
 ) {
   let abi = {} as any;
   abi = use256abi ? curveabi["get_dy_256"] : curveabi["get_dy"];
 
+  const adjustedBaseDecimals = baseDecimals + (baseDecimalsAdjustment ?? 0);
+
   // I don't understand the logic I used here, I just guessed until it worked.
   let decimalsPower = new BigNumber(10).pow(
-    baseDecimals + Math.max(0, decimalsToken0 - decimalsToken1)
+    adjustedBaseDecimals + Math.max(0, decimalsToken0 - decimalsToken1)
   );
   let decimalsPowerCorrection = new BigNumber(10).pow(
-    baseDecimals + Math.max(0, decimalsToken1 - decimalsToken0)
+    adjustedBaseDecimals + Math.max(0, decimalsToken1 - decimalsToken0)
   );
+
+  if (pool === "0xf861483fa7E511fbc37487D91B6FAa803aF5d37c") {
+    console.log(decimalsPower.toString());
+  }
 
   const dy = (
     await sdk.api.abi.call({
@@ -106,7 +113,9 @@ export async function getCurvePrice(
     if (otherTokenPrice) {
       return price.toNumber() * otherTokenPrice;
     } else {
-      throw new Error(`Could not price token in Curve pool ${pool}. Unable to get price for paired token ${otherTokenGeckoID}.`)
+      throw new Error(
+        `Could not price token in Curve pool ${pool}. Unable to get price for paired token ${otherTokenGeckoID}.`
+      );
     }
   }
 
