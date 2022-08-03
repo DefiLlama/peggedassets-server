@@ -63,6 +63,7 @@ import pusd from "./pusd-2";
 import fusd from "./fantom-usd";
 import uxd from "./uxd-stablecoin";
 import usdh from "./usdh";
+import fpi from "./frax-price-index";
 
 export default {
   tether,
@@ -130,4 +131,5 @@ export default {
   "fantom-usd": fusd,
   "uxd-stablecoin": uxd,
   usdh,
+  "frax-price-index": fpi,
 };

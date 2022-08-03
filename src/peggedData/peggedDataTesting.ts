@@ -1309,4 +1309,24 @@ export default [
     twitter: "https://twitter.com/hubbleprotocol",
     wiki: "https://wiki.defillama.com/wiki/Hubble_Protocol",
   },
+  {
+    id: "66",
+    name: "Frax Price Index",
+    address: "0x5ca135cb8527d76e932f34b5145575f9d8cbe08e",
+    symbol: "FPI",
+    url: "https://frax.finance/",
+    description:
+      "The Frax Price Index (FPI) is the second stablecoin of the Frax Finance ecosystem. FPI is a stablecoin pegged to a basket of real-world consumer items as defined by the US CPI-U average.",
+    mintRedeemDescription:
+      "Using the Frax Finance app, users swap FRAX to mint FPI at the current exchange rate. FPI can be redeemed for FRAX at any time.",
+    onCoinGecko: "true",
+    gecko_id: "frax-price-index",
+    cmcId: null,
+    pegType: "peggedVAR",
+    pegMechanism: "algorithmic",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/fraxfinance",
+    wiki: "https://wiki.defillama.com/wiki/Frax",
+  },
 ] as PeggedAsset[];
