@@ -8,7 +8,7 @@ import peggedAssets from "./peggedData/peggedDataTesting";
 import {
   getLastRecord,
   hourlyPeggedBalances,
-  dailyPeggedPrices,
+  hourlyPeggedPrices,
   historicalRates,
 } from "./peggedAssets/utils/getLastRecord";
 import { getTimestampAtStartOfDay } from "./utils/date";
@@ -46,7 +46,7 @@ export async function craftChainDominanceResponse(chain: string | undefined) {
 
   const normalizedChain = normalizeChain(chain);
 
-  const lastPrices = await getLastRecord(dailyPeggedPrices());
+  const lastPrices = await getLastRecord(hourlyPeggedPrices());
   const lastRates = await getLastRecord(historicalRates());
 
   const lastPeggedBalances = await Promise.all(
