@@ -8,6 +8,10 @@ import {
 } from "../helper/getSupply";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import {
+  getTotalSupply as ontologyGetTotalSupply,
+  getBalance as ontologyGetBalance,
+} from "../helper/ontology";
+import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
@@ -240,11 +244,24 @@ const chainContracts: ChainContracts = {
     ],
     bridgedFromETH18Decimals: [
       "0xcfffe0c89a779c09df3df5624f54cdf7ef5fdd5d", // moss
-    ], 
+    ],
   },
   kava: {
     bridgedFromETH: ["0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD"], // celer
-  }
+  },
+  conflux: {
+    bridgedFromETH: [
+      "0xfe97e85d13abd9c1c33384e796f10b73905637ce", // celer
+      "0x8b8689c7f3014a4d86e4d1d0daaf74a47f5e0f27", // (converted address) shuttleflow
+    ],
+  },
+  ontology: {
+    bridgedFromETH: [
+      "ac654837a90eee8fccabd87a2d4fc7637484f01a", // poly network
+      "0xd85e30c5d372942810c86c4ac9d7b3bb24cc1965", // celer
+    ],
+    unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"], // poly network reserve
+  },
 };
 
 /* 
@@ -266,7 +283,6 @@ Don't know how to count the 2 Saber wrapped USDT on Solana.
 
 Evmos: missing multichain, it has no liquidity on dexes, and can't find address.
 
-Conflux, flow, don't know how to make calls.
 Conflux: cfx:acf2rcsh8payyxpg6xj7b0ztswwh81ute60tsw35j7 from shuttleflow, don't know where from
 0xfe97E85d13ABD9c1c33384E796F10B73905637cE celer
 Flow: A.231cc0dbbcffc4b7.ceUSDT celer, check for others.
@@ -529,6 +545,45 @@ async function reinetworkBridged(address: string, decimals: number) {
     );
     const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
+    return balances;
+  };
+}
+
+async function ontologyBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const polyUSDTAddress = chainContracts.ontology.bridgedFromETH[0];
+    const polyUSDTReserveAddress = chainContracts.ontology.unreleased[0];
+    const polyNetworkSupply = await ontologyGetTotalSupply(
+      polyUSDTAddress,
+      "oep4"
+    );
+    const polyNetworkReserve = await ontologyGetBalance(
+      polyUSDTAddress,
+      "oep4",
+      polyUSDTReserveAddress
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      polyNetworkSupply - polyNetworkReserve,
+      polyUSDTAddress,
+      true
+    );
+
+    const celerUSDTAddress = chainContracts.ontology.bridgedFromETH[1];
+    const celerSupply = await ontologyGetTotalSupply(celerUSDTAddress, "orc20");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      celerSupply,
+      celerUSDTAddress,
+      true
+    );
     return balances;
   };
 }
@@ -881,6 +936,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("kava", 6, chainContracts.kava.bridgedFromETH),
+  },
+  ontology: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: ontologyBridged(),
   },
 };
 

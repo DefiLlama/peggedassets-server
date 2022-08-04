@@ -8,6 +8,10 @@ import {
   osmosisSupply,
 } from "../helper/getSupply";
 import {
+  getTotalSupply as ontologyGetTotalSupply,
+  getBalance as ontologyGetBalance,
+} from "../helper/ontology";
+import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
@@ -154,6 +158,10 @@ const chainContracts: ChainContracts = {
   starknet: {
     bridgeOnETH: ["0x0437465dfb5b79726e35f08559b0cbea55bb585c"],
   },
+  ontology: {
+    bridgedFromETH: ["7b956c0c11fcffb9c9227ca1925ba4c3486b36f1"], // poly network
+    unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"],
+  },
 };
 
 /*
@@ -234,6 +242,35 @@ async function reinetworkMinted(address: string, decimals: number) {
     );
     const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
+    return balances;
+  };
+}
+
+async function ontologyBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const polyDAIAddress = chainContracts.ontology.bridgedFromETH[0];
+    const polyDAIReserveAddress = chainContracts.ontology.unreleased[0];
+    const polyNetworkSupply = await ontologyGetTotalSupply(
+      polyDAIAddress,
+      "oep4"
+    );
+    const polyNetworkReserve = await ontologyGetBalance(
+      polyDAIAddress,
+      "oep4",
+      polyDAIReserveAddress
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      polyNetworkSupply - polyNetworkReserve,
+      polyDAIAddress,
+      true
+    );
     return balances;
   };
 }
@@ -447,6 +484,11 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.starknet.bridgeOnETH[0],
       18
     ),
+  },
+  ontology: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: ontologyBridged(),
   },
 };
 

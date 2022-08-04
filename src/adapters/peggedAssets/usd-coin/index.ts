@@ -8,6 +8,10 @@ import {
   terraSupply,
 } from "../helper/getSupply";
 import {
+  getTotalSupply as ontologyGetTotalSupply,
+  getBalance as ontologyGetBalance,
+} from "../helper/ontology";
+import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
@@ -245,6 +249,13 @@ const chainContracts: ChainContracts = {
   karura: {
     bridgedFromETH: ["0x1F3a10587A20114EA25Ba1b388EE2dD4A337ce27"], // wormhole
   },
+  ontology: {
+    bridgedFromETH: [
+      "061a07cd393aac289b8ecfda2c3784b637a2fb33", // poly network
+      "0x08f7e8a161652d9f2fbfe200b18709540de5ced1", // celer
+    ],
+    unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"], // poly network reserve
+  },
 };
 
 /*
@@ -458,6 +469,45 @@ async function karuraMinted(address: string, decimals: number) {
     );
     const supply = res.data.result.totalSupply / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", supply);
+    return balances;
+  };
+}
+
+async function ontologyBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const polyUSDCAddress = chainContracts.ontology.bridgedFromETH[0];
+    const polyUSDCReserveAddress = chainContracts.ontology.unreleased[0];
+    const polyNetworkSupply = await ontologyGetTotalSupply(
+      polyUSDCAddress,
+      "oep4"
+    );
+    const polyNetworkReserve = await ontologyGetBalance(
+      polyUSDCAddress,
+      "oep4",
+      polyUSDCReserveAddress
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      polyNetworkSupply - polyNetworkReserve,
+      polyUSDCAddress,
+      true
+    );
+
+    const celerUSDCAddress = chainContracts.ontology.bridgedFromETH[1];
+    const celerSupply = await ontologyGetTotalSupply(celerUSDCAddress, "orc20");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      celerSupply,
+      celerUSDCAddress,
+      true
+    );
     return balances;
   };
 }
@@ -791,6 +841,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: karuraMinted(chainContracts.karura.bridgedFromETH[0], 6),
+  },
+  ontology: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: ontologyBridged(),
   },
 };
 

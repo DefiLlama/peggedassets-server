@@ -1,8 +1,10 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
+import { bridgedSupply } from "../helper/getSupply";
 import {
-  bridgedSupply,
-} from "../helper/getSupply";
+  getTotalSupply as ontologyGetTotalSupply,
+  getBalance as ontologyGetBalance,
+} from "../helper/ontology";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -27,7 +29,11 @@ const chainContracts: ChainContracts = {
   },
   fantom: {
     bridgedFromETH: ["0x0e1694483ebb3b74d3054e383840c6cf011e518e"], // multichain
-  }
+  },
+  ontology: {
+    bridgedFromETH: ["17a58a4a65959c2f567e5063c560f9d09fb81284"], // poly network
+    unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -46,8 +52,43 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
+    return balances;
+  };
+}
+
+async function ontologyBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const polyDAIAddress = chainContracts.ontology.bridgedFromETH[0];
+    const polyDAIReserveAddress = chainContracts.ontology.unreleased[0];
+    const polyNetworkSupply = await ontologyGetTotalSupply(
+      polyDAIAddress,
+      "oep4"
+    );
+    const polyNetworkReserve = await ontologyGetBalance(
+      polyDAIAddress,
+      "oep4",
+      polyDAIReserveAddress
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      polyNetworkSupply - polyNetworkReserve,
+      polyDAIAddress,
+      true
+    );
     return balances;
   };
 }
@@ -73,11 +114,12 @@ const adapter: PeggedIssuanceAdapter = {
   fantom: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply(
-      "fantom",
-      18,
-      chainContracts.fantom.bridgedFromETH
-    ),
+    ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
+  },
+  ontology: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: ontologyBridged(),
   },
 };
 

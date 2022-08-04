@@ -635,6 +635,14 @@ export default {
     bridge: "wormhole",
     sourceChain: formattedSourceChains.sol,
   },
+  "0x08f7e8a161652d9f2fbfe200b18709540de5ced1": {
+    bridge: "celer",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xd85e30c5d372942810c86c4ac9d7b3bb24cc1965": {
+    bridge: "celer",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x181002D60d504d30a39601Ae13Af3191cb102580": {
     bridge: "celer",
     sourceChain: formattedSourceChains.eth,
@@ -1466,7 +1474,23 @@ export default {
   "0x5bEF2617eCCA9a39924c09017c5F1E25Efbb3bA8": {
     bridge: "orbit",
     sourceChain: formattedSourceChains.eth,
-  }
+  },
+  ac654837a90eee8fccabd87a2d4fc7637484f01a: {
+    bridge: "polynetwork",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "061a07cd393aac289b8ecfda2c3784b637a2fb33": {
+    bridge: "polynetwork",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "7b956c0c11fcffb9c9227ca1925ba4c3486b36f1": {
+    bridge: "polynetwork",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "17a58a4a65959c2f567e5063c560f9d09fb81284": {
+    bridge: "polynetwork",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1655,5 +1679,9 @@ export const bridgeInfo = {
   orbit: {
     name: "Orbit Bridge",
     link: "https://orbitchain.io/",
-  }
+  },
+  polynetwork: {
+    name: "PolyNetwork",
+    link: "https://poly.network/",
+  },
 } as BridgeInfo;
