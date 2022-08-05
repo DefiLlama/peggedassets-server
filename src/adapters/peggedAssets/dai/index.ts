@@ -16,7 +16,6 @@ import {
   PeggedIssuanceAdapter,
   Balances,
 } from "../peggedAsset.type";
-import { multiFunctionBalance } from "../helper/generalUtil";
 const axios = require("axios");
 const retry = require("async-retry");
 

@@ -1,6 +1,9 @@
 const sdk = require("@defillama/sdk");
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
-import { sumSingleBalance, multiFunctionBalance } from "../helper/generalUtil";
+import {
+  sumSingleBalance,
+  sumMultipleBalanceFunctions,
+} from "../helper/generalUtil";
 import {
   bridgedSupply,
   supplyInEthereumBridge,
@@ -237,7 +240,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH6Decimals: [
       "0xef4229c8c3250C675F21BCefa42f58EfbfF6002a", // optics
       "0x37f750B7cC259A2f741AF45294f6a16572CF5cAd", // wormhole
-    ], 
+    ],
     bridgedFromETH18Decimals: ["0x93DB49bE12B864019dA9Cb147ba75cDC0506190e"], // moss
     bridgedFromPolygon: ["0x1bfc26cE035c368503fAE319Cc2596716428ca44"], // optics
     bridgedFromAvax: ["0xb70e0a782b058BFdb0d109a3599BEc1f19328E36"], // allbridge
@@ -558,7 +561,7 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
+    ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromETH),
         bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH18),
@@ -824,7 +827,7 @@ const adapter: PeggedIssuanceAdapter = {
   celo: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
+    ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
         bridgedSupply("celo", 18, chainContracts.celo.bridgedFromETH18Decimals),

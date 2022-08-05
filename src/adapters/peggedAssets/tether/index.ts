@@ -20,7 +20,7 @@ import {
   getTokenBalance as tronGetTokenBalance,
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
-import { multiFunctionBalance } from "../helper/generalUtil";
+import { sumMultipleBalanceFunctions } from "../helper/generalUtil";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -619,7 +619,7 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
+    ethereum: sumMultipleBalanceFunctions(
       [
         supplyInEthereumBridge(
           chainContracts.ethereum.issued[0],
@@ -838,7 +838,7 @@ const adapter: PeggedIssuanceAdapter = {
   oasis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
+    ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("oasis", 6, [chainContracts.oasis.bridgedFromETH[0]]),
         bridgedSupply("oasis", 6, [chainContracts.oasis.bridgedFromETH[1]]),
@@ -927,7 +927,7 @@ const adapter: PeggedIssuanceAdapter = {
   celo: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
+    ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
         bridgedSupply("celo", 18, chainContracts.celo.bridgedFromETH18Decimals),
