@@ -162,6 +162,9 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["7b956c0c11fcffb9c9227ca1925ba4c3486b36f1"], // poly network
     unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"],
   },
+  sx: {
+    bridgedFromETH: ["0x53813CD4aCD7145A716B4686b195511FA93e4Cb7"], // celer
+  },
 };
 
 /*
@@ -490,6 +493,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: ontologyBridged(),
   },
+  sx: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("sx", 18, chainContracts.sx.bridgedFromETH),
+  }
 };
 
 export default adapter;
