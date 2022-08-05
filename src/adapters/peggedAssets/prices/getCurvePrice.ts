@@ -39,10 +39,6 @@ export async function getCurvePrice(
     adjustedBaseDecimals + Math.max(0, decimalsToken1 - decimalsToken0)
   );
 
-  if (pool === "0xf861483fa7E511fbc37487D91B6FAa803aF5d37c") {
-    console.log(decimalsPower.toString());
-  }
-
   const dy = (
     await sdk.api.abi.call({
       abi: abi,
