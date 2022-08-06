@@ -1338,7 +1338,7 @@ export default [
     description:
       "Beanstalk is a permissionless fiat stablecoin protocol built on Ethereum.",
     mintRedeemDescription:
-      "Beanstalk uses the liquidity and time weighted average shortage or excess of Beans in the BEAN:3CRV pool to dynamically increase the Bean supply or debt of the protocol in order to maintain its peg.",
+      "Beanstalk uses the liquidity and time weighted average shortage or excess of Beans in the BEAN:3CRV pool to dynamically increase the Bean supply or burn it and issue debt in order to maintain its peg.",
     onCoinGecko: "false",
     gecko_id: "bean2",
     cmcId: null,
