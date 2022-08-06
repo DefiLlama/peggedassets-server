@@ -333,6 +333,14 @@ const curvePools: CurvePools = {
     use256abi: true,
     baseDecimalsAdjustment: 5,
   },
+  bean2: {
+    chain: "ethereum",
+    address: "0xc9c32cd16bf7efb85ff14e0c8603cc90f6f2ee49",
+    tokenIndex: 0,
+    decimalsToken0: 6,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
+  },
 };
 
 const dexscreener: AddressesForDexes = {

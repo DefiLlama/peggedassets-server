@@ -1329,4 +1329,24 @@ export default [
     twitter: "https://twitter.com/fraxfinance",
     wiki: "https://wiki.defillama.com/wiki/Frax",
   },
+  {
+    id: "67",
+    name: "Bean",
+    address: "0xBEA0000029AD1c77D3d5D23Ba2D8893dB9d1Efab",
+    symbol: "BEAN",
+    url: "https://bean.money/",
+    description:
+      "Beanstalk is a permissionless fiat stablecoin protocol built on Ethereum.",
+    mintRedeemDescription:
+      "Beanstalk uses the liquidity and time weighted average shortage or excess of Beans in the BEAN:3CRV pool to dynamically increase the Bean supply or debt of the protocol in order to maintain its peg.",
+    onCoinGecko: "false",
+    gecko_id: "bean2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/beanstalkfarms",
+    wiki: "https://wiki.defillama.com/wiki/Beanstalk",
+  },
 ] as PeggedAsset[];
