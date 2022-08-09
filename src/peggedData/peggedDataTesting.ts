@@ -1369,4 +1369,24 @@ export default [
     twitter: "https://twitter.com/LemmaFinance",
     wiki: "https://wiki.defillama.com/wiki/LemmaFinance",
   },
+  {
+    id: "69",
+    name: "Pando USD",
+    address: null,
+    symbol: "PUSD",
+    url: "https://pando.im/",
+    description:
+      "Pando USD is a stablecoin pegged to the US Dollar on the Mixin Network.",
+    mintRedeemDescription:
+    "Using the Pando Leaf app, users mint PUSD by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back PUSD is burned.",
+    onCoinGecko: "true",
+    gecko_id: "pando-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/pando_im",
+    wiki: "https://wiki.defillama.com/wiki/Pando",
+  },
 ] as PeggedAsset[];

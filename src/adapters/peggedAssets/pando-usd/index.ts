@@ -8,16 +8,6 @@ import {
 const axios = require("axios");
 const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
-
-const chainContracts: ChainContracts = {
-};
-
-// If there is any Mintscan (or other) API that can be used, it should replace this.
 async function pusdMinted() {
   return async function (
     _timestamp: number,
@@ -43,7 +33,7 @@ async function pusdMinted() {
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  kava: {
+  mixin: {
     minted: pusdMinted(),
     unreleased: async () => ({}),
   },
