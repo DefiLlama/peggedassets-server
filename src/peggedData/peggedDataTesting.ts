@@ -1349,4 +1349,24 @@ export default [
     twitter: "https://twitter.com/beanstalkfarms",
     wiki: "https://wiki.defillama.com/wiki/Beanstalk",
   },
+  {
+    id: "68",
+    name: "USDLemma",
+    address: "0xdb41ab644AbcA7f5ac579A5Cf2F41e606C2d6abc",
+    symbol: "USDL",
+    url: "https://www.lemma.finance/",
+    description:
+      "Lemma is a decentralized finance (DeFi) protocol with two products: a leveraged basis trading vault and USDL, a stablecoin that is fully decentralized, 100% capital efficient and USD pegged.",
+    mintRedeemDescription:
+    "Using the Lemma Finance app, users mint USDL by depositing an accepted asset into the protocol where it establishes a market neutral trading position on decentralized exchanges. When the loan is repaid to retrieve the collateral, the paid back USDL is burned.",
+    onCoinGecko: "false",
+    gecko_id: "usdlemma",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/LemmaFinance",
+    wiki: "https://wiki.defillama.com/wiki/LemmaFinance",
+  },
 ] as PeggedAsset[];

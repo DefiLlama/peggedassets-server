@@ -65,6 +65,7 @@ import uxd from "./uxd-stablecoin";
 import usdh from "./usdh";
 import fpi from "./frax-price-index";
 import bean2 from "./bean2";
+import usdlemma from "./usdlemma";
 
 export default {
   tether,
@@ -134,4 +135,5 @@ export default {
   usdh,
   "frax-price-index": fpi,
   bean2,
+  usdlemma,
 };
