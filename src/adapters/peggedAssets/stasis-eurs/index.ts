@@ -1,5 +1,5 @@
 const sdk = require("@defillama/sdk");
-import { sumSingleBalance, multiFunctionBalance } from "../helper/generalUtil";
+import { sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
   bridgedSupplySubtractReserve,

@@ -1,10 +1,3 @@
-type Bridges = {
-  [chain: string]: {
-    bridge: string;
-    link?: string;
-  };
-};
-
 type PeggedCategory = "stablecoins";
 type PegType = "peggedUSD" | "peggedVAR";
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";

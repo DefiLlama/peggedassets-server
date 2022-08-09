@@ -61,6 +61,11 @@ import home from "./bacon-protocol-home";
 import fiat from "./fixed-income-asset-token";
 import pusd from "./pusd-2";
 import fusd from "./fantom-usd";
+import uxd from "./uxd-stablecoin";
+import usdh from "./usdh";
+import fpi from "./frax-price-index";
+import bean2 from "./bean2";
+import usdlemma from "./usdlemma";
 import pandousd from "./pando-usd";
 
 export default {
@@ -127,5 +132,10 @@ export default {
   "fixed-income-asset-token": fiat,
   "pusd-2": pusd,
   "fantom-usd": fusd,
+  "uxd-stablecoin": uxd,
+  usdh,
+  "frax-price-index": fpi,
+  bean2,
+  usdlemma,
   "pando-usd": pandousd,
 };

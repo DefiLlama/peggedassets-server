@@ -1,5 +1,5 @@
 const sdk = require("@defillama/sdk");
-import { multiFunctionBalance, sumSingleBalance } from "../helper/generalUtil";
+import { sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
   bridgedSupplySubtractReserve,
@@ -148,7 +148,7 @@ async function ethereumUnreleased(
   ) {
     let balances = {} as Balances;
 
-    let bridgedTotalFunction = await multiFunctionBalance(
+    let bridgedTotalFunction = await sumMultipleBalanceFunctions(
       [
         bridgedSupply("polygon", 18, chainContracts.polygon.bridgedFromETH),
         bridgedSupplySubtractReserve("avax", 18, [

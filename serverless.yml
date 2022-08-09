@@ -82,17 +82,6 @@ functions:
       - http:
           path: /{params+}
           method: any
-  peggedchart:
-    handler: src/getPeggedChart.default
-    timeout: 60
-    memorySize: 3000
-    events:
-      - http:
-          path: peggedcharts
-          method: get
-      - http:
-          path: peggedcharts/{chain}
-          method: get
   stablecoinChart:
     handler: src/getStablecoinChart.default
     timeout: 60
@@ -133,14 +122,6 @@ functions:
       - http:
           path: config
           method: get
-  peggedAsset:
-    handler: src/getPegged.default
-    timeout: 120
-    memorySize: 2000
-    events:
-      - http:
-          path: pegged/{pegged}
-          method: get
   stablecoin:
     handler: src/getStablecoin.default
     timeout: 120
@@ -149,14 +130,6 @@ functions:
       - http:
           path: stablecoin/{stablecoin}
           method: get
-  peggedchains:
-    handler: src/getPeggedChains.default
-    timeout: 60
-    memorySize: 2000
-    events:
-      - http:
-          path: peggedchains
-          method: get
   stablecoinchains:
     handler: src/getStablecoinChains.default
     timeout: 60
@@ -164,14 +137,6 @@ functions:
     events:
       - http:
           path: stablecoinchains
-          method: get
-  peggedprices:
-    handler: src/getPeggedPrices.default
-    timeout: 60
-    memorySize: 2000
-    events:
-      - http:
-          path: peggedprices
           method: get
   stablecoinprices:
     handler: src/getStablecoinPrices.default

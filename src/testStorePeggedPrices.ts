@@ -11,6 +11,7 @@ const test = async () => {
   const { timestamp, chainBlocks } = await getCurrentBlocks();
       let pricePromises = peggedAssets.map(async (pegged) => {
         const price = await getCurrentPeggedPrice(pegged.gecko_id, chainBlocks, pegged.priceSource);
+		console.log(pegged.gecko_id)
         prices[pegged.gecko_id] = price;
       });
       await Promise.all(pricePromises);

@@ -1,5 +1,5 @@
 const sdk = require("@defillama/sdk");
-import { multiFunctionBalance, sumSingleBalance } from "../helper/generalUtil";
+import { sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
 import { bridgedSupply, solanaMintedOrBridged } from "../helper/getSupply";
 import {
   ChainBlocks,
@@ -124,7 +124,7 @@ const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    terra: multiFunctionBalance(
+    terra: sumMultipleBalanceFunctions(
       [
         bridgedSupply(
           "ethereum",
@@ -143,7 +143,7 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    terra: multiFunctionBalance(
+    terra: sumMultipleBalanceFunctions(
       [
         bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromTerra6Decimals),
         bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromTerra18Decimals),
@@ -163,7 +163,7 @@ const adapter: PeggedIssuanceAdapter = {
   polygon: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    terra: multiFunctionBalance(
+    terra: sumMultipleBalanceFunctions(
       [
         bridgedSupply(
           "polygon",

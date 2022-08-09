@@ -8,6 +8,10 @@ import {
 } from "../helper/getSupply";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import {
+  getTotalSupply as ontologyGetTotalSupply,
+  getBalance as ontologyGetBalance,
+} from "../helper/ontology";
+import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
@@ -16,7 +20,7 @@ import {
   getTokenBalance as tronGetTokenBalance,
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
-import { multiFunctionBalance } from "../helper/generalUtil";
+import { sumMultipleBalanceFunctions } from "../helper/generalUtil";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -240,11 +244,27 @@ const chainContracts: ChainContracts = {
     ],
     bridgedFromETH18Decimals: [
       "0xcfffe0c89a779c09df3df5624f54cdf7ef5fdd5d", // moss
-    ], 
+    ],
   },
   kava: {
     bridgedFromETH: ["0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD"], // celer
-  }
+  },
+  conflux: {
+    bridgedFromETH: [
+      "0xfe97e85d13abd9c1c33384e796f10b73905637ce", // celer
+      "0x8b8689c7f3014a4d86e4d1d0daaf74a47f5e0f27", // (converted address) shuttleflow
+    ],
+  },
+  ontology: {
+    bridgedFromETH: [
+      "ac654837a90eee8fccabd87a2d4fc7637484f01a", // poly network
+      "0xd85e30c5d372942810c86c4ac9d7b3bb24cc1965", // celer
+    ],
+    unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"], // poly network reserve
+  },
+  sx: {
+    bridgedFromETH: ["0x03Cc0D20B5eA163Aa3c0851235f4653F6Fe61017"], // celer
+  },
 };
 
 /* 
@@ -266,7 +286,6 @@ Don't know how to count the 2 Saber wrapped USDT on Solana.
 
 Evmos: missing multichain, it has no liquidity on dexes, and can't find address.
 
-Conflux, flow, don't know how to make calls.
 Conflux: cfx:acf2rcsh8payyxpg6xj7b0ztswwh81ute60tsw35j7 from shuttleflow, don't know where from
 0xfe97E85d13ABD9c1c33384E796F10B73905637cE celer
 Flow: A.231cc0dbbcffc4b7.ceUSDT celer, check for others.
@@ -533,6 +552,45 @@ async function reinetworkBridged(address: string, decimals: number) {
   };
 }
 
+async function ontologyBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const polyUSDTAddress = chainContracts.ontology.bridgedFromETH[0];
+    const polyUSDTReserveAddress = chainContracts.ontology.unreleased[0];
+    const polyNetworkSupply = await ontologyGetTotalSupply(
+      polyUSDTAddress,
+      "oep4"
+    );
+    const polyNetworkReserve = await ontologyGetBalance(
+      polyUSDTAddress,
+      "oep4",
+      polyUSDTReserveAddress
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      polyNetworkSupply - polyNetworkReserve,
+      polyUSDTAddress,
+      true
+    );
+
+    const celerUSDTAddress = chainContracts.ontology.bridgedFromETH[1];
+    const celerSupply = await ontologyGetTotalSupply(celerUSDTAddress, "orc20");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      celerSupply,
+      celerUSDTAddress,
+      true
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -561,7 +619,7 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
+    ethereum: sumMultipleBalanceFunctions(
       [
         supplyInEthereumBridge(
           chainContracts.ethereum.issued[0],
@@ -780,7 +838,7 @@ const adapter: PeggedIssuanceAdapter = {
   oasis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
+    ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("oasis", 6, [chainContracts.oasis.bridgedFromETH[0]]),
         bridgedSupply("oasis", 6, [chainContracts.oasis.bridgedFromETH[1]]),
@@ -869,7 +927,7 @@ const adapter: PeggedIssuanceAdapter = {
   celo: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
+    ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
         bridgedSupply("celo", 18, chainContracts.celo.bridgedFromETH18Decimals),
@@ -882,6 +940,16 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("kava", 6, chainContracts.kava.bridgedFromETH),
   },
+  ontology: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: ontologyBridged(),
+  },
+  sx: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("sx", 6, chainContracts.sx.bridgedFromETH),
+  }
 };
 
 export default adapter;

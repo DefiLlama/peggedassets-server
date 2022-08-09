@@ -1,12 +1,19 @@
 const sdk = require("@defillama/sdk");
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
-import { sumSingleBalance, multiFunctionBalance } from "../helper/generalUtil";
+import {
+  sumSingleBalance,
+  sumMultipleBalanceFunctions,
+} from "../helper/generalUtil";
 import {
   bridgedSupply,
   supplyInEthereumBridge,
   solanaMintedOrBridged,
   terraSupply,
 } from "../helper/getSupply";
+import {
+  getTotalSupply as ontologyGetTotalSupply,
+  getBalance as ontologyGetBalance,
+} from "../helper/ontology";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -233,7 +240,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH6Decimals: [
       "0xef4229c8c3250C675F21BCefa42f58EfbfF6002a", // optics
       "0x37f750B7cC259A2f741AF45294f6a16572CF5cAd", // wormhole
-    ], 
+    ],
     bridgedFromETH18Decimals: ["0x93DB49bE12B864019dA9Cb147ba75cDC0506190e"], // moss
     bridgedFromPolygon: ["0x1bfc26cE035c368503fAE319Cc2596716428ca44"], // optics
     bridgedFromAvax: ["0xb70e0a782b058BFdb0d109a3599BEc1f19328E36"], // allbridge
@@ -244,6 +251,16 @@ const chainContracts: ChainContracts = {
   },
   karura: {
     bridgedFromETH: ["0x1F3a10587A20114EA25Ba1b388EE2dD4A337ce27"], // wormhole
+  },
+  ontology: {
+    bridgedFromETH: [
+      "061a07cd393aac289b8ecfda2c3784b637a2fb33", // poly network
+      "0x08f7e8a161652d9f2fbfe200b18709540de5ced1", // celer
+    ],
+    unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"], // poly network reserve
+  },
+  sx: {
+    bridgedFromETH: ["0xe2aa35C2039Bd0Ff196A6Ef99523CC0D3972ae3e"], // celer
   },
 };
 
@@ -462,6 +479,45 @@ async function karuraMinted(address: string, decimals: number) {
   };
 }
 
+async function ontologyBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const polyUSDCAddress = chainContracts.ontology.bridgedFromETH[0];
+    const polyUSDCReserveAddress = chainContracts.ontology.unreleased[0];
+    const polyNetworkSupply = await ontologyGetTotalSupply(
+      polyUSDCAddress,
+      "oep4"
+    );
+    const polyNetworkReserve = await ontologyGetBalance(
+      polyUSDCAddress,
+      "oep4",
+      polyUSDCReserveAddress
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      polyNetworkSupply - polyNetworkReserve,
+      polyUSDCAddress,
+      true
+    );
+
+    const celerUSDCAddress = chainContracts.ontology.bridgedFromETH[1];
+    const celerSupply = await ontologyGetTotalSupply(celerUSDCAddress, "orc20");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      celerSupply,
+      celerUSDCAddress,
+      true
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -505,7 +561,7 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
+    ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromETH),
         bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH18),
@@ -771,7 +827,7 @@ const adapter: PeggedIssuanceAdapter = {
   celo: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: multiFunctionBalance(
+    ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
         bridgedSupply("celo", 18, chainContracts.celo.bridgedFromETH18Decimals),
@@ -791,6 +847,16 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: karuraMinted(chainContracts.karura.bridgedFromETH[0], 6),
+  },
+  ontology: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: ontologyBridged(),
+  },
+  sx: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("sx", 6, chainContracts.sx.bridgedFromETH),
   },
 };
 

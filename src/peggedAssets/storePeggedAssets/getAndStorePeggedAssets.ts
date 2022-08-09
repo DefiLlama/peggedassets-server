@@ -1,3 +1,4 @@
+import { BigNumber } from "ethers";
 import { PeggedAsset } from "../../peggedData/peggedDataTesting";
 import * as Sentry from "@sentry/serverless";
 import {
@@ -88,19 +89,28 @@ function mergeBridges(
   bridgeBalancesToMerge: BridgeBalances
 ) {
   if (bridgeBalances && Object.keys(bridgeBalances).length === 0) {
-    bridgeBalances = bridgeBalancesToMerge;
-    return bridgeBalances;
+    return bridgeBalancesToMerge;
   }
   bridgeBalances = bridgeBalances as BridgeBalances;
-  // this is incorrect, doesn't account for different sources, needs to be refactored
   for (let bridgeID in bridgeBalancesToMerge) {
     for (let sourceChain in bridgeBalancesToMerge[bridgeID]) {
       if (bridgeBalances?.[bridgeID]?.[sourceChain]) {
         const bridgeBalance = bridgeBalances[bridgeID][sourceChain].amount ?? 0;
         const bridgeBalanceToMerge =
           bridgeBalancesToMerge[bridgeID][sourceChain].amount;
-        bridgeBalances[bridgeID][sourceChain].amount =
-          bridgeBalance + bridgeBalanceToMerge;
+        if (
+          typeof bridgeBalance === "number" &&
+          typeof bridgeBalanceToMerge === "number"
+        ) {
+          bridgeBalances[bridgeID][sourceChain].amount =
+            bridgeBalance + bridgeBalanceToMerge;
+        } else {
+          bridgeBalances[bridgeID][sourceChain].amount = BigNumber.from(
+            bridgeBalance ?? 0
+          )
+            .add(BigNumber.from(bridgeBalanceToMerge))
+            .toNumber();
+        }
       } else {
         bridgeBalances[bridgeID] = bridgeBalances[bridgeID] || {};
         bridgeBalances[bridgeID][sourceChain] =
@@ -125,7 +135,9 @@ async function calcCirculating(
       Object.entries(chainIssuances).map(
         ([issuanceType, peggedTokenBalance]) => {
           const balance = peggedTokenBalance[pegType];
-          const bridges = peggedTokenBalance.bridges;
+          const bridges = JSON.parse(
+            JSON.stringify(peggedTokenBalance.bridges ?? {})
+          );
           if (balance == null) {
             return;
           }
@@ -135,8 +147,8 @@ async function calcCirculating(
           } else {
             if (issuanceType !== "bridgedTo") {
               if (issuanceType !== "minted" && issuanceType !== "circulating") {
-                peggedBalances[chain].bridgedTo[pegType]! += // issuanceType is a chain here
-                  balance;
+                // issuanceType is a chain here
+                peggedBalances[chain].bridgedTo[pegType]! += balance;
                 if (bridges) {
                   peggedBalances[chain].bridgedTo.bridges = mergeBridges(
                     peggedBalances[chain].bridgedTo.bridges || {},
@@ -146,6 +158,7 @@ async function calcCirculating(
               }
               circulating[pegType] = circulating[pegType] || 0;
               circulating[pegType]! += balance; // issuanceType is either "minted" or a chain here
+              delete peggedTokenBalance.bridges;
             }
           }
         }
