@@ -748,7 +748,7 @@ export default [
     cmcId: "5446",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko", 
+    priceSource: "coingecko",
     auditLinks: null,
     twitter: "https://twitter.com/defi_just",
     wiki: "https://wiki.defillama.com/wiki/USDJ",
@@ -1340,7 +1340,7 @@ export default [
     mintRedeemDescription:
       "Beanstalk uses the liquidity and time weighted average shortage or excess of Beans in the BEAN:3CRV pool to dynamically increase the Bean supply or burn it and issue debt in order to maintain its peg.",
     onCoinGecko: "false",
-    gecko_id: "bean2",  // should be updated once it is added to CG
+    gecko_id: "bean2", // should be updated once it is added to CG
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1358,7 +1358,7 @@ export default [
     description:
       "Lemma is a decentralized finance (DeFi) protocol with two products: a leveraged basis trading vault and USDL, a stablecoin that is fully decentralized, 100% capital efficient and USD pegged.",
     mintRedeemDescription:
-    "Using the Lemma Finance app, users mint USDL by depositing an accepted asset into the protocol where it establishes a market neutral trading position on decentralized exchanges. When the loan is repaid to retrieve the collateral, the paid back USDL is burned.",
+      "Using the Lemma Finance app, users mint USDL by depositing an accepted asset into the protocol where it establishes a market neutral trading position on decentralized exchanges. When the loan is repaid to retrieve the collateral, the paid back USDL is burned.",
     onCoinGecko: "false",
     gecko_id: "usdlemma",
     cmcId: null,
@@ -1378,7 +1378,7 @@ export default [
     description:
       "Pando USD is a stablecoin pegged to the US Dollar on the Mixin Network.",
     mintRedeemDescription:
-    "Using the Pando Leaf app, users mint PUSD by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back PUSD is burned.",
+      "Using the Pando Leaf app, users mint PUSD by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back PUSD is burned.",
     onCoinGecko: "true",
     gecko_id: "pando-usd",
     cmcId: null,
@@ -1388,5 +1388,27 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/pando_im",
     wiki: "https://wiki.defillama.com/wiki/Pando",
+  },
+  {
+    id: "70",
+    name: "DigitalDollar",
+    address: "arbitrum:0xf0b5ceefc89684889e5f7e0a7775bd100fcd3709",
+    symbol: "DUSD",
+    url: "https://fluid.ch/",
+    description:
+      "DUSD is a secure, transparent, democratic Digital Dollar on Arbitrum. All DUSD are 1:1 backed by real dollars.",
+    mintRedeemDescription:
+    "Fluid customers who have undergone a verification process can exchange USD for DUSD and redeem DUSD for USD.",
+    onCoinGecko: "true",
+    gecko_id: "digitaldollar",
+    cmcId: "19933",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://res.cloudinary.com/eoi-digital/image/upload/v1634004020/Audit_Report_-_Fluid_Finance_26.08.2021.pdf",
+    ],
+    twitter: "https://twitter.com/fluid_fi/",
+    wiki: "https://wiki.defillama.com/wiki/Fluid_Finance",
   },
 ] as PeggedAsset[];

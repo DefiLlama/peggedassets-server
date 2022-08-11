@@ -440,6 +440,9 @@ const addressesForDefillama: AddressesForDefillama = {
   "flex-usd": {
     address: "ethereum:0xa774ffb4af6b0a91331c084e1aebae6ad535e6f3",
   },
+  digitaldollar: {
+    address: "arbitrum:0xf0b5ceefc89684889e5f7e0a7775bd100fcd3709",
+  },
 };
 
 const pairSymbols: PairSymbols = {
