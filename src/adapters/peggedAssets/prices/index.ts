@@ -6,8 +6,10 @@ import { PriceSource } from "../../../peggedData/types";
 import { getCurvePrice, OtherTokenTypes } from "./getCurvePrice";
 const axios = require("axios");
 const retry = require("async-retry");
+import fetch from "node-fetch";
 
 const TWAPIntervalInSeconds: number = 10;
+const PRICES_API = "https://coins.llama.fi/prices";
 
 export type GetCoingeckoLog = () => Promise<any>;
 
@@ -54,9 +56,21 @@ type CurvePools = {
   };
 };
 
-type AddressesForDexes = {
+type AddressesForScreeners = {
   [coinGeckoID: string]: {
-    address: string;
+    address: string; // address does not have chain prefix
+  };
+};
+
+type AddressesForDefillama = {
+  [coinGeckoID: string]: {
+    address: string; // address has chain prefix
+  };
+};
+
+type PairSymbols = {
+  [coinGeckoID: string]: {
+    pairSymbols: string;
   };
 };
 
@@ -343,7 +357,7 @@ const curvePools: CurvePools = {
   },
 };
 
-const dexscreener: AddressesForDexes = {
+const addressesForScreeners: AddressesForScreeners = {
   usdd: {
     address: "0xd17479997F34dd9156Deef8F95A52D81D265be9c", // pools on BSC
     // address: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6", pools on ETH, but dexscreener rugged them for some reason
@@ -396,9 +410,6 @@ const dexscreener: AddressesForDexes = {
   "fantom-usd": {
     address: "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
   },
-};
-
-const birdeye: AddressesForDexes = {
   "parrot-usd": {
     address: "Ea5SjE2Y6yvCeW5dYTn7PYMuW5ikXkvbGdcmSnXeaLjS",
   },
@@ -416,21 +427,36 @@ const birdeye: AddressesForDexes = {
   },
 };
 
+const addressesForDefillama: AddressesForDefillama = {
+  usd: {
+    address: "polygon:0x236eec6359fb44cce8f97e99387aa7f8cd5cde1f",
+  },
+  "usd-balance": {
+    address: "fantom:0x6fc9383486c163fa48becdec79d6058f984f62ca",
+  },
+  "volt-protocol": {
+    address: "ethereum:0x559ebc30b0e58a45cc9ff573f77ef1e5eb1b3e18",
+  },
+  "flex-usd": {
+    address: "ethereum:0xa774ffb4af6b0a91331c084e1aebae6ad535e6f3",
+  },
+};
+
+const pairSymbols: PairSymbols = {
+  "celo-dollar": {
+    pairSymbols: "CUSD-USDT",
+  },
+  "celo-euro": {
+    pairSymbols: "CEUR-USDT",
+  },
+};
+
 const uniswapPools: UniswapPools = {
   reserve: {
     address: "0x98a19D4954B433Bd315335A05d7d6371D812A492",
     token: 0,
     chain: "ethereum",
     decimalsDifference: -12,
-  },
-};
-
-const kucoinPairs: AddressesForDexes = {
-  "celo-dollar": {
-    address: "CUSD-USDT",
-  },
-  "celo-euro": {
-    address: "CEUR-USDT",
   },
 };
 
@@ -526,7 +552,7 @@ export default async function getCurrentPeggedPrice(
     return null;
   }
   if (priceSource === "dexscreener") {
-    const address = dexscreener[token]?.address;
+    const address = addressesForScreeners[token]?.address;
     if (address) {
       for (let i = 0; i < 5; i++) {
         try {
@@ -560,7 +586,7 @@ export default async function getCurrentPeggedPrice(
     return null;
   }
   if (priceSource === "birdeye") {
-    const address = birdeye[token]?.address;
+    const address = addressesForScreeners[token]?.address;
     if (address) {
       for (let i = 0; i < 5; i++) {
         try {
@@ -584,7 +610,7 @@ export default async function getCurrentPeggedPrice(
     return null;
   }
   if (priceSource === "kucoin") {
-    const symbol = kucoinPairs[token]?.address;
+    const symbol = pairSymbols[token]?.pairSymbols;
     if (symbol) {
       for (let i = 0; i < 5; i++) {
         try {
@@ -605,6 +631,30 @@ export default async function getCurrentPeggedPrice(
       }
     }
     console.error(`Could not get Birdeye price for token ${token}`);
+    return null;
+  }
+  if (priceSource === "defillama") {
+    for (let i = 0; i < 5; i++) {
+      try {
+        const address = addressesForDefillama[token]?.address;
+        const body = { coins: [address] };
+        const res = await fetch(PRICES_API, {
+          method: "POST",
+          body: JSON.stringify(body),
+        }).then((r) => r.json());
+        const price = res?.coins?.[address]?.price;
+        if (price) {
+          return price;
+        } else {
+          console.error(`Could not get DeFiLlama price for token ${token}`);
+          return null;
+        }
+      } catch (e) {
+        console.error(token, e);
+        continue;
+      }
+    }
+    console.error(`Could not get Coingecko price for token ${token}`);
     return null;
   }
   if (priceSource === "coingecko") {

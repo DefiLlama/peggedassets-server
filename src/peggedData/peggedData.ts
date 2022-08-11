@@ -426,7 +426,7 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko",
+    priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/coinflexdotcom",
     wiki: "https://wiki.defillama.com/wiki/flexUSD",
@@ -688,7 +688,7 @@ export default [
     cmcId: "19224",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
-    priceSource: null, // dexscreener and coingecko both rugged
+    priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/USDB_",
     wiki: "https://wiki.defillama.com/wiki/FantOHM",
@@ -748,7 +748,7 @@ export default [
     cmcId: "5446",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko",
+    priceSource: "coingecko", 
     auditLinks: null,
     twitter: "https://twitter.com/defi_just",
     wiki: "https://wiki.defillama.com/wiki/USDJ",
@@ -788,7 +788,7 @@ export default [
     cmcId: null,
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
-    priceSource: "coingecko", // curve has no liqudity, and coingecko not giving accurate price
+    priceSource: "defillama", // curve has no liqudity, and coingecko not giving accurate price
     auditLinks: null,
     twitter: "https://twitter.com/voltprotocol",
     wiki: "https://wiki.defillama.com/wiki/Volt_Protocol",
@@ -928,7 +928,7 @@ export default [
     cmcId: "20317",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko", // for all dexscreener pools with high liquidity, dexscreener api does not give their liquidity.
+    priceSource: "defillama", // for all dexscreener pools with high liquidity, dexscreener api does not give their liquidity.
     auditLinks: null,
     twitter: "https://twitter.com/overnight_fi",
     wiki: "https://wiki.defillama.com/wiki/Overnight",
