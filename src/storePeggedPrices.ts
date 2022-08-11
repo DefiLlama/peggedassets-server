@@ -1,5 +1,5 @@
 import dynamodb from "./utils/shared/dynamodb";
-import peggedAssets from "./peggedData/peggedDataTesting";
+import peggedAssets from "./peggedData/peggedData";
 import getCurrentPeggedPrice from "./adapters/peggedAssets/prices";
 import { getCurrentBlocks } from "./peggedAssets/storePeggedAssets/blocks";
 import { wrapScheduledLambda } from "./utils/shared/wrap";

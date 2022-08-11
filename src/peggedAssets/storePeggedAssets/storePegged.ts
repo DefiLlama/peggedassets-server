@@ -1,7 +1,7 @@
 import { storePeggedAsset } from "./getAndStorePeggedAssets";
 import { getCurrentBlocks } from "./blocks";
-import peggedAssets from "../../peggedData/peggedDataTesting";
-import { importAdapter } from "../utils/importAdapterTesting";
+import peggedAssets from "../../peggedData/peggedData";
+import { importAdapter } from "../utils/importAdapter";
 
 const maxRetries = 4;
 

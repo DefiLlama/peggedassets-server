@@ -2,7 +2,7 @@ const sdk = require("@defillama/sdk");
 import chainabi from "./chainlink_abi.json";
 import uniabi from "./uniswap_abi.json";
 import { ChainBlocks } from "../peggedAsset.type";
-import { PriceSource } from "../../../peggedData/typesTesting";
+import { PriceSource } from "../../../peggedData/types";
 import { getCurvePrice, OtherTokenTypes } from "./getCurvePrice";
 const axios = require("axios");
 const retry = require("async-retry");

@@ -1,5 +1,5 @@
 import dynamodb from "../../utils/shared/dynamodb";
-import { PeggedAsset } from "../../peggedData/peggedDataTesting";
+import { PeggedAsset } from "../../peggedData/peggedData";
 import {
   HOUR,
   getDay,

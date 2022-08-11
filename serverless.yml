@@ -98,14 +98,6 @@ functions:
       - http:
           path: stablecoindominance/{chain}
           method: get
-  peggeds:
-    handler: src/getPeggeds.default
-    timeout: 120
-    memorySize: 2000
-    events:
-      - http:
-          path: peggeds
-          method: get
   stablecoins:
     handler: src/getStablecoins.default
     timeout: 120

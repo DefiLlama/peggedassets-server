@@ -2,7 +2,7 @@ const sdk = require("@defillama/sdk");
 import curveabi from "./curve_abi.json";
 import BigNumber from "bignumber.js";
 import { ChainBlocks } from "../peggedAsset.type";
-import { PriceSource } from "../../../peggedData/typesTesting";
+import { PriceSource } from "../../../peggedData/types";
 import getCurrentPeggedPrice from ".";
 
 export type OtherTokenTypes = "3crv" | "2crv" | "am3crv";

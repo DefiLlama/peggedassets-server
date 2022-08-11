@@ -1,5 +1,5 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
-import peggedAssets from "./peggedData/peggedDataTesting";
+import peggedAssets from "./peggedData/peggedData";
 import fetch from "node-fetch";
 import {
   getLastRecord,

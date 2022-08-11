@@ -1,7 +1,19 @@
-type PeggedCategory = "stablecoins";
-type PegType = "peggedUSD" | "peggedVAR";
+type PegType =
+  | "peggedUSD"
+  | "peggedVAR"
+  | "peggedEUR"
+  | "peggedSGD"
+  | "peggedJPY"
+  | "peggedCNY";
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
-export type PriceSource = "chainlink" | "uniswap" | "dexscreener" | "curve" | "coingecko" | "birdeye" | "kucoin";
+export type PriceSource =
+  | "chainlink"
+  | "uniswap"
+  | "dexscreener"
+  | "curve"
+  | "coingecko"
+  | "birdeye"
+  | "kucoin"
 
 export type PeggedAsset = {
   id: string;
@@ -10,17 +22,13 @@ export type PeggedAsset = {
   symbol: string;
   url: string;
   description: string;
-  mechanismDescription: string;
-  chain: string;
-  logo: null | string;
-  onCoinGecko: boolean;
+  mintRedeemDescription: string;
+  onCoinGecko: string;
   gecko_id: string;
   cmcId: string;
-  category: PeggedCategory;
   pegType: PegType;
   pegMechanism: PegMechanism;
   priceSource: PriceSource;
-  chains: string[];
   auditLinks: string[];
   twitter: string;
   wiki: string;

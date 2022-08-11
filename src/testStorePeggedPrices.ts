@@ -1,4 +1,4 @@
-import peggedAssets from "./peggedData/peggedDataTesting";
+import peggedAssets from "./peggedData/peggedData";
 import getCurrentPeggedPrice from "./adapters/peggedAssets/prices";
 const { getCurrentBlocks } = require("@defillama/sdk/build/computeTVL/blocks");
 

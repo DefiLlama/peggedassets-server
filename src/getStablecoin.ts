@@ -6,7 +6,7 @@ import {
 } from "./utils/shared";
 import fetch from "node-fetch";
 import { getHistoricalValues } from "./utils/shared/dynamodb";
-import peggedAssets from "./peggedData/peggedDataTesting";
+import peggedAssets from "./peggedData/peggedData";
 import {
   getLastRecord,
   hourlyPeggedBalances,
@@ -15,7 +15,7 @@ import {
 import {
   getChainDisplayName,
 } from "./utils/normalizeChain";
-import { importAdapter } from "./peggedAssets/utils/importAdapterTesting";
+import { importAdapter } from "./peggedAssets/utils/importAdapter";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
 type HourlyTvl = AWS.DynamoDB.DocumentClient.AttributeMap | undefined;

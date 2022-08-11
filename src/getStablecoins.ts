@@ -1,7 +1,7 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import fetch from "node-fetch";
 import peggedAssets, {
-} from "./peggedData/peggedDataTesting";
+} from "./peggedData/peggedData";
 import {
   getLastRecord,
   hourlyPeggedBalances,

@@ -1,5 +1,5 @@
 import { BigNumber } from "ethers";
-import { PeggedAsset } from "../../peggedData/peggedDataTesting";
+import { PeggedAsset } from "../../peggedData/peggedData";
 import * as Sentry from "@sentry/serverless";
 import {
   PeggedAssetIssuance,

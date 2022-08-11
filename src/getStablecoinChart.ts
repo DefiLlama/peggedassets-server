@@ -4,7 +4,7 @@ import {
   IResponse,
   errorResponse,
 } from "./utils/shared";
-import peggedAssets from "./peggedData/peggedDataTesting";
+import peggedAssets from "./peggedData/peggedData";
 import dynamodb from "./utils/shared/dynamodb";
 import {
   getLastRecord,
