@@ -474,7 +474,7 @@ async function karuraMinted(address: string, decimals: number) {
         )
     );
     const supply = res.data.result.totalSupply / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", supply);
+    sumSingleBalance(balances, "peggedUSD", supply, "wormhole", false, "Ethereum");
     return balances;
   };
 }
