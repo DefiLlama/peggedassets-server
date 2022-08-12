@@ -355,6 +355,15 @@ const curvePools: CurvePools = {
     decimalsToken1: 18,
     otherTokenisType: "3crv",
   },
+  "euro-coin": {
+    chain: "ethereum",
+    address: "0xe84f5b1582ba325fdf9ce6b0c1f087ccfc924e54",
+    tokenIndex: 0,
+    decimalsToken0: 6,
+    decimalsToken1: 18,
+    use256abi: true,
+    otherTokenisType: "3crv",
+  },
 };
 
 const addressesForScreeners: AddressesForScreeners = {
