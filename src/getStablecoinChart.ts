@@ -76,6 +76,9 @@ export async function craftChartsResponse(
   if (chain === "terra%20classic") {
     chain = "terra";
   }
+  if (chain === "sxnetwork") {
+    chain = "sx";
+  }
 
   if (chain === undefined) {
     return errorResponse({
