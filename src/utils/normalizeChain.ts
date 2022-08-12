@@ -795,6 +795,16 @@ export const chainCoingeckoIds = {
     categories: ["EVM", "Parachain"],
     parent: "Polkadot",
   },
+  "SXnetwork": {
+    geckoId: "sx-network",
+    symbol: "SX",
+    cmcId: "8377",
+    categories: ["EVM", "Rollup"],
+    parent: {
+      chain: "Polygon",
+      types: ["L2", "gas"]
+    },
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -997,6 +1007,8 @@ export function getChainDisplayName(
       return "Acala";
     case "terra":
       return "Terra Classic";
+    case "sx":
+      return "SXnetwork"
 
     default:
       return (

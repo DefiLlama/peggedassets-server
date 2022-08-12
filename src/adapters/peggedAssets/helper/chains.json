@@ -120,5 +120,6 @@
   "starknet",
   "acala",
   "karura",
-  "mixin"
+  "mixin",
+  "sx"
 ]
