@@ -364,6 +364,13 @@ const curvePools: CurvePools = {
     use256abi: true,
     otherTokenisType: "3crv",
   },
+  "vesta-stable": {
+    chain: "arbitrum",
+    address: "0x59bf0545fca0e5ad48e13da269facd2e8c886ba4",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+  }
 };
 
 const addressesForScreeners: AddressesForScreeners = {

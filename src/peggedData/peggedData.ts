@@ -1411,4 +1411,24 @@ export default [
     twitter: "https://twitter.com/fluid_fi/",
     wiki: "https://wiki.defillama.com/wiki/Fluid_Finance",
   },
+  {
+    id: "71",
+    name: "Vesta Stable",
+    address: "arbitrum:0x64343594ab9b56e99087bfa6f2335db24c2d1f17",
+    symbol: "VST",
+    url: "https://vestafinance.xyz/",
+    description:
+      "Vesta is a layer 2-first lending protocol where users can deposit collateral to mint VST (Vesta Stable) - a USD-pegged stablecoin.",
+    mintRedeemDescription:
+    "Using the Vesta Finance app, users mint VST by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back VST is burned.",
+    onCoinGecko: "true",
+    gecko_id: "vesta-stable",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/vestafinance",
+    wiki: "https://wiki.defillama.com/wiki/Vesta_Finance",
+  },
 ] as PeggedAsset[];
