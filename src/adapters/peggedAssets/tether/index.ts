@@ -270,7 +270,11 @@ const chainContracts: ChainContracts = {
   },
 };
 
-/* 
+/*
+Tezos is using USDT's API for now but could probably be easily moved to other API.
+
+Omni is using USDT's API, it seems there may now be multiple addresses of USDT, so explorer queries need to be updated.
+
 EOS can't find suitable API, using USDT's API for now.
 pNetwork has USDT, USDC, DAI bridge to EOS, but so far unable to understand the EOS API.
 
@@ -774,8 +778,14 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   omni: {
-    minted: omniMinted(),
-    unreleased: omniUnreleased(),
+    minted: usdtApiMinted("totaltokens_omni"),
+    unreleased: sumMultipleBalanceFunctions(
+      [
+        usdtApiUnreleased("reserve_balance_omni"),
+        usdtApiUnreleased("quarantined_omni"),
+      ],
+      "peggedUSD"
+    ),
   },
   tron: {
     minted: tronMinted(),
@@ -961,6 +971,10 @@ const adapter: PeggedIssuanceAdapter = {
       6,
       chainContracts.ethereumclassic.bridgedFromETH
     ),
+  },
+  tezos: {
+    minted: usdtApiMinted("totaltokens_tezos"),
+    unreleased: usdtApiUnreleased("reserve_balance_tezos"),
   },
 };
 
