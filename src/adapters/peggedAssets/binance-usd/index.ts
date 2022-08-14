@@ -141,6 +141,9 @@ const chainContracts: ChainContracts = {
   loopring: {
     bridgeOnETH: ["0x674bdf20A0F284D710BC40872100128e2d66Bd3f"],
   },
+  ethereumclassic: {
+    bridgedFromETH: ["0xb12c13e66AdE1F72f71834f2FC5082Db8C091358"], // multichain
+  },
 };
 
 /*
@@ -169,7 +172,7 @@ async function chainMinted(chain: string, decimals: number) {
         await sdk.api.abi.call({
           abi: "erc20:totalSupply",
           target: issued,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -383,6 +386,15 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.ethereum.issued[0],
       chainContracts.loopring.bridgeOnETH[0],
       18
+    ),
+  },
+  ethereumclassic: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "ethereumclassic",
+      18,
+      chainContracts.ethereumclassic.bridgedFromETH
     ),
   },
 };

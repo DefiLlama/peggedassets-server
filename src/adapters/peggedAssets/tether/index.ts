@@ -265,6 +265,9 @@ const chainContracts: ChainContracts = {
   sx: {
     bridgedFromETH: ["0x03Cc0D20B5eA163Aa3c0851235f4653F6Fe61017"], // celer
   },
+  ethereumclassic: {
+    bridgedFromETH: ["0xc9BAA8cfdDe8E328787E29b4B078abf2DaDc2055"], // multichain
+  },
 };
 
 /* 
@@ -309,7 +312,7 @@ async function chainMinted(chain: string, decimals: number) {
         await sdk.api.abi.call({
           abi: "erc20:totalSupply",
           target: issued,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -337,7 +340,7 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
         await sdk.api.erc20.balanceOf({
           target: issued,
           owner: owner,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -949,7 +952,16 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("sx", 6, chainContracts.sx.bridgedFromETH),
-  }
+  },
+  ethereumclassic: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "ethereumclassic",
+      6,
+      chainContracts.ethereumclassic.bridgedFromETH
+    ),
+  },
 };
 
 export default adapter;
