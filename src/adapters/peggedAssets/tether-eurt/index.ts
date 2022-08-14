@@ -39,7 +39,7 @@ async function chainMinted(chain: string, decimals: number) {
         await sdk.api.abi.call({
           abi: "erc20:totalSupply",
           target: issued,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -67,7 +67,7 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
         await sdk.api.erc20.balanceOf({
           target: issued,
           owner: owner,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -93,7 +93,7 @@ async function omniMinted() {
       data: "ecosystem=1",
     };
     const res = await retry(async (_bail: any) => await axios(options));
-    const totalSupply = parseInt(res.data.properties[459].totaltokens);
+    const totalSupply = parseInt(res.data.properties[461].totaltokens);
     sumSingleBalance(balances, "peggedEUR", totalSupply, "issued", false);
     return balances;
   };
