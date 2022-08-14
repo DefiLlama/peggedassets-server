@@ -908,7 +908,7 @@ export default [
     cmcId: "20411",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: null, // coingecko inaccurate
+    priceSource: "coingecko", // coingecko inaccurate
     auditLinks: null,
     twitter: "https://twitter.com/AcalaNetwork",
     wiki: "https://wiki.defillama.com/wiki/Acala",
