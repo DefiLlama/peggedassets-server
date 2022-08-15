@@ -60,7 +60,7 @@ async function ethereumBridged() {
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
         target: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6",
-        block: _chainBlocks["ethereum"],
+        block: _chainBlocks?.["ethereum"],
         chain: "ethereum",
       })
     ).output;
@@ -69,7 +69,7 @@ async function ethereumBridged() {
       await sdk.api.erc20.balanceOf({
         target: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6",
         owner: "0x9277a463A508F45115FdEaf22FfeDA1B16352433", // reserve contract for USDD on Ethereum
-        block: _chainBlocks["ethereum"],
+        block: _chainBlocks?.["ethereum"],
         chain: "ethereum",
       })
     ).output;
@@ -97,7 +97,7 @@ async function bscBridged() {
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
         target: "0xd17479997f34dd9156deef8f95a52d81d265be9c",
-        block: _chainBlocks["bsc"],
+        block: _chainBlocks?.["bsc"],
         chain: "bsc",
       })
     ).output;
@@ -106,7 +106,7 @@ async function bscBridged() {
       await sdk.api.erc20.balanceOf({
         target: "0xd17479997F34dd9156Deef8F95A52D81D265be9c",
         owner: "0xCa266910d92a313E5F9eb1AfFC462bcbb7d9c4A9", // reserve contract for USDD on BSC
-        block: _chainBlocks["bsc"],
+        block: _chainBlocks?.["bsc"],
         chain: "bsc",
       })
     ).output;

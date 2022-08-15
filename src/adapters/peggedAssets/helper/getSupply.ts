@@ -32,7 +32,7 @@ export async function bridgedSupply(
         await sdk.api.abi.call({
           abi: "erc20:totalSupply",
           target: address,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -79,7 +79,7 @@ export async function bridgedSupplySubtractReserve(
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
         target: bridgeAddress,
-        block: _chainBlocks[chain],
+        block: _chainBlocks?.[chain],
         chain: chain,
       })
     ).output;
@@ -90,7 +90,7 @@ export async function bridgedSupplySubtractReserve(
             await sdk.api.erc20.balanceOf({
               target: bridgeAddress,
               owner: reserve,
-              block: _chainBlocks[chain],
+              block: _chainBlocks?.[chain],
               chain: chain,
             })
           ).output
@@ -174,7 +174,7 @@ export async function terraSupply(addresses: string[], decimals: number) {
     for (let address of addresses) {
       const totalSupply = await terraGetTotalSupply(
         address,
-        _chainBlocks["terra"]
+        _chainBlocks?.["terra"]
       );
       sumSingleBalance(
         balances,

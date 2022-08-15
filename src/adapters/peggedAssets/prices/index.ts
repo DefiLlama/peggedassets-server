@@ -1,7 +1,6 @@
 const sdk = require("@defillama/sdk");
 import chainabi from "./chainlink_abi.json";
 import uniabi from "./uniswap_abi.json";
-import { ChainBlocks } from "../peggedAsset.type";
 import { PriceSource } from "../../../peggedData/types";
 import { getCurvePrice, OtherTokenTypes } from "./getCurvePrice";
 const axios = require("axios");
@@ -481,7 +480,6 @@ const uniswapPools: UniswapPools = {
 
 export default async function getCurrentPeggedPrice(
   token: string,
-  chainBlocks: ChainBlocks,
   priceSource: PriceSource
 ): Promise<number | null> {
   if (priceSource === "chainlink") {
@@ -490,7 +488,6 @@ export default async function getCurrentPeggedPrice(
       const latestRound = await sdk.api.abi.call({
         abi: chainabi.latestRoundData,
         target: feed.address,
-        block: chainBlocks[feed.chain],
         chain: feed.chain,
       });
 
@@ -520,7 +517,6 @@ export default async function getCurrentPeggedPrice(
         try {
           const price = await getCurvePrice(
             chain,
-            chainBlocks,
             address,
             tokenIndex,
             decimalsToken0,
@@ -551,7 +547,6 @@ export default async function getCurrentPeggedPrice(
         abi: uniabi.observe,
         params: [[0, TWAPIntervalInSeconds]],
         target: pool.address,
-        block: chainBlocks[pool.chain],
         chain: pool.chain,
       });
       if (observe.output && pool.decimalsDifference) {

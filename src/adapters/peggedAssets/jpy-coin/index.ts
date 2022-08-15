@@ -58,7 +58,7 @@ async function chainMinted(chain: string, decimals: number) {
         await sdk.api.abi.call({
           abi: "erc20:totalSupply",
           target: issued,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -90,7 +90,7 @@ async function chainUnreleased(
         await sdk.api.erc20.balanceOf({
           target: chainContracts[chain].issued[0],
           owner: owner,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;

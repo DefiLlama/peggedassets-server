@@ -1,7 +1,6 @@
 const sdk = require("@defillama/sdk");
 import curveabi from "./curve_abi.json";
 import BigNumber from "bignumber.js";
-import { ChainBlocks } from "../peggedAsset.type";
 import { PriceSource } from "../../../peggedData/types";
 import getCurrentPeggedPrice from ".";
 
@@ -15,7 +14,6 @@ const baseDecimals = 7; // Low values give inaccurate prices, high values increa
 
 export async function getCurvePrice(
   chain: string,
-  chainBlocks: ChainBlocks,
   pool: string,
   tokenIndex: 0 | 1,
   decimalsToken0: number,
@@ -44,7 +42,6 @@ export async function getCurvePrice(
       abi: abi,
       params: [0, 1, decimalsPower.toString()],
       target: pool,
-      block: chainBlocks[chain],
       chain: chain,
     })
   ).output;
@@ -60,7 +57,6 @@ export async function getCurvePrice(
           await sdk.api.abi.call({
             abi: curveabi.get_virtual_price,
             target: threePool,
-            block: chainBlocks["ethereum"],
             chain: "ethereum",
           })
         ).output /
@@ -75,7 +71,6 @@ export async function getCurvePrice(
           await sdk.api.abi.call({
             abi: curveabi.get_virtual_price,
             target: twoPool,
-            block: chainBlocks["fantom"],
             chain: "fantom",
           })
         ).output /
@@ -90,7 +85,6 @@ export async function getCurvePrice(
           await sdk.api.abi.call({
             abi: curveabi.get_virtual_price,
             target: amThreePool,
-            block: chainBlocks["polygon"],
             chain: "polygon",
           })
         ).output /
@@ -103,7 +97,6 @@ export async function getCurvePrice(
   if (otherTokenGeckoID && otherTokenPriceSource) {
     const otherTokenPrice = await getCurrentPeggedPrice(
       otherTokenGeckoID,
-      chainBlocks,
       otherTokenPriceSource
     );
     if (otherTokenPrice) {

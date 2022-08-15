@@ -25,7 +25,7 @@ type EmptyObject = { [key: string]: undefined };
 async function getPeggedAsset(
   unixTimestamp: number,
   ethBlock: number,
-  chainBlocks: ChainBlocks,
+  chainBlocks: ChainBlocks | undefined,
   peggedAsset: PeggedAsset,
   peggedBalances: PeggedAssetIssuance,
   chain: string,
@@ -210,7 +210,7 @@ async function calcCirculating(
 export async function storePeggedAsset(
   unixTimestamp: number,
   ethBlock: number,
-  chainBlocks: ChainBlocks,
+  chainBlocks: ChainBlocks | undefined,
   peggedAsset: PeggedAsset,
   module: any,
   maxRetries: number = 1,

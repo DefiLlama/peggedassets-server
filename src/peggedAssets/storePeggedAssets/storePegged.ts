@@ -4,6 +4,7 @@ import peggedAssets from "../../peggedData/peggedData";
 import { importAdapter } from "../utils/importAdapter";
 
 const maxRetries = 4;
+const chainBlocks = undefined; // not needed by any adapters
 
 const timeout = (prom: any, time: number, peggedID: string) =>
   Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
@@ -13,7 +14,7 @@ const timeout = (prom: any, time: number, peggedID: string) =>
   );
 
 async function iteratePeggedAssets(peggedIndexes: number[]) {
-  const { timestamp, ethereumBlock, chainBlocks } = await timeout(
+  const { timestamp, ethereumBlock } = await timeout(
     getCurrentBlocks(),
     60000,
     "get blocks"

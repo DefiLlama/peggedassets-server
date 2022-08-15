@@ -44,7 +44,7 @@ async function chainMinted(chain: string, decimals: number) {
         await sdk.api.abi.call({
           abi: "erc20:totalSupply",
           target: issued,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -78,7 +78,7 @@ async function chainUnreleased(
         await sdk.api.erc20.balanceOf({
           target: target,
           owner: reserve,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -111,7 +111,7 @@ async function ethereumUnreleased(decimals: number, reserves: string[]) {
         await sdk.api.erc20.balanceOf({
           target: chainContracts.ethereum.issued[0],
           owner: reserve,
-          block: _chainBlocks["ethereum"],
+          block: _chainBlocks?.["ethereum"],
           chain: "ethereum",
         })
       ).output;

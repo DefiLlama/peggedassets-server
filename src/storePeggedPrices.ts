@@ -29,13 +29,12 @@ const timeout = (prom: any, time: number) =>
 
 const handler = async (_event: any) => {
   let prices = {} as Prices;
-  const { timestamp, chainBlocks } = await timeout(getCurrentBlocks(), 60000);
+  const { timestamp } = await timeout(getCurrentBlocks(), 60000);
   for (let i = 0; i < 5; i++) {
     try {
       let pricePromises = peggedAssets.map(async (pegged) => {
         const price = await getCurrentPeggedPrice(
           pegged.gecko_id,
-          chainBlocks,
           pegged.priceSource
         );
         if (typeof price !== "number") {

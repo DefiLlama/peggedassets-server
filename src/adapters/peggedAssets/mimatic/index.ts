@@ -163,7 +163,7 @@ async function polygonMinted(chain: string, decimals: number) {
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
         target: chainContracts.polygon.issued[0],
-        block: _chainBlocks[chain],
+        block: _chainBlocks?.[chain],
         chain: chain,
       })
     ).output;
@@ -172,7 +172,7 @@ async function polygonMinted(chain: string, decimals: number) {
         await sdk.api.erc20.balanceOf({
           target: chainContracts.polygon.issued[0],
           owner: owner,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -189,7 +189,7 @@ async function polygonMinted(chain: string, decimals: number) {
         await sdk.api.erc20.balanceOf({
           target: chainContracts.polygon.issued[0],
           owner: owner,
-          block: _chainBlocks[chain],
+          block: _chainBlocks?.[chain],
           chain: chain,
         })
       ).output;
@@ -251,7 +251,7 @@ async function bridgedMAISupply(
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
         target: address,
-        block: _chainBlocks[chain],
+        block: _chainBlocks?.[chain],
         chain: chain,
       })
     ).output;
@@ -277,7 +277,7 @@ async function bridgedMAISupply(
           await sdk.api.erc20.balanceOf({
             target: address,
             owner: owner,
-            block: _chainBlocks[chain],
+            block: _chainBlocks?.[chain],
             chain: chain,
           })
         ).output;

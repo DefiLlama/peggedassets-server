@@ -55,7 +55,7 @@ return async function (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
         target: address,
-        block: _chainBlocks[chain],
+        block: _chainBlocks?.[chain],
         chain: chain,
       })
     ).output;

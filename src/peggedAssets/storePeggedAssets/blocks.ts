@@ -45,11 +45,10 @@ export async function getCurrentBlocks() {
   const lastBlockNumber = await provider.getBlockNumber();
   const block = await provider.getBlock(lastBlockNumber - 5); // To allow indexers to catch up
   console.log("block eth");
-  const chainBlocks = await getChainBlocks(block.timestamp);
-  chainBlocks["ethereum"] = block.number;
+  // const chainBlocks = await getChainBlocks(block.timestamp); // currently unused in server
+  // chainBlocks["ethereum"] = block.number;
   return {
     timestamp: block.timestamp,
     ethereumBlock: block.number,
-    chainBlocks,
   };
 }
