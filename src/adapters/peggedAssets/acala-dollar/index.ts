@@ -62,10 +62,12 @@ async function karuraMinted(address: string, decimals: number) {
 }
 
 const adapter: PeggedIssuanceAdapter = {
+  /* hacked, inflated circulating, not trading
   acala: {
     minted: acalaMinted(chainContracts.acala.issued[0], 12),
     unreleased: async () => ({}),
   },
+  */
   karura: {
     minted: karuraMinted(chainContracts.karura.issued[0], 12),
     unreleased: async () => ({}),
