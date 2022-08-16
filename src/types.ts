@@ -33,3 +33,9 @@ export type PeggedAssetIssuance = {
     [issuanceType: string]: PeggedTokenBalance;
   };
 };
+
+export type StoredPeggedAssetIssuance = {
+  [chain: string]: {
+    [issuanceType: string]: PeggedTokenBalance;
+  } | string | number;
+};

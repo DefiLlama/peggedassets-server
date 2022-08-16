@@ -5,16 +5,14 @@ import { getCurrentBlocks } from "./peggedAssets/storePeggedAssets/blocks";
 import { wrapScheduledLambda } from "./utils/shared/wrap";
 import { store } from "./utils/s3";
 import getTVLOfRecordClosestToTimestamp from "./utils/shared/getRecordClosestToTimestamp";
-import {
-  getDay,
-  getTimestampAtStartOfDay,
-  secondsInDay,
-} from "./utils/date";
+import { getDay, getTimestampAtStartOfDay, secondsInDay } from "./utils/date";
 import {
   dailyPeggedPrices,
   hourlyPeggedPrices,
 } from "./peggedAssets/utils/getLastRecord";
 import { bridgeInfo } from "./peggedData/bridgeData";
+import { executeAndIgnoreErrors } from "./peggedAssets/storePeggedAssets/errorDb";
+import { getCurrentUnixTimestamp } from "./utils/date";
 
 type Prices = {
   [coinGeckoId: string]: number | null;
@@ -24,6 +22,11 @@ const timeout = (prom: any, time: number) =>
   Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
     (err) => {
       console.error(`Could not get blocks`, err);
+      executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
+        getCurrentUnixTimestamp(),
+        "prices-getBlocks",
+        String(err),
+      ]);
     }
   );
 
@@ -44,7 +47,7 @@ const handler = async (_event: any) => {
         }
         prices[pegged.gecko_id] = price;
       });
-      
+
       await Promise.all(pricePromises);
       await store("peggedPrices.json", JSON.stringify(prices));
       await dynamodb.put({
@@ -54,6 +57,11 @@ const handler = async (_event: any) => {
       });
     } catch (e) {
       if (i >= 5) {
+        executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
+          getCurrentUnixTimestamp(),
+          "prices-storePeggedPrices",
+          String(e),
+        ]);
         throw e;
       } else {
         console.error(e);

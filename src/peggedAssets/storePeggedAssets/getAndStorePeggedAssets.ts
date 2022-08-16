@@ -11,6 +11,8 @@ import {
   dailyPeggedBalances,
 } from "../utils/getLastRecord";
 import storeNewPeggedBalances from "./storeNewPeggedBalances";
+import { executeAndIgnoreErrors } from "./errorDb";
+import { getCurrentUnixTimestamp } from "../../utils/date";
 
 type ChainBlocks = {
   [chain: string]: number;
@@ -63,7 +65,7 @@ async function getPeggedAsset(
 
       peggedBalances[chain][issuanceType] = balance;
       if (issuanceType !== "minted" && issuanceType !== "unreleased") {
-        // issuanceType must be a chain within peggedBalances, but I check for that when testing adapters.
+        // issuanceType must be a chain as key on bridgedFromMapping, but I check for that when testing adapters.
         bridgedFromMapping[issuanceType] =
           bridgedFromMapping[issuanceType] || [];
         bridgedFromMapping[issuanceType].push(balance);
@@ -75,6 +77,7 @@ async function getPeggedAsset(
           `Getting circulating for ${peggedAsset.name} on chain ${chain} failed.`,
           e
         );
+        executeAndIgnoreErrors('INSERT INTO `errors2` VALUES (?, ?, ?, ?)', [getCurrentUnixTimestamp(), peggedAsset.gecko_id, chain, String(e)]);
         peggedBalances[chain][issuanceType] = { [pegType]: null };
       } else {
         console.error(peggedAsset.name, e);
@@ -124,6 +127,7 @@ function mergeBridges(
 async function calcCirculating(
   peggedBalances: PeggedAssetIssuance,
   bridgedFromMapping: BridgeMapping,
+  peggedAsset: PeggedAsset,
   pegType: string
 ) {
   let chainCirculatingPromises = Object.keys(peggedBalances).map(
@@ -170,12 +174,14 @@ async function calcCirculating(
             console.error(
               `Null balance or 0 circulating error on chain ${chain}`
             );
+            executeAndIgnoreErrors('INSERT INTO `errors2` VALUES (?, ?, ?, ?)', [getCurrentUnixTimestamp(), peggedAsset.gecko_id, chain, `Null balance or 0 circulating error`]);
             return;
           }
           circulating[pegType]! -= balance;
         });
       }
       if (circulating[pegType]! < 0) {
+        executeAndIgnoreErrors('INSERT INTO `errors2` VALUES (?, ?, ?, ?)', [getCurrentUnixTimestamp(), peggedAsset.gecko_id, chain, `Pegged asset has negative circulating amount`]);
         throw new Error(
           `Pegged asset on chain ${chain} has negative circulating amount`
         );
@@ -252,7 +258,7 @@ export async function storePeggedAsset(
       }
     );
     await Promise.all(peggedBalancesPromises);
-    await calcCirculating(peggedBalances, bridgedFromMapping, pegType);
+    await calcCirculating(peggedBalances, bridgedFromMapping, peggedAsset, pegType);
 
     if (
       typeof peggedBalances.totalCirculating.circulating[pegType] !== "number"

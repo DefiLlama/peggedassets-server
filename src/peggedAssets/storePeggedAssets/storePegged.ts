@@ -2,6 +2,8 @@ import { storePeggedAsset } from "./getAndStorePeggedAssets";
 import { getCurrentBlocks } from "./blocks";
 import peggedAssets from "../../peggedData/peggedData";
 import { importAdapter } from "../utils/importAdapter";
+import { executeAndIgnoreErrors } from "./errorDb";
+import { getCurrentUnixTimestamp } from "../../utils/date";
 
 const maxRetries = 4;
 const chainBlocks = undefined; // not needed by any adapters
@@ -10,6 +12,7 @@ const timeout = (prom: any, time: number, peggedID: string) =>
   Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
     (err) => {
       console.error(`Could not store peggedAsset ${peggedID}`, err);
+      executeAndIgnoreErrors('INSERT INTO `errors` VALUES (?, ?, ?)', [getCurrentUnixTimestamp(), peggedID, String(err)]);
     }
   );
 
@@ -17,7 +20,7 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
   const { timestamp, ethereumBlock } = await timeout(
     getCurrentBlocks(),
     60000,
-    "get blocks"
+    "getBlocks"
   );
   if (timestamp) {
     const actions = peggedIndexes

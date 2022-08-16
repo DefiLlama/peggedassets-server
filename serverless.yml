@@ -144,6 +144,12 @@ functions:
     memorySize: 3000
     events:
       - schedule: cron(30 0 * * ? *)
+  checkRecentEntries:
+    handler: src/checkRecentDbEntries.default
+    timeout: 60
+    memorySize: 3000
+    events:
+      - schedule: cron(30 1 * * ? *)
   rates:
     handler: src/getRates.default
     timeout: 60

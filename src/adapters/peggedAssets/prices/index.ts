@@ -6,6 +6,8 @@ import { getCurvePrice, OtherTokenTypes } from "./getCurvePrice";
 const axios = require("axios");
 const retry = require("async-retry");
 import fetch from "node-fetch";
+import { executeAndIgnoreErrors } from "../../../peggedAssets/storePeggedAssets/errorDb";
+import { getCurrentUnixTimestamp } from "../../../utils/date";
 
 const TWAPIntervalInSeconds: number = 10;
 const PRICES_API = "https://coins.llama.fi/prices";
@@ -29,6 +31,10 @@ function releaseCoingeckoLock() {
 setInterval(() => {
   releaseCoingeckoLock();
 }, 2000);
+
+function storePriceError(tokenID: string) {
+  executeAndIgnoreErrors('INSERT INTO `errors` VALUES (?, ?, ?)', [getCurrentUnixTimestamp(), `prices-${tokenID}`, `Token has pricing method but it failed.`]);
+}
 
 type ChainlinkFeeds = {
   [coinGeckoID: string]: {
@@ -496,6 +502,7 @@ export default async function getCurrentPeggedPrice(
       }
     }
     console.error(`Could not get ChainLink price for token ${token}`);
+    storePriceError(token);
     return null;
   }
   if (priceSource === "curve") {
@@ -531,6 +538,7 @@ export default async function getCurrentPeggedPrice(
             return price;
           } else {
             console.error(`Could not get Curve price for token ${token}`);
+            storePriceError(token);
             return null;
           }
         } catch (e) {
@@ -539,6 +547,9 @@ export default async function getCurrentPeggedPrice(
         }
       }
     }
+    console.error(`Could not get Curve price for token ${token}`);
+    storePriceError(token);
+    return null;
   }
   if (priceSource === "uniswap") {
     const pool = uniswapPools[token];
@@ -563,6 +574,7 @@ export default async function getCurrentPeggedPrice(
       }
     }
     console.error(`Could not get Uniswap price for token ${token}`);
+    storePriceError(token);
     return null;
   }
   if (priceSource === "dexscreener") {
@@ -588,6 +600,7 @@ export default async function getCurrentPeggedPrice(
             return price;
           } else {
             console.error(`Could not get Dexscreener price for token ${token}`);
+            storePriceError(token);
             return null;
           }
         } catch (e) {
@@ -597,6 +610,7 @@ export default async function getCurrentPeggedPrice(
       }
     }
     console.error(`Could not get Dexscreener price for token ${token}`);
+    storePriceError(token);
     return null;
   }
   if (priceSource === "birdeye") {
@@ -612,6 +626,7 @@ export default async function getCurrentPeggedPrice(
             return price;
           } else {
             console.error(`Could not get Birdeye price for token ${token}`);
+            storePriceError(token);
             return null;
           }
         } catch (e) {
@@ -621,6 +636,7 @@ export default async function getCurrentPeggedPrice(
       }
     }
     console.error(`Could not get Birdeye price for token ${token}`);
+    storePriceError(token);
     return null;
   }
   if (priceSource === "kucoin") {
@@ -636,6 +652,7 @@ export default async function getCurrentPeggedPrice(
             return price;
           } else {
             console.error(`Could not get Kucoin price for token ${token}`);
+            storePriceError(token);
             return null;
           }
         } catch (e) {
@@ -645,6 +662,7 @@ export default async function getCurrentPeggedPrice(
       }
     }
     console.error(`Could not get Birdeye price for token ${token}`);
+    storePriceError(token);
     return null;
   }
   if (priceSource === "defillama") {
@@ -660,7 +678,8 @@ export default async function getCurrentPeggedPrice(
         if (price) {
           return price;
         } else {
-          console.error(`Could not get DeFiLlama price for token ${token}`);
+          console.error(`Could not get DefiLlama price for token ${token}`);
+          storePriceError(token);
           return null;
         }
       } catch (e) {
@@ -668,7 +687,8 @@ export default async function getCurrentPeggedPrice(
         continue;
       }
     }
-    console.error(`Could not get Coingecko price for token ${token}`);
+    console.error(`Could not get DefiLlama price for token ${token}`);
+    storePriceError(token);
     return null;
   }
   if (priceSource === "coingecko") {
@@ -684,6 +704,7 @@ export default async function getCurrentPeggedPrice(
           return price;
         } else {
           console.error(`Could not get Coingecko price for token ${token}`);
+          storePriceError(token);
           return null;
         }
       } catch (e) {
@@ -692,6 +713,7 @@ export default async function getCurrentPeggedPrice(
       }
     }
     console.error(`Could not get Coingecko price for token ${token}`);
+    storePriceError(token);
     return null;
   }
   console.error(
