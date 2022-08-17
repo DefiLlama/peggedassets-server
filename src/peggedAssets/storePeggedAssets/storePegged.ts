@@ -11,7 +11,7 @@ const chainBlocks = undefined; // not needed by any adapters
 const timeout = (prom: any, time: number, peggedID: string) =>
   Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
     (err) => {
-      console.info("storepegged timedout")
+      console.info("storepegged timedout");
       executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
         getCurrentUnixTimestamp(),
         peggedID,
@@ -30,10 +30,10 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
   if (timestamp) {
     const actions = peggedIndexes
       .map((idx) => peggedAssets[idx])
-      .map((peggedAsset) => {
+      .map(async (peggedAsset) => {
         const adapterModule = importAdapter(peggedAsset);
-        // times out after 50 seconds
-        return timeout(
+        // times out after 60 seconds
+        return await timeout(
           storePeggedAsset(
             timestamp,
             ethereumBlock,
