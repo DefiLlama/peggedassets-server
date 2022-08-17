@@ -20,6 +20,9 @@ export function execute(sql: string, values: any){
 }
 
 export function executeAndIgnoreErrors(sql: string, values: any){
+  console.info("attempted to store")
+  console.info(sql)
+  console.info(values)
     return connection.execute(sql, values)
     .catch(e => console.error("mysql error", e));
 }

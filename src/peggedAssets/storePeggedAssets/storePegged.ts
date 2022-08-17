@@ -11,10 +11,11 @@ const chainBlocks = undefined; // not needed by any adapters
 const timeout = (prom: any, time: number, peggedID: string) =>
   Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
     (err) => {
+      console.info("storepegged timedout")
       executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
         getCurrentUnixTimestamp(),
         peggedID,
-        'Failed to store pegged asset.',
+        String(err),
       ]);
       console.error(`Could not store peggedAsset ${peggedID}`, err);
     }
@@ -23,7 +24,7 @@ const timeout = (prom: any, time: number, peggedID: string) =>
 async function iteratePeggedAssets(peggedIndexes: number[]) {
   const { timestamp, ethereumBlock } = await timeout(
     getCurrentBlocks(),
-    50000,
+    45000,
     "getBlocks"
   );
   if (timestamp) {
@@ -42,7 +43,7 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
             maxRetries,
             true
           ),
-          50000,
+          60000,
           peggedAsset.gecko_id
         );
       });
