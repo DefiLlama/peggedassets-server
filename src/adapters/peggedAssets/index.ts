@@ -69,6 +69,8 @@ import usdlemma from "./usdlemma";
 import pandousd from "./pando-usd";
 import dusd from "./digitaldollar";
 import vst from "./vesta-stable";
+import kusd from "./kolibri-usd";
+import usdtez from "./usdtez";
 
 export default {
   tether,
@@ -142,4 +144,6 @@ export default {
   "pando-usd": pandousd,
   digitaldollar: dusd,
   "vesta-stable": vst,
+  "kolibri-usd": kusd,
+  usdtez,
 };
