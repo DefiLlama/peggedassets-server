@@ -21,7 +21,7 @@ export function execute(sql: string, values: any){
 
 export function executeAndIgnoreErrors(sql: string, values: any){
     return connection.execute(sql, values)
-    .catch(e => console.log("mysql error", e));
+    .catch(e => console.error("mysql error", e));
 }
 
 export function query(sql: string){
