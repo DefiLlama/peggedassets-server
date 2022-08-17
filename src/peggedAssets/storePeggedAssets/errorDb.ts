@@ -11,8 +11,8 @@ const connection = mysql.createPool({
   user: 'admin',
   database: 'stablecoins_errors',
   password: process.env.INFLUXDB_TOKEN,
-  waitForConnections: true,
-  connectionLimit: 1,
+  waitForConnections: false,
+  connectionLimit: 5,
 });
 
 export function execute(sql: string, values: any){

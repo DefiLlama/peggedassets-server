@@ -33,7 +33,7 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
       .map(async (peggedAsset) => {
         const adapterModule = importAdapter(peggedAsset);
         // times out after 60 seconds
-        return await timeout(
+        return timeout(
           storePeggedAsset(
             timestamp,
             ethereumBlock,
