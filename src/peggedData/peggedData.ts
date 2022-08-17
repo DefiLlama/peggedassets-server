@@ -1471,4 +1471,24 @@ export default [
     twitter: "https://twitter.com/usdtz",
     wiki: "https://wiki.defillama.com/wiki/USDtez",
   },
+  {
+    id: "74",
+    name: "Moremoney USD",
+    address: "avax:0x0f577433Bf59560Ef2a79c124E9Ff99fCa258948",
+    symbol: "MONEY",
+    url: "https://moremoney.finance/",
+    description:
+      "Moremoney is a lending protocol for opening (over)collateralized debt positions (CDP) using liquidity pool tokens, interest-bearing tokens (ibTKNs) and other major tokens as collateral.",
+    mintRedeemDescription:
+    "Using the Moremoney app, users mint MONEY by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back MONEY is burned.",
+    onCoinGecko: "true",
+    gecko_id: "moremoney-usd",
+    cmcId: "18758",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/Moremoneyfi",
+    wiki: "https://wiki.defillama.com/wiki/Moremoney_Finance",
+  },
 ] as PeggedAsset[];

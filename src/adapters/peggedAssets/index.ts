@@ -71,6 +71,7 @@ import dusd from "./digitaldollar";
 import vst from "./vesta-stable";
 import kusd from "./kolibri-usd";
 import usdtez from "./usdtez";
+import money from "./moremoney-usd";
 
 export default {
   tether,
@@ -146,4 +147,5 @@ export default {
   "vesta-stable": vst,
   "kolibri-usd": kusd,
   usdtez,
+  "moremoney-usd": money,
 };

@@ -375,7 +375,15 @@ const curvePools: CurvePools = {
     tokenIndex: 0,
     decimalsToken0: 18,
     decimalsToken1: 18,
-  }
+  },
+  "moremoney-usd": {
+    chain: "avax",
+    address: "0xb3f21fc59bc06209d5fb82c474f21582aef09a20",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
+  },
 };
 
 const addressesForScreeners: AddressesForScreeners = {
