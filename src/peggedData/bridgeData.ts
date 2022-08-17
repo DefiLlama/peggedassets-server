@@ -1459,6 +1459,10 @@ export default {
     bridge: "synapse",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x52A9CEA01c4CBDd669883e41758B8eB8e8E2B34b": {
+    bridge: "wan",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xcF422327dDaAa409C2976d01131d8a3457F03251": {
     bridge: "wan",
     sourceChain: formattedSourceChains.eth,

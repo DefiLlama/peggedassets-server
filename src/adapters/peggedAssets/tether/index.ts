@@ -271,6 +271,8 @@ const chainContracts: ChainContracts = {
 };
 
 /*
+Wan: appears to be bridged from more than 1 chain. Adapters currently cannot easily handle this case.
+
 Tezos is using USDT's API for now but could probably be easily moved to other API.
 
 Omni is using USDT's API, it seems there may now be multiple addresses of USDT, so explorer queries need to be updated.

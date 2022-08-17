@@ -265,6 +265,9 @@ const chainContracts: ChainContracts = {
   ethereumclassic: {
     bridgedFromETH: ["0xC1Be9a4D5D45BeeACAE296a7BD5fADBfc14602C4"], // multichain
   },
+  wan: {
+    bridgedFromETH: ["0x52A9CEA01c4CBDd669883e41758B8eB8e8E2B34b"], // wan
+  }
 };
 
 /*
@@ -869,6 +872,11 @@ const adapter: PeggedIssuanceAdapter = {
       6,
       chainContracts.ethereumclassic.bridgedFromETH
     ),
+  },
+  wan: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("wan", 6, chainContracts.wan.bridgedFromETH),
   },
 };
 
