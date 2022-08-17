@@ -14,7 +14,7 @@ const timeout = (prom: any, time: number, peggedID: string) =>
       executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
         getCurrentUnixTimestamp(),
         peggedID,
-        String(err),
+        'Failed to store pegged asset.',
       ]);
       console.error(`Could not store peggedAsset ${peggedID}`, err);
     }
