@@ -16,7 +16,6 @@ const timeout = (prom: any, time: number, peggedID: string) =>
         peggedID,
         String(err),
       ]);
-      setTimeout(() => {}, 5000); // give more time to write to db, not sure why this is needed on server
       console.error(`Could not store peggedAsset ${peggedID}`, err);
     }
   );
@@ -24,7 +23,7 @@ const timeout = (prom: any, time: number, peggedID: string) =>
 async function iteratePeggedAssets(peggedIndexes: number[]) {
   const { timestamp, ethereumBlock } = await timeout(
     getCurrentBlocks(),
-    60000,
+    50000,
     "getBlocks"
   );
   if (timestamp) {
@@ -32,7 +31,7 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
       .map((idx) => peggedAssets[idx])
       .map((peggedAsset) => {
         const adapterModule = importAdapter(peggedAsset);
-        // times out after 60 seconds
+        // times out after 50 seconds
         return timeout(
           storePeggedAsset(
             timestamp,
@@ -43,7 +42,7 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
             maxRetries,
             true
           ),
-          60000,
+          50000,
           peggedAsset.gecko_id
         );
       });
