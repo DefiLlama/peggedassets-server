@@ -20,9 +20,9 @@ type Prices = {
 
 const timeout = (prom: any, time: number) =>
   Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
-    (err) => {
+    async (err) => {
       console.error(`Could not get blocks`, err);
-      executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
+      await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
         getCurrentUnixTimestamp(),
         "prices-getBlocks",
         String(err),
@@ -57,7 +57,7 @@ const handler = async (_event: any) => {
       });
     } catch (e) {
       if (i >= 5) {
-        executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
+        await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
           getCurrentUnixTimestamp(),
           "prices-storePeggedPrices",
           String(e),

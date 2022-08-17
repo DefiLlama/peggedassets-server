@@ -11,8 +11,8 @@ const connection = mysql.createPool({
   user: 'admin',
   database: 'stablecoins_errors',
   password: process.env.INFLUXDB_TOKEN,
-  waitForConnections: false,
-  connectionLimit: 5,
+  waitForConnections: true,
+  connectionLimit: 2,
 });
 
 export function execute(sql: string, values: any){
@@ -20,9 +20,6 @@ export function execute(sql: string, values: any){
 }
 
 export function executeAndIgnoreErrors(sql: string, values: any){
-  console.info("attempted to store")
-  console.info(sql)
-  console.info(values)
     return connection.execute(sql, values)
     .catch(e => console.error("mysql error", e));
 }
