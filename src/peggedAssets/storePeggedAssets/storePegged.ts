@@ -11,7 +11,12 @@ const chainBlocks = undefined; // not needed by any adapters
 const timeout = (prom: any, time: number, peggedID: string) =>
   Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
     (err) => {
-      executeAndIgnoreErrors('INSERT INTO `errors` VALUES (?, ?, ?)', [getCurrentUnixTimestamp(), peggedID, String(err)]);
+      executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
+        getCurrentUnixTimestamp(),
+        peggedID,
+        String(err),
+      ]);
+      setTimeout(() => {}, 5000); // give more time to write to db, not sure why this is needed on server
       console.error(`Could not store peggedAsset ${peggedID}`, err);
     }
   );
