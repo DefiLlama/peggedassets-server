@@ -9,6 +9,7 @@ import dynamodb from "./utils/shared/dynamodb";
 import {
   getLastRecord,
   hourlyPeggedBalances,
+  hourlyPeggedPrices,
 } from "./peggedAssets/utils/getLastRecord";
 import { normalizeChain } from "./utils/normalizeChain";
 import {
@@ -22,14 +23,25 @@ type TokenBalance = {
   [token: string]: number | undefined;
 };
 
-function compare_fn(a: number, b: number) {
+// needed because new daily rates is not stored on same day it is queried for
+function ratesCompareFn(a: number, b: number) {
   if (Math.abs(a - b) <= secondsInDay) return 0;
+  return a - b;
+}
+
+// this should not get prices from the previous day
+function pricesCompareFn(a: number, b: number) {
+  if (Math.abs(a - b) < secondsInDay) return 0;
   return a - b;
 }
 
 // returns index of element or -n-1 where n is index of closest element
 // uses compare_fn to consider timestamps the same if they are within 1 day range
-function timestampsBinarySearch(ar: number[], el: number) {
+function timestampsBinarySearch(
+  ar: number[],
+  el: number,
+  compare_fn: (a: number, b: number) => number
+) {
   var m = 0;
   var n = ar.length - 1;
   while (m <= n) {
@@ -170,6 +182,37 @@ export async function craftChartsResponse(
   const historicalRates = historicalRatesItems.Items;
   const rateTimestamps = historicalRates?.map((item) => item.SK);
 
+  const historicalPriceItems = await dynamodb.query({
+    ExpressionAttributeValues: {
+      ":pk": `dailyPeggedPrices`,
+    },
+    KeyConditionExpression: "PK = :pk",
+  });
+  if (
+    historicalPriceItems.Items === undefined ||
+    historicalPriceItems.Items.length < 1
+  ) {
+    return errorResponse({
+      message: "Could not get prices.",
+    });
+  }
+
+  const historicalPrices = historicalPriceItems.Items;
+
+  const lastPrices = await getLastRecord(hourlyPeggedPrices());
+
+  const lastDailyItem = historicalPrices[historicalPrices.length - 1];
+  if (
+    lastPrices !== undefined &&
+    lastPrices.SK > lastDailyItem.SK &&
+    lastDailyItem.SK + secondsInHour * 25 > lastPrices.SK
+  ) {
+    lastPrices.SK = lastDailyItem.SK;
+    historicalPrices[historicalPrices.length - 1] = lastPrices;
+  }
+
+  const priceTimestamps = historicalPrices?.map((item) => item.SK);
+
   await Promise.all(
     historicalPeggedBalances.map(async (peggedBalance) => {
       if (peggedBalance === undefined) {
@@ -189,20 +232,6 @@ export async function craftChartsResponse(
           SK: lastTimestamp,
         });
       }
-      const historicalPriceItems = await dynamodb.query({
-        ExpressionAttributeValues: {
-          ":pk": `dailyPeggedPrices`,
-        },
-        KeyConditionExpression: "PK = :pk",
-      });
-      if (
-        historicalPriceItems.Items === undefined ||
-        historicalPriceItems.Items.length < 1
-      ) {
-        return undefined;
-      }
-      const historicalPrices = historicalPriceItems.Items;
-      const priceTimestamps = historicalPrices?.map((item) => item.SK);
 
       await Promise.all(
         historicalBalance.map(async (item: any) => {
@@ -211,7 +240,8 @@ export async function craftChartsResponse(
 
           const closestPriceIndex = timestampsBinarySearch(
             priceTimestamps,
-            timestamp
+            timestamp,
+            pricesCompareFn
           );
           const closestPrices = extractResultOfBinarySearch(
             historicalPrices,
@@ -224,7 +254,8 @@ export async function craftChartsResponse(
           } else if (pegType !== "peggedUSD" && !historicalPrice) {
             const closestRatesIndex = timestampsBinarySearch(
               rateTimestamps,
-              timestamp
+              timestamp,
+              ratesCompareFn
             );
             const closestRates = extractResultOfBinarySearch(
               historicalRates,
