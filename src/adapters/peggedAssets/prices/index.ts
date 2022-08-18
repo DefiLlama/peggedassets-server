@@ -33,7 +33,11 @@ setInterval(() => {
 }, 5000);
 
 function storePriceError(tokenID: string) {
-  executeAndIgnoreErrors('INSERT INTO `errors` VALUES (?, ?, ?)', [getCurrentUnixTimestamp(), `prices-${tokenID}`, `Token has pricing method but it failed.`]);
+  executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
+    getCurrentUnixTimestamp(),
+    `prices-${tokenID}`,
+    `Token has pricing method but it failed.`,
+  ]);
 }
 
 type ChainlinkFeeds = {
@@ -379,6 +383,14 @@ const curvePools: CurvePools = {
   "moremoney-usd": {
     chain: "avax",
     address: "0xb3f21fc59bc06209d5fb82c474f21582aef09a20",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
+  },
+  "interest-protocol": {
+    chain: "ethereum",
+    address: "0x63594b2011a0f2616586bf3eef8096d42272f916",
     tokenIndex: 0,
     decimalsToken0: 18,
     decimalsToken1: 18,

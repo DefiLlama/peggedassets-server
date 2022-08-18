@@ -1511,4 +1511,24 @@ export default [
     twitter: "https://twitter.com/youves_com",
     wiki: "https://wiki.defillama.com/wiki/Youves",
   },
+  {
+    id: "76",
+    name: "Interest Protocol",
+    address: "0x2a54ba2964c8cd459dc568853f79813a60761b58",
+    symbol: "USDI",
+    url: "https://interestprotocol.io/",
+    description:
+      "Interest Protocol (IP) is a fractional reserve banking protocol on the Ethereum blockchain that pays interest to all depositors. Interest Protocol issues a stablecoin, named USDi, that is both over-collateralized and highly scalable.",
+    mintRedeemDescription:
+    "Using the Interest Protocol app, users mint USDi by depositing an accepted collateral asset into a vault or swapping for USDC. When the loan is repaid to retrieve the collateral, the paid back USDi is burned.",
+    onCoinGecko: "true",
+    gecko_id: "interest-protocol",
+    cmcId: "20598",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/InterestDeFi",
+    wiki: "https://wiki.defillama.com/wiki/Interest_Protocol",
+  },
 ] as PeggedAsset[];

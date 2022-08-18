@@ -73,6 +73,7 @@ import kusd from "./kolibri-usd";
 import usdtez from "./usdtez";
 import money from "./moremoney-usd";
 import uusd from "./youves-uusd";
+import usdi from "./interest-protocol";
 
 export default {
   tether,
@@ -150,4 +151,5 @@ export default {
   usdtez,
   "moremoney-usd": money,
   "youves-uusd": uusd,
+  "interest-protocol": usdi,
 };
