@@ -2,10 +2,10 @@ const axios = require("axios");
 const retry = require("async-retry");
 const BigNumber = require("bignumber.js");
 
-export async function getTotalSupply(tokenID: string, decimals?: number) {
+export async function getTotalSupply(contract: string, decimals?: number) {
   const res = await retry(
     async (_bail: any) =>
-      await axios.get(`https://api.tzkt.io/v1/tokens?id=${tokenID}`)
+      await axios.get(`https://api.tzkt.io/v1/tokens?contract=${contract}`)
   );
 
   const supply = new BigNumber(res?.data?.[0]?.totalSupply);

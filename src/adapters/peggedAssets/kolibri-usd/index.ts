@@ -13,7 +13,11 @@ type ChainContracts = {
   };
 };
 
-const chainContracts: ChainContracts = {};
+const chainContracts: ChainContracts = {
+  tezos: {
+    issued: ["KT1K9gCRgaLRFKTErYt1wVxA3Frb9FjasjTV"],
+  },
+};
 
 async function tezosMinted(tokenID: string) {
   return async function (
@@ -30,7 +34,7 @@ async function tezosMinted(tokenID: string) {
 
 const adapter: PeggedIssuanceAdapter = {
   tezos: {
-    minted: tezosMinted("85"),
+    minted: tezosMinted(chainContracts.tezos.issued[0]),
     unreleased: async () => ({}),
   },
 };

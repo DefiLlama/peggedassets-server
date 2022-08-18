@@ -15,7 +15,7 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   tezos: {
-    issued: ["KT1LN4LPSqTMS7Sd2CJw4bbDGRkMv2t68Fy9"],
+    issued: ["KT1XRPEPXbZK25r3Htzp2o1x7xdMMmfocKNW"],
   },
 };
 

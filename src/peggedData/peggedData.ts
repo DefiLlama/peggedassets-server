@@ -1491,4 +1491,24 @@ export default [
     twitter: "https://twitter.com/Moremoneyfi",
     wiki: "https://wiki.defillama.com/wiki/Moremoney_Finance",
   },
+  {
+    id: "75",
+    name: "Youves uUSD",
+    address: "tezos:KT1XRPEPXbZK25r3Htzp2o1x7xdMMmfocKNW",
+    symbol: "UUSD",
+    url: "https://youves.com/",
+    description:
+      "uUSD is stablecoin pegged to USD on Tezos. It is fungible by design and backed by tez collateral.",
+    mintRedeemDescription:
+    "Using the youves app, users mint uUSD by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back uUSD is burned.",
+    onCoinGecko: "true",
+    gecko_id: "youves-uusd",
+    cmcId: "15041",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/youves_com",
+    wiki: "https://wiki.defillama.com/wiki/Youves",
+  },
 ] as PeggedAsset[];
