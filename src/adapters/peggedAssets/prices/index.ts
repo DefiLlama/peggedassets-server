@@ -30,7 +30,7 @@ function releaseCoingeckoLock() {
 // So we'll release one every 1.2 seconds to match it
 setInterval(() => {
   releaseCoingeckoLock();
-}, 2000);
+}, 5000);
 
 function storePriceError(tokenID: string) {
   executeAndIgnoreErrors('INSERT INTO `errors` VALUES (?, ?, ?)', [getCurrentUnixTimestamp(), `prices-${tokenID}`, `Token has pricing method but it failed.`]);
