@@ -74,6 +74,7 @@ import usdtez from "./usdtez";
 import money from "./moremoney-usd";
 import uusd from "./youves-uusd";
 import usdi from "./interest-protocol";
+import lugh from "./lugh";
 
 export default {
   tether,
@@ -152,4 +153,5 @@ export default {
   "moremoney-usd": money,
   "youves-uusd": uusd,
   "interest-protocol": usdi,
+  lugh,
 };

@@ -1531,4 +1531,24 @@ export default [
     twitter: "https://twitter.com/InterestDeFi",
     wiki: "https://wiki.defillama.com/wiki/Interest_Protocol",
   },
+  {
+    id: "77",
+    name: "LUGH",
+    address: "tezos:KT1JBNFcB5tiycHNdYGYCtR3kk6JaJysUCi8",
+    symbol: "EURL",
+    url: "https://www.lugh.io/",
+    description:
+      "LUGH (EURL) is a euro-pegged stablecoin on Tezos and Ethereum.",
+    mintRedeemDescription:
+    "Corporates who have undergone a verification process can exchange EUR for EURL and redeem EURL for EUR.",
+    onCoinGecko: "false",
+    gecko_id: "lugh",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: null,
+    auditLinks: ["https://www.lugh.io/"],
+    twitter: "https://twitter.com/LughStablecoin",
+    wiki: "https://wiki.defillama.com/wiki/LUGH",
+  },
 ] as PeggedAsset[];
