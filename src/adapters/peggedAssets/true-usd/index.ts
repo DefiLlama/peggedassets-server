@@ -10,6 +10,7 @@ import {
   getTokenBalance as tronGetTokenBalance,
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
+import { call as nearCall } from "../llama-helper/near";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -52,6 +53,14 @@ const chainContracts: ChainContracts = {
   },
   cronos: {
     issued: ["0x87EFB3ec1576Dec8ED47e58B832bEdCd86eE186e"],
+  },
+  near: {
+    bridgedFromETH: [
+      "0000000000085d4780b73119b644ae5ecd22b376.factory.bridge.near",
+    ], // rainbow
+  },
+  aurora: {
+    bridgedFromNear: ["0x5454ba0a9e3552f7828616d80a9d2d869726e6f5"], // rainbow
   },
 };
 
@@ -141,8 +150,26 @@ async function bscMinted() {
   };
 }
 
+async function nearBridged(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await nearCall(address, "ft_total_supply");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply / 10 ** decimals,
+      address,
+      true
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
-  
   ethereum: {
     minted: chainMinted("ethereum", 18),
     unreleased: async () => ({}),
@@ -231,6 +258,18 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("cronos", 18),
     unreleased: async () => ({}),
   },
+  near: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 18),
+  },
+  /* 0 supply
+  aurora: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    near: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromNear),
+  }
+  */
 };
 
 export default adapter;

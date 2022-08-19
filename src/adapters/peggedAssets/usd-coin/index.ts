@@ -14,6 +14,7 @@ import {
   getTotalSupply as ontologyGetTotalSupply,
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
+import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -145,8 +146,13 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x0b7007c13325c48911f73a2dad5fa5dcbf808adc"],
   },
   aurora: {
-    bridgeOnETH: ["0x23Ddd3e3692d1861Ed57EDE224608875809e127f"], // disparity, not sure
-    bridgedFromETH: ["0xB12BFcA5A55806AaF64E99521918A4bf0fC40802"], // celer
+    bridgeOnETH: ["0x23Ddd3e3692d1861Ed57EDE224608875809e127f"],
+    bridgedFromNear: ["0xB12BFcA5A55806AaF64E99521918A4bf0fC40802"], // rainbow bridge
+    /*
+    this is claimed by both rainbow bridge and celer. there does not appear to be enough in the
+    rainbow bridge and celer bridge contracts on ethereum for both aurora and near to have
+    USDC bridged independently, and near dev claims aurora's USDC may be a subset of near's
+    */
   },
   fuse: {
     bridgedFromETH: ["0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5"],
@@ -267,6 +273,9 @@ const chainContracts: ChainContracts = {
   },
   wan: {
     bridgedFromETH: ["0x52A9CEA01c4CBDd669883e41758B8eB8e8E2B34b"], // wan
+  },
+  near: {
+    bridgedFromETH: ["a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.factory.bridge.near"], // rainbow bridge
   }
 };
 
@@ -480,7 +489,14 @@ async function karuraMinted(address: string, decimals: number) {
         )
     );
     const supply = res.data.result.totalSupply / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", supply, "wormhole", false, "Ethereum");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply,
+      "wormhole",
+      false,
+      "Ethereum"
+    );
     return balances;
   };
 }
@@ -518,6 +534,25 @@ async function ontologyBridged() {
       "peggedUSD",
       celerSupply,
       celerUSDCAddress,
+      true
+    );
+    return balances;
+  };
+}
+
+async function nearBridged(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await nearCall(address, "ft_total_supply");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply / 10 ** decimals,
+      address,
       true
     );
     return balances;
@@ -685,7 +720,7 @@ const adapter: PeggedIssuanceAdapter = {
   aurora: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("aurora", 6, chainContracts.aurora.bridgedFromETH),
+    near: bridgedSupply("aurora", 6, chainContracts.aurora.bridgedFromNear),
   },
   fuse: {
     minted: async () => ({}),
@@ -877,6 +912,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("wan", 6, chainContracts.wan.bridgedFromETH),
+  },
+  near: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 6),
   },
 };
 

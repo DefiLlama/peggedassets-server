@@ -699,10 +699,6 @@ export default {
     bridge: "celer",
     sourceChain: formattedSourceChains.eth,
   },
-  "0xB12BFcA5A55806AaF64E99521918A4bf0fC40802": {
-    bridge: "celer",
-    sourceChain: formattedSourceChains.eth,
-  },
   "0xe46910336479F254723710D57e7b683F3315b22B": {
     bridge: "celer",
     sourceChain: formattedSourceChains.eth,
@@ -1075,17 +1071,45 @@ export default {
     bridge: "arbitrum",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x5454ba0a9e3552f7828616d80a9d2d869726e6f5": {
+    bridge: "near",
+    sourceChain: formattedSourceChains.near,
+  },
+  "0000000000085d4780b73119b644ae5ecd22b376.factory.bridge.near": {
+    bridge: "near",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "6b175474e89094c44da98b954eedeac495271d0f.factory.bridge.near": {
+    bridge: "near",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "4fabb145d64652a948d72533023f6e7a623c7c53.factory.bridge.near": {
+    bridge: "near",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.factory.bridge.near": {
+    bridge: "near",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xB12BFcA5A55806AaF64E99521918A4bf0fC40802": {
+    bridge: "near",
+    sourceChain: formattedSourceChains.near,
+  },
+  "dac17f958d2ee523a2206206994597c13d831ec7.factory.bridge.near": {
+    bridge: "near",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x5183e1B1091804BC2602586919E6880ac1cf2896": {
     bridge: "near",
     sourceChain: formattedSourceChains.near,
   },
   "0x4988a896b1227218e4a686fde5eabdcabd91571f": {
     bridge: "near",
-    sourceChain: formattedSourceChains.eth,
+    sourceChain: formattedSourceChains.near,
   },
   "0xe3520349f477a5f6eb06107066048508498a291b": {
     bridge: "near",
-    sourceChain: formattedSourceChains.eth,
+    sourceChain: formattedSourceChains.near,
   },
   "0x3c2b8be99c50593081eaa2a724f0b8285f5aba8f": {
     bridge: "harmony",

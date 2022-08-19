@@ -11,6 +11,7 @@ import {
   getTotalSupply as ontologyGetTotalSupply,
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
+import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -70,7 +71,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844"], // multichain
   },
   aurora: {
-    bridgedFromETH: ["0xe3520349f477a5f6eb06107066048508498a291b"],
+    bridgedFromNear: ["0xe3520349f477a5f6eb06107066048508498a291b"], // claimed by both celer and rainbow
   },
   fantom: {
     bridgedFromETH: [
@@ -167,6 +168,9 @@ const chainContracts: ChainContracts = {
   ethereumclassic: {
     bridgedFromETH: ["0x2C78f1b70Ccf63CDEe49F9233e9fAa99D43AA07e"], // multichain
   },
+  near: {
+    bridgedFromETH: ["6b175474e89094c44da98b954eedeac495271d0f.factory.bridge.near"], // rainbow 
+  }
 };
 
 /*
@@ -280,6 +284,25 @@ async function ontologyBridged() {
   };
 }
 
+async function nearBridged(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await nearCall(address, "ft_total_supply");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply / 10 ** decimals,
+      address,
+      true
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -355,7 +378,7 @@ const adapter: PeggedIssuanceAdapter = {
   aurora: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromETH),
+    near: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromNear),
   },
   fantom: {
     minted: async () => ({}),
@@ -508,6 +531,11 @@ const adapter: PeggedIssuanceAdapter = {
       18,
       chainContracts.ethereumclassic.bridgedFromETH
     ),
+  },
+  near: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 18),
   },
 };
 

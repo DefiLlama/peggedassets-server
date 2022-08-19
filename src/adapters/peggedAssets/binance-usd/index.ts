@@ -6,6 +6,7 @@ import {
   terraSupply,
   supplyInEthereumBridge,
 } from "../helper/getSupply";
+import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -144,6 +145,11 @@ const chainContracts: ChainContracts = {
   ethereumclassic: {
     bridgedFromETH: ["0xb12c13e66AdE1F72f71834f2FC5082Db8C091358"], // multichain
   },
+  near: {
+    bridgedFromETH: [
+      "4fabb145d64652a948d72533023f6e7a623c7c53.factory.bridge.near",
+    ], // rainbow bridge
+  }
 };
 
 /*
@@ -211,6 +217,25 @@ async function kavaMinted(owners: string[]) {
     }
     sumSingleBalance(balances, "peggedUSD", circulating, owner, true);
   }
+    return balances;
+  };
+}
+
+async function nearBridged(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await nearCall(address, "ft_total_supply");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply / 10 ** decimals,
+      address,
+      true
+    );
     return balances;
   };
 }
@@ -396,6 +421,11 @@ const adapter: PeggedIssuanceAdapter = {
       18,
       chainContracts.ethereumclassic.bridgedFromETH
     ),
+  },
+  near: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 18),
   },
 };
 

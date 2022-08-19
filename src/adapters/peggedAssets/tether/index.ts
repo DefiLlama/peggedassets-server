@@ -11,6 +11,7 @@ import {
   getTotalSupply as ontologyGetTotalSupply,
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
+import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -162,8 +163,13 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x6fbcdc1169b5130c59e72e51ed68a84841c98cd1"],
   },
   aurora: {
-    bridgeOnETH: ["0x23Ddd3e3692d1861Ed57EDE224608875809e127f"], // 60M disparity, not sure
-    bridgedFromETH: ["0x4988a896b1227218e4a686fde5eabdcabd91571f"],
+    bridgeOnETH: ["0x23Ddd3e3692d1861Ed57EDE224608875809e127f"],
+    bridgedFromNear: ["0x4988a896b1227218e4a686fde5eabdcabd91571f"], // rainbow bridge
+    /*
+    this is claimed by both rainbow bridge and celer. there does not appear to be enough in the
+    rainbow bridge and celer bridge contracts on ethereum for both aurora and near to have
+    USDT bridged independently, and near dev claims aurora's USDT may be a subset of near's
+    */
   },
   telos: {
     bridgedFromETH: ["0xefaeee334f0fd1712f9a8cc375f427d9cdd40d73"], // assuming multichain
@@ -267,6 +273,11 @@ const chainContracts: ChainContracts = {
   },
   ethereumclassic: {
     bridgedFromETH: ["0xc9BAA8cfdDe8E328787E29b4B078abf2DaDc2055"], // multichain
+  },
+  near: {
+    bridgedFromETH: [
+      "dac17f958d2ee523a2206206994597c13d831ec7.factory.bridge.near",
+    ], // rainbow bridge
   },
 };
 
@@ -600,6 +611,25 @@ async function ontologyBridged() {
   };
 }
 
+async function nearBridged(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await nearCall(address, "ft_total_supply");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply / 10 ** decimals,
+      address,
+      true
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -796,7 +826,7 @@ const adapter: PeggedIssuanceAdapter = {
   aurora: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("aurora", 6, chainContracts.aurora.bridgedFromETH),
+    near: bridgedSupply("aurora", 6, chainContracts.aurora.bridgedFromNear),
   },
   telos: {
     minted: async () => ({}),
@@ -977,6 +1007,11 @@ const adapter: PeggedIssuanceAdapter = {
   tezos: {
     minted: usdtApiMinted("totaltokens_tezos"),
     unreleased: usdtApiUnreleased("reserve_balance_tezos"),
+  },
+  near: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 6),
   },
 };
 
