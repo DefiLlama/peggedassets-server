@@ -1483,6 +1483,10 @@ export default {
     bridge: "synapse",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xfCeAAaEB8D564a9D0e71Ef36f027b9D162bC334e": {
+    bridge: "wan",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x52A9CEA01c4CBDd669883e41758B8eB8e8E2B34b": {
     bridge: "wan",
     sourceChain: formattedSourceChains.eth,
@@ -1523,6 +1527,26 @@ export default {
     bridge: "deus",
     sourceChain: formattedSourceChains.fantom,
   },
+  "0x08745bee17026ed2e0e39a98f81189b9e14ab1b3": {
+    bridge: "orbit",
+    sourceChain: formattedSourceChains.celo,
+  },
+  "0x210bc03f49052169d5588a52c317f71cf2078b85": {
+    bridge: "orbit",
+    sourceChain: formattedSourceChains.bsc,
+  },
+  "0x5c74070fdea071359b86082bd9f9b3deaafbe32b": {
+    bridge: "orbit",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x754288077d0ff82af7a5317c7cb8c444d421d103": {
+    bridge: "orbit",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167": {
+    bridge: "orbit",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x5bEF2617eCCA9a39924c09017c5F1E25Efbb3bA8": {
     bridge: "orbit",
     sourceChain: formattedSourceChains.eth,
@@ -1541,6 +1565,10 @@ export default {
   },
   "17a58a4a65959c2f567e5063c560f9d09fb81284": {
     bridge: "polynetwork",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x94fa70d079d76279e1815ce403e9b985bccc82ac": {
+    bridge: "cake",
     sourceChain: formattedSourceChains.eth,
   },
 } as BridgeMapping;
@@ -1735,5 +1763,9 @@ export const bridgeInfo = {
   polynetwork: {
     name: "PolyNetwork",
     link: "https://poly.network/",
+  },
+  cake: {
+    name: "Cake DeFi",
+    link: "https://cakedefi.com/",
   },
 } as BridgeInfo;

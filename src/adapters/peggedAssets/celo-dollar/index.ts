@@ -34,6 +34,9 @@ const chainContracts: ChainContracts = {
   solana: {
     bridgedFromCelo: ["EwxNF8g9UfmsJVcZFTpL9Hx5MCkoQFoJi6XNWzKf1j8e"], // allbridge
   },
+  klaytn: {
+    bridgedFromCelo: ["0x08745bee17026ed2e0e39a98f81189b9e14ab1b3"], // orbit
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -93,6 +96,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     celo: solanaMintedOrBridged(chainContracts.solana.bridgedFromCelo)
+  },
+  klaytn: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    celo: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromCelo),
   },
 };
 

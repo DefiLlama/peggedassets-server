@@ -149,7 +149,10 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "4fabb145d64652a948d72533023f6e7a623c7c53.factory.bridge.near",
     ], // rainbow bridge
-  }
+  },
+  klaytn: {
+    bridgedFromBSC: ["0x210bc03f49052169d5588a52c317f71cf2078b85"], // orbit
+  },
 };
 
 /*
@@ -426,6 +429,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 18),
+  },
+  klaytn: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    bsc: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromBSC),
   },
 };
 

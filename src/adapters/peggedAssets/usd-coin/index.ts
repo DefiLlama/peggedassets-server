@@ -275,8 +275,16 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x52A9CEA01c4CBDd669883e41758B8eB8e8E2B34b"], // wan
   },
   near: {
-    bridgedFromETH: ["a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.factory.bridge.near"], // rainbow bridge
-  }
+    bridgedFromETH: [
+      "a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.factory.bridge.near",
+    ], // rainbow bridge
+  },
+  defichain: {
+    bridgeOnETH: ["0x94fa70d079d76279e1815ce403e9b985bccc82ac"], // seems there is no direct bridge from ETH. but users can withdraw to defichain using cake defi?
+  },
+  klaytn: {
+    bridgedFromETH: ["0x754288077d0ff82af7a5317c7cb8c444d421d103"], // orbit
+  },
 };
 
 /*
@@ -917,6 +925,20 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 6),
+  },
+  defichain: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.defichain.bridgeOnETH[0],
+      6
+    ),
+  },
+  klaytn: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
 };
 

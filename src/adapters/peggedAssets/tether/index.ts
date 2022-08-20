@@ -279,11 +279,18 @@ const chainContracts: ChainContracts = {
       "dac17f958d2ee523a2206206994597c13d831ec7.factory.bridge.near",
     ], // rainbow bridge
   },
+  wan: {
+    bridgeOnETH: ["0xfCeAAaEB8D564a9D0e71Ef36f027b9D162bC334e"], // amount minted on wan does not match amount in bridge contract, using bridge contract amount for now
+  },
+  defichain: {
+    bridgeOnETH: ["0x94fa70d079d76279e1815ce403e9b985bccc82ac"], // seems there is no direct bridge from ETH. but users can withdraw to defichain using cake defi?
+  },
+  klaytn: {
+    bridgedFromETH: ["0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167"], // orbit
+  },
 };
 
 /*
-Wan: appears to be bridged from more than 1 chain. Adapters currently cannot easily handle this case.
-
 Tezos is using USDT's API for now but could probably be easily moved to other API.
 
 Omni is using USDT's API, it seems there may now be multiple addresses of USDT, so explorer queries need to be updated.
@@ -1012,6 +1019,25 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 6),
+  },
+  wan: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(chainContracts.ethereum.issued[0], chainContracts.wan.bridgeOnETH[0], 6)
+  },
+  defichain: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.defichain.bridgeOnETH[0],
+      6
+    ),
+  },
+  klaytn: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
 };
 
