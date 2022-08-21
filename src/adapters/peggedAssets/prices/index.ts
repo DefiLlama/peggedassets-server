@@ -26,11 +26,10 @@ function releaseCoingeckoLock() {
     firstLock(null);
   }
 }
-// Rate limit is 50 calls/min for coingecko's API
-// So we'll release one every 1.2 seconds to match it
+
 setInterval(() => {
   releaseCoingeckoLock();
-}, 5000);
+}, 7000);
 
 function storePriceError(tokenID: string) {
   executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
@@ -713,7 +712,7 @@ export default async function getCurrentPeggedPrice(
   }
   if (priceSource === "coingecko") {
     // only use as last resort
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       try {
         await getCoingeckoLock();
         const res = await axios.get(
