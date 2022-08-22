@@ -828,7 +828,7 @@ export default [
     cmcId: "9861",
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
-    priceSource: "dexscreener", // has low liquidity Uni pool. had pools on dexscreener but they rugged. coingecko is not updating.
+    priceSource: "coingecko", // has low liquidity Uni pool. had pools on dexscreener but they rugged. coingecko is not updating.
     auditLinks: null,
     twitter: "https://twitter.com/FloatProtocol",
     wiki: "https://wiki.defillama.com/wiki/Float_Protocol",
