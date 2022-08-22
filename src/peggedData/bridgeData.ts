@@ -1571,6 +1571,14 @@ export default {
     bridge: "cake",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x80b5a32E4F032B2a058b4F29EC95EEfEEB87aDcd": {
+    bridge: "canto",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xd567B3d7B8FE3C79a1AD8dA978812cfC4Fa05e75": {
+    bridge: "canto",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1767,5 +1775,13 @@ export const bridgeInfo = {
   cake: {
     name: "Cake DeFi",
     link: "https://cakedefi.com/",
+  },
+  adastra: {
+    name: "Ad Astra Portal",
+    link: "https://ad-astra.elrond.com/",
+  },
+  canto: {
+    name: "Canto",
+    link: "https://bridge.canto.io/",
   },
 } as BridgeInfo;

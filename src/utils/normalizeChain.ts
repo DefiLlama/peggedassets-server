@@ -795,15 +795,42 @@ export const chainCoingeckoIds = {
     categories: ["EVM", "Parachain"],
     parent: "Polkadot",
   },
-  "SXnetwork": {
+  SXnetwork: {
     geckoId: "sx-network",
     symbol: "SX",
     cmcId: "8377",
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Polygon",
-      types: ["L2", "gas"]
+      types: ["L2", "gas"],
     },
+  },
+  Heiko: {
+    geckoId: null,
+    symbol: "HKO",
+    cmcId: null,
+    categories: ["Parachain"],
+    parent: {
+      chain: "Kusama",
+      types: ["parachain"],
+    },
+  },
+  Dogechain: {
+    geckoId: "dogechain",
+    symbol: "DG",
+    cmcId: null,
+    categories: ["EVM"],
+  },
+  Canto: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
+  Ripple: {
+    geckoId: "ripple",
+    symbol: "XRP",
+    cmcId: "52",
   },
 } as {
   [chain: string]: {
@@ -1008,7 +1035,15 @@ export function getChainDisplayName(
     case "terra":
       return "Terra Classic";
     case "sx":
-      return "SXnetwork"
+      return "SXnetwork";
+    case "heiko":
+      return "Heiko";
+    case "dogechain":
+      return "Dogechain";
+    case "canto":
+      return "Canto";
+    case "ripple":
+      return "Ripple";
 
     default:
       return (

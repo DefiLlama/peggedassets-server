@@ -285,6 +285,9 @@ const chainContracts: ChainContracts = {
   klaytn: {
     bridgedFromETH: ["0x754288077d0ff82af7a5317c7cb8c444d421d103"], // orbit
   },
+  canto: {
+    bridgedFromETH: ["0x80b5a32E4F032B2a058b4F29EC95EEfEEB87aDcd"], // canto/gravity
+  }
 };
 
 /*
@@ -389,14 +392,14 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/assets/31566704"
         )
     );
-    const supply = supplyRes.data.asset.params.total;
+    const supply = supplyRes?.data?.asset?.params?.total;
     const reserveRes = await retry(
       async (_bail: any) =>
         await axios.get(
           "https://algoindexer.algoexplorerapi.io/v2/accounts/2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM"
         )
     );
-    const reserveAccount = reserveRes.data.account.assets.filter(
+    const reserveAccount = reserveRes?.data?.account?.assets?.filter(
       (asset: any) => asset["asset-id"] === 31566704
     );
     const reserves = reserveAccount[0].amount;
@@ -434,7 +437,7 @@ async function hederaMinted() {
           "https://mainnet-public.mirrornode.hedera.com/api/v1/tokens/0.0.456858"
         )
     );
-    const supply = issuance.data.total_supply;
+    const supply = issuance?.data?.total_supply;
     let balance = supply / 10 ** 6;
     sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
     return balances;
@@ -477,7 +480,8 @@ async function reinetworkBridged(address: string, decimals: number) {
           `https://scan.rei.network/api?module=token&action=getToken&contractaddress=${address}`
         )
     );
-    const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
+    const totalSupply =
+      parseInt(res?.data?.result?.totalSupply) / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
     return balances;
   };
@@ -496,7 +500,7 @@ async function karuraMinted(address: string, decimals: number) {
           `https://blockscout.karura.network/api?module=token&action=getToken&contractaddress=getToken&contractaddress=${address}`
         )
     );
-    const supply = res.data.result.totalSupply / 10 ** decimals;
+    const supply = res?.data?.result?.totalSupply / 10 ** decimals;
     sumSingleBalance(
       balances,
       "peggedUSD",
@@ -562,6 +566,32 @@ async function nearBridged(address: string, decimals: number) {
       supply / 10 ** decimals,
       address,
       true
+    );
+    return balances;
+  };
+}
+
+async function elrondBridged(tokenID: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
+        )
+    );
+    const supply = res?.data?.data?.supply / 10 ** decimals;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply,
+      "adastra",
+      false,
+      "Ethereum"
     );
     return balances;
   };
@@ -940,6 +970,16 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
+  elrond: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: elrondBridged("USDC-c76f1f", 6),
+  },
+  canto: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("canto", 6, chainContracts.canto.bridgedFromETH),
+  }
 };
 
 export default adapter;

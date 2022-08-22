@@ -288,6 +288,9 @@ const chainContracts: ChainContracts = {
   klaytn: {
     bridgedFromETH: ["0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167"], // orbit
   },
+  canto: {
+    bridgedFromETH: ["0xd567B3d7B8FE3C79a1AD8dA978812cfC4Fa05e75"], // canto/gravity
+  }
 };
 
 /*
@@ -1039,6 +1042,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
+  canto: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("canto", 6, chainContracts.canto.bridgedFromETH),
+  }
 };
 
 export default adapter;
