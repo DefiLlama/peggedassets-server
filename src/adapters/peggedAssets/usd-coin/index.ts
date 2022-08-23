@@ -287,7 +287,10 @@ const chainContracts: ChainContracts = {
   },
   canto: {
     bridgedFromETH: ["0x80b5a32E4F032B2a058b4F29EC95EEfEEB87aDcd"], // canto/gravity
-  }
+  },
+  everscale: {
+    bridgeOnETH: ["0xF8A0D53DDC6C92c3c59824f380C0f3d2a3cf521C"], // octus(?)
+  },
 };
 
 /*
@@ -979,7 +982,16 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("canto", 6, chainContracts.canto.bridgedFromETH),
-  }
+  },
+  everscale: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.everscale.bridgeOnETH[0],
+      6
+    ),
+  },
 };
 
 export default adapter;

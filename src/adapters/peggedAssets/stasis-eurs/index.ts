@@ -3,6 +3,7 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
   bridgedSupplySubtractReserve,
+  supplyInEthereumBridge
 } from "../helper/getSupply";
 import {
   ChainBlocks,
@@ -30,6 +31,9 @@ const chainContracts: ChainContracts = {
   xdai: {
     bridgedFromETH: ["0x9EE40742182707467f78344F6b287bE8704F27E2"],
   },
+  everscale: {
+    bridgeOnETH: ["0x6b9f9cadb11690b2df23c3cfce383a6706f9a5e6"], // octus(?)
+  }
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -188,6 +192,16 @@ const adapter: PeggedIssuanceAdapter = {
   algorand: {
     minted: algorandMinted(),
     unreleased: async () => ({}),
+  },
+  everscale: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.everscale.bridgeOnETH[0],
+      2,
+      "peggedEUR"
+    ),
   },
 };
 

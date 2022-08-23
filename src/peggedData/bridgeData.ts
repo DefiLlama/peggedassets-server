@@ -1579,6 +1579,26 @@ export default {
     bridge: "canto",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xF8A0D53DDC6C92c3c59824f380C0f3d2a3cf521C": {
+    bridge: "octus",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x81598d5362eAC63310e5719315497C5b8980C579": {
+    bridge: "octus",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xF2403a61C7A97a1a1b94A225173F6dD03614B907": {
+    bridge: "octus",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x6b9f9cadb11690b2df23c3cfce383a6706f9a5e6": {
+    bridge: "octus",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x032D06B4cC8A914b85615AcD0131C3e0a7330968": {
+    bridge: "octus",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1783,5 +1803,9 @@ export const bridgeInfo = {
   canto: {
     name: "Canto",
     link: "https://bridge.canto.io/",
+  },
+  octus: {
+    name: "Octus Bridge",
+    link: "https://octusbridge.io/",
   },
 } as BridgeInfo;

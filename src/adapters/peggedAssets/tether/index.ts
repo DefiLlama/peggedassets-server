@@ -290,7 +290,10 @@ const chainContracts: ChainContracts = {
   },
   canto: {
     bridgedFromETH: ["0xd567B3d7B8FE3C79a1AD8dA978812cfC4Fa05e75"], // canto/gravity
-  }
+  },
+  everscale: {
+    bridgeOnETH: ["0x81598d5362eAC63310e5719315497C5b8980C579"], // octus(?)
+  },
 };
 
 /*
@@ -1026,7 +1029,11 @@ const adapter: PeggedIssuanceAdapter = {
   wan: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: supplyInEthereumBridge(chainContracts.ethereum.issued[0], chainContracts.wan.bridgeOnETH[0], 6)
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.wan.bridgeOnETH[0],
+      6
+    ),
   },
   defichain: {
     minted: async () => ({}),
@@ -1046,7 +1053,16 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("canto", 6, chainContracts.canto.bridgedFromETH),
-  }
+  },
+  everscale: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.everscale.bridgeOnETH[0],
+      6
+    ),
+  },
 };
 
 export default adapter;

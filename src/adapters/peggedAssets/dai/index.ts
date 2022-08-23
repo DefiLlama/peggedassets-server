@@ -176,6 +176,9 @@ const chainContracts: ChainContracts = {
   klaytn: {
     bridgedFromETH: ["0x5c74070fdea071359b86082bd9f9b3deaafbe32b"], // orbit
   },
+  everscale: {
+    bridgeOnETH: ["0x032D06B4cC8A914b85615AcD0131C3e0a7330968"], // octus(?), does not match amount that is minted on the chain
+  },
 };
 
 /*
@@ -546,6 +549,15 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromETH),
+  },
+  everscale: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.everscale.bridgeOnETH[0],
+      18
+    ),
   },
 };
 

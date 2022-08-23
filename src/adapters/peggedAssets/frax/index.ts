@@ -67,6 +67,9 @@ const chainContracts: ChainContracts = {
   milkomeda: {
     bridgedFromETH: ["0x362233F1eF554Ca08555Ca191b4887c2C3132834"], // wormhole: not canonical FRAX
   },
+  everscale: {
+    bridgeOnETH: ["0xF2403a61C7A97a1a1b94A225173F6dD03614B907"], // octus: not canonical FRAX
+  }
 };
 
 /*
@@ -206,6 +209,15 @@ const adapter: PeggedIssuanceAdapter = {
       "milkomeda",
       18,
       chainContracts.milkomeda.bridgedFromETH
+    ),
+  },
+  everscale: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.everscale.bridgeOnETH[0],
+      18
     ),
   },
 };
