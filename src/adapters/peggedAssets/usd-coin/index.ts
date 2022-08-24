@@ -296,6 +296,9 @@ const chainContracts: ChainContracts = {
   },
   kadena: {
     bridgeOnETH: ["0x3765f3e827f4AB5393c1cb2D85bAcd37664cE8cA"], // lago
+  },
+  kardia: {
+    bridgedFromETH: ["0x765277EebeCA2e31912C9946eAe1021199B39C61"], // multichain
   }
 };
 
@@ -1011,7 +1014,12 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.kadena.bridgeOnETH[0],
       6
     ),
-  }
+  },
+  kardia: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("kardia", 6, chainContracts.kardia.bridgedFromETH),
+  },
 };
 
 export default adapter;

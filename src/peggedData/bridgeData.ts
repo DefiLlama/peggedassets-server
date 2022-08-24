@@ -31,6 +31,10 @@ export default {
   "0x1c20e891bab6b1727d14da358fae2984ed9b59eb": { bridge: "issued" },
   Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB: { bridge: "issued" },
   EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v: { bridge: "issued" },
+  "0x461d52769884ca6235b685ef2040f47d30c94eb5": {
+    bridge: "multichain",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xf27Ee99622C3C9b264583dACB2cCE056e194494f": {
     bridge: "multichain",
     sourceChain: formattedSourceChains.eth,

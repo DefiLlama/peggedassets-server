@@ -181,6 +181,9 @@ const chainContracts: ChainContracts = {
   },
   dogechain: {
     bridgedFromETH: ["0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C"], // multichain
+  },
+  thundercore: {
+    bridgedFromETH: ["0x461d52769884ca6235b685ef2040f47d30c94eb5"], // multichain
   }
 };
 
@@ -566,6 +569,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("dogechain", 18, chainContracts.dogechain.bridgedFromETH),
+  },
+  thundercore: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromETH),
   },
 };
 
