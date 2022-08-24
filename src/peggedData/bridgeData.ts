@@ -1615,6 +1615,10 @@ export default {
     bridge: "octus",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x3765f3e827f4AB5393c1cb2D85bAcd37664cE8cA": {
+    bridge: "lago",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1823,5 +1827,9 @@ export const bridgeInfo = {
   octus: {
     name: "Octus Bridge",
     link: "https://octusbridge.io/",
+  },
+  lago: {
+    name: "Lago Finance",
+    link: "https://www.lago.finance/",
   },
 } as BridgeInfo;

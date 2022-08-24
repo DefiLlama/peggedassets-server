@@ -293,6 +293,9 @@ const chainContracts: ChainContracts = {
   },
   dogechain: {
     bridgedFromETH: ["0x765277EebeCA2e31912C9946eAe1021199B39C61"], // multichain
+  },
+  kadena: {
+    bridgeOnETH: ["0x3765f3e827f4AB5393c1cb2D85bAcd37664cE8cA"], // lago
   }
 };
 
@@ -1000,6 +1003,15 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("dogechain", 6, chainContracts.dogechain.bridgedFromETH),
   },
+  kadena: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.kadena.bridgeOnETH[0],
+      6
+    ),
+  }
 };
 
 export default adapter;
