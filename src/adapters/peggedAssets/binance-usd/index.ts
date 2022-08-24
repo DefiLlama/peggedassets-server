@@ -153,6 +153,9 @@ const chainContracts: ChainContracts = {
   klaytn: {
     bridgedFromBSC: ["0x210bc03f49052169d5588a52c317f71cf2078b85"], // orbit
   },
+  dogechain: {
+    bridgedFromETH: ["0x332730a4F6E03D9C55829435f10360E13cfA41Ff"], // multichain
+  }
 };
 
 /*
@@ -434,6 +437,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     bsc: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromBSC),
+  },
+  dogechain: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("dogechain", 18, chainContracts.dogechain.bridgedFromETH),
   },
 };
 

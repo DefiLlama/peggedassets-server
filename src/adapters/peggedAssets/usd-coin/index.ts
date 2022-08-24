@@ -291,6 +291,9 @@ const chainContracts: ChainContracts = {
   everscale: {
     bridgeOnETH: ["0xF8A0D53DDC6C92c3c59824f380C0f3d2a3cf521C"], // octus(?)
   },
+  dogechain: {
+    bridgedFromETH: ["0x765277EebeCA2e31912C9946eAe1021199B39C61"], // multichain
+  }
 };
 
 /*
@@ -991,6 +994,11 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.everscale.bridgeOnETH[0],
       6
     ),
+  },
+  dogechain: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("dogechain", 6, chainContracts.dogechain.bridgedFromETH),
   },
 };
 

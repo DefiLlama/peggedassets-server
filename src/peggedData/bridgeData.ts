@@ -31,6 +31,22 @@ export default {
   "0x1c20e891bab6b1727d14da358fae2984ed9b59eb": { bridge: "issued" },
   Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB: { bridge: "issued" },
   EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v: { bridge: "issued" },
+  "0xf27Ee99622C3C9b264583dACB2cCE056e194494f": {
+    bridge: "multichain",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C": {
+    bridge: "multichain",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x765277EebeCA2e31912C9946eAe1021199B39C61": {
+    bridge: "multichain",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x332730a4F6E03D9C55829435f10360E13cfA41Ff": {
+    bridge: "multichain",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xb12c13e66AdE1F72f71834f2FC5082Db8C091358": {
     bridge: "multichain",
     sourceChain: formattedSourceChains.eth,
