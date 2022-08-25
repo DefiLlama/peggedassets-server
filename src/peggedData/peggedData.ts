@@ -1551,4 +1551,24 @@ export default [
     twitter: "https://twitter.com/LughStablecoin",
     wiki: "https://wiki.defillama.com/wiki/LUGH",
   },
+  {
+    id: "78",
+    name: "Note",
+    address: "canto:0x4e71a2e537b7f9d9413d3991d37958c0b5e1e503",
+    symbol: "NOTE",
+    url: "https://canto.io/",
+    description:
+      "NOTE is the unit of account on Canto. NOTE is an over-collateralized currency with a value perpetually rebalanced toward $1 through an algorithmic interest rate policy.",
+    mintRedeemDescription:
+    "NOTE is a fully immutable ERC-20 token backed by collateral lent to the Canto Lending Market. It can only be borrowed by users who post select collateral assets such as USDC, USDT, CANTO, ETH, ATOM, or Canto LP tokens.",
+    onCoinGecko: "true",
+    gecko_id: "note",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/CantoPublic",
+    wiki: "https://wiki.defillama.com/wiki/Canto",
+  },
 ] as PeggedAsset[];

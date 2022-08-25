@@ -174,7 +174,7 @@ const chainContracts: ChainContracts = {
     ], // rainbow
   },
   klaytn: {
-    bridgedFromETH: ["0x5c74070fdea071359b86082bd9f9b3deaafbe32b"], // orbit
+    bridgedFromETH: ["0x5c74070fdea071359b86082bd9f9b3deaafbe32b"], // orbit (bridge has some in farms, check DL adapter)
   },
   everscale: {
     bridgeOnETH: ["0x032D06B4cC8A914b85615AcD0131C3e0a7330968"], // octus(?), does not match amount that is minted on the chain

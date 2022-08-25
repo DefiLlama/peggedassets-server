@@ -283,7 +283,7 @@ const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x94fa70d079d76279e1815ce403e9b985bccc82ac"], // seems there is no direct bridge from ETH. but users can withdraw to defichain using cake defi?
   },
   klaytn: {
-    bridgedFromETH: ["0x754288077d0ff82af7a5317c7cb8c444d421d103"], // orbit
+    bridgedFromETH: ["0x754288077d0ff82af7a5317c7cb8c444d421d103"], // orbit (bridge has some in farms, check DL adapter)
   },
   canto: {
     bridgedFromETH: ["0x80b5a32E4F032B2a058b4F29EC95EEfEEB87aDcd"], // canto/gravity
