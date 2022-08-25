@@ -1151,6 +1151,10 @@ export default {
     bridge: "harmony",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x4c078361FC9BbB78DF910800A991C7c3DD2F6ce0": {
+    bridge: "metis",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xbB06DCA3AE6887fAbF931640f67cab3e3a16F4dC": {
     bridge: "metis",
     sourceChain: formattedSourceChains.eth,

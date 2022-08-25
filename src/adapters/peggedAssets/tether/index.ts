@@ -11,6 +11,7 @@ import {
   getTotalSupply as ontologyGetTotalSupply,
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
+import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
 import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
@@ -297,7 +298,7 @@ const chainContracts: ChainContracts = {
   },
   dogechain: {
     bridgedFromETH: ["0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D"], // multichain
-  }
+  },
 };
 
 /*
@@ -642,6 +643,26 @@ async function nearBridged(address: string, decimals: number) {
       supply / 10 ** decimals,
       address,
       true
+    );
+    return balances;
+  };
+}
+
+async function polyNetworkBridged(chainID: number, chainName: string, assetName: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const totalSupply = await pnGetTotalBridged(chainID, chainName, assetName)
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupply,
+      "polynetwork",
+      false,
+      "Ethereum"
     );
     return balances;
   };
@@ -1070,7 +1091,21 @@ const adapter: PeggedIssuanceAdapter = {
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("dogechain", 6, chainContracts.dogechain.bridgedFromETH),
+    ethereum: bridgedSupply(
+      "dogechain",
+      6,
+      chainContracts.dogechain.bridgedFromETH
+    ),
+  },
+  neo: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: polyNetworkBridged(4, "Neo", "pnUSDT"),
+  },
+  zilliqa: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: polyNetworkBridged(18, "Zilliqa", "zUSDT"),
   },
 };
 

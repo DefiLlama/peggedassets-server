@@ -184,6 +184,9 @@ const chainContracts: ChainContracts = {
   },
   thundercore: {
     bridgedFromETH: ["0x461d52769884ca6235b685ef2040f47d30c94eb5"], // multichain
+  },
+  metis: {
+    bridgedFromETH: ["0x4c078361FC9BbB78DF910800A991C7c3DD2F6ce0"],
   }
 };
 
@@ -574,6 +577,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromETH),
+  },
+  metis: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("metis", 18, chainContracts.metis.bridgedFromETH),
   },
 };
 

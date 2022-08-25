@@ -1,5 +1,8 @@
 const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
+import {
+  sumMultipleBalanceFunctions,
+  sumSingleBalance,
+} from "../helper/generalUtil";
 import {
   bridgedSupply,
   solanaMintedOrBridged,
@@ -7,6 +10,7 @@ import {
   supplyInEthereumBridge,
 } from "../helper/getSupply";
 import { call as nearCall } from "../llama-helper/near";
+import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -155,7 +159,7 @@ const chainContracts: ChainContracts = {
   },
   dogechain: {
     bridgedFromETH: ["0x332730a4F6E03D9C55829435f10360E13cfA41Ff"], // multichain
-  }
+  },
 };
 
 /*
@@ -208,21 +212,19 @@ async function kavaMinted(owners: string[]) {
   ) {
     let balances = {} as Balances;
     for (let owner of owners) {
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          `https://dex.binance.org/api/v1/account/${owner}`
-        )
-    );
-    const balanceObject = res.data.balances.filter(
-      (obj: any) => obj.symbol === "BUSD-BD1"
-    );
-    const circulating = parseInt(balanceObject[0].free);
-    if (typeof circulating !== "number") {
-      throw new Error("Binance Chain API for TUSD is broken.");
+      const res = await retry(
+        async (_bail: any) =>
+          await axios.get(`https://dex.binance.org/api/v1/account/${owner}`)
+      );
+      const balanceObject = res.data.balances.filter(
+        (obj: any) => obj.symbol === "BUSD-BD1"
+      );
+      const circulating = parseInt(balanceObject[0].free);
+      if (typeof circulating !== "number") {
+        throw new Error("Binance Chain API for TUSD is broken.");
+      }
+      sumSingleBalance(balances, "peggedUSD", circulating, owner, true);
     }
-    sumSingleBalance(balances, "peggedUSD", circulating, owner, true);
-  }
     return balances;
   };
 }
@@ -241,6 +243,30 @@ async function nearBridged(address: string, decimals: number) {
       supply / 10 ** decimals,
       address,
       true
+    );
+    return balances;
+  };
+}
+
+async function polyNetworkBridged(
+  chainID: number,
+  chainName: string,
+  assetName: string
+) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const totalSupply = await pnGetTotalBridged(chainID, chainName, assetName);
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupply,
+      "polynetwork",
+      false,
+      "BSC"
     );
     return balances;
   };
@@ -378,7 +404,13 @@ const adapter: PeggedIssuanceAdapter = {
   metis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    bsc: bridgedSupply("metis", 18, chainContracts.metis.bridgedFromBSC),
+    bsc: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("metis", 18, chainContracts.metis.bridgedFromBSC),
+        polyNetworkBridged(24, "Andromeda", "BUSD"),
+      ],
+      "peggedUSD"
+    ),
   },
   fantom: {
     minted: async () => ({}),
@@ -441,7 +473,11 @@ const adapter: PeggedIssuanceAdapter = {
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("dogechain", 18, chainContracts.dogechain.bridgedFromETH),
+    ethereum: bridgedSupply(
+      "dogechain",
+      18,
+      chainContracts.dogechain.bridgedFromETH
+    ),
   },
 };
 
