@@ -52,7 +52,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x5eE41aB6edd38cDfB9f6B4e6Cf7F75c87E170d98"],
   },
   cronos: {
-    issued: ["0x87EFB3ec1576Dec8ED47e58B832bEdCd86eE186e"],
+    issued: ["0x87EFB3ec1576Dec8ED47e58B832bEdCd86eE186e"], // this is not issued by TrueUSD; confirmed by Cronos team member
   },
   near: {
     bridgedFromETH: [
@@ -254,10 +254,12 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("heco", 18, chainContracts.heco.bridgedFromETH),
   },
+  /*
   cronos: {
     minted: chainMinted("cronos", 18),
     unreleased: async () => ({}),
   },
+  */
   near: {
     minted: async () => ({}),
     unreleased: async () => ({}),

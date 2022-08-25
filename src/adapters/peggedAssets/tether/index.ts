@@ -197,6 +197,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0xb72A7567847abA28A2819B855D7fE679D4f59846", // celer
       "0x7FF4a56B32ee13D7D4D405887E0eA37d61Ed919e", // nomad (contract has 18 decimals, but supply is divided by 10**12)
+      "0xc1be9a4d5d45beeacae296a7bd5fadbfc14602c4", // multichain
     ],
   },
   terra: {
@@ -320,8 +321,6 @@ Cronos: they have not provided any proof the circulating USDT is real USDT.
 
 Don't know how to count the 2 Saber wrapped USDT on Solana.
 
-Evmos: missing multichain, it has no liquidity on dexes, and can't find address.
-
 Conflux: cfx:acf2rcsh8payyxpg6xj7b0ztswwh81ute60tsw35j7 from shuttleflow, don't know where from
 0xfe97E85d13ABD9c1c33384E796F10B73905637cE celer
 Flow: A.231cc0dbbcffc4b7.ceUSDT celer, check for others.
@@ -332,7 +331,7 @@ Orbit: has no provider, no API.
 
 Velas: amount on chain does not match amount in multichain bridge, so it has not been added yet.
 
-Caduceus: 0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c is multichain, don't have provider yet.
+Caduceus: 0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c is multichain, don't have provider or API yet.
 */
 
 async function chainMinted(chain: string, decimals: number) {
