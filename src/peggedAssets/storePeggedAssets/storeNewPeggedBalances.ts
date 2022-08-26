@@ -23,7 +23,7 @@ export default async (
 ) => {
   const hourlyPK = hourlyPeggedBalances(peggedAsset.id);
   const pegType = peggedAsset.pegType;
-  const peggedID = peggedAsset.id;
+  const peggedID = peggedAsset.gecko_id;
   if (Object.keys(peggedBalances).length === 0) {
     return;
   }
