@@ -146,11 +146,13 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.optimism.bridgedFromETH
     ),
   },
+  /* call is reverting on server every time, temporarily disabling
   cronos: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("cronos", 18, chainContracts.cronos.bridgedFromETH),
   },
+  */
   metis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
