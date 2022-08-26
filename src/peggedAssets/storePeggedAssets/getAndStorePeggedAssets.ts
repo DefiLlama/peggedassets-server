@@ -1,6 +1,5 @@
 import { BigNumber } from "ethers";
 import { PeggedAsset } from "../../peggedData/peggedData";
-import * as Sentry from "@sentry/serverless";
 import {
   PeggedAssetIssuance,
   PeggedTokenBalance,
@@ -270,9 +269,6 @@ export async function storePeggedAsset(
     }
   } catch (e) {
     console.error(peggedAsset.name, e);
-    const scope = new Sentry.Scope();
-    scope.setTag("peggedAsset", peggedAsset.name);
-    Sentry.AWSLambda.captureException(e, scope);
     return;
   }
   if (
@@ -296,9 +292,6 @@ export async function storePeggedAsset(
     await storeTokensAction;
   } catch (e) {
     console.error(peggedAsset.name, e);
-    const scope = new Sentry.Scope();
-    scope.setTag("peggedAsset", peggedAsset.name);
-    Sentry.AWSLambda.captureException(e, scope);
     return;
   }
 
