@@ -49,7 +49,8 @@ const chainContracts: ChainContracts = {
     bridgedFromSol: ["0x3553f861dEc0257baDA9F8Ed268bf0D74e45E89C"], // wormhole
   },
   bsc: {
-    bridgeOnETH: ["0x47ac0Fb4F2D84898e4D9E7b4DaB3C24507a6D503"], // native one can't get balance
+    bridgeOnETH: ["0x47ac0Fb4F2D84898e4D9E7b4DaB3C24507a6D503"], // can get amount bridged from ETH from this
+    bridgedFromETHAndTron: ["0x55d398326f99059fF775485246999027B3197955"], // bridged from both Ethereum and Tron
     bridgedFromAvax: ["0x2B90E061a517dB2BbD7E39Ef7F733Fd234B494CA"], // wormhole
     bridgedFromETH: ["0x524bC91Dc82d6b90EF29F76A3ECAaBAffFD490Bc"], // wormhole
     bridgedFromSol: ["0x49d5cC521F75e13fa8eb4E89E9D381352C897c96"], // wormhole but the info on this is typo'd???
@@ -385,6 +386,47 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
   };
 }
 
+async function bscBridgedFromTron(
+  bscUSDTAddress: string,
+  ethUSDTAddress: string
+) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const totalSupply =
+      (
+        await sdk.api.abi.call({
+          abi: "erc20:totalSupply",
+          target: bscUSDTAddress,
+          block: _chainBlocks?.["bsc"],
+          chain: "bsc",
+        })
+      ).output /
+      10 ** 18;
+    const bridgedFromETH =
+      (
+        await sdk.api.erc20.balanceOf({
+          target: chainContracts.ethereum.issued[0],
+          owner: ethUSDTAddress,
+          block: _ethBlock,
+        })
+      ).output /
+      10 ** 6;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupply - bridgedFromETH,
+      "bsc",
+      false,
+      "Tron"
+    );
+    return balances;
+  };
+}
+
 async function solanaUnreleased() {
   return async function (
     _timestamp: number,
@@ -648,14 +690,18 @@ async function nearBridged(address: string, decimals: number) {
   };
 }
 
-async function polyNetworkBridged(chainID: number, chainName: string, assetName: string) {
+async function polyNetworkBridged(
+  chainID: number,
+  chainName: string,
+  assetName: string
+) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const totalSupply = await pnGetTotalBridged(chainID, chainName, assetName)
+    const totalSupply = await pnGetTotalBridged(chainID, chainName, assetName);
     sumSingleBalance(
       balances,
       "peggedUSD",
@@ -709,6 +755,10 @@ const adapter: PeggedIssuanceAdapter = {
     ),
     avalanche: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
     solana: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromSol),
+    tron: bscBridgedFromTron(
+      chainContracts.bsc.bridgedFromETHAndTron[0],
+      chainContracts.bsc.bridgeOnETH[0]
+    ),
   },
   avalanche: {
     minted: chainMinted("avax", 6),
