@@ -113,7 +113,7 @@ const chainContracts: ChainContracts = {
       "0x3c751Feb00364CA9e2d0105c40F0b423abf1DEE3", // passport.meter
       "0xeFAeeE334F0Fd1712f9a8cc375f427D9Cdd40d73", // multichain
       "0x81ECac0D6Be0550A00FF064a4f9dd2400585FE9c", // celer
-      "0x8e70cD5B4Ff3f62659049e74b6649c6603A0E594", // nomad
+      // "0x8e70cD5B4Ff3f62659049e74b6649c6603A0E594", // nomad, hacked
       "0xdfd74af792bc6d45d1803f425ce62dd16f8ae038", // axelar
     ],
   },
@@ -157,7 +157,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844", // where is this from? assuming multichain
       "0x3795C36e7D12A8c252A20C5a7B455f7c57b60283", // celer
-      "0xab58DA63DFDd6B97EAaB3C94165Ef6f43d951fb2", // nomad
+      //"0xab58DA63DFDd6B97EAaB3C94165Ef6f43d951fb2", // nomad, hacked
     ],
   },
   iotex: {
@@ -178,7 +178,7 @@ const chainContracts: ChainContracts = {
   },
   oasis: {
     bridgedFromETH: [
-      "0x6Cb9750a92643382e020eA9a170AbB83Df05F30B", // 107M, their discord claims it is from evodefi bridge?? sus
+      //"0x6Cb9750a92643382e020eA9a170AbB83Df05F30B", // EvoDefi, this was rugged, trading at $0.10
       "0xdC19A122e268128B5eE20366299fc7b5b199C8e3", // wormhole #3
       "0x4Bf769b05E832FCdc9053fFFBC78Ca889aCb5E1E", // celer
     ],
@@ -198,7 +198,7 @@ const chainContracts: ChainContracts = {
   evmos: {
     bridgedFromETH: [
       "0xb72A7567847abA28A2819B855D7fE679D4f59846", // celer
-      "0x7FF4a56B32ee13D7D4D405887E0eA37d61Ed919e", // nomad (contract has 18 decimals, but supply is divided by 10**12)
+      //"0x7FF4a56B32ee13D7D4D405887E0eA37d61Ed919e", // nomad (contract has 18 decimals, but supply is divided by 10**12), hacked, trading at $0.15
       "0xc1be9a4d5d45beeacae296a7bd5fadbfc14602c4", // multichain
     ],
   },

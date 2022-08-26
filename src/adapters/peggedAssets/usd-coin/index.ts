@@ -115,7 +115,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0x818ec0a7fe18ff94269904fced6ae3dae6d6dc0b", // multichain
       "0x6a2d262D56735DbA19Dd70682B39F6bE9a931D98", // celer
-      "0x8f552a71EFE5eeFc207Bf75485b356A0b3f01eC9", // nomad
+      //"0x8f552a71EFE5eeFc207Bf75485b356A0b3f01eC9", // nomad, hacked, trading at $0.15
       "0xca01a1d0993565291051daff390892518acfad3a", // axelar
     ],
   },
@@ -167,7 +167,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0xb44a9b6905af7c801311e8f4e76932ee959c663c", // multichain
       "0x6a2d262D56735DbA19Dd70682B39F6bE9a931D98", // celer
-      "0x5a955FDdF055F2dE3281d99718f5f1531744B102", // nomad
+      //"0x5a955FDdF055F2dE3281d99718f5f1531744B102", // nomad, hacked
     ],
   },
   elastos: {
@@ -189,6 +189,7 @@ const chainContracts: ChainContracts = {
       "0xE8A638b3B7565Ee7c5eb9755E58552aFc87b94DD", // wormhole
       "0x81ECac0D6Be0550A00FF064a4f9dd2400585FE9c", // celer
     ],
+    // 0x94fbfFe5698DB6f54d6Ca524DbE673a7729014Be is EvoDefi, rugged and trading at $0.20
     bridgedFromBSC: ["0x4cA2A3De42eabC8fd8b0AC46127E64DB08b9150e"], // wormhole
     bridgedFromPolygon: ["0x3E62a9c3aF8b810dE79645C4579acC8f0d06a241"], // wormhole
     bridgedFromAvax: ["0x05CbE6319Dcc937BdbDf0931466F4fFd0d392B47"], // wormhole
@@ -196,7 +197,7 @@ const chainContracts: ChainContracts = {
   evmos: {
     bridgedFromETH: [
       "0xe46910336479F254723710D57e7b683F3315b22B", // celer
-      "0x51e44FfaD5C2B122C8b635671FCC8139dc636E82", // nomad
+      //"0x51e44FfaD5C2B122C8b635671FCC8139dc636E82", // nomad, hacked, trading at $0.16
       "0x2C78f1b70Ccf63CDEe49F9233e9fAa99D43AA07e", // multichain
     ],
   },

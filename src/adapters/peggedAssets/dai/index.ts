@@ -82,7 +82,7 @@ const chainContracts: ChainContracts = {
   moonbeam: {
     bridgedFromETH: [
       "0x765277eebeca2e31912c9946eae1021199b39c61", // multichain
-      "0xc234A67a4F840E61adE794be47de455361b52413", // nomad
+      // "0xc234A67a4F840E61adE794be47de455361b52413", // nomad, hacked
       "0x14df360966a1c4582d2b18edbdae432ea0a27575", // axelar
     ],
   },
@@ -93,7 +93,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c", // multichain
       "0x6De33698e9e9b787e09d3Bd7771ef63557E148bb", // celer
-      "0x41eAFC40CD5Cb904157A10158F73fF2824dC1339", // nomad
+      //"0x41eAFC40CD5Cb904157A10158F73fF2824dC1339", // nomad, hacked
     ],
   },
   astar: {
@@ -105,7 +105,7 @@ const chainContracts: ChainContracts = {
   evmos: {
     bridgedFromETH: [
       "0x940dAAbA3F713abFabD79CdD991466fe698CBe54", // celer
-      "0x63743ACF2c7cfee65A5E356A4C4A005b586fC7AA", // nomad
+      //"0x63743ACF2c7cfee65A5E356A4C4A005b586fC7AA", // nomad, hacked, trading at $0.16
     ],
   },
   xdai: {
