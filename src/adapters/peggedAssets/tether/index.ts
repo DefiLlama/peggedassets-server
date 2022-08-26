@@ -974,11 +974,10 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("oasis", 6, [chainContracts.oasis.bridgedFromETH[0]]),
-        bridgedSupply("oasis", 6, [chainContracts.oasis.bridgedFromETH[1]]),
         bridgedSupply(
           "oasis",
           6,
-          [chainContracts.oasis.bridgedFromETH[2]],
+          [chainContracts.oasis.bridgedFromETH[1]],
           "celer",
           "Ethereum"
         ),
