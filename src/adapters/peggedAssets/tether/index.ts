@@ -300,6 +300,9 @@ const chainContracts: ChainContracts = {
   dogechain: {
     bridgedFromETH: ["0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D"], // multichain
   },
+  arbitrum_nova: {
+    bridgedFromETH: ["0x52484E1ab2e2B22420a25c20FA49E173a26202Cd"],
+  }
 };
 
 /*
@@ -1155,6 +1158,15 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: polyNetworkBridged(18, "Zilliqa", "zUSDT"),
+  },
+  arbitrum_nova: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "arbitrum_nova",
+      6,
+      chainContracts.arbitrum_nova.bridgedFromETH
+    ),
   },
 };
 

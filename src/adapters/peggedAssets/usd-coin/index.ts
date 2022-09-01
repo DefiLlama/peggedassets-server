@@ -300,6 +300,9 @@ const chainContracts: ChainContracts = {
   },
   kardia: {
     bridgedFromETH: ["0x765277EebeCA2e31912C9946eAe1021199B39C61"], // multichain
+  },
+  arbitrum_nova: {
+    bridgedFromETH: ["0x750ba8b76187092B0D1E87E28daaf484d1b5273b"]
   }
 };
 
@@ -1020,6 +1023,15 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("kardia", 6, chainContracts.kardia.bridgedFromETH),
+  },
+  arbitrum_nova: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "arbitrum_nova",
+      6,
+      chainContracts.arbitrum_nova.bridgedFromETH
+    ),
   },
 };
 

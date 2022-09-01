@@ -1075,6 +1075,18 @@ export default {
     bridge: "polygon",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x52484E1ab2e2B22420a25c20FA49E173a26202Cd": {
+    bridge: "arbitrum",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1": {
+    bridge: "arbitrum",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x750ba8b76187092B0D1E87E28daaf484d1b5273b": {
+    bridge: "arbitrum",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xaeF5bbcbFa438519a5ea80B4c7181B4E78d419f2": {
     bridge: "arbitrum",
     sourceChain: formattedSourceChains.eth,

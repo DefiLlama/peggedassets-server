@@ -65,7 +65,7 @@ const chainContracts: ChainContracts = {
     ],
   },
   arbitrum: {
-    bridgedFromETH: ["0xda10009cbd5d07dd0cecc66161fc93d7c9000da1"],
+    bridgedFromETH: ["0xda10009cbd5d07dd0cecc66161fc93d7c9000da1"], // same address as optimism
   },
   moonriver: {
     bridgedFromETH: ["0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844"], // multichain
@@ -187,6 +187,9 @@ const chainContracts: ChainContracts = {
   },
   metis: {
     bridgedFromETH: ["0x4c078361FC9BbB78DF910800A991C7c3DD2F6ce0"],
+  },
+  arbitrum_nova: {
+    bridgedFromETH: ["0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1"]
   }
 };
 
@@ -582,6 +585,15 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("metis", 18, chainContracts.metis.bridgedFromETH),
+  },
+  arbitrum_nova: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "arbitrum_nova",
+      18,
+      chainContracts.arbitrum_nova.bridgedFromETH
+    ),
   },
 };
 
