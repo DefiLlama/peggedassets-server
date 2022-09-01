@@ -832,6 +832,17 @@ export const chainCoingeckoIds = {
     symbol: "XRP",
     cmcId: "52",
   },
+  "Arbitrum Nova": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM", "Rollup"],
+    parent: {
+      chain: "Ethereum",
+      types: ["L2", "gas"]
+    },
+    chainId: 42170,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1044,6 +1055,8 @@ export function getChainDisplayName(
       return "Canto";
     case "ripple":
       return "Ripple";
+    case "arbitrum_nova":
+      return "Arbitrum Nova"
 
     default:
       return (

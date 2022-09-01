@@ -1,3 +1,3 @@
-import { craftChartsResponse } from "./getPeggedChart";
+import { craftChartsResponse } from "./getStablecoinChart";
 
-const response = craftChartsResponse(undefined, "tether");
+const response = craftChartsResponse("ethereum", undefined)
