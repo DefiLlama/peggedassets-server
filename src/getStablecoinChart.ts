@@ -91,6 +91,9 @@ export async function craftChartsResponse(
   if (chain === "sxnetwork") {
     chain = "sx";
   }
+  if (chain === "arbitrum%20nova") {
+    chain = "arbitrum_nova";
+  }
 
   if (chain === undefined) {
     return errorResponse({
@@ -120,7 +123,7 @@ export async function craftChartsResponse(
       let startKey = undefined;
       let historicalBalance = { Items: [] } as any;
       do {
-        const partialHistoricalBalance = (await dynamodb.query({
+        const partialHistoricalBalances = (await dynamodb.query({
           ExpressionAttributeValues: {
             ":pk": `dailyPeggedBalances#${pegged.id}`,
             ":sk": earliestTimestamp,
@@ -128,10 +131,10 @@ export async function craftChartsResponse(
           KeyConditionExpression: "PK = :pk AND SK > :sk",
           ExclusiveStartKey: startKey,
         })) as any;
-        startKey = partialHistoricalBalance.LastEvaluatedKey;
+        startKey = partialHistoricalBalances.LastEvaluatedKey;
         historicalBalance.Items = [
           ...historicalBalance.Items,
-          ...partialHistoricalBalance.Items,
+          ...partialHistoricalBalances.Items,
         ];
       } while (startKey);
       if (
