@@ -675,6 +675,7 @@ const adapter: PeggedIssuanceAdapter = {
     bsc: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromBSC),
     polygon: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromPolygon),
   },
+  /* hacked, trading at $0.06
   harmony: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -684,6 +685,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.harmony.bridgedFromETH
     ),
   },
+  */
   arbitrum: {
     minted: async () => ({}),
     unreleased: async () => ({}),

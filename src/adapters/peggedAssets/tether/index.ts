@@ -830,6 +830,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.moonriver.bridgedFromETH
     ),
   },
+  /* hacked, trading at $0.06
   harmony: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -839,6 +840,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.harmony.bridgedFromETH
     ),
   },
+  */
   syscoin: {
     minted: async () => ({}),
     unreleased: async () => ({}),

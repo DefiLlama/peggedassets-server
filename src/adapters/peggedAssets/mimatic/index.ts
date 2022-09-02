@@ -361,11 +361,13 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     none: maiApiCirculating("moonriverSupply"),
   },
+  /* not giving accurate number
   harmony: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     none: maiApiCirculating("harmonySupply"),
   },
+  */
   cronos: {
     minted: async () => ({}),
     unreleased: async () => ({}),
