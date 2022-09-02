@@ -441,8 +441,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   kava: {
-    minted: kavaMinted(chainContracts.kava.bridgeOnBNB),
+    minted: async () => ({}),
     unreleased: async () => ({}),
+    bsc: kavaMinted(chainContracts.kava.bridgeOnBNB), 
   },
   loopring: {
     minted: async () => ({}),
