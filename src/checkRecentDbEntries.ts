@@ -5,12 +5,14 @@ import {
   hourlyPeggedBalances,
   dailyPeggedBalances,
   historicalRates,
-  hourlyPeggedPrices
+  hourlyPeggedPrices,
 } from "./peggedAssets/utils/getLastRecord";
 import { secondsInHour, secondsInDay } from "./utils/date";
 import { executeAndIgnoreErrors } from "./peggedAssets/storePeggedAssets/errorDb";
 import { getCurrentUnixTimestamp } from "./utils/date";
 import { StoredPeggedAssetIssuance } from "./types";
+
+const chainsToIgnore = ["harmony"];
 
 export const handler = async (_event: any) => {
   const timestamp = getCurrentUnixTimestamp();
@@ -33,7 +35,10 @@ export const handler = async (_event: any) => {
             !(typeof issuances === "string") &&
             !(typeof issuances === "number")
           ) {
-            if (!issuances.circulating?.[pegType]) {
+            if (
+              !issuances.circulating?.[pegType] &&
+              !chainsToIgnore.includes(chain)
+            ) {
               executeAndIgnoreErrors(
                 "INSERT INTO `errors2` VALUES (?, ?, ?, ?)",
                 [
@@ -81,21 +86,21 @@ export const handler = async (_event: any) => {
     }
   }
 
-    // checks if prices is stale
-    const lastPrices = await getLastRecord(hourlyPeggedPrices());
-    if (lastPrices) {
-      const SK = lastPrices.SK;
-      if (typeof SK === "number") {
-        const lastTimestamp = SK;
-        if (Math.abs(timestamp - lastTimestamp) > secondsInDay) {
-          executeAndIgnoreErrors("INSERT INTO `stale` VALUES (?, ?, ?)", [
-            timestamp,
-            `hourlyPrices`,
-            lastTimestamp,
-          ]);
-        }
+  // checks if prices is stale
+  const lastPrices = await getLastRecord(hourlyPeggedPrices());
+  if (lastPrices) {
+    const SK = lastPrices.SK;
+    if (typeof SK === "number") {
+      const lastTimestamp = SK;
+      if (Math.abs(timestamp - lastTimestamp) > secondsInDay) {
+        executeAndIgnoreErrors("INSERT INTO `stale` VALUES (?, ?, ?)", [
+          timestamp,
+          `hourlyPrices`,
+          lastTimestamp,
+        ]);
       }
     }
+  }
 };
 
 export default wrapScheduledLambda(handler);
