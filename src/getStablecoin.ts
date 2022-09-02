@@ -12,9 +12,7 @@ import {
   hourlyPeggedBalances,
   dailyPeggedBalances,
 } from "./peggedAssets/utils/getLastRecord";
-import {
-  getChainDisplayName,
-} from "./utils/normalizeChain";
+import { getChainDisplayName } from "./utils/normalizeChain";
 import { importAdapter } from "./peggedAssets/utils/importAdapter";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
@@ -40,9 +38,7 @@ export async function craftProtocolResponse(
       console.error("Could not fetch pegged prices");
     });
 
-  const peggedData = peggedAssets.find(
-    (pegged) => pegged.id === peggedID
-  );
+  const peggedData = peggedAssets.find((pegged) => pegged.id === peggedID);
   if (peggedData === undefined) {
     return errorResponse({
       message: "Pegged asset is not in our database",
@@ -54,7 +50,8 @@ export async function craftProtocolResponse(
       getHistoricalValues(
         (useHourlyData ? hourlyPeggedBalances : dailyPeggedBalances)(
           peggedData.id
-        )
+        ),
+        1652241600 // currently frontend does not use data before May 11, 2022 for individual stablecoins
       ),
       importAdapter(peggedData),
     ]);
