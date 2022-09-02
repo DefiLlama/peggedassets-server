@@ -361,17 +361,17 @@ const adapter: PeggedIssuanceAdapter = {
       "Ethereum"
     ),
   },
-  /* hacked, trading at $0.06
   harmony: {
     minted: async () => ({}),
     unreleased: async () => ({}),
+      /* hacked, trading at $0.06
     ethereum: bridgedSupply(
       "harmony",
       18,
       chainContracts.harmony.bridgedFromETH
     ),
+     */
   },
-  */
   avalanche: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -465,13 +465,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromETH),
   },
-  /* broken atm
   reinetwork: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: reinetworkMinted(chainContracts.reinetwork.bridgedFromETH[0], 18),
   },
-  */
   loopring: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -519,13 +517,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("boba", 18, chainContracts.boba.bridgedFromETH),
   },
-  /* broken at the moment, add back in later
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    terra: osmosisSupply(DAI),
+    ethereum: osmosisSupply("dai", "Axelar", "Ethereum"),
   },
-  */
   starknet: {
     minted: async () => ({}),
     unreleased: async () => ({}),

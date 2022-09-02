@@ -12,7 +12,7 @@ import { executeAndIgnoreErrors } from "./peggedAssets/storePeggedAssets/errorDb
 import { getCurrentUnixTimestamp } from "./utils/date";
 import { StoredPeggedAssetIssuance } from "./types";
 
-const chainsToIgnore = ["harmony"];
+const chainsToIgnore = ["harmony", "acala"];
 
 export const handler = async (_event: any) => {
   const timestamp = getCurrentUnixTimestamp();

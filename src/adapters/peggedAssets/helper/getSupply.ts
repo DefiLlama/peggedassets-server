@@ -188,7 +188,7 @@ export async function terraSupply(addresses: string[], decimals: number) {
   };
 }
 
-export async function osmosisSupply(token: string) {
+export async function osmosisSupply(token: string, bridgeName: string, bridgedFrom: string) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -200,7 +200,7 @@ export async function osmosisSupply(token: string) {
         await axios.get(`https://api-osmosis.imperator.co/tokens/v2/${token}`)
     );
     const totalSupply = res.data[0].liquidity;
-    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, bridgeName, false, bridgedFrom);
     return balances;
   };
 }

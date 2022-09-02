@@ -9,6 +9,7 @@ import {
   supplyInEthereumBridge,
   solanaMintedOrBridged,
   terraSupply,
+  osmosisSupply
 } from "../helper/getSupply";
 import {
   getTotalSupply as ontologyGetTotalSupply,
@@ -903,13 +904,11 @@ const adapter: PeggedIssuanceAdapter = {
       6
     ),
   },
-  /* broken at the moment, add back in later
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    terra: osmosisSupply(USDC),
+    ethereum: osmosisSupply("usdc", "Axelar", "Ethereum"),
   },
-  */
   fantom: {
     minted: async () => ({}),
     unreleased: async () => ({}),

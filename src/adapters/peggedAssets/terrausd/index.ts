@@ -1,6 +1,13 @@
 const sdk = require("@defillama/sdk");
-import { sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply, solanaMintedOrBridged } from "../helper/getSupply";
+import {
+  sumMultipleBalanceFunctions,
+  sumSingleBalance,
+} from "../helper/generalUtil";
+import {
+  bridgedSupply,
+  solanaMintedOrBridged,
+  osmosisSupply,
+} from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -100,18 +107,10 @@ async function terraMinted() {
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
-        await axios.get(
-          "https://fcd.terra.dev/v1/totalsupply/ust"
-        )
+        await axios.get("https://fcd.terra.dev/v1/totalsupply/ust")
     );
     const totalSupply = res.data;
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      totalSupply,
-      "issued",
-      false
-    );
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
   };
 }
@@ -199,13 +198,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     terra: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromTerra),
   },
-  /* broken at the moment, add back in later
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    terra: osmosisSupply(UST),
+    terra: osmosisSupply("ustc", "Axelar", "Terra"),
   },
-  */
   moonbeam: {
     minted: async () => ({}),
     unreleased: async () => ({}),

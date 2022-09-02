@@ -289,17 +289,17 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
     bsc: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromBSC),
   },
-  /* appears to now be unbacked due to hack
   harmony: {
     minted: async () => ({}),
     unreleased: async () => ({}),
+    /* appears to now be unbacked due to hack
     ethereum: bridgedSupply(
       "harmony",
       18,
       chainContracts.harmony.bridgedFromETH
     ),
+      */
   },
-  */
   iotex: {
     minted: async () => ({}),
     unreleased: async () => ({}),

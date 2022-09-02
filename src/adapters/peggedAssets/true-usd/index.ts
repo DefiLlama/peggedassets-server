@@ -52,7 +52,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x5eE41aB6edd38cDfB9f6B4e6Cf7F75c87E170d98"],
   },
   cronos: {
-    issued: ["0x87EFB3ec1576Dec8ED47e58B832bEdCd86eE186e"], // this is not issued by TrueUSD; confirmed by Cronos team member
+    issued: ["0x87EFB3ec1576Dec8ED47e58B832bEdCd86eE186e"], // not clear whether this is held by crypto.com and where
   },
   near: {
     bridgedFromETH: [
