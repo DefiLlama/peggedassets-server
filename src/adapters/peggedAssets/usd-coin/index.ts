@@ -322,11 +322,13 @@ Conflux: don't know how to make calls. celer: 0x6963EfED0aB40F6C3d7BdA44A05dcf14
 
 Should check again for more unreleased tokens.
 
-Orbit: has 20M circulating, has no provider, no API.
-
 Gnosis: note there is 83M minted, 2.1M bridged, rest is here: 0x87D48c565D0D85770406D248efd7dc3cbd41e729
 
 Velas: amount on chain does not match amount in multichain bridge, so it has not been added yet.
+
+Juno, Crescent: missing Axelar bridged, no simple API to use, maybe can use axelarscan's
+
+Sifchain: not sure where it's coming from/how to track
 */
 
 async function chainMinted(chain: string, decimals: number) {
