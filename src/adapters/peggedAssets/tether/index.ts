@@ -332,8 +332,6 @@ Flow: A.231cc0dbbcffc4b7.ceUSDT celer, check for others.
 
 Don't know if every multichain contract has been found and included or not.
 
-Orbit: has no provider, no API.
-
 Velas: amount on chain does not match amount in multichain bridge, so it has not been added yet.
 
 Caduceus: 0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c is multichain, don't have provider or API yet.
