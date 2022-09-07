@@ -465,6 +465,9 @@ const addressesForScreeners: AddressesForScreeners = {
   usdh: {
     address: "USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX",
   },
+  "helio-protocol-hay": {
+    address: "0x0782b6d8c4551B9760e74c0545a9bCD90bdc41E5",
+  },
 };
 
 const addressesForDefillama: AddressesForDefillama = {

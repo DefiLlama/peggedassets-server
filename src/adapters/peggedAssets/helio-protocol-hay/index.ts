@@ -1,7 +1,9 @@
 const sdk = require("@defillama/sdk");
+import { sumSingleBalance } from "../helper/generalUtil";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
+  Balances
 } from "../peggedAsset.type";
 
 const chainContracts = {
@@ -10,12 +12,13 @@ const chainContracts = {
     },
 };
 
-async function bscMinted() {
+async function bscMinted(decimals: number) {
 return async function (
     _timestamp: number,
     _bscBlock: number,
     _chainBlocks: ChainBlocks
 ) {
+  let balances = {} as Balances;
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
@@ -24,13 +27,14 @@ return async function (
         chain: "bsc",
       })
     ).output;
-    return { peggedUSD: totalSupply / 10 ** 18 };
+    sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+    return balances;
   };
 }
 
 const adapter: PeggedIssuanceAdapter = {
   bsc: {
-    minted: bscMinted(),
+    minted: bscMinted(18),
     unreleased: async () => ({}),
   },
 };

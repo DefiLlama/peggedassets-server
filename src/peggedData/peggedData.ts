@@ -1571,4 +1571,24 @@ export default [
     twitter: "https://twitter.com/CantoPublic",
     wiki: "https://wiki.defillama.com/wiki/Canto",
   },
+  {
+    id: "79",
+    name: "Destablecoin HAY",
+    address: "bsc:0x0782b6d8c4551b9760e74c0545a9bcd90bdc41e5",
+    symbol: "HAY",
+    url: "https://helio.money/",
+    description:
+      "HAY is a decentralized, unbiased, collateral-backed destablecoin soft-pegged to the US Dollar.",
+    mintRedeemDescription:
+    "Using the Helio app, users mint HAY by depositing BNB into a vault. When the loan is repaid to retrieve the collateral, the paid back HAY is burned.",
+    onCoinGecko: "true",
+    gecko_id: "helio-protocol-hay",
+    cmcId: "21330",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "dexscreener",
+    auditLinks: null,
+    twitter: "https://twitter.com/Helio_Money",
+    wiki: "https://wiki.defillama.com/wiki/Helio_Protocol",
+  },
 ] as PeggedAsset[];
