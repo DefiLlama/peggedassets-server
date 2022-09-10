@@ -34,6 +34,7 @@ const chainContracts: ChainContracts = {
     reserves: [
       "0xf4f46382c2be1603dc817551ff9a7b333ed1d18f", // bentobox
       "0x1fc83f75499b7620d53757f0b01e2ae626aae530", // degenbox
+      "0xae64a325027c3c14cf6abc7818aa3b9c07f5c799", // gnosis
     ],
   },
   arbitrum: {
