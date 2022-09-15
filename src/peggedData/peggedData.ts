@@ -1591,4 +1591,24 @@ export default [
     twitter: "https://twitter.com/Helio_Money",
     wiki: "https://wiki.defillama.com/wiki/Helio_Protocol",
   },
+  {
+    id: "80",
+    name: "USD2",
+    address: null,
+    symbol: "USD2",
+    url: "https://usd2.lago.finance/",
+    description:
+      "USD2 is a fully-redeemable, decentralized stablecoin on the Kadena blockchain. It is currently 1:1 backed by collateral, in the form of USDC.",
+    mintRedeemDescription:
+    "Using the Lago Finance app, users swap kwUSDC to mint USD2 1:1. USD2 can be redeemed for kwUSDC 1:1 at any time.",
+    onCoinGecko: "false",
+    gecko_id: "usd2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed", // currently is crypto-backed for v1, but will change to FRAX mechanism for v2
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/lagofinance",
+    wiki: "https://wiki.defillama.com/wiki/Lago_Finance",
+  },
 ] as PeggedAsset[];

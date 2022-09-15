@@ -77,6 +77,7 @@ import usdi from "./interest-protocol";
 import lugh from "./lugh";
 import note from "./note";
 import hay from "./helio-protocol-hay";
+import usd2 from "./usd2";
 
 export default {
   tether,
@@ -158,4 +159,5 @@ export default {
   lugh,
   note,
   "helio-protocol-hay": hay,
+  usd2,
 };
