@@ -15,6 +15,7 @@ export type PriceSource =
   | "birdeye"
   | "kucoin"
   | "defillama"
+  | "kaddex"
 
 export type PeggedAsset = {
   id: string;

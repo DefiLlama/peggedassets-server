@@ -91,6 +91,12 @@ type UniswapPools = {
   };
 };
 
+type KaddexPools = {
+  [coinGeckoID: string]: {
+    pool_id: string;
+  };
+};
+
 const feeds: ChainlinkFeeds = {
   tether: {
     address: "0x3e7d1eab13ad0104d2750b8863b489d65364e32d",
@@ -495,6 +501,9 @@ const pairSymbols: PairSymbols = {
   "celo-euro": {
     pairSymbols: "CEUR-USDT",
   },
+  kda: {
+    pairSymbols: "KDA-USDT",
+  },
 };
 
 const uniswapPools: UniswapPools = {
@@ -503,6 +512,12 @@ const uniswapPools: UniswapPools = {
     token: 0,
     chain: "ethereum",
     decimalsDifference: -12,
+  },
+};
+
+const kaddexPools: KaddexPools = {
+  usd2: {
+    pool_id: "coin:lago.USD2",
   },
 };
 
@@ -608,7 +623,7 @@ export default async function getCurrentPeggedPrice(
             `https://api.dexscreener.com/latest/dex/tokens/${address}`
           );
           const filteredPools = res.data.pairs
-            .filter((obj: any) => obj?.baseToken?.address === `${address}`)
+            .filter((obj: any) => obj?.baseToken?.address === address)
             .sort((a: any, b: any) => {
               if (a.liquidity?.usd === undefined) {
                 return 1;
@@ -617,7 +632,7 @@ export default async function getCurrentPeggedPrice(
               } else return b.liquidity.usd - a.liquidity.usd;
             });
           const poolWithGreatestLiquidity = filteredPools[0];
-          const price = parseFloat(poolWithGreatestLiquidity?.priceUsd);
+          const price = parseFloat(poolWithGreatestLiquidity.priceUsd);
           if (price) {
             return price;
           } else {
@@ -735,6 +750,45 @@ export default async function getCurrentPeggedPrice(
       }
     }
     console.error(`Could not get Coingecko price for token ${token}`);
+    storePriceError(token);
+    return null;
+  }
+  if (priceSource === "kaddex") {
+    const poolID = kaddexPools[token]?.pool_id;
+    if (poolID) {
+      for (let i = 0; i < 5; i++) {
+        try {
+          const res = await axios.get(
+            "https://analytics-api.kaddex.com/dex-data/tickers"
+          );
+          const filteredPools = res.data.filter(
+            (obj: any) => obj?.pool_id === poolID
+          );
+          const pool = filteredPools[0];
+          let price = null;
+          if (pool.base_currency === "KDA") {
+            const kdaPrice = await getCurrentPeggedPrice("kda", "kucoin");
+            if (kdaPrice) {
+              price = kdaPrice * parseFloat(pool.last_price);
+            } else
+              console.info(
+                "Could not get KDA price for Kaddex pricing method."
+              );
+          }
+          if (typeof price === "number") {
+            return price;
+          } else {
+            console.error(`Could not get Kaddex price for token ${token}`);
+            storePriceError(token);
+            return null;
+          }
+        } catch (e) {
+          console.error(token, e);
+          continue;
+        }
+      }
+    }
+    console.error(`Could not get Kaddex price for token ${token}`);
     storePriceError(token);
     return null;
   }
