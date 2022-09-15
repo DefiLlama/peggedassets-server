@@ -24,12 +24,6 @@ const chainContracts: ChainContracts = {
   polygon: {
     bridgedFromETH: ["0xe0b52e49357fd4daf2c15e02058dce6bc0057db4"],
   },
-  optimism: {
-    issued: ["0x9485aca5bbBE1667AD97c7fE7C4531a624C8b1ED"],
-  },
-  arbitrum: {
-    issued: ["0xFA5Ed56A203466CbBC2430a43c66b9D8723528E7"],
-  },
   solana: {
     bridgedFromETH: ["CbNYA9n3927uXUukee2Hf4tm3xxkffJPPZvGazc2EAH1"], // wormhole
   },
@@ -91,14 +85,6 @@ const adapter: PeggedIssuanceAdapter = {
       "Ethereum",
       "peggedEUR"
     ),
-  },
-  optimism: {
-    minted: chainMinted("optimism", 18),
-    unreleased: async () => ({}),
-  },
-  arbitrum: {
-    minted: chainMinted("arbitrum", 18),
-    unreleased: async () => ({}),
   },
   solana: {
     minted: async () => ({}),
