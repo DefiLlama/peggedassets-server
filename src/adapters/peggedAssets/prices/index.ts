@@ -769,7 +769,7 @@ export default async function getCurrentPeggedPrice(
           if (pool.base_currency === "KDA") {
             const kdaPrice = await getCurrentPeggedPrice("kda", "kucoin");
             if (kdaPrice) {
-              price = kdaPrice * parseFloat(pool.last_price);
+              price = parseFloat(pool.last_price) / kdaPrice;
             } else
               console.info(
                 "Could not get KDA price for Kaddex pricing method."
