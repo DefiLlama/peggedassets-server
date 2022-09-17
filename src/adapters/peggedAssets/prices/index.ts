@@ -631,8 +631,8 @@ export default async function getCurrentPeggedPrice(
                 return -1;
               } else return b.liquidity.usd - a.liquidity.usd;
             });
-          const poolWithGreatestLiquidity = filteredPools[0];
-          const price = parseFloat(poolWithGreatestLiquidity.priceUsd);
+          const poolWithGreatestLiquidity = filteredPools?.[0];
+          const price = parseFloat(poolWithGreatestLiquidity?.priceUsd);
           if (price) {
             return price;
           } else {
@@ -768,7 +768,7 @@ export default async function getCurrentPeggedPrice(
           let price = null;
           if (pool.base_currency === "KDA") {
             const kdaPrice = await getCurrentPeggedPrice("kda", "kucoin");
-            if (kdaPrice) {
+            if (kdaPrice && (typeof pool.last_price === "string")) {
               price = parseFloat(pool.last_price) / kdaPrice;
             } else
               console.info(
