@@ -55,6 +55,7 @@ const handler = async (_event: any) => {
         SK: timestamp,
         prices: prices,
       });
+      break;
     } catch (e) {
       if (i >= 5) {
         await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
