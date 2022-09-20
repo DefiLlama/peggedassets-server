@@ -146,6 +146,13 @@ const chainContracts: ChainContracts = {
     bridgedFromPolygon: ["0xdFA46478F9e5EA86d57387849598dbFB2e964b02"],
     anyMAI: ["0x65e66a61d0a8f1e686c2d6083ad611a10d84d97a"],
   },
+  ethereum: {
+    issued: ["0x8D6CeBD76f18E1558D4DB88138e2DeFB3909fAD6"],
+    anyMAI: [
+      "0x4b641f607570b9053035780615f5b56a91f38f90",
+      "0x3182e6856c3b59c39114416075770ec9dc9ff436",
+    ],
+  },
 };
 
 /* 
@@ -364,7 +371,7 @@ const adapter: PeggedIssuanceAdapter = {
   harmony: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-      /* not giving accurate number
+    /* not giving accurate number
     none: maiApiCirculating("harmonySupply"),
       */
   },
@@ -460,6 +467,16 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.milkomeda.anyMAI,
       "multichain",
       "Polygon"
+    ),
+  },
+  ethereum: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: bridgedMAISupply(
+      "ethereum",
+      18,
+      chainContracts.ethereum.issued[0],
+      chainContracts.ethereum.anyMAI
     ),
   },
   /*
