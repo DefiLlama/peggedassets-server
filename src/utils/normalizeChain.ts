@@ -839,9 +839,15 @@ export const chainCoingeckoIds = {
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
-      types: ["L2", "gas"]
+      types: ["L2", "gas"],
     },
     chainId: 42170,
+  },
+  Kujira: {
+    geckoId: "kujira",
+    symbol: "KUJI",
+    cmcId: "15185",
+    categories: ["Cosmos"],
   },
 } as {
   [chain: string]: {
@@ -1056,7 +1062,9 @@ export function getChainDisplayName(
     case "ripple":
       return "Ripple";
     case "arbitrum_nova":
-      return "Arbitrum Nova"
+      return "Arbitrum Nova";
+    case "kujira":
+      return "Kujira";
 
     default:
       return (

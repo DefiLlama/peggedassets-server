@@ -1611,4 +1611,24 @@ export default [
     twitter: "https://twitter.com/lagofinance",
     wiki: "https://wiki.defillama.com/wiki/Lago_Finance",
   },
+  {
+    id: "81",
+    name: "USK",
+    address: null,
+    symbol: "USK",
+    url: "https://kujira.app/",
+    description:
+      "USK is an over-collateralized Cosmos stablecoin soft-pegged to the USD and initially backed by ATOM",
+    mintRedeemDescription:
+    "Using the Kujira BLUE app, users mint USK by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back USK is burned.",
+    onCoinGecko: "true",
+    gecko_id: "usk",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/TeamKujira",
+    wiki: "https://wiki.defillama.com/wiki/Kujira",
+  },
 ] as PeggedAsset[];
