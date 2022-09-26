@@ -476,7 +476,9 @@ const adapter: PeggedIssuanceAdapter = {
       "ethereum",
       18,
       chainContracts.ethereum.issued[0],
-      chainContracts.ethereum.anyMAI
+      chainContracts.ethereum.anyMAI,
+      "multichain",
+      "Polygon"
     ),
   },
   /*
