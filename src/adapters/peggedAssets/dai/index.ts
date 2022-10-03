@@ -1,5 +1,5 @@
 const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
+import { sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
   supplyInEthereumBridge,
@@ -130,7 +130,10 @@ const chainContracts: ChainContracts = {
     bridgeOnETH: ["0xaBEA9132b05A70803a4E85094fD0e1800777fBEF"],
   },
   aztec: {
-    bridgeOnETH: ["0x737901bea3eeb88459df9ef1BE8fF3Ae1B42A2ba"],
+    bridgeOnETH: [
+      "0x737901bea3eeb88459df9ef1BE8fF3Ae1B42A2ba",
+      "0xFF1F2B4ADb9dF6FC8eAFecDcbF96A2B351680455",
+    ],
   },
   velas: {
     bridgedFromETH: ["0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D"], // multichain
@@ -189,8 +192,8 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x4c078361FC9BbB78DF910800A991C7c3DD2F6ce0"],
   },
   arbitrum_nova: {
-    bridgedFromETH: ["0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1"]
-  }
+    bridgedFromETH: ["0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1"],
+  },
 };
 
 /*
@@ -364,7 +367,7 @@ const adapter: PeggedIssuanceAdapter = {
   harmony: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-      /* hacked, trading at $0.06
+    /* hacked, trading at $0.06
     ethereum: bridgedSupply(
       "harmony",
       18,
@@ -493,11 +496,15 @@ const adapter: PeggedIssuanceAdapter = {
   aztec: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: supplyInEthereumBridge(
+    ethereum: sumMultipleBalanceFunctions( [supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.aztec.bridgeOnETH[0],
       18
-    ),
+    ), supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.aztec.bridgeOnETH[1],
+      18
+    )], "peggedUSD" )
   },
   velas: {
     minted: async () => ({}),
@@ -574,12 +581,20 @@ const adapter: PeggedIssuanceAdapter = {
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("dogechain", 18, chainContracts.dogechain.bridgedFromETH),
+    ethereum: bridgedSupply(
+      "dogechain",
+      18,
+      chainContracts.dogechain.bridgedFromETH
+    ),
   },
   thundercore: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromETH),
+    ethereum: bridgedSupply(
+      "thundercore",
+      18,
+      chainContracts.thundercore.bridgedFromETH
+    ),
   },
   metis: {
     minted: async () => ({}),
