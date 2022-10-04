@@ -411,6 +411,7 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/assets/31566704"
         )
     );
+    console.info("algorand 1 sucess USDC")
     const supply = supplyRes?.data?.asset?.params?.total;
     const reserveRes = await retry(
       async (_bail: any) =>
@@ -418,6 +419,7 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/accounts/2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM"
         )
     );
+    console.info("algorand 2 sucess USDC")
     const reserveAccount = reserveRes?.data?.account?.assets?.filter(
       (asset: any) => asset["asset-id"] === 31566704
     );
@@ -474,6 +476,7 @@ async function circleAPIChainMinted(chain: string) {
       async (_bail: any) =>
         await axios.get("https://api.circle.com/v1/stablecoins")
     );
+    console.info("circle API sucess USDC")
     const usdcData = issuance.data.data.filter(
       (obj: any) => obj.symbol === "USDC"
     );
@@ -499,6 +502,7 @@ async function reinetworkBridged(address: string, decimals: number) {
           `https://scan.rei.network/api?module=token&action=getToken&contractaddress=${address}`
         )
     );
+    console.info("rei network sucess USDC")
     const totalSupply =
       parseInt(res?.data?.result?.totalSupply) / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
@@ -519,6 +523,7 @@ async function karuraMinted(address: string, decimals: number) {
           `https://blockscout.karura.network/api?module=token&action=getToken&contractaddress=getToken&contractaddress=${address}`
         )
     );
+    console.info("karura sucess USDC")
     const supply = res?.data?.result?.totalSupply / 10 ** decimals;
     sumSingleBalance(
       balances,
@@ -603,6 +608,7 @@ async function elrondBridged(tokenID: string, decimals: number) {
           `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
         )
     );
+    console.info("elrond sucess USDC")
     const supply = res?.data?.data?.supply / 10 ** decimals;
     sumSingleBalance(
       balances,

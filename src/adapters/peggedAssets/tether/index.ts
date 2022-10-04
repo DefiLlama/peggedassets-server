@@ -457,7 +457,7 @@ async function liquidMinted() {
           "https://blockstream.info/liquid/api/asset/ce091c998b83c78bb71a632313ba3760f1763d9cfcffae02258ffa9865a37bd2"
         )
     );
-    console.info("liquid success")
+    console.info("liquid success USDT")
     const issued = res.data.chain_stats.issued_amount;
     const burned = res.data.chain_stats.burned_amount;
     sumSingleBalance(
@@ -485,7 +485,7 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/assets/312769"
         )
     );
-    console.info("algorand 1 success")
+    console.info("algorand 1 success USDT")
     const supply = supplyRes.data.asset.params.total;
     const reserveRes = await retry(
       async (_bail: any) =>
@@ -493,7 +493,7 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/accounts/XIU7HGGAJ3QOTATPDSIIHPFVKMICXKHMOR2FJKHTVLII4FAOA3CYZQDLG4"
         )
     );
-    console.info("algorand 2 success")
+    console.info("algorand 2 success USDT")
     const reserveAccount = reserveRes.data.account.assets.filter(
       (asset: any) => asset["asset-id"] === 312769
     );
@@ -592,7 +592,7 @@ async function usdtApiMinted(key: string) {
       async (_bail: any) =>
         await axios("https://app.tether.to/transparency.json")
     );
-    console.info("tether API success")
+    console.info("tether API 1 success USDT")
     const issuance = res.data.data.usdt;
     const totalSupply = parseInt(issuance[key]);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
@@ -611,7 +611,7 @@ async function usdtApiUnreleased(key: string) {
       async (_bail: any) =>
         await axios("https://app.tether.to/transparency.json")
     );
-    console.info("tether API success")
+    console.info("tether API 2 success USDT")
     const issuance = res.data.data.usdt;
     const totalSupply = parseInt(issuance[key]);
     sumSingleBalance(balances, "peggedUSD", totalSupply);
@@ -632,7 +632,7 @@ async function reinetworkBridged(address: string, decimals: number) {
           `https://scan.rei.network/api?module=token&action=getToken&contractaddress=${address}`
         )
     );
-    console.info("rei network success")
+    console.info("rei network success USDT")
     const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
     return balances;
