@@ -38,6 +38,8 @@ const chainContracts: ChainContracts = {
     ],
   },
   avax: {
+    issued: ["0x9C9e5fD8bbc25984B178FdCE6117Defa39d2db39"],
+    reserves: ["0x4A13E986a4B8E123721aA1F621E046fe3b74F724"], // owner of the native "issued" contract
     bridgeOnETH: ["0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0"],
     bridgedFromETH: ["0x19860ccb0a68fd4213ab9d8266f7bbf05a8dde98"],
     bridgedFromBSC: ["0xA41a6c7E25DdD361343e8Cb8cFa579bbE5eEdb7a"], // wormhole
@@ -68,6 +70,8 @@ const chainContracts: ChainContracts = {
     ],
   },
   polygon: {
+    issued: ["0x9C9e5fD8bbc25984B178FdCE6117Defa39d2db39"],
+    reserves: ["0x4a13e986a4b8e123721aa1f621e046fe3b74f724"], // owner of native "issued" contract
     bridgedFromBSC: [
       "0x9fb83c0635de2e815fd1c21b3a292277540c2e8d", // multichain
       "0xA8D394fE7380b8cE6145d5f85E6aC22d4E91ACDe", // wormhole
@@ -272,6 +276,32 @@ async function polyNetworkBridged(
   };
 }
 
+async function chainUnreleased(chain: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+      const reserve = (
+        await sdk.api.erc20.balanceOf({
+          target: chainContracts[chain].issued[0],
+          owner: chainContracts[chain].reserves[0],
+          block: _chainBlocks?.[chain],
+          chain: chain,
+        })
+      ).output;
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        reserve / 10 ** decimals,
+        "issued",
+        false
+      );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -284,8 +314,8 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
   avalanche: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
+    minted: chainMinted("avax", 18),
+    unreleased: chainUnreleased("avax", 18),
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
     bsc: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromBSC),
   },
@@ -330,8 +360,8 @@ const adapter: PeggedIssuanceAdapter = {
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
+    minted: chainMinted("polygon", 18),
+    unreleased: chainUnreleased("polygon", 18),
     bsc: bridgedSupply("polygon", 18, chainContracts.polygon.bridgedFromBSC),
   },
   fuse: {
