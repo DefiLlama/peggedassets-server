@@ -11,6 +11,7 @@ import {
   getTotalSupply as ontologyGetTotalSupply,
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
+import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
 import { call as nearCall } from "../llama-helper/near";
 import {
@@ -256,7 +257,10 @@ const chainContracts: ChainContracts = {
     ],
   },
   kava: {
-    bridgedFromETH: ["0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD"], // celer
+    bridgedFromETH: [
+      "0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD", // celer
+      "0xB44a9B6905aF7c801311e8F4E76932ee959c663C", // multichain
+    ],
   },
   conflux: {
     bridgedFromETH: [
@@ -302,7 +306,7 @@ const chainContracts: ChainContracts = {
   },
   arbitrum_nova: {
     bridgedFromETH: ["0x52484E1ab2e2B22420a25c20FA49E173a26202Cd"],
-  }
+  },
 };
 
 /*
@@ -457,7 +461,7 @@ async function liquidMinted() {
           "https://blockstream.info/liquid/api/asset/ce091c998b83c78bb71a632313ba3760f1763d9cfcffae02258ffa9865a37bd2"
         )
     );
-    console.info("liquid success USDT")
+    console.info("liquid success USDT");
     const issued = res.data.chain_stats.issued_amount;
     const burned = res.data.chain_stats.burned_amount;
     sumSingleBalance(
@@ -485,7 +489,7 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/assets/312769"
         )
     );
-    console.info("algorand 1 success USDT")
+    console.info("algorand 1 success USDT");
     const supply = supplyRes.data.asset.params.total;
     const reserveRes = await retry(
       async (_bail: any) =>
@@ -493,7 +497,7 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/accounts/XIU7HGGAJ3QOTATPDSIIHPFVKMICXKHMOR2FJKHTVLII4FAOA3CYZQDLG4"
         )
     );
-    console.info("algorand 2 success USDT")
+    console.info("algorand 2 success USDT");
     const reserveAccount = reserveRes.data.account.assets.filter(
       (asset: any) => asset["asset-id"] === 312769
     );
@@ -592,7 +596,7 @@ async function usdtApiMinted(key: string) {
       async (_bail: any) =>
         await axios("https://app.tether.to/transparency.json")
     );
-    console.info("tether API 1 success USDT")
+    console.info("tether API 1 success USDT");
     const issuance = res.data.data.usdt;
     const totalSupply = parseInt(issuance[key]);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
@@ -611,7 +615,7 @@ async function usdtApiUnreleased(key: string) {
       async (_bail: any) =>
         await axios("https://app.tether.to/transparency.json")
     );
-    console.info("tether API 2 success USDT")
+    console.info("tether API 2 success USDT");
     const issuance = res.data.data.usdt;
     const totalSupply = parseInt(issuance[key]);
     sumSingleBalance(balances, "peggedUSD", totalSupply);
@@ -632,7 +636,7 @@ async function reinetworkBridged(address: string, decimals: number) {
           `https://scan.rei.network/api?module=token&action=getToken&contractaddress=${address}`
         )
     );
-    console.info("rei network success USDT")
+    console.info("rei network success USDT");
     const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
     return balances;
@@ -717,6 +721,21 @@ async function polyNetworkBridged(
       false,
       "Ethereum"
     );
+    return balances;
+  };
+}
+
+async function kavaBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (const contract of chainContracts.kava.bridgedFromETH) {
+      const totalSupply = await kavaGetTotalSupply(contract);
+      sumSingleBalance(balances, "peggedUSD", totalSupply, contract, true);
+    }
     return balances;
   };
 }
@@ -1077,7 +1096,7 @@ const adapter: PeggedIssuanceAdapter = {
   kava: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("kava", 6, chainContracts.kava.bridgedFromETH),
+    ethereum: kavaBridged(),
   },
   ontology: {
     minted: async () => ({}),

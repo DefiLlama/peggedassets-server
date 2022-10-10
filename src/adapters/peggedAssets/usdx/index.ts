@@ -28,7 +28,7 @@ async function kavaMinted() {
     const res = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://kava4.data.kava.io/vesting/circulatingsupplyusdx"
+          "https://api.kava.io/vesting/circulatingsupplyusdx"
         )
     );
     const supply = res.data

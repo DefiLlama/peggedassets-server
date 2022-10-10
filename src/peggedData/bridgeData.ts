@@ -107,6 +107,10 @@ export default {
     bridge: "multichain",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xfA9343C3897324496A05fC75abeD6bAC29f8A40f": {
+    bridge: "multichain",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d": {
     bridge: "multichain",
     sourceChain: formattedSourceChains.bsc,

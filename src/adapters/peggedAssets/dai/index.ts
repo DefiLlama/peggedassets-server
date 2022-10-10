@@ -1,5 +1,8 @@
 const sdk = require("@defillama/sdk");
-import { sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
+import {
+  sumMultipleBalanceFunctions,
+  sumSingleBalance,
+} from "../helper/generalUtil";
 import {
   bridgedSupply,
   supplyInEthereumBridge,
@@ -11,6 +14,7 @@ import {
   getTotalSupply as ontologyGetTotalSupply,
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
+import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
@@ -194,6 +198,9 @@ const chainContracts: ChainContracts = {
   arbitrum_nova: {
     bridgedFromETH: ["0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1"],
   },
+  kava: {
+    bridgedFromETH: ["0x765277EebeCA2e31912C9946eAe1021199B39C61"], // multichain
+  },
 };
 
 /*
@@ -322,6 +329,21 @@ async function nearBridged(address: string, decimals: number) {
       address,
       true
     );
+    return balances;
+  };
+}
+
+async function kavaBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (const contract of chainContracts.kava.bridgedFromETH) {
+      const totalSupply = await kavaGetTotalSupply(contract);
+      sumSingleBalance(balances, "peggedUSD", totalSupply, contract, true);
+    }
     return balances;
   };
 }
@@ -496,15 +518,21 @@ const adapter: PeggedIssuanceAdapter = {
   aztec: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: sumMultipleBalanceFunctions( [supplyInEthereumBridge(
-      chainContracts.ethereum.issued[0],
-      chainContracts.aztec.bridgeOnETH[0],
-      18
-    ), supplyInEthereumBridge(
-      chainContracts.ethereum.issued[0],
-      chainContracts.aztec.bridgeOnETH[1],
-      18
-    )], "peggedUSD" )
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        supplyInEthereumBridge(
+          chainContracts.ethereum.issued[0],
+          chainContracts.aztec.bridgeOnETH[0],
+          18
+        ),
+        supplyInEthereumBridge(
+          chainContracts.ethereum.issued[0],
+          chainContracts.aztec.bridgeOnETH[1],
+          18
+        ),
+      ],
+      "peggedUSD"
+    ),
   },
   velas: {
     minted: async () => ({}),
@@ -609,6 +637,11 @@ const adapter: PeggedIssuanceAdapter = {
       18,
       chainContracts.arbitrum_nova.bridgedFromETH
     ),
+  },
+  kava: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: kavaBridged(),
   },
 };
 

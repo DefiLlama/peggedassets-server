@@ -9,12 +9,13 @@ import {
   supplyInEthereumBridge,
   solanaMintedOrBridged,
   terraSupply,
-  osmosisSupply
+  osmosisSupply,
 } from "../helper/getSupply";
 import {
   getTotalSupply as ontologyGetTotalSupply,
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
+import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
@@ -255,7 +256,10 @@ const chainContracts: ChainContracts = {
     bridgedFromSol: ["0xCD7D7Ff64746C1909E44Db8e95331F9316478817"], // allbridge
   },
   kava: {
-    bridgedFromETH: ["0x23367BEA9B6931690960d8c59f6e708630f24E58"], // celer
+    bridgedFromETH: [
+      "0x23367BEA9B6931690960d8c59f6e708630f24E58", // celer
+      "0xfA9343C3897324496A05fC75abeD6bAC29f8A40f", // multichain
+    ],
   },
   karura: {
     bridgedFromETH: ["0x1F3a10587A20114EA25Ba1b388EE2dD4A337ce27"], // wormhole
@@ -303,8 +307,8 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x765277EebeCA2e31912C9946eAe1021199B39C61"], // multichain
   },
   arbitrum_nova: {
-    bridgedFromETH: ["0x750ba8b76187092B0D1E87E28daaf484d1b5273b"]
-  }
+    bridgedFromETH: ["0x750ba8b76187092B0D1E87E28daaf484d1b5273b"],
+  },
 };
 
 /*
@@ -411,7 +415,7 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/assets/31566704"
         )
     );
-    console.info("algorand 1 success USDC")
+    console.info("algorand 1 success USDC");
     const supply = supplyRes?.data?.asset?.params?.total;
     const reserveRes = await retry(
       async (_bail: any) =>
@@ -419,7 +423,7 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/accounts/2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM"
         )
     );
-    console.info("algorand 2 success USDC")
+    console.info("algorand 2 success USDC");
     const reserveAccount = reserveRes?.data?.account?.assets?.filter(
       (asset: any) => asset["asset-id"] === 31566704
     );
@@ -476,7 +480,7 @@ async function circleAPIChainMinted(chain: string) {
       async (_bail: any) =>
         await axios.get("https://api.circle.com/v1/stablecoins")
     );
-    console.info("circle API success USDC")
+    console.info("circle API success USDC");
     const usdcData = issuance.data.data.filter(
       (obj: any) => obj.symbol === "USDC"
     );
@@ -502,7 +506,7 @@ async function reinetworkBridged(address: string, decimals: number) {
           `https://scan.rei.network/api?module=token&action=getToken&contractaddress=${address}`
         )
     );
-    console.info("rei network success USDC")
+    console.info("rei network success USDC");
     const totalSupply =
       parseInt(res?.data?.result?.totalSupply) / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
@@ -523,7 +527,7 @@ async function karuraMinted(address: string, decimals: number) {
           `https://blockscout.karura.network/api?module=token&action=getToken&contractaddress=getToken&contractaddress=${address}`
         )
     );
-    console.info("karura success USDC")
+    console.info("karura success USDC");
     const supply = res?.data?.result?.totalSupply / 10 ** decimals;
     sumSingleBalance(
       balances,
@@ -608,7 +612,7 @@ async function elrondBridged(tokenID: string, decimals: number) {
           `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
         )
     );
-    console.info("elrond success USDC")
+    console.info("elrond success USDC");
     const supply = res?.data?.data?.supply / 10 ** decimals;
     sumSingleBalance(
       balances,
@@ -618,6 +622,21 @@ async function elrondBridged(tokenID: string, decimals: number) {
       false,
       "Ethereum"
     );
+    return balances;
+  };
+}
+
+async function kavaBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (const contract of chainContracts.kava.bridgedFromETH) {
+      const totalSupply = await kavaGetTotalSupply(contract);
+      sumSingleBalance(balances, "peggedUSD", totalSupply, contract, true);
+    }
     return balances;
   };
 }
@@ -943,7 +962,7 @@ const adapter: PeggedIssuanceAdapter = {
   kava: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("kava", 6, chainContracts.kava.bridgedFromETH),
+    ethereum: kavaBridged(),
   },
   karura: {
     minted: async () => ({}),
@@ -1015,7 +1034,11 @@ const adapter: PeggedIssuanceAdapter = {
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("dogechain", 6, chainContracts.dogechain.bridgedFromETH),
+    ethereum: bridgedSupply(
+      "dogechain",
+      6,
+      chainContracts.dogechain.bridgedFromETH
+    ),
   },
   kadena: {
     minted: async () => ({}),
