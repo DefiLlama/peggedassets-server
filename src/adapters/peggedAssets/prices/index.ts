@@ -401,6 +401,13 @@ const curvePools: CurvePools = {
     decimalsToken1: 18,
     otherTokenisType: "3crv",
   },
+  "arable-usd": {
+    chain: "avax",
+    address: "0x0bd1e9cc4837f6f97323f21b9db039ccb6951668",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 6,
+  },
 };
 
 const addressesForScreeners: AddressesForScreeners = {

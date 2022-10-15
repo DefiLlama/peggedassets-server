@@ -79,6 +79,7 @@ import note from "./note";
 import hay from "./helio-protocol-hay";
 import usd2 from "./usd2";
 import usk from "./usk";
+import arusd from "./arable-usd";
 
 export default {
   tether,
@@ -162,4 +163,5 @@ export default {
   "helio-protocol-hay": hay,
   usd2,
   usk,
+  "arable-usd": arusd,
 };

@@ -1618,7 +1618,7 @@ export default [
     symbol: "USK",
     url: "https://kujira.app/",
     description:
-      "USK is an over-collateralized Cosmos stablecoin soft-pegged to the USD and initially backed by ATOM",
+      "USK is an over-collateralized Cosmos stablecoin soft-pegged to the USD and initially backed by ATOM.",
     mintRedeemDescription:
     "Using the Kujira BLUE app, users mint USK by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back USK is burned.",
     onCoinGecko: "true",
@@ -1630,5 +1630,25 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/TeamKujira",
     wiki: "https://wiki.defillama.com/wiki/Kujira",
+  },
+  {
+    id: "82",
+    name: "arUSD",
+    address: "avax:0x025AB35fF6AbccA56d57475249baaEae08419039",
+    symbol: "ARUSD",
+    url: "https://arable.finance/",
+    description:
+      "Arable offers farms for staking with synthetic LP and synthetic cryptocurrencies. arUSD is a token that is pegged to USD. You can swap arUSD for any other synths on the Arable platform.",
+    mintRedeemDescription:
+    "Using the Arable Finance app, users mint arUSD by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back arUSD is burned.",
+    onCoinGecko: "false",
+    gecko_id: "arable-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/ArableProtocol",
+    wiki: "https://wiki.defillama.com/wiki/Arable_Protocol",
   },
 ] as PeggedAsset[];
