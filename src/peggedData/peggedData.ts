@@ -1651,4 +1651,24 @@ export default [
     twitter: "https://twitter.com/ArableProtocol",
     wiki: "https://wiki.defillama.com/wiki/Arable_Protocol",
   },
+  {
+    id: "83",
+    name: "USDW",
+    address: "ethpow:0x520A36eE3aa0b506288915f91Fb4BBB23d09a7D7",
+    symbol: "USDW",
+    url: "https://www.realprotocol.xyz/",
+    description:
+      "Real is a decentralized borrowing protocol on the EthereumPoW network that allows you to draw interest-free loans against Ether used as collateral. Loans are paid out in USDW (a USD pegged stablecoin) and need to maintain a minimum collateral ratio of 115%.",
+    mintRedeemDescription:
+    "Using the Real Protocol app, users mint USDW by depositing Ether into a vault. When the loan is repaid to retrieve the collateral, the paid back USDW is burned.",
+    onCoinGecko: "false",
+    gecko_id: "usdw",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/realprotocoleth",
+    wiki: "https://wiki.defillama.com/wiki/Real_Protocol",
+  },
 ] as PeggedAsset[];
