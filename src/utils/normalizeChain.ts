@@ -849,6 +849,12 @@ export const chainCoingeckoIds = {
     cmcId: "15185",
     categories: ["Cosmos"],
   },
+  "EthereumPoW": {
+    geckoId: "ethereum-pow-iou",
+    symbol: "ETHW",
+    cmcId: "21296",
+    categories: ["EVM"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1065,7 +1071,8 @@ export function getChainDisplayName(
       return "Arbitrum Nova";
     case "kujira":
       return "Kujira";
-
+    case "ethpow":
+      return "EthereumPoW"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

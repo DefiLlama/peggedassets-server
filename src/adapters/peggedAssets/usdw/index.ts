@@ -49,7 +49,7 @@ async function chainMinted(chain: string, decimals: number) {
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  ethpow: {
+  ethereumpow: {
     minted: chainMinted("ethpow", 18),
     unreleased: async () => ({}),
   },
