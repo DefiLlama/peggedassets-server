@@ -1671,4 +1671,24 @@ export default [
     twitter: "https://twitter.com/realprotocoleth",
     wiki: "https://wiki.defillama.com/wiki/Real_Protocol",
   },
+  {
+    id: "84",
+    name: "BOB",
+    address: "polygon:0xb0b195aefa3650a6908f15cdac7d92f8a5791b0b",
+    symbol: "BOB",
+    url: "https://www.zkbob.com/",
+    description:
+      "BOB is a multi-chain stable token (stablecoin) enhanced with optional privacy features. Once BOB is deposited in the zkBob app, pool participants can transfer any amount of BOB amongst themselves in a private, secure manner.",
+    mintRedeemDescription:
+    "BOB minting is handled with a multi-sig Safe by a distributed reserve board.",
+    onCoinGecko: "true",
+    gecko_id: "bob",
+    cmcId: "21882",
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic",
+    priceSource: "dexscreener",
+    auditLinks: null,
+    twitter: "https://twitter.com/zkBob_",
+    wiki: "https://wiki.defillama.com/wiki/zkBob",
+  },
 ] as PeggedAsset[];

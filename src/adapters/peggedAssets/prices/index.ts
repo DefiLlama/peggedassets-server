@@ -481,6 +481,9 @@ const addressesForScreeners: AddressesForScreeners = {
   "helio-protocol-hay": {
     address: "0x0782b6d8c4551B9760e74c0545a9bCD90bdc41E5",
   },
+  bob: {
+    address: "0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B"
+  }
 };
 
 const addressesForDefillama: AddressesForDefillama = {
