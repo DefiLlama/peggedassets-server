@@ -37,6 +37,9 @@ export async function craftChainDominanceResponse(chain: string | undefined) {
   if (chain === "terra%20classic") {
     chain = "terra";
   }
+  if (chain === "ethereumpow") {
+    chain = "ethpow";
+  }
 
   if (chain === undefined) {
     return errorResponse({

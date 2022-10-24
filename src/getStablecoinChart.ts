@@ -94,6 +94,9 @@ export async function craftChartsResponse(
   if (chain === "arbitrum%20nova") {
     chain = "arbitrum_nova";
   }
+  if (chain === "ethereumpow") {
+    chain = "ethpow";
+  }
 
   if (chain === undefined) {
     return errorResponse({
