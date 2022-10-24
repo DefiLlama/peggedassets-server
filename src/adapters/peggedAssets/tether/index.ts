@@ -13,6 +13,7 @@ import {
 } from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
+import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
 import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
@@ -306,6 +307,15 @@ const chainContracts: ChainContracts = {
   },
   arbitrum_nova: {
     bridgedFromETH: ["0x52484E1ab2e2B22420a25c20FA49E173a26202Cd"],
+  },
+  ethpow: {
+    bridgedFromETH: ["0x2ad7868ca212135c6119fd7ad1ce51cfc5702892"], // chainge
+  },
+  aptos: {
+    bridgedFromETH: [
+      "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa", // stargate
+      "0xa2eda21a58856fda86451436513b867c97eecb4ba099da5775520e0f7492e852", // wormhole
+    ],
   },
 };
 
@@ -736,6 +746,47 @@ async function kavaBridged() {
       const totalSupply = await kavaGetTotalSupply(contract);
       sumSingleBalance(balances, "peggedUSD", totalSupply, contract, true);
     }
+    return balances;
+  };
+}
+
+async function aptosBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const contractStargate =
+      "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa";
+    const typeStargate =
+      "0x1::coin::CoinInfo<0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT>";
+    const totalSupplyStargate = await aptosGetTotalSupply(
+      contractStargate,
+      typeStargate
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupplyStargate,
+      contractStargate,
+      true
+    );
+    const contractPortal =
+      "0xa2eda21a58856fda86451436513b867c97eecb4ba099da5775520e0f7492e852";
+    const typePortal =
+      "0x1::coin::CoinInfo<0xa2eda21a58856fda86451436513b867c97eecb4ba099da5775520e0f7492e852::coin::T>";
+    const totalSupplyPortal = await aptosGetTotalSupply(
+      contractPortal,
+      typePortal
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupplyPortal,
+      contractPortal,
+      true
+    );
     return balances;
   };
 }
@@ -1190,6 +1241,11 @@ const adapter: PeggedIssuanceAdapter = {
       6,
       chainContracts.arbitrum_nova.bridgedFromETH
     ),
+  },
+  aptos: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: aptosBridged(),
   },
 };
 

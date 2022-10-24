@@ -1073,6 +1073,8 @@ export function getChainDisplayName(
       return "Kujira";
     case "ethpow":
       return "EthereumPoW"
+    case "aptos":
+      return "Aptos"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

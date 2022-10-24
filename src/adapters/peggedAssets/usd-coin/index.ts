@@ -16,6 +16,7 @@ import {
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
+import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
 import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
@@ -309,12 +310,18 @@ const chainContracts: ChainContracts = {
   arbitrum_nova: {
     bridgedFromETH: ["0x750ba8b76187092B0D1E87E28daaf484d1b5273b"],
   },
+  aptos: {
+    bridgedFromETH: [
+      "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa", // stargate
+      "0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea"  // wormhole
+    ],
+  },
 };
 
 /*
 Sora: cannot find API query that gives supply.
 
-Cronos: they have not provided any proof the circulating USDC is real USDC.
+Cronos: they have not provided details about the wallets holding the USDC.
 
 Flow: A.b19436aae4d94622.FiatToken. HTTP API has no info about tokens. Using Circle API for now.
 
@@ -637,6 +644,27 @@ async function kavaBridged() {
       const totalSupply = await kavaGetTotalSupply(contract);
       sumSingleBalance(balances, "peggedUSD", totalSupply, contract, true);
     }
+    return balances;
+  };
+}
+
+async function aptosBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const contractStargate = "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa";
+    const typeStargate =
+      "0x1::coin::CoinInfo<0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC>";
+    const totalSupplyStargate = await aptosGetTotalSupply(contractStargate, typeStargate);
+    sumSingleBalance(balances, "peggedUSD", totalSupplyStargate, contractStargate, true);
+    const contractPortal = "0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea";
+    const typePortal =
+      "0x1::coin::CoinInfo<0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea::coin::T>";
+    const totalSupplyPortal = await aptosGetTotalSupply(contractPortal, typePortal);
+    sumSingleBalance(balances, "peggedUSD", totalSupplyPortal, contractPortal, true);
     return balances;
   };
 }
@@ -1062,6 +1090,11 @@ const adapter: PeggedIssuanceAdapter = {
       6,
       chainContracts.arbitrum_nova.bridgedFromETH
     ),
+  },
+  aptos: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: aptosBridged(),
   },
 };
 

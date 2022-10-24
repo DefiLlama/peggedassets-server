@@ -675,6 +675,14 @@ export default {
     bridge: "wormhole",
     sourceChain: formattedSourceChains.sol,
   },
+  "0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea": {
+    bridge: "wormhole",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xa2eda21a58856fda86451436513b867c97eecb4ba099da5775520e0f7492e852": {
+    bridge: "wormhole",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x53813CD4aCD7145A716B4686b195511FA93e4Cb7": {
     bridge: "celer",
     sourceChain: formattedSourceChains.eth,
@@ -1647,6 +1655,10 @@ export default {
     bridge: "lago",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa": {
+    bridge: "stargate",
+    sourcechain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1859,5 +1871,9 @@ export const bridgeInfo = {
   lago: {
     name: "Lago Finance",
     link: "https://www.lago.finance/",
+  },
+  stargate: {
+    name: "Stargate",
+    link: "https://stargate.finance/",
   },
 } as BridgeInfo;
