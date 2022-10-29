@@ -82,6 +82,7 @@ import usk from "./usk";
 import arusd from "./arable-usd";
 import usdw from "./usdw";
 import bob from "./bob";
+import usdr from "./real-usd";
 
 export default {
   tether,
@@ -167,5 +168,6 @@ export default {
   usk,
   "arable-usd": arusd,
   usdw,
-  bob
+  bob,
+  usdr
 };
