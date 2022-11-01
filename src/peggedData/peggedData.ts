@@ -1691,4 +1691,24 @@ export default [
     twitter: "https://twitter.com/zkBob_",
     wiki: "https://wiki.defillama.com/wiki/zkBob",
   },
+  {
+    id: "85",
+    name: "Real USD",
+    address: "polygon:0xb5DFABd7fF7F83BAB83995E72A52B97ABb7bcf63",
+    symbol: "USDR",
+    url: "https://www.tangible.store/realusd",
+    description:
+      "Real USD (USDR v2) is a natively rebasing, yield-bearing, overcollateralized stablecoin, pegged to the US dollar. Collateralizing USDR will be yield-generating, tokenized real estate that is inflation-resistant and wealth generating.",
+    mintRedeemDescription:
+    "Using Tangible, users can swap DAI to mint USDR 1:1. A portion of that DAI is then converted into tokenized real estate through Tangible's existing marketplace. Users receive a daily rebase. USDR can be redeemed for DAI 1:1 at any time.",
+    onCoinGecko: "true",
+    gecko_id: "real-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/tangibleDAO",
+    wiki: "https://wiki.defillama.com/wiki/Tangible",
+  },
 ] as PeggedAsset[];
