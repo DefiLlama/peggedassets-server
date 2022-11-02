@@ -1711,4 +1711,24 @@ export default [
     twitter: "https://twitter.com/tangibleDAO",
     wiki: "https://wiki.defillama.com/wiki/Tangible",
   },
+  {
+    id: "86",
+    name: "Zunami USD",
+    address: "0x015b94ab2b0a14a96030573fbcd0f3d3d763541f",
+    symbol: "UZD",
+    url: "https://www.zunami.io/",
+    description:
+      "UZD is a dollar-pegged stablecoin with wrapped stable assets (from Curve and Convex through Zunami Protocol) as collateral.",
+    mintRedeemDescription:
+    "Using the Zunami Protocol app, users can LP in a 3-pool and then deposit the LP tokens to mint UZD. UZD can be redeemed for LP tokens at any time.",
+    onCoinGecko: "true",
+    gecko_id: "zunami-protocol",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "curve",
+    auditLinks: null,
+    twitter: "https://twitter.com/ZunamiProtocol",
+    wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+  },
 ] as PeggedAsset[];

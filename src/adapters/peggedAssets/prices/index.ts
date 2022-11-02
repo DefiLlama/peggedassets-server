@@ -408,6 +408,14 @@ const curvePools: CurvePools = {
     decimalsToken0: 18,
     decimalsToken1: 6,
   },
+  "zunami-protocol": {
+    chain: "ethereum",
+    address: "0xbedca4252b27cc12ed7daf393f331886f86cd3ce",
+    tokenIndex: 0,
+    decimalsToken0: 18,
+    decimalsToken1: 18,
+    otherTokenisType: "3crv",
+  }
 };
 
 const addressesForScreeners: AddressesForScreeners = {

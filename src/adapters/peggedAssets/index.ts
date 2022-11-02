@@ -83,6 +83,7 @@ import arusd from "./arable-usd";
 import usdw from "./usdw";
 import bob from "./bob";
 import usdr from "./real-usd";
+import uzd from "./zunami-protocol";
 
 export default {
   tether,
@@ -169,5 +170,6 @@ export default {
   "arable-usd": arusd,
   usdw,
   bob,
-  "real-usd": usdr
+  "real-usd": usdr,
+  "zunami-protocol": uzd,
 };
