@@ -25,11 +25,10 @@ function releaseCoingeckoLock() {
     firstLock(null);
   }
 }
-// Rate limit is 50 calls/min for coingecko's API
-// So we'll release one every 1.2 seconds to match it
+
 setInterval(() => {
   releaseCoingeckoLock();
-}, 2000);
+}, 1500);
 const maxCoingeckoRetries = 5;
 
 type ChainContracts = {
