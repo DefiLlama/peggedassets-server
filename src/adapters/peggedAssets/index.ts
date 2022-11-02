@@ -169,5 +169,5 @@ export default {
   "arable-usd": arusd,
   usdw,
   bob,
-  usdr
+  "real-usd": usdr
 };
