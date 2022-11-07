@@ -34,7 +34,7 @@ export type PeggedAsset = {
   auditLinks: string[];
   twitter: string;
   wiki: string;
-  listed?: boolean;
+  delisted?: boolean;
 };
 
 type Bridge = {

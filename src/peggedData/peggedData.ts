@@ -1388,7 +1388,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/pando_im",
     wiki: "https://wiki.defillama.com/wiki/Pando",
-    listed: false,
+    delisted: true,
   },
   {
     id: "70",

@@ -41,7 +41,7 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
             peggedAsset,
             adapterModule,
             maxRetries,
-            peggedAsset.listed ?? true
+            peggedAsset.delisted ? false : true
           ),
           60000,
           peggedAsset.gecko_id
