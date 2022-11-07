@@ -700,6 +700,7 @@ async function nearBridged(address: string, decimals: number) {
   ) {
     let balances = {} as Balances;
     const supply = await nearCall(address, "ft_total_supply");
+    console.info("Near success USDT")
     sumSingleBalance(
       balances,
       "peggedUSD",
@@ -744,6 +745,7 @@ async function kavaBridged() {
     let balances = {} as Balances;
     for (const contract of chainContracts.kava.bridgedFromETH) {
       const totalSupply = await kavaGetTotalSupply(contract);
+      console.info("Kava success USDT")
       sumSingleBalance(balances, "peggedUSD", totalSupply, contract, true);
     }
     return balances;
@@ -765,6 +767,7 @@ async function aptosBridged() {
       contractStargate,
       typeStargate
     );
+    console.info("Aptos success USDT")
     sumSingleBalance(
       balances,
       "peggedUSD",
