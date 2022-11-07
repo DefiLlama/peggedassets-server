@@ -120,7 +120,7 @@ export async function craftChartsResponse(
       if (chain !== "all" && !lastBalance?.[normalizedChain]) {
         return undefined;
       }
-      const defaultStartTimestamp = startTimestamp ? startTimestamp : 1609372800
+      const defaultStartTimestamp = startTimestamp ? parseInt(startTimestamp) : 1609372800
       const earliestTimestamp =
         chain === "all" || backfilledChains.includes(chain ?? "")
           ? defaultStartTimestamp
