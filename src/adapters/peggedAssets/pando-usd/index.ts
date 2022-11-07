@@ -34,7 +34,7 @@ async function pusdMinted() {
 
 const adapter: PeggedIssuanceAdapter = {
   mixin: {
-    minted: pusdMinted(),
+    minted: async () => ({}), // pusdMinted(), Pando was hacked, de-listing until API works/reserves verified
     unreleased: async () => ({}),
   },
 };
