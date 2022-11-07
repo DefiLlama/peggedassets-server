@@ -70,7 +70,8 @@ function extractResultOfBinarySearch(ar: any[], binarySearchResult: number) {
 
 export async function craftChartsResponse(
   chain: string | undefined,
-  peggedID: string | undefined
+  peggedID: string | undefined,
+  startTimestamp: string | undefined
 ) {
   const sumDailyBalances = {} as {
     [timestamp: number]: {
@@ -119,9 +120,10 @@ export async function craftChartsResponse(
       if (chain !== "all" && !lastBalance?.[normalizedChain]) {
         return undefined;
       }
+      const defaultStartTimestamp = startTimestamp ? startTimestamp : 1609372800
       const earliestTimestamp =
         chain === "all" || backfilledChains.includes(chain ?? "")
-          ? 1609372800
+          ? defaultStartTimestamp
           : 1652241600; // chains have mostly incomplete data before May 11, 2022
       let startKey = undefined;
       let historicalBalance = { Items: [] } as any;
@@ -405,7 +407,8 @@ const handler = async (
 ): Promise<IResponse> => {
   const chain = event.pathParameters?.chain?.toLowerCase();
   const peggedID = event.queryStringParameters?.stablecoin?.toLowerCase();
-  const response = await craftChartsResponse(chain, peggedID);
+  const startTimestamp = event.queryStringParameters?.startts?.toLowerCase();
+  const response = await craftChartsResponse(chain, peggedID, startTimestamp);
   return successResponse(response, 10 * 60); // 10 mins cache
 };
 
