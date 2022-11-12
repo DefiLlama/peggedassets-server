@@ -409,7 +409,7 @@ const handler = async (
   const peggedID = event.queryStringParameters?.stablecoin?.toLowerCase();
   const startTimestamp = event.queryStringParameters?.startts?.toLowerCase();
   const response = await craftChartsResponse(chain, peggedID, startTimestamp);
-  return successResponse(response, 10 * 60); // 10 mins cache
+  return successResponse(response, 30 * 60); // 30 mins cache
 };
 
 export default wrap(handler);
