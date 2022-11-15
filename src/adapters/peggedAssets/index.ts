@@ -84,6 +84,7 @@ import usdw from "./usdw";
 import bob from "./bob";
 import usdr from "./real-usd";
 import uzd from "./zunami-protocol";
+import bankofchain from "./bank-of-chain";
 
 export default {
   tether,
@@ -172,4 +173,5 @@ export default {
   bob,
   "real-usd": usdr,
   "zunami-protocol": uzd,
+  "bank-of-chain": bankofchain,
 };

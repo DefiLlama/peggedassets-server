@@ -1732,4 +1732,24 @@ export default [
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
   },
+  {
+    id: "87",
+    name: "USDi",
+    address: "0x83131242843257bc6C43771762ba467346Efb2CF",
+    symbol: "USDI",
+    url: "https://bankofchain.io/",
+    description:
+      "USDi is the USD-pegged stablecoin of Bank of Chain ('BoC'), a decentralized yield generation protocol",
+    mintRedeemDescription:
+    "Using the Bank of Chain app, users can to deposit the three major stablecoins (USDT, USDC, DAI) in any desired combination and amount to mint USDi. USDi can be redeemed for its underlying stablecoins 1:1 at any time.",
+    onCoinGecko: "false",
+    gecko_id: "bank-of-chain",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/bankofchain_dao",
+    wiki: "https://wiki.defillama.com/wiki/BankOfChain",
+  },
 ] as PeggedAsset[];
