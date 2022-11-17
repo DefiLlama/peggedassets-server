@@ -23,6 +23,15 @@ type TokenBalance = {
   [token: string]: number | undefined;
 };
 
+const formatTokenBalance = (tokenBalance: TokenBalance) => {
+  let formattedTokenBalance = {} as TokenBalance;
+  for (const token in tokenBalance) {
+    const balance = tokenBalance[token];
+    formattedTokenBalance[token] = balance ? parseFloat(balance.toFixed(2)) : 0;
+  }
+  return formattedTokenBalance;
+};
+
 // needed because new daily rates is not stored on same day it is queried for
 function ratesCompareFn(a: number, b: number) {
   if (Math.abs(a - b) <= secondsInDay) return 0;
@@ -120,7 +129,9 @@ export async function craftChartsResponse(
       if (chain !== "all" && !lastBalance?.[normalizedChain]) {
         return undefined;
       }
-      const defaultStartTimestamp = startTimestamp ? parseInt(startTimestamp) : 1609372800
+      const defaultStartTimestamp = startTimestamp
+        ? parseInt(startTimestamp)
+        : 1609372800;
       const earliestTimestamp =
         chain === "all" || backfilledChains.includes(chain ?? "")
           ? defaultStartTimestamp
@@ -391,11 +402,11 @@ export async function craftChartsResponse(
   const response = Object.entries(sumDailyBalances).map(
     ([timestamp, balance]) => ({
       date: timestamp,
-      totalCirculating: balance.circulating,
-      totalUnreleased: balance.unreleased,
-      totalCirculatingUSD: balance.totalCirculatingUSD,
-      totalMintedUSD: balance.totalMintedUSD,
-      totalBridgedToUSD: balance.totalBridgedToUSD,
+      totalCirculating: formatTokenBalance(balance.circulating),
+      totalUnreleased: formatTokenBalance(balance.unreleased),
+      totalCirculatingUSD: formatTokenBalance(balance.totalCirculatingUSD),
+      totalMintedUSD: formatTokenBalance(balance.totalMintedUSD),
+      totalBridgedToUSD: formatTokenBalance(balance.totalBridgedToUSD),
     })
   );
 
