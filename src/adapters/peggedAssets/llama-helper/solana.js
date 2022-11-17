@@ -10,7 +10,7 @@ async function getSolBalance(account) {
   return new BigNumber(solBalance).div(1e9).toString(10);
 }
 
-const endpoint = "https://solana-api.projectserum.com/";
+const endpoint = "https://api.mainnet-beta.solana.com";
 const TOKEN_LIST_URL = "https://cdn.jsdelivr.net/gh/solana-labs/token-list@main/src/tokens/solana.tokenlist.json"
 
 async function getTokenSupply(token) {
