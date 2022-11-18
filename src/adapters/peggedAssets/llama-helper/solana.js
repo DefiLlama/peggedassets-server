@@ -216,5 +216,6 @@ module.exports = {
   sumOrcaLPs,
   getSolBalance,
   getCoingeckoId,
-  sumTokensUnknown
+  sumTokensUnknown,
+  endpoint
 };
