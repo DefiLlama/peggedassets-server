@@ -22,6 +22,9 @@ const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0xb0b195aefa3650a6908f15cdac7d92f8a5791b0b"],
   },
+  bsc: {
+    issued: ["0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B"]
+  }
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -65,6 +68,10 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("optimism", 18),
     unreleased: async () => ({}),
   },
+  bsc: {
+    minted: chainMinted("bsc", 18),
+    unreleased: async () => ({}),
+  }
 };
 
 export default adapter;
