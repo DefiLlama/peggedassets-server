@@ -531,6 +531,12 @@ const uniswapPools: UniswapPools = {
     chain: "ethereum",
     decimalsDifference: -12,
   },
+  xai: {
+    address: "0x55bB9904DF17f3b07551AA117841B3bbFC66646D",
+    token: 1,
+    chain: "ethereum",
+    decimalsDifference: 12,
+  }
 };
 
 const kaddexPools: KaddexPools = {
