@@ -2,7 +2,12 @@ const normalizedChainReplacements = {
   binance: "bsc",
   wanchain: "wan",
   kucoin: "kcc",
-  gnosis: "xdai"
+  gnosis: "xdai",
+  "terra%20classic": "terra",
+  sxnetwork: "sx",
+  "arbitrum%20nova":"arbitrum_nova",
+  ethereumpow: "ethpow",
+  "milkomeda%20c1": "milkomeda",
 } as {
   [chain: string]: string;
 };

@@ -91,19 +91,6 @@ export async function craftChartsResponse(
       totalBridgedToUSD: TokenBalance;
     };
   };
-  // quick fix; need to update later
-  if (chain === "terra%20classic") {
-    chain = "terra";
-  }
-  if (chain === "sxnetwork") {
-    chain = "sx";
-  }
-  if (chain === "arbitrum%20nova") {
-    chain = "arbitrum_nova";
-  }
-  if (chain === "ethereumpow") {
-    chain = "ethpow";
-  }
 
   if (chain === undefined) {
     return errorResponse({
