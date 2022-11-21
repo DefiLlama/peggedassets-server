@@ -2,6 +2,7 @@ const normalizedChainReplacements = {
   binance: "bsc",
   wanchain: "wan",
   kucoin: "kcc",
+  gnosis: "xdai"
 } as {
   [chain: string]: string;
 };
@@ -728,6 +729,17 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 2001,
   },
+  "Milkomeda C1": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    parent: {
+      chain: "Cardano",
+      types: ["gas"],
+    },
+    chainId: 2001,
+  },
   DFK: {
     geckoId: "defi-kingdoms",
     symbol: "JEWEL",
@@ -849,13 +861,13 @@ export const chainCoingeckoIds = {
     cmcId: "15185",
     categories: ["Cosmos"],
   },
-  "EthereumPoW": {
+  EthereumPoW: {
     geckoId: "ethereum-pow-iou",
     symbol: "ETHW",
     cmcId: "21296",
     categories: ["EVM"],
   },
-  "Aptos": {
+  Aptos: {
     geckoId: "aptos",
     symbol: "APT",
     cmcId: "21794",
@@ -891,6 +903,8 @@ export function transformNewChainName(chain: string) {
       return "Gnosis";
     case "Cosmos":
       return "CosmosHub";
+    case "Milkomeda":
+      return "Milkomeda C1";
     default:
       return chain;
   }
@@ -1037,7 +1051,7 @@ export function getChainDisplayName(
     case "vite":
       return "Vite";
     case "milkomeda":
-      return "Milkomeda";
+      return useNewChainNames ? "Milkomeda C1" : "Milkomeda";
     case "dfk":
       return "DFK";
     case "omni":
@@ -1077,9 +1091,9 @@ export function getChainDisplayName(
     case "kujira":
       return "Kujira";
     case "ethpow":
-      return "EthereumPoW"
+      return "EthereumPoW";
     case "aptos":
-      return "Aptos"
+      return "Aptos";
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

@@ -92,9 +92,6 @@ export async function craftChartsResponse(
     };
   };
   // quick fix; need to update later
-  if (chain === "gnosis") {
-    chain = "xdai";
-  }
   if (chain === "terra%20classic") {
     chain = "terra";
   }
