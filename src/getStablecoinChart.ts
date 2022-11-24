@@ -81,7 +81,8 @@ function extractResultOfBinarySearch(ar: any[], binarySearchResult: number) {
 export async function craftChartsResponse(
   chain: string | undefined,
   peggedID: string | undefined,
-  startTimestamp: string | undefined
+  startTimestamp: string | undefined,
+  useStoredCharts: boolean = true
 ) {
   if (chain === undefined) {
     return errorResponse({
@@ -89,7 +90,7 @@ export async function craftChartsResponse(
     });
   }
 
-  if (chain === "all") {
+  if (chain === "all" && useStoredCharts) {
     const id = peggedID ? peggedID : "all";
     const chart = (
       await axios.get(

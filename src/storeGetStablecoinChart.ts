@@ -7,13 +7,13 @@ const handler = async (_event: any) => {
   await Promise.all(
     peggedData.map(async (pegged) => {
       const id = pegged.id;
-      const chart = await craftChartsResponse("all", id, undefined);
+      const chart = await craftChartsResponse("all", id, undefined, false);
       const filename = `charts/all/${id}`;
       await store(filename, JSON.stringify(chart), true, false);
     })
   );
 
-  const allChart = await craftChartsResponse("all", undefined, undefined);
+  const allChart = await craftChartsResponse("all", undefined, undefined, false);
   await store("charts/all/all", JSON.stringify(allChart), true, false);
 };
 
