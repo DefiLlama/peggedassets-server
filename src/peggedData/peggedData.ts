@@ -1772,4 +1772,24 @@ export default [
     twitter: "https://twitter.com/Indigo_protocol",
     wiki: "https://wiki.defillama.com/wiki/Indigo_Protocol",
   },
+  {
+    id: "89",
+    name: "XAI",
+    address: "0xd7C9F0e536dC865Ae858b0C0453Fe76D13c3bEAc",
+    symbol: "XAI",
+    url: "https://www.silo.finance/",
+    description:
+      "XAI is an over-collateralized stablecoin with a soft peg to the US Dollar in the Silo lending protocol.",
+    mintRedeemDescription:
+    "Using the Silo Finance app, users can borrow XAI by depositing ETH or USDC as collateral. When the loan is repaid to retrieve the collateral, the paid back XAI is burned.",
+    onCoinGecko: "true",
+    gecko_id: "xai",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "uniswap",
+    auditLinks: null,
+    twitter: "https://twitter.com/SiloFinance",
+    wiki: "https://wiki.defillama.com/wiki/Silo_Finance",
+  },
 ] as PeggedAsset[];
