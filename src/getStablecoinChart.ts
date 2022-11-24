@@ -18,6 +18,7 @@ import {
   getClosestDayStartTimestamp,
 } from "./utils/date";
 import backfilledChains from "./peggedData/backfilledChains";
+const axios = require("axios");
 
 type TokenBalance = {
   [token: string]: number | undefined;
@@ -82,6 +83,33 @@ export async function craftChartsResponse(
   peggedID: string | undefined,
   startTimestamp: string | undefined
 ) {
+  if (chain === undefined) {
+    return errorResponse({
+      message: "Must include chain or 'all' path parameter.",
+    });
+  }
+
+  if (chain === "all") {
+    const id = peggedID ? peggedID : "all";
+    const chart = (
+      await axios.get(
+        `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/all/${id}`
+      )
+    ).data;
+    let filteredChart = chart;
+    if (startTimestamp) {
+      filteredChart = chart
+        .map((entry: any) => {
+          if (entry.date < parseInt(startTimestamp)) {
+            return null;
+          }
+          return entry;
+        })
+        .filter((entry: any) => entry);
+    }
+    return filteredChart;
+  }
+
   const sumDailyBalances = {} as {
     [timestamp: number]: {
       circulating: TokenBalance;
@@ -91,12 +119,6 @@ export async function craftChartsResponse(
       totalBridgedToUSD: TokenBalance;
     };
   };
-
-  if (chain === undefined) {
-    return errorResponse({
-      message: "Must include chain or 'all' path parameter.",
-    });
-  }
 
   const normalizedChain = normalizeChain(chain);
   let lastDailyTimestamp = 0;
@@ -128,7 +150,7 @@ export async function craftChartsResponse(
             ":pk": `dailyPeggedBalances#${pegged.id}`,
             ":sk": earliestTimestamp,
           },
-          KeyConditionExpression: "PK = :pk AND SK > :sk",
+          KeyConditionExpression: "PK = :pk AND SK >= :sk",
           ExclusiveStartKey: startKey,
         })) as any;
         startKey = partialHistoricalBalances.LastEvaluatedKey;

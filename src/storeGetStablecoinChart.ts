@@ -9,12 +9,12 @@ const handler = async (_event: any) => {
       const id = pegged.id;
       const chart = await craftChartsResponse("all", id, undefined);
       const filename = `charts/all/${id}`;
-      await store(filename, JSON.stringify(chart), true);
+      await store(filename, JSON.stringify(chart), true, false);
     })
   );
 
   const allChart = await craftChartsResponse("all", undefined, undefined);
-  await store("charts/all/all", JSON.stringify(allChart), true);
+  await store("charts/all/all", JSON.stringify(allChart), true, false);
 };
 
 export default wrapScheduledLambda(handler);
