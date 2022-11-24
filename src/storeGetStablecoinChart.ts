@@ -8,13 +8,13 @@ const handler = async (_event: any) => {
     peggedData.map(async (pegged) => {
       const id = pegged.id;
       const chart = await craftChartsResponse("all", id, undefined);
-      const filename = `/charts/all/${id}`;
+      const filename = `charts/all/${id}`;
       await store(filename, JSON.stringify(chart), true);
     })
   );
 
   const allChart = await craftChartsResponse("all", undefined, undefined);
-  await store("/charts/all/all", JSON.stringify(allChart), true);
+  await store("charts/all/all", JSON.stringify(allChart), true);
 };
 
 export default wrapScheduledLambda(handler);
