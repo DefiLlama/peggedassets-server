@@ -1739,9 +1739,9 @@ export default [
     symbol: "USDI",
     url: "https://bankofchain.io/",
     description:
-      "USDi is the USD-pegged stablecoin of Bank of Chain ('BoC'), a decentralized yield generation protocol",
+      "USDi is the USD-pegged stablecoin of Bank of Chain ('BoC'), a decentralized yield generation protocol.",
     mintRedeemDescription:
-    "Using the Bank of Chain app, users can to deposit the three major stablecoins (USDT, USDC, DAI) in any desired combination and amount to mint USDi. USDi can be redeemed for its underlying stablecoins 1:1 at any time.",
+    "Using the Bank of Chain app, users can deposit the three major stablecoins (USDT, USDC, DAI) in any desired combination and amount to mint USDi. USDi can be redeemed for its underlying stablecoins 1:1 at any time.",
     onCoinGecko: "false",
     gecko_id: "bank-of-chain",
     cmcId: null,
@@ -1751,5 +1751,25 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/bankofchain_dao",
     wiki: "https://wiki.defillama.com/wiki/BankOfChain",
+  },
+  {
+    id: "88",
+    name: "iUSD",
+    address: null,
+    symbol: "IUSD",
+    url: "https://indigoprotocol.io/",
+    description:
+      "iUSD is a synthetic CDP stablecoin native to Cardano.",
+    mintRedeemDescription:
+    "Using the Indigo app, users can mint iUSD by depositing ADA as collateral into a CDP. When the loan is repaid to retrieve the collateral, the paid back iUSD is burned.",
+    onCoinGecko: "false",
+    gecko_id: "iusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/Indigo_protocol",
+    wiki: "https://wiki.defillama.com/wiki/Indigo_Protocol",
   },
 ] as PeggedAsset[];

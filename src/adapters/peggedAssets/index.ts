@@ -86,6 +86,7 @@ import usdr from "./real-usd";
 import uzd from "./zunami-protocol";
 import bankofchain from "./bank-of-chain";
 import xai from './xai';
+import iusd from "./iusd";
 
 export default {
   tether,
@@ -176,4 +177,5 @@ export default {
   "zunami-protocol": uzd,
   "bank-of-chain": bankofchain,
   xai,
+  iusd,
 };
