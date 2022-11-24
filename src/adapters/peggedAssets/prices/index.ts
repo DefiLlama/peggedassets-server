@@ -294,14 +294,6 @@ const curvePools: CurvePools = {
     decimalsToken1: 18,
     otherTokenisType: "3crv",
   },
-  "dei-token": {
-    chain: "ethereum",
-    address: "0x6870F9b4DD5d34C7FC53D0d85D9dBd1aAB339BF7",
-    tokenIndex: 0,
-    decimalsToken0: 18,
-    decimalsToken1: 18,
-    otherTokenisType: "3crv",
-  },
   "stasis-eurs": {
     chain: "ethereum",
     address: "0x98a7F18d4E56Cfe84E3D081B40001B3d5bD3eB8B",
@@ -460,7 +452,7 @@ const addressesForScreeners: AddressesForScreeners = {
     address: "0x236eeC6359fb44CCe8f97E99387aa7F8cd5cdE1f",
   },
   "dei-token": {
-    address: "0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3",
+    address: "0xDE1E704dae0B4051e80DAbB26ab6ad6c12262DA0",
   },
   "bai-stablecoin": {
     address: "0x733ebcC6DF85f8266349DEFD0980f8Ced9B45f35",
@@ -491,7 +483,7 @@ const addressesForScreeners: AddressesForScreeners = {
   },
   bob: {
     address: "0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B"
-  }
+  },
 };
 
 const addressesForDefillama: AddressesForDefillama = {

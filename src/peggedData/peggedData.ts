@@ -948,7 +948,7 @@ export default [
     cmcId: "12517",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
-    priceSource: "curve",
+    priceSource: "dexscreener",
     auditLinks: null,
     twitter: "https://twitter.com/DeusDao",
     wiki: "https://wiki.defillama.com/wiki/Deus_Finance",
