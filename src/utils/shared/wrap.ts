@@ -1,21 +1,5 @@
 import * as Sentry from "@sentry/serverless";
-import * as SentryTracing from "@sentry/tracing";
 import { IResponse, credentialsCorsHeaders } from "./lambda-response";
-
-interface SamplingContext {
-  parentSampled: undefined;
-  transactionContext: { name: string; op: string };
-}
-
-// See https://github.com/getsentry/sentry-javascript/issues/2984#issuecomment-748077304
-SentryTracing.addExtensionMethods();
-Sentry.AWSLambda.init({
-  dsn: "",
-  tracesSampler: (_samplingContext: SamplingContext) => {
-    return 0;
-  },
-  environment: process.env.stage,
-});
 
 type Event =
   | AWSLambda.APIGatewayEvent
