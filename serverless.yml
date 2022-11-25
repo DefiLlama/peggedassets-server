@@ -149,7 +149,7 @@ functions:
     timeout: 60
     memorySize: 3000
     events:
-      - schedule: cron(30 * * * ? *)
+      - schedule: cron(30 */6 * * ? *)
   rates:
     handler: src/getRates.default
     timeout: 60
