@@ -1,4 +1,4 @@
-const normalizedChainReplacements = {
+export const normalizedChainReplacements = {
   binance: "bsc",
   wanchain: "wan",
   kucoin: "kcc",

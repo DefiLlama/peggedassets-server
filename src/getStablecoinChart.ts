@@ -111,6 +111,27 @@ export async function craftChartsResponse(
     return filteredChart;
   }
 
+  if (!peggedID && useStoredCharts) {
+    const normalizedChain = normalizeChain(chain);
+    const chart = (
+      await axios.get(
+        `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/${normalizedChain}`
+      )
+    ).data;
+    let filteredChart = chart;
+    if (startTimestamp) {
+      filteredChart = chart
+        .map((entry: any) => {
+          if (entry.date < parseInt(startTimestamp)) {
+            return null;
+          }
+          return entry;
+        })
+        .filter((entry: any) => entry);
+    }
+    return filteredChart;
+  }
+
   const sumDailyBalances = {} as {
     [timestamp: number]: {
       circulating: TokenBalance;
@@ -427,7 +448,7 @@ const handler = async (
   const peggedID = event.queryStringParameters?.stablecoin?.toLowerCase();
   const startTimestamp = event.queryStringParameters?.startts?.toLowerCase();
   const response = await craftChartsResponse(chain, peggedID, startTimestamp);
-  return successResponse(response, 30 * 60); // 30 mins cache
+  return successResponse(response, 10 * 60); // 10 mins cache
 };
 
 export default wrap(handler);
