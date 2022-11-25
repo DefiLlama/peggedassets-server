@@ -96,19 +96,21 @@ export async function craftChartsResponse(
       await axios.get(
         `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/all/${id}`
       )
-    ).data;
-    let filteredChart = chart;
-    if (startTimestamp) {
-      filteredChart = chart
-        .map((entry: any) => {
-          if (entry.date < parseInt(startTimestamp)) {
-            return null;
-          }
-          return entry;
-        })
-        .filter((entry: any) => entry);
-    }
-    return filteredChart;
+    )?.data;
+    if (chart) {
+      let filteredChart = chart;
+      if (startTimestamp) {
+        filteredChart = chart
+          .map((entry: any) => {
+            if (entry.date < parseInt(startTimestamp)) {
+              return null;
+            }
+            return entry;
+          })
+          .filter((entry: any) => entry);
+      }
+      return filteredChart;
+    } else return [];
   }
 
   if (!peggedID && useStoredCharts) {
@@ -117,19 +119,21 @@ export async function craftChartsResponse(
       await axios.get(
         `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/${normalizedChain}`
       )
-    ).data;
-    let filteredChart = chart;
-    if (startTimestamp) {
-      filteredChart = chart
-        .map((entry: any) => {
-          if (entry.date < parseInt(startTimestamp)) {
-            return null;
-          }
-          return entry;
-        })
-        .filter((entry: any) => entry);
-    }
-    return filteredChart;
+    )?.data;
+    if (chart) {
+      let filteredChart = chart;
+      if (startTimestamp) {
+        filteredChart = chart
+          .map((entry: any) => {
+            if (entry.date < parseInt(startTimestamp)) {
+              return null;
+            }
+            return entry;
+          })
+          .filter((entry: any) => entry);
+      }
+      return filteredChart;
+    } else return [];
   }
 
   const sumDailyBalances = {} as {
