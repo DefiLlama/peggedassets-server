@@ -91,13 +91,13 @@ export async function craftChartsResponse(
   }
 
   if (chain === "all" && useStoredCharts) {
-    const id = peggedID ? peggedID : "all";
-    const chart = (
-      await axios.get(
-        `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/all/${id}`
-      )
-    )?.data;
-    if (chart) {
+    try {
+      const id = peggedID ? peggedID : "all";
+      const chart = (
+        await axios.get(
+          `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/all/${id}`
+        )
+      )?.data;
       let filteredChart = chart;
       if (startTimestamp) {
         filteredChart = chart
@@ -110,17 +110,19 @@ export async function craftChartsResponse(
           .filter((entry: any) => entry);
       }
       return filteredChart;
-    } else return [];
+    } catch (e) {
+      return [];
+    }
   }
 
   if (!peggedID && useStoredCharts) {
-    const normalizedChain = normalizeChain(chain);
-    const chart = (
-      await axios.get(
-        `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/${normalizedChain}`
-      )
-    )?.data;
-    if (chart) {
+    try {
+      const normalizedChain = normalizeChain(chain);
+      const chart = (
+        await axios.get(
+          `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/${normalizedChain}`
+        )
+      )?.data;
       let filteredChart = chart;
       if (startTimestamp) {
         filteredChart = chart
@@ -133,7 +135,9 @@ export async function craftChartsResponse(
           .filter((entry: any) => entry);
       }
       return filteredChart;
-    } else return [];
+    } catch (e) {
+      return [];
+    }
   }
 
   const sumDailyBalances = {} as {
