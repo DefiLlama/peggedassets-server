@@ -177,7 +177,7 @@ functions:
   storeGetStablecoinChart:
     handler: src/storeGetStablecoinChart.default
     timeout: 900
-    memorySize: 10240
+    memorySize: 5120
     events:
       - schedule: cron(50 * * * ? *)
 
