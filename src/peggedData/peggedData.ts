@@ -1792,4 +1792,24 @@ export default [
     twitter: "https://twitter.com/SiloFinance",
     wiki: "https://wiki.defillama.com/wiki/Silo_Finance",
   },
+  {
+    id: "90",
+    name: "Redeemable USD",
+    address: null,
+    symbol: "RUSD",
+    url: "https://www.shareslake.com/",
+    description:
+      "Redeemable USD is a fiat-backed stablecoin on both the Cardano and Shareslake networks. It is a USD backed stablecoin in a 1:1 basis.",
+    mintRedeemDescription:
+    "Using the Shareslake Dashboard, users can deposit USD on Shareslake or ADA on Cardano to mint RUSD. RUSD can be redeemed for USD at any time.",
+    onCoinGecko: "false",
+    gecko_id: "redeemable",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/shareslake",
+    wiki: "https://wiki.defillama.com/wiki/Shareslake",
+  },
 ] as PeggedAsset[];
