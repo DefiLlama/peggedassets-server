@@ -1,12 +1,16 @@
 import dynamodb from "./utils/shared/dynamodb";
 import { wrapScheduledLambda } from "./utils/shared/wrap";
+import { store } from "./utils/s3";
 import fetch from "node-fetch";
 import { historicalRates } from "./peggedAssets/utils/getLastRecord";
 import { getTimestampAtStartOfDay } from "./utils/date";
 import { executeAndIgnoreErrors } from "./peggedAssets/storePeggedAssets/errorDb";
 import { getCurrentUnixTimestamp } from "./utils/date";
+import { getHistoricalValues } from "./utils/shared/dynamodb";
+import { secondsInWeek } from "./utils/date";
 
 const handler = async (_event: any) => {
+  // store daily db entry
   for (let i = 0; i < 5; i++) {
     try {
       const currentDate = new Date(Date.now());
@@ -39,6 +43,22 @@ const handler = async (_event: any) => {
     }
     return;
   }
+
+  // store daily s3 file
+  const historicalPeggedRates = await getHistoricalValues(historicalRates());
+  const filteredRates = historicalPeggedRates
+    ?.map((item) =>
+      typeof item === "object" &&
+      item.SK > Date.now() / 1000 - 8 * secondsInWeek
+        ? {
+            date: item.SK,
+            rates: item.rates,
+          }
+        : { rates: undefined }
+    )
+    .filter((item) => item.rates !== undefined);
+  const filename = `rates/2mo`;
+  await store(filename, JSON.stringify(filteredRates), true, false);
 };
 
 export default wrapScheduledLambda(handler);
