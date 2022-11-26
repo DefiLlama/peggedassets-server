@@ -32,7 +32,7 @@ const handler = async (
   _event: AWSLambda.APIGatewayEvent
 ): Promise<IResponse> => {
   const chainData = await craftStablecoinPricesResponse();
-  return successResponse(chainData, 10 * 60); // 10 mins cache
+  return successResponse(chainData, 30 * 60); // 30 mins cache
 };
 
 export default wrap(handler);
