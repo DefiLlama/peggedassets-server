@@ -220,22 +220,17 @@ export async function craftChartsResponse(
     })
   );
 
-  const historicalRatesItems = await dynamodb.query({
-    ExpressionAttributeValues: {
-      ":pk": `historicalRates`,
-    },
-    KeyConditionExpression: "PK = :pk",
-  });
-  if (
-    historicalRatesItems.Items === undefined ||
-    historicalRatesItems.Items.length < 1
-  ) {
+  const historicalRates = await (
+    await axios.get(
+      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`
+    )
+  )?.data;
+  if (historicalRates.length < 1) {
     return errorResponse({
       message: "Could not get historical fiat prices.",
     });
   }
-  const historicalRates = historicalRatesItems.Items;
-  const rateTimestamps = historicalRates?.map((item) => item.SK);
+  const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
 
   const historicalPriceItems = await dynamodb.query({
     ExpressionAttributeValues: {

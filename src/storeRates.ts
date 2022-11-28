@@ -44,9 +44,9 @@ const handler = async (_event: any) => {
     return;
   }
 
-  // store daily s3 file
+  // store daily s3 files
   const historicalPeggedRates = await getHistoricalValues(historicalRates());
-  const filteredRates = historicalPeggedRates
+  const filteredRates2Mo = historicalPeggedRates
     ?.map((item) =>
       typeof item === "object" &&
       item.SK > Date.now() / 1000 - 8 * secondsInWeek
@@ -57,8 +57,20 @@ const handler = async (_event: any) => {
         : { rates: undefined }
     )
     .filter((item) => item.rates !== undefined);
-  const filename = `rates/2mo`;
-  await store(filename, JSON.stringify(filteredRates), true, false);
+  const filename2Mo = `rates/2mo`;
+  await store(filename2Mo, JSON.stringify(filteredRates2Mo), true, false);
+  const filteredRatesFull = historicalPeggedRates
+  ?.map((item) =>
+    typeof item === "object"
+      ? {
+          date: item.SK,
+          rates: item.rates,
+        }
+      : { rates: undefined }
+  )
+  .filter((item) => item.rates !== undefined);
+const filenameFull = `rates/full`;
+await store(filenameFull, JSON.stringify(filteredRatesFull), true, false);
 };
 
 export default wrapScheduledLambda(handler);
