@@ -232,23 +232,17 @@ export async function craftChartsResponse(
   }
   const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
 
-  const historicalPriceItems = await dynamodb.query({
-    ExpressionAttributeValues: {
-      ":pk": `dailyPeggedPrices`,
-    },
-    KeyConditionExpression: "PK = :pk",
-  });
-  if (
-    historicalPriceItems.Items === undefined ||
-    historicalPriceItems.Items.length < 1
-  ) {
+  const historicalPrices = await (
+    await axios.get(
+      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/prices/full`
+    )
+  )?.data;
+  if (historicalPrices.length < 1) {
     return errorResponse({
-      message: "Could not get prices.",
+      message: "Could not get historical prices.",
     });
   }
-
-  const historicalPrices = historicalPriceItems.Items;
-
+  const priceTimestamps = historicalPrices?.map((item: any) => item.SK);
   const lastPrices = await getLastRecord(hourlyPeggedPrices());
 
   const lastDailyItem = historicalPrices[historicalPrices.length - 1];
@@ -260,8 +254,6 @@ export async function craftChartsResponse(
     lastPrices.SK = lastDailyItem.SK;
     historicalPrices[historicalPrices.length - 1] = lastPrices;
   }
-
-  const priceTimestamps = historicalPrices?.map((item) => item.SK);
 
   await Promise.all(
     historicalPeggedBalances.map(async (peggedBalance) => {

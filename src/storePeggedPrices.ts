@@ -31,6 +31,7 @@ const timeout = (prom: any, time: number) =>
   );
 
 const handler = async (_event: any) => {
+  // store hourly prices in db
   let prices = {} as Prices;
   const { timestamp } = await timeout(getCurrentBlocks(), 60000);
   for (let i = 0; i < 5; i++) {
@@ -71,8 +72,10 @@ const handler = async (_event: any) => {
     }
   }
 
+  // store bridge info (name, links) in s3
   await store("bridgeInfo.json", JSON.stringify(bridgeInfo));
 
+  // store daily prices in db
   const closestDailyRecord = await getTVLOfRecordClosestToTimestamp(
     dailyPeggedPrices(),
     timestamp,
@@ -85,6 +88,23 @@ const handler = async (_event: any) => {
       SK: getTimestampAtStartOfDay(timestamp),
       prices: prices,
     });
+  }
+
+  // store price history in s3
+  const historicalPriceItems = await dynamodb.query({
+    ExpressionAttributeValues: {
+      ":pk": `dailyPeggedPrices`,
+    },
+    KeyConditionExpression: "PK = :pk",
+  });
+  if (
+    historicalPriceItems.Items === undefined ||
+    historicalPriceItems.Items.length < 1
+  ) {
+  } else {
+    const historicalPrices = historicalPriceItems.Items;
+    const filenameFull = `prices/full`;
+    await store(filenameFull, JSON.stringify(historicalPrices), true, false);
   }
 };
 
