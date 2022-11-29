@@ -405,7 +405,7 @@ export default [
     gecko_id: "alchemix-usd",
     cmcId: "8614",
     pegType: "peggedUSD",
-    pegMechanism: "crypto-backed",
+    pegMechanism: "algorithmic",
     priceSource: "curve",
     auditLinks: null,
     twitter: "https://twitter.com/AlchemixFi",
