@@ -34,16 +34,15 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x130966628846BFd36ff31a822705796e8cb8C18D"], // multichain/abracadabra
     reserves: [
       "0x27c215c8b6e39f54c42ac04eb651211e9a566090", // multisig
+      "0xae4d3a42e46399827bd094b4426e2f79cca543ca", // gnosis
       "0xf4f46382c2be1603dc817551ff9a7b333ed1d18f", // bentobox
       "0x1fc83f75499b7620d53757f0b01e2ae626aae530", // degenbox
-      "0xae64a325027c3c14cf6abc7818aa3b9c07f5c799", // gnosis
     ],
   },
   arbitrum: {
     bridgedFromETH: ["0xfea7a6a0b346362bf88a9e4a88416b77a57d6c2a"], // multichain/abracadabra
     reserves: [
       "0x74c764d41b77dbbb4fe771dab1939b00b146894a", // bentobox
-      "0xf46bb6dda9709c49efb918201d97f6474eac5aea", // multisig
     ],
   },
   fantom: {
