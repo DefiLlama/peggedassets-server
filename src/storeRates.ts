@@ -41,7 +41,7 @@ const handler = async (_event: any) => {
         continue;
       }
     }
-    return;
+    break;
   }
 
   // store daily s3 files
