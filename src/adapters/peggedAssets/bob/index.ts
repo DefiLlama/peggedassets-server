@@ -76,7 +76,7 @@ const uniPoolsMapping = {
   },
 } as {
   [chain: string]: {
-    [poolAddress: string]: string; // token address
+    [poolAddress: string]: string; // non-BOB token address
   };
 };
 
@@ -94,7 +94,7 @@ async function getChainCollateralUsdValue(chain: string) {
         const balance = await returnBalance(
           token,
           pool,
-          _chainBlocks[chain],
+          _chainBlocks?.[chain],
           chain
         );
         tokenBalances[`${chain}:${token}`] = (tokenBalances[`${chain}:${token}`] ?? 0) + balance;
