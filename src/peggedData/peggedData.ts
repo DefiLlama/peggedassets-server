@@ -1812,4 +1812,24 @@ export default [
     twitter: "https://twitter.com/shareslake",
     wiki: "https://wiki.defillama.com/wiki/Shareslake",
   },
+  {
+    id: "91",
+    name: "Iron Bank EURO",
+    address: "0x96e61422b6a9ba0e068b6c5add4ffabc6a4aae27",
+    symbol: "IBEUR",
+    url: "https://www.ib.xyz",
+    description:
+      "ibXX (Fixed Forex assets, example; ibCHF, ibEUR, ibAUD) are erc20 tokens that are pegged to their corresponding forex pair name. They can only be borrowed via Iron Bank by supplying collateral in one of Iron Bank's accepted collateral options.",
+    mintRedeemDescription:
+      "Users can borrow ibEUR from the Iron Bank App (https://www.ib.xyz) or the Fixed Forex app (https://fixedforex.fi/) by supplying an accepted collateral.",
+    onCoinGecko: "true",
+    gecko_id: "iron-bank-euro",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/ibdotxyz",
+    wiki: "https://wiki.defillama.com/wiki/Iron_Bank",
+  },
 ] as PeggedAsset[];
