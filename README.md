@@ -10,7 +10,7 @@
 6. Import your adapter in `src/adapters/peggedAssets/index.ts` and then add it to the exports.
 7. (Optional) if the pegged asset has a ChainLink price feed or a liquid Uniswap V3 pool, you can add the ChainLink smart contract/Uniswap V3 pool info to `src/adapters/peggedAssets/prices/index.ts`.
 
-After submitting a PR, you can submit basic info about the pegged asset (website, ticker, icon, etc.) in the [Defillama Discord](https://discord.gg/defillama).
+After submitting a PR, you can submit basic info about the pegged asset (website, ticker, icon, etc.) in the [Defillama Discord](https://discord.defillama.com/).
 
 ## Pegged asset adapters
 
