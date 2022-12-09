@@ -43,6 +43,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xfea7a6a0b346362bf88a9e4a88416b77a57d6c2a"], // multichain/abracadabra
     reserves: [
       "0x74c764d41b77dbbb4fe771dab1939b00b146894a", // bentobox
+      "0xf46bb6dda9709c49efb918201d97f6474eac5aea", // multisig
     ],
   },
   fantom: {
