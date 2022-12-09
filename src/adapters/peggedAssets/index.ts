@@ -88,6 +88,7 @@ import bankofchain from "./bank-of-chain";
 import xai from "./xai";
 import iusd from "./iusd";
 import rusd from "./redeemable";
+import ibeur from "./iron-bank-euro";
 
 export default {
   tether,
@@ -180,4 +181,5 @@ export default {
   xai,
   iusd,
   redeemable: rusd,
+  "iron-bank-euro": ibeur,
 };
