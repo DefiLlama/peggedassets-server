@@ -33,6 +33,7 @@ const chainContracts: ChainContracts = {
   avax: {
     bridgedFromETH: ["0x130966628846BFd36ff31a822705796e8cb8C18D"], // multichain/abracadabra
     reserves: [
+      "0xae64a325027c3c14cf6abc7818aa3b9c07f5c799", // new gnosis
       "0x27c215c8b6e39f54c42ac04eb651211e9a566090", // multisig
       "0xae4d3a42e46399827bd094b4426e2f79cca543ca", // gnosis
       "0xf4f46382c2be1603dc817551ff9a7b333ed1d18f", // bentobox
