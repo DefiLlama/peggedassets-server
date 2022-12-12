@@ -37,7 +37,7 @@ async function chainMinted(chain: string, decimals: number) {
       ).output;
       sumSingleBalance(
         balances,
-        "peggedUSD",
+        "peggedEUR",
         totalSupply / 10 ** decimals,
         "issued",
         false
@@ -63,7 +63,7 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", reserve / 10 ** decimals);
+      sumSingleBalance(balances, "peggedEUR", reserve / 10 ** decimals);
     }
     return balances;
   };
