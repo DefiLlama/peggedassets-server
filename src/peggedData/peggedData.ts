@@ -1686,7 +1686,7 @@ export default [
     gecko_id: "bob",
     cmcId: "21882",
     pegType: "peggedUSD",
-    pegMechanism: "algorithmic",
+    pegMechanism: "crypto-backed",
     priceSource: "dexscreener",
     auditLinks: null,
     twitter: "https://twitter.com/zkBob_",
