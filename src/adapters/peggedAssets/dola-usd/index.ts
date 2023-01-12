@@ -17,7 +17,7 @@ const chainContracts = {
         bridgedFromETH: "0x8aE125E8653821E851F12A49F7765db9a9ce7384",
     },
     bsc: {
-        bridgedFromETH: "0xaFb64E73dEf6fAa8B6Ef9a6fb7312d5C4C15ebDB",
+        bridgedFromETH: "0x2f29bc0ffaf9bff337b31cbe6cb5fb3bf12e5840",
   },
 };
 
