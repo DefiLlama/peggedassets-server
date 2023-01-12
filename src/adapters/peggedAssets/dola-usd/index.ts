@@ -16,6 +16,9 @@ const chainContracts = {
     optimism: {
         bridgedFromETH: "0x8aE125E8653821E851F12A49F7765db9a9ce7384",
     },
+    bsc: {
+        bridgedFromETH: "0xaFb64E73dEf6fAa8B6Ef9a6fb7312d5C4C15ebDB",
+  },
 };
 
 async function ethereumMinted() {
@@ -84,6 +87,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedFromEthereum("optimism", 18, chainContracts.optimism.bridgedFromETH),
+  },
+  bsc: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedFromEthereum("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
 };
 
