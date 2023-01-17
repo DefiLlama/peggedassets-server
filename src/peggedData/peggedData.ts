@@ -1459,14 +1459,14 @@ export default [
     symbol: "USDTZ",
     url: "https://usdtz.com/",
     description:
-      "USDtez is a USD-pegged stablecoin based on a fungible Tezos community standard - the FA token standard.",
+      "USD Tez (USDtz) is the first USD stablecoin on Tezos. USDtz is reserve-backed 1-1 by FIAT, follows regulatory compliance standards, and publishes monthly audit reports. Unlike other stablecoins, USD Tez combines Tezos-exclusive domain expertise with the scalability of a full FIAT reserve",
     mintRedeemDescription:
-    "USDtez customers who have undergone a verification process can exchange accepted stablecoins for USDtez and redeem USDtez for stablecoins.",
+      "Zero fee minting and redemption of USD Tez (USDtz) is available to users who are approved through a KYC enrollment process. Accepted collateral includes select US-regulated FIAT-backed stablecoins.",
     onCoinGecko: "true",
     gecko_id: "usdtez",
     cmcId: null,
     pegType: "peggedUSD",
-    pegMechanism: "crypto-backed",
+    pegMechanism: "fiat-backed",
     priceSource: "coingecko",
     auditLinks: null,
     twitter: "https://twitter.com/usdtz",
