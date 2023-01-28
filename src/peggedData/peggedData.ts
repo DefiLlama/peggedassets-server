@@ -1832,4 +1832,24 @@ export default [
     twitter: "https://twitter.com/ibdotxyz",
     wiki: "https://wiki.defillama.com/wiki/Iron_Bank",
   },
+  {
+    id: "92",
+    name: "Meme Dollar",
+    address: "0x02814f435dd04e254be7ae69f61fca19881a780d",
+    symbol: "PINA",
+    url: "https://www.dontdiememe.com/pina",
+    description:
+      "Pina is also a stable dollar pegged to the value of $1. Using mechanisms inspired by Dynamic Set Dollar (DSD), they have optimized $Pina to better serve the needs of their marketplace.",
+    mintRedeemDescription:
+    "If the price of PINA is less than 1$, the supply is changed by emitting coupons to reduce the supply. You can stake PINA or LP PINA-USDC in order to get more PINA.",
+    onCoinGecko: "true",
+    gecko_id: "meme-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/DontDieMeme",
+    wiki: "https://wiki.defillama.com/wiki/DontDieMeme",
+  },
 ] as PeggedAsset[];
