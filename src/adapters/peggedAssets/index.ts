@@ -89,6 +89,7 @@ import xai from "./xai";
 import iusd from "./iusd";
 import rusd from "./redeemable";
 import ibeur from "./iron-bank-euro";
+import baousd from "./baousd";
 
 export default {
   tether,
@@ -182,4 +183,5 @@ export default {
   iusd,
   redeemable: rusd,
   "iron-bank-euro": ibeur,
+  baousd,
 };
