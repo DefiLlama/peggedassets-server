@@ -1862,7 +1862,7 @@ export default [
     "Cardano's native overcollateralized stablecoin, developed by IOG and powered by COTI. DJED is backed by ADA and uses SHEN as a reserve coin",
     mintRedeemDescription:
     "Users can mint DJED from the DJED App (https://djed.xyz/) by supplying ADA as collateral. It uses a collateral ratio between 400% and 800% for DJED and SHEN",
-    onCoinGecko: "true",
+    onCoinGecko: "false",
     gecko_id: "djed",
     cmcId: null,
     pegType: "peggedUSD",
