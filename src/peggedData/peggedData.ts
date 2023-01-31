@@ -1852,4 +1852,24 @@ export default [
     twitter: "https://twitter.com/DontDieMeme",
     wiki: "https://wiki.defillama.com/wiki/DontDieMeme",
   },
+  {
+    id: "93",
+    name: "Djed StableCoin",
+    address: null,
+    symbol: "DJED",
+    url: "https://djed.xyz/",
+    description:
+    "Cardano's native overcollateralized stablecoin, developed by IOG and powered by COTI. DJED is backed by ADA and uses SHEN as a reserve coin",
+    mintRedeemDescription:
+    "Users can mint DJED from the DJED App (https://djed.xyz/) by supplying ADA as collateral. It uses a collateral ratio between 400% and 800% for DJED and SHEN",
+    onCoinGecko: "true",
+    gecko_id: "djed",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/DjedStablecoin",
+    wiki: null,
+  },
 ] as PeggedAsset[];
