@@ -1592,6 +1592,7 @@ export default [
     twitter: "https://twitter.com/Helio_Money",
     wiki: "https://wiki.defillama.com/wiki/Helio_Protocol",
   },
+  /*
   {
     id: "80",
     name: "USD2",
@@ -1612,6 +1613,7 @@ export default [
     twitter: "https://twitter.com/lagofinance",
     wiki: "https://wiki.defillama.com/wiki/Lago_Finance",
   },
+  */
   {
     id: "81",
     name: "USK",

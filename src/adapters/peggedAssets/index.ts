@@ -77,7 +77,7 @@ import usdi from "./interest-protocol";
 import lugh from "./lugh";
 import note from "./note";
 import hay from "./helio-protocol-hay";
-import usd2 from "./usd2";
+//import usd2 from "./usd2";
 import usk from "./usk";
 import arusd from "./arable-usd";
 import usdw from "./usdw";
@@ -172,7 +172,7 @@ export default {
   lugh,
   note,
   "helio-protocol-hay": hay,
-  usd2,
+  //usd2,
   usk,
   "arable-usd": arusd,
   usdw,
