@@ -89,6 +89,7 @@ import xai from "./xai";
 import iusd from "./iusd";
 import rusd from "./redeemable";
 import ibeur from "./iron-bank-euro";
+import baousd from "./baousd";
 import pina from "./meme-dollar";
 import djed from "./djed";
 
@@ -184,6 +185,7 @@ export default {
   iusd,
   redeemable: rusd,
   "iron-bank-euro": ibeur,
+  baousd,
   "meme-dollar": pina,
   djed,
 };
