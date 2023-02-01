@@ -1874,4 +1874,24 @@ export default [
     twitter: "https://twitter.com/DjedStablecoin",
     wiki: null,
   },
+  {
+    id: "94",
+    name: "BaoUSD",
+    address: "0x7945b0a6674b175695e5d1d08ae1e6f13744abb0",
+    symbol: "BAOUSD",
+    url: "https://app.bao.finance",
+    description:
+    "BaoUSD is a CDP stablecoin, its over-collateralized and issued through our Bao Market",
+    mintRedeemDescription:
+    "Using the Bao Finance app, users can borrow BAOUSD by depositing ETH, USDC or bSTBL as collateral. When the loan is repaid to retrieve the collateral, the paid back BAOUSD is burned.",
+    onCoinGecko: "true",
+    gecko_id: "baousd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/BaoCommunity",
+    wiki: null,
+  },
 ] as PeggedAsset[];
