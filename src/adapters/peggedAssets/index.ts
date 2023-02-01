@@ -77,7 +77,7 @@ import usdi from "./interest-protocol";
 import lugh from "./lugh";
 import note from "./note";
 import hay from "./helio-protocol-hay";
-import usd2 from "./usd2";
+//import usd2 from "./usd2";
 import usk from "./usk";
 import arusd from "./arable-usd";
 import usdw from "./usdw";
@@ -90,6 +90,8 @@ import iusd from "./iusd";
 import rusd from "./redeemable";
 import ibeur from "./iron-bank-euro";
 import baousd from "./baousd";
+import pina from "./meme-dollar";
+import djed from "./djed";
 
 export default {
   tether,
@@ -171,7 +173,7 @@ export default {
   lugh,
   note,
   "helio-protocol-hay": hay,
-  usd2,
+  //usd2,
   usk,
   "arable-usd": arusd,
   usdw,
@@ -184,4 +186,6 @@ export default {
   redeemable: rusd,
   "iron-bank-euro": ibeur,
   baousd,
+  "meme-dollar": pina,
+  djed,
 };

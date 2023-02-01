@@ -1592,6 +1592,7 @@ export default [
     twitter: "https://twitter.com/Helio_Money",
     wiki: "https://wiki.defillama.com/wiki/Helio_Protocol",
   },
+  /*
   {
     id: "80",
     name: "USD2",
@@ -1612,6 +1613,7 @@ export default [
     twitter: "https://twitter.com/lagofinance",
     wiki: "https://wiki.defillama.com/wiki/Lago_Finance",
   },
+  */
   {
     id: "81",
     name: "USK",
@@ -1831,5 +1833,45 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/ibdotxyz",
     wiki: "https://wiki.defillama.com/wiki/Iron_Bank",
+  },
+  {
+    id: "92",
+    name: "Meme Dollar",
+    address: "0x02814f435dd04e254be7ae69f61fca19881a780d",
+    symbol: "PINA",
+    url: "https://www.dontdiememe.com/pina",
+    description:
+      "Pina is also a stable dollar pegged to the value of $1. Using mechanisms inspired by Dynamic Set Dollar (DSD), they have optimized $Pina to better serve the needs of their marketplace.",
+    mintRedeemDescription:
+    "If the price of PINA is less than 1$, the supply is changed by emitting coupons to reduce the supply. You can stake PINA or LP PINA-USDC in order to get more PINA.",
+    onCoinGecko: "true",
+    gecko_id: "meme-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/DontDieMeme",
+    wiki: "https://wiki.defillama.com/wiki/DontDieMeme",
+  },
+  {
+    id: "93",
+    name: "Djed StableCoin",
+    address: null,
+    symbol: "DJED",
+    url: "https://djed.xyz/",
+    description:
+    "Cardano's native overcollateralized stablecoin, developed by IOG and powered by COTI. DJED is backed by ADA and uses SHEN as a reserve coin",
+    mintRedeemDescription:
+    "Users can mint DJED from the DJED App (https://djed.xyz/) by supplying ADA as collateral. It uses a collateral ratio between 400% and 800% for DJED and SHEN",
+    onCoinGecko: "false",
+    gecko_id: "djed",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/DjedStablecoin",
+    wiki: null,
   },
 ] as PeggedAsset[];
