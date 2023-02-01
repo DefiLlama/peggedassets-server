@@ -91,7 +91,7 @@ import rusd from "./redeemable";
 import ibeur from "./iron-bank-euro";
 import baousd from "./baousd";
 import pina from "./meme-dollar";
-//import djed from "./djed";
+import djed from "./djed";
 
 export default {
   tether,
@@ -187,5 +187,5 @@ export default {
   "iron-bank-euro": ibeur,
   baousd,
   "meme-dollar": pina,
-  //djed,
+  djed,
 };
