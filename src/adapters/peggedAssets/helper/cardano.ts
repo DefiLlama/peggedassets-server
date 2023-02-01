@@ -24,3 +24,12 @@ export async function getTotalSupply(assetID: string) {
   return supply / 10 ** decimals;
 }
 
+
+async function getAssets(address: string) {
+  return (await axios.get(`${endpoint}/v0/addresses/${address}`, config)).data.amount
+}
+
+export async function getTokenBalance(token: string, owner: string) {
+  const assets = await getAssets(owner)
+  return assets.find((i: any) => i.unit === token)?.quantity ?? 0
+}

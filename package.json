@@ -9,7 +9,7 @@
     "deploy": "npm run deploy:dev",
     "format": "prettier --write \"src/**/*.ts\"",
     "serve": "node --max-old-space-size=8192 node_modules/serverless/bin/serverless offline start",
-    "test": "jest",
+    "test": "cd src/adapters/peggedAssets && npx ts-node test",
     "test:watch": "jest --watch",
     "prebuild": "npx ts-node src/cli/buildRequires.ts",
     "pretest": "npm run prebuild",
