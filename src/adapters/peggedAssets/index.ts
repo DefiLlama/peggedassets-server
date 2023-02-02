@@ -77,7 +77,21 @@ import usdi from "./interest-protocol";
 import lugh from "./lugh";
 import note from "./note";
 import hay from "./helio-protocol-hay";
-import usd2 from "./usd2";
+//import usd2 from "./usd2";
+import usk from "./usk";
+import arusd from "./arable-usd";
+import usdw from "./usdw";
+import bob from "./bob";
+import usdr from "./real-usd";
+import uzd from "./zunami-protocol";
+import bankofchain from "./bank-of-chain";
+import xai from "./xai";
+import iusd from "./iusd";
+import rusd from "./redeemable";
+import ibeur from "./iron-bank-euro";
+import baousd from "./baousd";
+import pina from "./meme-dollar";
+import djed from "./djed";
 import c98dollar from "./coin98-dollar";
 
 export default {
@@ -160,6 +174,20 @@ export default {
   lugh,
   note,
   "helio-protocol-hay": hay,
-  usd2,
+  //usd2,
+  usk,
+  "arable-usd": arusd,
+  usdw,
+  bob,
+  "real-usd": usdr,
+  "zunami-protocol": uzd,
+  "bank-of-chain": bankofchain,
+  xai,
+  iusd,
+  redeemable: rusd,
+  "iron-bank-euro": ibeur,
+  baousd,
+  "meme-dollar": pina,
+  djed,
   "coin98-dollar": c98dollar
 };
