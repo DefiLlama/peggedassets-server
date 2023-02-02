@@ -1894,4 +1894,24 @@ export default [
     twitter: "https://twitter.com/BaoCommunity",
     wiki: null,
   },
+  {
+    id: "95",
+    name: "composite",
+    address: null,
+    symbol: "CMST",
+    url: "https://harborprotocol.one/home",
+    description:
+      "CMST is an over-collateralized stablecoin for the Cosmos.",
+    mintRedeemDescription:
+    "Users can deposit safelisted Interchain assets on Harbor protocol as collateral and mint new $CMST.",
+    onCoinGecko: "true",
+    gecko_id: "composite",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: "https://github.com/oak-security/audit-reports/tree/master/Comdex",
+    twitter: "https://twitter.com/Composite_Money",
+    wiki: null,
+  },
 ] as PeggedAsset[];
