@@ -15,24 +15,23 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   fantom: {
-    issued: ["0xde12c7959e1a72bbe8a5f7a1dc8f8eef9ab011b3"],
+    issued: ["0xDE1E704dae0B4051e80DAbB26ab6ad6c12262DA0"],
     reserves: [
-      "0x958c24d5cdf94faf47cf4d66400af598dedc6e62", // DEIBonder
-      "0x0b99207afbb08ec101b5691e7d5c6faadd09a89b", // multisig
-      "0x68c102aba11f5e086c999d99620c78f5bc30ecd8" // scDEI, not sure if this counts as circulating/uncirculating but it is subtracted in the official DEI dashboard
+      "0xbB8B2F05A88108F7e9227b954358110c20e97E26", // anyDEI (maybe need to remove once bridged DEI is added?)
+      "0xEf6b0872CfDF881Cf9Fe0918D3FA979c616AF983", // multisig
     ],
   },
   ethereum: {
-    bridgedFromFantom: ["0xde12c7959e1a72bbe8a5f7a1dc8f8eef9ab011b3"],
+    bridgedFromFantom: ["0xDE1E704dae0B4051e80DAbB26ab6ad6c12262DA0"],
   },
   polygon: {
-    bridgedFromFantom: ["0xde12c7959e1a72bbe8a5f7a1dc8f8eef9ab011b3"],
+    bridgedFromFantom: ["0xDE1E704dae0B4051e80DAbB26ab6ad6c12262DA0"],
   },
   bsc: {
-    bridgedFromFantom: ["0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3"],
+    bridgedFromFantom: ["0xDE1E704dae0B4051e80DAbB26ab6ad6c12262DA0"],
   },
   metis: {
-    bridgedFromFantom: ["0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3"],
+    bridgedFromFantom: ["0xDE1E704dae0B4051e80DAbB26ab6ad6c12262DA0"],
   },
 };
 
@@ -95,6 +94,9 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("fantom", 18),
     unreleased: chainUnreleased("fantom", 18, chainContracts.fantom.reserves),
   },
+  // Either the bridged contracts are incorrect, or there are no holders on other chains. 
+  // Will need to be updated.
+  /*
   ethereum: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -131,6 +133,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.metis.bridgedFromFantom
     ),
   },
+  */
 };
 
 export default adapter;

@@ -18,9 +18,19 @@ import {
   getClosestDayStartTimestamp,
 } from "./utils/date";
 import backfilledChains from "./peggedData/backfilledChains";
+const axios = require("axios");
 
 type TokenBalance = {
   [token: string]: number | undefined;
+};
+
+const formatTokenBalance = (tokenBalance: TokenBalance) => {
+  let formattedTokenBalance = {} as TokenBalance;
+  for (const token in tokenBalance) {
+    const balance = tokenBalance[token];
+    formattedTokenBalance[token] = balance ? parseFloat(balance.toFixed(2)) : 0;
+  }
+  return formattedTokenBalance;
 };
 
 // needed because new daily rates is not stored on same day it is queried for
@@ -70,8 +80,66 @@ function extractResultOfBinarySearch(ar: any[], binarySearchResult: number) {
 
 export async function craftChartsResponse(
   chain: string | undefined,
-  peggedID: string | undefined
+  peggedID: string | undefined,
+  startTimestamp: string | undefined,
+  useStoredCharts: boolean = true
 ) {
+  if (chain === undefined) {
+    return errorResponse({
+      message: "Must include chain or 'all' path parameter.",
+    });
+  }
+
+  if (chain === "all" && useStoredCharts) {
+    try {
+      const id = peggedID ? peggedID : "all";
+      const chart = (
+        await axios.get(
+          `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/all/${id}`
+        )
+      )?.data;
+      let filteredChart = chart;
+      if (startTimestamp) {
+        filteredChart = chart
+          .map((entry: any) => {
+            if (entry.date < parseInt(startTimestamp)) {
+              return null;
+            }
+            return entry;
+          })
+          .filter((entry: any) => entry);
+      }
+      return filteredChart;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  if (!peggedID && useStoredCharts) {
+    try {
+      const normalizedChain = normalizeChain(chain);
+      const chart = (
+        await axios.get(
+          `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/${normalizedChain}`
+        )
+      )?.data;
+      let filteredChart = chart;
+      if (startTimestamp) {
+        filteredChart = chart
+          .map((entry: any) => {
+            if (entry.date < parseInt(startTimestamp)) {
+              return null;
+            }
+            return entry;
+          })
+          .filter((entry: any) => entry);
+      }
+      return filteredChart;
+    } catch (e) {
+      return [];
+    }
+  }
+
   const sumDailyBalances = {} as {
     [timestamp: number]: {
       circulating: TokenBalance;
@@ -81,25 +149,6 @@ export async function craftChartsResponse(
       totalBridgedToUSD: TokenBalance;
     };
   };
-  // quick fix; need to update later
-  if (chain === "gnosis") {
-    chain = "xdai";
-  }
-  if (chain === "terra%20classic") {
-    chain = "terra";
-  }
-  if (chain === "sxnetwork") {
-    chain = "sx";
-  }
-  if (chain === "arbitrum%20nova") {
-    chain = "arbitrum_nova";
-  }
-
-  if (chain === undefined) {
-    return errorResponse({
-      message: "Must include chain or 'all' path parameter.",
-    });
-  }
 
   const normalizedChain = normalizeChain(chain);
   let lastDailyTimestamp = 0;
@@ -116,9 +165,12 @@ export async function craftChartsResponse(
       if (chain !== "all" && !lastBalance?.[normalizedChain]) {
         return undefined;
       }
+      const defaultStartTimestamp = startTimestamp
+        ? parseInt(startTimestamp)
+        : 1609372800;
       const earliestTimestamp =
         chain === "all" || backfilledChains.includes(chain ?? "")
-          ? 1609372800
+          ? defaultStartTimestamp
           : 1652241600; // chains have mostly incomplete data before May 11, 2022
       let startKey = undefined;
       let historicalBalance = { Items: [] } as any;
@@ -128,7 +180,7 @@ export async function craftChartsResponse(
             ":pk": `dailyPeggedBalances#${pegged.id}`,
             ":sk": earliestTimestamp,
           },
-          KeyConditionExpression: "PK = :pk AND SK > :sk",
+          KeyConditionExpression: "PK = :pk AND SK >= :sk",
           ExclusiveStartKey: startKey,
         })) as any;
         startKey = partialHistoricalBalances.LastEvaluatedKey;
@@ -168,40 +220,29 @@ export async function craftChartsResponse(
     })
   );
 
-  const historicalRatesItems = await dynamodb.query({
-    ExpressionAttributeValues: {
-      ":pk": `historicalRates`,
-    },
-    KeyConditionExpression: "PK = :pk",
-  });
-  if (
-    historicalRatesItems.Items === undefined ||
-    historicalRatesItems.Items.length < 1
-  ) {
+  const historicalRates = await (
+    await axios.get(
+      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`
+    )
+  )?.data;
+  if (historicalRates.length < 1) {
     return errorResponse({
       message: "Could not get historical fiat prices.",
     });
   }
-  const historicalRates = historicalRatesItems.Items;
-  const rateTimestamps = historicalRates?.map((item) => item.SK);
+  const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
 
-  const historicalPriceItems = await dynamodb.query({
-    ExpressionAttributeValues: {
-      ":pk": `dailyPeggedPrices`,
-    },
-    KeyConditionExpression: "PK = :pk",
-  });
-  if (
-    historicalPriceItems.Items === undefined ||
-    historicalPriceItems.Items.length < 1
-  ) {
+  const historicalPrices = await (
+    await axios.get(
+      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/prices/full`
+    )
+  )?.data;
+  if (historicalPrices.length < 1) {
     return errorResponse({
-      message: "Could not get prices.",
+      message: "Could not get historical prices.",
     });
   }
-
-  const historicalPrices = historicalPriceItems.Items;
-
+  const priceTimestamps = historicalPrices?.map((item: any) => item.SK);
   const lastPrices = await getLastRecord(hourlyPeggedPrices());
 
   const lastDailyItem = historicalPrices[historicalPrices.length - 1];
@@ -213,8 +254,6 @@ export async function craftChartsResponse(
     lastPrices.SK = lastDailyItem.SK;
     historicalPrices[historicalPrices.length - 1] = lastPrices;
   }
-
-  const priceTimestamps = historicalPrices?.map((item) => item.SK);
 
   await Promise.all(
     historicalPeggedBalances.map(async (peggedBalance) => {
@@ -386,11 +425,11 @@ export async function craftChartsResponse(
   const response = Object.entries(sumDailyBalances).map(
     ([timestamp, balance]) => ({
       date: timestamp,
-      totalCirculating: balance.circulating,
-      totalUnreleased: balance.unreleased,
-      totalCirculatingUSD: balance.totalCirculatingUSD,
-      totalMintedUSD: balance.totalMintedUSD,
-      totalBridgedToUSD: balance.totalBridgedToUSD,
+      totalCirculating: formatTokenBalance(balance.circulating),
+      totalUnreleased: formatTokenBalance(balance.unreleased),
+      totalCirculatingUSD: formatTokenBalance(balance.totalCirculatingUSD),
+      totalMintedUSD: formatTokenBalance(balance.totalMintedUSD),
+      totalBridgedToUSD: formatTokenBalance(balance.totalBridgedToUSD),
     })
   );
 
@@ -402,7 +441,8 @@ const handler = async (
 ): Promise<IResponse> => {
   const chain = event.pathParameters?.chain?.toLowerCase();
   const peggedID = event.queryStringParameters?.stablecoin?.toLowerCase();
-  const response = await craftChartsResponse(chain, peggedID);
+  const startTimestamp = event.queryStringParameters?.startts?.toLowerCase();
+  const response = await craftChartsResponse(chain, peggedID, startTimestamp);
   return successResponse(response, 10 * 60); // 10 mins cache
 };
 

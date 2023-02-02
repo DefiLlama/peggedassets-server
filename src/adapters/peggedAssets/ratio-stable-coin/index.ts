@@ -2,6 +2,7 @@ const sdk = require("@defillama/sdk");
 import {
   PeggedIssuanceAdapter,
 } from "../peggedAsset.type";
+import { endpoint } from "../llama-helper/solana";
 const { Connection, PublicKey } = require('@solana/web3.js')
 const { Program, Provider, web3, utils } = require("@project-serum/anchor");
 const { NodeWallet } = require("@project-serum/anchor/dist/cjs/provider");
@@ -15,7 +16,7 @@ const getProvider = async () => {
   /* network set to local network for now */
   const dummy_keypair = web3.Keypair.generate();
   const wallet = new NodeWallet(dummy_keypair);
-  const network = "https://solana-api.projectserum.com/";
+  const network = `${endpoint}/`;
   const connection = new Connection(network, 'processed');
   const confirmOptions = {
     commitment: "processed",

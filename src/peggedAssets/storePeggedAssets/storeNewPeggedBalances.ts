@@ -52,7 +52,8 @@ export default async (
     )} to ${humanizeNumber(currentCirculating)}`;
     if (
       Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 24 * HOUR &&
-      lastHourlyCirculating * 5 < currentCirculating
+      lastHourlyCirculating * 5 < currentCirculating &&
+      lastHourlyCirculating > 1000000
     ) {
       await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
         unixTimestamp,

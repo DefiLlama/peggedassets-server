@@ -1,7 +1,6 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import fetch from "node-fetch";
-import peggedAssets, {
-} from "./peggedData/peggedData";
+import peggedAssets from "./peggedData/peggedData";
 import {
   getLastRecord,
   hourlyPeggedBalances,
@@ -12,10 +11,7 @@ import {
   nonChains,
   addToChains,
 } from "./utils/normalizeChain";
-import {
-  secondsInDay,
-  secondsInWeek,
-} from "./utils/date";
+import { secondsInDay, secondsInWeek } from "./utils/date";
 import { craftStablecoinChainsResponse } from "./getStablecoinChains";
 
 async function getTVLOfRecordClosestToTimestamp(
@@ -127,6 +123,9 @@ export async function craftProtocolsResponse(
         } as any;
         if (getPrices) {
           dataToReturn.price = prices[pegged.gecko_id] ?? null;
+        }
+        if (pegged.delisted) {
+          dataToReturn.delisted = true;
         }
         return dataToReturn;
       })

@@ -9,7 +9,7 @@ export async function getTotalSupply(address: string, tokenType: string) {
         `https://explorer.ont.io/v2/tokens/${tokenType}/${address}`
       )
   );
-
+  console.log("ontology success")
   const bnSupply = new BigNumber(supplyRes?.data?.result?.total_supply);
 
   return bnSupply.toNumber();
@@ -22,7 +22,7 @@ export async function getBalance(address: string, tokenType: string, owner: stri
         `https://explorer.ont.io/v2/addresses/${owner}/${tokenType}/balances`
       )
   );
-
+  console.log("ontology success")
   const filteredBalances = balancesRes?.data?.result?.filter(
     (balance: any) => balance.contract_hash === address
   );

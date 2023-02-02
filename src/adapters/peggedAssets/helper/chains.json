@@ -125,5 +125,8 @@
   "defichain",
   "canto",
   "dogechain",
-  "arbitrum_nova"
+  "arbitrum_nova",
+  "kujira",
+  "ethpow",
+  "aptos"
 ]

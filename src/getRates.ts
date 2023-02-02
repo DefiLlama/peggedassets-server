@@ -1,24 +1,14 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
-import { getHistoricalValues } from "./utils/shared/dynamodb";
-import { historicalRates } from "./peggedAssets/utils/getLastRecord";
-import { secondsInWeek } from "./utils/date";
+const axios = require("axios");
 
 export async function craftRatesResponse() {
-  const historicalPeggedPrices = await getHistoricalValues(historicalRates());
-
-  let response = historicalPeggedPrices
-    ?.map((item) =>
-      typeof item === "object" &&
-      item.SK > Date.now() / 1000 - 8 * secondsInWeek
-        ? {
-            date: item.SK,
-            rates: item.rates,
-          }
-        : { rates: undefined }
+  const rates = await (
+    await axios.get(
+      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/2mo`
     )
-    .filter((item) => item.rates !== undefined);
+  )?.data;
 
-  return response;
+  return rates;
 }
 
 const handler = async (

@@ -11,7 +11,9 @@ import {
   getTotalSupply as ontologyGetTotalSupply,
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
+import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
+import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
 import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
@@ -256,7 +258,10 @@ const chainContracts: ChainContracts = {
     ],
   },
   kava: {
-    bridgedFromETH: ["0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD"], // celer
+    bridgedFromETH: [
+      "0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD", // celer
+      "0xB44a9B6905aF7c801311e8F4E76932ee959c663C", // multichain
+    ],
   },
   conflux: {
     bridgedFromETH: [
@@ -302,7 +307,16 @@ const chainContracts: ChainContracts = {
   },
   arbitrum_nova: {
     bridgedFromETH: ["0x52484E1ab2e2B22420a25c20FA49E173a26202Cd"],
-  }
+  },
+  ethpow: {
+    bridgedFromETH: ["0x2ad7868ca212135c6119fd7ad1ce51cfc5702892"], // chainge
+  },
+  aptos: {
+    bridgedFromETH: [
+      "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa", // stargate
+      "0xa2eda21a58856fda86451436513b867c97eecb4ba099da5775520e0f7492e852", // wormhole
+    ],
+  },
 };
 
 /*
@@ -457,6 +471,7 @@ async function liquidMinted() {
           "https://blockstream.info/liquid/api/asset/ce091c998b83c78bb71a632313ba3760f1763d9cfcffae02258ffa9865a37bd2"
         )
     );
+    console.info("liquid success USDT");
     const issued = res.data.chain_stats.issued_amount;
     const burned = res.data.chain_stats.burned_amount;
     sumSingleBalance(
@@ -484,6 +499,7 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/assets/312769"
         )
     );
+    console.info("algorand 1 success USDT");
     const supply = supplyRes.data.asset.params.total;
     const reserveRes = await retry(
       async (_bail: any) =>
@@ -491,6 +507,7 @@ async function algorandMinted() {
           "https://algoindexer.algoexplorerapi.io/v2/accounts/XIU7HGGAJ3QOTATPDSIIHPFVKMICXKHMOR2FJKHTVLII4FAOA3CYZQDLG4"
         )
     );
+    console.info("algorand 2 success USDT");
     const reserveAccount = reserveRes.data.account.assets.filter(
       (asset: any) => asset["asset-id"] === 312769
     );
@@ -589,6 +606,7 @@ async function usdtApiMinted(key: string) {
       async (_bail: any) =>
         await axios("https://app.tether.to/transparency.json")
     );
+    console.info("tether API 1 success USDT");
     const issuance = res.data.data.usdt;
     const totalSupply = parseInt(issuance[key]);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
@@ -607,6 +625,7 @@ async function usdtApiUnreleased(key: string) {
       async (_bail: any) =>
         await axios("https://app.tether.to/transparency.json")
     );
+    console.info("tether API 2 success USDT");
     const issuance = res.data.data.usdt;
     const totalSupply = parseInt(issuance[key]);
     sumSingleBalance(balances, "peggedUSD", totalSupply);
@@ -627,6 +646,7 @@ async function reinetworkBridged(address: string, decimals: number) {
           `https://scan.rei.network/api?module=token&action=getToken&contractaddress=${address}`
         )
     );
+    console.info("rei network success USDT");
     const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
     return balances;
@@ -680,6 +700,7 @@ async function nearBridged(address: string, decimals: number) {
   ) {
     let balances = {} as Balances;
     const supply = await nearCall(address, "ft_total_supply");
+    console.info("Near success USDT")
     sumSingleBalance(
       balances,
       "peggedUSD",
@@ -710,6 +731,64 @@ async function polyNetworkBridged(
       "polynetwork",
       false,
       "Ethereum"
+    );
+    return balances;
+  };
+}
+
+async function kavaBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (const contract of chainContracts.kava.bridgedFromETH) {
+      const totalSupply = await kavaGetTotalSupply(contract);
+      console.info("Kava success USDT")
+      sumSingleBalance(balances, "peggedUSD", totalSupply, contract, true);
+    }
+    return balances;
+  };
+}
+
+async function aptosBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const contractStargate =
+      "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa";
+    const typeStargate =
+      "0x1::coin::CoinInfo<0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT>";
+    const totalSupplyStargate = await aptosGetTotalSupply(
+      contractStargate,
+      typeStargate
+    );
+    console.info("Aptos success USDT")
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupplyStargate,
+      contractStargate,
+      true
+    );
+    const contractPortal =
+      "0xa2eda21a58856fda86451436513b867c97eecb4ba099da5775520e0f7492e852";
+    const typePortal =
+      "0x1::coin::CoinInfo<0xa2eda21a58856fda86451436513b867c97eecb4ba099da5775520e0f7492e852::coin::T>";
+    const totalSupplyPortal = await aptosGetTotalSupply(
+      contractPortal,
+      typePortal
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupplyPortal,
+      contractPortal,
+      true
     );
     return balances;
   };
@@ -1071,7 +1150,7 @@ const adapter: PeggedIssuanceAdapter = {
   kava: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("kava", 6, chainContracts.kava.bridgedFromETH),
+    ethereum: kavaBridged(),
   },
   ontology: {
     minted: async () => ({}),
@@ -1165,6 +1244,11 @@ const adapter: PeggedIssuanceAdapter = {
       6,
       chainContracts.arbitrum_nova.bridgedFromETH
     ),
+  },
+  aptos: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: aptosBridged(),
   },
 };
 

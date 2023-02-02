@@ -20,6 +20,7 @@ const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x99d8a9c45b2eca8864373a26d1459e3dff1e17f3"],
     reserves: [
+      "0x30b9de623c209a42ba8d5ca76384ead740be9529", // new cauldron
       "0xf5bce5077908a1b7370b9ae04adc565ebd643966", // bentobox
       "0xd96f48665a1410c0cd669a88898eca36b9fc2cce", // degenbox
       "0x5f0dee98360d8200b20812e174d139a1a633edd2", // multisig
@@ -32,9 +33,11 @@ const chainContracts: ChainContracts = {
   avax: {
     bridgedFromETH: ["0x130966628846BFd36ff31a822705796e8cb8C18D"], // multichain/abracadabra
     reserves: [
+      "0xae64a325027c3c14cf6abc7818aa3b9c07f5c799", // new gnosis
+      "0x27c215c8b6e39f54c42ac04eb651211e9a566090", // multisig
+      "0xae4d3a42e46399827bd094b4426e2f79cca543ca", // gnosis
       "0xf4f46382c2be1603dc817551ff9a7b333ed1d18f", // bentobox
       "0x1fc83f75499b7620d53757f0b01e2ae626aae530", // degenbox
-      "0xae64a325027c3c14cf6abc7818aa3b9c07f5c799", // gnosis
     ],
   },
   arbitrum: {

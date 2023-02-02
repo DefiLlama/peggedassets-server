@@ -15,7 +15,7 @@ export type PriceSource =
   | "birdeye"
   | "kucoin"
   | "defillama"
-  | "kaddex"
+  | "kaddex";
 
 export type PeggedAsset = {
   id: string;
@@ -34,6 +34,7 @@ export type PeggedAsset = {
   auditLinks: string[];
   twitter: string;
   wiki: string;
+  delisted?: boolean;
 };
 
 type Bridge = {
