@@ -93,6 +93,7 @@ import composite from "./composite";
 import baousd from "./baousd";
 import pina from "./meme-dollar";
 import djed from "./djed";
+import c98dollar from "./coin98-dollar";
 
 export default {
   tether,
@@ -190,4 +191,5 @@ export default {
   baousd,
   "meme-dollar": pina,
   djed,
+  "coin98-dollar": c98dollar
 };
