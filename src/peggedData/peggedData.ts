@@ -1896,7 +1896,7 @@ export default [
   },
   {
     id: "95",
-    name: "composite",
+    name: "Composite",
     address: null,
     symbol: "CMST",
     url: "https://harborprotocol.one/home",
@@ -1914,4 +1914,24 @@ export default [
     twitter: "https://twitter.com/Composite_Money",
     wiki: null,
   },
+  {
+  id: "96",
+  name: "Coin98 Dollar",
+  address: null,
+  symbol: "CUSD",
+  url: "https://coin98.com/dollar",
+  description:
+    "CUSD is a decentralized stablecoin that is fully collateralized by assets in reserve",
+  mintRedeemDescription:
+  "In order to convert to 1 CUSD, a total of $1 worth of the collateralized assets must be sent into the CUSD Reserve smart contract. Specifically, in the initial phase, the collateral ratio to convert to 1 CUSD will be $1 worth of fiat-backed stablecoins - BUSD (on BNB Chain) and USDC (on Solana and Ethereum)",
+  onCoinGecko: "true",
+  gecko_id: "coin98-dollar",
+  cmcId: "21871",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/coin98_wallet",
+  wiki: null,
+},
 ] as PeggedAsset[];
