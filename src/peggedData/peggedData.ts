@@ -1939,7 +1939,7 @@ export default [
   name: "USP",
   address: "avax:0xdaCDe03d7Ab4D81fEDdc3a20fAA89aBAc9072CE2",
   symbol: "USP",
-  url: "https://coin98.com/dollar",
+  url: "https://app.platypus.finance/usp",
   description:
     "An over-collateralized ERC-20 stablecoin built on the Platypus stableswap",
   mintRedeemDescription:
