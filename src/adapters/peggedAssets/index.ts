@@ -193,5 +193,5 @@ export default {
   "meme-dollar": pina,
   djed,
   "coin98-dollar": c98dollar,
-  usp
+  "usp-stable": usp,
 };
