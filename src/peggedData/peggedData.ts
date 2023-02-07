@@ -1936,7 +1936,7 @@ export default [
 },
 {
   id: "97",
-  name: "USP ",
+  name: "USP Stablecoin",
   address: "avax:0xdaCDe03d7Ab4D81fEDdc3a20fAA89aBAc9072CE2",
   symbol: "USP",
   url: "https://app.platypus.finance/usp",
