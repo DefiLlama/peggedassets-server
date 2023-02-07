@@ -1857,7 +1857,7 @@ export default [
   {
     id: "93",
     name: "Djed StableCoin",
-    address: null,
+    address: "cardano:8db269c3ec630e06ae29f74bc39edd1f87c819f1056206e879a1cd61446a65644d6963726f555344",
     symbol: "DJED",
     url: "https://djed.xyz/",
     description:
@@ -1936,7 +1936,7 @@ export default [
 },
 {
   id: "97",
-  name: "USP",
+  name: "USP ",
   address: "avax:0xdaCDe03d7Ab4D81fEDdc3a20fAA89aBAc9072CE2",
   symbol: "USP",
   url: "https://app.platypus.finance/usp",
