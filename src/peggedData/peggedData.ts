@@ -1934,4 +1934,24 @@ export default [
   twitter: "https://twitter.com/coin98_wallet",
   wiki: null,
 },
+{
+  id: "97",
+  name: "USP",
+  address: "avax:0xdaCDe03d7Ab4D81fEDdc3a20fAA89aBAc9072CE2",
+  symbol: "USP",
+  url: "https://coin98.com/dollar",
+  description:
+    "An over-collateralized ERC-20 stablecoin built on the Platypus stableswap",
+  mintRedeemDescription:
+  "Users can deposits collateral into the Platypus Main Pool and stake their LP tokens into the MasterPlatypus to farm PTP. At the same time, it is possible for users to mint USP based on the the collateral factor",
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: null,
+  auditLinks: null,
+  twitter: "https://twitter.com/Platypusdefi",
+  wiki: null,
+},
 ] as PeggedAsset[];
