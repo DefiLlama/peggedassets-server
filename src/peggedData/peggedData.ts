@@ -1869,7 +1869,7 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: null,
+    priceSource: "coingecko",
     auditLinks: null,
     twitter: "https://twitter.com/DjedStablecoin",
     wiki: null,
