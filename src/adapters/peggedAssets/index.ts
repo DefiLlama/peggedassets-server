@@ -95,7 +95,7 @@ import pina from "./meme-dollar";
 import djed from "./djed";
 import c98dollar from "./coin98-dollar";
 import usp from "./usp-stablecoin";
-import euroe from "./euroe"
+import euroe from "./euroe-stablecoin"
 
 export default {
   tether,
