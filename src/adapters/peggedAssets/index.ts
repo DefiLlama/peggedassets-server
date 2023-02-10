@@ -195,5 +195,5 @@ export default {
   djed,
   "coin98-dollar": c98dollar,
   "usp-stable": usp,
-  "euro-stablecoin": euroe
+  "euroe-stablecoin": euroe
 };
