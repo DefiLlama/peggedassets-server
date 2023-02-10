@@ -1954,4 +1954,24 @@ export default [
   twitter: "https://twitter.com/Platypusdefi",
   wiki: null,
 },
+{
+  id: "98",
+  name: "EUROe Stablecoin ",
+  address: "0x820802Fa8a99901F52e39acD21177b0BE6EE2974",
+  symbol: "EUROe",
+  url: "https://www.euroe.com/",
+  description:
+    "EUROe is a euro stablecoin currently available on Ethereum. EUROe is fully fiat-backed and regulated as an e-money institution in Europe by the Finnish Financial Supervisory Authority",
+  mintRedeemDescription:
+  "EUROe customers who have undergone a verification process can exchange USD for GUSD and redeem GUSD for USD.",
+  onCoinGecko: "true",
+  gecko_id: "euroe-stablecoin",
+  cmcId: null,
+  pegType: "peggedEUR",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: ["https://dev.euroe.com/docs/Stablecoin/audits"],
+  twitter: "https://twitter.com/EUROemoney",
+  wiki: null,
+},
 ] as PeggedAsset[];
