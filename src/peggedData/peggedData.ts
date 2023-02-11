@@ -1956,7 +1956,7 @@ export default [
 },
 {
   id: "98",
-  name: "EUROe Stablecoin ",
+  name: "EUROe Stablecoin",
   address: "0x820802Fa8a99901F52e39acD21177b0BE6EE2974",
   symbol: "EUROe",
   url: "https://www.euroe.com/",
