@@ -1574,7 +1574,7 @@ export default [
   },
   {
     id: "79",
-    name: "Destablecoin HAY",
+    name: "HAY",
     address: "bsc:0x0782b6d8c4551b9760e74c0545a9bcd90bdc41e5",
     symbol: "HAY",
     url: "https://helio.money/",
