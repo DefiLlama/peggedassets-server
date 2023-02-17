@@ -96,6 +96,7 @@ import djed from "./djed";
 import c98dollar from "./coin98-dollar";
 import usp from "./usp-stablecoin";
 import euroe from "./euroe-stablecoin"
+import d2o from "./dam-finance";
 
 export default {
   tether,
@@ -195,5 +196,6 @@ export default {
   djed,
   "coin98-dollar": c98dollar,
   "usp-stable": usp,
-  "euroe-stablecoin": euroe
+  "euroe-stablecoin": euroe,
+  d2o
 };
