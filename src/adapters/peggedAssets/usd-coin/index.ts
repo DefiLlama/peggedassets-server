@@ -606,7 +606,7 @@ async function nearBridged(address: string, decimals: number) {
   };
 }
 
-async function elrondBridged(tokenID: string, decimals: number) {
+async function multiversxBridged(tokenID: string, decimals: number) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -616,10 +616,10 @@ async function elrondBridged(tokenID: string, decimals: number) {
     const res = await retry(
       async (_bail: any) =>
         await axios.get(
-          `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
+          `https://api.multiversx.com/tokens/${tokenID}/supply`
         )
     );
-    console.info("elrond success USDC");
+    console.info("multiversx success USDC");
     const supply = res?.data?.data?.supply / 10 ** decimals;
     sumSingleBalance(
       balances,
@@ -1040,10 +1040,10 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
-  elrond: {
+  multiversx: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: elrondBridged("USDC-c76f1f", 6),
+    ethereum: multiversxBridged("USDC-c76f1f", 6),
   },
   canto: {
     minted: async () => ({}),
