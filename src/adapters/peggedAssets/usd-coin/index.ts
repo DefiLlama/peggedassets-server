@@ -619,7 +619,7 @@ async function multiversxBridged(tokenID: string, decimals: number) {
           `https://api.multiversx.com/tokens/${tokenID}/supply`
         )
     );
-    console.info("multiversx success USDC");
+    console.info("MultiversX success USDC");
     const supply = res?.data?.data?.supply / 10 ** decimals;
     sumSingleBalance(
       balances,

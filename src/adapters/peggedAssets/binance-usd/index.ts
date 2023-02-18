@@ -302,6 +302,33 @@ async function chainUnreleased(chain: string, decimals: number) {
   };
 }
 
+async function multiversxBridged(tokenID: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://api.multiversx.com/tokens/${tokenID}/supply`
+        )
+    );
+    console.info("MultiversX success BUSD");
+    const supply = res?.data?.data?.supply / 10 ** decimals;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply,
+      "adastra",
+      false,
+      "Ethereum"
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -502,6 +529,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     bsc: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromBSC),
+  },
+  multiversx: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: multiversxBridged("BUSD-40b57e", 6),
   },
   dogechain: {
     minted: async () => ({}),

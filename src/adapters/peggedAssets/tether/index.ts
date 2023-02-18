@@ -736,6 +736,33 @@ async function polyNetworkBridged(
   };
 }
 
+async function multiversxBridged(tokenID: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://api.multiversx.com/tokens/${tokenID}/supply`
+        )
+    );
+    console.info("MultiversX success USDT");
+    const supply = res?.data?.data?.supply / 10 ** decimals;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply,
+      "adastra",
+      false,
+      "Ethereum"
+    );
+    return balances;
+  };
+}
+
 async function kavaBridged() {
   return async function (
     _timestamp: number,
@@ -1202,6 +1229,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
+  },
+  multiversx: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: multiversxBridged("USDT-f8c08c", 6),
   },
   canto: {
     minted: async () => ({}),
