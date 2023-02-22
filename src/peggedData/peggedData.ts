@@ -1974,4 +1974,24 @@ export default [
   twitter: "https://twitter.com/EUROemoney",
   wiki: null,
 },
+{
+  id: "99",
+  name: "Stablfi Cash",
+  address: "polygon:0x80487b4f8f70e793a81a42367c225ee0b94315df",
+  symbol: "CASH",
+  url: "https://www.stabl.fi/swap",
+  description:
+    "$CASH is a stable indexcoin pegged to the weighted average of a basket of stablecoin collaterals",
+  mintRedeemDescription:
+    "Using the Stabl.fi app, users can borrow $CASH by depositing stablecoins as collateral. When the loan is repaid to retrieve the collateral, the paid back $CASH is burned.",
+  onCoinGecko: "true",
+  gecko_id: "stabl-fi",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/Stabl_Fi",
+  wiki: null,
+},
 ] as PeggedAsset[];
