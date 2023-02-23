@@ -197,5 +197,5 @@ export default {
   "coin98-dollar": c98dollar,
   "usp-stable": usp,
   "euroe-stablecoin": euroe,
-  "stablfi-cash": cash
+  "stabl-fi": cash
 };
