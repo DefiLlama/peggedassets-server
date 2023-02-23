@@ -1945,7 +1945,7 @@ export default [
   mintRedeemDescription:
   "Users can deposits collateral into the Platypus Main Pool and stake their LP tokens into the MasterPlatypus to farm PTP. At the same time, it is possible for users to mint USP based on the the collateral factor",
   onCoinGecko: "false",
-  gecko_id: "usp-stable",
+  gecko_id: "platypus-usd",
   cmcId: null,
   pegType: "peggedUSD",
   pegMechanism: "crypto-backed",
