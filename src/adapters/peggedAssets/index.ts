@@ -94,7 +94,7 @@ import baousd from "./baousd";
 import pina from "./meme-dollar";
 import djed from "./djed";
 import c98dollar from "./coin98-dollar";
-import usp from "./usp-stablecoin";
+import usp from "./platypus-usd";
 import euroe from "./euroe-stablecoin";
 import cash from "./cash-stabl"
 
