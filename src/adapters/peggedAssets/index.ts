@@ -195,7 +195,7 @@ export default {
   "meme-dollar": pina,
   djed,
   "coin98-dollar": c98dollar,
-  "usp-stable": usp,
+  "platypus-usd": usp,
   "euroe-stablecoin": euroe,
   "stabl-fi": cash
 };
