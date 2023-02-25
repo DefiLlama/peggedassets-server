@@ -96,7 +96,7 @@ import djed from "./djed";
 import c98dollar from "./coin98-dollar";
 import usp from "./platypus-usd";
 import euroe from "./euroe-stablecoin";
-import cash from "./cash-stabl"
+import cash from "./stabl-fi"
 
 export default {
   tether,
