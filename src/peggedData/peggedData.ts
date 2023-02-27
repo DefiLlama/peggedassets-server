@@ -1994,4 +1994,24 @@ export default [
   twitter: "https://twitter.com/Stabl_Fi",
   wiki: null,
 },
+{
+  id: "100",
+  name: "Digital Standard Unit",
+  address: "0x605d26fbd5be761089281d5cec2ce86eea667109",
+  symbol: "DSU",
+  url: "https://www.dsu.money/",
+  description:
+    "Digital Standard Unit is a wrapper for stablecoins. The protocol consumes a particular collateral, places it into a reserve and issues a stablecoin, known as DSU, against it",
+  mintRedeemDescription:
+    "Users are able to mint DSU by providing the specified collateral, currently this is USDC. They are also able to redeem USDC from DSU at a 1-to-1 ratio with DSU",
+  onCoinGecko: "true",
+  gecko_id: "digital-standard-unit",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/dsumoney",
+  wiki: null,
+},
 ] as PeggedAsset[];
