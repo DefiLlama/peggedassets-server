@@ -463,7 +463,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 55,
   },
-  MultiversX: {
+  Elrond: {
     geckoId: "multiversx",
     symbol: "EGLD",
     cmcId: "6892",
@@ -991,7 +991,7 @@ export function getChainDisplayName(
       return "Polis";
     case "zyx":
       return "ZYX";
-    case "multiversx":
+    case "elrond":
       return "MultiversX";
     case "stellar":
       return "Stellar";

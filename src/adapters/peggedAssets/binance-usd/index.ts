@@ -530,7 +530,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     bsc: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromBSC),
   },
-  multiversx: {
+  elrond: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: multiversxBridged("BUSD-40b57e", 6),
