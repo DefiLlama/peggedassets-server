@@ -407,7 +407,7 @@ const curvePools: CurvePools = {
     decimalsToken0: 18,
     decimalsToken1: 18,
     otherTokenisType: "3crv",
-  }
+  },
 };
 
 const addressesForScreeners: AddressesForScreeners = {
@@ -482,7 +482,7 @@ const addressesForScreeners: AddressesForScreeners = {
     address: "0x0782b6d8c4551B9760e74c0545a9bCD90bdc41E5",
   },
   bob: {
-    address: "0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B"
+    address: "0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B",
   },
 };
 
@@ -528,7 +528,7 @@ const uniswapPools: UniswapPools = {
     token: 1,
     chain: "ethereum",
     decimalsDifference: 12,
-  }
+  },
 };
 
 const kaddexPools: KaddexPools = {
@@ -721,13 +721,11 @@ export default async function getCurrentPeggedPrice(
   if (priceSource === "defillama") {
     for (let i = 0; i < 5; i++) {
       try {
-        const address = addressesForDefillama[token]?.address;
-        const body = { coins: [address] };
-        const res = await fetch(PRICES_API, {
-          method: "POST",
-          body: JSON.stringify(body),
-        }).then((r) => r.json());
-        const price = res?.coins?.[address]?.price;
+        const key = "coingecko:" + token;
+        const res = await fetch(PRICES_API + "/current/" + key).then(
+          (r) => r.json() as any
+        );
+        const price = res?.coins?.[key]?.price;
         if (price) {
           return price;
         } else {
@@ -784,7 +782,7 @@ export default async function getCurrentPeggedPrice(
           let price = null;
           if (pool.base_currency === "KDA") {
             const kdaPrice = await getCurrentPeggedPrice("kda", "kucoin");
-            if (kdaPrice && (typeof pool.last_price === "string")) {
+            if (kdaPrice && typeof pool.last_price === "string") {
               price = parseFloat(pool.last_price) / kdaPrice;
             } else
               console.info(
