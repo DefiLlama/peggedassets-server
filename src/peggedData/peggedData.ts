@@ -1854,6 +1854,7 @@ export default [
     twitter: "https://twitter.com/DontDieMeme",
     wiki: "https://wiki.defillama.com/wiki/DontDieMeme",
   },
+  /*
   {
     id: "93",
     name: "Djed StableCoin",
@@ -1874,6 +1875,7 @@ export default [
     twitter: "https://twitter.com/DjedStablecoin",
     wiki: null,
   },
+  */
   {
     id: "94",
     name: "BaoUSD",
