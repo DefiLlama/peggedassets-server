@@ -107,9 +107,9 @@ async function terraMinted() {
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
-        await axios.get("https://fcd.terra.dev/v1/totalsupply/ust")
+        await axios.get("https://terra-classic-fcd.publicnode.com/v1/totalsupply/uusd")
     );
-    const totalSupply = res.data;
+    const totalSupply = res.data / 10**6;
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
   };
