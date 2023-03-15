@@ -25,6 +25,7 @@ import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
 import { sumMultipleBalanceFunctions } from "../helper/generalUtil";
+import { mixinSupply } from "../helper/mixin";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -316,6 +317,13 @@ const chainContracts: ChainContracts = {
       "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa", // stargate
       "0xa2eda21a58856fda86451436513b867c97eecb4ba099da5775520e0f7492e852", // wormhole
     ],
+  },
+  mixin: {
+    ethAssetIds: ["4d8c508b-91c5-375b-92b0-ee702ed2dac5"],
+    tronAssetIds: ["b91e18ff-a9ae-3dc7-8679-e935d9a4b34b"],
+    polygonAssetIds: ["218bc6f4-7927-3f8e-8568-3a3725b74361"],
+    BSCAssetIds: ["94213408-4ee7-3150-a9c4-9c5cce421c78"],
+    EOSAssetIds: ["5dac5e28-ad13-31ea-869f-41770dfcee09"],
   },
 };
 
@@ -700,7 +708,7 @@ async function nearBridged(address: string, decimals: number) {
   ) {
     let balances = {} as Balances;
     const supply = await nearCall(address, "ft_total_supply");
-    console.info("Near success USDT")
+    console.info("Near success USDT");
     sumSingleBalance(
       balances,
       "peggedUSD",
@@ -745,7 +753,7 @@ async function kavaBridged() {
     let balances = {} as Balances;
     for (const contract of chainContracts.kava.bridgedFromETH) {
       const totalSupply = await kavaGetTotalSupply(contract);
-      console.info("Kava success USDT")
+      console.info("Kava success USDT");
       sumSingleBalance(balances, "peggedUSD", totalSupply, contract, true);
     }
     return balances;
@@ -767,7 +775,7 @@ async function aptosBridged() {
       contractStargate,
       typeStargate
     );
-    console.info("Aptos success USDT")
+    console.info("Aptos success USDT");
     sumSingleBalance(
       balances,
       "peggedUSD",
@@ -1249,6 +1257,15 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: aptosBridged(),
+  },
+  mixin: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: mixinSupply(chainContracts.mixin.ethAssetIds, "Ethereum"),
+    tron: mixinSupply(chainContracts.mixin.tronAssetIds, "Tron"),
+    polygon: mixinSupply(chainContracts.mixin.polygonAssetIds, "Polygon"),
+    bsc: mixinSupply(chainContracts.mixin.BSCAssetIds, "BSC"),
+    eos: mixinSupply(chainContracts.mixin.EOSAssetIds, "EOS"),
   },
 };
 

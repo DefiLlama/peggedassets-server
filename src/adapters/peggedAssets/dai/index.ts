@@ -21,6 +21,7 @@ import {
   PeggedIssuanceAdapter,
   Balances,
 } from "../peggedAsset.type";
+import { mixinSupply } from "../helper/mixin";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -200,6 +201,9 @@ const chainContracts: ChainContracts = {
   },
   kava: {
     bridgedFromETH: ["0x765277EebeCA2e31912C9946eAe1021199B39C61"], // multichain
+  },
+  mixin: {
+    ethAssetIds: ["8549b4ad-917c-3461-a646-481adc5d7f7f"],
   },
 };
 
@@ -642,6 +646,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: kavaBridged(),
+  },
+  mixin: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: mixinSupply(chainContracts.mixin.ethAssetIds, "Ethereum"),
   },
 };
 
