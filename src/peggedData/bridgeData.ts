@@ -1123,6 +1123,10 @@ export default {
     bridge: "arbitrum",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x6a7661795c374c0bfc635934efaddff3a7ee23b6": {
+    bridge: "arbitrum",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x5454ba0a9e3552f7828616d80a9d2d869726e6f5": {
     bridge: "near",
     sourceChain: formattedSourceChains.near,
