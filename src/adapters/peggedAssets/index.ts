@@ -97,8 +97,9 @@ import c98dollar from "./coin98-dollar";
 import usp from "./platypus-usd";
 import euroe from "./euroe-stablecoin";
 import cash from "./stabl-fi";
-import dsu from "./digital-standard-unit"
-import eure from "./monerium-eur-money"
+import dsu from "./digital-standard-unit";
+import eure from "./monerium-eur-money";
+import anonusd from "./offshift-anonusd"
 
 export default {
   tether,
@@ -201,5 +202,6 @@ export default {
   "euroe-stablecoin": euroe,
   "stabl-fi": cash,
   "digital-standard-unit": dsu,
-  "monerium-eur-money": eure
+  "monerium-eur-money": eure,
+  "offshift-anonusd": anonusd
 };

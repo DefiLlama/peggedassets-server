@@ -2034,4 +2034,24 @@ export default [
   twitter: "https://twitter.com/monerium",
   wiki: null,
 },
+{
+  id: "102",
+  name: "Offshift anonUSD",
+  address: "0x5a7e6c8204a1359db9aacab7ba5fc309b7981efd",
+  symbol: "ANONUSD",
+  url: "https://offshift.io/",
+  description:
+    "Offshift anon is an on-chain, non-custodial platform that preserves user privacy while maintaining yield potential. Users can burn XFT to mint on-chain synthetics called anonAssets via Shifting, which makes them anonymous. AnonAssets are standard ERC20 tokens, eliminating yield-related tradeoffs associated with privacy",
+  mintRedeemDescription:
+    "To mint synthetics in the Offshift Ecosystem, users select and open a PriFi Application, and connect an ERC20 wallet. If a user possesses a positive XFT balance and sufficient ETH to cover gas fees, he/she may conduct a **Shift** and enter the Offshift Ecosystem’s private (anonymous and/or confidential) side via the Burn-and-Mint Mechanism",
+  onCoinGecko: "true",
+  gecko_id: "offshift-anonusd",
+  cmcId: "23729",
+  pegType: "peggedUSD",
+  pegMechanism: "algorithmic",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/OffshiftXFT",
+  wiki: null,
+},
 ] as PeggedAsset[];
