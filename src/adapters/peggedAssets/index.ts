@@ -99,7 +99,8 @@ import euroe from "./euroe-stablecoin";
 import cash from "./stabl-fi";
 import dsu from "./digital-standard-unit";
 import eure from "./monerium-eur-money";
-import anonusd from "./offshift-anonusd"
+import anonusd from "./offshift-anonusd";
+import nxusd from "./nxusd"
 
 export default {
   tether,
@@ -203,5 +204,6 @@ export default {
   "stabl-fi": cash,
   "digital-standard-unit": dsu,
   "monerium-eur-money": eure,
-  "offshift-anonusd": anonusd
+  "offshift-anonusd": anonusd,
+  nxusd
 };

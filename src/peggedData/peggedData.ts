@@ -2054,4 +2054,24 @@ export default [
   twitter: "https://twitter.com/OffshiftXFT",
   wiki: null,
 },
+{
+  id: "103",
+  name: "NXUSD",
+  address: "0xf14f4ce569cb3679e99d5059909e23b07bd2f387",
+  symbol: "NXUSD",
+  url: "https://nxusd.nereus.finance/",
+  description:
+    "NXUSD is an over-collateralized USD-pegged stablecoin minted by Nereus Finance",
+  mintRedeemDescription:
+    "Collateral tokens are deposited on Nereus Finance.A debt allocation is assigned to the borrower with ZERO INTEREST, plus an origination fee of 0.5% is charged.NXUSD tokens are deposited into the borrower's wallet.",
+  onCoinGecko: "true",
+  gecko_id: "nxusd",
+  cmcId: "19538",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: ["https://docs.nereus.finance/nereus-protocol/security-audit"],
+  twitter: "https://twitter.com/nereusfinance",
+  wiki: null,
+},
 ] as PeggedAsset[];
