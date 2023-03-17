@@ -764,11 +764,11 @@ export default [
     mintRedeemDescription:
       "Using the Algofi app, users mint STBL by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back STBL is burned.",
     onCoinGecko: false,
-    gecko_id: "stbl",
+    gecko_id: "algostable",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: null,
+    priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/algofiorg",
     wiki: "https://wiki.defillama.com/wiki/Algofi",
@@ -868,7 +868,7 @@ export default [
     cmcId: "8772",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
-    priceSource: null, // coingecko inaccurate
+    priceSource: "defillama", // coingecko inaccurate
     auditLinks: ["https://stablecoin.z.com/attestation/"],
     twitter: "https://twitter.com/GMOTrust",
     wiki: "https://wiki.defillama.com/wiki/ZUSD",
@@ -1340,7 +1340,7 @@ export default [
     mintRedeemDescription:
       "Beanstalk uses the liquidity and time weighted average shortage or excess of Beans in the BEAN:3CRV pool to dynamically increase the Bean supply or burn it and issue debt in order to maintain its peg.",
     onCoinGecko: "false",
-    gecko_id: "bean2", // should be updated once it is added to CG
+    gecko_id: "bean", // should be updated once it is added to CG
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
