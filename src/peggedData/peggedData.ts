@@ -2074,4 +2074,24 @@ export default [
   twitter: "https://twitter.com/nereusfinance",
   wiki: null,
 },
+{
+  id: "104",
+  name: "Davos Protocol",
+  address: "0xec38621e72d86775a89c7422746de1f52bba5320",
+  symbol: "DAVOS",
+  url: "https://davos.xyz/",
+  description:
+    "DAVOS is a fully crypto-collateralized stable asset that is soft-pegged to the US Dollar",
+  mintRedeemDescription:
+    "Using the Davos Protocol, users have the opportunity to borrow the DAVOS Stable Asset, initially using their staked MATIC assets as collateral. Users can borrow up to 66% of the value of their MATIC collateral",
+  onCoinGecko: "true",
+  gecko_id: "davos-protocol",
+  cmcId: "23515",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: ["https://github.com/davos-money/new-davos-smart-contracts/tree/main/audits"],
+  twitter: "https://twitter.com/Davos_Protocol",
+  wiki: null,
+},
 ] as PeggedAsset[];

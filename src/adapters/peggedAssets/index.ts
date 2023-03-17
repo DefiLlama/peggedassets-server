@@ -100,7 +100,8 @@ import cash from "./stabl-fi";
 import dsu from "./digital-standard-unit";
 import eure from "./monerium-eur-money";
 import anonusd from "./offshift-anonusd";
-import nxusd from "./nxusd"
+import nxusd from "./nxusd";
+import davos from "./davos-protocol"
 
 export default {
   tether,
@@ -205,5 +206,6 @@ export default {
   "digital-standard-unit": dsu,
   "monerium-eur-money": eure,
   "offshift-anonusd": anonusd,
-  nxusd
+  nxusd,
+  "davos-protocol": davos
 };
