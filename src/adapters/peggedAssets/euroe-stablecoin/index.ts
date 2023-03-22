@@ -15,6 +15,9 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x820802Fa8a99901F52e39acD21177b0BE6EE2974"],
+  },
+  polygon: {
+    issued: ["0x820802Fa8a99901F52e39acD21177b0BE6EE2974"],
   }
 };
 
@@ -51,6 +54,10 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("ethereum", 6),
     unreleased: async () => ({}),
   },
+  polygon: {
+    minted: chainMinted("polygon", 6),
+    unreleased: async () => ({}),
+  }
   
 };
 
