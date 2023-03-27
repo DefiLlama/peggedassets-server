@@ -102,6 +102,7 @@ import eure from "./monerium-eur-money";
 import anonusd from "./offshift-anonusd";
 import nxusd from "./nxusd";
 import davos from "./davos-protocol"
+import defifranc from "./defi-franc"
 
 export default {
   tether,
@@ -207,5 +208,6 @@ export default {
   "monerium-eur-money": eure,
   "offshift-anonusd": anonusd,
   nxusd,
-  "davos-protocol": davos
+  "davos-protocol": davos,
+  "defi-franc": defifranc
 };
