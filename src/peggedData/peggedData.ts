@@ -2094,4 +2094,24 @@ export default [
   twitter: "https://twitter.com/Davos_Protocol",
   wiki: null,
 },
+{
+  id: "105",
+  name: "DeFi Franc",
+  address: "0x045da4bfe02b320f4403674b3b7d121737727a36",
+  symbol: "DCHF",
+  url: "https://www.defifranc.com/",
+  description:
+    "The DeFi Franc (DCHF) is a decentralized stablecoin, pegged to the Swiss Franc. The DeFi Franc is over-collateralized and is created through loans which are backed by ETH and WBTC",
+  mintRedeemDescription:
+    "DCHF can be borrowed using ETH and BTC assets as collateral. Users can borrow up to 90% of the value of their ETH or BTC collateral and every DCHF is 100% redeemable for ETH worth 1 CHF",
+  onCoinGecko: "true",
+  gecko_id: "defi-franc",
+  cmcId: "22249",
+  pegType: "peggedVAR",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/monetadao",
+  wiki: null,
+},
 ] as PeggedAsset[];
