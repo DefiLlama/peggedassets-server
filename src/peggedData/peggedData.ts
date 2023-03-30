@@ -2114,4 +2114,24 @@ export default [
   twitter: "https://twitter.com/monetadao",
   wiki: null,
 },
+{
+  id: "106",
+  name: "Electronic USD",
+  address: "0xa0d69e286b938e21cbf7e51d71f6a4c8918f482f",
+  symbol: "EUSD",
+  url: "https://register.app/#/overview?token=0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F",
+  description:
+    "The eUSD RToken is a fully collateralized US-dollar stablecoin built on the Reserve Protocol",
+  mintRedeemDescription:
+    "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts",
+  onCoinGecko: "true",
+  gecko_id: "electronic-usd",
+  cmcId: "22933",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/reserveprotocol",
+  wiki: null,
+},
 ] as PeggedAsset[];
