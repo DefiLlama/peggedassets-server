@@ -399,6 +399,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     none: maiApiCirculating("gnosisSupply"),
   },
+  kava: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    none: maiApiCirculating("kavaSupply"),
+  },
   // the following are not given by API
   solana: {
     minted: async () => ({}),

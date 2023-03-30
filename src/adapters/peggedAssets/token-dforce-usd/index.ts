@@ -29,8 +29,8 @@ const chainContracts: ChainContracts = {
   polygon: {
     issued: ["0xCf66EB3D546F0415b368d98A95EAF56DeD7aA752"],
     unreleased: [
-      "0xc171ebe1a2873f042f1dddd9327d00527ca29882", // cbridge
-    //"0x88dcdc47d2f83a99cf0000fdf667a468bb958a78", // iUSX
+      "0x88DCDC47D2f83a99CF0000FDF667A468bB958a78", // cbridge
+    //"0xc171EBE1A2873F042F1dDdd9327D00527CA29882", // iUSX
     ],
   },
   bsc: {
@@ -43,8 +43,8 @@ const chainContracts: ChainContracts = {
   avax: {
     issued: ["0x853ea32391AaA14c112C645FD20BA389aB25C5e0"],
     unreleased: [
-      "0x73c01b355f2147e5ff315680e068354d6344eb0b", // cbridge
-      "0xef3c714c9425a8F3697A9C969Dc1af30ba82e5d4", // iUSX, none is borrowed
+      "0xef3c714c9425a8F3697A9C969Dc1af30ba82e5d4", // cbridge
+      "0x73C01B355F2147E5FF315680E068354D6344Eb0b", // iUSX, none is borrowed
     ],
   },
   kava: {
@@ -52,7 +52,7 @@ const chainContracts: ChainContracts = {
     unreleased: [
       "0xb51541df05DE07be38dcfc4a80c05389A54502BB", // cbridge
       "0x9787aF345E765a3fBf0F881c49f8A6830D94A514", // iUSX, none is borrowed
-    ], 
+    ],
   },
   arbitrum: {
     issued: ["0x641441c631e2f909700d2f41fd87f0aa6a6b4edb"],

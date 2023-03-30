@@ -1,5 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
+
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -14,10 +15,7 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   ethereum: {
-    issued: ["0x820802Fa8a99901F52e39acD21177b0BE6EE2974"],
-  },
-  polygon: {
-    issued: ["0x820802Fa8a99901F52e39acD21177b0BE6EE2974"],
+    issued: ["0x5a7E6C8204A1359DB9AAcab7bA5Fc309B7981eFd"],
   }
 };
 
@@ -37,28 +35,17 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(
-        balances,
-        "peggedEUR",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
+      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
     }
     return balances;
   };
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 6),
-    unreleased: async () => ({}),
-  },
-  polygon: {
-    minted: chainMinted("polygon", 6),
+    ethereum: {
+    minted: chainMinted("ethereum", 18),
     unreleased: async () => ({}),
   }
-  
 };
 
 export default adapter;
