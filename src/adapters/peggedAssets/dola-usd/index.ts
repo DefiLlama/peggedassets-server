@@ -22,6 +22,9 @@ const chainContracts = {
     arbitrum: {
        bridgedFromETH: "0x6a7661795c374c0bfc635934efaddff3a7ee23b6",
     },
+    polygon: {
+      bridgedFromETH: "0xbc2b48bc930ddc4e5cfb2e87a45c379aab3aac5c",
+    }
 };
 
 async function ethereumMinted() {
@@ -100,6 +103,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedFromEthereum("arbitrum", 18, chainContracts.arbitrum.bridgedFromETH),
+  },
+  polygon: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedFromEthereum("polygon", 18, chainContracts.polygon.bridgedFromETH),
   },
 };
 
