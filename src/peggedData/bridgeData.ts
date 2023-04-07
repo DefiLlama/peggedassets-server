@@ -951,6 +951,14 @@ export default {
     bridge: "axelar",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x7f5373AE26c3E8FfC4c77b7255DF7eC1A9aF52a6": {
+    bridge: "axelar",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xEB466342C4d449BC9f53A865D5Cb90586f405215": {
+    bridge: "axelar",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x8e70cD5B4Ff3f62659049e74b6649c6603A0E594": {
     bridge: "nomad",
     sourceChain: formattedSourceChains.eth,

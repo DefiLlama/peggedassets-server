@@ -260,6 +260,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0x23367BEA9B6931690960d8c59f6e708630f24E58", // celer
       "0xfA9343C3897324496A05fC75abeD6bAC29f8A40f", // multichain
+      "0xEB466342C4d449BC9f53A865D5Cb90586f405215", // axelar
     ],
   },
   karura: {

@@ -261,6 +261,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD", // celer
       "0xB44a9B6905aF7c801311e8F4E76932ee959c663C", // multichain
+      "0x7f5373AE26c3E8FfC4c77b7255DF7eC1A9aF52a6", // axelar
     ],
   },
   conflux: {
