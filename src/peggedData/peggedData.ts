@@ -2134,4 +2134,24 @@ export default [
   twitter: "https://twitter.com/reserveprotocol",
   wiki: null,
 },
+{
+  id: "107",
+  name: "Czodiac USD",
+  address: "bsc:0xE68b79e51bf826534Ff37AA9CeE71a3842ee9c70",
+  symbol: "CZUSD",
+  url: "https://czodiac.com/",
+  description:
+    "The CZUSD peg to BUSD is maintained by the innovative ScorchPeg system. The ScorchPeg holds a portion of BUSD in reserve and utilizes it to keep CZUSD at a steady $1 value through trades on Pancakeswap. During normal market conditions, the peg remains strong, however, during periods of stress, the ScorchPeg will temporarily pause, and CZUSD will be allowed to float.",
+  mintRedeemDescription:
+    "CZUSD and BUSD swapping.",
+  onCoinGecko: "true",
+  gecko_id: "czusd",
+  cmcId: "19366",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/zodiacs_c",
+  wiki: null,
+},
 ] as PeggedAsset[];
