@@ -18,6 +18,9 @@ const chainContracts: ChainContracts = {
   },
   polygon: {
     issued: ["0x820802Fa8a99901F52e39acD21177b0BE6EE2974"],
+  },
+  arbitrum: {
+    issued: ["0xcF985abA4647a432E60efcEeB8054BBd64244305"],
   }
 };
 
@@ -56,6 +59,11 @@ const adapter: PeggedIssuanceAdapter = {
   },
   polygon: {
     minted: chainMinted("polygon", 6),
+    unreleased: async () => ({}),
+  }
+  ,
+  arbitrum: {
+    minted: chainMinted("arbitrum", 6),
     unreleased: async () => ({}),
   }
   
