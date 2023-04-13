@@ -104,6 +104,7 @@ import anonusd from "./offshift-anonusd";
 import nxusd from "./nxusd";
 import davos from "./davos-protocol";
 import defifranc from "./defi-franc"
+import czusd from "./czusd"
 
 export default {
   tether,
@@ -211,5 +212,6 @@ export default {
   "offshift-anonusd": anonusd,
   nxusd,
   "davos-protocol": davos,
-  "defi-franc": defifranc
+  "defi-franc": defifranc,
+  "czusd": czusd
 };
