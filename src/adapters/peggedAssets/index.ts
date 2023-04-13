@@ -213,5 +213,5 @@ export default {
   nxusd,
   "davos-protocol": davos,
   "defi-franc": defifranc,
-  "czusd-usd": czusd
+  "czusd": czusd
 };
