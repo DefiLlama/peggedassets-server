@@ -2154,4 +2154,24 @@ export default [
   twitter: "https://twitter.com/zodiacs_c",
   wiki: null,
 },
+{
+  id: "108",
+  name: "Deuterium",
+  address: "moonbeam:0xc806B0600cbAfA0B197562a9F7e3B9856866E9bF",
+  symbol: "d2O",
+  url: "https://dam.finance",
+  description:
+    "d2o is an omnichain native stablecoin with a soft-peg to the United States Dollar",
+  mintRedeemDescription:
+    "Add colateral in order to mint d2O.",
+  onCoinGecko: "true",
+  gecko_id: "dam-finance",
+  cmcId: "23529",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/DAM_Finance",
+  wiki: null,
+},
 ] as PeggedAsset[];
