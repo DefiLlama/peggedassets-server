@@ -105,6 +105,7 @@ import nxusd from "./nxusd";
 import davos from "./davos-protocol";
 import defifranc from "./defi-franc"
 import czusd from "./czusd"
+import d2o from "./dam-finance";
 
 export default {
   tether,
@@ -213,5 +214,6 @@ export default {
   nxusd,
   "davos-protocol": davos,
   "defi-franc": defifranc,
-  "czusd": czusd
+  "czusd": czusd,
+  "dam-finance": d2o,
 };
