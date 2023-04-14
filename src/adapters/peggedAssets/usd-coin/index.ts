@@ -26,6 +26,7 @@ import {
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
+import { mixinSupply } from "../helper/mixin";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -316,6 +317,11 @@ const chainContracts: ChainContracts = {
       "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa", // stargate
       "0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea"  // wormhole
     ],
+  },
+  mixin: {
+    ethAssetIds: ["9b180ab6-6abe-3dc0-a13f-04169eb34bfa"],
+    polygonAssetIds: ["80b65786-7c75-3523-bc03-fb25378eae41"],
+    BSCAssetIds: ["3d3d69f1-6742-34cf-95fe-3f8964e6d307"],
   },
 };
 
@@ -1096,6 +1102,13 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: aptosBridged(),
+  },
+  mixin: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: mixinSupply(chainContracts.mixin.ethAssetIds, "Ethereum"),
+    polygon: mixinSupply(chainContracts.mixin.polygonAssetIds, "Polygon"),
+    bsc: mixinSupply(chainContracts.mixin.BSCAssetIds, "BSC"),
   },
 };
 
