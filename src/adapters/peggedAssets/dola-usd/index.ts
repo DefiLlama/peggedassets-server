@@ -24,6 +24,9 @@ const chainContracts = {
     },
     polygon: {
       bridgedFromETH: "0xbc2b48bc930ddc4e5cfb2e87a45c379aab3aac5c",
+    },
+    avax: {
+      bridgedFromETH: "0x221743dc9e954be4f86844649bf19b43d6f8366d",
     }
 };
 
@@ -108,6 +111,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedFromEthereum("polygon", 18, chainContracts.polygon.bridgedFromETH),
+  },
+  avax: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedFromEthereum("avax", 18, chainContracts.avax.bridgedFromETH),
   },
 };
 
