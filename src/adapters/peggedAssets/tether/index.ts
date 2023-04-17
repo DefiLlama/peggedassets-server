@@ -326,6 +326,12 @@ const chainContracts: ChainContracts = {
     BSCAssetIds: ["94213408-4ee7-3150-a9c4-9c5cce421c78"],
     EOSAssetIds: ["5dac5e28-ad13-31ea-869f-41770dfcee09"],
   },
+  thundercore: {
+    issued: ["0x4f3C8E20942461e2c3Bdd8311AC57B0c222f2b82"],
+    bridgeFromETH: [
+      "0x0dcb0cb0120d355cde1ce56040be57add0185baa" // multichain
+    ],
+  },
 };
 
 /*
@@ -1268,6 +1274,11 @@ const adapter: PeggedIssuanceAdapter = {
     bsc: mixinSupply(chainContracts.mixin.BSCAssetIds, "BSC"),
     eos: mixinSupply(chainContracts.mixin.EOSAssetIds, "EOS"),
   },
+  thundercore: {
+    minted: chainMinted("thundercore", 6),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("thundercore", 6, chainContracts.thundercore.bridgedFromETH),
+  }
 };
 
 export default adapter;
