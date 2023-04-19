@@ -8,6 +8,7 @@ export const normalizedChainReplacements = {
   "arbitrum%20nova":"arbitrum_nova",
   ethereumpow: "ethpow",
   "milkomeda%20c1": "milkomeda",
+  "zksync%20lite": "zksync"
 } as {
   [chain: string]: string;
 };
@@ -560,7 +561,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 2020,
   },
-  zkSync: {
+  "zkSync Lite": {
     geckoId: null,
     symbol: null,
     cmcId: null,
@@ -1099,6 +1100,8 @@ export function getChainDisplayName(
       return "EthereumPoW";
     case "aptos":
       return "Aptos";
+    case "zksync":
+      return "zkSync Lite"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
