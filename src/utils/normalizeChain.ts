@@ -1014,8 +1014,6 @@ export function getChainDisplayName(
       return "Velas";
     case "ethereumclassic":
       return "EthereumClassic";
-    case "zksync":
-      return "zkSync";
     case "godwoken":
       return "Godwoken";
     case "callisto":
