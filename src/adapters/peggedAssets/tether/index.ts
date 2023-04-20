@@ -327,9 +327,9 @@ const chainContracts: ChainContracts = {
     EOSAssetIds: ["5dac5e28-ad13-31ea-869f-41770dfcee09"],
   },
   thundercore: {
-    issued: ["0x4f3C8E20942461e2c3Bdd8311AC57B0c222f2b82"],
     bridgeFromETH: [
-      "0x0dcb0cb0120d355cde1ce56040be57add0185baa" // multichain
+      "0x0dcb0cb0120d355cde1ce56040be57add0185baa", // multichain
+      "0x4f3C8E20942461e2c3Bdd8311AC57B0c222f2b82"
     ],
   },
 };
@@ -1275,7 +1275,7 @@ const adapter: PeggedIssuanceAdapter = {
     eos: mixinSupply(chainContracts.mixin.EOSAssetIds, "EOS"),
   },
   thundercore: {
-    minted: chainMinted("thundercore", 6),
+    minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("thundercore", 6, chainContracts.thundercore.bridgedFromETH),
   }
