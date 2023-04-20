@@ -324,9 +324,9 @@ const chainContracts: ChainContracts = {
     BSCAssetIds: ["3d3d69f1-6742-34cf-95fe-3f8964e6d307"],
   },
   thundercore: {
-    issued: ["0x22e89898A04eaf43379BeB70bf4E38b1faf8A31e"],
     bridgeFromETH: [
-      "0xdc42728b0ea910349ed3c6e1c9dc06b5fb591f98" // multichain
+      "0xdc42728b0ea910349ed3c6e1c9dc06b5fb591f98", // multichain
+      "0x22e89898A04eaf43379BeB70bf4E38b1faf8A31e"
     ],
   }
 };
@@ -1117,7 +1117,7 @@ const adapter: PeggedIssuanceAdapter = {
     bsc: mixinSupply(chainContracts.mixin.BSCAssetIds, "BSC"),
   },
   thundercore: {
-    minted: chainMinted("thundercore", 6),
+    minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("thundercore", 6, chainContracts.thundercore.bridgedFromETH),
   }
