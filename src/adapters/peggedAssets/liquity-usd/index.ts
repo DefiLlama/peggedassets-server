@@ -35,6 +35,9 @@ const chainContracts: ChainContracts = {
   arbitrum: {
     bridgedFromETH: ["0x93b346b6BC2548dA6A1E7d98E9a421B42541425b"],
   },
+  polygon_zkevm: {
+    bridgedFromETH: ["0x01E9A866c361eAd20Ab4e838287DD464dc67A50e"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -108,6 +111,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("arbitrum", 18, chainContracts.arbitrum.bridgedFromETH),
   },
+  polygon_zkevm: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("polygon_zkevm", 18, chainContracts.polygon_zkevm.bridgedFromETH),
+  }
 };
 
 export default adapter;
