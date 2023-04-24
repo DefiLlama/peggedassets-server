@@ -114,6 +114,10 @@ const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x3980c9ed79d2c191A89E02Fa3529C60eD6e9c04b"],
     bridgedFromETH: ["0xea32a96608495e54156ae48931a7c20f0dcc1a21"],
   },
+  polygon_zkevm: {
+    bridgeOnETH: ["0x2a3dd3eb832af982ec71669e178424b10dca2ede"],
+    bridgeFromETH: ["0xa8ce8aee21bc2a48a5ef670afcc9274c7bbbc035"],
+  },
   moonbeam: {
     bridgeOnETH: ["0xec4486a90371c9b66f499ff3936f29f0d5af8b7e"],
     bridgedFromETH: [
@@ -762,6 +766,15 @@ const adapter: PeggedIssuanceAdapter = {
       "arbitrum",
       6,
       chainContracts.arbitrum.bridgedFromETH
+    ),
+  },
+  polygon_zkevm: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "polygon_zkevm",
+      6,
+      chainContracts.polygon_zkevm.bridgedFromETH
     ),
   },
   okexchain: {
