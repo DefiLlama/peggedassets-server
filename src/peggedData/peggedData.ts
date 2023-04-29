@@ -2174,4 +2174,24 @@ export default [
   twitter: "https://twitter.com/DAM_Finance",
   wiki: null,
 },
+{
+  id: "109",
+  name: "eUSD",
+  address: "0x97de57ec338ab5d51557da3434828c5dbfada371",
+  symbol: "EUSD",
+  url: "https://lybra.finance/eusd",
+  description:
+    "eUSD is an interest-bearing stablecoin hard-pegged to the US dollar",
+  mintRedeemDescription:
+    "Users deposit ETH & stETH as collateral with an excess collateral ratio of 150% to maintain safety and decentralization",
+  onCoinGecko: "false",
+  gecko_id: "eusd-27a558b0-8b5b-4225-a614-63539da936f4",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/LybraFinanceLSD",
+  wiki: null,
+},
 ] as PeggedAsset[];
