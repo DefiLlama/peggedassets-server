@@ -106,7 +106,7 @@ import davos from "./davos-protocol";
 import defifranc from "./defi-franc"
 import czusd from "./czusd"
 import d2o from "./dam-finance";
-import eusd from "./eusd";
+import eusd from "./eusd-27a558b0-8b5b-4225-a614-63539da936f4";
 
 export default {
   tether,
