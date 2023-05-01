@@ -2176,7 +2176,7 @@ export default [
 },
 {
   id: "109",
-  name: "eUSD",
+  name: "eusd-27a558b0-8b5b-4225-a614-63539da936f4",
   address: "0x97de57ec338ab5d51557da3434828c5dbfada371",
   symbol: "EUSD",
   url: "https://lybra.finance/eusd",
