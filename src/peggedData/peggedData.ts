@@ -2185,7 +2185,7 @@ export default [
   mintRedeemDescription:
     "Users deposit ETH & stETH as collateral with an excess collateral ratio of 150% to maintain safety and decentralization",
   onCoinGecko: "false",
-  gecko_id: "eusd-27a558b0-8b5b-4225-a614-63539da936f4",
+  gecko_id: "eusd",
   cmcId: null,
   pegType: "peggedUSD",
   pegMechanism: "crypto-backed",
