@@ -365,7 +365,9 @@ const adapter: PeggedIssuanceAdapter = {
   moonriver: {
     minted: async () => ({}),
     unreleased: async () => ({}),
+   /* not giving accurate number
     none: maiApiCirculating("moonriverSupply"),
+    */
   },
   harmony: {
     minted: async () => ({}),
