@@ -74,6 +74,10 @@ const uniPoolsMapping = {
     "0xb3aba0672F392A9Eb3115789f1a57C6a1888F057":
       "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", // WBNB pool (Kyberswap)
   },
+  arbitrum: {
+    "0xdbBc93072295362D38B63ACCd447D9c0B36a1678":
+      "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8", // USDC pool (Kyberswap)
+  },
 } as {
   [chain: string]: {
     [poolAddress: string]: string; // non-BOB token address
