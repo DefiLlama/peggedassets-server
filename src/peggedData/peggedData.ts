@@ -2194,4 +2194,24 @@ export default [
   twitter: "https://twitter.com/LybraFinanceLSD",
   wiki: null,
 },
+{
+  id: "110",
+  name: "crvUSD",
+  address: "0x95ECDC6caAf7E4805FCeF2679A92338351D24297",
+  symbol: "crvUSD",
+  url: "https://curve.fi",
+  description:
+    "crvUSD is a collateralized-debt-position (CDP) stablecoin pegged to the US Dollar",
+  mintRedeemDescription:
+    "Users deposit collateral to borrow crvUSD",
+  onCoinGecko: "false",
+  gecko_id: "crv-usd",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/CurveFinance",
+  wiki: null,
+},
 ] as PeggedAsset[];
