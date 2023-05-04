@@ -2205,7 +2205,7 @@ export default [
   mintRedeemDescription:
     "Users deposit collateral to borrow crvUSD",
   onCoinGecko: "false",
-  gecko_id: "crv-usd",
+  gecko_id: "crvusd",
   cmcId: null,
   pegType: "peggedUSD",
   pegMechanism: "crypto-backed",

@@ -107,7 +107,7 @@ import defifranc from "./defi-franc"
 import czusd from "./czusd"
 import d2o from "./dam-finance";
 import eusd from "./eusd";
-import crvusd from "./crv-usd"
+import crvusd from "./crvusd"
 
 export default {
   tether,
