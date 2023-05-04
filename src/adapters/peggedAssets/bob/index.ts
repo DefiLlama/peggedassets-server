@@ -135,6 +135,10 @@ const adapter: PeggedIssuanceAdapter = {
     minted: getChainCollateralUsdValue("bsc"),
     unreleased: async () => ({}),
   },
+  arbitrum: {
+    minted: getChainCollateralUsdValue("arbitrum"),
+    unreleased: async () => ({}),
+  },
 };
 
 export default adapter;
