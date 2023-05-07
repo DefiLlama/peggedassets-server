@@ -116,7 +116,7 @@ const chainContracts: ChainContracts = {
   },
   polygon_zkevm: {
     bridgeOnETH: ["0x2a3dd3eb832af982ec71669e178424b10dca2ede"],
-    bridgeFromETH: ["0xa8ce8aee21bc2a48a5ef670afcc9274c7bbbc035"],
+    bridgedFromETH: ["0xa8ce8aee21bc2a48a5ef670afcc9274c7bbbc035"],
   },
   moonbeam: {
     bridgeOnETH: ["0xec4486a90371c9b66f499ff3936f29f0d5af8b7e"],
