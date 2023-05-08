@@ -114,6 +114,10 @@ const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x3980c9ed79d2c191A89E02Fa3529C60eD6e9c04b"],
     bridgedFromETH: ["0xea32a96608495e54156ae48931a7c20f0dcc1a21"],
   },
+  zksync_era: {
+    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    bridgedFromETH: ["0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4"],
+  }
   polygon_zkevm: {
     bridgeOnETH: ["0x2a3dd3eb832af982ec71669e178424b10dca2ede"],
     bridgedFromETH: ["0xa8ce8aee21bc2a48a5ef670afcc9274c7bbbc035"],
@@ -766,6 +770,15 @@ const adapter: PeggedIssuanceAdapter = {
       "arbitrum",
       6,
       chainContracts.arbitrum.bridgedFromETH
+    ),
+  },
+  zksync_era: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "zksync_era",
+      6,
+      chainContracts.zksync_era.bridgedFromETH
     ),
   },
   polygon_zkevm: {
