@@ -117,7 +117,7 @@ const chainContracts: ChainContracts = {
   zksync_era: {
     bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
     bridgedFromETH: ["0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4"],
-  }
+  },
   polygon_zkevm: {
     bridgeOnETH: ["0x2a3dd3eb832af982ec71669e178424b10dca2ede"],
     bridgedFromETH: ["0xa8ce8aee21bc2a48a5ef670afcc9274c7bbbc035"],
