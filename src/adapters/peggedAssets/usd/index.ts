@@ -25,7 +25,7 @@ const chainContracts: ChainContracts = {
   optimism: {
     issued: ["0x73cb180bf0521828d8849bc8CF2B920918e23032"],
   },
-  zksync_era: {
+  era: {
     issued: ["0x8E86e46278518EFc1C5CEd245cBA2C7e3ef11557"],
   },
   avax: {
@@ -78,8 +78,8 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("optimism", 6),
     unreleased: async () => ({}),
   },
-  zksync_era: {
-    minted: chainMinted("zksync_era", 6),
+  era: {
+    minted: chainMinted("era", 6),
     unreleased: async () => ({}),
   },
   avax: {
