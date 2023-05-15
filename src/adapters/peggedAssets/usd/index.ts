@@ -28,6 +28,9 @@ const chainContracts: ChainContracts = {
   zksync_era: {
     issued: ["0x8E86e46278518EFc1C5CEd245cBA2C7e3ef11557"],
   },
+  avax: {
+    issued: ["0xe80772Eaf6e2E18B651F160Bc9158b2A5caFCA65"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -79,6 +82,10 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("zksync_era", 6),
     unreleased: async () => ({}),
   },
+  avax: {
+    minted: chainMinted("avax", 6),
+    unreleased: async () => ({}),
+  }
 };
 
 export default adapter;
