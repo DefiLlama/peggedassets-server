@@ -1277,7 +1277,7 @@ const adapter: PeggedIssuanceAdapter = {
   thundercore: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("thundercore", 6, chainContracts.thundercore.bridgedFromETH),
+    ethereum: bridgedSupply("thundercore", 6, chainContracts.thundercore.bridgeFromETH),
   }
 };
 

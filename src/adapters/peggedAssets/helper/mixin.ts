@@ -1,5 +1,5 @@
 import axios from "axios";
-import retry from "async-retry";
+const retry = require("async-retry");
 import { Balances, ChainBlocks } from "../peggedAsset.type";
 import { sumSingleBalance } from "./generalUtil";
 
