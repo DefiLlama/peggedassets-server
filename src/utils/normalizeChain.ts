@@ -9,8 +9,8 @@ export const normalizedChainReplacements = {
   ethereumpow: "ethpow",
   "milkomeda%20c1": "milkomeda",
   "zksync%20lite": "zksync",
-  "zksync era": "era",
-  "polygon zkevm": "polygon_zkevm",
+  "zksync%20era": "era",
+  "polygon%20zkevm": "polygon_zkevm",
 } as {
   [chain: string]: string;
 };
