@@ -16,7 +16,7 @@ async function chainMinted(chain: string, decimals: number) {
         const totalDebt = (
             await sdk.api.abi.call({
             abi: {"stateMutability":"view","type":"function","name":"total_debt","inputs":[],"outputs":[{"name":"","type":"uint256"}]},
-            target: "0x818709b85052ddc521fae9c78737b27316337e3a",
+            target: "0xC9332fdCB1C491Dcc683bAe86Fe3cb70360738BC",
             block: _ethBlock,
             chain: chain,
             })
