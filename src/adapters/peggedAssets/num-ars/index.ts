@@ -26,8 +26,6 @@ const minted = async () => {
         false
     )
 
-    console.log(balances)
-
     return balances
 }
 
@@ -76,10 +74,6 @@ const unreleased = async () => {
     mergeBalances(total_balances, 'peggedVAR', not_issued_balances)
     mergeBalances(total_balances, 'peggedVAR', distributor_balances)
     mergeBalances(total_balances, 'peggedVAR', burned_balances)
-
-    console.log(not_issued_balances)
-    console.log(distributor_balances)
-    console.log(burned_balances)
 
     return total_balances
 }
