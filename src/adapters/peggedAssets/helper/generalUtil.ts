@@ -99,7 +99,7 @@ export async function sumMultipleBalanceFunctions(
   };
 }
 
-function mergeBalances(
+export function mergeBalances(
   balances: Balances,
   pegType: PeggedAssetType,
   balancesToMerge: Balances

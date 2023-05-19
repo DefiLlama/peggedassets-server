@@ -1,14 +1,13 @@
-import sdk from "@defillama/sdk"
+import SDK from "@defillama/sdk"
+const sdk: typeof SDK = require("@defillama/sdk")
 import { Balances, PeggedIssuanceAdapter } from "../peggedAsset.type"
-import { sumSingleBalance } from "../helper/generalUtil"
-import { mergeBalances } from "@defillama/sdk/build/generalUtil"
-
-
+import { sumSingleBalance, mergeBalances } from "../helper/generalUtil"
 
 const NUARS_ADDRESS = "0x65517425ac3ce259a34400bb67ceb39ff3ddc0bd"
 const NUARS = {
     target: NUARS_ADDRESS,
-    decimals: 18
+    decimals: 18,
+    chain: 'polygon'
 }
 
 const MINTED_NOT_ISSUED_WALLET = "0x8388A0f91875e74Dc4705Abf2C9bBDD1bD40C585"
@@ -22,10 +21,12 @@ const minted = async () => {
     sumSingleBalance(
         balances,
         'peggedVAR',
-        minted,
+        parseFloat(minted),
         "issued",
         false
     )
+
+    console.log(balances)
 
     return balances
 }
@@ -51,36 +52,40 @@ const unreleased = async () => {
     sumSingleBalance(
         not_issued_balances,
         'peggedVAR',
-        minted_not_issued_balance,
+        parseFloat(minted_not_issued_balance),
         "not_issued",
         false
     )
     sumSingleBalance(
         distributor_balances,
         'peggedVAR',
-        distributor_balance,
+        parseFloat(distributor_balance),
         "not_issued",
         false
     )
     sumSingleBalance(
         burned_balances,
         'peggedVAR',
-        burned_balance,
+        parseFloat(burned_balance),
         "burnt",
         false
     )
 
     let total_balances = {} as Balances
 
-    mergeBalances(total_balances, not_issued_balances)
-    mergeBalances(total_balances, distributor_balances)
-    mergeBalances(total_balances, burned_balances)
+    mergeBalances(total_balances, 'peggedVAR', not_issued_balances)
+    mergeBalances(total_balances, 'peggedVAR', distributor_balances)
+    mergeBalances(total_balances, 'peggedVAR', burned_balances)
+
+    console.log(not_issued_balances)
+    console.log(distributor_balances)
+    console.log(burned_balances)
 
     return total_balances
 }
 
 const adapter: PeggedIssuanceAdapter = {
-    ['polygon'] : {
+    polygon : {
         minted,
         unreleased
     }
