@@ -466,7 +466,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 55,
   },
-  Elrond: {
+  "MultiversX": {
     geckoId: "elrond-erd-2",
     symbol: "EGLD",
     cmcId: "6892",
@@ -914,6 +914,7 @@ chainCoingeckoIds["xDai"] = chainCoingeckoIds["Gnosis"];
 chainCoingeckoIds["Binance"] = chainCoingeckoIds["BSC"];
 chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
+chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 
 export const extraSections = [
   "staking",
@@ -964,6 +965,8 @@ export function getChainDisplayName(
       return useNewChainNames ? "Gnosis" : "xDai";
     case "cosmos":
       return useNewChainNames ? "CosmosHub" : "Cosmos";
+    case "elrond":
+      return useNewChainNames ? "MultiversX" : "Elrond"
     case "avax":
       return "Avalanche";
     case "xdaiarb":
@@ -1016,8 +1019,8 @@ export function getChainDisplayName(
       return "Polis";
     case "zyx":
       return "ZYX";
-    case "elrond":
-      return "Elrond";
+    case "Elrond":
+      return "MultiversX"
     case "stellar":
       return "Stellar";
     case "shiden":
