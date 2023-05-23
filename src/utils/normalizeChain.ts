@@ -937,6 +937,8 @@ export function transformNewChainName(chain: string) {
       return "CosmosHub";
     case "Milkomeda":
       return "Milkomeda C1";
+    case "Elrond":
+      return "MultiversX";
     default:
       return chain;
   }
