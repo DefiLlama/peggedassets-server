@@ -11,6 +11,7 @@ export const normalizedChainReplacements = {
   "zksync%20lite": "zksync",
   "zksync%20era": "era",
   "polygon%20zkevm": "polygon_zkevm",
+  multiversx: "elrond"
 } as {
   [chain: string]: string;
 };
@@ -1019,8 +1020,6 @@ export function getChainDisplayName(
       return "Polis";
     case "zyx":
       return "ZYX";
-    case "Elrond":
-      return "MultiversX"
     case "stellar":
       return "Stellar";
     case "shiden":
