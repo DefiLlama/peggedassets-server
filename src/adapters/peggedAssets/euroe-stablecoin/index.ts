@@ -69,7 +69,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   avalanche: {
-    minted: chainMinted("avax", 6),
+    minted: chainMinted("avalanche", 6),
     unreleased: async () => ({}),
   }
   
