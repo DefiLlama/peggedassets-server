@@ -8,7 +8,9 @@ export const normalizedChainReplacements = {
   "arbitrum%20nova":"arbitrum_nova",
   ethereumpow: "ethpow",
   "milkomeda%20c1": "milkomeda",
-  "zksync%20lite": "zksync"
+  "zksync%20lite": "zksync",
+  "zksync era": "era",
+  "polygon zkevm": "polygon_zkevm",
 } as {
   [chain: string]: string;
 };
@@ -878,6 +880,28 @@ export const chainCoingeckoIds = {
     symbol: "APT",
     cmcId: "21794",
   },
+  "zkSync Era": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM", "Rollup"],
+    parent: {
+      chain: "Ethereum",
+      types: ["L2", "gas"]
+    },
+    chainId: 324,
+  },
+  "Polygon zkEVM": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM", "Rollup"],
+    parent: {
+      chain: "Ethereum",
+      types: ["L2", "gas"]
+    },
+    chainId: 1101
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1100,6 +1124,10 @@ export function getChainDisplayName(
       return "Aptos";
     case "zksync":
       return "zkSync Lite"
+    case "era":
+      return "zkSync Era";
+    case "polygon_zkevm":
+      return "Polygon zkEVM"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

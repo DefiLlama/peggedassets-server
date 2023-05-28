@@ -112,7 +112,7 @@
   "stellar",
   "flow",
   "loopring",
-  "zksync",
+  "era",
   "fusion",
   "aztec",
   "reinetwork",
@@ -129,5 +129,6 @@
   "kujira",
   "ethpow",
   "aptos",
-  "comdex"
+  "comdex",
+  "polygon_zkevm"
 ]
