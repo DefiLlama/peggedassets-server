@@ -9,8 +9,9 @@ export const normalizedChainReplacements = {
   ethereumpow: "ethpow",
   "milkomeda%20c1": "milkomeda",
   "zksync%20lite": "zksync",
-  "zksync era": "era",
-  "polygon zkevm": "polygon_zkevm",
+  "zksync%20era": "era",
+  "polygon%20zkevm": "polygon_zkevm",
+  multiversx: "elrond"
 } as {
   [chain: string]: string;
 };
@@ -466,7 +467,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 55,
   },
-  Elrond: {
+  "MultiversX": {
     geckoId: "elrond-erd-2",
     symbol: "EGLD",
     cmcId: "6892",
@@ -914,6 +915,7 @@ chainCoingeckoIds["xDai"] = chainCoingeckoIds["Gnosis"];
 chainCoingeckoIds["Binance"] = chainCoingeckoIds["BSC"];
 chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
+chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 
 export const extraSections = [
   "staking",
@@ -935,6 +937,8 @@ export function transformNewChainName(chain: string) {
       return "CosmosHub";
     case "Milkomeda":
       return "Milkomeda C1";
+    case "Elrond":
+      return "MultiversX";
     default:
       return chain;
   }
@@ -964,6 +968,8 @@ export function getChainDisplayName(
       return useNewChainNames ? "Gnosis" : "xDai";
     case "cosmos":
       return useNewChainNames ? "CosmosHub" : "Cosmos";
+    case "elrond":
+      return useNewChainNames ? "MultiversX" : "Elrond"
     case "avax":
       return "Avalanche";
     case "xdaiarb":
@@ -1016,8 +1022,6 @@ export function getChainDisplayName(
       return "Polis";
     case "zyx":
       return "ZYX";
-    case "elrond":
-      return "Elrond";
     case "stellar":
       return "Stellar";
     case "shiden":
