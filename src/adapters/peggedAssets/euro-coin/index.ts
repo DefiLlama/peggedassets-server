@@ -21,6 +21,9 @@ const chainContracts: ChainContracts = {
   polygon: {
     bridgedFromETH: ["0x8a037dbcA8134FFc72C362e394e35E0Cad618F85"],
   },
+  avax: {
+    issued: ["0xc891eb4cbdeff6e073e859e987815ed1505c2acd"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
