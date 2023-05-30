@@ -48,7 +48,7 @@ async function chainMinted(chain: string, decimals: number) {
 
 const adapter: PeggedIssuanceAdapter = {
   bsc: {
-    minted: chainMinted("bsc", 6),
+    minted: chainMinted("bsc", 18),
     unreleased: async () => ({}),
   },
 };

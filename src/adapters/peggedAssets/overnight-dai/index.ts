@@ -51,11 +51,11 @@ async function chainMinted(chain: string, decimals: number) {
 
 const adapter: PeggedIssuanceAdapter = {
   arbitrum: {
-    minted: chainMinted("arbitrum", 6),
+    minted: chainMinted("arbitrum", 18),
     unreleased: async () => ({}),
   },
   optimism: {
-    minted: chainMinted("optimism", 6),
+    minted: chainMinted("optimism", 18),
     unreleased: async () => ({}),
   },
 };
