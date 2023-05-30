@@ -222,6 +222,6 @@ export default {
   "dam-finance": d2o,
   eusd,
   crvusd,
-  overnightdai,
-  usdtplus
+  "overnight-dai": overnightdai,
+  "usdtplus": usdtplus
 };
