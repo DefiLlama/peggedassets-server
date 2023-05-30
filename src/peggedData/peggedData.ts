@@ -2216,7 +2216,7 @@ export default [
 },
 {
   id: "111",
-  name: "Overnight DAI+",
+  name: "DAI+",
   address: "optimism:0x970d50d09f3a656b43e11b0d45241a84e3a6e011",
   symbol: "DAI+",
   url: "https://overnight.fi/",
@@ -2236,7 +2236,7 @@ export default [
 },
 {
   id: "112",
-  name: "Overnight.fi USDT+",
+  name: "USDT+",
   address: "bsc:0x5335e87930b410b8c5bb4d43c3360aca15ec0c8c",
   symbol: "USDT+",
   url: "https://overnight.fi/",
