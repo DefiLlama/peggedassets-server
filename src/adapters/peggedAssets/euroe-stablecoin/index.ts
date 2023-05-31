@@ -22,7 +22,7 @@ const chainContracts: ChainContracts = {
   arbitrum: {
     issued: ["0xcF985abA4647a432E60efcEeB8054BBd64244305"],
   },
-  avalanche: {
+  avax: {
     issued: ["0x820802Fa8a99901F52e39acD21177b0BE6EE2974"],
   }
 };
@@ -68,8 +68,8 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("arbitrum", 6),
     unreleased: async () => ({}),
   },
-  avalanche: {
-    minted: chainMinted("avalanche", 6),
+  avax: {
+    minted: chainMinted("avax", 6),
     unreleased: async () => ({}),
   }
   
