@@ -2257,7 +2257,7 @@ export default [
 {
   id: "113",
   name: "CLever USD",
-  address: "bsc:0xE68b79e51bf826534Ff37AA9CeE71a3842ee9c70",
+  address: "0x3C20Ac688410bE8F391bE1fb00AFc5C212972F86",
   symbol: "clevUSD",
   url: "https://clever.aladdin.club/",
   description:
