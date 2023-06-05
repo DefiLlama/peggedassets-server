@@ -2254,4 +2254,24 @@ export default [
   twitter: "https://twitter.com/overnight_fi",
   wiki: null,
 },
+{
+  id: "113",
+  name: "SILK",
+  address: null,
+  symbol: "SILK",
+  url: "https://app.shadeprotocol.io",
+  description:
+    "SILK is a collateralized stablecoin with a variable peg that is derived from a basket of assets including forex, commodities, and cryptocurrencies. The basket is designed to maintain buying power.",
+  mintRedeemDescription:
+    "Using ShadeLend, users deposit collateral to borrow / mint SILK. When users repay their loan, the SILK is burned",
+  onCoinGecko: "false",
+  gecko_id: "silk",
+  cmcId: null,
+  pegType: "peggedVAR",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama", 
+  auditLinks: null,
+  twitter: "https://twitter.com/Shade_Protocol",
+  wiki: null,
+},
 ] as PeggedAsset[];
