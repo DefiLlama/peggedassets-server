@@ -109,7 +109,8 @@ import d2o from "./dam-finance";
 import eusd from "./eusd";
 import crvusd from "./crvusd";
 import overnightdai from "./overnight-dai";
-import usdtplus from "./usdtplus"
+import usdtplus from "./usdtplus";
+import silk from './silk';
 
 export default {
   tether,
@@ -223,5 +224,6 @@ export default {
   eusd,
   crvusd,
   "overnight-dai": overnightdai,
-  "usdtplus": usdtplus
+  "usdtplus": usdtplus,
+  silk
 };
