@@ -2274,4 +2274,24 @@ export default [
   twitter: "https://twitter.com/Shade_Protocol",
   wiki: null,
 },
+{
+  id: "114",
+  name: "CLever USD",
+  address: "0x3C20Ac688410bE8F391bE1fb00AFc5C212972F86",
+  symbol: "clevUSD",
+  url: "https://clever.aladdin.club/",
+  description:
+    "ClevUSD are synthetic versions of their associated real token, representing the future yield of CLever strategies. Each clevToken is backed by one or more equivalent real Tokens in the system.",
+  mintRedeemDescription:
+    "ClevUSD can be farmed in CLever liquidity pools or swapped for more of the original token.",
+  onCoinGecko: "true",
+  gecko_id: "clever-usd",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/0xc_lever",
+  wiki: null,
+},
 ] as PeggedAsset[];
