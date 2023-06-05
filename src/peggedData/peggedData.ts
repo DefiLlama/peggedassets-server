@@ -2261,7 +2261,7 @@ export default [
   symbol: "SILK",
   url: "https://app.shadeprotocol.io",
   description:
-    "SILK is a collateralized stablecoin with a variable peg that is derived from a basket of assets including forex, commodities, and cryptocurrencies. The basket is designed to maintain buying power.",
+    "SILK is a collateralized stablecoin with a variable peg that is derived from a basket of assets including forex, commodities, and cryptocurrencies. The basket is designed to maintain purchasing power.",
   mintRedeemDescription:
     "Using ShadeLend, users deposit collateral to borrow / mint SILK. When users repay their loan, the SILK is burned",
   onCoinGecko: "false",
