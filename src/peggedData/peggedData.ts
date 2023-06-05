@@ -2265,7 +2265,7 @@ export default [
   mintRedeemDescription:
     "Using ShadeLend, users deposit collateral to borrow / mint SILK. When users repay their loan, the SILK is burned",
   onCoinGecko: "false",
-  gecko_id: "silk",
+  gecko_id: "silk-bcec1136-561c-4706-a42c-8b67d0d7f7d2",
   cmcId: null,
   pegType: "peggedVAR",
   pegMechanism: "crypto-backed",
