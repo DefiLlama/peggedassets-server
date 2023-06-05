@@ -2254,4 +2254,24 @@ export default [
   twitter: "https://twitter.com/overnight_fi",
   wiki: null,
 },
+{
+  id: "113",
+  name: "CLever USD",
+  address: "bsc:0xE68b79e51bf826534Ff37AA9CeE71a3842ee9c70",
+  symbol: "clevUSD",
+  url: "https://clever.aladdin.club/",
+  description:
+    "ClevUSD are synthetic versions of their associated real token, representing the future yield of CLever strategies. Each clevToken is backed by one or more equivalent real Tokens in the system.",
+  mintRedeemDescription:
+    "ClevUSD can be farmed in CLever liquidity pools or swapped for more of the original token.",
+  onCoinGecko: "true",
+  gecko_id: "clever-usd",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/0xc_lever",
+  wiki: null,
+},
 ] as PeggedAsset[];
