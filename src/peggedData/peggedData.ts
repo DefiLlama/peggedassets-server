@@ -2294,4 +2294,24 @@ export default [
   twitter: "https://twitter.com/0xc_lever",
   wiki: null,
 },
+{
+  id: "115",
+  name: "R",
+  address: "0x183015a9bA6fF60230fdEaDc3F43b3D788b13e21",
+  symbol: "R",
+  url: "https://raft.fi/",
+  description:
+    "R is a USD-pegged stablecoin that uses Lido Staked Ether (stETH) as collateral, providing a capital-efficient and low cost way to borrow while keeping your stETH rewards.",
+  mintRedeemDescription:
+    "Users deposit stETH as collateral with a collateralization ratio of at least 110% to generate the stablecoin R.",
+  onCoinGecko: "true",
+  gecko_id: "r",
+  cmcId: "24404",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: ["https://github.com/trailofbits/publications/blob/master/reviews/2023-04-tempus-raft-securityreview.pdf"],
+  twitter: "https://twitter.com/raft_fi",
+  wiki: null,
+}
 ] as PeggedAsset[];
