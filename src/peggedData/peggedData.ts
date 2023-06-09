@@ -1704,8 +1704,8 @@ export default [
       "Real USD (USDR v2) is a natively rebasing, yield-bearing, overcollateralized stablecoin, pegged to the US dollar. Collateralizing USDR will be yield-generating, tokenized real estate that is inflation-resistant and wealth generating.",
     mintRedeemDescription:
     "Using Tangible, users can swap DAI to mint USDR 1:1. A portion of that DAI is then converted into tokenized real estate through Tangible's existing marketplace. Users receive a daily rebase. USDR can be redeemed for DAI 1:1 at any time.",
-    onCoinGecko: "true",
-    gecko_id: "real-usd",
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
