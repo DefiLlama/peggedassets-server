@@ -37,6 +37,7 @@ import ratio from "./ratio-stable-coin";
 import usdj from "./just-stablecoin";
 import stbl from "./stbl";
 import volt from "./volt-protocol";
+import r from './r';
 import rai from "./rai";
 import float from "./float-protocol-float";
 import usdx from "./usdx";
@@ -153,6 +154,7 @@ export default {
   "just-stablecoin": usdj,
   stbl,
   "volt-protocol": volt,
+  r,
   rai,
   "float-protocol-float": float,
   usdx,
