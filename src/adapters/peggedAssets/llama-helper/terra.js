@@ -53,6 +53,7 @@ async function getDenomBalance(denom, owner, block) {
 
 // LP stuff
 async function totalSupply(token, block) {
+    return 0;
     const data = await query(`contracts/${token}/store?query_msg={"token_info":{}}`, block)
     return data.total_supply
 }
