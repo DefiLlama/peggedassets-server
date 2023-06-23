@@ -5,7 +5,7 @@ const { getApplicationAddress } = require('./algorandUtils/address')
 const { RateLimiter } = require("limiter");
 
 const axiosObj = axios.create({
-  baseURL: 'https://algoindexer.algoexplorerapi.io',
+  baseURL: 'https://mainnet-idx.algonode.cloud',
   timeout: 300000,
 })
 

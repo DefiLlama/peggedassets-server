@@ -511,7 +511,7 @@ async function algorandMinted() {
     const supplyRes = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://algoindexer.algoexplorerapi.io/v2/assets/312769"
+          "https://mainnet-idx.algonode.cloud/v2/assets/312769"
         )
     );
     console.info("algorand 1 success USDT");
@@ -519,7 +519,7 @@ async function algorandMinted() {
     const reserveRes = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://algoindexer.algoexplorerapi.io/v2/accounts/XIU7HGGAJ3QOTATPDSIIHPFVKMICXKHMOR2FJKHTVLII4FAOA3CYZQDLG4"
+          "https://mainnet-idx.algonode.cloud/v2/accounts/XIU7HGGAJ3QOTATPDSIIHPFVKMICXKHMOR2FJKHTVLII4FAOA3CYZQDLG4"
         )
     );
     console.info("algorand 2 success USDT");

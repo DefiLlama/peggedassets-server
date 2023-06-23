@@ -64,14 +64,14 @@ async function algorandMinted() {
       const supplyRes = await retry(
         async (_bail: any) =>
           await axios.get(
-            "https://algoindexer.algoexplorerapi.io/v2/assets/83209012"
+            "https://mainnet-idx.algonode.cloud/v2/assets/83209012"
           )
       );
       const supply = supplyRes.data.asset.params.total;
       const reserveRes = await retry(
         async (_bail: any) =>
           await axios.get(
-            "https://algoindexer.algoexplorerapi.io/v2/accounts/XSAED32VYAQK42TQHKCRHYK7P6LBBPQ2237PALQZAGL2XJTNNOPD523CNA"
+            "https://mainnet-idx.algonode.cloud/v2/accounts/XSAED32VYAQK42TQHKCRHYK7P6LBBPQ2237PALQZAGL2XJTNNOPD523CNA"
           )
       );
       const reserveAccount = reserveRes.data.account.assets.filter(

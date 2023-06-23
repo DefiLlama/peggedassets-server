@@ -73,14 +73,14 @@ async function supply() {
     const supplyRes = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://algoindexer.algoexplorerapi.io/v2/assets/465865291"
+          "https://mainnet-idx.algonode.cloud/v2/assets/465865291"
         )
     );
     const supply = supplyRes.data.asset.params.total;
     const reserveRes = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://algoindexer.algoexplorerapi.io/v2/accounts/OPY7XNB5LVMECF3PHJGQV2U33LZPM5FBUXA3JJPHANAG5B7GEYUPZJVYRE"
+          "https://mainnet-idx.algonode.cloud/v2/accounts/OPY7XNB5LVMECF3PHJGQV2U33LZPM5FBUXA3JJPHANAG5B7GEYUPZJVYRE"
         )
     );
     const reserveAccount = reserveRes.data.account.assets.filter(

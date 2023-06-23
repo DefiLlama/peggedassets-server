@@ -440,7 +440,7 @@ async function algorandMinted() {
     const supplyRes = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://algoindexer.algoexplorerapi.io/v2/assets/31566704"
+          "https://mainnet-idx.algonode.cloud/v2/assets/31566704"
         )
     );
     console.info("algorand 1 success USDC");
@@ -448,7 +448,7 @@ async function algorandMinted() {
     const reserveRes = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://algoindexer.algoexplorerapi.io/v2/accounts/2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM"
+          "https://mainnet-idx.algonode.cloud/v2/accounts/2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM"
         )
     );
     console.info("algorand 2 success USDC");
