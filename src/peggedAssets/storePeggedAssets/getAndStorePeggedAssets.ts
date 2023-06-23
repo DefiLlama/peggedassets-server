@@ -212,6 +212,13 @@ async function calcCirculating(
   await Promise.all(peggedTotalPromises);
 }
 
+const timeout = (prom: any, time: number, peggedID: string, chain: string) =>
+  Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
+    async (err) => {
+      console.error(`Could not store peggedAsset ${peggedID} on chain ${chain}`, err);
+    }
+  );
+
 export async function storePeggedAsset(
   unixTimestamp: number,
   ethBlock: number,
@@ -253,7 +260,7 @@ export async function storePeggedAsset(
             );
           }
         );
-        await Promise.all(peggedChainPromises);
+        await timeout(Promise.all(peggedChainPromises), 60e3, peggedAsset.name, chain);
       }
     );
     await Promise.all(peggedBalancesPromises);
