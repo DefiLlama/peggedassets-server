@@ -362,7 +362,7 @@ export default [
     mintRedeemDescription:
       "When a stablecoin is bridged between Synapse-enabled chains, the funds are automatically converted to nUSD, and bridged to the destination chain. Once there, this nUSD can be auto-swapped to that chain's native stablecoins using the local nUSD pool.",
     onCoinGecko: false,
-    gecko_id: null,
+    gecko_id: "nexus-usd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -604,7 +604,7 @@ export default [
     mintRedeemDescription:
       "Using the Money On Chain app, users mint DoC by depositing rBTC into a vault. When the loan is repaid to retrieve the collateral, the paid back DoC is burned.",
     onCoinGecko: false,
-    gecko_id: null,
+    gecko_id: "doc",
     cmcId: "7558",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -723,9 +723,9 @@ export default [
       "USDr is an algorithmically risk-adjusted Collateralized Debt Position. Users can mint USDr using stable yield-bearing assets, starting with stablecoin LP from Saber.",
     mintRedeemDescription:
       "USDr is minted by depositing an accepted collateral asset into Ratio Finance. The collateral is used to generate yield that pays down the USDr debt. Any USDr used to repay the loan to retrieve the collateral is burned.",
-    onCoinGecko: "false",
-    gecko_id: null,
-    cmcId: "20674",
+    onCoinGecko: "true",
+    gecko_id: "ratio-stable-coin",
+    cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
@@ -783,8 +783,8 @@ export default [
       "VOLT is a stablecoin that uses a custom oracle system to stay pegged to the purchasing power of the US Dollar.",
     mintRedeemDescription:
       "Using the Volt Protocol app, users swap FEI or USDC to mint VOLT at the current exchange rate. VOLT can be redeemed for FEI or USDC at any time.",
-    onCoinGecko: "false",
-    gecko_id: null,
+    onCoinGecko: "true",
+    gecko_id: "volt-protocol",
     cmcId: null,
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
@@ -824,7 +824,7 @@ export default [
     mintRedeemDescription:
       "If the price of FLOAT is away from its target price, the supply is changed by minting (expansion) or buying up and burning FLOAT (contraction). This is done through a dutch auction (in an expansion) and a reverse dutch auction (in a contraction), respectively.",
     onCoinGecko: "true",
-    gecko_id: "float-protocol",
+    gecko_id: "float-protocol-float",
     cmcId: "9861",
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
@@ -943,8 +943,8 @@ export default [
       "DEI is a fractional reserve USD-pegged stablecoin and is the unit of account for all trading within the DEUS Finance ecosystem.",
     mintRedeemDescription:
       "Using the Deus Finance app, DEI can be minted by locking USDC and burning DEUS in a proportion determined by the protocol's collateral ratio.",
-    onCoinGecko: "false",
-    gecko_id: null,
+    onCoinGecko: "true",
+    gecko_id: "dei-token",
     cmcId: "12517",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1081,8 +1081,8 @@ export default [
     description: "USN is a NEAR-native stablecoin.",
     mintRedeemDescription:
       "Using the Decentral Bank app, users swap USDT to mint USN 1:1. USN can be redeemed for USDT 1:1 at any time.",
-    onCoinGecko: "false",
-    gecko_id: null,
+    onCoinGecko: "true",
+    gecko_id: "usn",
     cmcId: "19682",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1162,7 +1162,7 @@ export default [
     mintRedeemDescription:
       "Using the Karura app, users receive 3USD LP tokens by adding aUSD, USDC, or USDT liquidity. LP tokens can be redeemed for the underlying assets.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "three-usd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1182,7 +1182,7 @@ export default [
     mintRedeemDescription:
       "Using the SigmaUSD app, users swap ERG for the equivalent value of SigUSD. The SigUSD is backed by collateral ERG provided by Reserve Providers at a reserve ratio of 400% - 800%.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "sigmausd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1200,8 +1200,8 @@ export default [
     description: "A stablecoin backed by U.S. Homes.",
     mintRedeemDescription:
       "Using the Bacon app, users swap USDC to mint HOME 1:1. HOME can be redeemed for USDC 1:1 at any time.",
-    onCoinGecko: "false",
-    gecko_id: null,
+    onCoinGecko: "true",
+    gecko_id: "bacon-protocol-home",
     cmcId: "20520",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1220,8 +1220,8 @@ export default [
       "The FIAT protocol allows users to mint a single ERC-20 token, $FIAT, against a universe of accepted fixed income asset collateral.",
     mintRedeemDescription:
       "Using the FIAT DAO app, users by depositing an accepted fixed income collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back FIAT is burned.",
-    onCoinGecko: "false",
-    gecko_id: null,
+    onCoinGecko: "true",
+    gecko_id: "fixed-income-asset-token",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1240,8 +1240,8 @@ export default [
       "PUSd is a synthetic stablecoin minted against NFT collateralized debt positions.",
     mintRedeemDescription:
       "Using the JPEG'd app, users mint PUSd by depositing an accepted NFT into a vault. When the loan is repaid to retrieve the NFT, the paid back PUSd is burned.",
-    onCoinGecko: "false",
-    gecko_id: null,
+    onCoinGecko: "true",
+    gecko_id: "pusd-2",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1360,7 +1360,7 @@ export default [
     mintRedeemDescription:
       "Using the Lemma Finance app, users mint USDL by depositing an accepted asset into the protocol where it establishes a market neutral trading position on decentralized exchanges. When the loan is repaid to retrieve the collateral, the paid back USDL is burned.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "usdlemma",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1665,7 +1665,7 @@ export default [
     mintRedeemDescription:
     "Using the Real Protocol app, users mint USDW by depositing Ether into a vault. When the loan is repaid to retrieve the collateral, the paid back USDW is burned.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "usdw",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1744,8 +1744,8 @@ export default [
       "USDi is the USD-pegged stablecoin of Bank of Chain ('BoC'), a decentralized yield generation protocol.",
     mintRedeemDescription:
     "Using the Bank of Chain app, users can deposit the three major stablecoins (USDT, USDC, DAI) in any desired combination and amount to mint USDi. USDi can be redeemed for its underlying stablecoins 1:1 at any time.",
-    onCoinGecko: "true",
-    gecko_id: "interest-protocol",
+    onCoinGecko: "false",
+    gecko_id: "bank-of-chain",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1805,7 +1805,7 @@ export default [
     mintRedeemDescription:
     "Using the Shareslake Dashboard, users can deposit USD on Shareslake or ADA on Cardano to mint RUSD. RUSD can be redeemed for USD at any time.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "redeemable",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -1984,8 +1984,8 @@ export default [
     "$CASH is a stable indexcoin pegged to the weighted average of a basket of stablecoin collaterals",
   mintRedeemDescription:
     "Using the Stabl.fi app, users can borrow $CASH by depositing stablecoins as collateral. When the loan is repaid to retrieve the collateral, the paid back $CASH is burned.",
-  onCoinGecko: "false",
-  gecko_id: null,
+  onCoinGecko: "true",
+  gecko_id: "stabl-fi",
   cmcId: "21703",
   pegType: "peggedUSD",
   pegMechanism: "crypto-backed",
