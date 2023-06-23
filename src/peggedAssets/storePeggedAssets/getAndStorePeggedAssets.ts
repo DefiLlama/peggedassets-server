@@ -227,7 +227,6 @@ export async function storePeggedAsset(
   let peggedBalances: PeggedAssetIssuance = {};
   let bridgedFromMapping: BridgeMapping = {};
   try {
-    console.log(peggedAsset.name, module)
     let peggedBalancesPromises = Object.entries(module).map(
       async ([chain, issuances]) => {
         if (typeof issuances !== "object" || issuances === null) {
