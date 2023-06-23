@@ -43,7 +43,7 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
             maxRetries,
             peggedAsset.delisted ? false : true
           ),
-          60000,
+          120000,
           peggedAsset.gecko_id
         );
       });
