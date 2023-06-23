@@ -216,6 +216,7 @@ const timeout = (prom: any, time: number, peggedID: string, chain: string) =>
   Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
     async (err) => {
       console.error(`Could not store peggedAsset ${peggedID} on chain ${chain}`, err);
+      throw err;
     }
   );
 
