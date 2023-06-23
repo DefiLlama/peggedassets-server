@@ -97,7 +97,7 @@ const adapter: PeggedIssuanceAdapter = {
       "peggedEUR"
     ),
   },
-  avax: {
+  avalanche: {
     minted: chainMinted("avax", 6),
     unreleased: async () => ({}),
   },

@@ -112,7 +112,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedFromEthereum("polygon", 18, chainContracts.polygon.bridgedFromETH),
   },
-  avax: {
+  avalanche: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedFromEthereum("avax", 18, chainContracts.avax.bridgedFromETH),
