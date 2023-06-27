@@ -2313,5 +2313,24 @@ export default [
   auditLinks: ["https://github.com/trailofbits/publications/blob/master/reviews/2023-04-tempus-raft-securityreview.pdf"],
   twitter: "https://twitter.com/raft_fi",
   wiki: null,
-}
+},
+{id: "116",
+  name: "GRAI",
+  address: "0x15f74458aE0bFdAA1a96CA1aa779D715Cc1Eefe4",
+  symbol: "GRAI",
+  url: "https://www.gravitaprotocol.com/",
+  description:
+    "Gravita Protocol is an ETH-centric Borrowing Protocol for LSTs and Yield-Generating assets. GRAI is the debt token of the platform. Our motto is: fueling decentralization.",
+  mintRedeemDescription:
+    "Users deposit LSTs or BLUSD as collateral to generate the debt token GRAI.",
+  onCoinGecko: "true",
+  gecko_id: "grai",
+  cmcId: "25337",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: ["https://www.gravitaprotocol.com/audits/gravita-audit-report-dedaub-apr-23-2023.pdf","https://www.gravitaprotocol.com/audits/gravita-audit-report-omniscia-may-17-2023.pdf","https://hatsfinance.medium.com/gravita-audit-competition-final-writeup-dfb28463a0dc"],
+  twitter: "https://twitter.com/gravitaprotocol",
+  wiki: "https://docs.gravitaprotocol.com/",
+},
 ] as PeggedAsset[];
