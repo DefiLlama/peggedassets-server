@@ -112,7 +112,8 @@ import crvusd from "./crvusd";
 import overnightdai from "./overnight-dai";
 import usdtplus from "./usdtplus";
 import silk from './silk';
-import cleverusd from './clever-usd'
+import cleverusd from './clever-usd';
+import grai from './grai'
 
 export default {
   tether,
@@ -230,4 +231,5 @@ export default {
   "usdtplus": usdtplus,
   silk,
   "clever-usd":cleverusd,
+  grai,
 };
