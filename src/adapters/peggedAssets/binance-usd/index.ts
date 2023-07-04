@@ -165,7 +165,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x332730a4F6E03D9C55829435f10360E13cfA41Ff"], // multichain
   },
   thundercore: {
-    bridgeFromETH: [
+    bridgedFromETH: [
       "0xb12c13e66ade1f72f71834f2fc5082db8c091358", // multichain
     ],
     bridgedFromBSC: ["0xBEB0131D95AC3F03fd15894D0aDE5DBf7451d171"],
@@ -445,7 +445,6 @@ const adapter: PeggedIssuanceAdapter = {
     bsc: sumMultipleBalanceFunctions(
       [
         bridgedSupply("metis", 18, chainContracts.metis.bridgedFromBSC),
-        polyNetworkBridged(24, "Andromeda", "BUSD"),
       ],
       "peggedUSD"
     ),
