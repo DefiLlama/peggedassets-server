@@ -225,7 +225,7 @@ export default {
   "defi-franc": defifranc,
   "czusd": czusd,
   "dam-finance": d2o,
-  eusd,
+  "eusd-27a558b0-8b5b-4225-a614-63539da936f4": eusd,
   crvusd,
   "overnight-dai": overnightdai,
   "usdtplus": usdtplus,
