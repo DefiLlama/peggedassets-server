@@ -168,6 +168,13 @@ functions:
     memorySize: 2000
     events:
       - schedule: cron(40 * * * ? *)
+  alertOutdated:
+    handler: src/alertOutdated.default
+    timeout: 60
+    events:
+      - schedule: cron(0 * * * ? *)
+    environment:
+      OUTDATED_WEBHOOK: ${env:OUTDATED_WEBHOOK}
   storePeggedPrices:
     handler: src/storePeggedPrices.default
     timeout: 900
