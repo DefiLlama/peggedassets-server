@@ -16,6 +16,12 @@ const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x15f74458aE0bFdAA1a96CA1aa779D715Cc1Eefe4"],
   },
+  arbitrum: {
+    issued: ["0x894134a25a5faC1c2C26F1d8fBf05111a3CB9487"],
+  },
+  optimism: {
+    issued: ["0x894134a25a5faC1c2C26F1d8fBf05111a3CB9487"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -51,6 +57,14 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("ethereum", 18),
     unreleased: async () => ({}),
   },
+  arbitrum: {
+    minted: chainMinted("arbitrum", 18),
+    unreleased: async () => ({}),
+  },
+  optimism: {
+    minted: chainMinted("optimism", 18),
+    unreleased: async () => ({}),
+  }
 };
 
 export default adapter;
