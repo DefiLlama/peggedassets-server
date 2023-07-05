@@ -6,6 +6,7 @@ import {
   Balances,
 } from "../peggedAsset.type";
 
+
 type ChainContracts = {
   [chain: string]: {
     [contract: string]: string[];
@@ -52,5 +53,6 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
 };
+
 
 export default adapter;
