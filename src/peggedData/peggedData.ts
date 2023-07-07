@@ -2078,7 +2078,7 @@ export default [
   id: "104",
   name: "Davos Protocol",
   address: "0xec38621e72d86775a89c7422746de1f52bba5320",
-  symbol: "DAVOS",
+  symbol: "DUSD",
   url: "https://davos.xyz/",
   description:
     "DAVOS is a fully crypto-collateralized stable asset that is soft-pegged to the US Dollar",
