@@ -34,6 +34,7 @@ type ChainContracts = {
     [contract: string]: string[];
   };
 };
+// If you are trying to test the adapter locally and it failed, try to comment out the lines 309-311 and 1254-1262 (they are related with dogechain)
 // any bridgeOnETH contracts are not used and are just for info purposes
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -305,11 +306,9 @@ const chainContracts: ChainContracts = {
   everscale: {
     bridgeOnETH: ["0x81598d5362eAC63310e5719315497C5b8980C579"], // octus(?)
   },
-  /*
   dogechain: {
     bridgedFromETH: ["0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D"], // multichain
   },
-  */
   arbitrum_nova: {
     bridgedFromETH: ["0x52484E1ab2e2B22420a25c20FA49E173a26202Cd"],
   },
@@ -1250,7 +1249,6 @@ const adapter: PeggedIssuanceAdapter = {
       6
     ),
   },
-  /*
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -1260,7 +1258,6 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.dogechain.bridgedFromETH
     ),
   },
-  */
   neo: {
     minted: async () => ({}),
     unreleased: async () => ({}),
