@@ -70,6 +70,13 @@ const chainContracts: ChainContracts = {
       //"0x7e7e1d8757b241aa6791c089314604027544ce43", // iUSX
     ],
   },
+  conflux: {
+    issued: ["0x422a86f57b6b6F1e557d406331c25EEeD075E7aA"],
+    unreleased: [
+      "0x841ce48F9446C8E281D3F1444cB859b4A6D0738C", // cbridge
+      "0x6f87b39a2e36F205706921d81a6861B655db6358", // iUSX
+    ],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -228,6 +235,15 @@ const adapter: PeggedIssuanceAdapter = {
       18,
       chainContracts.arbitrum.issued[0],
       chainContracts.arbitrum.unreleased
+    ),
+  },
+  conflux: {
+    minted: chainMinted("conflux", 18),
+    unreleased: chainUnreleased(
+      "conflux",
+      18,
+      chainContracts.conflux.issued[0],
+      chainContracts.conflux.unreleased
     ),
   },
 };
