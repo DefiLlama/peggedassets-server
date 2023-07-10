@@ -259,6 +259,7 @@ const chainContracts: ChainContracts = {
     ],
   },
   kava: {
+    issued: ["0x919C1c267BC06a7039e03fcc2eF738525769109c"],
     bridgedFromETH: [
       "0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD", // celer
       "0xB44a9B6905aF7c801311e8F4E76932ee959c663C", // multichain
@@ -304,9 +305,11 @@ const chainContracts: ChainContracts = {
   everscale: {
     bridgeOnETH: ["0x81598d5362eAC63310e5719315497C5b8980C579"], // octus(?)
   },
+  /*
   dogechain: {
     bridgedFromETH: ["0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D"], // multichain
   },
+  */
   arbitrum_nova: {
     bridgedFromETH: ["0x52484E1ab2e2B22420a25c20FA49E173a26202Cd"],
   },
@@ -767,6 +770,21 @@ async function kavaBridged() {
   };
 }
 
+async function kavaMinted() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const totalSupply = await kavaGetTotalSupply(
+      chainContracts["kava"].issued[0]
+    );
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
+    return balances;
+  };
+}
+
 async function aptosBridged() {
   return async function (
     _timestamp: number,
@@ -1163,7 +1181,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   kava: {
-    minted: async () => ({}),
+    minted: kavaMinted(),
     unreleased: async () => ({}),
     ethereum: kavaBridged(),
   },
@@ -1232,6 +1250,7 @@ const adapter: PeggedIssuanceAdapter = {
       6
     ),
   },
+  /*
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -1241,6 +1260,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.dogechain.bridgedFromETH
     ),
   },
+  */
   neo: {
     minted: async () => ({}),
     unreleased: async () => ({}),
