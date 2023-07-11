@@ -34,6 +34,7 @@ type ChainContracts = {
     [contract: string]: string[];
   };
 };
+// If you are trying to test the adapter locally and it failed, try to comment out the lines 309-311 and 1254-1262 (they are related with dogechain)
 // any bridgeOnETH contracts are not used and are just for info purposes
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -259,11 +260,13 @@ const chainContracts: ChainContracts = {
     ],
   },
   kava: {
+    issued: ["0x919C1c267BC06a7039e03fcc2eF738525769109c"],
     bridgedFromETH: [
       "0xfB1af1baFE108906C0f1f3B36D15919B95ee95BD", // celer
       "0xB44a9B6905aF7c801311e8F4E76932ee959c663C", // multichain
       "0x7f5373AE26c3E8FfC4c77b7255DF7eC1A9aF52a6", // axelar
     ],
+    unreleased: ["0x5754284f345afc66a98fbB0a0Afe71e0F007B949"], // https://tether.to/en/transparency/#usdt
   },
   conflux: {
     bridgedFromETH: [
@@ -767,6 +770,21 @@ async function kavaBridged() {
   };
 }
 
+async function kavaMinted() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const totalSupply = await kavaGetTotalSupply(
+      chainContracts["kava"].issued[0]
+    );
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
+    return balances;
+  };
+}
+
 async function aptosBridged() {
   return async function (
     _timestamp: number,
@@ -1163,8 +1181,12 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   kava: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
+    minted: kavaMinted(),
+    unreleased: chainUnreleased(
+      "kava",
+      6,
+      chainContracts.kava.unreleased[0]
+    ),
     ethereum: kavaBridged(),
   },
   ontology: {
