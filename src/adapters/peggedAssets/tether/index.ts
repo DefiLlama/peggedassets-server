@@ -266,6 +266,7 @@ const chainContracts: ChainContracts = {
       "0xB44a9B6905aF7c801311e8F4E76932ee959c663C", // multichain
       "0x7f5373AE26c3E8FfC4c77b7255DF7eC1A9aF52a6", // axelar
     ],
+    unreleased: ["0x5754284f345afc66a98fbB0a0Afe71e0F007B949"], // https://tether.to/en/transparency/#usdt
   },
   conflux: {
     bridgedFromETH: [
@@ -1181,7 +1182,11 @@ const adapter: PeggedIssuanceAdapter = {
   },
   kava: {
     minted: kavaMinted(),
-    unreleased: async () => ({}),
+    unreleased: chainUnreleased(
+      "kava",
+      6,
+      chainContracts.kava.unreleased[0]
+    ),
     ethereum: kavaBridged(),
   },
   ontology: {
