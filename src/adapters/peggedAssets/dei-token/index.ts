@@ -35,6 +35,7 @@ const chainContracts: ChainContracts = {
   },
 };
 
+/*
 async function chainMinted(chain: string, decimals: number) {
   return async function (
     _timestamp: number,
@@ -62,7 +63,31 @@ async function chainMinted(chain: string, decimals: number) {
     return balances;
   };
 }
+*/
 
+async function chainMinted(chain: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (let issued of chainContracts[chain].issued) {
+      const totalSupply = 0;
+
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
+    }
+    return balances;
+  };
+}
+
+/*
 async function chainUnreleased(
   chain: string,
   decimals: number,
@@ -83,6 +108,25 @@ async function chainUnreleased(
           chain: chain,
         })
       ).output;
+      sumSingleBalance(balances, "peggedUSD", reserve / 10 ** decimals);
+    }
+    return balances;
+  };
+}
+*/
+async function chainUnreleased(
+  _chain: string,
+  decimals: number,
+  owners: string[]
+) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (let owner of owners) {
+      const reserve = 0;
       sumSingleBalance(balances, "peggedUSD", reserve / 10 ** decimals);
     }
     return balances;
