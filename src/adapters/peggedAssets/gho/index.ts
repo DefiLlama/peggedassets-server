@@ -1,33 +1,49 @@
 const sdk = require("@defillama/sdk");
-import { ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
+import { sumSingleBalance } from "../helper/generalUtil";
+import {
+  Balances,
+  ChainBlocks,
+  ChainContracts,
+  PeggedIssuanceAdapter,
+} from "../peggedAsset.type";
 
-const chainContracts = {
+const chainContracts: ChainContracts = {
   ethereum: {
-    issued: "TODO",
+    issued: ["0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f"],
   },
 };
 
-async function ethereumMinted() {
+async function chainMinted(chain: string, decimals: number) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
-        target: chainContracts.ethereum.issued,
-        block: _ethBlock,
-        chain: "ethereum",
-      })
-    ).output;
-    return { peggedUSD: totalSupply / 10 ** 18 };
+    let balances = {} as Balances;
+    for (let issued of chainContracts[chain].issued) {
+      const totalSupply = (
+        await sdk.api.abi.call({
+          abi: "erc20:totalSupply",
+          target: issued,
+          block: _chainBlocks?.[chain],
+          chain: chain,
+        })
+      ).output;
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
+    }
+    return balances;
   };
 }
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
-    minted: ethereumMinted(),
+    minted: chainMinted("ethereum", 18),
     unreleased: async () => ({}),
   },
 };
