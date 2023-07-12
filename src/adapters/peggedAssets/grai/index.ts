@@ -1,5 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
+import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -15,6 +16,12 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x15f74458aE0bFdAA1a96CA1aa779D715Cc1Eefe4"],
+  },
+  optimism: {
+    bridgedFromETH: ["0x894134a25a5faC1c2C26F1d8fBf05111a3CB9487"],
+  },
+  arbitrum: {
+    bridgedFromETH: ["0x894134a25a5faC1c2C26F1d8fBf05111a3CB9487"],
   },
 };
 
@@ -50,6 +57,24 @@ const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
     unreleased: async () => ({}),
+  },
+  optimism: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "optimism",
+      18,
+      chainContracts.optimism.bridgedFromETH
+    ),
+  },
+  arbitrum: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "arbitrum",
+      18,
+      chainContracts.arbitrum.bridgedFromETH
+    ),
   },
 };
 
