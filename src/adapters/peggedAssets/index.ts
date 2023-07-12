@@ -113,8 +113,8 @@ import overnightdai from "./overnight-dai";
 import usdtplus from "./usdtplus";
 import silk from './silk';
 import cleverusd from './clever-usd';
-import grai from './grai';
-import ethosreservenote from './ethos-reserve-note';
+import grai from './grai'
+import ethosreservenote from './ethos-reserve-note'
 import gho from './gho';
 
 export default {
