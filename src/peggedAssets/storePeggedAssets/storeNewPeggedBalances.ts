@@ -51,7 +51,7 @@ export default async (
       lastHourlyCirculating
     )} to ${humanizeNumber(currentCirculating)}`;
     if (
-      Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 24 * HOUR &&
+      Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR &&
       lastHourlyCirculating * 5 < currentCirculating &&
       lastHourlyCirculating > 1000000
     ) {
