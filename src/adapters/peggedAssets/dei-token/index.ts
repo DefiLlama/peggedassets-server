@@ -73,7 +73,7 @@ async function chainMinted(chain: string, decimals: number) {
   ) {
     let balances = {} as Balances;
     for (let issued of chainContracts[chain].issued) {
-      const totalSupply = 0;
+      const totalSupply = 0.01;
 
       sumSingleBalance(
         balances,
@@ -126,7 +126,7 @@ async function chainUnreleased(
   ) {
     let balances = {} as Balances;
     for (let owner of owners) {
-      const reserve = 0;
+      const reserve = 0.01;
       sumSingleBalance(balances, "peggedUSD", reserve / 10 ** decimals);
     }
     return balances;

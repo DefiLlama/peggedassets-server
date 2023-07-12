@@ -2314,7 +2314,8 @@ export default [
   twitter: "https://twitter.com/raft_fi",
   wiki: null,
 },
-{id: "116",
+{
+  id: "116",
   name: "GRAI",
   address: "0x15f74458aE0bFdAA1a96CA1aa779D715Cc1Eefe4",
   symbol: "GRAI",
@@ -2332,5 +2333,25 @@ export default [
   auditLinks: ["https://www.gravitaprotocol.com/audits/gravita-audit-report-dedaub-apr-23-2023.pdf","https://www.gravitaprotocol.com/audits/gravita-audit-report-omniscia-may-17-2023.pdf","https://hatsfinance.medium.com/gravita-audit-competition-final-writeup-dfb28463a0dc"],
   twitter: "https://twitter.com/gravitaprotocol",
   wiki: "https://docs.gravitaprotocol.com/",
+},
+{
+  id: "117",
+  name: "Ethos Reserve Note",
+  address: "optimism:0xc5b001dc33727f8f26880b184090d3e252470d45",
+  symbol: "ERN",
+  url: "https://www.ethos.finance/",
+  description:
+    "Ethos Reserve is a decentralized lending protocol that allows users to take out interest-free loans against collateral such as BTC and ETH.",
+  mintRedeemDescription:
+    "Loans drawn from Ethos Reserve require users to maintain a minimum amount of collateral in the system to cover their debt. These collateral ratios are as low as 108% for ETH, 120% for BTC, and may be lowered over time depending on usage",
+  onCoinGecko: "true",
+  gecko_id: "ethos-reserve-note",
+  cmcId: "24370",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://twitter.com/EthosReserve",
+  wiki: null,
 },
 ] as PeggedAsset[];
