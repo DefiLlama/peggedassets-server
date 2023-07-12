@@ -16,10 +16,10 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   fantom: {
     issued: ["0xDE1E704dae0B4051e80DAbB26ab6ad6c12262DA0"],
-    reserves: [
-      "0xbB8B2F05A88108F7e9227b954358110c20e97E26", // anyDEI (maybe need to remove once bridged DEI is added?)
-      "0xEf6b0872CfDF881Cf9Fe0918D3FA979c616AF983", // multisig
-    ],
+   // reserves: [
+    //  "0xbB8B2F05A88108F7e9227b954358110c20e97E26", // anyDEI (maybe need to remove once bridged DEI is added?)
+    //  "0xEf6b0872CfDF881Cf9Fe0918D3FA979c616AF983", // multisig
+  //  ],
   },
   ethereum: {
     bridgedFromFantom: ["0xDE1E704dae0B4051e80DAbB26ab6ad6c12262DA0"],
@@ -113,7 +113,7 @@ async function chainUnreleased(
     return balances;
   };
 }
-*/
+
 async function chainUnreleased(
   _chain: string,
   decimals: number,
@@ -132,11 +132,11 @@ async function chainUnreleased(
     return balances;
   };
 }
-
+*/
 const adapter: PeggedIssuanceAdapter = {
   fantom: {
     minted: chainMinted("fantom", 18),
-    unreleased: chainUnreleased("fantom", 18, chainContracts.fantom.reserves),
+    unreleased: async () => ({}),
   },
   // Either the bridged contracts are incorrect, or there are no holders on other chains. 
   // Will need to be updated.
