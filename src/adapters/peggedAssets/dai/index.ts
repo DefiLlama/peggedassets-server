@@ -96,7 +96,7 @@ const chainContracts: ChainContracts = {
   },
   milkomeda: {
     bridgedFromETH: [
-      "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c", // multichain
+      //"0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c", // multichain
       "0x6De33698e9e9b787e09d3Bd7771ef63557E148bb", // celer
       //"0x41eAFC40CD5Cb904157A10158F73fF2824dC1339", // nomad, hacked
     ],
@@ -122,7 +122,7 @@ const chainContracts: ChainContracts = {
   rsk: {
     bridgedFromETH: [
       "0x6b1a73d547f4009a26b8485b63d7015d248ad406",
-      "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c", //multichain
+     // "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c", //multichain
     ],
   },
   reinetwork: {
@@ -187,9 +187,11 @@ const chainContracts: ChainContracts = {
   everscale: {
     bridgeOnETH: ["0x032D06B4cC8A914b85615AcD0131C3e0a7330968"], // octus(?), does not match amount that is minted on the chain
   },
+  /*
   dogechain: {
-    bridgedFromETH: ["0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C"], // multichain
+    //bridgedFromETH: ["0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C"], // multichain
   },
+  */
   thundercore: {
     bridgedFromETH: ["0x461d52769884ca6235b685ef2040f47d30c94eb5"], // multichain
   },
@@ -610,6 +612,7 @@ const adapter: PeggedIssuanceAdapter = {
       18
     ),
   },
+  /*
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -619,6 +622,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.dogechain.bridgedFromETH
     ),
   },
+  */
   thundercore: {
     minted: async () => ({}),
     unreleased: async () => ({}),
