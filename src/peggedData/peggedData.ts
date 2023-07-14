@@ -936,7 +936,7 @@ export default [
   {
     id: "47",
     name: "DEI",
-    address: "fantom:0xde12c7959e1a72bbe8a5f7a1dc8f8eef9ab011b3",
+    address: "fantom:0xDE1E704dae0B4051e80DAbB26ab6ad6c12262DA0",
     symbol: "DEI",
     url: "https://deus.finance/",
     description:
