@@ -173,9 +173,11 @@ const chainContracts: ChainContracts = {
   sx: {
     bridgedFromETH: ["0x53813CD4aCD7145A716B4686b195511FA93e4Cb7"], // celer
   },
+  /*
   ethereumclassic: {
     bridgedFromETH: ["0x2C78f1b70Ccf63CDEe49F9233e9fAa99D43AA07e"], // multichain
   },
+  */
   near: {
     bridgedFromETH: [
       "6b175474e89094c44da98b954eedeac495271d0f.factory.bridge.near",
@@ -584,6 +586,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("sx", 18, chainContracts.sx.bridgedFromETH),
   },
+  /*
   ethereumclassic: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -593,6 +596,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.ethereumclassic.bridgedFromETH
     ),
   },
+  */
   near: {
     minted: async () => ({}),
     unreleased: async () => ({}),
