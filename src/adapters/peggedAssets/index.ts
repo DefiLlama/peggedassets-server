@@ -115,6 +115,7 @@ import silk from './silk';
 import cleverusd from './clever-usd';
 import grai from './grai'
 import ethosreservenote from './ethos-reserve-note'
+import gho from './gho';
 
 export default {
   tether,
@@ -233,5 +234,6 @@ export default {
   "silk-bcec1136-561c-4706-a42c-8b67d0d7f7d2": silk,
   "clever-usd":cleverusd,
   grai,
-  "ethos-reserve-note": ethosreservenote
+  "ethos-reserve-note": ethosreservenote,
+  gho,
 };

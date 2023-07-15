@@ -2354,4 +2354,24 @@ export default [
   twitter: "https://twitter.com/EthosReserve",
   wiki: null,
 },
+{
+  id: "118",
+  name: "GHO",
+  address: "0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f",
+  symbol: "GHO",
+  url: "https://app.aave.com/",
+  description:
+    "GHO is a native decentralized, overcollateralized digital asset pegged to USD.",
+  mintRedeemDescription:
+    "It is created by users via borrowing against multiple collateral. When user repays their GHO borrow position, the protocol burns that user's GHO. All the interest payments accrued by minters of GHO would be directly transferred to the AaveDAO treasury.",
+  onCoinGecko: "true",
+  gecko_id: "gho",
+  cmcId: "23508",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: ["https://github.com/aave/gho-core/tree/main/audits"],
+  twitter: "https://twitter.com/GHOAave",
+  wiki: "https://docs.gho.xyz",
+},
 ] as PeggedAsset[];
