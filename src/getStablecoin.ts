@@ -14,6 +14,7 @@ import {
 } from "./peggedAssets/utils/getLastRecord";
 import { getChainDisplayName } from "./utils/normalizeChain";
 import { importAdapter } from "./peggedAssets/utils/importAdapter";
+import { wrapResponseOrRedirect } from "./utils/wrapOrRedirect";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
 type HourlyTvl = AWS.DynamoDB.DocumentClient.AttributeMap | undefined;
@@ -106,14 +107,6 @@ export async function craftProtocolResponse(
     }
   });
 
-  const dataLength = JSON.stringify(response).length;
-  if (dataLength > 5.9e6) {
-    delete response.tokens;
-    Object.keys(response.chainBalances).forEach((chain) => {
-      delete response.chainBalances[chain].tokens;
-    });
-  }
-
   return response;
 }
 
@@ -125,7 +118,7 @@ const handler = async (
     true,
     false
   );
-  return successResponse(response, 10 * 60); // 10 mins cache
+  return wrapResponseOrRedirect(response, 10 * 60); // 10 mins cache
 };
 
 export default wrap(handler);

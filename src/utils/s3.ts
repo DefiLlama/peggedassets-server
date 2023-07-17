@@ -1,7 +1,7 @@
 import aws from "aws-sdk";
 import type { Readable } from "stream";
 
-const datasetBucket = "llama-stablecoins-data";
+export const datasetBucket = "llama-stablecoins-data";
 
 function next21Minutedate() {
   const dt = new Date();
@@ -33,14 +33,14 @@ export async function store(
     .promise();
 }
 
-export async function storeDataset(filename: string, body: string) {
+export async function storeDataset(filename: string, body: string, ContentType = "text/csv") {
   await new aws.S3()
     .upload({
       Bucket: datasetBucket,
       Key: `temp/${filename}`,
       Body: body,
       ACL: "public-read",
-      ContentType: "text/csv",
+      ContentType,
     })
     .promise();
 }
