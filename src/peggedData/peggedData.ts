@@ -943,8 +943,8 @@ export default [
       "DEI is a fractional reserve USD-pegged stablecoin and is the unit of account for all trading within the DEUS Finance ecosystem.",
     mintRedeemDescription:
       "Using the Deus Finance app, DEI can be minted by locking USDC and burning DEUS in a proportion determined by the protocol's collateral ratio.",
-    onCoinGecko: "true",
-    gecko_id: "dei-token",
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: "12517",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
