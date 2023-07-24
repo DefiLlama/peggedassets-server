@@ -43,7 +43,7 @@ import float from "./float-protocol-float";
 import usdx from "./usdx";
 import zusd from "./zusd";
 import usx from "./token-dforce-usd";
-import ausd from "./acala-dollar";
+import aseed from "./acala-dollar";
 import usd from "./usd";
 import dei from "./dei-token";
 import usn from "./usn";
@@ -163,7 +163,7 @@ export default {
   usdx,
   zusd,
   "token-dforce-usd": usx,
-  "acala-dollar": ausd,
+  "acala-dollar": aseed,
   usd,
   "dei-token": dei,
   "bai-stablecoin": bai,

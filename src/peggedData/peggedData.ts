@@ -895,16 +895,16 @@ export default [
   },
   {
     id: "45",
-    name: "Acala Dollar",
+    name: "aUSD Seed",
     address: null,
-    symbol: "AUSD",
+    symbol: "aSEED",
     url: "https://acala.network/",
     description:
-      "aUSD is the native decentralized stablecoin of Polkadot pegged to the US Dollar and backed only by decentralized assets in Collateralized Debt Positions (CDP).",
+      "aSEED is the native decentralized stablecoin of Polkadot pegged to the US Dollar and backed only by decentralized assets in Collateralized Debt Positions (CDP).", // aUSD will be converted to aSEED 1:1 across all avenues including account balance, and liquidity pools etc. 
     mintRedeemDescription:
-      "Using the Acala app, users mint aUSD by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back aUSD is burned.",
+      "Using the Acala app, users mint aSEED by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back aUSD is burned.",
     onCoinGecko: "true",
-    gecko_id: "acala-dollar",
+    gecko_id: "acala-dollar", // change to ausd-seed-acala once live on coingecko
     cmcId: "20411",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
