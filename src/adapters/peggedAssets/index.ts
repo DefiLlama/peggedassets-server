@@ -163,7 +163,7 @@ export default {
   usdx,
   zusd,
   "token-dforce-usd": usx,
-  "ausd-seed": aseed,
+  "acala-dollar": aseed,
   usd,
   "dei-token": dei,
   "bai-stablecoin": bai,
