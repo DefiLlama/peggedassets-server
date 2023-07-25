@@ -933,6 +933,7 @@ export default [
     twitter: "https://twitter.com/overnight_fi",
     wiki: "https://wiki.defillama.com/wiki/Overnight",
   },
+  /*
   {
     id: "47",
     name: "DEI",
@@ -953,6 +954,7 @@ export default [
     twitter: "https://twitter.com/DeusDao",
     wiki: "https://wiki.defillama.com/wiki/Deus_Finance",
   },
+  */
   {
     id: "48",
     name: "BAI Stablecoin",
