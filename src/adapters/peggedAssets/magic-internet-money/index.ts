@@ -20,8 +20,8 @@ const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x99d8a9c45b2eca8864373a26d1459e3dff1e17f3"],
     reserves: [
-     // "0x30b9de623c209a42ba8d5ca76384ead740be9529", // new cauldron
-     // "0xf5bce5077908a1b7370b9ae04adc565ebd643966", // bentobox
+      "0x30b9de623c209a42ba8d5ca76384ead740be9529", // new cauldron
+      "0xf5bce5077908a1b7370b9ae04adc565ebd643966", // bentobox
       "0xd96f48665a1410c0cd669a88898eca36b9fc2cce", // degenbox
       "0x5f0dee98360d8200b20812e174d139a1a633edd2", // multisig
       "0x439a5f0f5E8d149DDA9a0Ca367D4a8e4D6f83C10", // hold 73m 
@@ -30,6 +30,10 @@ const chainContracts: ChainContracts = {
   },
   polygon: {
     bridgedFromETH: ["0x49a0400587A7F65072c87c4910449fDcC5c47242"], // multichain/abracadabra
+  },
+  optimism: {
+    bridgedFromETH: ["0xB153FB3d196A8eB25522705560ac152eeEc57901"], // 
+    reserves: ["0xa93C81f564579381116ee3E007C9fCFd2EBa1723"] //degenbox
   },
   avax: {
     bridgedFromETH: ["0x130966628846BFd36ff31a822705796e8cb8C18D"], // multichain/abracadabra
@@ -280,6 +284,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("metis", 18, chainContracts.metis.bridgedFromETH),
+  },
+  optimism: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("optimism", 18, chainContracts.optimism.bridgedFromETH),
   },
   /* This appears not to be accessible anymore, so not adding it.
   terra: {
