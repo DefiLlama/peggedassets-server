@@ -2081,7 +2081,7 @@ export default [
   symbol: "DUSD",
   url: "https://davos.xyz/",
   description:
-    "DAVOS is a fully crypto-collateralized stable asset that is soft-pegged to the US Dollar",
+    "Davos Protocol is an innovative collateralized debt position (CDP) protocol that tackles the limitations of traditional CDPs in the DeFi landscape. It achieves this by implementing an unbiased monetary policy and fair borrowing rates, ensuring user protection and fostering widespread DeFi adoption. Notably, users retain the upside of their collateral, preserving their potential returns.",
   mintRedeemDescription:
     "Using the Davos Protocol, users have the opportunity to borrow the DAVOS Stable Asset, initially using their staked MATIC assets as collateral. Users can borrow up to 66% of the value of their MATIC collateral",
   onCoinGecko: "true",
