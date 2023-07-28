@@ -24,11 +24,16 @@ const chainContracts: ChainContracts = {
       "0xf5bce5077908a1b7370b9ae04adc565ebd643966", // bentobox
       "0xd96f48665a1410c0cd669a88898eca36b9fc2cce", // degenbox
       "0x5f0dee98360d8200b20812e174d139a1a633edd2", // multisig
+      "0x439a5f0f5E8d149DDA9a0Ca367D4a8e4D6f83C10", // hold 73m 
     ],
     multichain: ["0xbbc4a8d076f4b1888fec42581b6fc58d242cf2d5"], // multichain bridge contract, has significant amount more than is minted on other chains
   },
   polygon: {
     bridgedFromETH: ["0x49a0400587A7F65072c87c4910449fDcC5c47242"], // multichain/abracadabra
+  },
+  optimism: {
+    bridgedFromETH: ["0xB153FB3d196A8eB25522705560ac152eeEc57901"], // 
+    reserves: ["0xa93C81f564579381116ee3E007C9fCFd2EBa1723"] //degenbox
   },
   avax: {
     bridgedFromETH: ["0x130966628846BFd36ff31a822705796e8cb8C18D"], // multichain/abracadabra
@@ -45,6 +50,8 @@ const chainContracts: ChainContracts = {
     reserves: [
       "0x74c764d41b77dbbb4fe771dab1939b00b146894a", // bentobox
       "0xf46bb6dda9709c49efb918201d97f6474eac5aea", // multisig
+      "0x27807dd7adf218e1f4d885d54ed51c70efb9de50", // holds 20m
+      "0x7C8FeF8eA9b1fE46A7689bfb8149341C90431D38", // degenbox
     ],
   },
   fantom: {
@@ -210,7 +217,6 @@ async function ethereumUnreleased(
     return balances;
   };
 }
-
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -278,6 +284,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("metis", 18, chainContracts.metis.bridgedFromETH),
+  },
+  optimism: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("optimism", 18, chainContracts.optimism.bridgedFromETH),
   },
   /* This appears not to be accessible anymore, so not adding it.
   terra: {
