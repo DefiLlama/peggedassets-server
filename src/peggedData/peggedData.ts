@@ -2378,7 +2378,7 @@ export default [
 },
 {
   id: "119",
-  name: "FDUSD",
+  name: "First Digital USD",
   address: "0xc5f0f7b66764f6ec8c8dff7ba683102295e16409",
   symbol: "FDUSD",
   url: "https://firstdigitallabs.com",
