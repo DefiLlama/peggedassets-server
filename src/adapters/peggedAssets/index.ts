@@ -116,6 +116,7 @@ import cleverusd from './clever-usd';
 import grai from './grai'
 import ethosreservenote from './ethos-reserve-note'
 import gho from './gho';
+import fdusd from './first-digital-usd'
 
 export default {
   tether,
@@ -236,4 +237,5 @@ export default {
   grai,
   "ethos-reserve-note": ethosreservenote,
   gho,
+  "first-digital-usd": fdusd
 };
