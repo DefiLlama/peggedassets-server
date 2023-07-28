@@ -2376,4 +2376,24 @@ export default [
   twitter: "https://twitter.com/GHOAave",
   wiki: "https://docs.gho.xyz",
 },
+{
+  id: "119",
+  name: "First Digital USD",
+  address: "0xc5f0f7b66764f6ec8c8dff7ba683102295e16409",
+  symbol: "FDUSD",
+  url: "https://firstdigitallabs.com",
+  description:
+    "Each FDUSD is intended to be fully backed by one US dollar or an asset of equivalent fair value.",
+  mintRedeemDescription:
+    "To redeem your FDUSD stablecoin, you must first become a client of First Digital Labs and meet specific requirements, including Anti-Money Laundering (AML) and Counter-Terrorism Financing (CTF) checks. Upon successful completion of these checks, you can exchange your FDUSD for its equivalent in fiat currency, thereby taking it out of circulation. Alternatively, you can sell your FDUSD tokens on the secondary market through a cryptocurrency exchange or an Over-the-Counter (OTC) provider that supports FD121's stablecoins. ",
+  onCoinGecko: "true",
+  gecko_id: "first-digital-usd",
+  cmcId: "26081",
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/FDLabsHQ",
+  wiki: null,
+},
 ] as PeggedAsset[];
