@@ -1,8 +1,8 @@
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
+  Balances,
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
@@ -26,16 +26,11 @@ async function kujiraMinted(decimals: number) {
     const res = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://lcd.kaiyo.kujira.setten.io/cosmos/bank/v1beta1/supply"
+          "https://rest.cosmos.directory/kujira/cosmos/bank/v1beta1/supply/by_denom?denom=factory%2Fkujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7%2Fuusk"
         )
     );
-    const kujiraTokenInfo = res?.data?.supply;
-    const uskInfo = kujiraTokenInfo.filter(
-      (obj: any) =>
-        obj.denom ===
-        "factory/kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7/uusk"
-    );
-    const supply = uskInfo?.[0].amount / 10 ** decimals;
+    const uskInfo = res?.data?.amount;
+    const supply = uskInfo?.amount / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
   };
