@@ -909,6 +909,12 @@ export const chainCoingeckoIds = {
     cmcId: null,
     categories: ["EVM"],
   },
+  "Mantle": {
+    geckoId: "mantle",
+    symbol: "MNT",
+    cmcId: "27075",
+    categories: ["EVM"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1140,6 +1146,8 @@ export function getChainDisplayName(
       return "Polygon zkEVM"
     case "base":
       return "Base"
+    case "mantle":
+      return "Mantle"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
