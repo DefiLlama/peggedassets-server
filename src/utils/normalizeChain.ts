@@ -903,6 +903,12 @@ export const chainCoingeckoIds = {
     },
     chainId: 1101
   },
+  Base: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1132,6 +1138,8 @@ export function getChainDisplayName(
       return "zkSync Era";
     case "polygon_zkevm":
       return "Polygon zkEVM"
+    case "base":
+      return "Base"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
