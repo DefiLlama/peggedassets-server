@@ -1,3 +1,6 @@
+// GMO ZUSD
+// Stellar param from GMO API
+
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
@@ -84,27 +87,33 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   optimism: {
-    minted: chainMinted("optimism", 6),
+    minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply(
-        "optimism",
-        6,
-       chainContracts.optimism.bridgedFromETH,
+      "optimism",
+      6,
+      chainContracts.optimism.bridgedFromETH,
+      undefined,
+      undefined,
+      "peggedUSD"
      ),
  },
   arbitrum: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply(
-        "arbitrum",
-        6,
-        chainContracts.arbitrum.bridgedFromETH,
-    ),
- },
- stellar: {
-   minted: gmoAPIChainMinted("XLM"),
-   unreleased: async () => ({}),
- }
-};
-
-export default adapter;
+      "arbitrum",
+      6,
+      chainContracts.arbitrum.bridgedFromETH,
+      undefined,
+      undefined,
+      "peggedUSD"
+      ),
+    },
+    stellar: {
+      minted: gmoAPIChainMinted("XLM"),
+      unreleased: async () => ({}),
+    }
+  };
+  
+  export default adapter;

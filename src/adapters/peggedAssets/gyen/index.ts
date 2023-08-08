@@ -1,3 +1,6 @@
+// GMO GYEN
+// Stellar param from GMO API
+
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
@@ -37,7 +40,6 @@ async function chainMinted(chain: string, decimals: number) {
   ) {
     let balances = {} as Balances;
     for (let issued of chainContracts[chain].issued) {
-      console.log(issued);
       const totalSupply = (
         await sdk.api.abi.call({
           abi: "erc20:totalSupply",
@@ -77,6 +79,7 @@ async function gmoAPIChainMinted(chain: string) {
       );
       const supply = parseInt(filteredChainsData[0].amount);
       sumSingleBalance(balances, "peggedJPY", supply, "issued", false);
+      
       return balances;
     };
   }
@@ -88,14 +91,17 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   optimism: {
-     minted: chainMinted("optimism", 6),
-     unreleased: async () => ({}),
-     ethereum: bridgedSupply(
-         "optimism",
-         6,
-        chainContracts.optimism.bridgedFromETH,
-      ),
-  },
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "optimism",
+      6,
+      chainContracts.optimism.bridgedFromETH,
+      undefined,
+      undefined,
+      "peggedJPY"
+     ),
+ },
   arbitrum: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -103,6 +109,9 @@ const adapter: PeggedIssuanceAdapter = {
       "arbitrum",
       6,
       chainContracts.arbitrum.bridgedFromETH,
+      undefined,
+      undefined,
+      "peggedJPY"
     ),
   },
   stellar: {
