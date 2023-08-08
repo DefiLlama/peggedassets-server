@@ -2396,4 +2396,24 @@ export default [
   twitter: "https://twitter.com/FDLabsHQ",
   wiki: null,
 },
+{
+  id: "120",
+  name: "PayPal USD",
+  address: "0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
+  symbol: "PYUSD",
+  url: "https://www.paypal.com/pyusd",
+  description:
+    "PayPal USD is designed to maintain a stable $1 USD value. It's backed by dollar deposits, US treasuries, and cash equivalents",
+  mintRedeemDescription:
+    "As PayPal USD rolls out, users will be able to buy, sell, hold, and transfer it in the PayPal app or on their site",
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/PayPal",
+  wiki: null,
+},
 ] as PeggedAsset[];
