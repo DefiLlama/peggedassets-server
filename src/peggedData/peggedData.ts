@@ -2406,7 +2406,7 @@ export default [
     "PayPal USD is designed to maintain a stable $1 USD value. It's backed by dollar deposits, US treasuries, and cash equivalents",
   mintRedeemDescription:
     "As PayPal USD rolls out, users will be able to buy, sell, hold, and transfer it in the PayPal app or on their site",
-  onCoinGecko: "false",
+  onCoinGecko: false,
   gecko_id: null,
   cmcId: null,
   pegType: "peggedUSD",
