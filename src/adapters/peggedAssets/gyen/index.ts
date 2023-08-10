@@ -1,4 +1,4 @@
-// GMO ZUSD
+// GMO GYEN
 // Stellar param from GMO API
 
 const sdk = require("@defillama/sdk");
@@ -14,7 +14,6 @@ import {
 const axios = require("axios")
 const retry = require("async-retry");
 
-
 type ChainContracts = {
   [chain: string]: {
     [contract: string]: string[];
@@ -23,13 +22,13 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   ethereum: {
-    issued: ["0xc56c2b7e71b54d38aab6d52e94a04cbfa8f604fa"],
+    issued: ["0xC08512927D12348F6620a698105e1BAac6EcD911"] ,
   },
   optimism: {
-    bridgedFromETH: ["0x6e4cc0ab2b4d2edafa6723cfa1582229f1dd1be1"] ,
+    bridgedFromETH: ["0x589d35656641d6aB57A545F08cf473eCD9B6D5F7"] ,
   },
   arbitrum: {
-    bridgedFromETH: ["0x6e4cc0ab2b4d2edafa6723cfa1582229f1dd1be1"],
+    bridgedFromETH: ["0x589d35656641d6aB57A545F08cf473eCD9B6D5F7"],
   },
 };
 
@@ -49,36 +48,41 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedJPY",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
 }
-
 async function gmoAPIChainMinted(chain: string) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const issuance = await retry(
-      async (_bail: any) =>
-        await axios.get("https://stablecoin.z.com/token/totalSupply")
-    );
-    console.info("GMO API success");
-    const gyenData = issuance.data.data.filter(
-      (obj: any) => obj.symbol === "ZUSD"
-    );
-    const filteredChainsData = await gyenData[0].chains.filter(
-      (obj: any) => obj.chain === chain
-    );
-    const supply = parseInt(filteredChainsData[0].amount);
-    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
-    return balances;
-  };
-}
-
+    return async function (
+      _timestamp: number,
+      _ethBlock: number,
+      _chainBlocks: ChainBlocks
+    ) {
+      let balances = {} as Balances;
+      const issuance = await retry(
+        async (_bail: any) =>
+          await axios.get("https://stablecoin.z.com/token/totalSupply")
+      );
+      console.info("GMO API success");
+      const gyenData = issuance.data.data.filter(
+        (obj: any) => obj.symbol === "GYEN"
+      );
+      const filteredChainsData = await gyenData[0].chains.filter(
+        (obj: any) => obj.chain === chain
+      );
+      const supply = parseInt(filteredChainsData[0].amount);
+      sumSingleBalance(balances, "peggedJPY", supply, "issued", false);
+      
+      return balances;
+    };
+  }
 
 
 const adapter: PeggedIssuanceAdapter = {
@@ -95,7 +99,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.optimism.bridgedFromETH,
       undefined,
       undefined,
-      "peggedUSD"
+      "peggedJPY"
      ),
  },
   arbitrum: {
@@ -107,13 +111,13 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.arbitrum.bridgedFromETH,
       undefined,
       undefined,
-      "peggedUSD"
-      ),
-    },
-    stellar: {
-      minted: gmoAPIChainMinted("XLM"),
-      unreleased: async () => ({}),
-    }
-  };
-  
-  export default adapter;
+      "peggedJPY"
+    ),
+  },
+  stellar: {
+    minted: gmoAPIChainMinted("XLM"),
+    unreleased: async () => ({}),
+  }
+};
+
+export default adapter;
