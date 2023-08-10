@@ -117,7 +117,8 @@ import grai from './grai'
 import ethosreservenote from './ethos-reserve-note';
 import gho from './gho';
 import fdusd from './first-digital-usd';
-import pyusd from './paypal-usd'
+import pyusd from './paypal-usd';
+import psy from './psy'
 
 export default {
   tether,
@@ -239,5 +240,6 @@ export default {
   "ethos-reserve-note": ethosreservenote,
   gho,
   "first-digital-usd": fdusd,
-  'paypal-usd': pyusd
+  'paypal-usd': pyusd,
+  psy
 };
