@@ -2416,4 +2416,24 @@ export default [
   twitter: "https://twitter.com/PayPal",
   wiki: null,
 },
+{
+  id: "121",
+  name: "PSY",
+  address: "0x63D4dc5376cfB48a885A165cd97BA208b87881c7",
+  symbol: "sLSD",
+  url: "https://www.psy.money/",
+  description:
+    "PSY protocol offers a unique borrowing experience that is both interest-free and highly capital efficient. This means that for the same loan, less collateral is required compared to other borrowing systems. Instead of selling your collateral like wstETH or rETH to have liquid funds, you can use the protocol to lock up your collaterals, borrow against the collateral to withdraw SLSD, and then repay your loan at a future date.",
+  mintRedeemDescription:
+    "To borrow you must open a Trove and deposit a certain amount of collateral to it. Then you can draw SLSD up to a collateral ratio of 110%. A minimum debt of 2,000 SLSD is required.",
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/PSY_stablecoin",
+  wiki: null,
+},
 ] as PeggedAsset[];
