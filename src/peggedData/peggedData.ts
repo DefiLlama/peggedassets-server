@@ -2436,4 +2436,24 @@ export default [
   twitter: "https://twitter.com/PSY_stablecoin",
   wiki: null,
 },
+{
+  id: "122",
+  name: "GYEN",
+  address: "0xc08512927d12348f6620a698105e1baac6ecd911",
+  symbol: "GYEN",
+  url: "https://www.psy.money",
+  description:
+    "The First Regulated Digital JPY",
+  mintRedeemDescription:
+    "You need to make an account (Institutional or Individual) in order to redeem GYEN for JPY",
+  onCoinGecko: "true",
+  gecko_id: "gyen",
+  cmcId: "8771",
+  pegType: "peggedJPY",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/GMOTrust",
+  wiki: null,
+},
 ] as PeggedAsset[];
