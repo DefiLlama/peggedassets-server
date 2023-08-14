@@ -2441,7 +2441,7 @@ export default [
   name: "GYEN",
   address: "0xc08512927d12348f6620a698105e1baac6ecd911",
   symbol: "GYEN",
-  url: "https://www.psy.money",
+  url: "https://stablecoin.z.com",
   description:
     "The First Regulated Digital JPY",
   mintRedeemDescription:
