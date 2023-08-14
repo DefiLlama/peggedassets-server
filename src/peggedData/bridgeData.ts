@@ -123,17 +123,9 @@ export default {
     bridge: "multichain",
     sourceChain: formattedSourceChains.terra,
   },
-  "0x44Dd7C98885cD3086E723B8554a90c9cC4089C4C": {
-    bridge: "multichain",
-    sourceChain: formattedSourceChains.eth,
-  },
   "0x218c3c3D49d0E7B37aff0D8bB079de36Ae61A4c0": {
     bridge: "multichain",
     sourceChain: formattedSourceChains.bsc,
-  },
-  "0x0cae51e1032e8461f4806e26332c030e34de3adb": {
-    bridge: "multichain",
-    sourceChain: formattedSourceChains.eth,
   },
   FR87nWEUxVgerFGhZM8Y4AggKGLnaXswr1Pd8wZ4kZcp: {
     bridge: "multichain",
@@ -503,14 +495,6 @@ export default {
     bridge: "wormhole",
     sourceChain: formattedSourceChains.terra,
   },
-  Terra15a9dr3a2a2lj5fclrw35xxg9yuxg0d908wpf2y: {
-    bridge: "wormhole",
-    sourceChain: formattedSourceChains.eth,
-  },
-  HRQke5DKdDo3jV7wnomyiM8AA3EzkVnxMDdo2FQ5XUe1: {
-    bridge: "wormhole",
-    sourceChain: formattedSourceChains.eth,
-  },
   "0x362233F1eF554Ca08555Ca191b4887c2C3132834": {
     bridge: "wormhole",
     sourceChain: formattedSourceChains.eth,
@@ -842,10 +826,6 @@ export default {
   HjUhUzi6fVkY1BndaSc4Dcg2mCzvnqzXjVJtXsj78ver: {
     bridge: "allbridge",
     sourceChain: formattedSourceChains.ftm,
-  },
-  CYEFQXzQM6E5P8ZrXgS7XMSwU3CiqHMMyACX4zuaA2Z4: {
-    bridge: "allbridge",
-    sourceChain: formattedSourceChains.eth,
   },
   A96PoNcxa9LMxcF9HhKAfA1p3M1dGbubPMWf19gHAkgJ: {
     bridge: "allbridge",
@@ -1403,15 +1383,15 @@ export default {
     bridge: "aztec",
     sourceChain: formattedSourceChains.eth,
   },
-  "0x49a0400587A7F65072c87c4910449fDcC5c47242": {
+  "0xb153fb3d196a8eb25522705560ac152eeec57901": {
     bridge: "abracadabra",
     sourceChain: formattedSourceChains.eth,
   },
-  "0x130966628846BFd36ff31a822705796e8cb8C18D": {
+  "0xfe19f0b51438fd612f6fd59c1dbb3ea319f433ba": {
     bridge: "abracadabra",
     sourceChain: formattedSourceChains.eth,
   },
-  "0xfea7a6a0b346362bf88a9e4a88416b77a57d6c2a": {
+  "0x49a0400587a7f65072c87c4910449fdcc5c47242": {
     bridge: "abracadabra",
     sourceChain: formattedSourceChains.eth,
   },
@@ -1419,7 +1399,23 @@ export default {
     bridge: "abracadabra",
     sourceChain: formattedSourceChains.eth,
   },
-  "0xfe19f0b51438fd612f6fd59c1dbb3ea319f433ba": {
+  "0x0cae51e1032e8461f4806e26332c030e34de3adb": {
+    bridge: "abracadabra",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xfea7a6a0b346362bf88a9e4a88416b77a57d6c2a": {
+    bridge: "abracadabra",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x130966628846bfd36ff31a822705796e8cb8c18d": {
+    bridge: "abracadabra",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x471ee749ba270eb4c1165b5ad95e614947f6fceb": {
+    bridge: "abracadabra",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x4a3a6dd60a34bb2aba60d73b4c88315e9ceb6a3d": {
     bridge: "abracadabra",
     sourceChain: formattedSourceChains.eth,
   },
