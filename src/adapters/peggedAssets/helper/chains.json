@@ -130,5 +130,6 @@
   "ethpow",
   "aptos",
   "comdex",
-  "polygon_zkevm"
+  "polygon_zkevm",
+  "base"
 ]
