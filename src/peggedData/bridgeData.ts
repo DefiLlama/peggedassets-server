@@ -1675,6 +1675,10 @@ export default {
     bridge: "stargate",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca": {
+    bridge: "base",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1891,5 +1895,9 @@ export const bridgeInfo = {
   stargate: {
     name: "Stargate",
     link: "https://stargate.finance/",
+  },
+  base: {
+    name: "Base",
+    link: "https://bridge.base.org/deposit"
   },
 } as BridgeInfo;
