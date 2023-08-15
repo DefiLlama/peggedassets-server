@@ -332,10 +332,13 @@ const chainContracts: ChainContracts = {
     BSCAssetIds: ["3d3d69f1-6742-34cf-95fe-3f8964e6d307"],
   },
   thundercore: {
-    bridgeFromETH: [
+    bridgedFromETH: [
       "0xdc42728b0ea910349ed3c6e1c9dc06b5fb591f98", // multichain
       "0x22e89898A04eaf43379BeB70bf4E38b1faf8A31e"
     ],
+  },
+  base: {
+    bridgedFromETH: ["0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA"], //
   }
 };
 
@@ -1035,12 +1038,12 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: karuraMinted(chainContracts.karura.bridgedFromETH[0], 6),
-  },
+  },/*
   ontology: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: ontologyBridged(),
-  },
+  },*/
   sx: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -1146,6 +1149,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("thundercore", 6, chainContracts.thundercore.bridgedFromETH),
+  },
+  base: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("base", 6, chainContracts.base.bridgedFromETH),
   }
 };
 
