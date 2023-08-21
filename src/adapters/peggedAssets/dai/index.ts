@@ -243,10 +243,19 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
+      const dsr = (
+        await sdk.api.abi.call({
+          abi: {"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"dai","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
+          target: "0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b",
+          block: _chainBlocks?.[chain],
+          chain: chain,
+          params: ["0x197E90f9FAD81970bA7976f33CbD77088E5D7cf7"]
+        })
+      ).output;
       sumSingleBalance(
         balances,
         "peggedUSD",
-        totalSupply / 10 ** decimals,
+        (Number(totalSupply) + dsr/1e27) / 10 ** decimals,
         "issued",
         false
       );
