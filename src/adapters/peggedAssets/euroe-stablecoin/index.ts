@@ -1,5 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
+import { solanaMintedOrBridged } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -71,8 +72,11 @@ const adapter: PeggedIssuanceAdapter = {
   avalanche: {
     minted: chainMinted("avax", 6),
     unreleased: async () => ({}),
+  },
+  solana: {
+    minted: solanaMintedOrBridged(["2VhjJ9WxaGC3EZFwJG9BDUs9KxKCAjQY4vgd1qxgYWVg"]),
+    unreleased: async () => ({}),
   }
-  
 };
 
 export default adapter;
