@@ -1961,9 +1961,9 @@ export default [
   symbol: "EUROe",
   url: "https://www.euroe.com/",
   description:
-    "EUROe is a euro stablecoin currently available on Ethereum. EUROe is fully fiat-backed and regulated as an e-money institution in Europe by the Finnish Financial Supervisory Authority",
+    "EUROe is a fully fiat-backed multichain euro stablecoin. EUROe is issued by Membrane Finance Oy, an electronic money institution registered in Finland. EUROe is a MiCA-compliant stablecoin.",
   mintRedeemDescription:
-  "EUROe customers who have undergone a verification process can exchange USD for GUSD and redeem GUSD for USD.",
+  "Anyone with a EUROe Account can redeem and mint EUROe with fiat euros in a 1:1 ratio, either through a UI or using EUROe Account APIs.",
   onCoinGecko: "true",
   gecko_id: "euroe-stablecoin",
   cmcId: null,
