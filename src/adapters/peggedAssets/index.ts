@@ -245,5 +245,5 @@ export default {
   'paypal-usd': pyusd,
   psy,
   gyen,
-  star
+  "preon-star":star
 };
