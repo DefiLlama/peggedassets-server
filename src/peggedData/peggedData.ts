@@ -2456,4 +2456,24 @@ export default [
   twitter: "https://twitter.com/GMOTrust",
   wiki: null,
 },
+{
+  id: "123",
+  name: "STAR",
+  address: "0xC19669A405067927865B40Ea045a2baabbbe57f5",
+  symbol: "STAR",
+  url: "https://www.preon.finance/",
+  description:
+    "Preon is a decentralized, lending protocol that allows you to borrow against your crypto - at 0 interest. Loans are paid out in $STAR (our USD-pegged stablecoin) with a minimum maintained collateral ratio of 110%.",
+  mintRedeemDescription:
+    "Users deposit wMatic, weth or wstETH as collateral to generate the debt token STAR.",
+  onCoinGecko: "true",
+  gecko_id: "preon-star",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: ["https://docs.preon.finance/information/security"],
+  twitter: "https://twitter.com/PreonFinance",
+  wiki: "https://docs.preon.finance/",
+},
 ] as PeggedAsset[];

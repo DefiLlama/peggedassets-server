@@ -120,6 +120,7 @@ import fdusd from './first-digital-usd';
 import pyusd from './paypal-usd';
 import psy from './psy';
 import gyen  from './gyen'
+import star from './star'
 
 export default {
   tether,
@@ -243,5 +244,6 @@ export default {
   "first-digital-usd": fdusd,
   'paypal-usd': pyusd,
   psy,
-  gyen
+  gyen,
+  star
 };
