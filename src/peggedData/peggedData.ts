@@ -2496,4 +2496,24 @@ export default [
   twitter: "https://twitter.com/LybraFinanceLSD",
   wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
 },
+{
+  id: "1254",
+  name: "eUSD (V2)",
+  address: "0xdf3ac4f479375802a821f7b7b46cd7eb5e4262cc",
+  symbol: "eUSD",
+  url: "https://lybra.finance/",
+  description:
+    "eUSD is an interest-bearing stablecoin hard-pegged to the US dollar",
+  mintRedeemDescription:
+    "Users deposit ETH & stETH as collateral with an excess collateral ratio of 150% to maintain safety and decentralization or exchanged by peg-eusd",
+  onCoinGecko: "true",
+  gecko_id: "eusd-v2",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/LybraFinanceLSD",
+  wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
+},
 ] as PeggedAsset[];

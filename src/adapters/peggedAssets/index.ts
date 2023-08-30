@@ -119,9 +119,10 @@ import gho from './gho';
 import fdusd from './first-digital-usd';
 import pyusd from './paypal-usd';
 import psy from './psy';
-import gyen  from './gyen'
-import star from './star'
-import peusd from './peg-eusd'
+import gyen  from './gyen';
+import star from './star';
+import peusd from './peg-eusd';
+import eusdv2 from './eusdv2'
 
 export default {
   tether,
@@ -247,5 +248,6 @@ export default {
   psy,
   gyen,
   "preon-star":star,
-  "peusd": peusd
+  "peusd": peusd,
+  "eusd-v2": eusdv2
 };
