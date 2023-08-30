@@ -121,7 +121,7 @@ import pyusd from './paypal-usd';
 import psy from './psy';
 import gyen  from './gyen'
 import star from './star'
-import peusd from './peusd'
+import peusd from './peg-eusd'
 
 export default {
   tether,
