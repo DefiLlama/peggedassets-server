@@ -2478,7 +2478,7 @@ export default [
 },
 {
   id: "124",
-  name: "peUSD",
+  name: "peg-eUSD",
   address: "0xd585aaafa2b58b1cd75092b51ade9fa4ce52f247",
   symbol: "peUSD",
   url: "https://lybra.finance/",
