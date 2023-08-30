@@ -2476,4 +2476,24 @@ export default [
   twitter: "https://twitter.com/PreonFinance",
   wiki: "https://docs.preon.finance/",
 },
+{
+  id: "124",
+  name: "peUSD",
+  address: "0xd585aaafa2b58b1cd75092b51ade9fa4ce52f247",
+  symbol: "peUSD",
+  url: "https://lybra.finance/",
+  description:
+    "peUSD is an Omnichain, DeFi utility version of eUSD, integrated with the OFT standard of LayerZero.",
+  mintRedeemDescription:
+    "It can be converted from eUSD through the protocol or minted directly from non-rebase LSTs.",
+  onCoinGecko: "true",
+  gecko_id: "peusd",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/LybraFinanceLSD",
+  wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
+},
 ] as PeggedAsset[];
