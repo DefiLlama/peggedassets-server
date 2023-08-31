@@ -2500,7 +2500,7 @@ export default [
   id: "1254",
   name: "eUSD (V2)",
   address: "0xdf3ac4f479375802a821f7b7b46cd7eb5e4262cc",
-  symbol: "eUSD",
+  symbol: "eUSDv2",
   url: "https://lybra.finance/",
   description:
     "eUSD is an interest-bearing stablecoin hard-pegged to the US dollar",
