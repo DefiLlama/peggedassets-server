@@ -2497,7 +2497,7 @@ export default [
   wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
 },
 {
-  id: "1254",
+  id: "125",
   name: "eUSD (V2)",
   address: "0xdf3ac4f479375802a821f7b7b46cd7eb5e4262cc",
   symbol: "eUSDv2",
