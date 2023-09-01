@@ -2516,4 +2516,24 @@ export default [
   twitter: "https://twitter.com/LybraFinanceLSD",
   wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
 },
+{
+  id: "126",
+  name: "mkUSD",
+  address: "0x4591dbff62656e7859afe5e45f6f47d3669fbb28",
+  symbol: "mkUSD",
+  url: "https://prismafinance.com",
+  description:
+    "A non-custodial and decentralized Ethereum LST-backed stablecoin",
+  mintRedeemDescription:
+    "Users mint mkUSD by depositing liquid staking tokens (LSTs) as collateral into a vault. When the loan is repaid to retrieve the collateral, the paid back mkUSD is burned",
+  onCoinGecko: "true",
+  gecko_id: "prisma-mkusd",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/PrismaFi",
+  wiki: "https://docs.prismafinance.com/protocol-concepts/depositing-collateral-and-minting-mkusd",
+},
 ] as PeggedAsset[];
