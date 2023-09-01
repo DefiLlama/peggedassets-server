@@ -122,8 +122,9 @@ import psy from './psy';
 import gyen  from './gyen';
 import star from './star';
 import peusd from './peg-eusd';
-import eusdv2 from './eusdv2'
-import prismamkusd from './prisma-mkusd'
+import eusdv2 from './eusdv2';
+import prismamkusd from './prisma-mkusd';
+import lcny from './lcny'
 
 export default {
   tether,
@@ -251,5 +252,6 @@ export default {
   "preon-star":star,
   "peusd": peusd,
   "eusd-v2": eusdv2,
-  "prisma-mkusd": prismamkusd
+  "prisma-mkusd": prismamkusd,
+  "alternity-cny": lcny
 };

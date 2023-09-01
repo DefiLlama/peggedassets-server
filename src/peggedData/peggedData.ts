@@ -2536,4 +2536,24 @@ export default [
   twitter: "https://twitter.com/PrismaFi",
   wiki: "https://docs.prismafinance.com/protocol-concepts/depositing-collateral-and-minting-mkusd",
 },
+{
+  id: "127",
+  name: "Alternity CNY",
+  address: "0x7635b612792e4bfb7f2fa12a3e5d5a3f2e3c34bc",
+  symbol: "LCNY",
+  url: "https://alternity.finance",
+  description:
+    "Alternity protocol is a fork of the initial code of the Liquity Protocol. Minor amendments have been added to the protocol logic in order to make the stablecoin Yuan-pegged.",
+  mintRedeemDescription:
+    "Users can redeem their LCNY for ETH at any time without limitations. However, a redemption fee might be charged on the redeemed amount.",
+  onCoinGecko: "true",
+  gecko_id: "alternity-cny",
+  cmcId: null,
+  pegType: "peggedCNY",
+  pegMechanism: "crypto-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/0xAlternity",
+  wiki: "https://docs.alternity.finance/faq/redemptions-and-lcny-price-stability",
+},
 ] as PeggedAsset[];
