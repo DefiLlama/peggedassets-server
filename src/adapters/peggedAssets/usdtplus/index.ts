@@ -16,6 +16,9 @@ const chainContracts: ChainContracts = {
   bsc: {
     issued: ["0x5335E87930b410b8C5BB4D43c3360ACa15ec0C8C"],
   },
+  linea: {
+    issued: ["0x1E1F509963A6D33e169D9497b11c7DbFe73B7F13"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -49,6 +52,10 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: chainMinted("bsc", 18),
+    unreleased: async () => ({}),
+  },
+  linea: {
+    minted: chainMinted("linea", 6),
     unreleased: async () => ({}),
   },
 };
