@@ -31,6 +31,12 @@ const chainContracts: ChainContracts = {
   avax: {
     issued: ["0xe80772Eaf6e2E18B651F160Bc9158b2A5caFCA65"],
   },
+  linea: {
+    issued: ["0xB79DD08EA68A908A97220C76d19A6aA9cBDE4376"],
+  },
+  base: {
+    issued: ["0xB79DD08EA68A908A97220C76d19A6aA9cBDE4376"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -85,7 +91,15 @@ const adapter: PeggedIssuanceAdapter = {
   avalanche: {
     minted: chainMinted("avax", 6),
     unreleased: async () => ({}),
-  }
+  },
+  linea: {
+    minted: chainMinted("linea", 6),
+    unreleased: async () => ({}),
+  },
+  base: {
+    minted: chainMinted("base", 6),
+    unreleased: async () => ({}),
+  },
 };
 
 export default adapter;

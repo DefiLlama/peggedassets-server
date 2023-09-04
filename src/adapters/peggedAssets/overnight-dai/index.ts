@@ -19,6 +19,9 @@ const chainContracts: ChainContracts = {
   optimism: {
     issued: ["0x970D50d09F3a656b43E11B0D45241a84e3a6e011"],
   },
+  base: {
+    issued: ["0x65a2508C429a6078a7BC2f7dF81aB575BD9D9275"]
+  }
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -56,6 +59,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   optimism: {
     minted: chainMinted("optimism", 18),
+    unreleased: async () => ({}),
+  },
+  base: {
+    minted: chainMinted("base", 18),
     unreleased: async () => ({}),
   },
 };
