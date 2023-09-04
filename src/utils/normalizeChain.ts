@@ -903,7 +903,7 @@ export const chainCoingeckoIds = {
     },
     chainId: 1101
   },
-  Base: {
+  "Base": {
     geckoId: null,
     symbol: null,
     cmcId: null,
@@ -914,6 +914,16 @@ export const chainCoingeckoIds = {
     symbol: "MNT",
     cmcId: "27075",
     categories: ["EVM"],
+  },
+  "Linea": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM", "Rollup"],
+    parent: {
+      chain: "Ethereum",
+      types: ["L2", "gas"]
+    },
   },
 } as {
   [chain: string]: {
@@ -1148,6 +1158,8 @@ export function getChainDisplayName(
       return "Base"
     case "mantle":
       return "Mantle"
+    case "linea":
+        return "Linea"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
