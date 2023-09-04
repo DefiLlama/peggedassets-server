@@ -920,7 +920,6 @@ export const chainCoingeckoIds = {
     symbol: null,
     cmcId: null,
     categories: ["EVM", "Rollup"],
-    github: ["ConsenSys"],
     parent: {
       chain: "Ethereum",
       types: ["L2", "gas"]
