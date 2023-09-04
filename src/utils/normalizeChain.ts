@@ -903,19 +903,19 @@ export const chainCoingeckoIds = {
     },
     chainId: 1101
   },
-  "Base": {
+  Base: {
     geckoId: null,
     symbol: null,
     cmcId: null,
     categories: ["EVM"],
   },
-  "Mantle": {
+  Mantle: {
     geckoId: "mantle",
     symbol: "MNT",
     cmcId: "27075",
     categories: ["EVM"],
   },
-  "Linea": {
+  Linea: {
     geckoId: null,
     symbol: null,
     cmcId: null,
