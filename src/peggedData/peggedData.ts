@@ -2303,9 +2303,9 @@ export default [
   symbol: "R",
   url: "https://raft.fi/",
   description:
-    "R is a USD-pegged stablecoin that uses Lido Staked Ether (stETH) as collateral, providing a capital-efficient and low cost way to borrow while keeping your stETH rewards.",
+    "R is the most capital-efficient USD stablecoin backed by high-quality collateral assets such as stETH (Lido Staked Ether) and rETH (Rocket Pool ETH) and reserve assets such as CHAI, the yield-bearing version of the DAI stablecoin.",
   mintRedeemDescription:
-    "Users deposit stETH as collateral with a collateralization ratio of at least 110% to generate the stablecoin R.",
+    "Users can deposit any accepted collateral asset of their choice to generate R, and enjoy capital-efficient borrowing.",
   onCoinGecko: "true",
   gecko_id: "r",
   cmcId: "24404",
