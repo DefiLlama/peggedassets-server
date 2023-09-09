@@ -124,7 +124,8 @@ import star from './star';
 import peusd from './peg-eusd';
 import eusdv2 from './eusdv2';
 import prismamkusd from './prisma-mkusd';
-import lcny from './alternity-cny'
+import lcny from './alternity-cny';
+import nexus from './nexus';
 
 export default {
   tether,
@@ -253,5 +254,6 @@ export default {
   "peusd": peusd,
   "eusd-v2": eusdv2,
   "prisma-mkusd": prismamkusd,
-  "alternity-cny": lcny
+  "alternity-cny": lcny,
+  "nexus": nexus
 };
