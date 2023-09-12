@@ -150,6 +150,10 @@ const chainContracts: ChainContracts = {
   loopring: {
     bridgeOnETH: ["0x674bdf20A0F284D710BC40872100128e2d66Bd3f"],
   },
+  era: {
+    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    bridgedFromETH: ["0x9a455d1a2b4630ffdb9a2307f2e875400d28b3c5"],
+  },
   ethereumclassic: {
     bridgedFromETH: ["0xb12c13e66AdE1F72f71834f2FC5082Db8C091358"], // multichain
   },

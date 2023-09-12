@@ -111,6 +111,10 @@ const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x3980c9ed79d2c191A89E02Fa3529C60eD6e9c04b"],
     bridgedFromETH: ["0xbB06DCA3AE6887fAbF931640f67cab3e3a16F4dC"],
   },
+  era: {
+    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    bridgedFromETH: ["0x493257fd37edb34451f62edf8d2a0c418852ba4c"],
+  },
   moonbeam: {
     bridgeOnETH: ["0xEC4486a90371c9b66f499Ff3936F29f0D5AF8b7E"],
     bridgedFromETH: [
