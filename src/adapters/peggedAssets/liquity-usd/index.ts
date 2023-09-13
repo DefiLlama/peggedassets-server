@@ -38,11 +38,10 @@ const chainContracts: ChainContracts = {
   polygon_zkevm: {
     bridgedFromETH: ["0x01E9A866c361eAd20Ab4e838287DD464dc67A50e"],
   },
-  /*
   era: {
-    bridgedFromETH: ["0x503234F203fC7Eb888EEC8513210612a43Cf6115"],
+    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    bridgedFromETH: ["0x503234f203fc7eb888eec8513210612a43cf6115"],
   },
-  */
 };
 
 async function chainMinted(chain: string, decimals: number) {
