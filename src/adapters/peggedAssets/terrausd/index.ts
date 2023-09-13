@@ -149,7 +149,7 @@ const adapter: PeggedIssuanceAdapter = {
       ],
       "peggedUSD"
     ),
-  },
+  },/*
   harmony: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -158,7 +158,7 @@ const adapter: PeggedIssuanceAdapter = {
       18,
       chainContracts.harmony.bridgedFromTerra
     ),
-  },
+  },*/
   polygon: {
     minted: async () => ({}),
     unreleased: async () => ({}),
