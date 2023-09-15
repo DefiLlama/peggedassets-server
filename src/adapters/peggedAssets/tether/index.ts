@@ -1193,11 +1193,13 @@ const adapter: PeggedIssuanceAdapter = {
     ),
     ethereum: kavaBridged(),
   },
+  /*
   ontology: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: ontologyBridged(),
   },
+  */
   sx: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -1267,6 +1269,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.dogechain.bridgedFromETH
     ),
   },
+  /*
   neo: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -1277,6 +1280,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: polyNetworkBridged(18, "Zilliqa", "zUSDT"),
   },
+  */
   arbitrum_nova: {
     minted: async () => ({}),
     unreleased: async () => ({}),

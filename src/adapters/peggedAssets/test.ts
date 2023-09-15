@@ -41,11 +41,13 @@ async function getPeggedAsset(
   bridgedFromMapping: BridgeMapping = {}
 ) {
   peggedBalances[chain] = peggedBalances[chain] || {};
+  const interval = setTimeout(()=>console.log(`Issuance function for chain ${chain} exceeded the timeout limit`), 60e3)
   const balance = (await issuanceFunction(
     unixTimestamp,
     ethBlock,
     chainBlocks
   )) as PeggedTokenBalance;
+  clearTimeout(interval)
   if (balance && Object.keys(balance).length === 0) {
     peggedBalances[chain][issuanceType] = { [pegType]: 0 };
     return;
@@ -55,7 +57,7 @@ async function getPeggedAsset(
   }
   if (typeof balance[pegType] !== "number" || Number.isNaN(balance[pegType])) {
     throw new Error(
-      `Pegged balance is not a number, instead it is ${balance[pegType]}. Make sure balance object is exported with key from: ${pegTypes}.`
+      `Pegged balance on chain ${chain} is not a number, instead it is ${balance[pegType]}. Make sure balance object is exported with key from: ${pegTypes}.`
     );
   }
   const bridges = balance.bridges;
