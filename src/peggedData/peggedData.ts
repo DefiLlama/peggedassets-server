@@ -2585,7 +2585,7 @@ export default [
   description:
     "USDY is a tokenized note secured by short-term US Treasuries and bank demand deposits, bringing institutional-grade low-risk yield to the global on-chain economy.",
   mintRedeemDescription:
-    "USDY is accessible to non-US individual and institutional investors and is transferable on-chain 40-50 days after purchase. Non-US individual and institutional investors can on-board with Ondo (subject to KYC/KYB/AML) in order to mint/redeem USDY",
+    "USDY is accessible to non-US individual and institutional investors and is transferable on-chain 40-50 days after purchase. Users request to mint USDY by sending us USDC. After 40 day mint restriction is lifted it will mint USDY tokens",
   onCoinGecko: "true",
   gecko_id: "ondo-us-dollar-yield",
   cmcId: null,
