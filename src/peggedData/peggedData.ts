@@ -2576,4 +2576,24 @@ export default [
   twitter: "https://twitter.com/Nexus_ZDex",
   wiki: "https://docs.zdex.tech/",
 },
+{
+  id: "129",
+  name: "Ondo US Dollar Yield",
+  address: "0x96f6ef951840721adbf46ac996b59e0235cb985c",
+  symbol: "USDY",
+  url: "https://ondo.finance",
+  description:
+    "USDY is a tokenized note secured by short-term US Treasuries and bank demand deposits, bringing institutional-grade low-risk yield to the global on-chain economy.",
+  mintRedeemDescription:
+    "USDY is accessible to non-US individual and institutional investors and is transferable on-chain 40-50 days after purchase. Non-US individual and institutional investors can on-board with Ondo (subject to KYC/KYB/AML) in order to mint/redeem USDY",
+  onCoinGecko: "true",
+  gecko_id: "ondo-us-dollar-yield",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/ondofinance",
+  wiki: "https://docs.ondo.finance/general-access-products/usdy/faq/",
+},
 ] as PeggedAsset[];
