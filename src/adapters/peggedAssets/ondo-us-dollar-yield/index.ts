@@ -17,6 +17,9 @@ const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x96F6eF951840721AdBF46Ac996b59E0235CB985C"],
   },
+  polygon: {
+    issued: ["0x96F6eF951840721AdBF46Ac996b59E0235CB985C"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -50,6 +53,10 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
+    unreleased: async () => ({}),
+  },
+  polygon: {
+    minted: chainMinted("polygon", 18),
     unreleased: async () => ({}),
   },
 };
