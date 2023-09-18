@@ -126,6 +126,7 @@ import eusdv2 from './eusdv2';
 import prismamkusd from './prisma-mkusd';
 import lcny from './alternity-cny';
 import nexus1 from './nexus';
+import usdy from './ondo-us-dollar-yield'
 
 export default {
   tether,
@@ -255,5 +256,6 @@ export default {
   "eusd-v2": eusdv2,
   "prisma-mkusd": prismamkusd,
   "alternity-cny": lcny,
-  "nexus1": nexus1
+  "nexus1": nexus1,
+  "ondo-us-dollar-yield": usdy
 };
