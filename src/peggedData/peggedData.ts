@@ -2556,4 +2556,24 @@ export default [
   twitter: "https://twitter.com/0xAlternity",
   wiki: "https://docs.alternity.finance/faq/redemptions-and-lcny-price-stability",
 },
+{
+  id: "128",
+  name: "Nexus",
+  address: "0x92211b6B68a39F4f68E722f3A3A4810A2Ebc8383",
+  symbol: "NEX",
+  url: "https://nexus.zdex.tech/",
+  description:
+    "Nexus (NEX) is a revolutionary decentralized finance (DeFi) project that introduces a unique combination of security, scalability, and stability to the Ethereum network and Layer 2 solutions.",
+  mintRedeemDescription:
+    "Users can trade their NEX token on a uniswap pool.(no redeem process)",
+  onCoinGecko: "true",
+  gecko_id: "nexus1",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "algorithmic",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: "https://twitter.com/Nexus_ZDex",
+  wiki: "https://docs.zdex.tech/",
+},
 ] as PeggedAsset[];
