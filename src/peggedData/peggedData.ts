@@ -2596,4 +2596,24 @@ export default [
   twitter: "https://twitter.com/ondofinance",
   wiki: "https://docs.ondo.finance/general-access-products/usdy/faq/",
 },
+{
+  id: "130",
+  name: "Savvy USD",
+  address: "0xf202ab403cd7e90197ec0f010ee897e283037706",
+  symbol: "SVUSD",
+  url: "https://savvydefi.io",
+  description:
+    "Access non-liquidating, auto-repaying, 0% interest loans that give you an immediate advance on your future yield.",
+  mintRedeemDescription:
+    "svUSD are created when users deposit accepted Stablescoins like USDC, USDT, DAI, and more into Savvy protocol. Borrowing is capped at 50% of the value of the collateral deposited.",
+  onCoinGecko: "true",
+  gecko_id: "savvy-usd",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/SavvyDefi",
+  wiki: "https://app.savvydefi.io/dashboard",
+},
 ] as PeggedAsset[];
