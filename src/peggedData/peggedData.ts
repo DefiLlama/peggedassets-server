@@ -1371,7 +1371,7 @@ export default [
     twitter: "https://twitter.com/LemmaFinance",
     wiki: "https://wiki.defillama.com/wiki/LemmaFinance",
   },
-  {
+  /*{
     id: "69",
     name: "Pando USD",
     address: null,
@@ -1391,7 +1391,7 @@ export default [
     twitter: "https://twitter.com/pando_im",
     wiki: "https://wiki.defillama.com/wiki/Pando",
     delisted: true,
-  },
+  },*/
   {
     id: "70",
     name: "DigitalDollar",
