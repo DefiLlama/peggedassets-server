@@ -4,7 +4,7 @@ export type ChainBlocks = {
   [x: string]: number;
 };
 
-export type PeggedAssetType = "peggedUSD" | "peggedVAR" | "peggedEUR" | "peggedSGD" | "peggedJPY" | "peggedCNY";
+export type PeggedAssetType = "peggedUSD" | "peggedVAR" | "peggedEUR" | "peggedSGD" | "peggedJPY" | "peggedCNY" | "peggedUAH";
 
 type StringNumber = string;
 type PeggedBalances = {
