@@ -127,7 +127,8 @@ import prismamkusd from './prisma-mkusd';
 import lcny from './alternity-cny';
 import nexus1 from './nexus';
 import usdy from './ondo-us-dollar-yield';
-import svusd from './savvy-usd'
+import svusd from './savvy-usd';
+import uaht from './uaht'
 
 export default {
   tether,
@@ -259,5 +260,6 @@ export default {
   "alternity-cny": lcny,
   "nexus1": nexus1,
   "ondo-us-dollar-yield": usdy,
-  "savvy-usd": svusd
+  "savvy-usd": svusd,
+  uaht
 };

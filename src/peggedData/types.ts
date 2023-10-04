@@ -4,7 +4,9 @@ type PegType =
   | "peggedEUR"
   | "peggedSGD"
   | "peggedJPY"
-  | "peggedCNY";
+  | "peggedCNY"
+    "peggedUAH";
+
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 export type PriceSource =
   | "chainlink"

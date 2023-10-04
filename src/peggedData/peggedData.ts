@@ -2616,4 +2616,24 @@ export default [
   twitter: "https://twitter.com/SavvyDefi",
   wiki: "https://app.savvydefi.io/dashboard",
 },
+{
+  id: "131",
+  name: "UAHT",
+  address: "0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A",
+  symbol: "UAHT",
+  url: "https://uaht.io",
+  description:
+    "Welcome to the platform where people matter.",
+  mintRedeemDescription:
+    "UAHT is pegged to UAH Ukraine Currency",
+  onCoinGecko: "true",
+  gecko_id: "uaht",
+  cmcId: null,
+  pegType: "peggedUAH",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/starscrowding",
+  wiki: "https://github.com/starscrowding/UAHT#readme",
+},
 ] as PeggedAsset[];
