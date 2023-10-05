@@ -129,6 +129,7 @@ import nexus1 from './nexus';
 import usdy from './ondo-us-dollar-yield';
 import svusd from './savvy-usd';
 import uaht from './uaht'
+import usdm from './usdm'
 
 export default {
   tether,
@@ -261,5 +262,6 @@ export default {
   "nexus1": nexus1,
   "ondo-us-dollar-yield": usdy,
   "savvy-usd": svusd,
-  uaht
+  uaht,
+  "mountain-protocol-usdm": usdm
 };
