@@ -2636,4 +2636,24 @@ export default [
   twitter: "https://twitter.com/starscrowding",
   wiki: "https://github.com/starscrowding/UAHT#readme",
 },
+{
+  id: "132",
+  name: "USDM",
+  address: "0x59d9356e565ab3a36dd77763fc0d87feaf85508c",
+  symbol: "USDM",
+  url: "https://mountainprotocol.com",
+  description:
+    "The USDM Token is an ERC20 rebasing token, with a redemption value pegged at 1:1 for primary customers. Like other fiat-backed stablecoins, we expect a 1:~1 in secondary market price, driven by arbitrage opportunities.",
+  mintRedeemDescription:
+    "Users can purchase USDM with USDC. Balances will be credited in the platform when funds settle (usually in seconds) and are ready to withdraw.",
+  onCoinGecko: "true",
+  gecko_id: "mountain-protocol-usdm",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/MountainUSDM",
+  wiki: "https://docs.mountainprotocol.com/reference/usdm-token",
+},
 ] as PeggedAsset[];
