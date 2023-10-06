@@ -130,6 +130,7 @@ import usdy from './ondo-us-dollar-yield';
 import svusd from './savvy-usd';
 import uaht from './uaht'
 import usdm from './usdm'
+import nars from './nars'
 
 export default {
   tether,
@@ -263,5 +264,6 @@ export default {
   "ondo-us-dollar-yield": usdy,
   "savvy-usd": svusd,
   uaht,
-  "mountain-protocol-usdm": usdm
+  "mountain-protocol-usdm": usdm,
+  "num-ars": nars
 };

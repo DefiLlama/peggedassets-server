@@ -2656,4 +2656,24 @@ export default [
   twitter: "https://twitter.com/MountainUSDM",
   wiki: "https://docs.mountainprotocol.com/reference/usdm-token",
 },
+{
+  id: "133",
+  name: "NARS",
+  address: "0x65517425ac3ce259a34400bb67ceb39ff3ddc0bd",
+  symbol: "NARS",
+  url: "https://num.finance/stablecoins",
+  description:
+    "Seamlessly scale your financial operations globally.On Ramps, Loans and Yields.",
+  mintRedeemDescription:
+    "Num-S are collateralized stablecoins, minted and issued by Num Finance.",
+  onCoinGecko: "true",
+  gecko_id: "num-ars",
+  cmcId: null,
+  pegType: "peggedARS",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/Num_Finance",
+  wiki: "https://num.finance/transparency",
+},
 ] as PeggedAsset[];
