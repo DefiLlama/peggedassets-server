@@ -3,9 +3,10 @@ type PegType =
   | "peggedVAR"
   | "peggedEUR"
   | "peggedSGD"
-  | "peggedJPY"
-  | "peggedCNY"
-    "peggedUAH";
+  | "peggedJPY"  //japan
+  | "peggedCNY"  //china
+    "peggedUAH" //ukraine
+    "peggedARS" //ARGENTINE
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 export type PriceSource =
