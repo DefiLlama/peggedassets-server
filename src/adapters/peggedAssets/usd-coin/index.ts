@@ -637,7 +637,7 @@ async function nearMint(address: string, decimals: number) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const mintedAmount = await nearCall(address, "mint");
+    const mintedAmount = await nearCall(address, "ft_total_supply");
     sumSingleBalance(
       balances,
       "peggedUSD",
