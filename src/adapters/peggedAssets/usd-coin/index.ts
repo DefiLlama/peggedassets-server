@@ -1084,7 +1084,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("wan", 6, chainContracts.wan.bridgedFromETH),
   },
   near: {
-    minted: nearMint(chainContracts.near.issue[0], 6),
+    minted: nearMint(chainContracts.near.issued[0], 6),
     unreleased: async () => ({}),
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 6),
   },
