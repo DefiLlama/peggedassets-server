@@ -292,9 +292,8 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x52A9CEA01c4CBDd669883e41758B8eB8e8E2B34b"], // wan
   },
   near: {
-    bridgedFromETH: [
-      "a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.factory.bridge.near",
-    ], // rainbow bridge
+    bridgedFromETH: ["a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.factory.bridge.near",], // rainbow bridge
+    issued: ["17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1"],
   },
   defichain: {
     bridgeOnETH: ["0x94fa70d079d76279e1815ce403e9b985bccc82ac"], // seems there is no direct bridge from ETH. but users can withdraw to defichain using cake defi?
@@ -524,6 +523,7 @@ async function circleAPIChainMinted(chain: string) {
   };
 }
 
+
 async function reinetworkBridged(address: string, decimals: number) {
   return async function (
     _timestamp: number,
@@ -629,6 +629,26 @@ async function nearBridged(address: string, decimals: number) {
     return balances;
   };
 }
+
+async function nearMint(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const mintedAmount = await nearCall(address, "mint");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      mintedAmount / 10 ** decimals,
+      address,
+      false
+    );
+    return balances;
+  };
+}
+
 
 async function elrondBridged(tokenID: string, decimals: number) {
   return async function (
@@ -1064,7 +1084,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("wan", 6, chainContracts.wan.bridgedFromETH),
   },
   near: {
-    minted: async () => ({}),
+    minted: nearMint(chainContracts.near.issue[0], 6),
     unreleased: async () => ({}),
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 6),
   },
