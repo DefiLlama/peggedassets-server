@@ -45,6 +45,7 @@ const chainContracts: ChainContracts = {
     bridgedFromPolygon: ["0x566957eF80F9fd5526CD2BEF8BE67035C0b81130"], // wormhole
   },
   polygon: {
+    issued: ["0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"],
     bridgeOnETH: ["0x40ec5b33f54e0e8a33a975908c5ba1c14e5bbbdf"],
     bridgedFromETH: [
       "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
@@ -734,7 +735,7 @@ const adapter: PeggedIssuanceAdapter = {
     bsc: bridgedSupply("ethereum", 18, chainContracts.ethereum.bridgedFromBSC),
   },
   polygon: {
-    minted: async () => ({}),
+    minted: chainMinted("polygon", 6),
     unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "polygon",
