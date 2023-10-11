@@ -168,7 +168,10 @@ const chainContracts: ChainContracts = {
     */
   },
   fuse: {
-    bridgedFromETH: ["0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5"],
+    bridgedFromETH: [
+      "0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5", 
+      "0x28C3d1cD466Ba22f6cae51b1a4692a831696391A"
+    ],
   },
   meter: {
     bridgedFromETH: ["0xd86e243fc0007e6226b07c9a50c9d70d78299eb5"],
