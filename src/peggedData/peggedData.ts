@@ -1699,11 +1699,11 @@ export default [
   {
     id: "85",
     name: "Real USD",
-    address: "polygon:0xb5DFABd7fF7F83BAB83995E72A52B97ABb7bcf63",
+    address: "polygon:0x40379a439D4F6795B6fc9aa5687dB461677A2dBa",
     symbol: "USDR",
     url: "https://www.tangible.store/realusd",
     description:
-      "Real USD (USDR v2) is a natively rebasing, yield-bearing, overcollateralized stablecoin, pegged to the US dollar. Collateralizing USDR will be yield-generating, tokenized real estate that is inflation-resistant and wealth generating.",
+      "Real USD (USDR v3) is a natively rebasing, yield-bearing, overcollateralized stablecoin, pegged to the US dollar. Collateralizing USDR will be yield-generating, tokenized real estate that is inflation-resistant and wealth generating.",
     mintRedeemDescription:
     "Using Tangible, users can swap DAI to mint USDR 1:1. A portion of that DAI is then converted into tokenized real estate through Tangible's existing marketplace. Users receive a daily rebase. USDR can be redeemed for DAI 1:1 at any time.",
     onCoinGecko: "true",
