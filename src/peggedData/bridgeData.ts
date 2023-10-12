@@ -1255,6 +1255,10 @@ export default {
     bridge: "fuse",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x28C3d1cD466Ba22f6cae51b1a4692a831696391A": {
+    bridge: "fuse",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x381b31409e4d220919b2cff012ed94d70135a59e": {
     bridge: "tomochain",
     sourceChain: formattedSourceChains.eth,
