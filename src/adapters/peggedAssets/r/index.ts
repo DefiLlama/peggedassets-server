@@ -8,13 +8,15 @@ import {
 
 type ChainContracts = {
   [chain: string]: {
-    [contract: string]: string[];
+    issued: string[];
+    ignored?: string[]; // ignored addresses which have deadlock tokens
   };
 };
 
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x183015a9bA6fF60230fdEaDc3F43b3D788b13e21"],
+    ignored: ["0x2ba26baE6dF1153e29813d7f926143f9c94402f3"],
   },
   base: {
     issued: ["0xafb2820316e7bc5ef78d295ab9b8bb2257534576"],
@@ -28,8 +30,10 @@ async function chainMinted(chain: string, decimals: number) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
+    const { issued: issuedAddresses, ignored: ignoredAddresses = [] } =
+      chainContracts[chain];
+    for (let issued of issuedAddresses) {
+      let totalSupply = (
         await sdk.api.abi.call({
           abi: "erc20:totalSupply",
           target: issued,
@@ -37,6 +41,20 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
+
+      for (let ignored of ignoredAddresses) {
+        const ignoredBalance = (
+          await sdk.api.abi.call({
+            abi: "erc20:balanceOf",
+            target: issued,
+            params: ignored,
+            block: _chainBlocks?.[chain],
+            chain: chain,
+          })
+        ).output;
+        totalSupply -= ignoredBalance;
+      }
+
       sumSingleBalance(
         balances,
         "peggedUSD",
