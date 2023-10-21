@@ -18,7 +18,7 @@ const chainContracts: ChainContracts = {
     issued: ["0xd585aaafa2b58b1cd75092b51ade9fa4ce52f247"],
   },
   arbitrum: {
-    bridgedFromETH: ["0xdce765f021410B3266aA0053c93Cb4535F1e12e0"],
+    issued: ["0xdce765f021410B3266aA0053c93Cb4535F1e12e0"],
   },
 };
 
@@ -56,9 +56,8 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   arbitrum: {
-    minted: async () => ({}),
+    minted: chainMinted("arbitrum", 18),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("arbitrum", 18, chainContracts.arbitrum.bridgedFromETH),
   },
 };
 
