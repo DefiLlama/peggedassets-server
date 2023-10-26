@@ -131,6 +131,7 @@ import svusd from './savvy-usd';
 import uaht from './uaht'
 import usdm from './usdm'
 import nars from './nars'
+import phase from './phase-dollar'
 
 export default {
   tether,
@@ -265,5 +266,6 @@ export default {
   "savvy-usd": svusd,
   uaht,
   "mountain-protocol-usdm": usdm,
-  "num-ars": nars
+  "num-ars": nars,
+  "phase-dollar": phase
 };
