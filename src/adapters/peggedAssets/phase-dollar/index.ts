@@ -7,7 +7,9 @@ import {
   PeggedIssuanceAdapter,
 } from "../peggedAsset.type";
 
-import config from "./config";
+const config = {
+  base: "0xbe92452bb46485AF3308e6d77786bFBE3557808d",
+} as const;
 
 type ConfigChain = keyof typeof config;
 
