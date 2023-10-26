@@ -2676,4 +2676,25 @@ export default [
   twitter: "https://twitter.com/Num_Finance",
   wiki: "https://num.finance/transparency",
 },
+{
+  id: "134",
+  name: "Phase Dollar",
+  address: "base:0xbe92452bb46485AF3308e6d77786bFBE3557808d",
+  symbol: "CASH",
+  url: "https://phase.cash",
+  description:
+    "Every $CASH token is backed with 1 USD or more worth of assets. Due to protocol fees, $CASH incurs a premium to its price, which is captured by the protocol for backing.",
+  mintRedeemDescription:
+    "Minting is done via first depositing collateral into the vaults, and then minting/borrowing the stable. Redeeming/paying back/burning the stable (action burns it under the hood) lets the user pay back their debt to the vault, unlocking their collateral",
+  onCoinGecko: "true",
+  gecko_id: "phase-dollar",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/0xPhase",
+  wiki: "https://docs.phase.cash/protocol/what-is-phase",
+},
+
 ] as PeggedAsset[];
