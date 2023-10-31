@@ -66,7 +66,7 @@ export default [
     cmcId: "7129",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
-    priceSource: "defillama",
+    priceSource: "coingecko",
     auditLinks: null,
     twitter: "https://twitter.com/terra_money",
     wiki: "https://wiki.defillama.com/wiki/UST",
