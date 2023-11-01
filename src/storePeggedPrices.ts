@@ -27,7 +27,7 @@ const timeout = (prom: any, time: number) =>
         "prices-getBlocks",
         String(err),
       ]);
-    }
+    },
   );
 
 const handler = async (_event: any) => {
@@ -39,7 +39,7 @@ const handler = async (_event: any) => {
       let pricePromises = peggedAssets.map(async (pegged) => {
         const price = await getCurrentPeggedPrice(
           pegged.gecko_id,
-          pegged.priceSource
+          pegged.priceSource,
         );
         if (typeof price !== "number") {
           if (price) {
@@ -79,7 +79,7 @@ const handler = async (_event: any) => {
   const closestDailyRecord = await getTVLOfRecordClosestToTimestamp(
     dailyPeggedPrices(),
     timestamp,
-    secondsInDay * 1.5
+    secondsInDay * 1.5,
   );
   if (getDay(closestDailyRecord?.SK) !== getDay(timestamp)) {
     // First write of the day
@@ -91,18 +91,23 @@ const handler = async (_event: any) => {
   }
 
   // store price history in s3
-  const historicalPriceItems = await dynamodb.query({
-    ExpressionAttributeValues: {
-      ":pk": `dailyPeggedPrices`,
-    },
-    KeyConditionExpression: "PK = :pk",
-  });
-  if (
-    historicalPriceItems.Items === undefined ||
-    historicalPriceItems.Items.length < 1
-  ) {
+  let historicalPrices: any[] = [];
+  let lastEval = -1;
+  do {
+    const res = await dynamodb.query({
+      ExpressionAttributeValues: {
+        ":pk": dailyPeggedPrices(),
+        ":sk": lastEval,
+      },
+      KeyConditionExpression: "PK = :pk AND SK > :sk",
+    });
+    lastEval = res.LastEvaluatedKey?.SK;
+    if (res.Items !== undefined) {
+      historicalPrices = historicalPrices.concat(res.Items);
+    }
+  } while (lastEval !== undefined);
+  if (historicalPrices === undefined || historicalPrices.length < 1) {
   } else {
-    const historicalPrices = historicalPriceItems.Items;
     const filenameFull = `prices/full`;
     await store(filenameFull, JSON.stringify(historicalPrices), true, false);
   }
