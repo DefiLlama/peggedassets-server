@@ -51,6 +51,7 @@ export default [
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/USDC",
   },
+  /*
   {
     id: "3",
     name: "TerraClassicUSD",
@@ -71,6 +72,7 @@ export default [
     twitter: "https://twitter.com/terra_money",
     wiki: "https://wiki.defillama.com/wiki/UST",
   },
+  */
   {
     id: "4",
     name: "Binance USD",
