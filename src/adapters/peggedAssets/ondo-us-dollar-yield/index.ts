@@ -20,6 +20,9 @@ const chainContracts: ChainContracts = {
   polygon: {
     issued: ["0x96F6eF951840721AdBF46Ac996b59E0235CB985C"],
   },
+  mantle: {
+    issued: ["0x5bE26527e817998A7206475496fDE1E68957c5A6"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
