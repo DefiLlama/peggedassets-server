@@ -9,6 +9,7 @@ import {
   solanaMintedOrBridged,
   terraSupply,
   osmosisSupply,
+  cosmosSupply,
 } from "../helper/getSupply";
 import {
   getTotalSupply as ontologyGetTotalSupply,
@@ -209,6 +210,9 @@ const chainContracts: ChainContracts = {
   mixin: {
     ethAssetIds: ["8549b4ad-917c-3461-a646-481adc5d7f7f"],
   },
+  osmosis: {
+    bridgedFromETH: ["ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7"], // axelar
+  }
 };
 
 /*
@@ -574,7 +578,8 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: osmosisSupply("dai", "Axelar", "Ethereum"),
+    ethereum: cosmosSupply("osmosis", chainContracts.osmosis.bridgedFromETH, 18, "Axelar"),
+
   },
   starknet: {
     minted: async () => ({}),
