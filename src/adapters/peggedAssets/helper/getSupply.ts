@@ -1,12 +1,12 @@
+import { getTokenSupply as solanaGetTokenSupply } from "../llama-helper/solana";
+import { totalSupply as terraGetTotalSupply } from "../llama-helper/terra"; // NOTE this is NOT currently exported
 import type {
   Balances,
   ChainBlocks,
   PeggedAssetType,
 } from "../peggedAsset.type";
-const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "./generalUtil";
-import { getTokenSupply as solanaGetTokenSupply } from "../llama-helper/solana";
-import { totalSupply as terraGetTotalSupply } from "../llama-helper/terra"; // NOTE this is NOT currently exported
+const sdk = require("@defillama/sdk");
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -203,4 +203,34 @@ export async function osmosisSupply(token: string, bridgeName: string, bridgedFr
     sumSingleBalance(balances, "peggedUSD", totalSupply, bridgeName, false, bridgedFrom);
     return balances;
   };
+}
+
+export async function cosmosSupply(chain: string, tokens: string[], decimals: number, bridgedFromChain: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (let token of tokens) {
+      const res = await retry(
+        async (_bail: any) =>
+          await axios.get(`https://rest.cosmos.directory/${chain}/cosmos/bank/v1beta1/supply/by_denom?denom=${token}`)
+      );      
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        parseInt(res.data.amount.amount) / 10 ** decimals,
+        token,
+        false,
+        bridgedFromChain
+      );
+    }
+    return balances;
+  };
+}
+
+
+export async function kujiraSupply(tokens: string[], decimals: number, bridgedFromChain: string) {
+  return cosmosSupply("kujira", tokens, decimals, bridgedFromChain);
 }
