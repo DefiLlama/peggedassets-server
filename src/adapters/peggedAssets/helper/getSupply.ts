@@ -1,12 +1,12 @@
-import { getTokenSupply as solanaGetTokenSupply } from "../llama-helper/solana";
-import { totalSupply as terraGetTotalSupply } from "../llama-helper/terra"; // NOTE this is NOT currently exported
 import type {
   Balances,
   ChainBlocks,
   PeggedAssetType,
 } from "../peggedAsset.type";
-import { sumSingleBalance } from "./generalUtil";
 const sdk = require("@defillama/sdk");
+import { sumSingleBalance } from "./generalUtil";
+import { getTokenSupply as solanaGetTokenSupply } from "../llama-helper/solana";
+import { totalSupply as terraGetTotalSupply } from "../llama-helper/terra"; // NOTE this is NOT currently exported
 const axios = require("axios");
 const retry = require("async-retry");
 
