@@ -345,7 +345,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA"], //
   },
   kujira: {
-    bridgedFromAxelar: ["ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F"],
+    bridgedFromETH: ["ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F"],
     bridgedFromNoble: ["ibc/FE98AAD68F02F03565E9FA39A5E627946699B2B07115889ED812D8BA639576A9"],
   }
 };
@@ -1187,7 +1187,7 @@ const adapter: PeggedIssuanceAdapter = {
   kujira: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: kujiraSupply(chainContracts.kujira.bridgedFromAxelar, 6, "Axelar"),
+    ethereum: kujiraSupply(chainContracts.kujira.bridgedFromETH, 6, "Axelar"),
     noble: kujiraSupply(chainContracts.kujira.bridgedFromNoble, 6, "Noble"),
   },
 };
