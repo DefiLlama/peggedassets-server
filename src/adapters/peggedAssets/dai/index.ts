@@ -8,7 +8,6 @@ import {
   supplyInEthereumBridge,
   solanaMintedOrBridged,
   terraSupply,
-  osmosisSupply,
   cosmosSupply,
 } from "../helper/getSupply";
 import {
