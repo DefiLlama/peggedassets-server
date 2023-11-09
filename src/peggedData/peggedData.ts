@@ -2696,5 +2696,45 @@ export default [
   twitter: "https://twitter.com/0xPhase",
   wiki: "https://docs.phase.cash/protocol/what-is-phase",
 },
+{
+  id: "135",
+  name: "Inter",
+  address: null,
+  symbol: "IST",
+  url: "https://inter.trade/",
+  description:
+    "IST is the over-collateralized, risk-managed stable token for the interchain.",
+  mintRedeemDescription:
+    "Inter Protocol’s Vaults let you mint IST against the value of your IBC assets (like ATOM) to unlock liquidity. IST minters actively manage their positions to avoid liquidations if their asset value falls. Anyone can participate in bidding on liquidation auctions to profit from auctioned collateral.",
+  onCoinGecko: "true",
+  gecko_id: "inter-stable-token",
+  cmcId: 22736,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/inter_protocol",
+  wiki: "https://docs.inter.trade/",
+},
+{
+  id: "136",
+  name: "e-Money Euro",
+  address: null,
+  symbol: "EEUR",
+  url: "https://e-money.com",
+  description:
+    "e-Money EUR stablecoin. Audited and backed by fiat EUR deposits and government bonds.",
+  mintRedeemDescription:
+    "Unlike most existing stablecoins which aim to maintain a static 1:1 peg with their underlying assets, the value of e-Money’s currency-backed tokens continually shifts in line with the interest accrued on the reserve assets. This means that holders benefit from the interest accrued on their assets while they sit securely in your wallet.",
+  onCoinGecko: "true",
+  gecko_id: "e-money-eur",
+  cmcId: 13877,
+  pegType: "peggedEUR",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/emoney_com",
+  wiki: null,
+},
 
 ] as PeggedAsset[];
