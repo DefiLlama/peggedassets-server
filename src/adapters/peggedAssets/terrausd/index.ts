@@ -88,6 +88,9 @@ const chainContracts: ChainContracts = {
   dfk: {
     bridgedFromTerra: ["0x360d6dd540e3448371876662fbe7f1acaf08c5ab"], // synapse
   },
+  osmosis: {
+    bridgedFromTerra: ["ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"],
+  },
 };
 
 /*
@@ -201,7 +204,7 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    terra: osmosisSupply("ustc", "Axelar", "Terra"),
+    terra: osmosisSupply(chainContracts.osmosis.bridgedFromTerra, 6, "Terra"),
   },
   moonbeam: {
     minted: async () => ({}),

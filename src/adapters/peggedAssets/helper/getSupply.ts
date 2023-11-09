@@ -188,7 +188,7 @@ export async function terraSupply(addresses: string[], decimals: number) {
   };
 }
 
-export async function osmosisSupply(token: string, bridgeName: string, bridgedFrom: string) {
+export async function osmosisLiquidity(token: string, bridgeName: string, bridgedFrom: string) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -199,8 +199,8 @@ export async function osmosisSupply(token: string, bridgeName: string, bridgedFr
       async (_bail: any) =>
         await axios.get(`https://api-osmosis.imperator.co/tokens/v2/${token}`)
     );
-    const totalSupply = res.data[0].liquidity;
-    sumSingleBalance(balances, "peggedUSD", totalSupply, bridgeName, false, bridgedFrom);
+    const totalLiquidity = res.data[0].liquidity;
+    sumSingleBalance(balances, "peggedUSD", totalLiquidity, bridgeName, false, bridgedFrom);
     return balances;
   };
 }
@@ -230,6 +230,30 @@ export async function cosmosSupply(chain: string, tokens: string[], decimals: nu
   };
 }
 
+export async function osmosisSupply(tokens: string[], decimals: number, bridgedFromChain: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (let token of tokens) {
+      const res = await retry(
+        async (_bail: any) =>
+          await axios.get(`https://lcd.osmosis.zone/osmosis/superfluid/v1beta1/supply?denom=${token}`)
+      );      
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        parseInt(res.data.amount.amount) / 10 ** decimals,
+        token,
+        false,
+        bridgedFromChain
+      );
+    }
+    return balances;
+  };
+}
 
 export async function kujiraSupply(tokens: string[], decimals: number, bridgedFromChain: string) {
   return cosmosSupply("kujira", tokens, decimals, bridgedFromChain);

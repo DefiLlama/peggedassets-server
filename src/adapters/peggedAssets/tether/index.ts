@@ -340,6 +340,10 @@ const chainContracts: ChainContracts = {
       "0x4f3C8E20942461e2c3Bdd8311AC57B0c222f2b82"
     ],
   },
+  osmosis: {
+    bridgedFromETH: ["ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4"], // axelar
+    bridgedFromKava: ["ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"],
+  }
 };
 
 /*
@@ -1314,7 +1318,13 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("thundercore", 6, chainContracts.thundercore.bridgeFromETH),
-  }
+  },
+  osmosis: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 6, "Axelar"),
+    kava: osmosisSupply(chainContracts.osmosis.bridgedFromKava, 6, "Kava"),
+  },
 };
 
 export default adapter;

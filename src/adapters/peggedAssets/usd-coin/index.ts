@@ -9,8 +9,9 @@ import {
   supplyInEthereumBridge,
   solanaMintedOrBridged,
   terraSupply,
-  osmosisSupply,
+  cosmosSupply,
   kujiraSupply,
+  osmosisSupply,
 } from "../helper/getSupply";
 import {
   getTotalSupply as ontologyGetTotalSupply,
@@ -347,6 +348,10 @@ const chainContracts: ChainContracts = {
   kujira: {
     bridgedFromETH: ["ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F"],
     bridgedFromNoble: ["ibc/FE98AAD68F02F03565E9FA39A5E627946699B2B07115889ED812D8BA639576A9"],
+  },
+  osmosis: {
+    bridgedFromETH: ["ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858"], // axelar
+    bridgedFromNoble: ["ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"],
   }
 };
 
@@ -1031,7 +1036,8 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: osmosisSupply("usdc", "Axelar", "Ethereum"),
+    ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 6, "Axelar"),
+    noble: osmosisSupply(chainContracts.osmosis.bridgedFromNoble, 6, "Noble"),
   },
   fantom: {
     minted: async () => ({}),
