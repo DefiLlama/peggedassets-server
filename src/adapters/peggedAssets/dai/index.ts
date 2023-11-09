@@ -8,7 +8,7 @@ import {
   supplyInEthereumBridge,
   solanaMintedOrBridged,
   terraSupply,
-  cosmosSupply,
+  osmosisSupply,
 } from "../helper/getSupply";
 import {
   getTotalSupply as ontologyGetTotalSupply,
@@ -577,7 +577,7 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: cosmosSupply("osmosis", chainContracts.osmosis.bridgedFromETH, 18, "Axelar"),
+    ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 18, "Axelar"),
 
   },
   starknet: {

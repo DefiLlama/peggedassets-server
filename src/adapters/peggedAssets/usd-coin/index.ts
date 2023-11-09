@@ -11,6 +11,7 @@ import {
   terraSupply,
   cosmosSupply,
   kujiraSupply,
+  osmosisSupply,
 } from "../helper/getSupply";
 import {
   getTotalSupply as ontologyGetTotalSupply,
@@ -1035,8 +1036,8 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: cosmosSupply("osmosis", chainContracts.osmosis.bridgedFromETH, 6, "Axelar"),
-    noble: cosmosSupply("osmosis", chainContracts.osmosis.bridgedFromNoble, 6, "Noble"),
+    ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 6, "Axelar"),
+    noble: osmosisSupply(chainContracts.osmosis.bridgedFromNoble, 6, "Noble"),
   },
   fantom: {
     minted: async () => ({}),

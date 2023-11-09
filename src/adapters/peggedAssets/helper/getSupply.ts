@@ -230,6 +230,30 @@ export async function cosmosSupply(chain: string, tokens: string[], decimals: nu
   };
 }
 
+export async function osmosisSupply(tokens: string[], decimals: number, bridgedFromChain: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (let token of tokens) {
+      const res = await retry(
+        async (_bail: any) =>
+          await axios.get(`https://lcd.osmosis.zone/osmosis/superfluid/v1beta1/supply?denom=${token}`)
+      );      
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        parseInt(res.data.amount.amount) / 10 ** decimals,
+        token,
+        false,
+        bridgedFromChain
+      );
+    }
+    return balances;
+  };
+}
 
 export async function kujiraSupply(tokens: string[], decimals: number, bridgedFromChain: string) {
   return cosmosSupply("kujira", tokens, decimals, bridgedFromChain);

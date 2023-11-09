@@ -6,7 +6,7 @@ import {
 import {
   bridgedSupply,
   solanaMintedOrBridged,
-  cosmosSupply,
+  osmosisSupply,
 } from "../helper/getSupply";
 import {
   ChainBlocks,
@@ -204,7 +204,7 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    terra: cosmosSupply("osmosis", chainContracts.osmosis.bridgedFromTerra, 6, "Terra"),
+    terra: osmosisSupply(chainContracts.osmosis.bridgedFromTerra, 6, "Terra"),
   },
   moonbeam: {
     minted: async () => ({}),
