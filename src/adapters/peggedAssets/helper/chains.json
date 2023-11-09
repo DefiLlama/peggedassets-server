@@ -133,5 +133,6 @@
   "polygon_zkevm",
   "base",
   "linea",
-  "mantle"
+  "mantle",
+  "agoric"
 ]
