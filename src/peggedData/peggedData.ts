@@ -2712,7 +2712,7 @@ export default [
   pegType: "peggedUSD",
   pegMechanism: "crypto-backed",
   priceSource: "coingecko",
-  auditLinks: null,
+  auditLinks: "https://assets.ctfassets.net/xm0kp9xt5r54/1pucZFh1QsF1PgL5vhGAtS/054cd042b32f962fce8843758d6f3483/Atredis_Partners_-_Agoric_Vaults_Implementation_Assessment__-_Report_v1.0___1_.pdf",
   twitter: "https://twitter.com/inter_protocol",
   wiki: "https://docs.inter.trade/",
 },
@@ -2736,5 +2736,27 @@ export default [
   twitter: "https://twitter.com/emoney_com",
   wiki: null,
 },
+{
+  id: "137",
+  name: "Membrane",
+  address: null,
+  symbol: "CDT",
+  url: "https://membrane-ui-mainnet.vercel.app/",
+  description:
+    "Membrane is an experimental protocol that uses collateralized debt positions to synthesize credit demand into composable debt tokens that traverse the Cosmos in the form of $CDT.",
+  mintRedeemDescription:
+    "The mechanism is roughly analogous to a “Line of Credit”, wherein vault owners can deposit their collateral to receive a line of credit against it. This unique functionality enables a large amount of flexibility in otherwise rigid token positions.",
+  onCoinGecko: "false",
+  gecko_id: "cdt",
+  cmcId: null,
+  pegType: "peggedVAR",
+  pegMechanism: "crypto-backed",
+  priceSource: null,
+  auditLinks: "https://github.com/oak-security/audit-reports/blob/master/Membrane/2023-06-15%20Audit%20Report%20-%20Membrane%20v1.0.pdf",
+  twitter: "https://twitter.com/insaneinthembrn",
+  wiki: "https://membrane-finance.gitbook.io/",
+},
+
+
 
 ] as PeggedAsset[];
