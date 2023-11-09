@@ -1,4 +1,5 @@
 import { sumSingleBalance } from "../helper/generalUtil";
+import { osmosisSupply } from "../helper/getSupply";
 import {
   Balances,
   ChainBlocks,
@@ -13,7 +14,11 @@ type ChainContracts = {
   };
 };
 
-const chainContracts: ChainContracts = {};
+const chainContracts: ChainContracts = {
+  osmosis: {
+    bridgedFromKujira: ["ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC"],
+  },
+};
 
 // There appears to be no explorer API that can give total supply; this endpoint was provided by dev.
 async function kujiraMinted(decimals: number) {
@@ -41,6 +46,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: kujiraMinted(6),
     unreleased: async () => ({}),
   },
+  osmosis: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    kujira: osmosisSupply(chainContracts.osmosis.bridgedFromKujira, 6, "Kujira"),
+  }
 };
 
 export default adapter;
