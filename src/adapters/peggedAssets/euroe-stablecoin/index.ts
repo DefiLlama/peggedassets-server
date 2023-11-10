@@ -29,6 +29,9 @@ const chainContracts: ChainContracts = {
   solana: {
     issued: ["2VhjJ9WxaGC3EZFwJG9BDUs9KxKCAjQY4vgd1qxgYWVg"], 
   },
+  optimism: {
+    issued: ["0x820802Fa8a99901F52e39acD21177b0BE6EE2974"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -78,6 +81,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedEUR"),
+    unreleased: async () => ({}),
+  },
+  optimism: {
+    minted: chainMinted("optimism", 6),
     unreleased: async () => ({}),
   },
 };

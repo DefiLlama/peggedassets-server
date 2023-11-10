@@ -5,7 +5,7 @@ import {
   supplyInEthereumBridge,
   solanaMintedOrBridged,
   terraSupply,
-  osmosisSupply,
+  osmosisSupply
 } from "../helper/getSupply";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import {
@@ -850,6 +850,11 @@ const adapter: PeggedIssuanceAdapter = {
       6,
       chainContracts.ethereum.bridgedFromSol
     ),
+  },
+  osmosis: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: osmosisSupply("usdt", "Axelar", "Kava"),
   },
   polygon: {
     minted: async () => ({}),
