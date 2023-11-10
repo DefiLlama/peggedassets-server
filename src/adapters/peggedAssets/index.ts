@@ -271,8 +271,7 @@ export default {
   "mountain-protocol-usdm": usdm,
   "num-ars": nars,
   "phase-dollar": phase,
-  inter,
+  "inter-stable-token": inter,
   "e-money-euro": eeur,
   "membrane-cdt": cdt,
-
 };
