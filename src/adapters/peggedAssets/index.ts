@@ -132,9 +132,9 @@ import uaht from './uaht'
 import usdm from './usdm'
 import nars from './nars'
 import phase from './phase-dollar'
-import inter from './inter'
-import eeur from './eeur'
-import cdt from './cdt'
+import inter from './inter-stable-token'
+import eeur from './e-money-eur'
+import cdt from './membrane'
 
 export default {
   tether,
