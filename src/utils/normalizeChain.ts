@@ -1022,6 +1022,8 @@ export function getChainDisplayName(
       return "NEO";
     case "rsk":
       return "RSK";
+    case "osmosis":
+      return "Osmosis";
     case "iotex":
       return "IoTeX";
     case "thundercore":
@@ -1167,15 +1169,15 @@ export function getChainDisplayName(
     case "polygon_zkevm":
       return "Polygon zkEVM"
     case "base":
-      return "Base"
+      return "Base";
     case "mantle":
-      return "Mantle"
+      return "Mantle";
     case "linea":
-      return "Linea"
+      return "Linea";
     case "agoric":
-      return "Agoric"
+      return "Agoric";
     case "emoney":
-      return "eMoney"
+      return "eMoney";
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
