@@ -2698,7 +2698,7 @@ export default [
 },
 {
   id: "135",
-  name: "Inter",
+  name: "Inter Stable Token",
   address: null,
   symbol: "IST",
   url: "https://inter.trade/",
