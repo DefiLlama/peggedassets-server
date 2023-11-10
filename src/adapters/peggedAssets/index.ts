@@ -132,6 +132,9 @@ import uaht from './uaht'
 import usdm from './usdm'
 import nars from './nars'
 import phase from './phase-dollar'
+import inter from './inter'
+import eeur from './eeur'
+import cdt from './cdt'
 
 export default {
   tether,
@@ -267,5 +270,8 @@ export default {
   uaht,
   "mountain-protocol-usdm": usdm,
   "num-ars": nars,
-  "phase-dollar": phase
+  "phase-dollar": phase,
+  "inter-stable-token": inter,
+  "e-money-euro": eeur,
+  "membrane-cdt": cdt,
 };

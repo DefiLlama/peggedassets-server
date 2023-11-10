@@ -33,8 +33,8 @@ async function agoricMinted(decimals: number) {
           "https://rest.cosmos.directory/agoric/cosmos/bank/v1beta1/supply/uist"
         )
     );
-    const uskInfo = res?.data?.amount;
-    const supply = uskInfo?.amount / 10 ** decimals;
+    const istInfo = res?.data?.amount;
+    const supply = istInfo?.amount / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
   };
