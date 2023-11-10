@@ -2705,7 +2705,7 @@ export default [
   description:
     "IST is the over-collateralized, risk-managed stable token for the interchain.",
   mintRedeemDescription:
-    "Inter Protocol’s Vaults let you mint IST against the value of your IBC assets (like ATOM) to unlock liquidity. IST minters actively manage their positions to avoid liquidations if their asset value falls. Anyone can participate in bidding on liquidation auctions to profit from auctioned collateral.",
+    "Inter Protocol's Vaults let you mint IST against the value of your IBC assets (like ATOM) to unlock liquidity. IST minters actively manage their positions to avoid liquidations if their asset value falls. Anyone can participate in bidding on liquidation auctions to profit from auctioned collateral.",
   onCoinGecko: "true",
   gecko_id: "inter-stable-token",
   cmcId: 22736,
@@ -2725,7 +2725,7 @@ export default [
   description:
     "e-Money EUR stablecoin. Audited and backed by fiat EUR deposits and government bonds.",
   mintRedeemDescription:
-    "Unlike most existing stablecoins which aim to maintain a static 1:1 peg with their underlying assets, the value of e-Money’s currency-backed tokens continually shifts in line with the interest accrued on the reserve assets. This means that holders benefit from the interest accrued on their assets while they sit securely in your wallet.",
+    "Unlike most existing stablecoins which aim to maintain a static 1:1 peg with their underlying assets, the value of e-Money's currency-backed tokens continually shifts in line with the interest accrued on the reserve assets. This means that holders benefit from the interest accrued on their assets while they sit securely in your wallet.",
   onCoinGecko: "true",
   gecko_id: "e-money-eur",
   cmcId: 13877,
@@ -2747,7 +2747,7 @@ export default [
   mintRedeemDescription:
     "The mechanism is roughly analogous to a “Line of Credit”, wherein vault owners can deposit their collateral to receive a line of credit against it. This unique functionality enables a large amount of flexibility in otherwise rigid token positions.",
   onCoinGecko: "false",
-  gecko_id: "cdt",
+  gecko_id: "membrane",
   cmcId: null,
   pegType: "peggedVAR",
   pegMechanism: "crypto-backed",
