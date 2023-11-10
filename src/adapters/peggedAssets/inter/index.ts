@@ -16,12 +16,11 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   osmosis: {
-    bridgedFromKujira: ["ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC"],
+    bridgedFromAgoric: ["ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5"],
   },
-};
+}
 
-// There appears to be no explorer API that can give total supply; this endpoint was provided by dev.
-async function kujiraMinted(decimals: number) {
+async function agoricMinted(decimals: number) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -31,7 +30,7 @@ async function kujiraMinted(decimals: number) {
     const res = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://rest.cosmos.directory/kujira/cosmos/bank/v1beta1/supply/by_denom?denom=factory%2Fkujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7%2Fuusk"
+          "https://rest.cosmos.directory/agoric/cosmos/bank/v1beta1/supply/uist"
         )
     );
     const uskInfo = res?.data?.amount;
@@ -42,14 +41,14 @@ async function kujiraMinted(decimals: number) {
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  kujira: {
-    minted: kujiraMinted(6),
+  agoric: {
+    minted: agoricMinted(6),
     unreleased: async () => ({}),
   },
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    kujira: osmosisSupply(chainContracts.osmosis.bridgedFromKujira, 6, "Kujira"),
+    agoric: osmosisSupply(chainContracts.osmosis.bridgedFromAgoric, 6, "Agoric"),
   }
 };
 

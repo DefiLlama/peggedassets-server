@@ -1,4 +1,5 @@
 import { sumSingleBalance } from "../helper/generalUtil";
+import { osmosisSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -6,6 +7,18 @@ import {
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
+
+type ChainContracts = {
+  [chain: string]: {
+    [contract: string]: string[];
+  };
+};
+
+const chainContracts: ChainContracts = {
+  osmosis: {
+    bridgedFromComdex: ["ibc/23CA6C8D1AB2145DD13EB1E089A2E3F960DC298B468CCE034E19E5A78B61136E"],
+  },
+};
 
 async function compositeMinted(decimals: number) {
   return async function (
@@ -32,6 +45,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: compositeMinted(6),
     unreleased: async () => ({}),
   },
+  osmosis: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    comdex: osmosisSupply(chainContracts.osmosis.bridgedFromComdex, 6, "Comdex"),
+  }
 };
 
 export default adapter;

@@ -925,6 +925,18 @@ export const chainCoingeckoIds = {
       types: ["L2", "gas"]
     },
   },
+  Agoric: {
+    geckoId: "agoric",
+    symbol: "BLD",
+    cmcId: "16697",
+    categories: ["Cosmos"],
+  },
+  eMoney: {
+    geckoId: "e-money",
+    symbol: "NGM",
+    cmcId: "8279",
+    categories: ["Cosmos"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;

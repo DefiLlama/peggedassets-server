@@ -4,6 +4,7 @@ import {
   bridgedSupply,
   supplyInEthereumBridge,
   solanaMintedOrBridged,
+  osmosisSupply,
 } from "../helper/getSupply";
 import {
   ChainBlocks,
@@ -72,7 +73,10 @@ const chainContracts: ChainContracts = {
   },
   dogechain: {
     bridgedFromETH: ["0xf27Ee99622C3C9b264583dACB2cCE056e194494f"], // multichain
-  }
+  },
+  osmosis: {
+    bridgedFromETH: ["ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE"], // axelar
+  },
 };
 
 /*
@@ -228,6 +232,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("dogechain", 18, chainContracts.dogechain.bridgedFromETH),
   },
+  osmosis: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 18, "Axelar"),
+  }
 };
 
 export default adapter;
