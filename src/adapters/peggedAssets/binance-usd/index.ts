@@ -8,6 +8,7 @@ import {
   solanaMintedOrBridged,
   terraSupply,
   supplyInEthereumBridge,
+  osmosisSupply,
 } from "../helper/getSupply";
 import { call as nearCall } from "../llama-helper/near";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
@@ -174,6 +175,9 @@ const chainContracts: ChainContracts = {
     ],
     bridgedFromBSC: ["0xBEB0131D95AC3F03fd15894D0aDE5DBf7451d171"],
   },
+  osmosis: {
+    bridgedFromETH: ["ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D"],
+  }
 };
 
 /*
@@ -313,219 +317,224 @@ async function chainUnreleased(chain: string, decimals: number) {
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("ethereum", 18, chainContracts.ethereum.bridgedFromBSC),
-  },
-  bsc: {
+  // ethereum: {
+  //   minted: chainMinted("ethereum", 18),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("ethereum", 18, chainContracts.ethereum.bridgedFromBSC),
+  // },
+  // bsc: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
+  // },
+  // avalanche: {
+  //   minted: chainMinted("avax", 18),
+  //   unreleased: chainUnreleased("avax", 18),
+  //   ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
+  //   bsc: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromBSC),
+  // },
+  // harmony: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   /* appears to now be unbacked due to hack
+  //   ethereum: bridgedSupply(
+  //     "harmony",
+  //     18,
+  //     chainContracts.harmony.bridgedFromETH
+  //   ),
+  //     */
+  // },
+  // iotex: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   ethereum: bridgedSupply("iotex", 18, chainContracts.iotex.bridgedFromETH),
+  // },
+  // okexchain: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply(
+  //     "okexchain",
+  //     18,
+  //     chainContracts.okexchain.bridgedFromBSC
+  //   ),
+  // },
+  // moonriver: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply(
+  //     "moonriver",
+  //     18,
+  //     chainContracts.moonriver.bridgedFromBSC
+  //   ),
+  // },
+  // solana: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
+  //   bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
+  // },
+  // polygon: {
+  //   minted: chainMinted("polygon", 18),
+  //   unreleased: chainUnreleased("polygon", 18),
+  //   bsc: bridgedSupply("polygon", 18, chainContracts.polygon.bridgedFromBSC),
+  // },
+  // fuse: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("fuse", 18, chainContracts.fuse.bridgedFromBSC),
+  // },
+  // meter: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("meter", 18, chainContracts.meter.bridgedFromBSC),
+  // },
+  // moonbeam: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("moonbeam", 18, chainContracts.moonbeam.bridgedFromBSC),
+  // },
+  // milkomeda: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply(
+  //     "milkomeda",
+  //     18,
+  //     chainContracts.milkomeda.bridgedFromBSC
+  //   ),
+  // },
+  // elastos: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("elastos", 18, chainContracts.elastos.bridgedFromBSC),
+  // },
+  // aurora: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromBSC),
+  // },
+  // oasis: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
+  // },
+  // terra: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: terraSupply(chainContracts.terra.bridgedFromBSC, 8),
+  // },
+  // shiden: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("shiden", 18, chainContracts.shiden.bridgedFromBSC),
+  // },
+  // astar: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("astar", 18, chainContracts.astar.bridgedFromBSC),
+  // },
+  // evmos: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("evmos", 18, chainContracts.evmos.bridgedFromBSC),
+  // },
+  // syscoin: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("syscoin", 18, chainContracts.syscoin.bridgedFromBSC),
+  // },
+  // boba: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("boba", 18, chainContracts.boba.bridgedFromBSC),
+  // },
+  // metis: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: sumMultipleBalanceFunctions(
+  //     [
+  //       bridgedSupply("metis", 18, chainContracts.metis.bridgedFromBSC),
+  //     ],
+  //     "peggedUSD"
+  //   ),
+  // },
+  // fantom: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromBSC),
+  // },
+  // kcc: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("kcc", 18, chainContracts.kcc.bridgedFromBSC),
+  // },
+  // rsk: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromBSC),
+  // },
+  // theta: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply(
+  //     "theta",
+  //     18,
+  //     chainContracts.theta.bridgedFromBSC,
+  //     "multichain",
+  //     "BSC"
+  //   ),
+  // },
+  // kava: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: kavaMinted(chainContracts.kava.bridgeOnBNB), 
+  // },
+  // loopring: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   ethereum: supplyInEthereumBridge(
+  //     chainContracts.ethereum.issued[0],
+  //     chainContracts.loopring.bridgeOnETH[0],
+  //     18
+  //   ),
+  // },
+  // ethereumclassic: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   ethereum: bridgedSupply(
+  //     "ethereumclassic",
+  //     18,
+  //     chainContracts.ethereumclassic.bridgedFromETH
+  //   ),
+  // },
+  // near: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 18),
+  // },
+  // klaytn: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   bsc: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromBSC),
+  // },
+  // dogechain: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   ethereum: bridgedSupply(
+  //     "dogechain",
+  //     18,
+  //     chainContracts.dogechain.bridgedFromETH
+  //   ),
+  // },
+  // thundercore: {
+  //   minted: async () => ({}),
+  //   unreleased: async () => ({}),
+  //   ethereum: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromETH),
+  //   bsc: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromBSC),
+  // },
+  osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
-  },
-  avalanche: {
-    minted: chainMinted("avax", 18),
-    unreleased: chainUnreleased("avax", 18),
-    ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
-    bsc: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromBSC),
-  },
-  harmony: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    /* appears to now be unbacked due to hack
-    ethereum: bridgedSupply(
-      "harmony",
-      18,
-      chainContracts.harmony.bridgedFromETH
-    ),
-      */
-  },
-  iotex: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedSupply("iotex", 18, chainContracts.iotex.bridgedFromETH),
-  },
-  okexchain: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply(
-      "okexchain",
-      18,
-      chainContracts.okexchain.bridgedFromBSC
-    ),
-  },
-  moonriver: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply(
-      "moonriver",
-      18,
-      chainContracts.moonriver.bridgedFromBSC
-    ),
-  },
-  solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
-    bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
-  },
-  polygon: {
-    minted: chainMinted("polygon", 18),
-    unreleased: chainUnreleased("polygon", 18),
-    bsc: bridgedSupply("polygon", 18, chainContracts.polygon.bridgedFromBSC),
-  },
-  fuse: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("fuse", 18, chainContracts.fuse.bridgedFromBSC),
-  },
-  meter: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("meter", 18, chainContracts.meter.bridgedFromBSC),
-  },
-  moonbeam: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("moonbeam", 18, chainContracts.moonbeam.bridgedFromBSC),
-  },
-  milkomeda: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply(
-      "milkomeda",
-      18,
-      chainContracts.milkomeda.bridgedFromBSC
-    ),
-  },
-  elastos: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("elastos", 18, chainContracts.elastos.bridgedFromBSC),
-  },
-  aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromBSC),
-  },
-  oasis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
-  },
-  terra: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: terraSupply(chainContracts.terra.bridgedFromBSC, 8),
-  },
-  shiden: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("shiden", 18, chainContracts.shiden.bridgedFromBSC),
-  },
-  astar: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("astar", 18, chainContracts.astar.bridgedFromBSC),
-  },
-  evmos: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("evmos", 18, chainContracts.evmos.bridgedFromBSC),
-  },
-  syscoin: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("syscoin", 18, chainContracts.syscoin.bridgedFromBSC),
-  },
-  boba: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("boba", 18, chainContracts.boba.bridgedFromBSC),
-  },
-  metis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: sumMultipleBalanceFunctions(
-      [
-        bridgedSupply("metis", 18, chainContracts.metis.bridgedFromBSC),
-      ],
-      "peggedUSD"
-    ),
-  },
-  fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromBSC),
-  },
-  kcc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("kcc", 18, chainContracts.kcc.bridgedFromBSC),
-  },
-  rsk: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromBSC),
-  },
-  theta: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply(
-      "theta",
-      18,
-      chainContracts.theta.bridgedFromBSC,
-      "multichain",
-      "BSC"
-    ),
-  },
-  kava: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: kavaMinted(chainContracts.kava.bridgeOnBNB), 
-  },
-  loopring: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: supplyInEthereumBridge(
-      chainContracts.ethereum.issued[0],
-      chainContracts.loopring.bridgeOnETH[0],
-      18
-    ),
-  },
-  ethereumclassic: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedSupply(
-      "ethereumclassic",
-      18,
-      chainContracts.ethereumclassic.bridgedFromETH
-    ),
-  },
-  near: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 18),
-  },
-  klaytn: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    bsc: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromBSC),
-  },
-  dogechain: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedSupply(
-      "dogechain",
-      18,
-      chainContracts.dogechain.bridgedFromETH
-    ),
-  },
-  thundercore: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromETH),
-    bsc: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromBSC),
+    ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 18, "Axelar"),
   }
 };
 
