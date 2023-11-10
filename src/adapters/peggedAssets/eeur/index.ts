@@ -32,8 +32,8 @@ async function emoneyMinted(decimals: number) {
           "https://rest.cosmos.directory/emoney/cosmos/bank/v1beta1/supply/eeur"
         )
     );
-    const uskInfo = res?.data?.amount;
-    const supply = uskInfo?.amount / 10 ** decimals;
+    const eeurInfo = res?.data?.amount;
+    const supply = eeurInfo?.amount / 10 ** decimals;
     sumSingleBalance(balances, "peggedEUR", supply, "issued", false);
     return balances;
   };
