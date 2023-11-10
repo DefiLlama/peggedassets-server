@@ -1171,7 +1171,11 @@ export function getChainDisplayName(
     case "mantle":
       return "Mantle"
     case "linea":
-        return "Linea"
+      return "Linea"
+    case "agoric":
+      return "Agoric"
+    case "emoney":
+      return "eMoney"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
