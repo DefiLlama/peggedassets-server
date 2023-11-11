@@ -19,28 +19,7 @@ const chainContracts: ChainContracts = {
   },
 }
 
-async function emoneyMinted(decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://rest.cosmos.directory/emoney/cosmos/bank/v1beta1/supply/eeur"
-        )
-    );
-    const eeurInfo = res?.data?.amount;
-    const supply = eeurInfo?.amount / 10 ** decimals;
-    sumSingleBalance(balances, "peggedEUR", supply, "issued", false);
-    return balances;
-  };
-}
-
-// Copied this one from helpers in order to change the peggedUSD to peggedEUR
-export async function osmosisSupply(tokens: string[], decimals: number, bridgedFromChain: string) {
+export async function osmosisAmount(tokens: string[], decimals: number, bridgedFromChain: string) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -65,6 +44,27 @@ export async function osmosisSupply(tokens: string[], decimals: number, bridgedF
   };
 }
 
+async function emoneyMinted(decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          "https://rest.cosmos.directory/emoney/cosmos/bank/v1beta1/supply/eeur"
+        )
+    );
+    const eeurInfo = res?.data?.amount;
+    const supply = eeurInfo?.amount / 10 ** decimals;
+    sumSingleBalance(balances, "peggedEUR", supply, "issued", false);
+    return balances;
+  };
+}
+
+
 const adapter: PeggedIssuanceAdapter = {
   emoney: {
     minted: emoneyMinted(6),
@@ -73,7 +73,7 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    emoney: osmosisSupply(chainContracts.osmosis.bridgedFromEmoney, 6, "e-Money"),
+    emoney: osmosisAmount(chainContracts.osmosis.bridgedFromEmoney, 6, "e-Money"),
   }
 };
 
