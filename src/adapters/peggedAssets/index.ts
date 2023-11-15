@@ -272,6 +272,6 @@ export default {
   "num-ars": nars,
   "phase-dollar": phase,
   "inter-stable-token": inter,
-  "e-money-euro": eeur,
-  "membrane-cdt": cdt,
+  "e-money-eur": eeur,
+  "membrane": cdt,
 };
