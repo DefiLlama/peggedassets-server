@@ -8,6 +8,7 @@ import {
   solanaMintedOrBridged,
   terraSupply,
   supplyInEthereumBridge,
+  osmosisSupply,
 } from "../helper/getSupply";
 import { call as nearCall } from "../llama-helper/near";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
@@ -174,6 +175,9 @@ const chainContracts: ChainContracts = {
     ],
     bridgedFromBSC: ["0xBEB0131D95AC3F03fd15894D0aDE5DBf7451d171"],
   },
+  osmosis: {
+    bridgedFromETH: ["ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D"],
+  }
 };
 
 /*
@@ -526,6 +530,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromETH),
     bsc: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromBSC),
+  },
+  osmosis: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 18, "Axelar"),
   }
 };
 
