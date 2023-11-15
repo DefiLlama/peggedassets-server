@@ -149,12 +149,22 @@ const bridgedChainContracts: ChainContracts = {
   },
   kava: {
     address: "0x471ee749ba270eb4c1165b5ad95e614947f6fceb",
+    cauldrons: [
+      "0x3cff6f628ebc88e167640966e67314cf6466e6a8",
+      "0x895731a0c3836a5534561268f15eba377218651d",
+    ],
+    bentoboxes: [
+      "0x630fc1758de85c566bdec1d75a894794e1819d7e", // DegenBox
+    ],
     reserves: [
       "0x844fed6dd9eb143e6302e937c795c3f0ec47a7c7", // CauldronOwner
     ],
   },
   base: {
     address: "0x4a3a6dd60a34bb2aba60d73b4c88315e9ceb6a3d",
+  },
+  linea: {
+    address: "0xdd3b8084af79b9bae3d1b668c0de08ccc2c9429a",
   },
 };
 
