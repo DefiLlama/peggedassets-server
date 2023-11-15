@@ -23,7 +23,7 @@ async function osmosisMinted(decimals: number) {
     );
     const cdtInfo = res?.data?.amount;
     const supply = cdtInfo?.amount / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
+    sumSingleBalance(balances, "peggedVAR", supply, "issued", false);
     return balances;
   };
 }
