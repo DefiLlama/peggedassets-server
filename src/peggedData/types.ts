@@ -3,12 +3,18 @@ type PegType =
   | "peggedVAR"
   | "peggedEUR"
   | "peggedSGD"
-  | "peggedJPY"  //japan
-  | "peggedCNY"  //china
-    "peggedUAH" //ukraine
-    "peggedARS" //ARGENTINE
+  | "peggedJPY" //japan
+  | "peggedCNY" //china
+  | "peggedUAH" //ukraine
+  | "peggedARS" //ARGENTINE
+  | "peggedGBP" //GB
 
-type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
+type PegMechanism =
+  | "algorithmic" 
+  | "fiat-backed" 
+  | "crypto-backed" 
+  | "government-backed";
+  
 export type PriceSource =
   | "chainlink"
   | "uniswap"
