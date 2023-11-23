@@ -135,6 +135,10 @@ import phase from './phase-dollar'
 import inter from './inter-stable-token'
 import eeur from './e-money-eur'
 import cdt from './membrane'
+import aryze_eeur from "./aryze-eeur";
+import aryze_egbp from "./aryze-egbp";
+import aryze_esgd from "./aryze-esgd";
+import aryze_eusd from "./aryze-eusd";
 
 export default {
   tether,
@@ -274,4 +278,8 @@ export default {
   "inter-stable-token": inter,
   "e-money-eur": eeur,
   "membrane": cdt,
+  "aryze-eusd": aryze_eusd,
+  "aryze-eeur": aryze_eeur,
+  "aryze-egbp": aryze_egbp,
+  "aryze-esgd": aryze_esgd,
 };
