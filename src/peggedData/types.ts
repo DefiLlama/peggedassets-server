@@ -13,7 +13,6 @@ type PegMechanism =
   | "algorithmic" 
   | "fiat-backed" 
   | "crypto-backed" 
-  | "government-backed";
   
 export type PriceSource =
   | "chainlink"
