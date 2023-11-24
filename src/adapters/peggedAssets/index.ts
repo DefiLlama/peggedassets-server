@@ -135,6 +135,7 @@ import phase from './phase-dollar'
 import inter from './inter-stable-token'
 import eeur from './e-money-eur'
 import cdt from './membrane'
+import hydt from './hydt-protocol-hydt'
 
 export default {
   tether,
@@ -274,4 +275,5 @@ export default {
   "inter-stable-token": inter,
   "e-money-eur": eeur,
   "membrane": cdt,
+  "hydt-protocol-hydt": hydt,
 };
