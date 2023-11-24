@@ -4,7 +4,16 @@ export type ChainBlocks = {
   [x: string]: number;
 };
 
-export type PeggedAssetType = "peggedUSD" | "peggedVAR" | "peggedEUR" | "peggedSGD" | "peggedJPY" | "peggedCNY" | "peggedUAH" | "peggedARS" ;
+export type PeggedAssetType =
+  | "peggedUSD"
+  | "peggedVAR"
+  | "peggedEUR"
+  | "peggedSGD"
+  | "peggedJPY"
+  | "peggedCNY"
+  | "peggedUAH"
+  | "peggedARS"
+  | "peggedGBP";
 
 type StringNumber = string;
 type PeggedBalances = {
@@ -13,8 +22,8 @@ type PeggedBalances = {
 type BridgeBalances = {
   [bridgeID in BridgeID]: {
     [source: string]: {
-    amount: StringNumber | number;
-    }
+      amount: StringNumber | number;
+    };
   };
 };
 export type Balances = PeggedBalances & {
