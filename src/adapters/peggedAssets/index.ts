@@ -139,6 +139,7 @@ import aeeur from "./aryze-eeur";
 import aegbp from "./aryze-egbp";
 //import aesgd from "./aryze-esgd";
 import aeusd from "./aryze-eusd";
+import hydt from './hydt'
 
 export default {
   tether,
@@ -282,4 +283,5 @@ export default {
   "aryze-eeur": aeeur,
   "aryze-egbp": aegbp,   //if does not work, will test without aegbp, using only coingecko but since its the terminal not sure, will keep an eye
   //"aryze-esgd": aesgd,
+  "hydt-protocol-hydt": hydt,
 };
