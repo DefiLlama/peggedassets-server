@@ -2829,7 +2829,24 @@ export default [
 //   twitter: "https://twitter.com/ARYZEofficial",
 //   wiki: "https://docs.aryze.io/en/products-and-services/aryze-digital-cash",
 // },
-
+{
+  id: "142",
+  name: "HYDT",
+  address: "0x9810512be701801954449408966c630595d0cd51",
+  symbol: "HYDT",
+  url: "https://hydtprotocol.com/",
+  description:"HYDT Protocol offers industry leading high returns on HYDT Stablecoin Staking, along with decentralization, transparency and sustainability.",
+  mintRedeemDescription:"HYDT can be exchanged for other USD stablecoins on exchanges, but the protocol does not provide direct 1:1 redemption for users. While the protocol will automatically mint/redeem HYDT to make the HYDT price close to 1 USD, your redemption rate will depend on the HYDT/USD exchange rate at the time.",
+  onCoinGecko: "true",
+  gecko_id: "hydt-protocol-hydt",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "algorithmic",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/HydtProtocol",
+  wiki: "https://hydtprotocol.com/#faqs",
+},
 
 
 ] as PeggedAsset[];
