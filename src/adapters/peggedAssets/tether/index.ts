@@ -851,11 +851,13 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.ethereum.bridgedFromSol
     ),
   },
+  /*
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: osmosisSupply("usdt", "Axelar", "Kava"),
   },
+  */
   polygon: {
     minted: async () => ({}),
     unreleased: async () => ({}),
