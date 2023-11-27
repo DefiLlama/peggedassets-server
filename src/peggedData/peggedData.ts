@@ -2847,6 +2847,22 @@ export default [
   twitter: "https://twitter.com/HydtProtocol",
   wiki: "https://hydtprotocol.com/#faqs",
 },
-
-
+{
+  id: "143",
+  name: "Verified USD",
+  address: "0x0e573ce2736dd9637a0b21058352e1667925c7a8",
+  symbol: "USDV",
+  url: "https://usdv.money",
+  description:"Verified USD (USDV) is a tokenized real world asset (RWA) backed stablecoin built for modern finance.",
+  mintRedeemDescription:"USDV can be minted by approved entities called Minters through agreements with the issuing entity. Once purchased by Minters, USDV can circulate freely to anyone. There are no restrictions on who can hold or use USDV. For example, a user could swap ETH for USDV on a DEX",
+  onCoinGecko: "true",
+  gecko_id: "verified-usd-foundation-usdv",
+  cmcId: "28443",
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: null,
+  twitter: "https://twitter.com/usdv_money",
+  wiki: "https://docs.usdv.money/docs/what-is-usdv/faq",
+},
 ] as PeggedAsset[];
