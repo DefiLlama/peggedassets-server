@@ -8,16 +8,16 @@ import {
 
 type ChainContracts = {
   [chain: string]: {
-    [contract: string]: string;
+    [contract: string]: string[];
   };
 };
 
 const chainContracts: ChainContracts = {
   ethereum: {
-    issued: "0xaCdf0DBA4B9839b96221a8487e9ca660a48212be",
+    issued: ["0xaCdf0DBA4B9839b96221a8487e9ca660a48212be"],
   },
   base: {
-    issued: "0xCc7FF230365bD730eE4B352cC2492CEdAC49383e",
+    issued: ["0xCc7FF230365bD730eE4B352cC2492CEdAC49383e"],
   },
 };
 
@@ -40,7 +40,7 @@ async function chainMinted(chain: string, decimals: number) {
       sumSingleBalance(
         balances,
         "peggedUSD",
-        totalSupply / 10 ** decimals,
+        totalSupply / 10 ** decimals, 
         "issued",
         false
       );
@@ -51,16 +51,14 @@ async function chainMinted(chain: string, decimals: number) {
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
-    minted: chainMinted("ethereum", 6),
+    minted: chainMinted("ethereum", 18),
     unreleased: async () => ({}),
   },
   base: {
-    minted: chainMinted("base", 6),
+    minted: chainMinted("base", 18),
     unreleased: async () => ({}),
-  },
+  }, 
 };
 
 export default adapter;
-
-
 
