@@ -100,6 +100,7 @@ import euroe from "./euroe-stablecoin";
 import cash from "./stabl-fi";
 import dsu from "./digital-standard-unit";
 import electronicusd from "./electronic-usd";
+import hyusd from "./high-yield-usd";
 import eure from "./monerium-eur-money";
 import anonusd from "./offshift-anonusd";
 import nxusd from "./nxusd";
@@ -245,6 +246,7 @@ export default {
   "stabl-fi": cash,
   "digital-standard-unit": dsu,
   "electronic-usd": electronicusd,
+  "high-yield-usd": hyusd,
   "monerium-eur-money": eure,
   "offshift-anonusd": anonusd,
   nxusd,
