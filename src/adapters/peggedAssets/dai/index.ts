@@ -589,11 +589,13 @@ const adapter: PeggedIssuanceAdapter = {
       18
     ),
   },
+  /*
   ontology: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: ontologyBridged(),
   },
+  */
   sx: {
     minted: async () => ({}),
     unreleased: async () => ({}),
