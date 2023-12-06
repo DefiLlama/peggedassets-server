@@ -119,6 +119,10 @@ const bridgedChainContracts: ChainContracts = {
       "0xc89958b03a55b5de2221acb25b58b89a000215e6",
       "0x5698135ca439f21a57bddbe8b582c62f090406d5",
       "0x726413d7402ff180609d0ebc79506df8633701b1",
+      "0x7962acfcfc2ccebc810045391d60040f635404fb",
+      "0x2b02bbeab8ecab792d3f4dda7a76f63aa21934fa",
+      "0xd7659d913430945600dfe875434b6d80646d552a",
+      "0x4f9737e994da9811b8830775fd73e2f1c8e40741",
     ],
     reserves: [
       "0x27807dd7adf218e1f4d885d54ed51c70efb9de50", // ODM
