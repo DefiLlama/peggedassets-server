@@ -54,8 +54,6 @@ async function getPeggedAsset(
     chainBlocks
   )) as PeggedTokenBalance;
   clearTimeout(interval);
-
-  console.log(balance, "eieiems", Object.keys(balance).length);
   if (balance && Object.keys(balance).length === 0) {
     peggedBalances[chain][issuanceType] = { [pegType]: 0 };
     return;
