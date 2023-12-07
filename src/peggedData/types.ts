@@ -8,6 +8,7 @@ type PegType =
   | "peggedUAH" //ukraine
   | "peggedARS" //ARGENTINE
   | "peggedGBP" //GB
+    "peggedCAD" //canadian dollar
 
 type PegMechanism =
   | "algorithmic" 
