@@ -48,6 +48,7 @@ async function chainMinted(chain: string, decimals: number) {
         false
       );
     }
+    console.log("oemfofme", balances);
     return balances;
   };
 }

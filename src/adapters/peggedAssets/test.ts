@@ -41,13 +41,21 @@ async function getPeggedAsset(
   bridgedFromMapping: BridgeMapping = {}
 ) {
   peggedBalances[chain] = peggedBalances[chain] || {};
-  const interval = setTimeout(()=>console.log(`Issuance function for chain ${chain} exceeded the timeout limit`), 60e3)
+  const interval = setTimeout(
+    () =>
+      console.log(
+        `Issuance function for chain ${chain} exceeded the timeout limit`
+      ),
+    60e3
+  );
   const balance = (await issuanceFunction(
     unixTimestamp,
     ethBlock,
     chainBlocks
   )) as PeggedTokenBalance;
-  clearTimeout(interval)
+  clearTimeout(interval);
+
+  console.log(balance, "eieiems", Object.keys(balance).length);
   if (balance && Object.keys(balance).length === 0) {
     peggedBalances[chain][issuanceType] = { [pegType]: 0 };
     return;
