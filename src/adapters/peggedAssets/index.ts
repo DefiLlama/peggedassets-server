@@ -140,9 +140,10 @@ import aeeur from "./aryze-eeur";
 import aegbp from "./aryze-egbp";
 //import aesgd from "./aryze-esgd";
 import aeusd from "./aryze-eusd";
-import hydt from './hydt'
-import usdv from './usdv'
-import cadc from './cadc'
+import hydt from './hydt';
+import usdv from './usdv';
+import cadc from './cadc';
+import usde from './ethena-usde'
 
 export default {
   tether,
@@ -289,5 +290,6 @@ export default {
   //"aryze-esgd": aesgd,
   "hydt-protocol-hydt": hydt,
   "verified-usd-foundation-usdv": usdv,
-  "cad-coin":cadc
+  "cad-coin":cadc,
+  "ethena-usde": usde
 };
