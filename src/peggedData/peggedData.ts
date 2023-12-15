@@ -2919,4 +2919,24 @@ export default [
   twitter: "https://twitter.com/ethena_labs",
   wiki: "https://www.ethena.fi",
 },
+{
+  id: "147",
+  name: "Anchored Coins AEUR",
+  address: "0xA40640458FBc27b6EefEdeA1E9C9E17d4ceE7a21",
+  symbol: "AEUR",
+  url: "https://anchoredcoins.com",
+  description:
+    "AEUR is a Euro-backed stablecoin issued natively on the Ethereum and BNB Blockchain. Each AEUR is backed 1:1 by EUR held in the appointed reserve bank.",
+  mintRedeemDescription:
+    "To initiate using AEUR, you can create an account on one of the supported exchanges to purchase or trade. Alternatively, you can verify your identity to become Anchored Coins' client and deposit EUR into the designated bank account provided. To redeem or sell AEUR for EUR, you can effortlessly trade on secondary markets such as centralized/decentralized exchanges or dApps which support AEUR. For sizable redemptions, please get in touch with the team.",
+  onCoinGecko: "true",
+  gecko_id: "anchored-coins-eur",
+  cmcId: "28596",
+  pegType: "peggedEUR",
+  pegMechanism: "fiat-backed",
+  priceSource: "defillama",
+  auditLinks: null,
+  twitter: null,
+  wiki: null,
+},
 ] as PeggedAsset[];
