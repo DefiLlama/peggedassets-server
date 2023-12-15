@@ -343,6 +343,9 @@ const chainContracts: ChainContracts = {
   osmosis: {
     bridgedFromETH: ["ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4"], // axelar
     bridgedFromKava: ["ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"],
+  },
+  waves: {
+    bridgeOnETH: ["0x0de7b091A21BD439bdB2DfbB63146D9cEa21Ea83"], // PepeTeam Bridge
   }
 };
 
@@ -1327,6 +1330,15 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 6, "Axelar"),
     kava: osmosisSupply(chainContracts.osmosis.bridgedFromKava, 6, "Kava"),
   },
+  waves: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.waves.bridgeOnETH[0],
+      6
+    ),
+  }
 };
 
 export default adapter;

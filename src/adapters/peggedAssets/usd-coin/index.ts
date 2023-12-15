@@ -171,7 +171,7 @@ const chainContracts: ChainContracts = {
   },
   fuse: {
     bridgedFromETH: [
-      "0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5", 
+      "0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5",
       "0x28C3d1cD466Ba22f6cae51b1a4692a831696391A"
     ],
   },
@@ -353,8 +353,11 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858", // axelar
       "ibc/9F9B07EF9AD291167CF5700628145DE1DEB777C2CFC7907553B24446515F6D0E", // gravity
-    ], 
+    ],
     bridgedFromNoble: ["ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"],
+  },
+  waves: {
+    bridgeOnETH: ["0x0de7b091A21BD439bdB2DfbB63146D9cEa21Ea83"], // PepeTeam Bridge
   }
 };
 
@@ -1199,6 +1202,15 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: kujiraSupply(chainContracts.kujira.bridgedFromETH, 6, "Axelar"),
     noble: kujiraSupply(chainContracts.kujira.bridgedFromNoble, 6, "Noble"),
   },
+  waves: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.waves.bridgeOnETH[0],
+      6
+    ),
+  }
 };
 
 export default adapter;
