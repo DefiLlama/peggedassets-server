@@ -144,6 +144,7 @@ import hydt from './hydt';
 import usdv from './usdv';
 import cadc from './cadc';
 import usde from './ethena-usde'
+import aeur from './anchored-coins-eur'
 
 export default {
   tether,
@@ -291,5 +292,6 @@ export default {
   "hydt-protocol-hydt": hydt,
   "verified-usd-foundation-usdv": usdv,
   "cad-coin":cadc,
-  "ethena-usde": usde
+  "ethena-usde": usde,
+  "anchored-coins-eur": aeur
 };
