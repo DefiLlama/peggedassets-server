@@ -2914,7 +2914,7 @@ export default [
   cmcId: null,
   pegType: "peggedUSD",
   pegMechanism: "fiat-backed",
-  priceSource: "defillama",
+  priceSource: "coingecko",
   auditLinks: null,
   twitter: "https://twitter.com/ethena_labs",
   wiki: "https://www.ethena.fi",
