@@ -7,14 +7,11 @@ type PegType =
   | "peggedCNY" //china
   | "peggedUAH" //ukraine
   | "peggedARS" //ARGENTINE
-  | "peggedGBP" //GB
-    "peggedCAD" //canadian dollar
+  | "peggedGBP"; //GB
+("peggedCAD"); //canadian dollar
 
-type PegMechanism =
-  | "algorithmic" 
-  | "fiat-backed" 
-  | "crypto-backed" 
-  
+type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
+
 export type PriceSource =
   | "chainlink"
   | "uniswap"

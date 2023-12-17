@@ -18,7 +18,7 @@ const chainContracts: ChainContracts = {
   },
   optimism: {
     issued: ["0x96F2539d3684dbde8B3242A51A73B66360a5B541"],
-  }
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {

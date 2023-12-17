@@ -92,7 +92,7 @@ async function getChainCollateralUsdValue(chain: string) {
   ) {
     let balances = {} as Balances;
     const uniPools = uniPoolsMapping[chain];
-    let tokenBalances = {} as {[token: string]: number};
+    let tokenBalances = {} as { [token: string]: number };
     await Promise.all(
       Object.entries(uniPools).map(async ([pool, token]) => {
         const balance = await returnBalance(
@@ -101,7 +101,8 @@ async function getChainCollateralUsdValue(chain: string) {
           _chainBlocks?.[chain],
           chain
         );
-        tokenBalances[`${chain}:${token}`] = (tokenBalances[`${chain}:${token}`] ?? 0) + balance;
+        tokenBalances[`${chain}:${token}`] =
+          (tokenBalances[`${chain}:${token}`] ?? 0) + balance;
       })
     );
     const tokens = Object.keys(tokenBalances);
@@ -111,9 +112,9 @@ async function getChainCollateralUsdValue(chain: string) {
       )
     ).data.coins;
     Object.entries(tokenBalances).map(([token, balance]) => {
-      const usdValue = balance * (prices[token]?.price ?? 0)
+      const usdValue = balance * (prices[token]?.price ?? 0);
       sumSingleBalance(balances, "peggedUSD", usdValue, "issued", false);
-    })
+    });
     return balances;
   };
 }

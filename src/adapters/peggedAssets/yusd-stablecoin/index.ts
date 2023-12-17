@@ -16,7 +16,7 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   avax: {
     issued: ["0x111111111111ed1d73f860f57b2798b683f2d325"],
-  }
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -45,7 +45,7 @@ const adapter: PeggedIssuanceAdapter = {
   avalanche: {
     minted: chainMinted("avax", 18),
     unreleased: async () => ({}),
-  }
+  },
 };
 
 export default adapter;

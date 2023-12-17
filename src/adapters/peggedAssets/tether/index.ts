@@ -5,7 +5,7 @@ import {
   supplyInEthereumBridge,
   solanaMintedOrBridged,
   terraSupply,
-  osmosisSupply
+  osmosisSupply,
 } from "../helper/getSupply";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import {
@@ -337,16 +337,20 @@ const chainContracts: ChainContracts = {
   thundercore: {
     bridgeFromETH: [
       "0x0dcb0cb0120d355cde1ce56040be57add0185baa", // multichain
-      "0x4f3C8E20942461e2c3Bdd8311AC57B0c222f2b82"
+      "0x4f3C8E20942461e2c3Bdd8311AC57B0c222f2b82",
     ],
   },
   osmosis: {
-    bridgedFromETH: ["ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4"], // axelar
-    bridgedFromKava: ["ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB"],
+    bridgedFromETH: [
+      "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
+    ], // axelar
+    bridgedFromKava: [
+      "ibc/4ABBEF4C8926DDDB320AE5188CFD63267ABBCEFC0583E4AE05D6E5AA2401DDAB",
+    ],
   },
   waves: {
     bridgeOnETH: ["0x0de7b091A21BD439bdB2DfbB63146D9cEa21Ea83"], // PepeTeam Bridge
-  }
+  },
 };
 
 /*
@@ -525,9 +529,7 @@ async function algorandMinted() {
     let balances = {} as Balances;
     const supplyRes = await retry(
       async (_bail: any) =>
-        await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/assets/312769"
-        )
+        await axios.get("https://mainnet-idx.algonode.cloud/v2/assets/312769")
     );
     console.info("algorand 1 success USDT");
     const supply = supplyRes.data.asset.params.total;
@@ -730,7 +732,7 @@ async function nearBridged(address: string, decimals: number) {
   ) {
     let balances = {} as Balances;
     const supply = await nearCall(address, "ft_total_supply");
-    console.info("Near success USDT")
+    console.info("Near success USDT");
     sumSingleBalance(
       balances,
       "peggedUSD",
@@ -775,7 +777,7 @@ async function kavaBridged() {
     let balances = {} as Balances;
     for (const contract of chainContracts.kava.bridgedFromETH) {
       const totalSupply = await kavaGetTotalSupply(contract);
-      console.info("Kava success USDT")
+      console.info("Kava success USDT");
       sumSingleBalance(balances, "peggedUSD", totalSupply, contract, true);
     }
     return balances;
@@ -812,7 +814,7 @@ async function aptosBridged() {
       contractStargate,
       typeStargate
     );
-    console.info("Aptos success USDT")
+    console.info("Aptos success USDT");
     sumSingleBalance(
       balances,
       "peggedUSD",
@@ -1201,11 +1203,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   kava: {
     minted: kavaMinted(),
-    unreleased: chainUnreleased(
-      "kava",
-      6,
-      chainContracts.kava.unreleased[0]
-    ),
+    unreleased: chainUnreleased("kava", 6, chainContracts.kava.unreleased[0]),
     ethereum: kavaBridged(),
   },
   /*
@@ -1322,7 +1320,11 @@ const adapter: PeggedIssuanceAdapter = {
   thundercore: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("thundercore", 6, chainContracts.thundercore.bridgeFromETH),
+    ethereum: bridgedSupply(
+      "thundercore",
+      6,
+      chainContracts.thundercore.bridgeFromETH
+    ),
   },
   osmosis: {
     minted: async () => ({}),
@@ -1338,7 +1340,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.waves.bridgeOnETH[0],
       6
     ),
-  }
+  },
 };
 
 export default adapter;

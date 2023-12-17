@@ -75,7 +75,9 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xf27Ee99622C3C9b264583dACB2cCE056e194494f"], // multichain
   },
   osmosis: {
-    bridgedFromETH: ["ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE"], // axelar
+    bridgedFromETH: [
+      "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
+    ], // axelar
   },
 };
 
@@ -100,7 +102,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -230,13 +238,21 @@ const adapter: PeggedIssuanceAdapter = {
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("dogechain", 18, chainContracts.dogechain.bridgedFromETH),
+    ethereum: bridgedSupply(
+      "dogechain",
+      18,
+      chainContracts.dogechain.bridgedFromETH
+    ),
   },
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 18, "Axelar"),
-  }
+    ethereum: osmosisSupply(
+      chainContracts.osmosis.bridgedFromETH,
+      18,
+      "Axelar"
+    ),
+  },
 };
 
 export default adapter;

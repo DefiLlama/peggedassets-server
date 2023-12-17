@@ -14,8 +14,7 @@ type ChainContracts = {
   };
 };
 
-const chainContracts: ChainContracts = {
-};
+const chainContracts: ChainContracts = {};
 
 // If there is any Mintscan (or other) API that can be used, it should replace this.
 async function kavaMinted() {
@@ -27,11 +26,9 @@ async function kavaMinted() {
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
-        await axios.get(
-          "https://api.kava.io/vesting/circulatingsupplyusdx"
-        )
+        await axios.get("https://api.kava.io/vesting/circulatingsupplyusdx")
     );
-    const supply = res.data
+    const supply = res.data;
     sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
   };

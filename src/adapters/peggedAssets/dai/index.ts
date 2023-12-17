@@ -122,7 +122,7 @@ const chainContracts: ChainContracts = {
   rsk: {
     bridgedFromETH: [
       "0x6b1a73d547f4009a26b8485b63d7015d248ad406",
-     // "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c", //multichain
+      // "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c", //multichain
     ],
   },
   reinetwork: {
@@ -210,8 +210,10 @@ const chainContracts: ChainContracts = {
     ethAssetIds: ["8549b4ad-917c-3461-a646-481adc5d7f7f"],
   },
   osmosis: {
-    bridgedFromETH: ["ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7"], // axelar
-  }
+    bridgedFromETH: [
+      "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
+    ], // axelar
+  },
 };
 
 /*
@@ -248,17 +250,25 @@ async function chainMinted(chain: string, decimals: number) {
       ).output;
       const dsr = (
         await sdk.api.abi.call({
-          abi: {"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"dai","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
+          abi: {
+            constant: true,
+            inputs: [{ internalType: "address", name: "", type: "address" }],
+            name: "dai",
+            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+            payable: false,
+            stateMutability: "view",
+            type: "function",
+          },
           target: "0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b",
           block: _chainBlocks?.[chain],
           chain: chain,
-          params: ["0x197E90f9FAD81970bA7976f33CbD77088E5D7cf7"]
+          params: ["0x197E90f9FAD81970bA7976f33CbD77088E5D7cf7"],
         })
       ).output;
       sumSingleBalance(
         balances,
         "peggedUSD",
-        (Number(totalSupply) + dsr/1e27) / 10 ** decimals,
+        (Number(totalSupply) + dsr / 1e27) / 10 ** decimals,
         "issued",
         false
       );
@@ -577,8 +587,11 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 18, "Axelar"),
-
+    ethereum: osmosisSupply(
+      chainContracts.osmosis.bridgedFromETH,
+      18,
+      "Axelar"
+    ),
   },
   starknet: {
     minted: async () => ({}),

@@ -23,7 +23,7 @@ const chainContracts: ChainContracts = {
   },
   xdai: {
     issued: ["0xcB444e90D8198415266c6a2724b7900fb12FC56E"],
-  }
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -55,34 +55,32 @@ async function chainMinted(chain: string, decimals: number) {
 }
 
 async function algorandMinted() {
-    return async function (
-      _timestamp: number,
-      _ethBlock: number,
-      _chainBlocks: ChainBlocks
-    ) {
-      let balances = {} as Balances;
-      const supplyRes = await retry(
-        async (_bail: any) =>
-          await axios.get(
-            "https://mainnet-idx.algonode.cloud/v2/assets/83209012"
-          )
-      );
-      const supply = supplyRes.data.asset.params.total;
-      const reserveRes = await retry(
-        async (_bail: any) =>
-          await axios.get(
-            "https://mainnet-idx.algonode.cloud/v2/accounts/XSAED32VYAQK42TQHKCRHYK7P6LBBPQ2237PALQZAGL2XJTNNOPD523CNA"
-          )
-      );
-      const reserveAccount = reserveRes.data.account.assets.filter(
-        (asset: any) => asset["asset-id"] === 83209012
-      );
-      const reserves = reserveAccount[0].amount;
-      const balance = (supply - reserves) / 10 ** 8;
-      sumSingleBalance(balances, "peggedEUR", balance, "issued", false);
-      return balances;
-    };
-  }
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supplyRes = await retry(
+      async (_bail: any) =>
+        await axios.get("https://mainnet-idx.algonode.cloud/v2/assets/83209012")
+    );
+    const supply = supplyRes.data.asset.params.total;
+    const reserveRes = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          "https://mainnet-idx.algonode.cloud/v2/accounts/XSAED32VYAQK42TQHKCRHYK7P6LBBPQ2237PALQZAGL2XJTNNOPD523CNA"
+        )
+    );
+    const reserveAccount = reserveRes.data.account.assets.filter(
+      (asset: any) => asset["asset-id"] === 83209012
+    );
+    const reserves = reserveAccount[0].amount;
+    const balance = (supply - reserves) / 10 ** 8;
+    sumSingleBalance(balances, "peggedEUR", balance, "issued", false);
+    return balances;
+  };
+}
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {

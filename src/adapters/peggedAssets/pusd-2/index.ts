@@ -16,7 +16,7 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x466a756e9a7401b5e2444a3fcb3c2c12fbea0a54"],
-    unreleased: ["0x51c2cef9efa48e08557a361b52db34061c025a1b"]
+    unreleased: ["0x51c2cef9efa48e08557a361b52db34061c025a1b"],
   },
 };
 
@@ -73,7 +73,11 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: chainUnreleased("ethereum", 18, chainContracts.ethereum.unreleased[0])
+    unreleased: chainUnreleased(
+      "ethereum",
+      18,
+      chainContracts.ethereum.unreleased[0]
+    ),
   },
 };
 

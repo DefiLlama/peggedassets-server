@@ -148,11 +148,14 @@ export async function supplyInEthereumBridge(
   };
 }
 
-export async function solanaMintedOrBridged(targets: string[], pegType?: PeggedAssetType) {
+export async function solanaMintedOrBridged(
+  targets: string[],
+  pegType?: PeggedAssetType
+) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
-    _chainBlocks: ChainBlocks,
+    _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
@@ -188,7 +191,11 @@ export async function terraSupply(addresses: string[], decimals: number) {
   };
 }
 
-export async function osmosisLiquidity(token: string, bridgeName: string, bridgedFrom: string) {
+export async function osmosisLiquidity(
+  token: string,
+  bridgeName: string,
+  bridgedFrom: string
+) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -200,12 +207,24 @@ export async function osmosisLiquidity(token: string, bridgeName: string, bridge
         await axios.get(`https://api-osmosis.imperator.co/tokens/v2/${token}`)
     );
     const totalLiquidity = res.data[0].liquidity;
-    sumSingleBalance(balances, "peggedUSD", totalLiquidity, bridgeName, false, bridgedFrom);
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalLiquidity,
+      bridgeName,
+      false,
+      bridgedFrom
+    );
     return balances;
   };
 }
 
-export async function cosmosSupply(chain: string, tokens: string[], decimals: number, bridgedFromChain: string) {
+export async function cosmosSupply(
+  chain: string,
+  tokens: string[],
+  decimals: number,
+  bridgedFromChain: string
+) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -215,8 +234,10 @@ export async function cosmosSupply(chain: string, tokens: string[], decimals: nu
     for (let token of tokens) {
       const res = await retry(
         async (_bail: any) =>
-          await axios.get(`https://rest.cosmos.directory/${chain}/cosmos/bank/v1beta1/supply/by_denom?denom=${token}`)
-      );      
+          await axios.get(
+            `https://rest.cosmos.directory/${chain}/cosmos/bank/v1beta1/supply/by_denom?denom=${token}`
+          )
+      );
       sumSingleBalance(
         balances,
         "peggedUSD",
@@ -230,7 +251,11 @@ export async function cosmosSupply(chain: string, tokens: string[], decimals: nu
   };
 }
 
-export async function osmosisSupply(tokens: string[], decimals: number, bridgedFromChain: string) {
+export async function osmosisSupply(
+  tokens: string[],
+  decimals: number,
+  bridgedFromChain: string
+) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -240,8 +265,10 @@ export async function osmosisSupply(tokens: string[], decimals: number, bridgedF
     for (let token of tokens) {
       const res = await retry(
         async (_bail: any) =>
-          await axios.get(`https://lcd.osmosis.zone/osmosis/superfluid/v1beta1/supply?denom=${token}`)
-      );      
+          await axios.get(
+            `https://lcd.osmosis.zone/osmosis/superfluid/v1beta1/supply?denom=${token}`
+          )
+      );
       sumSingleBalance(
         balances,
         "peggedUSD",
@@ -255,6 +282,10 @@ export async function osmosisSupply(tokens: string[], decimals: number, bridgedF
   };
 }
 
-export async function kujiraSupply(tokens: string[], decimals: number, bridgedFromChain: string) {
+export async function kujiraSupply(
+  tokens: string[],
+  decimals: number,
+  bridgedFromChain: string
+) {
   return cosmosSupply("kujira", tokens, decimals, bridgedFromChain);
 }

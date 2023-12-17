@@ -27,7 +27,7 @@ const timeout = (prom: any, time: number) =>
         "prices-getBlocks",
         String(err),
       ]);
-    },
+    }
   );
 
 const handler = async (_event: any) => {
@@ -39,7 +39,7 @@ const handler = async (_event: any) => {
       let pricePromises = peggedAssets.map(async (pegged) => {
         const price = await getCurrentPeggedPrice(
           pegged.gecko_id,
-          pegged.priceSource,
+          pegged.priceSource
         );
         if (typeof price !== "number") {
           if (price) {
@@ -79,7 +79,7 @@ const handler = async (_event: any) => {
   const closestDailyRecord = await getTVLOfRecordClosestToTimestamp(
     dailyPeggedPrices(),
     timestamp,
-    secondsInDay * 1.5,
+    secondsInDay * 1.5
   );
   if (getDay(closestDailyRecord?.SK) !== getDay(timestamp)) {
     // First write of the day

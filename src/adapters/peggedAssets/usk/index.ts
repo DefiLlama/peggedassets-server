@@ -16,7 +16,9 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   osmosis: {
-    bridgedFromKujira: ["ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC"],
+    bridgedFromKujira: [
+      "ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC",
+    ],
   },
 };
 
@@ -49,8 +51,12 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    kujira: osmosisSupply(chainContracts.osmosis.bridgedFromKujira, 6, "Kujira"),
-  }
+    kujira: osmosisSupply(
+      chainContracts.osmosis.bridgedFromKujira,
+      6,
+      "Kujira"
+    ),
+  },
 };
 
 export default adapter;

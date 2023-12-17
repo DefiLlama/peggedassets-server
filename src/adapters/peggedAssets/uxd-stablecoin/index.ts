@@ -1,7 +1,5 @@
 const sdk = require("@defillama/sdk");
-import {
-  PeggedIssuanceAdapter,
-} from "../peggedAsset.type";
+import { PeggedIssuanceAdapter } from "../peggedAsset.type";
 import { solanaMintedOrBridged } from "../helper/getSupply";
 
 const chainContracts = {

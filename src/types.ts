@@ -12,8 +12,8 @@ type PeggedBalances = {
 export type BridgeBalances = {
   [bridgeID in BridgeID]: {
     [source: string]: {
-    amount: number;
-    }
+      amount: number;
+    };
   };
 };
 export type PeggedTokenBalance = PeggedBalances & {
@@ -35,7 +35,10 @@ export type PeggedAssetIssuance = {
 };
 
 export type StoredPeggedAssetIssuance = {
-  [chain: string]: {
-    [issuanceType: string]: PeggedTokenBalance;
-  } | string | number;
+  [chain: string]:
+    | {
+        [issuanceType: string]: PeggedTokenBalance;
+      }
+    | string
+    | number;
 };

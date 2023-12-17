@@ -5,13 +5,13 @@ export const normalizedChainReplacements = {
   gnosis: "xdai",
   "terra%20classic": "terra",
   sxnetwork: "sx",
-  "arbitrum%20nova":"arbitrum_nova",
+  "arbitrum%20nova": "arbitrum_nova",
   ethereumpow: "ethpow",
   "milkomeda%20c1": "milkomeda",
   "zksync%20lite": "zksync",
   "zksync%20era": "era",
   "polygon%20zkevm": "polygon_zkevm",
-  multiversx: "elrond"
+  multiversx: "elrond",
 } as {
   [chain: string]: string;
 };
@@ -467,7 +467,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 55,
   },
-  "MultiversX": {
+  MultiversX: {
     geckoId: "elrond-erd-2",
     symbol: "EGLD",
     cmcId: "6892",
@@ -888,7 +888,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
-      types: ["L2", "gas"]
+      types: ["L2", "gas"],
     },
     chainId: 324,
   },
@@ -899,9 +899,9 @@ export const chainCoingeckoIds = {
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
-      types: ["L2", "gas"]
+      types: ["L2", "gas"],
     },
-    chainId: 1101
+    chainId: 1101,
   },
   Base: {
     geckoId: null,
@@ -922,7 +922,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
-      types: ["L2", "gas"]
+      types: ["L2", "gas"],
     },
   },
   Agoric: {
@@ -1003,7 +1003,7 @@ export function getChainDisplayName(
     case "cosmos":
       return useNewChainNames ? "CosmosHub" : "Cosmos";
     case "elrond":
-      return useNewChainNames ? "MultiversX" : "Elrond"
+      return useNewChainNames ? "MultiversX" : "Elrond";
     case "avax":
       return "Avalanche";
     case "xdaiarb":
@@ -1163,11 +1163,11 @@ export function getChainDisplayName(
     case "aptos":
       return "Aptos";
     case "zksync":
-      return "zkSync Lite"
+      return "zkSync Lite";
     case "era":
       return "zkSync Era";
     case "polygon_zkevm":
-      return "Polygon zkEVM"
+      return "Polygon zkEVM";
     case "base":
       return "Base";
     case "mantle":

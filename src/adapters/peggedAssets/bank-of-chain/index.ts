@@ -14,8 +14,8 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   ethereum: {
-    issued: ["0x83131242843257bc6C43771762ba467346Efb2CF"],//USDi
-  }
+    issued: ["0x83131242843257bc6C43771762ba467346Efb2CF"], //USDi
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -34,7 +34,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };

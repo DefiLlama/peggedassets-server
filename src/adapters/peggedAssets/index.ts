@@ -37,7 +37,7 @@ import ratio from "./ratio-stable-coin";
 import usdj from "./just-stablecoin";
 import stbl from "./stbl";
 import volt from "./volt-protocol";
-import r from './r';
+import r from "./r";
 import rai from "./rai";
 import float from "./float-protocol-float";
 import usdx from "./usdx";
@@ -105,46 +105,46 @@ import eure from "./monerium-eur-money";
 import anonusd from "./offshift-anonusd";
 import nxusd from "./nxusd";
 import davos from "./davos-protocol";
-import defifranc from "./defi-franc"
-import czusd from "./czusd"
+import defifranc from "./defi-franc";
+import czusd from "./czusd";
 import d2o from "./dam-finance";
 import eusd from "./eusd";
 import crvusd from "./crvusd";
 import overnightdai from "./overnight-dai";
 import usdtplus from "./usdtplus";
-import silk from './silk';
-import cleverusd from './clever-usd';
-import grai from './grai'
-import ethosreservenote from './ethos-reserve-note';
-import gho from './gho';
-import fdusd from './first-digital-usd';
-import pyusd from './paypal-usd';
-import psy from './psy';
-import gyen  from './gyen';
-import star from './star';
-import peusd from './peg-eusd';
-import eusdv2 from './eusdv2';
-import prismamkusd from './prisma-mkusd';
-import lcny from './alternity-cny';
-import nexus1 from './nexus';
-import usdy from './ondo-us-dollar-yield';
-import svusd from './savvy-usd';
-import uaht from './uaht'
-import usdm from './usdm'
-import nars from './nars'
-import phase from './phase-dollar'
-import inter from './inter-stable-token'
-import eeur from './e-money-eur'
-import cdt from './membrane'
+import silk from "./silk";
+import cleverusd from "./clever-usd";
+import grai from "./grai";
+import ethosreservenote from "./ethos-reserve-note";
+import gho from "./gho";
+import fdusd from "./first-digital-usd";
+import pyusd from "./paypal-usd";
+import psy from "./psy";
+import gyen from "./gyen";
+import star from "./star";
+import peusd from "./peg-eusd";
+import eusdv2 from "./eusdv2";
+import prismamkusd from "./prisma-mkusd";
+import lcny from "./alternity-cny";
+import nexus1 from "./nexus";
+import usdy from "./ondo-us-dollar-yield";
+import svusd from "./savvy-usd";
+import uaht from "./uaht";
+import usdm from "./usdm";
+import nars from "./nars";
+import phase from "./phase-dollar";
+import inter from "./inter-stable-token";
+import eeur from "./e-money-eur";
+import cdt from "./membrane";
 import aeeur from "./aryze-eeur";
 import aegbp from "./aryze-egbp";
 //import aesgd from "./aryze-esgd";
 import aeusd from "./aryze-eusd";
-import hydt from './hydt';
-import usdv from './usdv';
-import cadc from './cadc';
-import usde from './ethena-usde'
-import aeur from './anchored-coins-eur'
+import hydt from "./hydt";
+import usdv from "./usdv";
+import cadc from "./cadc";
+import usde from "./ethena-usde";
+import aeur from "./anchored-coins-eur";
 
 export default {
   tether,
@@ -184,7 +184,7 @@ export default {
   mimatic,
   "ratio-stable-coin": ratio,
   "just-stablecoin": usdj,
-  "algostable": stbl,
+  algostable: stbl,
   "volt-protocol": volt,
   r,
   rai,
@@ -255,27 +255,27 @@ export default {
   nxusd,
   "davos-protocol": davos,
   "defi-franc": defifranc,
-  "czusd": czusd,
+  czusd: czusd,
   "dam-finance": d2o,
   "eusd-27a558b0-8b5b-4225-a614-63539da936f4": eusd,
   crvusd,
   "overnight-dai": overnightdai,
-  "usdtplus": usdtplus,
+  usdtplus: usdtplus,
   "silk-bcec1136-561c-4706-a42c-8b67d0d7f7d2": silk,
-  "clever-usd":cleverusd,
+  "clever-usd": cleverusd,
   grai,
   "ethos-reserve-note": ethosreservenote,
   gho,
   "first-digital-usd": fdusd,
-  'paypal-usd': pyusd,
+  "paypal-usd": pyusd,
   psy,
   gyen,
-  "preon-star":star,
-  "peusd": peusd,
+  "preon-star": star,
+  peusd: peusd,
   "eusd-v2": eusdv2,
   "prisma-mkusd": prismamkusd,
   "alternity-cny": lcny,
-  "nexus1": nexus1,
+  nexus1: nexus1,
   "ondo-us-dollar-yield": usdy,
   "savvy-usd": svusd,
   uaht,
@@ -284,14 +284,14 @@ export default {
   "phase-dollar": phase,
   "inter-stable-token": inter,
   "e-money-eur": eeur,
-  "membrane": cdt,
+  membrane: cdt,
   "aryze-eusd": aeusd,
   "aryze-eeur": aeeur,
-  "aryze-egbp": aegbp,   //if does not work, will test without aegbp, using only coingecko but since its the terminal not sure, will keep an eye
+  "aryze-egbp": aegbp, //if does not work, will test without aegbp, using only coingecko but since its the terminal not sure, will keep an eye
   //"aryze-esgd": aesgd,
   "hydt-protocol-hydt": hydt,
   "verified-usd-foundation-usdv": usdv,
-  "cad-coin":cadc,
+  "cad-coin": cadc,
   "ethena-usde": usde,
-  "anchored-coins-eur": aeur
+  "anchored-coins-eur": aeur,
 };

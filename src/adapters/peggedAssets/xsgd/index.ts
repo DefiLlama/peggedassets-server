@@ -71,9 +71,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   zilliqa: {
-    minted: zilliqaMinted(),  // can't figure out how to get token supply
+    minted: zilliqaMinted(), // can't figure out how to get token supply
     unreleased: async () => ({}),
-  }
+  },
 };
 
 export default adapter;

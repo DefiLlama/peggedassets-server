@@ -89,7 +89,9 @@ const chainContracts: ChainContracts = {
     bridgedFromTerra: ["0x360d6dd540e3448371876662fbe7f1acaf08c5ab"], // synapse
   },
   osmosis: {
-    bridgedFromTerra: ["ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"],
+    bridgedFromTerra: [
+      "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
+    ],
   },
 };
 
@@ -110,9 +112,11 @@ async function terraMinted() {
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
-        await axios.get("https://terra-classic-fcd.publicnode.com/v1/totalsupply/uusd")
+        await axios.get(
+          "https://terra-classic-fcd.publicnode.com/v1/totalsupply/uusd"
+        )
     );
-    const totalSupply = res.data / 10**6;
+    const totalSupply = res.data / 10 ** 6;
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
   };
@@ -152,7 +156,7 @@ const adapter: PeggedIssuanceAdapter = {
       ],
       "peggedUSD"
     ),
-  },/*
+  } /*
   harmony: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -161,7 +165,7 @@ const adapter: PeggedIssuanceAdapter = {
       18,
       chainContracts.harmony.bridgedFromTerra
     ),
-  },*/
+  },*/,
   polygon: {
     minted: async () => ({}),
     unreleased: async () => ({}),

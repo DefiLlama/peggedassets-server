@@ -30,7 +30,7 @@ const chainContracts: ChainContracts = {
     issued: ["0xCf66EB3D546F0415b368d98A95EAF56DeD7aA752"],
     unreleased: [
       "0x88DCDC47D2f83a99CF0000FDF667A468bB958a78", // cbridge
-    //"0xc171EBE1A2873F042F1dDdd9327D00527CA29882", // iUSX
+      //"0xc171EBE1A2873F042F1dDdd9327D00527CA29882", // iUSX
     ],
   },
   bsc: {

@@ -47,7 +47,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -59,11 +65,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   bsc: {
-    minted: bridgedSupply(
-      "bsc",
-      6,
-      chainContracts.bsc.bridgedFromETH
-    ),
+    minted: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromETH),
     unreleased: async () => ({}),
   },
   optimism: {
@@ -83,11 +85,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   avax: {
-    minted: bridgedSupply(
-      "avax",
-      6,
-      chainContracts.avax.bridgedFromETH
-    ),
+    minted: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromETH),
     unreleased: async () => ({}),
   },
 };

@@ -7,7 +7,7 @@ import {
   normalizedChainReplacements,
   normalizeChain,
 } from "./utils/normalizeChain";
-import PromisePool from "@supercharge/promise-pool"
+import PromisePool from "@supercharge/promise-pool";
 
 const handler = async (_event: any) => {
   // store "all" chains charts for each stablecoin
@@ -33,7 +33,9 @@ const handler = async (_event: any) => {
   await PromisePool.for([
     ...Object.keys(chainCoingeckoIds),
     ...Object.values(normalizedChainReplacements),
-  ]).withConcurrency(40).process(async (chain) => {
+  ])
+    .withConcurrency(40)
+    .process(async (chain) => {
       const normalizedChain = normalizeChain(chain);
       const chart = await craftChartsResponse(
         normalizedChain,
@@ -45,7 +47,7 @@ const handler = async (_event: any) => {
         const filename = `charts/${normalizedChain}`;
         await store(filename, JSON.stringify(chart), true, false);
       }
-    })
+    });
 };
 
 export default wrapScheduledLambda(handler);

@@ -95,7 +95,7 @@ const adapter: PeggedIssuanceAdapter = {
   solana: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    celo: solanaMintedOrBridged(chainContracts.solana.bridgedFromCelo)
+    celo: solanaMintedOrBridged(chainContracts.solana.bridgedFromCelo),
   },
   klaytn: {
     minted: async () => ({}),

@@ -16,7 +16,7 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x5a7E6C8204A1359DB9AAcab7bA5Fc309B7981eFd"],
-  }
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -35,17 +35,23 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
 }
 
 const adapter: PeggedIssuanceAdapter = {
-    ethereum: {
+  ethereum: {
     minted: chainMinted("ethereum", 18),
     unreleased: async () => ({}),
-  }
+  },
 };
 
 export default adapter;

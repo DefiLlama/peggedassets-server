@@ -72,7 +72,11 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: chainUnreleased("ethereum", 18, chainContracts.ethereum.reserves[0]),
+    unreleased: chainUnreleased(
+      "ethereum",
+      18,
+      chainContracts.ethereum.reserves[0]
+    ),
   },
 };
 
