@@ -2,7 +2,7 @@ const sdk = require("@defillama/sdk");
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances
+  Balances,
 } from "../peggedAsset.type";
 import { sumSingleBalance } from "../helper/generalUtil";
 import { solanaMintedOrBridged } from "../helper/getSupply";
@@ -14,15 +14,15 @@ type ChainContracts = {
 };
 
 const chainContracts: ChainContracts = {
-    ethereum: {
-        issued: ["0xC285B7E09A4584D027E5BC36571785B515898246"],
-    },
-    bsc: {
-        issued: ["0xFa4BA88Cf97e282c505BEa095297786c16070129"],
-    },
-    solana: {
-        issued: ["CUSDvqAQLbt7fRofcmV2EXfPA2t36kzj7FjzdmqDiNQL"],
-    }
+  ethereum: {
+    issued: ["0xC285B7E09A4584D027E5BC36571785B515898246"],
+  },
+  bsc: {
+    issued: ["0xFa4BA88Cf97e282c505BEa095297786c16070129"],
+  },
+  solana: {
+    issued: ["CUSDvqAQLbt7fRofcmV2EXfPA2t36kzj7FjzdmqDiNQL"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {

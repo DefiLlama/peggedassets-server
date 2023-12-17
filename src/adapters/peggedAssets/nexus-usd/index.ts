@@ -52,7 +52,7 @@ const chainContracts: ChainContracts = {
   },
   aurora: {
     bridgedFromETH: ["0x07379565cD8B0CaE7c60Dc78e7f601b34AF2A21c"],
-  }
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {

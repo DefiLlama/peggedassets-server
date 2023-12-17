@@ -22,13 +22,13 @@ const chainContracts: ChainContracts = {
     issued: ["0xa48F322F8b3edff967629Af79E027628b9Dd1298"],
   },
   arbitrum: {
-    issued: ["0x8ec1877698acf262fe8ad8a295ad94d6ea258988"], 
+    issued: ["0x8ec1877698acf262fe8ad8a295ad94d6ea258988"],
   },
   optimism: {
-    issued: ["0xb396b31599333739a97951b74652c117be86ee1d"], 
+    issued: ["0xb396b31599333739a97951b74652c117be86ee1d"],
   },
   bsc: {
-    issued: ["0x8ec1877698acf262fe8ad8a295ad94d6ea258988"], 
+    issued: ["0x8ec1877698acf262fe8ad8a295ad94d6ea258988"],
   },
 };
 
@@ -48,14 +48,20 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
 }
 
 const adapter: PeggedIssuanceAdapter = {
-    polygon: {
+  polygon: {
     minted: chainMinted("polygon", 18),
     unreleased: async () => ({}),
   },

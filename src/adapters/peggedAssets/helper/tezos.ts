@@ -16,14 +16,22 @@ export async function getTotalSupply(contract: string, decimals?: number) {
   return supply.div(10 ** d).toNumber();
 }
 
-export async function getBalance(address: string, tokenID: string, decimals?: number) {
+export async function getBalance(
+  address: string,
+  tokenID: string,
+  decimals?: number
+) {
   const res = await retry(
     async (_bail: any) =>
-      await axios.get(`https://api.tzkt.io/v1/tokens/balances?account=${address}&token.id=${tokenID}`)
+      await axios.get(
+        `https://api.tzkt.io/v1/tokens/balances?account=${address}&token.id=${tokenID}`
+      )
   );
 
   const supply = new BigNumber(res?.data?.[0]?.balance);
-  const metadataDecimals = new BigNumber(res?.data?.[0]?.token?.metadata?.decimals);
+  const metadataDecimals = new BigNumber(
+    res?.data?.[0]?.token?.metadata?.decimals
+  );
 
   const d = decimals ? decimals : metadataDecimals;
 

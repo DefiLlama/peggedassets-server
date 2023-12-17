@@ -15,11 +15,17 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   osmosis: {
-    bridgedFromEmoney: ["ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F"],
+    bridgedFromEmoney: [
+      "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
+    ],
   },
-}
+};
 
-export async function osmosisAmount(tokens: string[], decimals: number, bridgedFromChain: string) {
+export async function osmosisAmount(
+  tokens: string[],
+  decimals: number,
+  bridgedFromChain: string
+) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -29,8 +35,10 @@ export async function osmosisAmount(tokens: string[], decimals: number, bridgedF
     for (let token of tokens) {
       const res = await retry(
         async (_bail: any) =>
-          await axios.get(`https://lcd.osmosis.zone/osmosis/superfluid/v1beta1/supply?denom=${token}`)
-      );      
+          await axios.get(
+            `https://lcd.osmosis.zone/osmosis/superfluid/v1beta1/supply?denom=${token}`
+          )
+      );
       sumSingleBalance(
         balances,
         "peggedEUR",
@@ -64,7 +72,6 @@ async function emoneyMinted(decimals: number) {
   };
 }
 
-
 const adapter: PeggedIssuanceAdapter = {
   emoney: {
     minted: emoneyMinted(6),
@@ -73,8 +80,12 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    emoney: osmosisAmount(chainContracts.osmosis.bridgedFromEmoney, 6, "e-Money"),
-  }
+    emoney: osmosisAmount(
+      chainContracts.osmosis.bridgedFromEmoney,
+      6,
+      "e-Money"
+    ),
+  },
 };
 
 export default adapter;

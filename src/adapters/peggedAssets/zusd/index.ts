@@ -3,17 +3,14 @@
 
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
-import {
-  bridgedSupply,
-} from "../helper/getSupply";
+import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
 } from "../peggedAsset.type";
-const axios = require("axios")
+const axios = require("axios");
 const retry = require("async-retry");
-
 
 type ChainContracts = {
   [chain: string]: {
@@ -26,7 +23,7 @@ const chainContracts: ChainContracts = {
     issued: ["0xc56c2b7e71b54d38aab6d52e94a04cbfa8f604fa"],
   },
   optimism: {
-    bridgedFromETH: ["0x6e4cc0ab2b4d2edafa6723cfa1582229f1dd1be1"] ,
+    bridgedFromETH: ["0x6e4cc0ab2b4d2edafa6723cfa1582229f1dd1be1"],
   },
   arbitrum: {
     bridgedFromETH: ["0x6e4cc0ab2b4d2edafa6723cfa1582229f1dd1be1"],
@@ -49,7 +46,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -79,8 +82,6 @@ async function gmoAPIChainMinted(chain: string) {
   };
 }
 
-
-
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -96,8 +97,8 @@ const adapter: PeggedIssuanceAdapter = {
       undefined,
       undefined,
       "peggedUSD"
-     ),
- },
+    ),
+  },
   arbitrum: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -108,12 +109,12 @@ const adapter: PeggedIssuanceAdapter = {
       undefined,
       undefined,
       "peggedUSD"
-      ),
-    },
-    stellar: {
-      minted: gmoAPIChainMinted("XLM"),
-      unreleased: async () => ({}),
-    }
-  };
-  
-  export default adapter;
+    ),
+  },
+  stellar: {
+    minted: gmoAPIChainMinted("XLM"),
+    unreleased: async () => ({}),
+  },
+};
+
+export default adapter;

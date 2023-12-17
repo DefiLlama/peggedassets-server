@@ -16,7 +16,7 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   avax: {
     issued: ["0xdaCDe03d7Ab4D81fEDdc3a20fAA89aBAc9072CE2"],
-  }
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -35,7 +35,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };
@@ -45,7 +51,7 @@ const adapter: PeggedIssuanceAdapter = {
   avalanche: {
     minted: chainMinted("avax", 18),
     unreleased: async () => ({}),
-  }
+  },
 };
 
 export default adapter;

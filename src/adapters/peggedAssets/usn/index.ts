@@ -5,7 +5,7 @@ import {
   PeggedIssuanceAdapter,
   Balances,
 } from "../peggedAsset.type";
-import { call } from '../llama-helper/near';
+import { call } from "../llama-helper/near";
 import { bridgedSupply } from "../helper/getSupply";
 
 type ChainContracts = {
@@ -32,7 +32,7 @@ async function chainMinted(chain: string, decimals: number) {
     let balances = {} as Balances;
     for (let issued of chainContracts[chain].issued) {
       const totalSupply = await call(issued, "ft_total_supply");
-      
+
       sumSingleBalance(
         balances,
         "peggedUSD",
@@ -53,8 +53,8 @@ const adapter: PeggedIssuanceAdapter = {
   aurora: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    near: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromNear)
-  }
+    near: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromNear),
+  },
 };
 
 export default adapter;

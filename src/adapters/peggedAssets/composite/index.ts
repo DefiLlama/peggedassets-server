@@ -16,7 +16,9 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   osmosis: {
-    bridgedFromComdex: ["ibc/23CA6C8D1AB2145DD13EB1E089A2E3F960DC298B468CCE034E19E5A78B61136E"],
+    bridgedFromComdex: [
+      "ibc/23CA6C8D1AB2145DD13EB1E089A2E3F960DC298B468CCE034E19E5A78B61136E",
+    ],
   },
 };
 
@@ -33,7 +35,7 @@ async function compositeMinted(decimals: number) {
           "https://rest.comdex.one/cosmos/bank/v1beta1/supply/ucmst"
         )
     );
-    
+
     const supply = res?.data?.amount?.amount / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
@@ -48,8 +50,12 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    comdex: osmosisSupply(chainContracts.osmosis.bridgedFromComdex, 6, "Comdex"),
-  }
+    comdex: osmosisSupply(
+      chainContracts.osmosis.bridgedFromComdex,
+      6,
+      "Comdex"
+    ),
+  },
 };
 
 export default adapter;

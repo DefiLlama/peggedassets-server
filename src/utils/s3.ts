@@ -33,7 +33,11 @@ export async function store(
     .promise();
 }
 
-export async function storeDataset(filename: string, body: string, ContentType = "text/csv") {
+export async function storeDataset(
+  filename: string,
+  body: string,
+  ContentType = "text/csv"
+) {
   await new aws.S3()
     .upload({
       Bucket: datasetBucket,

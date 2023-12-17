@@ -16,9 +16,11 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   osmosis: {
-    bridgedFromAgoric: ["ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5"],
+    bridgedFromAgoric: [
+      "ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5",
+    ],
   },
-}
+};
 
 async function agoricMinted(decimals: number) {
   return async function (
@@ -48,8 +50,12 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    agoric: osmosisSupply(chainContracts.osmosis.bridgedFromAgoric, 6, "Agoric"),
-  }
+    agoric: osmosisSupply(
+      chainContracts.osmosis.bridgedFromAgoric,
+      6,
+      "Agoric"
+    ),
+  },
 };
 
 export default adapter;

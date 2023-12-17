@@ -16,8 +16,8 @@ const chainContracts: ChainContracts = {
   polygon: {
     issued: [
       "0x80487b4f8f70e793a81a42367c225ee0b94315df",
-      "0x5D066D022EDE10eFa2717eD3D79f22F949F8C175"
-  ],
+      "0x5D066D022EDE10eFa2717eD3D79f22F949F8C175",
+    ],
   },
 };
 
@@ -37,7 +37,13 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
     }
     return balances;
   };

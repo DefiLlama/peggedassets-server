@@ -1,7 +1,11 @@
 const axios = require("axios");
 const retry = require("async-retry");
 
-export async function getTotalBridged(chainID: number, chainName: string, assetName: string) {
+export async function getTotalBridged(
+  chainID: number,
+  chainName: string,
+  assetName: string
+) {
   const res = await retry(
     async (_bail: any) =>
       await axios.get(

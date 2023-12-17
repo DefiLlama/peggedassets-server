@@ -60,17 +60,17 @@ const handler = async (_event: any) => {
   const filename2Mo = `rates/2mo`;
   await store(filename2Mo, JSON.stringify(filteredRates2Mo), true, false);
   const filteredRatesFull = historicalPeggedRates
-  ?.map((item) =>
-    typeof item === "object"
-      ? {
-          date: item.SK,
-          rates: item.rates,
-        }
-      : { rates: undefined }
-  )
-  .filter((item) => item.rates !== undefined);
-const filenameFull = `rates/full`;
-await store(filenameFull, JSON.stringify(filteredRatesFull), true, false);
+    ?.map((item) =>
+      typeof item === "object"
+        ? {
+            date: item.SK,
+            rates: item.rates,
+          }
+        : { rates: undefined }
+    )
+    .filter((item) => item.rates !== undefined);
+  const filenameFull = `rates/full`;
+  await store(filenameFull, JSON.stringify(filteredRatesFull), true, false);
 };
 
 export default wrapScheduledLambda(handler);

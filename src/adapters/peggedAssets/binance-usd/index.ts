@@ -176,8 +176,10 @@ const chainContracts: ChainContracts = {
     bridgedFromBSC: ["0xBEB0131D95AC3F03fd15894D0aDE5DBf7451d171"],
   },
   osmosis: {
-    bridgedFromETH: ["ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D"],
-  }
+    bridgedFromETH: [
+      "ibc/6329DD8CF31A334DD5BE3F68C846C9FE313281362B37686A62343BAC1EB1546D",
+    ],
+  },
 };
 
 /*
@@ -297,21 +299,21 @@ async function chainUnreleased(chain: string, decimals: number) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-      const reserve = (
-        await sdk.api.erc20.balanceOf({
-          target: chainContracts[chain].issued[0],
-          owner: chainContracts[chain].reserves[0],
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        reserve / 10 ** decimals,
-        "issued",
-        false
-      );
+    const reserve = (
+      await sdk.api.erc20.balanceOf({
+        target: chainContracts[chain].issued[0],
+        owner: chainContracts[chain].reserves[0],
+        block: _chainBlocks?.[chain],
+        chain: chain,
+      })
+    ).output;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      reserve / 10 ** decimals,
+      "issued",
+      false
+    );
     return balances;
   };
 }
@@ -451,9 +453,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     bsc: sumMultipleBalanceFunctions(
-      [
-        bridgedSupply("metis", 18, chainContracts.metis.bridgedFromBSC),
-      ],
+      [bridgedSupply("metis", 18, chainContracts.metis.bridgedFromBSC)],
       "peggedUSD"
     ),
   },
@@ -486,7 +486,7 @@ const adapter: PeggedIssuanceAdapter = {
   kava: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    bsc: kavaMinted(chainContracts.kava.bridgeOnBNB), 
+    bsc: kavaMinted(chainContracts.kava.bridgeOnBNB),
   },
   loopring: {
     minted: async () => ({}),
@@ -528,14 +528,26 @@ const adapter: PeggedIssuanceAdapter = {
   thundercore: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromETH),
-    bsc: bridgedSupply("thundercore", 18, chainContracts.thundercore.bridgedFromBSC),
+    ethereum: bridgedSupply(
+      "thundercore",
+      18,
+      chainContracts.thundercore.bridgedFromETH
+    ),
+    bsc: bridgedSupply(
+      "thundercore",
+      18,
+      chainContracts.thundercore.bridgedFromBSC
+    ),
   },
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 18, "Axelar"),
-  }
+    ethereum: osmosisSupply(
+      chainContracts.osmosis.bridgedFromETH,
+      18,
+      "Axelar"
+    ),
+  },
 };
 
 export default adapter;

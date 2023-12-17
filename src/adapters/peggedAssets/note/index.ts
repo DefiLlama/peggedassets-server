@@ -37,7 +37,7 @@ async function cantoCirculating(chain: string, decimals: number) {
     sumSingleBalance(
       balances,
       "peggedUSD",
-      (totalSupply) / 10 ** decimals,
+      totalSupply / 10 ** decimals,
       "issued",
       false
     );

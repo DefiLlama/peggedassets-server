@@ -16,9 +16,7 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   polygon: {
     issued: "0x65517425ac3ce259a34400bb67ceb39ff3ddc0bd",
-    unreleased: [
-      "0x8388A0f91875e74Dc4705Abf2C9bBDD1bD40C585"
-    ],
+    unreleased: ["0x8388A0f91875e74Dc4705Abf2C9bBDD1bD40C585"],
   },
 };
 
@@ -78,10 +76,10 @@ async function chainUnreleased(chain: string, decimals: number) {
 }
 
 const adapter: PeggedIssuanceAdapter = {
-    polygon: {
-      minted: chainMinted("polygon", 18),
-      unreleased: chainUnreleased("polygon", 18),
-    },
-  };
-  
+  polygon: {
+    minted: chainMinted("polygon", 18),
+    unreleased: chainUnreleased("polygon", 18),
+  },
+};
+
 export default adapter;

@@ -17,11 +17,9 @@ async function pusdMinted() {
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
-        await axios.get(
-          "https://leaf-api.pando.im/api/cats"
-        )
+        await axios.get("https://leaf-api.pando.im/api/cats")
     );
-    const ret = res.data
+    const ret = res.data;
     let sum = 0.0;
     for (let ix = 0; ix < ret.data.collaterals.length; ix++) {
       const collateral = ret.data.collaterals[ix];

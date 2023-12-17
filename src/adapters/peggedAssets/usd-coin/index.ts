@@ -172,7 +172,7 @@ const chainContracts: ChainContracts = {
   fuse: {
     bridgedFromETH: [
       "0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5",
-      "0x28C3d1cD466Ba22f6cae51b1a4692a831696391A"
+      "0x28C3d1cD466Ba22f6cae51b1a4692a831696391A",
     ],
   },
   meter: {
@@ -298,8 +298,12 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x52A9CEA01c4CBDd669883e41758B8eB8e8E2B34b"], // wan
   },
   near: {
-    bridgedFromETH: ["a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.factory.bridge.near",], // rainbow bridge
-    issued: ["17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1"],
+    bridgedFromETH: [
+      "a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.factory.bridge.near",
+    ], // rainbow bridge
+    issued: [
+      "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+    ],
   },
   defichain: {
     bridgeOnETH: ["0x94fa70d079d76279e1815ce403e9b985bccc82ac"], // seems there is no direct bridge from ETH. but users can withdraw to defichain using cake defi?
@@ -328,7 +332,7 @@ const chainContracts: ChainContracts = {
   aptos: {
     bridgedFromETH: [
       "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa", // stargate
-      "0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea"  // wormhole
+      "0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea", // wormhole
     ],
   },
   mixin: {
@@ -339,26 +343,32 @@ const chainContracts: ChainContracts = {
   thundercore: {
     bridgedFromETH: [
       "0xdc42728b0ea910349ed3c6e1c9dc06b5fb591f98", // multichain
-      "0x22e89898A04eaf43379BeB70bf4E38b1faf8A31e"
+      "0x22e89898A04eaf43379BeB70bf4E38b1faf8A31e",
     ],
   },
   base: {
     bridgedFromETH: ["0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA"], //
   },
   kujira: {
-    bridgedFromETH: ["ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F"],
-    bridgedFromNoble: ["ibc/FE98AAD68F02F03565E9FA39A5E627946699B2B07115889ED812D8BA639576A9"],
+    bridgedFromETH: [
+      "ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F",
+    ],
+    bridgedFromNoble: [
+      "ibc/FE98AAD68F02F03565E9FA39A5E627946699B2B07115889ED812D8BA639576A9",
+    ],
   },
   osmosis: {
     bridgedFromETH: [
       "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858", // axelar
       "ibc/9F9B07EF9AD291167CF5700628145DE1DEB777C2CFC7907553B24446515F6D0E", // gravity
     ],
-    bridgedFromNoble: ["ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4"],
+    bridgedFromNoble: [
+      "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
+    ],
   },
   waves: {
     bridgeOnETH: ["0x0de7b091A21BD439bdB2DfbB63146D9cEa21Ea83"], // PepeTeam Bridge
-  }
+  },
 };
 
 /*
@@ -461,9 +471,7 @@ async function algorandMinted() {
     let balances = {} as Balances;
     const supplyRes = await retry(
       async (_bail: any) =>
-        await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/assets/31566704"
-        )
+        await axios.get("https://mainnet-idx.algonode.cloud/v2/assets/31566704")
     );
     console.info("algorand 1 success USDC");
     const supply = supplyRes?.data?.asset?.params?.total;
@@ -542,7 +550,6 @@ async function circleAPIChainMinted(chain: string) {
     return balances;
   };
 }
-
 
 async function reinetworkBridged(address: string, decimals: number) {
   return async function (
@@ -669,7 +676,6 @@ async function nearMint(address: string, decimals: number) {
   };
 }
 
-
 async function elrondBridged(tokenID: string, decimals: number) {
   return async function (
     _timestamp: number,
@@ -719,16 +725,36 @@ async function aptosBridged() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const contractStargate = "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa";
+    const contractStargate =
+      "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa";
     const typeStargate =
       "0x1::coin::CoinInfo<0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC>";
-    const totalSupplyStargate = await aptosGetTotalSupply(contractStargate, typeStargate);
-    sumSingleBalance(balances, "peggedUSD", totalSupplyStargate, contractStargate, true);
-    const contractPortal = "0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea";
+    const totalSupplyStargate = await aptosGetTotalSupply(
+      contractStargate,
+      typeStargate
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupplyStargate,
+      contractStargate,
+      true
+    );
+    const contractPortal =
+      "0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea";
     const typePortal =
       "0x1::coin::CoinInfo<0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea::coin::T>";
-    const totalSupplyPortal = await aptosGetTotalSupply(contractPortal, typePortal);
-    sumSingleBalance(balances, "peggedUSD", totalSupplyPortal, contractPortal, true);
+    const totalSupplyPortal = await aptosGetTotalSupply(
+      contractPortal,
+      typePortal
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupplyPortal,
+      contractPortal,
+      true
+    );
     return balances;
   };
 }
@@ -818,11 +844,7 @@ const adapter: PeggedIssuanceAdapter = {
   era: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply(
-      "era",
-      6,
-      chainContracts.era.bridgedFromETH
-    ),
+    ethereum: bridgedSupply("era", 6, chainContracts.era.bridgedFromETH),
   },
   polygon_zkevm: {
     minted: async () => ({}),
@@ -1079,12 +1101,12 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: karuraMinted(chainContracts.karura.bridgedFromETH[0], 6),
-  },/*
+  } /*
   ontology: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: ontologyBridged(),
-  },*/
+  },*/,
   sx: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -1189,7 +1211,11 @@ const adapter: PeggedIssuanceAdapter = {
   thundercore: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("thundercore", 6, chainContracts.thundercore.bridgedFromETH),
+    ethereum: bridgedSupply(
+      "thundercore",
+      6,
+      chainContracts.thundercore.bridgedFromETH
+    ),
   },
   base: {
     minted: async () => ({}),
@@ -1210,7 +1236,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.waves.bridgeOnETH[0],
       6
     ),
-  }
+  },
 };
 
 export default adapter;

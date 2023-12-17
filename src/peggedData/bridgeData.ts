@@ -1902,6 +1902,6 @@ export const bridgeInfo = {
   },
   base: {
     name: "Base Bridge",
-    link: "https://bridge.base.org/deposit"
+    link: "https://bridge.base.org/deposit",
   },
 } as BridgeInfo;

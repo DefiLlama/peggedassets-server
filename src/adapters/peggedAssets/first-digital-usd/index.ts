@@ -40,7 +40,7 @@ async function chainMinted(chain: string, decimals: number) {
       sumSingleBalance(
         balances,
         "peggedUSD",
-        totalSupply / 10 ** decimals, 
+        totalSupply / 10 ** decimals,
         "issued",
         false
       );
@@ -57,7 +57,7 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: chainMinted("bsc", 18),
     unreleased: async () => ({}),
-  }, 
+  },
 };
 
 export default adapter;

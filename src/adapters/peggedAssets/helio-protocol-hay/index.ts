@@ -3,22 +3,22 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances
+  Balances,
 } from "../peggedAsset.type";
 
 const chainContracts = {
-    bsc: {
-        issued: "0x0782b6d8c4551B9760e74c0545a9bCD90bdc41E5",
-    },
+  bsc: {
+    issued: "0x0782b6d8c4551B9760e74c0545a9bCD90bdc41E5",
+  },
 };
 
 async function bscMinted(decimals: number) {
-return async function (
+  return async function (
     _timestamp: number,
     _bscBlock: number,
     _chainBlocks: ChainBlocks
-) {
-  let balances = {} as Balances;
+  ) {
+    let balances = {} as Balances;
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
@@ -27,7 +27,13 @@ return async function (
         chain: "bsc",
       })
     ).output;
-    sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals, "issued", false);
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupply / 10 ** decimals,
+      "issued",
+      false
+    );
     return balances;
   };
 }

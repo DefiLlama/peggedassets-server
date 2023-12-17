@@ -3,7 +3,7 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
   bridgedSupplySubtractReserve,
-  supplyInEthereumBridge
+  supplyInEthereumBridge,
 } from "../helper/getSupply";
 import {
   ChainBlocks,
@@ -33,7 +33,7 @@ const chainContracts: ChainContracts = {
   },
   everscale: {
     bridgeOnETH: ["0x6b9f9cadb11690b2df23c3cfce383a6706f9a5e6"], // octus(?)
-  }
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {

@@ -1,6 +1,10 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
-import { ChainBlocks, PeggedIssuanceAdapter, Balances } from "../peggedAsset.type";
+import {
+  ChainBlocks,
+  PeggedIssuanceAdapter,
+  Balances,
+} from "../peggedAsset.type";
 
 const chainContracts = {
   ethereum: {

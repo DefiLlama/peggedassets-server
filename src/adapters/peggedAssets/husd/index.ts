@@ -33,7 +33,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "7VQo3HFLNH5QqGtM8eC3XQbPkJUu7nS9LeGWjerRh5Sw", // wormhole v2
       "BybpSTBoZHsmKnfxYG47GDhVPKrnEKX31CScShbrzUhX", // wormhole v1
-    ], 
+    ],
   },
 };
 /*
@@ -104,8 +104,8 @@ const adapter: PeggedIssuanceAdapter = {
   solana: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH)
-  }
+    ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
+  },
 };
 
 export default adapter;

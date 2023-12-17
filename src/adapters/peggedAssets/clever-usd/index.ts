@@ -34,7 +34,13 @@ async function chainMinted(chain: string) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** 18, "issued", false);
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** 18,
+        "issued",
+        false
+      );
     }
     return balances;
   };

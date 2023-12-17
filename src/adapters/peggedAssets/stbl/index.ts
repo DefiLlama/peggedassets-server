@@ -104,13 +104,7 @@ async function supply() {
 
     const balance = collateralSTBL + (supply - reserves) / 10 ** 6;
 
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      balance,
-      "issued",
-      false
-    );
+    sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
     return balances;
   };
 }

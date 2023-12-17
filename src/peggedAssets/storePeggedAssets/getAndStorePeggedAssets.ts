@@ -76,7 +76,12 @@ async function getPeggedAsset(
           `Getting circulating for ${peggedAsset.name} on chain ${chain} failed.`,
           e
         );
-        executeAndIgnoreErrors('INSERT INTO `errors2` VALUES (?, ?, ?, ?)', [getCurrentUnixTimestamp(), peggedAsset.gecko_id, chain, String(e)]);
+        executeAndIgnoreErrors("INSERT INTO `errors2` VALUES (?, ?, ?, ?)", [
+          getCurrentUnixTimestamp(),
+          peggedAsset.gecko_id,
+          chain,
+          String(e),
+        ]);
         peggedBalances[chain][issuanceType] = { [pegType]: null };
       } else {
         console.error(peggedAsset.name, e);
@@ -173,14 +178,27 @@ async function calcCirculating(
             console.error(
               `Null balance or 0 circulating error on chain ${chain}`
             );
-            executeAndIgnoreErrors('INSERT INTO `errors2` VALUES (?, ?, ?, ?)', [getCurrentUnixTimestamp(), peggedAsset.gecko_id, chain, `Null balance or 0 circulating error`]);
+            executeAndIgnoreErrors(
+              "INSERT INTO `errors2` VALUES (?, ?, ?, ?)",
+              [
+                getCurrentUnixTimestamp(),
+                peggedAsset.gecko_id,
+                chain,
+                `Null balance or 0 circulating error`,
+              ]
+            );
             return;
           }
           circulating[pegType]! -= balance;
         });
       }
       if (circulating[pegType]! < 0) {
-        executeAndIgnoreErrors('INSERT INTO `errors2` VALUES (?, ?, ?, ?)', [getCurrentUnixTimestamp(), peggedAsset.gecko_id, chain, `Pegged asset has negative circulating amount`]);
+        executeAndIgnoreErrors("INSERT INTO `errors2` VALUES (?, ?, ?, ?)", [
+          getCurrentUnixTimestamp(),
+          peggedAsset.gecko_id,
+          chain,
+          `Pegged asset has negative circulating amount`,
+        ]);
         throw new Error(
           `Pegged asset on chain ${chain} has negative circulating amount`
         );
@@ -215,7 +233,10 @@ async function calcCirculating(
 const timeout = (prom: any, time: number, peggedID: string, chain: string) =>
   Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
     async (err) => {
-      console.error(`Could not store peggedAsset ${peggedID} on chain ${chain}`, err);
+      console.error(
+        `Could not store peggedAsset ${peggedID} on chain ${chain}`,
+        err
+      );
       throw err;
     }
   );
@@ -261,11 +282,21 @@ export async function storePeggedAsset(
             );
           }
         );
-        await timeout(Promise.all(peggedChainPromises), 60e3, peggedAsset.name, chain);
+        await timeout(
+          Promise.all(peggedChainPromises),
+          60e3,
+          peggedAsset.name,
+          chain
+        );
       }
     );
     await Promise.all(peggedBalancesPromises);
-    await calcCirculating(peggedBalances, bridgedFromMapping, peggedAsset, pegType);
+    await calcCirculating(
+      peggedBalances,
+      bridgedFromMapping,
+      peggedAsset,
+      pegType
+    );
 
     if (
       typeof peggedBalances.totalCirculating.circulating[pegType] !== "number"
