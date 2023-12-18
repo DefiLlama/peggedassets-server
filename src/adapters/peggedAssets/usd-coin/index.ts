@@ -1219,7 +1219,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   base: {
-    minted: async () => ({}),
+    minted: chainMinted("base", 6),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("base", 6, chainContracts.base.bridgedFromETH),
   },
