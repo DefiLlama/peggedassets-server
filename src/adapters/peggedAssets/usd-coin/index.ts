@@ -347,6 +347,7 @@ const chainContracts: ChainContracts = {
     ],
   },
   base: {
+    issued: ["0x833589FCD6EDB6E08F4C7C32D4F71B54BDA02913"],
     bridgedFromETH: ["0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA"], //
   },
   kujira: {
@@ -1218,7 +1219,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   base: {
-    minted: async () => ({}),
+    minted: chainMinted("base", 6),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("base", 6, chainContracts.base.bridgedFromETH),
   },
