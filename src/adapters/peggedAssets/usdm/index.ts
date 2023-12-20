@@ -18,6 +18,22 @@ const chainContracts: ChainContracts = {
     issued: "0x59d9356e565ab3a36dd77763fc0d87feaf85508c",
     unreleased: [],
   },
+  polygon: {
+    issued: "0x59d9356e565ab3a36dd77763fc0d87feaf85508c",
+    unreleased: [],
+  },
+  base: {
+    issued: "0x59d9356e565ab3a36dd77763fc0d87feaf85508c",
+    unreleased: [],
+  },
+  optimism: {
+    issued: "0x59d9356e565ab3a36dd77763fc0d87feaf85508c",
+    unreleased: [],
+  },
+  arbitrum: {
+    issued: "0x59d9356e565ab3a36dd77763fc0d87feaf85508c",
+    unreleased: [],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -78,6 +94,22 @@ async function chainUnreleased(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
+    unreleased: async () => ({}),
+  },
+  polygon: {
+    minted: chainMinted("polygon", 18),
+    unreleased: async () => ({}),
+  },
+  base: {
+    minted: chainMinted("base", 18),
+    unreleased: async () => ({}),
+  },
+  arbitrum: {
+    minted: chainMinted("arbitrum", 18),
+    unreleased: async () => ({}),
+  },
+  optimism: {
+    minted: chainMinted("optimism", 18),
     unreleased: async () => ({}),
   },
 };
