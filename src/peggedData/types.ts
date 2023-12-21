@@ -7,8 +7,9 @@ type PegType =
   | "peggedCNY" //china
   | "peggedUAH" //ukraine
   | "peggedARS" //ARGENTINE
-  | "peggedGBP"; //GB
-("peggedCAD"); //canadian dollar
+  | "peggedGBP" //GB
+  | "peggedCAD" //canadian dollar
+  | "peggedTRY" //Turkish lira
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 
