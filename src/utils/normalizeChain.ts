@@ -1021,7 +1021,7 @@ export function getChainDisplayName(
     case "neo":
       return "NEO";
     case "rsk":
-      return "RSK";
+      return "Rootstock";
     case "osmosis":
       return "Osmosis";
     case "iotex":
