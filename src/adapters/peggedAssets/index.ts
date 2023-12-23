@@ -239,7 +239,7 @@ export default {
   iusd,
   redeemable: rusd,
   "iron-bank-euro": ibeur,
-  composite,
+  //composite,
   baousd,
   "meme-dollar": pina,
   djed,
