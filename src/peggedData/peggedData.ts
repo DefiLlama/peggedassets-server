@@ -1896,7 +1896,7 @@ export default [
     twitter: "https://twitter.com/BaoCommunity",
     wiki: null,
   },
-  {
+  /*{
     id: "95",
     name: "Composite",
     address: null,
@@ -1915,7 +1915,7 @@ export default [
       "https://github.com/oak-security/audit-reports/tree/master/Comdex",
     twitter: "https://twitter.com/Composite_Money",
     wiki: null,
-  },
+  },*/
   {
     id: "96",
     name: "Coin98 Dollar",
