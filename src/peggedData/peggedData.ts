@@ -2962,4 +2962,24 @@ export default [
     twitter: null,
     wiki: null,
   },
+  {
+    id: "148",
+    name: "Mynth MyUSD",
+    address: "cardano:asset1y739nyfjumygfukmw0k5xckhc3lz4fl0yxl3qk",
+    symbol: "MyUSD",
+    url: "https://www.mynth.ai",
+    description:
+      "Mynth enables seamless interoperable transfers using Cardano's fully redeemable native stablecoin MyUSD.",
+    mintRedeemDescription:
+      "User can mint and redeem MyUSD using tether (via TRC 20), user can also redeem using MNT (mynth governance token)",
+    onCoinGecko: "true",
+    gecko_id: "myusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic", //since can also be minted with MNT 
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/_mynth_",
+    wiki: "https://www.mynth.ai/faq",
+  },
 ] as PeggedAsset[];

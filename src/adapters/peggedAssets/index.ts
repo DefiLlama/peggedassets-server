@@ -145,6 +145,7 @@ import usdv from "./usdv";
 import cadc from "./cadc";
 import usde from "./ethena-usde";
 import aeur from "./anchored-coins-eur";
+import myusd from "./myusd"
 
 export default {
   tether,
@@ -294,4 +295,5 @@ export default {
   "cad-coin": cadc,
   "ethena-usde": usde,
   "anchored-coins-eur": aeur,
+  myusd //fake coingecko, replace once live
 };
