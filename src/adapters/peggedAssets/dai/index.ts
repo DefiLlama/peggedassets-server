@@ -114,6 +114,7 @@ const chainContracts: ChainContracts = {
     ],
   },
   xdai: {
+    bridgedFromETH: ["0x4aa42145Aa6Ebf72e164C9bBC74fbD3788045016"],
     bridgedFromBSC: ["0xFc8B2690F66B46fEC8B3ceeb95fF4Ac35a0054BC"], // address related to OmniBridge, I don't get what this token is though
   },
   terra: {
@@ -507,7 +508,11 @@ const adapter: PeggedIssuanceAdapter = {
   xdai: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    //ethereum: gnosisMinted(),
+    ethereum: supplyInEthereumBridge(
+      "0x83F20F44975D03b1b09e64809B757c47f942BEeA",
+      chainContracts.xdai.bridgedFromETH[0],
+      18
+    ),
     bsc: bridgedSupply("xdai", 18, chainContracts.xdai.bridgedFromBSC),
   },
   terra: {
@@ -587,11 +592,11 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: osmosisSupply(
+   /* ethereum: osmosisSupply(
       chainContracts.osmosis.bridgedFromETH,
       18,
       "Axelar"
-    ),
+    ),*/
   },
   starknet: {
     minted: async () => ({}),
