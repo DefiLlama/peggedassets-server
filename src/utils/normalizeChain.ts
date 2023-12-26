@@ -12,6 +12,7 @@ export const normalizedChainReplacements = {
   "zksync%20era": "era",
   "polygon%20zkevm": "polygon_zkevm",
   multiversx: "elrond",
+  rootstock: "rsk"
 } as {
   [chain: string]: string;
 };
@@ -223,7 +224,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 1666600000,
   },
-  RSK: {
+  Rootstock: {
     geckoId: "rootstock",
     symbol: "RBTC",
     cmcId: "3626",
@@ -950,6 +951,7 @@ chainCoingeckoIds["Binance"] = chainCoingeckoIds["BSC"];
 chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
 chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
+chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
 
 export const extraSections = [
   "staking",
@@ -973,6 +975,8 @@ export function transformNewChainName(chain: string) {
       return "Milkomeda C1";
     case "Elrond":
       return "MultiversX";
+      case "RSK":
+        return "Rootstock";
     default:
       return chain;
   }
@@ -1020,8 +1024,8 @@ export function getChainDisplayName(
       return "EOS";
     case "neo":
       return "NEO";
-    case "rsk":
-      return "RSK";
+      case "rsk":
+        return useNewChainNames ? "Rootstock" : "RSK";
     case "osmosis":
       return "Osmosis";
     case "iotex":
