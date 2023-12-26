@@ -20,6 +20,7 @@ import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
+  PeggedAssetType,
 } from "../peggedAsset.type";
 import { mixinSupply } from "../helper/mixin";
 const axios = require("axios");
@@ -278,24 +279,47 @@ async function chainMinted(chain: string, decimals: number) {
   };
 }
 
-async function gnosisMinted() {
+export async function fromETH(
+  owner: string,
+  decimals: number,
+  pegType?: PeggedAssetType
+) {
+  
+  const targets = [
+    "0x83F20F44975D03b1b09e64809B757c47f942BEeA",
+    "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+  ];
+
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://blockscout.com/xdai/mainnet/api?module=stats&action=coinsupply"
-        )
-    );
-    const totalSupply = parseInt(res.data);
-    sumSingleBalance(balances, "peggedUSD", totalSupply, "gnosis", false);
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
+
+    for (const target of targets) {
+      const bridged = (
+        await sdk.api.erc20.balanceOf({
+          target: target,
+          owner: owner,
+          block: _ethBlock,
+        })
+      ).output;
+
+      sumSingleBalance(
+        balances,
+        assetPegType,
+        bridged / 10 ** decimals,
+        target, 
+        false
+      );
+    }
+
     return balances;
   };
 }
+
 
 async function reinetworkMinted(address: string, decimals: number) {
   return async function (
@@ -508,11 +532,7 @@ const adapter: PeggedIssuanceAdapter = {
   xdai: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: supplyInEthereumBridge(
-      "0x83F20F44975D03b1b09e64809B757c47f942BEeA",
-      chainContracts.xdai.bridgedFromETH[0],
-      18
-    ),
+    ethereum: fromETH("0x4aa42145Aa6Ebf72e164C9bBC74fbD3788045016",18),
     bsc: bridgedSupply("xdai", 18, chainContracts.xdai.bridgedFromBSC),
   },
   terra: {
