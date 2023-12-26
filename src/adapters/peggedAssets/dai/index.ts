@@ -507,7 +507,7 @@ const adapter: PeggedIssuanceAdapter = {
   xdai: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: gnosisMinted(),
+    //ethereum: gnosisMinted(),
     bsc: bridgedSupply("xdai", 18, chainContracts.xdai.bridgedFromBSC),
   },
   terra: {
