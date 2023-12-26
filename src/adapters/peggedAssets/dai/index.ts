@@ -622,11 +622,11 @@ const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-   /* ethereum: osmosisSupply(
+    ethereum: osmosisSupply(
       chainContracts.osmosis.bridgedFromETH,
       18,
       "Axelar"
-    ),*/
+    ),
   },
   starknet: {
     minted: async () => ({}),
