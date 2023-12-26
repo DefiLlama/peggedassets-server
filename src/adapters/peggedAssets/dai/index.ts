@@ -279,12 +279,12 @@ async function chainMinted(chain: string, decimals: number) {
   };
 }
 
-export async function fromETH(
+async function fromETH(
   owner: string,
   decimals: number,
   pegType?: PeggedAssetType
 ) {
-  
+
   const targets = [
     "0x83F20F44975D03b1b09e64809B757c47f942BEeA",
     "0x6B175474E89094C44Da98b954EedeAC495271d0F"
@@ -299,13 +299,23 @@ export async function fromETH(
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
 
     for (const target of targets) {
-      const bridged = (
+      let bridged = (
         await sdk.api.erc20.balanceOf({
           target: target,
           owner: owner,
           block: _ethBlock,
         })
       ).output;
+      if(target === "0x83F20F44975D03b1b09e64809B757c47f942BEeA"){
+        bridged = (
+          await sdk.api.abi.call({
+            target: target,
+            abi: "function convertToAssets(uint256 shares) public view returns (uint256)",
+            params: [bridged],
+            block: _ethBlock,
+          })
+        ).output;
+      }
 
       sumSingleBalance(
         balances,
