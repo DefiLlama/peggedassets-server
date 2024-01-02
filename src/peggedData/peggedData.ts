@@ -833,6 +833,7 @@ export default [
     twitter: "https://twitter.com/FloatProtocol",
     wiki: "https://wiki.defillama.com/wiki/Float_Protocol",
   },
+  /*
   {
     id: "42",
     name: "USDX",
@@ -853,6 +854,7 @@ export default [
     twitter: "https://twitter.com/kava_platform",
     wiki: "https://wiki.defillama.com/wiki/USDX",
   },
+  */
   {
     id: "43",
     name: "ZUSD",

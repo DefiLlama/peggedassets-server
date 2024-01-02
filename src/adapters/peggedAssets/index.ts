@@ -40,7 +40,7 @@ import volt from "./volt-protocol";
 import r from "./r";
 import rai from "./rai";
 import float from "./float-protocol-float";
-import usdx from "./usdx";
+// import usdx from "./usdx"; problem is their api related to kava
 import zusd from "./zusd";
 import usx from "./token-dforce-usd";
 import aseed from "./acala-dollar";
@@ -190,7 +190,7 @@ export default {
   r,
   rai,
   "float-protocol-float": float,
-  usdx,
+ // usdx,
   zusd,
   "token-dforce-usd": usx,
   "acala-dollar": aseed,
