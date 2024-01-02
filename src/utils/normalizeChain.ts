@@ -938,6 +938,11 @@ export const chainCoingeckoIds = {
     cmcId: "8279",
     categories: ["Cosmos"],
   },
+  "Concordium": {
+    geckoId: "concordium",
+    symbol: "CCD",
+    cmcId: "18031",
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1182,6 +1187,8 @@ export function getChainDisplayName(
       return "Agoric";
     case "emoney":
       return "eMoney";
+    case "concordium":
+      return "Concordium"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
