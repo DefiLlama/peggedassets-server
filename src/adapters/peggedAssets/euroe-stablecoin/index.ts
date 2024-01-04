@@ -1,6 +1,7 @@
 const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply, solanaMintedOrBridged } from "../helper/getSupply";
+import fetch from "node-fetch";
+import { sumSingleBalance,  } from "../helper/generalUtil";
+import { solanaMintedOrBridged } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -33,6 +34,33 @@ const chainContracts: ChainContracts = {
     issued: ["0x820802Fa8a99901F52e39acD21177b0BE6EE2974"],
   },
 };
+
+async function concordiumMinted(apiEndpoint: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+
+    try {
+      const res = await fetch(apiEndpoint);
+
+      if (!res.ok) {
+        throw new Error(`Failed to fetch data from Concordium API. Status: ${res.status}`);
+      }
+
+      const totalSupply = parseFloat(await res.text());
+      const formattedTotalSupply = Number(totalSupply.toFixed(decimals));
+      sumSingleBalance(balances, "peggedEUR", formattedTotalSupply, apiEndpoint, true);
+
+    } catch (error) {
+      console.error(`Error fetching data from Concordium API: ${error}`);
+    }
+
+    return balances;
+  };
+}
 
 async function chainMinted(chain: string, decimals: number) {
   return async function (
@@ -85,6 +113,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   optimism: {
     minted: chainMinted("optimism", 6),
+    unreleased: async () => ({}),
+  },
+  concordium: {
+    minted: concordiumMinted("https://www.euroe.com/api/totalsupply/CCD", 6),
     unreleased: async () => ({}),
   },
 };
