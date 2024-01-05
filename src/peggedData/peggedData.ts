@@ -2982,4 +2982,24 @@ export default [
     twitter: "https://twitter.com/_mynth_",
     wiki: "https://www.mynth.ai/faq",
   },
+  {
+    id: "149",
+    name: "Sable Coin",
+    address: "bsc:0x0c6ed1e73ba73b8441868538e210ebd5dd240fa0",
+    symbol: "USDS",
+    url: "https://sable.finance",
+    description:
+      "Sable Finance offers interest-free loans and is more capital efficient than other borrowing platforms (i.e. less collateral is needed for the same loan).",
+    mintRedeemDescription:
+      "Redemption allows users to exchange USDS for LSD at face value. This mechanism gives USDS holders the option to redeem USDS for the underlying collateral at any time. Redemptions are always honored such that 1 USDS equals $1 worth of LSD.",
+    onCoinGecko: "true",
+    gecko_id: "sable-coin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed", 
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/SableFinance",
+    wiki: "https://sable-finance.gitbook.io/docs/",
+  },
 ] as PeggedAsset[];
