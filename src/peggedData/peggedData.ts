@@ -3002,4 +3002,24 @@ export default [
     twitter: "https://twitter.com/SableFinance",
     wiki: "https://sable-finance.gitbook.io/docs/",
   },
+  {
+    id: "150",
+    name: "USD Stable Colb",
+    address: "polygon:0x72c96c73207936e94066b4c8566c6987c9a1f1de",
+    symbol: "SCB",
+    url: "https://www.colb.finance",
+    description:
+      "A USD-backed stablecoin, strictly pegged 1:1 to the United States Dollar and issued in full compliance with Swiss legislation. SCB is fully collateralised by cash and cash equivalents, securely held in custody with a Swiss private bank and verified by third-party attestations.",
+    mintRedeemDescription:
+      "When a user triggers an SCB issuance request through a USD bank transfer, our compliance team undertakes an initial verification to uphold regulatory adherence. When a whitelisted user decides to redeem SCB, he must firstly sign a transaction in his non-custodial wallet to send the SCB to the burn address. At this stage, our compliance team is informed and undertakes a client file verification. Then, Colb Trust advances to reduce the circulating supply, ultimately burning the stablecoins. Then it is the custodian bank's job to be as efficient as possible to send the USD bank transfer to the user (1 to 4 business days).",
+    onCoinGecko: "true",
+    gecko_id: "colb-usd-stablecolb",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed", 
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/colb_finance",
+    wiki: "https://www.colb.finance/faq",
+  },
 ] as PeggedAsset[];
