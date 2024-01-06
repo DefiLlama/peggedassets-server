@@ -3005,7 +3005,7 @@ export default [
   {
     id: "150",
     name: "USD Stable Colb",
-    address: "polygon:0x72c96c73207936e94066b4c8566c6987c9a1f1de",
+    address: "polygon:0x72c96c73207936e94066b4c8566c6987c9a1f1de", ///
     symbol: "SCB",
     url: "https://www.colb.finance",
     description:
