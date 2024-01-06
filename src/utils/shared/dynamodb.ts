@@ -34,6 +34,7 @@ const dynamodb = {
       })
       .promise(),
   scan: () => client.scan({ TableName }).promise(),
+  getEnvSecrets: (key: AWS.DynamoDB.DocumentClient.Key = { PK: 'lambda-secrets' }) => client.get({ TableName: 'secrets', Key: key }).promise()
 };
 export default dynamodb;
 
