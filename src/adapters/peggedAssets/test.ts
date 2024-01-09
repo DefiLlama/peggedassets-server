@@ -1,3 +1,4 @@
+require('dotenv').config()
 const path = require("path");
 const { chainsForBlocks } = require("@defillama/sdk/build/computeTVL/blocks");
 const { getLatestBlock } = require("@defillama/sdk/build/util/index");

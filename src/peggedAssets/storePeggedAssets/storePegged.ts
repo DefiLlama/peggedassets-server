@@ -4,7 +4,6 @@ import peggedAssets from "../../peggedData/peggedData";
 import { importAdapter } from "../utils/importAdapter";
 import { executeAndIgnoreErrors } from "./errorDb";
 import { getCurrentUnixTimestamp } from "../../utils/date";
-import dynamodb from "../../utils/shared/dynamodb";
 
 const maxRetries = 4;
 const chainBlocks = undefined; // not needed by any adapters
@@ -53,18 +52,6 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
   return;
 }
 
-async function setEnvSecrets() {
-  try {
-    const { Item } = await dynamodb.getEnvSecrets()
-    Object.entries((Item as any)).forEach(([key, value]: any) => {
-      if (key !== 'PK' && key !== 'SK') process.env[key] = value
-    })
-  } catch (e) {
-    console.log('Unable to get env secrets: ', e)
-  }
-}
-
 export default async (peggedIndexes: number[]) => {
-  await setEnvSecrets()
   await iteratePeggedAssets(peggedIndexes);
 };
