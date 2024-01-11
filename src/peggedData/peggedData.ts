@@ -3022,4 +3022,24 @@ export default [
     twitter: "https://twitter.com/colb_finance",
     wiki: "https://www.colb.finance/faq",
   },
+  {
+    id: "151",
+    name: "zkUSD Dollar",
+    address: "zksync:0xfC7E56298657B002b3e656400E746b7212912757",
+    symbol: "zkUSD",
+    url: "https://goal3.xyz",
+    description:
+      "zkUSD is an algorithmic stablecoin whose value is pegged to the US Dollar. The peg is maintained by an algorithmic over-collateralization of assets. This means that the value of zkUSD is kept stable at $1 by always having more assets within the sportsbook backing it than its value, ensuring that it is a stable medium of exchange within the Goal3 sportsbook.",
+    mintRedeemDescription:
+      "The official mint/redemption gateway is the Goal3 Portal. 1 $zkUSD can always be redeemed through the portal into 1 USDC. Other venues of exchange for $zkUSD include SyncSwap and MEXC exchange.",
+    onCoinGecko: "true",
+    gecko_id: "goal3",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed", 
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/Goal3_xyz",
+    wiki: "https://docs.goal3.xyz/sportsbook/technical-overview/usdzkusd",
+  },
 ] as PeggedAsset[];
