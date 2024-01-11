@@ -1180,6 +1180,15 @@ const adapter: PeggedIssuanceAdapter = {
       6
     ),
   },
+  era: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.era.bridgeOnETH[0],
+      6
+    ),
+  },
   shiden: {
     minted: async () => ({}),
     unreleased: async () => ({}),
