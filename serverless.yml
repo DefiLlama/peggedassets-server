@@ -63,6 +63,7 @@ provider:
     DEFILLAMA_SDK_MUTED: true
     tableName: ${self:custom.tableName}
     stage: ${self:custom.stage}
+    ETHEREUM_RPC: ${env:ETHEREUM_RPC}
 
 custom:
   stage: ${opt:stage, self:provider.stage}
