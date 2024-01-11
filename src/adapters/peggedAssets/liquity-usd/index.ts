@@ -119,7 +119,6 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.arbitrum.bridgedFromETH
     ),
   },
-  /*
   polygon_zkevm: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -130,7 +129,6 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("era", 18, chainContracts.era.bridgedFromETH),
   }
-  */
 };
 
 export default adapter;
