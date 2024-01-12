@@ -147,7 +147,8 @@ import usde from "./ethena-usde";
 import aeur from "./anchored-coins-eur";
 import myusd from "./myusd";
 import usds from "./sable-coin";
-import scb from "./colb-usd-stablecolb"
+import scb from "./colb-usd-stablecolb";
+import zkusd from "./zkusd";
 
 export default {
   tether,
@@ -299,5 +300,6 @@ export default {
   "anchored-coins-eur": aeur,
   myusd, //fake coingecko, replace once live
   "sable-coin": usds,
-  "colb-usd-stablecolb": scb
+  "colb-usd-stablecolb": scb,
+  "goal3": zkusd
 };
