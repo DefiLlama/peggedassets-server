@@ -548,6 +548,15 @@ const adapter: PeggedIssuanceAdapter = {
       "Axelar"
     ),
   },
+  era: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply(
+      "era", 
+      18, 
+      chainContracts.era.bridgedFromETH
+    ),
+  },
 };
 
 export default adapter;
