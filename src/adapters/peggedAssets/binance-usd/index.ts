@@ -6,6 +6,7 @@ import {
 import {
   bridgedSupply,
   solanaMintedOrBridged,
+  bridgedSupplySubtractReserve,
   terraSupply,
   supplyInEthereumBridge,
   osmosisSupply,
@@ -33,6 +34,7 @@ const chainContracts: ChainContracts = {
   },
   bsc: {
     bridgeOnETH: ["0x47ac0fb4f2d84898e4d9e7b4dab3c24507a6d503"],
+    unreleased: ["0x0000000000000000000000000000000000001004"],
     bridgedFromETH: [
       "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
       "0x035de3679E692C471072d1A09bEb9298fBB2BD31", // wormhole
@@ -318,6 +320,9 @@ async function chainUnreleased(chain: string, decimals: number) {
   };
 }
 
+
+
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -327,7 +332,17 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
+    ethereum: bridgedSupplySubtractReserve(
+      "bsc",
+      18,
+      [
+        chainContracts.bsc.bridgedFromETH[0],
+        chainContracts.bsc.unreleased,
+      ],
+      "bsc",
+      "Ethereum",
+      "peggedUSD"
+    ),
   },
   avalanche: {
     minted: chainMinted("avax", 18),
@@ -379,12 +394,12 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("polygon", 18),
     unreleased: chainUnreleased("polygon", 18),
     bsc: bridgedSupply("polygon", 18, chainContracts.polygon.bridgedFromBSC),
-  },
+  },/*
   fuse: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     bsc: bridgedSupply("fuse", 18, chainContracts.fuse.bridgedFromBSC),
-  },
+  },*/
   meter: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -482,12 +497,12 @@ const adapter: PeggedIssuanceAdapter = {
       "multichain",
       "BSC"
     ),
-  },
+  },/*
   kava: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     bsc: kavaMinted(chainContracts.kava.bridgeOnBNB),
-  },
+  },*/
   loopring: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -515,7 +530,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     bsc: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromBSC),
-  },
+  },/*
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -524,7 +539,7 @@ const adapter: PeggedIssuanceAdapter = {
       18,
       chainContracts.dogechain.bridgedFromETH
     ),
-  },
+  },*/
   thundercore: {
     minted: async () => ({}),
     unreleased: async () => ({}),
