@@ -1017,7 +1017,7 @@ const adapter: PeggedIssuanceAdapter = {
   fuse: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("fuse", 6, chainContracts.fuse.bridgedFromETH),
+    //ethereum: bridgedSupply("fuse", 6, chainContracts.fuse.bridgedFromETH),
   },
   meter: {
     minted: async () => ({}),
@@ -1215,13 +1215,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: chainUnreleased("kava", 6, chainContracts.kava.unreleased[0]),
     ethereum: kavaBridged(),
   },
-  /*
   ontology: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: ontologyBridged(),
+    //ethereum: ontologyBridged(),
   },
-  */
   sx: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -1285,13 +1283,12 @@ const adapter: PeggedIssuanceAdapter = {
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply(
+    /*ethereum: bridgedSupply(
       "dogechain",
       6,
       chainContracts.dogechain.bridgedFromETH
-    ),
+    ),*/
   },
-  /*
   neo: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -1302,7 +1299,6 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: polyNetworkBridged(18, "Zilliqa", "zUSDT"),
   },
-  */
   arbitrum_nova: {
     minted: async () => ({}),
     unreleased: async () => ({}),
