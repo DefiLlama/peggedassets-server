@@ -239,52 +239,49 @@ export async function bridgedSupplyMinusReserves(
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
+  ): Promise<Balances> {
+    let balances: Balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     let sum = 0;
     const bridgeAddress = bridgeAndReserveAddresses[0];
     const reserveAddresses = bridgeAndReserveAddresses[1];
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
+
+    // Fetch total supply and reserve balances in parallel
+    const totalSupplyPromise = sdk.api.abi.call({
+      abi: "erc20:totalSupply",
+      target: bridgeAddress,
+      block: _chainBlocks?.[chain],
+      chain: chain,
+    });
+
+    const reservePromises = reserveAddresses.map((reserve: any) => 
+      sdk.api.erc20.balanceOf({
         target: bridgeAddress,
+        owner: reserve,
         block: _chainBlocks?.[chain],
         chain: chain,
       })
-    ).output;
-    sum += totalSupply;
+    );
 
-    for (let reserve of reserveAddresses) {
-      const totalReserve = reserve
-        ? (
-            await sdk.api.erc20.balanceOf({
-              target: bridgeAddress,
-              owner: reserve,
-              block: _chainBlocks?.[chain],
-              chain: chain,
-            })
-          ).output
-        : 0;
-      sum -= totalReserve;
-    }
+    const [totalSupplyResponse, ...reserveResponses] = await Promise.all([
+      totalSupplyPromise, 
+      ...reservePromises
+    ]);
 
-    bridgeName
-      ? sumSingleBalance(
-          balances,
-          assetPegType,
-          sum / 10 ** decimals,
-          bridgeName,
-          false,
-          bridgedFromChain
-        )
-      : sumSingleBalance(
-          balances,
-          assetPegType,
-          sum / 10 ** decimals,
-          bridgeAddress,
-          true
-        );
+    sum += parseInt(totalSupplyResponse.output, 10);
+    reserveResponses.forEach((reserveResponse: { output: string; }) => {
+      sum -= parseInt(reserveResponse.output, 10);
+    });
+
+    const balanceKey = bridgeName ?? bridgeAddress;
+    sumSingleBalance(
+      balances,
+      assetPegType,
+      sum / 10 ** decimals,
+      balanceKey,
+      bridgeName ? false : true,
+      bridgedFromChain
+    );
 
     return balances;
   };
