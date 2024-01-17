@@ -17,6 +17,7 @@ import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
+  PeggedAssetType,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
@@ -34,7 +35,7 @@ const chainContracts: ChainContracts = {
   },
   bsc: {
     bridgeOnETH: ["0x47ac0fb4f2d84898e4d9e7b4dab3c24507a6d503"],
-    unreleased: ["0x0000000000000000000000000000000000001004"],
+    uncirculating: ["0x0000000000000000000000000000000000001004","0xD2f93484f2D319194cBa95C5171B18C1d8cfD6C4"],
     bridgedFromETH: [
       "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
       "0x035de3679E692C471072d1A09bEb9298fBB2BD31", // wormhole
@@ -226,6 +227,70 @@ async function chainMinted(chain: string, decimals: number) {
   };
 }
 
+export async function bridgedSupplyMinusReserves(
+  chain: string,
+  decimals: number,
+  bridgeAndReserveAddresses: any,
+  bridgeName?: string,
+  bridgedFromChain?: string,
+  pegType?: PeggedAssetType
+) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
+    let sum = 0;
+    const bridgeAddress = bridgeAndReserveAddresses[0];
+    const reserveAddresses = bridgeAndReserveAddresses[1];
+    const totalSupply = (
+      await sdk.api.abi.call({
+        abi: "erc20:totalSupply",
+        target: bridgeAddress,
+        block: _chainBlocks?.[chain],
+        chain: chain,
+      })
+    ).output;
+    sum += totalSupply;
+
+    for (let reserve of reserveAddresses) {
+      const totalReserve = reserve
+        ? (
+            await sdk.api.erc20.balanceOf({
+              target: bridgeAddress,
+              owner: reserve,
+              block: _chainBlocks?.[chain],
+              chain: chain,
+            })
+          ).output
+        : 0;
+      sum -= totalReserve;
+    }
+
+    bridgeName
+      ? sumSingleBalance(
+          balances,
+          assetPegType,
+          sum / 10 ** decimals,
+          bridgeName,
+          false,
+          bridgedFromChain
+        )
+      : sumSingleBalance(
+          balances,
+          assetPegType,
+          sum / 10 ** decimals,
+          bridgeAddress,
+          true
+        );
+
+    return balances;
+  };
+}
+
+
 async function kavaMinted(owners: string[]) {
   return async function (
     _timestamp: number,
@@ -332,12 +397,12 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupplySubtractReserve(
+    ethereum: bridgedSupplyMinusReserves(
       "bsc",
       18,
       [
         chainContracts.bsc.bridgedFromETH[0],
-        chainContracts.bsc.unreleased,
+        chainContracts.bsc.uncirculating,
       ],
       "bsc",
       "Ethereum",
