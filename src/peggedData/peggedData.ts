@@ -3042,4 +3042,24 @@ export default [
     twitter: "https://twitter.com/Goal3_xyz",
     wiki: "https://docs.goal3.xyz/sportsbook/technical-overview/usdzkusd",
   },
+  {
+    id: "152",
+    name: "Liquid Loans USDL",
+    address: "pulse:0x0deed1486bc52aa0d3e6f8849cec5add6598a162",
+    symbol: "USDL",
+    url: "https://www.liquidloans.io/",
+    description:
+      "USDL is a stablecoin with 110% collateralization, no repayment schedule, immutability, and no governance or admin keys",
+    mintRedeemDescription:
+      "USDL is minted when users deposit PLS (PulseChain coin) as collateral that has been locked into individual smart contracts called Vaults.",
+    onCoinGecko: "true",
+    gecko_id: "liquid-loans-usdl",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed", 
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/liquidloansio",
+    wiki: null,
+  },
 ] as PeggedAsset[];

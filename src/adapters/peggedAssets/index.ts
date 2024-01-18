@@ -149,6 +149,7 @@ import myusd from "./myusd";
 import usds from "./sable-coin";
 import scb from "./colb-usd-stablecolb";
 import zkusd from "./zkusd";
+import usdl from "./liquid-loans-usdl";
 
 export default {
   tether,
@@ -301,5 +302,6 @@ export default {
   myusd, //fake coingecko, replace once live
   "sable-coin": usds,
   "colb-usd-stablecolb": scb,
-  "goal3": zkusd
+  "goal3": zkusd,
+  "liquid-loans-usdl": usdl
 };
