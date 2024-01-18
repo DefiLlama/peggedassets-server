@@ -3062,4 +3062,24 @@ export default [
     twitter: "https://twitter.com/liquidloansio",
     wiki: null,
   },
+  {
+    id: "153",
+    name: "Binance Peg BUSD",
+    address: "bsc:0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+    symbol: "BUSD",
+    url: "https://www.binance.com/en",
+    description:
+      "Binance-Peg BUSD is a stablecoin backed by FDUSD and issued by Binance",
+    mintRedeemDescription:
+      "Binance locks FDUSD as collateral and mints the B-Token, Binance-Peg BUSD",
+    onCoinGecko: "true",
+    gecko_id: "binance-peg-busd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed", 
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/binance",
+    wiki: null,
+  },
 ] as PeggedAsset[];

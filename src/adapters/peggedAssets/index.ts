@@ -150,6 +150,7 @@ import usds from "./sable-coin";
 import scb from "./colb-usd-stablecolb";
 import zkusd from "./zkusd";
 import usdl from "./liquid-loans-usdl";
+import binancebusd from "./binance-peg-busd";
 
 export default {
   tether,
@@ -303,5 +304,6 @@ export default {
   "sable-coin": usds,
   "colb-usd-stablecolb": scb,
   "goal3": zkusd,
-  "liquid-loans-usdl": usdl
+  "liquid-loans-usdl": usdl,
+  "binance-peg-busd": binancebusd
 };
