@@ -943,6 +943,12 @@ export const chainCoingeckoIds = {
     symbol: "CCD",
     cmcId: "18031",
   },
+  "Sui": {
+    geckoId: "sui",
+    github: ['MystenLabs'],
+    symbol: "SUI",
+    cmcId: "20947",
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1189,6 +1195,8 @@ export function getChainDisplayName(
       return "eMoney";
     case "concordium":
       return "Concordium"
+    case "sui":
+      return "Sui"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
