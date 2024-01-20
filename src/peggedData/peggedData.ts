@@ -3082,4 +3082,24 @@ export default [
     twitter: "https://twitter.com/binance",
     wiki: null,
   },
+  /*{
+    id: "154",
+    name: "Bucket Protocol BUCK Stablecoin",
+    address: "sui:0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2",
+    symbol: "BUCK",
+    url: "https://app.bucketprotocol.io/",
+    description:
+      "BUCK is a USD-pegged stablecoin users can mint by depositing collateral assets into Bucket. BUCK is backed by multiple types of over-collateralized digital assets, like BTC, ETH, and SUI",
+    mintRedeemDescription:
+      `BUCK aligns with the USD via "hard" and "soft" peg mechanisms. The "hard" peg is due to the redeemable nature of BUCK for SUI and a minimum collateral ratio of 110%. The "soft" peg comes from BUCK's perceived value equalling USD, and a borrowing fee that rises as more BUCK is redeemed, reducing BUCK supply`,
+    onCoinGecko: "true",
+    gecko_id: "bucket-protocol-buck-stablecoin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed", 
+    priceSource: "coingecko",
+    auditLinks: "https://github.com/Bucket-Protocol/Audit",
+    twitter: "https://twitter.com/bucket_protocol",
+    wiki: null,
+  },*/
 ] as PeggedAsset[];
