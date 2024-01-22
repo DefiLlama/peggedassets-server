@@ -3082,7 +3082,7 @@ export default [
     twitter: "https://twitter.com/binance",
     wiki: null,
   },
-  /*{
+  {
     id: "154",
     name: "Bucket Protocol BUCK Stablecoin",
     address: "sui:0xce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2",
@@ -3101,5 +3101,5 @@ export default [
     auditLinks: "https://github.com/Bucket-Protocol/Audit",
     twitter: "https://twitter.com/bucket_protocol",
     wiki: null,
-  },*/
+  },
 ] as PeggedAsset[];
