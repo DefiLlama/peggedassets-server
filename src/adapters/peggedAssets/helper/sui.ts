@@ -1,12 +1,12 @@
 import http from '../llama-helper/http';
-import { getEnv } from '../helper/env';
+//import { getEnv } from '../helper/env';
 
 
 interface CallOptions {
     withMetadata?: boolean;
   }
   
-  const endpoint = (): string => getEnv('SUI_RPC');
+  const endpoint = (): string => ('https://fullnode.mainnet.sui.io/');
   
   async function getObject(objectId: string): Promise<any> {
     return (await call('sui_getObject', [objectId, {
