@@ -293,6 +293,7 @@ const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xc9BAA8cfdDe8E328787E29b4B078abf2DaDc2055"], // multichain
   },
   near: {
+    issued: ["usdt.tether-token.near"],
     bridgedFromETH: [
       "dac17f958d2ee523a2206206994597c13d831ec7.factory.bridge.near",
     ], // rainbow bridge
@@ -739,6 +740,25 @@ async function nearBridged(address: string, decimals: number) {
       supply / 10 ** decimals,
       address,
       true
+    );
+    return balances;
+  };
+}
+
+async function nearMint(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const mintedAmount = await nearCall(address, "ft_total_supply");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      mintedAmount / 10 ** decimals,
+      address,
+      false
     );
     return balances;
   };
@@ -1239,7 +1259,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: usdtApiUnreleased("reserve_balance_tezos"),
   },
   near: {
-    minted: async () => ({}),
+    minted: nearMint(chainContracts.near.issued[0], 6),
     unreleased: async () => ({}),
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 6),
   },
