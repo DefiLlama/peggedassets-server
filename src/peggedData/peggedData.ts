@@ -3102,7 +3102,7 @@ export default [
     twitter: "https://twitter.com/bucket_protocol",
     wiki: null,
   },
-  /*{
+  {
     id: "155",
     name: "Glo Dollar",
     address: "0x3cbc780d2934d55a06069e837fabd3e6fc23dab0",
@@ -3121,5 +3121,5 @@ export default [
     auditLinks: "https://www.glodollar.org/articles/smart-contract-audits",
     twitter: "https://twitter.com/glodollar",
     wiki: null,
-  },*/
+  },
 ] as PeggedAsset[];
