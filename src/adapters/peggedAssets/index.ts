@@ -151,7 +151,8 @@ import scb from "./colb-usd-stablecolb";
 import zkusd from "./zkusd";
 import usdl from "./liquid-loans-usdl";
 import binancebusd from "./binance-peg-busd";
-import buck from "./bucket-protocol-buck-stablecoin"
+import buck from "./bucket-protocol-buck-stablecoin";
+import usdglo from "./glo-dollar"
 
 export default {
   tether,
@@ -307,5 +308,6 @@ export default {
   "goal3": zkusd,
   "liquid-loans-usdl": usdl,
   "binance-peg-busd": binancebusd,
-  "bucket-protocol-buck-stablecoin": buck
+  "bucket-protocol-buck-stablecoin": buck,
+  "glo-dollar": usdglo
 };

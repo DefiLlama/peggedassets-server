@@ -3102,4 +3102,24 @@ export default [
     twitter: "https://twitter.com/bucket_protocol",
     wiki: null,
   },
+  /*{
+    id: "155",
+    name: "Glo Dollar",
+    address: "0x3cbc780d2934d55a06069e837fabd3e6fc23dab0",
+    symbol: "USDGLO",
+    url: "https://www.glodollar.org/",
+    description:
+      "Glo Dollar - USDGLO, is a stablecoin 100% backed by cash and US Treasuries, redeemable 1:1 for US dollars that aims to generate basic incomes for people in extreme poverty",
+    mintRedeemDescription:
+      `USDGLO, issued by Brale Inc., and backed by cash, cash equivalents, and short-term U.S. government debt, with Brale ensuring liquidity to meet redemption obligations and managing reserve allocations`,
+    onCoinGecko: "true",
+    gecko_id: "glo-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed", 
+    priceSource: "coingecko",
+    auditLinks: "https://www.glodollar.org/articles/smart-contract-audits",
+    twitter: "https://twitter.com/glodollar",
+    wiki: null,
+  },*/
 ] as PeggedAsset[];
