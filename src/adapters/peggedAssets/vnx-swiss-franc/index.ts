@@ -77,7 +77,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   solana: {
-    minted: solanaMintedOrBridged(chainContracts.solana.issued),
+    minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedCHF"),
     unreleased: async () => ({}),
   },
 };
