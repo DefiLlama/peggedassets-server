@@ -3129,7 +3129,8 @@ export default [
     url: "https://vnx.li/",
     description:
       "VNX Gold (VNXAU) is a multichain token backed by physical gold that is certified by the London Bullion Market Association (LBMA), from a token generator licensed under the Blockchain act in Liechtenstein.",
-    mintRedeemDescription: "",
+    mintRedeemDescription:
+      "VNX Gold (VNXAU) is a multichain commodity token that represents ownership of physical gold purchased and stored for the benefit of the VNX Gold holder in a highly secured professional vault in the Principality of Liechtenstein. 1 VNX Gold token = 1 gram of gold.",
     onCoinGecko: "true",
     gecko_id: "vnx-gold",
     cmcId: "22492",
@@ -3148,7 +3149,8 @@ export default [
     url: "https://vnx.li/",
     description:
       "VNX Swiss Franc (VCHF) is a multichain token referencing Swiss Franc from a token generator licensed under the Blockchain act in Liechtenstein",
-    mintRedeemDescription: "",
+    mintRedeemDescription:
+      "VNX Swiss Franc (VCHF) multichain token referencing CHF, issued by VNX Commodities AG (registered with the FMA) and supported by assets held in reserve.",
     onCoinGecko: "true",
     gecko_id: "vnx-swiss-franc",
     cmcId: "24130",
@@ -3167,7 +3169,8 @@ export default [
     url: "https://vnx.li/",
     description:
       "VNX Euro (VEUR) is a token referencing Euro from a token generator licensed under the Blockchain act in Liechtenstein.",
-    mintRedeemDescription: "",
+    mintRedeemDescription:
+      "VNX Swiss Franc (VCHF) is issued by VNX Commodities AG, a licensed stablecoin generator, and Supported by assets held in reserve, and redeemable on a 1:1 basis for Swiss Franc. (But we need to commit it with Vlad!! Take into account that Supported by assets held in reserve was checked with Thomas 5-7 month ago.",
     onCoinGecko: "true",
     gecko_id: "vnx-euro",
     cmcId: "24228",
