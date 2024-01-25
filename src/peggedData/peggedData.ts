@@ -3121,6 +3121,7 @@ export default [
     twitter: "https://twitter.com/glodollar",
     wiki: null,
   },
+  /*
   {
     id: "156",
     name: "VNX Gold",
@@ -3141,6 +3142,7 @@ export default [
     twitter: "https://twitter.com/vnx_platform",
     wiki: null,
   },
+  */
   {
     id: "157",
     name: "VNX Swiss Franc",
