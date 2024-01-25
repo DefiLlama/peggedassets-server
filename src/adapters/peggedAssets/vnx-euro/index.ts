@@ -20,7 +20,7 @@ const chainContracts: ChainContracts = {
   polygon: {
     issued: ["0xE4095d9372E68d108225c306A4491cacfB33B097"],
   },
-  avalanche: {
+  avax: {
     issued: ["0x7678e162f38ec9ef2bfd1d0aaf9fd93355e5fa0b"],
   },
   solana: {
@@ -69,9 +69,10 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   avalanche: {
-    minted: chainMinted("avalanche", 18),
+    minted: chainMinted("avax", 18),
     unreleased: async () => ({}),
   },
+  /*
   q: {
     minted: chainMinted("q", 18),
     unreleased: async () => ({}),
@@ -80,6 +81,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: solanaMintedOrBridged(chainContracts.solana.issued),
     unreleased: async () => ({}),
   },
+  */
 };
 
 export default adapter;
