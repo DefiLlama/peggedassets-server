@@ -72,7 +72,6 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("avax", 18),
     unreleased: async () => ({}),
   },
-  /*
   q: {
     minted: chainMinted("q", 18),
     unreleased: async () => ({}),
@@ -81,7 +80,6 @@ const adapter: PeggedIssuanceAdapter = {
     minted: solanaMintedOrBridged(chainContracts.solana.issued),
     unreleased: async () => ({}),
   },
-  */
 };
 
 export default adapter;
