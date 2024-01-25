@@ -10,7 +10,7 @@ type PegType =
   | "peggedGBP" //GB
   | "peggedCAD" //canadian dollar
   | "peggedTRY" //Turkish lira
-  | "peggedGOLD" //Gold
+  | "peggedXAU" //Gold
   | "peggedCHF"; //Swiss franc
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";

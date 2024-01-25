@@ -3134,7 +3134,7 @@ export default [
     onCoinGecko: "true",
     gecko_id: "vnx-gold",
     cmcId: "22492",
-    pegType: "peggedGOLD",
+    pegType: "peggedXAU", //xau = gold 
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
     auditLinks: "https://vnx.li/transparency/",
