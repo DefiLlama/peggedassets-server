@@ -20,7 +20,7 @@ const chainContracts: ChainContracts = {
   polygon: {
     issued: ["0xCdB3867935247049e87c38eA270edD305D84c9AE"],
   },
-  avalanche: {
+  avax: {
     issued: ["0x228a48df6819ccc2eca01e2192ebafffdad56c19"],
   },
   solana: {
@@ -69,7 +69,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   avalanche: {
-    minted: chainMinted("avalanche", 18),
+    minted: chainMinted("avax", 18),
     unreleased: async () => ({}),
   },
   q: {
