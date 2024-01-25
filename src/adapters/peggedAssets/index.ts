@@ -152,7 +152,10 @@ import zkusd from "./zkusd";
 import usdl from "./liquid-loans-usdl";
 import binancebusd from "./binance-peg-busd";
 import buck from "./bucket-protocol-buck-stablecoin";
-import usdglo from "./glo-dollar"
+import usdglo from "./glo-dollar";
+import vnxau from "./vnx-gold";
+import veur from "./vnx-euro";
+import vchf from "./vnx-swiss-franc";
 
 export default {
   tether,
@@ -305,9 +308,12 @@ export default {
   myusd, //fake coingecko, replace once live
   "sable-coin": usds,
   "colb-usd-stablecolb": scb,
-  "goal3": zkusd,
+  goal3: zkusd,
   "liquid-loans-usdl": usdl,
   "binance-peg-busd": binancebusd,
   "bucket-protocol-buck-stablecoin": buck,
-  "glo-dollar": usdglo
+  "glo-dollar": usdglo,
+  "vnx-gold": vnxau,
+  "vnx-euro": veur,
+  "vnx-swiss-franc": vchf,
 };
