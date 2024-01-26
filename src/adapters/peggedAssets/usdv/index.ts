@@ -90,6 +90,22 @@ const adapter: PeggedIssuanceAdapter = {
     ),
     unreleased: async () => ({}),
   },
+  polygon: {
+    minted: bridgedSupply(
+      "polygon",
+      6,
+      chainContracts.polygon.bridgedFromETH
+    ),
+    unreleased: async () => ({}),
+  },
+  tomochain: {
+    minted: bridgedSupply(
+      "tomochain",
+      6,
+      chainContracts.tomochain.bridgedFromETH
+    ),
+    unreleased: async () => ({}),
+  },
   avax: {
     minted: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromETH),
     unreleased: async () => ({}),
