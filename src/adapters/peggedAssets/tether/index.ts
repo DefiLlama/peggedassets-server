@@ -31,7 +31,7 @@ import { chainContracts } from './config';
 const axios = require("axios");
 const retry = require("async-retry");
 
-// If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain
+// If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain and fuse
 // any bridgeOnETH contracts are not used and are just for info purposes
 
 
@@ -718,7 +718,7 @@ const adapter: PeggedIssuanceAdapter = {
   fuse: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    //ethereum: bridgedSupply("fuse", 6, chainContracts.fuse.bridgedFromETH),
+    ethereum: bridgedSupply("fuse", 6, chainContracts.fuse.bridgedFromETH),
   },
   meter: {
     minted: async () => ({}),
@@ -984,11 +984,11 @@ const adapter: PeggedIssuanceAdapter = {
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    /*ethereum: bridgedSupply(
+    ethereum: bridgedSupply(
       "dogechain",
       6,
       chainContracts.dogechain.bridgedFromETH
-    ),*/
+    ),
   },
   neo: {
     minted: async () => ({}),
