@@ -3172,7 +3172,7 @@ export default [
     description:
       "VNX Euro (VEUR) is a token referencing Euro from a token generator licensed under the Blockchain act in Liechtenstein.",
     mintRedeemDescription:
-      "VNX Swiss Franc (VCHF) is issued by VNX Commodities AG, a licensed stablecoin generator, and Supported by assets held in reserve, and redeemable on a 1:1 basis for Swiss Franc. (But we need to commit it with Vlad!! Take into account that Supported by assets held in reserve was checked with Thomas 5-7 month ago.",
+      "VNX Euro (VEUR) is a multichain token referencing the Euro, issued by VNX Commodities AG (registered with the FMA) and supported by assets held in reserve.",
     onCoinGecko: "true",
     gecko_id: "vnx-euro",
     cmcId: "24228",
