@@ -2749,8 +2749,8 @@ export default [
       "Membrane is an experimental protocol that uses collateralized debt positions to synthesize credit demand into composable debt tokens that traverse the Cosmos in the form of $CDT.",
     mintRedeemDescription:
       "The mechanism is roughly analogous to a “Line of Credit”, wherein vault owners can deposit their collateral to receive a line of credit against it. This unique functionality enables a large amount of flexibility in otherwise rigid token positions.",
-    onCoinGecko: "false",
-    gecko_id: "membrane",
+    onCoinGecko: "true",
+    gecko_id: "collateralized-debt-token",
     cmcId: null,
     pegType: "peggedVAR",
     pegMechanism: "crypto-backed",
@@ -2758,7 +2758,7 @@ export default [
     auditLinks:
       "https://github.com/oak-security/audit-reports/blob/master/Membrane/2023-06-15%20Audit%20Report%20-%20Membrane%20v1.0.pdf",
     twitter: "https://twitter.com/insaneinthembrn",
-    wiki: "https://membrane-finance.gitbook.io/",
+    wiki: "https://membrane-finance.gitbook.io/membrane-docs-1/",
   },
   {
     id: "138",
