@@ -188,11 +188,11 @@ const adapter: PeggedIssuanceAdapter = {
       "Ethereum",
       "peggedEUR"
     ),
-  },
+  },/*
   algorand: {
     minted: algorandMinted(),
     unreleased: async () => ({}),
-  },
+  },*/
   everscale: {
     minted: async () => ({}),
     unreleased: async () => ({}),
