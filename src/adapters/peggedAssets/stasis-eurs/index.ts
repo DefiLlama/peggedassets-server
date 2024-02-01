@@ -144,7 +144,7 @@ async function algorandMinted() {
     const reserveRes = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/accounts/XOS4GHMBFJD3I7TYZQFB7FPZ25NHW5V2LS7O54JFSVTPNDAE45DFTKVN3U"
+          "https://mainnet-idx.algonode.cloud/v2/accounts/KJIKORX3CEQWN4VBI3A2MILSLZ7ITYWY7JRUYN4TK33KXCZSFOGSO2WIH4"
         )
     );
     const reserveAccount = reserveRes.data.account.assets.filter(
@@ -188,11 +188,11 @@ const adapter: PeggedIssuanceAdapter = {
       "Ethereum",
       "peggedEUR"
     ),
-  },/*
+  },
   algorand: {
     minted: algorandMinted(),
     unreleased: async () => ({}),
-  },*/
+  },
   everscale: {
     minted: async () => ({}),
     unreleased: async () => ({}),
