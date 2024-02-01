@@ -135,7 +135,7 @@ import nars from "./nars";
 import phase from "./phase-dollar";
 import inter from "./inter-stable-token";
 import eeur from "./e-money-eur";
-import cdt from "./membrane";
+import cdt from "./collateralized-debt-token";
 import aeeur from "./aryze-eeur";
 import aegbp from "./aryze-egbp";
 //import aesgd from "./aryze-esgd";
@@ -295,7 +295,7 @@ export default {
   "phase-dollar": phase,
   "inter-stable-token": inter,
   "e-money-eur": eeur,
-  membrane: cdt,
+  'collateralized-debt-token': cdt,
   "aryze-eusd": aeusd,
   "aryze-eeur": aeeur,
   "aryze-egbp": aegbp, //if does not work, will test without aegbp, using only coingecko but since its the terminal not sure, will keep an eye

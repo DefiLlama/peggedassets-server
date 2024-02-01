@@ -2741,7 +2741,7 @@ export default [
   },
   {
     id: "137",
-    name: "Membrane",
+    name: "Collateralized Debt Token",
     address: null,
     symbol: "CDT",
     url: "https://membrane-ui-mainnet.vercel.app/",
