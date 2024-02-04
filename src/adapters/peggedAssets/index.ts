@@ -156,8 +156,12 @@ import usdglo from "./glo-dollar";
 import vnxau from "./vnx-gold";
 import veur from "./vnx-euro";
 import vchf from "./vnx-swiss-franc";
+import pct from "./pct";
+import spct from "./spct";
 
 export default {
+  "anzen-private-credit": pct,
+  "anzen-secured-private-credit": spct,
   tether,
   "usd-coin": usdc,
   terrausd,
