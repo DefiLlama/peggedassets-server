@@ -115,6 +115,10 @@ const adapter: PeggedIssuanceAdapter = {
     minted: gmoAPIChainMinted("XLM"),
     unreleased: async () => ({}),
   },
+  solana: {
+    minted: gmoAPIChainMinted("SOLANA"),
+    unreleased: async () => ({}),
+  },
 };
 
 export default adapter;
