@@ -156,6 +156,7 @@ import usdglo from "./glo-dollar";
 import vnxau from "./vnx-gold";
 import veur from "./vnx-euro";
 import vchf from "./vnx-swiss-franc";
+import usdrif from "./usd-rif"
 
 export default {
   tether,
@@ -316,4 +317,5 @@ export default {
   "vnx-gold": vnxau,
   "vnx-euro": veur,
   "vnx-swiss-franc": vchf,
+  "rif-us-dollar": usdrif
 };

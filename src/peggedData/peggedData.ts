@@ -3194,8 +3194,8 @@ export default [
     mintRedeemDescription:
       "The USDRIF stablecoins are minted through the RIF On Chain Protocol whenever there is a certain amount of RIFpro (RIFP) staked in the platform by other users who act as liquidity providers. Users can use the decentralised RIF on Chain dApp to exchange RIF tokens for USDRIF stablecoins and vice versa at any point providing there is a liquidity available in the protocol.",
     onCoinGecko: false,
-    gecko_id: "",
-    cmcId: "",
+    gecko_id: "rif-us-dollar", //fake coingecko
+    cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: null,
