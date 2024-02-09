@@ -3183,4 +3183,24 @@ export default [
     twitter: "https://twitter.com/vnx_platform",
     wiki: null,
   },
+  {
+    id: "159",
+    name: "RIF US Dollar",
+    address: "rsk:0x3a15461d8ae0f0fb5fa2629e9da7d66a794a6e37",
+    symbol: "USDRIF",
+    url: "https://rifonchain.com/",
+    description:
+      "RIF US Dollar is a fully crypto collateralized stablecoin. 1:1 pegged to US Dollar guaranteed by the smart contract that creates it. USDRIF is built on Rootstock, the first and longest running Bitcoin sidechain.",
+    mintRedeemDescription:
+      "The USDRIF stablecoins are minted through the RIF On Chain Protocol whenever there is a certain amount of RIFpro (RIFP) staked in the platform by other users who act as liquidity providers. Users can use the decentralised RIF on Chain dApp to exchange RIF tokens for USDRIF stablecoins and vice versa at any point providing there is a liquidity available in the protocol.",
+    onCoinGecko: false,
+    gecko_id: "",
+    cmcId: "",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://twitter.com/rifonchain",
+    wiki: null,
+  },
 ] as PeggedAsset[];
