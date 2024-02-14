@@ -205,21 +205,25 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
       }
       let peggedChainPromises = Object.entries(issuances).map(
         async ([issuanceType, issuanceFunctionPromise]) => {
-          const issuanceFunction = await issuanceFunctionPromise;
-          if (typeof issuanceFunction !== "function") {
-            return;
+          try {
+            const issuanceFunction = await issuanceFunctionPromise;
+            if (typeof issuanceFunction !== "function") {
+              return;
+            }
+            await getPeggedAsset(
+              unixTimestamp,
+              ethBlock,
+              chainBlocks,
+              peggedBalances,
+              chain,
+              issuanceType,
+              issuanceFunction,
+              pegType,
+              bridgedFromMapping
+            );
+          } catch(e){
+            console.log(`Failed on ${chain}:${issuanceType}`, e)
           }
-          await getPeggedAsset(
-            unixTimestamp,
-            ethBlock,
-            chainBlocks,
-            peggedBalances,
-            chain,
-            issuanceType,
-            issuanceFunction,
-            pegType,
-            bridgedFromMapping
-          );
         }
       );
       await Promise.all(peggedChainPromises);
