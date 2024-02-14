@@ -595,6 +595,14 @@ export default {
     bridge: "wormhole",
     sourceChain: formattedSourceChains.sol,
   },
+  "0x5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf": {
+    bridge: "wormhole",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c": {
+    bridge: "wormhole",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0x05832a0905E516f29344ADBa1c2052a788B10129": {
     bridge: "wormhole",
     sourceChain: formattedSourceChains.avax,

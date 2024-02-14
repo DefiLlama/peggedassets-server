@@ -445,6 +445,20 @@ async function nearMint(address: string, decimals: number) {
   };
 }
 
+async function suiBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await axios.get(`https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdt`)
+    const totalSupply = parseInt(res.data.find((t:any)=>t.coin==="USDT_ETH").cumulative_balance);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c", true);
+    return balances;
+  };
+}
+
 async function polyNetworkBridged(
   chainID: number,
   chainName: string,
@@ -672,6 +686,11 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.harmony.bridgedFromETH
     ),
     */
+  },
+  sui:{
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: suiBridged()
   },
   syscoin: {
     minted: async () => ({}),
