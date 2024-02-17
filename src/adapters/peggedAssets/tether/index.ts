@@ -1066,6 +1066,15 @@ const adapter: PeggedIssuanceAdapter = {
       6
     ),
   },
+  starknet: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.starknet.bridgeOnETH[0],
+      6
+    ),
+  },
 };
 
 export default adapter;

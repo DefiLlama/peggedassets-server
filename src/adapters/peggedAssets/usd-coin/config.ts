@@ -336,5 +336,8 @@ export type ChainContracts = {
       waves: {
         bridgeOnETH: ["0x0de7b091A21BD439bdB2DfbB63146D9cEa21Ea83"], // PepeTeam Bridge
       },
+      starknet: {
+        bridgeOnETH: ["0xF6080D9fbEEbcd44D89aFfBFd42F098cbFf92816"], // starknet bridge
+      }
   };
   
