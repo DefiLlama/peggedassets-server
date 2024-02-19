@@ -124,6 +124,8 @@ const bridgedChainContracts: ChainContracts = {
       "0xd7659d913430945600dfe875434b6d80646d552a",
       "0x4f9737e994da9811b8830775fd73e2f1c8e40741",
       "0x66805f6e719d7e67d46e8b2501c1237980996c6a",
+      "0x49De724D7125641F56312EBBcbf48Ef107c8FA57",
+      "0x780db9770dDc236fd659A39430A8a7cC07D0C320",
     ],
     reserves: [
       "0x27807dd7adf218e1f4d885d54ed51c70efb9de50", // ODM
@@ -179,7 +181,7 @@ async function chainReleased(
   decimals: number,
   bridged: boolean
 ) {
-  return async function (
+  return async function(
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
