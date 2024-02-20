@@ -1576,9 +1576,9 @@ export default [
   },
   {
     id: "79",
-    name: "HAY",
+    name: "Lista USD",
     address: "bsc:0x0782b6d8c4551b9760e74c0545a9bcd90bdc41e5",
-    symbol: "HAY",
+    symbol: "LISUSD",
     url: "https://helio.money/",
     description:
       "HAY is a decentralized, unbiased, collateral-backed destablecoin soft-pegged to the US Dollar.",
