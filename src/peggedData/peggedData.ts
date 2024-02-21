@@ -3203,4 +3203,24 @@ export default [
     twitter: "https://twitter.com/rifonchain",
     wiki: null,
   },
+  {
+    id: "160",
+    name: "Sovryn Dollar",
+    address: "rsk:0xc1411567d2670e24d9c4daaa7cda95686e1250aa",
+    symbol: "DLLR",
+    url: "https://sovryn.com/sovryn-dollar",
+    description:
+      "The Sovryn Dollar (DLLR) is an aggregation of purely BTC-backed “constituent” stablecoins into a single stablecoin",
+    mintRedeemDescription:
+      "The Sovryn Dollar (DLLR) is minted through Mynt, a smart contract system, by aggregating various BTC-backed stablecoins into a single, more resilient stablecoin",
+    onCoinGecko: false,
+    gecko_id: "sovryn-dollar", 
+    cmcId: "27363",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/SovrynBTC",
+    wiki: null,
+  },
 ] as PeggedAsset[];
