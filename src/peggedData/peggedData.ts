@@ -3223,4 +3223,24 @@ export default [
     twitter: "https://twitter.com/SovrynBTC",
     wiki: null,
   },
+  {
+    id: "161",
+    name: "Quantoz EURD",
+    address: "algorand:1221682136",
+    symbol: "EURD",
+    url: "https://quantozpay.com/",
+    description:
+      "EURD is a Euro-backed e-money token, regulated by the Dutch Central Bank, aiming to provide stability, security, low fees, and instant transactions with broad application scalability",
+    mintRedeemDescription:
+      "EURD is minted by Quantoz Payments, backed by a 100% Euro reserve in a trust account, under a Dutch e-money license, ensuring secure, regulated issuance with funds safeguarded by the independent Quantoz Foundation",
+    onCoinGecko: false,
+    gecko_id: "quantoz-eurd", 
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/Quantoz",
+    wiki: null,
+  },
 ] as PeggedAsset[];
