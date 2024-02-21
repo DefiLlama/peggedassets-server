@@ -8,7 +8,7 @@ import {
 const axios = require("axios");
 const retry = require("async-retry");
 
-// This shoulddd all work now?
+
 async function algorandMinted() {
     return async function (
         _timestamp: number,
@@ -34,9 +34,9 @@ async function algorandMinted() {
         );
         const reserves = reserveAccount[0].amount;
 
-        const balance = (supply - reserves) / 10 ** 8;
+        const balance = (supply - reserves) / 10 ** 2;
 
-        sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
+        sumSingleBalance(balances, "peggedEUR", balance, "issued", false);
         return balances;
     };
 }
