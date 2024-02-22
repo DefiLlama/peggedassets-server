@@ -3245,7 +3245,7 @@ export default [
   },
   {
     id: "162",
-    name: "BabelFish XUSD",
+    name: "XUSD",
     address: "rsk:0xb5999795BE0eBb5BAb23144Aa5fD6a02d080299f",
     symbol: "XUSD",
     url: "https://babelfish.money/",
@@ -3254,7 +3254,7 @@ export default [
     mintRedeemDescription:
       "Its purpose is to act as a trustless stablecoin translation device - meaning it facilitates the conversion of multiple USD-pegged stablecoins with each other at a fixed 1:1 ratio.",
     onCoinGecko: false,
-    gecko_id: "babelfish-xusd", //fake coingecko
+    gecko_id: "xusd-babelfish", //fake coingecko
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",

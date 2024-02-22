@@ -159,7 +159,7 @@ import vchf from "./vnx-swiss-franc";
 import usdrif from "./usd-rif";
 import dllr from "./sovryn-dollar"
 import eurd from "./quantoz-eurd";
-import xusd from "./babelfish-xusd";
+import xusd from "./xusd-babelfish";
 import ultra from "./ultra"
 
 export default {
@@ -324,6 +324,6 @@ export default {
   "rif-us-dollar": usdrif,
   "sovryn-dollar": dllr,
   "quantoz-eurd": eurd,
-  "babelfish-xusd": xusd,
+  "xusd-babelfish": xusd,
   "ultra": ultra
 };
