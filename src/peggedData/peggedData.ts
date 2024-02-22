@@ -3245,22 +3245,22 @@ export default [
   },
   {
     id: "162",
-    name: "XUSD",
-    address: "rsk:0xb5999795be0ebb5bab23144aa5fd6a02d080299f",
+    name: "BabelFish XUSD",
+    address: "rsk:0xb5999795BE0eBb5BAb23144Aa5fD6a02d080299f",
     symbol: "XUSD",
-    url: "https://wiki.sovryn.com/en/technical-documents/xusd-overview",
+    url: "https://babelfish.money/",
     description:
       "XUSD is a USD-pegged stablecoin aggregator of the Babelfish protocol",
     mintRedeemDescription:
       "Its purpose is to act as a trustless stablecoin translation device - meaning it facilitates the conversion of multiple USD-pegged stablecoins with each other at a fixed 1:1 ratio.",
     onCoinGecko: false,
-    gecko_id: "xusd-fake", //fake coingecko
+    gecko_id: "babelfish-xusd", //fake coingecko
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
-    twitter: "https://twitter.com/SovrynBTC",
+    twitter: "https://twitter.com/babelfishmoney",
     wiki: null
   },
   {
