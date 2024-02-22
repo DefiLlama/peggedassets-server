@@ -160,7 +160,7 @@ import usdrif from "./usd-rif";
 import dllr from "./sovryn-dollar"
 import eurd from "./quantoz-eurd";
 import xusd from "./xusd-babelfish";
-import ultra from "./ultra"
+import ultra from "./prismalrt-ultra"
 
 export default {
   tether,
@@ -325,5 +325,5 @@ export default {
   "sovryn-dollar": dllr,
   "quantoz-eurd": eurd,
   "xusd-babelfish": xusd,
-  "ultra": ultra
+  "prismalrt-ultra": ultra
 };
