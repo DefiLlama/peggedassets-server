@@ -159,7 +159,8 @@ import vchf from "./vnx-swiss-franc";
 import usdrif from "./usd-rif";
 import dllr from "./sovryn-dollar"
 import eurd from "./quantoz-eurd";
-import xusd from "./xusd"
+import xusd from "./xusd";
+import ultra from "./ultra"
 
 export default {
   tether,
@@ -323,5 +324,6 @@ export default {
   "rif-us-dollar": usdrif,
   "sovryn-dollar": dllr,
   "quantoz-eurd": eurd,
-  "xusd-fake": xusd
+  "xusd-fake": xusd,
+  "ultra": ultra
 };
