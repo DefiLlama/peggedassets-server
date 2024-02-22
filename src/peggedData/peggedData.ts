@@ -3230,9 +3230,9 @@ export default [
     symbol: "EURD",
     url: "https://quantozpay.com/",
     description:
-      "EURD is a Euro-backed e-money token, regulated by the Dutch Central Bank, aiming to provide stability, security, low fees, and instant transactions with broad application scalability",
+      "EURD is a regulated, programmable E-Money Token, fully backed by euro managed by the Quantoz Foundation under supervision by the Dutch Central Bank. Quantoz Payments handles the KYC and AML procedures, limiting the regulatory burden for merchants and service providers",
     mintRedeemDescription:
-      "EURD is minted by Quantoz Payments, backed by a 100% Euro reserve in a trust account, under a Dutch e-money license, ensuring secure, regulated issuance with funds safeguarded by the independent Quantoz Foundation",
+      "All funded EURD can be redeemed 1:1 to the whitelisted bank account of the EURD users",
     onCoinGecko: false,
     gecko_id: "quantoz-eurd", 
     cmcId: null,
