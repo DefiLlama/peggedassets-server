@@ -3262,5 +3262,25 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/SovrynBTC",
     wiki: null
+  },
+  {
+    id: "163",
+    name: "ULTRA",
+    address: "0x35282d87011f87508D457F08252Bc5bFa52E10A0",
+    symbol: "ULTRA",
+    url: "https://prismafinance.com/",
+    description:
+      "ULTRA is a new stablecoin issued by PrismaLRT, a new borrowing protocol developed by Prisma focused on unlocking liquidity for Liquid Restaking Tokens (LRTs).",
+    mintRedeemDescription:
+      "As a decentralized stablecoin on the Ethereum Mainnet, $ULTRA is minted by users (borrowers). As with all borrowing on Prisma, a user must supply collateral (at a specific collateral ratio) to be able to mint $ULTRA. Correspondingly, when a user repays a debt position (or is liquidated), PrismaLRT protocol burns that user’s $ULTRA.",
+    onCoinGecko: false,
+    gecko_id: "ultra", //fake coingecko
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/PrismaFi",
+    wiki: null
   }
 ] as PeggedAsset[];
