@@ -2936,7 +2936,7 @@ export default [
     gecko_id: "ethena-usde",
     cmcId: null,
     pegType: "peggedUSD",
-    pegMechanism: "fiat-backed",
+    pegMechanism: "crypto-backed",
     priceSource: "coingecko",
     auditLinks: null,
     twitter: "https://twitter.com/ethena_labs",
