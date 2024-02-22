@@ -3254,8 +3254,8 @@ export default [
     mintRedeemDescription:
       "Its purpose is to act as a trustless stablecoin translation device - meaning it facilitates the conversion of multiple USD-pegged stablecoins with each other at a fixed 1:1 ratio.",
     onCoinGecko: false,
-    gecko_id: "", 
-    cmcId: "",
+    gecko_id: "xusd-fake", //fake coingecko
+    cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
