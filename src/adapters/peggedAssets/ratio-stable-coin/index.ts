@@ -59,7 +59,7 @@ async function totalDebt() {
 
 const adapter: PeggedIssuanceAdapter = {
   solana: {
-    minted: totalDebt(),
+    minted: async () => ({}),
     unreleased: async () => ({}),
   },
 };
