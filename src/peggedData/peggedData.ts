@@ -713,8 +713,8 @@ export default [
     twitter: "https://twitter.com/QiDaoProtocol",
     wiki: "https://wiki.defillama.com/wiki/MAI",
   },
-  {
-    id: "36",
+  /*{
+    id: "36", // discontinued stable
     name: "Ratio Stable Coin",
     address: "solana:USDrbBQwQbQ2oWHUPfA8QBHcyVxKUq1xHyXsSLKdUq2",
     symbol: "USDR",
@@ -732,7 +732,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/ratiofinance",
     wiki: "https://wiki.defillama.com/wiki/USDR",
-  },
+  },*/
   {
     id: "37",
     name: "USDJ",
