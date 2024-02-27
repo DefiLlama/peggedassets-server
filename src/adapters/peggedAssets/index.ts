@@ -33,7 +33,7 @@ import sperax from "./sperax-usd";
 import usdp from "./usdp";
 import usdb from "./usd-balance";
 import mimatic from "./mimatic";
-import ratio from "./ratio-stable-coin";
+//import ratio from "./ratio-stable-coin";
 import usdj from "./just-stablecoin";
 import stbl from "./stbl";
 import volt from "./volt-protocol";
@@ -198,7 +198,7 @@ export default {
   usdp,
   "usd-balance": usdb,
   mimatic,
-  "ratio-stable-coin": ratio,
+  //"ratio-stable-coin": ratio,
   "just-stablecoin": usdj,
   algostable: stbl,
   "volt-protocol": volt,
