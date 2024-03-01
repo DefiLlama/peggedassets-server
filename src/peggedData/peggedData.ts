@@ -3282,5 +3282,25 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PrismaFi",
     wiki: null
+  },
+  {
+    id: "164",
+    name: "Dólar Americano (USDCB)",
+    address: "0xaA5dc2Ea0E056Fc962F48aB25547d66d3586eE8a",
+    symbol: "USDCB",
+    url: "https://www.pagolinea.com/",
+    description:
+      "Coinback token, collateralized stablecoin on Rootstock backed by the corresponding fiat asset.",
+    mintRedeemDescription:
+      "When Pagolinea users deposit fiat assets, coinback tokens are minted and transferred to the users. When users withdraw fiat, the coinback tokens are burnt.",
+    onCoinGecko: false,
+    gecko_id: "",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/pagolinea",
+    wiki: null
   }
 ] as PeggedAsset[];
