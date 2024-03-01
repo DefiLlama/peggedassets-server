@@ -1399,6 +1399,10 @@ export default {
     bridge: "abracadabra",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x76da31d7c9cbeae102aff34d3398bc450c8374c1": {
+    bridge: "abracadabra",
+    sourceChain: formattedSourceChains.eth,
+  },
   "0xfe19f0b51438fd612f6fd59c1dbb3ea319f433ba": {
     bridge: "abracadabra",
     sourceChain: formattedSourceChains.eth,
