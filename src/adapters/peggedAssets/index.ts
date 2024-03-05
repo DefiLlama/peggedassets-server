@@ -161,6 +161,7 @@ import dllr from "./sovryn-dollar"
 import eurd from "./quantoz-eurd";
 import xusd from "./xusd-babelfish";
 import ultra from "./prismalrt-ultra"
+import usdcb from "./pago-linea-usdcb"
 
 export default {
   tether,
@@ -325,5 +326,6 @@ export default {
   "sovryn-dollar": dllr,
   "quantoz-eurd": eurd,
   "xusd-babelfish": xusd,
-  "prismalrt-ultra": ultra
+  "prismalrt-ultra": ultra,
+   usdcb  //fake coingecko, there is nothing with that id
 };
