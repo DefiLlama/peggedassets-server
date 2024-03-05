@@ -26,6 +26,9 @@ const chainContracts: ChainContracts = {
   q: {
     issued: ["0xe4fadbbf24f118b1e63d65f1aac2a825a07f7619"],
   },
+  tezos: {
+    issued: ["KT1LSH97386CURN9FgRNqdQJoHaHY6e1vxUv"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -71,6 +74,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   q: {
     minted: chainMinted("q", 18),
+    unreleased: async () => ({}),
+  },
+  tezos: {
+    minted: chainMinted("tezos", 18),
     unreleased: async () => ({}),
   },
 };

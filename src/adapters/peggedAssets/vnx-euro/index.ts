@@ -29,6 +29,9 @@ const chainContracts: ChainContracts = {
   q: {
     issued: ["0x513f99dee650f529d7c65bb5679f092b64003520"],
   },
+  tezos: {
+    issued: ["KT1FenS7BCUjn1otfFyfrfxguiGnL4UTF3aG"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -78,6 +81,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedEUR"),
+    unreleased: async () => ({}),
+  },
+  tezos: {
+    minted: chainMinted("tezos", 18),
     unreleased: async () => ({}),
   },
 };
