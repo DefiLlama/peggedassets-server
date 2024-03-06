@@ -160,8 +160,9 @@ import usdrif from "./usd-rif";
 import dllr from "./sovryn-dollar"
 import eurd from "./quantoz-eurd";
 import xusd from "./xusd-babelfish";
-import ultra from "./prismalrt-ultra"
-import usdcb from "./pago-linea-usdcb"
+import ultra from "./prismalrt-ultra";
+import usdcb from "./pago-linea-usdcb";
+import audd from "./novatti-australian-digital-dollar";
 
 export default {
   tether,
@@ -327,5 +328,6 @@ export default {
   "quantoz-eurd": eurd,
   "xusd-babelfish": xusd,
   "prismalrt-ultra": ultra,
-   usdcb  //fake coingecko, there is nothing with that id
+   usdcb,  //fake coingecko, there is nothing with that id
+   "novatti-australian-digital-dollar": audd
 };
