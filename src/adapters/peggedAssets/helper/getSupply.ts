@@ -9,6 +9,7 @@ import { getTokenSupply as solanaGetTokenSupply } from "../llama-helper/solana";
 import { totalSupply as terraGetTotalSupply } from "../llama-helper/terra"; // NOTE this is NOT currently exported
 const axios = require("axios");
 const retry = require("async-retry");
+import { getTotalSupply as tezosGetTotalSupply } from "../helper/tezos";
 
 type BridgeAndReserveAddressPair = [string, string[]];
 

@@ -6,6 +6,7 @@ import {
   ChainBlocks,
   PeggedIssuanceAdapter,
 } from "../peggedAsset.type";
+import { getTotalSupply as tezosGetTotalSupply } from "../helper/tezos";
 
 type ChainContracts = {
   [chain: string]: {
@@ -28,6 +29,9 @@ const chainContracts: ChainContracts = {
   },
   q: {
     issued: ["0x65b9d36281e97418793f3430793f88440dab68d7"],
+  },
+  tezos: {
+    issued: ["KT1LssxZqfQtRFv1CRkzX9E9gzap9iFrtWmq"],
   },
 };
 
@@ -59,6 +63,19 @@ async function chainMinted(chain: string, decimals: number) {
   };
 }
 
+async function tezosMinted(contract: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const totalSupply = await tezosGetTotalSupply(contract);
+    sumSingleBalance(balances, "peggedCHF", totalSupply, "issued", false);
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -78,6 +95,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedCHF"),
+    unreleased: async () => ({}),
+  },
+  tezos: {
+    minted: tezosMinted(chainContracts.tezos.issued[0]),
     unreleased: async () => ({}),
   },
 };
