@@ -3302,5 +3302,25 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/pagolinea",
     wiki: null
+  },
+  {
+    id: "165",
+    name: "AUDD",
+    address: "0x4cCe605eD955295432958d8951D0B176C10720d5",
+    symbol: "AUDD",
+    url: "https://www.audd.digital/",
+    description:
+      "AUDD is an Australian Dollar Stablecoin 1:1 backed by Australian Dollars. It is currently available on Ethereum, Stellar, XRP Ledger, and Solana",
+    mintRedeemDescription:
+      "AUDD is collateralised on a 1:1 basis by Australia's sovereign currency by way of cash in bank accounts or government-backed instruments such as Treasury Bills and Notes",
+    onCoinGecko: true,
+    gecko_id: "novatti-australian-digital-dollar",
+    cmcId: null,
+    pegType: "peggedAUD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/audd_digital",
+    wiki: null
   }
 ] as PeggedAsset[];
