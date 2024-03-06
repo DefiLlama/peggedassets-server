@@ -17,7 +17,8 @@ export type PeggedAssetType =
   | "peggedCAD"
   | "peggedTRY"
   | "peggedCHF"
-  | "peggedGOLD";
+  | "peggedGOLD" //not used
+  | "peggedAUD"
 
 type StringNumber = string;
 type PeggedBalances = {

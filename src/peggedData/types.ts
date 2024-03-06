@@ -1,8 +1,8 @@
 type PegType =
-  | "peggedUSD"
-  | "peggedVAR"
-  | "peggedEUR"
-  | "peggedSGD"
+  | "peggedUSD" //dollar
+  | "peggedVAR" //variable
+  | "peggedEUR" //europe/euro
+  | "peggedSGD" //singapora
   | "peggedJPY" //japan
   | "peggedCNY" //china
   | "peggedUAH" //ukraine
@@ -10,8 +10,9 @@ type PegType =
   | "peggedGBP" //GB
   | "peggedCAD" //canadian dollar
   | "peggedTRY" //Turkish lira
-  | "peggedXAU" //Gold
-  | "peggedCHF"; //Swiss franc
+  | "peggedXAU" //Gold this is not used
+  | "peggedCHF" //Swiss franc
+  | "peggedAUD" //Australian currency
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 
