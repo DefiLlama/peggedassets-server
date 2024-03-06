@@ -1,3 +1,6 @@
+//AUDD - Australian Dollar Stablecoin
+// For any queries please submit a ticket via the contact form at https://audd.digital
+
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
 import { solanaMintedOrBridged } from "../helper/getSupply";
