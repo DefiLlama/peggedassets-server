@@ -37,7 +37,7 @@ The `minted` and `unreleased` properties are required to be present on every cha
 
 The `bridgedFromChain` properties are optional. The property name should simply be the name of the chain the pegged assets are bridged from.
 
-The async functions should take timestamp, ethBlock, and chainBlocks as parameters, just like Defillama TVL Adapters. They must return an object `{ peggedXYZ: x }`, where `peggedXYZ` is a supported pegged asset type, and `x` is a Number. Currently only `peggedUSD`, `peggedEUR`, and `peggedVAR` (variable peg) are supported.
+The async functions should take timestamp, ethBlock, and chainBlocks as parameters, just like Defillama TVL Adapters. They must return an object `{ peggedXYZ: x }`, where `peggedXYZ` is a supported pegged asset type, and `x` is a Number. Currently we support `peggedUSD`, `peggedEUR`,`peggedVAR` (variable peg) and more you can see the full list here https://github.com/DefiLlama/peggedassets-server/blob/master/src/adapters/peggedAssets/peggedAsset.type.ts#L7
 
 Here is an example adapter:
 	
