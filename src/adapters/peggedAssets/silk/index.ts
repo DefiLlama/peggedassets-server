@@ -23,7 +23,7 @@ async function silkMinted(decimals: number) {
     );
     const totalSupply = res?.data?.totalUsd;
     const supply = totalSupply / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
+    sumSingleBalance(balances, "peggedVAR", supply, "issued", false);
     return balances;
   };
 }
