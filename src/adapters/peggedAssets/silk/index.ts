@@ -21,16 +21,16 @@ async function silkMinted(decimals: number) {
           "https://ruvzuawwz7.execute-api.us-east-1.amazonaws.com/prod-analytics-v1/silk"
         )
     );
-    const totalSupply = res?.data?.totalSupply;
+    const totalSupply = res?.data?.totalUsd;
     const supply = totalSupply / 10 ** decimals;
-    sumSingleBalance(balances, "peggedVAR", supply, "issued", false);
+    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
   };
 }
 
 const adapter: PeggedIssuanceAdapter = {
   secret: {
-    minted: silkMinted(6),
+    minted: silkMinted(0),
     unreleased: async () => ({}),
   },
 };
