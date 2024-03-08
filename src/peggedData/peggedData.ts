@@ -3350,17 +3350,16 @@ export default [
     symbol: "fxUSD",
     url: "https://fx.aladdin.club/",
     description:
-      "ClevUSD are synthetic versions of their associated real token, representing the future yield of CLever strategies. Each clevToken is backed by one or more equivalent real Tokens in the system.",
-    mintRedeemDescription:
-      "ClevUSD can be farmed in CLever liquidity pools or swapped for more of the original token.",
-    onCoinGecko: "true",
-    gecko_id: "clever-usd",
+      "f(x) is a DeFi protocol on Ethereum that offers a powerful new decentralized stablecoin enabled by an amplified ETH.",
+    mintRedeemDescription: "",
+    onCoinGecko: "false",
+    gecko_id: "",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
-    twitter: "https://twitter.com/0xc_lever",
+    twitter: "https://twitter.com/protocol_fx",
     wiki: null,
   },
 ] as PeggedAsset[];
