@@ -3342,4 +3342,24 @@ export default [
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
   },
+
+  {
+    id: "167",
+    name: "f(x) USD",
+    address: "0x085780639CC2cACd35E474e71f4d000e2405d8f6",
+    symbol: "fxUSD",
+    url: "https://fx.aladdin.club/",
+    description:
+      "f(x) is a DeFi protocol on Ethereum that offers a powerful new decentralized stablecoin enabled by an amplified ETH.",
+    mintRedeemDescription: "",
+    onCoinGecko: "false",
+    gecko_id: "",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/protocol_fx",
+    wiki: null,
+  },
 ] as PeggedAsset[];
