@@ -3214,7 +3214,7 @@ export default [
     mintRedeemDescription:
       "The Sovryn Dollar (DLLR) is minted through Mynt, a smart contract system, by aggregating various BTC-backed stablecoins into a single, more resilient stablecoin",
     onCoinGecko: false,
-    gecko_id: "sovryn-dollar", 
+    gecko_id: "sovryn-dollar",
     cmcId: "27363",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3234,7 +3234,7 @@ export default [
     mintRedeemDescription:
       "All funded EURD can be redeemed 1:1 to the whitelisted bank account of the EURD users",
     onCoinGecko: false,
-    gecko_id: "quantoz-eurd", 
+    gecko_id: "quantoz-eurd",
     cmcId: null,
     pegType: "peggedEUR",
     pegMechanism: "fiat-backed",
@@ -3254,14 +3254,14 @@ export default [
     mintRedeemDescription:
       "Its purpose is to act as a trustless stablecoin translation device - meaning it facilitates the conversion of multiple USD-pegged stablecoins with each other at a fixed 1:1 ratio.",
     onCoinGecko: false,
-    gecko_id: "xusd-babelfish", 
+    gecko_id: "xusd-babelfish",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/babelfishmoney",
-    wiki: null
+    wiki: null,
   },
   {
     id: "163",
@@ -3281,7 +3281,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/PrismaFi",
-    wiki: null
+    wiki: null,
   },
   {
     id: "164",
@@ -3301,7 +3301,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/pagolinea",
-    wiki: null
+    wiki: null,
   },
   {
     id: "165",
@@ -3321,6 +3321,46 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/audd_digital",
-    wiki: null
-  }
+    wiki: null,
+  },
+  {
+    id: "166",
+    name: "Fractional ETH",
+    address: "0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726",
+    symbol: "fETH",
+    url: "https://fx.aladdin.club/",
+    description:
+      "f(x) splits ETH into a mix of low-volatility “floating stablecoins” called fETH.",
+    mintRedeemDescription: "Users can supply ETH or stETH to mint fETH.",
+    onCoinGecko: "true",
+    gecko_id: "f-x-protocol-fractional-eth",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/protocol_fx",
+    wiki: null,
+  },
+
+  {
+    id: "167",
+    name: "f(x) USD",
+    address: "0x085780639CC2cACd35E474e71f4d000e2405d8f6",
+    symbol: "fxUSD",
+    url: "https://fx.aladdin.club/",
+    description:
+      "ClevUSD are synthetic versions of their associated real token, representing the future yield of CLever strategies. Each clevToken is backed by one or more equivalent real Tokens in the system.",
+    mintRedeemDescription:
+      "ClevUSD can be farmed in CLever liquidity pools or swapped for more of the original token.",
+    onCoinGecko: "true",
+    gecko_id: "clever-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/0xc_lever",
+    wiki: null,
+  },
 ] as PeggedAsset[];
