@@ -163,6 +163,7 @@ import xusd from "./xusd-babelfish";
 import ultra from "./prismalrt-ultra";
 import usdcb from "./pago-linea-usdcb";
 import audd from "./novatti-australian-digital-dollar";
+import cgusd from "./cygnus-finance-global-usd";
 
 export default {
   tether,
@@ -329,5 +330,6 @@ export default {
   "xusd-babelfish": xusd,
   "prismalrt-ultra": ultra,
    usdcb,  //fake coingecko, there is nothing with that id
-   "novatti-australian-digital-dollar": audd
+   "novatti-australian-digital-dollar": audd,
+   "cygnus-finance-global-usd": cgusd
 };
