@@ -3342,5 +3342,43 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/CygnusFi",
     wiki: "https://wiki.cygnus.finance/whitepaper"
-  }
+  },
+  {
+    id: "167",
+    name: "Fractional ETH",
+    address: "0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726",
+    symbol: "fETH",
+    url: "https://fx.aladdin.club/",
+    description:
+      "f(x) splits ETH into a mix of low-volatility “floating stablecoins” called fETH.",
+    mintRedeemDescription: "Users can supply ETH or stETH to mint fETH.",
+    onCoinGecko: "true",
+    gecko_id: "f-x-protocol-fractional-eth",
+    cmcId: null,
+    pegType: "peggedVAR",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/protocol_fx",
+    wiki: null,
+  },
+  {
+    id: "168",
+    name: "fxUSD",
+    address: "0x085780639CC2cACd35E474e71f4d000e2405d8f6",
+    symbol: "fxUSD",
+    url: "https://fx.aladdin.club/",
+    description:
+      "fxUSD is unlike anything else in DeFi. It is the first truly decentralized stablecoin with the scalability to compete toe-to-toe with centralized offerings. Its combination of strong peg, built in yield and zero slippage swapping makes it extremely user friendly, while the ingenious economic design grows the available liquidity automatically as a byproduct of providing serious value to constituent LSDs.",
+    mintRedeemDescription: "Users are able to mint and redeem with USDC,USDT,SETH and more",
+    onCoinGecko: "false",
+    gecko_id: "f-x-protocol-usd", //fcoingecko
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/protocol_fx",
+    wiki: null,
+  },
 ] as PeggedAsset[];
