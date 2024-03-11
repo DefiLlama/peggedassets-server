@@ -3322,5 +3322,25 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/audd_digital",
     wiki: null
+  },
+  {
+    id: "166",
+    name: "Cygnus Finance Global USD",
+    address: "base:0xCa72827a3D211CfD8F6b00Ac98824872b72CAb49",
+    symbol: "cgUSD",
+    url: "https://www.cygnus.finance",
+    description:
+      "The cgUSD token, an ERC20 rebasing token, is backed by US Treasury bills. Every New York banking day, the total issuance of cgUSD aligns with the net value of its asset portfolio, encompassing on-chain stablecoins, the market value of U.S. Treasury Bills, and accrued interest.",
+    mintRedeemDescription:
+      "Users can mint cgUSD by using assets from multiple chains USDT, USDC. Users can use our Withdrawals Request and Claim tabs to withdraw cgUSD and receive USDC at a 1:1 ratio. Under normal circumstances, withdrawal periods can take anywhere between 5-7 days. After that, you can claim your cgUSD using the Claim tab.",
+    onCoinGecko: true,
+    gecko_id: "cygnus-finance-global-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/CygnusFi",
+    wiki: "https://wiki.cygnus.finance/whitepaper"
   }
 ] as PeggedAsset[];
