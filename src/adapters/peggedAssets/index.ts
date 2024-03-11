@@ -164,6 +164,8 @@ import ultra from "./prismalrt-ultra";
 import usdcb from "./pago-linea-usdcb";
 import audd from "./novatti-australian-digital-dollar";
 import cgusd from "./cygnus-finance-global-usd";
+import feth from "./feth"
+import fxusd from "./fxusd"
 
 export default {
   tether,
@@ -331,5 +333,7 @@ export default {
   "prismalrt-ultra": ultra,
    usdcb,  //fake coingecko, there is nothing with that id
    "novatti-australian-digital-dollar": audd,
-   "cygnus-finance-global-usd": cgusd
+   "cygnus-finance-global-usd": cgusd,
+   "f-x-protocol-fractional-eth": feth,
+   "f-x-protocol-usd": fxusd
 };
