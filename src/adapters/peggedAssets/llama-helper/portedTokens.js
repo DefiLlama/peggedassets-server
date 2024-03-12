@@ -770,6 +770,14 @@ function fixAstarBalances(balances) {
   return fixBalances(balances, mapping)
 }
 
+function fixMantaBalances(balances) {
+  const mapping = {
+    '0xcd91716ef98798A85E79048B78287B13ae6b99b2': { coingeckoId: 'goku-money-gai', decimals: 18, },
+  }
+
+  return fixBalances(balances, mapping)
+}
+
 function fixHPBBalances(balances) {
   const mapping = {
     '0xBE05Ac1FB417c9EA435b37a9Cecd39Bc70359d31': { coingeckoId: 'high-performance-blockchain', decimals: 18, },
@@ -1012,6 +1020,7 @@ const fixBalancesMapping = {
   avax: fixAvaxBalances,
   evmos: b => fixBalances(b, evmosFixMapping, { removeUnmapped: false }),
   astar: fixAstarBalances,
+  manta: fixMantaBalances,
   shiden: fixShidenBalances,
   cronos: b => fixBalances(b, cronosFixMapping, { removeUnmapped: false }),
   tezos: fixTezosBalances,
