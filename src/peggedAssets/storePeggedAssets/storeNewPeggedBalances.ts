@@ -60,9 +60,11 @@ export default async (
         peggedID,
         `Circulating has 5x (${change}) within one hour, disabling it`,
       ]);
+/*
       throw new Error(
         `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour, disabling it`
       );
+*/
     } else {
       await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
         unixTimestamp,
