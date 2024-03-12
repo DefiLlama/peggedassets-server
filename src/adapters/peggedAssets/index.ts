@@ -157,17 +157,19 @@ import vnxau from "./vnx-gold";
 import veur from "./vnx-euro";
 import vchf from "./vnx-swiss-franc";
 import usdrif from "./usd-rif";
-import dllr from "./sovryn-dollar"
+import dllr from "./sovryn-dollar";
 import eurd from "./quantoz-eurd";
 import xusd from "./xusd-babelfish";
 import ultra from "./prismalrt-ultra";
 import usdcb from "./pago-linea-usdcb";
 import audd from "./novatti-australian-digital-dollar";
 import cgusd from "./cygnus-finance-global-usd";
-import feth from "./feth"
-import fxusd from "./fxusd"
+import feth from "./feth";
+import fxusd from "./fxusd";
+import euro3 from "./euro3";
 
 export default {
+  euro3,
   tether,
   "usd-coin": usdc,
   terrausd,
@@ -305,7 +307,7 @@ export default {
   "phase-dollar": phase,
   "inter-stable-token": inter,
   "e-money-eur": eeur,
-  'collateralized-debt-token': cdt,
+  "collateralized-debt-token": cdt,
   "aryze-eusd": aeusd,
   "aryze-eeur": aeeur,
   "aryze-egbp": aegbp, //if does not work, will test without aegbp, using only coingecko but since its the terminal not sure, will keep an eye
@@ -331,9 +333,9 @@ export default {
   "quantoz-eurd": eurd,
   "xusd-babelfish": xusd,
   "prismalrt-ultra": ultra,
-   usdcb,  //fake coingecko, there is nothing with that id
-   "novatti-australian-digital-dollar": audd,
-   "cygnus-finance-global-usd": cgusd,
-   "f-x-protocol-fractional-eth": feth,
-   "f-x-protocol-usd": fxusd
+  usdcb, //fake coingecko, there is nothing with that id
+  "novatti-australian-digital-dollar": audd,
+  "cygnus-finance-global-usd": cgusd,
+  "f-x-protocol-fractional-eth": feth,
+  "f-x-protocol-usd": fxusd,
 };

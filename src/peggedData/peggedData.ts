@@ -3214,7 +3214,7 @@ export default [
     mintRedeemDescription:
       "The Sovryn Dollar (DLLR) is minted through Mynt, a smart contract system, by aggregating various BTC-backed stablecoins into a single, more resilient stablecoin",
     onCoinGecko: false,
-    gecko_id: "sovryn-dollar", 
+    gecko_id: "sovryn-dollar",
     cmcId: "27363",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3234,7 +3234,7 @@ export default [
     mintRedeemDescription:
       "All funded EURD can be redeemed 1:1 to the whitelisted bank account of the EURD users",
     onCoinGecko: false,
-    gecko_id: "quantoz-eurd", 
+    gecko_id: "quantoz-eurd",
     cmcId: null,
     pegType: "peggedEUR",
     pegMechanism: "fiat-backed",
@@ -3254,14 +3254,14 @@ export default [
     mintRedeemDescription:
       "Its purpose is to act as a trustless stablecoin translation device - meaning it facilitates the conversion of multiple USD-pegged stablecoins with each other at a fixed 1:1 ratio.",
     onCoinGecko: false,
-    gecko_id: "xusd-babelfish", 
+    gecko_id: "xusd-babelfish",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/babelfishmoney",
-    wiki: null
+    wiki: null,
   },
   {
     id: "163",
@@ -3281,7 +3281,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/PrismaFi",
-    wiki: null
+    wiki: null,
   },
   {
     id: "164",
@@ -3301,7 +3301,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/pagolinea",
-    wiki: null
+    wiki: null,
   },
   {
     id: "165",
@@ -3321,7 +3321,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/audd_digital",
-    wiki: null
+    wiki: null,
   },
   {
     id: "166",
@@ -3341,7 +3341,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/CygnusFi",
-    wiki: "https://wiki.cygnus.finance/whitepaper"
+    wiki: "https://wiki.cygnus.finance/whitepaper",
   },
   {
     id: "167",
@@ -3370,7 +3370,8 @@ export default [
     url: "https://fx.aladdin.club/",
     description:
       "fxUSD is unlike anything else in DeFi. It is the first truly decentralized stablecoin with the scalability to compete toe-to-toe with centralized offerings. Its combination of strong peg, built in yield and zero slippage swapping makes it extremely user friendly, while the ingenious economic design grows the available liquidity automatically as a byproduct of providing serious value to constituent LSDs.",
-    mintRedeemDescription: "Users are able to mint and redeem with USDC,USDT,SETH and more",
+    mintRedeemDescription:
+      "Users are able to mint and redeem with USDC,USDT,SETH and more",
     onCoinGecko: "false",
     gecko_id: "f-x-protocol-usd", //fcoingecko
     cmcId: null,
@@ -3379,6 +3380,30 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
+    wiki: null,
+  },
+  {
+    id: "169",
+    name: "EURO3",
+    address: "0xA0e4c84693266a9d3BBef2f394B33712c76599Ab",
+    symbol: "EURO3",
+    url: "https://3adao.org/",
+    description:
+      "EURO3 is an over-collateralized, decentralized, variable supply payment coin pegged to the Euro.",
+    mintRedeemDescription:
+      "EURO3 is created by users minting EURO3 loans and it's removed from circulation (burnt) when users repay their loan or redeem EURO3 for the collateral assets.",
+    onCoinGecko: "true",
+    gecko_id: "euro3",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: [
+      "https://docs.3adao.org/3a-protocol/technical-documentation/audit-report",
+      "https://www.hypernative.io/certificate/3a-dao",
+      "https://www.fyeo.io/post/fyeo-3a-dao-security-assessment",
+    ],
+    twitter: "https://twitter.com/3aaaDAO",
     wiki: null,
   },
 ] as PeggedAsset[];
