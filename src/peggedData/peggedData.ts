@@ -3401,4 +3401,28 @@ export default [
     twitter: "https://twitter.com/goku_stable",
     wiki: null,
   },
+  {
+    id: "170",
+    name: "EURO3",
+    address: "polygon:0xA0e4c84693266a9d3BBef2f394B33712c76599Ab",
+    symbol: "EURO3",
+    url: "https://3adao.org/",
+    description:
+      "EURO3 is an over-collateralized, decentralized, variable supply payment coin pegged to the Euro.",
+    mintRedeemDescription:
+      "EURO3 is created by users minting EURO3 loans and it's removed from circulation (burnt) when users repay their loan or redeem EURO3 for the collateral assets.",
+    onCoinGecko: "true",
+    gecko_id: "euro3",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: [
+      "https://docs.3adao.org/3a-protocol/technical-documentation/audit-report",
+      "https://www.hypernative.io/certificate/3a-dao",
+      "https://www.fyeo.io/post/fyeo-3a-dao-security-assessment",
+    ],
+    twitter: "https://twitter.com/3aaaDAO",
+    wiki: null,
+  },
 ] as PeggedAsset[];

@@ -167,6 +167,7 @@ import audd from "./novatti-australian-digital-dollar";
 import cgusd from "./cygnus-finance-global-usd";
 import feth from "./feth"
 import fxusd from "./fxusd"
+import euro3 from "./euro3"
 
 export default {
   tether,
@@ -337,5 +338,6 @@ export default {
    "novatti-australian-digital-dollar": audd,
    "cygnus-finance-global-usd": cgusd,
    "f-x-protocol-fractional-eth": feth,
-   "f-x-protocol-usd": fxusd
+   "f-x-protocol-usd": fxusd,
+   euro3 //since its the real coingecko id + same symbol we good with this. I think no need to "euro3": euro3 
 };
