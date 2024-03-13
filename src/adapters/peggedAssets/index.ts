@@ -218,7 +218,7 @@ export default {
   usd,
   "dei-token": dei,
   "bai-stablecoin": bai,
-  "gai-stablecoin": gai,
+  "goku-money-gai": gai,
   usn,
   "tether-eurt": eurt,
   "euro-coin": eurc,
