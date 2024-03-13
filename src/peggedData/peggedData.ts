@@ -3381,4 +3381,24 @@ export default [
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
   },
+  {
+    id: "169",
+    name: "GAI Stablecoin",
+    address: "manta:0xcd91716ef98798A85E79048B78287B13ae6b99b2",
+    symbol: "GAI",
+    url: "https://www.goku.money/",
+    description:
+      "Goku Money is a decentralized borrowing protocol on Manta that allows you to draw interest-free loans against multiple collateral assets (e.g. MANTA, TIA, USDT, and etc.). Loans are paid out in GAI (a USD pegged stablecoin).",
+    mintRedeemDescription:
+      "Using the Goku Money app, users mint GAI by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back GAI is burned.",
+    onCoinGecko: "true",
+    gecko_id: "goku-money-gai",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/goku_stable",
+    wiki: null,
+  },
 ] as PeggedAsset[];

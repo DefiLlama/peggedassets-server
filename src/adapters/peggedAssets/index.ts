@@ -48,6 +48,7 @@ import usd from "./usd";
 import dei from "./dei-token";
 import usn from "./usn";
 import bai from "./bai-stablecoin";
+import gai from "./gai-stablecoin";
 import eurt from "./tether-eurt";
 import eurc from "./euro-coin";
 import stasis from "./stasis-eurs";
@@ -217,6 +218,7 @@ export default {
   usd,
   "dei-token": dei,
   "bai-stablecoin": bai,
+  "gai-stablecoin": gai,
   usn,
   "tether-eurt": eurt,
   "euro-coin": eurc,
