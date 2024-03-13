@@ -60,11 +60,9 @@ export default async (
         peggedID,
         `Circulating has 5x (${change}) within one hour, disabling it`,
       ]);
-/*
       throw new Error(
         `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour, disabling it`
       );
-*/
     } else {
       await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
         unixTimestamp,
@@ -76,6 +74,15 @@ export default async (
         peggedAsset.name
       );
     }
+  }
+  if (
+    lastHourlyCirculating/2 > currentCirculating &&
+    currentCirculating !== 0 &&
+    Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR
+  ) {
+    throw new Error(
+      `Circulating for ${peggedAsset.name} has dropped >50% within one hour, disabling it`
+    );
   }
   await Promise.all(
     Object.entries(peggedBalances).map(async ([chain, issuance]) => {
