@@ -3425,4 +3425,24 @@ export default [
     twitter: "https://twitter.com/3aaaDAO",
     wiki: null,
   },
+  {
+    id: "171",
+    name: "Lets Get HAI",
+    address: "optimism:0x10398abc267496e49106b07dd6be13364d10dc71",
+    symbol: "HAI",
+    url: "https://www.letsgethai.com/",
+    description:
+      "HAI is a low-cost, dollar-denominated protocol on the Optimism network, featuring a collateral-backed system coin, dynamic value transfer balancing via a PID controller, and a Global Settlement mechanism for equitable collateral redemption",
+    mintRedeemDescription:
+      "HAI is minted from over-collateralized debt positions (CDPs). Every HAI token in circulation corresponds to a greater amount of collateral locked by individual protocol users. Users can mint or burn HAI, depending on their collateral's value.",
+    onCoinGecko: "true",
+    gecko_id: "let-s-get-hai",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://twitter.com/letsgethai",
+    wiki: null,
+  },
 ] as PeggedAsset[];

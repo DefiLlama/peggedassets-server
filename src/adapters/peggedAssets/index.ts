@@ -165,9 +165,10 @@ import ultra from "./prismalrt-ultra";
 import usdcb from "./pago-linea-usdcb";
 import audd from "./novatti-australian-digital-dollar";
 import cgusd from "./cygnus-finance-global-usd";
-import feth from "./feth"
-import fxusd from "./fxusd"
-import euro3 from "./euro3"
+import feth from "./feth";
+import fxusd from "./fxusd";
+import euro3 from "./euro3";
+import hai from "./let-s-get-hai"
 
 export default {
   tether,
@@ -339,5 +340,6 @@ export default {
    "cygnus-finance-global-usd": cgusd,
    "f-x-protocol-fractional-eth": feth,
    "f-x-protocol-usd": fxusd,
-   euro3 //since its the real coingecko id + same symbol we good with this. I think no need to "euro3": euro3 
+   euro3, //since its the real coingecko id + same symbol we good with this. I think no need to "euro3": euro3 
+   hai
 };
