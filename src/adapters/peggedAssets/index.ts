@@ -341,5 +341,5 @@ export default {
    "f-x-protocol-fractional-eth": feth,
    "f-x-protocol-usd": fxusd,
    euro3, //since its the real coingecko id + same symbol we good with this. I think no need to "euro3": euro3 
-   hai
+   "let-s-get-hai": hai
 };
