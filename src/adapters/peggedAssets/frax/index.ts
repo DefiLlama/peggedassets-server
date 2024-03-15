@@ -1,4 +1,5 @@
 const sdk = require("@defillama/sdk");
+import axios from "axios";
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
@@ -86,29 +87,27 @@ Frax works differently from other stables, bridged amounts don't matter.
 See: https://docs.frax.finance/cross-chain/bridge
 */
 
-async function chainMinted(chain: string, decimals: number) {
+
+async function fraxMinted() {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
+    try {
+      const response = await axios.get(
+        "https://api.frax.finance/v2/frax/balance-sheet/latest"
       );
+      const data = response.data;
+
+      // Calculate total supply
+      const totalSupply = (data.totalLiabilities - data.categorySummaryUsd["asset:owned:frax"]) - data.totalLockedLiquidity
+      const supply = totalSupply;
+      sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
+      return balances;
+    } catch (error) {
+      console.error("Error fetching supply data:", error);
     }
     return balances;
   };
@@ -116,7 +115,7 @@ async function chainMinted(chain: string, decimals: number) {
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
-    minted: chainMinted("ethereum", 18),
+    minted: fraxMinted(),
     unreleased: async () => ({}),
   },
   bsc: {
