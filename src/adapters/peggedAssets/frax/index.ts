@@ -102,10 +102,7 @@ async function fraxMinted() {
       const data = response.data;
 
       // Calculate total supply
-      const totalSupply =
-        data.totalLiabilities -
-        data["asset:owned:frax_usd"] -
-        data.totalLockedLiquidity;
+      const totalSupply = (data.totalLiabilities - data.categorySummaryUsd["asset:owned:frax"]) - data.totalLockedLiquidity
       const supply = totalSupply;
       sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
       return balances;
