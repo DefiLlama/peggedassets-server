@@ -933,6 +933,16 @@ const adapter: PeggedIssuanceAdapter = {
       6
     ),
   },
+  mode: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("mode", 6, chainContracts.mode.bridgedFromETH),
+  },
+  manta: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("manta", 6, chainContracts.manta.bridgedFromETH),
+  },
 };
 
 export default adapter;
