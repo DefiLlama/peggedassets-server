@@ -338,6 +338,12 @@ export type ChainContracts = {
       },
       starknet: {
         bridgeOnETH: ["0xF6080D9fbEEbcd44D89aFfBFd42F098cbFf92816"], // starknet bridge
-      }
+      },
+      mode: {
+        bridgedFromETH: ["0xd988097fb8612cc24eec14542bc03424c656005f"], // mode bridge
+      },
+      manta: {
+        bridgedFromETH: ["0xb73603c5d87fa094b7314c74ace2e64d165016fb"],
+      },
   };
   
