@@ -3445,4 +3445,24 @@ export default [
     twitter: "https://twitter.com/letsgethai",
     wiki: null,
   },
+  {
+    id: "172",
+    name: "USDB Blast",
+    address: "blast:0x4300000000000000000000000000000000000003",
+    symbol: "USDB",
+    url: "https://blast.io",
+    description:
+      "The only Ethereum L2 with native yield for ETH and stablecoins.",
+    mintRedeemDescription:
+      "Users bridge USDC/USDT from ethereum and get USDB on blast",
+    onCoinGecko: "true",
+    gecko_id: "usdb",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://twitter.com/Blast_L2",
+    wiki: null,
+  },
 ] as PeggedAsset[];
