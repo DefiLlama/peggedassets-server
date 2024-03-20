@@ -3449,7 +3449,7 @@ export default [
     id: "172",
     name: "USDB Blast",
     address: "blast:0x4300000000000000000000000000000000000003",
-    symbol: "USDB",
+    symbol: "usdb(blast)", // we already have a symbol like this
     url: "https://blast.io",
     description:
       "The only Ethereum L2 with native yield for ETH and stablecoins.",
