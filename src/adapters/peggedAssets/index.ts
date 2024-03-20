@@ -122,7 +122,7 @@ import fdusd from "./first-digital-usd";
 import pyusd from "./paypal-usd";
 import psy from "./psy";
 import gyen from "./gyen";
-import star from "./star";
+import star from "./preon-star";
 import peusd from "./peg-eusd";
 import eusdv2 from "./eusdv2";
 import prismamkusd from "./prisma-mkusd";
