@@ -13,11 +13,9 @@ type ChainContracts = {
 };
 
 const chainContracts: ChainContracts = {
-  ethereum: {
+  blast: {
     issued: [
-      "0x085780639CC2cACd35E474e71f4d000e2405d8f6",
-      "0xD6B8162e2fb9F3EFf09bb8598ca0C8958E33A23D",
-      "0xa87F04c9743Fd1933F82bdDec9692e9D97673769",
+      "0x4300000000000000000000000000000000000003",
     ],
   },
 };
@@ -51,8 +49,8 @@ async function chainMinted(chain: string, decimals: number) {
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 18),
+  blast: {
+    minted: chainMinted("blast", 18),
     unreleased: async () => ({}),
   },
 };

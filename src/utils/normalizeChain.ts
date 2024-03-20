@@ -949,6 +949,36 @@ export const chainCoingeckoIds = {
     symbol: "SUI",
     cmcId: "20947",
   },
+  "Blast": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM", "Rollup"],
+    parent: {
+      chain: "Ethereum",
+      types: ["L2", "gas"]
+    },
+  },
+  "Mode": {
+    geckoId: "mode",
+    symbol: "MODE",
+    cmcId: null,
+    categories: ["EVM", "Rollup"],
+    parent: {
+      chain: "Ethereum",
+      types: ["L2", "gas"]
+    },
+  },
+  "Manta": {
+    geckoId: "manta-network",
+    symbol: "MANTA",
+    cmcId: "13631",
+    categories: ["EVM", "Rollup"],
+    parent: {
+      chain: "Ethereum",
+      types: ["L2", "gas"]
+    },
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1197,6 +1227,12 @@ export function getChainDisplayName(
       return "Concordium"
     case "sui":
       return "Sui"
+    case "blast":
+      return "Blast"
+    case "mode":
+      return "Mode"
+    case "manta":
+      return "Manta"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

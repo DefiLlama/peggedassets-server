@@ -168,7 +168,8 @@ import cgusd from "./cygnus-finance-global-usd";
 import feth from "./feth";
 import fxusd from "./fxusd";
 import euro3 from "./euro3";
-import hai from "./let-s-get-hai"
+import hai from "./let-s-get-hai";
+import usdbb from "./usdb-blast" //cant have duplicated 
 
 export default {
   tether,
@@ -341,5 +342,6 @@ export default {
    "f-x-protocol-fractional-eth": feth,
    "f-x-protocol-usd": fxusd,
    euro3, //since its the real coingecko id + same symbol we good with this. I think no need to "euro3": euro3 
-   "let-s-get-hai": hai
+   "let-s-get-hai": hai,
+   "usdb": usdbb
 };
