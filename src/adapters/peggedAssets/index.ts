@@ -169,7 +169,7 @@ import feth from "./feth";
 import fxusd from "./fxusd";
 import euro3 from "./euro3";
 import hai from "./let-s-get-hai";
-import usdbblast from "./usdb-blast" //cant have duplicated 
+import usdbblast from "./usdb"  
 
 export default {
   tether,
