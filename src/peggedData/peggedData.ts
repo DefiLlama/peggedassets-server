@@ -3465,4 +3465,24 @@ export default [
     twitter: "https://twitter.com/Blast_L2",
     wiki: null,
   },
+  {
+    id: "173",
+    name: "BlackRock USD",
+    address: "0x7712c34205737192402172409a8F7ccef8aA2AEc",
+    symbol: "BUIDL", 
+    url: "https://www.blackrock.com/",
+    description:
+      "The BlackRock USD Institutional Digital Liquidity Fund is represented by the blockchain-based BUIDL token, is fully backed by cash, U.S. Treasury bills, and repurchase agreements, and will provide yield paid out via blockchain rails every day to token holders, according to a press release.",
+    mintRedeemDescription:
+      "BUIDL seeks to offer a stable value of $1 per token and pays daily accrued dividends directly to investors' wallets as new tokens each month. The Fund invests 100% of its total assets in cash, U.S. Treasury bills, and repurchase agreements, allowing investors to earn yield while holding the token on the blockchain. Investors can transfer their tokens 24/7/365 to other pre-approved investors. Fund participants will also have flexible custody options allowing them to choose how to hold their tokens.",
+    onCoinGecko: "true",
+    gecko_id: "blackrock-usd-institutional-digital-liquidity-fund",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: [],
+    twitter: "https://twitter.com/BlackRock",
+    wiki: null,
+  },
 ] as PeggedAsset[];

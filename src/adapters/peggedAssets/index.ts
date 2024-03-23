@@ -170,6 +170,7 @@ import fxusd from "./fxusd";
 import euro3 from "./euro3";
 import hai from "./let-s-get-hai";
 import usdbblast from "./usdb"  
+import buidl from "./blackrock-usd"
 
 export default {
   tether,
@@ -343,5 +344,6 @@ export default {
    "f-x-protocol-usd": fxusd,
    euro3, //since its the real coingecko id + same symbol we good with this. I think no need to "euro3": euro3 
    "let-s-get-hai": hai,
-   "usdb": usdbblast
+   "usdb": usdbblast,
+   "blackrock-usd-institutional-digital-liquidity-fund": buidl
 };
