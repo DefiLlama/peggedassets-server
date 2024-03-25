@@ -3485,4 +3485,24 @@ export default [
     twitter: "https://twitter.com/BlackRock",
     wiki: null,
   },
+  {
+    id: "174",
+    name: "rUSD",
+    address: "0x65d72aa8da931f047169112fcf34f52dbaae7d18",
+    symbol: "rUSD", 
+    url: "https://fx.aladdin.club/assets/rUSD",
+    description:
+      "rUSD is a stablecoin that uses the same mechanism as fxUSD, but with its reserve comprised of only ETH Liquid Restaking Tokens (LRT), starting with Ether.fi’s eETH.",
+    mintRedeemDescription:
+      "User can mint using LRT (starting with eETH).",
+    onCoinGecko: "true",
+    gecko_id: "fx-rusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: [],
+    twitter: "https://twitter.com/0xc_lever",
+    wiki: null,
+  },
 ] as PeggedAsset[];
