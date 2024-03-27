@@ -1095,9 +1095,9 @@ export default [
   },
   {
     id: "55",
-    name: "agEUR",
+    name: "EURA", // previous ageur
     address: "0x1a7e4e63778b4f12a199c062f3efdd288afcbce8",
-    symbol: "AGEUR",
+    symbol: "EURA",
     url: "https://www.angle.money/",
     description:
       "Angle Protocol aims at creating a sustainable money layer for blockchains. It is currently issuing agEUR, the most liquid Euro stablecoin on Ethereum and other chains.",
