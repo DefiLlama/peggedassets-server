@@ -12,8 +12,7 @@ export const normalizedChainReplacements = {
   "zksync%20era": "era",
   "polygon%20zkevm": "polygon_zkevm",
   multiversx: "elrond",
-  rootstock: "rsk",
-  "op mainnet": "optimism"
+  rootstock: "rsk"
 } as {
   [chain: string]: string;
 };
@@ -68,10 +67,10 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 11297108109,
   },
-  "OP Mainnet": {
-    geckoId: "optimism",
-    symbol: "OP",
-    cmcId: "11840",
+  Optimism: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
     categories: ["EVM", "Rollup"],
     parent: "Ethereum",
     chainId: 10,
@@ -994,7 +993,6 @@ chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
 chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
-chainCoingeckoIds["Optimism"] = chainCoingeckoIds["OP Mainnet"]
 
 export const extraSections = [
   "staking",
@@ -1019,9 +1017,7 @@ export function transformNewChainName(chain: string) {
     case "Elrond":
       return "MultiversX";
       case "RSK":
-      return "Rootstock";
-    case "Optimism":
-      return "OP Mainnet"
+        return "Rootstock";
     default:
       return chain;
   }
@@ -1053,8 +1049,6 @@ export function getChainDisplayName(
       return useNewChainNames ? "CosmosHub" : "Cosmos";
     case "elrond":
       return useNewChainNames ? "MultiversX" : "Elrond";
-    case "optimism":
-      return useNewChainNames ? "OP Mainnet" : "Optimism"
     case "avax":
       return "Avalanche";
     case "xdaiarb":
