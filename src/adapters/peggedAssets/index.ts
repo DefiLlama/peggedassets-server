@@ -54,7 +54,7 @@ import eurc from "./euro-coin";
 import stasis from "./stasis-eurs";
 import ceur from "./celo-euro";
 import seur from "./seur";
-import ageur from "./ageur";
+import eura from "./eura";
 import par from "./par-stablecoin";
 import ush from "./hedge-usd";
 import threeusd from "./three-usd";
@@ -230,7 +230,7 @@ export default {
   "stasis-eurs": stasis,
   "celo-euro": ceur,
   seur,
-  ageur,
+  "ageur": eura,
   "par-stablecoin": par,
   "hedge-usd": ush,
   "three-usd": threeusd,
