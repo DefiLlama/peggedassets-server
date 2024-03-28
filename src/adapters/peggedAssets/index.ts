@@ -91,7 +91,7 @@ import xai from "./xai";
 import iusd from "./iusd";
 import rusd from "./redeemable";
 import ibeur from "./iron-bank-euro";
-import composite from "./composite";
+//import composite from "./composite";
 import baousd from "./baousd";
 import pina from "./meme-dollar";
 import djed from "./djed";
@@ -171,7 +171,8 @@ import euro3 from "./euro3";
 import hai from "./let-s-get-hai";
 import usdbblast from "./usdb";
 import buidl from "./blackrock-usd";
-import fxrusd from "./fx-rusd"
+import fxrusd from "./fx-rusd";
+import pxdc from "./powercity-pxdc";
 
 export default {
   tether,
@@ -347,5 +348,6 @@ export default {
    "let-s-get-hai": hai,
    "usdb": usdbblast,
    "blackrock-usd-institutional-digital-liquidity-fund": buidl,
-   "fx-rusd": fxrusd
+   "fx-rusd": fxrusd,
+   "powercity-pxdc": pxdc,
 };
