@@ -3505,4 +3505,24 @@ export default [
     twitter: "https://twitter.com/0xc_lever",
     wiki: null,
   },
+  {
+    id: "175",
+    name: "PXDC Stablecoin",
+    address: "pulse:0xeB6b7932Da20c6D7B3a899D5887d86dfB09A6408",
+    symbol: "PXDC",
+    url: "https://www.earn.powercity.io/",
+    description:
+      "PXDC is a stablecoin with 110% collateralization, no repayment schedule, immutability, and no governance or admin keys",
+    mintRedeemDescription:
+      "PXDC is minted when users deposit PLSX (PulseX token) as collateral that has been locked into individual smart contracts called Vaults.",
+    onCoinGecko: "true",
+    gecko_id: "powercity-pxdc",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: "https://omniscia.io/reports/powercity-earn-implementation-646b3050e69c940014643ed6",
+    twitter: "https://twitter.com/POWERCITYio",
+    wiki: "https://docs.powercity.io/earn-protocol",
+  },
 ] as PeggedAsset[];
