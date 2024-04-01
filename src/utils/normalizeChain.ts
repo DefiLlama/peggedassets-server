@@ -13,7 +13,6 @@ export const normalizedChainReplacements = {
   "polygon%20zkevm": "polygon_zkevm",
   multiversx: "elrond",
   rootstock: "rsk",
-  "pulsechain": "pulse",
 } as {
   [chain: string]: string;
 };
@@ -1000,7 +999,6 @@ chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
 chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
-chainCoingeckoIds["Pulse"] = chainCoingeckoIds["PulseChain"]
 
 export const extraSections = [
   "staking",
@@ -1026,8 +1024,6 @@ export function transformNewChainName(chain: string) {
       return "MultiversX";
     case "RSK":
       return "Rootstock";
-    case "Pulse":
-      return "PulseChain"
     default:
       return chain;
   }
@@ -1059,8 +1055,6 @@ export function getChainDisplayName(
       return useNewChainNames ? "CosmosHub" : "Cosmos";
     case "elrond":
       return useNewChainNames ? "MultiversX" : "Elrond";
-    case "pulse":
-      return useNewChainNames ? "PulseChain" : "Pulse"
     case "avax":
       return "Avalanche";
     case "xdaiarb":
@@ -1245,6 +1239,8 @@ export function getChainDisplayName(
       return "Mode"
     case "manta":
       return "Manta"
+    case "pulse":
+      return "PulseChain"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
