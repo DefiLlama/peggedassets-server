@@ -25,7 +25,7 @@ async function ergoMinted(decimals: number) {
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
-        await axios.get("https://ergo.watch/api/sigmausd/state")
+        await axios.get("https://api.ergo.watch/sigmausd/state")
     );
     const supply = res.data.circ_sigusd / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
@@ -35,7 +35,7 @@ async function ergoMinted(decimals: number) {
 
 const adapter: PeggedIssuanceAdapter = {
   ergo: {
-    minted: ergoMinted(2),
+    minted: ergoMinted(0),
     unreleased: async () => ({}),
   },
 };
