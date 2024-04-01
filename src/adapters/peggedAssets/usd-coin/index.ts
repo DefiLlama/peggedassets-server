@@ -216,7 +216,7 @@ async function circleAPIChainMinted(chain: string) {
   };
 }
 
-async function suiBridged(chain:string) {
+async function suiBridged(chain: string) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -224,7 +224,7 @@ async function suiBridged(chain:string) {
   ) {
     let balances = {} as Balances;
     const res = await axios.get(`https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdc`)
-    const totalSupply = parseInt(res.data.find((t:any)=>t.coin===`USDC_${chain}`).cumulative_balance);
+    const totalSupply = parseInt(res.data.find((t: any) => t.coin === `USDC_${chain}`).cumulative_balance);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "0x5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf", true);
     return balances;
   };
@@ -920,7 +920,7 @@ const adapter: PeggedIssuanceAdapter = {
       6
     ),
   },
-  sui:{
+  sui: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: suiBridged("ETH"),
