@@ -12,7 +12,8 @@ export const normalizedChainReplacements = {
   "zksync%20era": "era",
   "polygon%20zkevm": "polygon_zkevm",
   multiversx: "elrond",
-  rootstock: "rsk"
+  rootstock: "rsk",
+  "pulsechain": "pulse",
 } as {
   [chain: string]: string;
 };
@@ -979,6 +980,12 @@ export const chainCoingeckoIds = {
       types: ["L2", "gas"]
     },
   },
+  "PulseChain": {
+    geckoId: "pulsechain",
+    symbol: "PLS",
+    cmcId: null,
+    categories: ["EVM"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -993,6 +1000,7 @@ chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
 chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
+chainCoingeckoIds["Pulse"] = chainCoingeckoIds["PulseChain"]
 
 export const extraSections = [
   "staking",
@@ -1016,8 +1024,10 @@ export function transformNewChainName(chain: string) {
       return "Milkomeda C1";
     case "Elrond":
       return "MultiversX";
-      case "RSK":
-        return "Rootstock";
+    case "RSK":
+      return "Rootstock";
+    case "Pulse":
+      return "PulseChain"
     default:
       return chain;
   }
@@ -1049,6 +1059,8 @@ export function getChainDisplayName(
       return useNewChainNames ? "CosmosHub" : "Cosmos";
     case "elrond":
       return useNewChainNames ? "MultiversX" : "Elrond";
+    case "pulse":
+      return useNewChainNames ? "PulseChain" : "Pulse"
     case "avax":
       return "Avalanche";
     case "xdaiarb":
