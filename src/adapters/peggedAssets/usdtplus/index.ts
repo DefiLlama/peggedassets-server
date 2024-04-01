@@ -19,6 +19,9 @@ const chainContracts: ChainContracts = {
   linea: {
     issued: ["0x1E1F509963A6D33e169D9497b11c7DbFe73B7F13"],
   },
+  arbitrum: {
+    issued: ["0xb1084db8D3C05CEbd5FA9335dF95EE4b8a0edc30"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -56,6 +59,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   linea: {
     minted: chainMinted("linea", 6),
+    unreleased: async () => ({}),
+  },
+  arbitrum: {
+    minted: chainMinted("arbitrum", 6),
     unreleased: async () => ({}),
   },
 };
