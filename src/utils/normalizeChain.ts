@@ -12,7 +12,7 @@ export const normalizedChainReplacements = {
   "zksync%20era": "era",
   "polygon%20zkevm": "polygon_zkevm",
   multiversx: "elrond",
-  rootstock: "rsk"
+  rootstock: "rsk",
 } as {
   [chain: string]: string;
 };
@@ -979,8 +979,8 @@ export const chainCoingeckoIds = {
       types: ["L2", "gas"]
     },
   },
-  Pulse: {
-    geckoId: null,
+  "PulseChain": {
+    geckoId: "pulsechain",
     symbol: "PLS",
     cmcId: null,
     categories: ["EVM"],
