@@ -117,7 +117,7 @@ async function fromETH(
           block: _ethBlock,
         })
       ).output;
-      if(target === "0x83F20F44975D03b1b09e64809B757c47f942BEeA"){
+      if (target === "0x83F20F44975D03b1b09e64809B757c47f942BEeA") {
         bridged = (
           await sdk.api.abi.call({
             target: target,
@@ -132,7 +132,7 @@ async function fromETH(
         balances,
         assetPegType,
         bridged / 10 ** decimals,
-        target, 
+        target,
         false
       );
     }
@@ -353,7 +353,7 @@ const adapter: PeggedIssuanceAdapter = {
   xdai: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: fromETH("0x4aa42145Aa6Ebf72e164C9bBC74fbD3788045016",18),
+    ethereum: fromETH("0x4aa42145Aa6Ebf72e164C9bBC74fbD3788045016", 18),
     bsc: bridgedSupply("xdai", 18, chainContracts.xdai.bridgedFromBSC),
   },
   terra: {
@@ -538,6 +538,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("era", 18, chainContracts.era.bridgedFromETH),
+  },
+  pulse: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("pulse", 18, chainContracts.pulse.bridgedFromETH),
   },
 };
 

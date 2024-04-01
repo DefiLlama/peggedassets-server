@@ -453,7 +453,7 @@ async function suiBridged() {
   ) {
     let balances = {} as Balances;
     const res = await axios.get(`https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdt`)
-    const totalSupply = parseInt(res.data.find((t:any)=>t.coin==="USDT_ETH").cumulative_balance);
+    const totalSupply = parseInt(res.data.find((t: any) => t.coin === "USDT_ETH").cumulative_balance);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c", true);
     return balances;
   };
@@ -687,7 +687,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
     */
   },
-  sui:{
+  sui: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: suiBridged()
@@ -1084,6 +1084,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("manta", 6, chainContracts.manta.bridgedFromETH),
+  },
+  pulse: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("pulse", 6, chainContracts.pulse.bridgedFromETH),
   },
 };
 
