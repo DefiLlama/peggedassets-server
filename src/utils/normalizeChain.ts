@@ -979,6 +979,12 @@ export const chainCoingeckoIds = {
       types: ["L2", "gas"]
     },
   },
+  Pulse: {
+    geckoId: null,
+    symbol: "PLS",
+    cmcId: null,
+    categories: ["EVM"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1016,8 +1022,8 @@ export function transformNewChainName(chain: string) {
       return "Milkomeda C1";
     case "Elrond":
       return "MultiversX";
-      case "RSK":
-        return "Rootstock";
+    case "RSK":
+      return "Rootstock";
     default:
       return chain;
   }
@@ -1065,8 +1071,8 @@ export function getChainDisplayName(
       return "EOS";
     case "neo":
       return "NEO";
-      case "rsk":
-        return useNewChainNames ? "Rootstock" : "RSK";
+    case "rsk":
+      return useNewChainNames ? "Rootstock" : "RSK";
     case "osmosis":
       return "Osmosis";
     case "iotex":
@@ -1224,15 +1230,17 @@ export function getChainDisplayName(
     case "emoney":
       return "eMoney";
     case "concordium":
-      return "Concordium"
+      return "Concordium";
     case "sui":
-      return "Sui"
+      return "Sui";
     case "blast":
-      return "Blast"
+      return "Blast";
     case "mode":
-      return "Mode"
+      return "Mode";
     case "manta":
-      return "Manta"
+      return "Manta";
+    case "pulse":
+      return "PulseChain";
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

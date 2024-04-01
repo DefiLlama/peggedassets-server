@@ -192,5 +192,8 @@ export type ChainContracts = {
         bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
         bridgedFromETH: ["0x4B9eb6c0b6ea15176BBF62841C6B2A8a398cb656"],
       },
+      pulse: {
+        bridgedFromETH: ["0xefD766cCb38EaF1dfd701853BFCe31359239F305"], // PulseRamp
+      },
   };
   

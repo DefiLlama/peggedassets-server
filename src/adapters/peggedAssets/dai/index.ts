@@ -539,6 +539,11 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
     ethereum: bridgedSupply("era", 18, chainContracts.era.bridgedFromETH),
   },
+  pulse: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: bridgedSupply("pulse", 18, chainContracts.pulse.bridgedFromETH),
+  },
 };
 
 export default adapter;

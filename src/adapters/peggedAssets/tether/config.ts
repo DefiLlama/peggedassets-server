@@ -328,5 +328,8 @@ export type ChainContracts = {
       manta: {
         bridgedFromETH: ["0xf417f5a458ec102b90352f697d6e2ac3a3d2851f"],
       },
+      pulse: {
+        bridgedFromETH: ["0x0Cb6F5a34ad42ec934882A05265A7d5F59b51A2f"], // PulseRamp
+      },
   };
   
