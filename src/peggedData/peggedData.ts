@@ -3525,4 +3525,24 @@ export default [
     twitter: "https://twitter.com/POWERCITYio",
     wiki: "https://docs.powercity.io/earn-protocol",
   },
+  {
+    id: "176",
+    name: "Fathom Dollar",
+    address: "xdc:xdc49d3f7543335cf38Fa10889CCFF10207e22110B5",
+    symbol: "FXD",
+    url: "https://fathom.fi",
+    description:
+      "FXD is overcollateralized, decentralized, and softly pegged stablecoin",
+    mintRedeemDescription:
+      "Mint FXD using XDC as collateral while choosing your own terms for the minted amount, rebalancing and repayment. FXD positions can be repaid at any time unlocking your XDC.",
+    onCoinGecko: "true",
+    gecko_id: "fathom-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/Fathom_fi",
+    wiki: "https://gist.github.com/BaldyAsh/3676a18b003758057f634c9af2cfe49a",
+  },
 ] as PeggedAsset[];
