@@ -173,6 +173,7 @@ import usdbblast from "./usdb";
 import buidl from "./blackrock-usd";
 import fxrusd from "./fx-rusd";
 import pxdc from "./powercity-pxdc";
+import fdx from "./fathom-dollar"
 
 export default {
   tether,
@@ -350,4 +351,5 @@ export default {
    "blackrock-usd-institutional-digital-liquidity-fund": buidl,
    "fx-rusd": fxrusd,
    "powercity-pxdc": pxdc,
+   "fathom-dollar": fdx
 };
