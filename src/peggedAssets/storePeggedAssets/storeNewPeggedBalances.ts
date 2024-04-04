@@ -11,6 +11,7 @@ import getTVLOfRecordClosestToTimestamp from "../../utils/shared/getRecordCloses
 import { getLastRecord } from "../utils/getLastRecord";
 import { humanizeNumber } from "@defillama/sdk/build/computeTVL/humanizeNumber";
 import { executeAndIgnoreErrors } from "./errorDb";
+import { sendMessage } from "../../utils/discord";
 
 type PKconverted = (id: string) => string;
 
@@ -60,9 +61,9 @@ export default async (
         peggedID,
         `Circulating has 5x (${change}) within one hour, disabling it`,
       ]);
-      throw new Error(
-        `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour, disabling it`
-      );
+      const errorMessage = `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour, disabling it`
+      await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK!);
+      throw new Error(errorMessage);
     } else {
       await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
         unixTimestamp,
@@ -74,6 +75,15 @@ export default async (
         peggedAsset.name
       );
     }
+  }
+  if (
+    lastHourlyCirculating/2 > currentCirculating &&
+    currentCirculating !== 0 &&
+    Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR
+  ) {
+    const errorMessage=`Circulating for ${peggedAsset.name} has dropped >50% within one hour, disabling it`
+    await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK!);
+    throw new Error(errorMessage);
   }
   await Promise.all(
     Object.entries(peggedBalances).map(async ([chain, issuance]) => {

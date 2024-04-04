@@ -168,6 +168,8 @@ functions:
     handler: src/storePeggedAssets.default
     timeout: 900
     memorySize: 3000
+    environment:
+      OUTDATED_WEBHOOK: ${env:OUTDATED_WEBHOOK}
   triggerStorePegged:
     handler: src/triggerStorePegged.default
     timeout: 900

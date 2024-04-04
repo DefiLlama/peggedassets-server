@@ -1,37 +1,52 @@
 const sdk = require("@defillama/sdk");
-import { ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
+import { sumSingleBalance } from "../helper/generalUtil";
+import {
+  ChainBlocks,
+  PeggedIssuanceAdapter,
+  Balances,
+} from "../peggedAsset.type";
 
-const chainContracts: { [key: string]: { issued: string } } = {
+type ChainContracts = {
+  [chain: string]: {
+    issued: string;
+    unreleased: string[];
+  };
+};
+
+const chainContracts: ChainContracts = {
   polygon: {
     issued: "0xA0e4c84693266a9d3BBef2f394B33712c76599Ab",
-  },
-  linea: {
-    issued: "",
+    unreleased: [],
   },
 };
 
-async function chainMinted(chain: string) {
+async function chainMinted(chain: string, decimals: number) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
+    let balances = {} as Balances;
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
         target: chainContracts[chain].issued,
         block: _ethBlock,
         chain: chain,
-      })
     ).output;
-    console.log(totalSupply / 10 ** 18);
-    return { peggedEUR: totalSupply / 10 ** 18 };
+    sumSingleBalance(
+      balances,
+      "peggedEUR",
+      totalSupply / 10 ** decimals,
+      "issued",
+      false
+    );
+    return balances;
   };
 }
-
 const adapter: PeggedIssuanceAdapter = {
   polygon: {
-    minted: chainMinted("polygon"),
+    minted: chainMinted("polygon", 18),
     unreleased: async () => ({}),
   },
 };

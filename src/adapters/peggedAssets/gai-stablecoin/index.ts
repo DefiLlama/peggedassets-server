@@ -1,6 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply } from "../helper/getSupply";
+
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -14,14 +14,8 @@ type ChainContracts = {
 };
 
 const chainContracts: ChainContracts = {
-  arbitrum: {
-    issued: ["0xC19669A405067927865B40Ea045a2baabbbe57f5"],
-  },
-  polygon: {
-    issued: ["0xC19669A405067927865B40Ea045a2baabbbe57f5"],
-  },
-  base: {
-    issued: ["0xC19669A405067927865B40Ea045a2baabbbe57f5"],
+  manta: {
+    issued: ["0xcd91716ef98798A85E79048B78287B13ae6b99b2"],
   },
 };
 
@@ -41,29 +35,15 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
+      sumSingleBalance(balances, "peggedUSD", totalSupply / 10 ** decimals);
     }
     return balances;
   };
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  arbitrum: {
-    minted: chainMinted("arbitrum", 18),
-    unreleased: async () => ({}),
-  },
-  polygon: {
-    minted: chainMinted("polygon", 18),
-    unreleased: async () => ({}),
-  },
-  base: {
-    minted: chainMinted("base", 18),
+  manta: {
+    minted: chainMinted("manta", 18),
     unreleased: async () => ({}),
   },
 };

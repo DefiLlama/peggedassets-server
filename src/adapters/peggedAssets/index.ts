@@ -48,12 +48,13 @@ import usd from "./usd";
 import dei from "./dei-token";
 import usn from "./usn";
 import bai from "./bai-stablecoin";
+import gai from "./gai-stablecoin";
 import eurt from "./tether-eurt";
 import eurc from "./euro-coin";
 import stasis from "./stasis-eurs";
 import ceur from "./celo-euro";
 import seur from "./seur";
-import ageur from "./ageur";
+import eura from "./eura";
 import par from "./par-stablecoin";
 import ush from "./hedge-usd";
 import threeusd from "./three-usd";
@@ -167,6 +168,12 @@ import cgusd from "./cygnus-finance-global-usd";
 import feth from "./feth";
 import fxusd from "./fxusd";
 import euro3 from "./euro3";
+import hai from "./let-s-get-hai";
+import usdbblast from "./usdb";
+import buidl from "./blackrock-usd";
+import fxrusd from "./fx-rusd";
+import pxdc from "./powercity-pxdc";
+import fdx from "./fathom-dollar"
 
 export default {
   euro3,
@@ -219,13 +226,14 @@ export default {
   usd,
   "dei-token": dei,
   "bai-stablecoin": bai,
+  "goku-money-gai": gai,
   usn,
   "tether-eurt": eurt,
   "euro-coin": eurc,
   "stasis-eurs": stasis,
   "celo-euro": ceur,
   seur,
-  ageur,
+  "ageur": eura,
   "par-stablecoin": par,
   "hedge-usd": ush,
   "three-usd": threeusd,
@@ -333,9 +341,16 @@ export default {
   "quantoz-eurd": eurd,
   "xusd-babelfish": xusd,
   "prismalrt-ultra": ultra,
-  usdcb, //fake coingecko, there is nothing with that id
+  usdcb,  //fake coingecko, there is nothing with that id
   "novatti-australian-digital-dollar": audd,
   "cygnus-finance-global-usd": cgusd,
   "f-x-protocol-fractional-eth": feth,
   "f-x-protocol-usd": fxusd,
+  euro3, //since its the real coingecko id + same symbol we good with this. I think no need to "euro3": euro3 
+  "let-s-get-hai": hai,
+  "usdb": usdbblast,
+  "blackrock-usd-institutional-digital-liquidity-fund": buidl,
+  "fx-rusd": fxrusd,
+  "powercity-pxdc": pxdc,
+  "fathom-dollar": fdx
 };
