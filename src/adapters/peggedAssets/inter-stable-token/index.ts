@@ -32,7 +32,7 @@ async function agoricMinted(decimals: number) {
     const res = await retry(
       async (_bail: any) =>
         await axios.get(
-          "https://rest.cosmos.directory/agoric/cosmos/bank/v1beta1/supply/uist"
+          "https://rest.cosmos.directory/agoric/cosmos/bank/v1beta1/supply/by_denom?denom=uist"
         )
     );
     const istInfo = res?.data?.amount;
