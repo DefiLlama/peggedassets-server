@@ -12,6 +12,7 @@ import {
   PeggedIssuanceAdapter,
   Balances,
 } from "../peggedAsset.type";
+import { call as nearCall } from "../llama-helper/near";
 
 type ChainContracts = {
   [chain: string]: {
@@ -113,6 +114,25 @@ async function fraxMinted() {
   };
 }
 
+async function nearBridged(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await nearCall(address, "ft_total_supply");
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply / 10 ** decimals,
+      address,
+      true
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: fraxMinted(),
@@ -156,6 +176,11 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("evmos", 18, chainContracts.evmos.bridgedFromETH),
+  },
+  near: {
+    minted: async () => ({}),
+    unreleased: async () => ({}),
+    ethereum: nearBridged("853d955acef822db058eb8505911ed77f175b99e.factory.bridge.near", 18),
   },
   harmony: {
     minted: async () => ({}),
