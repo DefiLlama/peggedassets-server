@@ -102,6 +102,7 @@ import cash from "./stabl-fi";
 import dsu from "./digital-standard-unit";
 import electronicusd from "./electronic-usd";
 import hyusd from "./high-yield-usd";
+import usd3 from "./web-3-dollar";
 import eure from "./monerium-eur-money";
 import anonusd from "./offshift-anonusd";
 import nxusd from "./nxusd";
@@ -280,6 +281,7 @@ export default {
   "digital-standard-unit": dsu,
   "electronic-usd": electronicusd,
   "high-yield-usd": hyusd,
+  "web-3-dollar": usd3,
   "monerium-eur-money": eure,
   "offshift-anonusd": anonusd,
   nxusd,

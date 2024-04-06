@@ -3545,4 +3545,24 @@ export default [
     twitter: "https://twitter.com/Fathom_fi",
     wiki: "https://gist.github.com/BaldyAsh/3676a18b003758057f634c9af2cfe49a",
   },
+  {
+    id: "177",
+    name: "Web 3 Dollar",
+    address: "0x0d86883FAf4FfD7aEb116390af37746F45b6f378",
+    symbol: "USD3",
+    url: "https://app.reserve.org/ethereum/token/0x0d86883faf4ffd7aeb116390af37746f45b6f378/overview",
+    description:
+      "Earn the DeFi rate any time you're in stables",
+    mintRedeemDescription:
+      "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
+    onCoinGecko: null,
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "reserve register app",
+    auditLinks: null,
+    twitter: "https://twitter.com/USD_3",
+    wiki: "https://app.reserve.org/ethereum/token/0x0d86883faf4ffd7aeb116390af37746f45b6f378/overview",
+  },
 ] as PeggedAsset[];
