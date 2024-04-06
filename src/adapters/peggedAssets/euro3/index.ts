@@ -18,6 +18,10 @@ const chainContracts: ChainContracts = {
     issued: "0xA0e4c84693266a9d3BBef2f394B33712c76599Ab",
     unreleased: [],
   },
+  linea: {
+    issued: "0x3f817b28da4940f018c6b5c0a11c555ebb1264f9",
+    unreleased: [],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -49,6 +53,10 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   polygon: {
     minted: chainMinted("polygon", 18),
+    unreleased: async () => ({}),
+  },
+  linea: {
+    minted: chainMinted("linea", 18),
     unreleased: async () => ({}),
   },
 };
