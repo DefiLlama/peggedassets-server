@@ -14,7 +14,7 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   ethereum: {
-    issued: ["0xb40b6608B2743E691C9B54DdBDEe7bf03cd79f1c"],
+    issued: ["0x8C0D76C9B18779665475F3E212D9Ca1Ed6A1A0e6"],
   },
 };
 

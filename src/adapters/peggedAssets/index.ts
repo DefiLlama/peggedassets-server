@@ -85,7 +85,7 @@ import arusd from "./arable-usd";
 import usdw from "./usdw";
 import bob from "./bob";
 import usdr from "./real-usd";
-import uzd from "./zunami-protocol";
+import zunUSD from "./zunami-protocol";
 import bankofchain from "./bank-of-chain";
 import xai from "./xai";
 import iusd from "./iusd";
@@ -263,7 +263,7 @@ export default {
   usdw,
   bob,
   "real-usd": usdr,
-  "zunami-protocol": uzd,
+  "zunami-protocol": zunUSD,
   "bank-of-chain": bankofchain,
   xai,
   iusd,
