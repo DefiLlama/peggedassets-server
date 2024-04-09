@@ -3566,6 +3566,7 @@ export default [
     twitter: "https://twitter.com/nostrafinance",
     wiki: null,
   },
+  {
      id: "178",
     name: "Web 3 Dollar",
     address: "0x0d86883FAf4FfD7aEb116390af37746F45b6f378",
@@ -3576,12 +3577,13 @@ export default [
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: null,
-    gecko_id: null,
+    gecko_id: "web-3-dollar", //fakecg
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "reserve register app",
+    priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/USD_3",
     wiki: "https://app.reserve.org/ethereum/token/0x0d86883faf4ffd7aeb116390af37746f45b6f378/overview",
+ }
 ] as PeggedAsset[];
