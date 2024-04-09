@@ -3560,7 +3560,7 @@ export default [
     gecko_id: "nostra-uno",
     cmcId: "22750",
     pegType: "peggedUSD",
-    pegMechanism: "crypto-backed",
+    pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/nostrafinance",

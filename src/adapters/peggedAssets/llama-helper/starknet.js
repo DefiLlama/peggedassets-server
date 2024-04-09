@@ -5,7 +5,7 @@ const {
   number,
   hash,
   uint256,
-} = require("./starknet");
+} = require("starknet");
 const axios = require("axios");
 const plimit = require("p-limit");
 const { sliceIntoChunks, sleep } = require("./utils");
@@ -63,7 +63,7 @@ function parseOutput(result, abi, allAbi) {
   return response;
 }
 
-export async function call({ abi, target, params = [], allAbi = [] } = {}, ...rest) {
+async function call({ abi, target, params = [], allAbi = [] } = {}, ...rest) {
   const {
     data: { result },
   } = await axios.post(
