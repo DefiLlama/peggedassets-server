@@ -44,6 +44,7 @@
     "node-html-parser": "^5.0.0",
     "pact-lang-api": "^4.3.5",
     "papaparse": "^5.3.1",
+    "starknet": "^4.22.0",
     "tronweb": "^3.2.7",
     "underscore": "^1.13.1",
     "web3": "^1.5.3"

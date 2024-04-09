@@ -3545,4 +3545,25 @@ export default [
     twitter: "https://twitter.com/Fathom_fi",
     wiki: "https://gist.github.com/BaldyAsh/3676a18b003758057f634c9af2cfe49a",
   },
+  {
+    id: "177",
+    name: "UNO",
+    address:
+      "starknet:0x719b5092403233201aa822ce928bd4b551d0cdb071a724edd7dc5e5f57b7f34",
+    symbol: "UNO",
+    url: "https://nostra.finance/",
+    description:
+      "UNO is the first stablecoin native to Starknet, offering a robust solution for users seeking stability in the volatile crypto market. Pegged to the US Dollar, UNO combines the reliability of traditional fiat-backed stablecoins with Starknet’s innovation, aiming to enhance the DeFi experience for users worldwide.",
+    mintRedeemDescription:
+      "Customers can swap USDC in exchange for UNO and vice versa. Institutional partners who have undergone a verification process can exchange USD for UNO and redeem UNO for USD.",
+    onCoinGecko: "true",
+    gecko_id: "nostra-uno",
+    cmcId: "22750",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/nostrafinance",
+    wiki: null,
+  },
 ] as PeggedAsset[];
