@@ -352,6 +352,6 @@ export default {
    "blackrock-usd-institutional-digital-liquidity-fund": buidl,
    "fx-rusd": fxrusd,
    "powercity-pxdc": pxdc,
-   "fathom-dollar": fdx
-  "nostra-uno": uno,
+   "fathom-dollar": fdx,
+   "nostra-uno": uno,
 };
