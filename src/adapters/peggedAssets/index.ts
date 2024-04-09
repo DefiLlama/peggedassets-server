@@ -174,6 +174,7 @@ import buidl from "./blackrock-usd";
 import fxrusd from "./fx-rusd";
 import pxdc from "./powercity-pxdc";
 import fdx from "./fathom-dollar"
+import uno from "./nostra-uno";
 
 export default {
   tether,
@@ -352,4 +353,5 @@ export default {
    "fx-rusd": fxrusd,
    "powercity-pxdc": pxdc,
    "fathom-dollar": fdx
+  "nostra-uno": uno,
 };
