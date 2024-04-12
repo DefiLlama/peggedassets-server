@@ -3585,5 +3585,25 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/USD_3",
     wiki: "https://app.reserve.org/ethereum/token/0x0d86883faf4ffd7aeb116390af37746f45b6f378/overview",
- }
+ },
+ {
+  id: "179",
+ name: "Convertible JPY Token",
+ address: "0x1cfa5641c01406ab8ac350ded7d735ec41298372",
+ symbol: "CJPY",
+ url: "https://app.yamato.fi/#/",
+ description:
+   "Yamato Protocol is a crypto-asset overcollateralized stable coin issuance protocol. V1 allows the issuance of CJPY (“Convertible JPY”, a Japanese Yen equivalent coin) using ETH as collateral.",
+ mintRedeemDescription:
+   "Users deposit ETH as collateral to generate the debt token CJPY.",
+ onCoinGecko: "true",
+ gecko_id: "convertible-jpy-token",
+ cmcId: null,
+ pegType: "peggedJPY",
+ pegMechanism: "crypto-backed",
+ priceSource: "coingecko",
+ auditLinks: "https://docs.yamato.fi/v/en/audit",
+ twitter: "https://twitter.com/DeFiGeekJapanEN",
+ wiki: "https://docs.yamato.fi/v/en",
+}
 ] as PeggedAsset[];
