@@ -3588,7 +3588,7 @@ export default [
  },
  {
   id: "179",
- name: "Convertible JPY Token",
+ name: "CJPY",
  address: "0x1cfa5641c01406ab8ac350ded7d735ec41298372",
  symbol: "CJPY",
  url: "https://app.yamato.fi/#/",
