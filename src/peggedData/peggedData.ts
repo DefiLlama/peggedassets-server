@@ -3603,7 +3603,7 @@ export default [
  pegMechanism: "crypto-backed",
  priceSource: "coingecko",
  auditLinks: "https://docs.yamato.fi/v/en/audit",
- twitter: "https://twitter.com/DeFiGeekJapanEN",
+ twitter: "https://twitter.com/YamatoProtocol",
  wiki: "https://docs.yamato.fi/v/en",
 }
 ] as PeggedAsset[];
