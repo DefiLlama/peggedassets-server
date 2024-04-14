@@ -36,6 +36,7 @@
     "jest-dynalite": "^3.3.1",
     "limiter": "2.1.0",
     "mysql": "^2.18.1",
+    "starknet": "^4.22.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "serverless": "^2.31.0",

@@ -3545,4 +3545,65 @@ export default [
     twitter: "https://twitter.com/Fathom_fi",
     wiki: "https://gist.github.com/BaldyAsh/3676a18b003758057f634c9af2cfe49a",
   },
+  {
+    id: "177",
+    name: "UNO",
+    address:
+      "starknet:0x719b5092403233201aa822ce928bd4b551d0cdb071a724edd7dc5e5f57b7f34",
+    symbol: "UNO",
+    url: "https://nostra.finance/",
+    description:
+      "UNO is the first stablecoin native to Starknet, offering a robust solution for users seeking stability in the volatile crypto market. Pegged to the US Dollar, UNO combines the reliability of traditional fiat-backed stablecoins with Starknet’s innovation, aiming to enhance the DeFi experience for users worldwide.",
+    mintRedeemDescription:
+      "Customers can swap USDC in exchange for UNO and vice versa. Institutional partners who have undergone a verification process can exchange USD for UNO and redeem UNO for USD.",
+    onCoinGecko: "true",
+    gecko_id: "nostra-uno",
+    cmcId: "22750",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/nostrafinance",
+    wiki: null,
+  },
+  {
+     id: "178",
+    name: "Web 3 Dollar",
+    address: "0x0d86883FAf4FfD7aEb116390af37746F45b6f378",
+    symbol: "USD3",
+    url: "https://app.reserve.org/ethereum/token/0x0d86883faf4ffd7aeb116390af37746f45b6f378/overview",
+    description:
+      "Earn the DeFi rate any time you're in stables",
+    mintRedeemDescription:
+      "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
+    onCoinGecko: null,
+    gecko_id: "web-3-dollar", //fakecg
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/USD_3",
+    wiki: "https://app.reserve.org/ethereum/token/0x0d86883faf4ffd7aeb116390af37746f45b6f378/overview",
+ },
+ {
+  id: "179",
+ name: "CJPY",
+ address: "0x1cfa5641c01406ab8ac350ded7d735ec41298372",
+ symbol: "CJPY",
+ url: "https://app.yamato.fi/#/",
+ description:
+   "Yamato Protocol is a crypto-asset overcollateralized stable coin issuance protocol. V1 allows the issuance of CJPY (“Convertible JPY”, a Japanese Yen equivalent coin) using ETH as collateral.",
+ mintRedeemDescription:
+   "Users deposit ETH as collateral to generate the debt token CJPY.",
+ onCoinGecko: "true",
+ gecko_id: "convertible-jpy-token",
+ cmcId: null,
+ pegType: "peggedJPY",
+ pegMechanism: "crypto-backed",
+ priceSource: "coingecko",
+ auditLinks: "https://docs.yamato.fi/v/en/audit",
+ twitter: "https://twitter.com/YamatoProtocol",
+ wiki: "https://docs.yamato.fi/v/en",
+}
 ] as PeggedAsset[];

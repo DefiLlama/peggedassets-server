@@ -102,6 +102,7 @@ import cash from "./stabl-fi";
 import dsu from "./digital-standard-unit";
 import electronicusd from "./electronic-usd";
 import hyusd from "./high-yield-usd";
+import usd3 from "./web-3-dollar";
 import eure from "./monerium-eur-money";
 import anonusd from "./offshift-anonusd";
 import nxusd from "./nxusd";
@@ -174,6 +175,8 @@ import buidl from "./blackrock-usd";
 import fxrusd from "./fx-rusd";
 import pxdc from "./powercity-pxdc";
 import fdx from "./fathom-dollar"
+import uno from "./nostra-uno";
+import cjpy from "./convertible-jpy-token";
 
 export default {
   tether,
@@ -280,6 +283,7 @@ export default {
   "digital-standard-unit": dsu,
   "electronic-usd": electronicusd,
   "high-yield-usd": hyusd,
+  "web-3-dollar": usd3,
   "monerium-eur-money": eure,
   "offshift-anonusd": anonusd,
   nxusd,
@@ -351,5 +355,7 @@ export default {
    "blackrock-usd-institutional-digital-liquidity-fund": buidl,
    "fx-rusd": fxrusd,
    "powercity-pxdc": pxdc,
-   "fathom-dollar": fdx
+   "fathom-dollar": fdx,
+   "nostra-uno": uno,
+   "convertible-jpy-token": cjpy,
 };
