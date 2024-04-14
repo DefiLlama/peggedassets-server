@@ -86,6 +86,8 @@ import usdw from "./usdw";
 import bob from "./bob";
 import usdr from "./real-usd";
 import uzd from "./zunami-protocol";
+import zunUSD from "./zun-usd"
+import zunETH from "./zun-eth"
 import bankofchain from "./bank-of-chain";
 import xai from "./xai";
 import iusd from "./iusd";
@@ -267,6 +269,8 @@ export default {
   bob,
   "real-usd": usdr,
   "zunami-protocol": uzd,
+  zunUSD,
+  zunETH,
   "bank-of-chain": bankofchain,
   xai,
   iusd,
