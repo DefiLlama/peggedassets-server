@@ -177,6 +177,7 @@ import pxdc from "./powercity-pxdc";
 import fdx from "./fathom-dollar"
 import uno from "./nostra-uno";
 import cjpy from "./convertible-jpy-token";
+import bread from "./bread"
 
 export default {
   tether,
@@ -358,4 +359,5 @@ export default {
    "fathom-dollar": fdx,
    "nostra-uno": uno,
    "convertible-jpy-token": cjpy,
+   "bread-fake-cg": bread
 };

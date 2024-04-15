@@ -3605,5 +3605,25 @@ export default [
  auditLinks: "https://docs.yamato.fi/v/en/audit",
  twitter: "https://twitter.com/YamatoProtocol",
  wiki: "https://docs.yamato.fi/v/en",
+},
+{
+  id: "180",
+ name: "Bread",
+ address: "gnosis:0xa555d5344f6fb6c65da19e403cb4c1ec4a1a5ee3",
+ symbol: "BREAD",
+ url: "https://breadchain.xyz",
+ description:
+   "A network of cooperatives projects building solidarity primitives.",
+ mintRedeemDescription:
+   "BREAD is linked to $DAI which is a stablecoin with equal value to USD. User deposited xdai and get bread",
+ onCoinGecko: "true",
+ gecko_id: "bread-fake-cg",
+ cmcId: null,
+ pegType: "peggedUSD",
+ pegMechanism: "crypto-backed",
+ priceSource: "defillama",
+ auditLinks: null,
+ twitter: "https://twitter.com/breadchain_",
+ wiki: null,
 }
 ] as PeggedAsset[];
