@@ -3606,7 +3606,7 @@ export default [
  twitter: "https://twitter.com/YamatoProtocol",
  wiki: "https://docs.yamato.fi/v/en",
 },
-  {
+{
   id: "180",
  name: "Bread",
  address: "gnosis:0xa555d5344f6fb6c65da19e403cb4c1ec4a1a5ee3",
@@ -3626,7 +3626,7 @@ export default [
  twitter: "https://twitter.com/breadchain_",
  wiki: null,
 },
- {
+{
    id: "181",
    name: "Zunami USD",
    address: "0x8C0D76C9B18779665475F3E212D9Ca1Ed6A1A0e6",
@@ -3637,7 +3637,7 @@ export default [
    mintRedeemDescription:
        "The Algorithmic Peg Stabilizer (APS) stands as the foundational mechanism for both minting and redeeming zunStables, as well as maintaining their peg to USD. The concept of APS draws inspiration from AMO of FRAX and bears resemblance to similar mechanisms such as Elixir from Alchemix.",
    onCoinGecko: "false",
-   gecko_id: null,
+   gecko_id: "zunUSD",
    cmcId: null,
    pegType: "peggedUSD",
    pegMechanism: "crypto-backed",
@@ -3657,7 +3657,7 @@ export default [
    mintRedeemDescription:
        "The Algorithmic Peg Stabilizer (APS) stands as the foundational mechanism for both minting and redeeming zunStables, as well as maintaining their peg to ETH. The concept of APS draws inspiration from AMO of FRAX and bears resemblance to similar mechanisms such as Elixir from Alchemix.",
    onCoinGecko: "false",
-   gecko_id: null,
+   gecko_id: "zunETH",
    cmcId: null,
    pegType: "peggedVAR",
    pegMechanism: "crypto-backed",
