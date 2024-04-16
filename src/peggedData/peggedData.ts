@@ -1716,6 +1716,7 @@ export default [
     twitter: "https://twitter.com/tangibleDAO",
     wiki: "https://wiki.defillama.com/wiki/Tangible",
   },
+  /*
   {
     id: "86",
     name: "Zunami USD",
@@ -1736,6 +1737,7 @@ export default [
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
   },
+  */
   {
     id: "87",
     name: "USDi",
