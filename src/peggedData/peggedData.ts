@@ -3606,7 +3606,7 @@ export default [
  twitter: "https://twitter.com/YamatoProtocol",
  wiki: "https://docs.yamato.fi/v/en",
 },
-{
+  {
   id: "180",
  name: "Bread",
  address: "gnosis:0xa555d5344f6fb6c65da19e403cb4c1ec4a1a5ee3",
@@ -3625,5 +3625,45 @@ export default [
  auditLinks: null,
  twitter: "https://twitter.com/breadchain_",
  wiki: null,
-}
+},
+ {
+   id: "181",
+   name: "Zunami USD",
+   address: "0x8C0D76C9B18779665475F3E212D9Ca1Ed6A1A0e6",
+   symbol: "zunUSD",
+   url: "https://www.zunami.io/",
+   description:
+       "zunUSD is an ERC-20 stablecoin minted using the USD Omnipool as collateral. The Omnipool functions as a Yield Aggregator, providing liquidity to multiple strategies and reinvesting profits.",
+   mintRedeemDescription:
+       "The Algorithmic Peg Stabilizer (APS) stands as the foundational mechanism for both minting and redeeming zunStables, as well as maintaining their peg to USD. The concept of APS draws inspiration from AMO of FRAX and bears resemblance to similar mechanisms such as Elixir from Alchemix.",
+   onCoinGecko: "false",
+   gecko_id: null,
+   cmcId: null,
+   pegType: "peggedUSD",
+   pegMechanism: "crypto-backed",
+   priceSource: "defillama",
+   auditLinks: "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
+   twitter: "https://twitter.com/ZunamiProtocol",
+   wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+ },
+ {
+   id: "182",
+   name: "Zunami ETH",
+   address: "0xc2e660C62F72c2ad35AcE6DB78a616215E2F2222",
+   symbol: "zunETH",
+   url: "https://www.zunami.io/",
+   description:
+       "zunETH is an ERC-20 stablecoin minted using the ETH Omnipool as collateral. The Omnipool functions as a Yield Aggregator, providing liquidity to multiple strategies and reinvesting profits.",
+   mintRedeemDescription:
+       "The Algorithmic Peg Stabilizer (APS) stands as the foundational mechanism for both minting and redeeming zunStables, as well as maintaining their peg to ETH. The concept of APS draws inspiration from AMO of FRAX and bears resemblance to similar mechanisms such as Elixir from Alchemix.",
+   onCoinGecko: "false",
+   gecko_id: null,
+   cmcId: null,
+   pegType: "peggedVAR",
+   pegMechanism: "crypto-backed",
+   priceSource: "defillama",
+   auditLinks: "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
+   twitter: "https://twitter.com/ZunamiProtocol",
+   wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+  },
 ] as PeggedAsset[];
