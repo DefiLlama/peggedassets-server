@@ -3606,8 +3606,28 @@ export default [
  twitter: "https://twitter.com/YamatoProtocol",
  wiki: "https://docs.yamato.fi/v/en",
 },
+  {
+  id: "180",
+ name: "Bread",
+ address: "gnosis:0xa555d5344f6fb6c65da19e403cb4c1ec4a1a5ee3",
+ symbol: "BREAD",
+ url: "https://breadchain.xyz",
+ description:
+   "A network of cooperatives projects building solidarity primitives.",
+ mintRedeemDescription:
+   "BREAD is linked to $DAI which is a stablecoin with equal value to USD. User deposited xdai and get bread",
+ onCoinGecko: "true",
+ gecko_id: "bread-fake-cg",
+ cmcId: null,
+ pegType: "peggedUSD",
+ pegMechanism: "crypto-backed",
+ priceSource: "defillama",
+ auditLinks: null,
+ twitter: "https://twitter.com/breadchain_",
+ wiki: null,
+},
  {
-   id: "180",
+   id: "181",
    name: "Zunami USD",
    address: "0x8C0D76C9B18779665475F3E212D9Ca1Ed6A1A0e6",
    symbol: "zunUSD",
@@ -3627,7 +3647,7 @@ export default [
    wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
  },
  {
-   id: "181",
+   id: "182",
    name: "Zunami ETH",
    address: "0xc2e660C62F72c2ad35AcE6DB78a616215E2F2222",
    symbol: "zunETH",
