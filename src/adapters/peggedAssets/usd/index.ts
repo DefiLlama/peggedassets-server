@@ -37,6 +37,9 @@ const chainContracts: ChainContracts = {
   base: {
     issued: ["0xB79DD08EA68A908A97220C76d19A6aA9cBDE4376"],
   },
+  blast: {
+    issued: ["0x4fEE793d435c6D2c10C135983BB9d6D4fC7B9BBd", "0x870a8F46b62B8BDeda4c02530C1750CddF2ED32e"]
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -98,6 +101,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   base: {
     minted: chainMinted("base", 6),
+    unreleased: async () => ({}),
+  },
+  blast: {
+    minted: chainMinted("blast", 18),
     unreleased: async () => ({}),
   },
 };
