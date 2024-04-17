@@ -53,7 +53,7 @@
     "@acala-network/api": "^3.0.2",
     "@connext/nxtp-contracts": "0.0.94",
     "@connext/nxtp-utils": "0.0.94",
-    "@defillama/sdk": "^4.0.44",
+    "@defillama/sdk": "^5.0.44",
     "@makerdao/multicall": "^0.12.0",
     "@polkadot/api": "^6.7.1",
     "@port.finance/port-sdk": "^0.1.42",
