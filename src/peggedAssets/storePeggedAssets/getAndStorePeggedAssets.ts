@@ -25,7 +25,7 @@ type EmptyObject = { [key: string]: undefined };
 
 async function getPeggedAsset(
   unixTimestamp: number,
-  ethBlock: number,
+  ethBlock: number | undefined,
   chainBlocks: ChainBlocks | undefined,
   peggedAsset: PeggedAsset,
   peggedBalances: PeggedAssetIssuance,
@@ -243,7 +243,7 @@ const timeout = (prom: any, time: number, peggedID: string, chain: string) =>
 
 export async function storePeggedAsset(
   unixTimestamp: number,
-  ethBlock: number,
+  ethBlock: number|undefined,
   chainBlocks: ChainBlocks | undefined,
   peggedAsset: PeggedAsset,
   module: any,
