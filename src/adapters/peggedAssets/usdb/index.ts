@@ -14,9 +14,7 @@ type ChainContracts = {
 
 const chainContracts: ChainContracts = {
   blast: {
-    issued: [
-      "0x4300000000000000000000000000000000000003",
-    ],
+    issued: ["0x4300000000000000000000000000000000000003"],
   },
 };
 

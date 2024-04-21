@@ -29,8 +29,8 @@ const chainContracts = {
     bridgedFromETH: "0x221743dc9e954be4f86844649bf19b43d6f8366d",
   },
   base: {
-    bridgedFromETH: "0x4621b7A9c75199271F773Ebd9A499dbd165c3191"
-  }
+    bridgedFromETH: "0x4621b7A9c75199271F773Ebd9A499dbd165c3191",
+  },
 };
 
 async function ethereumMinted() {

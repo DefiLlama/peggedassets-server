@@ -3216,7 +3216,7 @@ export default [
     mintRedeemDescription:
       "The Sovryn Dollar (DLLR) is minted through Mynt, a smart contract system, by aggregating various BTC-backed stablecoins into a single, more resilient stablecoin",
     onCoinGecko: false,
-    gecko_id: "sovryn-dollar", 
+    gecko_id: "sovryn-dollar",
     cmcId: "27363",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3236,7 +3236,7 @@ export default [
     mintRedeemDescription:
       "All funded EURD can be redeemed 1:1 to the whitelisted bank account of the EURD users",
     onCoinGecko: false,
-    gecko_id: "quantoz-eurd", 
+    gecko_id: "quantoz-eurd",
     cmcId: null,
     pegType: "peggedEUR",
     pegMechanism: "fiat-backed",
@@ -3256,14 +3256,14 @@ export default [
     mintRedeemDescription:
       "Its purpose is to act as a trustless stablecoin translation device - meaning it facilitates the conversion of multiple USD-pegged stablecoins with each other at a fixed 1:1 ratio.",
     onCoinGecko: false,
-    gecko_id: "xusd-babelfish", 
+    gecko_id: "xusd-babelfish",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/babelfishmoney",
-    wiki: null
+    wiki: null,
   },
   {
     id: "163",
@@ -3283,7 +3283,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/PrismaFi",
-    wiki: null
+    wiki: null,
   },
   {
     id: "164",
@@ -3303,7 +3303,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/pagolinea",
-    wiki: null
+    wiki: null,
   },
   {
     id: "165",
@@ -3323,7 +3323,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/audd_digital",
-    wiki: null
+    wiki: null,
   },
   {
     id: "166",
@@ -3343,7 +3343,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/CygnusFi",
-    wiki: "https://wiki.cygnus.finance/whitepaper"
+    wiki: "https://wiki.cygnus.finance/whitepaper",
   },
   {
     id: "167",
@@ -3372,7 +3372,8 @@ export default [
     url: "https://fx.aladdin.club/",
     description:
       "fxUSD is unlike anything else in DeFi. It is the first truly decentralized stablecoin with the scalability to compete toe-to-toe with centralized offerings. Its combination of strong peg, built in yield and zero slippage swapping makes it extremely user friendly, while the ingenious economic design grows the available liquidity automatically as a byproduct of providing serious value to constituent LSDs.",
-    mintRedeemDescription: "Users are able to mint and redeem with USDC,USDT,SETH and more",
+    mintRedeemDescription:
+      "Users are able to mint and redeem with USDC,USDT,SETH and more",
     onCoinGecko: "false",
     gecko_id: "f-x-protocol-usd", //fcoingecko
     cmcId: null,
@@ -3451,7 +3452,7 @@ export default [
     id: "172",
     name: "USDB Blast",
     address: "blast:0x4300000000000000000000000000000000000003",
-    symbol: "USDB", 
+    symbol: "USDB",
     url: "https://blast.io",
     description:
       "The only Ethereum L2 with native yield for ETH and stablecoins.",
@@ -3471,7 +3472,7 @@ export default [
     id: "173",
     name: "BlackRock USD",
     address: "0x7712c34205737192402172409a8F7ccef8aA2AEc",
-    symbol: "BUIDL", 
+    symbol: "BUIDL",
     url: "https://www.blackrock.com/",
     description:
       "The BlackRock USD Institutional Digital Liquidity Fund is represented by the blockchain-based BUIDL token, is fully backed by cash, U.S. Treasury bills, and repurchase agreements, and will provide yield paid out via blockchain rails every day to token holders, according to a press release.",
@@ -3491,12 +3492,11 @@ export default [
     id: "174",
     name: "rUSD",
     address: "0x65d72aa8da931f047169112fcf34f52dbaae7d18",
-    symbol: "rUSD", 
+    symbol: "rUSD",
     url: "https://fx.aladdin.club/assets/rUSD",
     description:
       "rUSD is a stablecoin that uses the same mechanism as fxUSD, but with its reserve comprised of only ETH Liquid Restaking Tokens (LRT), starting with Ether.fi’s eETH.",
-    mintRedeemDescription:
-      "User can mint using LRT (starting with eETH).",
+    mintRedeemDescription: "User can mint using LRT (starting with eETH).",
     onCoinGecko: "true",
     gecko_id: "fx-rusd",
     cmcId: null,
@@ -3523,7 +3523,8 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "coingecko",
-    auditLinks: "https://omniscia.io/reports/powercity-earn-implementation-646b3050e69c940014643ed6",
+    auditLinks:
+      "https://omniscia.io/reports/powercity-earn-implementation-646b3050e69c940014643ed6",
     twitter: "https://twitter.com/POWERCITYio",
     wiki: "https://docs.powercity.io/earn-protocol",
   },
@@ -3569,13 +3570,12 @@ export default [
     wiki: null,
   },
   {
-     id: "178",
+    id: "178",
     name: "Web 3 Dollar",
     address: "0x0d86883FAf4FfD7aEb116390af37746F45b6f378",
     symbol: "USD3",
     url: "https://app.reserve.org/ethereum/token/0x0d86883faf4ffd7aeb116390af37746f45b6f378/overview",
-    description:
-      "Earn the DeFi rate any time you're in stables",
+    description: "Earn the DeFi rate any time you're in stables",
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: null,
@@ -3587,86 +3587,88 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/USD_3",
     wiki: "https://app.reserve.org/ethereum/token/0x0d86883faf4ffd7aeb116390af37746f45b6f378/overview",
- },
- {
-  id: "179",
- name: "CJPY",
- address: "0x1cfa5641c01406ab8ac350ded7d735ec41298372",
- symbol: "CJPY",
- url: "https://app.yamato.fi/#/",
- description:
-   "Yamato Protocol is a crypto-asset overcollateralized stable coin issuance protocol. V1 allows the issuance of CJPY (“Convertible JPY”, a Japanese Yen equivalent coin) using ETH as collateral.",
- mintRedeemDescription:
-   "Users deposit ETH as collateral to generate the debt token CJPY.",
- onCoinGecko: "true",
- gecko_id: "convertible-jpy-token",
- cmcId: null,
- pegType: "peggedJPY",
- pegMechanism: "crypto-backed",
- priceSource: "coingecko",
- auditLinks: "https://docs.yamato.fi/v/en/audit",
- twitter: "https://twitter.com/YamatoProtocol",
- wiki: "https://docs.yamato.fi/v/en",
-},
-{
-  id: "180",
- name: "Bread",
- address: "gnosis:0xa555d5344f6fb6c65da19e403cb4c1ec4a1a5ee3",
- symbol: "BREAD",
- url: "https://breadchain.xyz",
- description:
-   "A network of cooperatives projects building solidarity primitives.",
- mintRedeemDescription:
-   "BREAD is linked to $DAI which is a stablecoin with equal value to USD. User deposited xdai and get bread",
- onCoinGecko: "true",
- gecko_id: "bread-fake-cg",
- cmcId: null,
- pegType: "peggedUSD",
- pegMechanism: "crypto-backed",
- priceSource: "defillama",
- auditLinks: null,
- twitter: "https://twitter.com/breadchain_",
- wiki: null,
-},
-{
-   id: "181",
-   name: "Zunami USD",
-   address: "0x8C0D76C9B18779665475F3E212D9Ca1Ed6A1A0e6",
-   symbol: "zunUSD",
-   url: "https://www.zunami.io/",
-   description:
-       "zunUSD is an ERC-20 stablecoin minted using the USD Omnipool as collateral. The Omnipool functions as a Yield Aggregator, providing liquidity to multiple strategies and reinvesting profits.",
-   mintRedeemDescription:
-       "The Algorithmic Peg Stabilizer (APS) stands as the foundational mechanism for both minting and redeeming zunStables, as well as maintaining their peg to USD. The concept of APS draws inspiration from AMO of FRAX and bears resemblance to similar mechanisms such as Elixir from Alchemix.",
-   onCoinGecko: "false",
-   gecko_id: "zunUSD",
-   cmcId: null,
-   pegType: "peggedUSD",
-   pegMechanism: "crypto-backed",
-   priceSource: "defillama",
-   auditLinks: "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
-   twitter: "https://twitter.com/ZunamiProtocol",
-   wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
- },
- {
-   id: "182",
-   name: "Zunami ETH",
-   address: "0xc2e660C62F72c2ad35AcE6DB78a616215E2F2222",
-   symbol: "zunETH",
-   url: "https://www.zunami.io/",
-   description:
-       "zunETH is an ERC-20 stablecoin minted using the ETH Omnipool as collateral. The Omnipool functions as a Yield Aggregator, providing liquidity to multiple strategies and reinvesting profits.",
-   mintRedeemDescription:
-       "The Algorithmic Peg Stabilizer (APS) stands as the foundational mechanism for both minting and redeeming zunStables, as well as maintaining their peg to ETH. The concept of APS draws inspiration from AMO of FRAX and bears resemblance to similar mechanisms such as Elixir from Alchemix.",
-   onCoinGecko: "false",
-   gecko_id: "zunETH",
-   cmcId: null,
-   pegType: "peggedVAR",
-   pegMechanism: "crypto-backed",
-   priceSource: "defillama",
-   auditLinks: "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
-   twitter: "https://twitter.com/ZunamiProtocol",
-   wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+  },
+  {
+    id: "179",
+    name: "CJPY",
+    address: "0x1cfa5641c01406ab8ac350ded7d735ec41298372",
+    symbol: "CJPY",
+    url: "https://app.yamato.fi/#/",
+    description:
+      "Yamato Protocol is a crypto-asset overcollateralized stable coin issuance protocol. V1 allows the issuance of CJPY (“Convertible JPY”, a Japanese Yen equivalent coin) using ETH as collateral.",
+    mintRedeemDescription:
+      "Users deposit ETH as collateral to generate the debt token CJPY.",
+    onCoinGecko: "true",
+    gecko_id: "convertible-jpy-token",
+    cmcId: null,
+    pegType: "peggedJPY",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: "https://docs.yamato.fi/v/en/audit",
+    twitter: "https://twitter.com/YamatoProtocol",
+    wiki: "https://docs.yamato.fi/v/en",
+  },
+  {
+    id: "180",
+    name: "Bread",
+    address: "gnosis:0xa555d5344f6fb6c65da19e403cb4c1ec4a1a5ee3",
+    symbol: "BREAD",
+    url: "https://breadchain.xyz",
+    description:
+      "A network of cooperatives projects building solidarity primitives.",
+    mintRedeemDescription:
+      "BREAD is linked to $DAI which is a stablecoin with equal value to USD. User deposited xdai and get bread",
+    onCoinGecko: "true",
+    gecko_id: "bread-fake-cg",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/breadchain_",
+    wiki: null,
+  },
+  {
+    id: "181",
+    name: "Zunami USD",
+    address: "0x8C0D76C9B18779665475F3E212D9Ca1Ed6A1A0e6",
+    symbol: "zunUSD",
+    url: "https://www.zunami.io/",
+    description:
+      "zunUSD is an ERC-20 stablecoin minted using the USD Omnipool as collateral. The Omnipool functions as a Yield Aggregator, providing liquidity to multiple strategies and reinvesting profits.",
+    mintRedeemDescription:
+      "The Algorithmic Peg Stabilizer (APS) stands as the foundational mechanism for both minting and redeeming zunStables, as well as maintaining their peg to USD. The concept of APS draws inspiration from AMO of FRAX and bears resemblance to similar mechanisms such as Elixir from Alchemix.",
+    onCoinGecko: "false",
+    gecko_id: "zunUSD",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks:
+      "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
+    twitter: "https://twitter.com/ZunamiProtocol",
+    wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+  },
+  {
+    id: "182",
+    name: "Zunami ETH",
+    address: "0xc2e660C62F72c2ad35AcE6DB78a616215E2F2222",
+    symbol: "zunETH",
+    url: "https://www.zunami.io/",
+    description:
+      "zunETH is an ERC-20 stablecoin minted using the ETH Omnipool as collateral. The Omnipool functions as a Yield Aggregator, providing liquidity to multiple strategies and reinvesting profits.",
+    mintRedeemDescription:
+      "The Algorithmic Peg Stabilizer (APS) stands as the foundational mechanism for both minting and redeeming zunStables, as well as maintaining their peg to ETH. The concept of APS draws inspiration from AMO of FRAX and bears resemblance to similar mechanisms such as Elixir from Alchemix.",
+    onCoinGecko: "false",
+    gecko_id: "zunETH",
+    cmcId: null,
+    pegType: "peggedVAR",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks:
+      "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
+    twitter: "https://twitter.com/ZunamiProtocol",
+    wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
   },
   {
     id: "183",
@@ -3675,9 +3677,9 @@ export default [
     symbol: "BtcUSD",
     url: "https://www.btcfi.one/dashboard",
     description:
-        "BTCFi is a way for Bitcoin holders to earn passive income while maintaining their BTC positions. By using Bitcoin as a collateral to mint BtcUSD, users can utilize Bitcoin as a way to access DeFi and the opportunities offered by it",
+      "BTCFi is a way for Bitcoin holders to earn passive income while maintaining their BTC positions. By using Bitcoin as a collateral to mint BtcUSD, users can utilize Bitcoin as a way to access DeFi and the opportunities offered by it",
     mintRedeemDescription:
-        "Users are able to deposited WBTC or BTCBA and mint btcusd",
+      "Users are able to deposited WBTC or BTCBA and mint btcusd",
     onCoinGecko: "true",
     gecko_id: "bitcoin-usd-btcfi",
     cmcId: null,
@@ -3687,5 +3689,5 @@ export default [
     auditLinks: null,
     twitter: null,
     wiki: "https://docs.bifrostnetwork.com/eng.btcfi.one",
-   },
+  },
 ] as PeggedAsset[];

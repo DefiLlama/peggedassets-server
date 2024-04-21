@@ -938,48 +938,48 @@ export const chainCoingeckoIds = {
     cmcId: "8279",
     categories: ["Cosmos"],
   },
-  "Concordium": {
+  Concordium: {
     geckoId: "concordium",
     symbol: "CCD",
     cmcId: "18031",
   },
-  "Sui": {
+  Sui: {
     geckoId: "sui",
-    github: ['MystenLabs'],
+    github: ["MystenLabs"],
     symbol: "SUI",
     cmcId: "20947",
   },
-  "Blast": {
+  Blast: {
     geckoId: null,
     symbol: null,
     cmcId: null,
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
-      types: ["L2", "gas"]
+      types: ["L2", "gas"],
     },
   },
-  "Mode": {
+  Mode: {
     geckoId: "mode",
     symbol: "MODE",
     cmcId: null,
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
-      types: ["L2", "gas"]
+      types: ["L2", "gas"],
     },
   },
-  "Manta": {
+  Manta: {
     geckoId: "manta-network",
     symbol: "MANTA",
     cmcId: "13631",
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
-      types: ["L2", "gas"]
+      types: ["L2", "gas"],
     },
   },
-  "PulseChain": {
+  PulseChain: {
     geckoId: "pulsechain",
     symbol: "PLS",
     cmcId: null,
@@ -1248,7 +1248,7 @@ export function getChainDisplayName(
     case "pulse":
       return "PulseChain";
     case "bfc":
-      return "Bifrost Network"
+      return "Bifrost Network";
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

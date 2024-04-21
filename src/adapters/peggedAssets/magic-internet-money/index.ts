@@ -82,7 +82,7 @@ const bridgedChainContracts: ChainContracts = {
   blast: {
     address: "0x76da31d7c9cbeae102aff34d3398bc450c8374c1",
     cauldrons: ["0x79e8cad80e2aa49a246b789584c45aab1cfe402e"],
-    bentoboxes: ["0xc8f5eb8a632f9600d1c7bc91e97dad5f8b1e3748"]
+    bentoboxes: ["0xc8f5eb8a632f9600d1c7bc91e97dad5f8b1e3748"],
   },
   bsc: {
     address: "0xfe19f0b51438fd612f6fd59c1dbb3ea319f433ba",
@@ -186,7 +186,7 @@ async function chainReleased(
   decimals: number,
   bridged: boolean
 ) {
-  return async function(
+  return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks

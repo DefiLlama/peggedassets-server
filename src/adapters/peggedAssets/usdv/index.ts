@@ -91,11 +91,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: async () => ({}),
   },
   polygon: {
-    minted: bridgedSupply(
-      "polygon",
-      6,
-      chainContracts.polygon.bridgedFromETH
-    ),
+    minted: bridgedSupply("polygon", 6, chainContracts.polygon.bridgedFromETH),
     unreleased: async () => ({}),
   },
   tomochain: {

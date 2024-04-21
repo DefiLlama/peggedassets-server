@@ -61,7 +61,7 @@ export default async (
         peggedID,
         `Circulating has 5x (${change}) within one hour, disabling it`,
       ]);
-      const errorMessage = `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour, disabling it`
+      const errorMessage = `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour, disabling it`;
       await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK!);
       throw new Error(errorMessage);
     } else {
@@ -77,11 +77,11 @@ export default async (
     }
   }
   if (
-    lastHourlyCirculating/2 > currentCirculating &&
+    lastHourlyCirculating / 2 > currentCirculating &&
     currentCirculating !== 0 &&
     Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR
   ) {
-    const errorMessage=`Circulating for ${peggedAsset.name} has dropped >50% within one hour, disabling it`
+    const errorMessage = `Circulating for ${peggedAsset.name} has dropped >50% within one hour, disabling it`;
     await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK!);
     throw new Error(errorMessage);
   }

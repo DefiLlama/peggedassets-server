@@ -1,7 +1,5 @@
 const sdk = require("@defillama/sdk");
-import {
-  sumSingleBalance,
-} from "../helper/generalUtil";
+import { sumSingleBalance } from "../helper/generalUtil";
 
 import {
   ChainBlocks,
@@ -23,7 +21,7 @@ const chainContracts: ChainContracts = {
   bsc: {
     issued: ["0xc5f0f7b66764f6ec8c8dff7ba683102295e16409"],
   },
-}
+};
 
 async function chainMinted(chain: string, decimals: number) {
   return async function (

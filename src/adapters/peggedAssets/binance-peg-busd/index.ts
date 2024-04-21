@@ -31,7 +31,7 @@ type ChainContracts = {
 const chainContracts: ChainContracts = {
   bsc: {
     issued: ["0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"],
-    reserves: ["0x0000000000000000000000000000000000001004",],
+    reserves: ["0x0000000000000000000000000000000000001004"],
   },
   avax: {
     issued: ["0x9C9e5fD8bbc25984B178FdCE6117Defa39d2db39"],
@@ -52,11 +52,11 @@ const chainContracts: ChainContracts = {
   },
   tron: {
     issued: ["TMz2SWatiAtZVVcH2ebpsbVtYwUPT9EdjH"],
-    reserves: ["TDE6LDhCfAQbaxs5RLgjJmYbtP5YyorQeh"]
+    reserves: ["TDE6LDhCfAQbaxs5RLgjJmYbtP5YyorQeh"],
   },
   binance: {
     issued: ["bnb19v2ayq6k6e5x6ny3jdutdm6kpqn3n6mxheegvj"],
-    reserves: ["bnb1v8vkkymvhe2sf7gd2092ujc6hweta38xadu2pj"]
+    reserves: ["bnb1v8vkkymvhe2sf7gd2092ujc6hweta38xadu2pj"],
   },
   solana: {
     bridgedFromBSC: ["5RpUwQ8wtdPCZHhu6MERp2RGrpobsbZ6MH5dDHkUjs2"], // wormhole
@@ -133,13 +133,13 @@ const chainContracts: ChainContracts = {
   },
   theta: {
     bridgedFromBSC: ["0x7B37d0787A3424A0810E02b24743a45eBd5530B2"], // multichain
-  },/*
+  } /*
   kava: {
     bridgeOnBNB: [
       "bnb1skl4n4vrzx3ty9ujaut8rmkhkmtl4t04ysllfm", // cold wallets on BNB chain
       "bnb10zq89008gmedc6rrwzdfukjk94swynd7dl97w8",
     ],
-  },*/
+  },*/,
   klaytn: {
     bridgedFromBSC: ["0x210bc03f49052169d5588a52c317f71cf2078b85"], // orbit
   },
@@ -190,7 +190,6 @@ async function chainMinted(chain: string, decimals: number) {
   };
 }
 
-
 async function kavaMinted(owners: string[]) {
   return async function (
     _timestamp: number,
@@ -215,7 +214,6 @@ async function kavaMinted(owners: string[]) {
     return balances;
   };
 }
-
 
 async function polyNetworkBridged(
   chainID: number,
@@ -267,9 +265,6 @@ async function chainUnreleased(chain: string, decimals: number) {
   };
 }
 
-
-
-
 const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: chainMinted("bsc", 18),
@@ -311,12 +306,12 @@ const adapter: PeggedIssuanceAdapter = {
     minted: async () => ({}),
     unreleased: async () => ({}),
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
-  },/*
+  } /*
   fuse: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     bsc: bridgedSupply("fuse", 18, chainContracts.fuse.bridgedFromBSC),
-  },*/
+  },*/,
   meter: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -414,12 +409,12 @@ const adapter: PeggedIssuanceAdapter = {
       "multichain",
       "BSC"
     ),
-  },/*
+  } /*
   kava: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     bsc: kavaMinted(chainContracts.kava.bridgeOnBNB),
-  },*/
+  },*/,
   klaytn: {
     minted: async () => ({}),
     unreleased: async () => ({}),

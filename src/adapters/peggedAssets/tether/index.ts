@@ -27,13 +27,12 @@ import {
 } from "../helper/tron";
 import { sumMultipleBalanceFunctions } from "../helper/generalUtil";
 import { mixinSupply } from "../helper/mixin";
-import { chainContracts } from './config';
+import { chainContracts } from "./config";
 const axios = require("axios");
 const retry = require("async-retry");
 
 // If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain and fuse
 // any bridgeOnETH contracts are not used and are just for info purposes
-
 
 /*
 Tezos is using USDT's API for now but could probably be easily moved to other API.
@@ -452,9 +451,19 @@ async function suiBridged() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const res = await axios.get(`https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdt`)
-    const totalSupply = parseInt(res.data.find((t: any) => t.coin === "USDT_ETH").cumulative_balance);
-    sumSingleBalance(balances, "peggedUSD", totalSupply, "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c", true);
+    const res = await axios.get(
+      `https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdt`
+    );
+    const totalSupply = parseInt(
+      res.data.find((t: any) => t.coin === "USDT_ETH").cumulative_balance
+    );
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      totalSupply,
+      "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c",
+      true
+    );
     return balances;
   };
 }
@@ -690,7 +699,7 @@ const adapter: PeggedIssuanceAdapter = {
   sui: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: suiBridged()
+    ethereum: suiBridged(),
   },
   syscoin: {
     minted: async () => ({}),

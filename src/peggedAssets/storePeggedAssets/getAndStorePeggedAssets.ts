@@ -243,7 +243,7 @@ const timeout = (prom: any, time: number, peggedID: string, chain: string) =>
 
 export async function storePeggedAsset(
   unixTimestamp: number,
-  ethBlock: number|undefined,
+  ethBlock: number | undefined,
   chainBlocks: ChainBlocks | undefined,
   peggedAsset: PeggedAsset,
   module: any,

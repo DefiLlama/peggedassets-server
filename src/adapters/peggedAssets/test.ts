@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 const path = require("path");
 const { chainsForBlocks } = require("@defillama/sdk/build/computeTVL/blocks");
 const { getLatestBlock } = require("@defillama/sdk/build/util/index");
@@ -221,8 +221,8 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
               pegType,
               bridgedFromMapping
             );
-          } catch(e){
-            console.log(`Failed on ${chain}:${issuanceType}`, e)
+          } catch (e) {
+            console.log(`Failed on ${chain}:${issuanceType}`, e);
           }
         }
       );

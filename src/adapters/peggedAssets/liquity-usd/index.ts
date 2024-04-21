@@ -122,13 +122,17 @@ const adapter: PeggedIssuanceAdapter = {
   polygon_zkevm: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply("polygon_zkevm", 18, chainContracts.polygon_zkevm.bridgedFromETH),
+    ethereum: bridgedSupply(
+      "polygon_zkevm",
+      18,
+      chainContracts.polygon_zkevm.bridgedFromETH
+    ),
   },
   era: {
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: bridgedSupply("era", 18, chainContracts.era.bridgedFromETH),
-  }
+  },
 };
 
 export default adapter;

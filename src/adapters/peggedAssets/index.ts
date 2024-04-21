@@ -86,8 +86,8 @@ import usdw from "./usdw";
 import bob from "./bob";
 import usdr from "./real-usd";
 import uzd from "./zunami-protocol";
-import zunUSD from "./zun-usd"
-import zunETH from "./zun-eth"
+import zunUSD from "./zun-usd";
+import zunETH from "./zun-eth";
 import bankofchain from "./bank-of-chain";
 import xai from "./xai";
 import iusd from "./iusd";
@@ -161,7 +161,7 @@ import vnxau from "./vnx-gold";
 import veur from "./vnx-euro";
 import vchf from "./vnx-swiss-franc";
 import usdrif from "./usd-rif";
-import dllr from "./sovryn-dollar"
+import dllr from "./sovryn-dollar";
 import eurd from "./quantoz-eurd";
 import xusd from "./xusd-babelfish";
 import ultra from "./prismalrt-ultra";
@@ -176,11 +176,11 @@ import usdbblast from "./usdb";
 import buidl from "./blackrock-usd";
 import fxrusd from "./fx-rusd";
 import pxdc from "./powercity-pxdc";
-import fdx from "./fathom-dollar"
+import fdx from "./fathom-dollar";
 import uno from "./nostra-uno";
 import cjpy from "./convertible-jpy-token";
 import bread from "./bread";
-import btcusd from "./bitcoin-usd-btcfi"
+import btcusd from "./bitcoin-usd-btcfi";
 
 export default {
   tether,
@@ -239,7 +239,7 @@ export default {
   "stasis-eurs": stasis,
   "celo-euro": ceur,
   seur,
-  "ageur": eura,
+  ageur: eura,
   "par-stablecoin": par,
   "hedge-usd": ush,
   "three-usd": threeusd,
@@ -324,7 +324,7 @@ export default {
   "phase-dollar": phase,
   "inter-stable-token": inter,
   "e-money-eur": eeur,
-  'collateralized-debt-token': cdt,
+  "collateralized-debt-token": cdt,
   "aryze-eusd": aeusd,
   "aryze-eeur": aeeur,
   "aryze-egbp": aegbp, //if does not work, will test without aegbp, using only coingecko but since its the terminal not sure, will keep an eye
@@ -350,20 +350,20 @@ export default {
   "quantoz-eurd": eurd,
   "xusd-babelfish": xusd,
   "prismalrt-ultra": ultra,
-   usdcb,  //fake coingecko, there is nothing with that id
-   "novatti-australian-digital-dollar": audd,
-   "cygnus-finance-global-usd": cgusd,
-   "f-x-protocol-fractional-eth": feth,
-   "f-x-protocol-usd": fxusd,
-   euro3, //since its the real coingecko id + same symbol we good with this. I think no need to "euro3": euro3 
-   "let-s-get-hai": hai,
-   "usdb": usdbblast,
-   "blackrock-usd-institutional-digital-liquidity-fund": buidl,
-   "fx-rusd": fxrusd,
-   "powercity-pxdc": pxdc,
-   "fathom-dollar": fdx,
-   "nostra-uno": uno,
-   "convertible-jpy-token": cjpy,
-   "bread-fake-cg": bread,
-   "bitcoin-usd-btcfi": btcusd
+  usdcb, //fake coingecko, there is nothing with that id
+  "novatti-australian-digital-dollar": audd,
+  "cygnus-finance-global-usd": cgusd,
+  "f-x-protocol-fractional-eth": feth,
+  "f-x-protocol-usd": fxusd,
+  euro3, //since its the real coingecko id + same symbol we good with this. I think no need to "euro3": euro3
+  "let-s-get-hai": hai,
+  usdb: usdbblast,
+  "blackrock-usd-institutional-digital-liquidity-fund": buidl,
+  "fx-rusd": fxrusd,
+  "powercity-pxdc": pxdc,
+  "fathom-dollar": fdx,
+  "nostra-uno": uno,
+  "convertible-jpy-token": cjpy,
+  "bread-fake-cg": bread,
+  "bitcoin-usd-btcfi": btcusd,
 };

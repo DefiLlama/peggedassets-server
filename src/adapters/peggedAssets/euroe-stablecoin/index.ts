@@ -1,6 +1,6 @@
 const sdk = require("@defillama/sdk");
 import fetch from "node-fetch";
-import { sumSingleBalance,  } from "../helper/generalUtil";
+import { sumSingleBalance } from "../helper/generalUtil";
 import { solanaMintedOrBridged } from "../helper/getSupply";
 import {
   ChainBlocks,
@@ -47,13 +47,20 @@ async function concordiumMinted(apiEndpoint: string, decimals: number) {
       const res = await fetch(apiEndpoint);
 
       if (!res.ok) {
-        throw new Error(`Failed to fetch data from Concordium API. Status: ${res.status}`);
+        throw new Error(
+          `Failed to fetch data from Concordium API. Status: ${res.status}`
+        );
       }
 
       const totalSupply = parseFloat(await res.text());
       const formattedTotalSupply = Number(totalSupply.toFixed(decimals));
-      sumSingleBalance(balances, "peggedEUR", formattedTotalSupply, apiEndpoint, true);
-
+      sumSingleBalance(
+        balances,
+        "peggedEUR",
+        formattedTotalSupply,
+        apiEndpoint,
+        true
+      );
     } catch (error) {
       console.error(`Error fetching data from Concordium API: ${error}`);
     }
