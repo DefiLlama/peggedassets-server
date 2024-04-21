@@ -985,6 +985,12 @@ export const chainCoingeckoIds = {
     cmcId: null,
     categories: ["EVM"],
   },
+  "Bifrost Network": {
+    geckoId: "bifrost",
+    symbol: "BFC",
+    cmcId: "7817",
+    categories: ["EVM"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1241,6 +1247,8 @@ export function getChainDisplayName(
       return "Manta";
     case "pulse":
       return "PulseChain";
+    case "bfc":
+      return "Bifrost Network"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
