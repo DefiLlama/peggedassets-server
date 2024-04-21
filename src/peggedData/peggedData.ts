@@ -3668,4 +3668,24 @@ export default [
    twitter: "https://twitter.com/ZunamiProtocol",
    wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
   },
+  {
+    id: "183",
+    name: "Bitcoin USD",
+    address: "bfc:0x6906ccda405926fc3f04240187dd4fad5df6d555",
+    symbol: "BtcUSD",
+    url: "https://www.btcfi.one/dashboard",
+    description:
+        "BTCFi is a way for Bitcoin holders to earn passive income while maintaining their BTC positions. By using Bitcoin as a collateral to mint BtcUSD, users can utilize Bitcoin as a way to access DeFi and the opportunities offered by it",
+    mintRedeemDescription:
+        "Users are able to deposited WBTC or BTCBA and mint btcusd",
+    onCoinGecko: "true",
+    gecko_id: "bitcoin-usd-btcfi",
+    cmcId: null,
+    pegType: "peggedVAR",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: null,
+    wiki: "https://docs.bifrostnetwork.com/eng.btcfi.one",
+   },
 ] as PeggedAsset[];
