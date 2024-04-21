@@ -88,7 +88,6 @@ Frax works differently from other stables, bridged amounts don't matter.
 See: https://docs.frax.finance/cross-chain/bridge
 */
 
-
 async function fraxMinted() {
   return async function (
     _timestamp: number,
@@ -103,7 +102,10 @@ async function fraxMinted() {
       const data = response.data;
 
       // Calculate total supply
-      const totalSupply = (data.totalLiabilities - data.categorySummaryUsd["asset:owned:frax"]) - data.totalLockedLiquidity
+      const totalSupply =
+        data.totalLiabilities -
+        data.categorySummaryUsd["asset:owned:frax"] -
+        data.totalLockedLiquidity;
       const supply = totalSupply;
       sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
       return balances;
@@ -180,7 +182,10 @@ const adapter: PeggedIssuanceAdapter = {
   near: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: nearBridged("853d955acef822db058eb8505911ed77f175b99e.factory.bridge.near", 18),
+    ethereum: nearBridged(
+      "853d955acef822db058eb8505911ed77f175b99e.factory.bridge.near",
+      18
+    ),
   },
   harmony: {
     minted: async () => ({}),

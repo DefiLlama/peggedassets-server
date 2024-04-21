@@ -22,8 +22,8 @@ const timeout = (prom: any, time: number, peggedID: string) =>
   );
 
 async function iteratePeggedAssets(peggedIndexes: number[]) {
-  const timestamp = getCurrentUnixTimestamp()
-  const ethereumBlock = undefined
+  const timestamp = getCurrentUnixTimestamp();
+  const ethereumBlock = undefined;
   if (timestamp) {
     const actions = peggedIndexes
       .map((idx) => peggedAssets[idx])

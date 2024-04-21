@@ -23,11 +23,9 @@ import {
   PeggedAssetType,
 } from "../peggedAsset.type";
 import { mixinSupply } from "../helper/mixin";
-import { chainContracts } from './config';
+import { chainContracts } from "./config";
 const axios = require("axios");
 const retry = require("async-retry");
-
-
 
 /*
 Sora: can't find API call that works 0x0001d8f1f93b103d8619d367dbecea3182e5546bea164355fe7decc8be301f63
@@ -95,10 +93,9 @@ async function fromETH(
   decimals: number,
   pegType?: PeggedAssetType
 ) {
-
   const targets = [
     "0x83F20F44975D03b1b09e64809B757c47f942BEeA",
-    "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+    "0x6B175474E89094C44Da98b954EedeAC495271d0F",
   ];
 
   return async function (
@@ -140,7 +137,6 @@ async function fromETH(
     return balances;
   };
 }
-
 
 async function reinetworkMinted(address: string, decimals: number) {
   return async function (

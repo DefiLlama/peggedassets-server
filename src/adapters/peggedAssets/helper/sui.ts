@@ -1,32 +1,38 @@
-import http from '../llama-helper/http';
+import http from "../llama-helper/http";
 //import { getEnv } from '../helper/env';
 
-
 interface CallOptions {
-    withMetadata?: boolean;
-  }
-  
-  const endpoint = (): string => ('https://fullnode.mainnet.sui.io/');
-  
-  async function getObject(objectId: string): Promise<any> {
-    return (await call('sui_getObject', [objectId, {
-      "showType": true,
-      "showOwner": true,
-      "showContent": true,
-    }])).content;
-  }
-   
-  async function call(method: string, params: any, { withMetadata = false }: CallOptions = {}): Promise<any> {
-    if (!Array.isArray(params)) params = [params];
-    const {
-      result
-    } = await http.post(endpoint(), { jsonrpc: "2.0", id: 1, method, params });
-    return withMetadata ? result : result.data;
-  }
+  withMetadata?: boolean;
+}
 
+const endpoint = (): string => "https://fullnode.mainnet.sui.io/";
 
-export {
-  endpoint,
-  call,
-  getObject,
-};
+async function getObject(objectId: string): Promise<any> {
+  return (
+    await call("sui_getObject", [
+      objectId,
+      {
+        showType: true,
+        showOwner: true,
+        showContent: true,
+      },
+    ])
+  ).content;
+}
+
+async function call(
+  method: string,
+  params: any,
+  { withMetadata = false }: CallOptions = {}
+): Promise<any> {
+  if (!Array.isArray(params)) params = [params];
+  const { result } = await http.post(endpoint(), {
+    jsonrpc: "2.0",
+    id: 1,
+    method,
+    params,
+  });
+  return withMetadata ? result : result.data;
+}
+
+export { endpoint, call, getObject };
