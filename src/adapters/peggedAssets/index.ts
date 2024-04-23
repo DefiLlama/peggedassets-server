@@ -181,6 +181,7 @@ import uno from "./nostra-uno";
 import cjpy from "./convertible-jpy-token";
 import bread from "./bread";
 import btcusd from "./bitcoin-usd-btcfi";
+import wen from "./magma-wen"
 
 export default {
   tether,
@@ -366,4 +367,5 @@ export default {
   "convertible-jpy-token": cjpy,
   "bread-fake-cg": bread,
   "bitcoin-usd-btcfi": btcusd,
+  "magma-wen": wen
 };
