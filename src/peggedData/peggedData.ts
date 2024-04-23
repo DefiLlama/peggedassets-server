@@ -693,6 +693,7 @@ export default [
     twitter: "https://twitter.com/USDB_",
     wiki: "https://wiki.defillama.com/wiki/FantOHM",
   },
+  /*
   {
     id: "35",
     name: "MAI",
