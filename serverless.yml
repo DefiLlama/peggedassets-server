@@ -64,6 +64,7 @@ provider:
     tableName: ${self:custom.tableName}
     stage: ${self:custom.stage}
     ETHEREUM_RPC: ${env:ETHEREUM_RPC}
+    LLAMA_PROVIDER_RPC_GET_BLOCKNUMBER_TIMEOUT: 300
 
 custom:
   stage: ${opt:stage, self:provider.stage}
