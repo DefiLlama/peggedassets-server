@@ -29,9 +29,6 @@ export async function bridgedSupply(
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     for (let address of addresses) {
-      if(chain === "mode"){
-        console.log("mode provider:", sdk.getProvider("mode"))
-      }
       const totalSupply = (
         await sdk.api.abi.call({
           abi: "erc20:totalSupply",
