@@ -3690,4 +3690,24 @@ export default [
     twitter: null,
     wiki: "https://docs.bifrostnetwork.com/eng.btcfi.one",
   },
+  {
+    id: "184",
+    name: "Magma Wen",
+    address: "iotex:io1ds9lfdfkj665xjsdy8razw4re0m4fyf73xu5k6",
+    symbol: "WEN",
+    url: "https://magma.finance",
+    description:
+      "Magma is a new DeFi primitive that enables users to mint a stablecoin, WEN. Fully collateralized by liquid staking tokens (LSTs) and real world assets (RWAs), WEN opens DeFi doors for projects and users alike through providing a native stable asset for the ecosystem.",
+    mintRedeemDescription:
+      "Using Magma, users mint WEN by depositing IOTX/uniIOTX as collateral into a Vault. After the WEN loan is repaid to retrieve the collateral, the paid back WEN is burned",
+    onCoinGecko: "false",
+    gecko_id: "magma-wen",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://github.com/magma-fi/Audits/blob/main/MagmaStablecoin_final_Secure3_Audit_Report.pdf",
+    twitter: "https://twitter.com/MagmaProtocol",
+    wiki: "https://docs.magma.finance/",
+  },
 ] as PeggedAsset[];
