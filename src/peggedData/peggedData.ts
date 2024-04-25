@@ -3711,4 +3711,24 @@ export default [
     twitter: "https://twitter.com/MagmaProtocol",
     wiki: "https://docs.magma.finance/",
   },
+  {
+    id: "185",
+    name: "Gyroscope GYD",
+    address: "0xe07f9d810a48ab5c3c914ba3ca53af14e4491e8a",
+    symbol: "GYD",
+    url: "https://gyro.finance/",
+    description:
+      "Gyroscope is a decentralized stablecoin featuring a novel all-weather stablecoin design combined with more efficient stablecoin liquidity pools",
+    mintRedeemDescription:
+      "Mint and redeem GYD through Gyroscope's Dynamic Stability Mechanism, which autonomously adjusts prices based on reserve ratios and market outflows",
+    onCoinGecko: "true",
+    gecko_id: "gyroscope-gyd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://docs.gyro.finance/gyroscope-protocol/audit-reports",
+    twitter: "https://twitter.com/gyrostable",
+    wiki: "https://docs.gyro.finance/",
+  },
 ] as PeggedAsset[];
