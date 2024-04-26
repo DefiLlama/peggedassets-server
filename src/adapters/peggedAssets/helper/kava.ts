@@ -1,15 +1,8 @@
-const axios = require("axios");
-const retry = require("async-retry");
+const sdk = require('@defillama/sdk')
 
 export async function getTotalSupply(address: string) {
-  const res = await retry(
-    async (_bail: any) =>
-      await axios.get(
-        `https://explorer.kava.io/api?module=token&action=getToken&contractaddress=${address}`
-      )
-  );
-  const result = res?.data?.result;
-  const supply = result.totalSupply;
-  const decimals = result.decimals;
+  const api = new sdk.ChainApi({ chain: 'kava' })
+  const supply = await api.call({  abi: 'erc20:totalSupply', target: address})
+  const decimals = await api.call({  abi: 'erc20:decimals', target: address})
   return supply / 10 ** decimals;
 }

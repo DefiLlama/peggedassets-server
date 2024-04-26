@@ -1,3 +1,6 @@
+
+process.env.SKIP_RPC_CHECK = 'true'
+
 require("dotenv").config();
 const path = require("path");
 const { chainsForBlocks } = require("@defillama/sdk/build/computeTVL/blocks");
@@ -7,6 +10,7 @@ import { PeggedIssuanceAdapter } from "./peggedAsset.type";
 const {
   humanizeNumber,
 } = require("@defillama/sdk/build/computeTVL/humanizeNumber");
+import * as sdk from "@defillama/sdk";
 const chainList = require("./helper/chains.json");
 const errorString = "------ ERROR ------";
 
@@ -31,7 +35,7 @@ async function getLatestBlockRetry(chain: string) {
 }
 
 async function getPeggedAsset(
-  unixTimestamp: number,
+  _unixTimestamp: number,
   ethBlock: number,
   chainBlocks: ChainBlocks,
   peggedBalances: PeggedAssetIssuance,
@@ -49,8 +53,9 @@ async function getPeggedAsset(
       ),
     60e3
   );
+  const chainApi = new sdk.ChainApi({ chain })
   const balance = (await issuanceFunction(
-    unixTimestamp,
+    chainApi,
     ethBlock,
     chainBlocks
   )) as PeggedTokenBalance;
@@ -149,6 +154,8 @@ if (process.argv.length < 3) {
 }
 
 const passedFile = path.resolve(process.cwd(), process.argv[2]);
+const dummyFn = () => ({});
+const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
 
 (async () => {
   let adapter = {} as PeggedIssuanceAdapter;
@@ -161,6 +168,7 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
   const chains = Object.keys(module).filter(
     (chain) => !["minted", "unreleased"].includes(chain)
   );
+
   checkExportKeys(passedFile, chains);
   const unixTimestamp = Math.round(Date.now() / 1000) - 60;
   const chainBlocks = {} as ChainBlocks;
@@ -168,14 +176,14 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
   if (!chains.includes("ethereum")) {
     chains.push("ethereum");
   }
-  await Promise.all(
+  /* await Promise.all(
     chains.map(async (chainRaw) => {
       const chain = chainRaw === "avalanche" ? "avax" : chainRaw;
       if (chainsForBlocks.includes(chain) || chain === "ethereum") {
         chainBlocks[chain] = (await getLatestBlockRetry(chain)).number - 10;
       }
     })
-  );
+  ); */
   const ethBlock = chainBlocks.ethereum;
 
   let pegType = process.argv[3];
@@ -184,13 +192,16 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
   }
   let peggedBalances: PeggedAssetIssuance = {};
   let bridgedFromMapping: BridgeMapping = {};
+  
+  await initializeSdkInternalCache()
+
   let peggedBalancesPromises = Object.entries(module).map(
     async ([chain, issuances]) => {
       if (typeof issuances !== "object" || issuances === null) {
         return;
       }
       const issuanceTypes = Object.keys(issuances);
-      if (
+      /* if (
         !(
           issuanceTypes.includes("minted") &&
           issuanceTypes.includes("unreleased")
@@ -199,7 +210,13 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
         throw new Error(
           `Chain ${chain} does not have both 'minted' and 'unreleased' issuance.`
         );
-      }
+      } */
+
+      if (!(issuances as any).minted)
+        (issuances as any).minted = dummyFn;
+      if (!(issuances as any).unreleased)
+        (issuances as any).unreleased = dummyFn;
+
       if (issuanceTypes.includes(chain)) {
         throw new Error(`Chain ${chain} has issuance bridged to itself.`);
       }
@@ -263,6 +280,7 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
         humanizeNumber(issuance[pegType])
       )
   );
+  await saveSdkInternalCache()
   process.exit(0);
 })();
 
@@ -290,3 +308,23 @@ function handleError(error: string) {
 
 process.on("unhandledRejection", handleError);
 process.on("uncaughtException", handleError);
+
+
+
+
+async function initializeSdkInternalCache() {
+  let currentCache = await sdk.cache.readCache(INTERNAL_CACHE_FILE)
+  // sdk.log('cache size:', JSON.stringify(currentCache).length, 'chains:', Object.keys(currentCache))
+  const ONE_MONTH = 60 * 60 * 24 * 30
+  if (!currentCache || !currentCache.startTime || (Date.now() / 1000 - currentCache.startTime > ONE_MONTH)) {
+    currentCache = {
+      startTime: Math.round(Date.now() / 1000),
+    }
+    await sdk.cache.writeCache(INTERNAL_CACHE_FILE, currentCache)
+  }
+  sdk.sdkCache.startCache(currentCache)
+}
+
+async function saveSdkInternalCache() {
+  await sdk.cache.writeCache(INTERNAL_CACHE_FILE, sdk.sdkCache.retriveCache())
+}

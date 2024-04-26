@@ -4,14 +4,9 @@ import { bridgedSupply, solanaMintedOrBridged } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   celo: {
@@ -61,11 +56,8 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   celo: {
     minted: chainMinted("celo", 18),
-    unreleased: async () => ({}),
   },
   ethereum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     celo: bridgedSupply(
       "ethereum",
       18,
@@ -76,8 +68,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     celo: bridgedSupply(
       "polygon",
       18,
@@ -88,8 +78,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     celo: solanaMintedOrBridged(
       chainContracts.solana.bridgedFromCelo,
       "peggedEUR"

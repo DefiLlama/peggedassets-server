@@ -3,15 +3,10 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import { getTotalSupply as tezosGetTotalSupply } from "../helper/tezos";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   tezos: {
@@ -35,7 +30,6 @@ async function tezosMinted(tokenID: string) {
 const adapter: PeggedIssuanceAdapter = {
   tezos: {
     minted: tezosMinted(chainContracts.tezos.issued[0]),
-    unreleased: async () => ({}),
   },
 };
 

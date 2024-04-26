@@ -6,7 +6,6 @@ const adapter: PeggedIssuanceAdapter = {
     minted: solanaMintedOrBridged([
       "9iLH8T7zoWhY7sBmj1WK9ENbWdS1nL8n9wAxaeRitTa6",
     ]),
-    unreleased: async () => ({}),
   },
 };
 

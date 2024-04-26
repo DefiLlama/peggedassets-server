@@ -8,14 +8,9 @@ import {
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -78,11 +73,8 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "polygon",
       18,
@@ -94,23 +86,17 @@ const adapter: PeggedIssuanceAdapter = {
   },
   optimism: {
     minted: chainMinted("optimism", 18),
-    unreleased: async () => ({}),
   },
   arbitrum: {
     minted: chainMinted("arbitrum", 18),
-    unreleased: async () => ({}),
   },
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: solanaMintedOrBridged(
       chainContracts.solana.bridgedFromETH,
       "peggedEUR"
     ),
   },
   fuse: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "fuse",
       18,
@@ -121,8 +107,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   zksync: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.zksync.bridgeOnETH[0],
@@ -131,8 +115,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "fantom",
       18,
@@ -143,8 +125,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "aurora",
       18,

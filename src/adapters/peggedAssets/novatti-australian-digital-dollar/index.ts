@@ -7,16 +7,11 @@ import { solanaMintedOrBridged } from "../helper/getSupply";
 import {
   Balances,
   ChainBlocks,
-  PeggedIssuanceAdapter,
+  PeggedIssuanceAdapter,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 interface AssetSupplyFetched {
   circulating: number;
 }
@@ -88,15 +83,12 @@ async function fetchStellarCirculatingSupply(): Promise<Balances> {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
-    unreleased: async () => ({}),
   },
   stellar: {
     minted: fetchStellarCirculatingSupply, // This should be a reference to your async function, not a type
-    unreleased: async () => ({}),
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedAUD"),
-    unreleased: async () => ({}),
   },
 };
 

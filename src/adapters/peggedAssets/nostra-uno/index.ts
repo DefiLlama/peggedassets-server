@@ -4,15 +4,9 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   Balances,
   ChainBlocks,
-  PeggedIssuanceAdapter,
+  PeggedIssuanceAdapter,  ChainContracts,
 } from "../peggedAsset.type";
 import { starknetTotalSupplyAbi, starknetBalanceOfAbi } from "./abi";
-
-export type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 export const chainContracts: ChainContracts = {
   starknet: {

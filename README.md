@@ -96,11 +96,8 @@ Here is an example adapter:
     const adapter: PeggedIssuanceAdapter = {
       ethereum: {
         minted: ethereumMinted(),
-        unreleased: async () => ({}),
       },
       bsc: {
-        minted: async () => ({}),
-        unreleased: async () => ({}),
         ethereum: bridgedFromEthereum("bsc", 18, chainContracts.bsc.bridgedFromETH),
       },
     };

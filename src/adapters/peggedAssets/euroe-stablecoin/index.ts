@@ -5,14 +5,9 @@ import { solanaMintedOrBridged } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -100,31 +95,24 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
-    unreleased: async () => ({}),
   },
   polygon: {
     minted: chainMinted("polygon", 6),
-    unreleased: async () => ({}),
   },
   arbitrum: {
     minted: chainMinted("arbitrum", 6),
-    unreleased: async () => ({}),
   },
   avalanche: {
     minted: chainMinted("avax", 6),
-    unreleased: async () => ({}),
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedEUR"),
-    unreleased: async () => ({}),
   },
   optimism: {
     minted: chainMinted("optimism", 6),
-    unreleased: async () => ({}),
   },
   concordium: {
     minted: concordiumMinted("https://www.euroe.com/api/totalsupply/CCD", 6),
-    unreleased: async () => ({}),
   },
 };
 

@@ -4,16 +4,11 @@ import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances, ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -27,21 +22,13 @@ const chainContracts: ChainContracts = {
   },
 };
 
-async function wavesMinted() {
+function wavesMinted() {
   // Subtracting USDN in reserve wallet from total USDN minted gives ~960M.
   // Their API gives the amount circulating as ~860M. Using their API for now.
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function () {
     let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios("https://api.neutrino.at/circulating-supply/USDN")
-    );
-    const totalCirculating = parseInt(res.data);
-    sumSingleBalance(balances, "peggedUSD", totalCirculating, "issued", false);
+    const { data } = await axios("https://nodes.wavesnodes.com/assets/details/DG2xFkPdDwKUoBkzGAhQtLpSGzfXLiCYPEzeKH2Ad24p")
+    sumSingleBalance(balances, "peggedUSD", data.quantity/ 10 ** data.decimals, "issued", false);
     return balances;
   };
 }
@@ -49,11 +36,8 @@ async function wavesMinted() {
 const adapter: PeggedIssuanceAdapter = {
   waves: {
     minted: wavesMinted(),
-    unreleased: async () => ({}),
   },
   ethereum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     waves: bridgedSupply(
       "ethereum",
       18,
@@ -61,8 +45,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     waves: bridgedSupply(
       "polygon",
       18,
@@ -70,8 +52,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   bsc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     waves: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromWaves),
   },
 };

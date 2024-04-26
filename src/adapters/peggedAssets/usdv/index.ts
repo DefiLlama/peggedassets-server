@@ -4,14 +4,9 @@ import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -68,11 +63,9 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
-    unreleased: async () => ({}),
   },
   bsc: {
     minted: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromETH),
-    unreleased: async () => ({}),
   },
   optimism: {
     minted: bridgedSupply(
@@ -80,7 +73,6 @@ const adapter: PeggedIssuanceAdapter = {
       6,
       chainContracts.optimism.bridgedFromETH
     ),
-    unreleased: async () => ({}),
   },
   arbitrum: {
     minted: bridgedSupply(
@@ -88,11 +80,9 @@ const adapter: PeggedIssuanceAdapter = {
       6,
       chainContracts.arbitrum.bridgedFromETH
     ),
-    unreleased: async () => ({}),
   },
   polygon: {
     minted: bridgedSupply("polygon", 6, chainContracts.polygon.bridgedFromETH),
-    unreleased: async () => ({}),
   },
   tomochain: {
     minted: bridgedSupply(
@@ -100,11 +90,9 @@ const adapter: PeggedIssuanceAdapter = {
       6,
       chainContracts.tomochain.bridgedFromETH
     ),
-    unreleased: async () => ({}),
   },
   avax: {
     minted: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromETH),
-    unreleased: async () => ({}),
   },
 };
 

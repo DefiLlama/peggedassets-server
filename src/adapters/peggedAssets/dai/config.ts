@@ -1,8 +1,4 @@
-export type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
+import { ChainContracts } from "../peggedAsset.type";
 
 export const chainContracts: ChainContracts = {
   ethereum: {

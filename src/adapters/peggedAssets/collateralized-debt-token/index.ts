@@ -2,7 +2,7 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   Balances,
   ChainBlocks,
-  PeggedIssuanceAdapter,
+  PeggedIssuanceAdapter,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
@@ -31,7 +31,6 @@ async function osmosisMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: osmosisMinted(6),
-    unreleased: async () => ({}),
   },
 };
 

@@ -8,16 +8,11 @@ import {
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -163,8 +158,6 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: ethereumUnreleased(2, chainContracts.ethereum.unreleased),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupplySubtractReserve(
       "polygon",
       2,
@@ -178,8 +171,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   xdai: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "xdai",
       2,
@@ -191,11 +182,8 @@ const adapter: PeggedIssuanceAdapter = {
   },
   algorand: {
     minted: algorandMinted(),
-    unreleased: async () => ({}),
   },
   everscale: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.everscale.bridgeOnETH[0],

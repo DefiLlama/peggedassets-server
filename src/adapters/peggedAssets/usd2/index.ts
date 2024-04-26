@@ -33,7 +33,6 @@ async function supplyMinted() {
 const adapter: PeggedIssuanceAdapter = {
   kadena: {
     minted: supplyMinted(),
-    unreleased: async () => ({}),
   },
 };
 

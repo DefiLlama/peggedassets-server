@@ -20,16 +20,13 @@ export async function getBalance(
   tokenType: string,
   owner: string
 ) {
-  const balancesRes = await retry(
-    async (_bail: any) =>
-      await axios.get(
-        `https://explorer.ont.io/v2/addresses/${owner}/${tokenType}/balances`
-      )
-  );
-  console.log("ontology success");
+  const balancesRes = await axios.get(
+    `https://explorer.ont.io/v2/addresses/${owner}/${tokenType}/balances`
+  )
   const filteredBalances = balancesRes?.data?.result?.filter(
     (balance: any) => balance.contract_hash === address
   );
+  if (!filteredBalances[0]?.balance) return 0
 
   const bnBalance = new BigNumber(filteredBalances[0]?.balance);
 

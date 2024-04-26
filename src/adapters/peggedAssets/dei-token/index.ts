@@ -4,14 +4,9 @@ import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   fantom: {
@@ -136,14 +131,11 @@ async function chainUnreleased(
 const adapter: PeggedIssuanceAdapter = {
   fantom: {
     minted: chainMinted("fantom", 18),
-    unreleased: async () => ({}),
   },
   // Either the bridged contracts are incorrect, or there are no holders on other chains.
   // Will need to be updated.
   /*
   ethereum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     fantom: bridgedSupply(
       "ethereum",
       18,
@@ -151,8 +143,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     fantom: bridgedSupply(
       "polygon",
       18,
@@ -160,8 +150,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   bsc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     fantom: bridgedSupply(
       "bsc",
       18,
@@ -169,8 +157,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   metis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     fantom: bridgedSupply(
       "metis",
       18,

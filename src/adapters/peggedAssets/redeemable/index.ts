@@ -1,7 +1,7 @@
 import {
   PeggedIssuanceAdapter,
   ChainBlocks,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import { sumSingleBalance } from "../helper/generalUtil";
 import { getTotalSupply } from "../helper/cardano";
@@ -30,7 +30,6 @@ async function getCardanoSupply() {
 const adapter: PeggedIssuanceAdapter = {
   cardano: {
     minted: getCardanoSupply(),
-    unreleased: async () => ({}),
   },
 };
 
