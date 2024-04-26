@@ -1,6 +1,6 @@
 import { addChainExports } from "../helper/getSupply";
 import {
-  PeggedIssuanceAdapter,
+  PeggedIssuanceAdapter,  ChainContracts,
 } from "../peggedAsset.type";
 
 const chainContracts = {

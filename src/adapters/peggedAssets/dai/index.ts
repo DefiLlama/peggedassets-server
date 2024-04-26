@@ -20,7 +20,7 @@ import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
-  PeggedAssetType,
+  PeggedAssetType,  ChainContracts,
 } from "../peggedAsset.type";
 import { mixinSupply } from "../helper/mixin";
 import { chainContracts } from "./config";

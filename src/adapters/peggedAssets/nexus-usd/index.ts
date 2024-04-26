@@ -1,19 +1,5 @@
-const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply } from "../helper/getSupply";
-import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,
-} from "../peggedAsset.type";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
-
-const chainContracts: ChainContracts = {
+const chainContracts = {
   ethereum: {
     issued: ["0x1B84765dE8B7566e4cEAF4D0fD3c5aF52D3DdE4F"],
   },
@@ -55,96 +41,6 @@ const chainContracts: ChainContracts = {
   },
 };
 
-async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 18),
-  },
-  bsc: {
-    ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
-  },
-  polygon: {
-    ethereum: bridgedSupply(
-      "polygon",
-      18,
-      chainContracts.polygon.bridgedFromETH
-    ),
-  },
-  avalanche: {
-    ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
-  },
-  arbitrum: {
-    ethereum: bridgedSupply(
-      "arbitrum",
-      18,
-      chainContracts.arbitrum.bridgedFromETH
-    ),
-  },
-  fantom: {
-    ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
-  },
-  harmony: {
-    ethereum: bridgedSupply(
-      "harmony",
-      18,
-      chainContracts.harmony.bridgedFromETH
-    ),
-  },
-  boba: {
-    ethereum: bridgedSupply("boba", 18, chainContracts.boba.bridgedFromETH),
-  },
-  optimism: {
-    ethereum: bridgedSupply(
-      "optimism",
-      18,
-      chainContracts.optimism.bridgedFromETH
-    ),
-  },
-  /* call is reverting on server every time, temporarily disabling
-  cronos: {
-    ethereum: bridgedSupply("cronos", 18, chainContracts.cronos.bridgedFromETH),
-  },
-  */
-  metis: {
-    ethereum: bridgedSupply("metis", 18, chainContracts.metis.bridgedFromETH),
-  },
-  /* Supply is 0.
-  dfk: {
-    ethereum: bridgedSupply("dfk", 18, chainContracts.dfk.bridgedFromETH),
-  },
-  */
-  aurora: {
-    ethereum: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromETH),
-  },
-};
-
+import { addChainExports } from "../helper/getSupply";
+const adapter = addChainExports(chainContracts);
 export default adapter;

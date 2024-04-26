@@ -2,7 +2,7 @@ import { BigNumber } from "ethers";
 import type {
   Balances,
   PeggedAssetType,
-  ChainBlocks,
+  ChainBlocks,  ChainContracts,
 } from "../peggedAsset.type";
 import bridgeMapping, { BridgeID } from "../../../peggedData/bridgeData";
 

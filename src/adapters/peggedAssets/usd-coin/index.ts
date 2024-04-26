@@ -23,7 +23,7 @@ import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY

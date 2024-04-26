@@ -3,20 +3,13 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import {
   getTokenBalance as tronGetTokenBalance,
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
-const axios = require("axios");
-const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const locks = [] as ((value: unknown) => void)[];
 function getCoingeckoLock() {

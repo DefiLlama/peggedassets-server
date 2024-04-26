@@ -8,14 +8,9 @@ import {
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {

@@ -4,15 +4,11 @@ import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
+  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   acala: {

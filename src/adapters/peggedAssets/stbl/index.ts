@@ -4,7 +4,7 @@ import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 const { lookupApplications } = require("../llama-helper/algorand");
 const axios = require("axios");

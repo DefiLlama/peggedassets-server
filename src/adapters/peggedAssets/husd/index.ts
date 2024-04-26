@@ -4,17 +4,12 @@ import { bridgedSupply, solanaMintedOrBridged } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {

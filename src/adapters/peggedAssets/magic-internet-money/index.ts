@@ -3,7 +3,7 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   Balances,
   ChainBlocks,
-  PeggedIssuanceAdapter,
+  PeggedIssuanceAdapter,  ChainContracts,
 } from "../peggedAsset.type";
 import { BENTOBOX_ABI } from "./abis/bentobox";
 import { CAULDRON_V1_ABI } from "./abis/cauldron-v1";

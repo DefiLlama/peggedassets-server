@@ -2,7 +2,7 @@ const sdk = require("@defillama/sdk");
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import { sumSingleBalance } from "../helper/generalUtil";
 

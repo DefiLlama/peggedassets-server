@@ -5,7 +5,7 @@ import { getTokenSupply as solanaGetTokenSupply } from "../llama-helper/solana";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
@@ -31,11 +31,6 @@ setInterval(() => {
 }, 1500);
 const maxCoingeckoRetries = 5;
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 // Using API provided by MAI devs because they do not agree with the values calculated from on-chain contracts.
 const chainContracts: ChainContracts = {

@@ -1,20 +1,6 @@
-const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
-import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,
-} from "../peggedAsset.type";
-
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
-
 // The amounts minted on chains and in bridge contracts seem to have no relation to each other.
 // Adapter treats each chain separately, subtracts the gnosis multisig address as unreleased, except for ethereum where it also subtracts the large amounts in bridge contracts.
-const chainContracts: ChainContracts = {
+const chainContracts = {
   ethereum: {
     issued: ["0x2370f9d504c7a6e775bf6e14b3f12846b594cd53"],
     unreleased: [
@@ -44,95 +30,8 @@ const chainContracts: ChainContracts = {
     issued: ["0x431D5dfF03120AFA4bDf332c61A6e1766eF37BDB"],
     unreleased: ["0xa312f84607Efb1D200C313859156ccC3500189b6"],
   },
-};
-
-async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedJPY",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-    return balances;
-  };
 }
 
-async function chainUnreleased(
-  chain: string,
-  decimals: number,
-  owners: string[]
-) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let owner of owners) {
-      const reserve = (
-        await sdk.api.erc20.balanceOf({
-          target: chainContracts[chain].issued[0],
-          owner: owner,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(balances, "peggedJPY", reserve / 10 ** decimals);
-    }
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 18),
-    unreleased: chainUnreleased(
-      "ethereum",
-      18,
-      chainContracts.ethereum.unreleased
-    ),
-  },
-  avalanche: {
-    minted: chainMinted("avax", 18),
-    unreleased: chainUnreleased("avax", 18, chainContracts.avax.unreleased),
-  },
-  polygon: {
-    minted: chainMinted("polygon", 18),
-    unreleased: chainUnreleased(
-      "polygon",
-      18,
-      chainContracts.polygon.unreleased
-    ),
-  },
-  shiden: {
-    minted: chainMinted("shiden", 18),
-    unreleased: chainUnreleased("shiden", 18, chainContracts.shiden.unreleased),
-  },
-  astar: {
-    minted: chainMinted("astar", 18),
-    unreleased: chainUnreleased("astar", 18, chainContracts.astar.unreleased),
-  },
-  xdai: {
-    minted: chainMinted("xdai", 18),
-    unreleased: chainUnreleased("xdai", 18, chainContracts.xdai.unreleased),
-  },
-};
-
+import { addChainExports } from "../helper/getSupply";
+const adapter = addChainExports(chainContracts, undefined, { pegType: "peggedJPY", });
 export default adapter;

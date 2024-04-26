@@ -314,7 +314,7 @@ process.on("uncaughtException", handleError);
 
 async function initializeSdkInternalCache() {
   let currentCache = await sdk.cache.readCache(INTERNAL_CACHE_FILE)
-  sdk.log('cache size:', JSON.stringify(currentCache).length, 'chains:', Object.keys(currentCache))
+  // sdk.log('cache size:', JSON.stringify(currentCache).length, 'chains:', Object.keys(currentCache))
   const ONE_MONTH = 60 * 60 * 24 * 30
   if (!currentCache || !currentCache.startTime || (Date.now() / 1000 - currentCache.startTime > ONE_MONTH)) {
     currentCache = {

@@ -2,16 +2,11 @@ const sdk = require("@defillama/sdk");
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import { sumSingleBalance } from "../helper/generalUtil";
 import { solanaMintedOrBridged } from "../helper/getSupply";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {

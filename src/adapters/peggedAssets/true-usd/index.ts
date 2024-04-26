@@ -4,7 +4,7 @@ import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
@@ -13,11 +13,6 @@ import { call as nearCall } from "../llama-helper/near";
 const axios = require("axios");
 const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {

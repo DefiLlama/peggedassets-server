@@ -1,7 +1,8 @@
 import type {
   Balances,
   ChainBlocks,
-  PeggedAssetType,
+  PeggedAssetType,  ChainContracts,
+  PeggedIssuanceAdapter,
 } from "../peggedAsset.type";
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "./generalUtil";
@@ -294,13 +295,15 @@ export async function kujiraSupply(
 // const dummyFn = () => ({})
 
 export function addChainExports(config: any, adapter: any = {}, {
-  decmials = 18
+  decmials = 18, pegType,
 }: {
   decmials?: number
-} = {}): any {
+  pegType?: string
+} = {}): PeggedIssuanceAdapter {
   Object.entries(config).forEach(([chain, chainConfig]: [string, any]) => {
     if (!adapter[chain])
       adapter[chain] = {};
+    if (pegType) chainConfig.pegType = pegType;
 
     const cExports = adapter[chain]
     Object.keys(chainConfig).forEach((key) => {
@@ -335,8 +338,8 @@ function getIssued({
     if (typeof issued === "string") issued = [issued];
     const supplies = await api.multiCall({ abi: issuedABI, calls: issued })
     const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issued })
-    issued.forEach((address, i) => {
-      sumSingleBalance(balances, pegType, supplies[i] / 10 ** decimals[i], address, false);
+    issued.forEach((_address, i) => {
+      sumSingleBalance(balances, pegType, supplies[i] / 10 ** decimals[i], 'issued', false);
     })
 
     return balances;
