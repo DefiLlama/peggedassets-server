@@ -182,7 +182,8 @@ import cjpy from "./convertible-jpy-token";
 import bread from "./bread";
 import btcusd from "./bitcoin-usd-btcfi";
 import wen from "./magma-wen";
-import gyd from "./gyroscope-gyd"
+import gyd from "./gyroscope-gyd";
+import isc from "./international-stable-currency";
 
 export default {
   tether,
@@ -369,5 +370,6 @@ export default {
   "bread-fake-cg": bread,
   "bitcoin-usd-btcfi": btcusd,
   "magma-wen": wen,
-  "gyroscope-gyd": gyd
+  "gyroscope-gyd": gyd,
+  "international-stable-currency": isc,
 };
