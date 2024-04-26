@@ -10,7 +10,7 @@ const chainContracts = {
 
 const adapter: PeggedIssuanceAdapter = {
   solana: {
-    minted: solanaMintedOrBridged(chainContracts.solana.issued),
+    minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedVAR"),
     unreleased: async () => ({}),
   },
 };
