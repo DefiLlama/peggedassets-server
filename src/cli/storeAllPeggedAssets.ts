@@ -2,7 +2,6 @@ import PromisePool from "@supercharge/promise-pool";
 import storePeggedAssets from "./../peggedAssets/storePeggedAssets/storePegged";
 import peggedAssets from "./../peggedData/peggedData";
 import * as sdk from "@defillama/sdk"
-
 const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json'
 
 const handler = async () => {
@@ -26,11 +25,12 @@ handler().catch(console.error).then(async () => {
 });
 
 
+
 async function initializeSdkInternalCache() {
   let currentCache = await sdk.cache.readCache(INTERNAL_CACHE_FILE)
   sdk.log('cache size:', JSON.stringify(currentCache).length, 'chains:', Object.keys(currentCache))
-  const ONE_WEEK = 60 * 60 * 24 * 7
-  if (!currentCache || !currentCache.startTime || (Date.now() / 1000 - currentCache.startTime > ONE_WEEK)) {
+  const ONE_MONTH = 60 * 60 * 24 * 30
+  if (!currentCache || !currentCache.startTime || (Date.now() / 1000 - currentCache.startTime > ONE_MONTH)) {
     currentCache = {
       startTime: Math.round(Date.now() / 1000),
     }

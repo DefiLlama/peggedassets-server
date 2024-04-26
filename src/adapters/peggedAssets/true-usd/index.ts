@@ -7,7 +7,6 @@ import {
   Balances,
 } from "../peggedAsset.type";
 import {
-  getTokenBalance as tronGetTokenBalance,
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
 import { call as nearCall } from "../llama-helper/near";

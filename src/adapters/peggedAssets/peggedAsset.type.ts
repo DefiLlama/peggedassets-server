@@ -43,8 +43,8 @@ export type Fetch = (
 
 export type PeggedIssuanceAdapter = {
   [chain: string]: {
-    minted: Promise<Fetch> | (() => Promise<{}>);
-    unreleased: Promise<Fetch> | (() => Promise<{}>);
+    // minted: Promise<Fetch> | (() => Promise<{}>) | undefined;
+    // unreleased: Promise<Fetch> | (() => Promise<{}>) | undefined;
     [bridgedFrom: string]: Promise<Fetch> | (() => Promise<{}>);
   };
 };
