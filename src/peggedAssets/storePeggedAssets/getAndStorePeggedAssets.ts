@@ -12,6 +12,7 @@ import {
 import storeNewPeggedBalances from "./storeNewPeggedBalances";
 import { executeAndIgnoreErrors } from "./errorDb";
 import { getCurrentUnixTimestamp } from "../../utils/date";
+import * as sdk from "@defillama/sdk";
 
 type ChainBlocks = {
   [chain: string]: number;
@@ -24,7 +25,7 @@ type BridgeMapping = {
 type EmptyObject = { [key: string]: undefined };
 
 async function getPeggedAsset(
-  unixTimestamp: number,
+  api: sdk.ChainApi,
   ethBlock: number | undefined,
   chainBlocks: ChainBlocks | undefined,
   peggedAsset: PeggedAsset,
@@ -39,11 +40,7 @@ async function getPeggedAsset(
   for (let i = 0; i < maxRetries; i++) {
     try {
       peggedBalances[chain] = peggedBalances[chain] || {};
-      const balance = (await issuanceFunction(
-        unixTimestamp,
-        ethBlock,
-        chainBlocks
-      )) as PeggedTokenBalance;
+      const balance = (await issuanceFunction(api, ethBlock, chainBlocks)) as PeggedTokenBalance;
       if (balance && Object.keys(balance).length === 0) {
         peggedBalances[chain][issuanceType] = { [pegType]: 0 };
         return;
@@ -267,8 +264,9 @@ export async function storePeggedAsset(
             if (typeof issuanceFunction !== "function") {
               return;
             }
+            const api = new sdk.ChainApi({ chain, timestamp: unixTimestamp });
             await getPeggedAsset(
-              unixTimestamp,
+              api,
               ethBlock,
               chainBlocks,
               peggedAsset,

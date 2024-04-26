@@ -331,14 +331,12 @@ function getIssued({
   issued, pegType = "peggedUSD", issuedABI = "erc20:totalSupply",
 }: { issued: string[] | string, pegType: PeggedAssetType, issuedABI: string }) {
   return async (api: ChainApi) => {
-    console.log(issued, pegType, issuedABI, 'hello')
     const balances = {} as Balances;
     if (typeof issued === "string") issued = [issued];
     const supplies = await api.multiCall({ abi: issuedABI, calls: issued })
     const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issued })
     issued.forEach((address, i) => {
       sumSingleBalance(balances, pegType, supplies[i] / 10 ** decimals[i], address, false);
-      console.log(balances, pegType, supplies[i] / 10 ** decimals[i], address, false)
     })
 
     return balances;

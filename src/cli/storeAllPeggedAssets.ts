@@ -9,18 +9,18 @@ const handler = async () => {
   const peggedIndexes = Array.from(Array(peggedAssets.length).keys());
   // randomize the order of the pegged indexes
   peggedIndexes.sort(() => Math.random() - 0.5)
-  
+
   const items = peggedIndexes.slice(0, 7)
-  await new PromisePool(items)
-  .withConcurrency(7)
-  .for(peggedIndexes)
-  .process((i: any) => storePeggedAssets([i]))
+  await new PromisePool()
+    .withConcurrency(7)
+    .for(items)
+    .process((i: any) => storePeggedAssets([i]))
 };
 
 handler().catch(console.error).then(async () => {
   console.log("done")
   console.log("saving cache")
-  await saveSdkInternalCache() 
+  await saveSdkInternalCache()
   process.exit(0)
 });
 
