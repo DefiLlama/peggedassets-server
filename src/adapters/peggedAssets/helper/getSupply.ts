@@ -291,7 +291,7 @@ export async function kujiraSupply(
   return cosmosSupply("kujira", tokens, decimals, bridgedFromChain);
 }
 
-const dummyFn = () => ({})
+// const dummyFn = () => ({})
 
 export function addChainExports(config: any, adapter: any = {}, {
   decmials = 18
@@ -321,8 +321,8 @@ export function addChainExports(config: any, adapter: any = {}, {
         default: console.log(`Ignored: Unknown key ${key} in ${chain} config for addChainExports`)
       }
     })
-    if (!cExports.minted) cExports.minted = dummyFn
-    if (!cExports.unreleased) cExports.unreleased = dummyFn;
+    // if (!cExports.minted) cExports.minted = dummyFn
+    // if (!cExports.unreleased) cExports.unreleased = dummyFn;
   })
   return adapter
 }

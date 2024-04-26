@@ -21,6 +21,8 @@ const timeout = (prom: any, time: number, peggedID: string) =>
     }
   );
 
+const stubFn = () => ({})
+
 async function iteratePeggedAssets(peggedIndexes: number[]) {
   const timestamp = getCurrentUnixTimestamp();
   const ethereumBlock = undefined;
@@ -30,6 +32,11 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
       .map((idx) => peggedAssets[idx])
       .map(async (peggedAsset) => {
         const adapterModule = importAdapter(peggedAsset);
+
+        Object.values(adapterModule).forEach((obj: any) => {
+          if (!obj.minted) obj.minted = stubFn
+          if (!obj.unreleased) obj.unreleased = stubFn
+        })
         // times out after 60 seconds
         return await timeout(
           storePeggedAsset(
