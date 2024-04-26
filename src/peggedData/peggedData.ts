@@ -3731,4 +3731,24 @@ export default [
     twitter: "https://twitter.com/gyrostable",
     wiki: "https://docs.gyro.finance/",
   },
+  {
+    id: "186",
+    name: "International Stable Currency",
+    address: "solana:J9BcrQfX4p9D1bvLzRNCbMDv8f44a9LFdeqNE4Yk2WMD",
+    symbol: "ISC",
+    url: "https://www.isc.money",
+    description:
+      " International Stable Currency (ISC) is yield-bearing stablecoin pegged to a basket of real world assets.",
+    mintRedeemDescription:
+      " ISC Issuer is tasked with two principal functions that are integral to the operation of the ISC ecosystem. Firstly, it is responsible for the minting and burning of ISC. Secondly, it manages the loans of ISC between itself and the ISC",
+    onCoinGecko: "true",
+    gecko_id: "international-stable-currency",
+    cmcId: null,
+    pegType: "peggedVAR",
+    pegMechanism: "fiat-backed", // composition is bonds, t-bilts, cash
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://twitter.com/ISC_money",
+    wiki: "https://wp.isc.money",
+  },
 ] as PeggedAsset[];
