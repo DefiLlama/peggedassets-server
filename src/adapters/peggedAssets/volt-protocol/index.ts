@@ -101,7 +101,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   arbitrum: {
-    minted: async () => ({}),
     unreleased: chainUnreleased(
       "arbitrum",
       18,

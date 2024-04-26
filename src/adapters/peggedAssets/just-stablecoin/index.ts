@@ -74,7 +74,6 @@ async function tronMinted() {
 const adapter: PeggedIssuanceAdapter = {
   tron: {
     minted: tronMinted(),
-    unreleased: async () => ({}),
   },
 };
 

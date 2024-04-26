@@ -86,24 +86,17 @@ async function tronMinted() {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 8),
-    unreleased: async () => ({}),
   },
   tron: {
     minted: tronMinted(),
-    unreleased: async () => ({}),
   },
   heco: {
     minted: chainMinted("heco", 8),
-    unreleased: async () => ({}),
   },
   elastos: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     heco: bridgedSupply("elastos", 8, chainContracts.elastos.bridgedFromHeco),
   },
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
   },
 };

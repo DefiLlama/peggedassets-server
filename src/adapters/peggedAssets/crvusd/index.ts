@@ -59,11 +59,8 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   waves: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.waves.bridgeOnETH[0],

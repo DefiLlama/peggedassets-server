@@ -396,7 +396,6 @@ const bridgedAdapter: PeggedIssuanceAdapter = Object.fromEntries(
   Object.entries(bridgedChainContracts).map(([chain, chainContract]) => [
     chain,
     {
-      minted: async () => ({}),
       ethereum: chainReleased(chain, chainContract.address, 18, true),
       unreleased: chainUnreleased(chain, chainContract, 18, true),
     },

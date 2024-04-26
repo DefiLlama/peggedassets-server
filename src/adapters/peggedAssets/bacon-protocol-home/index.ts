@@ -35,7 +35,6 @@ async function ethereumMinted() {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: ethereumMinted(),
-    unreleased: async () => ({}),
   },
 };
 

@@ -49,7 +49,6 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   xdai: {
     minted: chainMinted("xdai", 18),
-    unreleased: async () => ({}),
   },
 };
 

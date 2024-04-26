@@ -86,8 +86,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "polygon",
       6,
@@ -99,7 +97,6 @@ const adapter: PeggedIssuanceAdapter = {
   },
   avalanche: {
     minted: chainMinted("avax", 6),
-    unreleased: async () => ({}),
   },
 };
 

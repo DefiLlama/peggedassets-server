@@ -56,11 +56,8 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "polygon",
       18,
@@ -72,7 +69,6 @@ const adapter: PeggedIssuanceAdapter = {
   },
   zilliqa: {
     minted: zilliqaMinted(), // can't figure out how to get token supply
-    unreleased: async () => ({}),
   },
 };
 

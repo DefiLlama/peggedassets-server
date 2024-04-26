@@ -75,11 +75,8 @@ async function emoneyMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   emoney: {
     minted: emoneyMinted(6),
-    unreleased: async () => ({}),
   },
   osmosis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     emoney: osmosisAmount(
       chainContracts.osmosis.bridgedFromEmoney,
       6,

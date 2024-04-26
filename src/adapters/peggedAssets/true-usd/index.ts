@@ -171,7 +171,6 @@ async function nearBridged(address: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   /*
    * This is to get Ethereum balance to be 0.
@@ -191,28 +190,21 @@ const adapter: PeggedIssuanceAdapter = {
       ],
       "peggedUSD"
     ),
-    unreleased: async () => ({}),
   },
   */
   bsc: {
     minted: bscMinted(),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
   avalanche: {
     minted: chainMinted("avax", 18),
-    unreleased: async () => ({}),
   },
   /* this has 0 supply?
   harmony: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("harmony", 18, chainContracts.harmony.bridgedFromETH),
   },
   */
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "polygon",
       18,
@@ -220,8 +212,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "arbitrum",
       18,
@@ -229,17 +219,12 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
   },
   tron: {
     minted: tronMinted(),
-    unreleased: async () => ({}),
   },
   syscoin: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "syscoin",
       18,
@@ -249,25 +234,18 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   heco: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("heco", 18, chainContracts.heco.bridgedFromETH),
   },
   /*
   cronos: {
     minted: chainMinted("cronos", 18),
-    unreleased: async () => ({}),
   },
   */
   near: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 18),
   },
   /* 0 supply
   aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     near: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromNear),
   }
   */

@@ -85,11 +85,8 @@ async function gmoAPIChainMinted(chain: string) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
-    unreleased: async () => ({}),
   },
   optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "optimism",
       6,
@@ -100,8 +97,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "arbitrum",
       6,
@@ -113,11 +108,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   stellar: {
     minted: gmoAPIChainMinted("XLM"),
-    unreleased: async () => ({}),
   },
   solana: {
     minted: gmoAPIChainMinted("SOLANA"),
-    unreleased: async () => ({}),
   },
 };
 

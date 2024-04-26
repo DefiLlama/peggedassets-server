@@ -47,7 +47,6 @@ async function suiMinted() {
 const adapter: PeggedIssuanceAdapter = {
   sui: {
     minted: suiMinted(),
-    unreleased: async () => ({}),
   },
 };
 

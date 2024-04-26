@@ -48,7 +48,6 @@ async function cantoCirculating(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   canto: {
     minted: cantoCirculating("canto", 18),
-    unreleased: async () => ({}),
   },
 };
 

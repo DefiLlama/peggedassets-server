@@ -59,11 +59,8 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "polygon",
       18,
@@ -71,8 +68,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   okexchain: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "okexchain",
       18,
@@ -80,8 +75,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
   },
 };

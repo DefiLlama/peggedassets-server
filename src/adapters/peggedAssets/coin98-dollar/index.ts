@@ -56,15 +56,12 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   bsc: {
     minted: chainMinted("bsc", 18),
-    unreleased: async () => ({}),
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued),
-    unreleased: async () => ({}),
   },
 };
 

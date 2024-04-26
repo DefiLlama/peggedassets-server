@@ -57,11 +57,8 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 2),
-    unreleased: async () => ({}),
   },
   wan: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("wan", 2, chainContracts.wan.bridgedFromETH),
   },
 };

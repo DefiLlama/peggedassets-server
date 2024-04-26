@@ -167,8 +167,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "polygon",
       6,

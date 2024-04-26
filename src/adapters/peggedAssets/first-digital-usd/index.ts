@@ -84,7 +84,6 @@ const adapter: PeggedIssuanceAdapter = {
   },
   bsc: {
     minted: chainMinted("bsc", 18),
-    unreleased: async () => ({}),
   },
 };
 

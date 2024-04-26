@@ -31,7 +31,6 @@ async function silkMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   secret: {
     minted: silkMinted(0),
-    unreleased: async () => ({}),
   },
 };
 

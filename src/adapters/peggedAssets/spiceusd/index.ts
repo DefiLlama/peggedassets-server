@@ -82,7 +82,6 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
 const adapter: PeggedIssuanceAdapter = {
   avalanche: {
     minted: chainMinted("avax", 18),
-    unreleased: async () => ({}),
   },
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -94,11 +93,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   polygon: {
     minted: chainMinted("polygon", 18),
-    unreleased: async () => ({}),
   },
   bsc: {
     minted: chainMinted("bsc", 18),
-    unreleased: async () => ({}),
   },
 };
 

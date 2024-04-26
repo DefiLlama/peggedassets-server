@@ -70,11 +70,8 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   celo: {
     minted: chainMinted("celo", 18),
-    unreleased: async () => ({}),
   },
   ethereum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     celo: bridgedSupply(
       "ethereum",
       18,
@@ -83,8 +80,6 @@ const adapter: PeggedIssuanceAdapter = {
   },
   /* has 0 supply
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     celo: bridgedSupply(
       "polygon",
       18,
@@ -93,13 +88,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   */
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     celo: solanaMintedOrBridged(chainContracts.solana.bridgedFromCelo),
   },
   klaytn: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     celo: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromCelo),
   },
 };

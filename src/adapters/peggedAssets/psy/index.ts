@@ -41,7 +41,6 @@ async function arbitrumMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   arbitrum: {
     minted: arbitrumMinted(18),
-    unreleased: async () => ({}),
   },
 };
 

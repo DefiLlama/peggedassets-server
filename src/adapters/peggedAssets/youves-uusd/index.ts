@@ -35,7 +35,6 @@ async function tezosMinted(tokenID: string) {
 const adapter: PeggedIssuanceAdapter = {
   tezos: {
     minted: tezosMinted(chainContracts.tezos.issued[0]),
-    unreleased: async () => ({}),
   },
 };
 

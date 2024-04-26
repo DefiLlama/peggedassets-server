@@ -46,11 +46,8 @@ async function kujiraMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   kujira: {
     minted: kujiraMinted(6),
-    unreleased: async () => ({}),
   },
   osmosis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     kujira: osmosisSupply(
       chainContracts.osmosis.bridgedFromKujira,
       6,

@@ -88,16 +88,11 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   bsc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "polygon",
       18,
@@ -105,13 +100,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   avalanche: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "arbitrum",
       18,
@@ -119,13 +110,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
   },
   harmony: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "harmony",
       18,
@@ -133,13 +120,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   boba: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("boba", 18, chainContracts.boba.bridgedFromETH),
   },
   optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "optimism",
       18,
@@ -148,26 +131,18 @@ const adapter: PeggedIssuanceAdapter = {
   },
   /* call is reverting on server every time, temporarily disabling
   cronos: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("cronos", 18, chainContracts.cronos.bridgedFromETH),
   },
   */
   metis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("metis", 18, chainContracts.metis.bridgedFromETH),
   },
   /* Supply is 0.
   dfk: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("dfk", 18, chainContracts.dfk.bridgedFromETH),
   },
   */
   aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromETH),
   },
 };

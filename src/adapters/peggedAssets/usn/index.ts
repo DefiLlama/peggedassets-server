@@ -48,11 +48,8 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   near: {
     minted: chainMinted("near", 18),
-    unreleased: async () => ({}),
   },
   aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     near: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromNear),
   },
 };

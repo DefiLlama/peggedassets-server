@@ -98,8 +98,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "arbitrum",
       18,
@@ -107,8 +105,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "optimism",
       18,
@@ -116,8 +112,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
   },
 };

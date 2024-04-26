@@ -45,11 +45,8 @@ async function compositeMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   comdex: {
     minted: compositeMinted(6),
-    unreleased: async () => ({}),
   },
   osmosis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     comdex: osmosisSupply(
       chainContracts.osmosis.bridgedFromComdex,
       6,

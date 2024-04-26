@@ -36,7 +36,6 @@ async function ergoMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ergo: {
     minted: ergoMinted(0),
-    unreleased: async () => ({}),
   },
 };
 

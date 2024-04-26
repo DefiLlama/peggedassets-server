@@ -49,7 +49,6 @@ async function chainMinted(chain: string) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum"),
-    unreleased: async () => ({}),
   },
 };
 

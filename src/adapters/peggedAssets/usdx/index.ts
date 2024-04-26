@@ -37,7 +37,6 @@ async function kavaMinted() {
 const adapter: PeggedIssuanceAdapter = {
   kava: {
     minted: kavaMinted(),
-    unreleased: async () => ({}),
   },
 };
 

@@ -68,11 +68,8 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "polygon",
       18,
@@ -83,8 +80,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "optimism",
       18,
@@ -95,8 +90,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "arbitrum",
       18,
@@ -107,8 +100,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   avalanche: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "avax",
       18,
@@ -119,8 +110,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   xdai: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "xdai",
       18,
@@ -131,8 +120,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   loopring: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.loopring.bridgeOnETH[0],

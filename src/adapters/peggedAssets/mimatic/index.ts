@@ -350,72 +350,47 @@ async function maiApiCirculating(key: string) {
 const adapter: PeggedIssuanceAdapter = {
   polygon: {
     minted: maiApiPolygon("polygonSupply"),
-    unreleased: async () => ({}),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: maiApiCirculating("fantomSupply"),
   },
   avalanche: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: maiApiCirculating("avalancheSupply"),
   },
   moonriver: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: maiApiCirculating("moonriverSupply"),
   },
   harmony: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     /* not giving accurate number
     none: maiApiCirculating("harmonySupply"),
       */
   },
   cronos: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: maiApiCirculating("cronosSupply"),
   },
   optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: maiApiCirculating("optimismSupply"),
   },
   bsc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: maiApiCirculating("BNBSupply"),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: maiApiCirculating("arbitrumSupply"),
   },
   xdai: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: maiApiCirculating("gnosisSupply"),
   },
   kava: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: maiApiCirculating("kavaSupply"),
   },
   // the following are not given by API
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: solanaMAISupply(
       chainContracts.solana.bridgedFromPolygon[0],
       chainContracts.solana.reserveAddress[0]
     ),
   },
   iotex: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: bridgedMAISupply(
       "iotex",
       18,
@@ -426,8 +401,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: bridgedMAISupply(
       "aurora",
       18,
@@ -438,8 +411,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   celo: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: bridgedMAISupply(
       "celo",
       18,
@@ -450,8 +421,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   metis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: bridgedMAISupply(
       "metis",
       18,
@@ -462,8 +431,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   milkomeda: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: bridgedMAISupply(
       "milkomeda",
       18,
@@ -474,8 +441,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   ethereum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     none: bridgedMAISupply(
       "ethereum",
       18,
@@ -488,11 +453,8 @@ const adapter: PeggedIssuanceAdapter = {
   /*
   polygon: {
     minted: polygonMinted("polygon", 18),
-    unreleased: async () => ({}),
   },
   bsc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "bsc",
       18,
@@ -501,16 +463,12 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: solanaMAISupply(
       chainContracts.solana.bridgedFromPolygon[0],
       chainContracts.solana.reserveAddress[0]
     ),
   },
   avalanche: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "avax",
       18,
@@ -519,8 +477,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "arbitrum",
       18,
@@ -529,8 +485,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   moonriver: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "moonriver",
       18,
@@ -539,8 +493,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   harmony: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "harmony",
       18,
@@ -549,8 +501,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   iotex: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "iotex",
       18,
@@ -559,8 +509,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "aurora",
       18,
@@ -569,8 +517,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   xdai: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "xdai",
       18,
@@ -579,13 +525,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   boba: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply("boba", 18, chainContracts.boba.bridgedFromPolygon[0], chainContracts.boba.anyMAI),
   },
   celo: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "celo",
       18,
@@ -594,8 +536,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "fantom",
       18,
@@ -604,8 +544,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   metis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "metis",
       18,
@@ -614,8 +552,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   cronos: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "cronos",
       18,
@@ -624,8 +560,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   milkomeda: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "milkomeda",
       18,
@@ -634,8 +568,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     polygon: bridgedMAISupply(
       "optimism",
       18,

@@ -52,7 +52,6 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   polygon: {
     minted: chainMinted("polygon", 18),
-    unreleased: async () => ({}),
   },
 };
 

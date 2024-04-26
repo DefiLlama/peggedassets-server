@@ -42,7 +42,6 @@ async function karuraMinted(address: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   karura: {
     minted: karuraMinted(chainContracts.karura.issued[0], 12),
-    unreleased: async () => ({}),
   },
 };
 

@@ -96,11 +96,8 @@ async function ontologyBridged() {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "arbitrum",
       18,
@@ -109,16 +106,11 @@ const adapter: PeggedIssuanceAdapter = {
   },
   optimism: {
     minted: chainMinted("optimism", 18),
-    unreleased: async () => ({}),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
   },
   ontology: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: ontologyBridged(),
   },
 };

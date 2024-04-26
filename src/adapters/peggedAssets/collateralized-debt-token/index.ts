@@ -31,7 +31,6 @@ async function osmosisMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   osmosis: {
     minted: osmosisMinted(6),
-    unreleased: async () => ({}),
   },
 };
 

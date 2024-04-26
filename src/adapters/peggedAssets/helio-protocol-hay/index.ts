@@ -41,7 +41,6 @@ async function bscMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: bscMinted(18),
-    unreleased: async () => ({}),
   },
 };
 

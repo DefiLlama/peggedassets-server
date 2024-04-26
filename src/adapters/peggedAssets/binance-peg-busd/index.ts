@@ -285,8 +285,6 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: chainUnreleased("optimism", 18),
   },
   okexchain: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply(
       "okexchain",
       18,
@@ -294,8 +292,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   moonriver: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply(
       "moonriver",
       18,
@@ -303,28 +299,18 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
   } /*
   fuse: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("fuse", 18, chainContracts.fuse.bridgedFromBSC),
   },*/,
   meter: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("meter", 18, chainContracts.meter.bridgedFromBSC),
   },
   moonbeam: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("moonbeam", 18, chainContracts.moonbeam.bridgedFromBSC),
   },
   milkomeda: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply(
       "milkomeda",
       18,
@@ -332,76 +318,48 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   elastos: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("elastos", 18, chainContracts.elastos.bridgedFromBSC),
   },
   aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromBSC),
   },
   oasis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
   },
   terra: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: terraSupply(chainContracts.terra.bridgedFromBSC, 8),
   },
   shiden: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("shiden", 18, chainContracts.shiden.bridgedFromBSC),
   },
   astar: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("astar", 18, chainContracts.astar.bridgedFromBSC),
   },
   evmos: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("evmos", 18, chainContracts.evmos.bridgedFromBSC),
   },
   syscoin: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("syscoin", 18, chainContracts.syscoin.bridgedFromBSC),
   },
   boba: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("boba", 18, chainContracts.boba.bridgedFromBSC),
   },
   metis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: sumMultipleBalanceFunctions(
       [bridgedSupply("metis", 18, chainContracts.metis.bridgedFromBSC)],
       "peggedUSD"
     ),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromBSC),
   },
   kcc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("kcc", 18, chainContracts.kcc.bridgedFromBSC),
   },
   rsk: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromBSC),
   },
   theta: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply(
       "theta",
       18,
@@ -411,18 +369,12 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   } /*
   kava: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: kavaMinted(chainContracts.kava.bridgeOnBNB),
   },*/,
   klaytn: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply("klaytn", 18, chainContracts.klaytn.bridgedFromBSC),
   },
   thundercore: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bsc: bridgedSupply(
       "thundercore",
       18,

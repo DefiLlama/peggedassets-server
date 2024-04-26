@@ -45,11 +45,8 @@ async function agoricMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   agoric: {
     minted: agoricMinted(6),
-    unreleased: async () => ({}),
   },
   osmosis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     agoric: osmosisSupply(
       chainContracts.osmosis.bridgedFromAgoric,
       6,

@@ -88,15 +88,12 @@ async function fetchStellarCirculatingSupply(): Promise<Balances> {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
-    unreleased: async () => ({}),
   },
   stellar: {
     minted: fetchStellarCirculatingSupply, // This should be a reference to your async function, not a type
-    unreleased: async () => ({}),
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedAUD"),
-    unreleased: async () => ({}),
   },
 };
 

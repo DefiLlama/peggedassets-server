@@ -28,7 +28,6 @@ async function bscMinted() {
 const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: bscMinted(),
-    unreleased: async () => ({}),
   },
 };
 

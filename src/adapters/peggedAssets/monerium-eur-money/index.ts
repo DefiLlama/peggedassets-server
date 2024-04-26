@@ -85,19 +85,15 @@ async function algorandMinted() {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   xdai: {
     minted: chainMinted("xdai", 18),
-    unreleased: async () => ({}),
   },
   polygon: {
     minted: chainMinted("polygon", 18),
-    unreleased: async () => ({}),
   },
   algorand: {
     minted: algorandMinted(),
-    unreleased: async () => ({}),
   },
 };
 

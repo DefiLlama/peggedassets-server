@@ -49,7 +49,6 @@ const adapter: PeggedIssuanceAdapter = {};
 for (const chain of Object.keys(config) as ConfigChain[]) {
   adapter[chain] = {
     minted: chainMinted(chain),
-    unreleased: async () => ({}),
   };
 }
 

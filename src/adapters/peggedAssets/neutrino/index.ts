@@ -49,11 +49,8 @@ async function wavesMinted() {
 const adapter: PeggedIssuanceAdapter = {
   waves: {
     minted: wavesMinted(),
-    unreleased: async () => ({}),
   },
   ethereum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     waves: bridgedSupply(
       "ethereum",
       18,
@@ -61,8 +58,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     waves: bridgedSupply(
       "polygon",
       18,
@@ -70,8 +65,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   bsc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     waves: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromWaves),
   },
 };

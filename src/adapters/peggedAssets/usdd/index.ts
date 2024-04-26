@@ -125,11 +125,8 @@ async function bscBridged() {
 const adapter: PeggedIssuanceAdapter = {
   tron: {
     minted: tronMinted(),
-    unreleased: async () => ({}),
   },
   bittorrent: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     tron: bridgedSupply(
       "bittorrent",
       18,
@@ -137,13 +134,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   ethereum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bittorrent: ethereumBridged(),
   },
   bsc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     bittorrent: bscBridged(),
   },
 };

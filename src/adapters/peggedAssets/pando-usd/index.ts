@@ -33,7 +33,6 @@ async function pusdMinted() {
 const adapter: PeggedIssuanceAdapter = {
   mixin: {
     minted: pusdMinted(),
-    unreleased: async () => ({}),
   },
 };
 

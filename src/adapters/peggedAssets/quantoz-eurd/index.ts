@@ -45,7 +45,6 @@ async function algorandMinted() {
 const adapter: PeggedIssuanceAdapter = {
   algorand: {
     minted: algorandMinted(),
-    unreleased: async () => ({}),
   },
 };
 

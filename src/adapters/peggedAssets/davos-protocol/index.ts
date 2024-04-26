@@ -63,23 +63,18 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   polygon: {
     minted: chainMinted("polygon", 18),
-    unreleased: async () => ({}),
   },
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   arbitrum: {
     minted: chainMinted("arbitrum", 18),
-    unreleased: async () => ({}),
   },
   bsc: {
     minted: chainMinted("bsc", 18),
-    unreleased: async () => ({}),
   },
   optimism: {
     minted: chainMinted("optimism", 18),
-    unreleased: async () => ({}),
   },
 };
 

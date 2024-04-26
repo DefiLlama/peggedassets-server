@@ -112,7 +112,6 @@ async function supply() {
 const adapter: PeggedIssuanceAdapter = {
   algorand: {
     minted: supply(),
-    unreleased: async () => ({}),
   },
 };
 

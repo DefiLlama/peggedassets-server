@@ -31,7 +31,6 @@ async function getCardanoSupply() {
 const adapter: PeggedIssuanceAdapter = {
   cardano: {
     minted: getCardanoSupply,
-    unreleased: async () => ({}),
   },
 };
 

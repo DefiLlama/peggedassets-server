@@ -76,23 +76,18 @@ async function tezosMinted(contract: string) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   polygon: {
     minted: chainMinted("polygon", 18),
-    unreleased: async () => ({}),
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued),
-    unreleased: async () => ({}),
   },
   q: {
     minted: chainMinted("q", 18),
-    unreleased: async () => ({}),
   },
   tezos: {
     minted: tezosMinted(chainContracts.tezos.issued[0]),
-    unreleased: async () => ({}),
   },
 };
 

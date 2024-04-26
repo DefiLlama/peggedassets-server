@@ -59,20 +59,15 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   xdai: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("xdai", 18, chainContracts.xdai.bridgedFromETH),
   },
   bsc: {
     minted: chainMinted("bsc", 18),
-    unreleased: async () => ({}),
   },
   fantom: {
     minted: chainMinted("fantom", 18),
-    unreleased: async () => ({}),
   },
 };
 

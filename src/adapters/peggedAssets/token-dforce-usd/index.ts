@@ -207,8 +207,6 @@ const adapter: PeggedIssuanceAdapter = {
   },
   */
   avalanche: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
   },
   kava: {
     minted: chainMinted("kava", 18),

@@ -122,23 +122,18 @@ async function getChainCollateralUsdValue(chain: string) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: getChainCollateralUsdValue("ethereum"),
-    unreleased: async () => ({}),
   },
   polygon: {
     minted: getChainCollateralUsdValue("polygon"),
-    unreleased: async () => ({}),
   },
   optimism: {
     minted: getChainCollateralUsdValue("optimism"),
-    unreleased: async () => ({}),
   },
   bsc: {
     minted: getChainCollateralUsdValue("bsc"),
-    unreleased: async () => ({}),
   },
   arbitrum: {
     minted: getChainCollateralUsdValue("arbitrum"),
-    unreleased: async () => ({}),
   },
 };
 
