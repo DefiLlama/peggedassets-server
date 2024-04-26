@@ -486,17 +486,17 @@ const adapter: PeggedIssuanceAdapter = {
       18
     ),
   },
-  /*
+
   dogechain: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedSupply(
+    /*ethereum: bridgedSupply(
       "dogechain",
       18,
       chainContracts.dogechain.bridgedFromETH
-    ),
+    ),*/
   },
-  */
+  
   thundercore: {
     minted: async () => ({}),
     unreleased: async () => ({}),
@@ -520,11 +520,13 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.arbitrum_nova.bridgedFromETH
     ),
   },
-  kava: {
+  /*
+  kava: { broke the adapter
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: kavaBridged(),
+    ethereum: kavaBridged(), 
   },
+  */
   mixin: {
     minted: async () => ({}),
     unreleased: async () => ({}),

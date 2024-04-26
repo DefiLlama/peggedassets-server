@@ -784,11 +784,13 @@ const adapter: PeggedIssuanceAdapter = {
     polygon: bridgedSupply("celo", 6, chainContracts.celo.bridgedFromPolygon),
     solana: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromSol),
   },
-  kava: {
+  /*
+  kava: { //broke the adapter
     minted: async () => ({}),
     unreleased: async () => ({}),
     ethereum: kavaBridged(),
   },
+  */
   karura: {
     minted: async () => ({}),
     unreleased: async () => ({}),

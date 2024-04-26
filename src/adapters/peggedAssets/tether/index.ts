@@ -939,11 +939,13 @@ const adapter: PeggedIssuanceAdapter = {
       "peggedUSD"
     ),
   },
-  kava: {
+  /*
+  kava: { broke the adapter
     minted: kavaMinted(),
     unreleased: chainUnreleased("kava", 6, chainContracts.kava.unreleased[0]),
     ethereum: kavaBridged(),
   },
+  */
   ontology: {
     minted: async () => ({}),
     unreleased: async () => ({}),
