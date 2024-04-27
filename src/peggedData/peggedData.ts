@@ -300,14 +300,14 @@ export default [
     description:
       "DOLA is an over-collateralized stablecoin pegged to the US Dollar.  It can also be used as collateral within the Frontier protocol to achieve high capital efficiency, leverage and native yield.",
     mintRedeemDescription:
-      "Using the Frontier Banking app, users mint DOLA by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back DOLA is burned.",
+      "Using FiRM, users mint DOLA by depositing an accepted collateral asset. When the loan is repaid to retrieve the collateral, the paid back DOLA is burned.",
     onCoinGecko: "true",
     gecko_id: "dola-usd",
     cmcId: "19191",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: null,
+    auditLinks: "https://inverse.finance/audits",
     twitter: "https://twitter.com/InverseFinance",
     wiki: "https://wiki.defillama.com/wiki/DOLA",
   },
