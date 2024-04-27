@@ -1,5 +1,5 @@
 
-const pegType = "peggedGBP";
+const pegType = "peggedSGD";
 
 const chainContracts = {
   ethereum: {
