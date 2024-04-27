@@ -3738,9 +3738,9 @@ export default [
     symbol: "ISC",
     url: "https://www.isc.money",
     description:
-      " International Stable Currency (ISC) is yield-bearing stablecoin pegged to a basket of real world assets.",
+      "International Stable Currency (ISC) is a yield-bearing stablecoin pegged to a basket of real world assets.",
     mintRedeemDescription:
-      " ISC Issuer is tasked with two principal functions that are integral to the operation of the ISC ecosystem. Firstly, it is responsible for the minting and burning of ISC. Secondly, it manages the loans of ISC between itself and the ISC",
+      "ISC Issuer is tasked with two principal functions that are integral to the operation of the ISC ecosystem. Firstly, it is responsible for the minting and burning of ISC. Secondly, it manages the loans of ISC between itself and the ISC Reserves.",
     onCoinGecko: "true",
     gecko_id: "international-stable-currency",
     cmcId: null,
