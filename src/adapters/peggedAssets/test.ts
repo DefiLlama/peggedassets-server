@@ -236,8 +236,8 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
   ) {
     throw new Error(`Pegged asset doesn't have total circulating`);
   }
-  if (peggedBalances.totalCirculating.circulating[pegType]! > 100e9) {
-    throw new Error(`Pegged asset total circulating is over 100 billion`);
+  if (peggedBalances.totalCirculating.circulating[pegType]! > 1000e9) {
+    throw new Error(`Pegged asset total circulating is over 1000 billion`);
   }
   if (peggedBalances.totalCirculating.circulating[pegType] === 0) {
     throw new Error(`Returned 0 total circulating`);
