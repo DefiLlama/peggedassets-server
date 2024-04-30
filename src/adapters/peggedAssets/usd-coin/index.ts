@@ -522,11 +522,6 @@ const adapter: PeggedIssuanceAdapter = {
   */
   arbitrum: {
     minted: chainMinted("arbitrum", 6),
-    unreleased: chainUnreleased(
-      "arbitrum",
-      6,
-      chainContracts.arbitrum.unreleased[0]
-    ),
     ethereum: bridgedSupply(
       "arbitrum",
       6,

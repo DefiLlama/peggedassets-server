@@ -69,7 +69,6 @@ export const chainContracts: ChainContracts = {
   },
   arbitrum: {
     issued: ["0xaf88d065e77c8cc2239327c5edb3a432268e5831"],
-    unreleased: ["0x2df1c51e09aecf9cacb7bc98cb1742757f163df7"], // circle bridge wallet
     bridgeOnETH: ["0xcee284f754e854890e311e3280b767f80797180d"],
     bridgedFromETH: ["0xff970a61a04b1ca14834a43f5de4533ebddb5cc8"],
   },
