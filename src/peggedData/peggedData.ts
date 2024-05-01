@@ -3757,10 +3757,10 @@ export default [
     address: "0x0BBF664D46becc28593368c97236FAa0fb397595",
     symbol: "KNOX",
     url: "https://app.reserve.org/arbitrum/token/0x0bbf664d46becc28593368c97236faa0fb397595/overview",
-    description: "Where value anchors",
+    description: "A permissionless, yield-bearing stablecoin designed to be a reliable store of value",
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
-    onCoinGecko: null,
+    onCoinGecko: "false",
     gecko_id: "knox-dollar", //fakecg
     cmcId: null,
     pegType: "peggedUSD",
