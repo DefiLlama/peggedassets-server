@@ -105,6 +105,7 @@ import dsu from "./digital-standard-unit";
 import electronicusd from "./electronic-usd";
 import hyusd from "./high-yield-usd";
 import usd3 from "./web-3-dollar";
+import knox from "./knox-dollar";
 import eure from "./monerium-eur-money";
 import anonusd from "./offshift-anonusd";
 import nxusd from "./nxusd";

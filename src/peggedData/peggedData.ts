@@ -3751,4 +3751,23 @@ export default [
     twitter: "https://twitter.com/ISC_money",
     wiki: "https://wp.isc.money",
   },
+    {
+    id: "187",
+    name: "KNOX Dollar",
+    address: "0x0BBF664D46becc28593368c97236FAa0fb397595",
+    symbol: "KNOX",
+    url: "https://app.reserve.org/arbitrum/token/0x0bbf664d46becc28593368c97236faa0fb397595/overview",
+    description: "Where value anchors",
+    mintRedeemDescription:
+      "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
+    onCoinGecko: null,
+    gecko_id: "knox-dollar", //fakecg
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/KNOX_Dollar",
+    wiki: "https://app.reserve.org/arbitrum/token/0x0bbf664d46becc28593368c97236faa0fb397595/overview",
+  },
 ] as PeggedAsset[];
