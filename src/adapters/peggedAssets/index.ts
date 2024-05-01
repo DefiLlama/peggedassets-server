@@ -186,6 +186,7 @@ import wen from "./magma-wen";
 import gyd from "./gyroscope-gyd";
 import isc from "./international-stable-currency";
 import usc from "./orby-network-usc-stablecoin";
+import fxbtcusd from "./f-x-btc-usd"
 
 export default {
   tether,
@@ -375,5 +376,6 @@ export default {
   "gyroscope-gyd": gyd,
   "international-stable-currency": isc,
   "orby-network-usc-stablecoin": usc,
-  "knox-dollar": knox
+  "knox-dollar": knox,
+  "f-x-btc-usd": fxbtcusd
 };

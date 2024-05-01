@@ -3789,4 +3789,24 @@ export default [
     twitter: "https://twitter.com/OrbyNetwork",
     wiki: "https://doc.orby.network/introduction/what-is-usdusc",
   },
+  {
+    id: "189",
+    name: "btcUSD",
+    address: "0x9d11ab23d33ad026c466ce3c124928fdb69ba20e",
+    symbol: "btcUSD",
+    url: "https://fx.aladdin.club/",
+    description:
+      "btcUSD is a stablecoin pegged to the USD, offering high yields and maintaining stability with a 120% collateral ratio",
+    mintRedeemDescription:
+      "btcUSD is minted by depositing collateral at a minimum 120% collateral ratio, providing a stablecoin with yields pegged to the USD",
+    onCoinGecko: "false",
+    gecko_id: "f-x-btc-usd", //fcoingecko
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/protocol_fx",
+    wiki: "https://docs.aladdin.club/f-x-protocol/introduction-of-btcusd-xwbtc",
+  },
 ] as PeggedAsset[];
