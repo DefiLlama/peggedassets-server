@@ -375,4 +375,5 @@ export default {
   "gyroscope-gyd": gyd,
   "international-stable-currency": isc,
   "orby-network-usc-stablecoin": usc,
+  "knox-dollar": knox
 };

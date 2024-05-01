@@ -3751,10 +3751,10 @@ export default [
     twitter: "https://twitter.com/ISC_money",
     wiki: "https://wp.isc.money",
   },
-    {
+  {
     id: "187",
     name: "KNOX Dollar",
-    address: "0x0BBF664D46becc28593368c97236FAa0fb397595",
+    address: "arbitrum:0x0BBF664D46becc28593368c97236FAa0fb397595",
     symbol: "KNOX",
     url: "https://app.reserve.org/arbitrum/token/0x0bbf664d46becc28593368c97236faa0fb397595/overview",
     description: "A permissionless, yield-bearing stablecoin designed to be a reliable store of value",
@@ -3769,5 +3769,24 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/KNOX_Dollar",
     wiki: "https://app.reserve.org/arbitrum/token/0x0bbf664d46becc28593368c97236faa0fb397595/overview",
+  },
+  {
+    id: "188",
+    name: "Orby USC",
+    address: "cronos:0xd42e078cea2be8d03cd9dfecc1f0d28915edea78",
+    symbol: "USC",
+    url: "https://orby.network/",
+    description: "USC is Orby's decentralised, overcollateralized stablecoin that is soft-pegged to the US dollar",
+    mintRedeemDescription:
+      "$USC is an overcollateralized stablecoin minted by depositing more collateral than debt into a shuttle, where users must maintain at least $USC 100 and adhere to a minimum collateral-to-debt ratio, adjusted continuously by an oracle",
+    onCoinGecko: "true",
+    gecko_id: "orby-network-usc-stablecoin", 
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://doc.orby.network/overview/security-and-audits",
+    twitter: "https://twitter.com/OrbyNetwork",
+    wiki: "https://doc.orby.network/introduction/what-is-usdusc",
   },
 ] as PeggedAsset[];
