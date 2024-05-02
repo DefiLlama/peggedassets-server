@@ -1,5 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
+import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -10,10 +11,10 @@ import {
 
 const chainContracts: ChainContracts = {
   ethereum: {
-    issued: "0x0d86883FAf4FfD7aEb116390af37746F45b6f378",
+    issued: ["0x0d86883FAf4FfD7aEb116390af37746F45b6f378"],
   },
   base: {
-    bridgedFromETH: "0xEFb97aaF77993922aC4be4Da8Fbc9A2425322677",
+    bridgedFromETH: ["0xEFb97aaF77993922aC4be4Da8Fbc9A2425322677"],
   },
 };
 
@@ -45,35 +46,6 @@ async function chainMinted(chain: string, decimals: number) {
   };
 }
 
-async function bridgedFromEthereum(
-  chain: string,
-  decimals: number,
-  address: string
-) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
-        target: address,
-        block: _chainBlocks?.[chain],
-        chain: chain,
-      })
-    ).output;
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      totalSupply / 10 ** decimals,
-      address,
-      true
-    );
-    return balances;
-  };
-}
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
@@ -83,11 +55,7 @@ const adapter: PeggedIssuanceAdapter = {
   base: {
     minted: async () => ({}),
     unreleased: async () => ({}),
-    ethereum: bridgedFromEthereum(
-      "base",
-      18,
-      chainContracts.base.bridgedFromETH
-    ),
+    ethereum: bridgedSupply("base", 18, chainContracts.base.bridgedFromETH),
   },
 };
 
