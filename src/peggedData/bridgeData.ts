@@ -1699,6 +1699,10 @@ export default {
     bridge: "base",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xEFb97aaF77993922aC4be4Da8Fbc9A2425322677": {
+    bridge: "base",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
