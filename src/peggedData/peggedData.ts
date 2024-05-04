@@ -3815,7 +3815,7 @@ export default [
     address: "0x78da5799CF427Fee11e9996982F4150eCe7a99A7",
     symbol: "rgUSD",
     url: "https://app.reserve.org/ethereum/token/0x78da5799cf427fee11e9996982f4150ece7a99a7/overview",
-    description: "Earn the DeFi rate any time you're in stables",
+    description: "Hold $1 USD peg, and deploy collateral to generate safe, on-chain yield to incentivize liquidity for itself and partners",
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: null,
