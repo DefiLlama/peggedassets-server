@@ -881,7 +881,7 @@ export default [
     symbol: "USX",
     url: "https://dforce.network/",
     description:
-      "USX is a USD-pegged stablecoin by dForce with a dual model for minting - USX can be minted through Vault (single collateral & risk-isolated), or via borrowing from supported lending protocols (pool-based & multi-collateral & market-driven rates) directly.",
+      "An omni decentralized stablecoin protocol. USX is an omni-decentralized stablecoin, serving as a conduit to facilitate interoperability across multiple Ethereum and Bitcoin L1/L2s. USX unlocks seamless access to real yields backed by RWA, providing additional value to holders beyond price stability. USX also leverages AI technologies to enhance its functionalities and management",
     mintRedeemDescription:
       "Using the dForce Network app, users mint USX by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back USX is burned. Users can borrow USX from whitelisted lending protocols which have had their USX liquidity issued algorithmically.",
     onCoinGecko: "true",
