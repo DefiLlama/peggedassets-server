@@ -3809,4 +3809,23 @@ export default [
     twitter: "https://twitter.com/protocol_fx",
     wiki: "https://docs.aladdin.club/f-x-protocol/introduction-of-btcusd-xwbtc",
   },
+  {
+    id: "190",
+    name: "Revenue Generating USD",
+    address: "0x78da5799CF427Fee11e9996982F4150eCe7a99A7",
+    symbol: "rgUSD",
+    url: "https://app.reserve.org/ethereum/token/0x78da5799cf427fee11e9996982f4150ece7a99a7/overview",
+    description: "Hold $1 USD peg, and deploy collateral to generate safe, on-chain yield to incentivize liquidity for itself and partners",
+    mintRedeemDescription:
+      "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
+    onCoinGecko: null,
+    gecko_id: "revenue-generating-usd", //fakecg
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/rgUSD_Bull",
+    wiki: "https://app.reserve.org/ethereum/token/0x78da5799cf427fee11e9996982f4150ece7a99a7/overview",
+  },
 ] as PeggedAsset[];

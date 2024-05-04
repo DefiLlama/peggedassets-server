@@ -105,6 +105,7 @@ import dsu from "./digital-standard-unit";
 import electronicusd from "./electronic-usd";
 import hyusd from "./high-yield-usd";
 import usd3 from "./web-3-dollar";
+import rgusd from "./revenue-generating-usd";
 import knox from "./knox-dollar";
 import eure from "./monerium-eur-money";
 import anonusd from "./offshift-anonusd";
@@ -296,6 +297,7 @@ export default {
   "electronic-usd": electronicusd,
   "high-yield-usd": hyusd,
   "web-3-dollar": usd3,
+  "revenue-generating-usd": rgusd,
   "monerium-eur-money": eure,
   "offshift-anonusd": anonusd,
   nxusd,
