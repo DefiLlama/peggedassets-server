@@ -3,16 +3,11 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {};
 
@@ -37,7 +32,6 @@ async function kavaMinted() {
 const adapter: PeggedIssuanceAdapter = {
   kava: {
     minted: kavaMinted(),
-    unreleased: async () => ({}),
   },
 };
 

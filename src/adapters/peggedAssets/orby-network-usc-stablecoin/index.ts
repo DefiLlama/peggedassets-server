@@ -1,56 +1,9 @@
-const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
-import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,
-} from "../peggedAsset.type";
-
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
-
-const chainContracts: ChainContracts = {
+const chainContracts = {
   cronos: {
     issued: ["0xD42E078ceA2bE8D03cd9dFEcC1f0d28915Edea78"],
   },
 };
 
-async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  cronos: {
-    minted: chainMinted("cronos", 18),
-    unreleased: async () => ({}),
-  },
-};
-
+import { addChainExports } from "../helper/getSupply";
+const adapter = addChainExports(chainContracts);
 export default adapter;

@@ -3,14 +3,9 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   canto: {
@@ -48,7 +43,6 @@ async function cantoCirculating(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   canto: {
     minted: cantoCirculating("canto", 18),
-    unreleased: async () => ({}),
   },
 };
 

@@ -1,10 +1,7 @@
-const sdk = require("@defillama/sdk");
+import { addChainExports } from "../helper/getSupply";
 import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,
+  PeggedIssuanceAdapter,  ChainContracts,
 } from "../peggedAsset.type";
-import { sumSingleBalance } from "../helper/generalUtil";
 
 const chainContracts = {
   ethereum: {
@@ -33,126 +30,6 @@ const chainContracts = {
   },
 };
 
-async function ethereumMinted() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
-        target: chainContracts.ethereum.issued,
-        block: _ethBlock,
-        chain: "ethereum",
-      })
-    ).output;
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      totalSupply / 10 ** 18,
-      chainContracts.ethereum.issued,
-      true
-    );
-    return balances;
-  };
-}
-
-async function bridgedFromEthereum(
-  chain: string,
-  decimals: number,
-  address: string
-) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
-        target: address,
-        block: _chainBlocks?.[chain],
-        chain: chain,
-      })
-    ).output;
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      totalSupply / 10 ** decimals,
-      address,
-      true
-    );
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: ethereumMinted(),
-    unreleased: async () => ({}),
-  },
-  fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedFromEthereum(
-      "fantom",
-      18,
-      chainContracts.fantom.bridgedFromETH
-    ),
-  },
-  optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedFromEthereum(
-      "optimism",
-      18,
-      chainContracts.optimism.bridgedFromETH
-    ),
-  },
-  bsc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedFromEthereum("bsc", 18, chainContracts.bsc.bridgedFromETH),
-  },
-  arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedFromEthereum(
-      "arbitrum",
-      18,
-      chainContracts.arbitrum.bridgedFromETH
-    ),
-  },
-  polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedFromEthereum(
-      "polygon",
-      18,
-      chainContracts.polygon.bridgedFromETH
-    ),
-  },
-  avalanche: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedFromEthereum(
-      "avax",
-      18,
-      chainContracts.avax.bridgedFromETH
-    ),
-  },
-  base: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedFromEthereum(
-      "base",
-      18,
-      chainContracts.base.bridgedFromETH
-    ),
-  },
-};
+const adapter: PeggedIssuanceAdapter = addChainExports(chainContracts);
 
 export default adapter;

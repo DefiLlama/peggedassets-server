@@ -8,14 +8,9 @@ import {
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -70,6 +65,8 @@ async function ontologyBridged() {
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
+    return {}
+    /* 
     let balances = {} as Balances;
     const polyDAIAddress = chainContracts.ontology.bridgedFromETH[0];
     const polyDAIReserveAddress = chainContracts.ontology.unreleased[0];
@@ -89,18 +86,15 @@ async function ontologyBridged() {
       polyDAIAddress,
       true
     );
-    return balances;
+    return balances; */
   };
 }
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    unreleased: async () => ({}),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "arbitrum",
       18,
@@ -109,16 +103,11 @@ const adapter: PeggedIssuanceAdapter = {
   },
   optimism: {
     minted: chainMinted("optimism", 18),
-    unreleased: async () => ({}),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
   },
   ontology: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: ontologyBridged(),
   },
 };

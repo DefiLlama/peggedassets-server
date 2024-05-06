@@ -11,16 +11,11 @@ import {
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -125,11 +120,8 @@ async function terraMinted() {
 const adapter: PeggedIssuanceAdapter = {
   terra: {
     minted: terraMinted(),
-    unreleased: async () => ({}),
   },
   ethereum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: sumMultipleBalanceFunctions(
       [
         bridgedSupply(
@@ -147,8 +139,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   bsc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: sumMultipleBalanceFunctions(
       [
         bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromTerra6Decimals),
@@ -158,8 +148,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   } /*
   harmony: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply(
       "harmony",
       18,
@@ -167,8 +155,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },*/,
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: sumMultipleBalanceFunctions(
       [
         bridgedSupply(
@@ -186,33 +172,21 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: solanaMintedOrBridged(chainContracts.solana.bridgedFromTerra),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromTerra),
   },
   aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromTerra),
   },
   avalanche: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromTerra),
   },
   osmosis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: osmosisSupply(chainContracts.osmosis.bridgedFromTerra, 6, "Terra"),
   },
   moonbeam: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply(
       "moonbeam",
       6,
@@ -220,23 +194,15 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   oasis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromTerra),
   },
   celo: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromTerra),
   },
   fuse: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply("fuse", 18, chainContracts.fuse.bridgedFromTerra),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply(
       "arbitrum",
       6,
@@ -244,8 +210,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply(
       "optimism",
       6,
@@ -253,13 +217,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   metis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply("metis", 6, chainContracts.metis.bridgedFromTerra),
   },
   dfk: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     terra: bridgedSupply("dfk", 6, chainContracts.dfk.bridgedFromTerra),
   },
 };

@@ -10,15 +10,10 @@ import {
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import { call as nearCall } from "../llama-helper/near";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 // all multichain
 const chainContracts: ChainContracts = {
@@ -138,21 +133,14 @@ async function nearBridged(address: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: fraxMinted(),
-    unreleased: async () => ({}),
   },
   bsc: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
   avalanche: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "arbitrum",
       18,
@@ -160,36 +148,24 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromETH),
   },
   boba: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("boba", 18, chainContracts.boba.bridgedFromETH),
   },
   fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
   },
   evmos: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply("evmos", 18, chainContracts.evmos.bridgedFromETH),
   },
   near: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: nearBridged(
       "853d955acef822db058eb8505911ed77f175b99e.factory.bridge.near",
       18
     ),
   },
   harmony: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "harmony",
       18,
@@ -197,8 +173,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   moonbeam: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "moonbeam",
       18,
@@ -206,8 +180,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   moonriver: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "moonriver",
       18,
@@ -215,8 +187,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "optimism",
       18,
@@ -224,8 +194,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   polygon: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "polygon",
       18,
@@ -233,13 +201,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
   },
   zksync: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.zksync.bridgeOnETH[0],
@@ -247,8 +211,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   milkomeda: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "milkomeda",
       18,
@@ -256,8 +218,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   everscale: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.everscale.bridgeOnETH[0],
@@ -265,8 +225,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   dogechain: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "dogechain",
       18,
@@ -274,8 +232,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   osmosis: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: osmosisSupply(
       chainContracts.osmosis.bridgedFromETH,
       18,

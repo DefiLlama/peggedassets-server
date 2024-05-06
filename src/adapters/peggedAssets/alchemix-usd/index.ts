@@ -1,17 +1,7 @@
-const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply } from "../helper/getSupply";
+import { addChainExports, } from "../helper/getSupply";
 import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,
+  ChainContracts,
 } from "../peggedAsset.type";
-
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -32,94 +22,5 @@ const chainContracts: ChainContracts = {
   },
 };
 
-async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-    return balances;
-  };
-}
-
-async function chainUnreleased(
-  chain: string,
-  decimals: number,
-  target: string,
-  owners: string[]
-) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let owner of owners) {
-      const reserve = (
-        await sdk.api.erc20.balanceOf({
-          target: target,
-          owner: owner,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(balances, "peggedUSD", reserve / 10 ** decimals);
-    }
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 18),
-    unreleased: chainUnreleased(
-      "ethereum",
-      18,
-      chainContracts.ethereum.issued[0],
-      chainContracts.ethereum.unreleased
-    ),
-  },
-  arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedSupply(
-      "arbitrum",
-      18,
-      chainContracts.arbitrum.bridgedFromETH
-    ),
-  },
-  optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedSupply(
-      "optimism",
-      18,
-      chainContracts.optimism.bridgedFromETH
-    ),
-  },
-  fantom: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
-    ethereum: bridgedSupply("fantom", 18, chainContracts.fantom.bridgedFromETH),
-  },
-};
-
+const adapter = addChainExports(chainContracts);
 export default adapter;

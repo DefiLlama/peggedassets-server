@@ -3,7 +3,7 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
@@ -15,11 +15,6 @@ import { returnBalance } from "../llama-helper/utils";
  */
 
 /*
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   polygon: {
@@ -122,23 +117,18 @@ async function getChainCollateralUsdValue(chain: string) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: getChainCollateralUsdValue("ethereum"),
-    unreleased: async () => ({}),
   },
   polygon: {
     minted: getChainCollateralUsdValue("polygon"),
-    unreleased: async () => ({}),
   },
   optimism: {
     minted: getChainCollateralUsdValue("optimism"),
-    unreleased: async () => ({}),
   },
   bsc: {
     minted: getChainCollateralUsdValue("bsc"),
-    unreleased: async () => ({}),
   },
   arbitrum: {
     minted: getChainCollateralUsdValue("arbitrum"),
-    unreleased: async () => ({}),
   },
 };
 

@@ -4,15 +4,11 @@ import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
+  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   acala: {
@@ -64,12 +60,9 @@ async function karuraMinted(address: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   // hacked, inflated circulating, not trading acalaMinted(chainContracts.acala.issued[0], 12),
   acala: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
   },
   karura: {
     minted: karuraMinted(chainContracts.karura.issued[0], 12),
-    unreleased: async () => ({}),
   },
 };
 

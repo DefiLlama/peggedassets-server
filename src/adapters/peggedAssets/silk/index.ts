@@ -2,7 +2,7 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
@@ -31,7 +31,6 @@ async function silkMinted(decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   secret: {
     minted: silkMinted(0),
-    unreleased: async () => ({}),
   },
 };
 

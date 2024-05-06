@@ -4,17 +4,12 @@ import { bridgedSupply, solanaMintedOrBridged } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -86,24 +81,17 @@ async function tronMinted() {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 8),
-    unreleased: async () => ({}),
   },
   tron: {
     minted: tronMinted(),
-    unreleased: async () => ({}),
   },
   heco: {
     minted: chainMinted("heco", 8),
-    unreleased: async () => ({}),
   },
   elastos: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     heco: bridgedSupply("elastos", 8, chainContracts.elastos.bridgedFromHeco),
   },
   solana: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
   },
 };

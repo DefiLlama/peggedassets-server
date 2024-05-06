@@ -7,16 +7,11 @@ import { bridgedSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -85,11 +80,8 @@ async function gmoAPIChainMinted(chain: string) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
-    unreleased: async () => ({}),
   },
   optimism: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "optimism",
       6,
@@ -100,8 +92,6 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   arbitrum: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     ethereum: bridgedSupply(
       "arbitrum",
       6,
@@ -113,11 +103,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   stellar: {
     minted: gmoAPIChainMinted("XLM"),
-    unreleased: async () => ({}),
   },
   solana: {
     minted: gmoAPIChainMinted("SOLANA"),
-    unreleased: async () => ({}),
   },
 };
 

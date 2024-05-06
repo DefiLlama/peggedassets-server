@@ -2,7 +2,7 @@ import { BigNumber } from "ethers";
 import type {
   Balances,
   PeggedAssetType,
-  ChainBlocks,
+  ChainBlocks,  ChainContracts,
 } from "../peggedAsset.type";
 import bridgeMapping, { BridgeID } from "../../../peggedData/bridgeData";
 
@@ -75,13 +75,7 @@ function appendBridgeData(
 }
 
 export async function sumMultipleBalanceFunctions(
-  functions: Promise<
-    (
-      timestamp: number,
-      ethBlock: number,
-      chainBlocks: ChainBlocks
-    ) => Promise<Balances>
-  >[],
+  functions: any,
   pegType: PeggedAssetType
 ) {
   return async function (

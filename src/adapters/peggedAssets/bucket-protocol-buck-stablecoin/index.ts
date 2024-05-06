@@ -2,15 +2,10 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   ChainBlocks,
   Balances,
-  PeggedIssuanceAdapter,
+  PeggedIssuanceAdapter,  ChainContracts,
 } from "../peggedAsset.type";
 import { getObject } from "../helper/sui";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   sui: {
@@ -47,7 +42,6 @@ async function suiMinted() {
 const adapter: PeggedIssuanceAdapter = {
   sui: {
     minted: suiMinted(),
-    unreleased: async () => ({}),
   },
 };
 

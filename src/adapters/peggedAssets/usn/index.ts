@@ -3,16 +3,11 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,
+  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import { call } from "../llama-helper/near";
 import { bridgedSupply } from "../helper/getSupply";
 
-type ChainContracts = {
-  [chain: string]: {
-    [contract: string]: string[];
-  };
-};
 
 const chainContracts: ChainContracts = {
   near: {
@@ -48,11 +43,8 @@ async function chainMinted(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   near: {
     minted: chainMinted("near", 18),
-    unreleased: async () => ({}),
   },
   aurora: {
-    minted: async () => ({}),
-    unreleased: async () => ({}),
     near: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromNear),
   },
 };
