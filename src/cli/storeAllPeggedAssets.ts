@@ -10,11 +10,21 @@ const handler = async () => {
   // randomize the order of the pegged indexes
   peggedIndexes.sort(() => Math.random() - 0.5)
 
-  const items = peggedIndexes.slice(0, 7)
+  const items = peggedIndexes
   await new PromisePool()
-    .withConcurrency(7)
+    .withConcurrency(4)
     .for(items)
-    .process((i: any) => storePeggedAssets([i]))
+    .process(async (i: any) => {
+      // const timeKey = `                                             pegged_asset_${peggedAssets[i].name}`;
+      // console.time(timeKey);
+      try {
+        await storePeggedAssets([i])
+      } catch (e) {
+        console.log('error storing', peggedAssets[i].name)
+        console.error(e)
+      }
+      // console.timeEnd(timeKey);
+    })
 };
 
 handler().catch(console.error).then(async () => {

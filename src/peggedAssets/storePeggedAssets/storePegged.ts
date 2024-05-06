@@ -27,11 +27,12 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
   const timestamp = getCurrentUnixTimestamp();
   const ethereumBlock = undefined;
   if (timestamp) {
-    console.log("Storing pegged assets", timestamp, peggedIndexes.map((i) => peggedAssets[i].name));
+    // console.log("Storing pegged assets", timestamp, peggedIndexes.map((i) => peggedAssets[i].name));
     const actions = peggedIndexes
       .map((idx) => peggedAssets[idx])
       .map(async (peggedAsset) => {
         const adapterModule = importAdapter(peggedAsset);
+        if (!adapterModule) console.log("No adapter found for", peggedAsset.name, peggedAsset);
 
         Object.values(adapterModule).forEach((obj: any) => {
           if (!obj.minted) obj.minted = stubFn

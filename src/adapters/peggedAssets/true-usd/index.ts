@@ -63,8 +63,6 @@ Sora: 0x006d336effe921106f7817e133686bbc4258a4e0d6fed3a9294d8a8b27312cee, don't 
 
 function chainMinted(chain: string) {
   return async function (_api: ChainApi) {
-    const timeKey = `${chain}_chain_minted`;
-    console.time(timeKey);
     const api = await getApi(chain, _api)
     let balances = {} as Balances;
     const issued = await api.multiCall({ abi: "erc20:totalSupply", calls: chainContracts[chain].issued })
@@ -73,7 +71,6 @@ function chainMinted(chain: string) {
     for (let i = 0; i < issued.length; i++)
       sumSingleBalance(balances, "peggedUSD", issued[i] / 10 ** decimals[i], "issued", false);
 
-    console.timeEnd(timeKey);
     return balances;
   };
 }
@@ -84,13 +81,11 @@ async function tronMinted() {
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
-    console.time("tron_minted");
     let balances = {} as Balances;
     const totalSupply = await tronGetTotalSupply(
       chainContracts["tron"].issued[0]
     );
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
-    console.timeEnd("tron_minted");
     return balances;
   };
 }

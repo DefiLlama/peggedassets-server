@@ -65,6 +65,8 @@ async function ontologyBridged() {
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
+    return {}
+    /* 
     let balances = {} as Balances;
     const polyDAIAddress = chainContracts.ontology.bridgedFromETH[0];
     const polyDAIReserveAddress = chainContracts.ontology.unreleased[0];
@@ -84,7 +86,7 @@ async function ontologyBridged() {
       polyDAIAddress,
       true
     );
-    return balances;
+    return balances; */
   };
 }
 

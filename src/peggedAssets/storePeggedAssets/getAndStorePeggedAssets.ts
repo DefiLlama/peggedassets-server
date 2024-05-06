@@ -319,14 +319,14 @@ export async function storePeggedAsset(
 
   try {
     // Checks circuit breakers
-    /* const storeTokensAction = storeNewPeggedBalances(
+    const storeTokensAction = storeNewPeggedBalances(
       peggedAsset,
       unixTimestamp,
       peggedBalances,
       hourlyPeggedBalances,
       dailyPeggedBalances
     );
-    await storeTokensAction; */
+    await storeTokensAction;
   } catch (e) {
     console.error(peggedAsset.name, e);
     return;
