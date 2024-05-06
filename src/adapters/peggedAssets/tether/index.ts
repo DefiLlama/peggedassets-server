@@ -6,6 +6,7 @@ import {
   solanaMintedOrBridged,
   terraSupply,
   osmosisSupply,
+  getApi,
 } from "../helper/getSupply";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import {
@@ -19,7 +20,7 @@ import { call as nearCall } from "../llama-helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
+  Balances,
 } from "../peggedAsset.type";
 import {
   getTokenBalance as tronGetTokenBalance,
@@ -28,6 +29,7 @@ import {
 import { sumMultipleBalanceFunctions } from "../helper/generalUtil";
 import { mixinSupply } from "../helper/mixin";
 import { chainContracts } from "./config";
+import { ChainApi } from "@defillama/sdk";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -67,21 +69,11 @@ Caduceus: 0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c is multichain, don't have p
 */
 
 async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (_api: ChainApi) {
+    const api = await getApi(chain, _api)
     let balances = {} as Balances;
     for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
+      const totalSupply = await api.call({ abi: "erc20:totalSupply", target: issued, })
       sumSingleBalance(
         balances,
         "peggedUSD",
@@ -95,21 +87,11 @@ async function chainMinted(chain: string, decimals: number) {
 }
 
 async function chainUnreleased(chain: string, decimals: number, owner: string) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (_api: ChainApi) {
+    const api = await getApi(chain, _api)
     let balances = {} as Balances;
     for (let issued of chainContracts[chain].issued) {
-      const reserve = (
-        await sdk.api.erc20.balanceOf({
-          target: issued,
-          owner: owner,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
+      const reserve = await api.call({ target: issued, params: owner, abi: "erc20:balanceOf", })
       sumSingleBalance(balances, "peggedUSD", reserve / 10 ** decimals);
     }
     return balances;
@@ -120,28 +102,18 @@ async function bscBridgedFromTron(
   bscUSDTAddress: string,
   ethUSDTAddress: string
 ) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (_api: ChainApi) {
+    const api = await getApi('bsc', _api)
     let balances = {} as Balances;
-    const totalSupply =
-      (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: bscUSDTAddress,
-          block: _chainBlocks?.["bsc"],
-          chain: "bsc",
-        })
-      ).output /
-      10 ** 18;
+    const totalSupply = await api.call({
+      abi: "erc20:totalSupply",
+      target: bscUSDTAddress,
+    }) / 10 ** 18;
     const bridgedFromETH =
       (
         await sdk.api.erc20.balanceOf({
           target: chainContracts.ethereum.issued[0],
           owner: ethUSDTAddress,
-          block: _ethBlock,
         })
       ).output /
       10 ** 6;

@@ -1,17 +1,16 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply } from "../helper/getSupply";
+import { bridgedSupply, getApi, } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
+  Balances, ChainContracts,
 } from "../peggedAsset.type";
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
 import { call as nearCall } from "../llama-helper/near";
-const axios = require("axios");
-const retry = require("async-retry");
+import { ChainApi } from "@defillama/sdk";
 
 
 const chainContracts: ChainContracts = {
@@ -62,30 +61,19 @@ const chainContracts: ChainContracts = {
 Sora: 0x006d336effe921106f7817e133686bbc4258a4e0d6fed3a9294d8a8b27312cee, don't know how to query API.
 */
 
-async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+function chainMinted(chain: string) {
+  return async function (_api: ChainApi) {
+    const timeKey = `${chain}_chain_minted`;
+    console.time(timeKey);
+    const api = await getApi(chain, _api)
     let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
+    const issued = await api.multiCall({ abi: "erc20:totalSupply", calls: chainContracts[chain].issued })
+    const decimals = await api.multiCall({ abi: "erc20:decimals", calls: chainContracts[chain].issued })
+
+    for (let i = 0; i < issued.length; i++)
+      sumSingleBalance(balances, "peggedUSD", issued[i] / 10 ** decimals[i], "issued", false);
+
+    console.timeEnd(timeKey);
     return balances;
   };
 }
@@ -96,11 +84,13 @@ async function tronMinted() {
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
+    console.time("tron_minted");
     let balances = {} as Balances;
     const totalSupply = await tronGetTotalSupply(
       chainContracts["tron"].issued[0]
     );
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
+    console.timeEnd("tron_minted");
     return balances;
   };
 }
@@ -112,34 +102,34 @@ async function bscMinted() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const totalSupply = 9 * 10 ** 10; // this is hardcoded because Binance API doesn't seem to give 'token' or 'tokens' info that includes TUSD
-    const responseMint = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://dex.binance.org/api/v1/account/bnb1hn8ym9xht925jkncjpf7lhjnax6z8nv24fv2yq"
-        )
-    );
-    const responseReserve = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://dex.binance.org/api/v1/account/bnb100dxzy02a6k7vysc5g4kk4fqamr7jhjg4m83l0"
-        )
-    );
-    const mintingAccountObj = responseMint.data.balances.filter(
-      (obj: any) => obj.symbol === "TUSDB-888"
-    );
-    const reserveAccountObj = responseReserve.data.balances.filter(
-      (obj: any) => obj.symbol === "TUSDB-888"
-    );
-    const circulating =
-      totalSupply -
-      mintingAccountObj[0].free -
-      reserveAccountObj[0].free -
-      reserveAccountObj[0].frozen;
-    if (typeof circulating !== "number") {
-      throw new Error("Binance Chain API for TUSD is broken.");
-    }
-    sumSingleBalance(balances, "peggedUSD", circulating, "issued", false);
+    /*     const totalSupply = 9 * 10 ** 10; // this is hardcoded because Binance API doesn't seem to give 'token' or 'tokens' info that includes TUSD
+        const responseMint = await retry(
+          async (_bail: any) =>
+            await axios.get(
+              "https://dex.binance.org/api/v1/account/bnb1hn8ym9xht925jkncjpf7lhjnax6z8nv24fv2yq"
+            )
+        );
+        const responseReserve = await retry(
+          async (_bail: any) =>
+            await axios.get(
+              "https://dex.binance.org/api/v1/account/bnb100dxzy02a6k7vysc5g4kk4fqamr7jhjg4m83l0"
+            )
+        );
+        const mintingAccountObj = responseMint.data.balances.filter(
+          (obj: any) => obj.symbol === "TUSDB-888"
+        )[0] ?? { free: 0, frozen: 0};
+        const reserveAccountObj = responseReserve.data.balances.filter(
+          (obj: any) => obj.symbol === "TUSDB-888"
+        )[0] ?? { free: 0, frozen: 0};
+        const circulating =
+          totalSupply -
+          mintingAccountObj.free -
+          reserveAccountObj.free -
+          reserveAccountObj.frozen;
+        if (typeof circulating !== "number") {
+          throw new Error("Binance Chain API for TUSD is broken.");
+        }
+        sumSingleBalance(balances, "peggedUSD", circulating, "issued", false); */
     return balances;
   };
 }
@@ -165,7 +155,7 @@ async function nearBridged(address: string, decimals: number) {
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
-    minted: chainMinted("ethereum", 18),
+    minted: chainMinted("ethereum"),
   },
   /*
    * This is to get Ethereum balance to be 0.
@@ -192,7 +182,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
   avalanche: {
-    minted: chainMinted("avax", 18),
+    minted: chainMinted("avax"),
   },
   /* this has 0 supply?
   harmony: {

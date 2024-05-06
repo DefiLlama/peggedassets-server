@@ -1,10 +1,9 @@
 import type {
   Balances,
   ChainBlocks,
-  PeggedAssetType,  ChainContracts,
+  PeggedAssetType,
   PeggedIssuanceAdapter,
 } from "../peggedAsset.type";
-const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "./generalUtil";
 import { getTokenSupply as solanaGetTokenSupply } from "../llama-helper/solana";
 import { totalSupply as terraGetTotalSupply } from "../llama-helper/terra"; // NOTE this is NOT currently exported
@@ -14,52 +13,39 @@ const retry = require("async-retry");
 
 type BridgeAndReserveAddressPair = [string, string[]];
 
-export async function bridgedSupply(
+const tweleveHoursAgo = () => Math.round(Date.now() / 1000) - 12 * 60 * 60;
+
+export async function getApi(chain: string, _api: ChainApi) {
+  if (chain === _api.chain) return _api;
+  const api = new ChainApi({ chain });
+  if (_api.timestamp && _api.timestamp < tweleveHoursAgo()) await api.getBlock()
+  return api;
+}
+
+export function bridgedSupply(
   chain: string,
   decimals: number,
   addresses: string[],
   bridgeName?: string,
   bridgedFromChain?: string,
   pegType?: PeggedAssetType
-) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+): any {
+  return async function (_api: ChainApi) {
+    const api = await getApi(chain, _api)
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
-    for (let address of addresses) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: address,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
+    const supplies = await api.multiCall({ abi: "erc20:totalSupply", calls: addresses, });
+    for (let i = 0; i < supplies.length; i++) {
       bridgeName
-        ? sumSingleBalance(
-          balances,
-          assetPegType,
-          totalSupply / 10 ** decimals,
-          bridgeName,
-          false,
-          bridgedFromChain
-        )
-        : sumSingleBalance(
-          balances,
-          assetPegType,
-          totalSupply / 10 ** decimals,
-          address,
-          true
-        );
+        ? sumSingleBalance(balances, assetPegType, supplies[i] / 10 ** decimals, bridgeName, false, bridgedFromChain)
+        : sumSingleBalance(balances, assetPegType, supplies[i] / 10 ** decimals, addresses[i], true);
     }
+
     return balances;
   };
 }
 
-export async function bridgedSupplySubtractReserve(
+export function bridgedSupplySubtractReserve(
   chain: string,
   decimals: number,
   bridgeAndReserveAddresses: BridgeAndReserveAddressPair,
@@ -67,90 +53,41 @@ export async function bridgedSupplySubtractReserve(
   bridgedFromChain?: string,
   pegType?: PeggedAssetType
 ) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (_api: ChainApi) {
+    const api = await getApi(chain, _api)
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     let sum = 0;
     const bridgeAddress = bridgeAndReserveAddresses[0];
     const reserveAddresses = bridgeAndReserveAddresses[1];
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
-        target: bridgeAddress,
-        block: _chainBlocks?.[chain],
-        chain: chain,
-      })
-    ).output;
-    sum += totalSupply;
-    for (let reserve of reserveAddresses) {
-      const totalReserve = reserve
-        ? (
-          await sdk.api.erc20.balanceOf({
-            target: bridgeAddress,
-            owner: reserve,
-            block: _chainBlocks?.[chain],
-            chain: chain,
-          })
-        ).output
-        : 0;
-      sum -= totalReserve;
-    }
+    const totalSupply = await api.call({ abi: "erc20:totalSupply", target: bridgeAddress, })
+    sum += +totalSupply;
+    const tokenBals = await api.multiCall({ abi: 'erc20:balanceOf', calls: reserveAddresses, target: bridgeAddress, })
+    tokenBals.forEach((bal) => sum -= +bal);
     bridgeName
-      ? sumSingleBalance(
-        balances,
-        assetPegType,
-        sum / 10 ** decimals,
-        bridgeName,
-        false,
-        bridgedFromChain
-      )
-      : sumSingleBalance(
-        balances,
-        assetPegType,
-        sum / 10 ** decimals,
-        bridgeAddress,
-        true
-      );
+      ? sumSingleBalance(balances, assetPegType, sum / 10 ** decimals, bridgeName, false, bridgedFromChain)
+      : sumSingleBalance(balances, assetPegType, sum / 10 ** decimals, bridgeAddress, true);
     return balances;
   };
 }
 
-export async function supplyInEthereumBridge(
+export function supplyInEthereumBridge(
   target: string,
   owner: string,
   decimals: number,
   pegType?: PeggedAssetType
 ) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (_api: ChainApi) {
+    const api = await getApi('ethereum', _api)
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
-    const bridged = (
-      await sdk.api.erc20.balanceOf({
-        target: target,
-        owner: owner,
-        block: _ethBlock,
-      })
-    ).output;
-    sumSingleBalance(
-      balances,
-      assetPegType,
-      bridged / 10 ** decimals,
-      owner,
-      true
-    );
+    const bridged = await api.call({ abi: 'erc20:balanceOf', target: target, params: owner, })
+    sumSingleBalance(balances, assetPegType, bridged / 10 ** decimals, owner, true);
     return balances;
   };
 }
 
-export async function solanaMintedOrBridged(
+export function solanaMintedOrBridged(
   targets: string[],
   pegType?: PeggedAssetType
 ) {
@@ -169,7 +106,7 @@ export async function solanaMintedOrBridged(
   };
 }
 
-export async function terraSupply(addresses: string[], decimals: number) {
+export function terraSupply(addresses: string[], decimals: number) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -193,7 +130,7 @@ export async function terraSupply(addresses: string[], decimals: number) {
   };
 }
 
-export async function osmosisLiquidity(
+export function osmosisLiquidity(
   token: string,
   bridgeName: string,
   bridgedFrom: string
@@ -221,7 +158,7 @@ export async function osmosisLiquidity(
   };
 }
 
-export async function cosmosSupply(
+export function cosmosSupply(
   chain: string,
   tokens: string[],
   decimals: number,
@@ -253,7 +190,7 @@ export async function cosmosSupply(
   };
 }
 
-export async function osmosisSupply(
+export function osmosisSupply(
   tokens: string[],
   decimals: number,
   bridgedFromChain: string
@@ -284,7 +221,7 @@ export async function osmosisSupply(
   };
 }
 
-export async function kujiraSupply(
+export function kujiraSupply(
   tokens: string[],
   decimals: number,
   bridgedFromChain: string
@@ -308,11 +245,15 @@ export function addChainExports(config: any, adapter: any = {}, {
     const cExports = adapter[chain]
     Object.keys(chainConfig).forEach((key) => {
       switch (key) {
+        case 'bridgeOnETH':
+        case 'pegType':
+          break;
         case "issued":
           if (!cExports.minted)
             cExports.minted = getIssued(chainConfig)
           break;
         case "unreleased":
+        case "reserves":
           if (!cExports.unreleased)
             cExports.unreleased = getUnreleased(chainConfig)
           break;
@@ -347,9 +288,10 @@ function getIssued({
 }
 
 function getUnreleased({
-  issued, pegType = "peggedUSD", unreleased,
-}: { issued: string[] | string, pegType: PeggedAssetType, issuedABI: string, unreleased: string[] | string, }) {
+  issued, pegType = "peggedUSD", unreleased, reserves,
+}: { issued: string[] | string, pegType: PeggedAssetType, issuedABI: string, unreleased: string[] | string, reserves: any }) {
   return async (api: ChainApi) => {
+    if (!unreleased && reserves) unreleased = reserves;
     const balances = {} as Balances;
     if (typeof issued === "string") issued = [issued];
     if (typeof unreleased === "string") unreleased = [unreleased]

@@ -1,13 +1,10 @@
 const sdk = require("@defillama/sdk");
 import {
-  sumMultipleBalanceFunctions,
   sumSingleBalance,
 } from "../helper/generalUtil";
 import {
   bridgedSupply,
   solanaMintedOrBridged,
-  bridgedSupplySubtractReserve,
-  terraSupply,
   supplyInEthereumBridge,
   osmosisSupply,
 } from "../helper/getSupply";
@@ -17,13 +14,12 @@ import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
-  PeggedAssetType,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 
 
-const chainContracts: ChainContracts = {
+const chainContracts: any = {
   ethereum: {
     issued: ["0x4fabb145d64652a948d72533023f6e7a623c7c53"],
     bridgedFromBSC: ["0x7B4B0B9b024109D182dCF3831222fbdA81369423"], // wormhole
@@ -322,14 +318,12 @@ async function chainUnreleased(chain: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
-    bsc: async () => ({}),
   },
   bsc: {
     ethereum: async () => ({}),
   },
   avalanche: {
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
-    bsc: async () => ({}),
   },
   harmony: {
     /* appears to now be unbacked due to hack
@@ -343,73 +337,32 @@ const adapter: PeggedIssuanceAdapter = {
   iotex: {
     ethereum: bridgedSupply("iotex", 18, chainContracts.iotex.bridgedFromETH),
   },
-  okexchain: {
-    bsc: async () => ({}),
-  },
-  moonriver: {
-    bsc: async () => ({}),
-  },
+  okexchain: {},
+  moonriver: {},
   solana: {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
-    bsc: async () => ({}),
   },
-  polygon: {
-    bsc: async () => ({}),
-  } /*
+  polygon: {} /*
   fuse: {
     bsc: bridgedSupply("fuse", 18, chainContracts.fuse.bridgedFromBSC),
   },*/,
-  meter: {
-    bsc: async () => ({}),
-  },
-  moonbeam: {
-    bsc: async () => ({}),
-  },
-  milkomeda: {
-    bsc: async () => ({}),
-  },
-  elastos: {
-    bsc: async () => ({}),
-  },
-  aurora: {
-    bsc: async () => ({}),
-  },
-  oasis: {
-    bsc: async () => ({}),
-  },
-  terra: {
-    bsc: async () => ({}),
-  },
-  shiden: {
-    bsc: async () => ({}),
-  },
-  astar: {
-    bsc: async () => ({}),
-  },
-  evmos: {
-    bsc: async () => ({}),
-  },
-  syscoin: {
-    bsc: async () => ({}),
-  },
-  boba: {
-    bsc: async () => ({}),
-  },
-  metis: {
-    bsc: async () => ({}),
-  },
-  fantom: {
-    bsc: async () => ({}),
-  },
-  kcc: {
-    bsc: async () => ({}),
-  },
-  rsk: {
-    bsc: async () => ({}),
-  },
-  theta: {
-    bsc: async () => ({}),
-  } /*
+  meter: {},
+  moonbeam: {},
+  milkomeda: {},
+  elastos: {},
+  aurora: {},
+  oasis: {},
+  terra: {},
+  shiden: {},
+  astar: {},
+  evmos: {},
+  syscoin: {},
+  boba: {},
+  metis: {},
+  fantom: {},
+  kcc: {},
+  rsk: {},
+  theta: {} /*
   kava: {
     bsc: kavaMinted(chainContracts.kava.bridgeOnBNB),
   },*/,
@@ -430,9 +383,7 @@ const adapter: PeggedIssuanceAdapter = {
   near: {
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 18),
   },
-  klaytn: {
-    bsc: async () => ({}),
-  } /*
+  klaytn: {} /*
   dogechain: {
     ethereum: bridgedSupply(
       "dogechain",
@@ -446,7 +397,6 @@ const adapter: PeggedIssuanceAdapter = {
       18,
       chainContracts.thundercore.bridgedFromETH
     ),
-    bsc: async () => ({}),
   },
   osmosis: {
     ethereum: osmosisSupply(

@@ -6,18 +6,14 @@ import {
 import {
   bridgedSupply,
   solanaMintedOrBridged,
-  bridgedSupplySubtractReserve,
   terraSupply,
-  supplyInEthereumBridge,
-  osmosisSupply,
 } from "../helper/getSupply";
-import { call as nearCall } from "../llama-helper/near";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
-  PeggedAssetType,  ChainContracts,
+  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
