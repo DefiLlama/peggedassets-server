@@ -991,6 +991,13 @@ export const chainCoingeckoIds = {
     cmcId: "7817",
     categories: ["EVM"],
   },
+  "Bitlayer": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    twitter: "BitlayerLabs",
+    categories: ["EVM"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1249,6 +1256,8 @@ export function getChainDisplayName(
       return "PulseChain";
     case "bfc":
       return "Bifrost Network";
+    case "btr":
+      return "Bitlayer";
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
