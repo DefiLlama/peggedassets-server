@@ -3828,4 +3828,23 @@ export default [
     twitter: "https://twitter.com/rgUSD_Bull",
     wiki: "https://app.reserve.org/ethereum/token/0x78da5799cf427fee11e9996982f4150ece7a99a7/overview",
   },
+  {
+    id: "191",
+    name: "bitSmiley USD",
+    address: "bitlayer:0x07373d112edc4570b46996ad1187bc4ac9fb5ed0",
+    symbol: "bitUSD",
+    url: "https://www.bitsmiley.io",
+    description: "Bitcoin stablecoin based on over-collateralization",
+    mintRedeemDescription:
+      "Users deposit a specific amount of BTC into bitSmiley Treasury to generate bitUSD. To redeem their deposited BTC, users need to repay the generate bitUSD and also pay a certain amount of stability fee.",
+    onCoinGecko: null,
+    gecko_id: "bitsmiley-bitusd", //fakecg
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/bitsmiley_labs",
+    wiki: "https://github.com/bitSmiley-protocol/whitepaper/blob/main/BitSmiley_White_Paper.pdf",
+  },
 ] as PeggedAsset[];
