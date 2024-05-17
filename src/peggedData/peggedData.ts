@@ -3847,4 +3847,23 @@ export default [
     twitter: "https://twitter.com/bitsmiley_labs",
     wiki: "https://github.com/bitSmiley-protocol/whitepaper/blob/main/BitSmiley_White_Paper.pdf",
   },
+  {
+    id: "192",
+    name: "USDA",
+    address: "0x0000206329b97db379d5e1bf586bbdb969c63274",
+    symbol: "USDA",
+    url: "https://angle.money/usda",
+    description: "Angle's Dollar stablecoin (USDA) is a USD stablecoin supported by a robust Price Stability Module. USDA is over-collateralized, decentralized, transparent, generates yield, and offers competitive pricing for on-chain USD to Euro exchanges",
+    mintRedeemDescription:
+      "Users can get USDA, by swapping their assets on the Angle app or a DEX. It is also possible to acquire USDA by borrowing it against a variety of collaterals",
+    onCoinGecko: true,
+    gecko_id: "angle-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/AngleProtocol",
+    wiki: "https://docs.angle.money/transmuter/implementation/collateralsmanagement#for-eura-and-usda",
+  },
 ] as PeggedAsset[];

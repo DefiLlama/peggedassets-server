@@ -188,7 +188,8 @@ import gyd from "./gyroscope-gyd";
 import isc from "./international-stable-currency";
 import usc from "./orby-network-usc-stablecoin";
 import fxbtcusd from "./f-x-btc-usd";
-import bitusd from "./bitsmiley-bitusd"
+import bitusd from "./bitsmiley-bitusd";
+import usda from "./angle-usd"
 
 export default {
   tether,
@@ -381,5 +382,6 @@ export default {
   "orby-network-usc-stablecoin": usc,
   "knox-dollar": knox,
   "f-x-btc-usd": fxbtcusd,
-  "bitsmiley-bitusd": bitusd
+  "bitsmiley-bitusd": bitusd,
+  "angle-usd": usda
 };
