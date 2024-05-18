@@ -190,6 +190,7 @@ import usc from "./orby-network-usc-stablecoin";
 import fxbtcusd from "./f-x-btc-usd";
 import bitusd from "./bitsmiley-bitusd";
 import usda from "./angle-usd"
+import usc2  from "./usc-2";
 
 export default {
   tether,
@@ -383,5 +384,6 @@ export default {
   "knox-dollar": knox,
   "f-x-btc-usd": fxbtcusd,
   "bitsmiley-bitusd": bitusd,
-  "angle-usd": usda
+  "angle-usd": usda,
+  "usc-2": usc2
 };

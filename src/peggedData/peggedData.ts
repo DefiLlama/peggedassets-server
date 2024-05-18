@@ -3866,4 +3866,23 @@ export default [
     twitter: "https://x.com/AngleProtocol",
     wiki: "https://docs.angle.money/transmuter/implementation/collateralsmanagement#for-eura-and-usda",
   },
+  {
+    id: "193",
+    name: "Chi USC",
+    address: "0x38547d918b9645f2d94336b6b61aeb08053e142c",
+    symbol: "USC",
+    url: "https://chiprotocol.io/dashboard/mint",
+    description: "USC is a decentralised, scalable, fully backed stablecoin which is 1-1 USD pegged",
+    mintRedeemDescription:
+      "To mint USC, you are required to deposit a specific amount of ETH/LST in the reserves. Afterward, you can generate USC tokens with a collateral ratio of 100% against your deposit",
+    onCoinGecko: true,
+    gecko_id: "usc-2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/ProtocolChi",
+    wiki: "https://chi-protocol.gitbook.io/docs/overview/introduction-to-chi-protocol",
+  },
 ] as PeggedAsset[];
