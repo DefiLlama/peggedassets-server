@@ -8,6 +8,13 @@ export const chainContracts: ChainContracts = {
     bridgedFromBSC: ["0x7cd167B101D2808Cfd2C45d17b2E7EA9F46b74B6"], // wormhole
     bridgedFromPolygon: ["0x566957eF80F9fd5526CD2BEF8BE67035C0b81130"], // wormhole
   },
+  immutable: {
+    issued: ["0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"],
+    bridgeOnETH: ["0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"],
+    bridgedFromETH: [
+      "0x6de8aCC0D406837030CE4dd28e7c08C5a96a30d2", //axelar
+      ],
+  },
   polygon: {
     issued: ["0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"],
     bridgeOnETH: ["0x40ec5b33f54e0e8a33a975908c5ba1c14e5bbbdf"],
