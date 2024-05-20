@@ -998,6 +998,15 @@ export const chainCoingeckoIds = {
     twitter: "BitlayerLabs",
     categories: ["EVM"],
   },
+  "Immutable zkEVM": {
+    geckoId: "immutable-x",
+    symbol: "IMX",
+    cmcId: "10603",
+    categories: ["EVM"],
+    twitter: "Immutable",
+    url: "https://www.immutable.com",
+    chainId: 13371
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1258,6 +1267,8 @@ export function getChainDisplayName(
       return "Bifrost Network";
     case "btr":
       return "Bitlayer";
+    case "imx":
+      return "Immutable zkEVM"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
