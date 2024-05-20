@@ -345,6 +345,10 @@ export const chainContracts: ChainContracts = {
   pulse: {
     bridgedFromETH: ["0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07"], // PulseRamp
   },
+  iotex: {
+    bridgeOnETH: ["0xc2e0f31d739cb3153ba5760a203b3bd7c27f0d7a"],
+    bridgedFromETH: ["0xcdf79194c6c285077a58da47641d4dbe51f63542", "0x3B2bf2b523f54C4E454F08Aa286D03115aFF326c"],
+  },
   imx: {
     //issued: ["0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"],
     //bridgeOnETH: ["0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"],
