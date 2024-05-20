@@ -145,5 +145,6 @@
   "mode",
   "xdc",
   "bfc",
-  "btr"
+  "btr",
+  "imx"
 ]

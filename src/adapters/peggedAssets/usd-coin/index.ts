@@ -821,6 +821,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   pulse: {
     ethereum: bridgedSupply("pulse", 6, chainContracts.pulse.bridgedFromETH),
+  },  
+  imx: {
+    ethereum: bridgedSupply("imx",6,chainContracts.imx.bridgedFromETH,"Axelar")
   },
 };
 
