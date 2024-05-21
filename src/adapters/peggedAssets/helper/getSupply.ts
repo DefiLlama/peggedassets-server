@@ -8,6 +8,8 @@ import { sumSingleBalance } from "./generalUtil";
 import { getTokenSupply as solanaGetTokenSupply } from "../llama-helper/solana";
 import { totalSupply as terraGetTotalSupply } from "../llama-helper/terra"; // NOTE this is NOT currently exported
 import { ChainApi } from "@defillama/sdk";
+import * as sui from "../llama-helper/sui";
+import * as aptos from "../llama-helper/aptos";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -276,6 +278,27 @@ function getIssued({
 }: { issued: string[] | string, pegType: PeggedAssetType, issuedABI: string }) {
   return async (api: ChainApi) => {
     const balances = {} as Balances;
+    if (api.chain === "solana") {
+      for (const i of issued) {
+        const supply = await solanaGetTokenSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
+    if (api.chain === "sui") {
+      for (const i of issued) {
+        const supply = await sui.getTokenSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
+    if (api.chain === "aptos") {
+      for (const i of issued) {
+        const supply = await aptos.getTokenSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
     if (typeof issued === "string") issued = [issued];
     const supplies = await api.multiCall({ abi: issuedABI, calls: issued })
     const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issued })
