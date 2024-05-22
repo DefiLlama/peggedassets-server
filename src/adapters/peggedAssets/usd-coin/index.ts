@@ -825,6 +825,9 @@ const adapter: PeggedIssuanceAdapter = {
   imx: {
     ethereum: bridgedSupply("imx",6,chainContracts.imx.bridgedFromETH,"Axelar")
   },
+  iotex: {
+    ethereum: bridgedSupply("iotex", 6, chainContracts.iotex.bridgedFromETH),
+  },
 };
 
 export default adapter;
