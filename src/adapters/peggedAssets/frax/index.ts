@@ -76,6 +76,9 @@ const chainContracts: ChainContracts = {
       "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
     ], // axelar
   },
+  fraxtal: {
+    bridgedFromETH: ["0xfc00000000000000000000000000000000000001"],
+  },
 };
 
 /*
@@ -236,6 +239,13 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.osmosis.bridgedFromETH,
       18,
       "Axelar"
+    ),
+  },
+  fraxtal: {
+    ethereum: bridgedSupply(
+      "fraxtal",
+      18,
+      chainContracts.fraxtal.bridgedFromETH
     ),
   },
 };
