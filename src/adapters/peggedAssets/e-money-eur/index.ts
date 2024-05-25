@@ -36,7 +36,7 @@ export async function osmosisAmount(
       );
       sumSingleBalance(
         balances,
-        "peggedEUR",
+        "peggedUSD",
         parseInt(res.data.amount.amount) / 10 ** decimals,
         token,
         false,
@@ -68,9 +68,9 @@ async function emoneyMinted(decimals: number) {
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  emoney: {
+  /*emoney: {
     minted: emoneyMinted(6),
-  },
+  },*/
   osmosis: {
     emoney: osmosisAmount(
       chainContracts.osmosis.bridgedFromEmoney,
