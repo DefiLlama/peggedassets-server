@@ -75,7 +75,7 @@ const adapter: PeggedIssuanceAdapter = {
     emoney: osmosisAmount(
       chainContracts.osmosis.bridgedFromEmoney,
       6,
-      "e-Money"
+      "emoney"
     ),
   },
 };
