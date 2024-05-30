@@ -191,7 +191,7 @@ import fxbtcusd from "./f-x-btc-usd";
 import bitusd from "./bitsmiley-bitusd";
 import usda from "./angle-usd"
 import usc2  from "./usc-2";
-import ckusdc from "./ckusd"
+import ckusdc from "./ckusdc"
 
 export default {
   tether,
