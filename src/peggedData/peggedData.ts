@@ -3885,4 +3885,23 @@ export default [
     twitter: "https://x.com/ProtocolChi",
     wiki: "https://chi-protocol.gitbook.io/docs/overview/introduction-to-chi-protocol",
   },
+  {
+    id: "194",
+    name: "ckUSDC",
+    address: null,
+    symbol: "ckUSDC",
+    url: "https://dashboard.internetcomputer.org/ethereum/xevnm-gaaaa-aaaar-qafnq-cai",
+    description: "ckUSDC is a fully backed stablecoin which is 1-1 USDC pegged",
+    mintRedeemDescription:
+      "The pair of smart contracts work in unison to ensure that the total value of ckUSDC is fully backed 1:1 by USDC. This can always be verified by viewing the on-chain dashboards and metrics of the canisters: ckETH Minter dashboard, ckETH Minter metrics, ckUSDC Ledger metrics.",
+    onCoinGecko: true,
+    gecko_id: "ckusdc", //fakecg
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/dfinity",
+    wiki: "https://github.com/dfinity/ic/blob/master/rs/ethereum/cketh/docs/ckerc20.adoc",
+  },
 ] as PeggedAsset[];
