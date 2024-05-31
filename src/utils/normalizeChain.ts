@@ -1007,6 +1007,12 @@ export const chainCoingeckoIds = {
     url: "https://www.immutable.com",
     chainId: 13371
   },
+  "ICP": {
+    geckoId: "internet-computer",
+    github: ['dfinity'],
+    symbol: "ICP",
+    cmcId: "8916",
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1269,6 +1275,8 @@ export function getChainDisplayName(
       return "Bitlayer";
     case "imx":
       return "Immutable zkEVM"
+    case "icp":
+      return "ICP"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

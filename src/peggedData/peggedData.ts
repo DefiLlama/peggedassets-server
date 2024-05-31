@@ -3885,6 +3885,7 @@ export default [
     twitter: "https://x.com/ProtocolChi",
     wiki: "https://chi-protocol.gitbook.io/docs/overview/introduction-to-chi-protocol",
   },
+  /* // we added under usdc on icp network
   {
     id: "194",
     name: "ckUSDC",
@@ -3904,4 +3905,5 @@ export default [
     twitter: "https://x.com/dfinity",
     wiki: "https://github.com/dfinity/ic/blob/master/rs/ethereum/cketh/docs/ckerc20.adoc",
   },
+  */
 ] as PeggedAsset[];
