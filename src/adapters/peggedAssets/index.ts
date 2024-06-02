@@ -140,7 +140,7 @@ import usdm from "./usdm";
 import nars from "./nars";
 import phase from "./phase-dollar";
 import inter from "./inter-stable-token";
-import eeur from "./e-money-eur";
+//import eeur from "./e-money-eur";
 import cdt from "./collateralized-debt-token";
 import aeeur from "./aryze-eeur";
 import aegbp from "./aryze-egbp";
@@ -335,7 +335,7 @@ export default {
   "num-ars": nars,
   "phase-dollar": phase,
   "inter-stable-token": inter,
-  "e-money-eur": eeur,
+  //"e-money-eur": eeur,
   "collateralized-debt-token": cdt,
   "aryze-eusd": aeusd,
   "aryze-eeur": aeeur,

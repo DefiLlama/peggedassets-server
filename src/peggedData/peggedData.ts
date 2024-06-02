@@ -2722,8 +2722,8 @@ export default [
     twitter: "https://twitter.com/inter_protocol",
     wiki: "https://docs.inter.trade/",
   },
-  {
-    id: "136",
+  /*{
+    id: "136", // stablecoin cancellation announced
     name: "e-Money Eur",
     address: null,
     symbol: "EEUR",
@@ -2741,7 +2741,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/emoney_com",
     wiki: null,
-  },
+  },*/
   {
     id: "137",
     name: "Collateralized Debt Token",
