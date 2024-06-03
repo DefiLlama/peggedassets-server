@@ -171,6 +171,31 @@ async function liquidMinted() {
   };
 }
 
+async function tonMinted() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          "https://toncenter.com/api/v3/jetton/masters?address=EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs&limit=128&offset=0"
+        )
+    );
+    const issued = res.data.jetton_masters[0].total_supply;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      (issued ) / 10 ** 6,
+      "issued",
+      false
+    );
+    return balances;
+  };
+}
+
 async function algorandMinted() {
   // I gave up on trying to use the SDK for this
   return async function (
@@ -939,6 +964,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   pulse: {
     ethereum: bridgedSupply("pulse", 6, chainContracts.pulse.bridgedFromETH),
+  },
+  ton: {
+    minted: tonMinted(),
+    unreleased: usdtApiUnreleased("reserve_balance_ton"),
   },
 };
 
