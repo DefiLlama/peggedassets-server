@@ -3,6 +3,10 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "api2-dev": "ts-node --transpile-only api2/index.ts",
+    "api2-prod": "bash api2/scripts/prod_start.sh",
+    "api2-cron-task": "npx ts-node --transpile-only api2/cron-task/index.ts",
+    "api2-store-rates": "npx ts-node --transpile-only api2/scripts/storeRates.ts",
     "deploy:env": "npm run prebuild && sls deploy --stage $NODE_ENV",
     "deploy:dev": "export NODE_ENV=dev && npm run deploy:env",
     "deploy:prod": "export NODE_OPTIONS=--max-old-space-size=6144 && export NODE_ENV=prod && npm run deploy:env",
@@ -64,8 +68,10 @@
     "graphql": "^15.3.0",
     "graphql-request": "^3.2.0",
     "hi-base32": "^0.5.1",
+    "hyper-express": "^6.16.3",
     "js-sha512": "^0.9.0",
     "node-fetch": "^2.6.1",
-    "pact-lang-api": "^4.3.5"
+    "pact-lang-api": "^4.3.5",
+    "pm2": "^5.4.0"
   }
 }

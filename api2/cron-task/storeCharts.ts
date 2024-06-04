@@ -1,28 +1,105 @@
+import { getHistoricalValues } from "../../src/utils/shared/dynamodb";
+import peggedAssets from "../../src/peggedData/peggedData";
 import {
-  successResponse,
-  wrap,
-  IResponse,
-  errorResponse,
-} from "./utils/shared";
-import peggedAssets from "./peggedData/peggedData";
-import dynamodb from "./utils/shared/dynamodb";
-import {
+  dailyPeggedBalances,
   getLastRecord,
   hourlyPeggedBalances,
   hourlyPeggedPrices,
-} from "./peggedAssets/utils/getLastRecord";
-import { normalizeChain } from "./utils/normalizeChain";
+} from "../../src/peggedAssets/utils/getLastRecord";
+import axios from "axios";
+import { secondsInHour, secondsInDay, getClosestDayStartTimestamp, } from "../../src/utils/date";
+import backfilledChains from "../../src/peggedData/backfilledChains";
+import { storeRouteData } from "../file-cache";
 import {
-  secondsInHour,
-  secondsInDay,
-  getClosestDayStartTimestamp,
-} from "./utils/date";
-import backfilledChains from "./peggedData/backfilledChains";
-const axios = require("axios");
+  chainCoingeckoIds,
+  normalizedChainReplacements,
+  normalizeChain,
+} from "../../src/utils/normalizeChain";
+
+import { cache } from "../cache";
+
+
 
 type TokenBalance = {
   [token: string]: number | undefined;
 };
+
+
+export default async function handler() {
+  const timeKey = "chart-update-init";
+  console.time(timeKey);
+  const historicalRates = await (
+    await axios.get(
+      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`
+    )
+  )?.data;
+  const lastPrices = await getLastRecord(hourlyPeggedPrices);
+  const priceTimestamps = cache.historicalPrices?.map((item: any) => item.SK);
+  const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
+  await getPeggedAssetsData()
+  cache.historicalRates = historicalRates
+  cache.lastPrices = lastPrices
+  cache.priceTimestamps = priceTimestamps
+  cache.rateTimestamps = rateTimestamps
+  console.timeEnd(timeKey)
+
+  console.time('storeCharts')
+
+/*   const commonOptions = {
+    lastPrices,
+    historicalPrices,
+    historicalRates,
+    priceTimestamps,
+    rateTimestamps,
+    peggedAssetsData: cache.peggedAssetsData,
+  }
+  // store overall chart
+  const allData = await craftChartsResponse({ ...commonOptions, chain: "all" });  
+  await storeRouteData('charts/all/all', allData)
+
+  // store chain charts
+  const chains = [Object.keys(chainCoingeckoIds), Object.values(normalizedChainReplacements)].flat()
+  for (let chain of chains) {
+    const normalizedChain = normalizeChain(chain);
+    const chainData = await craftChartsResponse({ ...commonOptions, chain, });
+    if (chainData.length) {
+      await storeRouteData(`charts/${normalizedChain}`, chainData)
+    } else {
+      console.log(`No data for ${chain}`)
+    }
+  }
+
+  // store pegged asset charts
+  for (const pegged of peggedAssets) {
+    const id = pegged.id;
+    const chart = await craftChartsResponse({ ...commonOptions, peggedID: id });
+    await storeRouteData(`charts/all/${id}`, chart)
+  }
+  console.timeEnd('storeCharts') */
+
+}
+
+
+async function getPeggedAssetsData() {
+  if (!cache.peggedAssetsData)
+      cache.peggedAssetsData = {}
+  
+  await Promise.all(peggedAssets.map(async (pegged) => {
+
+    const lastBalance = await getLastRecord(hourlyPeggedBalances(pegged.id));
+    const allBalances = cache.peggedAssetsData[pegged.id]?.balances || []
+    const highestSK = allBalances.reduce((highest, item) => Math.max(highest, item.SK), -1)
+    const newItems = await getHistoricalValues(dailyPeggedBalances(pegged.id), highestSK)
+    allBalances.push(...newItems)
+    cache.peggedAssetsData[pegged.id] = {
+      balances: allBalances,
+      lastBalance
+    }
+  }))
+
+  return cache.peggedAssetsData
+}
+
 
 const formatTokenBalance = (tokenBalance: TokenBalance) => {
   let formattedTokenBalance = {} as TokenBalance;
@@ -78,17 +155,13 @@ function extractResultOfBinarySearch(ar: any[], binarySearchResult: number) {
   return ar[binarySearchResult];
 }
 
-export async function craftChartsResponse(
-  chain: string | undefined,
-  peggedID: string | undefined,
-  startTimestamp: string | undefined,
-  useStoredCharts: boolean = true
-) {
-  if (chain === undefined) {
-    return errorResponse({
-      message: "Must include chain or 'all' path parameter.",
-    });
+export function craftChartsResponse(
+  { chain = 'all', peggedID, startTimestamp }: {
+    chain?: string,
+    peggedID?: string,
+    startTimestamp?: string,
   }
+) {
 
   const filterChart = (chart: any) => {
     return chart.map((entry: any) => {
@@ -99,35 +172,8 @@ export async function craftChartsResponse(
       return entry;
     }).filter((entry: any) => entry);
   }
-
-  if (chain === "all" && useStoredCharts) {
-    try {
-      const id = peggedID ? peggedID : "all";
-      const chart = (
-        await axios.get(
-          `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/all/${id}`
-        )
-      )?.data;
-      return filterChart(chart);
-    } catch (e) {
-      return [];
-    }
-  }
-
-  if (!peggedID && useStoredCharts) {
-    try {
-      const normalizedChain = normalizeChain(chain);
-      const chart = (
-        await axios.get(
-          `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/${normalizedChain}`
-        )
-      )?.data;
-      return filterChart(chart);
-    } catch (e) {
-      return [];
-    }
-  }
-
+  
+  const { historicalPrices, historicalRates, lastPrices, priceTimestamps, rateTimestamps, peggedAssetsData, } = cache as any
   const sumDailyBalances = {} as {
     [timestamp: number]: {
       circulating: TokenBalance;
@@ -138,102 +184,53 @@ export async function craftChartsResponse(
     };
   };
 
-  const normalizedChain = normalizeChain(chain);
+  const normalizedChain = normalizeChain(chain!);
   let lastDailyTimestamp = 0;
-
-
-  const historicalRates = await (
-    await axios.get(
-      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`
-    )
-  )?.data;
-  if (historicalRates.length < 1) {
-    return errorResponse({
-      message: "Could not get historical fiat prices.",
-    });
-  }
-  const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
-
-  const historicalPrices = await (
-    await axios.get(
-      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/prices/full`
-    )
-  )?.data;
-  if (historicalPrices.length < 1) {
-    return errorResponse({
-      message: "Could not get historical prices.",
-    });
-  }
-  const priceTimestamps = historicalPrices?.map((item: any) => item.SK);
-  const lastPrices = await getLastRecord(hourlyPeggedPrices);
 
   /*
    * whenever "chain" and "peggedAsset", and peggedAsset has no entry in lastBalance for that chain,
    * historicalPeggedBalances is empty. Not sure exactly where that's happening.
    */
-  const historicalPeggedBalances = await Promise.all(
-    peggedAssets.map(async (pegged) => {
-      if (peggedID && pegged.id !== peggedID) {
-        return;
-      }
-      const lastBalance = await getLastRecord(hourlyPeggedBalances(pegged.id));
-      if (chain !== "all" && !lastBalance?.[normalizedChain]) {
-        return undefined;
-      }
-      const defaultStartTimestamp = startTimestamp
-        ? parseInt(startTimestamp)
-        : 1609372800;
-      const earliestTimestamp =
-        chain === "all" || backfilledChains.includes(chain ?? "")
-          ? defaultStartTimestamp
-          : 1652241600; // chains have mostly incomplete data before May 11, 2022
-      let startKey = undefined;
-      let historicalBalance = { Items: [] } as any;
-      do {
-        const partialHistoricalBalances = (await dynamodb.query({
-          ExpressionAttributeValues: {
-            ":pk": `dailyPeggedBalances#${pegged.id}`,
-            ":sk": earliestTimestamp,
-          },
-          KeyConditionExpression: "PK = :pk AND SK >= :sk",
-          ExclusiveStartKey: startKey,
-        })) as any;
-        startKey = partialHistoricalBalances.LastEvaluatedKey;
-        historicalBalance.Items = [
-          ...historicalBalance.Items,
-          ...partialHistoricalBalances.Items,
-        ];
-      } while (startKey);
-      if (
-        historicalBalance.Items === undefined ||
-        historicalBalance.Items.length < 1
-      ) {
-        return undefined;
-      }
+  const historicalPeggedBalances = peggedAssets.map((pegged) => {
+    if (peggedID && pegged.id !== peggedID) {
+      return;
+    }
+    const { balance: lastBalance, balances } = peggedAssetsData[pegged.id]
 
-      const lastDailyItem =
-        historicalBalance.Items[historicalBalance.Items.length - 1];
-      if (
-        lastBalance !== undefined &&
-        lastBalance.SK > lastDailyItem.SK &&
-        lastDailyItem.SK + secondsInHour * 25 > lastBalance.SK
-      ) {
-        lastBalance.SK = lastDailyItem.SK;
-        historicalBalance.Items[historicalBalance.Items.length - 1] =
-          lastBalance;
-      }
-      const lastTimestamp = getClosestDayStartTimestamp(
-        historicalBalance.Items[historicalBalance.Items.length - 1].SK
-      );
-      lastDailyTimestamp = Math.max(lastDailyTimestamp, lastTimestamp);
+    // if (chain !== "all" && !lastBalance?.[normalizedChain])
+    //   return undefined;
 
-      return {
-        pegged,
-        historicalBalance: historicalBalance.Items,
-        lastTimestamp,
-      };
-    })
-  );
+    const defaultStartTimestamp = 1609372800;
+    const earliestTimestamp =
+      chain === "all" || backfilledChains.includes(chain ?? "")
+        ? defaultStartTimestamp
+        : 1652241600; // chains have mostly incomplete data before May 11, 2022
+    let historicalBalance = { Items: balances.filter(i => i.SK > earliestTimestamp) } as any;
+
+    if (historicalBalance.Items === undefined || historicalBalance.Items.length < 1)
+      return undefined;
+
+    const lastDailyItem = historicalBalance.Items[historicalBalance.Items.length - 1];
+    if (
+      lastBalance !== undefined &&
+      lastBalance.SK > lastDailyItem.SK &&
+      lastDailyItem.SK + secondsInHour * 25 > lastBalance.SK
+    ) {
+      lastBalance.SK = lastDailyItem.SK;
+      historicalBalance.Items[historicalBalance.Items.length - 1] =
+        lastBalance;
+    }
+    const lastTimestamp = getClosestDayStartTimestamp(
+      historicalBalance.Items[historicalBalance.Items.length - 1].SK
+    );
+    lastDailyTimestamp = Math.max(lastDailyTimestamp, lastTimestamp);
+
+    return {
+      pegged,
+      historicalBalance: historicalBalance.Items,
+      lastTimestamp,
+    };
+  })
 
   const lastDailyItem = historicalPrices[historicalPrices.length - 1];
   if (
@@ -419,17 +416,5 @@ export async function craftChartsResponse(
     })
   );
 
-  return response;
+  return filterChart(response)
 }
-
-const handler = async (
-  event: AWSLambda.APIGatewayEvent
-): Promise<IResponse> => {
-  const chain = event.pathParameters?.chain?.toLowerCase();
-  const peggedID = event.queryStringParameters?.stablecoin?.toLowerCase();
-  const startTimestamp = event.queryStringParameters?.startts?.toLowerCase();
-  const response = await craftChartsResponse(chain, peggedID, startTimestamp);
-  return successResponse(response, 10 * 60); // 10 mins cache
-};
-
-export default wrap(handler);

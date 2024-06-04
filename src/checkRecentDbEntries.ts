@@ -71,7 +71,7 @@ export const handler = async (_event: any) => {
   );
 
   // checks if exchange rates (for fallback prices) is stale
-  const lastRates = await getLastRecord(historicalRates());
+  const lastRates = await getLastRecord(historicalRates);
   if (lastRates) {
     const SK = lastRates.SK;
     if (typeof SK === "number") {
@@ -87,7 +87,7 @@ export const handler = async (_event: any) => {
   }
 
   // checks if prices is stale
-  const lastPrices = await getLastRecord(hourlyPeggedPrices());
+  const lastPrices = await getLastRecord(hourlyPeggedPrices);
   if (lastPrices) {
     const SK = lastPrices.SK;
     if (typeof SK === "number") {
