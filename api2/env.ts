@@ -1,6 +1,6 @@
 
 
-const requiredEnvVars = []
+const requiredEnvVars = ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'API2_SUBPATH']
 
 export function validateEnv() {
   const ENV = process.env
