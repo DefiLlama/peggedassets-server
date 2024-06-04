@@ -18,5 +18,5 @@ RUN npm install
 # Make port 5001 available to the world outside this container
 EXPOSE 5001
 
-# Run your app when the container launches
-CMD ["npm", "run", "api2-prod"]
+# bash command to keep the container running
+CMD ["bash", "-c", "npm run api2-prod; while true; do sleep 10000; done"]
