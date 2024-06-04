@@ -24,7 +24,7 @@ handle_error_and_rollback() {
   # notify team on discord that there is an issue
   curl -H "Content-Type: application/json" \
       -X POST \
-      -d "{\"content\":\"[API2-rest-server] $MESSAGE_2\"}" \
+      -d "{\"content\":\"[stablecoin-rest-server] $MESSAGE_2\"}" \
       $TEAM_WEBHOOK
 
   # rollback to safe commit hash if it exists
@@ -52,6 +52,6 @@ else
         MESSAGE="Current commit hash does not match safe commit hash"
         handle_error_and_rollback
     else
-        echo "API2 rest server started without issue: $SAFE_COMMIT_HASH"
+        echo "Stablecoin rest server started without issue: $SAFE_COMMIT_HASH"
     fi
 fi
