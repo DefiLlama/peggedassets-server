@@ -823,7 +823,11 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("pulse", 6, chainContracts.pulse.bridgedFromETH),
   },  
   imx: {
-    ethereum: bridgedSupply("imx",6,chainContracts.imx.bridgedFromETH)
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.imx.bridgeOnETH[0],
+      6
+    ),
   },
   iotex: {
     ethereum: bridgedSupply("iotex", 6, chainContracts.iotex.bridgedFromETH),
