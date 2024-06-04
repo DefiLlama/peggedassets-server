@@ -30,7 +30,7 @@ export async function initCache() {
   console.time('Cache initialized')
   const _cache = await readFromPGCache('cron-cache') ?? {}
   Object.keys(_cache).forEach(key => cache[key] = _cache[key])
-  cache.rates = await await getLastRecord(historicalRates);
+  cache.rates = await getLastRecord(historicalRates);
   console.timeEnd('Cache initialized')
 }
 

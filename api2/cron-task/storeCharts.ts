@@ -28,7 +28,7 @@ type TokenBalance = {
 export default async function handler() {
   const timeKey = "chart-update-init";
   console.time(timeKey);
-  const historicalRates = await (
+  const historicalRates = (
     await axios.get(
       `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`
     )
