@@ -3906,4 +3906,23 @@ export default [
     wiki: "https://github.com/dfinity/ic/blob/master/rs/ethereum/cketh/docs/ckerc20.adoc",
   },
   */
+  {
+    id: "195",
+    name: "Usual USD",
+    address: "0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5",
+    symbol: "USD0",
+    url: "https://usual.money",
+    description: "Usual enables an RWA-stablecoin that provides a high standard of security and transparency, while redistributing the generated value in the form of speculative yield in $USUAL, the Usual governance token.",
+    mintRedeemDescription:
+      "Usual enables users to deposit either USYC or USDC as collateral to mint USD0. USD0 is backed 1:1 by collateral exclusively in the form of very short-term RWAs (Real-World Assets).",
+    onCoinGecko: true,
+    gecko_id: "usual-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "RWA-backed",
+    priceSource: "coingecko",
+    auditLinks: "https://gitbook.usual.money/ressources-and-ecosystem/audits",
+    twitter: "https://x.com/usualmoney",
+    wiki: "https://gitbook.usual.money/",
+  },
 ] as PeggedAsset[];
