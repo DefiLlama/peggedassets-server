@@ -224,4 +224,11 @@ const adapter: PeggedIssuanceAdapter = {
   },
 };
 
+// hardcoded value as zero since it is no longer a stablecoin
+Object.keys(adapter).forEach((chain) => {
+  Object.keys(adapter[chain]).forEach((key) => {
+    adapter[chain][key] = () => {}
+  })
+})
+
 export default adapter;
