@@ -71,7 +71,7 @@ export function craftChainDominanceResponse(chain: string | undefined) {
     const peggedGeckoID = pegged.gecko_id;
 
     let fallbackPrice = 1;
-    const historicalPrice = lastPrices?.prices[peggedGeckoID];
+    const historicalPrice = lastPrices?.[peggedGeckoID];
     if (pegType === "peggedVAR") {
       fallbackPrice = 0;
     } else if (pegType !== "peggedUSD" && !historicalPrice) {
