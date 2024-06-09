@@ -37,7 +37,8 @@ export default async function getCurrentPeggedPrice(
   token: string,
   priceSource: PriceSource
 ): Promise<number | null> {
-  if (priceSource === "defillama") {
+  if(token === "terrausd") return 0
+  if (priceSource === "defillama" || priceSource === "coingecko") {
     for (let i = 0; i < 5; i++) {
       try {
         const key = "coingecko:" + token;
@@ -61,6 +62,7 @@ export default async function getCurrentPeggedPrice(
     storePriceError(token);
     return null;
   }
+  /*
   if (priceSource === "coingecko") {
     // only use as last resort
     for (let i = 0; i < 3; i++) {
@@ -86,6 +88,7 @@ export default async function getCurrentPeggedPrice(
     storePriceError(token);
     return null;
   }
+  */
   console.error(
     `no priceSource method given or failed to get price for ${token}`
   );
