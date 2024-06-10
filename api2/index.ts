@@ -8,7 +8,7 @@ const webserver = new HyperExpress.Server()
 
 const port = +(process.env.PORT ?? 5001)
 
-if (!process.env.API2_SUBPATH) throw new Error('Missing API2_SUBPATH env var')
+// if (!process.env.API2_SUBPATH) throw new Error('Missing API2_SUBPATH env var')
 
 async function main() {
   console.time('Api Server init')
