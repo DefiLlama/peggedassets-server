@@ -10,7 +10,7 @@ RUN git clone https://github.com/DefiLlama/peggedassets-server /app/repo
 # Change to the directory of your repo
 WORKDIR /app/repo
 
-RUN git checkout api2
+# RUN git checkout api2
 
 # Install any needed packages specified in package.json
 RUN npm install
