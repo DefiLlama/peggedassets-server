@@ -23,10 +23,9 @@ async function main() {
   ])
 
   const router = new HyperExpress.Router()
-  const subPath = '/' + process.env.API2_SUBPATH
-  webserver.use(subPath, router)
+  webserver.use(router)
 
-  setRoutes(router, subPath)
+  setRoutes(router)
   webserver.get('/hash', (_req, res) => res.send(process.env.CURRENT_COMMIT_HASH))
 
   webserver.listen(port)

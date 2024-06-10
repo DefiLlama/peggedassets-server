@@ -6,7 +6,7 @@ import { craftChartsResponse } from "../cron-task/storeCharts";
 import { getStablecoinData } from "./getStableCoin";
 import { craftChainDominanceResponse } from "./getChainDominance";
 
-export default function setRoutes(router: HyperExpress.Router, routerBasePath: string) {
+export default function setRoutes(router: HyperExpress.Router) {
 
   router.get("/config", defaultFileHandler);
   router.get("/rates", defaultFileHandler);
@@ -50,8 +50,7 @@ export default function setRoutes(router: HyperExpress.Router, routerBasePath: s
 
   function defaultFileHandler(req: HyperExpress.Request, res: HyperExpress.Response) {
     const fullPath = req.path;
-    const routerPath = fullPath.replace(routerBasePath, '');
-    return fileResponse(routerPath, res);
+    return fileResponse(fullPath, res);
   }
 
   async function fileResponse(filePath: string, res: HyperExpress.Response) {
