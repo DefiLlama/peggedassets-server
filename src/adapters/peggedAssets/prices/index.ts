@@ -34,6 +34,7 @@ export async function getPrices(assets: any[]) {
       finalRes[mapping[key]] = value.price;
     })
   }
+  finalRes["terrausd"] = 0
   return finalRes
 }
 
