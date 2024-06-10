@@ -89,82 +89,82 @@ functions:
       - http:
           path: /{params+}
           method: any
-  stablecoinChart:
-    handler: src/getStablecoinChart.default
-    timeout: 60
-    memorySize: 3000
-    events:
-      - http:
-          path: stablecoincharts/{chain}
-          method: get
-  stablecoinDominance:
-    handler: src/getChainDominance.default
-    timeout: 60
-    memorySize: 3000
-    events:
-      - http:
-          path: stablecoindominance/{chain}
-          method: get
-  stablecoins:
-    handler: src/getStablecoins.default
-    timeout: 120
-    memorySize: 3000
-    events:
-      - http:
-          path: stablecoins
-          method: get
-  config:
-    handler: src/config.default
-    timeout: 120
-    memorySize: 2000
-    events:
-      - http:
-          path: config
-          method: get
-  stablecoin:
-    handler: src/getStablecoin.default
-    timeout: 120
-    memorySize: 2000
-    events:
-      - http:
-          path: stablecoin/{stablecoin}
-          method: get
-  stablecoinchains:
-    handler: src/getStablecoinChains.default
-    timeout: 60
-    memorySize: 2000
-    events:
-      - http:
-          path: stablecoinchains
-          method: get
-  stablecoinprices:
-    handler: src/getStablecoinPrices.default
-    timeout: 60
-    memorySize: 2000
-    events:
-      - http:
-          path: stablecoinprices
-          method: get
-  storeRates:
-    handler: src/storeRates.default
-    timeout: 60
-    memorySize: 3000
-    events:
-      - schedule: cron(30 0 * * ? *)
-  checkRecentEntries:
-    handler: src/checkRecentDbEntries.default
-    timeout: 60
-    memorySize: 3000
-    events:
-      - schedule: cron(30 */6 * * ? *)
-  rates:
-    handler: src/getRates.default
-    timeout: 60
-    memorySize: 2000
-    events:
-      - http:
-          path: rates
-          method: get
+  # stablecoinChart:
+  #   handler: src/getStablecoinChart.default
+  #   timeout: 60
+  #   memorySize: 3000
+  #   events:
+  #     - http:
+  #         path: stablecoincharts/{chain}
+  #         method: get
+  # stablecoinDominance:
+  #   handler: src/getChainDominance.default
+  #   timeout: 60
+  #   memorySize: 3000
+  #   events:
+  #     - http:
+  #         path: stablecoindominance/{chain}
+  #         method: get
+  # stablecoins:
+  #   handler: src/getStablecoins.default
+  #   timeout: 120
+  #   memorySize: 3000
+  #   events:
+  #     - http:
+  #         path: stablecoins
+  #         method: get
+  # config:
+  #   handler: src/config.default
+  #   timeout: 120
+  #   memorySize: 2000
+  #   events:
+  #     - http:
+  #         path: config
+  #         method: get
+  # stablecoin:
+  #   handler: src/getStablecoin.default
+  #   timeout: 120
+  #   memorySize: 2000
+  #   events:
+  #     - http:
+  #         path: stablecoin/{stablecoin}
+  #         method: get
+  # stablecoinchains:
+  #   handler: src/getStablecoinChains.default
+  #   timeout: 60
+  #   memorySize: 2000
+  #   events:
+  #     - http:
+  #         path: stablecoinchains
+  #         method: get
+  # stablecoinprices:
+  #   handler: src/getStablecoinPrices.default
+  #   timeout: 60
+  #   memorySize: 2000
+  #   events:
+  #     - http:
+  #         path: stablecoinprices
+  #         method: get
+  # storeRates:
+  #   handler: src/storeRates.default
+  #   timeout: 60
+  #   memorySize: 3000
+  #   events:
+  #     - schedule: cron(30 0 * * ? *)
+  # checkRecentEntries:
+  #   handler: src/checkRecentDbEntries.default
+  #   timeout: 60
+  #   memorySize: 3000
+  #   events:
+  #     - schedule: cron(30 */6 * * ? *)
+  # rates:
+  #   handler: src/getRates.default
+  #   timeout: 60
+  #   memorySize: 2000
+  #   events:
+  #     - http:
+  #         path: rates
+  #         method: get
   # storePeggedAssets:
   #   handler: src/storePeggedAssets.default
   #   timeout: 900
@@ -177,25 +177,25 @@ functions:
   #   memorySize: 2000
   #   events:
   #     - schedule: cron(40 * * * ? *)
-  alertOutdated:
-    handler: src/alertOutdated.default
-    timeout: 60
-    events:
-      - schedule: cron(0 * * * ? *)
-    environment:
-      OUTDATED_WEBHOOK: ${env:OUTDATED_WEBHOOK}
-  storePeggedPrices:
-    handler: src/storePeggedPrices.default
-    timeout: 900
-    memorySize: 3000
-    events:
-      - schedule: cron(15/30 * * * ? *)
-  storeGetStablecoinChart:
-    handler: src/storeGetStablecoinChart.default
-    timeout: 900
-    memorySize: 5120
-    events:
-      - schedule: cron(50 * * * ? *)
+  # alertOutdated:
+  #   handler: src/alertOutdated.default
+  #   timeout: 60
+  #   events:
+  #     - schedule: cron(0 * * * ? *)
+  #   environment:
+  #     OUTDATED_WEBHOOK: ${env:OUTDATED_WEBHOOK}
+  # storePeggedPrices:
+  #   handler: src/storePeggedPrices.default
+  #   timeout: 900
+  #   memorySize: 3000
+  #   events:
+  #     - schedule: cron(15/30 * * * ? *)
+  # storeGetStablecoinChart:
+  #   handler: src/storeGetStablecoinChart.default
+  #   timeout: 900
+  #   memorySize: 5120
+  #   events:
+  #     - schedule: cron(50 * * * ? *)
 
 resources:
   # DynamoDB and api gateway errors
