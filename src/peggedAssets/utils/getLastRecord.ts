@@ -17,6 +17,6 @@ export const hourlyPeggedBalances = (protocolId: string) =>
   `hourlyPeggedBalances#${protocolId}`;
 export const dailyPeggedBalances = (protocolId: string) =>
   `dailyPeggedBalances#${protocolId}`;
-export const dailyPeggedPrices = () => "dailyPeggedPrices";
-export const hourlyPeggedPrices = () => "hourlyPeggedPrices";
-export const historicalRates = () => "historicalRates";
+export const dailyPeggedPrices = "dailyPeggedPrices";
+export const hourlyPeggedPrices = "hourlyPeggedPrices";
+export const historicalRates = "historicalRates";

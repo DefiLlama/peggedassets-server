@@ -8,9 +8,9 @@ import {
 import { secondsInHour } from "./utils/date";
 
 export async function craftStablecoinPricesResponse() {
-  const historicalPeggedPrices = await getHistoricalValues(dailyPeggedPrices());
+  const historicalPeggedPrices = await getHistoricalValues(dailyPeggedPrices);
 
-  const lastPrices = await getLastRecord(hourlyPeggedPrices());
+  const lastPrices = await getLastRecord(hourlyPeggedPrices);
 
   const lastDailyItem =
     historicalPeggedPrices[historicalPeggedPrices.length - 1];

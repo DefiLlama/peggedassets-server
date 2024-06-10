@@ -1,24 +1,13 @@
-import {
-  successResponse,
-  wrap,
-  IResponse,
-  errorResponse,
-} from "./utils/shared";
-import peggedAssets from "./peggedData/peggedData";
-import {
-  getLastRecord,
-  hourlyPeggedBalances,
-  hourlyPeggedPrices,
-  historicalRates,
-} from "./peggedAssets/utils/getLastRecord";
-import { getTimestampAtStartOfDay } from "./utils/date";
-import { normalizeChain } from "./utils/normalizeChain";
+import peggedAssets from "../../src/peggedData/peggedData";
+import { getTimestampAtStartOfDay } from "../../src/utils/date";
+import { normalizeChain } from "../../src/utils/normalizeChain";
+import { cache } from "../cache";
 
 type tokenBalance = {
   [token: string]: number | undefined;
 };
 
-export async function craftChainDominanceResponse(chain: string | undefined) {
+export function craftChainDominanceResponse(chain: string | undefined) {
   const sumDailyBalances = {} as {
     [timestamp: number]: {
       totalCirculating: tokenBalance;
@@ -41,20 +30,16 @@ export async function craftChainDominanceResponse(chain: string | undefined) {
     chain = "ethpow";
   }
 
-  if (chain === undefined) {
-    return errorResponse({
-      message: "Must include chain as path parameter.",
-    });
-  }
+  if (chain === undefined) 
+    throw new Error("Must include chain as path parameter.")
 
   const normalizedChain = normalizeChain(chain);
 
-  const lastPrices = await getLastRecord(hourlyPeggedPrices);
-  const lastRates = await getLastRecord(historicalRates);
+  const lastPrices = cache.peggedPrices
+  const lastRates = cache.rates
 
-  const lastPeggedBalances = await Promise.all(
-    peggedAssets.map(async (pegged) => {
-      const lastBalance = await getLastRecord(hourlyPeggedBalances(pegged.id));
+  const lastPeggedBalances = peggedAssets.map((pegged) => {
+      const lastBalance = cache.peggedAssetsData?.[pegged.id]?.lastBalance;
       if (!lastBalance?.[normalizedChain]) {
         return undefined;
       }
@@ -67,11 +52,10 @@ export async function craftChainDominanceResponse(chain: string | undefined) {
         lastBalance,
       };
     })
-  );
 
   let timestamp = 0;
   // use most recent timestamp as the timestamp for every pegged balance
-  lastPeggedBalances.map((peggedBalance) => {
+  lastPeggedBalances.map(async (peggedBalance) => {
     timestamp = Math.max(
       timestamp,
       getTimestampAtStartOfDay(peggedBalance?.lastBalance?.SK ?? 0)
@@ -87,7 +71,7 @@ export async function craftChainDominanceResponse(chain: string | undefined) {
     const peggedGeckoID = pegged.gecko_id;
 
     let fallbackPrice = 1;
-    const historicalPrice = lastPrices?.prices[peggedGeckoID];
+    const historicalPrice = lastPrices?.[peggedGeckoID];
     if (pegType === "peggedVAR") {
       fallbackPrice = 0;
     } else if (pegType !== "peggedUSD" && !historicalPrice) {
@@ -152,13 +136,3 @@ export async function craftChainDominanceResponse(chain: string | undefined) {
 
   return response;
 }
-
-const handler = async (
-  event: AWSLambda.APIGatewayEvent
-): Promise<IResponse> => {
-  const chain = event.pathParameters?.chain?.toLowerCase();
-  const response = await craftChainDominanceResponse(chain);
-  return successResponse(response, 10 * 60); // 10 mins cache
-};
-
-export default wrap(handler);
