@@ -3915,7 +3915,7 @@ export default [
     description: "Usual enables an RWA-stablecoin that provides a high standard of security and transparency, while redistributing the generated value in the form of speculative yield in $USUAL, the Usual governance token.",
     mintRedeemDescription:
       "Usual enables users to deposit either USYC or USDC as collateral to mint USD0. USD0 is backed 1:1 by collateral exclusively in the form of very short-term RWAs (Real-World Assets).",
-    onCoinGecko: true,
+    onCoinGecko: false,
     gecko_id: "usual-usd",
     cmcId: null,
     pegType: "peggedUSD",
