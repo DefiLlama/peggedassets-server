@@ -1,6 +1,9 @@
 const chainContracts = {
   ethereum: {
-    issued: "0x96F6eF951840721AdBF46Ac996b59E0235CB985C",
+    issued: [
+      "0x96F6eF951840721AdBF46Ac996b59E0235CB985C", // USDY
+      "0xe86845788d6e3E5C2393ADe1a051AE617D974C09", // USDYc
+    ],
   },
   mantle: {
     issued: "0x5bE26527e817998A7206475496fDE1E68957c5A6",
