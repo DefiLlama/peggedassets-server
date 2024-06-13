@@ -3919,7 +3919,7 @@ export default [
     gecko_id: "usual-usd",
     cmcId: null,
     pegType: "peggedUSD",
-    pegMechanism: "RWA-backed",
+    pegMechanism: "fiat-backed",
     priceSource: "coingecko",
     auditLinks: "https://gitbook.usual.money/ressources-and-ecosystem/audits",
     twitter: "https://x.com/usualmoney",
