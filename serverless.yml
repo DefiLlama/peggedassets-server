@@ -190,12 +190,12 @@ functions:
   #   memorySize: 3000
   #   events:
   #     - schedule: cron(15/30 * * * ? *)
-  # storeGetStablecoinChart:
-  #   handler: src/storeGetStablecoinChart.default
-  #   timeout: 900
-  #   memorySize: 5120
-  #   events:
-  #     - schedule: cron(50 * * * ? *)
+  storeGetStablecoinChart:
+    handler: src/storeGetStablecoinChart.default
+    timeout: 900
+    memorySize: 5120
+    events:
+      - schedule: cron(50 * * * ? *)
 
 resources:
   # DynamoDB and api gateway errors
