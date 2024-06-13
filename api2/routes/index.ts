@@ -42,10 +42,10 @@ export default function setRoutes(router: HyperExpress.Router) {
 
   router.get("/stablecoincharts/:chain", ew(async (req: any, res: any) => {
     const { chain } = req.path_parameters;
-    let { stablecoin, startts } = req.query;
+    let { stablecoin, starts } = req.query;
     const peggedID = stablecoin?.toLowerCase()
 
-    return successResponse(res, await craftChartsResponse({ chain, peggedID, startTimestamp: startts }));
+    return successResponse(res, await craftChartsResponse({ chain, peggedID, startTimestamp: starts }));
   }));
 
   function defaultFileHandler(req: HyperExpress.Request, res: HyperExpress.Response) {
