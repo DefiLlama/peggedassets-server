@@ -194,6 +194,7 @@ import usc2  from "./usc-2";
 import ckusdc from "./ckusdc";
 import usd0 from "./usual-usd";
 import classicusd from "./classic-usd";
+import usr from "./resolv-usr";
 
 export default {
   tether,
@@ -392,4 +393,5 @@ export default {
   ckusdc, //fakecg
   "usual-usd": usd0,
   "classic-usd": classicusd,
+  "resolv-usr": usr
 };

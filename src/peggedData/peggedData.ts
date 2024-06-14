@@ -3944,4 +3944,24 @@ export default [
     twitter: "https://x.com/Classic_USD",
     wiki: null,
   },
+  {
+    id: "197",
+    name: "Resolv USD",
+    address: "0x66a1E37c9b0eAddca17d3662D6c05F4DECf3e110",
+    symbol: "USR",
+    url: "https://www.resolv.im/",
+    description:
+        "An overcollateralized stablecoin natively backed by Ether (ETH). USR achieves its peg by hedging its collateral pool and maintaining a tokenized insurance fund called RLP. Users can stake USR to obtain the yield-bearing version called stUSR.",
+    mintRedeemDescription:
+        "USR is minted by depositing liquid assets, such as USDC or USDT, on 1:1 value basis. When USR is redeemed, a user receives a 1:1 equivalent to the notional amount.",
+    onCoinGecko: false,
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://docs.resolv.im/resources/security",
+    twitter: "https://twitter.com/ResolvLabs",
+    wiki: "https://docs.resolv.im/",
+  },
 ] as PeggedAsset[];
