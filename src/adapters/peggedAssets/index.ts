@@ -192,7 +192,8 @@ import bitusd from "./bitsmiley-bitusd";
 import usda from "./angle-usd"
 import usc2  from "./usc-2";
 import ckusdc from "./ckusdc";
-import usd0 from "./usual-usd"
+import usd0 from "./usual-usd";
+import classicusd from "./classic-usd";
 
 export default {
   tether,
@@ -389,5 +390,6 @@ export default {
   "angle-usd": usda,
   "usc-2": usc2,
   ckusdc, //fakecg
-  "usual-usd": usd0
+  "usual-usd": usd0,
+  "classic-usd": classicusd,
 };
