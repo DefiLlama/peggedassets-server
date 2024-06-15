@@ -30,6 +30,7 @@ import {
 } from "../helper/tron";
 import { mixinSupply } from "../helper/mixin";
 import { chainContracts } from "./config";
+import { lookupAccountByID } from "../llama-helper/algorand";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -125,6 +126,7 @@ async function solanaUnreleased() {
   };
 }
 
+const getBal = (address:string)=>lookupAccountByID(address).then(r=>r.account.assets.find((t:any)=>t["asset-id"]==31566704).amount / 10 ** 6)
 async function algorandMinted() {
   // I gave up on trying to use the SDK for this
   return async function (
@@ -138,18 +140,19 @@ async function algorandMinted() {
         await axios.get("https://mainnet-idx.algonode.cloud/v2/assets/31566704")
     );
     const supply = supplyRes?.data?.asset?.params?.total;
-    const reserveRes = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/accounts/2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM"
-        )
-    );
-    const reserveAccount = reserveRes?.data?.account?.assets?.filter(
-      (asset: any) => asset["asset-id"] === 31566704
-    );
-    const reserves = reserveAccount[0].amount;
-    let balance = (supply - reserves) / 10 ** 6;
+    let balance = (supply / 10 ** 6 - await getBal("2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM"));
     sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
+    return balances;
+  };
+}
+
+async function algorandUnreleased() {
+  return async function () {
+    let balances = {} as Balances;
+
+    sumSingleBalance(balances, "peggedUSD", 
+    (await getBal("OSS3CEB3KK2QGVW4DZYMHLDJMJIY7WKFQCPXV7KOZCGF6GPILAARBOGZHM")) + 
+    (await getBal("SO6ZNE255CHM56JNA6SYDAKIMHC266DGM4G47O6N66UT57HZZ7VV6Y2N7Y")));
     return balances;
   };
 }
@@ -613,6 +616,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   algorand: {
     minted: algorandMinted(),
+    unreleased: algorandUnreleased(),
   },
   tron: {
     minted: tronMinted(),
