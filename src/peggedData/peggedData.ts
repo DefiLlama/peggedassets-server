@@ -3955,7 +3955,7 @@ export default [
     mintRedeemDescription:
         "USR is minted by depositing liquid assets, such as USDC or USDT, on 1:1 value basis. When USR is redeemed, a user receives a 1:1 equivalent to the notional amount.",
     onCoinGecko: false,
-    gecko_id: null,
+    gecko_id: "resolv-usr",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
