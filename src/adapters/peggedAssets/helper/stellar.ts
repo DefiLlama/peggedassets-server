@@ -1,15 +1,14 @@
 const axios = require("axios");
 const retry = require("async-retry");
 
-const stellarExpertEndpoint = (assetCode: string, assetIssuer: string): string =>
-  `https://api.stellar.expert/explorer/public/asset/${assetCode}-${assetIssuer}`;
+const stellarExpertEndpoint = (assetID: string): string =>
+  `https://api.stellar.expert/explorer/public/asset/${assetID.replace(":", "-")}`;
 
 export async function getAsset(assetID: string) {
   // assetID is concatenation of the assetCode and assetIssuer, separated by a colon
-  const [assetCode, assetIssuer] = assetID.split(":");
   const asset = await retry(
     async (_bail: any) =>
-      await axios.get(stellarExpertEndpoint(assetCode, assetIssuer))
+      await axios.get(stellarExpertEndpoint(assetID))
   );
   const data = asset.data;
   return data;
