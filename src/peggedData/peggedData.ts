@@ -3964,4 +3964,24 @@ export default [
     twitter: "https://twitter.com/ResolvLabs",
     wiki: "https://docs.resolv.im/",
   },
+  {
+    id: "198",
+    name: "Stable Jack aUSD",
+    address: "avax:0xaBe7a9dFDA35230ff60D1590a929aE0644c47DC1",
+    symbol: "aUSD",
+    url: "https://www.stablejack.xyz",
+    description:
+        "Stable Jack allows users to exchange the yield, volatility, and points of the collateral asset while maintaining their principal. This will allow new DeFi primitives to be built on yield-bearing assets, lending markets, DEXs, or volatile assets.",
+    mintRedeemDescription:
+        "aUSD is a decentralized yield-bearing stablecoin that is fully collateralized and backed by AVAX LSTs.",
+    onCoinGecko: false,
+    gecko_id: "stable-jack-ausd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/StableJack_xyz",
+    wiki: "https://docs.stablejack.xyz/stablejack",
+  },
 ] as PeggedAsset[];
