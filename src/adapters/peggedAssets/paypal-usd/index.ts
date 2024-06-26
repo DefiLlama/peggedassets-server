@@ -6,7 +6,11 @@ const chainContracts = {
       "0xE25a329d385f77df5D4eD56265babe2b99A5436e", // paxosTreasury
     ],
   },
+  solana: {
+    issued: ["2b1kV6DkPAnxd5ixfnxCpjxmKwqjjaYmCZfHsFu24GXo"],
+  },
 };
+
 
 import { addChainExports } from "../helper/getSupply";
 const adapter = addChainExports(chainContracts);
