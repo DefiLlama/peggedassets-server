@@ -10,7 +10,7 @@ import {
   PeggedIssuanceAdapter,
   Balances,  ChainContracts,
 } from "../peggedAsset.type";
-import * as stellar from "../helper/stellar";
+import { getTotalSupply as stellarGetTotalSupply } from "../helper/stellar";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -29,6 +29,9 @@ const chainContracts: ChainContracts = {
   },
   everscale: {
     bridgeOnETH: ["0x6b9f9cadb11690b2df23c3cfce383a6706f9a5e6"], // octus(?)
+  },
+  stellar: {
+    issued: ["EURS:GC5FGCDEOGOGSNWCCNKS3OMEVDHTE3Q5A5FEQWQKV3AXA7N6KDQ2CUZJ"],
   },
 };
 
@@ -153,14 +156,14 @@ async function algorandMinted() {
   };
 }
 
-async function stellarMinted() {
+async function stellarMinted(assetID: string) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const supply = await stellar.getTotalSupply("EURS:GC5FGCDEOGOGSNWCCNKS3OMEVDHTE3Q5A5FEQWQKV3AXA7N6KDQ2CUZJ")
+    const supply = await stellarGetTotalSupply(assetID)
     sumSingleBalance(balances, "peggedEUR", supply, "issued", false)
     return balances;
   }
@@ -206,7 +209,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   stellar: {
-    minted: stellarMinted(),
+    minted: stellarMinted(chainContracts.stellar.issued[0]),
   },
 };
 
