@@ -6,7 +6,8 @@ import {
   PeggedIssuanceAdapter,
   Balances,  ChainContracts,
 } from "../peggedAsset.type";
-
+const axios = require("axios");
+const retry = require("async-retry");
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -71,6 +72,29 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
   };
 }
 
+async function circleAPIChainMinted(chain: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const issuance = await retry(
+      async (_bail: any) =>
+        await axios.get("https://api.circle.com/v1/stablecoins")
+    );
+    const eurcData = issuance.data.data.filter(
+      (obj: any) => obj.symbol === "EUROC"
+    );
+    const filteredChainsData = await eurcData[0].chains.filter(
+      (obj: any) => obj.chain === chain
+    );
+    const supply = parseInt(filteredChainsData[0].amount);
+    sumSingleBalance(balances, "peggedEUR", supply, "issued", false);
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -93,6 +117,9 @@ const adapter: PeggedIssuanceAdapter = {
   avalanche: {
     minted: chainMinted("avax", 6),
   },
+  stellar: {
+    minted: circleAPIChainMinted("XLM")
+  }
 };
 
 export default adapter;
