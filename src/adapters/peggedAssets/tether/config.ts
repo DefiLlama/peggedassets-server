@@ -220,6 +220,8 @@ export const chainContracts: ChainContracts = {
     ],
   },
   celo: {
+    //issued: ["0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e"],
+    //unreleased: ["0x5754284f345afc66a98fbB0a0Afe71e0F007B949"],
     bridgedFromETH6Decimals: [
       "0x88eeC49252c8cbc039DCdB394c0c2BA2f1637EA0", // optics
     ],

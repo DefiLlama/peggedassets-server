@@ -225,6 +225,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x3ad9dfe640e1a9cc1d9b0948620820d975c3803a"], // synapse
   },
   celo: {
+    issued: ["0xcebA9300f2b948710d2653dD7B07f33A8B32118C"],
     bridgedFromETH6Decimals: [
       "0xef4229c8c3250C675F21BCefa42f58EfbfF6002a", // optics
       "0x37f750B7cC259A2f741AF45294f6a16572CF5cAd", // wormhole

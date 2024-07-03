@@ -840,6 +840,8 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromETH),
   },
   celo: {
+    minted: usdtApiMinted("totaltokens_celo"),
+    unreleased: usdtApiUnreleased("reserve_balance_celo"),
     ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),

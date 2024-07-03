@@ -690,6 +690,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("dfk", 18, chainContracts.dfk.bridgedFromETH),
   },
   celo: {
+    minted: chainMinted("celo",6),
     ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
