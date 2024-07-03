@@ -3984,4 +3984,24 @@ export default [
     twitter: "https://x.com/StableJack_xyz",
     wiki: "https://docs.stablejack.xyz/stablejack",
   },
+  {
+    id: "199",
+    name: "Celo Real",
+    address: "celo:0xe8537a3d056DA446677B9E9d6c5dB704EaAb4787",
+    symbol: "CREAL",
+    url: "https://celo.org/",
+    description:
+      "cREAL is a decentralized, over-collateralized algorithmic stablecoin that tracks the value of the Brazilian real",
+    mintRedeemDescription:
+      "Celo real (cREAL) is based on Mento, the stability protocol on Celo, and supported by multiple digital assets, including BTC and ETH, in the Celo Reserve.",
+    onCoinGecko: "true",
+    gecko_id: "celo-real-creal",
+    cmcId: "16385",
+    pegType: "peggedREAL",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/CeloOrg",
+    wiki: "https://blog.celo.org/celo-launches-the-creal-stablecoin-11da0d560c1c",
+  },
 ] as PeggedAsset[];
