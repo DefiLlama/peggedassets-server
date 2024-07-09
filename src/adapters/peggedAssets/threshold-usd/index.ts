@@ -1,10 +1,9 @@
-const sdk = require("@defillama/sdk");
 import {
-  ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
 } from "../peggedAsset.type";
 import { sumSingleBalance } from "../helper/generalUtil";
+import { ChainApi } from "@defillama/sdk";
 
 const chainContracts = {
   ethereum: {
@@ -17,60 +16,20 @@ const chainContracts = {
 };
 
 async function ethereumMinted() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (api: ChainApi) {
     let balances = {} as Balances;
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
-        target: chainContracts.ethereum.issued[0],
-        block: _ethBlock,
-        chain: "ethereum",
-      })
-    ).output;
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      totalSupply / 10 ** 18,
-      "issued",
-      false
-    );
+    const totalSupply = await api.call({ abi: "erc20:totalSupply", target: chainContracts.ethereum.issued[0], })
+    sumSingleBalance(balances, "peggedUSD", totalSupply / 1e18, "issued", false);
     return balances;
   };
 }
 
 async function ethereumUnreleased() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (api: ChainApi) {
     let balances = {} as Balances;
-    for (let pcv of chainContracts.ethereum.pcvContracts) {
-      const debtToPay = (
-        await sdk.api.abi.call({
-          abi: {
-            stateMutability: "view",
-            type: "function",
-            name: "debtToPay",
-            inputs: [],
-            outputs: [
-              {
-                internalType: "uint256",
-                name: "",
-                type: "uint256"
-              }
-            ],
-          },
-          target: pcv,
-          block: _ethBlock,
-        })
-      ).output;
-      sumSingleBalance(balances, "peggedUSD", debtToPay / 10 ** 18);
-    }
+    const debts = await api.multiCall({  abi: 'uint256:debtToPay', calls: chainContracts.ethereum.pcvContracts})
+    for (const debt of debts) 
+      sumSingleBalance(balances, "peggedUSD", debt / 1e18)
     return balances;
   };
 }
