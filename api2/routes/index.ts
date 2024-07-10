@@ -19,10 +19,14 @@ export default function setRoutes(router: HyperExpress.Router) {
     chain = normalizeChain(chain)
     return fileResponse('/stablecoindominance/' + chain, res);
   }))
-  router.get("/stablecoincharts2/:chain", defaultFileHandler);
-  router.get("/stablecoincharts2/all-llama-app", defaultFileHandler);
-  router.get("/stablecoincharts2/all-dominance-chain-breakdown", defaultFileHandler);
-  router.get("/stablecoincharts2/recent-protocol-data", defaultFileHandler);
+  router.get("/stablecoincharts2/:chain", ew(async (req: any, res: any) => {
+    let { chain } = req.path_parameters;
+    chain = normalizeChain(chain)
+    return fileResponse('/stablecoincharts2/' + chain, res);
+  }));
+  // router.get("/stablecoincharts2/all-llama-app", defaultFileHandler);
+  // router.get("/stablecoincharts2/all-dominance-chain-breakdown", defaultFileHandler);
+  // router.get("/stablecoincharts2/recent-protocol-data", defaultFileHandler);
 
   // TOO: nuke this route to reduce load on the server
   router.get("/stablecoincharts/:chain", ew(async (req: any, res: any) => {
