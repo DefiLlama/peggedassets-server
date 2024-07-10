@@ -1013,6 +1013,14 @@ export const chainCoingeckoIds = {
     symbol: "ICP",
     cmcId: "8916",
   },
+  "TON": {
+    geckoId: "the-open-network",
+    github: ['ton-blockchain'],
+    symbol: "TON",
+    cmcId: "11419",
+    twitter: "ton_blockchain",
+    url: "https://ton.org/",
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
