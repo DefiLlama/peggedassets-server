@@ -12,6 +12,15 @@ type balance = { [token: string]: number };
 
 export async function craftStablecoinChainsResponse({ peggedPrices }: { peggedPrices?: any } = {}) {
   const chainCirculating = {} as { [chain: string]: balance };
+  const chainTvlData = await fetch('https://api.llama.fi/v2/chains').then((res) => res.json());
+  chainTvlData.forEach((data: any) => {
+    const {name, tvl } = data
+    if (!chainCoingeckoIds[name]) {
+      chainCoingeckoIds[name] = data
+      chainCoingeckoIds[name].symbol = data.tokenSymbol
+    };
+    (chainCoingeckoIds[name] as any).tvl = tvl
+  })
   
   let prices = await fetchPrices(peggedPrices);
 
@@ -48,6 +57,7 @@ export async function craftStablecoinChainsResponse({ peggedPrices }: { peggedPr
       gecko_id: chainCoingeckoIds[chainName]?.geckoId ?? null,
       totalCirculatingUSD: chainCirculating,
       tokenSymbol: chainCoingeckoIds[chainName]?.symbol ?? null,
+      tvl: (chainCoingeckoIds as any)[chainName]?.tvl ?? null,
       name: chainName,
     })
   );
