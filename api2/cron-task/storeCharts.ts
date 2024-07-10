@@ -165,13 +165,8 @@ export function craftChartsResponse(
   if (startTimestamp && typeof startTimestamp === 'string') startTimestamp = parseInt(startTimestamp)
 
   const filterChart = (chart: any) => {
-    return chart.map((entry: any) => {
-      if (!startTimestamp) return entry;
-      if (entry.date < startTimestamp) {
-        return null;
-      }
-      return entry;
-    }).filter((entry: any) => entry);
+    if (startTimestamp) chart = chart.filter((entry: any) => entry?.date >= startTimestamp)
+    return chart.filter((entry: any) => entry)
   }
 
   const { historicalPrices, historicalRates, lastPrices, priceTimestamps, rateTimestamps, peggedAssetsData, } = cache as any

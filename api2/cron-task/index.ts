@@ -7,7 +7,7 @@ import storeCharts, { craftChartsResponse } from "./storeCharts";
 import storeStablecoins from "./getStableCoins";
 import { craftStablecoinPricesResponse } from "./getStablecoinPrices";
 import { craftStablecoinChainsResponse } from "./getStablecoinChains";
-import { cache, initCache, saveCache } from "../cache";
+import { CacheType, cache, initCache, saveCache } from "../cache";
 import { getCurrentUnixTimestamp } from "../../src/utils/date";
 import { sendMessage } from "../../src/utils/discord";
 import { getStablecoinData } from "../routes/getStableCoin";
@@ -17,7 +17,7 @@ import { getChainDisplayName, normalizeChain } from "../../src/utils/normalizeCh
 run().catch(console.error).then(() => process.exit(0))
 
 async function run() {
-  await initCache()
+  await initCache(CacheType.CRON)
 
   await Promise.all([
     storeRates(),
@@ -128,7 +128,10 @@ async function run() {
         const allPeggedAssetsData = await craftChartsResponse({ chain, peggedID: peggedAsset, startTimestamp })
         if (chain === 'all')
           recentProtocolData[peggedAsset] = allPeggedAssetsData.slice(-32)
-        breakdown[peggedAsset] = removeEmptyItems(allPeggedAssetsData)
+        if (peggedAsset === '3') // special case for terraUSD which is hardcoded as 0 after the depeg
+          breakdown[peggedAsset] = allPeggedAssetsData
+        else
+          breakdown[peggedAsset] = removeEmptyItems(allPeggedAssetsData)
       }
 
 
