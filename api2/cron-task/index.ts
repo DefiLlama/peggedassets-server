@@ -12,7 +12,7 @@ import { getCurrentUnixTimestamp } from "../../src/utils/date";
 import { sendMessage } from "../../src/utils/discord";
 import { getStablecoinData } from "../routes/getStableCoin";
 import { craftChainDominanceResponse } from "../routes/getChainDominance";
-import { normalizeChain } from "../../src/utils/normalizeChain";
+import { getChainDisplayName, normalizeChain } from "../../src/utils/normalizeChain";
 
 run().catch(console.error).then(() => process.exit(0))
 
@@ -39,12 +39,18 @@ async function run() {
     assetChainMap[asset.id] = new Set(_chains)
     _chains.forEach((chain) => allChainsSet.add(chain))
   })
+  const dominanceMap: any = {}
+  const chainChartMap: any = {}
 
   await storePeggedAssets()
   await storeStablecoinDominance()
   await storeChainChartData()
 
   await storeRouteData('stablecoins', allStablecoinsData)
+  await storeRouteData('stablecoincharts2/all-dominance-chain-breakdown', {
+    dominanceMap,
+    chainChartMap,
+  })
   await saveCache()
 
   await alertOutdated()
@@ -77,6 +83,7 @@ async function run() {
     for (const chain of [...allChainsSet]) {
       try {
         const data = await craftChainDominanceResponse(chain)
+        dominanceMap[getChainDisplayName(chain, true)] = data
         await storeRouteData('stablecoindominance/' + chain, data)
       } catch (e) {
         console.error('Error fetching chain data', e)
@@ -97,6 +104,7 @@ async function run() {
     for (const chain of [...allChainsSet]) {
       try {
         const data = await getChainData(chain)
+        chainChartMap[getChainDisplayName(chain, true)] = data.aggregated
         await storeRouteData('stablecoincharts2/' + chain, data)
       } catch (e) {
         console.error('Error fetching chain data', e)
