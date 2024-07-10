@@ -45,45 +45,45 @@ export default async function handler() {
 
   console.time('storeCharts')
 
-/*   const commonOptions = {
-    lastPrices,
-    historicalPrices,
-    historicalRates,
-    priceTimestamps,
-    rateTimestamps,
-    peggedAssetsData: cache.peggedAssetsData,
-  }
-  // store overall chart
-  const allData = await craftChartsResponse({ ...commonOptions, chain: "all" });  
-  await storeRouteData('charts/all/all', allData)
-
-  // store chain charts
-  const chains = [Object.keys(chainCoingeckoIds), Object.values(normalizedChainReplacements)].flat()
-  for (let chain of chains) {
-    const normalizedChain = normalizeChain(chain);
-    const chainData = await craftChartsResponse({ ...commonOptions, chain, });
-    if (chainData.length) {
-      await storeRouteData(`charts/${normalizedChain}`, chainData)
-    } else {
-      console.log(`No data for ${chain}`)
+  /*   const commonOptions = {
+      lastPrices,
+      historicalPrices,
+      historicalRates,
+      priceTimestamps,
+      rateTimestamps,
+      peggedAssetsData: cache.peggedAssetsData,
     }
-  }
-
-  // store pegged asset charts
-  for (const pegged of peggedAssets) {
-    const id = pegged.id;
-    const chart = await craftChartsResponse({ ...commonOptions, peggedID: id });
-    await storeRouteData(`charts/all/${id}`, chart)
-  }
-  console.timeEnd('storeCharts') */
+    // store overall chart
+    const allData = await craftChartsResponse({ ...commonOptions, chain: "all" });  
+    await storeRouteData('charts/all/all', allData)
+  
+    // store chain charts
+    const chains = [Object.keys(chainCoingeckoIds), Object.values(normalizedChainReplacements)].flat()
+    for (let chain of chains) {
+      const normalizedChain = normalizeChain(chain);
+      const chainData = await craftChartsResponse({ ...commonOptions, chain, });
+      if (chainData.length) {
+        await storeRouteData(`charts/${normalizedChain}`, chainData)
+      } else {
+        console.log(`No data for ${chain}`)
+      }
+    }
+  
+    // store pegged asset charts
+    for (const pegged of peggedAssets) {
+      const id = pegged.id;
+      const chart = await craftChartsResponse({ ...commonOptions, peggedID: id });
+      await storeRouteData(`charts/all/${id}`, chart)
+    }
+    console.timeEnd('storeCharts') */
 
 }
 
 
 async function getPeggedAssetsData() {
   if (!cache.peggedAssetsData)
-      cache.peggedAssetsData = {}
-  
+    cache.peggedAssetsData = {}
+
   await Promise.all(peggedAssets.map(async (pegged) => {
 
     const lastBalance = await getLastRecord(hourlyPeggedBalances(pegged.id));
@@ -159,20 +159,21 @@ export function craftChartsResponse(
   { chain = 'all', peggedID, startTimestamp }: {
     chain?: string,
     peggedID?: string,
-    startTimestamp?: string,
+    startTimestamp?: string | number,
   }
 ) {
+  if (startTimestamp && typeof startTimestamp === 'string') startTimestamp = parseInt(startTimestamp)
 
   const filterChart = (chart: any) => {
     return chart.map((entry: any) => {
       if (!startTimestamp) return entry;
-      if (entry.date < parseInt(startTimestamp)) {
+      if (entry.date < startTimestamp) {
         return null;
       }
       return entry;
     }).filter((entry: any) => entry);
   }
-  
+
   const { historicalPrices, historicalRates, lastPrices, priceTimestamps, rateTimestamps, peggedAssetsData, } = cache as any
   const sumDailyBalances = {} as {
     [timestamp: number]: {
