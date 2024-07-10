@@ -120,12 +120,12 @@ function craftProtocolsResponse(
   return response;
 }
 
-export default async function handler() {
+export default async function handler({ peggedPrices }: { peggedPrices?: any; } = {}) {
   const pegged = craftProtocolsResponse(true);
   let response: any = {
     peggedAssets: pegged,
   };
-  const chainData = await craftStablecoinChainsResponse();
+  const chainData = await craftStablecoinChainsResponse({ peggedPrices });
   response.chains = chainData;
   await storeRouteData('stablecoins', response)
   return response;

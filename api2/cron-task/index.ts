@@ -27,7 +27,7 @@ async function run() {
 
   // this also pulls data from ddb and sets to cache
   await storeCharts()
-  const allStablecoinsData = await storeStablecoins()
+  const allStablecoinsData = await storeStablecoins({ peggedPrices: cache.peggedPrices})
   await storePrices()
   await storeStablecoinChains()
   const allChainsSet: Set<string> = new Set()
@@ -44,20 +44,25 @@ async function run() {
   await storeStablecoinDominance()
   await storeChainChartData()
 
+  await storeRouteData('stablecoins', allStablecoinsData)
   await saveCache()
 
   await alertOutdated()
 
 
   async function storePeggedAssets() {
-    for (const { id } of allStablecoinsData.peggedAssets) {
+    for (const peggedAssetData of allStablecoinsData.peggedAssets) {
+      const { id } = peggedAssetData
       try {
         const data = await getStablecoinData(id)
         data.chainBalances = data.chainBalances ?? {}
         for (const [chain, chainData] of Object.entries(data.chainBalances)) {
           const nChain = normalizeChain(chain)
-          allChainsSet.add(nChain)
-          assetChainMap[id].add(nChain);
+          if (!assetChainMap[id].has(nChain)) {
+            peggedAssetData.chains.push(chain)
+            assetChainMap[id].add(nChain)
+          }
+          allChainsSet.add(nChain);
           (chainData as any).tokens = removeEmptyItems((chainData as any).tokens)
         }
         data.tokens = removeEmptyItems(data.tokens)
