@@ -97,9 +97,12 @@ async function run() {
     const allChartsStartTimestamp = 1617148800 // for /stablecoins page, charts begin on April 1, 2021, to reduce size of page
     const allData = await getChainData('all')
     await storeRouteData('stablecoincharts2/all', allData)
-    const allDataShortened = await getChainData(frontendKey)
-    for (const [peggedAssetId, chartData] of Object.entries(allDataShortened.breakdown)) {
-      recentProtocolData[peggedAssetId] = (chartData as any).slice(-32)
+    const allDataShortened: any = {
+      breakdown: {},
+      aggregated: allData.aggregated.filter((item: any) => item.date >= allChartsStartTimestamp)
+    }
+    for (const [id, value] of Object.entries(allData.breakdown)) {
+      allDataShortened.breakdown[id] = (value as any).filter((item: any) => item.date >= allChartsStartTimestamp)
     }
     await storeRouteData('stablecoincharts2/' + frontendKey, allDataShortened)
 
@@ -122,7 +125,10 @@ async function run() {
       for (const [peggedAsset, chainMap] of Object.entries(assetChainMap)) {
         if (chain !== 'all' && !(chainMap as any).has(chain))
           continue
-        breakdown[peggedAsset] = removeEmptyItems(await craftChartsResponse({ chain, peggedID: peggedAsset, startTimestamp }))
+        const allPeggedAssetsData = await craftChartsResponse({ chain, peggedID: peggedAsset, startTimestamp })
+        if (chain === 'all')
+          recentProtocolData[peggedAsset] = allPeggedAssetsData.slice(-32)
+        breakdown[peggedAsset] = removeEmptyItems(allPeggedAssetsData)
       }
 
 
