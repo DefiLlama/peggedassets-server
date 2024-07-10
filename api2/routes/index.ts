@@ -25,6 +25,7 @@ export default function setRoutes(router: HyperExpress.Router) {
   router.get("/stablecoincharts2/:chain", defaultFileHandler);
   router.get("/stablecoincharts2/all-llama-app", defaultFileHandler);
   router.get("/stablecoincharts2/all-dominance-chain-breakdown", defaultFileHandler);
+  router.get("/stablecoincharts2/recent-protocol-data", defaultFileHandler);
 
   /* Ignore optional query parameters for now
   router.get("/stablecoins", ew(async (req: any, res: any) => {

@@ -27,7 +27,7 @@ async function run() {
 
   // this also pulls data from ddb and sets to cache
   await storeCharts()
-  const allStablecoinsData = await storeStablecoins({ peggedPrices: cache.peggedPrices})
+  const allStablecoinsData = await storeStablecoins({ peggedPrices: cache.peggedPrices })
   await storePrices()
   await storeStablecoinChains()
   const allChainsSet: Set<string> = new Set()
@@ -41,16 +41,15 @@ async function run() {
   })
   const dominanceMap: any = {}
   const chainChartMap: any = {}
+  const recentProtocolData: any = {}
 
   await storePeggedAssets()
   await storeStablecoinDominance()
   await storeChainChartData()
 
   await storeRouteData('stablecoins', allStablecoinsData)
-  await storeRouteData('stablecoincharts2/all-dominance-chain-breakdown', {
-    dominanceMap,
-    chainChartMap,
-  })
+  await storeRouteData('stablecoincharts2/all-dominance-chain-breakdown', { dominanceMap, chainChartMap, })
+  await storeRouteData('stablecoincharts2/recent-protocol-data', recentProtocolData)
   await saveCache()
 
   await alertOutdated()
@@ -99,6 +98,9 @@ async function run() {
     const allData = await getChainData('all')
     await storeRouteData('stablecoincharts2/all', allData)
     const allDataShortened = await getChainData(frontendKey)
+    for (const [peggedAssetId, chartData] of Object.entries(allDataShortened.breakdown)) {
+      recentProtocolData[peggedAssetId] = (chartData as any).slice(-32)
+    }
     await storeRouteData('stablecoincharts2/' + frontendKey, allDataShortened)
 
     for (const chain of [...allChainsSet]) {
