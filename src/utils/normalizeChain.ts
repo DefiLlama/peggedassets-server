@@ -1285,6 +1285,8 @@ export function getChainDisplayName(
       return "Immutable zkEVM"
     case "icp":
       return "ICP"
+    case "ton":
+      return "TON"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
