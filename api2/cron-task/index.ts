@@ -24,12 +24,9 @@ async function run() {
     storeConfig(),
     storePeggedPrices(),
   ])
-
   // this also pulls data from ddb and sets to cache
   await storeCharts()
   const allStablecoinsData = await storeStablecoins({ peggedPrices: cache.peggedPrices })
-  await storePrices()
-  await storeStablecoinChains()
   const allChainsSet: Set<string> = new Set()
   const assetChainMap: {
     [asset: string]: Set<string>
@@ -43,17 +40,26 @@ async function run() {
   const chainChartMap: any = {}
   const recentProtocolData: any = {}
 
-  await storePeggedAssets()
-  await storeStablecoinDominance()
-  await storeChainChartData()
+
+  const timeWrapper = {
+    storePrices,
+    storeStablecoinChains,
+    storePeggedAssets,
+    storeStablecoinDominance,
+    storeChainChartData,
+    alertOutdated,
+  }
+
+  for (const key in timeWrapper) {
+    console.time(key)
+    await timeWrapper[key]()
+    console.timeEnd(key)
+  }
 
   await storeRouteData('stablecoins', allStablecoinsData)
   await storeRouteData('stablecoincharts2/all-dominance-chain-breakdown', { dominanceMap, chainChartMap, })
   await storeRouteData('stablecoincharts2/recent-protocol-data', recentProtocolData)
   await saveCache()
-
-  await alertOutdated()
-
 
   async function storePeggedAssets() {
     for (const peggedAssetData of allStablecoinsData.peggedAssets) {
@@ -111,6 +117,7 @@ async function run() {
         const data = await getChainData(chain)
         chainChartMap[getChainDisplayName(chain, true)] = data.aggregated
         await storeRouteData('stablecoincharts2/' + chain, data)
+        await storeRouteData('stablecoincharts/' + chain, data.aggregated)
       } catch (e) {
         console.error('Error fetching chain data', e)
       }
@@ -119,19 +126,16 @@ async function run() {
     async function getChainData(chain: string) {
       let startTimestamp = chain === frontendKey ? allChartsStartTimestamp : undefined
       chain = chain === frontendKey ? 'all' : chain
-      const aggregated = removeEmptyItems(await craftChartsResponse({ chain, startTimestamp, }))
+      const aggregated = removeEmptyItems(await craftChartsResponse({ chain, startTimestamp, assetChainMap}))
       const breakdown: any = {}
 
       for (const [peggedAsset, chainMap] of Object.entries(assetChainMap)) {
         if (chain !== 'all' && !(chainMap as any).has(chain))
           continue
-        const allPeggedAssetsData = await craftChartsResponse({ chain, peggedID: peggedAsset, startTimestamp })
+        const allPeggedAssetsData = await craftChartsResponse({ chain, peggedID: peggedAsset, startTimestamp, assetChainMap })
         if (chain === 'all')
           recentProtocolData[peggedAsset] = allPeggedAssetsData.slice(-32)
-        if (peggedAsset === '3') // special case for terraUSD which is hardcoded as 0 after the depeg
-          breakdown[peggedAsset] = allPeggedAssetsData
-        else
-          breakdown[peggedAsset] = removeEmptyItems(allPeggedAssetsData)
+        breakdown[peggedAsset] = removeEmptyItems(allPeggedAssetsData)
       }
 
 
@@ -185,9 +189,14 @@ async function alertOutdated() {
 
 }
 
-
+// filter out empty items from array but retain the last item as is
 function removeEmptyItems(array: any[] = []) {
-  return array.map(removeEmpty).filter((item: any) => item)
+  if (array.length < 2) return array
+  const last = array[array.length - 1]
+  let items = array.slice(0, array.length - 1)
+  items = items.map(removeEmpty).filter((item: any) => item)
+  items.push(last)
+  return items
 }
 
 function removeEmpty(item: any) {
