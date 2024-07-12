@@ -65,9 +65,9 @@ export default function setRoutes(router: HyperExpress.Router) {
       res.set('Cache-Control', 'public, max-age=1800'); // Set caching to 30 minutes
       // set response headers as json
       res.setHeader('Content-Type', 'application/json');
-      // res.json(await readRouteData(filePath))
-      const fileStream = createReadStream(getRouteDataPath(filePath))
-      fileStream.pipe(res)
+      res.json(await readRouteData(filePath))
+      // const fileStream = createReadStream(getRouteDataPath(filePath))
+      // fileStream.pipe(res)
     } catch (e) {
       console.error(e);
       return errorResponse(res, 'Internal server error', { statusCode: 500 })
