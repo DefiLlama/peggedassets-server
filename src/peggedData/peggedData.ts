@@ -4024,4 +4024,24 @@ export default [
     twitter: "https://x.com/hliquity_",
     wiki: "https://docs.hliquity.org/overview/overview#hchf-the-stablecoin",
   },
+  {
+    id: "201",
+    name: "HEXDC Stablecoin",
+    address: "pulse:0x1FE0319440A672526916C232EAEe4808254Bdb00",
+    symbol: "HEXDC",
+    url: "https://www.flex.powercity.io/",
+    description:
+      "HEXDC is a stablecoin with 110% collateralization, no repayment schedule, immutability, and no governance or admin keys",
+    mintRedeemDescription:
+      "HEXDC is minted when users deposit HEX (Hex token) as collateral that has been locked into individual smart contracts called Vaults.",
+    onCoinGecko: "false",
+    gecko_id: "powercity-hexdc",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/POWERCITYio",
+    wiki: "https://docs.powercity.io/flex-protocol",
+  },
 ] as PeggedAsset[];
