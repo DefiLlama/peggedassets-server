@@ -4004,4 +4004,24 @@ export default [
     twitter: "https://twitter.com/CeloOrg",
     wiki: "https://blog.celo.org/celo-launches-the-creal-stablecoin-11da0d560c1c",
   },
+  {
+    id: "200",
+    name: "Hedera Swiss Franc",
+    address: "hedera:0x00000000000000000000000000000000005c9f6b",
+    symbol: "HCHF",
+    url: "https://hliquity.org/",
+    description:
+      "A stablecoin pegged to the Swiss Franc",
+    mintRedeemDescription:
+      "HLiquity offers interest-free loans. Lock up your HBAR, borrow HCHF against it, and repay later without interest",
+    onCoinGecko: "true",
+    gecko_id: "hedera-swiss-franc",
+    cmcId: null,
+    pegType: "peggedCHF",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/hliquity_",
+    wiki: "https://docs.hliquity.org/overview/overview#hchf-the-stablecoin",
+  },
 ] as PeggedAsset[];
