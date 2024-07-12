@@ -398,6 +398,6 @@ export default {
   "classic-usd": classicusd,
   "resolv-usr": usr,
   "stable-jack-ausd": ausd,
-  "hedera-swiss-franc": hchf
+  "hedera-swiss-franc": hchf,
   "celo-real-creal": creal
 };
