@@ -33,6 +33,7 @@ import sperax from "./sperax-usd";
 import usdp from "./usdp";
 import usdb from "./usd-balance";
 import mimatic from "./mimatic";
+import hchf from "./hedera-swiss-franc";
 //import ratio from "./ratio-stable-coin";
 import usdj from "./just-stablecoin";
 import stbl from "./stbl";
@@ -397,5 +398,6 @@ export default {
   "classic-usd": classicusd,
   "resolv-usr": usr,
   "stable-jack-ausd": ausd,
+  "hedera-swiss-franc": hchf
   "celo-real-creal": creal
 };
