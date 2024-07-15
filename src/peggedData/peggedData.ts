@@ -4024,4 +4024,24 @@ export default [
     twitter: "https://x.com/hliquity_",
     wiki: "https://docs.hliquity.org/overview/overview#hchf-the-stablecoin",
   },
+  {
+    id: "201",
+    name: "HEX Dollar Coin",
+    address: "pulse:0x1fe0319440a672526916c232eaee4808254bdb00",
+    symbol: "HEXDC",
+    url: "https://www.flex.powercity.io/#/",
+    description:
+      "Powercity Flex Protocol is a decentralized borrowing protocol that allows you to draw interest-free loans against HEX used as collateral. Loans are paid out in HEXDC (a USD pegged stablecoin)",
+    mintRedeemDescription:
+      "Powercity Flex Protocol offers interest-free loans. Lock up your HEX, borrow HEXDC against it, and repay later without interest",
+    onCoinGecko: "true",
+    gecko_id: "hex-dollar-coin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/POWERCITYio",
+    wiki: "https://docs.powercity.io/flex-protocol",
+  },
 ] as PeggedAsset[];

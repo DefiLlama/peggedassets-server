@@ -198,6 +198,7 @@ import classicusd from "./classic-usd";
 import usr from "./resolv-usr";
 import ausd from "./stable-jack-ausd";
 import creal from "./celo-real-creal";
+import hexdc from "./hex-dollar-coin";
 
 export default {
   tether,
@@ -399,5 +400,6 @@ export default {
   "resolv-usr": usr,
   "stable-jack-ausd": ausd,
   "hedera-swiss-franc": hchf,
-  "celo-real-creal": creal
+  "celo-real-creal": creal,
+  "hex-dollar-coin": hexdc
 };
