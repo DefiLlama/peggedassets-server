@@ -3108,7 +3108,7 @@ export default [
   {
     id: "155",
     name: "Glo Dollar",
-    address: "0x3cbc780d2934d55a06069e837fabd3e6fc23dab0",
+    address: "0x4f604735c1cf31399c6e711d5962b2b3e0225ad3",
     symbol: "USDGLO",
     url: "https://www.glodollar.org/",
     description:
