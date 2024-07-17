@@ -840,6 +840,9 @@ const adapter: PeggedIssuanceAdapter = {
   icp: {
     ethereum: supplyInEthereumBridge('0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', '0xb25eA1D493B49a1DeD42aC5B1208cC618f9A9B80', 6),
   },
+  scroll: {
+    ethereum: bridgedSupply("scroll", 6, chainContracts.scroll.bridgedFromETH),
+  },
 };
 
 export default adapter;

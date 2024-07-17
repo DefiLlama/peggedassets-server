@@ -329,4 +329,9 @@ export const chainContracts: ChainContracts = {
   pulse: {
     bridgedFromETH: ["0x0Cb6F5a34ad42ec934882A05265A7d5F59b51A2f"], // PulseRamp
   },
+  scroll: {
+    bridgedFromETH: [
+      "0xf55bec9cafdbe8730f096aa55dad6d22d44099df", // usdt
+    ],
+  },
 };

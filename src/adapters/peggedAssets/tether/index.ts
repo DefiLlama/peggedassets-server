@@ -971,6 +971,9 @@ const adapter: PeggedIssuanceAdapter = {
     minted: tonMinted(),
     unreleased: usdtApiUnreleased("reserve_balance_ton"),
   },
+  scroll: {
+    ethereum: bridgedSupply("scroll", 6, chainContracts.scroll.bridgedFromETH),
+  },
 };
 
 export default adapter;

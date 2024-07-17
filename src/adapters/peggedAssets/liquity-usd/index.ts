@@ -27,6 +27,11 @@ const chainContracts = {
     bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
     bridgedFromETH: ["0x503234f203fc7eb888eec8513210612a43cf6115"],
   },
+  scroll: {
+    bridgedFromETH: [
+      "0xeDEAbc3A1e7D21fE835FFA6f83a710c70BB1a051", // LUSD
+    ],
+  },
 };
 import { addChainExports } from "../helper/getSupply";
 const adapter = addChainExports(chainContracts);
