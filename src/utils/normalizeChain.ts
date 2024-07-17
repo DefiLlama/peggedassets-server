@@ -3,6 +3,7 @@ export const normalizedChainReplacements = {
   wanchain: "wan",
   kucoin: "kcc",
   gnosis: "xdai",
+  avalanche: 'avax',
   "terra%20classic": "terra",
   sxnetwork: "sx",
   "arbitrum%20nova": "arbitrum_nova",
