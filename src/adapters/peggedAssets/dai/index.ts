@@ -453,6 +453,9 @@ const adapter: PeggedIssuanceAdapter = {
   pulse: {
     ethereum: bridgedSupply("pulse", 18, chainContracts.pulse.bridgedFromETH),
   },
+  scroll: {
+    ethereum: bridgedSupply("scroll", 18, chainContracts.scroll.bridgedFromETH),
+  },
 };
 
 export default adapter;

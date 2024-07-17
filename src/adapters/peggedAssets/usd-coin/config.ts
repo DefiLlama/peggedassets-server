@@ -358,4 +358,9 @@ export const chainContracts: ChainContracts = {
       "0xEB466342C4d449BC9f53A865D5Cb90586f405215" //axelar
       ],
   },
+  scroll: {
+    bridgedFromETH: [
+      "0x06efdbff2a14a7c8e15944d1f4a48f9f95f663a4", // usdc
+    ],
+  },
 };
