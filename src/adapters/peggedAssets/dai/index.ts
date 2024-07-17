@@ -456,6 +456,9 @@ const adapter: PeggedIssuanceAdapter = {
   scroll: {
     ethereum: bridgedSupply("scroll", 18, chainContracts.scroll.bridgedFromETH),
   },
+  taiko: {
+    ethereum: bridgedSupply("taiko", 18, chainContracts.taiko.bridgedFromETH),
+  },
 };
 
 export default adapter;

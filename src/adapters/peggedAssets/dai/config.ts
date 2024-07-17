@@ -196,4 +196,9 @@ export const chainContracts: ChainContracts = {
       "0xcA77eB3fEFe3725Dc33bccB54eDEFc3D9f764f97", // dai
     ],
   },
+  taiko: {
+    bridgedFromETH: [
+      "0x7d02A3E0180451B17e5D7f29eF78d06F8117106C", // DAI
+    ],
+  },
 };

@@ -334,4 +334,14 @@ export const chainContracts: ChainContracts = {
       "0xf55bec9cafdbe8730f096aa55dad6d22d44099df", // usdt
     ],
   },
+  taiko: {
+    bridgedFromETH: [
+      "0x2DEF195713CF4a606B49D07E520e22C17899a736", // USDT
+    ],
+  },
+  mantle: {
+    bridgedFromETH: [
+      "0x201EBa5CC46D216Ce6DC03F6a759e8E766e956aE", // USDT
+    ],
+  },
 };
