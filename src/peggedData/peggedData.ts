@@ -4044,4 +4044,25 @@ export default [
     twitter: "https://x.com/POWERCITYio",
     wiki: "https://docs.powercity.io/flex-protocol",
   },
+  {
+    id: "202",
+    name: "Anzen USDz",
+    address: "0xa469b7ee9ee773642b3e93e842e5d9b5baa10067",
+    symbol: "USDz",
+    url: "https://anzen.finance/",
+    description:
+      "USDz is a stablecoin backed by a diversified portfolio of private credit assets, specifically over-collateralized asset-backed securities. These assets are rigorously underwritten in partnership with Percent, a US licensed broker-dealer that has structured and serviced over $1.7 billion in credit deals since 2018.",
+    mintRedeemDescription:
+      "Anzen enables users to deposit either SPCT as collateral to create USDz. The protocol deploys capital alongside institutional fiat investors, ensuring a robust and secure backing for USDz.",
+    onCoinGecko: "true",
+    gecko_id: "anzen-usdz",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: 
+      "https://docs.anzen.finance/developer-resources/audits",
+    twitter: "https://x.com/AnzenFinance",
+    wiki: "https://docs.anzen.finance/",
+  },
 ] as PeggedAsset[];
