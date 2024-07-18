@@ -27,9 +27,6 @@ export const cache: {
   historicalPrices?: DailyPeggedPrices[]
 } = {}
 
-const MINUTES = 60 * 1000
-const HOUR = 60 * MINUTES
-
 const cacheFile = 'stablecoin-cache'
 
 export async function initCache(cacheType = CacheType.API_SERVER) {

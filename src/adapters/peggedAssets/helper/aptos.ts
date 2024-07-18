@@ -27,3 +27,10 @@ export async function getTotalSupply(account: string, type?: string) {
   const supply = resources?.data?.supply?.vec?.[0].integer?.vec?.[0].value;
   return supply / 10 ** decimals;
 }
+
+export async function getTokenSupply(token: string) {
+  const { data } = await axios.get(`${endpoint}/v1/accounts/${token}/resources`);
+  const coinInfo = data.find((coin: any) => coin.type.startsWith('0x1::coin::CoinInfo'));
+
+  return coinInfo.data.supply.vec[0].integer.vec[0].value / 10 ** coinInfo.data.decimals;
+}

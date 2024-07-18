@@ -4,11 +4,10 @@
   "blast",
   "polygon",
   "fantom",
-  "avalanche",
+  "avax",
   "arbitrum",
   "cronos",
   "harmony",
-  "avax",
   "heco",
   "moonriver",
   "solana",
@@ -150,5 +149,6 @@
   "btr",
   "imx",
   "fraxtal",
-  "scroll"
+  "scroll",
+  "taiko"
 ]

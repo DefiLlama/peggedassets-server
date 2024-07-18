@@ -27,5 +27,4 @@ export async function sendMessage(
       content: formattedMessage,
     }),
   }).then((body) => body.json());
-  console.log("discord", response);
 }

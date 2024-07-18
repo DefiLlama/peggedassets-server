@@ -43,9 +43,9 @@ export default async function handler() {
   cache.rateTimestamps = rateTimestamps
   console.timeEnd(timeKey)
 
+  /*  
   console.time('storeCharts')
-
-  /*   const commonOptions = {
+ const commonOptions = {
       lastPrices,
       historicalPrices,
       historicalRates,
@@ -89,17 +89,47 @@ async function getPeggedAssetsData() {
     const lastBalance = await getLastRecord(hourlyPeggedBalances(pegged.id));
     const allBalances = cache.peggedAssetsData[pegged.id]?.balances || []
     const highestSK = allBalances.reduce((highest, item) => Math.max(highest, item.SK), -1)
-    const newItems = await getHistoricalValues(dailyPeggedBalances(pegged.id), highestSK)
-    allBalances.push(...newItems)
+    const pullData = !lastBalance || (lastBalance.SK - highestSK > secondsInDay) // if last item on the table is more than 1 day older than the last balance, pull data
+    if (pullData) {
+      console.info('fetching new data for', pegged.id)
+      const newItems = await getHistoricalValues(dailyPeggedBalances(pegged.id), highestSK)
+      allBalances.push(...newItems)
+    }
     cache.peggedAssetsData[pegged.id] = {
       balances: allBalances,
       lastBalance
     }
   }))
 
+  const { SK, ...terraLastBalance } = cache.peggedAssetsData['3'].lastBalance
+  cache.peggedAssetsData['3'].balances.forEach((item: any, index: any) => { // the token deppeged after this
+    if (item.SK > 1655891865) {
+      cache.peggedAssetsData['3'].balances[index] = { ...item, ...terraLastBalance }
+      return
+    }
+  })
+
+  replaceAvalanceAvax(cache.peggedAssetsData) // convert all 'avalanche' keys to 'avax'
   return cache.peggedAssetsData
 }
 
+function replaceAvalanceAvax(obj) {
+  if (typeof obj !== 'object' || obj === null) {
+      return; // Not an object or is null, do nothing
+  }
+
+  if (obj.hasOwnProperty('avalanche')) {
+      obj['avax'] = obj['avalanche']; // Create 'avax' key with 'avalanche' value
+      delete obj['avalanche']; // Remove 'avalanche' key
+  }
+
+  // Recursively apply to all object values
+  Object.values(obj).forEach(value => {
+      if (typeof value === 'object') {
+        replaceAvalanceAvax(value); // Recursive call
+      }
+  });
+}
 
 const formatTokenBalance = (tokenBalance: TokenBalance) => {
   let formattedTokenBalance = {} as TokenBalance;
@@ -155,11 +185,17 @@ function extractResultOfBinarySearch(ar: any[], binarySearchResult: number) {
   return ar[binarySearchResult];
 }
 
+const _assetCache: any = {};
+let lastDailyTimestamp = 0;
+
 export function craftChartsResponse(
-  { chain = 'all', peggedID, startTimestamp }: {
+  { chain = 'all', peggedID, startTimestamp, assetChainMap, }: {
     chain?: string,
     peggedID?: string,
     startTimestamp?: string | number,
+    assetChainMap: {
+      [asset: string]: Set<string>
+    }
   }
 ) {
   if (startTimestamp && typeof startTimestamp === 'string') startTimestamp = parseInt(startTimestamp)
@@ -181,7 +217,6 @@ export function craftChartsResponse(
   };
 
   const normalizedChain = normalizeChain(chain!);
-  let lastDailyTimestamp = 0;
 
   /*
    * whenever "chain" and "peggedAsset", and peggedAsset has no entry in lastBalance for that chain,
@@ -191,6 +226,15 @@ export function craftChartsResponse(
     if (peggedID && pegged.id !== peggedID) {
       return;
     }
+    const chainMap = assetChainMap[pegged.id];
+    if (chain !== "all" && !chainMap.has(chain)) return; // if the coin is not found an given chain, dont process it
+    if (!_assetCache[pegged.id]) addToAssetCache(pegged);
+    return _assetCache[pegged.id];
+  }).filter((i) => i);
+
+
+  function addToAssetCache(pegged: any) {
+
     const { balance: lastBalance, balances } = peggedAssetsData[pegged.id]
 
     // if (chain !== "all" && !lastBalance?.[normalizedChain])
@@ -221,12 +265,12 @@ export function craftChartsResponse(
     );
     lastDailyTimestamp = Math.max(lastDailyTimestamp, lastTimestamp);
 
-    return {
+    _assetCache[pegged.id] = {
       pegged,
       historicalBalance: historicalBalance.Items,
       lastTimestamp,
     };
-  })
+  }
 
   const lastDailyItem = historicalPrices[historicalPrices.length - 1];
   if (
@@ -239,51 +283,36 @@ export function craftChartsResponse(
   }
 
   historicalPeggedBalances.map((peggedBalance) => {
-    if (peggedBalance === undefined) {
-      return;
-    }
     let { historicalBalance, pegged, lastTimestamp } = peggedBalance;
     const pegType = pegged.pegType;
     const peggedGeckoID = pegged.gecko_id;
     const lastBalance = historicalBalance[historicalBalance.length - 1];
 
+    // fill missing data with last available data
     while (lastTimestamp < lastDailyTimestamp) {
-      lastTimestamp = getClosestDayStartTimestamp(
-        lastTimestamp + 24 * secondsInHour
-      );
+      lastTimestamp = getClosestDayStartTimestamp(lastTimestamp + 24 * secondsInHour);
       historicalBalance.push({
         ...lastBalance,
         SK: lastTimestamp,
       });
+      peggedBalance.lastTimestamp = lastTimestamp;
     }
 
     historicalBalance.map((item: any) => {
-      const timestamp = getClosestDayStartTimestamp(item.SK);
+      const timestamp = getClosestDayStartTimestamp(item.SK)
       let itemBalance: any = {};
 
-      const closestPriceIndex = timestampsBinarySearch(
-        priceTimestamps,
-        timestamp,
-        pricesCompareFn
-      );
-      const closestPrices = extractResultOfBinarySearch(
-        historicalPrices,
-        closestPriceIndex
-      );
+      const closestPriceIndex = timestampsBinarySearch(priceTimestamps, timestamp, pricesCompareFn);
+      const closestPrices = extractResultOfBinarySearch(historicalPrices, closestPriceIndex);
+
       let fallbackPrice = 1;
       const historicalPrice = closestPrices?.prices[peggedGeckoID];
       if (pegType === "peggedVAR") {
         fallbackPrice = 0;
       } else if (pegType !== "peggedUSD" && !historicalPrice) {
-        const closestRatesIndex = timestampsBinarySearch(
-          rateTimestamps,
-          timestamp,
-          ratesCompareFn
-        );
-        const closestRates = extractResultOfBinarySearch(
-          historicalRates,
-          closestRatesIndex
-        );
+        const closestRatesIndex = timestampsBinarySearch(rateTimestamps, timestamp, ratesCompareFn);
+
+        const closestRates = extractResultOfBinarySearch(historicalRates, closestRatesIndex);
         const ticker = pegType.slice(-3);
         fallbackPrice = 1 / closestRates?.rates?.[ticker];
         if (typeof fallbackPrice !== "number") {
