@@ -4073,5 +4073,22 @@ export default [
     twitter: "https://x.com/AnzenFinance",
     wiki: "https://docs.anzen.finance/",
   },
-  
+  {
+    id:'203',
+    name: "Chad USD",
+    address: "scroll:0x3cfe56cacf4042057645da9472f6cd51fcb05684",
+    symbol: "cUSD",
+    url: "https://chadfinance.xyz",
+    description: "cUSD is the first Scroll-native, decentralized, overcollateralized stablecoin, pegged by concentrated LPs and tracking the US dollar.",
+    mintRedeemDescription: "Chad USD, developed by Chad Finance, can be minted by collateralizing your Uni-V3 positions, thereby creating deeper liquidity on Scroll.",
+    onCoinGecko: "false",
+    gecko_id: null, 
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: "https://github.com/ch4dfinance/Chad-Finance/blob/main/ChadFinanceAudit.pdf",
+    twitter: "https://twitter.com/chadfinancexyz",
+    wiki: "https://docs.chadfinance.xyz",
+  }
+
 ] as PeggedAsset[];
