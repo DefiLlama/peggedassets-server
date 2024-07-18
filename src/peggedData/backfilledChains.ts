@@ -1,7 +1,7 @@
 const backfilledChains = [
   "ethereum",
   "bsc",
-  "avalanche",
+  "avax",
   "arbitrum",
   "optimism",
   "fantom",

@@ -479,7 +479,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
-    avalanche: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
+    avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
     celo: solanaMintedOrBridged(chainContracts.solana.bridgedFromCelo),
     fantom: solanaMintedOrBridged(chainContracts.solana.bridgedFromFantom),
   },
@@ -493,7 +493,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
     solana: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromSol),
     polygon: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromPolygon),
-    avalanche: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
+    avax: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
   },
   avax: {
     minted: chainMinted("avax", 6),
@@ -625,14 +625,14 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: terraSupply(chainContracts.terra.bridgedFromETH, 6),
     solana: terraSupply(chainContracts.terra.bridgedFromSol, 6),
     bsc: terraSupply(chainContracts.terra.bridgedFromBSC, 6),
-    avalanche: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
+    avax: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
   },
   oasis: {
     ethereum: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromETH),
     solana: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromSol),
     bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
     polygon: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromPolygon),
-    avalanche: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
+    avax: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
   },
   crab: {
     ethereum: bridgedSupply("crab", 6, chainContracts.crab.bridgedFromETH),
@@ -698,7 +698,7 @@ const adapter: PeggedIssuanceAdapter = {
       ],
       "peggedUSD"
     ),
-    avalanche: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromAvax),
+    avax: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromAvax),
     polygon: bridgedSupply("celo", 6, chainContracts.celo.bridgedFromPolygon),
     solana: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromSol),
   },

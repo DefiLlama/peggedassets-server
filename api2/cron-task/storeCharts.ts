@@ -109,9 +109,27 @@ async function getPeggedAssetsData() {
     }
   })
 
+  replaceAvalanceAvax(cache.peggedAssetsData) // convert all 'avalanche' keys to 'avax'
   return cache.peggedAssetsData
 }
 
+function replaceAvalanceAvax(obj) {
+  if (typeof obj !== 'object' || obj === null) {
+      return; // Not an object or is null, do nothing
+  }
+
+  if (obj.hasOwnProperty('avalanche')) {
+      obj['avax'] = obj['avalanche']; // Create 'avax' key with 'avalanche' value
+      delete obj['avalanche']; // Remove 'avalanche' key
+  }
+
+  // Recursively apply to all object values
+  Object.values(obj).forEach(value => {
+      if (typeof value === 'object') {
+        replaceAvalanceAvax(value); // Recursive call
+      }
+  });
+}
 
 const formatTokenBalance = (tokenBalance: TokenBalance) => {
   let formattedTokenBalance = {} as TokenBalance;

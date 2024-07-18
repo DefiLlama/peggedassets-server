@@ -593,7 +593,7 @@ const adapter: PeggedIssuanceAdapter = {
       ],
       "peggedUSD"
     ),
-    avalanche: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
+    avax: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
     solana: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromSol),
     tron: bscBridgedFromTron(
       chainContracts.bsc.bridgedFromETHAndTron[0],
@@ -614,7 +614,7 @@ const adapter: PeggedIssuanceAdapter = {
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
     heco: solanaMintedOrBridged(chainContracts.solana.bridgedFromHeco),
-    avalanche: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
+    avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
   },
   arbitrum: {
     ethereum: bridgedSupply(
@@ -785,13 +785,13 @@ const adapter: PeggedIssuanceAdapter = {
     solana: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromSol),
     bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
     polygon: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromPolygon),
-    avalanche: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
+    avax: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
   },
   terra: {
     ethereum: terraSupply(chainContracts.terra.bridgedFromETH, 6),
     solana: terraSupply(chainContracts.terra.bridgedFromSol, 6),
     bsc: terraSupply(chainContracts.terra.bridgedFromBSC, 6),
-    avalanche: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
+    avax: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
   },
   statemine: {
     minted: usdtApiMinted("totaltokens_statemine"),
