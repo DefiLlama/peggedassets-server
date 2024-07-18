@@ -495,7 +495,7 @@ const adapter: PeggedIssuanceAdapter = {
     polygon: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromPolygon),
     avalanche: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax", 6),
     ethereum: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromETH),
     solana: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromSol),

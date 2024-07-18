@@ -258,7 +258,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
      */
   },
-  avalanche: {
+  avax: {
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
   },
   arbitrum: {

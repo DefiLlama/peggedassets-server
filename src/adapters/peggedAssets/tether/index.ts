@@ -600,7 +600,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.bsc.bridgeOnETH[0]
     ),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax", 6),
     unreleased: chainUnreleased("avax", 6, chainContracts.avax.unreleased[0]),
     ethereum: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromETH),
