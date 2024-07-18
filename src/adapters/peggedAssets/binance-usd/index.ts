@@ -8,7 +8,7 @@ import {
   supplyInEthereumBridge,
   osmosisSupply,
 } from "../helper/getSupply";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
 import {
   ChainBlocks,

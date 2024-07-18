@@ -12,7 +12,7 @@ import {
   PeggedIssuanceAdapter,
   Balances,  ChainContracts,
 } from "../peggedAsset.type";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 
 
 // all multichain

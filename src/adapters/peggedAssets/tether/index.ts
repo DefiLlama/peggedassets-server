@@ -16,7 +16,7 @@ import {
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
 import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,

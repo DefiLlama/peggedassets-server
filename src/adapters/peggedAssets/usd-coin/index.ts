@@ -19,7 +19,7 @@ import {
 } from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -30,7 +30,7 @@ import {
 } from "../helper/tron";
 import { mixinSupply } from "../helper/mixin";
 import { chainContracts } from "./config";
-import { lookupAccountByID } from "../llama-helper/algorand";
+import { lookupAccountByID } from "../helper/algorand";
 const axios = require("axios");
 const retry = require("async-retry");
 

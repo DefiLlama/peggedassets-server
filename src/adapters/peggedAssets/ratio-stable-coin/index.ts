@@ -1,6 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { PeggedIssuanceAdapter } from "../peggedAsset.type";
-import { endpoint } from "../llama-helper/solana";
+import { endpoint } from "../helper/solana";
 const { Connection, PublicKey } = require("@solana/web3.js");
 const { Program, Provider, web3, utils } = require("@project-serum/anchor");
 const { NodeWallet } = require("@project-serum/anchor/dist/cjs/provider");

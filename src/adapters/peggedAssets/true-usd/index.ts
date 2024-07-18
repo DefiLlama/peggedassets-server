@@ -9,7 +9,7 @@ import {
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import { ChainApi } from "@defillama/sdk";
 
 
