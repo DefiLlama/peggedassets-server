@@ -3707,7 +3707,8 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: "https://github.com/magma-fi/Audits/blob/main/MagmaStablecoin_final_Secure3_Audit_Report.pdf",
+    auditLinks:
+      "https://github.com/magma-fi/Audits/blob/main/MagmaStablecoin_final_Secure3_Audit_Report.pdf",
     twitter: "https://twitter.com/MagmaProtocol",
     wiki: "https://docs.magma.finance/",
   },
@@ -3757,7 +3758,8 @@ export default [
     address: "arbitrum:0x0BBF664D46becc28593368c97236FAa0fb397595",
     symbol: "KNOX",
     url: "https://app.reserve.org/arbitrum/token/0x0bbf664d46becc28593368c97236faa0fb397595/overview",
-    description: "A permissionless, yield-bearing stablecoin designed to be a reliable store of value",
+    description:
+      "A permissionless, yield-bearing stablecoin designed to be a reliable store of value",
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: "false",
@@ -3776,11 +3778,12 @@ export default [
     address: "cronos:0xd42e078cea2be8d03cd9dfecc1f0d28915edea78",
     symbol: "USC",
     url: "https://orby.network/",
-    description: "USC is Orby's decentralised, overcollateralized stablecoin that is soft-pegged to the US dollar",
+    description:
+      "USC is Orby's decentralised, overcollateralized stablecoin that is soft-pegged to the US dollar",
     mintRedeemDescription:
       "$USC is an overcollateralized stablecoin minted by depositing more collateral than debt into a shuttle, where users must maintain at least $USC 100 and adhere to a minimum collateral-to-debt ratio, adjusted continuously by an oracle",
     onCoinGecko: "true",
-    gecko_id: "orby-network-usc-stablecoin", 
+    gecko_id: "orby-network-usc-stablecoin",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3815,7 +3818,8 @@ export default [
     address: "0x78da5799CF427Fee11e9996982F4150eCe7a99A7",
     symbol: "rgUSD",
     url: "https://app.reserve.org/ethereum/token/0x78da5799cf427fee11e9996982f4150ece7a99a7/overview",
-    description: "Hold $1 USD peg, and deploy collateral to generate safe, on-chain yield to incentivize liquidity for itself and partners",
+    description:
+      "Hold $1 USD peg, and deploy collateral to generate safe, on-chain yield to incentivize liquidity for itself and partners",
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: null,
@@ -3853,7 +3857,8 @@ export default [
     address: "0x0000206329b97db379d5e1bf586bbdb969c63274",
     symbol: "USDA",
     url: "https://angle.money/usda",
-    description: "Angle's Dollar stablecoin (USDA) is a USD stablecoin supported by a robust Price Stability Module. USDA is over-collateralized, decentralized, transparent, generates yield, and offers competitive pricing for on-chain USD to Euro exchanges",
+    description:
+      "Angle's Dollar stablecoin (USDA) is a USD stablecoin supported by a robust Price Stability Module. USDA is over-collateralized, decentralized, transparent, generates yield, and offers competitive pricing for on-chain USD to Euro exchanges",
     mintRedeemDescription:
       "Users can get USDA, by swapping their assets on the Angle app or a DEX. It is also possible to acquire USDA by borrowing it against a variety of collaterals",
     onCoinGecko: true,
@@ -3872,7 +3877,8 @@ export default [
     address: "0x38547d918b9645f2d94336b6b61aeb08053e142c",
     symbol: "USC",
     url: "https://chiprotocol.io/dashboard/mint",
-    description: "USC is a decentralised, scalable, fully backed stablecoin which is 1-1 USD pegged",
+    description:
+      "USC is a decentralised, scalable, fully backed stablecoin which is 1-1 USD pegged",
     mintRedeemDescription:
       "To mint USC, you are required to deposit a specific amount of ETH/LST in the reserves. Afterward, you can generate USC tokens with a collateral ratio of 100% against your deposit",
     onCoinGecko: true,
@@ -3912,7 +3918,8 @@ export default [
     address: "0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5",
     symbol: "USD0",
     url: "https://usual.money",
-    description: "Usual enables an RWA-stablecoin that provides a high standard of security and transparency, while redistributing the generated value in the form of speculative yield in $USUAL, the Usual governance token.",
+    description:
+      "Usual enables an RWA-stablecoin that provides a high standard of security and transparency, while redistributing the generated value in the form of speculative yield in $USUAL, the Usual governance token.",
     mintRedeemDescription:
       "Usual enables users to deposit either USYC or USDC as collateral to mint USD0. USD0 is backed 1:1 by collateral exclusively in the form of very short-term RWAs (Real-World Assets).",
     onCoinGecko: false,
@@ -3931,7 +3938,8 @@ export default [
     address: "ethereumclassic:0xDE093684c796204224BC081f937aa059D903c52a",
     symbol: "USC",
     url: "https://brale.xyz/stablecoins/USC",
-    description: "Launched in 2024, Classic USD (USC) is a fiat-collateralized stablecoin issued through a partnership between Brale and EthereumClassic.com. Classic USD is the premiere native stablecoin for Ethereum Classi's decentralized finance ecosystem, global payments, and on-chain fiat settlement. As of 2022, Ethereum Classic is the largest and most secure Proof-of-Work smart contract network in the world",
+    description:
+      "Launched in 2024, Classic USD (USC) is a fiat-collateralized stablecoin issued through a partnership between Brale and EthereumClassic.com. Classic USD is the premiere native stablecoin for Ethereum Classi's decentralized finance ecosystem, global payments, and on-chain fiat settlement. As of 2022, Ethereum Classic is the largest and most secure Proof-of-Work smart contract network in the world",
     mintRedeemDescription:
       "USC, issued by Brale Inc., with Brale ensuring liquidity to meet redemption obligations and managing reserve allocations",
     onCoinGecko: true,
@@ -3951,9 +3959,9 @@ export default [
     symbol: "USR",
     url: "https://www.resolv.im/",
     description:
-        "An overcollateralized stablecoin natively backed by Ether (ETH). USR achieves its peg by hedging its collateral pool and maintaining a tokenized insurance fund called RLP. Users can stake USR to obtain the yield-bearing version called stUSR.",
+      "An overcollateralized stablecoin natively backed by Ether (ETH). USR achieves its peg by hedging its collateral pool and maintaining a tokenized insurance fund called RLP. Users can stake USR to obtain the yield-bearing version called stUSR.",
     mintRedeemDescription:
-        "USR is minted by depositing liquid assets, such as USDC or USDT, on 1:1 value basis. When USR is redeemed, a user receives a 1:1 equivalent to the notional amount.",
+      "USR is minted by depositing liquid assets, such as USDC or USDT, on 1:1 value basis. When USR is redeemed, a user receives a 1:1 equivalent to the notional amount.",
     onCoinGecko: false,
     gecko_id: "resolv-usr",
     cmcId: null,
@@ -3971,9 +3979,9 @@ export default [
     symbol: "aUSD",
     url: "https://www.stablejack.xyz",
     description:
-        "Stable Jack allows users to exchange the yield, volatility, and points of the collateral asset while maintaining their principal. This will allow new DeFi primitives to be built on yield-bearing assets, lending markets, DEXs, or volatile assets.",
+      "Stable Jack allows users to exchange the yield, volatility, and points of the collateral asset while maintaining their principal. This will allow new DeFi primitives to be built on yield-bearing assets, lending markets, DEXs, or volatile assets.",
     mintRedeemDescription:
-        "aUSD is a decentralized yield-bearing stablecoin that is fully collateralized and backed by AVAX LSTs.",
+      "aUSD is a decentralized yield-bearing stablecoin that is fully collateralized and backed by AVAX LSTs.",
     onCoinGecko: false,
     gecko_id: "stable-jack-ausd",
     cmcId: null,
@@ -4003,5 +4011,26 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/CeloOrg",
     wiki: "https://blog.celo.org/celo-launches-the-creal-stablecoin-11da0d560c1c",
+  },
+  {
+    id: "200",
+    name: "Chad USD",
+    address: "scroll:0x3cfe56cacf4042057645da9472f6cd51fcb05684",
+    symbol: "cUSD",
+    url: "https://chadfinance.xyz",
+    description:
+      "cUSD is the first Scroll-native, decentralized, overcollateralized stablecoin, pegged by concentrated LPs and tracking the US dollar.",
+    mintRedeemDescription:
+      "Chad USD, developed by Chad Finance, can be minted by collateralizing your Uni-V3 positions, thereby creating deeper liquidity on Scroll.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks:
+      "https://github.com/ch4dfinance/Chad-Finance/blob/main/ChadFinanceAudit.pdf",
+    twitter: "https://twitter.com/chadfinancexyz",
+    wiki: "https://docs.chadfinance.xyz",
   },
 ] as PeggedAsset[];
