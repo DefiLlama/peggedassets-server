@@ -7,6 +7,7 @@ import {
   PeggedIssuanceAdapter,  ChainContracts,
 } from "../peggedAsset.type";
 import { getTotalSupply as tezosGetTotalSupply } from "../helper/tezos";
+import { getTotalSupply as stellarGetTotalSupply } from "../helper/stellar";
 
 
 const chainContracts: ChainContracts = {
@@ -27,6 +28,9 @@ const chainContracts: ChainContracts = {
   },
   tezos: {
     issued: ["KT1FenS7BCUjn1otfFyfrfxguiGnL4UTF3aG"],
+  },
+  stellar: {
+    issued: ["VEUR:GDXLSLCOPPHTWOQXLLKSVN4VN3G67WD2ENU7UMVAROEYVJLSPSEWXIZN"],
   },
 };
 
@@ -71,6 +75,19 @@ async function tezosMinted(contract: string) {
   };
 }
 
+async function stellarMinted(assetID: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const totalSupply = await stellarGetTotalSupply(assetID);
+    sumSingleBalance(balances, "peggedEUR", totalSupply, "issued", false);
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -89,6 +106,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   tezos: {
     minted: tezosMinted(chainContracts.tezos.issued[0]),
+  },
+  stellar: {
+    minted: stellarMinted(chainContracts.stellar.issued[0]),
   },
 };
 
