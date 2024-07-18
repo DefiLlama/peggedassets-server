@@ -176,7 +176,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: bscMinted(),
     ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax"),
   },
   /* this has 0 supply?

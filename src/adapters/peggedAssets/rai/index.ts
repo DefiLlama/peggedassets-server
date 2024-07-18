@@ -94,7 +94,7 @@ const adapter: PeggedIssuanceAdapter = {
       "peggedVAR"
     ),
   },
-  avalanche: {
+  avax: {
     ethereum: bridgedSupply(
       "avax",
       18,

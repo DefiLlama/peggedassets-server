@@ -322,7 +322,7 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     ethereum: async () => ({}),
   },
-  avalanche: {
+  avax: {
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
   },
   harmony: {
