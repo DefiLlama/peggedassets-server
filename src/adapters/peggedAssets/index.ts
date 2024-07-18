@@ -200,6 +200,7 @@ import ausd from "./stable-jack-ausd";
 import creal from "./celo-real-creal";
 import hexdc from "./hex-dollar-coin";
 import usdz from "./anzen-usdz";
+import chadusd from "./chad-usd";
 
 export default {
   tether,
@@ -403,5 +404,6 @@ export default {
   "hedera-swiss-franc": hchf,
   "celo-real-creal": creal,
   "hex-dollar-coin": hexdc,
-  "anzen-usdz": usdz
+  "anzen-usdz": usdz,
+  "chad-usd": chadusd
 };
