@@ -13,6 +13,7 @@ import {
 } from "./utils/normalizeChain";
 import { secondsInDay, secondsInWeek } from "./utils/date";
 import { craftStablecoinChainsResponse } from "./getStablecoinChains";
+import { fetchPrices } from "./utils/fetchPrices";
 
 async function getTVLOfRecordClosestToTimestamp(
   PK: string,
@@ -28,18 +29,13 @@ async function getTVLOfRecordClosestToTimestamp(
 
 export async function craftProtocolsResponse(
   useNewChainNames: boolean,
-  getPrices: boolean
+  getPrices: boolean,
+  { peggedPrices }: { peggedPrices?: any; } = {}
 ) {
-  let prices = {} as any;
-  if (getPrices) {
-    prices = await fetch(
-      "https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/peggedPrices.json"
-    )
-      .then((res: any) => res.json())
-      .catch(() => {
-        console.error("Could not fetch pegged prices");
-      });
-  }
+
+  let prices = {} as any
+  if (getPrices)
+    prices = await fetchPrices(peggedPrices);
 
   const response = (
     await Promise.all(

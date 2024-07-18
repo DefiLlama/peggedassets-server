@@ -1,36 +1,10 @@
-const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
-  ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
+  Balances,
 } from "../peggedAsset.type";
-const axios = require("axios");
-const retry = require("async-retry");
-import { returnBalance } from "../llama-helper/utils";
-/*
- * Adapter attempts to approximate collateralized BOB supply by getting total value
- * of collateral assets in the BOB UniV3 pools on each chain.
- * If the pool addresses can be retrieved using Uni V3 Factory somehow, should re-write adapter to do that.
- */
+import { ChainApi } from "@defillama/sdk";
 
-/*
-
-const chainContracts: ChainContracts = {
-  polygon: {
-    issued: ["0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B"],
-  },
-  optimism: {
-    issued: ["0xb0b195aefa3650a6908f15cdac7d92f8a5791b0b"],
-  },
-  ethereum: {
-    issued: ["0xb0b195aefa3650a6908f15cdac7d92f8a5791b0b"],
-  },
-  bsc: {
-    issued: ["0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B"]
-  }
-};
-*/
 
 const uniPoolsMapping = {
   ethereum: {
@@ -80,36 +54,12 @@ const uniPoolsMapping = {
 };
 
 async function getChainCollateralUsdValue(chain: string) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (api: ChainApi) {
+    const toa = Object.entries(uniPoolsMapping[chain]).map(([pool, token]) => [token, pool])
+    await api.sumTokens({ tokensAndOwners: toa})
+    const usdValue = await api.getUSDValue()
     let balances = {} as Balances;
-    const uniPools = uniPoolsMapping[chain];
-    let tokenBalances = {} as { [token: string]: number };
-    await Promise.all(
-      Object.entries(uniPools).map(async ([pool, token]) => {
-        const balance = await returnBalance(
-          token,
-          pool,
-          _chainBlocks?.[chain],
-          chain
-        );
-        tokenBalances[`${chain}:${token}`] =
-          (tokenBalances[`${chain}:${token}`] ?? 0) + balance;
-      })
-    );
-    const tokens = Object.keys(tokenBalances);
-    const prices = (
-      await axios.get(
-        "https://coins.llama.fi/prices/current/" + tokens.join(",")
-      )
-    ).data.coins;
-    Object.entries(tokenBalances).map(([token, balance]) => {
-      const usdValue = balance * (prices[token]?.price ?? 0);
-      sumSingleBalance(balances, "peggedUSD", usdValue, "issued", false);
-    });
+    sumSingleBalance(balances, "peggedUSD", usdValue, "issued", false);
     return balances;
   };
 }

@@ -1,10 +1,9 @@
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
-  ChainBlocks,
   Balances,
-  PeggedIssuanceAdapter,  ChainContracts,
+  PeggedIssuanceAdapter, ChainContracts,
 } from "../peggedAsset.type";
-import { getObject } from "../helper/sui";
+import * as sui from "../helper/sui";
 
 
 const chainContracts: ChainContracts = {
@@ -13,16 +12,12 @@ const chainContracts: ChainContracts = {
       "0x9e3dab13212b27f5434416939db5dec6a319d15b89a84fd074d03ece6350d3df",
     ],
   },
-};
+}
 
 async function suiMinted() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ): Promise<Balances> {
+  return async function (): Promise<Balances> {
     let balances = {} as Balances;
-    const { fields: buckAmount } = await getObject(
+    const { fields: buckAmount } = await sui.getObject(
       chainContracts.sui.issued[0]
     );
     const mintedAmount =

@@ -78,7 +78,7 @@ const adapter: PeggedIssuanceAdapter = {
   polygon: {
     minted: chainMinted("polygon", 18),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax", 18),
   },
   q: {

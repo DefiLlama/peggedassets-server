@@ -16,7 +16,7 @@ import {
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
 import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -593,14 +593,14 @@ const adapter: PeggedIssuanceAdapter = {
       ],
       "peggedUSD"
     ),
-    avalanche: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
+    avax: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
     solana: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromSol),
     tron: bscBridgedFromTron(
       chainContracts.bsc.bridgedFromETHAndTron[0],
       chainContracts.bsc.bridgeOnETH[0]
     ),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax", 6),
     unreleased: chainUnreleased("avax", 6, chainContracts.avax.unreleased[0]),
     ethereum: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromETH),
@@ -614,7 +614,7 @@ const adapter: PeggedIssuanceAdapter = {
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
     heco: solanaMintedOrBridged(chainContracts.solana.bridgedFromHeco),
-    avalanche: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
+    avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
   },
   arbitrum: {
     ethereum: bridgedSupply(
@@ -785,13 +785,13 @@ const adapter: PeggedIssuanceAdapter = {
     solana: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromSol),
     bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
     polygon: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromPolygon),
-    avalanche: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
+    avax: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
   },
   terra: {
     ethereum: terraSupply(chainContracts.terra.bridgedFromETH, 6),
     solana: terraSupply(chainContracts.terra.bridgedFromSol, 6),
     bsc: terraSupply(chainContracts.terra.bridgedFromBSC, 6),
-    avalanche: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
+    avax: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
   },
   statemine: {
     minted: usdtApiMinted("totaltokens_statemine"),
@@ -840,6 +840,8 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromETH),
   },
   celo: {
+    minted: usdtApiMinted("totaltokens_celo"),
+    unreleased: usdtApiUnreleased("reserve_balance_celo"),
     ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
@@ -968,6 +970,15 @@ const adapter: PeggedIssuanceAdapter = {
   ton: {
     minted: tonMinted(),
     unreleased: usdtApiUnreleased("reserve_balance_ton"),
+  },
+  scroll: {
+    ethereum: bridgedSupply("scroll", 6, chainContracts.scroll.bridgedFromETH),
+  },
+  taiko: {
+    ethereum: bridgedSupply("taiko", 6, chainContracts.taiko.bridgedFromETH),
+  },
+  mantle: {
+    ethereum: bridgedSupply("mantle", 6, chainContracts.mantle.bridgedFromETH),
   },
 };
 

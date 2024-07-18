@@ -19,7 +19,7 @@ import {
 } from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -30,7 +30,7 @@ import {
 } from "../helper/tron";
 import { mixinSupply } from "../helper/mixin";
 import { chainContracts } from "./config";
-import { lookupAccountByID } from "../llama-helper/algorand";
+import { lookupAccountByID } from "../helper/algorand";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -479,7 +479,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
-    avalanche: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
+    avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
     celo: solanaMintedOrBridged(chainContracts.solana.bridgedFromCelo),
     fantom: solanaMintedOrBridged(chainContracts.solana.bridgedFromFantom),
   },
@@ -493,9 +493,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
     solana: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromSol),
     polygon: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromPolygon),
-    avalanche: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
+    avax: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax", 6),
     ethereum: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromETH),
     solana: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromSol),
@@ -625,14 +625,14 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: terraSupply(chainContracts.terra.bridgedFromETH, 6),
     solana: terraSupply(chainContracts.terra.bridgedFromSol, 6),
     bsc: terraSupply(chainContracts.terra.bridgedFromBSC, 6),
-    avalanche: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
+    avax: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
   },
   oasis: {
     ethereum: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromETH),
     solana: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromSol),
     bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
     polygon: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromPolygon),
-    avalanche: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
+    avax: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
   },
   crab: {
     ethereum: bridgedSupply("crab", 6, chainContracts.crab.bridgedFromETH),
@@ -690,6 +690,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("dfk", 18, chainContracts.dfk.bridgedFromETH),
   },
   celo: {
+    minted: chainMinted("celo",6),
     ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
@@ -697,7 +698,7 @@ const adapter: PeggedIssuanceAdapter = {
       ],
       "peggedUSD"
     ),
-    avalanche: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromAvax),
+    avax: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromAvax),
     polygon: bridgedSupply("celo", 6, chainContracts.celo.bridgedFromPolygon),
     solana: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromSol),
   },
@@ -838,6 +839,15 @@ const adapter: PeggedIssuanceAdapter = {
   },
   icp: {
     ethereum: supplyInEthereumBridge('0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', '0xb25eA1D493B49a1DeD42aC5B1208cC618f9A9B80', 6),
+  },
+  scroll: {
+    ethereum: bridgedSupply("scroll", 6, chainContracts.scroll.bridgedFromETH),
+  },
+  taiko: {
+    ethereum: bridgedSupply("taiko", 6, chainContracts.taiko.bridgedFromETH),
+  },
+  mantle: {
+    ethereum: bridgedSupply("mantle", 6, chainContracts.mantle.bridgedFromETH),
   },
 };
 

@@ -5,20 +5,24 @@ import {
   getLastRecord,
   hourlyPeggedBalances,
 } from "./peggedAssets/utils/getLastRecord";
-import { getChainDisplayName, chainCoingeckoIds } from "./utils/normalizeChain";
+import { getChainDisplayName, chainCoingeckoIds, nonChains } from "./utils/normalizeChain";
+import { fetchPrices } from "./utils/fetchPrices";
 
 type balance = { [token: string]: number };
 
-export async function craftStablecoinChainsResponse() {
+export async function craftStablecoinChainsResponse({ peggedPrices }: { peggedPrices?: any } = {}) {
   const chainCirculating = {} as { [chain: string]: balance };
-  let prices = {} as any;
-  prices = await fetch(
-    "https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/peggedPrices.json"
-  )
-    .then((res: any) => res.json())
-    .catch(() => {
-      throw new Error("Could not fetch pegged prices");
-    });
+  const chainTvlData = await fetch('https://api.llama.fi/v2/chains').then((res) => res.json());
+  chainTvlData.forEach((data: any) => {
+    const {name, tvl } = data
+    if (!chainCoingeckoIds[name]) {
+      chainCoingeckoIds[name] = data
+      chainCoingeckoIds[name].symbol = data.tokenSymbol
+    };
+    (chainCoingeckoIds[name] as any).tvl = tvl
+  })
+  
+  let prices = await fetchPrices(peggedPrices);
 
   await Promise.all(
     peggedAssets.map(async (pegged) => {
@@ -33,14 +37,17 @@ export async function craftStablecoinChainsResponse() {
       const price = currentPrice ? currentPrice : fallbackPrice;
       Object.entries(lastBalances).forEach(([chain, issuances]) => {
         const chainName = getChainDisplayName(chain, true);
-        if (chainCoingeckoIds[chainName] === undefined) {
+        if (nonChains.includes(chainName)) {
           return;
         }
+        // if (chainCoingeckoIds[chainName] === undefined) {
+        //   return;
+        // }
         chainCirculating[chainName] = chainCirculating[chainName] || {};
         let circulating = issuances.circulating;
         chainCirculating[chainName][pegType] =
           chainCirculating[chainName][pegType] ?? 0;
-        chainCirculating[chainName][pegType] += circulating[pegType] * price;
+        chainCirculating[chainName][pegType] += (circulating?.[pegType] ?? 0) * price;
         chainsAdded += 1;
       });
     })
@@ -50,6 +57,7 @@ export async function craftStablecoinChainsResponse() {
       gecko_id: chainCoingeckoIds[chainName]?.geckoId ?? null,
       totalCirculatingUSD: chainCirculating,
       tokenSymbol: chainCoingeckoIds[chainName]?.symbol ?? null,
+      tvl: (chainCoingeckoIds as any)[chainName]?.tvl ?? null,
       name: chainName,
     })
   );

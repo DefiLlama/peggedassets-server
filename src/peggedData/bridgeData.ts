@@ -1749,6 +1749,10 @@ export const bridgeInfo = {
     name: "Avalanche Bridge",
     link: "https://bridge.avax.network/",
   },
+  avax: {
+    name: "Avalanche Bridge",
+    link: "https://bridge.avax.network/",
+  },
   "avalanche-old": {
     name: "Avalanche Bridge (Old)",
   },

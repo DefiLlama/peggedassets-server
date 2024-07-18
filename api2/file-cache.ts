@@ -36,6 +36,10 @@ export async function readRouteData(subPath: string) {
   return readFileData(subPath)
 }
 
+export function getRouteDataPath(subPath: string) {
+  return path.join(ROUTES_DATA_DIR, subPath)
+}
+
 async function storeData(subPath: string, data: any) {
   const filePath = path.join(CACHE_DIR!, subPath)
   const dirPath = path.dirname(filePath)

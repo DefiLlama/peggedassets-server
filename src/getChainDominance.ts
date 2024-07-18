@@ -30,17 +30,7 @@ export async function craftChainDominanceResponse(chain: string | undefined) {
       };
     };
   };
-  // quick fix; need to update later
-  if (chain === "gnosis") {
-    chain = "xdai";
-  }
-  if (chain === "terra%20classic") {
-    chain = "terra";
-  }
-  if (chain === "ethereumpow") {
-    chain = "ethpow";
-  }
-
+  
   if (chain === undefined) {
     return errorResponse({
       message: "Must include chain as path parameter.",

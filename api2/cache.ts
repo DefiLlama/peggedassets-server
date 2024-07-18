@@ -1,6 +1,10 @@
 import { getLastRecord, historicalRates } from "../src/peggedAssets/utils/getLastRecord";
 import { readFromPGCache, writeToPGCache } from "./file-cache";
 
+export enum CacheType {
+  CRON,
+  API_SERVER
+}
 
 type Prices = {
   [coinGeckoId: string]: number;
@@ -23,17 +27,18 @@ export const cache: {
   historicalPrices?: DailyPeggedPrices[]
 } = {}
 
-const MINUTES = 60 * 1000
-const HOUR = 60 * MINUTES
+const cacheFile = 'stablecoin-cache'
 
-export async function initCache() {
+export async function initCache(cacheType = CacheType.API_SERVER) {
   console.time('Cache initialized')
-  const _cache = await readFromPGCache('cron-cache') ?? {}
-  Object.keys(_cache).forEach(key => cache[key] = _cache[key])
-  cache.rates = await getLastRecord(historicalRates);
+  if (cacheType === CacheType.CRON) {
+    const _cache = await readFromPGCache(cacheFile) ?? {}
+    Object.keys(_cache).forEach(key => cache[key] = _cache[key])
+    cache.rates = await getLastRecord(historicalRates);
+  }
   console.timeEnd('Cache initialized')
 }
 
 export async function saveCache() {
-  await writeToPGCache('cron-cache', cache)
+  await writeToPGCache(cacheFile, cache)
 }

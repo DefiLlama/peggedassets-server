@@ -3,6 +3,7 @@ export const normalizedChainReplacements = {
   wanchain: "wan",
   kucoin: "kcc",
   gnosis: "xdai",
+  avalanche: 'avax',
   "terra%20classic": "terra",
   sxnetwork: "sx",
   "arbitrum%20nova": "arbitrum_nova",
@@ -13,6 +14,26 @@ export const normalizedChainReplacements = {
   "polygon%20zkevm": "polygon_zkevm",
   multiversx: "elrond",
   rootstock: "rsk",
+  "terra classic": "terra",
+  "nova network": "nova",
+  "godwokenv1": "godwoken_v1",
+  "arbitrum nova": "arbitrum_nova",
+  "zksync era": "era",
+  "polygon zkevm": "polygon_zkevm",
+  "eos evm": "eos_evm",
+  "oasys": "oas",
+  "map relay chain": "map",
+  "pulsechain": "pulse",
+  "opbnb": "op_bnb",
+  "bifrost network": "bfc",
+  "horizen eon": "eon",
+  "bahamut": "ftn",
+  "viction": "tomochain",
+  "bevm": "chainx",
+  "bitnet": "btn",
+  "defichain evm": "defichain_evm",
+  "hydration": "hydradx",
+  "bitlayer": "btr",
 } as {
   [chain: string]: string;
 };
@@ -1013,6 +1034,26 @@ export const chainCoingeckoIds = {
     symbol: "ICP",
     cmcId: "8916",
   },
+  "TON": {
+    geckoId: "the-open-network",
+    github: ['ton-blockchain'],
+    symbol: "TON",
+    cmcId: "11419",
+    twitter: "ton_blockchain",
+    url: "https://ton.org/",
+  },
+  "Scroll": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
+  "Taiko": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  }
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1277,6 +1318,12 @@ export function getChainDisplayName(
       return "Immutable zkEVM"
     case "icp":
       return "ICP"
+    case "ton":
+      return "TON"
+    case "scroll":
+      return "Scroll"
+    case "taiko":
+      return "Taiko"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

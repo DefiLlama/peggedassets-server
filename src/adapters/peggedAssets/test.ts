@@ -176,14 +176,7 @@ const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
   if (!chains.includes("ethereum")) {
     chains.push("ethereum");
   }
-  /* await Promise.all(
-    chains.map(async (chainRaw) => {
-      const chain = chainRaw === "avalanche" ? "avax" : chainRaw;
-      if (chainsForBlocks.includes(chain) || chain === "ethereum") {
-        chainBlocks[chain] = (await getLatestBlockRetry(chain)).number - 10;
-      }
-    })
-  ); */
+  
   const ethBlock = chainBlocks.ethereum;
 
   let pegType = process.argv[3];

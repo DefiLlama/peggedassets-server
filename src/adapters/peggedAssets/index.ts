@@ -33,6 +33,7 @@ import sperax from "./sperax-usd";
 import usdp from "./usdp";
 import usdb from "./usd-balance";
 import mimatic from "./mimatic";
+import hchf from "./hedera-swiss-franc";
 //import ratio from "./ratio-stable-coin";
 import usdj from "./just-stablecoin";
 import stbl from "./stbl";
@@ -195,7 +196,10 @@ import ckusdc from "./ckusdc";
 import usd0 from "./usual-usd";
 import classicusd from "./classic-usd";
 import usr from "./resolv-usr";
-import ausd from "./stable-jack-ausd"
+import ausd from "./stable-jack-ausd";
+import creal from "./celo-real-creal";
+import hexdc from "./hex-dollar-coin";
+import usdz from "./anzen-usdz";
 
 export default {
   tether,
@@ -395,5 +399,9 @@ export default {
   "usual-usd": usd0,
   "classic-usd": classicusd,
   "resolv-usr": usr,
-  "stable-jack-ausd": ausd
+  "stable-jack-ausd": ausd,
+  "hedera-swiss-franc": hchf,
+  "celo-real-creal": creal,
+  "hex-dollar-coin": hexdc,
+  "anzen-usdz": usdz
 };

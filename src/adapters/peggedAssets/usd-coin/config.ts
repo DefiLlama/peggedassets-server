@@ -225,6 +225,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x3ad9dfe640e1a9cc1d9b0948620820d975c3803a"], // synapse
   },
   celo: {
+    issued: ["0xcebA9300f2b948710d2653dD7B07f33A8B32118C"],
     bridgedFromETH6Decimals: [
       "0xef4229c8c3250C675F21BCefa42f58EfbfF6002a", // optics
       "0x37f750B7cC259A2f741AF45294f6a16572CF5cAd", // wormhole
@@ -356,5 +357,21 @@ export const chainContracts: ChainContracts = {
       "0x6de8aCC0D406837030CE4dd28e7c08C5a96a30d2", //maybe native bridge?
       "0xEB466342C4d449BC9f53A865D5Cb90586f405215" //axelar
       ],
+  },
+  scroll: {
+    bridgedFromETH: [
+      "0x06efdbff2a14a7c8e15944d1f4a48f9f95f663a4", // usdc
+    ],
+  },
+  taiko: {
+    bridgedFromETH: [
+      "0x07d83526730c7438048D55A4fc0b850e2aaB6f0b", // USDC
+    ],
+  },
+  mantle: {
+    bridgedFromETH: [
+      "0x09Bc4E0D864854c6aFB6eB9A9cdF58aC190D0dF9", // USDC Bridged
+      "0xEB466342C4d449BC9f53A865D5Cb90586f405215", // Axelar Wrapped USDC
+    ],
   },
 };
