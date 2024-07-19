@@ -405,5 +405,5 @@ export default {
   "celo-real-creal": creal,
   "hex-dollar-coin": hexdc,
   "anzen-usdz": usdz,
-  "chad-usd": chadusd
+  chadusd
 };
