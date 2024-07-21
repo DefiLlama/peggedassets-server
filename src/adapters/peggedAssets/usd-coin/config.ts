@@ -374,4 +374,9 @@ export const chainContracts: ChainContracts = {
       "0xEB466342C4d449BC9f53A865D5Cb90586f405215", // Axelar Wrapped USDC
     ],
   },
+  linea: {
+    bridgedFromETH: [
+      "0x176211869cA2b568f2A7D4EE941E073a821EE1ff", // USDC
+    ],
+  },
 };
