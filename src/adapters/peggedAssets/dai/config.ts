@@ -201,4 +201,9 @@ export const chainContracts: ChainContracts = {
       "0x7d02A3E0180451B17e5D7f29eF78d06F8117106C", // DAI
     ],
   },
+  linea: {
+    bridgedFromETH: [
+      "0x4AF15ec2A0BD43Db75dd04E62FAA3B8EF36b00d5", // DAI
+    ],
+  },
 };

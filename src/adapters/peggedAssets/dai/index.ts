@@ -459,6 +459,9 @@ const adapter: PeggedIssuanceAdapter = {
   taiko: {
     ethereum: bridgedSupply("taiko", 18, chainContracts.taiko.bridgedFromETH),
   },
+  linea: {
+    ethereum: bridgedSupply("linea", 18, chainContracts.linea.bridgedFromETH),
+  },
 };
 
 export default adapter;

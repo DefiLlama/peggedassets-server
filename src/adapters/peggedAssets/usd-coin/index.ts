@@ -849,6 +849,9 @@ const adapter: PeggedIssuanceAdapter = {
   mantle: {
     ethereum: bridgedSupply("mantle", 6, chainContracts.mantle.bridgedFromETH),
   },
+  linea: {
+    ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
+  },
 };
 
 export default adapter;

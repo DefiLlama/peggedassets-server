@@ -344,4 +344,10 @@ export const chainContracts: ChainContracts = {
       "0x201EBa5CC46D216Ce6DC03F6a759e8E766e956aE", // USDT
     ],
   },
+  linea: {
+    bridgedFromETH: [
+      "0xA219439258ca9da29E9Cc4cE5596924745e12B93", // USDT
+    ],
+  },
+
 };
