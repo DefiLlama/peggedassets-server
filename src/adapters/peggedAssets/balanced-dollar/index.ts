@@ -1,4 +1,4 @@
-import { getXSupply, getICONSupply } from "../llama-helper/icon"
+import { getXSupply, getICONSupply } from "../helper/icon"
 
 const adapter = {
     icon: {
