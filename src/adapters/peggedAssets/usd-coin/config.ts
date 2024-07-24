@@ -358,4 +358,25 @@ export const chainContracts: ChainContracts = {
       "0xEB466342C4d449BC9f53A865D5Cb90586f405215" //axelar
       ],
   },
+  scroll: {
+    bridgedFromETH: [
+      "0x06efdbff2a14a7c8e15944d1f4a48f9f95f663a4", // usdc
+    ],
+  },
+  taiko: {
+    bridgedFromETH: [
+      "0x07d83526730c7438048D55A4fc0b850e2aaB6f0b", // USDC
+    ],
+  },
+  mantle: {
+    bridgedFromETH: [
+      "0x09Bc4E0D864854c6aFB6eB9A9cdF58aC190D0dF9", // USDC Bridged
+      "0xEB466342C4d449BC9f53A865D5Cb90586f405215", // Axelar Wrapped USDC
+    ],
+  },
+  linea: {
+    bridgedFromETH: [
+      "0x176211869cA2b568f2A7D4EE941E073a821EE1ff", // USDC
+    ],
+  },
 };

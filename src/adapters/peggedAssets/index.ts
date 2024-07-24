@@ -198,7 +198,9 @@ import classicusd from "./classic-usd";
 import usr from "./resolv-usr";
 import ausd from "./stable-jack-ausd";
 import creal from "./celo-real-creal";
-import bnusd from "./balanced-dollar"
+import hexdc from "./hex-dollar-coin";
+import usdz from "./anzen-usdz";
+import chadusd from "./chad-usd"; // since there is a cusd already, will use this, we did something like this for coin98
 
 export default {
   tether,
@@ -401,5 +403,8 @@ export default {
   "stable-jack-ausd": ausd,
   "hedera-swiss-franc": hchf,
   "celo-real-creal": creal,
-  "balanced-dollar": bnusd
+  "hex-dollar-coin": hexdc,
+  "anzen-usdz": usdz,
+  "chad-usd": chadusd
+
 };

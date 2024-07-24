@@ -103,6 +103,7 @@ async function run() {
     const allChartsStartTimestamp = 1617148800 // for /stablecoins page, charts begin on April 1, 2021, to reduce size of page
     const allData = await getChainData('all')
     await storeRouteData('stablecoincharts2/all', allData)
+    await storeRouteData('stablecoincharts/all' , allData.aggregated)
     const allDataShortened: any = {
       breakdown: {},
       aggregated: allData.aggregated.filter((item: any) => item.date >= allChartsStartTimestamp)

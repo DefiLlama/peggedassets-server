@@ -102,7 +102,7 @@ const adapter: PeggedIssuanceAdapter = {
   arbitrum: {
     minted: chainMinted("arbitrum", 6),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax", 6),
   },
   solana: {
