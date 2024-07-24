@@ -1,4 +1,11 @@
-const retry = require('./retry')
+const retryModule = require('async-retry')
+
+async function retry(func){
+    return retryModule(func, {
+        retries:3
+    })
+}
+
 const axios = require("axios")
 const { request } = require("graphql-request")
 const COVALENT_KEY = 'ckey_72cd3b74b4a048c9bc671f7c5a6'

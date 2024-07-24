@@ -261,7 +261,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("bsc", 18),
     unreleased: chainUnreleased("bsc", 18),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax", 18),
     unreleased: chainUnreleased("avax", 18),
     bsc: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromBSC),

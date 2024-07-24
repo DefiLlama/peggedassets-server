@@ -12,7 +12,7 @@ import {
   PeggedIssuanceAdapter,
   Balances,  ChainContracts,
 } from "../peggedAsset.type";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 
 
 // all multichain
@@ -140,7 +140,7 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
-  avalanche: {
+  avax: {
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
   },
   arbitrum: {

@@ -9,7 +9,7 @@ import {
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import { ChainApi } from "@defillama/sdk";
 
 
@@ -176,7 +176,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: bscMinted(),
     ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax"),
   },
   /* this has 0 supply?

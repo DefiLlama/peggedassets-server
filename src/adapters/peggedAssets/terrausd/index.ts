@@ -180,7 +180,7 @@ const adapter: PeggedIssuanceAdapter = {
   aurora: {
     terra: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromTerra),
   },
-  avalanche: {
+  avax: {
     terra: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromTerra),
   },
   osmosis: {

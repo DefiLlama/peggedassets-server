@@ -5,6 +5,9 @@ const chainContracts = {
   bsc: {
     bridgedFromETH: ["0xb3c11196A4f3b1da7c23d9FB0A3dDE9c6340934F"],
   },
+  linea: {
+    bridgedFromETH: ["0xd2bc272EA0154A93bf00191c8a1DB23E67643EC5"],
+  },
 };
 import { addChainExports } from "../helper/getSupply";
 const adapter = addChainExports(chainContracts);

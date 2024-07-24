@@ -1,13 +1,13 @@
-import http from "../llama-helper/http";
-//import { getEnv } from '../helper/env';
+import http from "../helper/http";
+const axios = require("axios");
 
 interface CallOptions {
   withMetadata?: boolean;
 }
 
-const endpoint = (): string => "https://fullnode.mainnet.sui.io/";
+export const endpoint = (): string => "https://fullnode.mainnet.sui.io/";
 
-async function getObject(objectId: string): Promise<any> {
+export async function getObject(objectId: string): Promise<any> {
   return (
     await call("sui_getObject", [
       objectId,
@@ -20,7 +20,7 @@ async function getObject(objectId: string): Promise<any> {
   ).content;
 }
 
-async function call(
+export async function call(
   method: string,
   params: any,
   { withMetadata = false }: CallOptions = {}
@@ -35,4 +35,19 @@ async function call(
   return withMetadata ? result : result.data;
 }
 
-export { endpoint, call, getObject };
+
+export async function getTokenSupply(token: string) {
+  const { data: { result: { decimals } } } = await axios.post(endpoint(), {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "suix_getCoinMetadata",
+    "params": [token]
+  });
+  const { data: { result: { value: supply } } } = await axios.post(endpoint(), {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "suix_getTotalSupply",
+    "params": [token]
+  });
+  return supply / 10 ** decimals;
+}

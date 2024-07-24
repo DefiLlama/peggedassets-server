@@ -15,7 +15,7 @@ import {
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -227,7 +227,7 @@ const adapter: PeggedIssuanceAdapter = {
   solana: {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
-    avalanche: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
+    avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
     fantom: solanaMintedOrBridged(chainContracts.solana.bridgedFromFantom),
   },
   polygon: {
@@ -258,7 +258,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
      */
   },
-  avalanche: {
+  avax: {
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
   },
   arbitrum: {
@@ -452,6 +452,15 @@ const adapter: PeggedIssuanceAdapter = {
   },
   pulse: {
     ethereum: bridgedSupply("pulse", 18, chainContracts.pulse.bridgedFromETH),
+  },
+  scroll: {
+    ethereum: bridgedSupply("scroll", 18, chainContracts.scroll.bridgedFromETH),
+  },
+  taiko: {
+    ethereum: bridgedSupply("taiko", 18, chainContracts.taiko.bridgedFromETH),
+  },
+  linea: {
+    ethereum: bridgedSupply("linea", 18, chainContracts.linea.bridgedFromETH),
   },
 };
 
