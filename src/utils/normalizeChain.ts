@@ -1053,7 +1053,13 @@ export const chainCoingeckoIds = {
     symbol: null,
     cmcId: null,
     categories: ["EVM"],
-  }
+  },
+  "re.al": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1324,6 +1330,8 @@ export function getChainDisplayName(
       return "Scroll"
     case "taiko":
       return "Taiko"
+    case "real":
+        return "re.al"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

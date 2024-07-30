@@ -12,6 +12,7 @@ import * as aptos from "../helper/aptos";
 const axios = require("axios");
 const retry = require("async-retry");
 process.env.TAIKO_RPC = 'https://rpc.taiko.xyz'
+process.env.REAL_RPC = 'https://tangible-real.gateway.tenderly.co'
 
 type BridgeAndReserveAddressPair = [string, string[]];
 
