@@ -14,7 +14,7 @@ const chainContracts: ChainContracts = {
   },
   real: {
     bridgedFromPolygon: [
-      "0xb2d75f8Aa33608cF15940Ed47bF139F7CD15d073", // wrapped
+      "0xb2d75f8Aa33608cF15940Ed47bF139F7CD15d073", 
     ],
   },
 
