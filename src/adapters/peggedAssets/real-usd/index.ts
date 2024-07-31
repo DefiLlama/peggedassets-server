@@ -56,7 +56,9 @@ const adapter: PeggedIssuanceAdapter = {
     polygon: bridgedSupply(
       "real",
       9,
-      chainContracts.real.bridgedFromPolygon
+      chainContracts.real.bridgedFromPolygon,
+      undefined,
+      "Polygon"
     ),
   },
 
