@@ -406,4 +406,5 @@ export default {
   "hex-dollar-coin": hexdc,
   "anzen-usdz": usdz,
   "chad-usd": chadusd
+
 };
