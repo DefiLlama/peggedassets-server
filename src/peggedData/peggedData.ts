@@ -4093,4 +4093,23 @@ export default [
     twitter: "https://twitter.com/chadfinancexyz",
     wiki: "https://docs.chadfinance.xyz",
   },
+  {
+    id: "204",
+    name: "Balanced Dollars",
+    address: "icon:cx88fd7df7ddff82f7cc735c871dc519838cb235bb",
+    symbol: "BNUSD",
+    url: "https://balanced.network",
+    description:
+      "Borrow bnUSD, swap and transfer crypto cross-chain, supply liquidity, and govern the future of Balanced",
+    mintRedeemDescription:
+      "The Balanced Dollar (bnUSD) is a decentralised stablecoin that tracks the price of 1 US dollar. You can borrow bnUSD against any supported collateral type, and use it wrapper-free on every blockchain Balanced connects to. There’s a 0.2% fee, and your loan will increase by 2% a year.",
+    onCoinGecko: "true",
+    gecko_id: "balanced-dollars",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    twitter: "https://x.com/BalancedDAO",
+    wiki: "https://balanced.network/how/",
+  },
 ] as PeggedAsset[];
