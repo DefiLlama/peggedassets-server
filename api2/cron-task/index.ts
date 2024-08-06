@@ -119,6 +119,7 @@ async function run() {
         chainChartMap[getChainDisplayName(chain, true)] = data.aggregated
         await storeRouteData('stablecoincharts2/' + chain, data)
         await storeRouteData('stablecoincharts/' + chain, data.aggregated)
+        console.log('stablecoincharts/' + chain, data.aggregated)
       } catch (e) {
         console.error('Error fetching chain data', e)
       }
