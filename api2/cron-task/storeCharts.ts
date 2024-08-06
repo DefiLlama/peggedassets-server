@@ -227,7 +227,7 @@ export function craftChartsResponse(
       return;
     }
     const chainMap = assetChainMap[pegged.id];
-    if (chain !== "all" && !chainMap.has(chain)) return; // if the coin is not found an given chain, dont process it
+    if (chain !== "all" && !chainMap?.has(chain)) return; // if the coin is not found an given chain, dont process it
     if (!_assetCache[pegged.id]) addToAssetCache(pegged);
     return _assetCache[pegged.id];
   }).filter((i) => i);
