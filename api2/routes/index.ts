@@ -25,13 +25,15 @@ export default function setRoutes(router: HyperExpress.Router) {
   }))
   router.get("/stablecoincharts2/:chain", ew(async (req: any, res: any) => {
     let { chain } = req.path_parameters;
+    chain = decodeURIComponent(chain)
     chain = normalizeChain(chain)
     return fileResponse('/stablecoincharts2/' + chain, res);
   }));
 
   // TOO: nuke this route to reduce load on the server
   router.get("/stablecoincharts/:chain", ew(async (req: any, res: any) => {
-    let { chain } = req.path_parameters;
+    let { chain } = req.path_parameters
+    chain = decodeURIComponent(chain)
     let { stablecoin, starts, startts } = req.query
     chain = normalizeChain(chain)
     if (!stablecoin) return fileResponse('/stablecoincharts/' + chain, res);
