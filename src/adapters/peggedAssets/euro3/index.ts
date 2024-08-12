@@ -9,5 +9,5 @@ const chainContracts = {
 };
 
 import { addChainExports } from "../helper/getSupply";
-const adapter = addChainExports(chainContracts);
+const adapter = addChainExports(chainContracts, undefined, { pegType });
 export default adapter;

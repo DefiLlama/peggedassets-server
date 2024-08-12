@@ -251,7 +251,16 @@ export function addChainExports(config: any, adapter: any = {}, {
           if (!cExports.ethereum)
             cExports.ethereum = bridgedSupply(chain, decmials, chainConfig.bridgedFromETH)
           break;
-        default: console.log(`Ignored: Unknown key ${key} in ${chain} config for addChainExports`)
+        default: {
+          if (key.startsWith("bridgedFrom")) {
+            let srcChain = key.slice("bridgedFrom".length).toLowerCase()
+            if (srcChain === "ETH") srcChain = "ethereum"
+            if (!Array.isArray(chainConfig[key])) chainConfig[key] = [chainConfig[key]]
+            if (!cExports[srcChain])
+              cExports[srcChain] = bridgedSupply(chain, decmials, chainConfig[key], undefined, srcChain, pegType as any)
+          } else
+            console.log(`Ignored: Unknown key ${key} in ${chain} config for addChainExports`)
+        }
       }
     })
     // if (!cExports.minted) cExports.minted = dummyFn
