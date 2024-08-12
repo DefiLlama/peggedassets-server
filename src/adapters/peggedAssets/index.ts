@@ -202,7 +202,8 @@ import hexdc from "./hex-dollar-coin";
 import usdz from "./anzen-usdz";
 import chadusd from "./chad-usd"; // since there is a cusd already, will use this, we did something like this for coin98
 import bnusd from "./balanced-dollars"
-
+import xlinkBridgedBtcStacks from "./xlink-bridged-btc-stacks";
+import alexWrappedUsdt from "./alex-wrapped-usdt";
 
 export default {
   tether,
@@ -408,6 +409,8 @@ export default {
   "hex-dollar-coin": hexdc,
   "anzen-usdz": usdz,
   "chad-usd": chadusd,
-  "balanced-dollars": bnusd
+  "balanced-dollars": bnusd,
+  "xlink-bridged-btc-stacks": xlinkBridgedBtcStacks,
+  "alex-wrapped-usdt": alexWrappedUsdt
 
 };
