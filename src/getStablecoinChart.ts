@@ -91,14 +91,16 @@ export async function craftChartsResponse(
   }
 
   const filterChart = (chart: any) => {
-    return chart.map((entry: any) => {
-      if (!startTimestamp) return entry;
-      if (entry.date < parseInt(startTimestamp)) {
-        return null;
-      }
-      return entry;
-    }).filter((entry: any) => entry);
-  }
+    return chart
+      .map((entry: any) => {
+        if (!startTimestamp) return entry;
+        if (entry.date < parseInt(startTimestamp)) {
+          return null;
+        }
+        return entry;
+      })
+      .filter((entry: any) => entry);
+  };
 
   if (chain === "all" && useStoredCharts) {
     try {
@@ -140,7 +142,6 @@ export async function craftChartsResponse(
 
   const normalizedChain = normalizeChain(chain);
   let lastDailyTimestamp = 0;
-
 
   const historicalRates = await (
     await axios.get(
@@ -306,13 +307,8 @@ export async function craftChartsResponse(
             `missing totalCirculating for ${peggedGeckoID} at timestamp ${timestamp}`
           );
         }
-        const itemPegType = Object.keys(
-          item.totalCirculating.circulating
-        )?.[0];
-        if (
-          item.totalCirculating.circulating &&
-          !(itemPegType === pegType)
-        ) {
+        const itemPegType = Object.keys(item.totalCirculating.circulating)?.[0];
+        if (item.totalCirculating.circulating && !(itemPegType === pegType)) {
           throw new Error(
             `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
           );
@@ -384,7 +380,7 @@ export async function craftChartsResponse(
         sumDailyBalances[timestamp].totalMintedUSD[pegType] =
           (sumDailyBalances[timestamp].totalMintedUSD[pegType] ?? 0) +
           (itemBalance.minted[pegType] - itemBalance.unreleased[pegType]) *
-          price;
+            price;
 
         sumDailyBalances[timestamp].totalBridgedToUSD =
           sumDailyBalances[timestamp].totalBridgedToUSD || {};
@@ -405,8 +401,8 @@ export async function craftChartsResponse(
           historicalBalance
         );
       }
-    })
-  })
+    });
+  });
 
   const response = Object.entries(sumDailyBalances).map(
     ([timestamp, balance]) => ({
@@ -425,7 +421,8 @@ export async function craftChartsResponse(
 const handler = async (
   event: AWSLambda.APIGatewayEvent
 ): Promise<IResponse> => {
-  const chain = event.pathParameters?.chain?.toLowerCase();
+  let chain = event.pathParameters?.chain?.toLowerCase();
+  if (chain) chain = decodeURIComponent(chain);
   const peggedID = event.queryStringParameters?.stablecoin?.toLowerCase();
   const startTimestamp = event.queryStringParameters?.startts?.toLowerCase();
   const response = await craftChartsResponse(chain, peggedID, startTimestamp);
