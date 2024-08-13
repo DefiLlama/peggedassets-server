@@ -51,7 +51,7 @@ import usn from "./usn";
 import bai from "./bai-stablecoin";
 import gai from "./gai-stablecoin";
 import eurt from "./tether-eurt";
-import eurc from "./euro-coin";
+import eurc from "./eurc";
 import stasis from "./stasis-eurs";
 import ceur from "./celo-euro";
 import seur from "./seur";
