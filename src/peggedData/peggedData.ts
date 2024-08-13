@@ -1000,7 +1000,7 @@ export default [
     id: "50",
     name: "EURC", // previous Euro Coin
     address: "0x1abaea1f7c830bd89acc67ec4af516284b1bc33c",
-    symbol: "EUROC",
+    symbol: "EURC",
     url: "https://www.circle.com/",
     description:
       "EUROC is issued by Circle under the same full-reserve model as USD Coin (USDC). Euro Coin is 100% backed by euros held in euro-denominated banking accounts so that it's always redeemable 1:1 for euros.",
