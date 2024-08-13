@@ -20,6 +20,9 @@ const chainContracts: ChainContracts = {
   avax: {
     issued: ["0xc891eb4cbdeff6e073e859e987815ed1505c2acd"],
   },
+  base: {
+    issued: ["0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -119,7 +122,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   stellar: {
     minted: circleAPIChainMinted("XLM")
-  }
+  },
+  base: {
+    minted: chainMinted("base", 6),
+  },
 };
 
 export default adapter;
