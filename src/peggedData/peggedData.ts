@@ -4109,6 +4109,7 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     auditLinks: null,
+    priceSource: "defillama",
     twitter: "https://x.com/BalancedDAO",
     wiki: "https://balanced.network/how/",
   },
