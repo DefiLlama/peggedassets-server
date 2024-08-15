@@ -25,6 +25,7 @@ const chainContracts: ChainContracts = {
   },
   solana: {
     issued: ["HzwqbKZw8HxMN6bF2yFZNrht3c2iXXzpKcFu7uBEDKtr"],
+    unreleased: ["7VHUFJHWu2CuExkJcJrzhQPJ2oygupTWkL2A2For4BmE"], 
   },
 };
 
@@ -124,13 +125,13 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("avax", 6),
   },
   stellar: {
-    minted: circleAPIChainMinted("XLM")
+    minted: circleAPIChainMinted("XLM"),
   },
   base: {
     minted: chainMinted("base", 6),
   },
   solana: {
-    minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedEUR"),
+    minted: circleAPIChainMinted ("SOL")
   },
 };
 
