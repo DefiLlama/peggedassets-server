@@ -9,6 +9,8 @@ import {
 const axios = require("axios");
 const retry = require("async-retry");
 
+import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
+
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x1abaea1f7c830bd89acc67ec4af516284b1bc33c"],
@@ -79,6 +81,22 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
   };
 }
 
+async function solanaUnreleased() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const unreleased = await solanaGetTokenBalance(
+      chainContracts["solana"].issued[0],
+      chainContracts["solana"].unreleased[0]
+    );
+    sumSingleBalance(balances, "peggedEUR", unreleased);
+    return balances;
+  };
+}
+
 async function circleAPIChainMinted(chain: string) {
   return async function (
     _timestamp: number,
@@ -131,8 +149,8 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("base", 6),
   },
   solana: {
-    minted: circleAPIChainMinted ("SOL")
+    minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedEUR"),
+    unreleased: solanaUnreleased(),
   },
 };
 
-export default adapter;
