@@ -154,3 +154,4 @@ const adapter: PeggedIssuanceAdapter = {
   },
 };
 
+export default adapter
