@@ -4113,4 +4113,24 @@ export default [
     twitter: "https://x.com/BalancedDAO",
     wiki: "https://balanced.network/how/",
   },
+  {
+    id: "205",
+    name: "Agora Dollar",
+    address: "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
+    symbol: "aUSD",
+    url: "https://www.agora.finance/",
+    description:
+      "Billions of people across the globe can now enjoy a more secure, inclusive financial system—built on the world’s most widely recognized currency, the US dollar.",
+    mintRedeemDescription:
+      "Users deposite USD and than mint aUSD",
+    onCoinGecko: "true",
+    gecko_id: "agora-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/withAUSD",
+    wiki: null,
+  },
 ] as PeggedAsset[];
