@@ -21,6 +21,7 @@ import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
+  PeggedAssetType,
 } from "../peggedAsset.type";
 import {
   getTokenBalance as tronGetTokenBalance,
@@ -188,7 +189,7 @@ async function tonMinted() {
     sumSingleBalance(
       balances,
       "peggedUSD",
-      (issued ) / 10 ** 6,
+      (issued) / 10 ** 6,
       "issued",
       false
     );
@@ -551,6 +552,20 @@ async function aptosBridged() {
     );
     return balances;
   };
+}
+
+
+async function stacksBSCBridged(_api: ChainApi) {
+  const bridgeName = 'alex'
+  const bscApi = await getApi('bsc', _api)
+  let balances = {} as Balances;
+  let assetPegType = "peggedUSD" as PeggedAssetType
+  const bscBal = await bscApi.call({  abi: 'erc20:balanceOf', target: '0x55d398326f99059fF775485246999027B3197955', params: '0x7ceC01355aC0791dE5b887e80fd20e391BCB103a'})
+  sumSingleBalance(balances, assetPegType, bscBal/ 1e18, bridgeName, false, 'bsc')
+  // const ethApi = await getApi('ethereum', _api)
+  // const ethBal = await ethApi.call({  abi: 'erc20:balanceOf', target: '0x55d398326f99059fF775485246999027B3197955', params: '0x7ceC01355aC0791dE5b887e80fd20e391BCB103a'})
+  // sumSingleBalance(balances, assetPegType, ethBal/ 1e6, bridgeName, false, 'ethereum')
+  return balances;
 }
 
 const adapter: PeggedIssuanceAdapter = {
@@ -983,6 +998,10 @@ const adapter: PeggedIssuanceAdapter = {
   linea: {
     ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
   },
+  stacks: {
+    bsc: stacksBSCBridged,
+  }
 };
 
 export default adapter;
+
