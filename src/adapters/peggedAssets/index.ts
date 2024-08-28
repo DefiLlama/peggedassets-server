@@ -202,7 +202,8 @@ import hexdc from "./hex-dollar-coin";
 import usdz from "./anzen-usdz";
 import chadusd from "./chad-usd"; // since there is a cusd already, will use this, we did something like this for coin98
 import bnusd from "./balanced-dollars";
-import ausdagora from "./agora-dollar"
+import ausdagora from "./agora-dollar";
+import opuscash from "./opus-cash";
 
 
 export default {
@@ -410,5 +411,6 @@ export default {
   "anzen-usdz": usdz,
   "chad-usd": chadusd,
   "balanced-dollars": bnusd,
-  "agora-dollar": ausdagora
+  "agora-dollar": ausdagora,
+  "opus-cash": opuscash,
 };
