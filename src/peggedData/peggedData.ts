@@ -4117,7 +4117,7 @@ export default [
     id: "205",
     name: "Agora Dollar",
     address: "0x00000000efe302beaa2b3e6e1b18d08d69a9012a",
-    symbol: "aUSD",
+    symbol: "AUSD",
     url: "https://www.agora.finance/",
     description:
       "Billions of people across the globe can now enjoy a more secure, inclusive financial system—built on the world’s most widely recognized currency, the US dollar.",
