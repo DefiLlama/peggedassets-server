@@ -4133,4 +4133,24 @@ export default [
     twitter: "https://x.com/withAUSD",
     wiki: null,
   },
+  {
+    id: "206",
+    name: "Opus CASH",
+    address: "starknet:0x0498edfaf50ca5855666a700c25dd629d577eb9afccdf3b5977aec79aee55ada",
+    symbol: "CASH",
+    url: "https://www.opus.money/",
+    description:
+      "To mint CASH, you need to first deposit collateral into Opus. You will then be able to borrow CASH at a given interest rate up to the liquidation limit. The interest rate and liquidation limit are both determined by the profile of your deposited collateral",
+    mintRedeemDescription:
+      "Users deposite USD and than mint aUSD",
+    onCoinGecko: "true",
+    gecko_id: "opus-cash",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/OpusMoney",
+    wiki: null,
+  },
 ] as PeggedAsset[];
