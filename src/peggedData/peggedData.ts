@@ -4140,9 +4140,9 @@ export default [
     symbol: "CASH",
     url: "https://www.opus.money/",
     description:
-      "To mint CASH, you need to first deposit collateral into Opus. You will then be able to borrow CASH at a given interest rate up to the liquidation limit. The interest rate and liquidation limit are both determined by the profile of your deposited collateral",
+      "Opus CASH is an overcollateralized USD-pegged stablecoin that you can borrow against a basket of collateral at an interest rate based on your collateral profile",
     mintRedeemDescription:
-      "Users deposite USD and than mint aUSD",
+      "To mint CASH, you need to first deposit collateral into Opus. You will then be able to borrow CASH at a given interest rate up to the liquidation limit. The interest rate and liquidation limit are both determined by the profile of your deposited collateral",
     onCoinGecko: "true",
     gecko_id: "opus-cash",
     cmcId: null,
