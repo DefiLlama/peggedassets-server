@@ -554,6 +554,15 @@ async function aptosBridged() {
   };
 }
 
+async function injectiveETHBridged(_api: ChainApi) {
+  const bridgeName = 'peggy'
+  const bscApi = await getApi('ethereum', _api)
+  let balances = {} as Balances;
+  let assetPegType = "peggedUSD" as PeggedAssetType
+  const bscBal = await bscApi.call({  abi: 'erc20:balanceOf', target: '0xdAC17F958D2ee523a2206206994597C13D831ec7', params: '0xF955C57f9EA9Dc8781965FEaE0b6A2acE2BAD6f3'})
+  sumSingleBalance(balances, assetPegType, bscBal/ 1e6, bridgeName, false, 'ethereum')
+  return balances;
+}
 
 async function stacksBSCBridged(_api: ChainApi) {
   const bridgeName = 'alex'
@@ -1000,6 +1009,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   stacks: {
     bsc: stacksBSCBridged,
+  },
+  injective: {
+    ethereum: injectiveETHBridged,
   }
 };
 

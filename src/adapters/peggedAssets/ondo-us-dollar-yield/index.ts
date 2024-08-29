@@ -1,3 +1,44 @@
+const sdk = require("@defillama/sdk");
+import { ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
+const axios = require("axios");
+const retry = require("async-retry");
+import { addChainExports } from "../helper/getSupply";
+
+// Function to get the balance of the injected bridged assets
+async function injectiveBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    const issuance = await retry(async (_bail: any) =>
+      axios.get("https://injective-nuxt-api.vercel.app/api/tokens")
+    );
+
+    // Accessing specific token's amount
+    const tokens = issuance?.data?.supply?.[1412]?.amount;
+    const balance = tokens / 1e18;
+    return { peggedUSD: balance };
+  };
+}
+
+async function nobleBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    const issuance = await retry(async (_bail: any) =>
+      axios.get("https://ondo.finance/api/v1/assets")
+    );
+
+    // Accessing specific token's amount
+    const tokens = issuance?.data?.assets[0].tvlUsd.noble;
+    const balance = tokens ;
+    return { peggedUSD: balance };
+  };
+}
+// Define the chain contracts
 const chainContracts = {
   ethereum: {
     issued: [
@@ -22,8 +63,21 @@ const chainContracts = {
       "0xcfea864b32833f157f042618bd845145256b1bf4c0da34a7013b76e42daa53cc",
     ],
   },
+  arbitrum: {
+    issued: ["0x35e050d3C0eC2d29D269a8EcEa763a183bDF9A9D"]
+  },
 };
 
-import { addChainExports } from "../helper/getSupply";
-const adapter = addChainExports(chainContracts);
+// Use `addChainExports` to generate the final adapter with combined logic
+const adapter: PeggedIssuanceAdapter = {
+  ...addChainExports(chainContracts),
+  noble: {
+    minted: nobleBridged()
+  },
+  injective: {
+    noble: injectiveBridged(),
+  },
+};
+
 export default adapter;
+

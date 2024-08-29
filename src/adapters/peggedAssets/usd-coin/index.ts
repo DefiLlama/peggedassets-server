@@ -12,6 +12,7 @@ import {
   cosmosSupply,
   kujiraSupply,
   osmosisSupply,
+  getApi
 } from "../helper/getSupply";
 import {
   getTotalSupply as ontologyGetTotalSupply,
@@ -23,7 +24,7 @@ import { call as nearCall } from "../helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
+  Balances,  ChainContracts,PeggedAssetType
 } from "../peggedAsset.type";
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
@@ -33,6 +34,7 @@ import { chainContracts } from "./config";
 import { lookupAccountByID } from "../helper/algorand";
 const axios = require("axios");
 const retry = require("async-retry");
+import { ChainApi } from "@defillama/sdk";
 
 // If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain and fuse
 
@@ -444,6 +446,25 @@ async function aptosBridged() {
   };
 }
 
+async function injectiveBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    const issuance = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          "https://injective-nuxt-api.vercel.app/api/tokens"
+        )
+    );
+    // Filter to find the specific token by address
+    const tokens = issuance?.data?.supply[1292].amount;
+    const balance = tokens/1e6;
+    return { peggedUSD: balance };
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -852,6 +873,12 @@ const adapter: PeggedIssuanceAdapter = {
   linea: {
     ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
   },
+  injective: {
+    noble: injectiveBridged(),
+  },
+  noble: {
+    minted: circleAPIChainMinted("NOBLE"),
+  }
 };
 
 export default adapter;
