@@ -452,15 +452,16 @@ async function injectiveBridged() {
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
-    const issuance = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://injective-nuxt-api.vercel.app/api/tokens"
-        )
+    const issuance = await retry(async (_bail: any) =>
+      axios.get("https://injective-nuxt-api.vercel.app/api/tokens")
     );
-    // Filter to find the specific token by address
-    const tokens = issuance?.data?.supply[1292].amount;
-    const balance = tokens/1e6;
+
+    const targetDenom = "ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E";
+    const targetToken = issuance?.data?.supply?.find(
+      (token: any) => token.denom === targetDenom
+    );
+
+    const balance = targetToken ? targetToken.amount / 1e6 : 0;
     return { peggedUSD: balance };
   };
 }
