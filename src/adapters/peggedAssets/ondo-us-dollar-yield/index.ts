@@ -34,7 +34,7 @@ async function nobleBridged() {
 
     // Accessing specific token's amount
     const tokens = issuance?.data?.assets[0].tvlUsd.noble;
-    const balance = tokens ;
+    const balance = tokens / issuance?.data?.assets[0].priceUsd ;
     return { peggedUSD: balance };
   };
 }
