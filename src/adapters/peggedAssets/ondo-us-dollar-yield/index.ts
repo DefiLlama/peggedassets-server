@@ -4,7 +4,7 @@ const axios = require("axios");
 const retry = require("async-retry");
 import { addChainExports } from "../helper/getSupply";
 
-// Function to get the balance of the injected bridged assets
+
 async function injectiveBridged() {
   return async function (
     _timestamp: number,
@@ -15,12 +15,17 @@ async function injectiveBridged() {
       axios.get("https://injective-nuxt-api.vercel.app/api/tokens")
     );
 
-    // Accessing specific token's amount
-    const tokens = issuance?.data?.supply?.[1412]?.amount;
-    const balance = tokens / 1e18;
+    const targetDenom = "ibc/93EAE5F9D6C14BFAC8DD1AFDBE95501055A7B22C5D8FA8C986C31D6EFADCA8A9";
+    const targetToken = issuance?.data?.supply?.find(
+      (token: any) => token.denom === targetDenom
+    );
+
+    const balance = targetToken ? targetToken.amount / 1e18 : 0;
     return { peggedUSD: balance };
   };
 }
+
+
 
 async function nobleBridged() {
   return async function (
