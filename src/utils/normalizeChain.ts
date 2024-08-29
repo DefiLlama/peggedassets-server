@@ -1060,6 +1060,18 @@ export const chainCoingeckoIds = {
     cmcId: null,
     categories: ["EVM"],
   },
+  "Injective": {
+    geckoId: "injective-protocol",
+    symbol: "INJ",
+    cmcId: null,
+    categories: ["Cosmos"],
+  },
+  "Noble": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["Cosmos"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1332,6 +1344,10 @@ export function getChainDisplayName(
       return "Taiko"
     case "real":
         return "re.al"
+    case "injective":
+      return "Injective"
+    case "noble":
+      return "Noble"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
