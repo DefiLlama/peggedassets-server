@@ -3,6 +3,7 @@ import { ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 import { addChainExports } from "../helper/getSupply";
+import { sumSingleBalance } from '../helper/generalUtil';
 
 
 async function injectiveBridged() {
@@ -20,12 +21,12 @@ async function injectiveBridged() {
       (token: any) => token.denom === targetDenom
     );
 
-    const balance = targetToken ? targetToken.amount / 1e18 : 0;
-    return { peggedUSD: balance };
+    const circulatingSupply = targetToken ? targetToken.amount / 1e18 : 0;
+    let balances = {}
+    sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued", false);
+    return balances;
   };
 }
-
-
 
 async function nobleBridged() {
   return async function (
@@ -37,13 +38,15 @@ async function nobleBridged() {
       axios.get("https://ondo.finance/api/v1/assets")
     );
 
-    // Accessing specific token's amount
     const tokens = issuance?.data?.assets[0].tvlUsd.noble;
-    const balance = tokens / issuance?.data?.assets[0].priceUsd ;
-    return { peggedUSD: balance };
+    const circulatingSupply = tokens / issuance?.data?.assets[0].priceUsd;
+
+    let balances = {};
+    sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued", false);
+    return balances;
   };
 }
-// Define the chain contracts
+
 const chainContracts = {
   ethereum: {
     issued: [
