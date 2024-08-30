@@ -1,4 +1,5 @@
-import { bridgedSupply, solanaMintedOrBridged } from "../helper/getSupply";
+import { addChainExports,solanaMintedOrBridged } from "../helper/getSupply";
+import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
 
 const chainContracts = {
   ethereum: {
@@ -49,11 +50,14 @@ const chainContracts = {
   xlayer: {
     bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
   },
+};
+
+const adapter: PeggedIssuanceAdapter = {
+  ...addChainExports(chainContracts),
+ 
   solana: {
-    bridgedFromETH:  ["DEkqHyPN7GMRJ5cArtQFAWefqbZb33Hyf6s5iCwjEonT", "peggedUSD"],
+    ethereum: solanaMintedOrBridged(["DEkqHyPN7GMRJ5cArtQFAWefqbZb33Hyf6s5iCwjEonT"]),
   },
 };
 
-import { addChainExports } from "../helper/getSupply";
-const adapter = addChainExports(chainContracts);
-export default adapter;
+export default adapter; 
