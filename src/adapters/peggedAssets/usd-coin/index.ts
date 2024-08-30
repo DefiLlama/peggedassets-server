@@ -461,10 +461,14 @@ async function injectiveBridged() {
       (token: any) => token.denom === targetDenom
     );
 
-    const balance = targetToken ? targetToken.amount / 1e6 : 0;
-    return { peggedUSD: balance };
+    const circulatingSupply = targetToken ? targetToken.amount / 1e6 : 0;
+    let balances = {};
+    sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued", false);
+
+    return balances;
   };
 }
+
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
