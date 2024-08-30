@@ -1,3 +1,5 @@
+import { bridgedSupply, solanaMintedOrBridged } from "../helper/getSupply";
+
 const chainContracts = {
   ethereum: {
     issued: ["0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"],
@@ -48,9 +50,10 @@ const chainContracts = {
     bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
   },
   solana: {
-    issued: ["HzwqbKZw8HxMN6bF2yFZNrht3c2iXXzpKcFu7uBEDKtr"],
+    bridgedFromETH:  ["DEkqHyPN7GMRJ5cArtQFAWefqbZb33Hyf6s5iCwjEonT", "peggedUSD"],
   },
 };
+
 import { addChainExports } from "../helper/getSupply";
 const adapter = addChainExports(chainContracts);
 export default adapter;
