@@ -61,6 +61,7 @@ const ethereumChainContract: ChainContract = {
     "0x289424add4a1a503870eb475fd8bf1d586b134ed",
     "0x6371efe5cd6e3d2d7c477935b7669401143b7985",
     "0xbc36fde44a7fd8f545d459452ef9539d7a14dd63",
+    "0x00380cb5858664078f2289180cc32f74440ac923",
   ],
   reserves: [
     "0x30b9de623c209a42ba8d5ca76384ead740be9529", // CauldronOwner
