@@ -1072,6 +1072,12 @@ export const chainCoingeckoIds = {
     cmcId: null,
     categories: ["Cosmos"],
   },
+  "X Layer": {
+    geckoId: "x-layer",
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1348,6 +1354,8 @@ export function getChainDisplayName(
       return "Injective"
     case "noble":
       return "Noble"
+    case "xlayer":
+      return "X Layer"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
