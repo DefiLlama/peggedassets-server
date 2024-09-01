@@ -204,6 +204,7 @@ import chadusd from "./chad-usd"; // since there is a cusd already, will use thi
 import bnusd from "./balanced-dollars";
 import ausdagora from "./agora-dollar";
 import opuscash from "./opus-cash";
+import dyad from "./dyad";
 
 
 export default {
@@ -413,4 +414,5 @@ export default {
   "balanced-dollars": bnusd,
   "agora-dollar": ausdagora,
   "opus-cash": opuscash,
+  "dyad": dyad
 };

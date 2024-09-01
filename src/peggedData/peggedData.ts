@@ -4153,4 +4153,24 @@ export default [
     twitter: "https://x.com/OpusMoney",
     wiki: null,
   },
+  {
+    id: "207",
+    name: "Dyad",
+    address: "0xfd03723a9a3abe0562451496a9a394d2c4bad4ab",
+    symbol: "DYAD",
+    url: "https://www.dyadstable.xyz/",
+    description:
+      "DYAD is a stablecoin optimized for unit economics, leveraging shared collateral pools and DYAD NFTs (Notes) that compete for the lowest mint cost. Note owners can mint DYAD via a cross-collateral CDP and increase their capital efficiency by utilising $Kerosene",
+    mintRedeemDescription:
+      "To mint DYAD, users must first deposit collateral, allowing them to borrow DYAD up to a minimum collateral ratio of 150%, with ratios below this risking liquidation",
+    onCoinGecko: "true",
+    gecko_id: "dyad",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/0xDYAD",
+    wiki: "https://dyad.gitbook.io/docs",
+  },
 ] as PeggedAsset[];
