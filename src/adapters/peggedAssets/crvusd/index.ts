@@ -1,23 +1,11 @@
 const sdk = require("@defillama/sdk");
+import { addChainExports,supplyInEthereumBridge } from "../helper/getSupply";
 import { sumSingleBalance } from "../helper/generalUtil";
-import { supplyInEthereumBridge } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,  ChainContracts,
 } from "../peggedAsset.type";
-
-
-const chainContracts: ChainContracts = {
-  ethereum: {
-    issued: ["0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E"],
-  },
-  waves: {
-    bridgeOnETH: [
-      "0x0de7b091A21BD439bdB2DfbB63146D9cEa21Ea83", // PepeTeam Bridge
-    ],
-  },
-};
 
 async function chainMinted(chain: string, decimals: number) {
   return async function (
@@ -51,17 +39,46 @@ async function chainMinted(chain: string, decimals: number) {
   };
 }
 
+const chainContracts = {
+ 
+  arbitrum: {
+    bridgedFromETH: "0x498Bf2B1e120FeD3ad3D42EA2165E9b73f99C1e5"
+  },
+  optimism: {
+    bridgedFromETH: "0xC52D7F23a2e460248Db6eE192Cb23dD12bDDCbf6"
+  },
+  base: {
+    bridgedFromETH: "0x417Ac0e078398C154EdFadD9Ef675d30Be60Af93"
+  },
+  xdai: {
+    bridgedFromETH: "0xaBEf652195F98A91E490f047A5006B71c85f058d"
+  },
+  polygon: {
+    bridgedFromETH: "0xc4Ce1D6F5D98D65eE25Cf85e9F2E9DcFEe6Cb5d6"
+  },
+  fraxtal: {
+    bridgedFromETH: "0xB102f7Efa0d5dE071A8D37B3548e1C7CB148Caf3"
+  },
+  bsc: {
+    bridgedFromETH: "0xe2fb3F127f5450DeE44afe054385d74C392BdeF4"
+  },
+  era: {
+    bridgedFromETH: "0x43cD37CC4B9EC54833c8aC362Dd55E58bFd62b86"
+  }
+};
+
 const adapter: PeggedIssuanceAdapter = {
+  ...addChainExports(chainContracts),
   ethereum: {
     minted: chainMinted("ethereum", 18),
   },
   waves: {
-    ethereum: supplyInEthereumBridge(
-      chainContracts.ethereum.issued[0],
-      chainContracts.waves.bridgeOnETH[0],
+    ethereum: supplyInEthereumBridge( // PepeTeam Bridge
+      "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+      "0x0de7b091A21BD439bdB2DfbB63146D9cEa21Ea83",
       18
     ),
   },
 };
 
-export default adapter;
+export default adapter; 
