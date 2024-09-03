@@ -384,7 +384,6 @@ async function elrondBridged(tokenID: string, decimals: number) {
       supply,
       "adastra",
       false,
-      "Ethereum"
     );
     return balances;
   };
@@ -764,8 +763,9 @@ const adapter: PeggedIssuanceAdapter = {
   klaytn: {
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
-  elrond: {
-    ethereum: elrondBridged("USDC-c76f1f", 6),
+  elrond: { // both amounts end up as USDC-c76f1f
+    ethereum: elrondBridged("ETHUSDC-220753", 6),
+    bsc: elrondBridged("BSCUSDC-887875", 18),
   },
   canto: {
     ethereum: bridgedSupply("canto", 6, chainContracts.canto.bridgedFromETH),

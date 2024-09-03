@@ -220,6 +220,32 @@ async function kavaBridged() {
   };
 }
 
+async function elrondBridged(tokenID: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
+        )
+    );
+    const supply = res?.data?.data?.supply / 10 ** decimals;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply,
+      "adastra",
+      false,
+      "Ethereum"
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -461,6 +487,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   linea: {
     ethereum: bridgedSupply("linea", 18, chainContracts.linea.bridgedFromETH),
+  },
+  elrond: { 
+    ethereum: elrondBridged("WDAI-9eeb54", 18),
   },
 };
 

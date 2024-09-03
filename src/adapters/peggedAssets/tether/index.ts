@@ -577,6 +577,31 @@ async function stacksBSCBridged(_api: ChainApi) {
   return balances;
 }
 
+async function elrondBridged(tokenID: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
+        )
+    );
+    const supply = res?.data?.data?.supply / 10 ** decimals;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply,
+      "adastra",
+      false,
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -1012,7 +1037,11 @@ const adapter: PeggedIssuanceAdapter = {
   },
   injective: {
     ethereum: injectiveETHBridged,
-  }
+  },
+  elrond: { // both amounts end up as USDT-f8c08c
+    ethereum: elrondBridged("ETHUSDT-9c73c6", 6),
+    bsc: elrondBridged("BSCUSDT-059796", 18),
+  },
 };
 
 export default adapter;
