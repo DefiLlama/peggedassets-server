@@ -205,6 +205,7 @@ import bnusd from "./balanced-dollars";
 import ausdagora from "./agora-dollar";
 import opuscash from "./opus-cash";
 import dyad from "./dyad";
+import dckusd from "./dackie-usd";
 
 
 export default {
@@ -414,5 +415,6 @@ export default {
   "balanced-dollars": bnusd,
   "agora-dollar": ausdagora,
   "opus-cash": opuscash,
-  "dyad": dyad
+  "dyad": dyad,
+  "dackie-usd": dckusd
 };

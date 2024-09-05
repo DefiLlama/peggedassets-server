@@ -4173,4 +4173,24 @@ export default [
     twitter: "https://x.com/0xDYAD",
     wiki: "https://dyad.gitbook.io/docs",
   },
+  {
+    id: "208",
+    name: "Dackie USD",
+    address: "base:0x613ce28076289de255f1a6487437f03e37e4a71d",
+    symbol: "DCKUSD",
+    url: "https://www.dyadstable.xyz/",
+    description:
+      "Dackie USD (dckUSD) is the algorithmic stablecoin, designed to enhance liquidity and drive growth within the DackieSwap ecosystem across multiple blockchains",
+    mintRedeemDescription:
+      "dckUSD is minted by burning DACKIE tokens through a mechanism integrated into the DackieSwap protocol. When users select the DACKIE-dckUSD pair, the mint-burn process is triggered automatically",
+    onCoinGecko: "true",
+    gecko_id: "dackie-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "algorithmic",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/DackieSwap",
+    wiki: "https://docs.dackieswap.xyz/products/product-features/dackie-usd-dckusd#introduction",
+  },
 ] as PeggedAsset[];
