@@ -546,6 +546,8 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   era: {
+    minted: chainMinted("era", 6),
+    unreleased: async () => ({}),
     ethereum: bridgedSupply("era", 6, chainContracts.era.bridgedFromETH),
   },
   polygon_zkevm: {
