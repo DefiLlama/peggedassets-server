@@ -185,7 +185,7 @@ export const chainContracts: ChainContracts = {
     ], // axelar
   },
   era: {
-    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    bridgeOnETH: ["0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB"],
     bridgedFromETH: ["0x4B9eb6c0b6ea15176BBF62841C6B2A8a398cb656"],
   },
   pulse: {
