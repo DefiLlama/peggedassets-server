@@ -137,6 +137,9 @@ const chainContracts: ChainContracts = {
   thundercore: {
     bridgedFromBSC: ["0xBEB0131D95AC3F03fd15894D0aDE5DBf7451d171"],
   },
+  era: {
+    bridgedFromBSC: ["0x2039bb4116B4EFc145Ec4f0e2eA75012D6C0f181"], // celer
+  },
 };
 
 /*

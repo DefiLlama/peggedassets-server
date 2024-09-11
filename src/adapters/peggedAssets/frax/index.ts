@@ -38,6 +38,9 @@ const chainContracts: ChainContracts = {
   fantom: {
     bridgedFromETH: ["0xdc301622e621166BD8E82f2cA0A26c13Ad0BE355"],
   },
+  era: {
+    bridgedFromETH: ["0xb4C1544cb4163f4C2ECa1aE9Ce999F63892d912A"],
+  },
   evmos: {
     bridgedFromETH: ["0xE03494D0033687543a80c9B1ca7D6237F2EA8BD8"],
   },

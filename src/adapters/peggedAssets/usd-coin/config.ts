@@ -81,7 +81,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xea32a96608495e54156ae48931a7c20f0dcc1a21"],
   },
   era: {
-    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    issued: ["0x1d17CBcF0D6D143135aE902365D2E5e2A16538D4"],
+    bridgeOnETH: ["0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB"],
     bridgedFromETH: ["0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4"],
   },
   polygon_zkevm: {

@@ -876,10 +876,10 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   era: {
-    ethereum: supplyInEthereumBridge(
-      chainContracts.ethereum.issued[0],
-      chainContracts.era.bridgeOnETH[0],
-      6
+    ethereum: bridgedSupply(
+      "arbieratrum",
+      6,
+      chainContracts.era.bridgedFromETH
     ),
   },
   shiden: {

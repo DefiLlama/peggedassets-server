@@ -76,7 +76,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xbB06DCA3AE6887fAbF931640f67cab3e3a16F4dC"],
   },
   era: {
-    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    bridgeOnETH: ["0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB"],
     bridgedFromETH: ["0x493257fd37edb34451f62edf8d2a0c418852ba4c"],
   },
   moonbeam: {
