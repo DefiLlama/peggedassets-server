@@ -877,7 +877,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   era: {
     ethereum: bridgedSupply(
-      "arbieratrum",
+      "era",
       6,
       chainContracts.era.bridgedFromETH
     ),

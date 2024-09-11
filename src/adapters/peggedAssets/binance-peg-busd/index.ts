@@ -375,6 +375,13 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.thundercore.bridgedFromBSC
     ),
   },
+  era: {
+    bsc: bridgedSupply(
+      "era",
+      18,
+      chainContracts.era.bridgedFromBSC,'celer'
+    ),
+  },
 };
 
 export default adapter;

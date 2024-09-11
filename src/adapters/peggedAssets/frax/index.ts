@@ -251,6 +251,13 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.fraxtal.bridgedFromETH
     ),
   },
+  era: {
+    ethereum: bridgedSupply(
+      "era",
+      18,
+      chainContracts.era.bridgedFromETH
+    ),
+  },
 };
 
 export default adapter;
