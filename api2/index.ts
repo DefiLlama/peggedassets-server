@@ -43,6 +43,10 @@ async function main() {
 
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
+process.on('uncaughtException', (e) => {
+  console.error('Uncaught exception', e)
+  shutdown()
+})
 
 function shutdown() {
   console.log('Shutting down gracefully...');
