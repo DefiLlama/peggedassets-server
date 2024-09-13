@@ -43,39 +43,42 @@ export default async function handler() {
   cache.rateTimestamps = rateTimestamps
   console.timeEnd(timeKey)
 
-  /*  
-  console.time('storeCharts')
- const commonOptions = {
-      lastPrices,
-      historicalPrices,
-      historicalRates,
-      priceTimestamps,
-      rateTimestamps,
-      peggedAssetsData: cache.peggedAssetsData,
-    }
-    // store overall chart
-    const allData = await craftChartsResponse({ ...commonOptions, chain: "all" });  
-    await storeRouteData('charts/all/all', allData)
-  
-    // store chain charts
-    const chains = [Object.keys(chainCoingeckoIds), Object.values(normalizedChainReplacements)].flat()
-    for (let chain of chains) {
-      const normalizedChain = normalizeChain(chain);
-      const chainData = await craftChartsResponse({ ...commonOptions, chain, });
-      if (chainData.length) {
-        await storeRouteData(`charts/${normalizedChain}`, chainData)
-      } else {
-        console.log(`No data for ${chain}`)
-      }
-    }
-  
-    // store pegged asset charts
-    for (const pegged of peggedAssets) {
-      const id = pegged.id;
-      const chart = await craftChartsResponse({ ...commonOptions, peggedID: id });
-      await storeRouteData(`charts/all/${id}`, chart)
-    }
-    console.timeEnd('storeCharts') */
+}
+
+export async function storeChartsPart2(assetChainMap: any) {
+  const { lastPrices, historicalRates, priceTimestamps, rateTimestamps, } = cache
+
+  const commonOptions = {
+    assetChainMap,
+    lastPrices,
+    historicalPrices: cache.historicalPrices,
+    historicalRates,
+    priceTimestamps,
+    rateTimestamps,
+    peggedAssetsData: cache.peggedAssetsData,
+  }
+  // store overall chart
+  const allData = await craftChartsResponse({ ...commonOptions, chain: "all" });
+  await storeRouteData('charts/all/all', allData)
+
+  // store chain charts
+  const chains = [Object.keys(chainCoingeckoIds), Object.values(normalizedChainReplacements)].flat()
+  for (let chain of chains) {
+    const normalizedChain = normalizeChain(chain);
+    const chainData = await craftChartsResponse({ ...commonOptions, chain: normalizedChain, });
+    // if (chainData.length) {
+    await storeRouteData(`charts/${normalizedChain}`, chainData)
+    // } else {
+    //   console.log(`No data for ${chain} ${normalizedChain}`)
+    // }
+  }
+
+  // store pegged asset charts
+  for (const pegged of peggedAssets) {
+    const id = pegged.id;
+    const chart = await craftChartsResponse({ ...commonOptions, peggedID: id });
+    await storeRouteData(`charts/all/${id}`, chart)
+  }
 
 }
 
@@ -115,19 +118,19 @@ async function getPeggedAssetsData() {
 
 function replaceAvalanceAvax(obj) {
   if (typeof obj !== 'object' || obj === null) {
-      return; // Not an object or is null, do nothing
+    return; // Not an object or is null, do nothing
   }
 
   if (obj.hasOwnProperty('avalanche')) {
-      obj['avax'] = obj['avalanche']; // Create 'avax' key with 'avalanche' value
-      delete obj['avalanche']; // Remove 'avalanche' key
+    obj['avax'] = obj['avalanche']; // Create 'avax' key with 'avalanche' value
+    delete obj['avalanche']; // Remove 'avalanche' key
   }
 
   // Recursively apply to all object values
   Object.values(obj).forEach(value => {
-      if (typeof value === 'object') {
-        replaceAvalanceAvax(value); // Recursive call
-      }
+    if (typeof value === 'object') {
+      replaceAvalanceAvax(value); // Recursive call
+    }
   });
 }
 

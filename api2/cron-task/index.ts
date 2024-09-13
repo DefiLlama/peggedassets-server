@@ -3,7 +3,7 @@ import * as rates from "../../src/getRates";
 import sluggifyPegged from "../../src/peggedAssets/utils/sluggifyPegged";
 import { storeRouteData } from "../file-cache";
 import storePeggedPrices from "./storePeggedPrices";
-import storeCharts, { craftChartsResponse } from "./storeCharts";
+import storeCharts, { craftChartsResponse, storeChartsPart2 } from "./storeCharts";
 import storeStablecoins from "./getStableCoins";
 import { craftStablecoinPricesResponse } from "./getStablecoinPrices";
 import { craftStablecoinChainsResponse } from "./getStablecoinChains";
@@ -40,8 +40,8 @@ async function run() {
   const chainChartMap: any = {}
   const recentProtocolData: any = {}
 
-
   const timeWrapper = {
+    storeChartsPart2: () => storeChartsPart2(assetChainMap),
     storePrices,
     storeStablecoinChains,
     storePeggedAssets,
@@ -95,8 +95,6 @@ async function run() {
       }
     }
   }
-
-
 
   async function storeChainChartData() {
     const frontendKey = 'all-llama-app'

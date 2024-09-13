@@ -17,6 +17,19 @@ export default function setRoutes(router: HyperExpress.Router) {
   router.get("/stablecoinchains", defaultFileHandler);
   router.get("/stablecoins", defaultFileHandler);
   router.get("/stablecoin/:stablecoin", defaultFileHandler);
+  router.get("/stablecoin/:stablecoin", defaultFileHandler);
+
+  router.get("/charts/all/:peggedID", ew(async (req: any, res: any) => {
+    let { peggedID } = req.path_parameters;
+    peggedID = normalizeChain(peggedID)
+    return fileResponse('/charts/all/' + peggedID, res);
+  }))
+
+  router.get("/charts/:chain", ew(async (req: any, res: any) => {
+    let { chain } = req.path_parameters;
+    chain = normalizeChain(chain)
+    return fileResponse('/charts/' + chain, res);
+  }))
 
   router.get("/stablecoindominance/:chain", ew(async (req: any, res: any) => {
     let { chain } = req.path_parameters;
