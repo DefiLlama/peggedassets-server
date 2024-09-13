@@ -1,4 +1,3 @@
-import { BigNumber } from "ethers";
 import { PeggedAsset } from "../../peggedData/peggedData";
 import {
   PeggedAssetIssuance,
@@ -109,11 +108,7 @@ function mergeBridges(
           bridgeBalances[bridgeID][sourceChain].amount =
             bridgeBalance + bridgeBalanceToMerge;
         } else {
-          bridgeBalances[bridgeID][sourceChain].amount = BigNumber.from(
-            bridgeBalance ?? 0
-          )
-            .add(BigNumber.from(bridgeBalanceToMerge))
-            .toNumber();
+          bridgeBalances[bridgeID][sourceChain].amount = Number(BigInt(bridgeBalance ?? 0) + BigInt(bridgeBalanceToMerge ?? 0));
         }
       } else {
         bridgeBalances[bridgeID] = bridgeBalances[bridgeID] || {};

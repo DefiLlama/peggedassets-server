@@ -205,5 +205,4 @@ resources:
 
 plugins:
   - serverless-esbuild
-  - serverless-offline
   - serverless-prune-plugin
