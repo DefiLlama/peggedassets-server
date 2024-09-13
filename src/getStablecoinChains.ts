@@ -1,6 +1,6 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import peggedAssets from "./peggedData/peggedData";
-import fetch from "node-fetch";
+import axios from "axios";
 import {
   getLastRecord,
   hourlyPeggedBalances,
@@ -12,16 +12,16 @@ type balance = { [token: string]: number };
 
 export async function craftStablecoinChainsResponse({ peggedPrices }: { peggedPrices?: any } = {}) {
   const chainCirculating = {} as { [chain: string]: balance };
-  const chainTvlData = await fetch('https://api.llama.fi/v2/chains').then((res) => res.json());
+  const { data: chainTvlData } = await axios('https://api.llama.fi/v2/chains');
   chainTvlData.forEach((data: any) => {
-    const {name, tvl } = data
+    const { name, tvl } = data
     if (!chainCoingeckoIds[name]) {
       chainCoingeckoIds[name] = data
       chainCoingeckoIds[name].symbol = data.tokenSymbol
     };
     (chainCoingeckoIds[name] as any).tvl = tvl
   })
-  
+
   let prices = await fetchPrices(peggedPrices);
 
   await Promise.all(

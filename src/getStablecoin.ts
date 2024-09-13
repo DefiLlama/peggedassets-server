@@ -1,10 +1,8 @@
 import {
-  successResponse,
   wrap,
   IResponse,
   errorResponse,
 } from "./utils/shared";
-import fetch from "node-fetch";
 import { getHistoricalValues } from "./utils/shared/dynamodb";
 import peggedAssets from "./peggedData/peggedData";
 import {

@@ -7,7 +7,6 @@ async function retry(func){
 }
 
 const axios = require("axios")
-const { request } = require("graphql-request")
 const COVALENT_KEY = 'ckey_72cd3b74b4a048c9bc671f7c5a6'
 
 async function get(endpoint) {
@@ -18,9 +17,6 @@ async function post(endpoint, body) {
   return (await axios.post(endpoint, body)).data
 }
 
-async function graphQuery(endpoint, graphQuery, params = {}) {
-  return request(endpoint, graphQuery, params)
-}
 
 async function covalentGetTokens(address, chain = 'ethereum') {
   let chainId
@@ -37,6 +33,5 @@ async function covalentGetTokens(address, chain = 'ethereum') {
 module.exports = {
   get,
   post,
-  graphQuery,
   covalentGetTokens,
 }

@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import axios from "axios";
 
 export async function sendMessage(
   message: string,
@@ -18,13 +18,7 @@ export async function sendMessage(
   }
   // Example: https://gist.github.com/dragonwocky/ea61c8d21db17913a43da92efe0de634
   // Docs: https://gist.github.com/dragonwocky/ea61c8d21db17913a43da92efe0de634
-  const response = await fetch(`${webhookUrl}?wait=true`, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      content: formattedMessage,
-    }),
-  }).then((body) => body.json());
+  await axios.post(`${webhookUrl}?wait=true`, {
+    content: formattedMessage,
+  })
 }

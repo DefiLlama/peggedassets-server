@@ -1,11 +1,11 @@
-import fetch from "node-fetch";
 import fs from "fs";
 import { getTimestampAtStartOfDay } from "../../utils/date";
+import axios from "axios";
 
 export type GetCoingeckoLog = () => Promise<any>;
 
 function fetchJson(url: string) {
-  return fetch(url).then((res) => res.json());
+  return axios(url).then((res) => res.data);
 }
 
 const locks = [] as ((value: unknown) => void)[];

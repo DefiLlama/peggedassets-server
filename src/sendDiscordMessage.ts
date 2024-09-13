@@ -1,5 +1,5 @@
 import { wrapScheduledLambda } from "./utils/shared/wrap";
-import fetch from "node-fetch";
+import axios from "axios";
 
 function parse_service_event(event: any, service = "Service") {
   return [
@@ -63,13 +63,7 @@ const handler = async (event: any) => {
       ],
     };
 
-    const response = await fetch(`${webhookUrl}?wait=true`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(discord_data),
-    }).then((body) => body.json());
+    const { data: response } = await axios.post(`${webhookUrl}?wait=true`, discord_data)
     console.log("response", response);
   }
 };
