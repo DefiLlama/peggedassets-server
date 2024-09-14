@@ -5,42 +5,41 @@ const retry = require("async-retry");
 import { addChainExports } from "../helper/getSupply";
 import { sumSingleBalance } from '../helper/generalUtil';
 
-
-async function injectiveBridged() {
+async function nobleNative() {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
-    const issuance = await retry(async (_bail: any) =>
-      axios.get("https://injective-nuxt-api.vercel.app/api/tokens")
+    const supplyData = await retry(async (_bail: any) =>
+      axios.get("https://noble-api.polkachu.com/cosmos/bank/v1beta1/supply/ausdy")
     );
 
-    const targetDenom = "ibc/93EAE5F9D6C14BFAC8DD1AFDBE95501055A7B22C5D8FA8C986C31D6EFADCA8A9";
-    const targetToken = issuance?.data?.supply?.find(
-      (token: any) => token.denom === targetDenom
-    );
-
-    const circulatingSupply = targetToken ? targetToken.amount / 1e18 : 0;
-    let balances = {}
+    const circulatingSupply = supplyData?.data?.amount?.amount / 1e18;
+    let balances = {};
     sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued", false);
     return balances;
   };
 }
 
-async function nobleBridged() {
+async function bridgedFromNoble(channel: string) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
-    const issuance = await retry(async (_bail: any) =>
-      axios.get("https://ondo.finance/api/v1/assets")
+    // Fetch the escrow address for the given IBC channel
+    const escrowResponse = await retry(async (_bail: any) =>
+      axios.get(`https://noble-api.polkachu.com/ibc/apps/transfer/v1/channels/${channel}/ports/transfer/escrow_address`)
+    );
+    const escrowAddress = escrowResponse?.data?.escrow_address;
+
+    // Fetch the balance of the escrow address
+    const balanceResponse = await retry(async (_bail: any) =>
+      axios.get(`https://noble-api.polkachu.com/cosmos/bank/v1beta1/balances/${escrowAddress}/by_denom?denom=ausdy`)
     );
 
-    const tokens = issuance?.data?.assets[0].tvlUsd.noble;
-    const circulatingSupply = tokens / issuance?.data?.assets[0].priceUsd;
-
+    const circulatingSupply = balanceResponse?.data?.balance?.amount / 1e18;
     let balances = {};
     sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued", false);
     return balances;
@@ -56,7 +55,6 @@ const chainContracts = {
   },
   mantle: {
     issued: "0x5bE26527e817998A7206475496fDE1E68957c5A6",
-    unreleased: ["0x94FEC56BBEcEaCC71c9e61623ACE9F8e1B1cf473"],
   },
   sui: {
     issued: [
@@ -80,12 +78,14 @@ const chainContracts = {
 const adapter: PeggedIssuanceAdapter = {
   ...addChainExports(chainContracts),
   noble: {
-    minted: nobleBridged()
+    minted: nobleNative()
   },
   injective: {
-    noble: injectiveBridged(),
+    noble: bridgedFromNoble("channel-31"),
   },
+  osmosis: {
+    noble: bridgedFromNoble("channel-1"),
+  }
 };
 
 export default adapter;
-
