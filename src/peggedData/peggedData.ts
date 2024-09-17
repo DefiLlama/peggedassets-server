@@ -647,7 +647,7 @@ export default [
     gecko_id: "sperax-usd",
     cmcId: "17285",
     pegType: "peggedUSD",
-    pegMechanism: "algorithmic",
+    pegMechanism: "crypto-backed",
     priceSource: "defillama", // does not liquidity on curve
     auditLinks: null,
     twitter: "https://twitter.com/SperaxUSD",
