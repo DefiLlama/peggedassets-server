@@ -206,6 +206,7 @@ import ausdagora from "./agora-dollar";
 import opuscash from "./opus-cash";
 import dyad from "./dyad";
 import dckusd from "./dackie-usd";
+import skydollar from "./usds"
 
 
 export default {
@@ -416,5 +417,6 @@ export default {
   "agora-dollar": ausdagora,
   "opus-cash": opuscash,
   "dyad": dyad,
-  "dackie-usd": dckusd
+  "dackie-usd": dckusd,
+  "usds": skydollar
 };

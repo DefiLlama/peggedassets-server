@@ -4193,4 +4193,24 @@ export default [
     twitter: "https://x.com/DackieSwap",
     wiki: "https://docs.dackieswap.xyz/products/product-features/dackie-usd-dckusd#introduction",
   },
+  {
+    id: "209",
+    name: "Sky Dollar",
+    address: "0xdc035d45d973e3ec169d2276ddab16f1e407384f",
+    symbol: "USDS",
+    url: "https://app.sky.money/",
+    description:
+      "USDS is the stablecoin of Sky Protocol, soft-pegged to the U.S. dollar and backed by surplus collateral",
+    mintRedeemDescription:
+      "Users can access Sky Protocol's liquidity pools through Sky.money to trade USDC, USDT, ETH, or SKY for USDS. They can also upgrade DAI to USDS",
+    onCoinGecko: "true",
+    gecko_id: "usds",
+    cmcId: "33039",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/SkyEcosystem",
+    wiki: "https://sky.money/faq",
+  },
 ] as PeggedAsset[];
