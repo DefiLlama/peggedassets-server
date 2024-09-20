@@ -4213,4 +4213,24 @@ export default [
     twitter: "https://x.com/SkyEcosystem",
     wiki: "https://sky.money/faq",
   },
+  {
+    id: "210",
+    name: "Elixir deUSD",
+    address: "0x15700b564ca08d9439c58ca5053166e8317aa138",
+    symbol: "DEUSD",
+    url: "https://www.elixir.xyz/",
+    description:
+      'deUSD ("decentralized US Dollar") is a fully collateralized synthetic dollar powered by the Elixir Network',
+    mintRedeemDescription:
+      "deUSD is minted by stETH and sDAI, which are deposited collateral assets, which will be used to by the protocol to short ETH, creating a delta neutral position",
+    onCoinGecko: "true",
+    gecko_id: "elixir-deusd",
+    cmcId: "31024",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/elixir",
+    wiki: "https://docs.elixir.xyz/deusd",
+  },
 ] as PeggedAsset[];
