@@ -4233,4 +4233,24 @@ export default [
     twitter: "https://x.com/elixir",
     wiki: "https://docs.elixir.xyz/deusd",
   },
+  {
+    id: "211",
+    name: "Threshold USD",
+    address: "0xcfc5bd99915aaa815401c5a41a927ab7a38d29cf",
+    symbol: "THUSD",
+    url: "https://app.thresholdusd.org",
+    description:
+      'Threshold USD (thUSD) is a stablecoin soft-pegged against USD and backed by ETH and tBTC as collateral, with a minimum collateral ratio of 110%.',
+    mintRedeemDescription:
+      "A redemption is the process of exchanging thUSD for tBTC at face value, as if 1 thUSD is exactly worth $1. That is, for x thUSD you get x Dollars worth of tBTC in return. Users can redeem their thUSD for tBTC at any time without limitations. However, a redemption fee might be charged on the redeemed amount",
+    onCoinGecko: "true",
+    gecko_id: "threshold-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/ThresholdUSD",
+    wiki: "https://docs.threshold.network/applications/threshold-usd"
+  },
 ] as PeggedAsset[];
