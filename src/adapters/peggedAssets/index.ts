@@ -207,7 +207,8 @@ import opuscash from "./opus-cash";
 import dyad from "./dyad";
 import dckusd from "./dackie-usd";
 import skydollar from "./usds";
-import deusd from "./elixir-deusd"
+import deusd from "./elixir-deusd";
+import thusd from "./threshold-usd"
 
 
 export default {
@@ -420,5 +421,6 @@ export default {
   "dyad": dyad,
   "dackie-usd": dckusd,
   "usds": skydollar,
-  "elixir-deusd": deusd
+  "elixir-deusd": deusd,
+  "threshold-usd": thusd
 };
