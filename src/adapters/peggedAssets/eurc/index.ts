@@ -1,6 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply, solanaMintedOrBridged } from "../helper/getSupply";
+import { bridgedSupply, solanaMintedOrBridged, supplyInEthereumBridge } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -151,6 +151,14 @@ const adapter: PeggedIssuanceAdapter = {
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedEUR"),
     unreleased: solanaUnreleased(),
+  },
+  icp: {
+    ethereum: supplyInEthereumBridge(
+      '0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c', 
+      '0xb25eA1D493B49a1DeD42aC5B1208cC618f9A9B80', 
+      6, 
+      "peggedEUR"
+    ),
   },
 };
 
