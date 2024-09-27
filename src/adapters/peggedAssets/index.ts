@@ -209,7 +209,7 @@ import dckusd from "./dackie-usd";
 import skydollar from "./usds";
 import deusd from "./elixir-deusd";
 import thusd from "./threshold-usd"
-
+import m from "./m0-m"
 
 export default {
   tether,
@@ -422,5 +422,6 @@ export default {
   "dackie-usd": dckusd,
   "usds": skydollar,
   "elixir-deusd": deusd,
-  "threshold-usd": thusd
+  "threshold-usd": thusd,
+  "m-by-m0": m
 };
