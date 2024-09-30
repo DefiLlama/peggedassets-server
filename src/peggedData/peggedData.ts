@@ -4253,4 +4253,24 @@ export default [
     twitter: "https://x.com/ThresholdUSD",
     wiki: "https://docs.threshold.network/applications/threshold-usd"
   },
+  {
+    id: "212",
+    name: "Move Dollar",
+    address: "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_coin::MOD",
+    symbol: "MOD",
+    url: "https://app.thala.fi/overview",
+    description:
+      `Thala's stablecoin, Move Dollar (MOD), is backed by both native and multi-chain assets, with an additional ongoing focus on yield-bearing collateral types`,
+    mintRedeemDescription:
+      "Mint MOD by depositing collateral and borrowing less than its value, ensuring over-collateralization. Redeem MOD for $1 worth of collateral minus a fee, establishing a $1 price floor",
+    onCoinGecko: "true",
+    gecko_id: "move-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/ThalaLabs",
+    wiki: "https://docs.thala.fi/overview/move-dollar-mod/stablecoin"
+  },
 ] as PeggedAsset[];
