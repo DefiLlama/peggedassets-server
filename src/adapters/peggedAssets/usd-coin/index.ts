@@ -43,8 +43,6 @@ Sora: cannot find API query that gives supply.
 
 Cronos: they have not provided details about the wallets holding the USDC.
 
-Flow: A.b19436aae4d94622.FiatToken. HTTP API has no info about tokens. Using Circle API for now.
-
 Hedera missing 7M unreleased, is not in treasury account. Using Circle API because of this.
 
 Stellar: 1 explorer doesn't work, 1 doesn't list it as an asset. Using Circle API for now.
@@ -677,7 +675,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: circleAPIChainMinted("XLM"),
   },
   flow: {
-    minted: circleAPIChainMinted("FLOW"),
+    ethereum: bridgedSupply("flow", 6, chainContracts.flow.bridgedFromETH),
   },
   xdai: {
     ethereum: bridgedSupply("xdai", 6, chainContracts.xdai.bridgedFromETH),
