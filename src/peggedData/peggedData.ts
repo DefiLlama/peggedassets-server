@@ -2631,7 +2631,7 @@ export default [
     address: "0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A",
     symbol: "UAHT",
     url: "https://uaht.io",
-    description: "Welcome to the platform where people matter.",
+    description: "Borderless protocol for free people.",
     mintRedeemDescription: "UAHT is pegged to UAH Ukraine Currency",
     onCoinGecko: "true",
     gecko_id: "uaht",
@@ -2640,7 +2640,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
     auditLinks: null,
-    twitter: "https://twitter.com/starscrowding",
+    twitter: "https://twitter.com/uaht_io",
     wiki: "https://github.com/starscrowding/UAHT#readme",
   },
   {
