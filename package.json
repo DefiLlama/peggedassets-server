@@ -23,6 +23,8 @@
     "fillLast": "export AWS_REGION='eu-central-1' && export tableName='prod-stablecoins-table' && npx ts-node src/cli/fillLast.ts"
   },
   "devDependencies": {
+  },
+  "dependencies": {
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-typescript": "^7.13.0",
@@ -41,9 +43,7 @@
     "serverless-prune-plugin": "^2.0.2",
     "serverless-webpack-fixed": "^5.3.3",
     "ts-jest": "^29.2.5",
-    "typescript": "^5.6.2"
-  },
-  "dependencies": {
+    "typescript": "^5.6.2",
     "aws-sdk": "^2.869.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
