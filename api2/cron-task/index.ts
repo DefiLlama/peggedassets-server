@@ -1,3 +1,11 @@
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason)
+})
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception thrown', error)
+})
+
 import peggedAssets from "../../src/peggedData/peggedData";
 import * as rates from "../../src/getRates";
 import sluggifyPegged from "../../src/peggedAssets/utils/sluggifyPegged";
