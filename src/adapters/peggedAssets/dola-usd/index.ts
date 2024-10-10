@@ -28,6 +28,12 @@ const chainContracts = {
   base: {
     bridgedFromETH: "0x4621b7A9c75199271F773Ebd9A499dbd165c3191",
   },
+  blast: {
+    bridgedFromETH: "0x8e38179D361402f6a94767757e807146609E9B3d",
+  },
+  mode: {
+    bridgedFromETH: "0x00eA4344e90c741560f08667961A8dE39FF506D7",
+  },
 };
 
 const adapter: PeggedIssuanceAdapter = addChainExports(chainContracts);
