@@ -210,6 +210,7 @@ import skydollar from "./usds";
 import deusd from "./elixir-deusd";
 import thusd from "./threshold-usd";
 import mod from "./move-dollar"
+import usdx0 from "./usdx-money-usdx";
 
 
 export default {
@@ -424,5 +425,6 @@ export default {
   "usds": skydollar,
   "elixir-deusd": deusd,
   "threshold-usd": thusd,
-  "move-dollar": mod
+  "move-dollar": mod,
+  "usdx-money-usdx": usdx0
 };
