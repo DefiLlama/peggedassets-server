@@ -4293,4 +4293,24 @@ export default [
     twitter: "https://x.com/m0foundation",
     wiki: "https://docs.m0.org/portal/overview/whitepaper/i.-introduction"
   },
+  {
+    id: "214",
+    name: "USDX Money USDX",
+    address: "bsc:0xf3527ef8de265eaa3716fb312c12847bfba66cef",
+    symbol: "USDX",
+    url: "https://usdx.money/",
+    description:
+      `USDX is a synthetic USD stablecoin that takes on forms of BTC as backing, combined with short BTC hedges on exchanges to achieve a delta neutral approximate dollar position`,
+    mintRedeemDescription:
+      "USDX can be minted by approved entities who pass KYC/KYB screenings, using USDX.money contracts, where users deposit cryptocurrency as collateral and receive USDX, with corresponding short positions opened on derivatives exchanges to hedge the backing assets",
+    onCoinGecko: "true",
+    gecko_id: "usdx-money-usdx",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/usdx_money",
+    wiki: "https://docs.usdx.money/a-synthetic-usd/usdx-basics"
+  },
 ] as PeggedAsset[];
