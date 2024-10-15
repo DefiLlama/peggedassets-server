@@ -208,9 +208,8 @@ import dyad from "./dyad";
 import dckusd from "./dackie-usd";
 import skydollar from "./usds";
 import deusd from "./elixir-deusd";
-import thusd from "./threshold-usd"
-import m from "./m0-m"
 import thusd from "./threshold-usd";
+import m from "./m-by-m^0";
 import mod from "./move-dollar"
 
 export default {
@@ -425,6 +424,6 @@ export default {
   "usds": skydollar,
   "elixir-deusd": deusd,
   "threshold-usd": thusd,
-  "m0-m": m
+  "m-by-m^0": m,
   "move-dollar": mod
 };
