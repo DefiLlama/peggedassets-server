@@ -468,6 +468,26 @@ async function injectiveBridged() {
   };
 }
 
+async function flowBridged(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://evm.flowscan.io/api/v2/addresses/${address}`
+        )
+    );
+    const totalSupply =
+      parseInt(res?.data?.token?.total_supply) / 10 ** decimals;
+    sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
+    return balances;
+  };
+}
+
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
@@ -676,9 +696,7 @@ const adapter: PeggedIssuanceAdapter = {
   stellar: {
     minted: circleAPIChainMinted("XLM"),
   },
-  flow: {
-    minted: circleAPIChainMinted("FLOW"),
-  },
+  
   xdai: {
     ethereum: bridgedSupply("xdai", 6, chainContracts.xdai.bridgedFromETH),
   },
@@ -885,7 +903,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   noble: {
     minted: circleAPIChainMinted("NOBLE"),
-  }
+  },
+  flow: {
+    ethereum: flowBridged(chainContracts.flow.bridgedFromETH[0], 6),
+  },
 };
 
 export default adapter;

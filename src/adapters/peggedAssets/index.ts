@@ -210,6 +210,8 @@ import skydollar from "./usds";
 import deusd from "./elixir-deusd";
 import thusd from "./threshold-usd"
 import m from "./m0-m"
+import thusd from "./threshold-usd";
+import mod from "./move-dollar"
 
 export default {
   tether,
@@ -423,5 +425,6 @@ export default {
   "usds": skydollar,
   "elixir-deusd": deusd,
   "threshold-usd": thusd,
-  "m-by-m0": m
+  "m0-m": m
+  "move-dollar": mod
 };

@@ -380,4 +380,9 @@ export const chainContracts: ChainContracts = {
       "0x176211869cA2b568f2A7D4EE941E073a821EE1ff", // USDC
     ],
   },
+  flow: {
+    bridgedFromETH: [
+      "0x7f27352D5F83Db87a5A3E00f4B07Cc2138D8ee52", // Bridged USDC (Celer)
+    ]
+  }
 };

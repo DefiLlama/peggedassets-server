@@ -2631,7 +2631,7 @@ export default [
     address: "0x0D9447E16072b636b4a1E8f2b8C644e58F3eaA6A",
     symbol: "UAHT",
     url: "https://uaht.io",
-    description: "Welcome to the platform where people matter.",
+    description: "Borderless protocol for free people.",
     mintRedeemDescription: "UAHT is pegged to UAH Ukraine Currency",
     onCoinGecko: "true",
     gecko_id: "uaht",
@@ -2640,7 +2640,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
     auditLinks: null,
-    twitter: "https://twitter.com/starscrowding",
+    twitter: "https://twitter.com/uaht_io",
     wiki: "https://github.com/starscrowding/UAHT#readme",
   },
   {
@@ -4252,5 +4252,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/ThresholdUSD",
     wiki: "https://docs.threshold.network/applications/threshold-usd"
+  },
+  {
+    id: "212",
+    name: "Move Dollar",
+    address: "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_coin::MOD",
+    symbol: "MOD",
+    url: "https://app.thala.fi/overview",
+    description:
+      `Thala's stablecoin, Move Dollar (MOD), is backed by both native and multi-chain assets, with an additional ongoing focus on yield-bearing collateral types`,
+    mintRedeemDescription:
+      "Mint MOD by depositing collateral and borrowing less than its value, ensuring over-collateralization. Redeem MOD for $1 worth of collateral minus a fee, establishing a $1 price floor",
+    onCoinGecko: "true",
+    gecko_id: "move-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/ThalaLabs",
+    wiki: "https://docs.thala.fi/overview/move-dollar-mod/stablecoin"
   },
 ] as PeggedAsset[];
