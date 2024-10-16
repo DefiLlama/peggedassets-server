@@ -1,5 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
+import { cosmosSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -77,6 +78,11 @@ async function algorandMinted() {
   };
 }
 
+
+function nobleSupply() {
+  return cosmosSupply("noble", ['ueure'], 6, '', 'peggedEUR');
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -89,6 +95,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   algorand: {
     minted: algorandMinted(),
+  },
+  noble: {
+    minted: nobleSupply(),
   },
 };
 

@@ -147,11 +147,55 @@ export function osmosisLiquidity(
   };
 }
 
+const cosmosEndpoints: any = {
+  crescent: "https://mainnet.crescent.network:1317",
+  osmosis: "https://rest.cosmos.directory/osmosis",
+  cosmos: "https://cosmoshub-lcd.stakely.io",
+  kujira: "https://kuji-api.kleomedes.network",
+  comdex: "https://rest.comdex.one",
+  terra: "https://terra-classic-lcd.publicnode.com",
+  terra2: "https://terra-lcd.publicnode.com",
+  umee: "https://umee-api.polkachu.com",
+  orai: "https://lcd.orai.io",
+  juno: "https://juno.api.m.stavr.tech",
+  cronos: "https://rest.mainnet.crypto.org",
+  chihuahua: "https://rest.cosmos.directory/chihuahua",
+  stargaze: "https://rest.stargaze-apis.com",
+  quicksilver: "https://rest.cosmos.directory/quicksilver",
+  persistence: "https://rest.cosmos.directory/persistence",
+  secret: "https://rpc.ankr.com/http/scrt_cosmos",
+  // chihuahua: "https://api.chihuahua.wtf",
+  injective: "https://injective-rest.publicnode.com",
+  migaloo: "https://migaloo-api.polkachu.com",
+  fxcore: "https://fx-rest.functionx.io",
+  xpla: "https://dimension-lcd.xpla.dev",
+  kava: "https://api2.kava.io",
+  neutron: "https://rest-kralum.neutron-1.neutron.org",
+  quasar: "https://quasar-api.polkachu.com",
+  gravitybridge: "https://gravitychain.io:1317",
+  sei: "https://sei-rest.publicnode.com",
+  aura: "https://lcd.aura.network",
+  archway: "https://api.mainnet.archway.io",
+  sifchain: "https://sifchain-api.polkachu.com",
+  nolus: "https://pirin-cl.nolus.network:1317",
+  nibiru: "https://lcd.nibiru.fi",
+  bostrom: "https://lcd.bostrom.cybernode.ai",
+  joltify: "https://lcd.joltify.io",
+  noble: "https://api.noble.xyz"
+};
+
+
+function getCosmosRPC(chain: string) {
+  if (cosmosEndpoints[chain]) return cosmosEndpoints[chain];
+  return `https://rest.cosmos.directory/${chain}`;
+}
+
 export function cosmosSupply(
   chain: string,
   tokens: string[],
   decimals: number,
-  bridgedFromChain: string
+  bridgedFromChain: string,
+  pegType: PeggedAssetType = "peggedUSD"
 ) {
   return async function (
     _timestamp: number,
@@ -160,15 +204,18 @@ export function cosmosSupply(
   ) {
     let balances = {} as Balances;
     for (let token of tokens) {
+      let api = `cosmos/bank/v1beta1/supply/by_denom?denom=${token}`
+      if (chain === 'noble')
+        api = `cosmos/bank/v1beta1/supply/${token}`
       const res = await retry(
         async (_bail: any) =>
           await axios.get(
-            `https://rest.cosmos.directory/${chain}/cosmos/bank/v1beta1/supply/by_denom?denom=${token}`
+            `${getCosmosRPC(chain)}/${api}`
           )
       );
       sumSingleBalance(
         balances,
-        "peggedUSD",
+        pegType,
         parseInt(res.data.amount.amount) / 10 ** decimals,
         token,
         false,
