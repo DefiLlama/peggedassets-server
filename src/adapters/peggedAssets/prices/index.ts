@@ -1,55 +1,55 @@
 import { PriceSource } from "../../../peggedData/types";
 const axios = require("axios");
-import fetch from "node-fetch";
-import { executeAndIgnoreErrors } from "../../../peggedAssets/storePeggedAssets/errorDb";
-import { getCurrentUnixTimestamp } from "../../../utils/date";
 
 const PRICES_API = "https://coins.llama.fi/prices";
 
 export type GetCoingeckoLog = () => Promise<any>;
 
-const locks = [] as ((value: unknown) => void)[];
-function getCoingeckoLock() {
-  return new Promise((resolve) => {
-    locks.push(resolve);
-  });
-}
-function releaseCoingeckoLock() {
-  const firstLock = locks.shift();
-  if (firstLock !== undefined) {
-    firstLock(null);
+
+export async function getPrices(assets: any[]) {
+  const mapping = {} as any;
+  function getTokenAddress(token: any) {
+    let id = token.address
+    if (id)
+      return id.startsWith("0x") ? 'ethereum:' + id : id;
+    return 'coingecko:' + token.gecko_id;
   }
-}
+  assets.forEach((token) => {
+    mapping[getTokenAddress(token)] = token.gecko_id;
+  })
+  const tokens = Object.keys(mapping)
+  const finalRes = {} as any;
+  const chunks = []
+  const chunkSize = 50
+  for (let i = 0; i < tokens.length; i += chunkSize) {
+    chunks.push(tokens.slice(i, i + chunkSize))
+  }
 
-setInterval(() => {
-  releaseCoingeckoLock();
-}, 7000);
-
-function storePriceError(tokenID: string) {
-  executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
-    getCurrentUnixTimestamp(),
-    `prices-${tokenID}`,
-    `Token has pricing method but it failed.`,
-  ]);
+  for (const chunk of chunks) {
+    const { data: res } = await axios(PRICES_API + "/current/" + chunk.join(","))
+    Object.entries(res.coins).map(([key, value]: [any, any]) => {
+      finalRes[mapping[key]] = value.price;
+    })
+  }
+  finalRes["terrausd"] = 0
+  return finalRes
 }
 
 export default async function getCurrentPeggedPrice(
   token: string,
   priceSource: PriceSource
 ): Promise<number | null> {
-  if (priceSource === "defillama") {
+  if (token === "terrausd") return 0
+  if (priceSource === "defillama" || priceSource === "coingecko") {
     for (let i = 0; i < 5; i++) {
       try {
         const key = "coingecko:" + token;
-        const res = await fetch(PRICES_API + "/current/" + key).then(
-          (r) => r.json() as any
-        );
+        const { data: res } = await axios(PRICES_API + "/current/" + key)
         const price = res?.coins?.[key]?.price;
         if (price) {
           return price;
         } else {
           console.error(`Could not get DefiLlama price for token ${token}`);
-          storePriceError(token);
           return null;
         }
       } catch (e) {
@@ -58,32 +58,6 @@ export default async function getCurrentPeggedPrice(
       }
     }
     console.error(`Could not get DefiLlama price for token ${token}`);
-    storePriceError(token);
-    return null;
-  }
-  if (priceSource === "coingecko") {
-    // only use as last resort
-    for (let i = 0; i < 3; i++) {
-      try {
-        await getCoingeckoLock();
-        const res = await axios.get(
-          `https://api.coingecko.com/api/v3/simple/price?ids=${token}&vs_currencies=usd`
-        );
-        const price = res?.data?.[token]?.usd;
-        if (price) {
-          return price;
-        } else {
-          console.error(`Could not get Coingecko price for token ${token}`);
-          storePriceError(token);
-          return null;
-        }
-      } catch (e) {
-        console.error(token, e);
-        continue;
-      }
-    }
-    console.error(`Could not get Coingecko price for token ${token}`);
-    storePriceError(token);
     return null;
   }
   console.error(

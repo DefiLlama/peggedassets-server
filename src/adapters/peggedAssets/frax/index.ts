@@ -12,7 +12,7 @@ import {
   PeggedIssuanceAdapter,
   Balances,  ChainContracts,
 } from "../peggedAsset.type";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 
 
 // all multichain
@@ -37,6 +37,9 @@ const chainContracts: ChainContracts = {
   },
   fantom: {
     bridgedFromETH: ["0xdc301622e621166BD8E82f2cA0A26c13Ad0BE355"],
+  },
+  era: {
+    bridgedFromETH: ["0xb4C1544cb4163f4C2ECa1aE9Ce999F63892d912A"],
   },
   evmos: {
     bridgedFromETH: ["0xE03494D0033687543a80c9B1ca7D6237F2EA8BD8"],
@@ -140,7 +143,7 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     ethereum: bridgedSupply("bsc", 18, chainContracts.bsc.bridgedFromETH),
   },
-  avalanche: {
+  avax: {
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
   },
   arbitrum: {
@@ -246,6 +249,13 @@ const adapter: PeggedIssuanceAdapter = {
       "fraxtal",
       18,
       chainContracts.fraxtal.bridgedFromETH
+    ),
+  },
+  era: {
+    ethereum: bridgedSupply(
+      "era",
+      18,
+      chainContracts.era.bridgedFromETH
     ),
   },
 };

@@ -59,6 +59,13 @@ const chainContracts = {
       "0x6f87b39a2e36F205706921d81a6861B655db6358", // iUSX
     ],
   },
+  base: {
+    issued: ["0xc142171B138DB17a1B7Cb999C44526094a4dae05"],
+    unreleased: [
+      "0x7d43AABC515C356145049227CeE54B608342c0ad", // cbridge
+      // "0x82AFc965E4E18009DD8d5AF05cfAa99bF0E605df", // iUSX
+    ],
+  },
 };
 
 

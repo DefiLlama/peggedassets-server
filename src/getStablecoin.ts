@@ -1,10 +1,8 @@
 import {
-  successResponse,
   wrap,
   IResponse,
   errorResponse,
 } from "./utils/shared";
-import fetch from "node-fetch";
 import { getHistoricalValues } from "./utils/shared/dynamodb";
 import peggedAssets from "./peggedData/peggedData";
 import {
@@ -15,6 +13,7 @@ import {
 import { getChainDisplayName } from "./utils/normalizeChain";
 import { importAdapter } from "./peggedAssets/utils/importAdapter";
 import { wrapResponseOrRedirect } from "./utils/wrapOrRedirect";
+import { fetchPrices } from "./utils/fetchPrices";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
 type HourlyTvl = AWS.DynamoDB.DocumentClient.AttributeMap | undefined;
@@ -28,16 +27,10 @@ function replaceLast(historical: HistoricalTvls, last: HourlyTvl) {
 export async function craftProtocolResponse(
   peggedID: string | undefined,
   useNewChainNames: boolean,
-  useHourlyData: boolean
+  useHourlyData: boolean,
+  { peggedPrices }: { peggedPrices?: any; } = {}
 ) {
-  let prices = {} as any;
-  prices = await fetch(
-    "https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/peggedPrices.json"
-  )
-    .then((res: any) => res.json())
-    .catch(() => {
-      console.error("Could not fetch pegged prices");
-    });
+  let prices = await fetchPrices(peggedPrices);
 
   const peggedData = peggedAssets.find((pegged) => pegged.id === peggedID);
   if (peggedData === undefined) {
@@ -86,12 +79,12 @@ export async function craftProtocolResponse(
       ?.map((item) =>
         typeof item[normalizedChain] === "object"
           ? {
-              date: item.SK,
-              circulating: item[normalizedChain].circulating ?? 0,
-              minted: item[normalizedChain].minted ?? 0,
-              unreleased: item[normalizedChain].unreleased ?? 0,
-              bridgedTo: item[normalizedChain].bridgedTo ?? 0,
-            }
+            date: item.SK,
+            circulating: item[normalizedChain].circulating ?? 0,
+            minted: item[normalizedChain].minted ?? 0,
+            unreleased: item[normalizedChain].unreleased ?? 0,
+            bridgedTo: item[normalizedChain].bridgedTo ?? 0,
+          }
           : { circulating: undefined }
       )
       .filter((item) => item.circulating !== undefined);

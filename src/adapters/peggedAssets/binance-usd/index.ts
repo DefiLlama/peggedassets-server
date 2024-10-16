@@ -8,7 +8,7 @@ import {
   supplyInEthereumBridge,
   osmosisSupply,
 } from "../helper/getSupply";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
 import {
   ChainBlocks,
@@ -149,7 +149,7 @@ const chainContracts: any = {
     bridgeOnETH: ["0x674bdf20A0F284D710BC40872100128e2d66Bd3f"],
   },
   era: {
-    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    bridgeOnETH: ["0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB"],
     bridgedFromETH: ["0x9a455d1a2b4630ffdb9a2307f2e875400d28b3c5"],
   },
   ethereumclassic: {
@@ -322,7 +322,7 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     ethereum: async () => ({}),
   },
-  avalanche: {
+  avax: {
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
   },
   harmony: {

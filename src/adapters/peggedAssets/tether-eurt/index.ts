@@ -171,10 +171,12 @@ const adapter: PeggedIssuanceAdapter = {
       "peggedEUR"
     ),
   },
+  /*
   omni: {
     minted: omniMinted(),
     unreleased: omniUnreleased(),
   },
+  */
 };
 
 export default adapter;

@@ -1,11 +1,8 @@
-const sdk = require("@defillama/sdk");
-import fetch from "node-fetch";
+import axios from "axios";
 import { sumSingleBalance } from "../helper/generalUtil";
-import { solanaMintedOrBridged } from "../helper/getSupply";
 import {
   ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
+  Balances, ChainContracts,
 } from "../peggedAsset.type";
 
 
@@ -30,90 +27,19 @@ const chainContracts: ChainContracts = {
   },
 };
 
-async function concordiumMinted(apiEndpoint: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
 
-    try {
-      const res = await fetch(apiEndpoint);
+import { addChainExports } from "../helper/getSupply";
+const adapter = addChainExports(chainContracts, undefined, {
+  pegType: 'peggedEUR'
+});
 
-      if (!res.ok) {
-        throw new Error(
-          `Failed to fetch data from Concordium API. Status: ${res.status}`
-        );
-      }
-
-      const totalSupply = parseFloat(await res.text());
-      const formattedTotalSupply = Number(totalSupply.toFixed(decimals));
-      sumSingleBalance(
-        balances,
-        "peggedEUR",
-        formattedTotalSupply,
-        apiEndpoint,
-        true
-      );
-    } catch (error) {
-      console.error(`Error fetching data from Concordium API: ${error}`);
-    }
-
-    return balances;
-  };
+async function concordiumMinted() {
+  let balances = {} as Balances;
+  const { data: res } = await axios("https://www.euroe.com/api/totalsupply/CCD");
+  sumSingleBalance(balances, "peggedEUR", Number(res.toFixed(2)), 'euroe', true);
+  return balances;
 }
 
-async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedEUR",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 6),
-  },
-  polygon: {
-    minted: chainMinted("polygon", 6),
-  },
-  arbitrum: {
-    minted: chainMinted("arbitrum", 6),
-  },
-  avalanche: {
-    minted: chainMinted("avax", 6),
-  },
-  solana: {
-    minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedEUR"),
-  },
-  optimism: {
-    minted: chainMinted("optimism", 6),
-  },
-  concordium: {
-    minted: concordiumMinted("https://www.euroe.com/api/totalsupply/CCD", 6),
-  },
-};
+adapter.concordium = { minted: concordiumMinted, }
 
 export default adapter;

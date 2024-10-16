@@ -1,5 +1,4 @@
 import { storePeggedAsset } from "./getAndStorePeggedAssets";
-import { getCurrentBlocks } from "./blocks";
 import peggedAssets from "../../peggedData/peggedData";
 import { importAdapter } from "../utils/importAdapter";
 import { executeAndIgnoreErrors } from "./errorDb";

@@ -137,6 +137,9 @@ const chainContracts: ChainContracts = {
   thundercore: {
     bridgedFromBSC: ["0xBEB0131D95AC3F03fd15894D0aDE5DBf7451d171"],
   },
+  era: {
+    bridgedFromBSC: ["0x2039bb4116B4EFc145Ec4f0e2eA75012D6C0f181"], // celer
+  },
 };
 
 /*
@@ -261,7 +264,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("bsc", 18),
     unreleased: chainUnreleased("bsc", 18),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax", 18),
     unreleased: chainUnreleased("avax", 18),
     bsc: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromBSC),
@@ -370,6 +373,13 @@ const adapter: PeggedIssuanceAdapter = {
       "thundercore",
       18,
       chainContracts.thundercore.bridgedFromBSC
+    ),
+  },
+  era: {
+    bsc: bridgedSupply(
+      "era",
+      18,
+      chainContracts.era.bridgedFromBSC,'celer'
     ),
   },
 };

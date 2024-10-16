@@ -24,8 +24,13 @@ const chainContracts = {
     bridgedFromETH: ["0x01E9A866c361eAd20Ab4e838287DD464dc67A50e"],
   },
   era: {
-    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    bridgeOnETH: ["0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB"],
     bridgedFromETH: ["0x503234f203fc7eb888eec8513210612a43cf6115"],
+  },
+  scroll: {
+    bridgedFromETH: [
+      "0xeDEAbc3A1e7D21fE835FFA6f83a710c70BB1a051", // LUSD
+    ],
   },
 };
 import { addChainExports } from "../helper/getSupply";

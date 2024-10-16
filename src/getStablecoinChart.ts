@@ -90,6 +90,18 @@ export async function craftChartsResponse(
     });
   }
 
+  const filterChart = (chart: any) => {
+    return chart
+      .map((entry: any) => {
+        if (!startTimestamp) return entry;
+        if (entry.date < parseInt(startTimestamp)) {
+          return null;
+        }
+        return entry;
+      })
+      .filter((entry: any) => entry);
+  };
+
   if (chain === "all" && useStoredCharts) {
     try {
       const id = peggedID ? peggedID : "all";
@@ -98,18 +110,7 @@ export async function craftChartsResponse(
           `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/all/${id}`
         )
       )?.data;
-      let filteredChart = chart;
-      if (startTimestamp) {
-        filteredChart = chart
-          .map((entry: any) => {
-            if (entry.date < parseInt(startTimestamp)) {
-              return null;
-            }
-            return entry;
-          })
-          .filter((entry: any) => entry);
-      }
-      return filteredChart;
+      return filterChart(chart);
     } catch (e) {
       return [];
     }
@@ -123,18 +124,7 @@ export async function craftChartsResponse(
           `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/charts/${normalizedChain}`
         )
       )?.data;
-      let filteredChart = chart;
-      if (startTimestamp) {
-        filteredChart = chart
-          .map((entry: any) => {
-            if (entry.date < parseInt(startTimestamp)) {
-              return null;
-            }
-            return entry;
-          })
-          .filter((entry: any) => entry);
-      }
-      return filteredChart;
+      return filterChart(chart);
     } catch (e) {
       return [];
     }
@@ -152,6 +142,32 @@ export async function craftChartsResponse(
 
   const normalizedChain = normalizeChain(chain);
   let lastDailyTimestamp = 0;
+
+  const historicalRates = await (
+    await axios.get(
+      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`
+    )
+  )?.data;
+  if (historicalRates.length < 1) {
+    return errorResponse({
+      message: "Could not get historical fiat prices.",
+    });
+  }
+  const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
+
+  const historicalPrices = await (
+    await axios.get(
+      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/prices/full`
+    )
+  )?.data;
+  if (historicalPrices.length < 1) {
+    return errorResponse({
+      message: "Could not get historical prices.",
+    });
+  }
+  const priceTimestamps = historicalPrices?.map((item: any) => item.SK);
+  const lastPrices = await getLastRecord(hourlyPeggedPrices);
+
   /*
    * whenever "chain" and "peggedAsset", and peggedAsset has no entry in lastBalance for that chain,
    * historicalPeggedBalances is empty. Not sure exactly where that's happening.
@@ -220,31 +236,6 @@ export async function craftChartsResponse(
     })
   );
 
-  const historicalRates = await (
-    await axios.get(
-      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`
-    )
-  )?.data;
-  if (historicalRates.length < 1) {
-    return errorResponse({
-      message: "Could not get historical fiat prices.",
-    });
-  }
-  const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
-
-  const historicalPrices = await (
-    await axios.get(
-      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/prices/full`
-    )
-  )?.data;
-  if (historicalPrices.length < 1) {
-    return errorResponse({
-      message: "Could not get historical prices.",
-    });
-  }
-  const priceTimestamps = historicalPrices?.map((item: any) => item.SK);
-  const lastPrices = await getLastRecord(hourlyPeggedPrices());
-
   const lastDailyItem = historicalPrices[historicalPrices.length - 1];
   if (
     lastPrices !== undefined &&
@@ -255,172 +246,163 @@ export async function craftChartsResponse(
     historicalPrices[historicalPrices.length - 1] = lastPrices;
   }
 
-  await Promise.all(
-    historicalPeggedBalances.map(async (peggedBalance) => {
-      if (peggedBalance === undefined) {
-        return;
-      }
-      let { historicalBalance, pegged, lastTimestamp } = peggedBalance;
-      const pegType = pegged.pegType;
-      const peggedGeckoID = pegged.gecko_id;
-      const lastBalance = historicalBalance[historicalBalance.length - 1];
+  historicalPeggedBalances.map((peggedBalance) => {
+    if (peggedBalance === undefined) {
+      return;
+    }
+    let { historicalBalance, pegged, lastTimestamp } = peggedBalance;
+    const pegType = pegged.pegType;
+    const peggedGeckoID = pegged.gecko_id;
+    const lastBalance = historicalBalance[historicalBalance.length - 1];
 
-      while (lastTimestamp < lastDailyTimestamp) {
-        lastTimestamp = getClosestDayStartTimestamp(
-          lastTimestamp + 24 * secondsInHour
-        );
-        historicalBalance.push({
-          ...lastBalance,
-          SK: lastTimestamp,
-        });
-      }
-
-      await Promise.all(
-        historicalBalance.map(async (item: any) => {
-          const timestamp = getClosestDayStartTimestamp(item.SK);
-          let itemBalance: any = {};
-
-          const closestPriceIndex = timestampsBinarySearch(
-            priceTimestamps,
-            timestamp,
-            pricesCompareFn
-          );
-          const closestPrices = extractResultOfBinarySearch(
-            historicalPrices,
-            closestPriceIndex
-          );
-          let fallbackPrice = 1;
-          const historicalPrice = closestPrices?.prices[peggedGeckoID];
-          if (pegType === "peggedVAR") {
-            fallbackPrice = 0;
-          } else if (pegType !== "peggedUSD" && !historicalPrice) {
-            const closestRatesIndex = timestampsBinarySearch(
-              rateTimestamps,
-              timestamp,
-              ratesCompareFn
-            );
-            const closestRates = extractResultOfBinarySearch(
-              historicalRates,
-              closestRatesIndex
-            );
-            const ticker = pegType.slice(-3);
-            fallbackPrice = 1 / closestRates?.rates?.[ticker];
-            if (typeof fallbackPrice !== "number") {
-              fallbackPrice = 0;
-            }
-          }
-
-          const price = historicalPrice ? historicalPrice : fallbackPrice;
-
-          if (chain === "all") {
-            if (!item.totalCirculating.circulating) {
-              throw new Error(
-                `missing totalCirculating for ${peggedGeckoID} at timestamp ${timestamp}`
-              );
-            }
-            const itemPegType = Object.keys(
-              item.totalCirculating.circulating
-            )?.[0];
-            if (
-              item.totalCirculating.circulating &&
-              !(itemPegType === pegType)
-            ) {
-              throw new Error(
-                `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
-              );
-            }
-
-            itemBalance.circulating = item.totalCirculating.circulating ?? {
-              [pegType]: 0,
-            };
-            if (item.totalCirculating.unreleased) {
-              itemBalance.unreleased = item.totalCirculating.unreleased;
-            }
-            itemBalance.bridgedTo = { [pegType]: 0 };
-            itemBalance.minted = { [pegType]: 0 };
-          } else {
-            if (item[normalizedChain]?.circulating) {
-              const itemPegType = Object.keys(
-                item[normalizedChain].circulating
-              )?.[0];
-              if (
-                item[normalizedChain]?.circulating &&
-                !(itemPegType === pegType)
-              ) {
-                throw new Error(
-                  `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
-                );
-              }
-            }
-
-            itemBalance.circulating = item[normalizedChain]?.circulating ?? {
-              [pegType]: 0,
-            };
-            itemBalance.unreleased = item[normalizedChain]?.unreleased ?? {
-              [pegType]: 0,
-            };
-            itemBalance.bridgedTo = item[normalizedChain]?.bridgedTo ?? {
-              [pegType]: 0,
-            };
-            itemBalance.minted = item[normalizedChain]?.minted ?? {
-              [pegType]: 0,
-            };
-            if (itemBalance.circulating === undefined) {
-              return;
-            }
-          }
-
-          // need stricter checks here
-          if (itemBalance !== null) {
-            sumDailyBalances[timestamp] = sumDailyBalances[timestamp] || {};
-            sumDailyBalances[timestamp].circulating =
-              sumDailyBalances[timestamp].circulating || {};
-            sumDailyBalances[timestamp].circulating[pegType] =
-              (sumDailyBalances[timestamp].circulating[pegType] ?? 0) +
-              itemBalance.circulating[pegType];
-
-            sumDailyBalances[timestamp].unreleased =
-              sumDailyBalances[timestamp].unreleased || {};
-            sumDailyBalances[timestamp].unreleased[pegType] =
-              (sumDailyBalances[timestamp].unreleased[pegType] ?? 0) +
-              itemBalance.unreleased[pegType];
-
-            sumDailyBalances[timestamp].totalCirculatingUSD =
-              sumDailyBalances[timestamp].totalCirculatingUSD || {};
-            sumDailyBalances[timestamp].totalCirculatingUSD[pegType] =
-              (sumDailyBalances[timestamp].totalCirculatingUSD[pegType] ?? 0) +
-              itemBalance.circulating[pegType] * price;
-
-            sumDailyBalances[timestamp].totalMintedUSD =
-              sumDailyBalances[timestamp].totalMintedUSD || {};
-            sumDailyBalances[timestamp].totalMintedUSD[pegType] =
-              (sumDailyBalances[timestamp].totalMintedUSD[pegType] ?? 0) +
-              (itemBalance.minted[pegType] - itemBalance.unreleased[pegType]) *
-                price;
-
-            sumDailyBalances[timestamp].totalBridgedToUSD =
-              sumDailyBalances[timestamp].totalBridgedToUSD || {};
-            sumDailyBalances[timestamp].totalBridgedToUSD[pegType] =
-              (sumDailyBalances[timestamp].totalBridgedToUSD[pegType] ?? 0) +
-              itemBalance.bridgedTo[pegType] * price;
-            if (chain === "all") {
-              sumDailyBalances[timestamp].totalMintedUSD[pegType] = 0;
-              sumDailyBalances[timestamp].totalBridgedToUSD[pegType] = 0;
-            }
-          } else {
-            console.log(
-              "itemBalance is invalid",
-              itemBalance,
-              item,
-              pegged,
-              lastTimestamp,
-              historicalBalance
-            );
-          }
-        })
+    while (lastTimestamp < lastDailyTimestamp) {
+      lastTimestamp = getClosestDayStartTimestamp(
+        lastTimestamp + 24 * secondsInHour
       );
-    })
-  );
+      historicalBalance.push({
+        ...lastBalance,
+        SK: lastTimestamp,
+      });
+    }
+
+    historicalBalance.map((item: any) => {
+      const timestamp = getClosestDayStartTimestamp(item.SK);
+      let itemBalance: any = {};
+
+      const closestPriceIndex = timestampsBinarySearch(
+        priceTimestamps,
+        timestamp,
+        pricesCompareFn
+      );
+      const closestPrices = extractResultOfBinarySearch(
+        historicalPrices,
+        closestPriceIndex
+      );
+      let fallbackPrice = 1;
+      const historicalPrice = closestPrices?.prices[peggedGeckoID];
+      if (pegType === "peggedVAR") {
+        fallbackPrice = 0;
+      } else if (pegType !== "peggedUSD" && !historicalPrice) {
+        const closestRatesIndex = timestampsBinarySearch(
+          rateTimestamps,
+          timestamp,
+          ratesCompareFn
+        );
+        const closestRates = extractResultOfBinarySearch(
+          historicalRates,
+          closestRatesIndex
+        );
+        const ticker = pegType.slice(-3);
+        fallbackPrice = 1 / closestRates?.rates?.[ticker];
+        if (typeof fallbackPrice !== "number") {
+          fallbackPrice = 0;
+        }
+      }
+
+      const price = historicalPrice ? historicalPrice : fallbackPrice;
+
+      if (chain === "all") {
+        if (!item.totalCirculating.circulating) {
+          throw new Error(
+            `missing totalCirculating for ${peggedGeckoID} at timestamp ${timestamp}`
+          );
+        }
+        const itemPegType = Object.keys(item.totalCirculating.circulating)?.[0];
+        if (item.totalCirculating.circulating && !(itemPegType === pegType)) {
+          throw new Error(
+            `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
+          );
+        }
+
+        itemBalance.circulating = item.totalCirculating.circulating ?? {
+          [pegType]: 0,
+        };
+        if (item.totalCirculating.unreleased) {
+          itemBalance.unreleased = item.totalCirculating.unreleased;
+        }
+        itemBalance.bridgedTo = { [pegType]: 0 };
+        itemBalance.minted = { [pegType]: 0 };
+      } else {
+        if (item[normalizedChain]?.circulating) {
+          const itemPegType = Object.keys(
+            item[normalizedChain].circulating
+          )?.[0];
+          if (
+            item[normalizedChain]?.circulating &&
+            !(itemPegType === pegType)
+          ) {
+            throw new Error(
+              `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
+            );
+          }
+        }
+
+        itemBalance.circulating = item[normalizedChain]?.circulating ?? {
+          [pegType]: 0,
+        };
+        itemBalance.unreleased = item[normalizedChain]?.unreleased ?? {
+          [pegType]: 0,
+        };
+        itemBalance.bridgedTo = item[normalizedChain]?.bridgedTo ?? {
+          [pegType]: 0,
+        };
+        itemBalance.minted = item[normalizedChain]?.minted ?? {
+          [pegType]: 0,
+        };
+        if (itemBalance.circulating === undefined) {
+          return;
+        }
+      }
+
+      // need stricter checks here
+      if (itemBalance !== null) {
+        sumDailyBalances[timestamp] = sumDailyBalances[timestamp] || {};
+        sumDailyBalances[timestamp].circulating =
+          sumDailyBalances[timestamp].circulating || {};
+        sumDailyBalances[timestamp].circulating[pegType] =
+          (sumDailyBalances[timestamp].circulating[pegType] ?? 0) +
+          itemBalance.circulating[pegType];
+
+        sumDailyBalances[timestamp].unreleased =
+          sumDailyBalances[timestamp].unreleased || {};
+        sumDailyBalances[timestamp].unreleased[pegType] =
+          (sumDailyBalances[timestamp].unreleased[pegType] ?? 0) +
+          itemBalance.unreleased[pegType];
+
+        sumDailyBalances[timestamp].totalCirculatingUSD =
+          sumDailyBalances[timestamp].totalCirculatingUSD || {};
+        sumDailyBalances[timestamp].totalCirculatingUSD[pegType] =
+          (sumDailyBalances[timestamp].totalCirculatingUSD[pegType] ?? 0) +
+          itemBalance.circulating[pegType] * price;
+
+        sumDailyBalances[timestamp].totalMintedUSD =
+          sumDailyBalances[timestamp].totalMintedUSD || {};
+        sumDailyBalances[timestamp].totalMintedUSD[pegType] =
+          (sumDailyBalances[timestamp].totalMintedUSD[pegType] ?? 0) +
+          (itemBalance.minted[pegType] - itemBalance.unreleased[pegType]) *
+            price;
+
+        sumDailyBalances[timestamp].totalBridgedToUSD =
+          sumDailyBalances[timestamp].totalBridgedToUSD || {};
+        sumDailyBalances[timestamp].totalBridgedToUSD[pegType] =
+          (sumDailyBalances[timestamp].totalBridgedToUSD[pegType] ?? 0) +
+          itemBalance.bridgedTo[pegType] * price;
+        if (chain === "all") {
+          sumDailyBalances[timestamp].totalMintedUSD[pegType] = 0;
+          sumDailyBalances[timestamp].totalBridgedToUSD[pegType] = 0;
+        }
+      } else {
+        console.log(
+          "itemBalance is invalid",
+          itemBalance,
+          item,
+          pegged,
+          lastTimestamp,
+          historicalBalance
+        );
+      }
+    });
+  });
 
   const response = Object.entries(sumDailyBalances).map(
     ([timestamp, balance]) => ({
@@ -439,7 +421,8 @@ export async function craftChartsResponse(
 const handler = async (
   event: AWSLambda.APIGatewayEvent
 ): Promise<IResponse> => {
-  const chain = event.pathParameters?.chain?.toLowerCase();
+  let chain = event.pathParameters?.chain?.toLowerCase();
+  if (chain) chain = decodeURIComponent(chain);
   const peggedID = event.queryStringParameters?.stablecoin?.toLowerCase();
   const startTimestamp = event.queryStringParameters?.startts?.toLowerCase();
   const response = await craftChartsResponse(chain, peggedID, startTimestamp);

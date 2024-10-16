@@ -1,7 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
-import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
-import { getTokenSupply as solanaGetTokenSupply } from "../llama-helper/solana";
+import { getTokenBalance as solanaGetTokenBalance, getTokenSupply as solanaGetTokenSupply } from "../helper/solana";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -349,7 +348,7 @@ const adapter: PeggedIssuanceAdapter = {
   fantom: {
     none: maiApiCirculating("fantomSupply"),
   },
-  avalanche: {
+  avax: {
     none: maiApiCirculating("avalancheSupply"),
   },
   moonriver: {
@@ -463,7 +462,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.solana.reserveAddress[0]
     ),
   },
-  avalanche: {
+  avax: {
     polygon: bridgedMAISupply(
       "avax",
       18,

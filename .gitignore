@@ -16,3 +16,5 @@ src/testGetPeggedChart.ts
 src/adapters/peggedAssets/historical/
 package-lock.json
 src/adapters/peggedAssets/storeCoinGeckoPriceHistory.ts
+api2/.api2-cache/*
+.current_commit_hash

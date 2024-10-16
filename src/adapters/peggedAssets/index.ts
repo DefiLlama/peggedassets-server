@@ -33,6 +33,7 @@ import sperax from "./sperax-usd";
 import usdp from "./usdp";
 import usdb from "./usd-balance";
 import mimatic from "./mimatic";
+import hchf from "./hedera-swiss-franc";
 //import ratio from "./ratio-stable-coin";
 import usdj from "./just-stablecoin";
 import stbl from "./stbl";
@@ -50,7 +51,7 @@ import usn from "./usn";
 import bai from "./bai-stablecoin";
 import gai from "./gai-stablecoin";
 import eurt from "./tether-eurt";
-import eurc from "./euro-coin";
+import eurc from "./eurc";
 import stasis from "./stasis-eurs";
 import ceur from "./celo-euro";
 import seur from "./seur";
@@ -140,7 +141,7 @@ import usdm from "./usdm";
 import nars from "./nars";
 import phase from "./phase-dollar";
 import inter from "./inter-stable-token";
-import eeur from "./e-money-eur";
+//import eeur from "./e-money-eur";
 import cdt from "./collateralized-debt-token";
 import aeeur from "./aryze-eeur";
 import aegbp from "./aryze-egbp";
@@ -191,6 +192,26 @@ import fxbtcusd from "./f-x-btc-usd";
 import bitusd from "./bitsmiley-bitusd";
 import usda from "./angle-usd"
 import usc2  from "./usc-2";
+import ckusdc from "./ckusdc";
+import usd0 from "./usual-usd";
+import classicusd from "./classic-usd";
+import usr from "./resolv-usr";
+import ausd from "./stable-jack-ausd";
+import creal from "./celo-real-creal";
+import hexdc from "./hex-dollar-coin";
+import usdz from "./anzen-usdz";
+import chadusd from "./chad-usd"; // since there is a cusd already, will use this, we did something like this for coin98
+import bnusd from "./balanced-dollars";
+import ausdagora from "./agora-dollar";
+import opuscash from "./opus-cash";
+import dyad from "./dyad";
+import dckusd from "./dackie-usd";
+import skydollar from "./usds";
+import deusd from "./elixir-deusd";
+import thusd from "./threshold-usd";
+import m from "./m-by-m^0";
+import mod from "./move-dollar";
+import usdx0 from "./usdx-money-usdx";
 
 export default {
   tether,
@@ -334,7 +355,7 @@ export default {
   "num-ars": nars,
   "phase-dollar": phase,
   "inter-stable-token": inter,
-  "e-money-eur": eeur,
+  //"e-money-eur": eeur,
   "collateralized-debt-token": cdt,
   "aryze-eusd": aeusd,
   "aryze-eeur": aeeur,
@@ -385,5 +406,26 @@ export default {
   "f-x-btc-usd": fxbtcusd,
   "bitsmiley-bitusd": bitusd,
   "angle-usd": usda,
-  "usc-2": usc2
+  "usc-2": usc2,
+  ckusdc, //fakecg
+  "usual-usd": usd0,
+  "classic-usd": classicusd,
+  "resolv-usr": usr,
+  "stable-jack-ausd": ausd,
+  "hedera-swiss-franc": hchf,
+  "celo-real-creal": creal,
+  "hex-dollar-coin": hexdc,
+  "anzen-usdz": usdz,
+  "chad-usd": chadusd,
+  "balanced-dollars": bnusd,
+  "agora-dollar": ausdagora,
+  "opus-cash": opuscash,
+  "dyad": dyad,
+  "dackie-usd": dckusd,
+  "usds": skydollar,
+  "elixir-deusd": deusd,
+  "threshold-usd": thusd,
+  "move-dollar": mod,
+  "usdx-money-usdx": usdx0,
+  "m-by-m^0": m,
 };

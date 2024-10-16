@@ -947,10 +947,6 @@ export default {
     bridge: "axelar",
     sourceChain: formattedSourceChains.eth,
   },
-  "0x6de8aCC0D406837030CE4dd28e7c08C5a96a30d2": {
-    bridge: "axelar",
-    sourceChain: formattedSourceChains.eth
-  },
   "0x8e70cD5B4Ff3f62659049e74b6649c6603A0E594": {
     bridge: "nomad",
     sourceChain: formattedSourceChains.eth,
@@ -1750,6 +1746,10 @@ export const bridgeInfo = {
     link: "https://www.hecochain.com/",
   },
   avalanche: {
+    name: "Avalanche Bridge",
+    link: "https://bridge.avax.network/",
+  },
+  avax: {
     name: "Avalanche Bridge",
     link: "https://bridge.avax.network/",
   },

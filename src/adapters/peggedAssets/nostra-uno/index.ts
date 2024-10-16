@@ -1,5 +1,5 @@
 const sdk = require("@defillama/sdk");
-import { call } from "../llama-helper/starknet";
+import { call } from "../helper/starknet";
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
   Balances,

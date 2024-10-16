@@ -81,7 +81,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xea32a96608495e54156ae48931a7c20f0dcc1a21"],
   },
   era: {
-    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    issued: ["0x1d17CBcF0D6D143135aE902365D2E5e2A16538D4"],
+    bridgeOnETH: ["0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB"],
     bridgedFromETH: ["0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4"],
   },
   polygon_zkevm: {
@@ -225,6 +226,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x3ad9dfe640e1a9cc1d9b0948620820d975c3803a"], // synapse
   },
   celo: {
+    issued: ["0xcebA9300f2b948710d2653dD7B07f33A8B32118C"],
     bridgedFromETH6Decimals: [
       "0xef4229c8c3250C675F21BCefa42f58EfbfF6002a", // optics
       "0x37f750B7cC259A2f741AF45294f6a16572CF5cAd", // wormhole
@@ -351,9 +353,36 @@ export const chainContracts: ChainContracts = {
   },
   imx: {
     //issued: ["0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"],
-    //bridgeOnETH: ["0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"],
+    bridgeOnETH: ["0xBa5E35E26Ae59c7aea6F029B68c6460De2d13eB6"],
     bridgedFromETH: [
-      "0x6de8aCC0D406837030CE4dd28e7c08C5a96a30d2", //axelar
+      "0x6de8aCC0D406837030CE4dd28e7c08C5a96a30d2", //maybe native bridge?
+      "0xEB466342C4d449BC9f53A865D5Cb90586f405215" //axelar
       ],
   },
+  scroll: {
+    bridgedFromETH: [
+      "0x06efdbff2a14a7c8e15944d1f4a48f9f95f663a4", // usdc
+    ],
+  },
+  taiko: {
+    bridgedFromETH: [
+      "0x07d83526730c7438048D55A4fc0b850e2aaB6f0b", // USDC
+    ],
+  },
+  mantle: {
+    bridgedFromETH: [
+      "0x09Bc4E0D864854c6aFB6eB9A9cdF58aC190D0dF9", // USDC Bridged
+      "0xEB466342C4d449BC9f53A865D5Cb90586f405215", // Axelar Wrapped USDC
+    ],
+  },
+  linea: {
+    bridgedFromETH: [
+      "0x176211869cA2b568f2A7D4EE941E073a821EE1ff", // USDC
+    ],
+  },
+  flow: {
+    bridgedFromETH: [
+      "0x7f27352D5F83Db87a5A3E00f4B07Cc2138D8ee52", // Bridged USDC (Celer)
+    ]
+  }
 };

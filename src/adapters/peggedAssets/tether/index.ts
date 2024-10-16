@@ -16,11 +16,12 @@ import {
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
 import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
+  PeggedAssetType,
 } from "../peggedAsset.type";
 import {
   getTokenBalance as tronGetTokenBalance,
@@ -164,6 +165,31 @@ async function liquidMinted() {
       balances,
       "peggedUSD",
       (issued - burned) / 10 ** 8,
+      "issued",
+      false
+    );
+    return balances;
+  };
+}
+
+async function tonMinted() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          "https://toncenter.com/api/v3/jetton/masters?address=EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs&limit=128&offset=0"
+        )
+    );
+    const issued = res.data.jetton_masters[0].total_supply;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      (issued) / 10 ** 6,
       "issued",
       false
     );
@@ -528,6 +554,54 @@ async function aptosBridged() {
   };
 }
 
+async function injectiveETHBridged(_api: ChainApi) {
+  const bridgeName = 'peggy'
+  const bscApi = await getApi('ethereum', _api)
+  let balances = {} as Balances;
+  let assetPegType = "peggedUSD" as PeggedAssetType
+  const bscBal = await bscApi.call({  abi: 'erc20:balanceOf', target: '0xdAC17F958D2ee523a2206206994597C13D831ec7', params: '0xF955C57f9EA9Dc8781965FEaE0b6A2acE2BAD6f3'})
+  sumSingleBalance(balances, assetPegType, bscBal/ 1e6, bridgeName, false, 'ethereum')
+  return balances;
+}
+
+async function stacksBSCBridged(_api: ChainApi) {
+  const bridgeName = 'alex'
+  const bscApi = await getApi('bsc', _api)
+  let balances = {} as Balances;
+  let assetPegType = "peggedUSD" as PeggedAssetType
+  const bscBal = await bscApi.call({  abi: 'erc20:balanceOf', target: '0x55d398326f99059fF775485246999027B3197955', params: '0x7ceC01355aC0791dE5b887e80fd20e391BCB103a'})
+  sumSingleBalance(balances, assetPegType, bscBal/ 1e18, bridgeName, false, 'bsc')
+  // const ethApi = await getApi('ethereum', _api)
+  // const ethBal = await ethApi.call({  abi: 'erc20:balanceOf', target: '0x55d398326f99059fF775485246999027B3197955', params: '0x7ceC01355aC0791dE5b887e80fd20e391BCB103a'})
+  // sumSingleBalance(balances, assetPegType, ethBal/ 1e6, bridgeName, false, 'ethereum')
+  return balances;
+}
+
+async function elrondBridged(tokenID: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
+        )
+    );
+    const supply = res?.data?.data?.supply / 10 ** decimals;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply,
+      "adastra",
+      false,
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -568,14 +642,14 @@ const adapter: PeggedIssuanceAdapter = {
       ],
       "peggedUSD"
     ),
-    avalanche: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
+    avax: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
     solana: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromSol),
     tron: bscBridgedFromTron(
       chainContracts.bsc.bridgedFromETHAndTron[0],
       chainContracts.bsc.bridgeOnETH[0]
     ),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax", 6),
     unreleased: chainUnreleased("avax", 6, chainContracts.avax.unreleased[0]),
     ethereum: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromETH),
@@ -589,7 +663,7 @@ const adapter: PeggedIssuanceAdapter = {
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
     heco: solanaMintedOrBridged(chainContracts.solana.bridgedFromHeco),
-    avalanche: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
+    avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
   },
   arbitrum: {
     ethereum: bridgedSupply(
@@ -760,13 +834,13 @@ const adapter: PeggedIssuanceAdapter = {
     solana: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromSol),
     bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
     polygon: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromPolygon),
-    avalanche: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
+    avax: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
   },
   terra: {
     ethereum: terraSupply(chainContracts.terra.bridgedFromETH, 6),
     solana: terraSupply(chainContracts.terra.bridgedFromSol, 6),
     bsc: terraSupply(chainContracts.terra.bridgedFromBSC, 6),
-    avalanche: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
+    avax: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
   },
   statemine: {
     minted: usdtApiMinted("totaltokens_statemine"),
@@ -802,10 +876,10 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   era: {
-    ethereum: supplyInEthereumBridge(
-      chainContracts.ethereum.issued[0],
-      chainContracts.era.bridgeOnETH[0],
-      6
+    ethereum: bridgedSupply(
+      "era",
+      6,
+      chainContracts.era.bridgedFromETH
     ),
   },
   shiden: {
@@ -815,6 +889,8 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromETH),
   },
   celo: {
+    minted: usdtApiMinted("totaltokens_celo"),
+    unreleased: usdtApiUnreleased("reserve_balance_celo"),
     ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
@@ -940,6 +1016,36 @@ const adapter: PeggedIssuanceAdapter = {
   pulse: {
     ethereum: bridgedSupply("pulse", 6, chainContracts.pulse.bridgedFromETH),
   },
+  ton: {
+    minted: tonMinted(),
+    unreleased: usdtApiUnreleased("reserve_balance_ton"),
+  },
+  scroll: {
+    ethereum: bridgedSupply("scroll", 6, chainContracts.scroll.bridgedFromETH),
+  },
+  taiko: {
+    ethereum: bridgedSupply("taiko", 6, chainContracts.taiko.bridgedFromETH),
+  },
+  mantle: {
+    ethereum: bridgedSupply("mantle", 6, chainContracts.mantle.bridgedFromETH),
+  },
+  linea: {
+    ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
+  },
+  icp: {
+    ethereum: supplyInEthereumBridge('0xdAC17F958D2ee523a2206206994597C13D831ec7', '0xb25eA1D493B49a1DeD42aC5B1208cC618f9A9B80', 6),
+  },
+  stacks: {
+    bsc: stacksBSCBridged,
+  },
+  injective: {
+    ethereum: injectiveETHBridged,
+  },
+  elrond: { // both amounts end up as USDT-f8c08c
+    ethereum: elrondBridged("ETHUSDT-9c73c6", 6),
+    bsc: elrondBridged("BSCUSDT-059796", 18),
+  },
 };
 
 export default adapter;
+

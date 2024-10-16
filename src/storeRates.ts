@@ -1,15 +1,14 @@
 import dynamodb from "./utils/shared/dynamodb";
 import { wrapScheduledLambda } from "./utils/shared/wrap";
 import { store } from "./utils/s3";
-import fetch from "node-fetch";
+import axios from "axios";
 import { historicalRates } from "./peggedAssets/utils/getLastRecord";
 import { getTimestampAtStartOfDay } from "./utils/date";
-import { executeAndIgnoreErrors } from "./peggedAssets/storePeggedAssets/errorDb";
-import { getCurrentUnixTimestamp } from "./utils/date";
 import { getHistoricalValues } from "./utils/shared/dynamodb";
 import { secondsInWeek } from "./utils/date";
+import * as sdk from '@defillama/sdk'
 
-const handler = async (_event: any) => {
+export const handler = async (_event: any) => {
   // store daily db entry
   for (let i = 0; i < 5; i++) {
     try {
@@ -18,13 +17,13 @@ const handler = async (_event: any) => {
       const day = ("0" + currentDate.getUTCDate()).slice(-2);
       const currentDateFormatted = `${currentDate.getUTCFullYear()}-${month}-${day}`;
       const url = `https://openexchangerates.org/api/historical/${currentDateFormatted}.json?app_id=019357e37fe74858b56d5a9c30e89dd1`;
-      const response = await fetch(url).then((res) => res.json());
+      const { data: response } = await axios(url)
       const timestamp = response.timestamp;
       const date = getTimestampAtStartOfDay(timestamp);
       const rates = response.rates;
 
       await dynamodb.put({
-        PK: historicalRates(),
+        PK: historicalRates,
         SK: date,
         rates: rates,
       });
@@ -33,11 +32,13 @@ const handler = async (_event: any) => {
         throw e;
       } else {
         console.error(e);
-        executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
-          getCurrentUnixTimestamp(),
-          "storeRates",
-          String(e),
-        ]);
+        await sdk.elastic.addErrorLog({
+          error: e as any,
+          metadata: {
+            application: "pegged-assets",
+            function: "storeRates",
+          }
+        })
         continue;
       }
     }
@@ -45,15 +46,15 @@ const handler = async (_event: any) => {
   }
 
   // store daily s3 files
-  const historicalPeggedRates = await getHistoricalValues(historicalRates());
+  const historicalPeggedRates = await getHistoricalValues(historicalRates);
   const filteredRates2Mo = historicalPeggedRates
     ?.map((item) =>
       typeof item === "object" &&
-      item.SK > Date.now() / 1000 - 8 * secondsInWeek
+        item.SK > Date.now() / 1000 - 8 * secondsInWeek
         ? {
-            date: item.SK,
-            rates: item.rates,
-          }
+          date: item.SK,
+          rates: item.rates,
+        }
         : { rates: undefined }
     )
     .filter((item) => item.rates !== undefined);
@@ -63,9 +64,9 @@ const handler = async (_event: any) => {
     ?.map((item) =>
       typeof item === "object"
         ? {
-            date: item.SK,
-            rates: item.rates,
-          }
+          date: item.SK,
+          rates: item.rates,
+        }
         : { rates: undefined }
     )
     .filter((item) => item.rates !== undefined);

@@ -13,6 +13,7 @@ type PegType =
   | "peggedXAU" //Gold this is not used
   | "peggedCHF" //Swiss franc
   | "peggedCOP" //colombian peso
+  | "peggedREAL"//brazilian real 
   | "peggedAUD"; //Australian currency
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";

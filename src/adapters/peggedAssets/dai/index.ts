@@ -15,7 +15,7 @@ import {
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -220,6 +220,32 @@ async function kavaBridged() {
   };
 }
 
+async function elrondBridged(tokenID: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
+        )
+    );
+    const supply = res?.data?.data?.supply / 10 ** decimals;
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      supply,
+      "adastra",
+      false,
+      "Ethereum"
+    );
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
@@ -227,7 +253,7 @@ const adapter: PeggedIssuanceAdapter = {
   solana: {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
-    avalanche: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
+    avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
     fantom: solanaMintedOrBridged(chainContracts.solana.bridgedFromFantom),
   },
   polygon: {
@@ -258,7 +284,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
      */
   },
-  avalanche: {
+  avax: {
     ethereum: bridgedSupply("avax", 18, chainContracts.avax.bridgedFromETH),
   },
   arbitrum: {
@@ -452,6 +478,18 @@ const adapter: PeggedIssuanceAdapter = {
   },
   pulse: {
     ethereum: bridgedSupply("pulse", 18, chainContracts.pulse.bridgedFromETH),
+  },
+  scroll: {
+    ethereum: bridgedSupply("scroll", 18, chainContracts.scroll.bridgedFromETH),
+  },
+  taiko: {
+    ethereum: bridgedSupply("taiko", 18, chainContracts.taiko.bridgedFromETH),
+  },
+  linea: {
+    ethereum: bridgedSupply("linea", 18, chainContracts.linea.bridgedFromETH),
+  },
+  elrond: { 
+    ethereum: elrondBridged("WDAI-9eeb54", 18),
   },
 };
 

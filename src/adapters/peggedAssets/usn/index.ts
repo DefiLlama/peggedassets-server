@@ -5,7 +5,7 @@ import {
   PeggedIssuanceAdapter,
   Balances,  ChainContracts,
 } from "../peggedAsset.type";
-import { call } from "../llama-helper/near";
+import { call } from "../helper/near";
 import { bridgedSupply } from "../helper/getSupply";
 
 

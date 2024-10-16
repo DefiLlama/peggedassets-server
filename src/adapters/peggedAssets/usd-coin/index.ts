@@ -12,6 +12,7 @@ import {
   cosmosSupply,
   kujiraSupply,
   osmosisSupply,
+  getApi
 } from "../helper/getSupply";
 import {
   getTotalSupply as ontologyGetTotalSupply,
@@ -19,19 +20,21 @@ import {
 } from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
-import { call as nearCall } from "../llama-helper/near";
+import { call as nearCall } from "../helper/near";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
+  Balances,  ChainContracts,PeggedAssetType
 } from "../peggedAsset.type";
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
 import { mixinSupply } from "../helper/mixin";
 import { chainContracts } from "./config";
+import { lookupAccountByID } from "../helper/algorand";
 const axios = require("axios");
 const retry = require("async-retry");
+import { ChainApi } from "@defillama/sdk";
 
 // If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain and fuse
 
@@ -125,6 +128,7 @@ async function solanaUnreleased() {
   };
 }
 
+const getBal = (address:string)=>lookupAccountByID(address).then(r=>r.account.assets.find((t:any)=>t["asset-id"]==31566704).amount / 10 ** 6)
 async function algorandMinted() {
   // I gave up on trying to use the SDK for this
   return async function (
@@ -138,18 +142,19 @@ async function algorandMinted() {
         await axios.get("https://mainnet-idx.algonode.cloud/v2/assets/31566704")
     );
     const supply = supplyRes?.data?.asset?.params?.total;
-    const reserveRes = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/accounts/2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM"
-        )
-    );
-    const reserveAccount = reserveRes?.data?.account?.assets?.filter(
-      (asset: any) => asset["asset-id"] === 31566704
-    );
-    const reserves = reserveAccount[0].amount;
-    let balance = (supply - reserves) / 10 ** 6;
+    let balance = (supply / 10 ** 6 - await getBal("2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM"));
     sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
+    return balances;
+  };
+}
+
+async function algorandUnreleased() {
+  return async function () {
+    let balances = {} as Balances;
+
+    sumSingleBalance(balances, "peggedUSD", 
+    (await getBal("OSS3CEB3KK2QGVW4DZYMHLDJMJIY7WKFQCPXV7KOZCGF6GPILAARBOGZHM")) + 
+    (await getBal("SO6ZNE255CHM56JNA6SYDAKIMHC266DGM4G47O6N66UT57HZZ7VV6Y2N7Y")));
     return balances;
   };
 }
@@ -379,7 +384,6 @@ async function elrondBridged(tokenID: string, decimals: number) {
       supply,
       "adastra",
       false,
-      "Ethereum"
     );
     return balances;
   };
@@ -441,6 +445,50 @@ async function aptosBridged() {
   };
 }
 
+async function injectiveBridged() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    const issuance = await retry(async (_bail: any) =>
+      axios.get("https://injective-nuxt-api.vercel.app/api/tokens")
+    );
+
+    const targetDenom = "ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E";
+    const targetToken = issuance?.data?.supply?.find(
+      (token: any) => token.denom === targetDenom
+    );
+
+    const circulatingSupply = targetToken ? targetToken.amount / 1e6 : 0;
+    let balances = {};
+    sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued", false);
+
+    return balances;
+  };
+}
+
+async function flowBridged(address: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://evm.flowscan.io/api/v2/addresses/${address}`
+        )
+    );
+    const totalSupply =
+      parseInt(res?.data?.token?.total_supply) / 10 ** decimals;
+    sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
+    return balances;
+  };
+}
+
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -476,7 +524,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
-    avalanche: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
+    avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
     celo: solanaMintedOrBridged(chainContracts.solana.bridgedFromCelo),
     fantom: solanaMintedOrBridged(chainContracts.solana.bridgedFromFantom),
   },
@@ -490,9 +538,9 @@ const adapter: PeggedIssuanceAdapter = {
     ),
     solana: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromSol),
     polygon: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromPolygon),
-    avalanche: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
+    avax: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromAvax),
   },
-  avalanche: {
+  avax: {
     minted: chainMinted("avax", 6),
     ethereum: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromETH),
     solana: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromSol),
@@ -518,6 +566,8 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   era: {
+    minted: chainMinted("era", 6),
+    unreleased: async () => ({}),
     ethereum: bridgedSupply("era", 6, chainContracts.era.bridgedFromETH),
   },
   polygon_zkevm: {
@@ -613,6 +663,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   algorand: {
     minted: algorandMinted(),
+    unreleased: algorandUnreleased(),
   },
   tron: {
     minted: tronMinted(),
@@ -621,14 +672,14 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: terraSupply(chainContracts.terra.bridgedFromETH, 6),
     solana: terraSupply(chainContracts.terra.bridgedFromSol, 6),
     bsc: terraSupply(chainContracts.terra.bridgedFromBSC, 6),
-    avalanche: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
+    avax: terraSupply(chainContracts.terra.bridgedFromAvax, 6),
   },
   oasis: {
     ethereum: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromETH),
     solana: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromSol),
     bsc: bridgedSupply("oasis", 18, chainContracts.oasis.bridgedFromBSC),
     polygon: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromPolygon),
-    avalanche: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
+    avax: bridgedSupply("oasis", 6, chainContracts.oasis.bridgedFromAvax),
   },
   crab: {
     ethereum: bridgedSupply("crab", 6, chainContracts.crab.bridgedFromETH),
@@ -645,9 +696,7 @@ const adapter: PeggedIssuanceAdapter = {
   stellar: {
     minted: circleAPIChainMinted("XLM"),
   },
-  flow: {
-    minted: circleAPIChainMinted("FLOW"),
-  },
+  
   xdai: {
     ethereum: bridgedSupply("xdai", 6, chainContracts.xdai.bridgedFromETH),
   },
@@ -686,6 +735,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("dfk", 18, chainContracts.dfk.bridgedFromETH),
   },
   celo: {
+    minted: chainMinted("celo",6),
     ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
@@ -693,7 +743,7 @@ const adapter: PeggedIssuanceAdapter = {
       ],
       "peggedUSD"
     ),
-    avalanche: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromAvax),
+    avax: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromAvax),
     polygon: bridgedSupply("celo", 6, chainContracts.celo.bridgedFromPolygon),
     solana: bridgedSupply("celo", 18, chainContracts.celo.bridgedFromSol),
   },
@@ -733,8 +783,9 @@ const adapter: PeggedIssuanceAdapter = {
   klaytn: {
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
-  elrond: {
-    ethereum: elrondBridged("USDC-c76f1f", 6),
+  elrond: { // both amounts end up as USDC-c76f1f
+    ethereum: elrondBridged("ETHUSDC-220753", 6),
+    bsc: elrondBridged("BSCUSDC-887875", 18),
   },
   canto: {
     ethereum: bridgedSupply("canto", 6, chainContracts.canto.bridgedFromETH),
@@ -823,10 +874,38 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("pulse", 6, chainContracts.pulse.bridgedFromETH),
   },  
   imx: {
-    ethereum: bridgedSupply("imx",6,chainContracts.imx.bridgedFromETH)
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.imx.bridgeOnETH[0],
+      6
+    ),
   },
   iotex: {
     ethereum: bridgedSupply("iotex", 6, chainContracts.iotex.bridgedFromETH),
+  },
+  icp: {
+    ethereum: supplyInEthereumBridge('0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', '0xb25eA1D493B49a1DeD42aC5B1208cC618f9A9B80', 6),
+  },
+  scroll: {
+    ethereum: bridgedSupply("scroll", 6, chainContracts.scroll.bridgedFromETH),
+  },
+  taiko: {
+    ethereum: bridgedSupply("taiko", 6, chainContracts.taiko.bridgedFromETH),
+  },
+  mantle: {
+    ethereum: bridgedSupply("mantle", 6, chainContracts.mantle.bridgedFromETH),
+  },
+  linea: {
+    ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
+  },
+  injective: {
+    noble: injectiveBridged(),
+  },
+  noble: {
+    minted: circleAPIChainMinted("NOBLE"),
+  },
+  flow: {
+    ethereum: flowBridged(chainContracts.flow.bridgedFromETH[0], 6),
   },
 };
 

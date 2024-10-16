@@ -1,8 +1,7 @@
-import { BigNumber } from "ethers";
 import type {
   Balances,
   PeggedAssetType,
-  ChainBlocks,  ChainContracts,
+  ChainBlocks,
 } from "../peggedAsset.type";
 import bridgeMapping, { BridgeID } from "../../../peggedData/bridgeData";
 
@@ -23,8 +22,9 @@ export function sumSingleBalance(
     }
     (balances[pegType] as number) = prevBalance + balance;
   } else {
-    const prevBalance = BigNumber.from(balances[pegType] ?? 0);
-    balances[pegType] = prevBalance.add(BigNumber.from(balance)).toString();
+    const prevBalance = BigInt(balances[pegType] ?? 0);
+    const bBalance = BigInt(balance)
+    balances[pegType] = (prevBalance + bBalance).toString();
   }
   if (bridgeAddressOrName) {
     appendBridgeData(
@@ -65,12 +65,9 @@ function appendBridgeData(
     (balances.bridges[bridgeID][sourceChain].amount as number) =
       prevBridgeBalance + balance;
   } else {
-    const prevBridgeBalance = BigNumber.from(
-      balances.bridges[bridgeID]?.amount ?? 0
-    );
-    balances.bridges[bridgeID][sourceChain].amount = prevBridgeBalance
-      .add(BigNumber.from(balance))
-      .toString();
+    const prevBridgeBalance = BigInt(balances.bridges[bridgeID]?.[sourceChain]?.amount ?? 0);
+    const bBalance = BigInt(balance)
+    balances.bridges[bridgeID][sourceChain].amount = (prevBridgeBalance + bBalance).toString()
   }
 }
 
@@ -108,9 +105,9 @@ function mergeBalances(
   ) {
     balances[pegType] = balance + balanceToMerge;
   } else {
-    balances[pegType] = BigNumber.from(balance ?? 0)
-      .add(BigNumber.from(balanceToMerge))
-      .toString();
+    const prevBalance = BigInt(balanceToMerge);
+    const bBalance = BigInt(balance)
+    balances[pegType] = (prevBalance + bBalance).toString();
   }
   balances.bridges = balances.bridges || {};
   balancesToMerge.bridges = balancesToMerge.bridges || {};
@@ -127,11 +124,9 @@ function mergeBalances(
           balances.bridges[bridgeID][sourceChain].amount =
             bridgeBalance + bridgeBalanceToMerge;
         } else {
-          balances.bridges[bridgeID][sourceChain].amount = BigNumber.from(
-            bridgeBalance ?? 0
-          )
-            .add(BigNumber.from(bridgeBalanceToMerge))
-            .toString();
+          const prevBalance = BigInt(bridgeBalanceToMerge);
+          const bBalance = BigInt(bridgeBalance ?? 0)
+          balances.bridges[bridgeID][sourceChain].amount = (prevBalance + bBalance).toString();
         }
       } else {
         balances.bridges[bridgeID] = balances.bridges[bridgeID] || {};

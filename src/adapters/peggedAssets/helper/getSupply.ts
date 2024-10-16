@@ -5,13 +5,14 @@ import type {
   PeggedIssuanceAdapter,
 } from "../peggedAsset.type";
 import { sumSingleBalance } from "./generalUtil";
-import { getTokenSupply as solanaGetTokenSupply } from "../llama-helper/solana";
-import { totalSupply as terraGetTotalSupply } from "../llama-helper/terra"; // NOTE this is NOT currently exported
+import { getTokenSupply as solanaGetTokenSupply } from "../helper/solana";
 import { ChainApi } from "@defillama/sdk";
-import * as sui from "../llama-helper/sui";
-import * as aptos from "../llama-helper/aptos";
+import * as sui from "../helper/sui";
+import * as aptos from "../helper/aptos";
 const axios = require("axios");
 const retry = require("async-retry");
+process.env.TAIKO_RPC = 'https://rpc.taiko.xyz'
+process.env.REAL_RPC = 'https://tangible-real.gateway.tenderly.co'
 
 type BridgeAndReserveAddressPair = [string, string[]];
 
@@ -42,7 +43,6 @@ export function bridgedSupply(
         ? sumSingleBalance(balances, assetPegType, supplies[i] / 10 ** decimals, bridgeName, false, bridgedFromChain)
         : sumSingleBalance(balances, assetPegType, supplies[i] / 10 ** decimals, addresses[i], true);
     }
-
     return balances;
   };
 }
@@ -108,26 +108,13 @@ export function solanaMintedOrBridged(
   };
 }
 
-export function terraSupply(addresses: string[], decimals: number) {
+export function terraSupply(_addresses: string[], _decimals: number) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    for (let address of addresses) {
-      const totalSupply = await terraGetTotalSupply(
-        address,
-        _chainBlocks?.["terra"]
-      );
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        totalSupply / 10 ** decimals,
-        address,
-        true
-      );
-    }
     return balances;
   };
 }
@@ -264,7 +251,16 @@ export function addChainExports(config: any, adapter: any = {}, {
           if (!cExports.ethereum)
             cExports.ethereum = bridgedSupply(chain, decmials, chainConfig.bridgedFromETH)
           break;
-        default: console.log(`Ignored: Unknown key ${key} in ${chain} config for addChainExports`)
+        default: {
+          if (key.startsWith("bridgedFrom")) {
+            let srcChain = key.slice("bridgedFrom".length).toLowerCase()
+            if (srcChain === "ETH") srcChain = "ethereum"
+            if (!Array.isArray(chainConfig[key])) chainConfig[key] = [chainConfig[key]]
+            if (!cExports[srcChain])
+              cExports[srcChain] = bridgedSupply(chain, decmials, chainConfig[key], undefined, srcChain, pegType as any)
+          } else
+            console.log(`Ignored: Unknown key ${key} in ${chain} config for addChainExports`)
+        }
       }
     })
     // if (!cExports.minted) cExports.minted = dummyFn

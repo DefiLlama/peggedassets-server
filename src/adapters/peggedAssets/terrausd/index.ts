@@ -180,7 +180,7 @@ const adapter: PeggedIssuanceAdapter = {
   aurora: {
     terra: bridgedSupply("aurora", 18, chainContracts.aurora.bridgedFromTerra),
   },
-  avalanche: {
+  avax: {
     terra: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromTerra),
   },
   osmosis: {
@@ -223,5 +223,12 @@ const adapter: PeggedIssuanceAdapter = {
     terra: bridgedSupply("dfk", 6, chainContracts.dfk.bridgedFromTerra),
   },
 };
+
+// hardcoded value as zero since it is no longer a stablecoin
+Object.keys(adapter).forEach((chain) => {
+  Object.keys(adapter[chain]).forEach((key) => {
+    adapter[chain][key] = () => {}
+  })
+})
 
 export default adapter;

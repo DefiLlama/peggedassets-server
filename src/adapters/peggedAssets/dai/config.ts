@@ -185,10 +185,25 @@ export const chainContracts: ChainContracts = {
     ], // axelar
   },
   era: {
-    bridgeOnETH: ["0x32400084C286CF3E17e7B677ea9583e60a000324"],
+    bridgeOnETH: ["0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB"],
     bridgedFromETH: ["0x4B9eb6c0b6ea15176BBF62841C6B2A8a398cb656"],
   },
   pulse: {
     bridgedFromETH: ["0xefD766cCb38EaF1dfd701853BFCe31359239F305"], // PulseRamp
+  },
+  scroll: {
+    bridgedFromETH: [
+      "0xcA77eB3fEFe3725Dc33bccB54eDEFc3D9f764f97", // dai
+    ],
+  },
+  taiko: {
+    bridgedFromETH: [
+      "0x7d02A3E0180451B17e5D7f29eF78d06F8117106C", // DAI
+    ],
+  },
+  linea: {
+    bridgedFromETH: [
+      "0x4AF15ec2A0BD43Db75dd04E62FAA3B8EF36b00d5", // DAI
+    ],
   },
 };
