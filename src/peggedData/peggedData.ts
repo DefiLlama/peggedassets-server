@@ -4256,7 +4256,7 @@ export default [
   {
     id: "212",
     name: "Move Dollar",
-    address: "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_coin::MOD",
+    address: "sui:0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_coin::MOD",
     symbol: "MOD",
     url: "https://app.thala.fi/overview",
     description:
