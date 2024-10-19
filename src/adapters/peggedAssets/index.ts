@@ -67,7 +67,7 @@ import fusd from "./fantom-usd";
 import uxd from "./uxd-stablecoin";
 import usdh from "./usdh";
 import fpi from "./frax-price-index";
-import bean from "./bean";
+import bean2 from "./bean2";
 import usdlemma from "./usdlemma";
 //import pandousd from "./pando-usd";
 import dusd from "./digitaldollar";
@@ -282,7 +282,7 @@ export default {
   "uxd-stablecoin": uxd,
   usdh,
   "frax-price-index": fpi,
-  bean: bean,
+  bean: bean2,
   usdlemma,
   //"pando-usd": pandousd,
   digitaldollar: dusd,
