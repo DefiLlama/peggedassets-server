@@ -8,6 +8,15 @@ const config = {
   },
 };
 
+const blockClient = axios.create({
+  baseURL: 'https://cardano-mainnet.blockfrost.io/api/v0',
+  headers: {
+    'project_id': 'mai' + 'nnetcxT8VaeCgVMzMTSe' + 'zZijWlVkyh6XytpS',
+    'Content-Type': 'application/json'
+  },
+  timeout: 300000,
+})
+
 export async function getAsset(assetID: string) {
   // assetID is concatenation of the policy_id and hex-encoded asset_name
   const asset = await retry(
@@ -33,4 +42,27 @@ async function getAssets(address: string) {
 export async function getTokenBalance(token: string, owner: string) {
   const assets = await getAssets(owner);
   return assets.find((i: any) => i.unit === token)?.quantity ?? 0;
+}
+
+
+export async function addressesUtxosAssetAll(address: string, asset: string) {
+
+  const addresses = []
+  let page = 1
+  let response
+  do {
+    response = await blockClient.get(`/addresses/${address}/utxos/${asset}`, {
+      params: { count: 100, page, }
+    })
+    response = response.data
+    addresses.push(...response)
+    page++
+  } while (response.length)
+  return addresses
+}
+
+
+export async function getScriptsDatum(datumHash: string) {
+  const { data } = await blockClient.get(`scripts/datum/${datumHash}`)
+  return data
 }

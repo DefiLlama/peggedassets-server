@@ -1,7 +1,6 @@
 import {
   PeggedIssuanceAdapter,
-  ChainBlocks,
-  Balances,  ChainContracts,
+  Balances,
 } from "../peggedAsset.type";
 import { sumSingleBalance } from "../helper/generalUtil";
 import { getTotalSupply, getTokenBalance } from "../helper/cardano";
