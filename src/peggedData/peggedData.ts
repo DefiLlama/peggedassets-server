@@ -4313,4 +4313,24 @@ export default [
     twitter: "https://x.com/usdx_money",
     wiki: "https://docs.usdx.money/a-synthetic-usd/usdx-basics"
   },
+  {
+    id: "215",
+    name: "Moneta",
+    address: "cardano:c48cbb3d5e57ed56e276bc45f99ab39abe94e6cd7ac39fb402da47ad0014df105553444d",
+    symbol: "USDM",
+    url: "https://usdx.money/",
+    description:
+      `Fiat backed stablecoin native to the Cardano blockchain`,
+    mintRedeemDescription:
+      "Approved business users can mint USDM, after completing KYC. To redeem USDM for USD, verified users request a burn of their USDM tokens, with the equivalent USD amount transferred back to their verified bank account",
+    onCoinGecko: "false",
+    gecko_id: "moneta",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/USDMOfficial",
+    wiki: "https://moneta.global/moneta-usdm/"
+  }
 ] as PeggedAsset[];
