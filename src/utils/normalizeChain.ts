@@ -34,6 +34,7 @@ export const normalizedChainReplacements = {
   "defichain evm": "defichain_evm",
   "hydration": "hydradx",
   "bitlayer": "btr",
+  "kaia": "klaytn",
 } as {
   [chain: string]: string;
 };
@@ -1092,6 +1093,7 @@ chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
 chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
+chainCoingeckoIds["Klaytn"] = chainCoingeckoIds["Kaia"]
 
 export const extraSections = [
   "staking",
@@ -1117,6 +1119,8 @@ export function transformNewChainName(chain: string) {
       return "MultiversX";
     case "RSK":
       return "Rootstock";
+    case "Klaytn":
+      return "Kaia";
     default:
       return chain;
   }
@@ -1356,6 +1360,9 @@ export function getChainDisplayName(
       return "Noble"
     case "xlayer":
       return "X Layer"
+    case "klaytn":
+      return useNewChainNames ? "Kaia" : "Klaytn";
+  
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
