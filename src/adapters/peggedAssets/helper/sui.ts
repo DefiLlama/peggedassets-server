@@ -1,11 +1,12 @@
+import { graph } from "@defillama/sdk";
 import http from "../helper/http";
-const axios = require("axios");
 
 interface CallOptions {
   withMetadata?: boolean;
 }
 
 export const endpoint = (): string => "https://fullnode.mainnet.sui.io/";
+export const graphEndpoint = (): string => "https://sui-mainnet.mystenlabs.com/graphql";
 
 export async function getObject(objectId: string): Promise<any> {
   return (
@@ -37,17 +38,13 @@ export async function call(
 
 
 export async function getTokenSupply(token: string) {
-  const { data: { result: { decimals } } } = await axios.post(endpoint(), {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "method": "suix_getCoinMetadata",
-    "params": [token]
-  });
-  const { data: { result: { value: supply } } } = await axios.post(endpoint(), {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "method": "suix_getTotalSupply",
-    "params": [token]
-  });
-  return supply / 10 ** decimals;
+  const query = `{
+  coinMetadata(coinType:"${token}") {
+    decimals
+    symbol
+    supply
+  }
+}`
+  const { coinMetadata: { supply, decimals } } = await graph.request(graphEndpoint(), query)
+  return supply / 10 ** decimals
 }
