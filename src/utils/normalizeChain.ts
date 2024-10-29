@@ -29,7 +29,6 @@ export const normalizedChainReplacements = {
   "horizen eon": "eon",
   "bahamut": "ftn",
   "viction": "tomochain",
-  "bevm": "chainx",
   "bitnet": "btn",
   "defichain evm": "defichain_evm",
   "hydration": "hydradx",
