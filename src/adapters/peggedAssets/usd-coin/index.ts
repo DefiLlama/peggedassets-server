@@ -852,6 +852,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   sui: {
+    //minted: solanaMintedOrBridged(chainContracts.sui.issued),
     ethereum: suiBridged("ETH"),
     bsc: suiBridged("BSC"),
     solana: suiBridged("SOLANA"),

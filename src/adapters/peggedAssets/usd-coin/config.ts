@@ -384,5 +384,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0x7f27352D5F83Db87a5A3E00f4B07Cc2138D8ee52", // Bridged USDC (Celer)
     ]
+  },
+  sui: {
+    issued: ["0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"],
   }
 };
