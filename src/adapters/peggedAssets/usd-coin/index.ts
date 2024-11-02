@@ -1,5 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
+import * as sui from "../helper/sui";
 import {
   sumSingleBalance,
   sumMultipleBalanceFunctions,
@@ -215,6 +216,15 @@ async function circleAPIChainMinted(chain: string) {
     sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
   };
+}
+
+async function suiMinted(): Promise<Balances> {
+  let balances = {} as Balances;
+  const supply = await sui.getTokenSupply(
+    "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
+  );
+  sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
+        return balances;
 }
 
 async function suiBridged(chain: string) {
@@ -852,7 +862,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   sui: {
-    //minted: solanaMintedOrBridged(chainContracts.sui.issued),
+    minted: suiMinted,
     ethereum: suiBridged("ETH"),
     bsc: suiBridged("BSC"),
     solana: suiBridged("SOLANA"),
