@@ -4332,5 +4332,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/USDMOfficial",
     wiki: "https://moneta.global/moneta-usdm/"
+  },
+  {
+    id: "216",
+    name: "Solayer USD",
+    address: "solana:susdabGDNbhrnCa6ncrYo81u4s9GM8ecK2UwMyZiq4X",
+    symbol: "sUSD",
+    url: "https://solayer.org/platform/susd",
+    description:
+      `sUSD is a yield-bearing stablecoin on Solana that is pegged to the U.S. dollar and backed by U.S. Treasury Bills (T-bills)`,
+    mintRedeemDescription:
+      "To mint sUSD, a user locks USDC into the system, which creates a quote. This quote specifies the USDC amount, expiry time, and commission rate. A qualified liquidity provider then fulfills the buy order by transferring out the USDC and sending back a wrapped T-Bill as proof. Based on the wrapped T-Bill, the Solayer sUSD Program mints sUSD, which remains pegged 1:1 with USD",
+    onCoinGecko: "false",
+    gecko_id: "solayer-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/solayer_labs",
+    wiki: "https://docs.solayer.org/susd/what-is-susd"
   }
 ] as PeggedAsset[];

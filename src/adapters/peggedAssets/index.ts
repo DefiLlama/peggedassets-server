@@ -212,7 +212,8 @@ import thusd from "./threshold-usd";
 import m from "./m-by-m^0";
 import mod from "./move-dollar";
 import usdx0 from "./usdx-money-usdx";
-import moneta from "./moneta"
+import moneta from "./moneta";
+import solayerusd from "./solayer-usd"
 
 export default {
   tether,
@@ -429,5 +430,6 @@ export default {
   "move-dollar": mod,
   "usdx-money-usdx": usdx0,
   "m-by-m^0": m,
-  "moneta": moneta
+  "moneta": moneta,
+  "solayer-usd": solayerusd
 };
