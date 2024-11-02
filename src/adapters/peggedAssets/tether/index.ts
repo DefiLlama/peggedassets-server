@@ -973,6 +973,8 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   aptos: {
+    minted: usdtApiMinted("totaltokens_aptos"),
+    unreleased: usdtApiUnreleased("reserve_balance_aptos"),
     ethereum: aptosBridged(),
   },
   mixin: {
@@ -1044,6 +1046,14 @@ const adapter: PeggedIssuanceAdapter = {
   elrond: { // both amounts end up as USDT-f8c08c
     ethereum: elrondBridged("ETHUSDT-9c73c6", 6),
     bsc: elrondBridged("BSCUSDT-059796", 18),
+  },
+  polkadot: {
+    minted: usdtApiMinted("totaltokens_statemint"),
+    unreleased: usdtApiUnreleased("reserve_balance_statemint"),
+  },
+  kusama: {
+    minted: usdtApiMinted("totaltokens_statemine"),
+    unreleased: usdtApiUnreleased("reserve_balance_statemine"),
   },
 };
 
