@@ -120,11 +120,12 @@ async function solanaUnreleased() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const unreleased = await solanaGetTokenBalance(
-      chainContracts["solana"].issued[0],
-      chainContracts["solana"].unreleased[0]
-    );
-    sumSingleBalance(balances, "peggedUSD", unreleased);
+    for(let unreleasedAddress of chainContracts["solana"].unreleased){
+      sumSingleBalance(balances, "peggedUSD", await solanaGetTokenBalance(
+        chainContracts["solana"].issued[0],
+        unreleasedAddress
+      ));
+    }
     return balances;
   };
 }
@@ -614,6 +615,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("boba", 6, chainContracts.boba.bridgedFromETH),
   },
   optimism: {
+    minted: chainMinted("optimism", 6),
     ethereum: bridgedSupply(
       "optimism",
       6,
@@ -917,6 +919,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   flow: {
     ethereum: flowBridged(chainContracts.flow.bridgedFromETH[0], 6),
+  },
+  polkadot: {
+    minted: circleAPIChainMinted("PAH"),
   },
 };
 

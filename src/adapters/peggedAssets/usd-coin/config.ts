@@ -61,7 +61,7 @@ export const chainContracts: ChainContracts = {
     ],
     bridgedFromCelo: ["DHpoYejUDqzByb6HAdaLWF7KZvwUv2vWYDY9cTENNZui"], // allbridge
     bridgedFromFantom: ["Grk6b4UMRWkgyq4Y6S1BnNRF4hRgtnMFp7Sorkv6Ez4u"], // allbridge
-    unreleased: ["7VHUFJHWu2CuExkJcJrzhQPJ2oygupTWkL2A2For4BmE"], // address doesn't seem correct, just coincidence has correct amount
+    unreleased: ["7VHUFJHWu2CuExkJcJrzhQPJ2oygupTWkL2A2For4BmE", "41zCUJsKk6cMB94DDtm99qWmyMZfp4GkAhhuz4xTwePu", "41zCUJsKk6cMB94DDtm99qWmyMZfp4GkAhhuz4xTwePu"], // study https://solscan.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v#holders
   },
   arbitrum: {
     issued: ["0xaf88d065e77c8cc2239327c5edb3a432268e5831"],
@@ -69,6 +69,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xff970a61a04b1ca14834a43f5de4533ebddb5cc8"],
   },
   optimism: {
+    issued: ["0x0b2c639c533813f4aa9d7837caf62653d097ff85"],
     bridgeOnETH: ["0x99c9fc46f92e8a1c0dec1b1747d010903e884be1"],
     bridgedFromETH: ["0x7f5c764cbc14f9669b88837ca1490cca17c31607"],
   },
