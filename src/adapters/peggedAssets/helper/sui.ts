@@ -1,13 +1,15 @@
-import { graph } from "@defillama/sdk";
+import { graph } from "@defillama/sdk";  // Keeping the import in case other functions rely on it
 import http from "../helper/http";
 
 interface CallOptions {
   withMetadata?: boolean;
 }
 
+// Define the Sui API endpoint and the GraphQL endpoint
 export const endpoint = (): string => "https://fullnode.mainnet.sui.io/";
 export const graphEndpoint = (): string => "https://sui-mainnet.mystenlabs.com/graphql";
 
+// Function to fetch object details from Sui
 export async function getObject(objectId: string): Promise<any> {
   return (
     await call("sui_getObject", [
@@ -21,6 +23,7 @@ export async function getObject(objectId: string): Promise<any> {
   ).content;
 }
 
+// Generic function to make JSON-RPC calls
 export async function call(
   method: string,
   params: any,
@@ -36,15 +39,27 @@ export async function call(
   return withMetadata ? result : result.data;
 }
 
-
+// Function to get the token supply from the GraphQL API
 export async function getTokenSupply(token: string) {
-  const query = `{
-  coinMetadata(coinType:"${token}") {
-    decimals
-    symbol
-    supply
+  const query = {
+    query: `{
+      coinMetadata(coinType:"${token}") {
+        decimals
+        symbol
+        supply
+      }
+    }`
+  };
+
+  // Use http.post to send the query to the GraphQL endpoint
+  const response = await http.post(graphEndpoint(), query);
+
+  // Check if response contains the necessary data
+  const { data } = response;
+  if (!data || !data.coinMetadata) {
+    throw new Error("Error fetching token supply: coinMetadata not found");
   }
-}`
-  const { coinMetadata: { supply, decimals } } = await graph.request(graphEndpoint(), query)
-  return supply / 10 ** decimals
+
+  const { supply, decimals } = data.coinMetadata;
+  return supply / 10 ** decimals;
 }

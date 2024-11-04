@@ -9,7 +9,7 @@ async function suiMinted(): Promise<Balances> {
   const supply = await sui.getTokenSupply(
     "0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD"
   );
-  sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
+  sumSingleBalance(balances, "peggedUSD", supply, 'issued', false,);
         return balances;
 }
 
@@ -37,6 +37,9 @@ const chainContracts: ChainContracts = {
   },
   ethereum: {
     issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+  },
+  mantle: {
+    bridgedFromETH: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
   },
 };
 
