@@ -38,11 +38,14 @@ const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
   },
+  mantle: {
+    bridgedFromETH: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+  },
 };
 
 
 const adapter: PeggedIssuanceAdapter = {
-  ...addChainExports(chainContracts),
+  ...addChainExports(chainContracts, undefined, { decmials: 6, }),
   sui: {
     minted: suiMinted,
     unreleased: suiUnreleased,
