@@ -3203,7 +3203,7 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: null,
+    priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/rifonchain",
     wiki: null,
