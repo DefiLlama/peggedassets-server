@@ -923,6 +923,13 @@ const adapter: PeggedIssuanceAdapter = {
   polkadot: {
     minted: circleAPIChainMinted("PAH"),
   },
+  morph: {
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.morph.bridgeOnETH[0],
+      6
+    )
+  }
 };
 
 export default adapter;

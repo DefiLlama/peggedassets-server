@@ -491,6 +491,13 @@ const adapter: PeggedIssuanceAdapter = {
   elrond: { 
     ethereum: elrondBridged("WDAI-9eeb54", 18),
   },
+  morph: {
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.morph.bridgeOnETH[0],
+      18
+    )
+  }
 };
 
 export default adapter;

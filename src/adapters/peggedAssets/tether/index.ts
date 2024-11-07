@@ -1055,6 +1055,13 @@ const adapter: PeggedIssuanceAdapter = {
     minted: usdtApiMinted("totaltokens_statemine"),
     unreleased: usdtApiUnreleased("reserve_balance_statemine"),
   },
+  morph: {
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.morph.bridgeOnETH[0],
+      6
+    )
+  }
 };
 
 export default adapter;

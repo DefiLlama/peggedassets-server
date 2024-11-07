@@ -206,4 +206,7 @@ export const chainContracts: ChainContracts = {
       "0x4AF15ec2A0BD43Db75dd04E62FAA3B8EF36b00d5", // DAI
     ],
   },
+  morph: {
+    bridgeOnETH: ["0xA534BAdd09b4C62B7B1C32C41dF310AA17b52ef1"],
+  },
 };

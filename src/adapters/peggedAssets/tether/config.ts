@@ -349,5 +349,8 @@ export const chainContracts: ChainContracts = {
       "0xA219439258ca9da29E9Cc4cE5596924745e12B93", // USDT
     ],
   },
+  morph: {
+    bridgeOnETH: ["0x44c28f61A5C2Dd24Fc71D7Df8E85e18af4ab2Bd8"],
+  },
 
 };

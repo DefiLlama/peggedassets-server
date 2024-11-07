@@ -388,5 +388,8 @@ export const chainContracts: ChainContracts = {
   },
   sui: {
     issued: ["0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"],
-  }
+  },
+  morph: {
+    bridgeOnETH: ["0xc9045350712A1DCC3A74Eca18Bc985424Bbe7535"],
+  },
 };
