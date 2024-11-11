@@ -1366,7 +1366,7 @@ export function getChainDisplayName(
       return "Noble"
     case "xlayer":
       return "X Layer"
-    case "educhain":
+    case "occ":
       return "EDU Chain"
     case "klaytn":
       return useNewChainNames ? "Kaia" : "Klaytn";

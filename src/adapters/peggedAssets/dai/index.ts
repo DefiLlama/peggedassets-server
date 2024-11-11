@@ -498,8 +498,8 @@ const adapter: PeggedIssuanceAdapter = {
       18
     )
   },
-  educhain: {
-    ethereum: bridgedSupply("educhain", 18, chainContracts.educhain.bridgedFromETH),
+  occ: {
+    ethereum: bridgedSupply("occ", 18, chainContracts.occ.bridgedFromETH),
   },
 };
 
