@@ -497,7 +497,10 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.morph.bridgeOnETH[0],
       18
     )
-  }
+  },
+  educhain: {
+    ethereum: bridgedSupply("educhain", 18, chainContracts.educhain.bridgedFromETH),
+  },
 };
 
 export default adapter;

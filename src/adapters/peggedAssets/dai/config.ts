@@ -209,4 +209,7 @@ export const chainContracts: ChainContracts = {
   morph: {
     bridgeOnETH: ["0xA534BAdd09b4C62B7B1C32C41dF310AA17b52ef1"],
   },
+  educhain: {
+    bridgeOnETH: ["0x22fa593845fDa46Db5784f519B3364432a1d4203"],
+  },
 };
