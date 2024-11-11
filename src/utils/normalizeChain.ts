@@ -1078,6 +1078,13 @@ export const chainCoingeckoIds = {
     cmcId: null,
     categories: ["EVM"],
   },
+  "EDU Chain": {
+    geckoId: "edu-coin",
+    symbol: "EDU",
+    cmcId: "24613",
+    categories: ["EVM"],
+    chainId: 41923,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1359,6 +1366,8 @@ export function getChainDisplayName(
       return "Noble"
     case "xlayer":
       return "X Layer"
+    case "educhain":
+      return "EDU Chain"
     case "klaytn":
       return useNewChainNames ? "Kaia" : "Klaytn";
   
