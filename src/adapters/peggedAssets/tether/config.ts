@@ -353,6 +353,6 @@ export const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x44c28f61A5C2Dd24Fc71D7Df8E85e18af4ab2Bd8"],
   },
   occ: {
-    bridgeOnETH: ["0x7277Cc818e3F3FfBb169c6Da9CC77Fc2d2a34895"],
+    bridgedFromETH: ["0x7277Cc818e3F3FfBb169c6Da9CC77Fc2d2a34895"],
   },
 };
