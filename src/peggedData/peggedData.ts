@@ -4352,5 +4352,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/solayer_labs",
     wiki: "https://docs.solayer.org/susd/what-is-susd"
+  },
+  {
+    id: "217",
+    name: "Reservoir Stablecoin",
+    address: "0x09d4214c03d01f49544c0448dbe3a27f768f2b34",
+    symbol: "rUSD",
+    url: "https://app.reservoir.xyz",
+    description:
+      `Reservoir’s stablecoin, rUSD is available to non-U.S. users and users in non-sanctioned countries. rUSD is built to be extremely scalable and efficient, paving the way for increased utility and cross chain use cases`,
+    mintRedeemDescription:
+      "Redeemable on a 1:1 basis for USDC or other dollar-denominated stablecoins as directed by governance",
+    onCoinGecko: "false",
+    gecko_id: "reservoir-stablecoin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/__reservoir",
+    wiki: "https://docs.reservoir.xyz/products/stablecoin-rusd"
   }
 ] as PeggedAsset[];

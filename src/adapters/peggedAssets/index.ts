@@ -213,7 +213,8 @@ import m from "./m-by-m^0";
 import mod from "./move-dollar";
 import usdx0 from "./usdx-money-usdx";
 import moneta from "./moneta";
-import solayerusd from "./solayer-usd"
+import solayerusd from "./solayer-usd";
+import rusd1 from "./reservoir-stablecoin"
 
 export default {
   tether,
@@ -431,5 +432,6 @@ export default {
   "usdx-money-usdx": usdx0,
   "m-by-m^0": m,
   "moneta": moneta,
-  "solayer-usd": solayerusd
+  "solayer-usd": solayerusd,
+  "reservoir-stablecoin": rusd1
 };
