@@ -2,9 +2,9 @@ const chainContracts = {
   ethereum: {
     issued: ["0x7712c34205737192402172409a8F7ccef8aA2AEc"],
   },
-  // aptos: {
-  //   issued: ["0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a"],
-  // },
+  aptos: {
+    issued: ["0x50038be55be5b964cfa32cf128b5cf05f123959f286b4cc02b86cafd48945f89"],
+  },
   arbitrum: {
     issued: ["0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872"],
   },
