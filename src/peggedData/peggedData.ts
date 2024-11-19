@@ -4372,5 +4372,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/__reservoir",
     wiki: "https://docs.reservoir.xyz/products/stablecoin-rusd"
+  },
+  {
+    id: "218",
+    name: "Satoshi Stablecoin",
+    address: "bevm:0xf2692468666e459d87052f68ae474e36c1a34fbb",
+    symbol: "satUSD",
+    url: "https://www.satoshiprotocol.org/",
+    description:
+      `Satoshi Protocol is a universal stablecoin protocol backed by Bitcoin, using BTC as collateral to mint the native stablecoin satUSD across Bitcoin Mainnet, Layer 2s, and the EVM ecosystem`,
+    mintRedeemDescription:
+      "The Satoshi Protocol allows users to access liquidity by depositing collateral, enabling them to borrow up to 90.91% of the collateral's value in satUSD",
+    onCoinGecko: "true",
+    gecko_id: "satoshi-stablecoin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/SatoshiBEVM",
+    wiki: "https://docs.satoshiprotocol.org/"
   }
 ] as PeggedAsset[];
