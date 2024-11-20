@@ -4,7 +4,7 @@ const {
   validateAndParseAddress,
   number,
   hash,
-  uint256,
+  CallData,
 } = require("starknet");
 const axios = require("axios");
 const plimit = require("p-limit");
@@ -48,21 +48,22 @@ function formCallBody(
 }
 
 function parseOutput(result, abi, allAbi) {
-  const contract = new Contract([abi, ...allAbi], null, null);
-  let response = contract.parseResponse(abi.name, result);
-  if (abi.outputs.length === 1) {
-    response = response[0];
-    if (abi.outputs[0].type === "Uint256") return response;
+  let response = new CallData([abi, ...allAbi]).parse(abi.name, result)
+  // convert BigInt to string
+  for (const key in response) {
+    if (typeof response[key] === 'bigint') response[key] = response[key].toString()
+  }
+
+  if (abi.outputs.length === 1 && !abi.outputs[0].type.includes('::')) {
+    response = response[abi.outputs[0].name]
+    if (abi.outputs[0].type === 'Uint256') return +response
     switch (abi.customType) {
-      case "address":
-        return validateAndParseAddress(response);
-      case "Uint256":
-        return response;
+      case 'address': return validateAndParseAddress(response)
+      case 'Uint256': return +response
     }
   }
-  return response;
+  return response
 }
-
 async function call({ abi, target, params = [], allAbi = [] } = {}, ...rest) {
   const {
     data: { result },

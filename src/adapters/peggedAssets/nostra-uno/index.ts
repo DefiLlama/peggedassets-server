@@ -34,8 +34,7 @@ async function chainMinted(chain: string, decimals: number) {
             target: issued,
             abi: starknetTotalSupplyAbi,
             params: [],
-          },
-          _chainBlocks?.[chain]
+          }
         );
       } else {
         totalSupply = (
@@ -51,7 +50,7 @@ async function chainMinted(chain: string, decimals: number) {
       sumSingleBalance(
         balances,
         "peggedUSD",
-        totalSupply / 10 ** decimals,
+        totalSupply.toString() / 10 ** decimals,
         "issued",
         false
       );
@@ -90,7 +89,7 @@ async function chainUnreleased(chain: string, decimals: number) {
       sumSingleBalance(
         balances,
         "peggedUSD",
-        unreleased / 10 ** decimals,
+        unreleased.toString() / 10 ** decimals,
         "issued",
         false
       );

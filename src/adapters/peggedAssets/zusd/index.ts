@@ -71,7 +71,7 @@ async function gmoAPIChainMinted(chain: string) {
     const filteredChainsData = await gyenData[0].chains.filter(
       (obj: any) => obj.chain === chain
     );
-    const supply = parseInt(filteredChainsData[0].amount);
+    const supply = parseInt(filteredChainsData[0].amount ?? 0);
     sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
   };

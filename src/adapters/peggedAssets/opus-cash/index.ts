@@ -13,29 +13,16 @@ const chainContracts = {
   },
 };
 
-async function starknetMinted(chain: string, decimals: number) {
-return async function (
+async function starknetMinted(_chain: string, decimals: number) {
+  return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const totalSupply = await call(
-      {
-        target: chainContracts.starknet.issued,
-        abi: starknetTotalSupplyAbi,
-        params: [],
-      },
-      _chainBlocks?.[chain]
-    );
+    const totalSupply = await call({ target: chainContracts.starknet.issued, abi: starknetTotalSupplyAbi, });
 
-    sumSingleBalance(
-        balances,
-        "peggedUSD",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false,
-    );
+    sumSingleBalance(balances, "peggedUSD", totalSupply.toString() / 10 ** decimals, "issued", false,);
 
     return balances;
   };
