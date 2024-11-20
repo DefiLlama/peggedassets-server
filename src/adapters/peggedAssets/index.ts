@@ -216,6 +216,7 @@ import moneta from "./moneta";
 import solayerusd from "./solayer-usd";
 import rusd1 from "./reservoir-stablecoin";
 import satusd from "./satoshi-stablecoin"
+import usdf from "./astherus-usdf"
 
 export default {
   tether,
@@ -435,5 +436,6 @@ export default {
   "moneta": moneta,
   "solayer-usd": solayerusd,
   "reservoir-stablecoin": rusd1,
-  "satoshi-stablecoin": satusd
+  "satoshi-stablecoin": satusd,
+  "astherus-usdf": usdf
 };

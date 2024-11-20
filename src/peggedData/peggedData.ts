@@ -4392,5 +4392,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/Satoshi_BTCFi",
     wiki: "https://docs.satoshiprotocol.org/"
+  },
+  {
+    id: "219",
+    name: "Astherus",
+    address: "bsc:0x5A110fC00474038f6c02E89C707D638602EA44B5",
+    symbol: "USDF",
+    url: "https://astherus.com/en/usdf",
+    description:
+      `USDF is a token minted by depositing USDT on AstherusEarn. USDT and USDF are fully convertible at a 1:1 ratio. `,
+    mintRedeemDescription:
+      "Redemptionare temporarily unavailable during the ‘fundraising’ period. After the ‘fundraising’ period, users could redeem the USDF by clicking the button of “Redeem”. Then USDT tokens are claimable after three days after submitting the request for redemption.",
+    onCoinGecko: "false",
+    gecko_id: "astherus-usdf",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/AstherusHub",
+    wiki: "https://docs.astherus.com/"
   }
 ] as PeggedAsset[];
