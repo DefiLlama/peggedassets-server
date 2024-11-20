@@ -4390,7 +4390,7 @@ export default [
     pegMechanism: "crypto-backed",
     auditLinks: null,
     priceSource: "defillama",
-    twitter: "https://x.com/SatoshiBEVM",
+    twitter: "https://x.com/Satoshi_BTCFi",
     wiki: "https://docs.satoshiprotocol.org/"
   }
 ] as PeggedAsset[];
