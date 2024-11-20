@@ -338,7 +338,7 @@ export function craftChartsResponse(
           item.totalCirculating.circulating &&
           !(itemPegType === pegType)
         ) {
-          throw new Error(
+          console.log(
             `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
           );
         }
