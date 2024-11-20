@@ -360,7 +360,7 @@ export function craftChartsResponse(
             item[normalizedChain]?.circulating &&
             !(itemPegType === pegType)
           ) {
-            throw new Error(
+            console.log(
               `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
             );
           }
