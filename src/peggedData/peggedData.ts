@@ -3686,7 +3686,7 @@ export default [
     onCoinGecko: "true",
     gecko_id: "bitcoin-usd-btcfi",
     cmcId: null,
-    pegType: "peggedUSD",
+    pegType: "peggedVAR",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
