@@ -85,6 +85,12 @@ const adapter: PeggedIssuanceAdapter = {
   },
   osmosis: {
     noble: bridgedFromNoble("channel-1"),
+  },
+  mantra: {
+    noble: bridgedFromNoble("channel-101"),
+  },
+  penumbra: {
+    noble: bridgedFromNoble("channel-89"),
   }
 };
 
