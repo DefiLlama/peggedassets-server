@@ -1,4 +1,4 @@
-import { addChainExports,solanaMintedOrBridged } from "../helper/getSupply";
+import { addChainExports } from "../helper/getSupply";
 import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
 
 // Avalon - USDa, use LayerZero OFT (Mint-Burn) Modal to bridge
