@@ -12,9 +12,6 @@ const chainContracts = {
     taiko: {
       issued: ["0xff12470a969Dd362EB6595FFB44C82c959Fe9ACc"],
     },
-    iotex: {
-      issued: ["0x2d9526e2cabd30c6e8f89ea60d230503c59c6603"],
-    },
   };
 
 
