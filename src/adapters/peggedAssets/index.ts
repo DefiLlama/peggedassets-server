@@ -217,6 +217,7 @@ import solayerusd from "./solayer-usd";
 import rusd1 from "./reservoir-stablecoin";
 import satusd from "./satoshi-stablecoin"
 import usdf from "./astherus-usdf"
+import avalon_usda from "./usda"
 
 export default {
   tether,
@@ -437,5 +438,6 @@ export default {
   "solayer-usd": solayerusd,
   "reservoir-stablecoin": rusd1,
   "satoshi-stablecoin": satusd,
-  "astherus-usdf": usdf
+  "astherus-usdf": usdf,
+  "usda": avalon_usda
 };
