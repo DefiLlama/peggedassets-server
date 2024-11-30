@@ -4412,5 +4412,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/AstherusHub",
     wiki: "https://docs.astherus.com/"
+  },
+  {
+    id: "220",
+    name: "Avalon USDa",
+    address: "0x8a60e489004ca22d775c5f2c657598278d17d9c2",
+    symbol: "USDA",
+    url: "https://usda.avalonfinance.xyz/",
+    description:
+      `USDa is the flagship CDP (Collateralized Debt Position) product based on Avalon's CeDeFi lending platform`,
+    mintRedeemDescription:
+      "USDa is minted by depositing collateral or USDT (1:1) into Avalon CeDeFi, while redemptions require loan repayment or conversion to USDT",
+    onCoinGecko: "true",
+    gecko_id: "usda-2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/avalonfinance_",
+    wiki: "https://docs.avalonfinance.xyz/cedefi-cdp-usda"
   }
 ] as PeggedAsset[];
