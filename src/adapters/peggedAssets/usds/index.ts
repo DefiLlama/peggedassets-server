@@ -5,6 +5,9 @@ const chainContracts = {
     ethereum: {
       issued: ["0xdC035D45d973E3EC169d2276DDab16f1e407384F"],
     },
+    base: {
+      issued: ["0x820c137fa70c8691f0e44dc420a5e53c168921dc"],
+    },
   };
   
   
