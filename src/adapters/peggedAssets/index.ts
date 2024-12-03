@@ -439,5 +439,5 @@ export default {
   "reservoir-stablecoin": rusd1,
   "satoshi-stablecoin": satusd,
   "astherus-usdf": usdf,
-  "avalon-usda": avalon_usda
+  "usda-2": avalon_usda // coingecko id first, than token
 };
