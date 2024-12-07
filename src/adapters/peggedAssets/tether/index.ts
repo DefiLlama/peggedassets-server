@@ -768,8 +768,14 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   tron: {
-    minted: tronMinted(),
-    unreleased: tronUnreleased(),
+    minted: usdtApiMinted("totaltokens_tron"),
+    unreleased: sumMultipleBalanceFunctions(
+      [
+        usdtApiUnreleased("reserve_balance_tron"),
+        usdtApiUnreleased("quarantined_tron"),
+      ],
+      "peggedUSD"
+    ),
   },
   aurora: {
     near: bridgedSupply("aurora", 6, chainContracts.aurora.bridgedFromNear),
