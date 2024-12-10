@@ -123,7 +123,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xcca4e6302510d555b654b3eab9c0fcb223bcfdf0"],
   },
   ronin: {
-    bridgedFromETH: ["0x0b7007c13325c48911f73a2dad5fa5dcbf808adc"],
+    bridgeOnETH: ["0x64192819ac13ef72bf6b5ae239ac672b43a9af08"],
+    issued: ["0x0b7007c13325c48911f73a2dad5fa5dcbf808adc"], 
   },
   aurora: {
     bridgeOnETH: ["0x23Ddd3e3692d1861Ed57EDE224608875809e127f"],
