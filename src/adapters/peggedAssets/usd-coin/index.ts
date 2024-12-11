@@ -645,7 +645,11 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   ronin: {
-    ethereum: bridgedSupply("ronin", 6, chainContracts.ronin.bridgedFromETH),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.ronin.bridgeOnETH[0],
+      6
+    )
   },
   aurora: {
     near: bridgedSupply("aurora", 6, chainContracts.aurora.bridgedFromNear),
