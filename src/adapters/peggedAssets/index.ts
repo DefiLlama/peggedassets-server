@@ -218,6 +218,7 @@ import rusd1 from "./reservoir-stablecoin";
 import satusd from "./satoshi-stablecoin"
 import usdf from "./astherus-usdf"
 import avalon_usda from "./avalon-usda"
+import usdtb from "./usdtb"
 
 export default {
   tether,
@@ -439,5 +440,6 @@ export default {
   "reservoir-stablecoin": rusd1,
   "satoshi-stablecoin": satusd,
   "astherus-usdf": usdf,
-  "usda-2": avalon_usda // coingecko id first, than token
+  "usda-2": avalon_usda, // coingecko id first, than token
+  usdtb  // same as coingeckoID
 };

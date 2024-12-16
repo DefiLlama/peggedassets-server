@@ -4432,5 +4432,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/avalonfinance_",
     wiki: "https://docs.avalonfinance.xyz/cedefi-cdp-usda"
+  },
+  {
+    id: "221",
+    name: "Ethena USDtb",
+    address: "0xc139190f447e929f090edeb554d95abb8b18ac1c",
+    symbol: "USDTB",
+    url: "https://usdtb.money/",
+    description:
+      `USDtb is a digital dollar, otherwise known as a USD stablecoin. USDtb can be used the same way a holder would use any other dollar, whether to send and receive payments, acquire and trade assets, or to simply hold dollars.`,
+    mintRedeemDescription:
+      "The mint and redeem contract is a smart contract defining the operations for minting and redeeming USDtb tokens based on cryptographically signed orders controlled by a single admin. EIP-712 and EIP-1271 are the signing methods currently supported. The price present in any mint/redeem orders is determined by an off-chain RFQ system, which a benefactor may accept by signing an order and submitting it to the USDtb RFQ server",
+    onCoinGecko: "true",
+    gecko_id: "usdtb",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    auditLinks: "https://docs.usdtb.money/audits",
+    priceSource: "defillama",
+    twitter: "https://x.com/ethena_labs",
+    wiki: "https://docs.usdtb.money/"
   }
 ] as PeggedAsset[];
