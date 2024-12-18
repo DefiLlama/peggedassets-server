@@ -219,6 +219,7 @@ import satusd from "./satoshi-stablecoin"
 import usdf from "./astherus-usdf"
 import avalon_usda from "./avalon-usda"
 import usdtb from "./usdtb"
+import pausd from "./pausd-stablecoin" 
 
 export default {
   tether,
@@ -279,6 +280,7 @@ export default {
   seur,
   ageur: eura,
   "par-stablecoin": par,
+  "pausd-stablecoin": pausd,
   "hedge-usd": ush,
   "three-usd": threeusd,
   sigmausd,
