@@ -4452,5 +4452,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/ethena_labs",
     wiki: "https://docs.usdtb.money/"
+  },
+  {
+    id: "222",
+    name: "Parallel USD",
+    address: "0x571f54d23cdf2211c83e9a0cbd92aca36c48fa02",
+    symbol: "PAUSD",
+    url: "https://pausd.mimo.capital/",
+    description:
+      `paUSD is a USD stablecoin backed by collaterals, and can only be minted with governance-approved collaterals. paUSD are created when users deposit accepted tokens (such as WETH, WBTC, USDC, etc) as collateral in vaults and in turn receive a loan against that collateral`,
+    mintRedeemDescription:
+      "Tokens are minted by creating a vault on Parallel",
+    onCoinGecko: "true",
+    gecko_id: "parallel-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: "https://docs.usdtb.money/audits",
+    priceSource: "defillama",
+    twitter: "https://x.com/ParallelMoney",
+    wiki: "https://docs.mimo.capital/parallel-protocol/parallel-protocol/par-1"
   }
 ] as PeggedAsset[];
