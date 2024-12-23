@@ -7,11 +7,11 @@ import {
 
 const chainContracts = {
   arbitrum: {
-    minted: "0xD4fe6e1e37dfCf35E9EEb54D4cca149d1c10239f", // Contrato que emite la stablecoin en Arbitrum
-    curvePool: "0x2b2e23b7c1b0de9040011b860cc575650d0817f7", // Contrato del pool Curve
+    minted: "0xD4fe6e1e37dfCf35E9EEb54D4cca149d1c10239f", 
+    curvePool: "0x2b2e23b7c1b0de9040011b860cc575650d0817f7", 
   },
   ethereum: {
-    bridgedFromArbitrum: "0xe9766D6aed0A73255f95ACC1F263156e746B70ba", // Contrato de puente en Ethereum
+    bridgedFromArbitrum: "0xe9766D6aed0A73255f95ACC1F263156e746B70ba",
   },
 };
 
