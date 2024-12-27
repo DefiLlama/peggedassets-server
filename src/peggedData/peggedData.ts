@@ -4472,5 +4472,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/ParallelMoney",
     wiki: "https://docs.mimo.capital/parallel-protocol/parallel-protocol/par-1"
+  },
+  {
+    id: "223",
+    name: "TREN Debt Token",
+    address: "arbitrum:0xd4fe6e1e37dfcf35e9eeb54d4cca149d1c10239f",
+    symbol: "XY",
+    url: "https://www.tren.finance/",
+    description:
+      `XY is a synthetic dollar debt token in the Tren Finance ecosystem, backed by overcollateralized loans and using LayerZero's OFT standard for cross-chain transfers`,
+    mintRedeemDescription:
+      "Users mint XY by depositing collateral, while redemption is managed through automated peg stability contracts and buyback-and-burn mechanisms, avoiding direct redemptions to protect user collateral",
+    onCoinGecko: "true",
+    gecko_id: "tren-debt-token",
+    cmcId: "16013", 
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: "https://github.com/zokyo-sec/audit-reports/blob/main/Tren%20Finance/Tren%20Finance_Zokyo_audit_report_Nov19th_2024.pdf",
+    priceSource: "defillama",
+    twitter: "https://x.com/TrenFinance",
+    wiki: "https://docs.tren.finance/tokens/xy" 
   }
 ] as PeggedAsset[];
