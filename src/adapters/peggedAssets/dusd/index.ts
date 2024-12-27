@@ -20,7 +20,6 @@ async function dUSDMinted(chain: string, decimals: number) {
     _chainBlocks: ChainBlocks,
   ) {
     let balances = {} as Balances;
-    // Get total supply from the token contract
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
@@ -30,7 +29,6 @@ async function dUSDMinted(chain: string, decimals: number) {
       })
     ).output;
 
-    // Get AMO supply from AMO manager contract
     const amoSupply = (
       await sdk.api.abi.call({
         abi: {
@@ -46,13 +44,12 @@ async function dUSDMinted(chain: string, decimals: number) {
       })
     ).output;
 
-    // Calculate actual circulating supply by subtracting AMO supply
-    const circulatingSupply = totalSupply - amoSupply;
+    const circulatingSupply = BigInt(totalSupply) - BigInt(amoSupply);
 
     sumSingleBalance(
       balances,
       "peggedUSD",
-      circulatingSupply / 10 ** decimals,
+      Number(circulatingSupply / BigInt(10 ** decimals)),
       "issued",
       false,
     );
@@ -69,7 +66,6 @@ async function dUSDUnreleased(chain: string, decimals: number) {
   ) {
     let balances = {} as Balances;
 
-    // Get list of AMO vaults
     const amoVaults = (
       await sdk.api.abi.call({
         abi: {
@@ -85,8 +81,7 @@ async function dUSDUnreleased(chain: string, decimals: number) {
       })
     ).output;
 
-    // Get DUSD value from each vault and sum them up
-    let totalUnreleased = 0;
+    let totalUnreleased = 0n;
     for (const vault of amoVaults) {
       const vaultDusd = (
         await sdk.api.abi.call({
@@ -102,13 +97,13 @@ async function dUSDUnreleased(chain: string, decimals: number) {
           block: _chainBlocks?.[chain],
         })
       ).output;
-      totalUnreleased += Number(vaultDusd);
+      totalUnreleased += BigInt(vaultDusd);
     }
 
     sumSingleBalance(
       balances,
       "peggedUSD",
-      totalUnreleased / 10 ** decimals,
+      Number(totalUnreleased / BigInt(10 ** decimals)),
       "unreleased",
       false,
     );
