@@ -220,6 +220,7 @@ import usdf from "./astherus-usdf"
 import avalon_usda from "./avalon-usda"
 import usdtb from "./usdtb"
 import pausd from "./parallel-usd" 
+import dUSD from "./dusd"
 
 export default {
   tether,
@@ -443,5 +444,6 @@ export default {
   "satoshi-stablecoin": satusd,
   "astherus-usdf": usdf,
   "usda-2": avalon_usda, // coingecko id first, than token
-  usdtb  // same as coingeckoID
+  usdtb,  // same as coingeckoID,
+  dUSD, // TODO: need to obtain coingecko id
 };
