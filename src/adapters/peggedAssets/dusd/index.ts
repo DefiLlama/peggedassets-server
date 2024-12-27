@@ -9,7 +9,7 @@ import {
 const chainContracts = {
   fraxtal: {
     issued: "0x788D96f655735f52c676A133f4dFC53cEC614d4A",
-    amoManager: "0xd9Ba545656Cba566C042F96634749242a3bF76c7",
+    amoManager: "0x49a0c8030Ca199f6F246517aE689E3cC0775271a",
   },
 };
 
