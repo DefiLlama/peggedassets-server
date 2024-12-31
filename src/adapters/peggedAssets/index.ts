@@ -445,5 +445,5 @@ export default {
   "astherus-usdf": usdf,
   "usda-2": avalon_usda, // coingecko id first, than token
   usdtb,  // same as coingeckoID
- "tren-debt-token":xy
+ "tren-debt-token" : xy
 };
