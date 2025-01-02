@@ -1805,8 +1805,8 @@ export const bridgeInfo = {
     link: "https://voltage.finance/",
   },
   tomochain: {
-    name: "TomoBridge",
-    link: "https://bridge.TomoChain.com/",
+    name: "Arken Bridge",
+    link: "https://arken.ag/bridge",
   },
   evodefi: {
     name: "EVODeFi",
