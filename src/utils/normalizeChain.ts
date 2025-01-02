@@ -1191,7 +1191,7 @@ export function getChainDisplayName(
     case "gochain":
       return "GoChain";
     case "tomochain":
-      return "TomoChain";
+      return "Viction";
     case "fusion":
       return "Fusion";
     case "kardia":
