@@ -414,7 +414,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 60,
   },
-  TomoChain: {
+  Viction: {
     geckoId: "tomochain",
     symbol: "VIC",
     cmcId: "2570",
@@ -1099,7 +1099,8 @@ chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
 chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
-chainCoingeckoIds["Klaytn"] = chainCoingeckoIds["Kaia"]
+chainCoingeckoIds["Klaytn"] = chainCoingeckoIds["Kaia"];
+chainCoingeckoIds["TomoChain"] = chainCoingeckoIds["Viction"]
 
 export const extraSections = [
   "staking",
@@ -1127,6 +1128,8 @@ export function transformNewChainName(chain: string) {
       return "Rootstock";
     case "Klaytn":
       return "Kaia";
+    case "TomoChain":
+      return "Viction";
     default:
       return chain;
   }
@@ -1191,7 +1194,7 @@ export function getChainDisplayName(
     case "gochain":
       return "GoChain";
     case "tomochain":
-      return "Viction";
+      return useNewChainNames ? "Viction" : "TomoChain";
     case "fusion":
       return "Fusion";
     case "kardia":
