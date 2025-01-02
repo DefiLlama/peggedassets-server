@@ -13,7 +13,8 @@ import {
   cosmosSupply,
   kujiraSupply,
   osmosisSupply,
-  getApi
+  getApi,
+  supplyInArbitrumBridge
 } from "../helper/getSupply";
 import {
   getTotalSupply as ontologyGetTotalSupply,
@@ -936,6 +937,13 @@ const adapter: PeggedIssuanceAdapter = {
   },
   occ: {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),
+  },
+  hyperliquid: {
+    arbitrum: supplyInArbitrumBridge(
+      chainContracts.arbitrum.issued[0],
+      chainContracts.hyperliquid.bridgeOnARB[0],
+      6
+    ),
   },
 };
 

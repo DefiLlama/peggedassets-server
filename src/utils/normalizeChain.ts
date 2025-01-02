@@ -1085,6 +1085,12 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 41923,
   },
+  "Hyperliquid": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;

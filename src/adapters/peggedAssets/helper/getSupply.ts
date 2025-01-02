@@ -89,6 +89,22 @@ export function supplyInEthereumBridge(
   };
 }
 
+export function supplyInArbitrumBridge(
+  target: string,
+  owner: string,
+  decimals: number,
+  pegType?: PeggedAssetType
+) {
+  return async function (_api: ChainApi) {
+    const api = await getApi('arbitrum', _api)
+    let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
+    const bridged = await api.call({ abi: 'erc20:balanceOf', target: target, params: owner, })
+    sumSingleBalance(balances, assetPegType, bridged / 10 ** decimals, owner, true);
+    return balances;
+  };
+}
+
 export function solanaMintedOrBridged(
   targets: string[],
   pegType?: PeggedAssetType
