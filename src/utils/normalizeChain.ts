@@ -416,7 +416,7 @@ export const chainCoingeckoIds = {
   },
   TomoChain: {
     geckoId: "tomochain",
-    symbol: "TOMO",
+    symbol: "VIC",
     cmcId: "2570",
     categories: ["EVM"],
     chainId: 88,
