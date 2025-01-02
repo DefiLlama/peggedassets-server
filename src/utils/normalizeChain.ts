@@ -416,7 +416,7 @@ export const chainCoingeckoIds = {
   },
   TomoChain: {
     geckoId: "tomochain",
-    symbol: "TOMO",
+    symbol: "VIC",
     cmcId: "2570",
     categories: ["EVM"],
     chainId: 88,
@@ -1191,7 +1191,7 @@ export function getChainDisplayName(
     case "gochain":
       return "GoChain";
     case "tomochain":
-      return "TomoChain";
+      return "Viction";
     case "fusion":
       return "Fusion";
     case "kardia":
