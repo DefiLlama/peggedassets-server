@@ -2,9 +2,10 @@ const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
 import { cosmosSupply } from "../helper/getSupply";
 import {
+  Balances,
   ChainBlocks,
+  ChainContracts,
   PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
