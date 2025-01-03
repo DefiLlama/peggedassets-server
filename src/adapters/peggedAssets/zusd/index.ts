@@ -5,9 +5,10 @@ const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
 import { bridgedSupply } from "../helper/getSupply";
 import {
+  Balances,
   ChainBlocks,
+  ChainContracts,
   PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
@@ -71,7 +72,7 @@ async function gmoAPIChainMinted(chain: string) {
     const filteredChainsData = await gyenData[0].chains.filter(
       (obj: any) => obj.chain === chain
     );
-    const supply = parseInt(filteredChainsData[0].amount ?? 0);
+    const supply = parseInt(filteredChainsData[0].uiamount ?? 0);
     sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
   };
