@@ -1,7 +1,7 @@
 import { sumSingleBalance } from "../helper/generalUtil";
-import { Balances, PeggedIssuanceAdapter, ChainContracts } from "../peggedAsset.type";
-import * as sui from "../helper/sui";
 import { addChainExports } from "../helper/getSupply";
+import * as sui from "../helper/sui";
+import { Balances, ChainContracts, PeggedIssuanceAdapter } from "../peggedAsset.type";
 
 
 async function suiMinted(): Promise<Balances> {
@@ -13,23 +13,23 @@ async function suiMinted(): Promise<Balances> {
         return balances;
 }
 
-async function suiUnreleased(): Promise<Balances> {
-  let balances = {} as Balances;
-  const { fields: unreleasedFields } = await sui.getObject(
-    "0x916294b841355104e01f68d3f6afba32942a4a0d5c350e64228b48d5069cfd8a"
-  );
-  const unreleasedAmount = unreleasedFields.balance;
+// async function suiUnreleased(): Promise<Balances> {
+//   let balances = {} as Balances;
+//   const { fields: unreleasedFields } = await sui.getObject(
+//     "0x916294b841355104e01f68d3f6afba32942a4a0d5c350e64228b48d5069cfd8a"
+//   );
+//   const unreleasedAmount = unreleasedFields.balance;
 
-  sumSingleBalance(
-    balances,
-    "peggedUSD",
-    unreleasedAmount / 10 ** 6, 
-    undefined,
-    true
-  );
+//   sumSingleBalance(
+//     balances,
+//     "peggedUSD",
+//     unreleasedAmount / 10 ** 6, 
+//     undefined,
+//     true
+//   );
 
-  return balances;
-}
+//   return balances;
+// }
 
 const chainContracts: ChainContracts = {
   avax: {
@@ -48,7 +48,7 @@ const adapter: PeggedIssuanceAdapter = {
   ...addChainExports(chainContracts, undefined, { decmials: 6, }),
   sui: {
     minted: suiMinted,
-    unreleased: suiUnreleased,
+    // unreleased: suiUnreleased,
   },
 };
 
