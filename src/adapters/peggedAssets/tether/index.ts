@@ -735,11 +735,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("iotex", 6, chainContracts.iotex.bridgedFromETH),
   },
   tomochain: {
-    ethereum: bridgedSupply(
-      "tomochain",
-      6,
-      chainContracts.tomochain.bridgedFromETH
-    ),
+    ethereum: bridgedSupply("tomochain", 6, chainContracts.tomochain.bridgedFromETH2),
   },
   kardia: {
     ethereum: bridgedSupply("kardia", 6, chainContracts.kardia.bridgedFromETH),

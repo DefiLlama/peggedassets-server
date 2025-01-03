@@ -99,6 +99,7 @@ export const chainContracts: ChainContracts = {
   },
   tomochain: {
     bridgedFromETH: ["0x69b946132b4a6c74cd29ba3ff614ceea1ef9ff2b"],
+    bridgedFromETH2: ["0x381b31409e4d220919b2cff012ed94d70135a59e"]
   },
   harmony: {
     bridgeOnETH: ["0x2dccdb493827e15a5dc8f8b72147e6c4a5620857"],
