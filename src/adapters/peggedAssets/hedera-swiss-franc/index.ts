@@ -20,7 +20,6 @@ async function hederaMinted() {
         );
         const supply = issuance?.data?.total_supply;
         let balance = supply / 10 ** 8;
-        console.log(balance);
         return { peggedCHF: balance };
     };
 }

@@ -68,6 +68,7 @@ export default [
     pegMechanism: "algorithmic",
     priceSource: "coingecko",
     auditLinks: null,
+    deadFrom: "2022-05-09",
     twitter: "https://twitter.com/terra_money",
     wiki: "https://wiki.defillama.com/wiki/UST",
   },

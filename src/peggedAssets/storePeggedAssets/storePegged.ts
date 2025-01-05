@@ -30,6 +30,16 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
     const actions = peggedIndexes
       .map((idx) => peggedAssets[idx])
       .map(async (peggedAsset) => {
+        if (peggedAsset.delisted) {
+          console.log("Skipping delisted pegged asset", peggedAsset.name);
+          return;
+        }
+        if (peggedAsset.deadFrom) {
+          console.log("Skipping dead pegged asset", peggedAsset.name);
+          return;
+        }
+        if (peggedAsset.gecko_id === "bitcoin-usd-btcfi") 
+          peggedAsset.pegType = "peggedUSD";
         const adapterModule = importAdapter(peggedAsset);
         if (!adapterModule) console.log("No adapter found for", peggedAsset.name, peggedAsset);
 

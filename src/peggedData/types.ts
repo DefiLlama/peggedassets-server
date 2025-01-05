@@ -47,6 +47,7 @@ export type PeggedAsset = {
   twitter: string;
   wiki: string;
   delisted?: boolean;
+  deadFrom?: string;
 };
 
 type Bridge = {

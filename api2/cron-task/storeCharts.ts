@@ -338,9 +338,10 @@ export function craftChartsResponse(
           item.totalCirculating.circulating &&
           !(itemPegType === pegType)
         ) {
-          console.log(
-            `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
-          );
+          if (peggedGeckoID !== "bitcoin-usd-btcfi")
+            console.log(
+              `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
+            );
         }
 
         itemBalance.circulating = item.totalCirculating.circulating ?? {
@@ -360,9 +361,10 @@ export function craftChartsResponse(
             item[normalizedChain]?.circulating &&
             !(itemPegType === pegType)
           ) {
-            console.log(
-              `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
-            );
+            if (peggedGeckoID !== "bitcoin-usd-btcfi")
+              console.log(
+                `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
+              );
           }
         }
 
