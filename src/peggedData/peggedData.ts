@@ -4496,5 +4496,24 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/TrenFinance",
     wiki: "https://docs.tren.finance/tokens/xy" 
+  },
+  {
+    id: "224",
+    name: "dTRINITY USD",
+    address: "fraxtal:0x788D96f655735f52c676A133f4dFC53cEC614d4A",
+    symbol: "dUSD",
+    url: "https://dtrinity.org/",
+    description:
+      `dUSD is a decentralized and full-reserve stablecoin, backed by an on-chain reserve of other USD-denominated stablecoins and yieldcoins. Based on the ERC-20 standard, every dUSD token is backed by at least $1 of collateral and can be minted permissionlessly via smart contracts with no fees (excluding gas).`,
+    mintRedeemDescription: "",
+    onCoinGecko: "true",
+    gecko_id: "dtrinity-usd",
+    cmcId: "", 
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: "",
+    priceSource: "coingecko",
+    twitter: "https://x.com/dtrinity_defi",
+    wiki: "https://docs.dtrinity.org" 
   }
 ] as PeggedAsset[];
