@@ -1,25 +1,12 @@
 const sdk = require("@defillama/sdk");
+import { sumSingleBalance } from '../helper/generalUtil';
+import { addChainExports, cosmosSupply } from "../helper/getSupply";
 import { ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
-import { addChainExports } from "../helper/getSupply";
-import { sumSingleBalance } from '../helper/generalUtil';
 
-async function nobleNative() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    const supplyData = await retry(async (_bail: any) =>
-      axios.get("https://noble-api.polkachu.com/cosmos/bank/v1beta1/supply/ausdy")
-    );
-
-    const circulatingSupply = supplyData?.data?.amount?.amount / 1e18;
-    let balances = {};
-    sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued", false);
-    return balances;
-  };
+function nobleSupply() {
+  return cosmosSupply("noble", ['ausdy'], 18, '', 'peggedUSD');
 }
 
 async function bridgedFromNoble(channel: string) {
@@ -78,7 +65,7 @@ const chainContracts = {
 const adapter: PeggedIssuanceAdapter = {
   ...addChainExports(chainContracts),
   noble: {
-    minted: nobleNative()
+    minted: nobleSupply()
   },
   injective: {
     noble: bridgedFromNoble("channel-31"),

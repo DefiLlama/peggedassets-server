@@ -12,7 +12,7 @@
     "deploy:prod": "export NODE_OPTIONS=--max-old-space-size=6144 && export NODE_ENV=prod && npm run deploy:env",
     "deploy": "npm run deploy:dev",
     "serve": "node --max-old-space-size=8192 node_modules/serverless/bin/serverless offline start",
-    "test": "cd src/adapters/peggedAssets && npx ts-node test",
+    "test": "cd src/adapters/peggedAssets && npx ts-node --transpile-only test",
     "test:watch": "jest --watch",
     "prebuild": "npx ts-node src/cli/buildRequires.ts",
     "pretest": "npm run prebuild",
