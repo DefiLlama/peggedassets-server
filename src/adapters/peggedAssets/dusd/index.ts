@@ -64,45 +64,9 @@ async function dUSDMinted(chain: string, decimals: number) {
   };
 }
 
-async function dUSDUnreleased(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks,
-  ) {
-    let balances = {} as Balances;
-
-    const amoSupply = (
-      await sdk.api.abi.call({
-        abi: {
-          inputs: [],
-          name: "totalAmoSupply",
-          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-          stateMutability: "view",
-          type: "function",
-        },
-        target: chainContracts[chain as keyof typeof chainContracts].amoManager,
-        chain: chain,
-        block: _chainBlocks?.[chain],
-      })
-    ).output;
-
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      Number(BigInt(amoSupply) / BigInt(10 ** decimals)),
-      "issued",
-      false,
-    );
-
-    return balances;
-  };
-}
-
 const adapter: PeggedIssuanceAdapter = {
   fraxtal: {
     minted: dUSDMinted("fraxtal", 6),
-    unreleased: dUSDUnreleased("fraxtal", 6),
   },
 };
 
