@@ -10,6 +10,7 @@ const chainContracts = {
   fraxtal: {
     issued: "0x788D96f655735f52c676A133f4dFC53cEC614d4A",
     amoManager: "0x49a0c8030Ca199f6F246517aE689E3cC0775271a",
+    issuer: "0x1ec13EF0b22C53298A00b23b03203E03D999b7a2",
   },
 };
 
@@ -20,10 +21,16 @@ async function dUSDMinted(chain: string, decimals: number) {
     _chainBlocks: ChainBlocks,
   ) {
     let balances = {} as Balances;
-    const totalSupply = (
+    const circulatingSupply = (
       await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
-        target: chainContracts[chain as keyof typeof chainContracts].issued,
+        abi: {
+          inputs: [],
+          name: "circulatingDusd",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        target: chainContracts[chain as keyof typeof chainContracts].issuer,
         chain: chain,
         block: _chainBlocks?.[chain],
       })
@@ -44,12 +51,11 @@ async function dUSDMinted(chain: string, decimals: number) {
       })
     ).output;
 
-    const circulatingSupply = BigInt(totalSupply) - BigInt(amoSupply);
 
     sumSingleBalance(
       balances,
       "peggedUSD",
-      Number(circulatingSupply / BigInt(10 ** decimals)),
+      Number((BigInt(circulatingSupply) + BigInt(amoSupply))/ BigInt(10 ** decimals)),
       "issued",
       false,
     );
@@ -66,12 +72,12 @@ async function dUSDUnreleased(chain: string, decimals: number) {
   ) {
     let balances = {} as Balances;
 
-    const amoVaults = (
+    const amoSupply = (
       await sdk.api.abi.call({
         abi: {
           inputs: [],
-          name: "amoVaults",
-          outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
+          name: "totalAmoSupply",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
           stateMutability: "view",
           type: "function",
         },
@@ -81,30 +87,11 @@ async function dUSDUnreleased(chain: string, decimals: number) {
       })
     ).output;
 
-    let totalUnreleased = 0n;
-    for (const vault of amoVaults) {
-      const vaultDusd = (
-        await sdk.api.abi.call({
-          abi: {
-            inputs: [],
-            name: "totalDusdValue",
-            outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-            stateMutability: "view",
-            type: "function",
-          },
-          target: vault,
-          chain: chain,
-          block: _chainBlocks?.[chain],
-        })
-      ).output;
-      totalUnreleased += BigInt(vaultDusd);
-    }
-
     sumSingleBalance(
       balances,
       "peggedUSD",
-      Number(totalUnreleased / BigInt(10 ** decimals)),
-      "unreleased",
+      Number(BigInt(amoSupply) / BigInt(10 ** decimals)),
+      "issued",
       false,
     );
 
