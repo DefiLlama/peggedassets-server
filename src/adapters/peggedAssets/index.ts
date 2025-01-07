@@ -220,6 +220,7 @@ import vnxau from "./vnx-gold";
 import vchf from "./vnx-swiss-franc";
 import xusd from "./xusd-babelfish";
 import zkusd from "./zkusd";
+import dtrinityusd from "./dtrinity-usd";
 
 export default {
   tether,
@@ -443,6 +444,7 @@ export default {
   "satoshi-stablecoin": satusd,
   "astherus-usdf": usdf,
   "usda-2": avalon_usda, // coingecko id first, than token
-  usdtb,  // same as coingeckoID
- "tren-debt-token" : xy
+  usdtb,  // same as coingeckoID,
+ "tren-debt-token" : xy,
+ "dtrinity-usd": dtrinityusd,
 };
