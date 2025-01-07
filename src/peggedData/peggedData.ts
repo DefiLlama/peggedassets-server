@@ -4508,7 +4508,7 @@ export default [
     mintRedeemDescription: "Mirroring the US Dollar's non-redeemability for its underlying gold reserves post-Nixon Shock (1971), dUSD is also designed to have non-redeemable reserves to maximize float interest generation. In place of redemption, dUSD relies on open market operations to manage liquidity and stability, similar to the Fed.",
     onCoinGecko: "true",
     gecko_id: "dtrinity-usd",
-    cmcId: "", 
+    cmcId: null, 
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     auditLinks: "https://docs.dtrinity.org/developer/audits-and-security",
