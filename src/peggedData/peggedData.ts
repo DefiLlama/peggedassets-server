@@ -2219,7 +2219,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: [
-      "https://docs.curve.fi/references/audits/#curve-stablecoin-and-lending",
+      "https://docs.curve.fi/security/security/#stablecoin-and-lending",
     ],
     twitter: "https://twitter.com/CurveFinance",
     wiki: null,
