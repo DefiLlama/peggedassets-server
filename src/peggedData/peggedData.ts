@@ -4515,5 +4515,24 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/dtrinity_defi",
     wiki: "https://docs.dtrinity.org" 
+  },
+  {
+    id: "225",
+    name: "Zoth ZeUSD",
+    address: "metis:0x2d3D1a6982840Dd88bC2380Fd557F8A9D5e27a77",
+    symbol: "ZeUSD",
+    url: "https://app.zoth.io/zeusd",
+    description:
+      `ZeUSD is a fully composable, omnichain, RWA-backed CDP stable token, issued on top of high-quality liquid off-chain or on-chain RWAs like US TBIlls, ETFs, MMFs, Reverse Repos etc`,
+    mintRedeemDescription: "ZeUSD is created when users deposit eligible RWA as collateral to open a collateralized debt position",
+    onCoinGecko: "false",
+    gecko_id: "zoth-zeusd",
+    cmcId: null, 
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    auditLinks: "https://docs.zoth.io/zoth/resources/audits",
+    priceSource: "defillama",
+    twitter: "https://x.com/zothdotio",
+    wiki: "https://docs.zoth.io/zoth/products/zeusd-an-omni-chain-and-composable-stable-token" 
   }
 ] as PeggedAsset[];

@@ -221,6 +221,7 @@ import vchf from "./vnx-swiss-franc";
 import xusd from "./xusd-babelfish";
 import zkusd from "./zkusd";
 import dtrinityusd from "./dtrinity-usd";
+import zeusd from "./zoth-zeusd";
 
 export default {
   tether,
@@ -447,4 +448,5 @@ export default {
   usdtb,  // same as coingeckoID,
  "tren-debt-token" : xy,
  "dtrinity-usd": dtrinityusd,
+ "zoth-zeusd": zeusd
 };
