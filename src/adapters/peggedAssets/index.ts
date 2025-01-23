@@ -223,6 +223,7 @@ import zkusd from "./zkusd";
 import dtrinityusd from "./dtrinity-usd";
 import zeusd from "./zoth-zeusd";
 import zchf from "./frankencoin";
+import bold from "./liquity-bold"
 
 export default {
   tether,
@@ -450,5 +451,6 @@ export default {
  "tren-debt-token" : xy,
  "dtrinity-usd": dtrinityusd,
  "zoth-zeusd": zeusd,
- "frankencoin": zchf
+ "frankencoin": zchf,
+ "liquity-bold": bold
 };

@@ -4553,5 +4553,23 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/frankencoinzchf",
     wiki: "https://docs.frankencoin.com/#frankencoin-zchf-and-frankencoin-pool-shares-fps" 
+  },
+  {
+    id: "227",
+    name: "Liquity BOLD",
+    address: "0xb01dd87b29d187f3e3a4bf6cdaebfb97f3d9ab98",
+    symbol: "BOLD",
+    url: "https://www.liquity.org/bold",
+    description:
+      `The dollar you fully control: unstoppable, fully on-chain and always redeemable for (staked) ETH.`,
+    onCoinGecko: "true",
+    gecko_id: "liquity-bold",
+    cmcId: null, 
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/LiquityProtocol",
+    wiki: "https://docs.liquity.org/v2-documentation/technical-resources" 
   }
 ] as PeggedAsset[];
