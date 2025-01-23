@@ -4452,7 +4452,7 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
-    auditLinks: "https://docs.usdtb.money/audits",
+    auditLinks: ["https://docs.usdtb.money/audits"],
     priceSource: "defillama",
     twitter: "https://x.com/ethena_labs",
     wiki: "https://docs.usdtb.money/"
@@ -4472,7 +4472,7 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    auditLinks: "https://docs.usdtb.money/audits",
+    auditLinks: ["https://docs.usdtb.money/audits"],
     priceSource: "defillama",
     twitter: "https://x.com/ParallelMoney",
     wiki: "https://docs.mimo.capital/parallel-protocol/parallel-protocol/par-1"
@@ -4492,7 +4492,7 @@ export default [
     cmcId: "16013", 
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    auditLinks: "https://github.com/zokyo-sec/audit-reports/blob/main/Tren%20Finance/Tren%20Finance_Zokyo_audit_report_Nov19th_2024.pdf",
+    auditLinks: ["https://github.com/zokyo-sec/audit-reports/blob/main/Tren%20Finance/Tren%20Finance_Zokyo_audit_report_Nov19th_2024.pdf"],
     priceSource: "defillama",
     twitter: "https://x.com/TrenFinance",
     wiki: "https://docs.tren.finance/tokens/xy" 
@@ -4511,7 +4511,7 @@ export default [
     cmcId: null, 
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    auditLinks: "https://docs.dtrinity.org/developer/audits-and-security",
+    auditLinks: ["https://docs.dtrinity.org/developer/audits-and-security"],
     priceSource: "coingecko",
     twitter: "https://x.com/dtrinity_defi",
     wiki: "https://docs.dtrinity.org" 
@@ -4530,9 +4530,28 @@ export default [
     cmcId: null, 
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
-    auditLinks: "https://docs.zoth.io/zoth/resources/audits",
+    auditLinks: ["https://docs.zoth.io/zoth/resources/audits"],
     priceSource: "defillama",
     twitter: "https://x.com/zothdotio",
     wiki: "https://docs.zoth.io/zoth/products/zeusd-an-omni-chain-and-composable-stable-token" 
+  },
+  {
+    id: "226",
+    name: "Frankencoin",
+    address: "0xb58e61c3098d85632df34eecfb899a1ed80921cb",
+    symbol: "ZCHF",
+    url: "https://app.frankencoin.com/",
+    description:
+      `Frankencoin ZCHF is a collateralized, oracle-free stablecoin that tracks the value of the Swiss franc`,
+    mintRedeemDescription: "To mint ZCHF, propose a new position with a 1,000 ZCHF fee or clone an existing position, with reserves and interest deducted upfront, secured by a challenge-and-auction system to maintain collateral integrity",
+    onCoinGecko: "true",
+    gecko_id: "frankencoin",
+    cmcId: "31379", 
+    pegType: "peggedCHF",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/frankencoinzchf",
+    wiki: "https://docs.frankencoin.com/#frankencoin-zchf-and-frankencoin-pool-shares-fps" 
   }
 ] as PeggedAsset[];
