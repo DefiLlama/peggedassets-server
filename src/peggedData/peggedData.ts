@@ -4561,7 +4561,7 @@ export default [
     symbol: "BOLD",
     url: "https://www.liquity.org/bold",
     description:
-      `The dollar you fully control: unstoppable, fully on-chain and always redeemable for (staked) ETH.`,
+      `BOLD is the USD-pegged stablecoin issued in Liquity V2. It’s fully decentralized, overcollateralized and backed only by WETH, wstETH and rETH`,
     onCoinGecko: "true",
     gecko_id: "liquity-bold",
     cmcId: null, 
