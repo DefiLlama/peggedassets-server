@@ -661,7 +661,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
-    heco: solanaMintedOrBridged(chainContracts.solana.bridgedFromHeco),
+    // heco: solanaMintedOrBridged(chainContracts.solana.bridgedFromHeco),
     avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
   },
   arbitrum: {
@@ -721,7 +721,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   heco: {
-    ethereum: bridgedSupply("heco", 18, chainContracts.heco.bridgedFromETH),
+    // ethereum: bridgedSupply("heco", 18, chainContracts.heco.bridgedFromETH),
   },
   okexchain: {
     ethereum: bridgedSupply(

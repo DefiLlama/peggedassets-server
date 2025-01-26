@@ -86,10 +86,10 @@ const adapter: PeggedIssuanceAdapter = {
     minted: tronMinted(),
   },
   heco: {
-    minted: chainMinted("heco", 8),
+    // minted: chainMinted("heco", 8),
   },
   elastos: {
-    heco: bridgedSupply("elastos", 8, chainContracts.elastos.bridgedFromHeco),
+    // heco: bridgedSupply("elastos", 8, chainContracts.elastos.bridgedFromHeco),
   },
   solana: {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),

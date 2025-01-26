@@ -214,7 +214,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   heco: {
-    ethereum: bridgedSupply("heco", 18, chainContracts.heco.bridgedFromETH),
+    // ethereum: bridgedSupply("heco", 18, chainContracts.heco.bridgedFromETH),
   },
   /*
   cronos: {
