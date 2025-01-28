@@ -4572,5 +4572,24 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/LiquityProtocol",
     wiki: "https://docs.liquity.org/v2-documentation/technical-resources" 
+  },
+  {
+    id: "228",
+    name: "Quill USD",
+    address: "scroll:0x6F2A1A886Dbf8E36C4fa9F25a517861A930fBF3A",
+    symbol: "USDQ",
+    url: "https://app.quill.finance/",
+    description:
+      `$USDQ is a decentralized, algorithmic stablecoin that is soft-pegged to the U.S. dollar`,
+    mintRedeemDescription: "To mint $USDQ, users deposit an eligible collateral asset into their Trove on the Quill platform. Based on the value of the collateral and the protocol's collateralization requirements, users can mint $USDQ up to a certain limit",
+    onCoinGecko: "false",
+    gecko_id: "quill-usd",
+    cmcId: null, 
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/QuillFi",
+    wiki: "https://docs.quill.finance/faq/usdusdq" 
   }
 ] as PeggedAsset[];
