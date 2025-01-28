@@ -29,6 +29,9 @@ const chainContracts: ChainContracts = {
     issued: ["HzwqbKZw8HxMN6bF2yFZNrht3c2iXXzpKcFu7uBEDKtr"],
     unreleased: ["7VHUFJHWu2CuExkJcJrzhQPJ2oygupTWkL2A2For4BmE"], 
   },
+  sonic: {
+    bridgedFromETH: ["0xe715cbA7B5cCb33790ceBFF1436809d36cb17E57"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -157,6 +160,16 @@ const adapter: PeggedIssuanceAdapter = {
       '0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c', 
       '0xb25eA1D493B49a1DeD42aC5B1208cC618f9A9B80', 
       6, 
+      "peggedEUR"
+    ),
+  },
+  sonic: {
+    ethereum: bridgedSupply(
+      "sonic",
+      6,
+      chainContracts.sonic.bridgedFromETH,
+      "sonic",
+      "Ethereum",
       "peggedEUR"
     ),
   },
