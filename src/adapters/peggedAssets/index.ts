@@ -223,7 +223,8 @@ import zkusd from "./zkusd";
 import dtrinityusd from "./dtrinity-usd";
 import zeusd from "./zoth-zeusd";
 import zchf from "./frankencoin";
-import bold from "./liquity-bold"
+import bold from "./liquity-bold";
+import lvlusd from "./level-usd";
 
 export default {
   tether,
@@ -433,24 +434,25 @@ export default {
   "balanced-dollars": bnusd,
   "agora-dollar": ausdagora,
   "opus-cash": opuscash,
-  "dyad": dyad,
+  dyad: dyad,
   "dackie-usd": dckusd,
-  "usds": skydollar,
+  usds: skydollar,
   "elixir-deusd": deusd,
   "threshold-usd": thusd,
   "move-dollar": mod,
   "usdx-money-usdx": usdx0,
   "m-by-m^0": m,
-  "moneta": moneta,
+  moneta: moneta,
   "solayer-usd": solayerusd,
   "reservoir-stablecoin": rusd1,
   "satoshi-stablecoin": satusd,
   "astherus-usdf": usdf,
   "usda-2": avalon_usda, // coingecko id first, than token
-  usdtb,  // same as coingeckoID,
- "tren-debt-token" : xy,
- "dtrinity-usd": dtrinityusd,
- "zoth-zeusd": zeusd,
- "frankencoin": zchf,
- "liquity-bold": bold
+  usdtb, // same as coingeckoID,
+  "tren-debt-token": xy,
+  "dtrinity-usd": dtrinityusd,
+  "zoth-zeusd": zeusd,
+  frankencoin: zchf,
+  "liquity-bold": bold,
+  "level-usd": lvlusd,
 };
