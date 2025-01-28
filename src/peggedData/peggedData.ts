@@ -4514,7 +4514,8 @@ export default [
     auditLinks: ["https://docs.dtrinity.org/developer/audits-and-security"],
     priceSource: "coingecko",
     twitter: "https://x.com/dtrinity_defi",
-    wiki: "https://docs.dtrinity.org" 
+    wiki: "https://docs.dtrinity.org" ,
+    doublecounted: true,
   },
   {
     id: "225",

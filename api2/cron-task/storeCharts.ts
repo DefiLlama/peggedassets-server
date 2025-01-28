@@ -229,6 +229,10 @@ export function craftChartsResponse(
     if (peggedID && pegged.id !== peggedID) {
       return;
     }
+    // Skip double-counted assets for chain and all charts
+    if (!peggedID && pegged.doublecounted === true) {
+      return;
+    }
     const chainMap = assetChainMap[pegged.id];
     if (!chainMap || chain !== "all" && !chainMap?.has(chain)) return; // if the coin is not found an given chain or coin has no data, dont process it
     if (!_assetCache[pegged.id]) addToAssetCache(pegged);
