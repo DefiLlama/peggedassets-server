@@ -4616,7 +4616,7 @@ export default [
     id: "230",
     name: "Noon USN",
     address: "0xdA67B4284609d2d48e5d10cfAc411572727dc1eD",
-    symbol: "USDe",
+    symbol: "USN",
     url: "https://noon.capital",
     description:
       "USN is an over-collateralized stablecoin pegged to the US Dollar. It is a synthetic dollar which provides an yield to users by a basket of delta neutral strategies",
