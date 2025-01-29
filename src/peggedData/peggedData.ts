@@ -4612,5 +4612,24 @@ export default [
     twitter: "https://twitter.com/levelusd",
     wiki: "https://level-money.gitbook.io/docs/level-usd/level-usd-a-new-primitive",
     doublecounted: true,
-  }
+  },{
+    id: "230",
+    name: "Noon USN",
+    address: "0xdA67B4284609d2d48e5d10cfAc411572727dc1eD",
+    symbol: "USDe",
+    url: "https://noon.capital",
+    description:
+      "USN is an over-collateralized stablecoin pegged to the US Dollar. It is a synthetic dollar which provides an yield to users by a basket of delta neutral strategies",
+    mintRedeemDescription:
+      "Noon enables users to deposit USDT & USDC as collateral to create USN. Stability is secured through delta-neutral hedging strategies.",
+    onCoinGecko: "true",
+    gecko_id: "noon-usn",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: ["https://docs.noon.capital/security/smart-contract-audits"],
+    twitter: "https://twitter.com/noon_capital",
+    wiki: "https://docs.noon.capital",
+  },
 ] as PeggedAsset[];

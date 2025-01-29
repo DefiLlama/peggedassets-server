@@ -226,6 +226,7 @@ import zchf from "./frankencoin";
 import bold from "./liquity-bold";
 import lvlusd from "./level-usd";
 import usdq from "./quill-usd";
+import noonusn from "./noon-usn";
 
 export default {
   tether,
@@ -456,5 +457,6 @@ export default {
   frankencoin: zchf,
   "liquity-bold": bold,
   "level-usd": lvlusd,
-  "quill-usd": usdq
+  "quill-usd": usdq,
+  "noon-usn": noonusn,
 };
