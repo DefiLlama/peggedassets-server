@@ -4592,5 +4592,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/QuillFi",
     wiki: "https://docs.quill.finance/faq/usdusdq" 
+  },
+  {
+    id: "229",
+    name: "Level USD",
+    address: "0x7c1156e515aa1a2e851674120074968c905aaf37",
+    symbol: "LVLUSD",
+    url: "https://level.money",
+    description:
+      `Level USD is a stablecoin backed by USDC and USDT that are deployed on blue-chip restaking and lending protocols. Users can stake Level USD to earn stacked restaking and lending yield with the stable reserves of battle-tested stablecoins`,
+    mintRedeemDescription: "Users can mint Level USD with USDC and USDT permissionlessly. The protocol deploys this collateral into blue-chip restaking and lending protocols to generate yield for users",
+    onCoinGecko: "true",
+    gecko_id: "level-usd",
+    cmcId: null, 
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: ["https://level-money.gitbook.io/docs/technical-documentation/audits"],
+    priceSource: "defillama",
+    twitter: "https://twitter.com/levelusd",
+    wiki: "https://level-money.gitbook.io/docs/level-usd/level-usd-a-new-primitive",
+    doublecounted: true,
   }
 ] as PeggedAsset[];
