@@ -839,6 +839,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   aptos: {
+    minted: circleAPIChainMinted("APTOS"),
     ethereum: aptosBridged(),
   },
   mixin: {
