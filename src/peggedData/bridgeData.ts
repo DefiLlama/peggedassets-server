@@ -1703,6 +1703,10 @@ export default {
     bridge: "base",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x087c440f251ff6cfe62b86dde1be558b95b4bb9b": {
+    bridge: "CCIP",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
