@@ -405,4 +405,7 @@ export const chainContracts: ChainContracts = {
   sonic: {
     bridgedFromETH: ["0x29219dd400f2bf60e5a23d13be72b486d4038894"],
   },
+  soneium: {
+    bridgedFromETH: ["0xbA9986D2381edf1DA03B0B9c1f8b00dc4AacC369"],
+  },
 };
