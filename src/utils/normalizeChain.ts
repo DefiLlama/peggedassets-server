@@ -1097,6 +1097,14 @@ export const chainCoingeckoIds = {
     cmcId: null,
     categories: ["EVM"],
   },
+  "Soneium": {
+    geckoId: "soneium",
+    symbol: "SONE",
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: 1868,
+  },
+  
 } as {
   [chain: string]: {
     geckoId: string | null;
