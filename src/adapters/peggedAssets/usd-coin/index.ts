@@ -949,6 +949,9 @@ const adapter: PeggedIssuanceAdapter = {
   sonic: {
     ethereum: bridgedSupply("sonic", 6, chainContracts.sonic.bridgedFromETH),
   },
+  soneium: {
+    ethereum: bridgedSupply("soneium", 6, chainContracts.soneium.bridgedFromETH),
+  },
 };
 
 export default adapter;
