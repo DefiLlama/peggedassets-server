@@ -23,6 +23,9 @@ const chainContracts: ChainContracts = {
   base: {
     bridgedFromETH: ["0x20D1c515e38aE9c345836853E2af98455F919637"], 
   },
+  xdai: { // gnosis chain
+    bridgedFromETH: ["0x4cde2b4e7254e6ec5b450d50e3607bade6be3980"], 
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -62,8 +65,8 @@ const adapter: PeggedIssuanceAdapter = {
       "polygon",
       18,
       chainContracts.polygon.bridgedFromETH,
-      undefined,
-      undefined,
+      "polygon",
+      "Ethereum",
       "peggedCHF"
     )
   },
@@ -72,8 +75,8 @@ const adapter: PeggedIssuanceAdapter = {
       "arbitrum",
       18,
       chainContracts.arbitrum.bridgedFromETH,
-      undefined,
-      undefined,
+      "arbitrum",
+      "Ethereum",
       "peggedCHF"
     )
   },
@@ -82,8 +85,8 @@ const adapter: PeggedIssuanceAdapter = {
       "optimism",
       18,
       chainContracts.optimism.bridgedFromETH,
-      undefined,
-      undefined,
+      "optimism",
+      "Ethereum",
       "peggedCHF"
     )
   },
@@ -92,8 +95,18 @@ const adapter: PeggedIssuanceAdapter = {
       "base",
       18,
       chainContracts.base.bridgedFromETH,
-      undefined,
-      undefined,
+      "base",
+      "Ethereum",
+      "peggedCHF"
+    )
+  },
+  xdai: {
+    ethereum: bridgedSupply(
+      "xdai",
+      18,
+      chainContracts.xdai.bridgedFromETH,
+      "gnosis",
+      "Ethereum",
       "peggedCHF"
     )
   },
