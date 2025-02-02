@@ -1932,4 +1932,8 @@ export const bridgeInfo = {
     name: "Base Bridge",
     link: "https://bridge.base.org/deposit",
   },
+  ccip: {
+    name: "Chainlink Bridge",
+    link: "https://chain.link/cross-chain",
+  },
 } as BridgeInfo;
