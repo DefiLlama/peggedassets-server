@@ -4631,5 +4631,6 @@ export default [
     auditLinks: ["https://docs.noon.capital/security/smart-contract-audits"],
     twitter: "https://twitter.com/noon_capital",
     wiki: "https://docs.noon.capital",
+    doublecounted: true
   },
 ] as PeggedAsset[];
