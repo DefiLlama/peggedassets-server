@@ -1703,6 +1703,10 @@ export default {
     bridge: "base",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x087c440f251ff6cfe62b86dde1be558b95b4bb9b": {
+    bridge: "CCIP",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1805,8 +1809,8 @@ export const bridgeInfo = {
     link: "https://voltage.finance/",
   },
   tomochain: {
-    name: "TomoBridge",
-    link: "https://bridge.TomoChain.com/",
+    name: "Arken Bridge",
+    link: "https://arken.ag/bridge",
   },
   evodefi: {
     name: "EVODeFi",
@@ -1927,5 +1931,9 @@ export const bridgeInfo = {
   base: {
     name: "Base Bridge",
     link: "https://bridge.base.org/deposit",
+  },
+  ccip: {
+    name: "Chainlink Bridge",
+    link: "https://chain.link/cross-chain",
   },
 } as BridgeInfo;

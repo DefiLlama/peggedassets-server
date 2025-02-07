@@ -123,7 +123,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xcca4e6302510d555b654b3eab9c0fcb223bcfdf0"],
   },
   ronin: {
-    bridgedFromETH: ["0x0b7007c13325c48911f73a2dad5fa5dcbf808adc"],
+    bridgeOnETH: ["0x64192819ac13ef72bf6b5ae239ac672b43a9af08"],
+    issued: ["0x0b7007c13325c48911f73a2dad5fa5dcbf808adc"], 
   },
   aurora: {
     bridgeOnETH: ["0x23Ddd3e3692d1861Ed57EDE224608875809e127f"],
@@ -300,6 +301,9 @@ export const chainContracts: ChainContracts = {
       "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa", // stargate
       "0x5e156f1207d0ebfa19a9eeff00d62a282278fb8719f4fab3a586a0a2c0fffbea", // wormhole
     ],
+    issued: [
+      "0xbae207659db88bea0cbead6da0ed00aac12edcdda169e591cd41c94180b46f3b"
+    ]
   },
   mixin: {
     ethAssetIds: ["9b180ab6-6abe-3dc0-a13f-04169eb34bfa"],
@@ -394,5 +398,14 @@ export const chainContracts: ChainContracts = {
   },
   occ: {
     bridgedFromETH: ["0x836d275563bAb5E93Fd6Ca62a95dB7065Da94342"],
+  },
+  hyperliquid: {
+    bridgeOnARB: ["0x2Df1c51E09aECF9cacB7bc98cB1742757f163dF7"],
+  },
+  sonic: {
+    bridgedFromETH: ["0x29219dd400f2bf60e5a23d13be72b486d4038894"],
+  },
+  soneium: {
+    bridgedFromETH: ["0xbA9986D2381edf1DA03B0B9c1f8b00dc4AacC369"],
   },
 };

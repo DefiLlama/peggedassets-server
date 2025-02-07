@@ -1,36 +1,35 @@
 const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
+import { ChainApi } from "@defillama/sdk";
+import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
+import { sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
-  supplyInEthereumBridge,
-  solanaMintedOrBridged,
-  terraSupply,
-  osmosisSupply,
   getApi,
+  osmosisSupply,
+  solanaMintedOrBridged,
+  supplyInEthereumBridge,
+  terraSupply,
 } from "../helper/getSupply";
-import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
-import {
-  getTotalSupply as ontologyGetTotalSupply,
-  getBalance as ontologyGetBalance,
-} from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
-import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
-import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
+import { mixinSupply } from "../helper/mixin";
 import { call as nearCall } from "../helper/near";
 import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,
-  PeggedAssetType,
-} from "../peggedAsset.type";
+  getBalance as ontologyGetBalance,
+  getTotalSupply as ontologyGetTotalSupply,
+} from "../helper/ontology";
+import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
+import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import {
   getTokenBalance as tronGetTokenBalance,
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
-import { sumMultipleBalanceFunctions } from "../helper/generalUtil";
-import { mixinSupply } from "../helper/mixin";
+import {
+  Balances,
+  ChainBlocks,
+  PeggedAssetType,
+  PeggedIssuanceAdapter,
+} from "../peggedAsset.type";
 import { chainContracts } from "./config";
-import { ChainApi } from "@defillama/sdk";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -662,7 +661,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
-    heco: solanaMintedOrBridged(chainContracts.solana.bridgedFromHeco),
+    // heco: solanaMintedOrBridged(chainContracts.solana.bridgedFromHeco),
     avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
   },
   arbitrum: {
@@ -722,7 +721,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   heco: {
-    ethereum: bridgedSupply("heco", 18, chainContracts.heco.bridgedFromETH),
+    // ethereum: bridgedSupply("heco", 18, chainContracts.heco.bridgedFromETH),
   },
   okexchain: {
     ethereum: bridgedSupply(
@@ -735,11 +734,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("iotex", 6, chainContracts.iotex.bridgedFromETH),
   },
   tomochain: {
-    ethereum: bridgedSupply(
-      "tomochain",
-      6,
-      chainContracts.tomochain.bridgedFromETH
-    ),
+    ethereum: bridgedSupply("tomochain", 6, chainContracts.tomochain.bridgedFromETH2),
   },
   kardia: {
     ethereum: bridgedSupply("kardia", 6, chainContracts.kardia.bridgedFromETH),
@@ -768,8 +763,14 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   tron: {
-    minted: tronMinted(),
-    unreleased: tronUnreleased(),
+    minted: usdtApiMinted("totaltokens_tron"),
+    unreleased: sumMultipleBalanceFunctions(
+      [
+        usdtApiUnreleased("reserve_balance_tron"),
+        usdtApiUnreleased("quarantined_tron"),
+      ],
+      "peggedUSD"
+    ),
   },
   aurora: {
     near: bridgedSupply("aurora", 6, chainContracts.aurora.bridgedFromNear),
@@ -780,10 +781,10 @@ const adapter: PeggedIssuanceAdapter = {
   algorand: {
     minted: algorandMinted(),
   },
-  liquidchain: {
-    minted: liquidMinted(),
-    unreleased: usdtApiUnreleased("reserve_balance_liq"),
-  },
+  // liquidchain: {
+  //   minted: liquidMinted(),
+  //   unreleased: usdtApiUnreleased("reserve_balance_liq"),
+  // },
   bittorrent: {
     ethereum: bridgedSupply(
       "bittorrent",

@@ -62,6 +62,8 @@ const ethereumChainContract: ChainContract = {
     "0x6371efe5cd6e3d2d7c477935b7669401143b7985",
     "0xbc36fde44a7fd8f545d459452ef9539d7a14dd63",
     "0x00380cb5858664078f2289180cc32f74440ac923",
+    "0x38E7D1e4E2dE5b06b6fc9A91C2c37828854A41bb",
+    "0xE8ed7455fa1b2a3D8959cD2D59c7f136a45BF341",
   ],
   reserves: [
     "0x30b9de623c209a42ba8d5ca76384ead740be9529", // CauldronOwner
@@ -132,6 +134,10 @@ const bridgedChainContracts: ChainContracts = {
       "0x66805f6e719d7e67d46e8b2501c1237980996c6a",
       "0x49De724D7125641F56312EBBcbf48Ef107c8FA57",
       "0x780db9770dDc236fd659A39430A8a7cC07D0C320",
+      "0x6B04C535C852AD19345571247ee12B5BF23dAcB6",
+      "0xFCE0b2fe7d7d5057C82A896e4D8EC0e4b813f71f",
+      "0x9fF8b4C842e4a95dAB5089781427c836DAE94831",
+      "0x625Fe79547828b1B54467E5Ed822a9A8a074bD61",
     ],
     reserves: [
       "0x27807dd7adf218e1f4d885d54ed51c70efb9de50", // ODM

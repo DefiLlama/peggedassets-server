@@ -13,7 +13,8 @@ import {
   cosmosSupply,
   kujiraSupply,
   osmosisSupply,
-  getApi
+  getApi,
+  supplyInArbitrumBridge
 } from "../helper/getSupply";
 import {
   getTotalSupply as ontologyGetTotalSupply,
@@ -645,7 +646,11 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   ronin: {
-    ethereum: bridgedSupply("ronin", 6, chainContracts.ronin.bridgedFromETH),
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0],
+      chainContracts.ronin.bridgeOnETH[0],
+      6
+    )
   },
   aurora: {
     near: bridgedSupply("aurora", 6, chainContracts.aurora.bridgedFromNear),
@@ -834,6 +839,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   aptos: {
+    minted: circleAPIChainMinted("APTOS"),
     ethereum: aptosBridged(),
   },
   mixin: {
@@ -932,6 +938,19 @@ const adapter: PeggedIssuanceAdapter = {
   },
   occ: {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),
+  },
+  hyperliquid: {
+    arbitrum: supplyInArbitrumBridge(
+      chainContracts.arbitrum.issued[0],
+      chainContracts.hyperliquid.bridgeOnARB[0],
+      6
+    ),
+  },
+  sonic: {
+    ethereum: bridgedSupply("sonic", 6, chainContracts.sonic.bridgedFromETH),
+  },
+  soneium: {
+    ethereum: bridgedSupply("soneium", 6, chainContracts.soneium.bridgedFromETH),
   },
 };
 

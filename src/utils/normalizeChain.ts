@@ -28,7 +28,7 @@ export const normalizedChainReplacements = {
   "bifrost network": "bfc",
   "horizen eon": "eon",
   "bahamut": "ftn",
-  "viction": "tomochain",
+  viction: "tomochain",
   "bitnet": "btn",
   "defichain evm": "defichain_evm",
   "hydration": "hydradx",
@@ -414,9 +414,9 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 60,
   },
-  TomoChain: {
+  Viction: {
     geckoId: "tomochain",
-    symbol: "TOMO",
+    symbol: "VIC",
     cmcId: "2570",
     categories: ["EVM"],
     chainId: 88,
@@ -1085,6 +1085,26 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 41923,
   },
+  "Hyperliquid": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
+  "Sonic": {
+    geckoId: "sonic-3",
+    symbol: "S",
+    cmcId: null,
+    categories: ["EVM"],
+  },
+  "Soneium": {
+    geckoId: "soneium",
+    symbol: "SONE",
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: 1868,
+  },
+  
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1099,7 +1119,8 @@ chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
 chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
-chainCoingeckoIds["Klaytn"] = chainCoingeckoIds["Kaia"]
+chainCoingeckoIds["Klaytn"] = chainCoingeckoIds["Kaia"];
+chainCoingeckoIds["TomoChain"] = chainCoingeckoIds["Viction"]
 
 export const extraSections = [
   "staking",
@@ -1127,6 +1148,8 @@ export function transformNewChainName(chain: string) {
       return "Rootstock";
     case "Klaytn":
       return "Kaia";
+    case "TomoChain":
+      return "Viction";
     default:
       return chain;
   }
@@ -1191,7 +1214,7 @@ export function getChainDisplayName(
     case "gochain":
       return "GoChain";
     case "tomochain":
-      return "TomoChain";
+      return useNewChainNames ? "Viction" : "TomoChain";
     case "fusion":
       return "Fusion";
     case "kardia":

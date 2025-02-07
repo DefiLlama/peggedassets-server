@@ -1,223 +1,232 @@
-import tether from "./tether";
-import usdc from "./usd-coin";
-import terrausd from "./terrausd";
-import busd from "./binance-usd";
-import dai from "./dai";
-import frax from "./frax";
-import trueusd from "./true-usd";
-import liquity from "./liquity-usd";
-import fei from "./fei-usd";
-import mim from "./magic-internet-money";
-import pax from "./paxos-standard";
-import neutrino from "./neutrino";
-import yusd from "./yusd-stablecoin";
-import usdd from "./usdd";
-import nusd from "./nexus-usd";
-import dola from "./dola-usd";
-import pai from "./parrot-usd";
-import husd from "./husd";
-import gusd from "./gemini-dollar";
 import alusd from "./alchemix-usd";
+import busd from "./binance-usd";
+import cusd from "./celo-dollar";
+import dai from "./dai";
+import doc from "./doc";
+import dola from "./dola-usd";
+import fei from "./fei-usd";
 import flexusd from "./flex-usd";
+import frax from "./frax";
+import gusd from "./gemini-dollar";
+import hchf from "./hedera-swiss-franc";
+import husd from "./husd";
+import liquity from "./liquity-usd";
+import mim from "./magic-internet-money";
+import mimatic from "./mimatic";
+import musd from "./musd";
+import neutrino from "./neutrino";
+import nusd from "./nexus-usd";
 import susd from "./nusd";
 import ousd from "./origin-dollar";
-import cusd from "./celo-dollar";
-import musd from "./musd";
-import usdk from "./usdk";
+import pai from "./parrot-usd";
+import pax from "./paxos-standard";
 import reserve from "./reserve";
-import vai from "./vai";
-import tor from "./tor";
-import doc from "./doc";
-import spiceusd from "./spiceusd";
 import sperax from "./sperax-usd";
-import usdp from "./usdp";
+import spiceusd from "./spiceusd";
+import terrausd from "./terrausd";
+import tether from "./tether";
+import tor from "./tor";
+import trueusd from "./true-usd";
 import usdb from "./usd-balance";
-import mimatic from "./mimatic";
-import hchf from "./hedera-swiss-franc";
+import usdc from "./usd-coin";
+import usdd from "./usdd";
+import usdk from "./usdk";
+import usdp from "./usdp";
+import vai from "./vai";
+import yusd from "./yusd-stablecoin";
 //import ratio from "./ratio-stable-coin";
+import aseed from "./acala-dollar";
+import home from "./bacon-protocol-home";
+import bai from "./bai-stablecoin";
+import bean2 from "./bean2";
+import ceur from "./celo-euro";
+import dei from "./dei-token";
+import eura from "./eura";
+import eurc from "./eurc";
+import fusd from "./fantom-usd";
+import fiat from "./fixed-income-asset-token";
+import float from "./float-protocol-float";
+import fpi from "./frax-price-index";
+import gai from "./gai-stablecoin";
+import ush from "./hedge-usd";
 import usdj from "./just-stablecoin";
-import stbl from "./stbl";
-import volt from "./volt-protocol";
+import par from "./par-stablecoin";
+import pusd from "./pusd-2";
 import r from "./r";
 import rai from "./rai";
-import float from "./float-protocol-float";
-import usdx from "./usdx";
-import zusd from "./zusd";
-import usx from "./token-dforce-usd";
-import aseed from "./acala-dollar";
-import usd from "./usd";
-import dei from "./dei-token";
-import usn from "./usn";
-import bai from "./bai-stablecoin";
-import gai from "./gai-stablecoin";
-import eurt from "./tether-eurt";
-import eurc from "./eurc";
-import stasis from "./stasis-eurs";
-import ceur from "./celo-euro";
 import seur from "./seur";
-import eura from "./eura";
-import par from "./par-stablecoin";
-import ush from "./hedge-usd";
-import threeusd from "./three-usd";
 import sigmausd from "./sigmausd";
-import home from "./bacon-protocol-home";
-import fiat from "./fixed-income-asset-token";
-import pusd from "./pusd-2";
-import fusd from "./fantom-usd";
-import uxd from "./uxd-stablecoin";
+import stasis from "./stasis-eurs";
+import stbl from "./stbl";
+import eurt from "./tether-eurt";
+import threeusd from "./three-usd";
+import usx from "./token-dforce-usd";
+import usd from "./usd";
 import usdh from "./usdh";
-import fpi from "./frax-price-index";
-import bean2 from "./bean2";
 import usdlemma from "./usdlemma";
+import usdx from "./usdx";
+import usn from "./usn";
+import uxd from "./uxd-stablecoin";
+import volt from "./volt-protocol";
+import zusd from "./zusd";
 //import pandousd from "./pando-usd";
 import dusd from "./digitaldollar";
-import vst from "./vesta-stable";
-import kusd from "./kolibri-usd";
-import usdtez from "./usdtez";
-import money from "./moremoney-usd";
-import uusd from "./youves-uusd";
 import usdi from "./interest-protocol";
-import lugh from "./lugh";
-import note from "./note";
+import kusd from "./kolibri-usd";
+import money from "./moremoney-usd";
+import usdtez from "./usdtez";
+import vst from "./vesta-stable";
+import uusd from "./youves-uusd";
+// import lugh from "./lugh";
 import lisusd from "./helio-protocol-hay";
+import note from "./note";
 //import usd2 from "./usd2";
-import usk from "./usk";
+import lcny from "./alternity-cny";
 import arusd from "./arable-usd";
-import usdw from "./usdw";
-import bob from "./bob";
-import usdr from "./real-usd";
-import uzd from "./zunami-protocol";
-import zunUSD from "./zun-usd";
-import zunETH from "./zun-eth";
 import bankofchain from "./bank-of-chain";
-import xai from "./xai";
-import iusd from "./iusd";
-import rusd from "./redeemable";
-import ibeur from "./iron-bank-euro";
-import composite from "./composite";
 import baousd from "./baousd";
-import pina from "./meme-dollar";
-import djed from "./djed";
+import bob from "./bob";
+import cleverusd from "./clever-usd";
 import c98dollar from "./coin98-dollar";
-import usp from "./platypus-usd";
-import euroe from "./euroe-stablecoin";
-import cash from "./stabl-fi";
-import dsu from "./digital-standard-unit";
-import electronicusd from "./electronic-usd";
-import hyusd from "./high-yield-usd";
-import usd3 from "./web-3-dollar";
-import rgusd from "./revenue-generating-usd";
-import knox from "./knox-dollar";
-import eure from "./monerium-eur-money";
-import anonusd from "./offshift-anonusd";
-import nxusd from "./nxusd";
-import davos from "./davos-protocol";
-import defifranc from "./defi-franc";
+import crvusd from "./crvusd";
 import czusd from "./czusd";
 import d2o from "./dam-finance";
-import eusd from "./eusd";
-import crvusd from "./crvusd";
-import overnightdai from "./overnight-dai";
-import usdtplus from "./usdtplus";
-import silk from "./silk";
-import cleverusd from "./clever-usd";
-import grai from "./grai";
+import davos from "./davos-protocol";
+import defifranc from "./defi-franc";
+import dsu from "./digital-standard-unit";
+import djed from "./djed";
+import electronicusd from "./electronic-usd";
 import ethosreservenote from "./ethos-reserve-note";
-import gho from "./gho";
-import fdusd from "./first-digital-usd";
-import pyusd from "./paypal-usd";
-import psy from "./psy";
-import gyen from "./gyen";
-import star from "./star";
-import peusd from "./peg-eusd";
+import euroe from "./euroe-stablecoin";
+import eusd from "./eusd";
 import eusdv2 from "./eusdv2";
-import prismamkusd from "./prisma-mkusd";
-import lcny from "./alternity-cny";
+import fdusd from "./first-digital-usd";
+import gho from "./gho";
+import grai from "./grai";
+import gyen from "./gyen";
+import hyusd from "./high-yield-usd";
+import inter from "./inter-stable-token";
+import ibeur from "./iron-bank-euro";
+import iusd from "./iusd";
+import knox from "./knox-dollar";
+import pina from "./meme-dollar";
+import eure from "./monerium-eur-money";
+import nars from "./nars";
 import nexus1 from "./nexus";
+import nxusd from "./nxusd";
+import anonusd from "./offshift-anonusd";
 import usdy from "./ondo-us-dollar-yield";
+import overnightdai from "./overnight-dai";
+import pyusd from "./paypal-usd";
+import peusd from "./peg-eusd";
+import phase from "./phase-dollar";
+import usp from "./platypus-usd";
+import prismamkusd from "./prisma-mkusd";
+import psy from "./psy";
+import usdr from "./real-usd";
+import rusd from "./redeemable";
+import rgusd from "./revenue-generating-usd";
 import svusd from "./savvy-usd";
+import silk from "./silk";
+import cash from "./stabl-fi";
+import star from "./star";
 import uaht from "./uaht";
 import usdm from "./usdm";
-import nars from "./nars";
-import phase from "./phase-dollar";
-import inter from "./inter-stable-token";
+import usdtplus from "./usdtplus";
+import usdw from "./usdw";
+import usk from "./usk";
+import usd3 from "./web-3-dollar";
+import xai from "./xai";
+import zunETH from "./zun-eth";
+import zunUSD from "./zun-usd";
+import uzd from "./zunami-protocol";
 //import eeur from "./e-money-eur";
-import cdt from "./collateralized-debt-token";
 import aeeur from "./aryze-eeur";
 import aegbp from "./aryze-egbp";
+import cdt from "./collateralized-debt-token";
 //import aesgd from "./aryze-esgd";
-import aeusd from "./aryze-eusd";
-import hydt from "./hydt";
-import usdv from "./usdv";
-import cadc from "./cadc";
-import usde from "./ethena-usde";
-import aeur from "./anchored-coins-eur";
-import myusd from "./myusd";
-import usds from "./sable-coin";
-import scb from "./colb-usd-stablecolb";
-import zkusd from "./zkusd";
-import usdl from "./liquid-loans-usdl";
-import binancebusd from "./binance-peg-busd";
-import buck from "./bucket-protocol-buck-stablecoin";
-import usdglo from "./glo-dollar";
-import vnxau from "./vnx-gold";
-import veur from "./vnx-euro";
-import vchf from "./vnx-swiss-franc";
-import usdrif from "./usd-rif";
-import dllr from "./sovryn-dollar";
-import eurd from "./quantoz-eurd";
-import xusd from "./xusd-babelfish";
-import ultra from "./prismalrt-ultra";
-import usdcb from "./pago-linea-usdcb";
-import audd from "./novatti-australian-digital-dollar";
-import cgusd from "./cygnus-finance-global-usd";
-import feth from "./feth";
-import fxusd from "./fxusd";
-import euro3 from "./euro3";
-import hai from "./let-s-get-hai";
-import usdbblast from "./usdb";
-import buidl from "./blackrock-usd";
-import fxrusd from "./fx-rusd";
-import pxdc from "./powercity-pxdc";
-import fdx from "./fathom-dollar";
-import uno from "./nostra-uno";
-import cjpy from "./convertible-jpy-token";
-import bread from "./bread";
-import btcusd from "./bitcoin-usd-btcfi";
-import wen from "./magma-wen";
-import gyd from "./gyroscope-gyd";
-import isc from "./international-stable-currency";
-import usc from "./orby-network-usc-stablecoin";
-import fxbtcusd from "./f-x-btc-usd";
-import bitusd from "./bitsmiley-bitusd";
-import usda from "./angle-usd"
-import usc2  from "./usc-2";
-import ckusdc from "./ckusdc";
-import usd0 from "./usual-usd";
-import classicusd from "./classic-usd";
-import usr from "./resolv-usr";
-import ausd from "./stable-jack-ausd";
-import creal from "./celo-real-creal";
-import hexdc from "./hex-dollar-coin";
-import usdz from "./anzen-usdz";
-import chadusd from "./chad-usd"; // since there is a cusd already, will use this, we did something like this for coin98
-import bnusd from "./balanced-dollars";
 import ausdagora from "./agora-dollar";
-import opuscash from "./opus-cash";
-import dyad from "./dyad";
+import aeur from "./anchored-coins-eur";
+import usda from "./angle-usd";
+import usdz from "./anzen-usdz";
+import aeusd from "./aryze-eusd";
+import usdf from "./astherus-usdf";
+import avalon_usda from "./avalon-usda";
+import bnusd from "./balanced-dollars";
+import binancebusd from "./binance-peg-busd";
+import btcusd from "./bitcoin-usd-btcfi";
+import bitusd from "./bitsmiley-bitusd";
+import buidl from "./blackrock-usd";
+import bread from "./bread";
+import buck from "./bucket-protocol-buck-stablecoin";
+import cadc from "./cadc";
+import creal from "./celo-real-creal";
+import chadusd from "./chad-usd"; // since there is a cusd already, will use this, we did something like this for coin98
+import ckusdc from "./ckusdc";
+import classicusd from "./classic-usd";
+import scb from "./colb-usd-stablecolb";
+import cjpy from "./convertible-jpy-token";
+import cgusd from "./cygnus-finance-global-usd";
 import dckusd from "./dackie-usd";
-import skydollar from "./usds";
+import dyad from "./dyad";
 import deusd from "./elixir-deusd";
-import thusd from "./threshold-usd";
+import usde from "./ethena-usde";
+import euro3 from "./euro3";
+import fxbtcusd from "./f-x-btc-usd";
+import fdx from "./fathom-dollar";
+import feth from "./feth";
+import fxrusd from "./fx-rusd";
+import fxusd from "./fxusd";
+import usdglo from "./glo-dollar";
+import gyd from "./gyroscope-gyd";
+import hexdc from "./hex-dollar-coin";
+import hydt from "./hydt";
+import isc from "./international-stable-currency";
+import hai from "./let-s-get-hai";
+import usdl from "./liquid-loans-usdl";
 import m from "./m-by-m^0";
-import mod from "./move-dollar";
-import usdx0 from "./usdx-money-usdx";
+import wen from "./magma-wen";
 import moneta from "./moneta";
-import solayerusd from "./solayer-usd";
+import mod from "./move-dollar";
+import myusd from "./myusd";
+import uno from "./nostra-uno";
+import audd from "./novatti-australian-digital-dollar";
+import opuscash from "./opus-cash";
+import usc from "./orby-network-usc-stablecoin";
+import usdcb from "./pago-linea-usdcb";
+import pausd from "./parallel-usd";
+import pxdc from "./powercity-pxdc";
+import ultra from "./prismalrt-ultra";
+import eurd from "./quantoz-eurd";
 import rusd1 from "./reservoir-stablecoin";
-import satusd from "./satoshi-stablecoin"
-import usdf from "./astherus-usdf"
-import avalon_usda from "./avalon-usda"
+import usr from "./resolv-usr";
+import usds from "./sable-coin";
+import satusd from "./satoshi-stablecoin";
+import solayerusd from "./solayer-usd";
+import dllr from "./sovryn-dollar";
+import ausd from "./stable-jack-ausd";
+import thusd from "./threshold-usd";
+import xy from "./tren-debt-token";
+import usc2 from "./usc-2";
+import usdrif from "./usd-rif";
+import usdbblast from "./usdb";
+import skydollar from "./usds";
+import usdtb from "./usdtb";
+import usdv from "./usdv";
+import usdx0 from "./usdx-money-usdx";
+import usd0 from "./usual-usd";
+import veur from "./vnx-euro";
+import vnxau from "./vnx-gold";
+import vchf from "./vnx-swiss-franc";
+import xusd from "./xusd-babelfish";
+import zkusd from "./zkusd";
+import dtrinityusd from "./dtrinity-usd";
+import zeusd from "./zoth-zeusd";
+import zchf from "./frankencoin";
+import bold from "./liquity-bold";
+import lvlusd from "./level-usd";
+import usdq from "./quill-usd";
+import noonusn from "./noon-usn";
 
 export default {
   tether,
@@ -278,6 +287,7 @@ export default {
   seur,
   ageur: eura,
   "par-stablecoin": par,
+  "parallel-usd": pausd,
   "hedge-usd": ush,
   "three-usd": threeusd,
   sigmausd,
@@ -298,7 +308,7 @@ export default {
   "moremoney-usd": money,
   "youves-uusd": uusd,
   "interest-protocol": usdi,
-  lugh,
+  // lugh,
   note,
   "helio-protocol-hay": lisusd,
   //usd2,
@@ -426,18 +436,27 @@ export default {
   "balanced-dollars": bnusd,
   "agora-dollar": ausdagora,
   "opus-cash": opuscash,
-  "dyad": dyad,
+  dyad: dyad,
   "dackie-usd": dckusd,
-  "usds": skydollar,
+  usds: skydollar,
   "elixir-deusd": deusd,
   "threshold-usd": thusd,
   "move-dollar": mod,
   "usdx-money-usdx": usdx0,
   "m-by-m^0": m,
-  "moneta": moneta,
+  moneta: moneta,
   "solayer-usd": solayerusd,
   "reservoir-stablecoin": rusd1,
   "satoshi-stablecoin": satusd,
   "astherus-usdf": usdf,
-  "avalon-usda": avalon_usda
+  "usda-2": avalon_usda, // coingecko id first, than token
+  usdtb, // same as coingeckoID,
+  "tren-debt-token": xy,
+  "dtrinity-usd": dtrinityusd,
+  "zoth-zeusd": zeusd,
+  frankencoin: zchf,
+  "liquity-bold": bold,
+  "level-usd": lvlusd,
+  "quill-usd": usdq,
+  "noon-usn": noonusn,
 };

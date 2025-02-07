@@ -9,7 +9,6 @@ export async function getTotalSupply(address: string, tokenType: string) {
         `https://explorer.ont.io/v2/tokens/${tokenType}/${address}`
       )
   );
-  console.log("ontology success");
   const bnSupply = new BigNumber(supplyRes?.data?.result?.total_supply);
 
   return bnSupply.toNumber();

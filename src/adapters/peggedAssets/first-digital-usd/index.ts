@@ -1,12 +1,13 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
-
+import * as sui from "../helper/sui";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
+  Balances,
+  ChainContracts,
 } from "../peggedAsset.type";
-
+import { solanaMintedOrBridged } from "../helper/getSupply";
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -16,7 +17,19 @@ const chainContracts: ChainContracts = {
   bsc: {
     issued: ["0xc5f0f7b66764f6ec8c8dff7ba683102295e16409"],
   },
+  solana: {
+    issued: ["9zNQRsGLjNKwCUU5Gq5LR8beUCPzQMVMqKAi3SSZh54u"]
+  }
 };
+
+async function suiMinted(): Promise<Balances> {
+  let balances = {} as Balances;
+  const supply = await sui.getTokenSupply(
+    "0xf16e6b723f242ec745dfd7634ad072c42d5c1d9ac9d62a39c381303eaa57693a::fdusd::FDUSD"
+  );
+  sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
+  return balances;
+}
 
 async function chainMinted(chain: string, decimals: number) {
   return async function (
@@ -80,6 +93,12 @@ const adapter: PeggedIssuanceAdapter = {
   bsc: {
     minted: chainMinted("bsc", 18),
   },
+  sui: {
+    minted: suiMinted,
+  },
+  solana: {
+    minted: solanaMintedOrBridged(chainContracts.solana.issued),
+  }
 };
 
 export default adapter;

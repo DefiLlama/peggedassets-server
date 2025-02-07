@@ -1,3 +1,7 @@
+import { ChainApi } from "@defillama/sdk";
+import * as aptos from "../helper/aptos";
+import { getTokenSupply as solanaGetTokenSupply } from "../helper/solana";
+import * as sui from "../helper/sui";
 import type {
   Balances,
   ChainBlocks,
@@ -5,10 +9,6 @@ import type {
   PeggedIssuanceAdapter,
 } from "../peggedAsset.type";
 import { sumSingleBalance } from "./generalUtil";
-import { getTokenSupply as solanaGetTokenSupply } from "../helper/solana";
-import { ChainApi } from "@defillama/sdk";
-import * as sui from "../helper/sui";
-import * as aptos from "../helper/aptos";
 const axios = require("axios");
 const retry = require("async-retry");
 process.env.TAIKO_RPC = 'https://rpc.taiko.xyz'
@@ -81,6 +81,22 @@ export function supplyInEthereumBridge(
 ) {
   return async function (_api: ChainApi) {
     const api = await getApi('ethereum', _api)
+    let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
+    const bridged = await api.call({ abi: 'erc20:balanceOf', target: target, params: owner, })
+    sumSingleBalance(balances, assetPegType, bridged / 10 ** decimals, owner, true);
+    return balances;
+  };
+}
+
+export function supplyInArbitrumBridge(
+  target: string,
+  owner: string,
+  decimals: number,
+  pegType?: PeggedAssetType
+) {
+  return async function (_api: ChainApi) {
+    const api = await getApi('arbitrum', _api)
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     const bridged = await api.call({ abi: 'erc20:balanceOf', target: target, params: owner, })
@@ -181,13 +197,13 @@ const cosmosEndpoints: any = {
   nibiru: "https://lcd.nibiru.fi",
   bostrom: "https://lcd.bostrom.cybernode.ai",
   joltify: "https://lcd.joltify.io",
-  noble: "https://api.noble.xyz"
+  noble: "https://noble-api.polkachu.com"
 };
 
 
 function getCosmosRPC(chain: string) {
   if (cosmosEndpoints[chain]) return cosmosEndpoints[chain];
-  return `https://rest.cosmos.directory/${chain}`;
+  return `https://rest.cosmos.directory/${chain}/`;
 }
 
 export function cosmosSupply(
@@ -205,8 +221,6 @@ export function cosmosSupply(
     let balances = {} as Balances;
     for (let token of tokens) {
       let api = `cosmos/bank/v1beta1/supply/by_denom?denom=${token}`
-      if (chain === 'noble')
-        api = `cosmos/bank/v1beta1/supply/${token}`
       const res = await retry(
         async (_bail: any) =>
           await axios.get(
