@@ -34,6 +34,18 @@ export const normalizedChainReplacements = {
   "hydration": "hydradx",
   "bitlayer": "btr",
   "kaia": "klaytn",
+  superposition: "superposition",
+  lisk_l2: "lisk_l2",
+  xai: "xai",
+  zircuit: "zircuit",
+  worldchain: "worldchain",
+  shape: "shape",
+  bitlayer: "bitlayer",
+  galxe: "galxe",
+  vitruveo: "vitruveo",
+  zkfair: "zkfair",
+  wemix: "wemix",
+  kroma: "kroma",
 } as {
   [chain: string]: string;
 };
@@ -1103,6 +1115,90 @@ export const chainCoingeckoIds = {
     cmcId: null,
     categories: ["EVM"],
     chainId: 1868,
+  },
+  Superposition: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Lisk_L2: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  XAI: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Zircuit: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Worldchain: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Shape: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Bitlayer: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Galxe: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Vitruveo: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  zkFair: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Wemix: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Kroma: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
   },
   
 } as {
