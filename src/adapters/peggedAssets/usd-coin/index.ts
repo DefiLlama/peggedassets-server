@@ -988,6 +988,21 @@ const adapter: PeggedIssuanceAdapter = {
   kroma: {
     ethereum: bridgedSupply("kroma", 6, chainContracts.kroma.bridgedFromETH),
   },
+  berachain: {
+    ethereum: bridgedSupply("berachain", 6, chainContracts.berachain.bridgedFromETH),
+  },
+  core: {
+    ethereum: bridgedSupply("core", 6, chainContracts.core.bridgedFromETH),
+  },
+  cronos: {
+    ethereum: bridgedSupply("cronos", 6, chainContracts.cronos.bridgedFromETH),
+  },
+  b_squared: {
+    ethereum: bridgedSupply("b_squared", 6, chainContracts.b_squared.bridgedFromETH),
+  },
+  bob: {
+    ethereum: bridgedSupply("bob", 6, chainContracts.bob.bridgedFromETH),
+  },
 };
 
 export default adapter;
