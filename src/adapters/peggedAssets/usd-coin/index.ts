@@ -952,6 +952,42 @@ const adapter: PeggedIssuanceAdapter = {
   soneium: {
     ethereum: bridgedSupply("soneium", 6, chainContracts.soneium.bridgedFromETH),
   },
+  superposition: {
+  ethereum: bridgedSupply("superposition", 6, chainContracts.superposition.bridgedFromETH),
+  },
+  lisk_l2: {
+    ethereum: bridgedSupply("lisk_l2", 6, chainContracts.lisk_l2.bridgedFromETH),
+  },
+  xai: {
+    ethereum: bridgedSupply("xai", 6, chainContracts.xai.bridgedFromETH),
+  },
+  zircuit: {
+    ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH),
+  },
+  worldchain: {
+    ethereum: bridgedSupply("worldchain", 6, chainContracts.worldchain.bridgedFromETH),
+  },
+  shape: {
+    ethereum: bridgedSupply("shape", 6, chainContracts.shape.bridgedFromETH),
+  },
+  bitlayer: {
+    ethereum: bridgedSupply("bitlayer", 6, chainContracts.bitlayer.bridgedFromETH),
+  },
+  galxe: {
+    ethereum: bridgedSupply("galxe", 6, chainContracts.galxe.bridgedFromETH),
+  },
+  vitruveo: {
+    ethereum: bridgedSupply("vitruveo", 6, chainContracts.vitruveo.bridgedFromPolygon),
+  },
+  zkfair: {
+    ethereum: bridgedSupply("zkfair", 6, chainContracts.zkfair.bridgedFromETH),
+  },
+  wemix: {
+    ethereum: bridgedSupply("wemix", 6, chainContracts.wemix.bridgedFromETH),
+  },
+  kroma: {
+    ethereum: bridgedSupply("kroma", 6, chainContracts.kroma.bridgedFromETH),
+  },
 };
 
 export default adapter;
