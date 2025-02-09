@@ -46,6 +46,11 @@ export const normalizedChainReplacements = {
   zkfair: "zkfair",
   wemix: "wemix",
   kroma: "kroma",
+  berachain: "berachain",
+  core: "core",
+  cronos: "cronos",
+  bsquared: "b_squared",
+  bob: "bob",
 } as {
   [chain: string]: string;
 };
@@ -1200,6 +1205,72 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: null, // Add chain ID if available
   },
+    Galxe: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Vitruveo: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  zkFair: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Wemix: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+  Kroma: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: null, // Add chain ID if available
+  },
+    Berachain: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
+  Core: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
+  Cronos: {
+    geckoId: "crypto-com-chain",
+    symbol: "CRO",
+    cmcId: "3635",
+    categories: ["EVM"],
+    chainId: 25,
+  },
+  BSquared: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
+  Bob: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+  },
   
 } as {
   [chain: string]: {
@@ -1468,25 +1539,35 @@ export function getChainDisplayName(
     case "btr":
       return "Bitlayer";
     case "imx":
-      return "Immutable zkEVM"
+      return "Immutable zkEVM";
     case "icp":
-      return "ICP"
+      return "ICP";
     case "ton":
-      return "TON"
+      return "TON";
     case "scroll":
-      return "Scroll"
+      return "Scroll";
     case "taiko":
-      return "Taiko"
+      return "Taiko";
     case "real":
-        return "re.al"
+      return "re.al";
     case "injective":
-      return "Injective"
+      return "Injective";
     case "noble":
-      return "Noble"
+      return "Noble";
     case "xlayer":
-      return "X Layer"
+      return "X Layer";
     case "occ":
-      return "EDU Chain"
+      return "EDU Chain";
+    case "berachain":
+      return "Berachain";
+    case "core":
+      return "Core";
+    case "cronos":
+      return "Cronos";
+    case "b_squared":
+      return "BSquared";
+    case "bob":
+      return "Bob";  
     case "klaytn":
       return useNewChainNames ? "Kaia" : "Klaytn";
   
