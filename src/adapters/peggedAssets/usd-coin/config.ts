@@ -408,4 +408,40 @@ export const chainContracts: ChainContracts = {
   soneium: {
     bridgedFromETH: ["0xbA9986D2381edf1DA03B0B9c1f8b00dc4AacC369"],
   },
+  vitruveo: {
+  bridgedFromPolygon: ["0xbCfB3FCa16b12C7756CD6C24f1cC0AC0E38569CF"],
+  },
+  gravity: {
+    bridgedFromETH: ["0xFbDa5F676cB37624f28265A144A48B0d6e87d3b6"],
+  },
+  superposition: {
+    bridgedFromETH: ["0x401eCb1D350407f13ba348573E5630B83638E30D"],
+  },
+  lisk_l2: {
+    bridgedFromETH: ["0xF242275d3a6527d877f2c927a82D9b057609cc71"],
+  },
+  xai: {
+    bridgedFromETH: ["0x8712796136Ac8e0EEeC123251ef93702f265aa80"],
+  },
+  zircuit: {
+    bridgedFromETH: ["0x8712796136Ac8e0EEeC123251ef93702f265aa80"],
+  },
+  worldchain: {
+    bridgedFromETH: ["0x79A02482A880bCE3F13e09Da970dC34db4CD24d1"],
+  },
+  shape: {
+    bridgedFromETH: ["0xdb7DD8B00EdC5778Fe00B2408bf35C7c054f8BBe"],
+  },
+  bitlayer: {
+    bridgedFromETH: ["0xf8c374ce88a3be3d374e8888349c7768b607c755"],
+  },
+  zkfair: {
+    bridgedFromETH: ["0xD33Db7EC50A98164cC865dfaa64666906d79319C"],
+  },
+  wemix: {
+    bridgedFromETH: ["0xcdf764933b9a9ebb2c5da904b9715f3cf981572a"],
+  },
+  kroma: {
+    bridgedFromETH: ["0x0257e4d92c00c9efcca1d641b224d7d09cfa4522"],
+  },
 };
