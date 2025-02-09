@@ -444,4 +444,19 @@ export const chainContracts: ChainContracts = {
   kroma: {
     bridgedFromETH: ["0x0257e4d92c00c9efcca1d641b224d7d09cfa4522"],
   },
+  berachain: {
+    bridgedFromETH: ["0x549943e04f40284185054145c6e4e9568c1d3241"],
+  },
+  core: {
+    bridgedFromETH: ["0xa4151b2b3e269645181dccf2d426ce75fcbdeca9"],
+  },
+  cronos: {
+    bridgedFromETH: ["0xc21223249ca28397b4b6541dffaecc539bff0c59"],
+  },
+  b_squared: {
+    bridgedFromETH: ["0xE544e8a38aDD9B1ABF21922090445Ba93f74B9E5"],
+  },
+  bob: {
+    bridgedFromETH: ["0xe75D0fB2C24A55cA1e3F96781a2bCC7bdba058F0"],
+  },
 };
