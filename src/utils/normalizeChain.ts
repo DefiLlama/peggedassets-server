@@ -1177,35 +1177,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: null, // Add chain ID if available
   },
-  Vitruveo: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
-    categories: ["EVM"],
-    chainId: null, // Add chain ID if available
-  },
-  zkFair: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
-    categories: ["EVM"],
-    chainId: null, // Add chain ID if available
-  },
   Wemix: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
-    categories: ["EVM"],
-    chainId: null, // Add chain ID if available
-  },
-  Kroma: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
-    categories: ["EVM"],
-    chainId: null, // Add chain ID if available
-  },
-    Galxe: {
     geckoId: null,
     symbol: null,
     cmcId: null,
@@ -1220,13 +1192,6 @@ export const chainCoingeckoIds = {
     chainId: null, // Add chain ID if available
   },
   zkFair: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
-    categories: ["EVM"],
-    chainId: null, // Add chain ID if available
-  },
-  Wemix: {
     geckoId: null,
     symbol: null,
     cmcId: null,
