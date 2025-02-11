@@ -408,4 +408,7 @@ export const chainContracts: ChainContracts = {
   soneium: {
     bridgedFromETH: ["0xbA9986D2381edf1DA03B0B9c1f8b00dc4AacC369"],
   },
+  unichain: {
+    issued: ["0x078d782b760474a361dda0af3839290b0ef57ad6"],
+  },
 };
