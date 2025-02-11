@@ -501,6 +501,9 @@ const adapter: PeggedIssuanceAdapter = {
   occ: {
     ethereum: bridgedSupply("occ", 18, chainContracts.occ.bridgedFromETH),
   },
+  unichain: {
+    ethereum: bridgedSupply("unichain", 18, chainContracts.unichain.bridgedFromETH),
+  },
 };
 
 export default adapter;
