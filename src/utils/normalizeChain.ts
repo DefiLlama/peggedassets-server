@@ -1399,8 +1399,7 @@ export function getChainDisplayName(
       return "EDU Chain"
     case "klaytn":
       return useNewChainNames ? "Kaia" : "Klaytn";
-    case "unichain":
-      return "Unichain"
+      
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
