@@ -4612,7 +4612,8 @@ export default [
     twitter: "https://twitter.com/levelusd",
     wiki: "https://level-money.gitbook.io/docs/level-usd/level-usd-a-new-primitive",
     doublecounted: true,
-  },{
+  },
+  {
     id: "230",
     name: "Noon USN",
     address: "0xdA67B4284609d2d48e5d10cfAc411572727dc1eD",
@@ -4631,6 +4632,27 @@ export default [
     auditLinks: ["https://docs.noon.capital/security/smart-contract-audits"],
     twitter: "https://twitter.com/noon_capital",
     wiki: "https://docs.noon.capital",
+    doublecounted: true
+  },
+  {
+    id: "231",
+    name: "Honey",
+    address: "berachain:0xfcbd14dc51f0a4d49d5e53c2e0950e0bc26d0dce",
+    symbol: "HONEY",
+    url: "https://honey.berachain.com/",
+    description:
+      "HONEY is Berachain's native stablecoin",
+    mintRedeemDescription:
+      "The initial collateral options will be USDC and BYUSD (pyUSD). New assets used to mint $HONEY can be added via governance",
+    onCoinGecko: "true",
+    gecko_id: "honey-3",
+    cmcId: "35670",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/berachain",
+    wiki: "https://docs.berachain.com/learn/pol/tokens/honey",
     doublecounted: true
   },
 ] as PeggedAsset[];
