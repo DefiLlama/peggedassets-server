@@ -453,7 +453,7 @@ export const chainContracts: ChainContracts = {
   cronos: {
     bridgedFromETH: ["0xc21223249ca28397b4b6541dffaecc539bff0c59"],
   },
-  b_squared: {
+  bsquared: {
     bridgedFromETH: ["0xE544e8a38aDD9B1ABF21922090445Ba93f74B9E5"],
   },
   bob: {
