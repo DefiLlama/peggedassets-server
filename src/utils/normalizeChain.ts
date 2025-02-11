@@ -1104,7 +1104,13 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 1868,
   },
-  
+  "Unichain": {
+    geckoId: null,
+    symbol: "-",
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: 130,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1393,7 +1399,7 @@ export function getChainDisplayName(
       return "EDU Chain"
     case "klaytn":
       return useNewChainNames ? "Kaia" : "Klaytn";
-  
+      
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

@@ -952,6 +952,9 @@ const adapter: PeggedIssuanceAdapter = {
   soneium: {
     ethereum: bridgedSupply("soneium", 6, chainContracts.soneium.bridgedFromETH),
   },
+  unichain: {
+    minted: chainMinted("unichain", 6),
+  },
 };
 
 export default adapter;
