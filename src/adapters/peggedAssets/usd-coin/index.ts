@@ -997,7 +997,7 @@ const adapter: PeggedIssuanceAdapter = {
   cronos: {
     ethereum: bridgedSupply("cronos", 6, chainContracts.cronos.bridgedFromETH),
   },
-  b_squared: {
+  bsquared: {
     ethereum: bridgedSupply("b_squared", 6, chainContracts.b_squared.bridgedFromETH),
   },
   bob: {
