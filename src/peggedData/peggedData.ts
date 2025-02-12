@@ -4655,4 +4655,25 @@ export default [
     wiki: "https://docs.berachain.com/learn/pol/tokens/honey",
     doublecounted: true
   },
+  {
+    id: "232",
+    name: "Pinto",
+    address: "base:0xb170000aeefa790fa61d6e837d1035906839a3c8",
+    symbol: "PINTO",
+    url: "https://pinto.money/overview",
+    description:
+      "Pinto is a censorship-resistant, credit-based stable asset protocol built on Base, designed to provide low-volatility money without reliance on collateral",
+    mintRedeemDescription:
+      "To mint PINTO, users deposit whitelisted assets into the Silo to earn yield or participate in the Field by lending to the protocol in exchange for future rewards, while to redeem PINTO, users withdraw their deposits or claim rewards based on the protocol's credit-based system",
+    onCoinGecko: "true",
+    gecko_id: "pinto",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/pintodotmoney",
+    wiki: "https://docs.pinto.money/",
+    doublecounted: true
+  },
 ] as PeggedAsset[];
