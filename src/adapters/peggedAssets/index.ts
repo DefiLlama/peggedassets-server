@@ -228,6 +228,7 @@ import lvlusd from "./level-usd";
 import usdq from "./quill-usd";
 import noonusn from "./noon-usn";
 import honey from "./honey-3";
+import pinto from "./pinto";
 
 export default {
   tether,
@@ -460,5 +461,6 @@ export default {
   "level-usd": lvlusd,
   "quill-usd": usdq,
   "noon-usn": noonusn,
-  "honey-3": honey
+  "honey-3": honey,
+  "pinto": pinto
 };
