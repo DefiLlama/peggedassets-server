@@ -229,6 +229,7 @@ import usdq from "./quill-usd";
 import noonusn from "./noon-usn";
 import honey from "./honey-3";
 import pinto from "./pinto";
+import wusd from "./worldwide-usd";
 
 export default {
   tether,
@@ -462,5 +463,6 @@ export default {
   "quill-usd": usdq,
   "noon-usn": noonusn,
   "honey-3": honey,
-  "pinto": pinto
+  "pinto": pinto,
+  "worldwide-usd": wusd
 };
