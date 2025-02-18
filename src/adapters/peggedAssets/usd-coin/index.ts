@@ -958,25 +958,25 @@ const adapter: PeggedIssuanceAdapter = {
   superposition: {
     ethereum: bridgedSupply("superposition", 6, chainContracts.superposition.bridgedFromETH),
   },
-  /*lisk: {
-    ethereum: bridgedSupply("lisk_l2", 6, chainContracts.lisk_l2.bridgedFromETH),
-  },*/
+  lisk: {
+    ethereum: bridgedSupply("lisk", 6, chainContracts.lisk.bridgedFromETH),
+  },
   xai: {
     ethereum: bridgedSupply("xai", 6, chainContracts.xai.bridgedFromETH),
   },
   zircuit: {
     ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH),
   },
-  /*wc: {
-    ethereum: bridgedSupply("worldchain", 6, chainContracts.worldchain.bridgedFromETH),
-  },*/
+  wc: {
+    ethereum: bridgedSupply("worldchain", 6, chainContracts.wc.bridgedFromETH),
+  },
   shape: {
     ethereum: bridgedSupply("shape", 6, chainContracts.shape.bridgedFromETH),
   },
-  /*btr: {
-    ethereum: bridgedSupply("bitlayer", 6, chainContracts.bitlayer.bridgedFromETH),
+  btr: {
+    ethereum: bridgedSupply("bitlayer", 6, chainContracts.btr.bridgedFromETH),
   },
-  galxe: {
+  /*galxe: {
     ethereum: bridgedSupply("galxe", 6, chainContracts.galxe.bridgedFromETH),
   },
   vitruveo: {
@@ -1000,9 +1000,9 @@ const adapter: PeggedIssuanceAdapter = {
   cronos: {
     ethereum: bridgedSupply("cronos", 6, chainContracts.cronos.bridgedFromETH),
   },
-  /*bsquared: {
-    ethereum: bridgedSupply("b_squared", 6, chainContracts.b_squared.bridgedFromETH),
-  },*/
+  bsquared: {
+    ethereum: bridgedSupply("bsquared", 6, chainContracts.bsquared.bridgedFromETH),
+  },
   bob: {
     ethereum: bridgedSupply("bob", 6, chainContracts.bob.bridgedFromETH),
   },  
