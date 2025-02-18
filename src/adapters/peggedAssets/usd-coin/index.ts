@@ -958,22 +958,22 @@ const adapter: PeggedIssuanceAdapter = {
   superposition: {
     ethereum: bridgedSupply("superposition", 6, chainContracts.superposition.bridgedFromETH),
   },
-  lisk: {
+  /*lisk: {
     ethereum: bridgedSupply("lisk_l2", 6, chainContracts.lisk_l2.bridgedFromETH),
-  },
+  },*/
   xai: {
     ethereum: bridgedSupply("xai", 6, chainContracts.xai.bridgedFromETH),
   },
   zircuit: {
     ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH),
   },
-  wc: {
+  /*wc: {
     ethereum: bridgedSupply("worldchain", 6, chainContracts.worldchain.bridgedFromETH),
-  },
+  },*/
   shape: {
     ethereum: bridgedSupply("shape", 6, chainContracts.shape.bridgedFromETH),
   },
-  btr: {
+  /*btr: {
     ethereum: bridgedSupply("bitlayer", 6, chainContracts.bitlayer.bridgedFromETH),
   },
   galxe: {
@@ -984,7 +984,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   zkfair: {
     ethereum: bridgedSupply("zkfair", 6, chainContracts.zkfair.bridgedFromETH),
-  },
+  },*/
   wemix: {
     ethereum: bridgedSupply("wemix", 6, chainContracts.wemix.bridgedFromETH),
   },
@@ -1000,9 +1000,9 @@ const adapter: PeggedIssuanceAdapter = {
   cronos: {
     ethereum: bridgedSupply("cronos", 6, chainContracts.cronos.bridgedFromETH),
   },
-  bsquared: {
+  /*bsquared: {
     ethereum: bridgedSupply("b_squared", 6, chainContracts.b_squared.bridgedFromETH),
-  },
+  },*/
   bob: {
     ethereum: bridgedSupply("bob", 6, chainContracts.bob.bridgedFromETH),
   },  
