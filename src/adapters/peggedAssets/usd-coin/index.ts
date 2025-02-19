@@ -924,7 +924,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: circleAPIChainMinted("NOBLE"),
   },
   flow: {
-    ethereum: flowBridged(chainContracts.flow.bridgedFromETH[0], 6),
+    ethereum: bridgedSupply("flow",6,chainContracts.flow.bridgedFromETH),
   },
   polkadot: {
     minted: circleAPIChainMinted("PAH"),
