@@ -4676,4 +4676,24 @@ export default [
     wiki: "https://docs.pinto.money/",
     doublecounted: true
   },
+  {
+    id: "233",
+    name: "TheStandard USD",
+    address: "arbitrum:0x2ea0be86990e8dac0d09e4316bb92086f304622d",
+    symbol: "USDS",
+    url: "https://www.thestandard.io/",
+    description:
+      "USDs is TheStandard's USD-pegged stablecoin, central to the protocol's borrowing operations",
+    mintRedeemDescription:
+      "To mint USDS, users deposit collateral into a Smart Vault. This can be single or multiple collateral types",
+    onCoinGecko: "true",
+    gecko_id: "thestandard-usd",
+    cmcId: "33452",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.thestandard.io/tst/security-and-risk-management/audits-and-safety-measures"],
+    twitter: "https://x.com/thestandard_io",
+    wiki: "https://docs.thestandard.io/tst/introduction/usds-and-euros",
+  },
 ] as PeggedAsset[];
