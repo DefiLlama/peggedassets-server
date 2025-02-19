@@ -4696,4 +4696,24 @@ export default [
     twitter: "https://x.com/thestandard_io",
     wiki: "https://docs.thestandard.io/tst/introduction/usds-and-euros",
   },
+  {
+    id: "234",
+    name: "Worldwide USD",
+    address: "0x7cd017ca5ddb86861fa983a34b5f495c6f898c41",
+    symbol: "WUSD",
+    url: "https://wspn.io/",
+    description:
+      "WUSD is a regulated stablecoin designed for worldwide payments and round-the-clock financial markets, always redeemable 1:1 for US dollars",
+    mintRedeemDescription:
+      "WUSD is backed by liquid assets, including cash, cash equivalents, and short-term treasury bills. Each WUSD token represents one US Dollar held in reserve",
+    onCoinGecko: "true",
+    gecko_id: "worldwide-usd",
+    cmcId: "29318",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://wspn.io/Certik%20Smart%20Contract%20Audit%20Report.pdf"],
+    twitter: "https://x.com/WSPNpayment",
+    wiki: "https://wspn.io/documentation.html",
+  },
 ] as PeggedAsset[];
