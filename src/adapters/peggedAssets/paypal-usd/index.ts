@@ -7,7 +7,10 @@ const chainContracts = {
   },
   berachain: {
     bridgedFromETH: ["0x688e72142674041f8f6Af4c808a4045cA1D6aC82"],
-  }
+  },
+  flow: {
+    bridgedFromETH: ["0x2aaBea2058b5aC2D339b163C6Ab6f2b6d53aabED"],
+  },
 };
 
 import { addChainExports } from "../helper/getSupply";
