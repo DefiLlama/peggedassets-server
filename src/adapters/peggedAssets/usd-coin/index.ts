@@ -956,7 +956,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("unichain", 6),
   },
   superposition: {
-    ethereum: bridgedSupply("superposition", 6, chainContracts.superposition.bridgedFromETH),
+    ethereum: bridgedSupply("spn", 6, chainContracts.superposition.bridgedFromETH),
   },
   lisk: {
     ethereum: bridgedSupply("lisk", 6, chainContracts.lisk.bridgedFromETH),
@@ -968,13 +968,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH),
   },
   wc: {
-    ethereum: bridgedSupply("worldchain", 6, chainContracts.wc.bridgedFromETH),
+    ethereum: bridgedSupply("wc", 6, chainContracts.wc.bridgedFromETH),
   },
   shape: {
     ethereum: bridgedSupply("shape", 6, chainContracts.shape.bridgedFromETH),
   },
   btr: {
-    ethereum: bridgedSupply("bitlayer", 6, chainContracts.btr.bridgedFromETH),
+    ethereum: bridgedSupply("btr", 6, chainContracts.btr.bridgedFromETH),
   },
   /*galxe: {
     ethereum: bridgedSupply("galxe", 6, chainContracts.galxe.bridgedFromETH),
