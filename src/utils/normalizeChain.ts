@@ -1111,6 +1111,13 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 130,
   },
+  "World Chain": {
+    geckoId: "worldcoin-wld",
+    symbol: "WLD",
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: 480,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1398,7 +1405,10 @@ export function getChainDisplayName(
     case "occ":
       return "EDU Chain"
     case "klaytn":
-      return useNewChainNames ? "Kaia" : "Klaytn";
+      return useNewChainNames ? "Kaia" : "Klaytn"
+    case "wc":
+      return "World Chain"
+        ;
       
     default:
       return (

@@ -411,4 +411,55 @@ export const chainContracts: ChainContracts = {
   unichain: {
     issued: ["0x078d782b760474a361dda0af3839290b0ef57ad6"],
   },
+  vitruveo: {
+  bridgedFromPolygon: ["0xbCfB3FCa16b12C7756CD6C24f1cC0AC0E38569CF"],
+  },
+  gravity: {
+    bridgedFromETH: ["0xFbDa5F676cB37624f28265A144A48B0d6e87d3b6"],
+  },
+  superposition: {
+    bridgedFromETH: ["0x401eCb1D350407f13ba348573E5630B83638E30D"],
+  },
+  lisk: {
+    bridgedFromETH: ["0xF242275d3a6527d877f2c927a82D9b057609cc71"],
+  },
+  xai: {
+    bridgedFromETH: ["0x8712796136Ac8e0EEeC123251ef93702f265aa80"],
+  },
+  zircuit: {
+    bridgedFromETH: ["0x8712796136Ac8e0EEeC123251ef93702f265aa80"],
+  },
+  wc: {
+    bridgedFromETH: ["0x79A02482A880bCE3F13e09Da970dC34db4CD24d1"],
+  },
+  shape: {
+    bridgedFromETH: ["0xdb7DD8B00EdC5778Fe00B2408bf35C7c054f8BBe"],
+  },
+  btr: {
+    bridgedFromETH: ["0xf8c374ce88a3be3d374e8888349c7768b607c755"],
+  },
+  zkfair: {
+    bridgedFromETH: ["0xD33Db7EC50A98164cC865dfaa64666906d79319C"],
+  },
+  wemix: {
+    bridgedFromETH: ["0xcdf764933b9a9ebb2c5da904b9715f3cf981572a"],
+  },
+  kroma: {
+    bridgedFromETH: ["0x0257e4d92c00c9efcca1d641b224d7d09cfa4522"],
+  },
+  berachain: {
+    bridgedFromETH: ["0x549943e04f40284185054145c6e4e9568c1d3241"],
+  },
+  core: {
+    bridgedFromETH: ["0xa4151b2b3e269645181dccf2d426ce75fcbdeca9"],
+  },
+  cronos: {
+    bridgedFromETH: ["0xc21223249ca28397b4b6541dffaecc539bff0c59"],
+  },
+  bsquared: {
+    bridgedFromETH: ["0xE544e8a38aDD9B1ABF21922090445Ba93f74B9E5"],
+  },
+  bob: {
+    bridgedFromETH: ["0xe75D0fB2C24A55cA1e3F96781a2bCC7bdba058F0"],
+  },  
 };

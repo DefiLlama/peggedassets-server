@@ -955,6 +955,57 @@ const adapter: PeggedIssuanceAdapter = {
   unichain: {
     minted: chainMinted("unichain", 6),
   },
+  superposition: {
+    ethereum: bridgedSupply("spn", 6, chainContracts.superposition.bridgedFromETH),
+  },
+  lisk: {
+    ethereum: bridgedSupply("lisk", 6, chainContracts.lisk.bridgedFromETH),
+  },
+  xai: {
+    ethereum: bridgedSupply("xai", 6, chainContracts.xai.bridgedFromETH),
+  },
+  zircuit: {
+    ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH),
+  },
+  wc: {
+    ethereum: bridgedSupply("wc", 6, chainContracts.wc.bridgedFromETH),
+  },
+  shape: {
+    ethereum: bridgedSupply("shape", 6, chainContracts.shape.bridgedFromETH),
+  },
+  btr: {
+    ethereum: bridgedSupply("btr", 6, chainContracts.btr.bridgedFromETH),
+  },
+  /*galxe: {
+    ethereum: bridgedSupply("galxe", 6, chainContracts.galxe.bridgedFromETH),
+  },
+  vitruveo: {
+    ethereum: bridgedSupply("vitruveo", 6, chainContracts.vitruveo.bridgedFromPolygon),
+  },*/
+  zkfair: {
+    ethereum: bridgedSupply("zkfair", 18, chainContracts.zkfair.bridgedFromETH),
+  },
+  wemix: {
+    ethereum: bridgedSupply("wemix", 6, chainContracts.wemix.bridgedFromETH),
+  },
+  kroma: {
+    ethereum: bridgedSupply("kroma", 6, chainContracts.kroma.bridgedFromETH),
+  },
+  berachain: {
+    ethereum: bridgedSupply("berachain", 6, chainContracts.berachain.bridgedFromETH),
+  },
+  core: {
+    ethereum: bridgedSupply("core", 6, chainContracts.core.bridgedFromETH),
+  },
+  cronos: {
+    ethereum: bridgedSupply("cronos", 6, chainContracts.cronos.bridgedFromETH),
+  },
+  bsquared: {
+    ethereum: bridgedSupply("bsquared", 6, chainContracts.bsquared.bridgedFromETH),
+  },
+  bob: {
+    ethereum: bridgedSupply("bob", 6, chainContracts.bob.bridgedFromETH),
+  },  
 };
 
 export default adapter;
