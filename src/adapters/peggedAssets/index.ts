@@ -464,5 +464,5 @@ export default {
   "noon-usn": noonusn,
   "honey-3": honey,
   "pinto": pinto,
-  "the-standard-usd": standardusds
+  "thestandard-usd": standardusds
 };
