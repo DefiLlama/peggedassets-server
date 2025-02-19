@@ -981,10 +981,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   vitruveo: {
     ethereum: bridgedSupply("vitruveo", 6, chainContracts.vitruveo.bridgedFromPolygon),
-  },
-  zkfair: {
-    ethereum: bridgedSupply("zkfair", 6, chainContracts.zkfair.bridgedFromETH),
   },*/
+  zkfair: {
+    ethereum: bridgedSupply("zkfair", 18, chainContracts.zkfair.bridgedFromETH),
+  },
   wemix: {
     ethereum: bridgedSupply("wemix", 6, chainContracts.wemix.bridgedFromETH),
   },
