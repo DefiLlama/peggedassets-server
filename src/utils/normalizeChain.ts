@@ -1111,7 +1111,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 130,
   },
-  "wc": {
+  "World Chain": {
     geckoId: "worldcoin-wld",
     symbol: "WLD",
     cmcId: null,
