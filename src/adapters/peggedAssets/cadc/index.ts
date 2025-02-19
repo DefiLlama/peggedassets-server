@@ -11,6 +11,9 @@ const chainContracts = {
   arbitrum: {
     issued: "0x2b28E826b55e399F4d4699b85f68666AC51e6f70", pegType
   },
+  base: {
+    issued: "0x043eb4b75d0805c43d7c834902e335621983cf03", pegType
+  }
 };
 
 import { addChainExports } from "../helper/getSupply";
