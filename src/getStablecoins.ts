@@ -116,6 +116,9 @@ export async function craftProtocolsResponse(
               chainCirculating[a].current[pegType]
           ),
         } as any;
+        if (pegged.doublecounted) {
+          dataToReturn.doublecounted = true;
+        }
         if (getPrices) {
           dataToReturn.price = prices[pegged.gecko_id] ?? null;
         }
