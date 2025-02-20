@@ -12,7 +12,7 @@ import { solanaMintedOrBridged } from "../helper/getSupply";
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0xc5f0f7b66764F6ec8C8Dff7BA683102295E16409"],
-    busdcollateral: ["0x47ac0Fb4F2D84898e4D9E7b4DaB3C24507a6D503"], // binance-peg collaterals
+    busdcollateral: ["0x47ac0Fb4F2D84898e4D9E7b4DaB3C24507a6D503"], // binance-peg BUSD collateral, seen as BUSD by users
   },
   bsc: {
     issued: ["0xc5f0f7b66764f6ec8c8dff7ba683102295e16409"],

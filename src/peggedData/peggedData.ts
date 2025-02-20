@@ -2392,7 +2392,7 @@ export default [
   },
   {
     id: "119",
-    name: "First Digital USD",
+    name: "First Digital USD", // a portion of the circulating supply is seen as binance-peg BUSD by users, FDUSD is locked as collateral to mint binance-peg BUSD
     address: "0xc5f0f7b66764f6ec8c8dff7ba683102295e16409",
     symbol: "FDUSD",
     url: "https://firstdigitallabs.com",
