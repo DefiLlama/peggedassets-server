@@ -105,7 +105,7 @@ async function run() {
   }
 
   async function storeChainChartData() {
-    const doublecountedIds = peggedAssets.filter(stable=>stable.doublecounted === true).map(stable=>stable.id)
+    const doublecountedIds = peggedAssets.map((stable, index)=>stable.doublecounted === true ? index : null).filter(Boolean)
     const frontendKey = 'all-llama-app'
     const allChartsStartTimestamp = 1617148800 // for /stablecoins page, charts begin on April 1, 2021, to reduce size of page
     const allData = await getChainData('all')
