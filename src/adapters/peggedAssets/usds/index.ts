@@ -8,6 +8,9 @@ const chainContracts = {
     base: {
       issued: ["0x820c137fa70c8691f0e44dc420a5e53c168921dc"],
     },
+    arbitrum: {
+      bridgedFromETH: ["0x6491c05A82219b8D1479057361ff1654749b876b"],
+    },
   };
   
   
