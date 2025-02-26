@@ -463,4 +463,7 @@ export const chainContracts: ChainContracts = {
   bob: {
     bridgedFromETH: ["0xe75D0fB2C24A55cA1e3F96781a2bCC7bdba058F0"],
   },  
+  ink: {
+    bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"]
+  }
 };

@@ -1006,6 +1006,9 @@ const adapter: PeggedIssuanceAdapter = {
   bob: {
     ethereum: bridgedSupply("bob", 6, chainContracts.bob.bridgedFromETH),
   },  
+  ink: {
+    ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH, "stargate"),
+  }, 
 };
 
 export default adapter;
