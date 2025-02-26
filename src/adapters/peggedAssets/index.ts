@@ -231,6 +231,7 @@ import honey from "./honey-3";
 import pinto from "./pinto";
 import wusd from "./worldwide-usd";
 import standardusds from "./thestandard-usd";
+import frxusd from "./frx-usd"
 
 export default {
   tether,
@@ -466,5 +467,6 @@ export default {
   "honey-3": honey,
   "pinto": pinto,
   "worldwide-usd": wusd,
-  "thestandard-usd": standardusds
+  "thestandard-usd": standardusds,
+  "frx-usd": frxusd
 };
