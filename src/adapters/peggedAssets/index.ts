@@ -238,6 +238,7 @@ export default {
   terrausd,
   "binance-usd": busd,
   dai,
+  brz,
   frax,
   "true-usd": trueusd,
   "liquity-usd": liquity,
@@ -465,6 +466,5 @@ export default {
   "noon-usn": noonusn,
   "honey-3": honey,
   "pinto": pinto,
-  "the-standard-usd": standardusds,
-  brz
+  "the-standard-usd": standardusds
 };
