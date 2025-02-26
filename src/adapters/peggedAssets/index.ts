@@ -31,6 +31,7 @@ import usdb from "./usd-balance";
 import usdc from "./usd-coin";
 import usdd from "./usdd";
 import usdk from "./usdk";
+import brz from "./brz";
 import usdp from "./usdp";
 import vai from "./vai";
 import yusd from "./yusd-stablecoin";
@@ -464,5 +465,6 @@ export default {
   "noon-usn": noonusn,
   "honey-3": honey,
   "pinto": pinto,
-  "the-standard-usd": standardusds
+  "the-standard-usd": standardusds,
+  brz
 };
