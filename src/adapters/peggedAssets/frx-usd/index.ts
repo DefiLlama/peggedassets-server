@@ -17,32 +17,32 @@ const chainContracts = {
   bsc: {
     bridgedFromETH: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
-  /*ink: {
-    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
-  },*/
+  ink: {
+    bridgedFromETH: "0x80eede496655fb9047dd39d9f418d5483ed600df",
+  },
   sonic: {
-    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
+    bridgedFromETH: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
   mode: {
-    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
+    bridgedFromETH: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
   metis: {
-    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
+    bridgedFromETH: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
- /* sei: {
-    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
-  },*/
+  sei: {
+    bridgedFromETH: "0x80eede496655fb9047dd39d9f418d5483ed600df",
+  },
   xlayer: {
-    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
+    bridgedFromETH: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
   avax: {
-    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
+    bridgedFromETH: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
   polygon: {
-    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
+    bridgedFromETH: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
   polygon_zkevm: {
-    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
+    bridgedFromETH: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
 };
 
