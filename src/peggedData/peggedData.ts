@@ -4716,4 +4716,24 @@ export default [
     twitter: "https://x.com/WSPNpayment",
     wiki: "https://wspn.io/documentation.html",
   },
+  {
+    id: "235",
+    name: "Frax USD",
+    address: "0xcacd6fd266af91b8aed52accc382b4e165586e29",
+    symbol: "FRXUSD",
+    url: "https://app.frax.finance/",
+    description:
+      "Frax USD (frxUSD) is a fiat-redeemable, fully-collateralized stablecoin issued by the Frax Finance Protocol",
+    mintRedeemDescription:
+      "Frax USD uses a hybrid model that allows for governance-approved enshrined custodians to mint/redeem the stablecoin by holding cash-equivalent reserves while also having onchain mechanisms built by the Frax Finance Protocol",
+    onCoinGecko: "true",
+    gecko_id: "frax-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/fraxfinance",
+    wiki: "https://docs.frax.com/protocol/assets/frxusd/frxusd",
+  },
 ] as PeggedAsset[];
