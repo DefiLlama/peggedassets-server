@@ -356,4 +356,7 @@ export const chainContracts: ChainContracts = {
   occ: {
     bridgedFromETH: ["0x7277Cc818e3F3FfBb169c6Da9CC77Fc2d2a34895"],
   },
+  ink: {
+    issued: ["0x0200C29006150606B650577BBE7B6248F58470c1"]
+  }
 };
