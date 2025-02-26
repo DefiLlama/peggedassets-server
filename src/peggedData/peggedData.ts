@@ -4735,5 +4735,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/fraxfinance",
     wiki: "https://docs.frax.com/protocol/assets/frxusd/frxusd",
+    doublecounted: true
   },
 ] as PeggedAsset[];
