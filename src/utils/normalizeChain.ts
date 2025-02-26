@@ -1118,6 +1118,13 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 480,
   },
+  Ink: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: 57073,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1408,6 +1415,8 @@ export function getChainDisplayName(
       return useNewChainNames ? "Kaia" : "Klaytn"
     case "wc":
       return "World Chain"
+    case "ink":
+      return "Ink"
         ;
       
     default:
