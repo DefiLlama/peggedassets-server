@@ -1067,7 +1067,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),
   },
   ink: {
-    minted: chainMinted("ink", 6), // uses LayerZero OFT (Mint-Burn) Modal to bridge
+    ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH),
   }
 };
 
