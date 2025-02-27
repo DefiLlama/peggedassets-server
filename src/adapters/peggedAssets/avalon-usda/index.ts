@@ -12,6 +12,9 @@ const chainContracts = {
     taiko: {
       issued: ["0xff12470a969Dd362EB6595FFB44C82c959Fe9ACc"],
     },
+    berachain: {
+      issued: ["0xff12470a969Dd362EB6595FFB44C82c959Fe9ACc"]
+    }
   };
 
 
