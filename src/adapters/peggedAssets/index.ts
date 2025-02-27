@@ -232,7 +232,7 @@ import pinto from "./pinto";
 import wusd from "./worldwide-usd";
 import standardusds from "./thestandard-usd";
 import frxusd from "./frx-usd"
-import syusd from "./synnax-stablecoin"
+import syusd from "./syusd"
 
 export default {
   tether,
@@ -470,5 +470,5 @@ export default {
   "worldwide-usd": wusd,
   "thestandard-usd": standardusds,
   "frx-usd": frxusd,
-  "synnax-stablecoin": syusd,
+  syusd,
 };
