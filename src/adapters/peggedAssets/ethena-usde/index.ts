@@ -50,6 +50,9 @@ const chainContracts = {
   xlayer: {
     bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
   },
+  berachain: {
+    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
+  },
 };
 
 const adapter: PeggedIssuanceAdapter = {
