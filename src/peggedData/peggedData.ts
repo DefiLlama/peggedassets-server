@@ -4737,4 +4737,24 @@ export default [
     wiki: "https://docs.frax.com/protocol/assets/frxusd/frxusd",
     doublecounted: true
   },
+  {
+    id: "236",
+    name: "Synnax Stablecoin",
+    address: "0x059A6b0bA116c63191182a0956cF697d0d2213eC",
+    symbol: "syUSD",
+    url: "https://synnax.fi",
+    description:
+      "syUSD is Synnax’s stablecoin, secured by overcollateralized assets and designed to maintain a soft peg to the U.S. dollar",
+    mintRedeemDescription:
+      "Users mint syUSD by depositing assets into Synnax vaults, where collateral is utilized for market-making strategies. Redemption requires debt repayment",
+    onCoinGecko: "true",
+    gecko_id: "synnax-stablecoin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Synnax-v1.0.pdf"],
+    twitter: "https://twitter.com/synnax_labs",
+    wiki: "https://docs.synnax.fi",
+  },
 ] as PeggedAsset[];
