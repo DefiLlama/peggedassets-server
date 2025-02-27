@@ -1068,6 +1068,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   ink: {
     ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH),
+  },
+  berachain: {
+    ethereum: bridgedSupply("berachain", 6, chainContracts.berachain.bridgedFromETH),
   }
 };
 

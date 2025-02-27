@@ -358,5 +358,8 @@ export const chainContracts: ChainContracts = {
   },
   ink: {
     bridgedFromETH: ["0x0200C29006150606B650577BBE7B6248F58470c1"]
+  },
+  berachain: {
+    bridgedFromETH: ["0x779Ded0c9e1022225f8E0630b35a9b54bE713736"]
   }
 };
