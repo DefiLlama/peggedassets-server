@@ -470,5 +470,5 @@ export default {
   "worldwide-usd": wusd,
   "thestandard-usd": standardusds,
   "frax-usd": frxusd,
-  syusd
+  "synnax-stablecoin": syusd
 };
