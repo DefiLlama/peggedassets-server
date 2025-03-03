@@ -361,5 +361,8 @@ export const chainContracts: ChainContracts = {
   },
   berachain: {
     bridgedFromETH: ["0x779Ded0c9e1022225f8E0630b35a9b54bE713736"]
+  },
+  sei: {
+    bridgedFromKava: ["0xB75D0B03c06A926e488e2659DF1A861F860bD3d1"]
   }
 };
