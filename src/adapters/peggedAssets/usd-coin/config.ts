@@ -465,5 +465,8 @@ export const chainContracts: ChainContracts = {
   },  
   ink: {
     bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"]
+  },
+  sei: {
+    bridgedFromNoble: ["0x3894085Ef7Ff0f0aeDf52E2A2704928d1Ec074F1"]
   }
 };

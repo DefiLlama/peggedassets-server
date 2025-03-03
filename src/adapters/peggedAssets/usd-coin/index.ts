@@ -1009,6 +1009,9 @@ const adapter: PeggedIssuanceAdapter = {
   ink: {
     ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH, "stargate"),
   }, 
+  sei: {
+    noble: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromNoble),
+  }
 };
 
 export default adapter;
