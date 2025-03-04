@@ -26,7 +26,28 @@ const chainContracts = {
     },
     sei: {
       issued: ["0xff12470a969dd362eb6595ffb44c82c959fe9acc"]
-    }
+    },
+    zircuit: {
+      issued: ["0xff12470a969dd362eb6595ffb44c82c959fe9acc"]
+    },
+    sonic: {
+      issued: ["0xff12470a969dd362eb6595ffb44c82c959fe9acc"]
+    },
+    corn: {
+      issued: ["0xff12470a969dd362eb6595ffb44c82c959fe9acc"]
+    },
+    morph: {
+      issued: ["0xff12470a969dd362eb6595ffb44c82c959fe9acc"]
+    },
+    klaytn: {
+      issued: ["0xdc3cf1961b08da169b078f7df6f26676bf6a4ff6"]
+    },
+    btr: {
+      issued: ["0x91bd7f5e328aecd1024e4118ade0ccb786f55db1"]
+    },
+    bob: {
+      issued: ["0x250fC55c82bcE84C991ba25698A142B21cDC778A"]
+    },
   };
 
 
