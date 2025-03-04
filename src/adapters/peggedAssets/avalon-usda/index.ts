@@ -23,6 +23,9 @@ const chainContracts = {
     },
     era: {
       issued: ["0xB8d7d88D042880aE87Bb61DE2dFFF8441768766D"]
+    },
+    sei: {
+      issued: ["0xff12470a969dd362eb6595ffb44c82c959fe9acc"]
     }
   };
 
