@@ -233,6 +233,8 @@ import wusd from "./worldwide-usd";
 import standardusds from "./thestandard-usd";
 import frxusd from "./frax-usd";
 import syusd from "./syusd"
+import stablrusd from "./stablr-usd"
+import stablreuro from "./stablr-euro"
 
 export default {
   tether,
@@ -470,5 +472,7 @@ export default {
   "worldwide-usd": wusd,
   "thestandard-usd": standardusds,
   "frax-usd": frxusd,
-  "synnax-stablecoin": syusd
+  "synnax-stablecoin": syusd,
+  "stablr-euro": stablreuro,
+  "stablr-usd": stablrusd,
 };
