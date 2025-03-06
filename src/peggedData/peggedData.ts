@@ -4778,4 +4778,25 @@ export default [
     wiki: "https://www.hashnote.com/",
     doublecounted: true
   },
+  {
+    id: "238",
+    name: "Rings scUSD",
+    address: "sonic:0xd3dce716f3ef535c5ff8d041c1a41c3bd89b97ae",
+    symbol: "SCUSD",
+    url: "https://app.rings.money/#/mint",
+    description:
+      "scUSD is a yield-bearing stablecoin that users mint by depositing stablecoins, which are then deployed into DeFi strategies",
+    mintRedeemDescription:
+      "scUSD is minted when users deposit stablecoins on Ethereum or Sonic, with the funds deployed into yield-generating DeFi strategies",
+    onCoinGecko: "true",
+    gecko_id: "rings-scusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/Rings_Protocol",
+    wiki: "https://docs.rings.money/tutorials/introduction",
+    doublecounted: true
+  },
 ] as PeggedAsset[];
