@@ -4797,6 +4797,5 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/Rings_Protocol",
     wiki: "https://docs.rings.money/tutorials/introduction",
-    doublecounted: true
   },
 ] as PeggedAsset[];
