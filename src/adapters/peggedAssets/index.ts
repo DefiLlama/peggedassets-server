@@ -232,6 +232,9 @@ import pinto from "./pinto";
 import wusd from "./worldwide-usd";
 import standardusds from "./thestandard-usd";
 import frxusd from "./frax-usd";
+import syusd from "./syusd"
+import stablrusd from "./stablr-usd"
+import stablreuro from "./stablr-euro";
 import syusd from "./syusd";
 import scusd from "./rings-scusd"
 
@@ -472,5 +475,7 @@ export default {
   "thestandard-usd": standardusds,
   "frax-usd": frxusd,
   "synnax-stablecoin": syusd,
+  "stablr-euro": stablreuro,
+  "stablr-usd": stablrusd,
   "rings-scusd": scusd
 };
