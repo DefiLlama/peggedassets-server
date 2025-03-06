@@ -918,7 +918,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
   },
   injective: {
-    noble: injectiveBridged(),
+    noble: cosmosSupply('injective', ['ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E'], 6, 'noble'),
   },
   noble: {
     minted: circleAPIChainMinted("NOBLE"),
