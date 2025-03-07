@@ -4838,4 +4838,24 @@ export default [
     twitter: "https://x.com/stablrusd/",
     wiki: "https://stablr.com/usdr",
   },
+  {
+    id: "241",
+    name: "OpenDollar USDO",
+    address: "0x8238884Ec9668Ef77B90C6dfF4D1a9F4F4823BFe",
+    symbol: "USDO",
+    url: "https://openeden.com/usdo",
+    description:
+      "USDO is collateralized by tokenized U.S. Treasury Bills and money market funds (such as OpenEden’s TBILL), from which USDO’s yield is generated.",
+    mintRedeemDescription:
+      "When a client wants to mint USDO, the client deposits USDC to the OpenEden platform, and an equivalent dollar value of USDO is manually minted for the client. The deposited USDC is then used to purchase the reserve asset, which is OpenEden's TBILL token (tokenized short-term U.S. Treasury Bills). When a client wants to redeem USDO, the client deposits the USDO onto the OpenEden platform, and an equivalent dollar value of USDC is redeemed from the reserve assets to be sent to the client. The deposited USDO is then burnt from circulation.",
+    onCoinGecko: "true",
+    gecko_id: "openeden-open-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/OpenEden_X",
+    wiki: "https://docs.openeden.com/usdo/introduction",
+  },
 ] as PeggedAsset[];
