@@ -4,6 +4,12 @@ const chainContracts = {
     },
     sei: {
       bridgedFromETH: ["0x37a4dd9ced2b19cfe8fac251cd727b5787e45269"]
+    },
+    avax: {
+      bridgedFromETH: ["0xB57B25851fE2311CC3fE511c8F10E868932e0680"]
+    },
+    polygon: {
+      bridgedFromETH: ["0xB57B25851fE2311CC3fE511c8F10E868932e0680"]
     }
   };
   
