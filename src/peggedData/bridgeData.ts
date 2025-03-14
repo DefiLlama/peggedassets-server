@@ -1707,6 +1707,14 @@ export default {
     bridge: "CCIP",
     sourceChain: formattedSourceChains.eth,
   },
+  "0x37a4dd9ced2b19cfe8fac251cd727b5787e45269": {
+    bridge: "elixir",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xB57B25851fE2311CC3fE511c8F10E868932e0680": {
+    bridge: "elixir",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1935,5 +1943,9 @@ export const bridgeInfo = {
   ccip: {
     name: "Chainlink Bridge",
     link: "https://chain.link/cross-chain",
+  },
+  elixir: {
+    name: "Elixir Bridge",
+    link: "https://bridge.elixir.xyz/",
   },
 } as BridgeInfo;
