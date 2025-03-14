@@ -13,17 +13,17 @@ import {
 
 const chainContracts: ChainContracts = {
   tron: {
-    issued: ["TPYmHEhy5n8TCEfYGqW2rPxsghSfzghPDn"],
+    issued: ["TXDk8mbtRbXeYuMNS83CfKPaYYT8XWv9Hz"],
   },
   bittorrent: {
-    bridgedFromTron: ["0x17F235FD5974318E4E2a5e37919a209f7c37A6d1"],
+    bridgedFromTron: ["0x42f9db3e95f91b414f4a321122e2804Ab75778d9"],
   },
   ethereum: {
-    bridgedFromBttc: ["0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6"],
+    bridgedFromBttc: ["0x3D7975EcCFc61a2102b08925CbBa0a4D4dBB6555"],
     reserves: ["0x9277a463A508F45115FdEaf22FfeDA1B16352433"],
   },
   bsc: {
-    bridgedFromBttc: ["0xd17479997f34dd9156deef8f95a52d81d265be9c"],
+    bridgedFromBttc: ["0x392004BEe213F1FF580C867359C246924f21E6Ad"],
     reserves: ["0xCa266910d92a313E5F9eb1AfFC462bcbb7d9c4A9"],
   },
 };
@@ -54,7 +54,7 @@ async function ethereumBridged() {
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
-        target: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6",
+        target: chainContracts.ethereum.bridgedFromBttc[0],
         block: _chainBlocks?.["ethereum"],
         chain: "ethereum",
       })
@@ -62,8 +62,8 @@ async function ethereumBridged() {
 
     const reserve = (
       await sdk.api.erc20.balanceOf({
-        target: "0x0C10bF8FcB7Bf5412187A595ab97a3609160b5c6",
-        owner: "0x9277a463A508F45115FdEaf22FfeDA1B16352433", // reserve contract for USDD on Ethereum
+        target: chainContracts.ethereum.bridgedFromBttc[0],
+        owner: chainContracts.ethereum.reserves[0], // reserve contract for USDD on Ethereum
         block: _chainBlocks?.["ethereum"],
         chain: "ethereum",
       })
@@ -73,7 +73,7 @@ async function ethereumBridged() {
       balances,
       "peggedUSD",
       (totalSupply - reserve) / 10 ** 18,
-      "0xd17479997f34dd9156deef8f95a52d81d265be9c",
+      chainContracts.ethereum.reserves[0],
       true
     );
     return balances;
@@ -91,7 +91,7 @@ async function bscBridged() {
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
-        target: "0xd17479997f34dd9156deef8f95a52d81d265be9c",
+        target: chainContracts.bsc.bridgedFromBttc[0],
         block: _chainBlocks?.["bsc"],
         chain: "bsc",
       })
@@ -99,8 +99,8 @@ async function bscBridged() {
 
     const reserve = (
       await sdk.api.erc20.balanceOf({
-        target: "0xd17479997F34dd9156Deef8F95A52D81D265be9c",
-        owner: "0xCa266910d92a313E5F9eb1AfFC462bcbb7d9c4A9", // reserve contract for USDD on BSC
+        target: chainContracts.bsc.bridgedFromBttc[0],
+        owner: chainContracts.bsc.reserves[0], // reserve contract for USDD on BSC
         block: _chainBlocks?.["bsc"],
         chain: "bsc",
       })
@@ -110,7 +110,7 @@ async function bscBridged() {
       balances,
       "peggedUSD",
       (totalSupply - reserve) / 10 ** 18,
-      "0xd17479997f34dd9156deef8f95a52d81d265be9c",
+      chainContracts.bsc.reserves[0],
       true
     );
     return balances;
