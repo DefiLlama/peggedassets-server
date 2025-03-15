@@ -236,7 +236,8 @@ import syusd from "./syusd"
 import stablrusd from "./stablr-usd"
 import stablreuro from "./stablr-euro";
 import scusd from "./rings-scusd";
-import usdo from "./openeden-open-dollar"
+import usdo from "./openeden-open-dollar";
+import hermeticausdh from "./hermetica-usdh";
 
 export default {
   tether,
@@ -478,5 +479,6 @@ export default {
   "stablr-euro": stablreuro,
   "stablr-usd": stablrusd,
   "rings-scusd": scusd,
-  "openeden-open-dollar": usdo
+  "openeden-open-dollar": usdo,
+  "hermetica-usdh": hermeticausdh
 };

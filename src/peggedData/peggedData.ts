@@ -4858,4 +4858,24 @@ export default [
     twitter: "https://x.com/OpenEden_X",
     wiki: "https://docs.openeden.com/usdo/introduction",
   },
+  {
+    id: "242",
+    name: "Hermetica USDh",
+    address: "SPN5AKG35QZSK2M8GAMR4AFX45659RJHDW353HSG.usdh-token-v1",
+    symbol: "USDH",
+    url: "https://app.hermetica.fi/stake",
+    description:
+      "Bitcoin-backed, yield-bearing synthetic dollar on Bitcoin L1 and L2s",
+    mintRedeemDescription:
+      "USDh is minted through Hermetica by approved users who complete KYC/AML and deposit Bitcoin, with issuance on Bitcoin Layer 1 via Runes and Layer 2 via Stacks.",
+    onCoinGecko: "true",
+    gecko_id: "hermetica-usdh",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/HermeticaFi",
+    wiki: "https://docs.hermetica.fi/usdh/usdh-and-susdh",
+  },
 ] as PeggedAsset[];
