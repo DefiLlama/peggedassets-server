@@ -8,12 +8,13 @@ import { sumSingleBalance } from "../helper/generalUtil";
 
 const chainContracts : ChainContracts = {
   ethereum: {
-    
     issued: ["0xdA67B4284609d2d48e5d10cfAc411572727dc1eD"],
-
   },
   era: {
     issued: ["0x0469d9d1dE0ee58fA1153ef00836B9BbCb84c0B6"]
+  },
+  sophon: {
+    issued: ["0xC1AA99c3881B26901aF70738A7C217dc32536d36"]
   }
 };
 
@@ -52,6 +53,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   era: {
     minted: chainMinted("era", 18),
+  },
+  sophon: {
+    minted: chainMinted("sophon", 18),
   },
 };
 
