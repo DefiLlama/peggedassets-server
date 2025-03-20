@@ -4878,4 +4878,24 @@ export default [
     twitter: "https://x.com/HermeticaFi",
     wiki: "https://docs.hermetica.fi/usdh/usdh-and-susdh",
   },
+  {
+    id: "243",
+    name: "Coinshift",
+    address: "0xbEeFc011e94f43b8B7b455eBaB290C7Ab4E216f1",
+    symbol: "csUSDL",
+    url: "https://www.coinshift.xyz/personal",
+    description:
+      "Earn real yield with csUSDL, the institutional-grade stablecoin backed by the world’s most secure onchain assets.",
+    mintRedeemDescription:
+      "csUSDL can be minted by swapping USDC directly via CoWSwap. For minimal slippage, users can first swap USDC for USDL using Curve, then deposit USDL into wUSDL through LiftDollar, and finally deposit wUSDL into the csUSDL Morpho vault. csUSDL can be redeemed for wUSDL based on available liquidity in the Morpho vault. CoWSwap solvers facilitate redemptions by leveraging all available on-chain liquidity, including Curve and Balancer, ensuring efficient conversions between csUSDL and USDC.",
+    onCoinGecko: "true",
+    gecko_id: "coinshift-usdl-morpho-vault",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/0xCoinshift",
+    wiki: "https://docs.coinshift.xyz/coinshift-assets/csusdl/coinshift-usdl-vault/how-csusdl-vault-works",
+  },
 ] as PeggedAsset[];
