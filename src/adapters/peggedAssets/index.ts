@@ -238,6 +238,7 @@ import stablreuro from "./stablr-euro";
 import scusd from "./rings-scusd";
 import usdo from "./openeden-open-dollar";
 import hermeticausdh from "./hermetica-usdh";
+import csusdl from "./coinshift-usdl-morpho-vault"
 
 export default {
   tether,
@@ -480,5 +481,6 @@ export default {
   "stablr-usd": stablrusd,
   "rings-scusd": scusd,
   "openeden-open-dollar": usdo,
-  "hermetica-usdh": hermeticausdh
+  "hermetica-usdh": hermeticausdh,
+  "coinshift-usdl-morpho-vault": csusdl
 };
