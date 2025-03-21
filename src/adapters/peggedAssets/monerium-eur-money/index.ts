@@ -13,14 +13,24 @@ const retry = require("async-retry");
 
 const chainContracts: ChainContracts = {
   ethereum: {
-    issued: ["0x3231Cb76718CDeF2155FC47b5286d82e6eDA273f"],
+    issued: ["0x39b8B6385416f4cA36a20319F70D28621895279D"],
   },
   polygon: {
-    issued: ["0x18ec0A6E18E5bc3784fDd3a3634b31245ab704F6"],
+    issued: ["0xE0aEa583266584DafBB3f9C3211d5588c73fEa8d"],
   },
   xdai: {
-    issued: ["0xcB444e90D8198415266c6a2724b7900fb12FC56E"],
+    issued: ["0x420CA0f9B9b604cE0fd9C18EF134C705e5Fa3430"],
   },
+  arbitrum: {
+    issued: ["0x0c06cCF38114ddfc35e07427B9424adcca9F44F8"],
+  },
+  linea: {
+    issued: ["0x3ff47c5Bf409C86533FE1f4907524d304062428D"],
+  },
+  scroll: {
+    issued: ["0xd7BB130A48595fCDf9480E36C1aE97ff2938aC21"],
+  },
+
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -93,6 +103,15 @@ const adapter: PeggedIssuanceAdapter = {
   },
   polygon: {
     minted: chainMinted("polygon", 18),
+  },
+  arbitrum: {
+    minted: chainMinted("arbitrum", 18),
+  },
+  linea: {
+    minted: chainMinted("linea", 18),
+  },
+  scroll: {
+    minted: chainMinted("scroll", 18),
   },
   algorand: {
     minted: algorandMinted(),
