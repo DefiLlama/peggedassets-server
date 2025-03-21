@@ -240,8 +240,10 @@ import usdo from "./openeden-open-dollar";
 import hermeticausdh from "./hermetica-usdh";
 import csusdl from "./coinshift-usdl-morpho-vault";
 import liftdollar from "./lift-dollar"
+import cardano_usda from './usda'
 
 export default {
+  usda: cardano_usda,
   tether,
   "usd-coin": usdc,
   terrausd,
