@@ -8,7 +8,7 @@ import { getTotalSupply } from "../helper/cardano";
 const assetIDs = {
   cardano: {
     issued: [
-      "", // policy id
+      "fe7c786ab321f41c654ef6c1af7b3250a613c24e4213e0425a7ae45655534441",
     ],
   },
 };
