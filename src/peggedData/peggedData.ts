@@ -4897,5 +4897,26 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/0xCoinshift",
     wiki: "https://docs.coinshift.xyz/coinshift-assets/csusdl/coinshift-usdl-vault/how-csusdl-vault-works",
+    doublecounted: true
+  },
+  {
+    id: "244",
+    name: "Lift Dollar",
+    address: "0xbdc7c08592ee4aa51d06c27ee23d5087d65adbcd",
+    symbol: "USDL",
+    url: "https://liftdollar.com/",
+    description:
+      "Lift Dollar (USDL) is a US dollar-backed stablecoin with regulatory oversight that distributes yield from its cash and cash equivalent reserves to its holders every day.",
+    mintRedeemDescription:
+      "Institutions mint USDL by wiring USD or sending USDC, which Paxos converts and delivers to an Ethereum address; to redeem, they send USDL to Paxos for a USD wire transfer",
+    onCoinGecko: "true",
+    gecko_id: "lift-dollar",
+    cmcId: "32454",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/LiftDollar_USDL",
+    wiki: "https://docs.liftdollar.com/",
   },
 ] as PeggedAsset[];
