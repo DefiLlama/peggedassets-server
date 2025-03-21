@@ -1125,6 +1125,17 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 57073,
   },
+  "Sophon": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM", "Rollup"],
+    parent: {
+      chain: "Ethereum",
+      types: ["L2", "gas"],
+    },
+    chainId: 50104,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1417,6 +1428,8 @@ export function getChainDisplayName(
       return "World Chain"
     case "ink":
       return "Ink"
+    case "sophon":
+      return "Sophon"
         ;
       
     default:
