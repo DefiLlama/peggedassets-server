@@ -4952,8 +4952,26 @@ export default [
     cmcId: "35721",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko",
+    priceSource: "defillama",
     auditLinks: ["https://docs.falcon.finance/resources/audits"],
     twitter: "https://x.com/FalconStable"
+  },
+  {
+    id: "247",
+    name: "Schuman EUROP",
+    address: "0x888883b5f5d21fb10dfeb70e8f9722b9fb0e5e51",
+    symbol: "EUROP",
+    url: "https://schuman.io/europ/",
+    description: "EURØP is a secure, transparent, and MiCA-compliant euro-denominated stablecoin, redeemable 1:1 for the euro",
+    mintRedeemDescription: "EURØP is issued by a licensed stablecoin issuer and regulated by the French banking authority ACPR. Each EURØP is 100% backed by euros, with reserves held in government-supervised EU banks such as Société Générale",
+    onCoinGecko: "true",
+    gecko_id: "schuman-europ",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://skynet.certik.com/projects/schuman-financial"],
+    twitter: "https://x.com/Schuman_io",
+    wiki: "https://schuman.io/europ/"
   },
 ] as PeggedAsset[];
