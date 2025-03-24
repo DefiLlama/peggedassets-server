@@ -239,6 +239,7 @@ import scusd from "./rings-scusd";
 import usdo from "./openeden-open-dollar";
 import hermeticausdh from "./hermetica-usdh";
 import csusdl from "./coinshift-usdl-morpho-vault";
+import europ from "./schuman-europ";
 import falconfinance from "./falcon-finance";
 import liftdollar from "./lift-dollar";
 import cardano_usda from './anzens-usda'
@@ -487,6 +488,7 @@ export default {
   "hermetica-usdh": hermeticausdh,
   "coinshift-usdl-morpho-vault": csusdl,
   "lift-dollar": liftdollar,
+  "schuman-europ": europ,
   "falcon-finance": falconfinance,
   "anzens-usda": cardano_usda,
 };
