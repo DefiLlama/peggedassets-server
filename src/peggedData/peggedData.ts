@@ -4919,4 +4919,41 @@ export default [
     twitter: "https://x.com/LiftDollar_USDL",
     wiki: "https://docs.liftdollar.com/",
   },
+  {
+    id: "245",
+    name: "Anzens USDA",
+    address: "cardano:fe7c786ab321f41c654ef6c1af7b3250a613c24e4213e0425a7ae45655534441",
+    symbol: "USDA",
+    url: "https://anzens.com/",
+    description:
+      "USDA stablecoin is designed to be pegged to the U.S. Dollar with 100% reserves backed by dollars and dollar equivalents.",
+    mintRedeemDescription:
+      "USDA is minted and redeemed through Anzens via bank transfers and requires KYC verification..",
+    onCoinGecko: "false",
+    gecko_id: "anzens-usda",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/AnzensOfficial",
+    wiki: "https://anzens.com/"
+  },
+  {
+    id: "246",
+    name: "Falcon USD",
+    address: "0xFa2B947eEc368f42195f24F36d2aF29f7c24CeC2",
+    symbol: "USDf",
+    url: "https://falcon.finance/",
+    description: "Falcon Finance is a next-generation synthetic dollar protocol. Preserving users’ multi-assets with industry-competitive yields across any market conditions, it sets a new standard in the industry, along with transparency, security, and institutional-grade risk management.",
+    mintRedeemDescription: "Falcon Finance users who have completed KYC verification can mint USDf by depositing collateral and redeem USDf for supported assets, subject to eligibility and jurisdictional requirements.",
+    onCoinGecko: "true",
+    gecko_id: "falcon-finance",
+    cmcId: "35721",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: ["https://docs.falcon.finance/resources/audits"],
+    twitter: "https://x.com/FalconStable"
+  },
 ] as PeggedAsset[];

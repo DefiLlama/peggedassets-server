@@ -232,15 +232,17 @@ import pinto from "./pinto";
 import wusd from "./worldwide-usd";
 import standardusds from "./thestandard-usd";
 import frxusd from "./frax-usd";
-import syusd from "./syusd"
-import stablrusd from "./stablr-usd"
+import syusd from "./syusd";
+import stablrusd from "./stablr-usd";
 import stablreuro from "./stablr-euro";
 import scusd from "./rings-scusd";
 import usdo from "./openeden-open-dollar";
 import hermeticausdh from "./hermetica-usdh";
 import csusdl from "./coinshift-usdl-morpho-vault";
-import liftdollar from "./lift-dollar";
 import europ from "./schuman-europ";
+import falconfinance from "./falcon-finance";
+import liftdollar from "./lift-dollar";
+import cardano_usda from './anzens-usda'
 
 export default {
   tether,
@@ -474,7 +476,7 @@ export default {
   "quill-usd": usdq,
   "noon-usn": noonusn,
   "honey-3": honey,
-  "pinto": pinto,
+  pinto: pinto,
   "worldwide-usd": wusd,
   "thestandard-usd": standardusds,
   "frax-usd": frxusd,
@@ -487,4 +489,6 @@ export default {
   "coinshift-usdl-morpho-vault": csusdl,
   "lift-dollar": liftdollar,
   "schuman-europ": europ,
+  "falcon-finance": falconfinance,
+  "anzens-usda": cardano_usda,
 };
