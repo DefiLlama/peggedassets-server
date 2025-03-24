@@ -4921,6 +4921,26 @@ export default [
   },
   {
     id: "245",
+    name: "Anzens USDA",
+    address: "cardano:fe7c786ab321f41c654ef6c1af7b3250a613c24e4213e0425a7ae45655534441",
+    symbol: "USDA",
+    url: "https://anzens.com/",
+    description:
+      "USDA stablecoin is designed to be pegged to the U.S. Dollar with 100% reserves backed by dollars and dollar equivalents.",
+    mintRedeemDescription:
+      "USDA is minted and redeemed through Anzens via bank transfers and requires KYC verification..",
+    onCoinGecko: "false",
+    gecko_id: "anzens-usda",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/AnzensOfficial",
+    wiki: "https://anzens.com/"
+  },
+  {
+    id: "246",
     name: "Falcon USD",
     address: "0xFa2B947eEc368f42195f24F36d2aF29f7c24CeC2",
     symbol: "USDf",
