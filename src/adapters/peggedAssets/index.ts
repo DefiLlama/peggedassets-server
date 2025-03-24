@@ -240,7 +240,7 @@ import usdo from "./openeden-open-dollar";
 import hermeticausdh from "./hermetica-usdh";
 import csusdl from "./coinshift-usdl-morpho-vault";
 import liftdollar from "./lift-dollar"
-import cardano_usda from './anzen-usda'
+import cardano_usda from './anzens-usda'
 
 export default {
   tether,
@@ -486,5 +486,5 @@ export default {
   "hermetica-usdh": hermeticausdh,
   "coinshift-usdl-morpho-vault": csusdl,
   "lift-dollar": liftdollar,
-  "anzen-usda": cardano_usda,
+  "anzens-usda": cardano_usda,
 };
