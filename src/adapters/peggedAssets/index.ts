@@ -243,7 +243,8 @@ import csusdl from "./coinshift-usdl-morpho-vault";
 import europ from "./schuman-europ";
 import falconfinance from "./falcon-finance";
 import liftdollar from "./lift-dollar";
-import cardano_usda from './anzens-usda'
+import cardano_usda from './anzens-usda';
+import usdfc from './usdfc'
 
 export default {
   tether,
@@ -493,4 +494,5 @@ export default {
   "falcon-finance": falconfinance,
   "anzens-usda": cardano_usda,
   "hashnote-usda": hashnote_usyc,
+  "usdfc": usdfc
 };
