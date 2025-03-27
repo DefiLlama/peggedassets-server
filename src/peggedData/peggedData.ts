@@ -4974,4 +4974,22 @@ export default [
     twitter: "https://x.com/Schuman_io",
     wiki: "https://schuman.io/europ/"
   },
+  {
+    id: "248",
+    name: "USDFC",
+    address: "filecoin:0x80B98d3aa09ffff255c3ba4A241111Ff1262F045",
+    symbol: "USDFC",
+    url: "https://app.usdfc.net/#/",
+    description: "USDFC is fully collateralized by Filecoin (FIL) and aims to maintain a 1:1 peg to the US dollar",
+    mintRedeemDescription: "Users mint USDFC by depositing FIL as collateral, and redeem USDFC by exchanging it back for FIL at the current USD-equivalent value",
+    onCoinGecko: "false",
+    gecko_id: "usdfc",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.secured.finance/fixed-rate-lending-protocol/security-and-safety-measures/smart-contract-audits"],
+    twitter: "https://x.com/USDFC_Protocol",
+    wiki: "https://docs.secured.finance/usdfc-stablecoin-protocol/introduction"
+  },
 ] as PeggedAsset[];
