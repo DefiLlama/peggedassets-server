@@ -152,6 +152,7 @@ import usdz from "./anzen-usdz";
 import aeusd from "./aryze-eusd";
 import usdf from "./astherus-usdf";
 import avalon_usda from "./avalon-usda";
+import hashnote_usyc from "./hashnote-usyc";
 import bnusd from "./balanced-dollars";
 import binancebusd from "./binance-peg-busd";
 import btcusd from "./bitcoin-usd-btcfi";
@@ -491,4 +492,5 @@ export default {
   "schuman-europ": europ,
   "falcon-finance": falconfinance,
   "anzens-usda": cardano_usda,
+  "hashnote-usda": hashnote_usyc,
 };
