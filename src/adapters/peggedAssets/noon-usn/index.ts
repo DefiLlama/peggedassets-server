@@ -34,7 +34,6 @@ async function chainMinted(chain: string, decimals: number) {
           chain: chain,
         })
       ).output;
-      console.log(totalSupply)
       sumSingleBalance(
         balances,
         "peggedUSD",

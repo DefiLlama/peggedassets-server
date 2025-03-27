@@ -26,9 +26,9 @@ const chainContracts = {
   mode: {
     issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
-  metis: {
-    issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
-  },
+  // metis: {
+  //   issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
+  // },
   sei: {
     issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
