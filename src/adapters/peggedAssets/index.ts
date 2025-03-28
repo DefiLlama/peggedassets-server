@@ -31,6 +31,7 @@ import usdb from "./usd-balance";
 import usdc from "./usd-coin";
 import usdd from "./usdd";
 import usdk from "./usdk";
+import brz from "./brz";
 import usdp from "./usdp";
 import vai from "./vai";
 import yusd from "./yusd-stablecoin";
@@ -252,6 +253,7 @@ export default {
   terrausd,
   "binance-usd": busd,
   dai,
+  brz,
   frax,
   "true-usd": trueusd,
   "liquity-usd": liquity,
