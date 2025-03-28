@@ -52,7 +52,7 @@ const chainContracts = {
 
 const adapterSolana: PeggedIssuanceAdapter = {
     solana: {
-        minted: solanaMintedOrBridged(chainContracts.solana.issued),
+        minted: solanaMintedOrBridged(chainContracts.solana.issued, pegType),
     },
 };
 
