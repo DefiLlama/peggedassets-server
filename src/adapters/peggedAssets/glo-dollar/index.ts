@@ -26,6 +26,9 @@ const chainContracts: ChainContracts = {
   base: {
     issued: ["0x4F604735c1cF31399C6E711D5962b2B3E0225AD3"],
   },
+  vechain: {
+    issued: ["0x29c630cce4ddb23900f5fe66ab55e488c15b9f5e"]
+  }
 }
 
 async function stellarMinted(assetID: string) {
