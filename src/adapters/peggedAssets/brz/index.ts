@@ -3,7 +3,7 @@ import {
     PeggedIssuanceAdapter
 } from "../peggedAsset.type";
 
-const pegType = "peggedUSD";
+const pegType = "peggedREAL";
 
 const chainContracts = {
     ethereum: {
