@@ -541,6 +541,8 @@ export const chainCoingeckoIds = {
     geckoId: "xdce-crowd-sale",
     symbol: "XDC",
     cmcId: "2634",
+    categories: ["EVM"],
+    chainId: 50,
   },
   Velas: {
     geckoId: "velas",

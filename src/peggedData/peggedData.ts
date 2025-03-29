@@ -5010,4 +5010,24 @@ export default [
     twitter: "https://x.com/BrzToken",
     wiki: "https://www.brztoken.io/#brz-token"
   },
+  {
+    id: "250",
+    name: "Bridged USDC(XDC)",
+    address: "0x2A8E898b6242355c290E1f4Fc966b8788729A4D4",
+    symbol: "USDC.e",
+    url: "https://bridge.xdc.org/",
+    description:
+        "USDC.e is a bridged USDC - managed by XSwap Protocol.",
+    mintRedeemDescription:
+        "USDC.e can be minted via bridge.xdc.com by locking native USDC on Arbitrum and Ethereum networks. Bridge also allows to bridge USDC.e from XDC Network into Ethereum and Arbitrum networks.",
+    onCoinGecko: "true",
+    gecko_id: "bridged-usdc-xdc-bridge",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [""],
+    twitter: "https://x.com/XSwapProtocol",
+    wiki: "https://wiki.defillama.com/wiki/USDC",
+  },
 ] as PeggedAsset[];
