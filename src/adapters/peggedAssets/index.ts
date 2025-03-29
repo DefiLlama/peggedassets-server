@@ -31,6 +31,7 @@ import usdb from "./usd-balance";
 import usdc from "./usd-coin";
 import usdd from "./usdd";
 import usdk from "./usdk";
+import brz from "./brz";
 import usdp from "./usdp";
 import vai from "./vai";
 import yusd from "./yusd-stablecoin";
@@ -152,6 +153,7 @@ import usdz from "./anzen-usdz";
 import aeusd from "./aryze-eusd";
 import usdf from "./astherus-usdf";
 import avalon_usda from "./avalon-usda";
+import hashnote_usyc from "./hashnote-usyc";
 import bnusd from "./balanced-dollars";
 import binancebusd from "./binance-peg-busd";
 import btcusd from "./bitcoin-usd-btcfi";
@@ -242,7 +244,8 @@ import csusdl from "./coinshift-usdl-morpho-vault";
 import europ from "./schuman-europ";
 import falconfinance from "./falcon-finance";
 import liftdollar from "./lift-dollar";
-import cardano_usda from './anzens-usda'
+import cardano_usda from './anzens-usda';
+import usdfc from './usdfc'
 
 export default {
   tether,
@@ -250,6 +253,7 @@ export default {
   terrausd,
   "binance-usd": busd,
   dai,
+  brz,
   frax,
   "true-usd": trueusd,
   "liquity-usd": liquity,
@@ -491,4 +495,6 @@ export default {
   "schuman-europ": europ,
   "falcon-finance": falconfinance,
   "anzens-usda": cardano_usda,
+  "hashnote-usda": hashnote_usyc,
+  "usdfc": usdfc
 };
