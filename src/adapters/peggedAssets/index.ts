@@ -495,6 +495,6 @@ export default {
   "schuman-europ": europ,
   "falcon-finance": falconfinance,
   "anzens-usda": cardano_usda,
-  "hashnote-usda": hashnote_usyc,
+  "hashnote-usyc": hashnote_usyc,
   "usdfc": usdfc
 };
