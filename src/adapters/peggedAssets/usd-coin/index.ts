@@ -1011,6 +1011,18 @@ const adapter: PeggedIssuanceAdapter = {
   }, 
   sei: {
     noble: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromNoble),
+  },
+  xdc: {
+    ethereum: supplyInEthereumBridge(
+      chainContracts.ethereum.issued[0], 
+      chainContracts.xdc.bridgeOnETH[0],
+      6
+    ),
+    arbitrum: supplyInArbitrumBridge(
+      chainContracts.arbitrum.issued[0],
+      chainContracts.xdc.bridgeOnARB[0],
+      6
+    ) 
   }
 };
 
