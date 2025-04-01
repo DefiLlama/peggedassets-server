@@ -428,7 +428,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x8712796136Ac8e0EEeC123251ef93702f265aa80"],
   },
   zircuit: {
-    bridgedFromETH: ["0x8712796136Ac8e0EEeC123251ef93702f265aa80"],
+    bridgedFromETH: ["0x3b952c8C9C44e8Fe201e2b26F6B2200203214cfF"],
   },
   wc: {
     bridgedFromETH: ["0x79A02482A880bCE3F13e09Da970dC34db4CD24d1"],
