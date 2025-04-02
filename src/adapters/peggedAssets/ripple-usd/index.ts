@@ -15,7 +15,7 @@ async function rippleMinted(
     axios.get("https://api.xrpscan.com/api/v1/token/RLUSD.rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De")
   );
 
-  const supplyStr = res.data.metrics.supply; 
+  const supplyStr = res.data.supply; 
   const supply = parseFloat(supplyStr);
 
   sumSingleBalance(balances, "peggedUSD", supply, "issued");
