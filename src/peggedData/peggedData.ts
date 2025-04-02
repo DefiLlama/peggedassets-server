@@ -5010,4 +5010,22 @@ export default [
     twitter: "https://x.com/BrzToken",
     wiki: "https://www.brztoken.io/#brz-token"
   },
+  {
+    id: "250",
+    name: "Ripple USD",
+    address: "0x8292bb45bf1ee4d140127049757c2e0ff06317ed",
+    symbol: "RLUSD",
+    url: "https://ripple.com/solutions/stablecoin/",
+    description: "Ripple USD (RLUSD) is designed to maintain a constant value of one US dollar",
+    mintRedeemDescription: "Natively issued on XRP Ledger and Ethereum blockchains, Ripple USD is fully backed by a segregated reserve of cash and cash equivalents and redeemable 1:1 for US dollars",
+    onCoinGecko: "true",
+    gecko_id: "ripple-usd",
+    cmcId: "34387",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/Ripple",
+    wiki: "https://docs.ripple.com/stablecoin/"
+  },
 ] as PeggedAsset[];
