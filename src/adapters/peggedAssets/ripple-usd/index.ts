@@ -4,21 +4,35 @@ import { Balances, ChainContracts, ChainBlocks, PeggedIssuanceAdapter } from "..
 const axios = require("axios");
 const retry = require("async-retry");
 
-async function rippleMinted(
+const NODE_URL = "https://xrplcluster.com";
+
+export async function rippleMinted(
   _timestamp: number,
   _ethBlock: number,
   _chainBlocks: ChainBlocks
 ): Promise<Balances> {
   const balances = {} as Balances;
 
-  const res = await retry(async (_bail: any) =>
-    axios.get("https://api.xrpscan.com/api/v1/token/RLUSD.rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De")
-  );
+  const address = "rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De";
+  const tokenCurrency = "524C555344000000000000000000000000000000";
 
-  const supplyStr = res.data.supply; 
+  const payload = {
+    method: "gateway_balances",
+    params: [
+      {
+        account: address,
+        ledger_index: "validated",
+      },
+    ],
+  };
+
+  const res = await retry(async (_bail: any) => axios.post(NODE_URL, payload));
+
+  const supplyStr = res.data.result.obligations[tokenCurrency];
   const supply = parseFloat(supplyStr);
 
   sumSingleBalance(balances, "peggedUSD", supply, "issued");
+
   return balances;
 }
 
