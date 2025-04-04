@@ -3,7 +3,7 @@ import type { PeggedAsset } from "./types";
 export type { PeggedAsset };
 
 /*
-both `name` and `gecko_id` must be included. `name` is used to fetch icon and in API Config. `gecko_id` is used to fetch adapters and prices. 
+both `name` and `gecko_id` must be included. `name` is used to fetch icon and in API Config. `gecko_id` is used to fetch adapters and prices.
 
 `description` should be brief but still include: Issuer, function of asset, and asset stablecoin is pegged to.
 
@@ -3144,7 +3144,7 @@ export default [
     onCoinGecko: "true",
     gecko_id: "vnx-gold",
     cmcId: "22492",
-    pegType: "peggedXAU", //xau = gold 
+    pegType: "peggedXAU", //xau = gold
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
     auditLinks: "https://vnx.li/transparency/",
@@ -4489,13 +4489,13 @@ export default [
       "Users mint XY by depositing collateral, while redemption is managed through automated peg stability contracts and buyback-and-burn mechanisms, avoiding direct redemptions to protect user collateral",
     onCoinGecko: "true",
     gecko_id: "tren-debt-token",
-    cmcId: "16013", 
+    cmcId: "16013",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     auditLinks: ["https://github.com/zokyo-sec/audit-reports/blob/main/Tren%20Finance/Tren%20Finance_Zokyo_audit_report_Nov19th_2024.pdf"],
     priceSource: "defillama",
     twitter: "https://x.com/TrenFinance",
-    wiki: "https://docs.tren.finance/tokens/xy" 
+    wiki: "https://docs.tren.finance/tokens/xy"
   },
   {
     id: "224",
@@ -4508,7 +4508,7 @@ export default [
     mintRedeemDescription: "Mirroring the US Dollar's non-redeemability for its underlying gold reserves post-Nixon Shock (1971), dUSD is also designed to have non-redeemable reserves to maximize float interest generation. In place of redemption, dUSD relies on open market operations to manage liquidity and stability, similar to the Fed.",
     onCoinGecko: "true",
     gecko_id: "dtrinity-usd",
-    cmcId: null, 
+    cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     auditLinks: ["https://docs.dtrinity.org/developer/audits-and-security"],
@@ -4528,13 +4528,13 @@ export default [
     mintRedeemDescription: "ZeUSD is created when users deposit eligible RWA as collateral to open a collateralized debt position",
     onCoinGecko: "false",
     gecko_id: "zoth-zeusd",
-    cmcId: null, 
+    cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     auditLinks: ["https://docs.zoth.io/zoth/resources/audits"],
     priceSource: "defillama",
     twitter: "https://x.com/zothdotio",
-    wiki: "https://docs.zoth.io/zoth/products/zeusd-an-omni-chain-and-composable-stable-token" 
+    wiki: "https://docs.zoth.io/zoth/products/zeusd-an-omni-chain-and-composable-stable-token"
   },
   {
     id: "226",
@@ -4547,13 +4547,13 @@ export default [
     mintRedeemDescription: "To mint ZCHF, propose a new position with a 1,000 ZCHF fee or clone an existing position, with reserves and interest deducted upfront, secured by a challenge-and-auction system to maintain collateral integrity",
     onCoinGecko: "true",
     gecko_id: "frankencoin",
-    cmcId: "31379", 
+    cmcId: "31379",
     pegType: "peggedCHF",
     pegMechanism: "crypto-backed",
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/frankencoinzchf",
-    wiki: "https://docs.frankencoin.com/#frankencoin-zchf-and-frankencoin-pool-shares-fps" 
+    wiki: "https://docs.frankencoin.com/#frankencoin-zchf-and-frankencoin-pool-shares-fps"
   },
   {
     id: "227",
@@ -4566,13 +4566,13 @@ export default [
     mintRedeemDescription: "BOLD is minted in Liquity V2 by borrowing against overcollateralized deposits of WETH, wstETH, or rETH, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
     onCoinGecko: "true",
     gecko_id: "liquity-bold",
-    cmcId: null, 
+    cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/LiquityProtocol",
-    wiki: "https://docs.liquity.org/v2-documentation/technical-resources" 
+    wiki: "https://docs.liquity.org/v2-documentation/technical-resources"
   },
   {
     id: "228",
@@ -4585,13 +4585,13 @@ export default [
     mintRedeemDescription: "To mint $USDQ, users deposit an eligible collateral asset into their Trove on the Quill platform. Based on the value of the collateral and the protocol's collateralization requirements, users can mint $USDQ up to a certain limit",
     onCoinGecko: "false",
     gecko_id: "quill-usd",
-    cmcId: null, 
+    cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/QuillFi",
-    wiki: "https://docs.quill.finance/faq/usdusdq" 
+    wiki: "https://docs.quill.finance/faq/usdusdq"
   },
   {
     id: "229",
@@ -4604,7 +4604,7 @@ export default [
     mintRedeemDescription: "Users can mint Level USD with USDC and USDT permissionlessly. The protocol deploys this collateral into blue-chip restaking and lending protocols to generate yield for users",
     onCoinGecko: "true",
     gecko_id: "level-usd",
-    cmcId: null, 
+    cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     auditLinks: ["https://level-money.gitbook.io/docs/technical-documentation/audits"],
@@ -4982,7 +4982,7 @@ export default [
     url: "https://app.usdfc.net/#/",
     description: "USDFC is fully collateralized by Filecoin (FIL) and aims to maintain a 1:1 peg to the US dollar",
     mintRedeemDescription: "Users mint USDFC by depositing FIL as collateral, and redeem USDFC by exchanging it back for FIL at the current USD-equivalent value",
-    onCoinGecko: "false",
+    onCoinGecko: "true",
     gecko_id: "usdfc",
     cmcId: null,
     pegType: "peggedUSD",
