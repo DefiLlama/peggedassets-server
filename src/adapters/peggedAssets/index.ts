@@ -247,6 +247,7 @@ import liftdollar from "./lift-dollar";
 import cardano_usda from './anzens-usda';
 import usdfc from './usdfc';
 import rlusd from './ripple-usd'
+import aegisyusd from "./aegis-yusd";
 
 export default {
   tether,
@@ -498,5 +499,6 @@ export default {
   "anzens-usda": cardano_usda,
   "hashnote-usyc": hashnote_usyc,
   "usdfc": usdfc,
-  "ripple-usd": rlusd
+  "ripple-usd": rlusd,
+  "aegis-yusd": aegisyusd,
 };
