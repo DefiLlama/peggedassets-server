@@ -7,6 +7,13 @@ import {
   Balances,  ChainContracts,
 } from "../peggedAsset.type";
 
+const pegkeepers = [
+  "0x9201da0d97caaaff53f01b2fb56767c7072de340",
+  "0xfb726f57d251ab5c731e5c64ed4f5f94351ef9f3",
+  "0x3fa20eaa107de08b38a8734063d605d5842fe09c",
+  "0x503E1Bf274e7a6c64152395aE8eB57ec391F91F8"
+]
+
 async function chainMinted(chain: string, decimals: number) {
   return async function (
     _timestamp: number,
@@ -28,10 +35,39 @@ async function chainMinted(chain: string, decimals: number) {
         chain: chain,
       })
     ).output;
+    
+    // Get debt from all pegkeepers
+    const pegkeeperDebtCalls = pegkeepers.map(keeper => ({
+      target: keeper,
+      params: []
+    }));
+    
+    const pegkeeperDebts = await sdk.api.abi.multiCall({
+      abi: {
+        stateMutability: "view",
+        type: "function",
+        name: "debt",
+        inputs: [],
+        outputs: [{ name: "", type: "uint256" }],
+      },
+      calls: pegkeeperDebtCalls,
+      block: _ethBlock,
+      chain: chain,
+    });
+    
+    // Sum up all pegkeeper debts
+    let totalPegkeeperDebt = 0;
+    pegkeeperDebts.output.forEach((call: any) => {
+        totalPegkeeperDebt += Number(call.output);
+    });
+    
+    // Add total_debt and pegkeeper debt together
+    const totalSupply = Number(totalDebt) + totalPegkeeperDebt;
+    
     sumSingleBalance(
       balances,
       "peggedUSD",
-      totalDebt / 10 ** decimals,
+      totalSupply / 10 ** decimals,
       "issued",
       false
     );
@@ -64,6 +100,9 @@ const chainContracts = {
   },
   era: {
     bridgedFromETH: "0x43cD37CC4B9EC54833c8aC362Dd55E58bFd62b86"
+  },
+  sonic: {
+    bridgedFromETH: "0x7fff4c4a827c84e32c5e175052834111b2ccd270"
   }
 };
 
