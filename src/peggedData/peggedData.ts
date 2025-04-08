@@ -5028,4 +5028,22 @@ export default [
     twitter: "https://x.com/Ripple",
     wiki: "https://docs.ripple.com/stablecoin/"
   },
+  {
+    id: "251",
+    name: "Felix feUSD",
+    address: "hyperliquid:0x02c6a2fA58cC01A18B8D9E00eA48d65E4dF26c70",
+    symbol: "FEUSD",
+    url: "https://usefelix.xyz/borrow",
+    description: "Felix feUSD is a synthetic dollar protocol on Hyperliquid L1",
+    mintRedeemDescription: "Users can deposit HYPE, PURR, or bridged majors (BTC, ETH, SOL) as collateral to mint feUSD, and later redeem feUSD for an equivalent value in collateral",
+    onCoinGecko: "true",
+    gecko_id: "felix-feusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/felixprotocol",
+    wiki: "https://usefelix.gitbook.io/felix-docs"
+  },
 ] as PeggedAsset[];
