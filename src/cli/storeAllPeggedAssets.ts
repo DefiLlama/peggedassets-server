@@ -12,7 +12,7 @@ const handler = async () => {
 
   const items = peggedIndexes
   await new PromisePool()
-    .withConcurrency(4)
+    .withConcurrency(15)
     .for(items)
     .process(async (i: any) => {
       // const timeKey = `                                             pegged_asset_${peggedAssets[i].name}`;
