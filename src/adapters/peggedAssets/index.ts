@@ -246,7 +246,8 @@ import falconfinance from "./falcon-finance";
 import liftdollar from "./lift-dollar";
 import cardano_usda from './anzens-usda';
 import usdfc from './usdfc';
-import rlusd from './ripple-usd'
+import rlusd from './ripple-usd';
+import feusd from './felix-feusd';
 
 export default {
   tether,
@@ -498,5 +499,6 @@ export default {
   "anzens-usda": cardano_usda,
   "hashnote-usyc": hashnote_usyc,
   "usdfc": usdfc,
-  "ripple-usd": rlusd
+  "ripple-usd": rlusd,
+  "felix-feusd": feusd,
 };
