@@ -248,6 +248,7 @@ import cardano_usda from './anzens-usda';
 import usdfc from './usdfc';
 import rlusd from './ripple-usd';
 import feusd from './felix-feusd';
+import eurcv from "./eur-coinvertible";
 import standx_dusd from './standx-dusd';
 
 export default {
@@ -501,6 +502,7 @@ export default {
   "hashnote-usyc": hashnote_usyc,
   "usdfc": usdfc,
   "ripple-usd": rlusd,
+  "eur-coinvertible": eurcv,
   "felix-feusd": feusd,
   'standx-dusd': standx_dusd
 };
