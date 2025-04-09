@@ -1,6 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { Balances, ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
-import { chainContracts } from "../eur-coinvertible/config";
+import { chainContracts } from "./config";
 import { sumSingleBalance } from "../helper/generalUtil";
 import { solanaMintedOrBridged } from "../helper/getSupply";
 import { getTokenBalance } from "../helper/solana";
