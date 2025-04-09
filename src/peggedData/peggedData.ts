@@ -5087,4 +5087,24 @@ export default [
     twitter: "https://x.com/BimaBTC",
     wiki: "https://docs.bima.money/",
   },
+  {
+    id: "254",
+    name: "EUR CoinVertible",
+    address: "0x5f7827fdeb7c20b443265fc2f40845b715385ff2",
+    symbol: "EURCV",
+    url: "https://www.sgforge.com/product/coinvertible//",
+    description: "EUR CoinVertible (EURCV) is a fully collateralized, regulatory-compliant stablecoin issued by Societe Generale-FORGE to bridge traditional finance and public blockchains",
+    mintRedeemDescription: "EURCV is minted and redeemed by authorized institutions through SG-FORGE’s infrastructure, where fiat deposits back on-chain issuance and redemptions trigger equivalent fiat withdrawals",
+    onCoinGecko: "true",
+    gecko_id: "societe-generale-forge-eurcv",
+    cmcId: "32796",
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://www.sgforge.com/wp-content/uploads/2024/07/Hacken_EURCV_-2024-06-06.pdf"
+    ],
+    twitter: null,
+    wiki: "https://www.sgforge.com/product/coinvertible/",
+  },
 ] as PeggedAsset[];
