@@ -246,7 +246,8 @@ import falconfinance from "./falcon-finance";
 import liftdollar from "./lift-dollar";
 import cardano_usda from './anzens-usda';
 import usdfc from './usdfc';
-import rlusd from './ripple-usd';
+import rlusd from './ripple-usd'
+import aegisyusd from "./aegis-yusd";
 import feusd from './felix-feusd';
 import eurcv from "./societe-generale-forge-eurcv";
 import standx_dusd from './standx-dusd';
@@ -503,6 +504,7 @@ export default {
   "hashnote-usyc": hashnote_usyc,
   "usdfc": usdfc,
   "ripple-usd": rlusd,
+  "aegis-yusd": aegisyusd,
   "societe-generale-forge-eurcv": eurcv,
   "felix-feusd": feusd,
   'standx-dusd': standx_dusd,
