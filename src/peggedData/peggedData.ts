@@ -5046,4 +5046,22 @@ export default [
     twitter: "https://x.com/felixprotocol",
     wiki: "https://usefelix.gitbook.io/felix-docs"
   },
+  {
+    id: "252",
+    name: "StandX DUSD",
+    address: "solana:DUSDt4AeLZHWYmcXnVGYdgAzjtzU5mXUVnTMdnSzAttM",
+    symbol: "DUSD",
+    url: "https://standx.com",
+    description: "DUSD is a native yield bearing stablecoin designed to provide users with a stablecoin that offers competitive returns",
+    mintRedeemDescription: "Users can mint DUSD by depositing USDT or USDC and redeem by swapping DUSD back to USDT or USDC through the platform.",
+    onCoinGecko: "false",
+    gecko_id: "standx-dusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.standx.com/docs/solutions/audits"],
+    twitter: "https://x.com/StandX_Official",
+    wiki: "https://docs.standx.com/docs/dusd-overview"
+  },
 ] as PeggedAsset[];
