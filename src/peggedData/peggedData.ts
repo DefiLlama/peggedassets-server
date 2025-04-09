@@ -5062,6 +5062,7 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.standx.com/docs/solutions/audits"],
     twitter: "https://x.com/StandX_Official",
-    wiki: "https://docs.standx.com/docs/dusd-overview"
+    wiki: "https://docs.standx.com/docs/dusd-overview",
+    doublecounted: true
   },
 ] as PeggedAsset[];
