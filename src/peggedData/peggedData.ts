@@ -5065,4 +5065,26 @@ export default [
     wiki: "https://docs.standx.com/docs/dusd-overview",
     doublecounted: true
   },
+  {
+    id: "253",
+    name: "USBD",
+    address: "0x6bedE1c6009a78c222D9BDb7974bb67847fdB68c",
+    symbol: "USBD",
+    url: "https://bima.money/",
+    description: "USBD is a capital-efficient stablecoin over-collateralized by Bitcoin derivatives",
+    mintRedeemDescription: "Users mint USBD by locking approved collateral like LSTs or BTC in a vault, and can redeem it by repaying USBD to unlock their collateral.",
+    onCoinGecko: "false",
+    gecko_id: "usbd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://github.com/Cyfrin/cyfrin-audit-reports/blob/main/reports/2024-09-27-cyfrin-bima-v2.0.pdf",
+      "https://cantina.xyz/portfolio/0e4d03d9-b8c4-4cd7-ab20-15a480096d49",
+      "https://scalebit.xyz/reports/20241023-Bima-Final-Audit-Report.pdf"
+    ],
+    twitter: "https://x.com/BimaBTC",
+    wiki: "https://docs.bima.money/",
+  },
 ] as PeggedAsset[];

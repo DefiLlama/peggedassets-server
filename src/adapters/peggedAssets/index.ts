@@ -249,6 +249,7 @@ import usdfc from './usdfc';
 import rlusd from './ripple-usd';
 import feusd from './felix-feusd';
 import standx_dusd from './standx-dusd';
+import usbd from './usbd';
 
 export default {
   tether,
@@ -502,5 +503,6 @@ export default {
   "usdfc": usdfc,
   "ripple-usd": rlusd,
   "felix-feusd": feusd,
-  'standx-dusd': standx_dusd
+  'standx-dusd': standx_dusd,
+  'usbd': usbd,
 };
