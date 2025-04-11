@@ -5089,7 +5089,7 @@ export default [
   },
   {
     id: "254",
-    name: "Societe Generale Forge EURCV",
+    name: "EUR CoinVertible",
     address: "0x5f7827fdeb7c20b443265fc2f40845b715385ff2",
     symbol: "EURCV",
     url: "https://www.sgforge.com/product/coinvertible/",
