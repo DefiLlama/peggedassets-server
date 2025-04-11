@@ -1074,9 +1074,16 @@ const adapter: PeggedIssuanceAdapter = {
   },
   sei: {
     kava: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromKava),
+    ethereum: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromETH),
   },
   zircuit: {
     ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH)
+  },
+  unichain: {
+    ethereum: bridgedSupply("unichain", 6, chainContracts.unichain.bridgedFromETH)
+  },
+  corn: {
+    ethereum: bridgedSupply("corn", 6, chainContracts.corn.bridgedFromETH)
   }
 };
 

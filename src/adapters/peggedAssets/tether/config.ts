@@ -61,11 +61,14 @@ export const chainContracts: ChainContracts = {
   },
   arbitrum: {
     bridgeOnETH: ["0xcee284f754e854890e311e3280b767f80797180d"],
-    bridgedFromETH: ["0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"],
+    bridgedFromETH: ["0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"], // USDT0
   },
   optimism: {
     bridgeOnETH: ["0x99c9fc46f92e8a1c0dec1b1747d010903e884be1"],
-    bridgedFromETH: ["0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"],
+    bridgedFromETH: [
+      "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58",
+      "0x01bff41798a0bcf287b996046ca68b395dbc1071" // USDT0
+    ],
   },
   boba: {
     bridgeOnETH: ["0xdc1664458d2f0b6090bea60a8793a4e66c2f1c00"],
@@ -360,12 +363,19 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x0200C29006150606B650577BBE7B6248F58470c1"]
   },
   berachain: {
-    bridgedFromETH: ["0x779Ded0c9e1022225f8E0630b35a9b54bE713736"]
+    bridgedFromETH: ["0x779Ded0c9e1022225f8E0630b35a9b54bE713736"] // USDT0
   },
   sei: {
-    bridgedFromKava: ["0xB75D0B03c06A926e488e2659DF1A861F860bD3d1"]
+    bridgedFromKava: ["0xB75D0B03c06A926e488e2659DF1A861F860bD3d1"],
+    bridgedFromETH: ["0x9151434b16b9763660705744891fa906f660ecc5"], // USDT0
   },
   zircuit: {
     bridgedFromETH: ["0x46dDa6a5a559d861c06EC9a95Fb395f5C3Db0742"],
-  }
+  },
+  unichain: {
+    bridgedFromETH: ["0x9151434b16b9763660705744891fa906f660ecc5"], // USDT0
+  },
+  corn: {
+    bridgedFromETH: ["0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb"], // USDT0
+  },
 };
