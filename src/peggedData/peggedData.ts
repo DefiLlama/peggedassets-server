@@ -5143,5 +5143,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/aegis_im",
     wiki: "https://x.com/ResupplyFi",
+    doublecounted: true
   },
 ] as PeggedAsset[];
