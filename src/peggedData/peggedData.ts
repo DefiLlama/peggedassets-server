@@ -5141,7 +5141,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: [],
-    twitter: "https://x.com/aegis_im",
+    twitter: "https://x.com/ResupplyFi",
     wiki: "https://x.com/ResupplyFi",
     doublecounted: true
   },
