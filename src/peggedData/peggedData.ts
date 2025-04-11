@@ -5142,7 +5142,7 @@ export default [
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/ResupplyFi",
-    wiki: "https://x.com/ResupplyFi",
+    wiki: "https://docs.resupply.fi/resupply-protocol/overview",
     doublecounted: true
   },
 ] as PeggedAsset[];
