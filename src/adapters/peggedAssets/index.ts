@@ -252,6 +252,7 @@ import feusd from './felix-feusd';
 import eurcv from "./societe-generale-forge-eurcv";
 import standx_dusd from './standx-dusd';
 import usbd from './usbd';
+import reusd from './resupply-usd'
 
 export default {
   tether,
@@ -509,4 +510,5 @@ export default {
   "felix-feusd": feusd,
   'standx-dusd': standx_dusd,
   'usbd': usbd,
+  'resupply-usd': reusd
 };

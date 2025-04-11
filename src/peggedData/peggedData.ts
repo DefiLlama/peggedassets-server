@@ -5126,4 +5126,22 @@ export default [
     wiki: "https://docs.aegis.im/",
     doublecounted: true
   },
+  {
+    id: "256",
+    name: "Resupply USD",
+    address: "0x4274cd7277c7bb0806bd5fe84b9adae466a8da0a",
+    symbol: "REUSD",
+    url: "https://resupply.fi/",
+    description: "A decentralized stablecoin backed by stablecoin collateral in yield-bearing Curve Lend and Frax Lend markets, designed to maintain a 1:1 USD peg while sharing earned lending fees with borrowers.",
+    mintRedeemDescription: "Deposit crvUSD or frxUSD into a collateralized vault to mint reUSD (minimum 1,000). The borrow rate is half the market’s lending rate, half the risk-free rate, or 2%, whichever is higher. Repaying reUSD unlocks the original collateral.",
+    onCoinGecko: "true",
+    gecko_id: "resupply-usd",
+    cmcId:  null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/aegis_im",
+    wiki: "https://x.com/ResupplyFi",
+  },
 ] as PeggedAsset[];
