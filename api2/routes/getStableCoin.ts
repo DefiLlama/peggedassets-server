@@ -25,7 +25,7 @@ export function getStablecoinData(peggedID: string | undefined) {
   const { balances, lastBalance } = cache.peggedAssetsData?.[peggedData.id] ?? {}
   const lastBalancesHourlyRecord = lastBalance
   // currently frontend does not use data before May 11, 2022 for individual stablecoins
-  const historicalPeggedBalances = balances.filter((item) => item.SK >= 1652241600)
+  const historicalPeggedBalances = balances
 
   if (!useHourlyData) {
     replaceLast(historicalPeggedBalances, lastBalancesHourlyRecord);

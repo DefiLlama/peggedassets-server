@@ -247,12 +247,7 @@ export function craftChartsResponse(
     // if (chain !== "all" && !lastBalance?.[normalizedChain])
     //   return undefined;
 
-    const defaultStartTimestamp = 1609372800;
-    const earliestTimestamp =
-      chain === "all" || backfilledChains.includes(chain ?? "")
-        ? defaultStartTimestamp
-        : 1652241600; // chains have mostly incomplete data before May 11, 2022
-    let historicalBalance = { Items: balances.filter(i => i.SK > earliestTimestamp) } as any;
+    let historicalBalance = { Items: balances } as any;
 
     if (historicalBalance.Items === undefined || historicalBalance.Items.length < 1)
       return undefined;
