@@ -474,6 +474,6 @@ export const chainContracts: ChainContracts = {
     bridgeOnARB: ["0x7c62Bb89ABb22a6bA8668bEE8ddEC416bD402492"]
   },
   corn: {
-  bridgedFromETH: ["0xDF0B24095e15044538866576754F3C964e902Ee6"],
+    bridgedFromETH: ["0xDF0B24095e15044538866576754F3C964e902Ee6"],
   },
 };
