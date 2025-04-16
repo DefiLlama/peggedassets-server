@@ -5145,4 +5145,22 @@ export default [
     wiki: "https://docs.resupply.fi/resupply-protocol/overview",
     doublecounted: true
   },
+  /*{
+    id: "257",
+    name: "A7A5",
+    address: "0x6fA0BE17e4beA2fCfA22ef89BF8ac9aab0AB0fc9",
+    symbol: "A7A5",
+    url: "https://a7a5.kg/",
+    description: "A7A5 - token backed by fiat deposits of Central Asian banks. Stable, secure, and transparent. Regulated by Kyrgyzstan",
+    mintRedeemDescription: "Users mint A7A5 by depositing Russian rubles through authorized partners with KYC, receiving tokens 1:1 on-chain, and can redeem them by returning A7A5 for an equivalent ruble payout",
+    onCoinGecko: "false",
+    gecko_id: "a7a5",
+    cmcId:  null,
+    pegType: "peggedRUB",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://a7a5.kg/A7A5%20Token%20Audit%20Report.pdf"],
+    twitter: "https://x.com/A7A5official",
+    wiki: "https://a7a5.kg/transparency",
+  },*/
 ] as PeggedAsset[];
