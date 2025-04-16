@@ -1,69 +1,9 @@
+import axios from "axios";
 import { sumSingleBalance } from "../helper/generalUtil";
 import { addChainExports } from "../helper/getSupply";
-import { Balances, ChainContracts, ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
-const axios = require("axios");
-const retry = require("async-retry");
+import { Balances, ChainContracts, PeggedIssuanceAdapter } from "../peggedAsset.type";
 
 const NODE_URL = "https://xrplcluster.com";
-
-export async function rippleMinted(
-  _timestamp: number,
-  _ethBlock: number,
-  _chainBlocks: ChainBlocks
-): Promise<Balances> {
-  const balances = {} as Balances;
-
-  const issuerAddress = "rJNE2NNz83GJYtWVLwMvchDWEon3huWnFn";
-  const tokenCurrency = "TBL";
-  const subscriptionOperatorAddress = "rHzvHZ1EYAJQCepz9SwfAwZux6XZQ5sXQx"; // replace with actual operator if different
-
-  const payload = {
-    method: "gateway_balances",
-    params: [
-      {
-        account: issuerAddress,
-        ledger_index: "validated",
-      },
-    ],
-  };
-
-  const res = await retry(async (_bail: any) => axios.post(NODE_URL, payload));
-  const result = res.data?.result;
-
-  const obligations = result?.obligations;
-  const otherBalances = result?.balances?.[subscriptionOperatorAddress];
-
-  if (!obligations || !obligations[tokenCurrency]) {
-    console.error("Ripple obligations:", obligations);
-    throw new Error(`Token ${tokenCurrency} not found in obligations`);
-  }
-
-  const totalIssued = parseFloat(obligations[tokenCurrency]);
-
-  if (!otherBalances) {
-    console.error("Ripple balances:", result?.balances);
-    throw new Error(`No balances found for subscription operator: ${subscriptionOperatorAddress}`);
-  }
-
-  // Find the TBL balance held by the subscription operator
-  const operatorTBL = otherBalances.find((b: [string, string]) => b[1] === tokenCurrency);
-
-  if (!operatorTBL) {
-    throw new Error(`Token ${tokenCurrency} not held by subscription operator`);
-  }
-
-  const operatorHeld = parseFloat(operatorTBL[0]);
-
-  const circulatingSupply = totalIssued - operatorHeld;
-
-  if (isNaN(circulatingSupply)) {
-    throw new Error(`Invalid circulating supply calculation`);
-  }
-
-  sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued");
-
-  return balances;
-}
 
 // Contracts on different chains
 const chainContracts: ChainContracts = {
@@ -76,6 +16,36 @@ const chainContracts: ChainContracts = {
   solana: {
     issued: ["4MmJVdwYN8LwvbGeCowYjSx7KoEi6BJWg8XXnW4fDDp6"],
   },
+};
+
+function createPayload(account: string) {
+  return {
+    method: "gateway_balances",
+    params: [{ account, ledger_index: "validated" }],
+  };
+}
+
+const rippleMinted = async () => {
+  const balances: Balances = {};
+  const tokenCurrency = "TBL";
+  const issuerAddress = "rJNE2NNz83GJYtWVLwMvchDWEon3huWnFn";
+  const subscriptionOperatorAddress = "rB56JZWRKvpWNeyqM3QYfZwW4fS9YEyPWM";
+
+  // Fetch issuer obligations
+  const { data: issuerData } = await axios.post(NODE_URL, createPayload(issuerAddress));
+  const issuerObligations = parseFloat(issuerData.result.obligations[tokenCurrency] ?? "0");
+
+  // Fetch operator balances
+  const { data: operatorData } = await axios.post(NODE_URL, createPayload(subscriptionOperatorAddress));
+  const operatorAssets = operatorData.result.assets[issuerAddress] || [];
+
+  const heldByOperator = parseFloat(
+    operatorAssets.find((asset: any) => asset.currency === tokenCurrency)?.value ?? "0"
+  );
+
+  const circulatingSupply = Math.max(0, issuerObligations - heldByOperator);
+  sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued");
+  return balances;
 };
 
 // Merge everything together using addChainExports, and override ripple with custom minted logic
