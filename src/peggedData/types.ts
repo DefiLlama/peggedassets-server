@@ -14,6 +14,7 @@ type PegType =
   | "peggedCHF" //Swiss franc
   | "peggedCOP" //colombian peso
   | "peggedREAL"//brazilian real 
+  | "peggedRUB" //russian ruble
   | "peggedAUD"; //Australian currency
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
