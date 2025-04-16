@@ -1012,6 +1012,18 @@ const adapter: PeggedIssuanceAdapter = {
   sei: {
     noble: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromNoble),
   },
+  corn: {
+    ethereum: bridgedSupply("corn", 6, chainContracts.corn.bridgedFromETH),
+  },
+  xLayer: {
+    ethereum: bridgedSupply("xLayer", 6, chainContracts.xLayer.bridgedFromETH),
+  },
+  abstract: {
+    ethereum: bridgedSupply("abstract", 6, chainContracts.abstract.bridgedFromETH, "stargate"),
+  },
+  flare: {
+    ethereum: bridgedSupply("flare", 6, chainContracts.flare.bridgedFromETH, "stargate"),
+  },
   xdc: {
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0], 
