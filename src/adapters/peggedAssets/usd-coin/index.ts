@@ -1015,8 +1015,8 @@ const adapter: PeggedIssuanceAdapter = {
   corn: {
     ethereum: bridgedSupply("corn", 6, chainContracts.corn.bridgedFromETH),
   },
-  xLayer: {
-    ethereum: bridgedSupply("xLayer", 6, chainContracts.xLayer.bridgedFromETH),
+  xlayer: {
+    ethereum: bridgedSupply("xlayer", 6, chainContracts.xlayer.bridgedFromETH),
   },
   abstract: {
     ethereum: bridgedSupply("abstract", 6, chainContracts.abstract.bridgedFromETH, "stargate"),

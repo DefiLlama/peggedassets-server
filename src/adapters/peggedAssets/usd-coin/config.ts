@@ -476,7 +476,7 @@ export const chainContracts: ChainContracts = {
   corn: {
     bridgedFromETH: ["0xDF0B24095e15044538866576754F3C964e902Ee6"],
   },
-  xLayer: {
+  xlayer: {
     bridgedFromETH: ["0x74b7f16337b8972027f6196a17a631ac6de26d22"],
   },
   abstract: {
