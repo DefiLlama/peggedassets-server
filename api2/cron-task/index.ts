@@ -113,10 +113,10 @@ async function run() {
     await storeRouteData('stablecoincharts/all' , allData.aggregated)
     const allDataShortened: any = {
       breakdown: {},
-      aggregated: allData.aggregated.filter((item: any) => item.date >= allChartsStartTimestamp)
+      aggregated: allData.aggregated
     }
     for (const [id, value] of Object.entries(allData.breakdown)) {
-      allDataShortened.breakdown[id] = (value as any).filter((item: any) => item.date >= allChartsStartTimestamp)
+      allDataShortened.breakdown[id] = (value as any)
     }
     await storeRouteData('stablecoincharts2/' + frontendKey, allDataShortened)
 
@@ -132,7 +132,7 @@ async function run() {
     }
 
     async function getChainData(chain: string) {
-      let startTimestamp = chain === frontendKey ? allChartsStartTimestamp : undefined
+      let startTimestamp = undefined
       chain = chain === frontendKey ? 'all' : chain
       const aggregated = removeEmptyItems(await craftChartsResponse({ chain, startTimestamp, assetChainMap}))
       const breakdown: any = {}
