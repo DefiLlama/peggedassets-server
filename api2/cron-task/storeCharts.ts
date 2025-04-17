@@ -1,24 +1,11 @@
-import { getHistoricalValues } from "../../src/utils/shared/dynamodb";
-import peggedAssets from "../../src/peggedData/peggedData";
-import {
-  dailyPeggedBalances,
-  getLastRecord,
-  hourlyPeggedBalances,
-  hourlyPeggedPrices,
-} from "../../src/peggedAssets/utils/getLastRecord";
 import axios from "axios";
-import { secondsInHour, secondsInDay, getClosestDayStartTimestamp, } from "../../src/utils/date";
-import backfilledChains from "../../src/peggedData/backfilledChains";
-import { storeRouteData } from "../file-cache";
-import {
-  chainCoingeckoIds,
-  normalizedChainReplacements,
-  normalizeChain,
-} from "../../src/utils/normalizeChain";
-
+import { dailyPeggedBalances, getLastRecord, hourlyPeggedBalances, hourlyPeggedPrices } from "../../src/peggedAssets/utils/getLastRecord";
+import peggedAssets from "../../src/peggedData/peggedData";
+import { getClosestDayStartTimestamp, secondsInDay, secondsInHour, } from "../../src/utils/date";
+import { chainCoingeckoIds, normalizeChain, normalizedChainReplacements } from "../../src/utils/normalizeChain";
+import { getHistoricalValues } from "../../src/utils/shared/dynamodb";
 import { cache } from "../cache";
-
-
+import { storeRouteData } from "../file-cache";
 
 type TokenBalance = {
   [token: string]: number | undefined;
@@ -28,11 +15,7 @@ type TokenBalance = {
 export default async function handler() {
   const timeKey = "chart-update-init";
   console.time(timeKey);
-  const historicalRates = (
-    await axios.get(
-      `https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`
-    )
-  )?.data;
+  const historicalRates = (await axios.get(`https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`))?.data;
   const lastPrices = await getLastRecord(hourlyPeggedPrices);
   const priceTimestamps = cache.historicalPrices?.map((item: any) => item.SK);
   const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
@@ -42,7 +25,6 @@ export default async function handler() {
   cache.priceTimestamps = priceTimestamps
   cache.rateTimestamps = rateTimestamps
   console.timeEnd(timeKey)
-
 }
 
 export async function storeChartsPart2(assetChainMap: any) {
@@ -66,11 +48,7 @@ export async function storeChartsPart2(assetChainMap: any) {
   for (let chain of chains) {
     const normalizedChain = normalizeChain(chain);
     const chainData = await craftChartsResponse({ ...commonOptions, chain: normalizedChain, });
-    // if (chainData.length) {
     await storeRouteData(`charts/${normalizedChain}`, chainData)
-    // } else {
-    //   console.log(`No data for ${chain} ${normalizedChain}`)
-    // }
   }
 
   // store pegged asset charts
@@ -79,19 +57,15 @@ export async function storeChartsPart2(assetChainMap: any) {
     const chart = await craftChartsResponse({ ...commonOptions, peggedID: id });
     await storeRouteData(`charts/all/${id}`, chart)
   }
-
 }
 
-
 async function getPeggedAssetsData() {
-  if (!cache.peggedAssetsData)
-    cache.peggedAssetsData = {}
+  if (!cache.peggedAssetsData) cache.peggedAssetsData = {}
 
   await Promise.all(peggedAssets.map(async (pegged) => {
-
     const lastBalance = await getLastRecord(hourlyPeggedBalances(pegged.id));
     const allBalances = cache.peggedAssetsData[pegged.id]?.balances || []
-    const highestSK = allBalances.reduce((highest, item) => Math.max(highest, item.SK), -1)
+    const highestSK = allBalances.reduce((highest: any, item: any) => Math.max(highest, item.SK), -1)
     const pullData = !lastBalance || (lastBalance.SK - highestSK > secondsInDay) // if last item on the table is more than 1 day older than the last balance, pull data
     if (pullData) {
       console.info('fetching new data for', pegged.id)
@@ -226,13 +200,9 @@ export function craftChartsResponse(
    * historicalPeggedBalances is empty. Not sure exactly where that's happening.
    */
   const historicalPeggedBalances = peggedAssets.map((pegged) => {
-    if (peggedID && pegged.id !== peggedID) {
-      return;
-    }
+    if (peggedID && pegged.id !== peggedID) return;
     // Skip double-counted assets for chain and all charts
-    if (!peggedID && pegged.doublecounted === true) {
-      return;
-    }
+    if (!peggedID && pegged.doublecounted === true) return;
     const chainMap = assetChainMap[pegged.id];
     if (!chainMap || chain !== "all" && !chainMap?.has(chain)) return; // if the coin is not found an given chain or coin has no data, dont process it
     if (!_assetCache[pegged.id]) addToAssetCache(pegged);
@@ -241,35 +211,16 @@ export function craftChartsResponse(
 
 
   function addToAssetCache(pegged: any) {
-
     const { balance: lastBalance, balances } = peggedAssetsData[pegged.id]
-
-    // if (chain !== "all" && !lastBalance?.[normalizedChain])
-    //   return undefined;
-
-    const defaultStartTimestamp = 1609372800;
-    const earliestTimestamp =
-      chain === "all" || backfilledChains.includes(chain ?? "")
-        ? defaultStartTimestamp
-        : 1652241600; // chains have mostly incomplete data before May 11, 2022
-    let historicalBalance = { Items: balances.filter(i => i.SK > earliestTimestamp) } as any;
-
-    if (historicalBalance.Items === undefined || historicalBalance.Items.length < 1)
-      return undefined;
+    let historicalBalance = { Items: balances } as any;
+    if (!historicalBalance.Items || historicalBalance.Items.length < 1) return undefined;
 
     const lastDailyItem = historicalBalance.Items[historicalBalance.Items.length - 1];
-    if (
-      lastBalance !== undefined &&
-      lastBalance.SK > lastDailyItem.SK &&
-      lastDailyItem.SK + secondsInHour * 25 > lastBalance.SK
-    ) {
+    if (lastBalance && lastBalance.SK > lastDailyItem.SK && lastDailyItem.SK + secondsInHour * 25 > lastBalance.SK) {
       lastBalance.SK = lastDailyItem.SK;
-      historicalBalance.Items[historicalBalance.Items.length - 1] =
-        lastBalance;
+      historicalBalance.Items[historicalBalance.Items.length - 1] = lastBalance;
     }
-    const lastTimestamp = getClosestDayStartTimestamp(
-      historicalBalance.Items[historicalBalance.Items.length - 1].SK
-    );
+    const lastTimestamp = getClosestDayStartTimestamp(historicalBalance.Items[historicalBalance.Items.length - 1].SK);
     lastDailyTimestamp = Math.max(lastDailyTimestamp, lastTimestamp);
 
     _assetCache[pegged.id] = {
@@ -280,16 +231,12 @@ export function craftChartsResponse(
   }
 
   const lastDailyItem = historicalPrices[historicalPrices.length - 1];
-  if (
-    lastPrices !== undefined &&
-    lastPrices.SK > lastDailyItem.SK &&
-    lastDailyItem.SK + secondsInHour * 25 > lastPrices.SK
-  ) {
+  if (lastPrices && lastPrices.SK > lastDailyItem.SK && lastDailyItem.SK + secondsInHour * 25 > lastPrices.SK) {
     lastPrices.SK = lastDailyItem.SK;
     historicalPrices[historicalPrices.length - 1] = lastPrices;
   }
 
-  historicalPeggedBalances.map((peggedBalance) => {
+  historicalPeggedBalances.forEach((peggedBalance) => {
     let { historicalBalance, pegged, lastTimestamp } = peggedBalance;
     const pegType = pegged.pegType;
     const peggedGeckoID = pegged.gecko_id;
@@ -298,10 +245,7 @@ export function craftChartsResponse(
     // fill missing data with last available data
     while (lastTimestamp < lastDailyTimestamp) {
       lastTimestamp = getClosestDayStartTimestamp(lastTimestamp + 24 * secondsInHour);
-      historicalBalance.push({
-        ...lastBalance,
-        SK: lastTimestamp,
-      });
+      historicalBalance.push({ ...lastBalance, SK: lastTimestamp });
       peggedBalance.lastTimestamp = lastTimestamp;
     }
 
@@ -318,72 +262,56 @@ export function craftChartsResponse(
         fallbackPrice = 0;
       } else if (pegType !== "peggedUSD" && !historicalPrice) {
         const closestRatesIndex = timestampsBinarySearch(rateTimestamps, timestamp, ratesCompareFn);
-
         const closestRates = extractResultOfBinarySearch(historicalRates, closestRatesIndex);
         const ticker = pegType.slice(-3);
         fallbackPrice = 1 / closestRates?.rates?.[ticker];
-        if (typeof fallbackPrice !== "number") {
-          fallbackPrice = 0;
-        }
+        if (typeof fallbackPrice !== "number") fallbackPrice = 0;
       }
 
       const price = historicalPrice ? historicalPrice : fallbackPrice;
+      const isAllChain = (chain === "all");
 
-      if (chain === "all") {
+      if (isAllChain) {
         if (!item.totalCirculating.circulating) {
           throw new Error(
             `missing totalCirculating for ${peggedGeckoID} at timestamp ${timestamp}`
           );
         }
-        const itemPegType = Object.keys(
-          item.totalCirculating.circulating
-        )?.[0];
-        if (
-          item.totalCirculating.circulating &&
-          !(itemPegType === pegType)
-        ) {
-          if (peggedGeckoID !== "bitcoin-usd-btcfi")
+      
+        const itemPegType = Object.keys(item.totalCirculating.circulating)?.[0];
+        if (item.totalCirculating.circulating && itemPegType !== pegType) {
+          if (peggedGeckoID !== "bitcoin-usd-btcfi") {
             console.log(
               `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
             );
+          }
         }
-
-        itemBalance.circulating = item.totalCirculating.circulating ?? {
-          [pegType]: 0,
-        };
+      
+        itemBalance.circulating = item.totalCirculating.circulating ?? { [pegType]: 0 };
         if (item.totalCirculating.unreleased) {
           itemBalance.unreleased = item.totalCirculating.unreleased;
         }
         itemBalance.bridgedTo = { [pegType]: 0 };
         itemBalance.minted = { [pegType]: 0 };
       } else {
-        if (item[normalizedChain]?.circulating) {
-          const itemPegType = Object.keys(
-            item[normalizedChain].circulating
-          )?.[0];
-          if (
-            item[normalizedChain]?.circulating &&
-            !(itemPegType === pegType)
-          ) {
-            if (peggedGeckoID !== "bitcoin-usd-btcfi")
+        const chainData = item[normalizedChain];
+      
+        if (chainData?.circulating) {
+          const itemPegType = Object.keys(chainData.circulating)?.[0];
+          if (chainData.circulating && itemPegType !== pegType) {
+            if (peggedGeckoID !== "bitcoin-usd-btcfi") {
               console.log(
                 `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
               );
+            }
           }
         }
-
-        itemBalance.circulating = item[normalizedChain]?.circulating ?? {
-          [pegType]: 0,
-        };
-        itemBalance.unreleased = item[normalizedChain]?.unreleased ?? {
-          [pegType]: 0,
-        };
-        itemBalance.bridgedTo = item[normalizedChain]?.bridgedTo ?? {
-          [pegType]: 0,
-        };
-        itemBalance.minted = item[normalizedChain]?.minted ?? {
-          [pegType]: 0,
-        };
+      
+        itemBalance.circulating = chainData?.circulating ?? { [pegType]: 0 };
+        itemBalance.unreleased = chainData?.unreleased ?? { [pegType]: 0 };
+        itemBalance.bridgedTo = chainData?.bridgedTo ?? { [pegType]: 0 };
+        itemBalance.minted = chainData?.minted ?? { [pegType]: 0 };
+      
         if (itemBalance.circulating === undefined) {
           return;
         }
