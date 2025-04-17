@@ -5145,8 +5145,26 @@ export default [
     wiki: "https://docs.resupply.fi/resupply-protocol/overview",
     doublecounted: true
   },
-  /*{
+  {
     id: "257",
+    name: "OpenEden TBILL",
+    address: "0xdd50c053c096cb04a3e3362e2b622529ec5f2e8a",
+    symbol: "TBILL",
+    url: "https://app.openeden.com/tbill",
+    description: "The TBILL Vault is the world's first smart-contract vault for U.S. Treasury Bills. Earn the U.S. risk-free rate on your stablecoins by minting TBILL tokens, with 24/7 liquidity.",
+    mintRedeemDescription: "TBILL tokens are issued out of a bankruptcy remote BVIFSC regulated professional fund and has its underlying portfolio of short-dated Treasury Bills managed by a licensed fund managers complying with strict regulatory and reporting requirements.",
+    onCoinGecko: "true",
+    gecko_id: "openeden-tbill",
+    cmcId:  null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/OpenEden_X",
+    wiki: "https://docs.openeden.com/",
+  },
+  /*{
+    id: "258",
     name: "A7A5",
     address: "0x6fA0BE17e4beA2fCfA22ef89BF8ac9aab0AB0fc9",
     symbol: "A7A5",
