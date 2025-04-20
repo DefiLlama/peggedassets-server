@@ -282,9 +282,9 @@ export function kujiraSupply(
 // const dummyFn = () => ({})
 
 export function addChainExports(config: any, adapter: any = {}, {
-  decmials = 18, pegType,
+  decimals = 18, pegType,
 }: {
-  decmials?: number
+  decimals?: number
   pegType?: string
 } = {}): PeggedIssuanceAdapter {
   Object.entries(config).forEach(([chain, chainConfig]: [string, any]) => {
@@ -310,7 +310,7 @@ export function addChainExports(config: any, adapter: any = {}, {
         case "bridgedFromETH":
           if (!Array.isArray(chainConfig.bridgedFromETH)) chainConfig.bridgedFromETH = [chainConfig.bridgedFromETH]
           if (!cExports.ethereum)
-            cExports.ethereum = bridgedSupply(chain, decmials, chainConfig.bridgedFromETH)
+            cExports.ethereum = bridgedSupply(chain, decimals, chainConfig.bridgedFromETH)
           break;
         default: {
           if (key.startsWith("bridgedFrom")) {
@@ -318,7 +318,7 @@ export function addChainExports(config: any, adapter: any = {}, {
             if (srcChain === "ETH") srcChain = "ethereum"
             if (!Array.isArray(chainConfig[key])) chainConfig[key] = [chainConfig[key]]
             if (!cExports[srcChain])
-              cExports[srcChain] = bridgedSupply(chain, decmials, chainConfig[key], undefined, srcChain, pegType as any)
+              cExports[srcChain] = bridgedSupply(chain, decimals, chainConfig[key], undefined, srcChain, pegType as any)
           } else
             console.log(`Ignored: Unknown key ${key} in ${chain} config for addChainExports`)
         }

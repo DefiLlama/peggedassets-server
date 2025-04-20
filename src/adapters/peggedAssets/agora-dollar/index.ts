@@ -45,7 +45,7 @@ const chainContracts: ChainContracts = {
 
 
 const adapter: PeggedIssuanceAdapter = {
-  ...addChainExports(chainContracts, undefined, { decmials: 6, }),
+  ...addChainExports(chainContracts, undefined, { decimals: 6, }),
   sui: {
     minted: suiMinted,
     // unreleased: suiUnreleased,
