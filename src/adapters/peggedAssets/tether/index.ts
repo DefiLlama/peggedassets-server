@@ -32,6 +32,7 @@ import {
 import { chainContracts } from "./config";
 const axios = require("axios");
 const retry = require("async-retry");
+import * as sui from "../helper/sui";
 
 // If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain and fuse
 // any bridgeOnETH contracts are not used and are just for info purposes
@@ -434,29 +435,29 @@ async function nearMint(address: string, decimals: number) {
   };
 }
 
-async function suiBridged() {
+async function suiWormholeBridged() {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const res = await axios.get(
-      `https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdt`
-    );
-    const totalSupply = parseInt(
-      res.data.find((t: any) => t.coin === "USDT_ETH").cumulative_balance
-    );
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      totalSupply,
-      "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c",
-      true
-    );
+    const res = await axios.get(`https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdt`)
+    const totalSupply = parseInt(res.data.find((t:any)=>t.coin==="USDT_ETH").cumulative_balance);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c", true);
     return balances;
   };
 }
+
+async function suiBridged(): Promise<Balances> {
+  let balances = {} as Balances;
+  const supply = await sui.getTokenSupply(
+    "0x375f70cf2ae4c00bf37117d0c85a2c71545e6ee05c4a5c7d282cd66a4504b068::usdt::USDT",
+  );
+  sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
+        return balances;
+}
+
 
 async function polyNetworkBridged(
   chainID: number,
@@ -711,7 +712,13 @@ const adapter: PeggedIssuanceAdapter = {
     */
   },
   sui: {
-    ethereum: suiBridged(),
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        suiWormholeBridged(),
+        suiBridged
+      ],
+      "peggedUSD"
+    ),
   },
   syscoin: {
     ethereum: bridgedSupply(
