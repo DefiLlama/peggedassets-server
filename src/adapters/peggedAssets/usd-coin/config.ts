@@ -485,4 +485,7 @@ export const chainContracts: ChainContracts = {
   flare: {
     bridgedFromETH: ["0xFbDa5F676cB37624f28265A144A48B0d6e87d3b6"],
   },
+  move: {
+    bridgedFromETH: ["0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"], // oft native bridge
+  },
 };

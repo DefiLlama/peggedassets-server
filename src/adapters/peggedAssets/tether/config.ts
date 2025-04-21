@@ -378,4 +378,7 @@ export const chainContracts: ChainContracts = {
   corn: {
     bridgedFromETH: ["0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb"], // USDT0
   },
+  move: {
+    bridgedFromETH: ["0x38cdb3f0afabee56a3393793940d28214cba1f5781e13d5db18fa7079f60ab55"], // OFT native bridge
+  }
 };

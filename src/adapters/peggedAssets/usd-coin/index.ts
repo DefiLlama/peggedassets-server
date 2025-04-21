@@ -21,7 +21,7 @@ import {
   getBalance as ontologyGetBalance,
 } from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
-import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
+import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
 import { call as nearCall } from "../helper/near";
 import {
   ChainBlocks,
@@ -498,6 +498,18 @@ async function flowBridged(address: string, decimals: number) {
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
     return balances;
   };
+}
+
+async function moveNativeBridge(): Promise<Balances> {
+  const balances = {} as Balances;
+  
+  const resp = await function_view({
+    functionStr: `${chainContracts.move.bridgedFromETH}::oft_fa::supply`,
+    args: [],
+  });
+  balances["peggedUSD"] = Number(resp) / 1e6; // adjust if decimals ≠ 6
+
+  return balances;
 }
 
 
@@ -1035,6 +1047,9 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.xdc.bridgeOnARB[0],
       6
     ) 
+  },
+  move: {
+    ethereum: moveNativeBridge,
   }
 };
 

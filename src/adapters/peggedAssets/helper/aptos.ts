@@ -1,6 +1,7 @@
 const axios = require("axios");
 const retry = require("async-retry");
 const endpoint = "https://fullnode.mainnet.aptoslabs.com";
+import http from "../helper/http";
 
 export async function aQuery(api: string) {
   const query = await retry(
@@ -38,4 +39,27 @@ export async function getTokenSupply(token: string) {
   const coinInfo = data.find((coin: any) => coin.type.startsWith('0x1::coin::CoinInfo'));
 
   return coinInfo.data.supply.vec[0].integer.vec[0].value / 10 ** coinInfo.data.decimals;
+}
+
+const MOVEMENT_RPC = "https://mainnet.movementnetwork.xyz";
+
+export async function function_view({
+  functionStr,
+  type_arguments = [],
+  args = [],
+  ledgerVersion,
+}: {
+  functionStr: string;
+  type_arguments?: string[];
+  args?: any[];
+  ledgerVersion?: number;
+}) {
+  let path = `${MOVEMENT_RPC}/v1/view`;
+  if (ledgerVersion !== undefined) path += `?ledger_version=${ledgerVersion}`;
+  const response = await http.post(path, {
+    function: functionStr,
+    type_arguments,
+    arguments: args,
+  });
+  return response.length === 1 ? response[0] : response;
 }

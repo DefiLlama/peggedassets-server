@@ -1,6 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { ChainApi } from "@defillama/sdk";
-import { getTotalSupply as aptosGetTotalSupply } from "../helper/aptos";
+import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
 import { sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
@@ -456,6 +456,18 @@ async function suiBridged(): Promise<Balances> {
   );
   sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
         return balances;
+}
+
+async function moveNativeBridge(): Promise<Balances> {
+  const balances = {} as Balances;
+  
+  const resp = await function_view({
+    functionStr: `${chainContracts.move.bridgedFromETH}::oft_fa::supply`,
+    args: [],
+  });
+  balances["peggedUSD"] = Number(resp) / 1e6; // adjust if decimals ≠ 6
+
+  return balances;
 }
 
 
@@ -1091,6 +1103,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   corn: {
     ethereum: bridgedSupply("corn", 6, chainContracts.corn.bridgedFromETH)
+  },
+  move: {
+    ethereum: moveNativeBridge,
   }
 };
 
