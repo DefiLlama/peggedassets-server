@@ -1,3 +1,21 @@
+import { addChainExports,solanaMintedOrBridged } from "../helper/getSupply";
+import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
+import { function_view } from "../helper/aptos";
+import { Balances } from "../peggedAsset.type";
+ 
+ async function moveSupply(): Promise<Balances> {
+   const balances = {} as Balances;
+   
+   const resp = await function_view({
+     functionStr: '0x1::fungible_asset::supply',
+     type_arguments: ['0x1::object::ObjectCore'],
+     args: ["0xe4354602aa4311f36240dd57f3f3435ffccdbd0cd2963f1a69da39a2dbcd59b5"],
+   });
+   balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
+ 
+   return balances;
+ }
+
 const chainContracts = {
   ethereum: {
     issued: ["0xcacd6fd266af91b8aed52accc382b4e165586e29"],
@@ -46,8 +64,15 @@ const chainContracts = {
   },
 };
 
-import { addChainExports } from "../helper/getSupply";
-const adapter = addChainExports(chainContracts);
-export default adapter;
+const adapter: PeggedIssuanceAdapter = {
+  ...addChainExports(chainContracts),
+
+  move: {
+    minted: moveSupply,
+  }
+};
+
+export default adapter; 
+
 
 // frxUSD, use LayerZero OFT (Mint-Burn) Modal to bridge 
