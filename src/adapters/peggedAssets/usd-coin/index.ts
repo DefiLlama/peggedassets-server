@@ -500,14 +500,15 @@ async function flowBridged(address: string, decimals: number) {
   };
 }
 
-async function moveNativeBridge(): Promise<Balances> {
+async function moveSupply(): Promise<Balances> {
   const balances = {} as Balances;
   
   const resp = await function_view({
-    functionStr: `${chainContracts.move.bridgedFromETH}::oft_fa::supply`,
-    args: [],
+    functionStr: '0x1::fungible_asset::supply',
+    type_arguments: ['0x1::object::ObjectCore'],
+    args: [chainContracts.move.bridgedFromETH[0]],
   });
-  balances["peggedUSD"] = Number(resp) / 1e6; // adjust if decimals ≠ 6
+  balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
 
   return balances;
 }
@@ -1049,7 +1050,7 @@ const adapter: PeggedIssuanceAdapter = {
     ) 
   },
   move: {
-    ethereum: moveNativeBridge,
+    ethereum: moveSupply,
   }
 };
 

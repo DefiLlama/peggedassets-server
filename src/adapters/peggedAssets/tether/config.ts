@@ -379,6 +379,6 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb"], // USDT0
   },
   move: {
-    bridgedFromETH: ["0x38cdb3f0afabee56a3393793940d28214cba1f5781e13d5db18fa7079f60ab55"], // OFT native bridge
+    bridgedFromETH: ["0x447721a30109c662dde9c73a0c2c9c9c459fb5e5a9c92f03c50fa69737f5d08d"], // OFT native bridge
   }
 };
