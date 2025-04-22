@@ -253,7 +253,8 @@ import eurcv from "./societe-generale-forge-eurcv";
 import standx_dusd from './standx-dusd';
 import usbd from './usbd';
 import reusd from './resupply-usd';
-import tbill from './openeden-tbill'
+import tbill from './openeden-tbill';
+import msd from './arche-protocol-msd';
 
 export default {
   tether,
@@ -512,5 +513,6 @@ export default {
   'standx-dusd': standx_dusd,
   'usbd': usbd,
   'resupply-usd': reusd,
-  'openeden-tbill': tbill
+  'openeden-tbill': tbill,
+  "arche-protocol-msd": msd,
 };

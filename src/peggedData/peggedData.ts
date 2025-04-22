@@ -5181,4 +5181,22 @@ export default [
     twitter: "https://x.com/A7A5official",
     wiki: "https://a7a5.kg/transparency",
   },*/
+  {
+    id: "259",
+    name: "Arche Protocol MSD",
+    address: "0x7c9d9f4972072b6ff7dfa48f259688e7286abac9ebd192bbda30fea910139024",
+    symbol: "MSD",
+    url: "https://www.archeprotocol.xyz/borrow",
+    description: "Arche Protocol is the first native decentralized USD-pegged algorithmic stablecoin with exogenous collateral protocol built on the Movement Blockchain",
+    mintRedeemDescription: "Users deposit native assets like APT, SUI, and MOVE as collateral, which are staked via liquid staking providers, to mint MSD stablecoins on the Movement chain",
+    onCoinGecko: "false",
+    gecko_id: "arche-protocol-msd",
+    cmcId:  null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/archeprotocol",
+    wiki: "https://arche-protocol.gitbook.io/arche-protocol",
+  },
 ] as PeggedAsset[];
