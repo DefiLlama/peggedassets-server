@@ -1136,6 +1136,19 @@ export const chainCoingeckoIds = {
     },
     chainId: 50104,
   },
+  "Movement": {
+    geckoId: "movement",
+    symbol: "MOVE",
+    cmcId: "32452",
+    categories: ["EVM", "Rollup"],
+    parent: {
+      chain: "Ethereum",
+      types: ["L2"]
+    },
+    chainId: 3073,
+    twitter: "movementlabsxyz",
+    url: "https://movementlabs.xyz/",
+  }, 
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1430,7 +1443,8 @@ export function getChainDisplayName(
       return "Ink"
     case "sophon":
       return "Sophon"
-        ;
+    case "move":
+      return "Movement"
       
     default:
       return (
