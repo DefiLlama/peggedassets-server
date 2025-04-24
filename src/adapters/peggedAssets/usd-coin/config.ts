@@ -488,4 +488,7 @@ export const chainContracts: ChainContracts = {
   move: {
     bridgedFromETH: ["0x83121c9f9b0527d1f056e21a950d6bf3b9e9e2e8353d0e95ccea726713cbea39"], // oft native bridge
   },
+  hemi: {
+    bridgedFromETH: ["0xad11a8BEb98bbf61dbb1aa0F6d6F2ECD87b35afA"],
+  }
 };

@@ -1051,7 +1051,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   move: {
     ethereum: moveSupply,
-  }
+  },
+  hemi: {
+    ethereum: bridgedSupply("hemi", 6, chainContracts.hemi.bridgedFromETH, "stargate"),
+  },
 };
 
 export default adapter;
