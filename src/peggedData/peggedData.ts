@@ -5216,5 +5216,6 @@ export default [
     auditLinks: [],
     twitter: null,
     wiki: "https://docs.vdollar.finance/",
+    doublecounted: true
   },
 ] as PeggedAsset[];
