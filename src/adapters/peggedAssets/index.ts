@@ -255,6 +255,7 @@ import usbd from './usbd';
 import reusd from './resupply-usd';
 import tbill from './openeden-tbill';
 import msd from './arche-protocol-msd';
+import vusd from './vdollar-finance';
 
 export default {
   tether,
@@ -515,4 +516,5 @@ export default {
   'resupply-usd': reusd,
   'openeden-tbill': tbill,
   "arche-protocol-msd": msd,
+  "vdollar-finance": vusd,
 };
