@@ -5199,4 +5199,23 @@ export default [
     twitter: "https://x.com/archeprotocol",
     wiki: "https://arche-protocol.gitbook.io/arche-protocol",
   },
+  {
+    id: "260",
+    name: "VDollar Finance",
+    address: "0x677ddbd918637E5F2c79e164D402454dE7dA8619",
+    symbol: "VUSD",
+    url: "https://app.vdollar.finance/",
+    description: "vUSD is a stablecoin pegged to the US dollar, backed by over-collateralized, interest-generating collateral tokens",
+    mintRedeemDescription: "To mint VUSD, the user swaps an acceptable input asset (DAI, USDC, USDT) for newly minted VUSD at a 1:1 ratio, less minting fee (currently zero), in any amount with zero slippage",
+    onCoinGecko: "false",
+    gecko_id: "vdollar-finance",
+    cmcId:  null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: null,
+    wiki: "https://docs.vdollar.finance/",
+    doublecounted: true
+  },
 ] as PeggedAsset[];
