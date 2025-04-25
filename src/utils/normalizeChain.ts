@@ -1164,7 +1164,8 @@ chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
 chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
 chainCoingeckoIds["Klaytn"] = chainCoingeckoIds["Kaia"];
-chainCoingeckoIds["TomoChain"] = chainCoingeckoIds["Viction"]
+chainCoingeckoIds["TomoChain"] = chainCoingeckoIds["Viction"];
+chainCoingeckoIds["Move"] = chainCoingeckoIds["Movement"];
 
 export const extraSections = [
   "staking",
@@ -1194,6 +1195,8 @@ export function transformNewChainName(chain: string) {
       return "Kaia";
     case "TomoChain":
       return "Viction";
+    case "MOVE":
+      return "Movement";
     default:
       return chain;
   }
@@ -1444,7 +1447,7 @@ export function getChainDisplayName(
     case "sophon":
       return "Sophon"
     case "move":
-      return "Movement"
+      return useNewChainNames ? "Movement" : "Move"
       
     default:
       return (
