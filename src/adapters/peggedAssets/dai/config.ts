@@ -213,8 +213,9 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x22fa593845fDa46Db5784f519B3364432a1d4203"],
   },
   unichain: {
-    bridgedFromETH: [
-      "0x20cab320a855b39f724131c69424240519573f81",
-    ],
+    bridgedFromETH: ["0x20cab320a855b39f724131c69424240519573f81",],
+  },
+  hemi: {
+    bridgedFromETH: ["0x6c851F501a3F24E29A8E39a29591cddf09369080"],
   },
 };

@@ -504,6 +504,9 @@ const adapter: PeggedIssuanceAdapter = {
   unichain: {
     ethereum: bridgedSupply("unichain", 18, chainContracts.unichain.bridgedFromETH),
   },
+  hemi: {
+    ethereum: bridgedSupply("hemi", 18, chainContracts.hemi.bridgedFromETH),
+  },
 };
 
 export default adapter;
