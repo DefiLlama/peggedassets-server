@@ -27,7 +27,7 @@ export const cache: {
   historicalPrices?: DailyPeggedPrices[]
 } = {}
 
-const cacheFile = 'stablecoin-cache-v2'
+const cacheFile = 'stablecoin-cache-v3'
 
 export async function initCache(cacheType = CacheType.API_SERVER) {
   console.time('Cache initialized')
