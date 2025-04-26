@@ -34,6 +34,7 @@ export const normalizedChainReplacements = {
   "hydration": "hydradx",
   "bitlayer": "btr",
   "kaia": "klaytn",
+  "movement": "move",
 } as {
   [chain: string]: string;
 };
