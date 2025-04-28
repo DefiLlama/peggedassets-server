@@ -1111,6 +1111,9 @@ const adapter: PeggedIssuanceAdapter = {
   hemi: {
     ethereum: bridgedSupply("hemi", 6, chainContracts.hemi.bridgedFromETH)
   },
+  flare: {
+    ethereum: bridgedSupply("flare", 6, chainContracts.flare.bridgedFromETH)
+  },
 };
 
 export default adapter;

@@ -383,5 +383,8 @@ export const chainContracts: ChainContracts = {
   },
   hemi: {
     bridgedFromETH: ["0xbB0D083fb1be0A9f6157ec484b6C79E0A4e31C2e"], 
-  }
+  },
+  flare: { 
+    bridgedFromETH: ["0xe7cd86e13AC4309349F30B3435a9d337750fC82D"], // USDT0
+  },
 };
