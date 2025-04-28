@@ -5218,4 +5218,22 @@ export default [
     wiki: "https://docs.vdollar.finance/",
     doublecounted: true
   },
+  {
+    id: "261",
+    name: "Solomon USDv",
+    address: "solana:Ex5DaKYMCN6QWFA4n67TmMwsH8MJV68RX6YXTmVM532C",
+    symbol: "USDV",
+    url: "https://solomonlabs.org/",
+    description: "USDv is a Solana-native synthetic stablecoin backed by delta-hedged spot positions and perpetual shorts, designed to maintain a 1:1 USD peg while generating yield for stakers",
+    mintRedeemDescription: "Whitelisted users mint USDv by depositing assets that are delta-hedged into market-neutral positions, and redeem USDv by burning it to unlock the underlying collateral through the Solomon protocol",
+    onCoinGecko: "true",
+    gecko_id: "solomon-usdv",
+    cmcId:  null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.solomonlabs.org/audits"],
+    twitter: "https://x.com/solomon_labs",
+    wiki: "https://docs.solomonlabs.org/",
+  },
 ] as PeggedAsset[];
