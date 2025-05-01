@@ -124,6 +124,25 @@ export function solanaMintedOrBridged(
   };
 }
 
+export function tonTokenSupply(address: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const res = await retry(
+      async (_bail: any) =>
+        await axios.get(
+          `https://toncenter.com/api/v3/jetton/masters?address=${address}&limit=1&offset=0`
+        )
+    );
+    const supply = res.data.jetton_masters[0].total_supply;
+    sumSingleBalance(balances, "peggedUSD", (supply) / 10 ** 6, address, false);
+    return balances;
+  };
+}
+
 export function terraSupply(_addresses: string[], _decimals: number) {
   return async function (
     _timestamp: number,
