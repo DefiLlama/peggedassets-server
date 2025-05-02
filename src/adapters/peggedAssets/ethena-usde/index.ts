@@ -1,4 +1,4 @@
-import { addChainExports,solanaMintedOrBridged } from "../helper/getSupply";
+import { addChainExports,solanaMintedOrBridged, tonTokenSupply } from "../helper/getSupply";
 import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
 import { function_view } from "../helper/aptos";
 import { Balances } from "../peggedAsset.type";
@@ -85,7 +85,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   move: {
     ethereum: moveSupply,
-  }
+  },
+  ton: {
+    ethereum: tonTokenSupply("EQAIb6KmdfdDR7CN1GBqVJuP25iCnLKCvBlJ07Evuu2dzP5f"),
+  },
 };
 
 export default adapter; 
