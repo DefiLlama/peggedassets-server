@@ -4381,7 +4381,7 @@ export default [
     id: "218",
     name: "Satoshi Stablecoin",
     address: "bevm:0xf2692468666e459d87052f68ae474e36c1a34fbb",
-    symbol: "satUSD",
+    symbol: "SATUSD",
     url: "https://www.satoshiprotocol.org/",
     description:
       `Satoshi Protocol is a universal stablecoin protocol backed by Bitcoin, using BTC as collateral to mint the native stablecoin satUSD across Bitcoin Mainnet, Layer 2s, and the EVM ecosystem`,
