@@ -4380,8 +4380,8 @@ export default [
   {
     id: "218",
     name: "Satoshi Stablecoin",
-    address: "bevm:0xf2692468666e459d87052f68ae474e36c1a34fbb",
-    symbol: "SATUSD",
+    address: "bob:0xecf21b335B41f9d5A89f6186A99c19a3c467871f",
+    symbol: "satUSD",
     url: "https://www.satoshiprotocol.org/",
     description:
       `Satoshi Protocol is a universal stablecoin protocol backed by Bitcoin, using BTC as collateral to mint the native stablecoin satUSD across Bitcoin Mainnet, Layer 2s, and the EVM ecosystem`,
@@ -4392,7 +4392,7 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    auditLinks: null,
+    auditLinks: ["https://github.com/Satoshi-Protocol/satoshi-audit-report"],
     priceSource: "defillama",
     twitter: "https://x.com/Satoshi_BTCFi",
     wiki: "https://docs.satoshiprotocol.org/"
