@@ -6,21 +6,21 @@ process.on('uncaughtException', (error) => {
   console.error('Uncaught Exception thrown', error)
 })
 
-import peggedAssets from "../../src/peggedData/peggedData";
 import * as rates from "../../src/getRates";
 import sluggifyPegged from "../../src/peggedAssets/utils/sluggifyPegged";
-import { storeRouteData } from "../file-cache";
-import storePeggedPrices from "./storePeggedPrices";
-import storeCharts, { craftChartsResponse, storeChartsPart2 } from "./storeCharts";
-import storeStablecoins from "./getStableCoins";
-import { craftStablecoinPricesResponse } from "./getStablecoinPrices";
-import { craftStablecoinChainsResponse } from "./getStablecoinChains";
-import { CacheType, cache, initCache, saveCache } from "../cache";
+import peggedAssets from "../../src/peggedData/peggedData";
 import { getCurrentUnixTimestamp } from "../../src/utils/date";
 import { sendMessage } from "../../src/utils/discord";
-import { getStablecoinData } from "../routes/getStableCoin";
-import { craftChainDominanceResponse } from "../routes/getChainDominance";
 import { getChainDisplayName, normalizeChain } from "../../src/utils/normalizeChain";
+import { CacheType, cache, initCache, saveCache } from "../cache";
+import { storeRouteData } from "../file-cache";
+import { craftChainDominanceResponse } from "../routes/getChainDominance";
+import { getStablecoinData } from "../routes/getStableCoin";
+import storeStablecoins from "./getStableCoins";
+import { craftStablecoinChainsResponse } from "./getStablecoinChains";
+import { craftStablecoinPricesResponse } from "./getStablecoinPrices";
+import storeCharts, { craftChartsResponse, storeChartsPart2 } from "./storeCharts";
+import storePeggedPrices from "./storePeggedPrices";
 
 run().catch(console.error).then(() => process.exit(0))
 
@@ -107,16 +107,15 @@ async function run() {
   async function storeChainChartData() {
     const doublecountedIds = peggedAssets.map((stable)=> stable.doublecounted === true ? stable.id : null).filter(Boolean)
     const frontendKey = 'all-llama-app'
-    const allChartsStartTimestamp = 1617148800 // for /stablecoins page, charts begin on April 1, 2021, to reduce size of page
     const allData = await getChainData('all')
     await storeRouteData('stablecoincharts2/all', allData)
     await storeRouteData('stablecoincharts/all' , allData.aggregated)
     const allDataShortened: any = {
       breakdown: {},
-      aggregated: allData.aggregated.filter((item: any) => item.date >= allChartsStartTimestamp)
+      aggregated: allData.aggregated
     }
     for (const [id, value] of Object.entries(allData.breakdown)) {
-      allDataShortened.breakdown[id] = (value as any).filter((item: any) => item.date >= allChartsStartTimestamp)
+      allDataShortened.breakdown[id] = (value as any)
     }
     await storeRouteData('stablecoincharts2/' + frontendKey, allDataShortened)
 
@@ -132,20 +131,17 @@ async function run() {
     }
 
     async function getChainData(chain: string) {
-      let startTimestamp = chain === frontendKey ? allChartsStartTimestamp : undefined
+      let startTimestamp = undefined
       chain = chain === frontendKey ? 'all' : chain
       const aggregated = removeEmptyItems(await craftChartsResponse({ chain, startTimestamp, assetChainMap}))
       const breakdown: any = {}
 
       for (const [peggedAsset, chainMap] of Object.entries(assetChainMap)) {
-        if (chain !== 'all' && !(chainMap as any).has(chain))
-          continue
+        if (chain !== 'all' && !(chainMap as any).has(chain)) continue
         const allPeggedAssetsData = await craftChartsResponse({ chain, peggedID: peggedAsset, startTimestamp, assetChainMap })
-        if (chain === 'all')
-          recentProtocolData[peggedAsset] = allPeggedAssetsData.slice(-32)
+        if (chain === 'all') recentProtocolData[peggedAsset] = allPeggedAssetsData.slice(-32)
         breakdown[peggedAsset] = removeEmptyItems(allPeggedAssetsData)
       }
-
 
       return { aggregated, breakdown, doublecountedIds }
     }
