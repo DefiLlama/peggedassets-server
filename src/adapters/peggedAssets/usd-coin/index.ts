@@ -1055,6 +1055,9 @@ const adapter: PeggedIssuanceAdapter = {
   hemi: {
     ethereum: bridgedSupply("hemi", 6, chainContracts.hemi.bridgedFromETH, "stargate"),
   },
+  plume: {
+    ethereum: bridgedSupply("plume", 6, chainContracts.plume.bridgedFromETH),
+  },
 };
 
 export default adapter;

@@ -11,6 +11,9 @@ const chainContracts = {
   flow: {
     bridgedFromETH: ["0x2aaBea2058b5aC2D339b163C6Ab6f2b6d53aabED"],
   },
+  plume: {
+    bridgedFromETH: ["0xe9e8330a71912F03E54E7D93795acD9a56f070Aa"],
+  },
 };
 
 import { addChainExports } from "../helper/getSupply";
