@@ -5293,4 +5293,3 @@ export default [
     wiki: null,
   },
 ] as PeggedAsset[];
-
