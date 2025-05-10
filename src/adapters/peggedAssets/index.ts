@@ -20,6 +20,7 @@ import susd from "./nusd";
 import ousd from "./origin-dollar";
 import pai from "./parrot-usd";
 import pax from "./paxos-standard";
+import plumeUsd from "./plume-usd";
 import reserve from "./reserve";
 import sperax from "./sperax-usd";
 import spiceusd from "./spiceusd";
@@ -522,5 +523,6 @@ export default {
   "vdollar-finance": vusd,
   'solomon-usdv': solomonusdv,
   "usd1-wlfi": usd1,
-  "hex-trust-usdx": hexusdx
+  "hex-trust-usdx": hexusdx,
+  "plume-usd": plumeUsd,
 };
