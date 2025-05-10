@@ -490,5 +490,11 @@ export const chainContracts: ChainContracts = {
   },
   hemi: {
     bridgedFromETH: ["0xad11a8BEb98bbf61dbb1aa0F6d6F2ECD87b35afA"],
+  },
+  plume_mainnet: {
+    bridgedFromETH: [
+      "0x78adD880A697070c1e765Ac44D65323a0DcCE913", // stargate
+      "0x54FD4da2Fa19Cf0f63d8f93A6EA5BEd3F9C042C6", // deprecated - arbitrum native bridge
+    ]
   }
 };

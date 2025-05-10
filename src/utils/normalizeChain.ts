@@ -35,6 +35,7 @@ export const normalizedChainReplacements = {
   "bitlayer": "btr",
   "kaia": "klaytn",
   "movement": "move",
+  "plume%20mainnet": "plume",
 } as {
   [chain: string]: string;
 };
@@ -1150,6 +1151,15 @@ export const chainCoingeckoIds = {
     twitter: "movementlabsxyz",
     url: "https://movementlabs.xyz/",
   }, 
+  "Plume": {
+    geckoId: "plume",
+    symbol: "PLUME",
+    cmcId: "35364",
+    categories: ["EVM"],
+    chainId: 98866,
+    twitter: "plumenetwork",
+    url: "https://plume.org/",
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1449,7 +1459,8 @@ export function getChainDisplayName(
       return "Sophon"
     case "move":
       return useNewChainNames ? "Movement" : "Move"
-      
+    case "plume":
+      return "Plume"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
