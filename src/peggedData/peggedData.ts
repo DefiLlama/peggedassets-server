@@ -5290,6 +5290,6 @@ export default [
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/plumenetwork",
-    wiki: null,
+    wiki: "https://docs.plume.org/plume/plume-chain/official-tokens/plume-usd",
   },
 ] as PeggedAsset[];
