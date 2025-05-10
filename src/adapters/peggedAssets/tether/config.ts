@@ -387,7 +387,7 @@ export const chainContracts: ChainContracts = {
   flare: { 
     bridgedFromETH: ["0xe7cd86e13AC4309349F30B3435a9d337750fC82D"], // USDT0
   },
-  plume: {
+  plume_mainnet: {
     bridgedFromETH: [
       "0xda6087E69C51E7D31b6DBAD276a3c44703DFdCAd", // stargate
       "0x7c5568fd326086D35B002Cc705C852dbaB7438a8", // deprecated - arbitrum native bridge

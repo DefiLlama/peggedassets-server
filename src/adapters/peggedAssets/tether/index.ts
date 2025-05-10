@@ -1114,8 +1114,8 @@ const adapter: PeggedIssuanceAdapter = {
   flare: {
     ethereum: bridgedSupply("flare", 6, chainContracts.flare.bridgedFromETH)
   },
-  plume: {
-    ethereum: bridgedSupply("plume", 6, chainContracts.plume.bridgedFromETH),
+  plume_mainnet: {
+    ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
   },
 };
 
