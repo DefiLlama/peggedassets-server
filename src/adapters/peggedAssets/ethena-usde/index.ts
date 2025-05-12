@@ -74,7 +74,9 @@ const chainContracts = {
   move: {
     bridgedFromETH: "0x9d146a4c9472a7e7b0dbc72da0eafb02b54173a956ef22a9fba29756f8661c6c",
   },
-  
+  hyperliquid: {
+    bridgedFromETH: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34",
+  },
 };
 
 const adapter: PeggedIssuanceAdapter = {

@@ -387,4 +387,7 @@ export const chainContracts: ChainContracts = {
   flare: { 
     bridgedFromETH: ["0xe7cd86e13AC4309349F30B3435a9d337750fC82D"], // USDT0
   },
+  hyperliquid: {
+    bridgedFromETH: ["0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb"], // USDT0
+  },
 };
