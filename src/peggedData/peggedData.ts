@@ -2208,7 +2208,7 @@ export default [
     name: "crvUSD",
     address: "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e",
     symbol: "crvUSD",
-    url: "https://curve.fi",
+    url: "https://curve.finance",
     description:
       "crvUSD is a collateralized-debt-position (CDP) stablecoin pegged to the US Dollar",
     mintRedeemDescription: "Users deposit collateral to borrow crvUSD",
