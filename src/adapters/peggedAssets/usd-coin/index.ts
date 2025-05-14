@@ -871,10 +871,10 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("base", 6),
     ethereum: bridgedSupply("base", 6, chainContracts.base.bridgedFromETH),
   },
-  kujira: {
+ /* kujira: {
     ethereum: kujiraSupply(chainContracts.kujira.bridgedFromETH, 6, "Axelar"),
     noble: kujiraSupply(chainContracts.kujira.bridgedFromNoble, 6, "Noble"),
-  },
+  },*/
   waves: {
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
