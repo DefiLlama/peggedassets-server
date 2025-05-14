@@ -1114,6 +1114,9 @@ const adapter: PeggedIssuanceAdapter = {
   flare: {
     ethereum: bridgedSupply("flare", 6, chainContracts.flare.bridgedFromETH)
   },
+  hyperliquid: {
+    ethereum: bridgedSupply("hyperliquid", 6, chainContracts.hyperliquid.bridgedFromETH)
+  },
 };
 
 export default adapter;
