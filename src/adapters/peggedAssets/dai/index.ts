@@ -27,6 +27,55 @@ import { chainContracts } from "./config";
 const axios = require("axios");
 const retry = require("async-retry");
 
+
+async function sparkUnborrowedDAI(sllAddress: string, decimals: number) {
+  const daiToken = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
+  const aDaiToken = "0x4DEDf26112B3Ec8eC46e7E31EA5e123490B05B8B"; // aDAI
+  const variableDebtToken = "0xf705d2B7e92B3F38e6ae7afaDAA2fEE110fE5914"; // variable debt DAI
+
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    const balances: Balances = {};
+
+    const [sllADaiBalance, totalADaiSupply, totalVariableDebt] = await Promise.all([
+      sdk.api.erc20.balanceOf({
+        target: aDaiToken,
+        owner: sllAddress,
+        block: _ethBlock,
+      }),
+      sdk.api.erc20.totalSupply({
+        target: aDaiToken,
+        block: _ethBlock,
+      }),
+      sdk.api.erc20.totalSupply({
+        target: variableDebtToken,
+        block: _ethBlock,
+      }),
+    ]);
+
+    const sllADai = Number(sllADaiBalance.output);
+    const totalADai = Number(totalADaiSupply.output);
+    const totalDebt = Number(totalVariableDebt.output);
+
+    const sllFractionOfSupply = sllADai / totalADai;
+    const sllDebtPortion = totalDebt * sllFractionOfSupply;
+    const unborrowedDai = sllADai - sllDebtPortion;
+
+    sumSingleBalance(
+      balances,
+      "peggedUSD",
+      unborrowedDai / 10 ** decimals,
+      "sparkUnborrowedDAI",
+      true
+    );
+
+    return balances;
+  };
+}
+
 /*
 Sora: can't find API call that works 0x0001d8f1f93b103d8619d367dbecea3182e5546bea164355fe7decc8be301f63
 
@@ -249,6 +298,7 @@ async function elrondBridged(tokenID: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
+    unreleased:  sparkUnborrowedDAI("0x1601843c5E9bC251A3272907010AFa41Fa18347E", 18), // Spark SLL vault
   },
   solana: {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
