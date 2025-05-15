@@ -5272,4 +5272,23 @@ export default [
     twitter: "https://x.com/_HTDA",
     wiki: null,
   },
+  {
+    id: "264",
+    name: "XBANKING USDE",
+    address: "solana:8dt9fQhoRKuWCSAsYweG2UMF3rbcG9xzNCTWXXSmdmEi",
+    symbol: "USDE",
+    url: "https://xbanking.org/usde",
+    description: "USDE is a decentralized stablecoin pegged USD 1:1 from XBANKING protocol with a yield mechanism in DeFi",
+    mintRedeemDescription: "USDE is minted when users deposit stablecoins like USDT, USDC, or DAI into XBANKING’s smart contract, and it is redeemed by burning USDE to withdraw the underlying stablecoins, which are passively earning yield through DeFi strategies",
+    onCoinGecko: "true",
+    gecko_id: "xbanking-usde",
+    cmcId:  null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/xbanking",
+    wiki: null,
+    doublecounted: true
+  },
 ] as PeggedAsset[];

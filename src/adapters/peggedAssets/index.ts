@@ -258,7 +258,8 @@ import msd from './arche-protocol-msd';
 import vusd from './vdollar-finance';
 import solomonusdv from './solomon-usdv';
 import usd1 from './usd1-wlfi';
-import hexusdx from './hex-trust-usdx'
+import hexusdx from './hex-trust-usdx';
+import xbankusde from './xbanking-usde';
 
 export default {
   tether,
@@ -522,5 +523,6 @@ export default {
   "vdollar-finance": vusd,
   'solomon-usdv': solomonusdv,
   "usd1-wlfi": usd1,
-  "hex-trust-usdx": hexusdx
+  "hex-trust-usdx": hexusdx,
+  "xbanking-usde": xbankusde,
 };
