@@ -1117,6 +1117,9 @@ const adapter: PeggedIssuanceAdapter = {
   plume_mainnet: {
     ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
   },
+  hyperliquid: {
+    ethereum: bridgedSupply("hyperliquid", 6, chainContracts.hyperliquid.bridgedFromETH)
+  },
 };
 
 export default adapter;

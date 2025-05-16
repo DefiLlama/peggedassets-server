@@ -27,6 +27,7 @@ import { chainContracts } from "./config";
 const axios = require("axios");
 const retry = require("async-retry");
 
+
 /*
 Sora: can't find API call that works 0x0001d8f1f93b103d8619d367dbecea3182e5546bea164355fe7decc8be301f63
 
@@ -249,6 +250,7 @@ async function elrondBridged(tokenID: string, decimals: number) {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
+
   },
   solana: {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
@@ -449,7 +451,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.dogechain.bridgedFromETH
     ),
   }, */
-  
+
   thundercore: {
     ethereum: bridgedSupply(
       "thundercore",

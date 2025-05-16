@@ -259,7 +259,10 @@ import msd from './arche-protocol-msd';
 import vusd from './vdollar-finance';
 import solomonusdv from './solomon-usdv';
 import usd1 from './usd1-wlfi';
-import hexusdx from './hex-trust-usdx'
+import hexusdx from './hex-trust-usdx';
+import xbankusde from './xbanking-usde';
+import orkiusdk from './orki-usd';
+import plumeUsd from './plume-usd';
 
 export default {
   tether,
@@ -525,4 +528,6 @@ export default {
   "usd1-wlfi": usd1,
   "hex-trust-usdx": hexusdx,
   "plume-usd": plumeUsd,
+  "xbanking-usde": xbankusde,
+  "orki-usd": orkiusdk,
 };
