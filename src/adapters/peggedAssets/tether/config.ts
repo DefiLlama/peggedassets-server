@@ -390,7 +390,7 @@ export const chainContracts: ChainContracts = {
   plume_mainnet: {
     bridgedFromETH: [
       "0xda6087E69C51E7D31b6DBAD276a3c44703DFdCAd", // stargate
-      "0x7c5568fd326086D35B002Cc705C852dbaB7438a8", // deprecated - arbitrum native bridge
+      //"0x7c5568fd326086D35B002Cc705C852dbaB7438a8", // deprecated - arbitrum native bridge
     ]
   },
   hyperliquid: {
