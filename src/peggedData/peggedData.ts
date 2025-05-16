@@ -4577,7 +4577,7 @@ export default [
   {
     id: "228",
     name: "Quill USD",
-    address: "scroll:0x6F2A1A886Dbf8E36C4fa9F25a517861A930fBF3A",
+    address: "scroll:0xdb9e8f82d6d45fff803161f2a5f75543972b229a",
     symbol: "USDQ",
     url: "https://app.quill.finance/",
     description:
