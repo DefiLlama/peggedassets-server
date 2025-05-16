@@ -5291,4 +5291,22 @@ export default [
     wiki: null,
     doublecounted: true
   },
+    {
+    id: "265",
+    name: "Orki USD",
+    address: "swell:0x0000bAa0b1678229863c0A941C1056b83a1955F5",
+    symbol: "USDK",
+    url: "https://app.orki.finance/",
+    description: "USDK is the USD-pegged, overcollateralized and native stablecoin on Swellchain. Issued by Orki Finance and backed by LST/LRT-based assets like swETH and rswETH",
+    mintRedeemDescription: "USDK maintains its $1 peg through a market-driven mechanism where borrowers adjust interest rates in response to price fluctuations, and arbitrageurs engage in redemptions when USDK trades below $1. USDK can be redeemed at face value for its underlying collateral, ensuring liquidity and price stability",
+    onCoinGecko: "false",
+    gecko_id: "orki-usd",
+    cmcId:  null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/OrkiFi",
+    wiki: "https://orki-finance.gitbook.io/orki-finance-docs/products/usdk",
+  },
 ] as PeggedAsset[];
