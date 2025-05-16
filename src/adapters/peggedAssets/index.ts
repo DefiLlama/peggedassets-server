@@ -20,7 +20,6 @@ import susd from "./nusd";
 import ousd from "./origin-dollar";
 import pai from "./parrot-usd";
 import pax from "./paxos-standard";
-import plumeUsd from "./plume-usd";
 import reserve from "./reserve";
 import sperax from "./sperax-usd";
 import spiceusd from "./spiceusd";
