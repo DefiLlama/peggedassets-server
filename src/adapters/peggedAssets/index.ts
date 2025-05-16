@@ -20,6 +20,7 @@ import susd from "./nusd";
 import ousd from "./origin-dollar";
 import pai from "./parrot-usd";
 import pax from "./paxos-standard";
+import plumeUsd from "./plume-usd";
 import reserve from "./reserve";
 import sperax from "./sperax-usd";
 import spiceusd from "./spiceusd";
@@ -261,6 +262,7 @@ import usd1 from './usd1-wlfi';
 import hexusdx from './hex-trust-usdx';
 import xbankusde from './xbanking-usde';
 import orkiusdk from './orki-usd';
+import plumeUsd from './plume-usd';
 
 export default {
   tether,
@@ -525,6 +527,7 @@ export default {
   'solomon-usdv': solomonusdv,
   "usd1-wlfi": usd1,
   "hex-trust-usdx": hexusdx,
+  "plume-usd": plumeUsd,
   "xbanking-usde": xbankusde,
   "orki-usd": orkiusdk,
 };

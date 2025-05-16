@@ -5309,4 +5309,24 @@ export default [
     twitter: "https://x.com/OrkiFi",
     wiki: "https://orki-finance.gitbook.io/orki-finance-docs/products/usdk",
   },
+  {
+    id: "266",
+    name: "Plume USD",
+    address: "plume_mainnet:0xdddd73f5df1f0dc31373357beac77545dc5a6f3f",
+    symbol: "pUSD",
+    url: "https://pusd.plume.org/",
+    description:
+      "Plume USD is the premier stablecoin of the Plume ecosystem, designed to support seamless financial operations within Real World Asset Finance (RWAfi). Plume USD maintains a 1:1 peg with the US dollar, backed by a reserve of the world's most trusted stablecoins.",
+    mintRedeemDescription:
+      "Plume USD is minted by depositing USDC or USDT into the pUSD vault, and is redeemable 1:1 for USDC at any time, or for USDT at the current USDT/USDC exchange rate.",
+    onCoinGecko: "true",
+    gecko_id: "plume-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/plumenetwork",
+    wiki: "https://docs.plume.org/plume/plume-chain/official-tokens/plume-usd",
+  },
 ] as PeggedAsset[];
