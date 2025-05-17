@@ -5328,5 +5328,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/plumenetwork",
     wiki: "https://docs.plume.org/plume/plume-chain/official-tokens/plume-usd",
+    doublecounted: true
   },
 ] as PeggedAsset[];
