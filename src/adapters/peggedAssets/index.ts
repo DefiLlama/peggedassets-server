@@ -262,6 +262,7 @@ import hexusdx from './hex-trust-usdx';
 import xbankusde from './xbanking-usde';
 import orkiusdk from './orki-usd';
 import plumeUsd from './plume-usd';
+import mead2 from './mead-2';
 
 export default {
   tether,
@@ -529,4 +530,5 @@ export default {
   "plume-usd": plumeUsd,
   "xbanking-usde": xbankusde,
   "orki-usd": orkiusdk,
+  "mead-2": mead2,
 };
