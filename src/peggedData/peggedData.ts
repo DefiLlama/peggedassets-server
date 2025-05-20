@@ -5323,11 +5323,32 @@ export default [
     gecko_id: "plume-usd",
     cmcId: null,
     pegType: "peggedUSD",
-    pegMechanism: "fiat-backed",
+    pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/plumenetwork",
     wiki: "https://docs.plume.org/plume/plume-chain/official-tokens/plume-usd",
+    doublecounted: true
+  },
+  {
+    id: "267",
+    name: "Mead",
+    address: "berachain:0xedb5180661f56077292c92ab40b1ac57a279a396",
+    symbol: "MEAD",
+    url: "https://app.rootsfi.com/deposit",
+    description:
+      "MEAD is a Berachain-native stablecoin minted against LP tokens and other yield-bearing assets, allowing users to unlock liquidity without giving up rewards.",
+    mintRedeemDescription:
+      "MEAD is minted by depositing approved LP tokens or collateral into RootsFi, and is redeemed by repaying the MEAD debt to unlock the original collateral.",
+    onCoinGecko: "false",
+    gecko_id: "mead-2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/rootsfi",
+    wiki: "https://docs.rootsfi.com/introduction",
     doublecounted: true
   },
 ] as PeggedAsset[];
