@@ -5351,4 +5351,24 @@ export default [
     wiki: "https://docs.rootsfi.com/introduction",
     doublecounted: true
   },
+  {
+    id: "268",
+    name: "Yala stablecoin",
+    address: "ethereum:0xE868084cf08F3c3db11f4B73a95473762d9463f7",
+    symbol: "YU",
+    url: "https://www.yala.org/",
+    description:
+      "Yala Protocol allows users to lock Bitcoin as collateral to mint YU stablecoins. YU serves as both an asset and a tool, connecting Bitcoin with any ecosystem. Users can borrow, earn interest, and gain seamless access to DeFi applications across multiple chains.",
+    mintRedeemDescription:
+      "Users mint YU by depositing Bitcoin as collateral assets into the Yala Protocol. When the loan is repaid to retrieve the collateral, the paid back YU is burned.",
+    onCoinGecko: "false",
+    gecko_id: "yala-stablecoin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/yalaorg",
+    wiki: "https://docs.yala.org/user-guide-mainnet/metamint-usdyu",
+  },
 ] as PeggedAsset[];
