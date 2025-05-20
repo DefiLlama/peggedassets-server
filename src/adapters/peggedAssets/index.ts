@@ -263,6 +263,7 @@ import xbankusde from './xbanking-usde';
 import orkiusdk from './orki-usd';
 import plumeUsd from './plume-usd';
 import mead2 from './mead-2';
+import yu from './yala-yu';
 
 export default {
   tether,
@@ -531,4 +532,5 @@ export default {
   "xbanking-usde": xbankusde,
   "orki-usd": orkiusdk,
   "mead-2": mead2,
+  "yala-yu": yu,
 };
