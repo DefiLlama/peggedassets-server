@@ -36,6 +36,7 @@ export const normalizedChainReplacements = {
   "kaia": "klaytn",
   "movement": "move",
   "plume%20mainnet": "plume_mainnet",
+  "hyperliquid%20l1": "hyperliquid",
 } as {
   [chain: string]: string;
 };
@@ -1087,10 +1088,10 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 41923,
   },
-  "Hyperliquid": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+  "Hyperliquid L1": {
+    geckoId: "hyperliquid",
+    symbol: "HYPE",
+    cmcId: "32196",
     categories: ["EVM"],
   },
   "Sonic": {
@@ -1177,6 +1178,7 @@ chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
 chainCoingeckoIds["Klaytn"] = chainCoingeckoIds["Kaia"];
 chainCoingeckoIds["TomoChain"] = chainCoingeckoIds["Viction"];
 chainCoingeckoIds["Move"] = chainCoingeckoIds["Movement"];
+chainCoingeckoIds["Hyperliquid"] = chainCoingeckoIds["Hyperliquid L1"];
 
 export const extraSections = [
   "staking",
@@ -1461,6 +1463,8 @@ export function getChainDisplayName(
       return useNewChainNames ? "Movement" : "Move"
     case "plume_mainnet":
       return "Plume Mainnet"
+    case "hyperliquid":
+      return useNewChainNames ? "Hyperliquid L1" : "Hyperliquid" 
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
