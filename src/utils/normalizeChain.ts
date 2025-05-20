@@ -37,6 +37,7 @@ export const normalizedChainReplacements = {
   "movement": "move",
   "plume%20mainnet": "plume_mainnet",
   "hyperliquid%20l1": "hyperliquid",
+  "op%20mainnet": "optimism",
 } as {
   [chain: string]: string;
 };
@@ -91,7 +92,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     chainId: 11297108109,
   },
-  Optimism: {
+  "OP Mainnet": {
     geckoId: null,
     symbol: null,
     cmcId: null,
@@ -1210,6 +1211,10 @@ export function transformNewChainName(chain: string) {
       return "Viction";
     case "MOVE":
       return "Movement";
+    case "Hyperliquid":
+      return "Hyperliquid L1";
+    case "Optimism":
+      return "OP Mainnet";
     default:
       return chain;
   }
@@ -1464,7 +1469,9 @@ export function getChainDisplayName(
     case "plume_mainnet":
       return "Plume Mainnet"
     case "hyperliquid":
-      return useNewChainNames ? "Hyperliquid L1" : "Hyperliquid" 
+      return useNewChainNames ? "Hyperliquid L1" : "Hyperliquid"
+    case "optimism":
+      return useNewChainNames ? "OP Mainnet" : "Optimism" 
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
