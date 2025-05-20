@@ -5323,11 +5323,52 @@ export default [
     gecko_id: "plume-usd",
     cmcId: null,
     pegType: "peggedUSD",
-    pegMechanism: "fiat-backed",
+    pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/plumenetwork",
     wiki: "https://docs.plume.org/plume/plume-chain/official-tokens/plume-usd",
     doublecounted: true
+  },
+  {
+    id: "267",
+    name: "Mead",
+    address: "berachain:0xedb5180661f56077292c92ab40b1ac57a279a396",
+    symbol: "MEAD",
+    url: "https://app.rootsfi.com/deposit",
+    description:
+      "MEAD is a Berachain-native stablecoin minted against LP tokens and other yield-bearing assets, allowing users to unlock liquidity without giving up rewards.",
+    mintRedeemDescription:
+      "MEAD is minted by depositing approved LP tokens or collateral into RootsFi, and is redeemed by repaying the MEAD debt to unlock the original collateral.",
+    onCoinGecko: "false",
+    gecko_id: "mead-2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/rootsfi",
+    wiki: "https://docs.rootsfi.com/introduction",
+    doublecounted: true
+  },
+  {
+    id: "268",
+    name: "Yala stablecoin",
+    address: "ethereum:0xE868084cf08F3c3db11f4B73a95473762d9463f7",
+    symbol: "YU",
+    url: "https://www.yala.org/",
+    description:
+      "Yala Protocol allows users to lock Bitcoin as collateral to mint YU stablecoins. YU serves as both an asset and a tool, connecting Bitcoin with any ecosystem. Users can borrow, earn interest, and gain seamless access to DeFi applications across multiple chains.",
+    mintRedeemDescription:
+      "Users mint YU by depositing Bitcoin as collateral assets into the Yala Protocol. When the loan is repaid to retrieve the collateral, the paid back YU is burned.",
+    onCoinGecko: "false",
+    gecko_id: "yala-stablecoin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/yalaorg",
+    wiki: "https://docs.yala.org/user-guide-mainnet/metamint-usdyu",
   },
 ] as PeggedAsset[];
