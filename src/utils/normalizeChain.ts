@@ -907,7 +907,7 @@ export const chainCoingeckoIds = {
     symbol: "APT",
     cmcId: "21794",
   },
-  "zkSync Era": {
+  "ZKsync Era": {
     geckoId: null,
     symbol: null,
     cmcId: null,
@@ -1215,6 +1215,8 @@ export function transformNewChainName(chain: string) {
       return "Hyperliquid L1";
     case "Optimism":
       return "OP Mainnet";
+    case "zkSync Era":
+      return "ZKsync Era";
     default:
       return chain;
   }
@@ -1407,7 +1409,7 @@ export function getChainDisplayName(
     case "zksync":
       return "zkSync Lite";
     case "era":
-      return "zkSync Era";
+      return useNewChainNames ? "ZKsync Era" : "zkSync Era" ;
     case "polygon_zkevm":
       return "Polygon zkEVM";
     case "base":
