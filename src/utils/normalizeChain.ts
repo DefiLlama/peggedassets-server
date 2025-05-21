@@ -21,6 +21,7 @@ export const normalizedChainReplacements = {
   "bitlayer": "btr",
   "kaia": "klaytn",
   "movement": "move",
+  "xrpl": "ripple",
   "zksync era": "era",
   "zksync%20era": "era",
   "zksync-era": "era",
@@ -893,7 +894,7 @@ export const chainCoingeckoIds = {
     cmcId: null,
     categories: ["EVM"],
   },
-  Ripple: {
+  XRPL: {
     geckoId: "ripple",
     symbol: "XRP",
     cmcId: "52",
@@ -1200,6 +1201,7 @@ chainCoingeckoIds["TomoChain"] = chainCoingeckoIds["Viction"];
 chainCoingeckoIds["Move"] = chainCoingeckoIds["Movement"];
 chainCoingeckoIds["Hyperliquid"] = chainCoingeckoIds["Hyperliquid L1"];
 chainCoingeckoIds["Optimism"] = chainCoingeckoIds["OP Mainnet"];
+chainCoingeckoIds["Ripple"] = chainCoingeckoIds["XRPL"];
 
 export const extraSections = [
   "staking",
@@ -1237,6 +1239,8 @@ export function transformNewChainName(chain: string) {
       return "OP Mainnet";
     case "zkSync Era":
       return "ZKsync Era";
+    case "Ripple":
+      return "XRPL";
     default:
       return chain;
   }
@@ -1417,7 +1421,7 @@ export function getChainDisplayName(
     case "canto":
       return "Canto";
     case "ripple":
-      return "Ripple";
+      return useNewChainNames ? "XRPL" : "Ripple";
     case "arbitrum_nova":
       return "Arbitrum Nova";
     case "kujira":
