@@ -9,15 +9,18 @@ export const normalizedChainReplacements = {
   ethereumpow: "ethpow",
   "milkomeda%20c1": "milkomeda",
   "zksync%20lite": "zksync",
-  "polygon%20zkevm": "polygon_zkevm",
   multiversx: "elrond",
   rootstock: "rsk",
   "terra classic": "terra",
   "nova network": "nova",
   "godwokenv1": "godwoken_v1",
-  "arbitrum-nova": "arbitrum_nova",
+  "arbitrum nova": "arbitrum_nova",
   "zksync era": "era",
+  "zksync%20era": "era",
+  "zksync-era": "era",
   "polygon zkevm": "polygon_zkevm",
+  "polygon-zkevm": "polygon_zkevm",
+  "polygon%20zkevm": "polygon_zkevm",
   "eos evm": "eos_evm",
   "oasys": "oas",
   "map relay chain": "map",
@@ -34,7 +37,11 @@ export const normalizedChainReplacements = {
   "kaia": "klaytn",
   "movement": "move",
   "hyperliquid%20l1": "hyperliquid",
+  "hyperliquid l1": "hyperliquid",
+  "hyperliquid-l1": "hyperliquid",
   "op%20mainnet": "optimism",
+  "op mainnet": "optimism",
+  "op-mainnet": "optimism"
 } as {
   [chain: string]: string;
 };
