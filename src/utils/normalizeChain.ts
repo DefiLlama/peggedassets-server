@@ -33,8 +33,8 @@ export const normalizedChainReplacements = {
   "bitlayer": "btr",
   "kaia": "klaytn",
   "movement": "move",
-  "hyperliquid-l1": "hyperliquid",
-  "op-mainnet": "optimism",
+  "hyperliquid%20l1": "hyperliquid",
+  "op%20mainnet": "optimism",
 } as {
   [chain: string]: string;
 };
