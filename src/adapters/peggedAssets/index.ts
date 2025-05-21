@@ -264,6 +264,7 @@ import orkiusdk from './orki-usd';
 import plumeUsd from './plume-usd';
 import mead2 from './mead-2';
 import yu from './yala-stablecoin';
+import a7a5 from './a7a5';
 
 export default {
   tether,
@@ -533,4 +534,5 @@ export default {
   "orki-usd": orkiusdk,
   "mead-2": mead2,
   "yala-stablecoin": yu,
+  "a7a5": a7a5,
 };

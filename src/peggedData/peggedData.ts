@@ -5163,7 +5163,7 @@ export default [
     twitter: "https://x.com/OpenEden_X",
     wiki: "https://docs.openeden.com/",
   },
-  /*{
+  {
     id: "258",
     name: "A7A5",
     address: "0x6fA0BE17e4beA2fCfA22ef89BF8ac9aab0AB0fc9",
@@ -5180,7 +5180,7 @@ export default [
     auditLinks: ["https://a7a5.kg/A7A5%20Token%20Audit%20Report.pdf"],
     twitter: "https://x.com/A7A5official",
     wiki: "https://a7a5.kg/transparency",
-  },*/
+  },
   {
     id: "259",
     name: "Arche Protocol MSD",
