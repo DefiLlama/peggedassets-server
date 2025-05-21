@@ -1177,6 +1177,7 @@ chainCoingeckoIds["Klaytn"] = chainCoingeckoIds["Kaia"];
 chainCoingeckoIds["TomoChain"] = chainCoingeckoIds["Viction"];
 chainCoingeckoIds["Move"] = chainCoingeckoIds["Movement"];
 chainCoingeckoIds["Hyperliquid"] = chainCoingeckoIds["Hyperliquid L1"];
+chainCoingeckoIds["Optimism"] = chainCoingeckoIds["OP Mainnet"];
 
 export const extraSections = [
   "staking",
