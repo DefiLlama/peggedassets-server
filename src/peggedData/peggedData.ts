@@ -5177,7 +5177,7 @@ export default [
     pegType: "peggedRUB",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
-    auditLinks: ["https://a7a5.kg/A7A5%20Token%20Audit%20Report.pdf"],
+    auditLinks: ["https://a7a5.kg/A7A5%20Token%20Audit%20Report.pdf", "Financial statement and reserve report as of March 31, 2025.pdf"],
     twitter: "https://x.com/A7A5official",
     wiki: "https://a7a5.kg/transparency",
   },
