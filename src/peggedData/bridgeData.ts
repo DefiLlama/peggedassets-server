@@ -1715,6 +1715,10 @@ export default {
     bridge: "elixir",
     sourceChain: formattedSourceChains.eth,
   },
+  "YUYAiJo8KVbnc6Fb6h3MnH2VGND4uGWDH4iLnw7DLEu": {
+    bridge: "layerzero",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1947,5 +1951,9 @@ export const bridgeInfo = {
   elixir: {
     name: "Elixir Bridge",
     link: "https://bridge.elixir.xyz/",
+  },
+  layerzero: {
+    name: "LayerZero",
+    link: "https://layerzero.network/",
   },
 } as BridgeInfo;
