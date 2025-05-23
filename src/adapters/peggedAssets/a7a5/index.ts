@@ -1,3 +1,4 @@
+
 const pegType = "peggedRUB";
 const chainContracts = {
   ethereum: {
