@@ -4564,8 +4564,8 @@ export default [
     description:
       `BOLD is the USD-pegged stablecoin issued in Liquity V2. It’s fully decentralized, overcollateralized and backed only by WETH, wstETH and rETH`,
     mintRedeemDescription: "BOLD is minted in Liquity V2 by borrowing against overcollateralized deposits of WETH, wstETH, or rETH, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
-    onCoinGecko: "true",
-    gecko_id: "liquity-bold",
+    onCoinGecko: "false",
+    gecko_id: "legacy-bold",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
