@@ -225,7 +225,7 @@ import zkusd from "./zkusd";
 import dtrinityusd from "./dtrinity-usd";
 import zeusd from "./zoth-zeusd";
 import zchf from "./frankencoin";
-import bold from "./liquity-bold";
+import bold from "./legacy-bold";
 import lvlusd from "./level-usd";
 import usdq from "./quill-usd";
 import noonusn from "./noon-usn";
@@ -265,6 +265,8 @@ import plumeUsd from './plume-usd';
 import mead2 from './mead-2';
 import yu from './yala-stablecoin';
 import a7a5 from './a7a5';
+import liquityBold from './liquity-bold';
+
 
 export default {
   tether,
@@ -494,7 +496,7 @@ export default {
   "dtrinity-usd": dtrinityusd,
   "zoth-zeusd": zeusd,
   frankencoin: zchf,
-  "liquity-bold": bold,
+  "legacy-bold": bold,
   "level-usd": lvlusd,
   "quill-usd": usdq,
   "noon-usn": noonusn,
@@ -535,4 +537,5 @@ export default {
   "mead-2": mead2,
   "yala-stablecoin": yu,
   "a7a5": a7a5,
+  "liquity-bold": liquityBold,
 };

@@ -4557,7 +4557,7 @@ export default [
   },
   {
     id: "227",
-    name: "Liquity BOLD",
+    name: "Legacy BOLD",
     address: "0xb01dd87b29d187f3e3a4bf6cdaebfb97f3d9ab98",
     symbol: "BOLD",
     url: "https://www.liquity.org/bold",
@@ -5370,5 +5370,24 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/yalaorg",
     wiki: "https://docs.yala.org/user-guide-mainnet/metamint-usdyu",
+  },
+  {
+    id: "227",
+    name: "Liquity BOLD",
+    address: "0xb01dd87b29d187f3e3a4bf6cdaebfb97f3d9ab98",
+    symbol: "BOLD",
+    url: "https://www.liquity.org/bold",
+    description:
+      `BOLD is the USD-pegged stablecoin issued in Liquity V2. It’s fully decentralized, overcollateralized and backed only by WETH, wstETH and rETH`,
+    mintRedeemDescription: "BOLD is minted in Liquity V2 by borrowing against overcollateralized deposits of WETH, wstETH, or rETH, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
+    onCoinGecko: "true",
+    gecko_id: "liquity-bold",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/LiquityProtocol",
+    wiki: "https://docs.liquity.org/v2-documentation/technical-resources"
   },
 ] as PeggedAsset[];
