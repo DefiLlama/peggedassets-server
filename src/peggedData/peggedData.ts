@@ -5372,7 +5372,7 @@ export default [
     wiki: "https://docs.yala.org/user-guide-mainnet/metamint-usdyu",
   },
   {
-    id: "227",
+    id: "269",
     name: "Liquity BOLD",
     address: "0xb01dd87b29d187f3e3a4bf6cdaebfb97f3d9ab98",
     symbol: "BOLD",
@@ -5391,7 +5391,7 @@ export default [
     wiki: "https://docs.liquity.org/v2-documentation/technical-resources"
   },
   {
-    id: "228",
+    id: "270",
     name: "Franklin Onchain U.S. Government Money Fund",
     address: "stellar:BENJI-GBHNGLLIE3KWGKCHIKMHJ5HVZHYIK7WTBE4QF5PLAKL4CJGSEU7HZIW5",
     symbol: "BENJI",
