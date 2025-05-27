@@ -5353,7 +5353,7 @@ export default [
   },
   {
     id: "268",
-    name: "Yala stablecoin",
+    name: "YU",
     address: "ethereum:0xE868084cf08F3c3db11f4B73a95473762d9463f7",
     symbol: "YU",
     url: "https://www.yala.org/",
