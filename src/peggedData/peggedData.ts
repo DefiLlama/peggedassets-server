@@ -5426,6 +5426,7 @@ export default [
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/avantprotocol",
-    wiki: "https://docs.avantprotocol.com/overview/core-tokens"
+    wiki: "https://docs.avantprotocol.com/overview/core-tokens",
+    doublecounted: true
   },
 ] as PeggedAsset[];
