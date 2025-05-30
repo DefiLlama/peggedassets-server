@@ -541,5 +541,5 @@ export default {
   "a7a5": a7a5,
   "liquity-bold": liquityBold,
   "franklin-onchain-u-s-government-money-fund": benji,
-   avusd // same as coingeckoID,
+  "avant-usd":avusd 
 };
