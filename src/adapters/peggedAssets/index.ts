@@ -267,6 +267,7 @@ import yu from './yala-stablecoin';
 import a7a5 from './a7a5';
 import liquityBold from './liquity-bold';
 import benji from './franklin-onchain-u-s-government-money-fund';
+import avusd from './avant-usd';
 
 
 export default {
@@ -540,4 +541,5 @@ export default {
   "a7a5": a7a5,
   "liquity-bold": liquityBold,
   "franklin-onchain-u-s-government-money-fund": benji,
+   avusd // same as coingeckoID,
 };
