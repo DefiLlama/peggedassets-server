@@ -1123,6 +1123,9 @@ const adapter: PeggedIssuanceAdapter = {
   imx: {
     ethereum: supplyInEthereumBridge(chainContracts.ethereum.issued[0], chainContracts.imx.bridgeOnETH[0], 6),
   },
+  core: {
+    ethereum: bridgedSupply("core", 6, chainContracts.core.bridgedFromETH)
+  }
 };
 
 export default adapter;

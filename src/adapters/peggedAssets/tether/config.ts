@@ -402,4 +402,7 @@ export const chainContracts: ChainContracts = {
       "0x68bcc7F1190AF20e7b572BCfb431c3Ac10A936Ab", // native bridge
       ],
   },
+  core: {
+    bridgedFromETH: ["0x900101d06a7426441ae63e9ab3b9b0f63be145f1"], 
+  }
 };
