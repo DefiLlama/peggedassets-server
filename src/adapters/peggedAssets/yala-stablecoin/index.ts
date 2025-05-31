@@ -6,13 +6,13 @@ const chainContracts: ChainContracts = {
         issued: ["0xE868084cf08F3c3db11f4B73a95473762d9463f7"],
     },
     solana: {
-        bridgedFromETH: ["YUYAiJo8KVbnc6Fb6h3MnH2VGND4uGWDH4iLnw7DLEu"],
+        issued: ["YUYAiJo8KVbnc6Fb6h3MnH2VGND4uGWDH4iLnw7DLEu"],
     },
 };
 
 const adapterSolana: PeggedIssuanceAdapter = {
     solana: {
-        ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
+        minted: solanaMintedOrBridged(chainContracts.solana.issued),
     },
 };
 
