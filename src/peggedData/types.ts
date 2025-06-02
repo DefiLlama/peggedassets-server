@@ -50,6 +50,7 @@ export type PeggedAsset = {
   delisted?: boolean;
   deadFrom?: string;
   doublecounted?: boolean;
+  deprecated: boolean;
 };
 
 type Bridge = {
