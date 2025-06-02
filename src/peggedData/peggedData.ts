@@ -1961,6 +1961,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/Platypusdefi",
+    deprecated: true,
     wiki: null,
   },
   {
