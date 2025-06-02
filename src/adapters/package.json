@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@defillama/sdk": "^5.0.44",
+    "@defillama/sdk": "^5.0.143",
     "@project-serum/anchor": "^0.26.0",
     "@solana/web3.js": "^1.36.0",
     "@supercharge/promise-pool": "^3.2.0",

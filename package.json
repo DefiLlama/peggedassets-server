@@ -48,7 +48,7 @@
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "starknet": "^6.0.0",
-    "@defillama/sdk": "^5.0.44",
+    "@defillama/sdk": "^5.0.143",
     "@project-serum/anchor": "^0.26.0",
     "@project-serum/serum": "^0.13.33",
     "@sentry/serverless": "^6.2.3",

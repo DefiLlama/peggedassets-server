@@ -185,6 +185,12 @@ const bridgedChainContracts: ChainContracts = {
   linea: {
     address: "0xdd3b8084af79b9bae3d1b668c0de08ccc2c9429a",
   },
+  berachain: {
+    address: "0x5B82028cfc477C4E7ddA7FF33d59A23FA7Be002a",
+  },
+  nibiru: {
+    address: "0xfCfc58685101e2914cBCf7551B432500db84eAa8",
+  }
 };
 
 async function chainReleased(
