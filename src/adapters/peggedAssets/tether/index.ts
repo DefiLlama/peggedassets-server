@@ -1125,6 +1125,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   core: {
     ethereum: bridgedSupply("core", 6, chainContracts.core.bridgedFromETH)
+  },
+  soneium: {
+    ethereum: bridgedSupply("soneium", 6, chainContracts.soneium.bridgedFromETH)
   }
 };
 
