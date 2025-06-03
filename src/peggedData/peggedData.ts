@@ -1961,6 +1961,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/Platypusdefi",
+    deprecated: true,
     wiki: null,
   },
   {
@@ -5408,5 +5409,25 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/FTI_US",
     wiki: "https://www.franklintempleton.com/investments/options/money-market-funds/products/29386/SINGLCLASS/franklin-on-chain-u-s-government-money-fund/FOBXX"
+  },
+    {
+    id: "271",
+    name: "Avant USD",
+    address: "avax:0x24de8771bc5ddb3362db529fc3358f2df3a0e346",
+    symbol: "avUSD",
+    url: "https://www.avantprotocol.com",
+    description:
+      `Avant’s flagship stable value token, minted when users deposit USDC. avUSD can be redeemed for USDC, but receives no yield.`,
+    mintRedeemDescription: "Minted when users deposit USDC. avUSD can be redeemed for USDC",
+    onCoinGecko: "true",
+    gecko_id: "avant-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/avantprotocol",
+    wiki: "https://docs.avantprotocol.com/overview/core-tokens",
+    doublecounted: true
   },
 ] as PeggedAsset[];

@@ -267,6 +267,7 @@ import yu from './yala-stablecoin';
 import a7a5 from './a7a5';
 import liquityBold from './liquity-bold';
 import benji from './franklin-onchain-u-s-government-money-fund';
+import avusd from './avant-usd';
 import eurq from "./quantoz-eurq";
 import qusdq from "./quantoz-usdq";
 
@@ -542,6 +543,7 @@ export default {
   "a7a5": a7a5,
   "liquity-bold": liquityBold,
   "franklin-onchain-u-s-government-money-fund": benji,
+  "avant-usd":avusd,
   "quantoz-eurq": eurq,
   "quantoz-usdq": qusdq,
 };
