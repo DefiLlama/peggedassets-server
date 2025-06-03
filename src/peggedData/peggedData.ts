@@ -5410,7 +5410,7 @@ export default [
     twitter: "https://x.com/FTI_US",
     wiki: "https://www.franklintempleton.com/investments/options/money-market-funds/products/29386/SINGLCLASS/franklin-on-chain-u-s-government-money-fund/FOBXX"
   },
-    {
+  {
     id: "271",
     name: "Avant USD",
     address: "avax:0x24de8771bc5ddb3362db529fc3358f2df3a0e346",
@@ -5429,5 +5429,45 @@ export default [
     twitter: "https://x.com/avantprotocol",
     wiki: "https://docs.avantprotocol.com/overview/core-tokens",
     doublecounted: true
+  },
+  {
+    id: "272",
+    name: "Quantoz EURQ",
+    address: "algorand:2768422954",
+    symbol: "EURQ",
+    url: "https://quantozpay.com/",
+    description:
+        "The Quantoz EURQ is a stablecoin pegged 1:1 to the euro. The EURQ is issued by Quantoz Payments BV, an Electronic Money Institution under supervision of the Dutch Central Bank (DNB). The EURQ is designed to be Micar compliant and its whitepaper as Electronic Money Token (EMT) has been submitted to the Dutch Financial Authorities (AFM). The EURQs are distributed through Authorized Participants.",
+    mintRedeemDescription:
+        "All funded EURQ can be redeemed 1:1 to the whitelisted bank account of the EURQ users",
+    onCoinGecko: false,
+    gecko_id: "quantoz-eurq",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/Quantoz",
+    wiki: null,
+  },
+  {
+    id: "273",
+    name: "Quantoz USDQ",
+    address: "algorand:2768603795",
+    symbol: "USDQ",
+    url: "https://quantozpay.com/",
+    description:
+        "The Quantoz USDQ is a stablecoin pegged 1:1 to the dollar. The USDQ is issued by Quantoz Payments BV, an Electronic Money Institution under supervision of the Dutch Central Bank (DNB). The USDQ is designed to be Micar compliant and its whitepaper as Electronic Money Token (EMT) has been submitted to the Dutch Financial Authorities (AFM). The USDQs are distributed through Authorized Participants.",
+    mintRedeemDescription:
+        "All funded USDQ can be redeemed 1:1 to the whitelisted bank account of the USDQ users",
+    onCoinGecko: false,
+    gecko_id: "quantoz-usdq",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/Quantoz",
+    wiki: null,
   },
 ] as PeggedAsset[];
