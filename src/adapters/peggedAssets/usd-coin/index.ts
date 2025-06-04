@@ -1058,6 +1058,9 @@ const adapter: PeggedIssuanceAdapter = {
   plume_mainnet: {
     ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
   },
+  story: {
+    ethereum: bridgedSupply("story", 6, chainContracts.hemi.bridgedFromETH, "stargate"),
+  }
 };
 
 export default adapter;
