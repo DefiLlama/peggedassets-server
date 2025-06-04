@@ -1059,7 +1059,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
   },
   story: {
-    ethereum: bridgedSupply("story", 6, chainContracts.hemi.bridgedFromETH, "stargate"),
+    ethereum: bridgedSupply("story", 6, chainContracts.story.bridgedFromETH, "stargate"),
   }
 };
 
