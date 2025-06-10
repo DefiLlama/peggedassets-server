@@ -269,6 +269,7 @@ import liquityBold from './liquity-bold';
 import benji from './franklin-onchain-u-s-government-money-fund';
 import avusd from './avant-usd';
 import usdaf from './asymmetry-usdaf';
+import ylds from './ylds';
 
 
 export default {
@@ -543,5 +544,6 @@ export default {
   "liquity-bold": liquityBold,
   "franklin-onchain-u-s-government-money-fund": benji,
   "avant-usd":avusd,
-  "asymmetry-usdaf": usdaf
+  "asymmetry-usdaf": usdaf,
+  "ylds": ylds
 };
