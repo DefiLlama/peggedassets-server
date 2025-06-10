@@ -396,4 +396,16 @@ export const chainContracts: ChainContracts = {
   hyperliquid: {
     bridgedFromETH: ["0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb"], // USDT0
   },
+  imx: {
+    bridgeOnETH: ["0xBa5E35E26Ae59c7aea6F029B68c6460De2d13eB6"],
+    bridgedFromETH: [
+      "0x68bcc7F1190AF20e7b572BCfb431c3Ac10A936Ab", // native bridge
+      ],
+  },
+  core: {
+    bridgedFromETH: ["0x900101d06a7426441ae63e9ab3b9b0f63be145f1"], 
+  },
+  soneium: {
+    bridgedFromETH: ["0x102d758f688a4C1C5a80b116bD945d4455460282"], 
+  }
 };

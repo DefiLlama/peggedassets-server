@@ -1120,6 +1120,15 @@ const adapter: PeggedIssuanceAdapter = {
   hyperliquid: {
     ethereum: bridgedSupply("hyperliquid", 6, chainContracts.hyperliquid.bridgedFromETH)
   },
+  imx: {
+    ethereum: supplyInEthereumBridge(chainContracts.ethereum.issued[0], chainContracts.imx.bridgeOnETH[0], 6),
+  },
+  core: {
+    ethereum: bridgedSupply("core", 6, chainContracts.core.bridgedFromETH)
+  },
+  soneium: {
+    ethereum: bridgedSupply("soneium", 6, chainContracts.soneium.bridgedFromETH)
+  }
 };
 
 export default adapter;

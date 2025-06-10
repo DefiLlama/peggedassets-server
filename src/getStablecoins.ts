@@ -115,6 +115,7 @@ export async function craftProtocolsResponse(
               chainCirculating[b].current[pegType] -
               chainCirculating[a].current[pegType]
           ),
+          ...(pegged.deprecated ? { deprecated: true } : {}),
         } as any;
         if (pegged.doublecounted) {
           dataToReturn.doublecounted = true;

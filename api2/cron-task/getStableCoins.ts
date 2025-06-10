@@ -109,6 +109,7 @@ function craftProtocolsResponse(
             chainCirculating[b].current[pegType] -
             chainCirculating[a].current[pegType]
         ),
+        ...(pegged.deprecated ? { deprecated: true } : {}),
       } as any;
       dataToReturn.price = prices[pegged.gecko_id] ?? null;
       if (pegged.delisted) dataToReturn.delisted = true;

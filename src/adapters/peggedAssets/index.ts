@@ -225,7 +225,7 @@ import zkusd from "./zkusd";
 import dtrinityusd from "./dtrinity-usd";
 import zeusd from "./zoth-zeusd";
 import zchf from "./frankencoin";
-import bold from "./liquity-bold";
+import bold from "./legacy-bold";
 import lvlusd from "./level-usd";
 import usdq from "./quill-usd";
 import noonusn from "./noon-usn";
@@ -266,6 +266,13 @@ import mead2 from './mead-2';
 import yu from './yala-stablecoin';
 import a7a5 from './a7a5';
 import hyperstable from './hyperstable';
+import liquityBold from './liquity-bold';
+import benji from './franklin-onchain-u-s-government-money-fund';
+import avusd from './avant-usd';
+import eurq from "./quantoz-eurq";
+import qusdq from "./quantoz-usdq";
+import usdaf from './asymmetry-usdaf';
+import ylds from './ylds';
 
 export default {
   tether,
@@ -495,7 +502,7 @@ export default {
   "dtrinity-usd": dtrinityusd,
   "zoth-zeusd": zeusd,
   frankencoin: zchf,
-  "liquity-bold": bold,
+  "legacy-bold": bold,
   "level-usd": lvlusd,
   "quill-usd": usdq,
   "noon-usn": noonusn,
@@ -537,4 +544,11 @@ export default {
   "yala-stablecoin": yu,
   "a7a5": a7a5,
   "hyperstable": hyperstable,
+  "liquity-bold": liquityBold,
+  "franklin-onchain-u-s-government-money-fund": benji,
+  "avant-usd":avusd,
+  "quantoz-eurq": eurq,
+  "quantoz-usdq": qusdq,
+  "asymmetry-usdaf": usdaf,
+  "ylds": ylds
 };
