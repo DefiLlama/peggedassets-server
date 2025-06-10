@@ -5446,6 +5446,7 @@ export default [
     pegMechanism: "fiat-backed",
     auditLinks: null,
     priceSource: "defillama",
+    twitter: "https://x.com/figuremarkets",
   },
   {
     id: "273",
@@ -5461,8 +5462,10 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    auditLinks: null,
+    auditLinks: ["https://docs.asymmetry.finance/security/audits-bug-bounties"],
     priceSource: "defillama",
+    twitter: "https://x.com/asymmetryfin",
+    wiki: "https://docs.asymmetry.finance/usdaf-stablecoin/what-is-usdaf",
   },
   {
     id: "274",
