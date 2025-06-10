@@ -265,6 +265,7 @@ import plumeUsd from './plume-usd';
 import mead2 from './mead-2';
 import yu from './yala-stablecoin';
 import a7a5 from './a7a5';
+import hyperstable from './hyperstable';
 import liquityBold from './liquity-bold';
 import benji from './franklin-onchain-u-s-government-money-fund';
 import avusd from './avant-usd';
@@ -272,7 +273,6 @@ import eurq from "./quantoz-eurq";
 import qusdq from "./quantoz-usdq";
 import usdaf from './asymmetry-usdaf';
 import ylds from './ylds';
-
 
 export default {
   tether,
@@ -543,6 +543,7 @@ export default {
   "mead-2": mead2,
   "yala-stablecoin": yu,
   "a7a5": a7a5,
+  "hyperstable": hyperstable,
   "liquity-bold": liquityBold,
   "franklin-onchain-u-s-government-money-fund": benji,
   "avant-usd":avusd,
