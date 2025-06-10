@@ -5450,7 +5450,7 @@ export default [
   },
   {
     id: "273",
-    name: "Assymetry USDaf",
+    name: "Asymmetry USDaf",
     address: "0x85e30b8b263bc64d94b827ed450f2edfee8579da",
     symbol: "USDaf",
     url: "https://usdaf.asymmetry.finance/",
