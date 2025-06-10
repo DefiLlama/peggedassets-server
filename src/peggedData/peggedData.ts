@@ -5440,12 +5440,11 @@ export default [
       `YLDS is a fixed price, daily accrual public debt security native to blockchain. It is the first interest-bearing transferable stablecoin native to a public blockchain, registered with the Securities and Exchange Commission. YLDS can be transferred peer-to-peer and is backed by the same securities that prime money market funds hold.`,
     mintRedeemDescription: "Minted when users purchase YLDS on figuremarkets.com and can be redeemed 1:1 for USD/USDC 24/7.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "ylds",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     auditLinks: null,
     priceSource: "defillama",
-    doublecounted: true
   },
 ] as PeggedAsset[];
