@@ -1182,6 +1182,12 @@ export const chainCoingeckoIds = {
     twitter: "plumenetwork",
     url: "https://plume.org/",
   },
+  Provenance: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["Cosmos"],
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1498,6 +1504,8 @@ export function getChainDisplayName(
       return useNewChainNames ? "Hyperliquid L1" : "Hyperliquid"
     case "optimism":
       return useNewChainNames ? "OP Mainnet" : "Optimism" 
+    case "provenance":
+      return "Provenance";
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
