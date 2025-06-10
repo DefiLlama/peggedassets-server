@@ -5507,4 +5507,24 @@ export default [
     twitter: "https://twitter.com/Quantoz",
     wiki: null,
   },
+  {
+    id: "276",
+    name: "Hyperstable USD",
+    address: "hyperliquid:0x8ff0dd9f9c40a0d76ef1bcfaf5f98c1610c74bd8",
+    symbol: "USH",
+    url: "https://app.hyperstable.xyz/",
+    description:
+        "USH is an over-collateralized, crypto-backed stablecoin designed to maintain a 1:1 peg to the US dollar, with decentralized, non-custodial vaults and onchain interest rate adjustments to ensure stability and resilience",
+    mintRedeemDescription:
+        "To mint the USH stablecoin, users deposit one of the supported collateral types into the designated vault. Each vault has its own minimum health factor requirement and interest rate",
+    onCoinGecko: true,
+    gecko_id: "hyperstable",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.hyperstable.xyz/docs/security/audits/"],
+    twitter: "https://x.com/hyperstableX",
+    wiki: "https://docs.hyperstable.xyz/docs/protocol/ush/",
+  },
 ] as PeggedAsset[];
