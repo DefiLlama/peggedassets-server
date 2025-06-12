@@ -19,6 +19,9 @@ const chainContracts: ChainContracts = {
   },
   avax: {
     issued: ["0xe08b4c1005603427420e64252a8b120cace4d122"]
+  },
+  ethereum: {
+    issued: ["0x3DDc84940Ab509C11B20B76B466933f40b750dc9"]
   }
 }
 
