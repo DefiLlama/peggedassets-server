@@ -1,7 +1,7 @@
 
+import { importAdapter } from "../../src/peggedAssets/utils/importAdapter";
 import peggedAssets from "../../src/peggedData/peggedData";
 import { getChainDisplayName } from "../../src/utils/normalizeChain";
-import { importAdapter } from "../../src/peggedAssets/utils/importAdapter";
 import { cache } from "../cache";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
@@ -24,8 +24,8 @@ export function getStablecoinData(peggedID: string | undefined) {
   const module = importAdapter(peggedData)
   const { balances, lastBalance } = cache.peggedAssetsData?.[peggedData.id] ?? {}
   const lastBalancesHourlyRecord = lastBalance
-  // currently frontend does not use data before May 11, 2022 for individual stablecoins
-  const historicalPeggedBalances = balances.filter((item) => item.SK >= 1652241600)
+  // currently frontend does not use data before Jan 1, 2015 for individual stablecoins
+  const historicalPeggedBalances = balances.filter((item) => item.SK >= 1420070400)
 
   if (!useHourlyData) {
     replaceLast(historicalPeggedBalances, lastBalancesHourlyRecord);
