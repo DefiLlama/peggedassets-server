@@ -3,9 +3,6 @@ const axios = require("axios");
 
 const PRICES_API = "https://coins.llama.fi/prices";
 
-export type GetCoingeckoLog = () => Promise<any>;
-
-
 export async function getPrices(assets: any[]) {
   const mapping = {} as any;
   function getTokenAddress(token: any) {

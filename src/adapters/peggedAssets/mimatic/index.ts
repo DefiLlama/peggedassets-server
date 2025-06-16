@@ -10,26 +10,6 @@ const axios = require("axios");
 const retry = require("async-retry");
 const BigNumber = require("bignumber.js");
 
-type GetCoingeckoLog = () => Promise<any>;
-
-const locks = [] as ((value: unknown) => void)[];
-function getCoingeckoLock() {
-  return new Promise((resolve) => {
-    locks.push(resolve);
-  });
-}
-function releaseCoingeckoLock() {
-  const firstLock = locks.shift();
-  if (firstLock !== undefined) {
-    firstLock(null);
-  }
-}
-
-setInterval(() => {
-  releaseCoingeckoLock();
-}, 1500);
-const maxCoingeckoRetries = 5;
-
 
 // Using API provided by MAI devs because they do not agree with the values calculated from on-chain contracts.
 const chainContracts: ChainContracts = {
@@ -152,66 +132,6 @@ const chainContracts: ChainContracts = {
 sxnetwork address: 0xF9AbB1Ef0dAb68cEdf1acbD6859510B0af4ca1d5
 */
 
-async function polygonMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
-        target: chainContracts.polygon.issued[0],
-        block: _chainBlocks?.[chain],
-        chain: chain,
-      })
-    ).output;
-    for (let owner of chainContracts.polygon.anyMAI) {
-      const reserve = (
-        await sdk.api.erc20.balanceOf({
-          target: chainContracts.polygon.issued[0],
-          owner: owner,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        -reserve / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-    for (let owner of chainContracts.polygon.burned) {
-      const burned = (
-        await sdk.api.erc20.balanceOf({
-          target: chainContracts.polygon.issued[0],
-          owner: owner,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        -burned / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      totalSupply / 10 ** decimals,
-      "issued",
-      false
-    );
-    return balances;
-  };
-}
-
 async function solanaMAISupply(target: string, reserve: string) {
   return async function (
     _timestamp: number,
@@ -321,7 +241,6 @@ async function maiApiCirculating(key: string) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    await getCoingeckoLock();
     const res = await retry(
       async (_bail: any) =>
         await axios("https://api.mai.finance/v2/circulatingMai")
