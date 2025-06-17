@@ -4380,7 +4380,7 @@ export default [
   },
   {
     id: "218",
-    name: "River",
+    name: "River Stablecoin",
     address: "bob:0xecf21b335B41f9d5A89f6186A99c19a3c467871f",
     symbol: "satUSD",
     url: "https://app.river.inc",
