@@ -4380,14 +4380,14 @@ export default [
   },
   {
     id: "218",
-    name: "Satoshi Stablecoin",
+    name: "River",
     address: "bob:0xecf21b335B41f9d5A89f6186A99c19a3c467871f",
     symbol: "satUSD",
-    url: "https://www.satoshiprotocol.org/",
+    url: "https://app.river.inc",
     description:
-      `Satoshi Protocol is a universal stablecoin protocol backed by Bitcoin, using BTC as collateral to mint the native stablecoin satUSD across Bitcoin Mainnet, Layer 2s, and the EVM ecosystem`,
+      `River is building the circulatory system for crypto, connecting liquidity, yield and contributions across chains. Powered by the omni-CDP stablecoin protocol, earn, leverage, and scale — all without selling your assets.`,
     mintRedeemDescription:
-      "The Satoshi Protocol allows users to access liquidity by depositing collateral, enabling them to borrow up to 90.91% of the collateral's value in satUSD",
+      "River's Omni-CDP module allows users to access liquidity by depositing collateral, enabling them to borrow up to 90.91% of the collateral's value in satUSD",
     onCoinGecko: "true",
     gecko_id: "satoshi-stablecoin",
     cmcId: null,
@@ -4395,8 +4395,8 @@ export default [
     pegMechanism: "crypto-backed",
     auditLinks: ["https://github.com/Satoshi-Protocol/satoshi-audit-report"],
     priceSource: "defillama",
-    twitter: "https://x.com/Satoshi_BTCFi",
-    wiki: "https://docs.satoshiprotocol.org/"
+    twitter: "https://x.com/River4fun",
+    wiki: "https://docs.river.inc/"
   },
   {
     id: "219",
