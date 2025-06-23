@@ -5527,4 +5527,24 @@ export default [
     twitter: "https://x.com/hyperstableX",
     wiki: "https://docs.hyperstable.xyz/docs/protocol/ush/",
   },
+  {
+    id: "277",
+    name: "Parabol USD",
+    address: "base:0x1f94d6A61973eDf53252b9E61c6250F303957b9D",
+    symbol: "paraUSD",
+    url: "https://parabol.fi/",
+    description:
+       "Parabol USD (paraUSD) is a fiat-backed stablecoin built on the Parabol Protocol, offering a revolutionary approach to yield generation in the stablecoin ecosystem. The protocol enables savers to access risk-free yields as a baseline through its innovative Reserve Stability Pool (RSP). Users can lend their paraUSD for specific time periods (like 28-day notes), earning both fixed income based on T-Bill rates and additional floating income derived from overnight repo market performance. Treasury departments can optimize cash management while maintaining security, and developers can easily embed these institutional-grade yields into their applications through Parabol's comprehensive APIs and SDKs. All positions are represented as NFTs that can be transferred across markets.",
+    mintRedeemDescription:
+       "paraUSD can be obtained in three ways: (1) minting it directly with fiat after completing Know Your Business (KYB) or Know Your Customer (KYC) verification; (2) trading on centralized exchanges; or (3) trading on decentralized exchanges.",
+    onCoinGecko: true,
+    gecko_id: "parabol-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://github.com/Parabol-Finance/parabol-protocol-contracts/blob/main/audits/trailofbits-audit-250124.pdf","https://github.com/Parabol-Finance/parabol-protocol-contracts/blob/main/audits/trailofbits-audit-240514.pdf"],
+    twitter: "https://x.com/parabolfi",
+    wiki: "https://docs.parabol.fi/",
+  },
 ] as PeggedAsset[];

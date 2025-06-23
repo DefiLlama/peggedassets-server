@@ -273,6 +273,7 @@ import eurq from "./quantoz-eurq";
 import qusdq from "./quantoz-usdq";
 import usdaf from './asymmetry-usdaf';
 import ylds from './ylds';
+import parausd from './parabol-usd';
 
 export default {
   tether,
@@ -550,5 +551,6 @@ export default {
   "quantoz-eurq": eurq,
   "quantoz-usdq": qusdq,
   "asymmetry-usdaf": usdaf,
-  "ylds": ylds
+  "ylds": ylds,
+  "parabol-usd": parausd
 };
