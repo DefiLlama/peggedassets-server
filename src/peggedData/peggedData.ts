@@ -1584,7 +1584,7 @@ export default [
     name: "Lista USD",
     address: "bsc:0x0782b6d8c4551b9760e74c0545a9bcd90bdc41e5",
     symbol: "LISUSD",
-    url: "https://helio.money/",
+    url: "https://lista.org",
     description:
       "HAY is a decentralized, unbiased, collateral-backed destablecoin soft-pegged to the US Dollar.",
     mintRedeemDescription:
@@ -1596,7 +1596,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
-    twitter: "https://twitter.com/Helio_Money",
+    twitter: "https://twitter.com/LISTA_DAO",
     wiki: "https://wiki.defillama.com/wiki/Helio_Protocol",
   },
   /*
