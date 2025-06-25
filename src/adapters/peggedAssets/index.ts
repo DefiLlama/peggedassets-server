@@ -275,6 +275,7 @@ import usdaf from './asymmetry-usdaf';
 import ylds from './ylds';
 import usdn from './smardex-usdn';
 import weusd from './weusd';
+import parausd from './parabol-usd';
 
 export default {
   tether,
@@ -554,5 +555,6 @@ export default {
   "asymmetry-usdaf": usdaf,
   "ylds": ylds,
   "smardex-usdn": usdn,
-  "weusd": weusd
+  "weusd": weusd,
+  "parabol-usd": parausd
 };
