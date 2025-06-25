@@ -5553,7 +5553,7 @@ export default [
     coin_icon: "https://raw.githubusercontent.com/pipimove/logo/refs/heads/main/coin_weusd.ico",
     url: "https://picwe.org",
     description:
-      "WEUSD is a USD stablecoin built on the Movement blockchain that maintains a 1:1 peg to USD. This stablecoin provides stable value storage and exchange medium for the Movement ecosystem.",
+      "$WEUSD is a key component of PicWe’s ecosystem, designed to provide stability and facilitate efficient, reliable cross-chain transactions. As a native decentralized stablecoin, $WEUSD is created on-chain via smart contracts and plays a critical role in PicWe’s Omni-chain asset settlement layer.",
     mintRedeemDescription:
       "Users can mint WEUSD by depositing USDT/USDC assets.",
     onCoinGecko: "false",
