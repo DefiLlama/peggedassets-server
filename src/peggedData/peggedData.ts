@@ -5532,7 +5532,7 @@ export default [
     name: "SMARDEX USDN",
     address: "0xde17a000ba631c5d7c2bd9fb692efea52d90dee2",
     symbol: "USDN",
-    url: "https://etherscan.io/token/0xde17a000ba631c5d7c2bd9fb692efea52d90dee2",
+    url: "https://smardex.io/usdn/vault",
     description: "The USDN token is the first synthetic U.S. dollar backed by a structured product utilizing a delta-Neutral strategy. Unlike traditional stablecoins, whose value is guaranteed by centralized entities, the value of a synthetic dollar is determined by a purely mathematical financial process.",
     mintRedeemDescription: "Deposit Lido token (WSTETH) in USDN Vault allows to Mint USDN tokens and profit from its yield. Redeem Lido burns USDN",
     onCoinGecko: "true",
