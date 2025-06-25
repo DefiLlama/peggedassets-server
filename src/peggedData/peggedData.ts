@@ -5545,4 +5545,25 @@ export default [
     twitter: "https://x.com/SmarDex",
     wiki: null,
     },
+  {
+    id: "278",
+    name: "WEUSD",
+    address: "movement:0xed805e77c40d7e6ac5cd3e67514c485176621a2aa21e860cd515121d44a2f83d",
+    symbol: "WEUSD",
+    coin_icon: "https://raw.githubusercontent.com/pipimove/logo/refs/heads/main/coin_weusd.ico",
+    url: "https://picwe.org",
+    description:
+      "WEUSD is a USD stablecoin built on the Movement blockchain that maintains a 1:1 peg to USD. This stablecoin provides stable value storage and exchange medium for the Movement ecosystem.",
+    mintRedeemDescription:
+      "Users can mint WEUSD by depositing USDT/USDC assets.",
+    onCoinGecko: "false",
+    gecko_id: "weusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/PicWeGlobal",
+    wiki: "https://picwe.gitbook.io/picwe",
+  },
 ] as PeggedAsset[];
