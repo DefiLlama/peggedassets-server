@@ -274,6 +274,7 @@ import qusdq from "./quantoz-usdq";
 import usdaf from './asymmetry-usdaf';
 import ylds from './ylds';
 import usdn from './smardex-usdn';
+import weusd from './weusd';
 
 export default {
   tether,
@@ -552,5 +553,6 @@ export default {
   "quantoz-usdq": qusdq,
   "asymmetry-usdaf": usdaf,
   "ylds": ylds,
-  "smardex-usdn": usdn
+  "smardex-usdn": usdn,
+  "weusd": weusd
 };

@@ -5565,5 +5565,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/PicWeGlobal",
     wiki: "https://picwe.gitbook.io/picwe",
+    doublecounted: true
   },
 ] as PeggedAsset[];
