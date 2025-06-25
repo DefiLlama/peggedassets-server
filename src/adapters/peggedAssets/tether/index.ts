@@ -961,6 +961,8 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   klaytn: {
+    minted: usdtApiMinted("totaltokens_kaia"),
+    unreleased: usdtApiUnreleased("reserve_balance_kaia"),
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
   canto: {
