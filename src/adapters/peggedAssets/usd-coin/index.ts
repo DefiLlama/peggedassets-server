@@ -1,6 +1,7 @@
 const sdk = require("@defillama/sdk");
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import * as sui from "../helper/sui";
+import * as xrpl from "../ripple-usd/index";
 import {
   sumSingleBalance,
   sumMultipleBalanceFunctions,
@@ -1060,7 +1061,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   story: {
     ethereum: bridgedSupply("story", 6, chainContracts.story.bridgedFromETH, "stargate"),
-  }
+  },
+  xrpl: {
+    minted: chainMinted("xrpl", 6)
+  },
 };
 
 export default adapter;

@@ -500,4 +500,7 @@ export const chainContracts: ChainContracts = {
   story: {
     bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"],
   },
+  xrpl: {
+    issued: ["5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"], 
+  },
 };
