@@ -1584,7 +1584,7 @@ export default [
     name: "Lista USD",
     address: "bsc:0x0782b6d8c4551b9760e74c0545a9bcd90bdc41e5",
     symbol: "LISUSD",
-    url: "https://helio.money/",
+    url: "https://lista.org",
     description:
       "HAY is a decentralized, unbiased, collateral-backed destablecoin soft-pegged to the US Dollar.",
     mintRedeemDescription:
@@ -1596,7 +1596,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
-    twitter: "https://twitter.com/Helio_Money",
+    twitter: "https://twitter.com/LISTA_DAO",
     wiki: "https://wiki.defillama.com/wiki/Helio_Protocol",
   },
   /*
@@ -4380,14 +4380,14 @@ export default [
   },
   {
     id: "218",
-    name: "Satoshi Stablecoin",
+    name: "River Stablecoin",
     address: "bob:0xecf21b335B41f9d5A89f6186A99c19a3c467871f",
     symbol: "satUSD",
-    url: "https://www.satoshiprotocol.org/",
+    url: "https://app.river.inc",
     description:
-      `Satoshi Protocol is a universal stablecoin protocol backed by Bitcoin, using BTC as collateral to mint the native stablecoin satUSD across Bitcoin Mainnet, Layer 2s, and the EVM ecosystem`,
+      `River is building the circulatory system for crypto, connecting liquidity, yield and contributions across chains. Powered by the omni-CDP stablecoin protocol, earn, leverage, and scale — all without selling your assets.`,
     mintRedeemDescription:
-      "The Satoshi Protocol allows users to access liquidity by depositing collateral, enabling them to borrow up to 90.91% of the collateral's value in satUSD",
+      "River's Omni-CDP module allows users to access liquidity by depositing collateral, enabling them to borrow up to 90.91% of the collateral's value in satUSD",
     onCoinGecko: "true",
     gecko_id: "satoshi-stablecoin",
     cmcId: null,
@@ -4395,8 +4395,8 @@ export default [
     pegMechanism: "crypto-backed",
     auditLinks: ["https://github.com/Satoshi-Protocol/satoshi-audit-report"],
     priceSource: "defillama",
-    twitter: "https://x.com/Satoshi_BTCFi",
-    wiki: "https://docs.satoshiprotocol.org/"
+    twitter: "https://x.com/River4fun",
+    wiki: "https://docs.river.inc/"
   },
   {
     id: "219",
@@ -5172,7 +5172,7 @@ export default [
     url: "https://a7a5.io/",
     description: "A7A5 is a RUB stablecoin, fully backed by real assets and integrated into the Tron and Ethereum ecosystem. The main goal is to provide crypto enthusiasts with a safe and transparent tool for trading and passive income",
     mintRedeemDescription: "Users mint A7A5 by depositing Russian rubles through authorized partners with KYC, receiving tokens 1:1 on-chain, and can redeem them by returning A7A5 for an equivalent ruble payout",
-    onCoinGecko: "false",
+    onCoinGecko: "true",
     gecko_id: "a7a5",
     cmcId: "36549",
     pegType: "peggedRUB",
@@ -5532,7 +5532,7 @@ export default [
     name: "SMARDEX USDN",
     address: "0xde17a000ba631c5d7c2bd9fb692efea52d90dee2",
     symbol: "USDN",
-    url: "https://etherscan.io/token/0xde17a000ba631c5d7c2bd9fb692efea52d90dee2",
+    url: "https://smardex.io/usdn/vault",
     description: "The USDN token is the first synthetic U.S. dollar backed by a structured product utilizing a delta-Neutral strategy. Unlike traditional stablecoins, whose value is guaranteed by centralized entities, the value of a synthetic dollar is determined by a purely mathematical financial process.",
     mintRedeemDescription: "Deposit Lido token (WSTETH) in USDN Vault allows to Mint USDN tokens and profit from its yield. Redeem Lido burns USDN",
     onCoinGecko: "true",
@@ -5565,5 +5565,26 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/PicWeGlobal",
     wiki: "https://picwe.gitbook.io/picwe",
+    doublecounted: true
+  },
+  {
+    id: "279",
+    name: "Parabol USD",
+    address: "base:0x1f94d6A61973eDf53252b9E61c6250F303957b9D",
+    symbol: "paraUSD",
+    url: "https://parabol.fi/",
+    description:
+       "Parabol USD (paraUSD) is a fiat-backed stablecoin built on the Parabol Protocol, offering a revolutionary approach to yield generation in the stablecoin ecosystem. The protocol enables savers to access risk-free yields as a baseline through its innovative Reserve Stability Pool (RSP). Users can lend their paraUSD for specific time periods (like 28-day notes), earning both fixed income based on T-Bill rates and additional floating income derived from overnight repo market performance. Treasury departments can optimize cash management while maintaining security, and developers can easily embed these institutional-grade yields into their applications through Parabol's comprehensive APIs and SDKs. All positions are represented as NFTs that can be transferred across markets.",
+    mintRedeemDescription:
+       "paraUSD can be obtained in three ways: (1) minting it directly with fiat after completing Know Your Business (KYB) or Know Your Customer (KYC) verification; (2) trading on centralized exchanges; or (3) trading on decentralized exchanges.",
+    onCoinGecko: true,
+    gecko_id: "parabol-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://github.com/Parabol-Finance/parabol-protocol-contracts/blob/main/audits/trailofbits-audit-250124.pdf","https://github.com/Parabol-Finance/parabol-protocol-contracts/blob/main/audits/trailofbits-audit-240514.pdf"],
+    twitter: "https://x.com/parabolfi",
+    wiki: "https://docs.parabol.fi/",
   },
 ] as PeggedAsset[];
