@@ -5587,4 +5587,42 @@ export default [
     twitter: "https://x.com/parabolfi",
     wiki: "https://docs.parabol.fi/",
   },
+ {
+    id: "280",
+    name: "Tether CNH",
+    address: "0x6e109e9dd7fa1a58bc3eff667e8e41fc3cc07aef",
+    symbol: "CNHT",
+    url: "https://tether.to/en/",
+    description:
+       "All Tether tokens are pegged at 1-to-1 with a matching fiat currency and are backed 100% by Tether’s Reserves. Information about Tether Tokens in circulation is typically published daily.",
+    mintRedeemDescription:
+       "Redeem 1:1",
+    onCoinGecko: true,
+    gecko_id: "cnh-tether",
+    cmcId: null,
+    pegType: "peggedCNY",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/Tether_to",
+    wiki: "https://tether.to/en/",
+  },
+  {
+    id: "281",
+    name: "Mexican Peso Tether",
+    address: "0xed03ed872159e199065401b6d0d487d78d9464aa",
+    symbol: "MXNT",
+    url: "https://tether.to/en/",
+    description:
+       "All Tether tokens are pegged at 1-to-1 with a matching fiat currency and are backed 100% by Tether’s Reserves. Information about Tether Tokens in circulation is typically published daily.",
+    mintRedeemDescription:
+       "Redeem 1:1",
+    onCoinGecko: true,
+    gecko_id: "mexican-peso-tether",
+    cmcId: null,
+    pegType: "peggedMXN",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/Tether_to",
+    wiki: "https://tether.to/en/",
+  },
 ] as PeggedAsset[];
