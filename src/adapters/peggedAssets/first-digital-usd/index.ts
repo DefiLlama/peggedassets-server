@@ -19,6 +19,9 @@ const chainContracts: ChainContracts = {
   },
   solana: {
     issued: ["9zNQRsGLjNKwCUU5Gq5LR8beUCPzQMVMqKAi3SSZh54u"]
+  },
+  arbitrum: {
+    issued: ["0x93C9932E4afa59201F0B5E63f7d816516F1669fE"],
   }
 };
 
@@ -98,7 +101,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued),
-  }
+  },
+  arbitrum: {
+    minted: chainMinted("arbitrum", 18),
+  },
 };
 
 export default adapter;

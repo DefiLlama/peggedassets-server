@@ -1,7 +1,7 @@
 const sdk = require("@defillama/sdk");
 import { ChainApi } from "@defillama/sdk";
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
-import { sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
+import { getTetherTransparency, sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
   getApi,
@@ -310,11 +310,8 @@ async function usdtApiMinted(key: string) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios("https://app.tether.to/transparency.json")
-    );
-    const issuance = res.data.data.usdt;
+    const res = await getTetherTransparency();
+    const issuance = res.data.usdt;
     const totalSupply = parseInt(issuance[key]);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
@@ -328,11 +325,8 @@ async function usdtApiUnreleased(key: string) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios("https://app.tether.to/transparency.json")
-    );
-    const issuance = res.data.data.usdt;
+    const res = await getTetherTransparency();
+    const issuance = res.data.usdt;
     const totalSupply = parseInt(issuance[key]);
     sumSingleBalance(balances, "peggedUSD", totalSupply);
     return balances;
@@ -961,6 +955,8 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   klaytn: {
+    minted: usdtApiMinted("totaltokens_kaia"),
+    unreleased: usdtApiUnreleased("reserve_balance_kaia"),
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
   canto: {

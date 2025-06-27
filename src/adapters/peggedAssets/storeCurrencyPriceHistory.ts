@@ -2,30 +2,9 @@ import fs from "fs";
 import { getTimestampAtStartOfDay } from "../../utils/date";
 import axios from "axios";
 
-export type GetCoingeckoLog = () => Promise<any>;
-
 function fetchJson(url: string) {
   return axios(url).then((res) => res.data);
 }
-
-const locks = [] as ((value: unknown) => void)[];
-function getCoingeckoLock() {
-  return new Promise((resolve) => {
-    locks.push(resolve);
-  });
-}
-function releaseCoingeckoLock() {
-  const firstLock = locks.shift();
-  if (firstLock !== undefined) {
-    firstLock(null);
-  }
-}
-// Rate limit is 50 calls/min for coingecko's API
-// So we'll release one every 1.2 seconds to match it
-setInterval(() => {
-  releaseCoingeckoLock();
-}, 2000);
-const maxCoingeckoRetries = 5;
 
 const storePriceHistory = async (timestamp: number) => {
   let result = {} as any;
@@ -41,7 +20,7 @@ const storePriceHistory = async (timestamp: number) => {
     console.log(dateFormatted);
 
     let url = `https://openexchangerates.org/api/historical/${dateFormatted}.json?app_id=292b4223032e4b719b10c38f95fb1c90`;
-    const res = await makeCoingeckoCall(url, 4, getCoingeckoLock);
+    const res = await getWithRetries(url, 4);
     const time = getTimestampAtStartOfDay(res.timestamp);
     const rates = res.rates;
 
@@ -55,14 +34,12 @@ const storePriceHistory = async (timestamp: number) => {
   console.log("done");
 };
 
-export async function makeCoingeckoCall(
+export async function getWithRetries(
   url: string,
-  coingeckoMaxRetries: number,
-  getCoingeckoLock: GetCoingeckoLog
+  coingeckoMaxRetries: number
 ) {
   for (let j = 0; j < coingeckoMaxRetries; j++) {
     try {
-      await getCoingeckoLock();
       const values = await fetchJson(url);
       return values;
     } catch (e) {
