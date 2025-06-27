@@ -6,8 +6,6 @@ import {
   PeggedIssuanceAdapter,
   Balances,  ChainContracts,
 } from "../peggedAsset.type";
-const axios = require("axios");
-const retry = require("async-retry");
 
 
 const chainContracts: ChainContracts = {
@@ -66,88 +64,6 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
       ).output;
       sumSingleBalance(balances, "peggedEUR", reserve / 10 ** decimals);
     }
-    return balances;
-  };
-}
-
-async function omniMinted() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const options = {
-      method: "post",
-      url: "https://api.omniexplorer.info/v1/properties/listbyecosystem",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      data: "ecosystem=1",
-    };
-    const res = await retry(async (_bail: any) => await axios(options));
-    const totalSupply = parseInt(res.data.properties[461].totaltokens);
-    sumSingleBalance(balances, "peggedEUR", totalSupply, "issued", false);
-    return balances;
-  };
-}
-
-async function omniUnreleased() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const options = {
-      method: "post",
-      url: "https://api.omniexplorer.info/v1/address/addr",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      data: "addr=1NTMakcgVwQpMdGxRQnFKyb3G1FAJysSfz",
-    };
-    const res = await retry(async (_bail: any) => await axios(options));
-    const account = res.data.balance.filter((obj: any) => obj.id === "41");
-    const balance = parseInt(account[0].value);
-    sumSingleBalance(balances, "peggedEUR", balance / 10 ** 8);
-    return balances;
-  };
-}
-
-async function usdtApiMinted(key: string) {
-  // would be better to replace with different api or on-chain calls
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios("https://app.tether.to/transparency.json")
-    );
-    const issuance = res.data.data.usdt;
-    const totalSupply = parseInt(issuance[key]);
-    sumSingleBalance(balances, "peggedEUR", totalSupply, "issued", false);
-    return balances;
-  };
-}
-
-async function usdtApiUnreleased(key: string) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios("https://app.tether.to/transparency.json")
-    );
-    const issuance = res.data.data.usdt;
-    const totalSupply = parseInt(issuance[key]);
-    sumSingleBalance(balances, "peggedEUR", totalSupply);
     return balances;
   };
 }

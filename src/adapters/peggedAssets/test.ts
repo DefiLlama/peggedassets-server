@@ -3,8 +3,6 @@ process.env.SKIP_RPC_CHECK = 'true'
 
 require("dotenv").config();
 const path = require("path");
-const { chainsForBlocks } = require("@defillama/sdk/build/computeTVL/blocks");
-const { getLatestBlock } = require("@defillama/sdk/build/util/index");
 import { PeggedAssetIssuance, PeggedTokenBalance } from "../../types";
 import { PeggedIssuanceAdapter } from "./peggedAsset.type";
 const {
@@ -23,16 +21,6 @@ type BridgeMapping = {
 };
 
 const pegTypes = ["peggedUSD", "peggedEUR", "peggedVAR"];
-
-async function getLatestBlockRetry(chain: string) {
-  for (let i = 0; i < 5; i++) {
-    try {
-      return await getLatestBlock(chain);
-    } catch (e) {
-      throw new Error(`Couln't get block heights for chain "${chain}"` + e);
-    }
-  }
-}
 
 async function getPeggedAsset(
   _unixTimestamp: number,
@@ -252,12 +240,16 @@ const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
   if (peggedBalances.totalCirculating.circulating[pegType] === 0) {
     throw new Error(`Returned 0 total circulating`);
   }
+  const displayTable: any = []
   Object.entries(peggedBalances).forEach(([chain, issuances]) => {
+    const item: any = { chain}
     if (chain !== "totalCirculating") {
+      displayTable.push(item)
       console.log(`--- ${chain} ---`);
       Object.entries(issuances)
         .sort((a, b) => (b[1][pegType] ?? 0) - (a[1][pegType] ?? 0))
         .forEach(([issuanceType, issuance]) => {
+          item[issuanceType] =  humanizeNumber(issuance[pegType]);
           console.log(
             issuanceType.padEnd(25, " "),
             humanizeNumber(issuance[pegType])
@@ -266,14 +258,18 @@ const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
     }
   });
   console.log(`------ Total Circulating ------`);
+  const totalItem: any = { chain: "Total Circulating" }
   Object.entries(peggedBalances.totalCirculating).forEach(
-    ([issuanceType, issuance]) =>
+    ([issuanceType, issuance]) =>{
+      totalItem[issuanceType] = humanizeNumber(issuance[pegType]);
       console.log(
         `Total ${issuanceType}`.padEnd(25, " "),
         humanizeNumber(issuance[pegType])
       )
+    }
   );
-  await saveSdkInternalCache()
+  displayTable.push(totalItem)
+  console.table(displayTable);
   process.exit(0);
 })();
 

@@ -21,6 +21,7 @@ export type PeggedAssetType =
   | "peggedCOP"
   | "peggedREAL"
   | "peggedRUB"
+  | "peggedMXN"
   | "peggedAUD";
 
 type StringNumber = string;
