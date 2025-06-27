@@ -1,4 +1,4 @@
-// import { addChainExports } from "../helper/getSupply";
+import { addChainExports } from "../helper/getSupply";
 import { PeggedIssuanceAdapter, Balances } from "../peggedAsset.type";
 import { function_view } from "../helper/aptos";
 
@@ -18,23 +18,20 @@ async function movementSupply(): Promise<Balances> {
   return balances;
 }
 
-// const chainContracts = {
-//   ethereum: {
-//     issued: ["0xcacd6fd266af91b8aed52accc382b4e165586e29"],
-//   },
-//   base: {
-//     issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
-//   },
-//   arbitrum: {
-//     issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
-//   },
-//   bsc: {
-//     issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
-//   },
-// };
+const chainContracts = {
+  base: {
+    issued: "0xdd73EA766B80417C0607A3f08E34A0C415D89D56",
+  },
+  arbitrum: {
+    issued: "0xdd73EA766B80417C0607A3f08E34A0C415D89D56",
+  },
+  bsc: {
+    issued: "0xdd73EA766B80417C0607A3f08E34A0C415D89D56",
+  },
+};
 
 const adapter: PeggedIssuanceAdapter = {
-  // ...addChainExports(chainContracts),
+  ...addChainExports(chainContracts),
   move: {
     minted: movementSupply,
   }
