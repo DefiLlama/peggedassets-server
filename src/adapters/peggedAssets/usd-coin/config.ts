@@ -500,4 +500,22 @@ export const chainContracts: ChainContracts = {
   story: {
     bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"],
   },
+  nero: {
+    bridgedFromARB: ["0x8712796136ac8e0eeec123251ef93702f265aa80"],
+  },
+  perennial: {
+    bridgedFromETH: ["0x39CD9EF9E511ec008247aD5DA01245D84a9521be"],
+  },
+  ape: {
+    bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"],
+  },
+  glue: {
+    bridgedFromETH: ["0xEe45ed3f6c675F319BB9de62991C1E78B484e0B8"],
+  },
+  goat: {
+    bridgedFromETH: ["0x3022b87ac063DE95b1570F46f5e470F8B53112D8"],
+  },
+  rootstock: {
+    bridgedFromETH: ["0x74C9F2B00581F1b11Aa7Ff05aa9f608B7389de67"],
+  },
 };
