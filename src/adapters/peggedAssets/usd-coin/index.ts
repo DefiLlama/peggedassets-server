@@ -1,7 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import * as sui from "../helper/sui";
-import * as xrpl from "../ripple-usd/index";
 import {
   sumSingleBalance,
   sumMultipleBalanceFunctions,
@@ -514,6 +513,42 @@ async function moveSupply(): Promise<Balances> {
   return balances;
 }
 
+async function rippleMinted() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    const balances = {} as Balances;
+    
+    const NODE_URL = "https://xrplcluster.com";
+    
+    // Get the USDC token info from config
+    const usdcToken = chainContracts.ripple.issued[0]; // "5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"
+    const [currencyCode, issuerAddress] = usdcToken.split('.');
+    
+    const payload = {
+      method: "gateway_balances",
+      params: [
+        {
+          account: issuerAddress,
+          ledger_index: "validated",
+        },
+      ],
+    };
+
+    const res = await retry(async (_bail: any) => axios.post(NODE_URL, payload));
+    
+    if (res.data.result && res.data.result.obligations && res.data.result.obligations[currencyCode]) {
+      const supplyStr = res.data.result.obligations[currencyCode];
+      const supply = parseFloat(supplyStr); // XRPL API returns value in correct decimal format
+      
+      sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
+    }
+    
+    return balances;
+  };
+}
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
@@ -783,10 +818,11 @@ const adapter: PeggedIssuanceAdapter = {
   },
   karura: {
     ethereum: karuraMinted(chainContracts.karura.bridgedFromETH[0], 6),
-  } /*
+  },
+  /*
   ontology: {
     ethereum: ontologyBridged(),
-  },*/,
+  },*/
   sx: {
     ethereum: bridgedSupply("sx", 6, chainContracts.sx.bridgedFromETH),
   },
@@ -1062,8 +1098,8 @@ const adapter: PeggedIssuanceAdapter = {
   story: {
     ethereum: bridgedSupply("story", 6, chainContracts.story.bridgedFromETH, "stargate"),
   },
-  xrpl: {
-    minted: chainMinted("xrpl", 6)
+  ripple: {
+    minted: rippleMinted(),
   },
 };
 
