@@ -506,7 +506,7 @@ export const chainContracts: ChainContracts = {
   perennial: {
     bridgedFromETH: ["0x39CD9EF9E511ec008247aD5DA01245D84a9521be"],
   },
-  ape: {
+  apechain: {
     bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"],
   },
   glue: {
@@ -515,7 +515,7 @@ export const chainContracts: ChainContracts = {
   goat: {
     bridgedFromETH: ["0x3022b87ac063DE95b1570F46f5e470F8B53112D8"],
   },
-  rootstock: {
+  rsk: {
     bridgedFromETH: ["0x74C9F2B00581F1b11Aa7Ff05aa9f608B7389de67"],
   },
 };
