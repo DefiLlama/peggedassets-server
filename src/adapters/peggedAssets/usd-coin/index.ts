@@ -1067,7 +1067,7 @@ const adapter: PeggedIssuanceAdapter = {
   perennial: {
     ethereum: bridgedSupply("perennial", 6, chainContracts.perennial.bridgedFromETH, "conduit"),
   },
-  ape: {
+  apechain: {
     ethereum: bridgedSupply("ape", 6, chainContracts.ape.bridgedFromETH, "stargate"),
   },
   glue: {
@@ -1076,7 +1076,7 @@ const adapter: PeggedIssuanceAdapter = {
   goat: {
     ethereum: bridgedSupply("goat", 6, chainContracts.goat.bridgedFromETH, "stargate"),
   },
-  rootstock: {
+  rsk: {
     ethereum: bridgedSupply("rootstock", 6, chainContracts.rootstock.bridgedFromETH, "stargate"),
   }
 };
