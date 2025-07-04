@@ -276,6 +276,7 @@ import ylds from './ylds';
 import usdn from './smardex-usdn';
 import weusd from './weusd';
 import parausd from './parabol-usd';
+import hemiusbd from './hemiusbd';
 
 export default {
   tether,
@@ -556,5 +557,6 @@ export default {
   "ylds": ylds,
   "smardex-usdn": usdn,
   "weusd": weusd,
-  "parabol-usd": parausd
+  "parabol-usd": parausd,
+  "hemiusbd": hemiusbd,
 };
