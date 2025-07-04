@@ -201,7 +201,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x3Ca3fEFA944753b43c751336A5dF531bDD6598B6"], // multichain
   },
   rsk: {
-    bridgedFromETH: ["0x1bda44fda023f2af8280a16fd1b01d1a493ba6c4"],
+    bridgedFromETH18Decimals: ["0x1bda44fda023f2af8280a16fd1b01d1a493ba6c4"],
+    bridgedFromETH6Decimals: ["0x74c9f2b00581f1b11aa7ff05aa9f608b7389de67"],
   },
   reinetwork: {
     bridgedFromETH: ["0x8d5E1225981359E2E09A3AB8F599A51486f53314"], // celer
@@ -514,9 +515,6 @@ export const chainContracts: ChainContracts = {
   },
   goat: {
     bridgedFromETH: ["0x3022b87ac063DE95b1570F46f5e470F8B53112D8"],
-  },
-  rsk: {
-    bridgedFromETH: ["0x74C9F2B00581F1b11Aa7Ff05aa9f608B7389de67"],
   },
   ripple: {
     issued: ["5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"],

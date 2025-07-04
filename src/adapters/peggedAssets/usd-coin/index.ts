@@ -770,7 +770,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("theta", 6, chainContracts.theta.bridgedFromETH),
   },
   rsk: {
-    ethereum: bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromETH),
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("rsk", 6, chainContracts.rsk.bridgedFromETH6Decimals),
+        bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromETH18Decimals),
+      ],
+      "peggedUSD"
+    ),
   },
   reinetwork: {
     ethereum: reinetworkBridged(chainContracts.reinetwork.bridgedFromETH[0], 6),
@@ -1099,22 +1105,19 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("story", 6, chainContracts.story.bridgedFromETH, "stargate"),
   },
   nero: {
-    ethereum: bridgedSupply("nero", 6, chainContracts.nero.bridgedFromARB, "VIA Labs"),
+    arbitrum: bridgedSupply("nero", 6, chainContracts.nero.bridgedFromARB, "VIA Labs"),
   },
   perennial: {
     ethereum: bridgedSupply("perennial", 6, chainContracts.perennial.bridgedFromETH, "conduit"),
   },
   apechain: {
-    ethereum: bridgedSupply("ape", 6, chainContracts.ape.bridgedFromETH, "stargate"),
+    ethereum: bridgedSupply("apechain", 6, chainContracts.apechain.bridgedFromETH, "stargate"),
   },
   glue: {
     ethereum: bridgedSupply("glue", 6, chainContracts.glue.bridgedFromETH, "stargate"),
   },
   goat: {
     ethereum: bridgedSupply("goat", 6, chainContracts.goat.bridgedFromETH, "stargate"),
-  },
-  rsk: {
-    ethereum: bridgedSupply("rootstock", 6, chainContracts.rootstock.bridgedFromETH, "stargate"),
   },
   ripple: {
     minted: rippleMinted(),
