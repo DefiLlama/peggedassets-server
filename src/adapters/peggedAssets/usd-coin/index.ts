@@ -1098,6 +1098,24 @@ const adapter: PeggedIssuanceAdapter = {
   story: {
     ethereum: bridgedSupply("story", 6, chainContracts.story.bridgedFromETH, "stargate"),
   },
+  nero: {
+    ethereum: bridgedSupply("nero", 6, chainContracts.nero.bridgedFromARB, "VIA Labs"),
+  },
+  perennial: {
+    ethereum: bridgedSupply("perennial", 6, chainContracts.perennial.bridgedFromETH, "conduit"),
+  },
+  apechain: {
+    ethereum: bridgedSupply("ape", 6, chainContracts.ape.bridgedFromETH, "stargate"),
+  },
+  glue: {
+    ethereum: bridgedSupply("glue", 6, chainContracts.glue.bridgedFromETH, "stargate"),
+  },
+  goat: {
+    ethereum: bridgedSupply("goat", 6, chainContracts.goat.bridgedFromETH, "stargate"),
+  },
+  rsk: {
+    ethereum: bridgedSupply("rootstock", 6, chainContracts.rootstock.bridgedFromETH, "stargate"),
+  },
   ripple: {
     minted: rippleMinted(),
   },
