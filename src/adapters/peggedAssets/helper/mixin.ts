@@ -24,7 +24,6 @@ export const mixinSupply = async (
 
     for (let assetId of assetIds) {
       const supply = await fetchMixinSupply(assetId);
-      console.info(`mixin success ${assetId} supply: ${supply}`);
       sumSingleBalance(
         balances,
         "peggedUSD",

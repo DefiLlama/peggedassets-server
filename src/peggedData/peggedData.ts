@@ -5172,7 +5172,7 @@ export default [
     url: "https://a7a5.io/",
     description: "A7A5 is a RUB stablecoin, fully backed by real assets and integrated into the Tron and Ethereum ecosystem. The main goal is to provide crypto enthusiasts with a safe and transparent tool for trading and passive income",
     mintRedeemDescription: "Users mint A7A5 by depositing Russian rubles through authorized partners with KYC, receiving tokens 1:1 on-chain, and can redeem them by returning A7A5 for an equivalent ruble payout",
-    onCoinGecko: "false",
+    onCoinGecko: "true",
     gecko_id: "a7a5",
     cmcId: "36549",
     pegType: "peggedRUB",
@@ -5553,7 +5553,7 @@ export default [
     coin_icon: "https://raw.githubusercontent.com/pipimove/logo/refs/heads/main/coin_weusd.ico",
     url: "https://picwe.org",
     description:
-      "WEUSD is a USD stablecoin built on the Movement blockchain that maintains a 1:1 peg to USD. This stablecoin provides stable value storage and exchange medium for the Movement ecosystem.",
+      "$WEUSD is a key component of PicWe’s ecosystem, designed to provide stability and facilitate efficient, reliable cross-chain transactions. As a native decentralized stablecoin, $WEUSD is created on-chain via smart contracts and plays a critical role in PicWe’s Omni-chain asset settlement layer.",
     mintRedeemDescription:
       "Users can mint WEUSD by depositing USDT/USDC assets.",
     onCoinGecko: "false",
@@ -5586,5 +5586,63 @@ export default [
     auditLinks: ["https://github.com/Parabol-Finance/parabol-protocol-contracts/blob/main/audits/trailofbits-audit-250124.pdf","https://github.com/Parabol-Finance/parabol-protocol-contracts/blob/main/audits/trailofbits-audit-240514.pdf"],
     twitter: "https://x.com/parabolfi",
     wiki: "https://docs.parabol.fi/",
+  },
+ {
+    id: "280",
+    name: "Tether CNH",
+    address: "0x6e109e9dd7fa1a58bc3eff667e8e41fc3cc07aef",
+    symbol: "CNHT",
+    url: "https://tether.to/en/",
+    description:
+       "All Tether tokens are pegged at 1-to-1 with a matching fiat currency and are backed 100% by Tether’s Reserves. Information about Tether Tokens in circulation is typically published daily.",
+    mintRedeemDescription:
+       "Redeem 1:1",
+    onCoinGecko: true,
+    gecko_id: "cnh-tether",
+    cmcId: null,
+    pegType: "peggedCNY",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/Tether_to",
+    wiki: "https://tether.to/en/",
+  },
+  {
+    id: "281",
+    name: "Mexican Peso Tether",
+    address: "0xed03ed872159e199065401b6d0d487d78d9464aa",
+    symbol: "MXNT",
+    url: "https://tether.to/en/",
+    description:
+       "All Tether tokens are pegged at 1-to-1 with a matching fiat currency and are backed 100% by Tether’s Reserves. Information about Tether Tokens in circulation is typically published daily.",
+    mintRedeemDescription:
+       "Redeem 1:1",
+    onCoinGecko: true,
+    gecko_id: "mexican-peso-tether",
+    cmcId: null,
+    pegType: "peggedMXN",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/Tether_to",
+    wiki: "https://tether.to/en/",
+  },
+  {
+    id: "282",
+    name: "Noble Dollar",
+    address: null,
+    symbol: "USDN",
+    url: "https://dollar.noble.xyz/",
+    description:
+       "Noble Dollar (USDN) is a yield-bearing stablecoin backed by U.S. Treasuries and built on the M^0 protocol",
+    mintRedeemDescription:
+       "Users can mint or redeem USDN by depositing or withdrawing USDC via the Noble Express app using supported chains like Ethereum, Solana, or Cosmos",
+    onCoinGecko: true,
+    gecko_id: "noble-dollar-usdn",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/noble_xyz/",
+    wiki: "https://dollar.noble.xyz/how-noble-dollar-works",
+    doublecounted: true
   },
 ] as PeggedAsset[];

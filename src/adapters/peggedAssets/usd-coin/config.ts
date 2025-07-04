@@ -493,7 +493,7 @@ export const chainContracts: ChainContracts = {
   },
   plume_mainnet: {
     bridgedFromETH: [
-      "0x78adD880A697070c1e765Ac44D65323a0DcCE913", // stargate
+      "0x78add880a697070c1e765ac44d65323a0dcce913", // stargate
       //"0x54FD4da2Fa19Cf0f63d8f93A6EA5BEd3F9C042C6", // deprecated - arbitrum native bridge
     ]
   },
@@ -517,5 +517,8 @@ export const chainContracts: ChainContracts = {
   },
   rsk: {
     bridgedFromETH: ["0x74C9F2B00581F1b11Aa7Ff05aa9f608B7389de67"],
+  },
+  ripple: {
+    issued: ["5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"],
   },
 };
