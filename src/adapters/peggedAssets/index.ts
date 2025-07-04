@@ -276,6 +276,9 @@ import ylds from './ylds';
 import usdn from './smardex-usdn';
 import weusd from './weusd';
 import parausd from './parabol-usd';
+import noble_dollar_usdn from "./noble-dollar-usdn";
+import mxnt from './mexican-peso-tether';
+import cnht from './cnh-tether';
 import usdu from './unitas'
 
 export default {
@@ -558,5 +561,8 @@ export default {
   "smardex-usdn": usdn,
   "weusd": weusd,
   "parabol-usd": parausd,
-  "unitas-usdu": usdu
+  "noble-dollar-usdn": noble_dollar_usdn,
+  "mexican-peso-tether": mxnt,
+  "cnh-tether": cnht,
+  "unitas-usdu": usdu  
 };

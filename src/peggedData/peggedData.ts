@@ -5625,4 +5625,24 @@ export default [
     twitter: "https://x.com/Tether_to",
     wiki: "https://tether.to/en/",
   },
+  {
+    id: "282",
+    name: "Noble Dollar",
+    address: null,
+    symbol: "USDN",
+    url: "https://dollar.noble.xyz/",
+    description:
+       "Noble Dollar (USDN) is a yield-bearing stablecoin backed by U.S. Treasuries and built on the M^0 protocol",
+    mintRedeemDescription:
+       "Users can mint or redeem USDN by depositing or withdrawing USDC via the Noble Express app using supported chains like Ethereum, Solana, or Cosmos",
+    onCoinGecko: true,
+    gecko_id: "noble-dollar-usdn",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/noble_xyz/",
+    wiki: "https://dollar.noble.xyz/how-noble-dollar-works",
+    doublecounted: true
+  },
 ] as PeggedAsset[];

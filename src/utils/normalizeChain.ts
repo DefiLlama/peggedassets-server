@@ -1182,11 +1182,29 @@ export const chainCoingeckoIds = {
     twitter: "plumenetwork",
     url: "https://plume.org/",
   },
-  Provenance: {
+  "Provenance": {
     geckoId: null,
     symbol: null,
     cmcId: null,
     categories: ["Cosmos"],
+  },
+  "Nero": {
+    geckoId: null,
+    symbol: "NERO",
+    cmcId: null,
+    categories: ["EVM"],
+    chainId: 1689,
+    twitter: "Nerochain_io",
+    url: "https://nerochain.io/",
+  },
+  "Glue": {
+    geckoId: "glue-2",
+    symbol: "GLUE",
+    cmcId: "36045",
+    categories: ["EVM"],
+    chainId: 1300,
+    twitter: "GlueNet",
+    url: "https://glue.net/",
   },
 } as {
   [chain: string]: {
@@ -1505,7 +1523,11 @@ export function getChainDisplayName(
     case "optimism":
       return useNewChainNames ? "OP Mainnet" : "Optimism" 
     case "provenance":
-      return "Provenance";
+      return "Provenance"
+    case "nero":
+      return "Nero"
+    case "glue":
+      return "Glue"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
