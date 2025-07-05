@@ -4846,9 +4846,9 @@ export default [
     symbol: "USDO",
     url: "https://openeden.com/usdo",
     description:
-      "OpenEden OpenDollar (USDO) is a rebasing yield-bearing stablecoin issued by OpenEden Digital, a Bermuda Monetary Authority licensed digital asset issuer set up as a Bermuda registered and licensed segregated accounts company. OpenEden Digital is a wholly owned subsidiary of OpenEden Group",
+      "The OpenEden OpenDollar (USDO) is a rebasing yield-bearing stablecoin issued by OpenEden Digital (OED), a Bermuda Monetary Authority (BMA) licensed digital asset issuer. OED is a wholly owned subsidiary of OpenEden Group (OEG). The value of USDO is fixed at $1, providing stability to its holders while offering a yield on the underlying reserve assets. USDO rebases daily, which allows holders to earn yield generated from reserves backed by U.S. Treasury Bills.",
     mintRedeemDescription:
-      "USDO can be minted by depositing USDC or TBILL as collateral to the OpenEden platform. USDO is fully-backed 1:1 by tokenized short-term U.S. Treasury Bills in the form of TBILL tokens",
+      "USDO can be minted on a primary basis using USDC or TBILL as collateral on the OpenEden platform. USDO is fully-backed 1:1 by tokenized short-term U.S. Treasury Bills.",
     onCoinGecko: "true",
     gecko_id: "openeden-open-dollar",
     cmcId: null,
