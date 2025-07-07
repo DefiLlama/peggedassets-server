@@ -1,5 +1,6 @@
 import { addChainExports, solanaMintedOrBridged } from "../helper/getSupply";
 import { cosmosSupply } from "../helper/getSupply";
+import { PeggedIssuanceAdapter } from "../peggedAsset.type";
 
 const M_TOKEN_ADDRESS = "0x866A2BF4E572CbcF37D5071A7a58503Bfb36be1b";
 
@@ -9,8 +10,6 @@ const M_TOKEN_ADDRESS = "0x866A2BF4E572CbcF37D5071A7a58503Bfb36be1b";
  * (Noble Dollar) stablecoin at a 1:1 ratio. The bridged M tokens are not circulating
  * but serve as collateral for USDN supply.
  */
-
-
 
 /**
  * Gets USDN supply on Noble as bridged M tokens
@@ -26,34 +25,32 @@ function nobleUSDNAsBridgedM() {
   );
 }
 
-
 const chainContracts = {
   ethereum: {
     issued: [M_TOKEN_ADDRESS],
   },
   arbitrum: {
-    bridgedFromEthereum: [M_TOKEN_ADDRESS],
+    bridgedFromETH: [M_TOKEN_ADDRESS],
   },
   optimism: {
-    bridgedFromEthereum: [M_TOKEN_ADDRESS],
+    bridgedFromETH: [M_TOKEN_ADDRESS],
   },
   plume_mainnet: {
-    bridgedFromEthereum: [M_TOKEN_ADDRESS],
+    bridgedFromETH: [M_TOKEN_ADDRESS],
   },
   hyperliquid: {
-    bridgedFromEthereum: [M_TOKEN_ADDRESS],
+    bridgedFromETH: [M_TOKEN_ADDRESS],
   },
 };
 
-// Create the adapter using addChainExports for standard chains
-const adapter = addChainExports(chainContracts, {}, { decimals: 6 });
-
-adapter.solana = {
-  ethereum: solanaMintedOrBridged(["mzerokyEX9TNDoK4o2YZQBDmMzjokAeN6M2g2S3pLJo"])
-};
-
-adapter.noble = {
-  ethereum: nobleUSDNAsBridgedM(),
+const adapter: PeggedIssuanceAdapter = {
+  ...addChainExports(chainContracts, {}, { decimals: 6 }),
+  solana: {
+    ethereum: solanaMintedOrBridged(["mzerokyEX9TNDoK4o2YZQBDmMzjokAeN6M2g2S3pLJo"]),
+  },
+  noble: {
+    ethereum: nobleUSDNAsBridgedM(),
+  },
 };
 
 export default adapter;
