@@ -3,10 +3,8 @@ const sdk = require("@defillama/sdk");
 
 type Chain = "hemi"
 
-const chainContracts: Partial<Record<Chain, { hemiusbd: string }>> = {
-  hemi: {
-    hemiusbd: "0x71E7c8F2B7D7F6c99E375023916CB3ed9ffC4621"
-  }
+const chainContracts: Partial<Record<Chain, string>> = {
+  hemi:"0x71E7c8F2B7D7F6c99E375023916CB3ed9ffC4621"
 };
 
 async function minted(chain: Chain) {
@@ -17,12 +15,10 @@ async function minted(chain: Chain) {
     // @ts-ignore
     chainBlocks: ChainBlocks
   ) {
-    const chainInfo = chainContracts[chain]!;
-
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "erc20:totalSupply",
-        target: chainInfo.hemiusbd,
+        target: chainContracts[chain],
         block,
         chain,
       })
