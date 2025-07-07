@@ -23,7 +23,7 @@ const handler = async () => {
   if (outdated.length > 0) {
     await sendMessage(
       outdated
-        .map((a) => `${a!.name} - ${a!.hoursAgo.toFixed(2)} hours ago`)
+        .map((a) => `[stablecoin - alert outdated] ${a!.name} - ${a!.hoursAgo.toFixed(2)} hours ago`)
         .join("\n"),
       process.env.OUTDATED_WEBHOOK!
     );
