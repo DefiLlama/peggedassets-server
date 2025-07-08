@@ -28,6 +28,12 @@ const chainContracts = {
   bsc: {
     issued: "0xdd73EA766B80417C0607A3f08E34A0C415D89D56",
   },
+  plume: {
+    issued: "0xdd73EA766B80417C0607A3f08E34A0C415D89D56",
+  },
+  hashkey: {
+    issued: "0xdd73EA766B80417C0607A3f08E34A0C415D89D56",
+  },
 };
 
 const adapter: PeggedIssuanceAdapter = {
