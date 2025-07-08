@@ -15,12 +15,12 @@ const M_TOKEN_ADDRESS = "0x866A2BF4E572CbcF37D5071A7a58503Bfb36be1b";
  * Gets USDN supply on Noble as bridged M tokens
  * This represents M tokens that are held in custody to back USDN
  */
-function nobleUSDNAsBridgedM() {
+async function nobleUSDNAsBridgedM() {
   return cosmosSupply(
     "noble",
     ['uusdn'],
     6,
-    '',
+    'ethereum',
     'peggedUSD'
   );
 }
