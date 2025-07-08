@@ -5645,4 +5645,22 @@ export default [
     wiki: "https://dollar.noble.xyz/how-noble-dollar-works",
     doublecounted: true
   },
+  {
+    id: "283",
+    name: "Unitas",
+    address: "solana:9ckR7pPPvyPadACDTzLwK2ZAEeUJ3qGSnzPs8bVaHrSy",
+    symbol: "USDU",
+    url: "https://unitas.so/",
+    description: "Unitas is a decentralized, yield-bearing stablecoin protocol built for the next generation of finance. It issues stablecoins that earn yield natively — no reliance on traditional banks. Powered by Solana, it's fast, scalable, and censorship-resistant",
+    mintRedeemDescription: "Minting and redemption are available only to users who have successfully completed our KYC/KYB process. We provide real-time quotes for both actions, and counterparties can finalize their mint or redeem requests by interacting with our API using the quoted terms.",
+    onCoinGecko: false,
+    gecko_id: "unitas",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/UnitasLabs", 
+    wiki: "https://docs.unitas.so/",
+    doublecounted: true
+  }
 ] as PeggedAsset[];

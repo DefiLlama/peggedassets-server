@@ -564,5 +564,5 @@ export default {
   "noble-dollar-usdn": noble_dollar_usdn,
   "mexican-peso-tether": mxnt,
   "cnh-tether": cnht,
-  "unitas-usdu": usdu  
+  "unitas": usdu
 };
