@@ -28,10 +28,10 @@ const chainContracts = {
   bsc: {
     issued: "0xdd73EA766B80417C0607A3f08E34A0C415D89D56",
   },
-  plume: {
+  plume_mainnet: {
     issued: "0xdd73EA766B80417C0607A3f08E34A0C415D89D56",
   },
-  hashkey: {
+  hsk: {
     issued: "0xdd73EA766B80417C0607A3f08E34A0C415D89D56",
   },
 };
