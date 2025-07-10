@@ -5662,5 +5662,22 @@ export default [
     twitter: "https://x.com/UnitasLabs", 
     wiki: "https://docs.unitas.so/",
     doublecounted: true
+  },
+  {
+    id: "284",
+    name: "MNEE USD",
+    address: "0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
+    symbol: "MNEE",
+    url: "https://www.mnee.io/",
+    description: "MNEE is revolutionizing the way we move money. It's the fastest, most scalable, lowest-fee fully regulated stablecoin on the market.",
+    mintRedeemDescription: "MNEE is fully backed 1‑for‑1 by U.S. dollars. Reserves are held in regulated financial institutions and are regularly audited by independent third parties to ensure full collateralization.",
+    onCoinGecko: true,
+    gecko_id: "mnee-usd-stablecoin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/MNEE_cash", 
+    wiki: "https://www.mnee.io/faq",
   }
 ] as PeggedAsset[];
