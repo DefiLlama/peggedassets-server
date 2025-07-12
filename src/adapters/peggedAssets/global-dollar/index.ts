@@ -11,5 +11,5 @@ const chainContracts = {
 };
 
 import { addChainExports } from "../helper/getSupply";
-const adapter = addChainExports(chainContracts);
+const adapter = addChainExports(chainContracts, undefined, { decimals: 6});
 export default adapter;
