@@ -279,9 +279,8 @@ import parausd from './parabol-usd';
 import noble_dollar_usdn from "./noble-dollar-usdn";
 import mxnt from './mexican-peso-tether';
 import cnht from './cnh-tether';
-import usdu from './unitas'
-import ggusd from './good-game-us-dollar';
 import usdu from './unitas';
+import ggusd from './good-game-us-dollar';
 import mnee from './mnee-usd-stablecoin';
 
 export default {
