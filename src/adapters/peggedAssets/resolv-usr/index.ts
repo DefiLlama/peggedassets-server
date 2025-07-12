@@ -1,14 +1,23 @@
 const chainContracts = {
     ethereum: {
-        issued: ["0x66a1e37c9b0eaddca17d3662d6c05f4decf3e110"],
+      issued: ["0x66a1e37c9b0eaddca17d3662d6c05f4decf3e110"],
     },
     base: {
-        issued: ["0x35e5db674d8e93a03d814fa0ada70731efe8a4b9"],
+      bridgedFromETH: ["0x35E5dB674D8e93a03d814FA0ADa70731efe8a4b9"],
     },
     bsc: {
-        issued: ["0x2492d0006411af6c8bbb1c8afc1b0197350a79e9"],
-    }
-};
+      bridgedFromETH: ["0x2492D0006411Af6C8bbb1c8afc1B0197350a79e9"],
+    },
+    berachain: {
+      bridgedFromETH: ["0x2492D0006411Af6C8bbb1c8afc1B0197350a79e9"],
+    },
+    hyperliquid: {
+      bridgedFromETH: ["0x0aD339d66BF4AeD5ce31c64Bc37B3244b6394A77"],
+    },
+    soneium: {
+      bridgedFromETH: ["0xb1b385542b6e80f77b94393ba8342c3af699f15c"],
+    },
+  };
 
 import { addChainExports } from "../helper/getSupply";
 const adapter = addChainExports(chainContracts);
