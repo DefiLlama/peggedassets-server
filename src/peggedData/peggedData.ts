@@ -5697,5 +5697,22 @@ export default [
     twitter: "https://x.com/fslweb3",
     wiki: "https://fsl.com/ggusd",
     doublecounted: true
+  },
+  {
+    id: "286",
+    name: "Global Dollar",
+    address: "0xe343167631d89B6Ffc58B88d6b7fB0228795491D",
+    symbol: "USDG",
+    url: "https://globaldollar.com/",
+    description: "Global Dollar (USDG) is a single currency stablecoin pegged to the US dollar that is regulated under the Monetary Authority of Singapore (MAS). USDG is issued by Paxos Digital Singapore (PDS) and will always be fully redeemable from Paxos on a one-to-one basis for US dollars.",
+    mintRedeemDescription: "KYC'ed users can mint and redeem USDG through paxos dashboard or through the Paxos API. USDG is redeemable 1:1 for US dollars.",
+    onCoinGecko: true,
+    gecko_id: "global-dollar",
+    cmcId: 33793,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    twitter: "https://x.com/global_dollar",
+    wiki: "https://globaldollar.com/global-dollar",
   }
 ] as PeggedAsset[];
