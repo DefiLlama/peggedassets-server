@@ -3,7 +3,7 @@ const chainContracts = {
         issued: ["0xe343167631d89B6Ffc58B88d6b7fB0228795491D"]
     },
     solana: {
-        bridgedFromETH: ["2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH"]
+        issued: ["2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH"]
     },
     ink: {
         bridgedFromETH: ["0xe343167631d89B6Ffc58B88d6b7fB0228795491D"]
