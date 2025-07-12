@@ -568,7 +568,7 @@ export default {
   "mexican-peso-tether": mxnt,
   "cnh-tether": cnht,
   "unitas": usdu,
-  "ggusd": ggusd,
+  "good-game-us-dollar": ggusd,
   "mnee-usd-stablecoin": mnee,
   "global-dollar": usdg
 };
