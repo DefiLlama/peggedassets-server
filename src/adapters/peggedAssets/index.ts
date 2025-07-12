@@ -283,6 +283,11 @@ import usdu from './unitas';
 import ggusd from './good-game-us-dollar';
 import mnee from './mnee-usd-stablecoin';
 import usdg from './global-dollar';
+import wanchain_usdc from './wanchain-usdc';
+import wanchain_usdt from './wanchain-usdt';
+import wanchain_dai from './wanchain-dai';
+import wanchain_eurc from './wanchain-eurc';
+import wanchain_pyusd from './wanchain-pyusd';
 
 export default {
   tether,
@@ -570,5 +575,10 @@ export default {
   "unitas": usdu,
   "ggusd": ggusd,
   "mnee-usd-stablecoin": mnee,
-  "global-dollar": usdg
+  "global-dollar": usdg,
+  "wanchain-usdc": wanchain_usdc,
+  "wanchain-usdt": wanchain_usdt,
+  "wanchain-dai": wanchain_dai,
+  "wanchain-eurc": wanchain_eurc,
+  "wanchain-pyusd": wanchain_pyusd,
 };
