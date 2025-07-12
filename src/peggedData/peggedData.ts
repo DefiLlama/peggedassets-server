@@ -5708,7 +5708,7 @@ export default [
     mintRedeemDescription: "KYC'ed users can mint and redeem USDG through paxos dashboard or through the Paxos API. USDG is redeemable 1:1 for US dollars.",
     onCoinGecko: true,
     gecko_id: "global-dollar",
-    cmcId: 33793,
+    cmcId: "33793",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
