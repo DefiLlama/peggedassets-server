@@ -281,8 +281,8 @@ import mxnt from './mexican-peso-tether';
 import cnht from './cnh-tether';
 import usdu from './unitas'
 import ggusd from './good-game-us-dollar';
-import usdu from './unitas';
 import mnee from './mnee-usd-stablecoin';
+import usdg from './global-dollar';
 
 export default {
   tether,
@@ -569,5 +569,6 @@ export default {
   "cnh-tether": cnht,
   "unitas": usdu,
   "ggusd": ggusd,
-  "mnee-usd-stablecoin": mnee
+  "mnee-usd-stablecoin": mnee,
+  "global-dollar": usdg
 };
