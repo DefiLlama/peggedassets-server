@@ -5714,5 +5714,23 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/global_dollar",
     wiki: "https://globaldollar.com/global-dollar",
-  }
+  },
+  {
+    id: "287",
+    name: "Parallel USDp",
+    address: "0x9B3a8f7CEC208e247d97dEE13313690977e24459",
+    symbol: "USDp",
+    url: "https://app.parallel.best/",
+    description:
+      "Parallel's Dollar stablecoin (USDp) is a USD stablecoin supported by a robust Price Stability Module. USDp is over-collateralized, decentralized, transparent, generates yield, and offers competitive pricing for on-chain USD",
+    mintRedeemDescription:
+      "Users can get USDp, by swapping their assets on the Parallel app or a DEX.",
+    onCoinGecko: false,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://github.com/parallel-protocol/parrallel-tokens/blob/main/docs/audits/Bailsec%20-%20Parallel%20Protocol%20-%20V3%20Core%20-%20Final%20Report.pdf"],
+    twitter: "https://x.com/ParallelMoney",
+    wiki: "https://docs.parallel.best/",
+  },
 ] as PeggedAsset[];

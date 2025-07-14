@@ -197,6 +197,7 @@ import opuscash from "./opus-cash";
 import usc from "./orby-network-usc-stablecoin";
 import usdcb from "./pago-linea-usdcb";
 import pausd from "./parallel-usd";
+import parallelusdp from "./parallel-usdp";
 import pxdc from "./powercity-pxdc";
 import ultra from "./prismalrt-ultra";
 import eurd from "./quantoz-eurd";
@@ -570,5 +571,6 @@ export default {
   "unitas": usdu,
   "good-game-us-dollar": ggusd,
   "mnee-usd-stablecoin": mnee,
-  "global-dollar": usdg
+  "global-dollar": usdg,
+  "parallel-usdp": parallelusdp
 };
