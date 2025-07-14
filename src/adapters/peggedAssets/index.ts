@@ -283,6 +283,7 @@ import usdu from './unitas';
 import ggusd from './good-game-us-dollar';
 import mnee from './mnee-usd-stablecoin';
 import usdg from './global-dollar';
+import onyc from './onyc';
 
 export default {
   tether,
@@ -570,5 +571,6 @@ export default {
   "unitas": usdu,
   "good-game-us-dollar": ggusd,
   "mnee-usd-stablecoin": mnee,
-  "global-dollar": usdg
+  "global-dollar": usdg,
+  "onyc":onyc
 };

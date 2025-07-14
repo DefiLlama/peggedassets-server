@@ -5714,5 +5714,23 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/global_dollar",
     wiki: "https://globaldollar.com/global-dollar",
+  },
+  {
+    id: "287",
+    name: "Onchain Yield Coin",
+    address: "5Y8NV33Vv7WbnLfq3zBcKSdYPrk7g2KoiQoe7M2tcxp5",
+    symbol: "ONYC",
+    url: "https://app.onre.finance/",
+    description: "ONyc, is a multi-collateral, yield-bearing asset backed by stablecoins and used to underwrite real world private placements and accrue yield from reinsurance premiums. ONyc targets a base yield exceeding 16%, driven by reinsurance performance that remains uncorrelated across market cycles. Alongside this base return, the collateral assets themselves contribute additional yield, resulting in a compound, multi-source return designed to deliver steady performance and capture upside as markets evolve.",
+    mintRedeemDescription: "To mint and redeem, a user must be KYC’d via the platform and meet eligibility requirements, including being a sophisticated investor.",
+    onCoinGecko: true,
+    gecko_id: "onyc",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    twitter: "https://x.com/onrefinance",
+    wiki: "https://www.onre.finance/",
+    auditLinks: ["https://certificate.quantstamp.com/full/on-re-solana/c31251fd-f107-478d-ac17-6d9ad6bd3faa/index.html"]
   }
 ] as PeggedAsset[];
