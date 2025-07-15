@@ -5714,5 +5714,22 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/global_dollar",
     wiki: "https://globaldollar.com/global-dollar",
+  },
+  {
+    id: "287",
+    name: "Nerite",
+    address: "arbitrum:0x4ecf61a6c2FaB8A047CEB3B3B263B401763e9D49",
+    symbol: "USND",
+    url: "https://app.nerite.org/",
+    description: "USND is an over-collateralized, governance-minimized stablecoin native to Arbitrum and fully backed by crypto collateral. USND also supports token streaming via Superfluid to enable real-time yield distribution.",
+    mintRedeemDescription: "Users open vaults (“troves”) and deposit accepted collateral to mint USND up to their chosen collateral ratio. To unlock collateral, borrowers repay and burn USND, or anyone can redeem USND directly for $1 of the lowest-rate collateral, ensuring the peg.",
+    onCoinGecko: false,
+    gecko_id: "us-nerite-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/neriteorg",
+    wiki: "https://docs.nerite.org/",
   }
 ] as PeggedAsset[];
