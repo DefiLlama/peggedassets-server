@@ -284,6 +284,8 @@ import usdu from './unitas';
 import ggusd from './good-game-us-dollar';
 import mnee from './mnee-usd-stablecoin';
 import usdg from './global-dollar';
+import usnerite from './us-nerite-dollar';
+import ebusd from './ebusd-stablecoin';
 
 export default {
   tether,
@@ -572,5 +574,7 @@ export default {
   "good-game-us-dollar": ggusd,
   "mnee-usd-stablecoin": mnee,
   "global-dollar": usdg,
-  "parallel-usdp": parallelusdp
+  "parallel-usdp": parallelusdp,
+  "us-nerite-dollar": usnerite,
+  "ebusd-stablecoin": ebusd
 };
