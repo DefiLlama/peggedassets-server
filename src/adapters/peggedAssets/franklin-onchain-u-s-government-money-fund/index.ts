@@ -22,6 +22,12 @@ const chainContracts: ChainContracts = {
   },
   ethereum: {
     issued: ["0x3DDc84940Ab509C11B20B76B466933f40b750dc9"]
+  },
+  solana: {
+    issued: ["5Tu84fKBpe9vfXeotjvfvWdWbAjy3hqsExvuHgFqFxA1"]
+  },
+  aptos: {
+    issued: ["0x7b5e9cac3433e9202f28527f707c89e1e47b19de2c33e4db9521a63ad219b739"]
   }
 }
 
