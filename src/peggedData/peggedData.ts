@@ -5731,5 +5731,23 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/neriteorg",
     wiki: "https://docs.nerite.org/",
-  }
+  },
+  {
+    id: "288",
+    name: "EBUSD",
+    address: "0x09fD37d9AA613789c517e76DF1c53aEce2b60Df4",
+    symbol: "EBUSD",
+    url: "https://ebisu.money/",
+    description: "Ebisu Money is a stablecoin credit market on Ethereum where users can mint ebUSD by depositing collateral and earn yield by providing ebUSD liquidity. The protocol features market-driven interest rates and a liquidation-backed stability mechanism to maintain solvency and capital efficiency.",
+    mintRedeemDescription: "Users mint ebUSD by opening a vault and depositing supported collateral. ebUSD can be redeemed by repaying debt and reclaiming collateral, or via redemptions that exchange ebUSD for collateral from the lowest-rate vaults.",
+    onCoinGecko: true,
+    gecko_id: "ebusd-stablecoin",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/Ebisu_Finance",
+    wiki: "https://ebisu.gitbook.io/ebisu-money",
+  },
+  
 ] as PeggedAsset[];
