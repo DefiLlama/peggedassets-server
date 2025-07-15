@@ -5717,7 +5717,7 @@ export default [
   },
   {
     id: "287",
-    name: "Nerite",
+    name: "Nerite USND",
     address: "arbitrum:0x4ecf61a6c2FaB8A047CEB3B3B263B401763e9D49",
     symbol: "USND",
     url: "https://app.nerite.org/",
