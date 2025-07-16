@@ -11,9 +11,10 @@ const chainContracts = {
     polygon: {
       bridgedFromETH: ["0xdc3326e71d45186f113a2f448984ca0e8d201995"]
     },
-    zilliqa: {
-      issued: ["zil180v66mlw007ltdv8tq5t240y7upwgf7djklmwh"]
-    }
+    //Not sure how to add
+    // zilliqa: {
+    //   issued: ["zil180v66mlw007ltdv8tq5t240y7upwgf7djklmwh"]
+    // }
 
 };
 
