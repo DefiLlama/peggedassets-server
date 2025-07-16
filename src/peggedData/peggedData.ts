@@ -5749,5 +5749,22 @@ export default [
     twitter: "https://x.com/Ebisu_Finance",
     wiki: "https://ebisu.gitbook.io/ebisu-money",
   },
+  {
+    id: "289",
+    name: "XSGD",
+    address: "0x70e8de73ce538da2beed35d14187f6959a8eca96",
+    symbol: "XSGD",
+    url: "https://www.straitsx.com/",
+    description: "XSGD is the StraitsX digital Singapore Dollar, designed to revolutionise money transfers across the region. XSGD is fully backed by reserve assets and is always redeemable on a 1:1 basis with the Singapore Dollar.",
+    mintRedeemDescription: "Verified StraitsX users can access the StraitsX platform to set up their StraitsX Mint function and directly mint XSGD into their preferred blockchain address by sending Singapore dollars to the bank account number available in the Mint tab. It can always be redeemed at a 1:1 ratio with SGD on the StraitsX platform.",
+    onCoinGecko: true,
+    gecko_id: "xsgd",
+    cmcId: "8489",
+    pegType: "peggedSGD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    twitter: "https://x.com/straitsx",
+    wiki: "https://www.straitsx.com/xsgd",
+  },
   
 ] as PeggedAsset[];
