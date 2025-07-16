@@ -2,6 +2,7 @@ import { ChainApi } from "@defillama/sdk";
 import * as aptos from "../helper/aptos";
 import { getTokenSupply as solanaGetTokenSupply } from "../helper/solana";
 import * as sui from "../helper/sui";
+import { getZilliqaTokenSupply } from "../helper/zilliqa";
 import type {
   Balances,
   ChainBlocks,
@@ -118,6 +119,25 @@ export function solanaMintedOrBridged(
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     for (let target of targets) {
       const totalSupply = await solanaGetTokenSupply(target);
+      sumSingleBalance(balances, assetPegType, totalSupply, target, true);
+    }
+    return balances;
+  };
+}
+
+export function zilliqaMintedOrBridged(
+  targets: string[],
+  pegType?: PeggedAssetType
+) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
+    for (let target of targets) {
+      const totalSupply = await getZilliqaTokenSupply(target);
       sumSingleBalance(balances, assetPegType, totalSupply, target, true);
     }
     return balances;
@@ -329,7 +349,7 @@ export function addChainExports(config: any, adapter: any = {}, {
         case "bridgedFromETH":
           if (!Array.isArray(chainConfig.bridgedFromETH)) chainConfig.bridgedFromETH = [chainConfig.bridgedFromETH]
           if (!cExports.ethereum)
-            cExports.ethereum = bridgedSupply(chain, decimals, chainConfig.bridgedFromETH)
+            cExports.ethereum = bridgedSupply(chain, decimals, chainConfig.bridgedFromETH, undefined, "ethereum", pegType as any)
           break;
         default: {
           if (key.startsWith("bridgedFrom")) {
