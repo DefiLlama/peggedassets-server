@@ -285,6 +285,7 @@ import mnee from './mnee-usd-stablecoin';
 import usdg from './global-dollar';
 import usnerite from './us-nerite-dollar';
 import ebusd from './ebusd-stablecoin';
+import xsgd from './xsgd';
 
 export default {
   tether,
@@ -574,5 +575,6 @@ export default {
   "mnee-usd-stablecoin": mnee,
   "global-dollar": usdg,
   "us-nerite-dollar": usnerite,
-  "ebusd-stablecoin": ebusd
+  "ebusd-stablecoin": ebusd,
+  "xsgd": xsgd
 };
