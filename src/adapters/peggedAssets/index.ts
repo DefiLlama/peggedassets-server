@@ -286,6 +286,7 @@ import usdg from './global-dollar';
 import usnerite from './us-nerite-dollar';
 import ebusd from './ebusd-stablecoin';
 import xsgd from './xsgd';
+import straitsx_xusd from './straitsx-xusd';
 
 export default {
   tether,
@@ -576,5 +577,6 @@ export default {
   "global-dollar": usdg,
   "us-nerite-dollar": usnerite,
   "ebusd-stablecoin": ebusd,
-  "xsgd": xsgd
+  "xsgd": xsgd,
+  "straitsx-xusd": straitsx_xusd
 };
