@@ -5767,7 +5767,7 @@ export default [
     wiki: "https://www.straitsx.com/xsgd",
   },
   {
-    id: "289",
+    id: "290",
     name: "StraitsX XUSD",
     address: "0xc08e7e23c235073c6807c2efe7021304cb7c2815",
     symbol: "XUSD",
