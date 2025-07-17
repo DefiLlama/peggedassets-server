@@ -6,7 +6,7 @@ const chainContracts:ChainContracts = {
     ethereum: {
         issued: ["0x9B3a8f7CEC208e247d97dEE13313690977e24459"],
     },
-    avalanche: {
+    avax: {
         issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
     },
     arbitrum: {
@@ -24,7 +24,7 @@ const chainContracts:ChainContracts = {
     optimism: {
         issued: ["0x90337e484B1Cb02132fc150d3Afa262147348545"],
     },
-    gnosis: {
+    xdai: {
         issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
     },
     hyperliquid:{
@@ -48,9 +48,9 @@ const chainContracts:ChainContracts = {
     unichain:{
         issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
     },
-    tac:{
-        issued: ["0x4DeF531c3060686948f00EcC7504f2E0b71EDa14"],
-    }
+    // tac:{
+    //     issued: ["0x4DeF531c3060686948f00EcC7504f2E0b71EDa14"],
+    // }
 };
   
 const adapter = addChainExports(chainContracts);
