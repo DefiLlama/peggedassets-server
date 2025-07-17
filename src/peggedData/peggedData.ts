@@ -5794,6 +5794,8 @@ export default [
     mintRedeemDescription:
       "Users can get USDp, by swapping their assets on the Parallel app or a DEX.",
     onCoinGecko: false,
+    gecko_id: "parallel-usdp",
+    cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
