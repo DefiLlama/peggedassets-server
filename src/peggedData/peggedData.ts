@@ -5803,4 +5803,24 @@ export default [
     twitter: "https://x.com/ParallelMoney",
     wiki: "https://docs.parallel.best/",
   },
+  {
+    id: "292",
+    name: "VNX British Pound",
+    address: "solana:5H4voZhzySsVvwVYDAKku8MZGuYBC7cXaBKDPW4YHWW1",
+    symbol: "VGBP",
+    url: "https://vnx.li/",
+    description:
+      "VNX British Pound (VGBP) is a token referencing British Pound from a token generator licensed under the Blockchain act in Liechtenstein.",
+    mintRedeemDescription:
+      "VGBP is minted by depositing GBP or VNX Gold and redeemed by returning the tokens in exchange for the underlying assets, maintaining a 1:1 backing.",
+    onCoinGecko: "true",
+    gecko_id: "vnx-british-pound",
+    cmcId: "36339",
+    pegType: "peggedGBP",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: "https://vnx.li/transparency/",
+    twitter: "https://twitter.com/vnx_platform",
+    wiki: "https://vnx.li/vgbp/",
+  },
 ] as PeggedAsset[];

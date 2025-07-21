@@ -11,6 +11,10 @@ const chainContracts = {
       issued: ["0xaeb4bb7debd1e5e82266f7c3b5cff56b3a7bf411"],
       pegType: 'peggedGBP',
     },
+    ethereum: {
+      issued: ["0x34C9C643Becd939c950bB9F141E35777559817CB"],
+      pegType: 'peggedGBP',
+    },
   };
   
   import { addChainExports } from "../helper/getSupply";
