@@ -32,6 +32,18 @@ const chainContracts: ChainContracts = {
   stellar: {
     issued: ["VEUR:GDXLSLCOPPHTWOQXLLKSVN4VN3G67WD2ENU7UMVAROEYVJLSPSEWXIZN"],
   },
+  base: {
+    issued: ["0x4ed9Df25d38795a47f52614126e47f564D37F347"],
+  },
+  celo: {
+    issued: ["0x9346f43c1588b6df1d52bdd6bf846064f92d9cba"],
+  },
+  fraxtal: {
+    issued: ["0x4c0bd74da8237c08840984fdb33a84b4586aaee6"],
+  },
+  arbitrum: {
+    issued: ["0x4883C8f0529F37e40eBeA870F3C13cDfAD5d01f8"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -109,6 +121,18 @@ const adapter: PeggedIssuanceAdapter = {
   },
   stellar: {
     minted: stellarMinted(chainContracts.stellar.issued[0]),
+  },
+  base: {
+    minted: chainMinted("base", 18),
+  },
+  celo: {
+    minted: chainMinted("celo", 18),
+  },
+  fraxtal: {
+    minted: chainMinted("fraxtal", 18),
+  },
+  arbitrum: {
+    minted: chainMinted("arbitrum", 18),
   },
 };
 
