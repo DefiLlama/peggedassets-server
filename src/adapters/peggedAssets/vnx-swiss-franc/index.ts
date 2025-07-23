@@ -32,6 +32,9 @@ const chainContracts: ChainContracts = {
   stellar: {
     issued: ["VCHF:GDXLSLCOPPHTWOQXLLKSVN4VN3G67WD2ENU7UMVAROEYVJLSPSEWXIZN"],
   },
+  base: {
+    issued: ["0x1fcA74D9ef54a6AC80ffE7D3b14e76c4330Fd5D8"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -109,6 +112,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   stellar: {
     minted: stellarMinted(chainContracts.stellar.issued[0]),
+  },
+  base: {
+    minted: chainMinted("base", 18),
   },
 };
 export default adapter;
