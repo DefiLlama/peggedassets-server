@@ -35,6 +35,18 @@ const chainContracts: ChainContracts = {
   base: {
     issued: ["0x1fcA74D9ef54a6AC80ffE7D3b14e76c4330Fd5D8"],
   },
+  celo: {
+    issued: ["0xc5ebea9984c485ec5d58ca5a2d376620d93af871"],
+  },
+  arbitrum: {
+    issued: ["0x02cea97794D2cFB5f560e1fF4e9C59D1BEC75969"],
+  },
+  fraxtal: {
+    issued: ["0x418126BB59457aFDbA1eCF376f97400B4157425D"],
+  },
+  icp: {
+    issued: ["ly36x-wiaaa-aaaai-aqj7q-cai"]
+      }
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -116,5 +128,14 @@ const adapter: PeggedIssuanceAdapter = {
   base: {
     minted: chainMinted("base", 18),
   },
+  celo: {
+    minted: chainMinted("celo", 18),
+  },
+  fraxtal: {
+    minted: chainMinted("fraxtal", 18),
+  },
+  arbitrum: {
+    minted: chainMinted("arbitrum", 18),
+  }
 };
 export default adapter;
