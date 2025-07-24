@@ -5693,7 +5693,7 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko",
+    priceSource: "defillama",
     twitter: "https://x.com/fslweb3",
     wiki: "https://fsl.com/ggusd",
     doublecounted: true
