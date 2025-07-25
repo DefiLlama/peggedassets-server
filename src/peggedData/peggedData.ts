@@ -5683,7 +5683,7 @@ export default [
   {
     id: "285",
     name: "Good Game US Dollar",
-    address: "0xFFFFFF9936BD58a008855b0812B44D2c8dffE2aA",
+    address: "polygon:0xFFFFFF9936BD58a008855b0812B44D2c8dffE2aA",
     symbol: "GGUSD",
     url: "https://fsl.com/ggusd",
     description: "GGUSD is a USD-pegged stablecoin developed with Agora (backed by VanEck) and secured by U.S. Treasuries. It combines stability with on-chain rewards - becoming the first flexible stablecoin to pay yield with no staking or lockups. As the native currency of 2184, GGUSD powers purchases, rewards, trading, real-world spending via the GMT Pay Card, and earns daily yield. Live on Polygon and BNB, it delivers an industry-leading APY for FSL ID holders.",
