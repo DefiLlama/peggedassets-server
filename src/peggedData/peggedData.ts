@@ -5701,7 +5701,7 @@ export default [
   {
     id: "286",
     name: "Global Dollar",
-    address: "0xe343167631d89B6Ffc58B88d6b7fB0228795491D",
+    address: "ink:0xe343167631d89B6Ffc58B88d6b7fB0228795491D",
     symbol: "USDG",
     url: "https://globaldollar.com/",
     description: "Global Dollar (USDG) is a single currency stablecoin pegged to the US dollar that is regulated under the Monetary Authority of Singapore (MAS). USDG is issued by Paxos Digital Singapore (PDS) and will always be fully redeemable from Paxos on a one-to-one basis for US dollars.",
