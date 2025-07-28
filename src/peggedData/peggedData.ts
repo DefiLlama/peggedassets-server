@@ -5683,7 +5683,7 @@ export default [
   {
     id: "285",
     name: "Good Game US Dollar",
-    address: "0xFFFFFF9936BD58a008855b0812B44D2c8dffE2aA",
+    address: "polygon:0xFFFFFF9936BD58a008855b0812B44D2c8dffE2aA",
     symbol: "GGUSD",
     url: "https://fsl.com/ggusd",
     description: "GGUSD is a USD-pegged stablecoin developed with Agora (backed by VanEck) and secured by U.S. Treasuries. It combines stability with on-chain rewards - becoming the first flexible stablecoin to pay yield with no staking or lockups. As the native currency of 2184, GGUSD powers purchases, rewards, trading, real-world spending via the GMT Pay Card, and earns daily yield. Live on Polygon and BNB, it delivers an industry-leading APY for FSL ID holders.",
@@ -5693,7 +5693,7 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko",
+    priceSource: "defillama",
     twitter: "https://x.com/fslweb3",
     wiki: "https://fsl.com/ggusd",
     doublecounted: true
@@ -5701,7 +5701,7 @@ export default [
   {
     id: "286",
     name: "Global Dollar",
-    address: "0xe343167631d89B6Ffc58B88d6b7fB0228795491D",
+    address: "ink:0xe343167631d89B6Ffc58B88d6b7fB0228795491D",
     symbol: "USDG",
     url: "https://globaldollar.com/",
     description: "Global Dollar (USDG) is a single currency stablecoin pegged to the US dollar that is regulated under the Monetary Authority of Singapore (MAS). USDG is issued by Paxos Digital Singapore (PDS) and will always be fully redeemable from Paxos on a one-to-one basis for US dollars.",

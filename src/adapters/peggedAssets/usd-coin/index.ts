@@ -1067,6 +1067,7 @@ const adapter: PeggedIssuanceAdapter = {
   }, 
   sei: {
     noble: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromNoble),
+    minted: circleAPIChainMinted("SEI"),
   },
   corn: {
     ethereum: bridgedSupply("corn", 6, chainContracts.corn.bridgedFromETH),
