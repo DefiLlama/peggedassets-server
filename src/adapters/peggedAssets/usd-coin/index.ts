@@ -791,7 +791,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   osmosis: {
     ethereum: osmosisSupply(chainContracts.osmosis.bridgedFromETH, 6, "Axelar"),
-    noble: osmosisSupply(chainContracts.osmosis.bridgedFromNoble, 6, "Noble"),
+    noble: osmosisSupply(chainContracts.osmosis.bridgedFromNoble, 6, "noble-ibc"), // Use 'noble-ibc' so IBC tokens aren’t subtracted from Noble mint supply
   },
   fantom: {
     ethereum: bridgedSupply("fantom", 6, chainContracts.fantom.bridgedFromETH),
@@ -910,7 +910,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
  /* kujira: {
     ethereum: kujiraSupply(chainContracts.kujira.bridgedFromETH, 6, "Axelar"),
-    noble: kujiraSupply(chainContracts.kujira.bridgedFromNoble, 6, "Noble"),
+    noble: kujiraSupply(chainContracts.kujira.bridgedFromNoble, 6, "noble-ibc"), // Use 'noble-ibc' so IBC tokens aren’t subtracted from Noble mint supply
   },*/
   waves: {
     ethereum: supplyInEthereumBridge(
@@ -968,7 +968,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
   },
   injective: {
-    noble: cosmosSupply('injective', ['ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E'], 6, 'noble'),
+    noble: cosmosSupply('injective', ['ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E'], 6, 'noble-ibc'), // Use 'noble-ibc' so IBC tokens aren’t subtracted from Noble mint supply
   },
   noble: {
     minted: circleAPIChainMinted("NOBLE"),
