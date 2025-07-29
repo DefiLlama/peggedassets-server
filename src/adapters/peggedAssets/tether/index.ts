@@ -33,6 +33,7 @@ import { chainContracts } from "./config";
 const axios = require("axios");
 const retry = require("async-retry");
 import * as sui from "../helper/sui";
+import { getTotalSupply } from "../helper/cardano";
 
 // If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain and fuse
 // any bridgeOnETH contracts are not used and are just for info purposes
@@ -348,6 +349,19 @@ async function reinetworkBridged(address: string, decimals: number) {
     );
     const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
+    return balances;
+  };
+}
+
+async function getCardanoSupply() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
+    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
   };
 }
@@ -1124,7 +1138,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   soneium: {
     ethereum: bridgedSupply("soneium", 6, chainContracts.soneium.bridgedFromETH)
-  }
+  },
+  cardano: {
+    ethereum: getCardanoSupply(),
+  },
 };
 
 export default adapter;

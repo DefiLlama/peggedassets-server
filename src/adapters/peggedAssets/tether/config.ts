@@ -409,5 +409,8 @@ export const chainContracts: ChainContracts = {
   },
   soneium: {
     bridgedFromETH: ["0x102d758f688a4C1C5a80b116bD945d4455460282"], 
-  }
+  },
+  cardano: {
+    bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534454"],
+  },
 };

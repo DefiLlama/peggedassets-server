@@ -37,6 +37,7 @@ import { lookupAccountByID } from "../helper/algorand";
 const axios = require("axios");
 const retry = require("async-retry");
 import { ChainApi } from "@defillama/sdk";
+import { getTotalSupply } from "../helper/cardano";
 
 // If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain and fuse
 
@@ -511,6 +512,19 @@ async function moveSupply(): Promise<Balances> {
   balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
 
   return balances;
+}
+
+async function getCardanoSupply() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
+    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
+    return balances;
+  };
 }
 
 async function rippleMinted() {
@@ -1122,6 +1136,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   ripple: {
     minted: rippleMinted(),
+  },
+  cardano: {
+    ethereum: getCardanoSupply(),
   },
 };
 
