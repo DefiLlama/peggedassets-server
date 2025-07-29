@@ -10,6 +10,7 @@ const axios = require("axios");
 const retry = require("async-retry");
 
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
+import { getTotalSupply } from "../helper/cardano";
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -31,6 +32,9 @@ const chainContracts: ChainContracts = {
   },
   sonic: {
     bridgedFromETH: ["0xe715cbA7B5cCb33790ceBFF1436809d36cb17E57"],
+  },
+  cardano: {
+    bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93545555243"],
   },
 };
 
@@ -123,6 +127,19 @@ async function circleAPIChainMinted(chain: string) {
   };
 }
 
+async function getCardanoSupply() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
+    sumSingleBalance(balances, "peggedEUR", supply, "issued", false);
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -172,6 +189,9 @@ const adapter: PeggedIssuanceAdapter = {
       "Ethereum",
       "peggedEUR"
     ),
+  },
+  cardano: {
+    ethereum: getCardanoSupply(),
   },
 };
 
