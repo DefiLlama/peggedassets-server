@@ -135,7 +135,7 @@ async function getCardanoSupply() {
   ) {
     let balances = {} as Balances;
     const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
-    sumSingleBalance(balances, "peggedEUR", supply, "issued", false);
+    sumSingleBalance(balances, "peggedEUR", supply, "wan", true);
     return balances;
   };
 }

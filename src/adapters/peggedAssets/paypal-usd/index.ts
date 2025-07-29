@@ -19,7 +19,7 @@ async function getCardanoSupply() {
   ) {
     let balances = {} as Balances;
     const supply = await getTotalSupply(assetIDs.cardano.issued[0]);
-    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
+    sumSingleBalance(balances, "peggedUSD", supply, "wan", true);
     return balances;
   };
 }
