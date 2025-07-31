@@ -1,10 +1,4 @@
-const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply } from "../helper/getSupply";
-import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
+import { ChainContracts,
 } from "../peggedAsset.type";
 
 const chainContracts: ChainContracts = {
@@ -39,99 +33,8 @@ const chainContracts: ChainContracts = {
   },
 };
 
-async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedCHF",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 18),
-  },
-  polygon: {
-    minted: chainMinted("polygon", 18),
-    ethereum: bridgedSupply(
-      "polygon",
-      18,
-      chainContracts.polygon.bridgedFromETH,
-      "polygon",
-      "Ethereum",
-      "peggedCHF"
-    )
-  },
-  arbitrum: {
-    minted: chainMinted("arbitrum", 18),
-    ethereum: bridgedSupply(
-      "arbitrum",
-      18,
-      chainContracts.arbitrum.bridgedFromETH,
-      "arbitrum",
-      "Ethereum",
-      "peggedCHF"
-    )
-  },
-  optimism: {
-    minted: chainMinted("optimism", 18),
-    ethereum: bridgedSupply(
-      "optimism",
-      18,
-      chainContracts.optimism.bridgedFromETH,
-      "optimism",
-      "Ethereum",
-      "peggedCHF"
-    )
-  },
-  base: {
-    minted: chainMinted("base", 18),
-    ethereum: bridgedSupply(
-      "base",
-      18,
-      chainContracts.base.bridgedFromETH,
-      "base",
-      "Ethereum",
-      "peggedCHF"
-    )
-  },
-  xdai: {
-    minted: chainMinted("xdai", 18),
-    ethereum: bridgedSupply(
-      "xdai",
-      18,
-      chainContracts.xdai.bridgedFromETH,
-      "gnosis",
-      "Ethereum",
-      "peggedCHF"
-    )
-  },
-  avax: {
-    minted: chainMinted("avax", 18),
-  },
-  sonic: {
-    minted: chainMinted("sonic", 18),
-  },
-};
-
+import { addChainExports } from "../helper/getSupply";
+const adapter = addChainExports(chainContracts, undefined, {
+  pegType: "peggedCHF",
+});
 export default adapter;
