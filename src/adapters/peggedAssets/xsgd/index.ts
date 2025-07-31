@@ -20,11 +20,7 @@ const chainContracts: ChainContracts = {
 };
 
 async function rippleMinted() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (  ) {
     const balances = {} as Balances;
     
     const NODE_URL = "https://xrplcluster.com";
@@ -54,11 +50,7 @@ async function rippleMinted() {
 }
 
 async function hederaMinted() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (  ) {
     const balances = {} as Balances;
     const tokenId = "0.0.1985922"; // XSGD token on Hedera
     const decimals = 6;
@@ -74,11 +66,7 @@ async function hederaMinted() {
 }
 
 async function zilliqaMinted() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function (  ) {
     const balances = {} as Balances;
     
     // XSGD proxy contract address

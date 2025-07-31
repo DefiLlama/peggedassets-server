@@ -26,34 +26,6 @@ const chainContracts: ChainContracts = {
   },
 };
 
-async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-    return balances;
-  };
-}
-
 async function gmoAPIChainMinted(chain: string) {
   return async function (
     _timestamp: number,
@@ -65,7 +37,6 @@ async function gmoAPIChainMinted(chain: string) {
       async (_bail: any) =>
         await axios.get("https://stablecoin.z.com/token/totalSupply")
     );
-    console.info("GMO API success");
     const gyenData = issuance.data.data.filter(
       (obj: any) => obj.symbol === "ZUSD"
     );
@@ -78,30 +49,11 @@ async function gmoAPIChainMinted(chain: string) {
   };
 }
 
+import { addChainExports } from "../helper/getSupply";
+const evmAdapters = addChainExports(chainContracts, undefined, {decimals: 6});
+
 const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 6),
-  },
-  optimism: {
-    ethereum: bridgedSupply(
-      "optimism",
-      6,
-      chainContracts.optimism.bridgedFromETH,
-      undefined,
-      undefined,
-      "peggedUSD"
-    ),
-  },
-  arbitrum: {
-    ethereum: bridgedSupply(
-      "arbitrum",
-      6,
-      chainContracts.arbitrum.bridgedFromETH,
-      undefined,
-      undefined,
-      "peggedUSD"
-    ),
-  },
+  ...evmAdapters,
   stellar: {
     minted: gmoAPIChainMinted("XLM"),
   },
