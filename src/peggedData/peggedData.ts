@@ -5823,4 +5823,24 @@ export default [
     twitter: "https://twitter.com/vnx_platform",
     wiki: "https://vnx.li/vgbp/",
   },
+  {
+    id: "293",
+    name: "Sigma Money bnbUSD",
+    address: "bsc:0x5519a479Da8Ce3Af7f373c16f14870BbeaFDa265",
+    symbol: "BNBUSD",
+    url: "https://sigma.money/",
+    description:
+      "bnbUSD is redefining what a stablecoin can be on BNB Chain. Born from the foundation of true decentralization, bnbUSD offers a powerful alternative to centralized stablecoins — combining a robust peg, built-in yield, and zero-slippage swaps for a seamless DeFi experience. Its elegant economic architecture ensures that liquidity scales naturally as users tap into the growing utility of BNB-native assets. Designed for composability and yield generation, bnbUSD isn’t just another stablecoin — it’s the future of stable value on BNB Chain.",
+    mintRedeemDescription:
+      "Users are able to mint and redeem with BNB, slisBNB, WBNB and more.",
+    onCoinGecko: "false",
+    gecko_id: "bnbusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/sigmadotmoney",
+    wiki: "https://docs.sigma.money/",
+  },
 ] as PeggedAsset[];

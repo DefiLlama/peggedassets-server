@@ -289,6 +289,7 @@ import ebusd from './ebusd-stablecoin';
 import xsgd from './xsgd';
 import straitsx_xusd from './straitsx-xusd';
 import vnx_british_pound from './vnx-british-pound';
+import bnbusd from './bnbusd';
 
 export default {
   tether,
@@ -582,5 +583,6 @@ export default {
   "ebusd-stablecoin": ebusd,
   "xsgd": xsgd,
   "straitsx-xusd": straitsx_xusd,
-  "vnx-british-pound": vnx_british_pound
+  "vnx-british-pound": vnx_british_pound,
+  "bnbusd": bnbusd,
 };
