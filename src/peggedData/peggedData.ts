@@ -5839,7 +5839,7 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: null,
+    auditLinks: "https://docs.sigma.money/risk-management/audit-reports",
     twitter: "https://x.com/sigmadotmoney",
     wiki: "https://docs.sigma.money/",
   },
