@@ -76,11 +76,7 @@ function chainMinted(chain: string) {
 }
 
 async function tronMinted() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function() {
     let balances = {} as Balances;
     const totalSupply = await tronGetTotalSupply(
       chainContracts["tron"].issued[0]
@@ -91,11 +87,7 @@ async function tronMinted() {
 }
 
 async function bscMinted() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function() {
     let balances = {} as Balances;
     /*     const totalSupply = 9 * 10 ** 10; // this is hardcoded because Binance API doesn't seem to give 'token' or 'tokens' info that includes TUSD
         const responseMint = await retry(
@@ -130,11 +122,7 @@ async function bscMinted() {
 }
 
 async function nearBridged(address: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function() {
     let balances = {} as Balances;
     const supply = await nearCall(address, "ft_total_supply");
     sumSingleBalance(

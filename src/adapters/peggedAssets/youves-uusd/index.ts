@@ -15,11 +15,7 @@ const chainContracts: ChainContracts = {
 };
 
 async function tezosMinted(tokenID: string) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function () {
     let balances = {} as Balances;
     const totalSupply = await tezosGetTotalSupply(tokenID);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
