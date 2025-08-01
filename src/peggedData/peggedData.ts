@@ -5843,4 +5843,25 @@ export default [
     twitter: "https://x.com/sigmadotmoney",
     wiki: "https://docs.sigma.money/",
   },
+  {
+    id: "294",
+    name: "Autonomint",
+    address: "base:0x4e44fB5c61a89CF44a9080AB987335889FCaA6bd",
+    symbol: "USDA+",
+    url: "https://www.autonomint.com/",
+    description:
+      "Autonomint has created a new mechanism to drastically reduce the costs incurred to hedge any asset. We do this with a combination of stablecoin and on-chain credit default swaps. ",
+    mintRedeemDescription:
+      "Anyone looking to hedge can deposit ETH & ETH LRT as collateral to mint USDA+, a stablecoin soft pegged to US Dollar.",
+    onCoinGecko: "false",
+    gecko_id: "autonomint", // fake
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://docs.autonomint.com/autonomint",
+    twitter: "https://x.com/autonomint",
+    wiki: "https://docs.autonomint.com/autonomint",
+  },
+
 ] as PeggedAsset[];
