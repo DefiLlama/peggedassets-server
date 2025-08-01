@@ -5,6 +5,12 @@ const chainContracts: ChainContracts = {
     ethereum: {
         issued: ["0xE868084cf08F3c3db11f4B73a95473762d9463f7"],
     },
+    bsc: {
+        issued: ["0xE868084cf08F3c3db11f4B73a95473762d9463f7"],
+    },
+    base: {
+        issued: ["0xE868084cf08F3c3db11f4B73a95473762d9463f7"],
+    },
     solana: {
         issued: ["YUYAiJo8KVbnc6Fb6h3MnH2VGND4uGWDH4iLnw7DLEu"],
     },
