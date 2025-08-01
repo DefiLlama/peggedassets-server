@@ -1,69 +1,20 @@
-const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
 import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,
   ChainContracts,
 } from "../peggedAsset.type";
-const axios = require("axios");
-const retry = require("async-retry");
 
+process.env.KARURA_RPC='https://eth-rpc-karura.aca-api.network'
 
 const chainContracts: ChainContracts = {
   acala: {
-    issued: ["0x0000000000000000000100000000000000000001"],
+    // issued: ["0x0000000000000000000100000000000000000001"],  // // hacked, inflated circulating, not trading acalaMinted(chainContracts.acala.issued[0], 12),
   },
   karura: {
-    issued: ["0x0000000000000000000100000000000000000081"],
+    // issued: ["0x0000000000000000000100000000000000000081"],  // hacked and redeemed for aSeed
   },
 };
 
-async function acalaMinted(address: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          `https://blockscout.acala.network/api?module=token&action=getToken&contractaddress=${address}`
-        )
-    );
-    const supply = res.data.result.totalSupply / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
-    return balances;
-  };
-}
-
-async function karuraMinted(address: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          `https://blockscout.karura.network/api?module=token&action=getToken&contractaddress=getToken&contractaddress=${address}`
-        )
-    );
-    const supply = res.data.result.totalSupply / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  // hacked, inflated circulating, not trading acalaMinted(chainContracts.acala.issued[0], 12),
-  acala: {
-  },
-  karura: {
-    minted: karuraMinted(chainContracts.karura.issued[0], 12),
-  },
-};
-
+import { addChainExports } from "../helper/getSupply";
+const adapter = addChainExports(chainContracts);
 export default adapter;
+
+  

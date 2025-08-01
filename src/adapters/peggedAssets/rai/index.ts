@@ -1,13 +1,3 @@
-const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply, supplyInEthereumBridge } from "../helper/getSupply";
-import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
-} from "../peggedAsset.type";
-
-
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x03ab458634910aad20ef5f1c8ee96f1d6ac54919"],
@@ -32,96 +22,7 @@ const chainContracts: ChainContracts = {
   },
 };
 
-async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedVAR",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 18),
-  },
-  polygon: {
-    ethereum: bridgedSupply(
-      "polygon",
-      18,
-      chainContracts.polygon.bridgedFromETH,
-      undefined,
-      undefined,
-      "peggedVAR"
-    ),
-  },
-  optimism: {
-    ethereum: bridgedSupply(
-      "optimism",
-      18,
-      chainContracts.optimism.bridgedFromETH,
-      undefined,
-      undefined,
-      "peggedVAR"
-    ),
-  },
-  arbitrum: {
-    ethereum: bridgedSupply(
-      "arbitrum",
-      18,
-      chainContracts.arbitrum.bridgedFromETH,
-      undefined,
-      undefined,
-      "peggedVAR"
-    ),
-  },
-  avax: {
-    ethereum: bridgedSupply(
-      "avax",
-      18,
-      chainContracts.avax.bridgedFromETH,
-      undefined,
-      undefined,
-      "peggedVAR"
-    ),
-  },
-  xdai: {
-    ethereum: bridgedSupply(
-      "xdai",
-      18,
-      chainContracts.xdai.bridgedFromETH,
-      undefined,
-      undefined,
-      "peggedVAR"
-    ),
-  },
-  loopring: {
-    ethereum: supplyInEthereumBridge(
-      chainContracts.ethereum.issued[0],
-      chainContracts.loopring.bridgeOnETH[0],
-      18,
-      "peggedVAR"
-    ),
-  },
-};
-
+import { addChainExports } from "../helper/getSupply";
+import { ChainContracts } from "../peggedAsset.type";
+const adapter = addChainExports(chainContracts, undefined, { pegType: 'peggedVAR' });
 export default adapter;

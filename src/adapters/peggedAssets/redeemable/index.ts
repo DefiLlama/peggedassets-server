@@ -1,10 +1,4 @@
-import {
-  PeggedIssuanceAdapter,
-  ChainBlocks,
-  Balances,  ChainContracts,
-} from "../peggedAsset.type";
-import { sumSingleBalance } from "../helper/generalUtil";
-import { getTotalSupply } from "../helper/cardano";
+import { addChainExports } from "../helper/getSupply";
 
 const assetIDs = {
   cardano: {
@@ -14,23 +8,4 @@ const assetIDs = {
   },
 };
 
-async function getCardanoSupply() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const supply = await getTotalSupply(assetIDs.cardano.issued[0]);
-    sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  cardano: {
-    minted: getCardanoSupply(),
-  },
-};
-
-export default adapter;
+export default addChainExports(assetIDs)
