@@ -290,6 +290,7 @@ import xsgd from './xsgd';
 import straitsx_xusd from './straitsx-xusd';
 import vnx_british_pound from './vnx-british-pound';
 import bnbusd from './bnbusd';
+import autonomint_usd from './autonomint-usda+';
 
 export default {
   tether,
@@ -585,4 +586,5 @@ export default {
   "straitsx-xusd": straitsx_xusd,
   "vnx-british-pound": vnx_british_pound,
   "bnbusd": bnbusd,
+  "automint": autonomint_usd
 };
