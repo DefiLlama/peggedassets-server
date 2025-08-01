@@ -218,4 +218,7 @@ export const chainContracts: ChainContracts = {
   hemi: {
     bridgedFromETH: ["0x6c851F501a3F24E29A8E39a29591cddf09369080"],
   },
+  cardano: {
+    bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff935444149"],
+  },
 };

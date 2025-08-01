@@ -279,13 +279,7 @@ export function craftChartsResponse(
         }
       
         const itemPegType = Object.keys(item.totalCirculating.circulating)?.[0];
-        if (item.totalCirculating.circulating && itemPegType !== pegType) {
-          if (peggedGeckoID !== "bitcoin-usd-btcfi") {
-            console.log(
-              `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
-            );
-          }
-        }
+        if (item.totalCirculating.circulating && itemPegType !== pegType) return;
       
         itemBalance.circulating = item.totalCirculating.circulating ?? { [pegType]: 0 };
         if (item.totalCirculating.unreleased) {
@@ -298,13 +292,7 @@ export function craftChartsResponse(
       
         if (chainData?.circulating) {
           const itemPegType = Object.keys(chainData.circulating)?.[0];
-          if (chainData.circulating && itemPegType !== pegType) {
-            if (peggedGeckoID !== "bitcoin-usd-btcfi") {
-              console.log(
-                `pegType mismatch for ${peggedGeckoID}: ${pegType} and ${itemPegType}`
-              );
-            }
-          }
+          if (chainData.circulating && itemPegType !== pegType) return;
         }
       
         itemBalance.circulating = chainData?.circulating ?? { [pegType]: 0 };

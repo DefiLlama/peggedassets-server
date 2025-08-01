@@ -1,7 +1,7 @@
 const sdk = require("@defillama/sdk");
 import { ChainApi } from "@defillama/sdk";
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
-import { sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
+import { getTetherTransparency, sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
   getApi,
@@ -33,6 +33,7 @@ import { chainContracts } from "./config";
 const axios = require("axios");
 const retry = require("async-retry");
 import * as sui from "../helper/sui";
+import { getTotalSupply } from "../helper/cardano";
 
 // If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain and fuse
 // any bridgeOnETH contracts are not used and are just for info purposes
@@ -310,11 +311,8 @@ async function usdtApiMinted(key: string) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios("https://app.tether.to/transparency.json")
-    );
-    const issuance = res.data.data.usdt;
+    const res = await getTetherTransparency();
+    const issuance = res.data.usdt;
     const totalSupply = parseInt(issuance[key]);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
@@ -328,11 +326,8 @@ async function usdtApiUnreleased(key: string) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios("https://app.tether.to/transparency.json")
-    );
-    const issuance = res.data.data.usdt;
+    const res = await getTetherTransparency();
+    const issuance = res.data.usdt;
     const totalSupply = parseInt(issuance[key]);
     sumSingleBalance(balances, "peggedUSD", totalSupply);
     return balances;
@@ -354,6 +349,19 @@ async function reinetworkBridged(address: string, decimals: number) {
     );
     const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
     sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
+    return balances;
+  };
+}
+
+async function getCardanoSupply() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
+    sumSingleBalance(balances, "peggedUSD", supply, "wan", true);
     return balances;
   };
 }
@@ -961,6 +969,8 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   klaytn: {
+    minted: usdtApiMinted("totaltokens_kaia"),
+    unreleased: usdtApiUnreleased("reserve_balance_kaia"),
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
   canto: {
@@ -1119,6 +1129,18 @@ const adapter: PeggedIssuanceAdapter = {
   },
   hyperliquid: {
     ethereum: bridgedSupply("hyperliquid", 6, chainContracts.hyperliquid.bridgedFromETH)
+  },
+  imx: {
+    ethereum: supplyInEthereumBridge(chainContracts.ethereum.issued[0], chainContracts.imx.bridgeOnETH[0], 6),
+  },
+  core: {
+    ethereum: bridgedSupply("core", 6, chainContracts.core.bridgedFromETH)
+  },
+  soneium: {
+    ethereum: bridgedSupply("soneium", 6, chainContracts.soneium.bridgedFromETH)
+  },
+  cardano: {
+    ethereum: getCardanoSupply(),
   },
 };
 

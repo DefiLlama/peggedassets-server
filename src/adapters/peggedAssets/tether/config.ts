@@ -274,6 +274,8 @@ export const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x94fa70d079d76279e1815ce403e9b985bccc82ac"], // seems there is no direct bridge from ETH. but users can withdraw to defichain using cake defi?
   },
   klaytn: {
+    issued: ["0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d"],
+    unreleased: ["0x5754284f345afc66a98fbb0a0afe71e0f007b949"],
     bridgedFromETH: ["0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167"], // orbit
   },
   canto: {
@@ -395,5 +397,20 @@ export const chainContracts: ChainContracts = {
   },
   hyperliquid: {
     bridgedFromETH: ["0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb"], // USDT0
+  },
+  imx: {
+    bridgeOnETH: ["0xBa5E35E26Ae59c7aea6F029B68c6460De2d13eB6"],
+    bridgedFromETH: [
+      "0x68bcc7F1190AF20e7b572BCfb431c3Ac10A936Ab", // native bridge
+      ],
+  },
+  core: {
+    bridgedFromETH: ["0x900101d06a7426441ae63e9ab3b9b0f63be145f1"], 
+  },
+  soneium: {
+    bridgedFromETH: ["0x102d758f688a4C1C5a80b116bD945d4455460282"], 
+  },
+  cardano: {
+    bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534454"],
   },
 };

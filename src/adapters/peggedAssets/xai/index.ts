@@ -1,15 +1,8 @@
-const sdk = require("@defillama/sdk");
-import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
-} from "../peggedAsset.type";
-import { sumSingleBalance } from "../helper/generalUtil";
 
 const chainContracts = {
   ethereum: {
     issued: ["0xd7C9F0e536dC865Ae858b0C0453Fe76D13c3bEAc"],
-    silos: [
+    unreleased: [
       "0xc8cd77d4cd9511f2822f24ad14fe9e3c97c57836",
       "0xfccc27aabd0ab7a0b2ad2b7760037b1eab61616b",
       "0x92e7e77163ffed918421e3cb6e0a22f2fe8b37fa",
@@ -24,82 +17,6 @@ const chainContracts = {
   },
 };
 
-async function ethereumMinted() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
-        target: chainContracts.ethereum.issued[0],
-        block: _ethBlock,
-        chain: "ethereum",
-      })
-    ).output;
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      totalSupply / 10 ** 18,
-      "issued",
-      false
-    );
-    return balances;
-  };
-}
-
-// Will use this in the future once bridging is relevant
-async function bridgedFromEthereum(
-  chain: string,
-  decimals: number,
-  address: string
-) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
-        target: address,
-        block: _chainBlocks[chain],
-        chain: chain,
-      })
-    ).output;
-    return { peggedUSD: totalSupply / 10 ** decimals };
-  };
-}
-
-async function ethereumUnreleased() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let address of chainContracts.ethereum.silos) {
-      const reserve = (
-        await sdk.api.erc20.balanceOf({
-          target: chainContracts.ethereum.issued[0],
-          owner: address,
-          block: _chainBlocks?.["ethereum"],
-          chain: "ethereum",
-        })
-      ).output;
-      sumSingleBalance(balances, "peggedUSD", reserve / 10 ** 18);
-    }
-    return balances;
-  };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: ethereumMinted(),
-    unreleased: ethereumUnreleased(),
-  },
-};
-
+import { addChainExports } from "../helper/getSupply";
+const adapter = addChainExports(chainContracts);
 export default adapter;

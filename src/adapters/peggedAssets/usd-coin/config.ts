@@ -201,7 +201,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x3Ca3fEFA944753b43c751336A5dF531bDD6598B6"], // multichain
   },
   rsk: {
-    bridgedFromETH: ["0x1bda44fda023f2af8280a16fd1b01d1a493ba6c4"],
+    bridgedFromETH18Decimals: ["0x1bda44fda023f2af8280a16fd1b01d1a493ba6c4"],
+    bridgedFromETH6Decimals: ["0x74c9f2b00581f1b11aa7ff05aa9f608b7389de67"],
   },
   reinetwork: {
     bridgedFromETH: ["0x8d5E1225981359E2E09A3AB8F599A51486f53314"], // celer
@@ -493,8 +494,32 @@ export const chainContracts: ChainContracts = {
   },
   plume_mainnet: {
     bridgedFromETH: [
-      "0x78adD880A697070c1e765Ac44D65323a0DcCE913", // stargate
+      "0x78add880a697070c1e765ac44d65323a0dcce913", // stargate
       //"0x54FD4da2Fa19Cf0f63d8f93A6EA5BEd3F9C042C6", // deprecated - arbitrum native bridge
     ]
-  }
+  },
+  story: {
+    bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"],
+  },
+  nero: {
+    bridgedFromARB: ["0x8712796136ac8e0eeec123251ef93702f265aa80"],
+  },
+  perennial: {
+    bridgedFromETH: ["0x39CD9EF9E511ec008247aD5DA01245D84a9521be"],
+  },
+  apechain: {
+    bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"],
+  },
+  glue: {
+    bridgedFromETH: ["0xEe45ed3f6c675F319BB9de62991C1E78B484e0B8"],
+  },
+  goat: {
+    bridgedFromETH: ["0x3022b87ac063DE95b1570F46f5e470F8B53112D8"],
+  },
+  ripple: {
+    issued: ["5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"],
+  },
+  cardano: {
+    bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534443"],
+  },
 };

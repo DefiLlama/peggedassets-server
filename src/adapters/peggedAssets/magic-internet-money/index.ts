@@ -7,6 +7,8 @@ import {
 } from "../peggedAsset.type";
 import { BENTOBOX_ABI } from "./abis/bentobox";
 import { CAULDRON_V1_ABI } from "./abis/cauldron-v1";
+import * as nibiruHelper from "../helper/nibiru";
+
 
 type Address = `0x${string}`;
 type ChainContract = {
@@ -185,6 +187,13 @@ const bridgedChainContracts: ChainContracts = {
   linea: {
     address: "0xdd3b8084af79b9bae3d1b668c0de08ccc2c9429a",
   },
+  berachain: {
+    address: "0x5B82028cfc477C4E7ddA7FF33d59A23FA7Be002a",
+  },
+  nibiru: {
+    address: "0xfCfc58685101e2914cBCf7551B432500db84eAa8",
+  }
+  
 };
 
 async function chainReleased(
@@ -200,14 +209,25 @@ async function chainReleased(
   ) {
     const balances: Balances = {};
 
-    const totalSupply = (
-      await sdk.api.abi.call({
-        abi: "erc20:totalSupply",
+    let totalSupply;
+    if (chain === 'nibiru') {
+      totalSupply = await nibiruHelper.call({
+        abi: { name: 'totalSupply' },
         target: address,
         block: _chainBlocks?.[chain],
-        chain: chain,
-      })
-    ).output;
+      });
+      // Convert hex string to number
+      totalSupply = parseInt(totalSupply, 16);
+    } else {
+      totalSupply = (
+        await sdk.api.abi.call({
+          abi: "erc20:totalSupply",
+          target: address,
+          block: _chainBlocks?.[chain],
+          chain: chain,
+        })
+      ).output;
+    }
 
     sumSingleBalance(
       balances,
@@ -233,7 +253,17 @@ async function chainUnreleased(
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) => {
-    const ownerPromise = ownerOf(address, chain, _chainBlocks);
+    let ownerPromise;
+    if (chain === 'nibiru') {
+      ownerPromise = nibiruHelper.call({
+        abi: { name: 'owner' },
+        target: address,
+        block: _chainBlocks?.[chain],
+      }).then(result => `0x${result.slice(26)}` as Address); // Convert the last 20 bytes to address with proper type
+    } else {
+      ownerPromise = ownerOf(address, chain, _chainBlocks);
+    }
+
     const [
       ownerBalance,
       ownerBentoboxBalances,
@@ -241,15 +271,25 @@ async function chainUnreleased(
       reserveBalances,
     ] = await Promise.all([
       ownerPromise.then(
-        async (owner) =>
-          (
+        async (owner) => {
+          if (chain === 'nibiru') {
+            const result = await nibiruHelper.call({
+              abi: { name: 'balanceOf' },
+              target: address,
+              params: [owner],
+              block: _chainBlocks?.[chain],
+            });
+            return parseInt(result, 16);
+          }
+          return (
             await sdk.api.erc20.balanceOf({
               target: address,
               owner,
               block: _chainBlocks?.[chain],
               chain: chain,
             })
-          ).output
+          ).output;
+        }
       ),
       ownerPromise.then((owner) =>
         Promise.all(
@@ -346,6 +386,7 @@ async function bentoboxBalanceAmountOf(
   chain: string,
   chainBlocks?: ChainBlocks
 ): Promise<number> {
+  // First get shares
   const shares = (
     await sdk.api.abi.call({
       abi: BENTOBOX_ABI.find(
@@ -358,6 +399,9 @@ async function bentoboxBalanceAmountOf(
     })
   ).output;
 
+  if (!shares || shares === '0') return 0;
+
+  // Then convert shares to amount
   const amount = (
     await sdk.api.abi.call({
       abi: BENTOBOX_ABI.find(

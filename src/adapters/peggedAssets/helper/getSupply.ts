@@ -2,6 +2,9 @@ import { ChainApi } from "@defillama/sdk";
 import * as aptos from "../helper/aptos";
 import { getTokenSupply as solanaGetTokenSupply } from "../helper/solana";
 import * as sui from "../helper/sui";
+import * as tezos from "../helper/tezos";
+import * as cardano from "../helper/cardano";
+import { getZilliqaTokenSupply } from "../helper/zilliqa";
 import type {
   Balances,
   ChainBlocks,
@@ -118,6 +121,25 @@ export function solanaMintedOrBridged(
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     for (let target of targets) {
       const totalSupply = await solanaGetTokenSupply(target);
+      sumSingleBalance(balances, assetPegType, totalSupply, target, true);
+    }
+    return balances;
+  };
+}
+
+export function zilliqaMintedOrBridged(
+  targets: string[],
+  pegType?: PeggedAssetType
+) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
+    for (let target of targets) {
+      const totalSupply = await getZilliqaTokenSupply(target);
       sumSingleBalance(balances, assetPegType, totalSupply, target, true);
     }
     return balances;
@@ -315,6 +337,7 @@ export function addChainExports(config: any, adapter: any = {}, {
     Object.keys(chainConfig).forEach((key) => {
       switch (key) {
         case 'bridgeOnETH':
+          cExports.ethereum = supplyInEthereumBridge(config.ethereum.issued[0], chainConfig.bridgeOnETH[0], decimals, pegType as any);
         case 'pegType':
           break;
         case "issued":
@@ -328,16 +351,24 @@ export function addChainExports(config: any, adapter: any = {}, {
           break;
         case "bridgedFromETH":
           if (!Array.isArray(chainConfig.bridgedFromETH)) chainConfig.bridgedFromETH = [chainConfig.bridgedFromETH]
-          if (!cExports.ethereum)
-            cExports.ethereum = bridgedSupply(chain, decimals, chainConfig.bridgedFromETH)
+          if (!cExports.ethereum) {
+            if (chain === 'solana')
+              cExports.ethereum = solanaMintedOrBridged(chainConfig[key])
+            else
+              cExports.ethereum = bridgedSupply(chain, decimals, chainConfig.bridgedFromETH, undefined, "ethereum", pegType as any)
+          }
           break;
         default: {
           if (key.startsWith("bridgedFrom")) {
             let srcChain = key.slice("bridgedFrom".length).toLowerCase()
             if (srcChain === "ETH") srcChain = "ethereum"
             if (!Array.isArray(chainConfig[key])) chainConfig[key] = [chainConfig[key]]
-            if (!cExports[srcChain])
-              cExports[srcChain] = bridgedSupply(chain, decimals, chainConfig[key], undefined, srcChain, pegType as any)
+            if (!cExports[srcChain]) {
+              if (chain === 'solana')
+                cExports[srcChain] = solanaMintedOrBridged(chainConfig[key])
+              else
+                cExports[srcChain] = bridgedSupply(chain, decimals, chainConfig[key], undefined, srcChain, pegType as any)
+            }
           } else
             console.log(`Ignored: Unknown key ${key} in ${chain} config for addChainExports`)
         }
@@ -371,6 +402,21 @@ function getIssued({
     if (api.chain === "aptos") {
       for (const i of issued) {
         const supply = await aptos.getTokenSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
+    if (api.chain === 'tezos') {
+      for (const i of issued) {
+        const supply = await tezos.getTotalSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
+
+    if (api.chain === 'cardano') {
+      for (const i of issued) {
+        const supply = await cardano.getTotalSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }

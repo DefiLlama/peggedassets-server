@@ -24,6 +24,7 @@ import {
 } from "../peggedAsset.type";
 import { mixinSupply } from "../helper/mixin";
 import { chainContracts } from "./config";
+import { getTotalSupply } from "../helper/cardano";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -135,6 +136,19 @@ async function fromETH(
       );
     }
 
+    return balances;
+  };
+}
+
+async function getCardanoSupply() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
+    sumSingleBalance(balances, "peggedUSD", supply, "wan", true);
     return balances;
   };
 }
@@ -508,6 +522,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   hemi: {
     ethereum: bridgedSupply("hemi", 18, chainContracts.hemi.bridgedFromETH),
+  },
+  cardano: {
+    ethereum: getCardanoSupply(),
   },
 };
 

@@ -1,5 +1,20 @@
 import { addChainExports } from "../helper/getSupply";
 import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
+import { function_view } from "../helper/aptos";
+import { Balances } from "../peggedAsset.type";
+
+async function moveSupply(): Promise<Balances> {
+  const balances = {} as Balances;
+  
+  const resp = await function_view({
+    functionStr: '0x1::fungible_asset::supply',
+    type_arguments: ['0x1::object::ObjectCore'],
+    args: [chainContracts.move.issued[0]],
+  });
+  balances["peggedUSD"] = Number(resp.vec[0]) / 1e8;
+
+  return balances;
+}
 
 // Avalon - USDa, use LayerZero OFT (Mint-Burn) Modal to bridge
 const chainContracts = {
@@ -48,11 +63,18 @@ const chainContracts = {
     bob: {
       issued: ["0x250fC55c82bcE84C991ba25698A142B21cDC778A"]
     },
+    move: {
+        issued: ["0x48b904a97eafd065ced05168ec44638a63e1e3bcaec49699f6b8dabbd1424650"],
+    }
   };
 
 
 const adapter: PeggedIssuanceAdapter = {
     ...addChainExports(chainContracts),
+
+    move: {
+        minted: moveSupply,
+    }
 };
 
 export default adapter;

@@ -7,7 +7,7 @@ import {
   Balances,
   ChainContracts,
 } from "../peggedAsset.type";
-import { solanaMintedOrBridged } from "../helper/getSupply";
+import { solanaMintedOrBridged, tonTokenSupply } from "../helper/getSupply";
 
 const chainContracts: ChainContracts = {
   ethereum: {
@@ -19,7 +19,10 @@ const chainContracts: ChainContracts = {
   },
   solana: {
     issued: ["9zNQRsGLjNKwCUU5Gq5LR8beUCPzQMVMqKAi3SSZh54u"]
-  }
+  },
+  arbitrum: {
+    issued: ["0x93C9932E4afa59201F0B5E63f7d816516F1669fE"],
+  },
 };
 
 async function suiMinted(): Promise<Balances> {
@@ -98,7 +101,13 @@ const adapter: PeggedIssuanceAdapter = {
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued),
-  }
+  },
+  arbitrum: {
+    minted: chainMinted("arbitrum", 18),
+  },
+  ton: {
+    minted: tonTokenSupply("EQD0Evpk4timFOHmy4Sv3l_KEUXlM-dN1_KhroTCfB2wkO89"),
+  },
 };
 
 export default adapter;

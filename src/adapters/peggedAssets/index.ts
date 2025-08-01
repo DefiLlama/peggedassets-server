@@ -197,6 +197,7 @@ import opuscash from "./opus-cash";
 import usc from "./orby-network-usc-stablecoin";
 import usdcb from "./pago-linea-usdcb";
 import pausd from "./parallel-usd";
+import parallelusdp from "./parallel-usdp";
 import pxdc from "./powercity-pxdc";
 import ultra from "./prismalrt-ultra";
 import eurd from "./quantoz-eurd";
@@ -225,7 +226,7 @@ import zkusd from "./zkusd";
 import dtrinityusd from "./dtrinity-usd";
 import zeusd from "./zoth-zeusd";
 import zchf from "./frankencoin";
-import bold from "./liquity-bold";
+import bold from "./legacy-bold";
 import lvlusd from "./level-usd";
 import usdq from "./quill-usd";
 import noonusn from "./noon-usn";
@@ -264,6 +265,31 @@ import orkiusdk from './orki-usd';
 import plumeUsd from './plume-usd';
 import mead2 from './mead-2';
 import yu from './yala-stablecoin';
+import a7a5 from './a7a5';
+import hyperstable from './hyperstable';
+import liquityBold from './liquity-bold';
+import benji from './franklin-onchain-u-s-government-money-fund';
+import avusd from './avant-usd';
+import eurq from "./quantoz-eurq";
+import qusdq from "./quantoz-usdq";
+import usdaf from './asymmetry-usdaf';
+import ylds from './ylds';
+import usdn from './smardex-usdn';
+import weusd from './weusd';
+import parausd from './parabol-usd';
+import noble_dollar_usdn from "./noble-dollar-usdn";
+import mxnt from './mexican-peso-tether';
+import cnht from './cnh-tether';
+import usdu from './unitas';
+import ggusd from './good-game-us-dollar';
+import mnee from './mnee-usd-stablecoin';
+import usdg from './global-dollar';
+import usnerite from './us-nerite-dollar';
+import ebusd from './ebusd-stablecoin';
+import xsgd from './xsgd';
+import straitsx_xusd from './straitsx-xusd';
+import vnx_british_pound from './vnx-british-pound';
+import bnbusd from './bnbusd';
 
 export default {
   tether,
@@ -493,7 +519,7 @@ export default {
   "dtrinity-usd": dtrinityusd,
   "zoth-zeusd": zeusd,
   frankencoin: zchf,
-  "liquity-bold": bold,
+  "legacy-bold": bold,
   "level-usd": lvlusd,
   "quill-usd": usdq,
   "noon-usn": noonusn,
@@ -533,4 +559,30 @@ export default {
   "orki-usd": orkiusdk,
   "mead-2": mead2,
   "yala-stablecoin": yu,
+  "a7a5": a7a5,
+  "hyperstable": hyperstable,
+  "liquity-bold": liquityBold,
+  "franklin-onchain-u-s-government-money-fund": benji,
+  "avant-usd":avusd,
+  "quantoz-eurq": eurq,
+  "quantoz-usdq": qusdq,
+  "asymmetry-usdaf": usdaf,
+  "ylds": ylds,
+  "smardex-usdn": usdn,
+  "weusd": weusd,
+  "parabol-usd": parausd,
+  "noble-dollar-usdn": noble_dollar_usdn,
+  "mexican-peso-tether": mxnt,
+  "cnh-tether": cnht,
+  "unitas": usdu,
+  "good-game-us-dollar": ggusd,
+  "mnee-usd-stablecoin": mnee,
+  "global-dollar": usdg,
+  "parallel-usdp": parallelusdp,
+  "us-nerite-dollar": usnerite,
+  "ebusd-stablecoin": ebusd,
+  "xsgd": xsgd,
+  "straitsx-xusd": straitsx_xusd,
+  "vnx-british-pound": vnx_british_pound,
+  "bnbusd": bnbusd,
 };

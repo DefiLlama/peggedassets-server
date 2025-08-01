@@ -5,6 +5,7 @@ type PegType =
   | "peggedSGD" //singapora
   | "peggedJPY" //japan
   | "peggedCNY" //china
+  | "peggedMXN" //mexican peso
   | "peggedUAH" //ukraine
   | "peggedARS" //ARGENTINE
   | "peggedGBP" //GB
@@ -50,6 +51,7 @@ export type PeggedAsset = {
   delisted?: boolean;
   deadFrom?: string;
   doublecounted?: boolean;
+  deprecated?: boolean;
 };
 
 type Bridge = {

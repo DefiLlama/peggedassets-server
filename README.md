@@ -40,8 +40,41 @@ The `bridgedFromChain` properties are optional. The property name should simply 
 The async functions should take timestamp, ethBlock, and chainBlocks as parameters, just like Defillama TVL Adapters. They must return an object `{ peggedXYZ: x }`, where `peggedXYZ` is a supported pegged asset type, and `x` is a Number. Currently we support `peggedUSD`, `peggedEUR`,`peggedVAR` (variable peg) and more you can see the full list here https://github.com/DefiLlama/peggedassets-server/blob/master/src/adapters/peggedAssets/peggedAsset.type.ts#L7
 If we are not supporting a particular peggedTYPE, please inform us on discord.
 
-Here is an example adapter:
+you can use this shorthand:
+
+```typescript
+const chainContracts = {
+  ethereum: {
+    issued: ["0xe2f2a5c287993345a840db3b0845fbc70f5935a5"],
+    unreleased: [
+      "0xAEf566ca7E84d1E736f999765a804687f39D9094",
+      "0x0B663CeaCEF01f2f88EB7451C70Aa069f19dB997",
+    ],
+  },
+  xdai: {
+    bridgedFromETH: ["0x7300AaFC0Ef0d47Daeb850f8b6a1931b40aCab33"],
+  },
+  polygon: {
+    issued: ["0xE840B73E5287865EEc17d250bFb1536704B43B21"],
+  },
+};
+
+import { addChainExports } from "../helper/getSupply";
+const adapter = addChainExports(chainContracts);  // assumes pegType to be peggedUSD and 18 decimals 
+export default adapter;
+
+
+
+// with different pegType or decimals
+export default addChainExports(chainContracts, undefined, { pegType: 'peggedEUR', decimals: 9})
+```
+
+
+
+
+Here is an example adapter with vannila code :
 	
+```typescript
     const sdk = require("@defillama/sdk");
     import {
       ChainBlocks,
@@ -79,13 +112,13 @@ Here is an example adapter:
     return async function (
         _timestamp: number,
         _ethBlock: number,
-        _chainBlocks: ChainBlocks
+        chainBlocks: ChainBlocks
     ) {
         const totalSupply = (
           await sdk.api.abi.call({
             abi: "erc20:totalSupply",
             target: address,
-            block: _chainBlocks[chain],
+            block: chainBlocks[chain],
             chain: chain,
           })
         ).output;
@@ -105,12 +138,4 @@ Here is an example adapter:
     export default adapter;
 
 
-# Running the Server
-
-If you want to run your own copy of this server on AWS:
-    
-    npm run build # Build with webpack & check for type errors
-    npm run format # Format code
- 
-    aws configure
-	serverless deploy
+```
