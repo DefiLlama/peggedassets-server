@@ -586,5 +586,5 @@ export default {
   "straitsx-xusd": straitsx_xusd,
   "vnx-british-pound": vnx_british_pound,
   "bnbusd": bnbusd,
-  "automint": autonomint_usd
+  "autonomint-usda+": autonomint_usd
 };

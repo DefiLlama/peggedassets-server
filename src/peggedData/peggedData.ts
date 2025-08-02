@@ -5854,7 +5854,7 @@ export default [
     mintRedeemDescription:
       "Anyone looking to hedge can deposit ETH & ETH LRT as collateral to mint USDA+, a stablecoin soft pegged to US Dollar.",
     onCoinGecko: "false",
-    gecko_id: "autonomint", // fake
+    gecko_id: "autonomint-usda+", // fake
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
