@@ -272,7 +272,8 @@ import benji from './franklin-onchain-u-s-government-money-fund';
 import avusd from './avant-usd';
 import eurq from "./quantoz-eurq";
 import qusdq from "./quantoz-usdq";
-import usdaf from './asymmetry-usdaf';
+import usdaf from './asymmetry-legacy-usdaf';
+import asymmetryUsdaf from './asymmetry-usdaf';
 import ylds from './ylds';
 import usdn from './smardex-usdn';
 import weusd from './weusd';
@@ -567,7 +568,8 @@ export default {
   "avant-usd":avusd,
   "quantoz-eurq": eurq,
   "quantoz-usdq": qusdq,
-  "asymmetry-usdaf": usdaf,
+  "asymmetry-usdaf": asymmetryUsdaf,
+  "asymmetry-legacy-usdaf": usdaf,
   "ylds": ylds,
   "smardex-usdn": usdn,
   "weusd": weusd,
