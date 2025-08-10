@@ -952,6 +952,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   near: {
     minted: nearMint(chainContracts.near.issued[0], 6),
+    unreleased: usdtApiUnreleased("reserve_balance_near"), 
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 6),
   },
   wan: {
