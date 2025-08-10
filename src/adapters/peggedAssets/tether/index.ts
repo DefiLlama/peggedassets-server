@@ -138,11 +138,18 @@ async function solanaUnreleased() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const unreleased = await solanaGetTokenBalance(
-      chainContracts["solana"].issued[0],
-      chainContracts["solana"].unreleased[0]
-    );
-    sumSingleBalance(balances, "peggedUSD", unreleased);
+    
+    // Check all unreleased accounts and sum their balances
+    let totalUnreleased = 0;
+    for (const unreleasedAccount of chainContracts["solana"].unreleased) {
+      const unreleased = await solanaGetTokenBalance(
+        chainContracts["solana"].issued[0],
+        unreleasedAccount
+      );
+      totalUnreleased += unreleased;
+    }
+    
+    sumSingleBalance(balances, "peggedUSD", totalUnreleased);
     return balances;
   };
 }

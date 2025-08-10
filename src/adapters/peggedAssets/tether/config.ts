@@ -53,7 +53,7 @@ export const chainContracts: ChainContracts = {
       "FwEHs3kJEdMa2qZHv7SgzCiFXUQPEycEXksfBkwmS8gj", // allbridge
       "B2wfeYz5VtBnQVrX4M8F6FeDrprVrzKPws5qg1in8bzR", // wormhole
     ],
-    unreleased: ["Q6XprfkF8RQQKoQVG33xT88H7wi8Uk1B1CC7YAs69Gi"],
+    unreleased: ["Q6XprfkF8RQQKoQVG33xT88H7wi8Uk1B1CC7YAs69Gi","A3znyaRYUvi7GbQv1pp9CqqiVo7anddU9rPKFH55V28R"],
   },
   tron: {
     issued: ["TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"],
