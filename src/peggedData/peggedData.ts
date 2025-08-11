@@ -3176,7 +3176,7 @@ export default [
   {
     id: "158",
     name: "VNX EURO",
-    address: "0xE4095d9372E68d108225c306A4491cacfB33B097",
+    address: "stellar:GDXLSLCOPPHTWOQXLLKSVN4VN3G67WD2ENU7UMVAROEYVJLSPSEWXIZN",
     symbol: "VEUR",
     url: "https://vnx.li/",
     description:
