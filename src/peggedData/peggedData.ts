@@ -4760,14 +4760,14 @@ export default [
   },
   {
     id: "237",
-    name: "Hashnote USYC",
+    name: "Circle USYC",
     address: "0x136471a34f6ef19fe571effc1ca711fdb8e49f2b",
     symbol: "USYC",
-    url: "https://usyc.hashnote.com/",
+    url: "https://www.circle.com/usyc",
     description:
       "USYC is a tokenized money market fund backed by U.S. Treasury bills, designed by Hashnote Labs (now part of Circle) to generate yield within the token itself for use as collateral in crypto markets",
     mintRedeemDescription:
-      "USYC is minted when users deposit USDC into Hashnote's platform, which then invests in short-term U.S. Treasury bills to create the yield-bearing token, and it can be redeemed by converting it back to USDC at a 1:1 ratio through Circle's system",
+      "USYC is minted when users deposit USDC into USYC fund, which then invests in short-term U.S. Treasury bills to create the yield-bearing token, and it can be redeemed by converting it back to USDC at a 1:1 ratio through Circle's system",
     onCoinGecko: "true",
     gecko_id: "hashnote-usyc",
     cmcId: null,
@@ -4775,8 +4775,8 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: [],
-    twitter: "https://x.com/Hashnote_Labs",
-    wiki: "https://www.hashnote.com/",
+    twitter: "https://x.com/circle",
+    wiki: "https://www.circle.com/",
     doublecounted: true
   },
   {
@@ -5454,7 +5454,7 @@ export default [
     address: "0x85e30b8b263bc64d94b827ed450f2edfee8579da",
     symbol: "USDaf",
     url: "https://usdaf.asymmetry.finance/",
-    description: 
+    description:
       `USDaf is a crypto-backed stablecoin minted via Collateralized Debt Positions (CDPs) on Asymmetry Finance, built using Liquity v2. It allows users to borrow against assets like wBTC, sfrxUSD, and tBTC, with user-defined interest rates and collateral ratios.`,
     mintRedeemDescription: "Minted when users lock supported collateral into a USDaf CDP on Asymmetry and can be redeemed by repaying the borrowed amount plus accrued interest.",
     onCoinGecko: "true",
@@ -5659,7 +5659,7 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    twitter: "https://x.com/UnitasLabs", 
+    twitter: "https://x.com/UnitasLabs",
     wiki: "https://docs.unitas.so/",
     doublecounted: true
   },
@@ -5677,7 +5677,7 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
-    twitter: "https://x.com/MNEE_cash", 
+    twitter: "https://x.com/MNEE_cash",
     wiki: "https://www.mnee.io/faq",
   },
   {
