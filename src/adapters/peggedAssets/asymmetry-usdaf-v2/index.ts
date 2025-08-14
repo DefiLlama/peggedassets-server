@@ -3,7 +3,7 @@ import { addChainExports } from "../helper/getSupply";
 
 const chainContracts = {
     ethereum: {
-      issued: ["0x85e30b8b263bc64d94b827ed450f2edfee8579da"],
+      issued: ["0x9cf12ccd6020b6888e4d4c4e4c7aca33c1eb91f8"],
     },
   };
   
