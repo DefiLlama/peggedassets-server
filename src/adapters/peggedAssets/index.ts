@@ -273,6 +273,7 @@ import avusd from './avant-usd';
 import eurq from "./quantoz-eurq";
 import qusdq from "./quantoz-usdq";
 import usdaf from './asymmetry-usdaf';
+import asymmetryUsdaf from './asymmetry-usdaf-v2';
 import ylds from './ylds';
 import usdn from './smardex-usdn';
 import weusd from './weusd';
@@ -567,7 +568,8 @@ export default {
   "avant-usd":avusd,
   "quantoz-eurq": eurq,
   "quantoz-usdq": qusdq,
-  "asymmetry-usdaf": usdaf,
+  "asymmetry-usdaf": asymmetryUsdaf,
+  "asymmetry-legacy-usdaf": usdaf,
   "ylds": ylds,
   "smardex-usdn": usdn,
   "weusd": weusd,
