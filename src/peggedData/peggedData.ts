@@ -4760,14 +4760,14 @@ export default [
   },
   {
     id: "237",
-    name: "Hashnote USYC",
+    name: "Circle USYC",
     address: "0x136471a34f6ef19fe571effc1ca711fdb8e49f2b",
     symbol: "USYC",
-    url: "https://usyc.hashnote.com/",
+    url: "https://www.circle.com/usyc",
     description:
       "USYC is a tokenized money market fund backed by U.S. Treasury bills, designed by Hashnote Labs (now part of Circle) to generate yield within the token itself for use as collateral in crypto markets",
     mintRedeemDescription:
-      "USYC is minted when users deposit USDC into Hashnote's platform, which then invests in short-term U.S. Treasury bills to create the yield-bearing token, and it can be redeemed by converting it back to USDC at a 1:1 ratio through Circle's system",
+      "USYC is minted when users deposit USDC into USYC fund, which then invests in short-term U.S. Treasury bills to create the yield-bearing token, and it can be redeemed by converting it back to USDC at a 1:1 ratio through Circle's system",
     onCoinGecko: "true",
     gecko_id: "hashnote-usyc",
     cmcId: null,
@@ -4775,8 +4775,8 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: [],
-    twitter: "https://x.com/Hashnote_Labs",
-    wiki: "https://www.hashnote.com/",
+    twitter: "https://x.com/circle",
+    wiki: "https://www.circle.com/usyc",
     doublecounted: true
   },
   {
