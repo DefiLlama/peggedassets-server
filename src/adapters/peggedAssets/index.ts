@@ -292,6 +292,7 @@ import straitsx_xusd from './straitsx-xusd';
 import vnx_british_pound from './vnx-british-pound';
 import bnbusd from './bnbusd';
 import autonomint_usd from './autonomint-usda+';
+import cap_cusd from './cap-cusd';
 
 export default {
   tether,
@@ -588,5 +589,6 @@ export default {
   "straitsx-xusd": straitsx_xusd,
   "vnx-british-pound": vnx_british_pound,
   "bnbusd": bnbusd,
-  "autonomint-usda+": autonomint_usd
+  "autonomint-usda+": autonomint_usd,
+  "cap-cusd": cap_cusd
 };

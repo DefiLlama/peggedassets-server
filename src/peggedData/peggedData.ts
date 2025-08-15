@@ -5883,5 +5883,26 @@ export default [
     twitter: "https://x.com/asymmetryfin",
     wiki: "https://docs.asymmetry.finance/usdaf-stablecoin/what-is-usdaf",
   },
+  {
+    id: "296",
+    name: "Cap cUSD",
+    address: "0xcCcc62962d17b8914c62D74FfB843d73B2a3cccC",
+    symbol: "CUSD",
+    url: "https://cap.app/mint",
+    description:
+      "Cap is a stablecoin protocol that provides credible financial guarantees via two products: the dollar-denominated cUSD and the yield-bearing stcUSD",
+    mintRedeemDescription:
+      "Users deposit reserve assets to mint cUSD at oracle value. cUSD's reserve is backed by blue chip stablecoins such as USDC, USDT, pyUSD, BUIDL, and BENJI, i.e. issued by regulated institutions with transparent attestations. It is 1:1 redeemable for any of the available reserve assets.",
+    onCoinGecko: "false",
+    gecko_id: "cap-cusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://docs.cap.app/resources/audits",
+    twitter: "https://x.com/capmoney_",
+    wiki: "https://docs.cap.app/",
+    doublecounted: true
+  },
 
 ] as PeggedAsset[];
