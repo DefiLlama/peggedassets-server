@@ -5863,5 +5863,25 @@ export default [
     twitter: "https://x.com/autonomint",
     wiki: "https://docs.autonomint.com/autonomint",
   },
+  {
+    id: "295",
+    name: "Asymmetry USDaf V2",
+    address: "0x9cf12ccd6020b6888e4d4c4e4c7aca33c1eb91f8",
+    symbol: "USDaf",
+    url: "https://www.asymmetry.finance/usdaf",
+    description:
+      "USDaf is an immutable, decentralized CDP stablecoin built on Liquity v2",
+    mintRedeemDescription:
+      "Users can borrow at custom fixed interest rates using BTC and yield-bearing stablecoins, or hold USDaf to earn on stablecoins.",
+    onCoinGecko: "true",
+    gecko_id: "asymmetry-usdaf-2", 
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://docs.asymmetry.finance/security/audits-bug-bounties",
+    twitter: "https://x.com/asymmetryfin",
+    wiki: "https://docs.asymmetry.finance/usdaf-stablecoin/what-is-usdaf",
+  },
 
 ] as PeggedAsset[];
