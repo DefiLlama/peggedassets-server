@@ -293,6 +293,7 @@ import vnx_british_pound from './vnx-british-pound';
 import bnbusd from './bnbusd';
 import autonomint_usd from './autonomint-usda+';
 import cap_cusd from './cap-cusd';
+import msusd from './main-street-usd';
 
 export default {
   tether,
@@ -590,5 +591,6 @@ export default {
   "vnx-british-pound": vnx_british_pound,
   "bnbusd": bnbusd,
   "autonomint-usda+": autonomint_usd,
-  "cap-cusd": cap_cusd
+  "cap-cusd": cap_cusd,
+  "main-street-usd": msusd
 };

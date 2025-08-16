@@ -5904,5 +5904,26 @@ export default [
     wiki: "https://docs.cap.app/",
     doublecounted: true
   },
+  {
+    id: "297",
+    name: "Main Street USD",
+    address: "sonic:0xE5Fb2Ed6832deF99ddE57C0b9d9A56537C89121D",
+    symbol: "MSUSD",
+    url: "https://mainstreet.finance/mint",
+    description:
+      "Yield-bearing synthetic dollar - democratizing access to the options volatility arbitrage",
+    mintRedeemDescription:
+      "msUSD can be minted at https://mainstreet.finance/mint by depositing USDC. The depositor will be minted 1:1 msUSD. Redemptions can occur on the same UI.",
+    onCoinGecko: "true",
+    gecko_id: "main-street-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://mainstreet-finance.gitbook.io/mainstreet.finance/audits/watchpug-security-audit",
+    twitter: "https://x.com/Main_St_Finance",
+    wiki: "https://mainstreet-finance.gitbook.io/mainstreet.finance",
+    doublecounted: true
+  },
 
 ] as PeggedAsset[];
