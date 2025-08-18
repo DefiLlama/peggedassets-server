@@ -294,6 +294,7 @@ import bnbusd from './bnbusd';
 import autonomint_usd from './autonomint-usda+';
 import cap_cusd from './cap-cusd';
 import msusd from './main-street-usd';
+import tryb from './bilira';
 
 export default {
   tether,
@@ -592,5 +593,6 @@ export default {
   "bnbusd": bnbusd,
   "autonomint-usda+": autonomint_usd,
   "cap-cusd": cap_cusd,
-  "main-street-usd": msusd
+  "main-street-usd": msusd,
+  "bilira" : tryb
 };
