@@ -109,7 +109,7 @@ import hyusd from "./high-yield-usd";
 import inter from "./inter-stable-token";
 import ibeur from "./iron-bank-euro";
 import iusd from "./iusd";
-import infniFi from "./infniFi";
+import infniFi from "./infinifi-usd";
 import knox from "./knox-dollar";
 import pina from "./meme-dollar";
 import eure from "./monerium-eur-money";
@@ -392,7 +392,7 @@ export default {
   "bank-of-chain": bankofchain,
   xai,
   iusd,
-  "infiniFi-iUSD": infniFi,
+  "infinifi-usd": infniFi,
   redeemable: rusd,
   "iron-bank-euro": ibeur,
   //composite,
