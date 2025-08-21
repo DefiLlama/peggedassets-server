@@ -5925,5 +5925,26 @@ export default [
     wiki: "https://mainstreet-finance.gitbook.io/mainstreet.finance",
     doublecounted: true
   },
+  {
+    id: "298",
+    name: "infiniFi USD",
+    address: "0x48f9e38f3070ad8945dfeae3fa70987722e3d89c",
+    symbol: "IUSD",
+    url: "https://infinifi.xyz/",
+    description:
+      "iUSD is a ERC20 - represents a users deposited value into the infiniFi protocol",
+    mintRedeemDescription:
+      "infiniFi USD (iUSD) can be minted and redeemed for USDC 1 for 1. There is no mint or redemption fee. In the case of lack of liquid reserves duration asset backing fills up the redemption queue as those assets reach maturity",
+    onCoinGecko: "true",
+    gecko_id: "infinifi-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://docs.infinifi.xyz/audits",
+    twitter: "https://x.com/infiniFi_",
+    wiki: "https://docs.infinifi.xyz/infiniFi-Docs-1ed44c414f36805a8642e0dcdabae970",
+    doublecounted: true
+  },
 
 ] as PeggedAsset[];
