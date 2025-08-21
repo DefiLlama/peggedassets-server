@@ -1,14 +1,15 @@
-
 process.env.SKIP_RPC_CHECK = 'true'
 
 require("dotenv").config();
 const path = require("path");
+import * as sdk from "@defillama/sdk";
+import peggedAssets from "../../peggedData/peggedData";
 import { PeggedAssetIssuance, PeggedTokenBalance } from "../../types";
+import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
 import { PeggedIssuanceAdapter } from "./peggedAsset.type";
 const {
   humanizeNumber,
 } = require("@defillama/sdk/build/computeTVL/humanizeNumber");
-import * as sdk from "@defillama/sdk";
 const chainList = require("./helper/chains.json");
 const errorString = "------ ERROR ------";
 
@@ -31,48 +32,109 @@ async function getPeggedAsset(
   issuanceType: string,
   issuanceFunction: any,
   pegType: string,
-  bridgedFromMapping: BridgeMapping = {}
+  bridgedFromMapping: BridgeMapping = {},
+  extrapolationMetadata: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> },
+  stablecoinId: string,
+  adapterLabel: string
 ) {
-  peggedBalances[chain] = peggedBalances[chain] || {};
-  const interval = setTimeout(
-    () =>
-      console.log(
-        `Issuance function for chain ${chain} exceeded the timeout limit`
+  try {
+    const chainApi = new sdk.ChainApi({ chain })
+    const balance = await Promise.race([
+      issuanceFunction(
+        chainApi,
+        ethBlock,
+        chainBlocks
+      ) as Promise<PeggedTokenBalance>,
+      new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), 300_000)
       ),
-    60e3
-  );
-  const chainApi = new sdk.ChainApi({ chain })
-  const balance = (await issuanceFunction(
-    chainApi,
-    ethBlock,
-    chainBlocks
-  )) as PeggedTokenBalance;
-  clearTimeout(interval);
-  if (balance && Object.keys(balance).length === 0) {
-    peggedBalances[chain][issuanceType] = { [pegType]: 0 };
-    return;
-  }
-  if (!balance) {
-    throw new Error(`Could not get pegged balance on chain ${chain}`);
-  }
-  if (typeof balance[pegType] !== "number" || Number.isNaN(balance[pegType])) {
-    throw new Error(
-      `Pegged balance on chain ${chain} is not a number, instead it is ${balance[pegType]}. Make sure balance object is exported with key from: ${pegTypes}.`
+    ]);
+    
+    if (balance && Object.keys(balance).length === 0) {
+      peggedBalances[chain] = peggedBalances[chain] || {};
+      peggedBalances[chain][issuanceType] = { [pegType]: 0 };
+      return balance;
+    }
+    
+    if (!balance) {
+      throw new Error(`Could not get pegged balance on chain ${chain}`);
+    }
+    
+    if (typeof (balance as any)[pegType] !== "number" || Number.isNaN((balance as any)[pegType])) {
+      throw new Error(
+        `Pegged balance on chain ${chain} is not a number, instead it is ${(balance as any)[pegType]}. Make sure balance object is exported with key from: ${pegType}.`
+      );
+    }
+    
+    const bridges = (balance as any).bridges;
+    if (!bridges && issuanceType !== "minted" && issuanceType !== "unreleased") {
+      console.error(
+        `${errorString}
+        Bridge data not found on chain ${chain}. Use sumSingleBalance from helper/generalUtil to add bridge data.`
+      );
+    }
+    
+    peggedBalances[chain] = peggedBalances[chain] || {};
+    peggedBalances[chain][issuanceType] = balance as PeggedTokenBalance;
+    
+    if (issuanceType !== "minted" && issuanceType !== "unreleased") {
+      bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
+      bridgedFromMapping[issuanceType].push(balance as PeggedTokenBalance);
+    }
+    
+
+    
+    return balance as PeggedTokenBalance;
+    
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.warn(`[${adapterLabel}] Chain ${chain} failed:`, errorMessage);
+    console.log(`[${adapterLabel}] Using snapshot fallback for failed chain ${chain}`);
+
+    const snap = await getClosestSnapshotForChain(
+      stablecoinId,
+      chain,
+      _unixTimestamp,
     );
+
+    if (snap && snap.snapshot && typeof snap.snapshot === 'object') {
+      const { snapshot, timestamp } = snap;
+
+      const extracted = extractIssuanceFromSnapshot(snapshot, issuanceType, pegType, chain);
+
+      peggedBalances[chain] = peggedBalances[chain] || {};
+      if (extracted) {
+        peggedBalances[chain][issuanceType] = extracted;
+
+        if (issuanceType !== "minted" && issuanceType !== "unreleased" && issuanceType !== "circulating") {
+          bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
+          bridgedFromMapping[issuanceType].push(extracted);
+        }
+        
+
+        
+      } else {
+        peggedBalances[chain][issuanceType] = { [pegType]: null as any };
+        console.log(
+          `[${adapterLabel}] Snapshot found but issuance '${issuanceType}' not present in bridgedTo for ${chain}`
+        );
+      }
+
+      extrapolationMetadata.extrapolated = true;
+      if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
+        extrapolationMetadata.extrapolatedChains.push({ chain, timestamp });
+      }
+
+      return peggedBalances[chain][issuanceType] || null;
+    }
+
+    console.log(`[${adapterLabel}] No cached snapshot found for chain ${chain} (issuance: ${issuanceType})`);
+    peggedBalances[chain] = peggedBalances[chain] || {};
+    peggedBalances[chain][issuanceType] = { [pegType]: null as any };
+    
+    console.error(`Getting ${issuanceType} on chain ${chain} failed.`);
+    return null;
   }
-  const bridges = balance.bridges;
-  if (!bridges) {
-    console.error(
-      `${errorString}
-      Bridge data not found on chain ${chain}. Use sumSingleBalance from helper/generalUtil to add bridge data.`
-    );
-  }
-  peggedBalances[chain][issuanceType] = balance;
-  if (issuanceType !== "minted" && issuanceType !== "unreleased") {
-    bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
-    bridgedFromMapping[issuanceType].push(balance);
-  }
-  return;
 }
 
 async function calcCirculating(
@@ -84,9 +146,10 @@ async function calcCirculating(
     async (chain) => {
       let circulating: PeggedTokenBalance = { [pegType]: 0 };
       const chainIssuances = peggedBalances[chain];
+      
       Object.entries(chainIssuances).map(
         ([issuanceType, peggedTokenBalance]) => {
-          const balance = peggedTokenBalance[pegType];
+          const balance = (peggedTokenBalance as any)[pegType];
           if (balance == null) {
             return;
           }
@@ -99,6 +162,7 @@ async function calcCirculating(
           }
         }
       );
+      
       if (bridgedFromMapping[chain]) {
         bridgedFromMapping[chain].forEach((peggedTokenBalance) => {
           const balance = peggedTokenBalance[pegType];
@@ -109,12 +173,13 @@ async function calcCirculating(
           circulating[pegType]! -= balance;
         });
       }
+      
       if (circulating[pegType]! < 0) {
         throw new Error(
           `Pegged asset on chain ${chain} has negative circulating amount`
         );
       }
-      peggedBalances[chain].circulating = circulating;
+      (peggedBalances as any)[chain].circulating = circulating;
     }
   );
   await Promise.all(chainCirculatingPromises);
@@ -123,12 +188,12 @@ async function calcCirculating(
   peggedBalances["totalCirculating"]["circulating"] = { [pegType]: 0 };
   peggedBalances["totalCirculating"]["unreleased"] = { [pegType]: 0 };
   let peggedTotalPromises = Object.keys(peggedBalances).map((chain) => {
-    const circulating = peggedBalances[chain].circulating;
-    const unreleased = peggedBalances[chain].unreleased;
+    const circulating = (peggedBalances as any)[chain].circulating || { [pegType]: 0 };
+    const unreleased  = (peggedBalances as any)[chain].unreleased  || { [pegType]: 0 };
     if (chain !== "totalCirculating") {
-      peggedBalances["totalCirculating"]["circulating"][pegType]! +=
+      (peggedBalances as any)["totalCirculating"]["circulating"][pegType]! +=
         circulating[pegType] || 0;
-      peggedBalances["totalCirculating"]["unreleased"][pegType]! +=
+      (peggedBalances as any)["totalCirculating"]["unreleased"][pegType]! +=
         unreleased[pegType] || 0;
     }
   });
@@ -142,8 +207,38 @@ if (process.argv.length < 3) {
 }
 
 const passedFile = path.resolve(process.cwd(), process.argv[2]);
-const dummyFn = () => ({});
+const dummyFn = () => {};
 const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
+
+function getStablecoinIdFromPath(filePath: string): string {
+  const pathParts = filePath.split(path.sep);
+  const stablecoinDir = pathParts[pathParts.length - 1];
+  
+  if (/^\d+$/.test(stablecoinDir)) {
+    return stablecoinDir;
+  }
+  
+  const peggedAsset = peggedAssets.find((pegged) => {
+    return pegged.gecko_id === stablecoinDir;
+  });
+  
+  if (peggedAsset) {
+    return peggedAsset.id;
+  }
+  
+  console.warn(`[WARNING] Could not determine stablecoin ID for path: ${filePath}, using folder name: ${stablecoinDir}`);
+  return stablecoinDir;
+}
+
+function getAdapterLabelFromPath(filePath: string): string {
+  const parts = filePath.split(path.sep);
+  const last = parts[parts.length - 1] || 'unknown-adapter';
+  if (/^\d+$/.test(last)) {
+    const found = peggedAssets.find(p => p.id === last);
+    return (found?.gecko_id || found?.name || last) as string;
+  }
+  return last;
+}
 
 (async () => {
   let adapter = {} as PeggedIssuanceAdapter;
@@ -156,6 +251,10 @@ const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
   const chains = Object.keys(module).filter(
     (chain) => !["minted", "unreleased"].includes(chain)
   );
+
+  const stablecoinId = getStablecoinIdFromPath(passedFile);
+  const adapterLabel = getAdapterLabelFromPath(passedFile);
+  console.log(`[INFO] Detected stablecoin: ${adapterLabel} (id: ${stablecoinId}) for file: ${passedFile}`);
 
   checkExportKeys(passedFile, chains);
   const unixTimestamp = Math.round(Date.now() / 1000) - 60;
@@ -174,6 +273,11 @@ const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
   let peggedBalances: PeggedAssetIssuance = {};
   let bridgedFromMapping: BridgeMapping = {};
   
+  const extrapolationMetadata = {
+    extrapolated: false,
+    extrapolatedChains: [] as Array<{ chain: string; timestamp: number }>
+  };
+
   await initializeSdkInternalCache()
 
   let peggedBalancesPromises = Object.entries(module).map(
@@ -182,21 +286,6 @@ const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
         return;
       }
       const issuanceTypes = Object.keys(issuances);
-      /* if (
-        !(
-          issuanceTypes.includes("minted") &&
-          issuanceTypes.includes("unreleased")
-        )
-      ) {
-        throw new Error(
-          `Chain ${chain} does not have both 'minted' and 'unreleased' issuance.`
-        );
-      } */
-
-      if (!(issuances as any).minted)
-        (issuances as any).minted = dummyFn;
-      if (!(issuances as any).unreleased)
-        (issuances as any).unreleased = dummyFn;
 
       if (issuanceTypes.includes(chain)) {
         throw new Error(`Chain ${chain} has issuance bridged to itself.`);
@@ -217,7 +306,10 @@ const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
               issuanceType,
               issuanceFunction,
               pegType,
-              bridgedFromMapping
+              bridgedFromMapping,
+              extrapolationMetadata,
+              stablecoinId,
+              adapterLabel
             );
           } catch (e) {
             console.log(`Failed on ${chain}:${issuanceType}`, e);
@@ -230,51 +322,86 @@ const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
   await Promise.all(peggedBalancesPromises);
   await calcCirculating(peggedBalances, bridgedFromMapping, pegType);
   if (
-    typeof peggedBalances.totalCirculating.circulating[pegType] !== "number"
+    typeof (peggedBalances as any).totalCirculating.circulating[pegType] !== "number"
   ) {
     throw new Error(`Pegged asset doesn't have total circulating`);
   }
-  if (peggedBalances.totalCirculating.circulating[pegType]! > 1000e9) {
+  if ((peggedBalances as any).totalCirculating.circulating[pegType]! > 1000e9) {
     throw new Error(`Pegged asset total circulating is over 1000 billion`);
   }
-  if (peggedBalances.totalCirculating.circulating[pegType] === 0) {
+  if ((peggedBalances as any).totalCirculating.circulating[pegType] === 0) {
     throw new Error(`Returned 0 total circulating`);
   }
   const displayTable: any = []
   Object.entries(peggedBalances).forEach(([chain, issuances]) => {
+    if (chain === "extrapolated" || chain === "extrapolatedChains") {
+      return;
+    }
+    
     const item: any = { chain}
     if (chain !== "totalCirculating") {
       displayTable.push(item)
       console.log(`--- ${chain} ---`);
-      Object.entries(issuances)
-        .sort((a, b) => (b[1][pegType] ?? 0) - (a[1][pegType] ?? 0))
-        .forEach(([issuanceType, issuance]) => {
-          item[issuanceType] =  humanizeNumber(issuance[pegType]);
-          console.log(
-            issuanceType.padEnd(25, " "),
-            humanizeNumber(issuance[pegType])
-          );
-        });
+      
+      if (issuances && typeof issuances === 'object') {
+        Object.entries(issuances)
+          .filter(([_, issuance]) => issuance && typeof issuance === 'object')
+          .sort((a, b) => {
+            const aValue = (a[1] as any)?.[pegType] ?? 0;
+            const bValue = (b[1] as any)?.[pegType] ?? 0;
+            return bValue - aValue;
+          })
+          .forEach(([issuanceType, issuance]) => {
+            const value = (issuance as any)?.[pegType];
+            item[issuanceType] = safeHumanizeNumber(value);
+            console.log(
+              issuanceType.padEnd(25, " "),
+              safeHumanizeNumber(value)
+            );
+          });
+      } else {
+        console.log(`[DEBUG] Chain ${chain} has invalid issuances data:`, issuances);
+      }
     }
   });
   console.log(`------ Total Circulating ------`);
   const totalItem: any = { chain: "Total Circulating" }
-  Object.entries(peggedBalances.totalCirculating).forEach(
+  Object.entries((peggedBalances as any).totalCirculating).forEach(
     ([issuanceType, issuance]) =>{
-      totalItem[issuanceType] = humanizeNumber(issuance[pegType]);
+      totalItem[issuanceType] = humanizeNumber((issuance as any)[pegType]);
       console.log(
         `Total ${issuanceType}`.padEnd(25, " "),
-        humanizeNumber(issuance[pegType])
+        humanizeNumber((issuance as any)[pegType])
       )
     }
   );
+  
+  if (extrapolationMetadata.extrapolated) {
+    console.log(`\n------ EXTRAPOLATION INFO ------`);
+    console.log(`⚠️  Some chains used extrapolated data from cache`);
+    console.log(`Extrapolated chains details:`);
+    
+    extrapolationMetadata.extrapolatedChains?.forEach((extrapolatedChain: any) => {
+      const d = new Date(extrapolatedChain.timestamp * 1000);
+      const formattedDate = d.toISOString().slice(0, 10); // YYYY-MM-DD
+      console.log(`   • ${extrapolatedChain.chain}: ${formattedDate}`);
+    });
+  } else {
+    console.log(`\n------ NO EXTRAPOLATION ------`);
+    console.log(`✅ All chains used real-time data`);
+  }
+  
+  console.log(`\n[DEBUG] Final extrapolation state:`, {
+    extrapolated: extrapolationMetadata.extrapolated,
+    extrapolatedChainsCount: extrapolationMetadata.extrapolatedChains?.length || 0,
+    extrapolationMetadata: extrapolationMetadata.extrapolatedChains
+  });
   displayTable.push(totalItem)
   console.table(displayTable);
   process.exit(0);
 })();
 
 function checkExportKeys(_filePath: string, chains: string[]) {
-  // should check filepath
 
   const unknownChains = chains.filter((chain) => !chainList.includes(chain));
 
@@ -298,12 +425,8 @@ function handleError(error: string) {
 process.on("unhandledRejection", handleError);
 process.on("uncaughtException", handleError);
 
-
-
-
 async function initializeSdkInternalCache() {
   let currentCache = await sdk.cache.readCache(INTERNAL_CACHE_FILE)
-  // sdk.log('cache size:', JSON.stringify(currentCache).length, 'chains:', Object.keys(currentCache))
   const ONE_MONTH = 60 * 60 * 24 * 30
   if (!currentCache || !currentCache.startTime || (Date.now() / 1000 - currentCache.startTime > ONE_MONTH)) {
     currentCache = {
@@ -316,4 +439,21 @@ async function initializeSdkInternalCache() {
 
 async function saveSdkInternalCache() {
   await sdk.cache.writeCache(INTERNAL_CACHE_FILE, sdk.sdkCache.retriveCache())
+}
+
+function safeHumanizeNumber(value: any): string {
+  if (value === null || value === undefined) {
+    return "0";
+  }
+  if (typeof value === "number") {
+    return humanizeNumber(value);
+  }
+  if (typeof value === "string") {
+    const numValue = parseFloat(value);
+    if (isNaN(numValue)) {
+      return "0";
+    }
+    return humanizeNumber(numValue);
+  }
+  return "0";
 }
