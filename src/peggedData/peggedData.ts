@@ -286,7 +286,7 @@ export default [
     gecko_id: "usdd",
     cmcId: "19891",
     pegType: "peggedUSD",
-    pegMechanism: "algorithmic",
+    pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: ["https://usdd.io/SlowMistAuditReport-USDDTRC20.pdf"],
     twitter: "https://twitter.com/usddio",
