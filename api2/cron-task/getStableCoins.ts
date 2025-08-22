@@ -110,6 +110,7 @@ function craftProtocolsResponse(
             chainCirculating[a].current[pegType]
         ),
         ...(pegged.deprecated ? { deprecated: true } : {}),
+        ...(pegged.yieldBearing ? { yieldBearing: true } : {}),
       } as any;
       dataToReturn.price = prices[pegged.gecko_id] ?? null;
       if (pegged.delisted) dataToReturn.delisted = true;

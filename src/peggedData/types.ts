@@ -52,6 +52,7 @@ export type PeggedAsset = {
   deadFrom?: string;
   doublecounted?: boolean;
   deprecated?: boolean;
+  yieldBearing?: boolean;
 };
 
 type Bridge = {

@@ -2609,6 +2609,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/ondofinance",
     wiki: "https://docs.ondo.finance/general-access-products/usdy/faq/",
+    yieldBearing: true,
   },
   {
     id: "130",
@@ -2790,6 +2791,7 @@ export default [
       "https://3838260506-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FTmzl9GX7emUArB9s00Rz%2Fuploads%2FvK1ML7oM7IwFeeR3bHaF%2FARYZE%20-%20eEUR%2C%20eGBP%2C%20eUSD%20and%20RYZE%20Code%20Audit.pdf?alt=media&token=0e1f74c0-0278-42bb-a7cd-c22ea0bf7b5d",
     twitter: "https://twitter.com/ARYZEofficial",
     wiki: "https://docs.aryze.io/en/products-and-services/aryze-digital-cash",
+    yieldBearing: true,
   },
   {
     id: "139",
@@ -2811,6 +2813,7 @@ export default [
       "https://3838260506-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FTmzl9GX7emUArB9s00Rz%2Fuploads%2FvK1ML7oM7IwFeeR3bHaF%2FARYZE%20-%20eEUR%2C%20eGBP%2C%20eUSD%20and%20RYZE%20Code%20Audit.pdf?alt=media&token=0e1f74c0-0278-42bb-a7cd-c22ea0bf7b5d",
     twitter: "https://twitter.com/ARYZEofficial",
     wiki: "https://docs.aryze.io/en/products-and-services/aryze-digital-cash",
+    yieldBearing: true,
   },
   {
     id: "140",
@@ -3595,6 +3598,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/USD_3",
     wiki: "https://app.reserve.org/ethereum/token/0x0d86883faf4ffd7aeb116390af37746f45b6f378/overview",
+    yieldBearing: true,
   },
   {
     id: "179",
@@ -3778,6 +3782,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/KNOX_Dollar",
     wiki: "https://app.reserve.org/arbitrum/token/0x0bbf664d46becc28593368c97236faa0fb397595/overview",
+    yieldBearing: true,
   },
   {
     id: "188",
@@ -4777,7 +4782,8 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/circle",
     wiki: "https://www.circle.com/usyc",
-    doublecounted: true
+    doublecounted: true,
+    yieldBearing: true,
   },
   {
     id: "238",
@@ -4857,7 +4863,7 @@ export default [
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/OpenEden_X",
-    wiki: "https://docs.openeden.com/usdo/introduction",
+    wiki: "https://docs.openeden.com/usdo/introduction"
   },
   {
     id: "242",
@@ -4898,7 +4904,8 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/0xCoinshift",
     wiki: "https://docs.coinshift.xyz/coinshift-assets/csusdl/coinshift-usdl-vault/how-csusdl-vault-works",
-    doublecounted: true
+    doublecounted: true,
+    yieldBearing: true,
   },
   {
     id: "244",
@@ -5163,6 +5170,7 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/OpenEden_X",
     wiki: "https://docs.openeden.com/",
+    yieldBearing: true,
   },
   {
     id: "258",
@@ -5236,6 +5244,7 @@ export default [
     auditLinks: ["https://docs.solomonlabs.org/audits"],
     twitter: "https://x.com/solomon_labs",
     wiki: "https://docs.solomonlabs.org/",
+    yieldBearing: true,
   },
   {
     id: "262",
