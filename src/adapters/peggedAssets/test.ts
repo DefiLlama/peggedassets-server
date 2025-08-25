@@ -37,103 +37,117 @@ async function getPeggedAsset(
   stablecoinId: string,
   adapterLabel: string
 ) {
-  try {
-    const chainApi = new sdk.ChainApi({ chain })
-    const balance = await Promise.race([
-      issuanceFunction(
-        chainApi,
-        ethBlock,
-        chainBlocks
-      ) as Promise<PeggedTokenBalance>,
-      new Promise<never>((_, reject) =>
-        setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), 300_000)
-      ),
-    ]);
-    
-    if (balance && Object.keys(balance).length === 0) {
-      peggedBalances[chain] = peggedBalances[chain] || {};
-      peggedBalances[chain][issuanceType] = { [pegType]: 0 };
-      return balance;
-    }
-    
-    if (!balance) {
-      throw new Error(`Could not get pegged balance on chain ${chain}`);
-    }
-    
-    if (typeof (balance as any)[pegType] !== "number" || Number.isNaN((balance as any)[pegType])) {
-      throw new Error(
-        `Pegged balance on chain ${chain} is not a number, instead it is ${(balance as any)[pegType]}. Make sure balance object is exported with key from: ${pegType}.`
-      );
-    }
-    
-    const bridges = (balance as any).bridges;
-    if (!bridges && issuanceType !== "minted" && issuanceType !== "unreleased") {
-      console.error(
-        `${errorString}
-        Bridge data not found on chain ${chain}. Use sumSingleBalance from helper/generalUtil to add bridge data.`
-      );
-    }
-    
-    peggedBalances[chain] = peggedBalances[chain] || {};
-    peggedBalances[chain][issuanceType] = balance as PeggedTokenBalance;
-    
-    if (issuanceType !== "minted" && issuanceType !== "unreleased") {
-      bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
-      bridgedFromMapping[issuanceType].push(balance as PeggedTokenBalance);
-    }
-    
-
-    
-    return balance as PeggedTokenBalance;
-    
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.warn(`[${adapterLabel}] Chain ${chain} failed:`, errorMessage);
-    console.log(`[${adapterLabel}] Using snapshot fallback for failed chain ${chain}`);
-
-    const snap = await getClosestSnapshotForChain(
-      stablecoinId,
-      chain,
-      _unixTimestamp,
-    );
-
-    if (snap && snap.snapshot && typeof snap.snapshot === 'object') {
-      const { snapshot, timestamp } = snap;
-
-      const extracted = extractIssuanceFromSnapshot(snapshot, issuanceType, pegType, chain);
-
-      peggedBalances[chain] = peggedBalances[chain] || {};
-      if (extracted) {
-        peggedBalances[chain][issuanceType] = extracted;
-
-        if (issuanceType !== "minted" && issuanceType !== "unreleased" && issuanceType !== "circulating") {
-          bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
-          bridgedFromMapping[issuanceType].push(extracted);
-        }
-        
-
-        
-      } else {
-        peggedBalances[chain][issuanceType] = { [pegType]: null as any };
-        console.log(
-          `[${adapterLabel}] Snapshot found but issuance '${issuanceType}' not present in bridgedTo for ${chain}`
+  const maxRetries = 3;
+  const timeoutMs = 3 * 60 * 1000; // 3 minutes
+  
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const chainApi = new sdk.ChainApi({ chain })
+      const balance = await Promise.race([
+        issuanceFunction(
+          chainApi,
+          ethBlock,
+          chainBlocks
+        ) as Promise<PeggedTokenBalance>,
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), timeoutMs)
+        ),
+      ]);
+      
+      if (balance && Object.keys(balance).length === 0) {
+        peggedBalances[chain] = peggedBalances[chain] || {};
+        peggedBalances[chain][issuanceType] = { [pegType]: 0 };
+        return balance;
+      }
+      
+      if (!balance) {
+        throw new Error(`Could not get pegged balance on chain ${chain}`);
+      }
+      
+      if (typeof (balance as any)[pegType] !== "number" || Number.isNaN((balance as any)[pegType])) {
+        throw new Error(
+          `Pegged balance on chain ${chain} is not a number, instead it is ${(balance as any)[pegType]}. Make sure balance object is exported with key from: ${pegType}.`
         );
       }
-
-      extrapolationMetadata.extrapolated = true;
-      if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
-        extrapolationMetadata.extrapolatedChains.push({ chain, timestamp });
+      
+      const bridges = (balance as any).bridges;
+      if (!bridges && issuanceType !== "minted" && issuanceType !== "unreleased") {
+        console.error(
+          `${errorString}
+          Bridge data not found on chain ${chain}. Use sumSingleBalance from helper/generalUtil to add bridge data.`
+        );
       }
+      
+      peggedBalances[chain] = peggedBalances[chain] || {};
+      peggedBalances[chain][issuanceType] = balance as PeggedTokenBalance;
+      
+      if (issuanceType !== "minted" && issuanceType !== "unreleased") {
+        bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
+        bridgedFromMapping[issuanceType].push(balance as PeggedTokenBalance);
+      }
+      
+      return balance as PeggedTokenBalance;
+      
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      
+      if (i >= maxRetries - 1) {
+        console.warn(`[${adapterLabel}] Chain ${chain} failed after ${maxRetries} attempts:`, errorMessage);
+        console.log(`[${adapterLabel}] Using snapshot fallback for failed chain ${chain}`);
 
-      return peggedBalances[chain][issuanceType] || null;
+        try {
+          const snap = await getClosestSnapshotForChain(
+            stablecoinId,
+            chain,
+            _unixTimestamp,
+          );
+
+          if (snap && snap.snapshot && typeof snap.snapshot === 'object') {
+            const { snapshot, timestamp } = snap;
+
+            const extracted = extractIssuanceFromSnapshot(snapshot, issuanceType, pegType, chain);
+
+            peggedBalances[chain] = peggedBalances[chain] || {};
+            if (extracted) {
+              peggedBalances[chain][issuanceType] = extracted;
+
+              if (issuanceType !== "minted" && issuanceType !== "unreleased" && issuanceType !== "circulating") {
+                bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
+                bridgedFromMapping[issuanceType].push(extracted);
+              }
+            } else {
+              peggedBalances[chain][issuanceType] = { [pegType]: null as any };
+              console.log(
+                `[${adapterLabel}] Snapshot found but issuance '${issuanceType}' not present in bridgedTo for ${chain}`
+              );
+            }
+
+            extrapolationMetadata.extrapolated = true;
+            if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
+              extrapolationMetadata.extrapolatedChains.push({ chain, timestamp });
+            }
+
+            return peggedBalances[chain][issuanceType] || null;
+          }
+
+          console.log(`[${adapterLabel}] No cached snapshot found for chain ${chain} (issuance: ${issuanceType})`);
+          peggedBalances[chain] = peggedBalances[chain] || {};
+          peggedBalances[chain][issuanceType] = { [pegType]: null as any };
+          
+          console.error(`Getting ${issuanceType} on chain ${chain} failed.`);
+          return null;
+        } catch (cacheError) {
+          console.error(`[${adapterLabel}] Cache fallback also failed for chain ${chain}:`, cacheError);
+          peggedBalances[chain] = peggedBalances[chain] || {};
+          peggedBalances[chain][issuanceType] = { [pegType]: null as any };
+          return null;
+        }
+      } else {
+        console.warn(`[${adapterLabel}] Chain ${chain} attempt ${i + 1}/${maxRetries} failed:`, errorMessage);
+        await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1))); // 1s, 2s, 3s
+        continue;
+      }
     }
-
-    console.log(`[${adapterLabel}] No cached snapshot found for chain ${chain} (issuance: ${issuanceType})`);
-    peggedBalances[chain] = peggedBalances[chain] || {};
-    peggedBalances[chain][issuanceType] = { [pegType]: null as any };
-    
-    console.error(`Getting ${issuanceType} on chain ${chain} failed.`);
-    return null;
   }
 }
 
@@ -320,7 +334,13 @@ function getAdapterLabelFromPath(filePath: string): string {
     }
   );
   await Promise.all(peggedBalancesPromises);
-  await calcCirculating(peggedBalances, bridgedFromMapping, pegType);
+  
+  await Promise.race([
+    calcCirculating(peggedBalances, bridgedFromMapping, pegType),
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error('calcCirculating exceeded the timeout limit')), 3 * 60 * 1000)
+    ),
+  ]);
   if (
     typeof (peggedBalances as any).totalCirculating.circulating[pegType] !== "number"
   ) {
