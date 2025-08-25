@@ -5946,5 +5946,23 @@ export default [
     wiki: "https://docs.infinifi.xyz/infiniFi-Docs-1ed44c414f36805a8642e0dcdabae970",
     doublecounted: true
   },
+  {
+    id: "299",
+    name: "PHT Stablecoin",
+    address: "0xbe370ad45d44eb45174c4ec60b88839fef32c077",
+    symbol: "PHT",
+    url: "https://www.apacx.io/PHT",
+    description: "PHT is a stablecoin pegged to the Philippine Peso (PHP)",
+    mintRedeemDescription: "PHT Stablecoin can be minted by depositing USDC or USDT as collateral, the minted PHT is redeemable for USDC or USDT at the prices of 1 Peso = 1 PHT",
+    onCoinGecko: "true",
+    gecko_id: "pht-stablecoin",
+    cmcId: null,
+    pegType: "peggedVAR",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: "https://docs.apacx.io/technical-references/smart-contract-audits",
+    twitter: "https://x.com/apacx_io",
+    wiki: "https://docs.apacx.io/",
+  }
 
 ] as PeggedAsset[];
