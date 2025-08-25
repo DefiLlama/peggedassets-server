@@ -344,7 +344,7 @@ export async function storePeggedAsset(
         );
         await timeout(
           Promise.all(peggedChainPromises),
-          5 * 60 * 1000, // 5 minutes
+          3 * 60 * 1000, // 3 minutes
           peggedAsset.name,
           chain
         );
