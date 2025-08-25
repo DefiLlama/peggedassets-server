@@ -5953,7 +5953,7 @@ export default [
     symbol: "PHT",
     url: "https://www.apacx.io/PHT",
     description: "PHT is a stablecoin pegged to the Philippine Peso (PHP)",
-    mintRedeemDescription: "PHT Stablecoin can be minted by depositing USDC or USDT as collateral, the minted PHT is redeemable for USDC or USDT at the prices of 1 Peso = 1 PHT",
+    mintRedeemDescription: "PHT Stablecoin can be minted by depositing USDC or USDT as collateral. After minting, users can repay the borrowed PHT with Stability Fees incurred, and withdraw their collaterals.",
     onCoinGecko: "true",
     gecko_id: "pht-stablecoin",
     cmcId: null,
