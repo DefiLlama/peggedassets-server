@@ -1,17 +1,17 @@
-import dynamodb from "../../utils/shared/dynamodb";
+import { humanizeNumber } from "@defillama/sdk/build/computeTVL/humanizeNumber";
 import { PeggedAsset } from "../../peggedData/peggedData";
+import { PeggedAssetIssuance } from "../../types";
 import {
   HOUR,
   getDay,
   getTimestampAtStartOfDay,
   secondsInDay,
 } from "../../utils/date";
-import { PeggedAssetIssuance } from "../../types";
+import { sendMessage } from "../../utils/discord";
+import dynamodb from "../../utils/shared/dynamodb";
 import getTVLOfRecordClosestToTimestamp from "../../utils/shared/getRecordClosestToTimestamp";
 import { getLastRecord } from "../utils/getLastRecord";
-import { humanizeNumber } from "@defillama/sdk/build/computeTVL/humanizeNumber";
 import { executeAndIgnoreErrors } from "./errorDb";
-import { sendMessage } from "../../utils/discord";
 
 type PKconverted = (id: string) => string;
 
@@ -20,7 +20,8 @@ export default async (
   unixTimestamp: number,
   peggedBalances: PeggedAssetIssuance,
   hourlyPeggedBalances: PKconverted,
-  dailyPeggedBalances: PKconverted
+  dailyPeggedBalances: PKconverted,
+  extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
 ) => {
   const hourlyPK = hourlyPeggedBalances(peggedAsset.id);
   const pegType = peggedAsset.pegType;
@@ -108,11 +109,19 @@ export default async (
     })
   );
 
-  await dynamodb.put({
+  const itemToStore: any = {
     PK: hourlyPK,
     SK: unixTimestamp,
     ...peggedBalances,
-  });
+  };
+
+  if (extrapolationMetadata && extrapolationMetadata.extrapolated) {
+    itemToStore.extrapolated = extrapolationMetadata.extrapolated;
+    itemToStore.extrapolatedChains = extrapolationMetadata.extrapolatedChains;
+    itemToStore.extrapolatedChainsCount = extrapolationMetadata.extrapolatedChains?.length || 0;
+  }
+
+  await dynamodb.put(itemToStore);
 
   const closestDailyRecord = await getTVLOfRecordClosestToTimestamp(
     dailyPeggedBalances(peggedAsset.id),
@@ -121,10 +130,18 @@ export default async (
   );
   if (getDay(closestDailyRecord?.SK) !== getDay(unixTimestamp)) {
     // First write of the day
-    await dynamodb.put({
+    const dailyItemToStore: any = {
       PK: dailyPeggedBalances(peggedAsset.id),
       SK: getTimestampAtStartOfDay(unixTimestamp),
       ...peggedBalances,
-    });
+    };
+
+    if (extrapolationMetadata && extrapolationMetadata.extrapolated) {
+      dailyItemToStore.extrapolated = extrapolationMetadata.extrapolated;
+      dailyItemToStore.extrapolatedChains = extrapolationMetadata.extrapolatedChains;
+      dailyItemToStore.extrapolatedChainsCount = extrapolationMetadata.extrapolatedChains?.length || 0;
+    }
+
+    await dynamodb.put(dailyItemToStore);
   }
 };

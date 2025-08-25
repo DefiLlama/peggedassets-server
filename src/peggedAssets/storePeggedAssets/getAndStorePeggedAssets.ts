@@ -1,17 +1,18 @@
+import * as sdk from "@defillama/sdk";
 import { PeggedAsset } from "../../peggedData/peggedData";
 import {
+  BridgeBalances,
   PeggedAssetIssuance,
   PeggedTokenBalance,
-  BridgeBalances,
 } from "../../types";
-import {
-  hourlyPeggedBalances,
-  dailyPeggedBalances,
-} from "../utils/getLastRecord";
-import storeNewPeggedBalances from "./storeNewPeggedBalances";
-import { executeAndIgnoreErrors } from "./errorDb";
 import { getCurrentUnixTimestamp } from "../../utils/date";
-import * as sdk from "@defillama/sdk";
+import { getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
+import {
+  dailyPeggedBalances,
+  hourlyPeggedBalances,
+} from "../utils/getLastRecord";
+import { executeAndIgnoreErrors } from "./errorDb";
+import storeNewPeggedBalances from "./storeNewPeggedBalances";
 
 type ChainBlocks = {
   [chain: string]: number;
@@ -34,7 +35,8 @@ async function getPeggedAsset(
   issuanceFunction: any,
   pegType: string,
   bridgedFromMapping: BridgeMapping = {},
-  maxRetries: number
+  maxRetries: number,
+  extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
 ) {
   for (let i = 0; i < maxRetries; i++) {
     try {
@@ -72,6 +74,64 @@ async function getPeggedAsset(
           `Getting circulating for ${peggedAsset.name} on chain ${chain} failed.`,
           e
         );
+        
+        try {
+          const snap = await getClosestSnapshotForChain(
+            peggedAsset.gecko_id,
+            chain,
+            getCurrentUnixTimestamp(),
+          );
+          
+          if (snap && snap.snapshot && typeof snap.snapshot === 'object') {
+            console.log(`Using cache fallback for ${peggedAsset.name} on chain ${chain}`);
+            
+            if (extrapolationMetadata) {
+              extrapolationMetadata.extrapolated = true;
+              if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
+                extrapolationMetadata.extrapolatedChains.push({ 
+                  chain, 
+                  timestamp: snap.timestamp 
+                });
+              }
+            }
+            
+            const bridgedTo = snap.snapshot.bridgedTo;
+            if (bridgedTo && typeof bridgedTo === 'object') {
+              if (issuanceType === 'minted' || issuanceType === 'unreleased') {
+                const value = bridgedTo[issuanceType]?.[pegType];
+                if (value != null) {
+                  peggedBalances[chain][issuanceType] = { [pegType]: value };
+                  return;
+                }
+              } else {
+                const bridges = bridgedTo.bridges;
+                if (bridges && typeof bridges === 'object') {
+                  let totalAmount = 0;
+                  for (const bridgeProtocol of Object.keys(bridges)) {
+                    const protocolData = bridges[bridgeProtocol];
+                    if (protocolData && typeof protocolData === 'object') {
+                      for (const destChain of Object.keys(protocolData)) {
+                        if (destChain.toLowerCase() === issuanceType.toLowerCase()) {
+                          const amount = protocolData[destChain]?.amount;
+                          if (amount != null) {
+                            totalAmount += amount;
+                          }
+                        }
+                      }
+                    }
+                  }
+                  if (totalAmount > 0) {
+                    peggedBalances[chain][issuanceType] = { [pegType]: totalAmount };
+                    return;
+                  }
+                }
+              }
+            }
+          }
+        } catch (cacheError) {
+          console.error(`Cache fallback also failed for ${peggedAsset.name} on chain ${chain}:`, cacheError);
+        }
+        
         executeAndIgnoreErrors("INSERT INTO `errors2` VALUES (?, ?, ?, ?)", [
           getCurrentUnixTimestamp(),
           peggedAsset.gecko_id,
@@ -247,6 +307,12 @@ export async function storePeggedAsset(
   const pegType = peggedAsset.pegType;
   let peggedBalances: PeggedAssetIssuance = {};
   let bridgedFromMapping: BridgeMapping = {};
+  
+  const extrapolationMetadata = {
+    extrapolated: false,
+    extrapolatedChains: [] as Array<{ chain: string; timestamp: number }>
+  };
+  
   try {
     let peggedBalancesPromises = Object.entries(module).map(
       async ([chain, issuances]) => {
@@ -271,13 +337,14 @@ export async function storePeggedAsset(
               issuanceFunction,
               pegType,
               bridgedFromMapping,
-              maxRetries
+              maxRetries,
+              extrapolationMetadata
             );
           }
         );
         await timeout(
           Promise.all(peggedChainPromises),
-          5 * 60 * 1000, // 5 minutes
+          3 * 60 * 1000, // 3 minutes
           peggedAsset.name,
           chain
         );
@@ -319,12 +386,17 @@ export async function storePeggedAsset(
       unixTimestamp,
       peggedBalances,
       hourlyPeggedBalances,
-      dailyPeggedBalances
+      dailyPeggedBalances,
+      extrapolationMetadata
     );
     await storeTokensAction;
   } catch (e) {
     console.error(peggedAsset.name, e);
     return;
+  }
+
+  if (extrapolationMetadata.extrapolated) {
+    console.log(`[${peggedAsset.name}] ⚠️  Used cache fallback for some chains:`, extrapolationMetadata.extrapolatedChains.map(ec => ec.chain).join(', '));
   }
 
   return peggedBalances;
