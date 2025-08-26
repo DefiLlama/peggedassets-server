@@ -38,7 +38,7 @@ async function getPeggedAsset(
   maxRetries: number,
   extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
 ) {
-  const timeoutMs = 5 * 60 * 1000; // 3 minutes
+  const timeoutMs = 3 * 60 * 1000; // 3 minutes
   
   for (let i = 0; i < maxRetries; i++) {
     try {
