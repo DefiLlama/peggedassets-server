@@ -5181,7 +5181,7 @@ export default [
     description: "A7A5 is a RUB stablecoin, fully backed by real assets and integrated into the Tron and Ethereum ecosystem. The main goal is to provide crypto enthusiasts with a safe and transparent tool for trading and passive income",
     mintRedeemDescription: "Users mint A7A5 by depositing Russian rubles through authorized partners with KYC, receiving tokens 1:1 on-chain, and can redeem them by returning A7A5 for an equivalent ruble payout",
     onCoinGecko: "true",
-    gecko_id: "a7a5",
+    gecko_id: "null",
     cmcId: "36549",
     pegType: "peggedRUB",
     pegMechanism: "fiat-backed",
