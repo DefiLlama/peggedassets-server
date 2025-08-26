@@ -3,7 +3,7 @@ import * as path from 'path';
 import peggedAssets from '../peggedData/peggedData';
 
 const DEFAULT_MAX_LOOKBACK_SECONDS =
-  Number(process.env.PEGGED_FALLBACK_LOOKBACK_SECONDS || 72 * 60 * 60); // 3 days
+  Number(process.env.PEGGED_FALLBACK_LOOKBACK_SECONDS || 168 * 60 * 60); // 1 week
 
 function normalizeName(s: string): string {
   return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -45,29 +45,57 @@ export async function getClosestSnapshotForChain(
     if (!peggedAsset) return null;
     const adapterId = peggedAsset.id;
 
-    const cacheDir = path.join(process.cwd(), '..', '..', '..', 'api2', '.api2-cache', 'build', 'stablecoin');
-    if (!fs.existsSync(cacheDir)) return null;
+    let cacheDir = null;
+    const possiblePaths = [
+      path.join(process.cwd(), 'api2', '.api2-cache', 'build', 'stablecoin'),
+      path.join(process.cwd(), '..', '..', '..', 'api2', '.api2-cache', 'build', 'stablecoin'),
+      path.join(process.cwd(), '..', '..', 'api2', '.api2-cache', 'build', 'stablecoin'),
+    ];
+    
+    for (const possiblePath of possiblePaths) {
+      if (fs.existsSync(possiblePath)) {
+        cacheDir = possiblePath;
+        break;
+      }
+    }
+    
+    if (!cacheDir) return null;
+    
     const filePath = path.join(cacheDir, adapterId);
     if (!fs.existsSync(filePath)) return null;
 
     const content = fs.readFileSync(filePath, 'utf8');
     const adapterData = JSON.parse(content);
 
+    if (adapterData && Array.isArray(adapterData)) {
+      for (const snapshot of adapterData) {
+        if (snapshot[chain] || snapshot[chain.toLowerCase()] || snapshot[chain.toUpperCase()]) {
+          const ts = snapshot.date || parseInt(adapterId);
+          if (!targetTimestamp || Math.abs(ts - targetTimestamp) <= maxLookbackSeconds) {
+            return { snapshot, timestamp: ts };
+          }
+        }
+      }
+    }
+
     const normalizedChain = normalizeName(chain);
-    if (!adapterData.chainBalances) return null;
+    if (adapterData.chainBalances) {
+      const match = Object.keys(adapterData.chainBalances).find(c => normalizeName(c) === normalizedChain);
+      if (match) {
+        const chainData = adapterData.chainBalances[match];
+        if (Array.isArray(chainData.tokens) && chainData.tokens.length > 0) {
+          const closest = pickClosest(chainData.tokens, targetTimestamp, maxLookbackSeconds);
+          if (closest) {
+            const ts = closest.date || parseInt(adapterId);
+            return { snapshot: closest, timestamp: ts };
+          }
+        }
+      }
+    }
 
-    const match = Object.keys(adapterData.chainBalances).find(c => normalizeName(c) === normalizedChain);
-    if (!match) return null;
-
-    const chainData = adapterData.chainBalances[match];
-    if (!Array.isArray(chainData.tokens) || chainData.tokens.length === 0) return null;
-
-    const closest = pickClosest(chainData.tokens, targetTimestamp, maxLookbackSeconds);
-    if (!closest) return null;
-
-    const ts = closest.date || parseInt(adapterId);
-    return { snapshot: closest, timestamp: ts };
-  } catch {
+    return null;
+  } catch (error) {
+    console.error(`Error in getClosestSnapshotForChain for ${stablecoinId} on chain ${chain}:`, error);
     return null;
   }
 }

@@ -1,10 +1,10 @@
-import { storePeggedAsset } from "./getAndStorePeggedAssets";
 import peggedAssets from "../../peggedData/peggedData";
+import { getCurrentUnixTimestamp } from "../../utils/date";
 import { importAdapter } from "../utils/importAdapter";
 import { executeAndIgnoreErrors } from "./errorDb";
-import { getCurrentUnixTimestamp } from "../../utils/date";
+import { storePeggedAsset } from "./getAndStorePeggedAssets";
 
-const maxRetries = 4;
+const maxRetries = 3;
 const chainBlocks = undefined; // not needed by any adapters
 
 const timeout = (prom: any, time: number, peggedID: string) =>
@@ -47,7 +47,6 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
           if (!obj.minted) obj.minted = stubFn
           if (!obj.unreleased) obj.unreleased = stubFn
         })
-        // times out after 60 seconds
         return await timeout(
           storePeggedAsset(
             timestamp,
