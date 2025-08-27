@@ -6,7 +6,7 @@ import {
   PeggedTokenBalance,
 } from "../../types";
 import { getCurrentUnixTimestamp } from "../../utils/date";
-import { getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
+import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
 import {
   dailyPeggedBalances,
   hourlyPeggedBalances,
@@ -38,10 +38,20 @@ async function getPeggedAsset(
   maxRetries: number,
   extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
 ) {
+  const timeoutMs = 3 * 60 * 1000; // 3 minutes
+  
   for (let i = 0; i < maxRetries; i++) {
     try {
       peggedBalances[chain] = peggedBalances[chain] || {};
-      const balance = (await issuanceFunction(api, ethBlock, chainBlocks)) as PeggedTokenBalance;
+      
+              // Use Promise.race with timeout
+        const balance = await Promise.race([
+          issuanceFunction(api, ethBlock, chainBlocks) as Promise<PeggedTokenBalance>,
+          new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), timeoutMs)
+          ),
+        ]);
+      
       if (balance && Object.keys(balance).length === 0) {
         peggedBalances[chain][issuanceType] = { [pegType]: 0 };
         return;
@@ -69,69 +79,58 @@ async function getPeggedAsset(
       }
       return;
     } catch (e) {
+      const errorMessage = e instanceof Error ? e.message : String(e);
+      
       if (i >= maxRetries - 1) {
-        console.error(
-          `Getting circulating for ${peggedAsset.name} on chain ${chain} failed.`,
-          e
-        );
-        
+        console.warn(`Chain ${chain} failed after ${maxRetries} attempts:`, errorMessage);
+        console.log(`Using snapshot fallback for failed chain ${chain}`);
+
         try {
           const snap = await getClosestSnapshotForChain(
-            peggedAsset.gecko_id,
+            peggedAsset.id,
             chain,
             getCurrentUnixTimestamp(),
           );
-          
+
           if (snap && snap.snapshot && typeof snap.snapshot === 'object') {
-            console.log(`Using cache fallback for ${peggedAsset.name} on chain ${chain}`);
-            
-            if (extrapolationMetadata) {
-              extrapolationMetadata.extrapolated = true;
-              if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
-                extrapolationMetadata.extrapolatedChains.push({ 
-                  chain, 
-                  timestamp: snap.timestamp 
-                });
+            const { snapshot, timestamp } = snap;
+
+            const extracted = extractIssuanceFromSnapshot(snapshot, issuanceType, pegType, chain);
+
+            peggedBalances[chain] = peggedBalances[chain] || {};
+            if (extracted) {
+              peggedBalances[chain][issuanceType] = extracted;
+
+              if (issuanceType !== "minted" && issuanceType !== "unreleased" && issuanceType !== "circulating") {
+                bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
+                bridgedFromMapping[issuanceType].push(extracted);
               }
+              
+              console.log(`✅ Cache fallback successful for ${chain}:${issuanceType}`);
+              
+                      // Update extrapolation metadata
+        if (extrapolationMetadata) {
+          extrapolationMetadata.extrapolated = true;
+          if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
+            extrapolationMetadata.extrapolatedChains.push({ 
+              chain, 
+              timestamp: timestamp 
+            });
+          }
+        }
+              
+              return;
+            } else {
+              console.warn(`No data extracted from snapshot for chain ${chain} (issuance: ${issuanceType})`);
             }
-            
-            const bridgedTo = snap.snapshot.bridgedTo;
-            if (bridgedTo && typeof bridgedTo === 'object') {
-              if (issuanceType === 'minted' || issuanceType === 'unreleased') {
-                const value = bridgedTo[issuanceType]?.[pegType];
-                if (value != null) {
-                  peggedBalances[chain][issuanceType] = { [pegType]: value };
-                  return;
-                }
-              } else {
-                const bridges = bridgedTo.bridges;
-                if (bridges && typeof bridges === 'object') {
-                  let totalAmount = 0;
-                  for (const bridgeProtocol of Object.keys(bridges)) {
-                    const protocolData = bridges[bridgeProtocol];
-                    if (protocolData && typeof protocolData === 'object') {
-                      for (const destChain of Object.keys(protocolData)) {
-                        if (destChain.toLowerCase() === issuanceType.toLowerCase()) {
-                          const amount = protocolData[destChain]?.amount;
-                          if (amount != null) {
-                            totalAmount += amount;
-                          }
-                        }
-                      }
-                    }
-                  }
-                  if (totalAmount > 0) {
-                    peggedBalances[chain][issuanceType] = { [pegType]: totalAmount };
-                    return;
-                  }
-                }
-              }
-            }
+          } else {
+            console.warn(`No cached snapshot found for chain ${chain} (issuance: ${issuanceType})`);
           }
         } catch (cacheError) {
-          console.error(`Cache fallback also failed for ${peggedAsset.name} on chain ${chain}:`, cacheError);
+          console.error(`Cache fallback failed for ${peggedAsset.name} on chain ${chain}:`, cacheError);
         }
         
+        // If cache fallback fails, log error and continue
         executeAndIgnoreErrors("INSERT INTO `errors2` VALUES (?, ?, ?, ?)", [
           getCurrentUnixTimestamp(),
           peggedAsset.gecko_id,
@@ -140,8 +139,9 @@ async function getPeggedAsset(
         ]);
         peggedBalances[chain][issuanceType] = { [pegType]: null };
       } else {
-        console.error(peggedAsset.name, e);
-        continue;
+        console.error(`Chain ${chain} attempt ${i + 1}/${maxRetries} failed:`, errorMessage);
+        // Wait before retrying (exponential backoff)
+        await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
       }
     }
   }
@@ -325,7 +325,11 @@ export async function storePeggedAsset(
             if (typeof issuanceFunction !== "function") {
               return;
             }
-            const api = new sdk.ChainApi({ chain, timestamp: unixTimestamp });
+            // For minted/unreleased, use destination chain. For bridges, use source chain
+            const api = new sdk.ChainApi({ 
+              chain: (issuanceType === 'minted' || issuanceType === 'unreleased') ? chain : issuanceType, 
+              timestamp: unixTimestamp 
+            });
             await getPeggedAsset(
               api,
               ethBlock,
@@ -377,6 +381,13 @@ export async function storePeggedAsset(
     throw new Error(
       `Returned 0 total circulating at timestamp ${unixTimestamp}`
     );
+  }
+
+  // Add extrapolation metadata to data if needed
+  if (extrapolationMetadata.extrapolated) {
+    (peggedBalances as any).extrapolated = extrapolationMetadata.extrapolated;
+    (peggedBalances as any).extrapolatedChains = extrapolationMetadata.extrapolatedChains;
+    (peggedBalances as any).extrapolatedChainsCount = extrapolationMetadata.extrapolatedChains?.length || 0;
   }
 
   try {
