@@ -1,9 +1,9 @@
 import { ChainApi } from "@defillama/sdk";
 import * as aptos from "../helper/aptos";
+import * as cardano from "../helper/cardano";
 import { getTokenSupply as solanaGetTokenSupply } from "../helper/solana";
 import * as sui from "../helper/sui";
 import * as tezos from "../helper/tezos";
-import * as cardano from "../helper/cardano";
 import { getZilliqaTokenSupply } from "../helper/zilliqa";
 import type {
   Balances,
@@ -296,7 +296,7 @@ export function osmosisSupply(
       const res = await retry(
         async (_bail: any) =>
           await axios.get(
-            `https://lcd.osmosis.zone/osmosis/superfluid/v1beta1/supply?denom=${token}`
+            `https://rest-osmosis.ecostake.com/osmosis/superfluid/v1beta1/supply?denom=${token}`
           )
       );
       sumSingleBalance(
