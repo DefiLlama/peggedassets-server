@@ -23,6 +23,16 @@ type BridgeMapping = {
 
 const pegTypes = ["peggedUSD", "peggedEUR", "peggedVAR"];
 
+function detectPegKey(balance: any, wanted: string) {
+  if (balance && typeof balance === 'object') {
+    if (wanted in balance && typeof balance[wanted] === 'number' && !Number.isNaN(balance[wanted]))
+      return wanted;
+    const found = Object.keys(balance).find(k => k.startsWith('pegged') && typeof balance[k] === 'number' && !Number.isNaN(balance[k]));
+    if (found) return found;
+  }
+  return wanted;
+}
+
 async function getPeggedAsset(
   _unixTimestamp: number,
   ethBlock: number,
@@ -56,20 +66,22 @@ async function getPeggedAsset(
       
       if (balance && Object.keys(balance).length === 0) {
         peggedBalances[chain] = peggedBalances[chain] || {};
-        peggedBalances[chain][issuanceType] = { [pegType]: 0 };
+        peggedBalances[chain][issuanceType] = { [pegType]: 0 } as any;
         return balance;
       }
       
       if (!balance) {
         throw new Error(`Could not get pegged balance on chain ${chain}`);
       }
-      
-      if (typeof (balance as any)[pegType] !== "number" || Number.isNaN((balance as any)[pegType])) {
+      const pegKey = detectPegKey(balance as any, pegType);
+      if (typeof (balance as any)[pegKey] !== "number" || Number.isNaN((balance as any)[pegKey])) {
         throw new Error(
-          `Pegged balance on chain ${chain} is not a number, instead it is ${(balance as any)[pegType]}. Make sure balance object is exported with key from: ${pegType}.`
+          `Pegged balance on chain ${chain} is not a number, instead it is ${(balance as any)[pegKey]}. Make sure balance object contains a numeric pegged* key.`
         );
       }
-      
+      if (pegKey !== pegType) {
+        (balance as any)[pegType] = (balance as any)[pegKey];
+      }
       const bridges = (balance as any).bridges;
       if (!bridges && issuanceType !== "minted" && issuanceType !== "unreleased") {
         console.error(
@@ -109,14 +121,14 @@ async function getPeggedAsset(
 
             peggedBalances[chain] = peggedBalances[chain] || {};
             if (extracted) {
-              peggedBalances[chain][issuanceType] = extracted;
+              peggedBalances[chain][issuanceType] = extracted as any;
 
               if (issuanceType !== "minted" && issuanceType !== "unreleased" && issuanceType !== "circulating") {
                 bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
-                bridgedFromMapping[issuanceType].push(extracted);
+                bridgedFromMapping[issuanceType].push(extracted as any);
               }
             } else {
-              peggedBalances[chain][issuanceType] = { [pegType]: null as any };
+              (peggedBalances as any)[chain][issuanceType] = { [pegType]: null as any };
               console.log(
                 `[${adapterLabel}] Snapshot found but issuance '${issuanceType}' not present in bridgedTo for ${chain}`
               );
@@ -127,19 +139,19 @@ async function getPeggedAsset(
               extrapolationMetadata.extrapolatedChains.push({ chain, timestamp });
             }
 
-            return peggedBalances[chain][issuanceType] || null;
+            return (peggedBalances as any)[chain][issuanceType] || null;
           }
 
           console.log(`[${adapterLabel}] No cached snapshot found for chain ${chain} (issuance: ${issuanceType})`);
           peggedBalances[chain] = peggedBalances[chain] || {};
-          peggedBalances[chain][issuanceType] = { [pegType]: null as any };
+          (peggedBalances as any)[chain][issuanceType] = { [pegType]: null as any };
           
           console.error(`Getting ${issuanceType} on chain ${chain} failed.`);
           return null;
         } catch (cacheError) {
           console.error(`[${adapterLabel}] Cache fallback also failed for chain ${chain}:`, cacheError);
           peggedBalances[chain] = peggedBalances[chain] || {};
-          peggedBalances[chain][issuanceType] = { [pegType]: null as any };
+          (peggedBalances as any)[chain][issuanceType] = { [pegType]: null as any };
           return null;
         }
       } else {
@@ -158,7 +170,7 @@ async function calcCirculating(
 ) {
   let chainCirculatingPromises = Object.keys(peggedBalances).map(
     async (chain) => {
-      let circulating: PeggedTokenBalance = { [pegType]: 0 };
+      let circulating: PeggedTokenBalance = { [pegType]: 0 } as any;
       const chainIssuances = peggedBalances[chain];
       
       Object.entries(chainIssuances).map(
@@ -168,27 +180,27 @@ async function calcCirculating(
             return;
           }
           if (issuanceType === "unreleased") {
-            circulating[pegType] = circulating[pegType] || 0;
-            circulating[pegType]! -= balance;
+            (circulating as any)[pegType] = (circulating as any)[pegType] || 0;
+            (circulating as any)[pegType]! -= balance;
           } else {
-            circulating[pegType]! = circulating[pegType] || 0;
-            circulating[pegType]! += balance;
+            (circulating as any)[pegType]! = (circulating as any)[pegType] || 0;
+            (circulating as any)[pegType]! += balance;
           }
         }
       );
       
       if (bridgedFromMapping[chain]) {
         bridgedFromMapping[chain].forEach((peggedTokenBalance) => {
-          const balance = peggedTokenBalance[pegType];
-          if (balance == null || circulating[pegType] === 0) {
+          const balance = (peggedTokenBalance as any)[pegType];
+          if (balance == null || (circulating as any)[pegType] === 0) {
             console.error(`Null balance or 0 circulating on chain ${chain}`);
             return;
           }
-          circulating[pegType]! -= balance;
+          (circulating as any)[pegType]! -= balance;
         });
       }
       
-      if (circulating[pegType]! < 0) {
+      if ((circulating as any)[pegType]! < 0) {
         throw new Error(
           `Pegged asset on chain ${chain} has negative circulating amount`
         );
@@ -198,9 +210,9 @@ async function calcCirculating(
   );
   await Promise.all(chainCirculatingPromises);
 
-  peggedBalances["totalCirculating"] = {};
-  peggedBalances["totalCirculating"]["circulating"] = { [pegType]: 0 };
-  peggedBalances["totalCirculating"]["unreleased"] = { [pegType]: 0 };
+  (peggedBalances as any)["totalCirculating"] = {};
+  (peggedBalances as any)["totalCirculating"]["circulating"] = { [pegType]: 0 } as any;
+  (peggedBalances as any)["totalCirculating"]["unreleased"] = { [pegType]: 0 } as any;
   let peggedTotalPromises = Object.keys(peggedBalances).map((chain) => {
     const circulating = (peggedBalances as any)[chain].circulating || { [pegType]: 0 };
     const unreleased  = (peggedBalances as any)[chain].unreleased  || { [pegType]: 0 };
