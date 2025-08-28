@@ -67,7 +67,6 @@ export async function alertOutdated() {
         .join("\n");
     
     await sendMessage(message, process.env.OUTDATED_WEBHOOK!);
-    console.log('🚨 Alert sent to Discord webhook');
   }
 }
 
