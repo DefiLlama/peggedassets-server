@@ -24,6 +24,16 @@ type BridgeMapping = {
 
 type EmptyObject = { [key: string]: undefined };
 
+function detectPegKey(balance: any, wanted: string) {
+  if (balance && typeof balance === 'object') {
+    if (wanted in balance && typeof balance[wanted] === 'number' && !Number.isNaN(balance[wanted]))
+      return wanted;
+    const found = Object.keys(balance).find(k => k.startsWith('pegged') && typeof balance[k] === 'number' && !Number.isNaN(balance[k]));
+    if (found) return found;
+  }
+  return wanted;
+}
+
 async function getPeggedAsset(
   api: sdk.ChainApi,
   ethBlock: number | undefined,
@@ -44,13 +54,13 @@ async function getPeggedAsset(
     try {
       peggedBalances[chain] = peggedBalances[chain] || {};
       
-              // Use Promise.race with timeout
-        const balance = await Promise.race([
-          issuanceFunction(api, ethBlock, chainBlocks) as Promise<PeggedTokenBalance>,
-          new Promise<never>((_, reject) =>
-            setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), timeoutMs)
-          ),
-        ]);
+      // Use Promise.race with timeout
+      const balance = await Promise.race([
+        issuanceFunction(api, ethBlock, chainBlocks) as Promise<PeggedTokenBalance>,
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), timeoutMs)
+        ),
+      ]);
       
       if (balance && Object.keys(balance).length === 0) {
         peggedBalances[chain][issuanceType] = { [pegType]: 0 };
@@ -61,18 +71,22 @@ async function getPeggedAsset(
           `Could not get pegged balance for ${peggedAsset.name} on chain ${chain}`
         );
       }
+
+      const pegKey = detectPegKey(balance, pegType);
       if (
-        typeof balance[pegType] !== "number" ||
-        Number.isNaN(balance[pegType])
+        typeof balance[pegKey] !== "number" ||
+        Number.isNaN(balance[pegKey])
       ) {
         throw new Error(
-          `Pegged balance for ${peggedAsset.name} is not a number, instead it is ${balance[pegType]}`
+          `Pegged balance for ${peggedAsset.name} is not a number, instead it is ${balance[pegKey]}`
         );
+      }
+      if (pegKey !== pegType) {
+        (balance as any)[pegType] = (balance as any)[pegKey];
       }
 
       peggedBalances[chain][issuanceType] = balance;
       if (issuanceType !== "minted" && issuanceType !== "unreleased") {
-        // issuanceType must be a chain as key on bridgedFromMapping, but I check for that when testing adapters.
         bridgedFromMapping[issuanceType] =
           bridgedFromMapping[issuanceType] || [];
         bridgedFromMapping[issuanceType].push(balance);
@@ -99,25 +113,25 @@ async function getPeggedAsset(
 
             peggedBalances[chain] = peggedBalances[chain] || {};
             if (extracted) {
-              peggedBalances[chain][issuanceType] = extracted;
+              peggedBalances[chain][issuanceType] = extracted as any;
 
               if (issuanceType !== "minted" && issuanceType !== "unreleased" && issuanceType !== "circulating") {
                 bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
-                bridgedFromMapping[issuanceType].push(extracted);
+                bridgedFromMapping[issuanceType].push(extracted as any);
               }
               
               console.log(`✅ Cache fallback successful for ${chain}:${issuanceType}`);
               
-                      // Update extrapolation metadata
-        if (extrapolationMetadata) {
-          extrapolationMetadata.extrapolated = true;
-          if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
-            extrapolationMetadata.extrapolatedChains.push({ 
-              chain, 
-              timestamp: timestamp 
-            });
-          }
-        }
+              // Update extrapolation metadata
+              if (extrapolationMetadata) {
+                extrapolationMetadata.extrapolated = true;
+                if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
+                  extrapolationMetadata.extrapolatedChains.push({ 
+                    chain, 
+                    timestamp: timestamp 
+                  });
+                }
+              }
               
               return;
             } else {
@@ -207,7 +221,7 @@ async function calcCirculating(
           } else {
             if (issuanceType !== "bridgedTo") {
               if (issuanceType !== "minted" && issuanceType !== "circulating") {
-                // issuanceType is a chain here
+                // issuanceType is a chain here (destination entry)
                 peggedBalances[chain].bridgedTo[pegType]! += balance;
                 if (bridges) {
                   peggedBalances[chain].bridgedTo.bridges = mergeBridges(
@@ -255,9 +269,7 @@ async function calcCirculating(
           `Pegged asset on chain ${chain} has negative circulating amount`
         );
       }
-      // Fix this.
-      // Rounding down small balances to avoid dealing with scientific floating points. Will be a problem for non-peggedUSD/peggedBTC.
-      // Also, 'minted' and 'unreleased' values are also used in frontend, need to deal with those too.
+      // Rounding down tiny balances to avoid scientific floating points
       if (circulating[pegType]! < 10 ** -6) {
         circulating[pegType] = 0;
       }

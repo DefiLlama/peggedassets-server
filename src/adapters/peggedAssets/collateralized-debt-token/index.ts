@@ -1,36 +1,28 @@
+import { ChainApi } from "@defillama/sdk";
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
   Balances,
-  ChainBlocks,
-  PeggedIssuanceAdapter,  ChainContracts,
+  PeggedAssetType,
+  PeggedIssuanceAdapter
 } from "../peggedAsset.type";
 const axios = require("axios");
-const retry = require("async-retry");
 
-// There appears to be no explorer API that can give total supply; this endpoint was provided by dev.
-async function osmosisMinted(decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+const factory = 'factory/osmo1s794h9rxggytja3a4pmwul53u98k06zy2qtrdvjnfuxruh7s8yjs6cyxgd/ucdt'
+
+async function osmosisMinted (token: string, decimals: number, pegType: PeggedAssetType) {
+  return async function (_api: ChainApi) {
     let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://lcd.osmosis.zone/osmosis/superfluid/v1beta1/supply?denom=factory/osmo1s794h9rxggytja3a4pmwul53u98k06zy2qtrdvjnfuxruh7s8yjs6cyxgd/ucdt"
-        )
-    );
-    const cdtInfo = res?.data?.amount;
-    const supply = cdtInfo?.amount / 10 ** decimals;
-    sumSingleBalance(balances, "peggedVAR", supply, "issued", false);
+    const url = `https://rest-osmosis.ecostake.com/osmosis/superfluid/v1beta1/supply?denom=${token}`
+    const { data } = await axios.get(url)
+    const amount = parseInt(data.amount.amount) / 10 ** decimals
+    sumSingleBalance(balances, pegType, amount, "issued", false)
     return balances;
-  };
+  } 
 }
 
 const adapter: PeggedIssuanceAdapter = {
   osmosis: {
-    minted: osmosisMinted(6),
+    minted: osmosisMinted(factory, 6, 'peggedVAR'),
   },
 };
 
