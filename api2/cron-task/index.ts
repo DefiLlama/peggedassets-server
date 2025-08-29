@@ -9,8 +9,6 @@ process.on('uncaughtException', (error) => {
 import * as rates from "../../src/getRates";
 import sluggifyPegged from "../../src/peggedAssets/utils/sluggifyPegged";
 import peggedAssets from "../../src/peggedData/peggedData";
-import { getCurrentUnixTimestamp } from "../../src/utils/date";
-import { sendMessage } from "../../src/utils/discord";
 import { getChainDisplayName, normalizeChain } from "../../src/utils/normalizeChain";
 import { CacheType, cache, initCache, saveCache } from "../cache";
 import { storeRouteData } from "../file-cache";
@@ -55,7 +53,6 @@ async function run() {
     storePeggedAssets,
     storeStablecoinDominance,
     storeChainChartData,
-    alertOutdated,
   }
 
   for (const key in timeWrapper) {
@@ -165,32 +162,6 @@ async function storePrices() {
 
 async function storeStablecoinChains() {
   await storeRouteData('stablecoinchains', craftStablecoinChainsResponse())
-}
-
-
-async function alertOutdated() {
-  const now = getCurrentUnixTimestamp();
-  const outdated = (
-    peggedAssets.map((asset) => {
-      if (asset.delisted || asset.name === 'TerraClassicUSD') return null;
-      const last = cache.peggedAssetsData?.[asset.id]?.lastBalance
-      if (last?.SK < now - 5 * 3600) {
-        return {
-          name: asset.name,
-          hoursAgo: (now - last?.SK) / 3600,
-        };
-      }
-      return null;
-    })
-  ).filter((a) => a !== null);
-
-  if (outdated.length > 0) {
-    const message = outdated
-      .map((a) => `[stablecoin - notify outdated] ${a!.name} - ${a!.hoursAgo.toFixed(2)} hours ago`)
-      .join("\n")
-    await sendMessage(message, process.env.OUTDATED_WEBHOOK!);
-  }
-
 }
 
 // filter out empty items from array but retain the last item as is
