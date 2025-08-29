@@ -5968,11 +5968,29 @@ export default [
     cmcId: null,
     pegType: "peggedPHP",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko",
+    priceSource: "defillama",
     auditLinks: "https://docs.apacx.io/technical-references/smart-contract-audits",
     twitter: "https://x.com/apacx_io",
     wiki: "https://docs.apacx.io/",
     doublecounted: true
+  },
+  {
+    id: "300",
+    name: "Bilira",
+    address: "0x2c537e5624e4af88a7ae4060c022609376c8d0eb",
+    symbol: "TRYB",
+    url: "https://bilira.site",
+    description: "TRYB is a stablecoin pegged to the Turkish Lira (TRY)",
+    mintRedeemDescription: "TRYB can be converted to Turkish Lira at a 1:1 ratio at any time. Its reserves are securely held in Turkish bank accounts, with audit reports regularly released to ensure transparency.",
+    onCoinGecko: "true",
+    gecko_id: "bilira",
+    cmcId: "5181",
+    pegType: "peggedTRY",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: "https://www.bilira.co/en/audit-reports",
+    twitter: "https://x.com/BiLira_Kripto",
+    wiki: "https://iq.wiki/wiki/bilira",
   }
 
 ] as PeggedAsset[];
