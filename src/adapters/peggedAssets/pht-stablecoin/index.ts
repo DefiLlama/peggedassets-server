@@ -18,4 +18,4 @@ const chainContracts: ChainContracts = {
   }
 };
 
-export default addChainExports(chainContracts, undefined, { decimals: 18, pegType: "peggedVAR" });
+export default addChainExports(chainContracts, undefined, { decimals: 18, pegType: "peggedPHP" });

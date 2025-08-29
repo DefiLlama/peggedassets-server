@@ -5966,12 +5966,13 @@ export default [
     onCoinGecko: "true",
     gecko_id: "pht-stablecoin",
     cmcId: null,
-    pegType: "peggedVAR",
+    pegType: "peggedPHP",
     pegMechanism: "crypto-backed",
     priceSource: "coingecko",
     auditLinks: "https://docs.apacx.io/technical-references/smart-contract-audits",
     twitter: "https://x.com/apacx_io",
     wiki: "https://docs.apacx.io/",
+    doublecounted: true
   }
 
 ] as PeggedAsset[];
