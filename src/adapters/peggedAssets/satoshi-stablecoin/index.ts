@@ -44,6 +44,21 @@ const chainContracts =
       "0xb4818BB69478730EF4e33Cc068dD94278e2766cB", // V2
     ],
   },
+  sonic: {
+    issued: [
+      "0xb4818BB69478730EF4e33Cc068dD94278e2766cB", // V2
+    ],
+  },
+  xlayer: {
+    issued: [
+      "0xceF6c74Ce218c0E1F48cA2430635D0a65Cd3737A", // V2
+    ],
+  },
+  ethereum: {
+    issued: [
+      "0x1958853A8BE062dc4f401750Eb233f5850F0D0d2", // V2
+    ],
+  },
 };
 
 import { addChainExports } from "../helper/getSupply";
