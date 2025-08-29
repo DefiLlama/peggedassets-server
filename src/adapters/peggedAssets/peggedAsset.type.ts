@@ -21,6 +21,7 @@ export type PeggedAssetType =
   | "peggedCOP"
   | "peggedREAL"
   | "peggedRUB"
+  | "peggedPHP"
   | "peggedMXN"
   | "peggedAUD";
 
