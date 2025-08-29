@@ -4,6 +4,20 @@ import { sendMessage } from "./utils/discord";
 import { getLastRecord } from "./utils/getLastRecord";
 import { wrapScheduledLambda } from "./utils/shared/wrap";
 
+function formatUSD(amount: number): string {
+  if (amount >= 1e12) {
+    return `$${(amount / 1e12).toFixed(1)}T`;
+  } else if (amount >= 1e9) {
+    return `$${(amount / 1e9).toFixed(1)}B`;
+  } else if (amount >= 1e6) {
+    return `$${(amount / 1e6).toFixed(1)}M`;
+  } else if (amount >= 1e3) {
+    return `$${(amount / 1e3).toFixed(1)}K`;
+  } else {
+    return `$${amount.toFixed(1)}`;
+  }
+}
+
 export async function alertOutdated() {
   const now = getCurrentUnixTimestamp();
   const fourHoursAgo = now - 4 * 3600;
@@ -28,13 +42,12 @@ export async function alertOutdated() {
             
             if (last.SK >= fourHoursAgo) return null;
             
-            const circulating = last.circulating;
-            if (!circulating) return null;
+            const totalCirculating = last.totalCirculating;
+            if (!totalCirculating || !totalCirculating.circulating) return null;
             
-
             let totalCirculatingUSD = 0;
             
-            for (const [_pegType, amount] of Object.entries(circulating)) {
+            for (const [_pegType, amount] of Object.entries(totalCirculating.circulating)) {
               if (typeof amount === 'number' && amount > 0) {
                 totalCirculatingUSD += amount;
               }
@@ -58,15 +71,16 @@ export async function alertOutdated() {
     )
   ).filter((a) => a !== null);
   
-  console.log(`📊 Found ${outdatedHighValue.length} high-value stablecoins (>$${(HIGH_VALUE_THRESHOLD/1e6).toFixed(0)}M) that are outdated`);
+  console.log(`📊 Found ${outdatedHighValue.length} high-value stablecoins (>${formatUSD(HIGH_VALUE_THRESHOLD)}) that are outdated`);
   
   if (outdatedHighValue.length > 0) {
-    const message = `🚨 ${outdatedHighValue.length} high-value stablecoins (>$${(HIGH_VALUE_THRESHOLD/1e6).toFixed(0)}M) failed to update in 4+ hours:\n` +
+    const message = `🚨 ${outdatedHighValue.length} high-value stablecoins (>${formatUSD(HIGH_VALUE_THRESHOLD)}) failed to update in 4+ hours:\n` +
       outdatedHighValue
-        .map((a) => `• ${a.name}: ${a.hoursAgo.toFixed(1)}h ago, was $${(a.totalCirculatingUSD/1e6).toFixed(1)}M USD`)
+        .map((a) => `• ${a.name}: ${a.hoursAgo.toFixed(1)}h ago, was ${formatUSD(a.totalCirculatingUSD)}`)
         .join("\n");
     
     await sendMessage(message, process.env.OUTDATED_WEBHOOK!);
+    console.log('🚨 Alert sent to Discord webhook');
   }
 }
 
