@@ -912,6 +912,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama", // coingecko inaccurate
     auditLinks: null,
+    deadFrom: "2022-08-15",
     twitter: "https://twitter.com/AcalaNetwork",
     wiki: "https://wiki.defillama.com/wiki/Acala",
   },
