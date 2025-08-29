@@ -17,6 +17,9 @@ const chainContracts = {
     },
     polygon: {
         issued: ["0x4fb71290ac171e1d144f7221d882becac7196eb5"], pegType
+    },
+    solana: {
+        issued: ["A94X2fRy3wydNShU4dRaDyap2UuoeWJGWyATtyp61WZf"], pegType
     }
   };
   
