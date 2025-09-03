@@ -7,6 +7,9 @@ const chainContracts = {
   },
   tron: {
     issued: ["TPFqcBAaaUMCSVRCqPaQ9QnzKhmuoLR6Rc"],
+  },
+  solana: {
+    issued: ["USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB"],
   }
 };
 
