@@ -5992,6 +5992,24 @@ export default [
     auditLinks: "https://www.bilira.co/en/audit-reports",
     twitter: "https://x.com/BiLira_Kripto",
     wiki: "https://iq.wiki/wiki/bilira",
+  },
+  {
+    id: "301",
+    name: "Jigsaw USD",
+    address: "0x000000096cb3d4007fc2b79b935c4540c5c2d745",
+    symbol: "JUSD",
+    url: "https://jigsaw.finance/",
+    description: "jUSD is Jigsaw's overcollateralized stablecoin, which allows users to access liquidity while keeping their collateral actively deployed",
+    mintRedeemDescription: "Users mint jUSD by depositing overcollateralized assets into Jigsaw and borrow against them fee-free, with dynamic collateral reallocation; redemption requires repaying jUSD to unlock the collateral",
+    onCoinGecko: "true",
+    gecko_id: "jigsaw-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://jigsaw.gitbook.io/jigsaw-protocol/security/smart-contract-audits",
+    twitter: "https://x.com/jigsawdefi",
+    wiki: "https://jigsaw.gitbook.io/jigsaw-protocol",
   }
 
 ] as PeggedAsset[];

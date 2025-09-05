@@ -297,6 +297,7 @@ import autonomint_usd from './autonomint-usda+';
 import cap_cusd from './cap-cusd';
 import msusd from './main-street-usd';
 import tryb from './bilira';
+import jigsaw_usd from './jigsaw-usd';
 
 export default {
   tether,
@@ -598,5 +599,6 @@ export default {
   "autonomint-usda+": autonomint_usd,
   "cap-cusd": cap_cusd,
   "main-street-usd": msusd,
-  "bilira" : tryb
+  "bilira" : tryb,
+  "jigsaw-usd": jigsaw_usd,
 };
