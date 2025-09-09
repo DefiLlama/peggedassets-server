@@ -45,22 +45,18 @@ export async function alertOutdated() {
             const totalCirculating = last.totalCirculating;
             if (!totalCirculating || !totalCirculating.circulating) return null;
             
-            let totalCirculatingUSD = 0;
+            // Only consider the circulating amount for the specific pegType of this asset
+            const circulatingAmount = totalCirculating.circulating[asset.pegType];
+            if (!circulatingAmount || typeof circulatingAmount !== 'number' || circulatingAmount <= 0) return null;
             
-            for (const [_pegType, amount] of Object.entries(totalCirculating.circulating)) {
-              if (typeof amount === 'number' && amount > 0) {
-                totalCirculatingUSD += amount;
-              }
-            }
-            
-            if (totalCirculatingUSD < HIGH_VALUE_THRESHOLD) return null;
+            if (circulatingAmount < HIGH_VALUE_THRESHOLD) return null;
             
             const hoursAgo = (now - last.SK) / 3600;
             
             return {
               name: asset.name,
               hoursAgo: hoursAgo,
-              totalCirculatingUSD: totalCirculatingUSD,
+              totalCirculatingUSD: circulatingAmount,
               lastUpdateTimestamp: last.SK
             };
           } catch (error) {
