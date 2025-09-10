@@ -18,9 +18,21 @@ import { reconcileDailyFromHourly } from "./reconcileDailyFromHourly";
 
 type PKconverted = (id: string) => string;
 
-function logPromote(peggedAsset: PeggedAsset, daySK: number, reason: string) {
+function logPromote(peggedAsset: PeggedAsset, daySK: number, reason: string, isReplacement?: boolean) {
   const iso = new Date(daySK * 1000).toISOString().slice(0, 10);
   console.log(`✅ [${peggedAsset.name}|id=${peggedAsset.id}] Daily promoted from hourly for ${iso} – ${reason}`);
+  
+  if (isReplacement) {
+    const alertMessage = `🔄 **Daily Promotion Alert**\n` +
+      `**Asset:** ${peggedAsset.name} (${peggedAsset.id})\n` +
+      `**Date:** ${iso}\n` +
+      `**Reason:** ${reason}\n` +
+      `**Type:** Replacing existing daily with hourly data`;
+    
+    sendMessage(alertMessage, process.env.OUTDATED_WEBHOOK!).catch(error => {
+      console.error('Error sending promotion alert:', error);
+    });
+  }
 }
 
 async function checkAndReplaceDailyWithHourly(
@@ -34,6 +46,7 @@ async function checkAndReplaceDailyWithHourly(
   wasPromoted: boolean;
   preview?: { Key: { PK: string; SK: number }; Item?: any };
   reason?: string;
+  isReplacement?: boolean;
 }> {
   try {
     const result = await reconcileDailyFromHourly(
@@ -45,8 +58,8 @@ async function checkAndReplaceDailyWithHourly(
 
     if (result.action === "PROMOTE") {
       const daySK = getTimestampAtStartOfDay(unixTimestamp);
-      logPromote(peggedAsset, daySK, result.reason);
-      return { wasPromoted: true, preview: (result as any).preview, reason: result.reason };
+      logPromote(peggedAsset, daySK, result.reason, result.isReplacement);
+      return { wasPromoted: true, preview: (result as any).preview, reason: result.reason, isReplacement: result.isReplacement };
     }
     return { wasPromoted: false, reason: result.reason };
   } catch (error) {

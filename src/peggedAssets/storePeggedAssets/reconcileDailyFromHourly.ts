@@ -22,6 +22,7 @@ type PromoteResult = {
   preview?: { Key: DailyKey; Item: PeggedDoc };
   currentQuality?: number;
   incomingQuality?: number;
+  isReplacement?: boolean;
 };
 
 type SkipResult = {
@@ -58,7 +59,7 @@ function completenessPenalty(doc?: PeggedDoc): number {
       for (const [kk, vv] of Object.entries(obj as Record<string, unknown>)) {
         if (kk === "bridges") continue;
         if (vv === null) bad += 1;
-        else if (typeof vv === "number" && vv === 0) bad += 1;
+        else if (typeof vv === "number" && (!Number.isFinite(vv) || vv === 0)) bad += 1;
       }
     }
   }
@@ -161,6 +162,7 @@ export async function reconcileDailyFromHourly(
 
   const promote = shouldPromote(existingDaily, incomingHourly);
   const reason = explainDecision(existingDaily, incomingHourly);
+  const isReplacement = promote && existingDaily !== undefined;
 
   const toWrite = promote ? buildDailyFromHourly(incomingHourly, daySK) : undefined;
 
@@ -173,6 +175,7 @@ export async function reconcileDailyFromHourly(
           preview: { Key: dailyKey, Item: previewItem! },
           currentQuality: qualityScore(existingDaily),
           incomingQuality: qualityScore(incomingHourly),
+          isReplacement,
         }
       : {
           action: "SKIP",
@@ -193,7 +196,7 @@ export async function reconcileDailyFromHourly(
     SK: daySK,
   });
 
-  return { action: "PROMOTE", reason, key: dailyKey };
+  return { action: "PROMOTE", reason, key: dailyKey, isReplacement };
 }
 
 if (require.main === module) {
