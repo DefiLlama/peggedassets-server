@@ -155,7 +155,6 @@ async function getPeggedAsset(
         ]);
         peggedBalances[chain][issuanceType] = { [pegType]: null };
       } else {
-        console.error(`${tag} Chain ${chain} attempt ${i + 1}/${maxRetries} failed (${label}):`, errorMessage);
         await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
       }
     }
