@@ -62,6 +62,9 @@ const chainContracts: ChainContracts = {
   solana: {
     issued: ["AUSD1jCcCyPLybk1YnvPWsHQSrZ46dxwoMniN4N2UEB9"],
   },
+  katana: {
+    issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+  },
 };
 
 
