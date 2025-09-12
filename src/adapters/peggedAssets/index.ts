@@ -298,7 +298,7 @@ import cap_cusd from './cap-cusd';
 import msusd from './main-street-usd';
 import tryb from './bilira';
 import jigsaw_usd from './jigsaw-usd';
-import musd from './mezo-usd'
+import mezousd from './mezo-usd'
 
 export default {
   tether,
@@ -602,5 +602,5 @@ export default {
   "main-street-usd": msusd,
   "bilira" : tryb,
   "jigsaw-usd": jigsaw_usd,
-  "mezo-usd": musd,
+  "mezo-usd": mezousd,
 };
