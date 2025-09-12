@@ -298,6 +298,7 @@ import cap_cusd from './cap-cusd';
 import msusd from './main-street-usd';
 import tryb from './bilira';
 import jigsaw_usd from './jigsaw-usd';
+import mezousd from './mezo-usd'
 import hylo_hyusd from './hylo-hyusd';
 
 export default {
@@ -602,5 +603,6 @@ export default {
   "main-street-usd": msusd,
   "bilira" : tryb,
   "jigsaw-usd": jigsaw_usd,
+  "mezo-usd": mezousd,
   "hylo-hyusd": hylo_hyusd,
 };
