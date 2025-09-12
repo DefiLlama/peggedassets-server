@@ -49,12 +49,15 @@ async function getPeggedAsset(
   extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
 ) {
   const timeoutMs = 3 * 60 * 1000; // 3 minutes
+  const label = (issuanceType === 'minted' || issuanceType === 'unreleased' || issuanceType === 'circulating')
+    ? issuanceType
+    : `bridgedFrom ${issuanceType} → ${chain}`;
+  const tag = `[${peggedAsset.name}|id=${peggedAsset.id}]`;
   
   for (let i = 0; i < maxRetries; i++) {
     try {
       peggedBalances[chain] = peggedBalances[chain] || {};
       
-      // Use Promise.race with timeout
       const balance = await Promise.race([
         issuanceFunction(api, ethBlock, chainBlocks) as Promise<PeggedTokenBalance>,
         new Promise<never>((_, reject) =>
@@ -87,6 +90,7 @@ async function getPeggedAsset(
 
       peggedBalances[chain][issuanceType] = balance;
       if (issuanceType !== "minted" && issuanceType !== "unreleased") {
+        // IMPORTANT: index by SOURCE chain (issuanceType)
         bridgedFromMapping[issuanceType] =
           bridgedFromMapping[issuanceType] || [];
         bridgedFromMapping[issuanceType].push(balance);
@@ -96,8 +100,8 @@ async function getPeggedAsset(
       const errorMessage = e instanceof Error ? e.message : String(e);
       
       if (i >= maxRetries - 1) {
-        console.warn(`Chain ${chain} failed after ${maxRetries} attempts:`, errorMessage);
-        console.log(`Using snapshot fallback for failed chain ${chain}`);
+        console.warn(`${tag} Chain ${chain} failed after ${maxRetries} attempts (${label}):`, errorMessage);
+        console.log(`${tag} Using snapshot fallback for chain ${chain} (${label})`);
 
         try {
           const snap = await getClosestSnapshotForChain(
@@ -120,9 +124,8 @@ async function getPeggedAsset(
                 bridgedFromMapping[issuanceType].push(extracted as any);
               }
               
-              console.log(`✅ Cache fallback successful for ${chain}:${issuanceType}`);
+              console.log(`✅ ${tag} Cache fallback successful for ${chain} (${label})`);
               
-              // Update extrapolation metadata
               if (extrapolationMetadata) {
                 extrapolationMetadata.extrapolated = true;
                 if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
@@ -135,16 +138,15 @@ async function getPeggedAsset(
               
               return;
             } else {
-              console.warn(`No data extracted from snapshot for chain ${chain} (issuance: ${issuanceType})`);
+              console.warn(`${tag} No data extracted from snapshot for chain ${chain} (${label})`);
             }
           } else {
-            console.warn(`No cached snapshot found for chain ${chain} (issuance: ${issuanceType})`);
+            console.warn(`${tag} No cached snapshot found for chain ${chain} (${label})`);
           }
         } catch (cacheError) {
-          console.error(`Cache fallback failed for ${peggedAsset.name} on chain ${chain}:`, cacheError);
+          console.error(`${tag} Cache fallback failed for ${peggedAsset.name} on chain ${chain} (${label}):`, cacheError);
         }
         
-        // If cache fallback fails, log error and continue
         executeAndIgnoreErrors("INSERT INTO `errors2` VALUES (?, ?, ?, ?)", [
           getCurrentUnixTimestamp(),
           peggedAsset.gecko_id,
@@ -153,8 +155,6 @@ async function getPeggedAsset(
         ]);
         peggedBalances[chain][issuanceType] = { [pegType]: null };
       } else {
-        console.error(`Chain ${chain} attempt ${i + 1}/${maxRetries} failed:`, errorMessage);
-        // Wait before retrying (exponential backoff)
         await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
       }
     }
@@ -198,7 +198,8 @@ async function calcCirculating(
   peggedBalances: PeggedAssetIssuance,
   bridgedFromMapping: BridgeMapping,
   peggedAsset: PeggedAsset,
-  pegType: string
+  pegType: string,
+  extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
 ) {
   let chainCirculatingPromises = Object.keys(peggedBalances).map(
     async (chain) => {
@@ -221,7 +222,6 @@ async function calcCirculating(
           } else {
             if (issuanceType !== "bridgedTo") {
               if (issuanceType !== "minted" && issuanceType !== "circulating") {
-                // issuanceType is a chain here (destination entry)
                 peggedBalances[chain].bridgedTo[pegType]! += balance;
                 if (bridges) {
                   peggedBalances[chain].bridgedTo.bridges = mergeBridges(
@@ -231,7 +231,7 @@ async function calcCirculating(
                 }
               }
               circulating[pegType] = circulating[pegType] || 0;
-              circulating[pegType]! += balance; // issuanceType is either "minted" or a chain here
+              circulating[pegType]! += balance;
               delete peggedTokenBalance.bridges;
             }
           }
@@ -259,6 +259,27 @@ async function calcCirculating(
         });
       }
       if (circulating[pegType]! < 0) {
+        try {
+          const snap = await getClosestSnapshotForChain(
+            peggedAsset.id,
+            chain,
+            getCurrentUnixTimestamp(),
+          );
+          if (snap && snap.snapshot) {
+            const extractedCirc = extractIssuanceFromSnapshot(snap.snapshot, 'circulating', pegType, chain);
+            const val = extractedCirc?.[pegType];
+            if (typeof val === 'number' && Number.isFinite(val) && val >= 0) {
+              peggedBalances[chain].circulating = { [pegType]: val };
+              if (extrapolationMetadata) {
+                extrapolationMetadata.extrapolated = true;
+                if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
+                  extrapolationMetadata.extrapolatedChains.push({ chain, timestamp: snap.timestamp || 0 });
+                }
+              }
+              return;
+            }
+          }
+        } catch (_) {}
         executeAndIgnoreErrors("INSERT INTO `errors2` VALUES (?, ?, ?, ?)", [
           getCurrentUnixTimestamp(),
           peggedAsset.gecko_id,
@@ -269,7 +290,6 @@ async function calcCirculating(
           `Pegged asset on chain ${chain} has negative circulating amount`
         );
       }
-      // Rounding down tiny balances to avoid scientific floating points
       if (circulating[pegType]! < 10 ** -6) {
         circulating[pegType] = 0;
       }
@@ -313,8 +333,6 @@ export async function storePeggedAsset(
   module: any,
   maxRetries: number = 1,
   breakIfIssuanceIsZero: boolean = false
-  //storePreviousData: boolean = true,
-  //runBeforeStore?: () => Promise<void>
 ) {
   const pegType = peggedAsset.pegType;
   let peggedBalances: PeggedAssetIssuance = {};
@@ -337,7 +355,6 @@ export async function storePeggedAsset(
             if (typeof issuanceFunction !== "function") {
               return;
             }
-            // For minted/unreleased, use destination chain. For bridges, use source chain
             const api = new sdk.ChainApi({ 
               chain: (issuanceType === 'minted' || issuanceType === 'unreleased') ? chain : issuanceType, 
               timestamp: unixTimestamp 
@@ -371,7 +388,8 @@ export async function storePeggedAsset(
       peggedBalances,
       bridgedFromMapping,
       peggedAsset,
-      pegType
+      pegType,
+      extrapolationMetadata
     );
 
     if (
@@ -395,7 +413,6 @@ export async function storePeggedAsset(
     );
   }
 
-  // Add extrapolation metadata to data if needed
   if (extrapolationMetadata.extrapolated) {
     (peggedBalances as any).extrapolated = extrapolationMetadata.extrapolated;
     (peggedBalances as any).extrapolatedChains = extrapolationMetadata.extrapolatedChains;
@@ -403,7 +420,6 @@ export async function storePeggedAsset(
   }
 
   try {
-    // Checks circuit breakers
     const storeTokensAction = storeNewPeggedBalances(
       peggedAsset,
       unixTimestamp,
@@ -419,7 +435,7 @@ export async function storePeggedAsset(
   }
 
   if (extrapolationMetadata.extrapolated) {
-    console.log(`[${peggedAsset.name}] ⚠️  Used cache fallback for some chains:`, extrapolationMetadata.extrapolatedChains.map(ec => ec.chain).join(', '));
+    console.log(`[${peggedAsset.name}|id=${peggedAsset.id}] ⚠️  Used cache fallback for some chains:`, extrapolationMetadata.extrapolatedChains.map(ec => ec.chain).join(', '));
   }
 
   return peggedBalances;

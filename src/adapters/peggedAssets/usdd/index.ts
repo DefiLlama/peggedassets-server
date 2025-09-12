@@ -19,6 +19,7 @@ const chainContracts: ChainContracts = {
     bridgedFromTron: ["0x42f9db3e95f91b414f4a321122e2804Ab75778d9"],
   },
   ethereum: {
+    issued: ["0x4f8e5DE400DE08B164E7421B3EE387f461beCD1A"],
     bridgedFromBttc: ["0x3D7975EcCFc61a2102b08925CbBa0a4D4dBB6555"],
     reserves: ["0x9277a463A508F45115FdEaf22FfeDA1B16352433"],
   },
@@ -117,6 +118,34 @@ async function bscBridged() {
   };
 }
 
+async function chainMinted(chain: string, decimals: number) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    for (let issued of chainContracts[chain].issued) {
+      const totalSupply = (
+        await sdk.api.abi.call({
+          abi: "erc20:totalSupply",
+          target: issued,
+          block: _chainBlocks?.[chain],
+          chain: chain,
+        })
+      ).output;
+      sumSingleBalance(
+        balances,
+        "peggedUSD",
+        totalSupply / 10 ** decimals,
+        "issued",
+        false
+      );
+    }
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   tron: {
     minted: tronMinted(),
@@ -129,6 +158,7 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   ethereum: {
+    minted: chainMinted("ethereum", 18),
     bittorrent: ethereumBridged(),
   },
   bsc: {
