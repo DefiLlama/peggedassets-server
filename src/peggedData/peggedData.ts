@@ -6010,6 +6010,24 @@ export default [
     auditLinks: "https://jigsaw.gitbook.io/jigsaw-protocol/security/smart-contract-audits",
     twitter: "https://x.com/jigsawdefi",
     wiki: "https://jigsaw.gitbook.io/jigsaw-protocol",
+  },
+  {
+    id: "302",
+    name: "Hylo HYUSD",
+    address: "5YMkXAYccHSGnHn9nob9xEvv6Pvka9DZWH7nTbotTu9E",
+    symbol: "HYUSD",
+    url: "https://hylo.so/",
+    description: "hyUSD is a USD-soft-pegged stablecoin backed by liquid staking tokens (LSTs) and stabilized through a dual-token system with xSOL, liquidation mechanisms, and a stability pool.",
+    mintRedeemDescription: "Users mint hyUSD by depositing supported LSTs into Hylo's collateral pool, and redeem it by burning hyUSD to withdraw an equivalent amount of collateral.",
+    onCoinGecko: "false",
+    gecko_id: "hylo-hyusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://docs.hylo.so/security/audits",
+    twitter: "https://x.com/hylo_so",
+    wiki: "https://docs.hylo.so/protocol-overview/hyUSD-&-xSOL",
   }
 
 ] as PeggedAsset[];
