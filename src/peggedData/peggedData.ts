@@ -6028,6 +6028,23 @@ export default [
     auditLinks: "https://docs.hylo.so/security/audits",
     twitter: "https://x.com/hylo_so",
     wiki: "https://docs.hylo.so/protocol-overview/hyUSD-&-xSOL",
+  },
+  {
+    id: "303",
+    name: "USDU Finance",
+    address: "0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+    symbol: "USDU",
+    url: "https://usdu.finance",
+    description: "USDU is a next-generation stablecoin designed to bring deep liquidity and yield-backed stability to the decentralized finance ecosystem. It is a yield-collateralized stablecoin, fully backed by on-chain lending income from credit-rated markets.",
+    onCoinGecko: "false",
+    gecko_id: "usdu-finance",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://usdu.finance/wp-content/uploads/2025/07/BlockBite-USDU-Security-Audit-2025.pdf",
+    twitter: "https://x.com/USDUfinance",
+    wiki: "https://usdu.gitbook.io/docs",
   }
 
 ] as PeggedAsset[];
