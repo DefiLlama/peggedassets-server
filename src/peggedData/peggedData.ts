@@ -5401,25 +5401,25 @@ export default [
     twitter: "https://x.com/LiquityProtocol",
     wiki: "https://docs.liquity.org/v2-documentation/technical-resources"
   },
-  {
-    id: "270",
-    name: "Franklin Onchain U.S. Government Money Fund",
-    address: "stellar:BENJI-GBHNGLLIE3KWGKCHIKMHJ5HVZHYIK7WTBE4QF5PLAKL4CJGSEU7HZIW5",
-    symbol: "BENJI",
-    url: "https://www.franklintempleton.com/investments/options/money-market-funds/products/29386/SINGLCLASS/franklin-on-chain-u-s-government-money-fund/FOBXX",
-    description:
-      `The fund seeks to provide as high a level of current income as is consistent with the preservation of shareholders' capital and liquidity. The fund also tries to maintain a stable $1 share price.`,
-    mintRedeemDescription: "Franklin Onchain U.S. Government Money Fund is minted by depositing U.S. government money market funds into the Franklin Onchain U.S. Government Money Fund, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
-    onCoinGecko: "false",
-    gecko_id: "franklin-onchain-u-s-government-money-fund",
-    cmcId: null,
-    pegType: "peggedUSD",
-    pegMechanism: "fiat-backed",
-    auditLinks: null,
-    priceSource: "defillama",
-    twitter: "https://x.com/FTI_US",
-    wiki: "https://www.franklintempleton.com/investments/options/money-market-funds/products/29386/SINGLCLASS/franklin-on-chain-u-s-government-money-fund/FOBXX"
-  },
+  // {
+  //   id: "270",
+  //   name: "Franklin Onchain U.S. Government Money Fund",
+  //   address: "stellar:BENJI-GBHNGLLIE3KWGKCHIKMHJ5HVZHYIK7WTBE4QF5PLAKL4CJGSEU7HZIW5",
+  //   symbol: "BENJI",
+  //   url: "https://www.franklintempleton.com/investments/options/money-market-funds/products/29386/SINGLCLASS/franklin-on-chain-u-s-government-money-fund/FOBXX",
+  //   description:
+  //     `The fund seeks to provide as high a level of current income as is consistent with the preservation of shareholders' capital and liquidity. The fund also tries to maintain a stable $1 share price.`,
+  //   mintRedeemDescription: "Franklin Onchain U.S. Government Money Fund is minted by depositing U.S. government money market funds into the Franklin Onchain U.S. Government Money Fund, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
+  //   onCoinGecko: "false",
+  //   gecko_id: "franklin-onchain-u-s-government-money-fund",
+  //   cmcId: null,
+  //   pegType: "peggedUSD",
+  //   pegMechanism: "fiat-backed",
+  //   auditLinks: null,
+  //   priceSource: "defillama",
+  //   twitter: "https://x.com/FTI_US",
+  //   wiki: "https://www.franklintempleton.com/investments/options/money-market-funds/products/29386/SINGLCLASS/franklin-on-chain-u-s-government-money-fund/FOBXX"
+  // },
   {
     id: "271",
     name: "Avant USD",
