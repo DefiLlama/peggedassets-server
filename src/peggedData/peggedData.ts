@@ -6039,7 +6039,7 @@ export default [
     mintRedeemDescription: "MUSD uses a CDP (collateralized debt position) model. Every outstanding MUSD is redeemable for Bitcoin. $1 in BTC collateral can be used to mint 1 MUSD.",
     onCoinGecko: "true",
     gecko_id: "mezo-usd",
-    cmcId: null,
+    cmcId: "37163",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
