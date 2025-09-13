@@ -6028,6 +6028,24 @@ export default [
     auditLinks: "https://docs.hylo.so/security/audits",
     twitter: "https://x.com/hylo_so",
     wiki: "https://docs.hylo.so/protocol-overview/hyUSD-&-xSOL",
+  },
+  {
+    id: "303",
+    name: "Mezo USD",
+    address: "mezo:0xdd468a1ddc392dcdbef6db6e34e89aa338f9f186",
+    symbol: "MUSD",
+    url: "https://mezo.org/",
+    description: "MUSD is a permissionless stablecoin 100% backed by Bitcoin reserves and designed to maintain a 1:1 peg with the U.S. dollar.",
+    mintRedeemDescription: "MUSD uses a CDP (collateralized debt position) model. Every outstanding MUSD is redeemable for Bitcoin. $1 in BTC collateral can be used to mint 1 MUSD.",
+    onCoinGecko: "true",
+    gecko_id: "mezo-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://mezo.org/docs/audits/2025-04-15%20-%20Cantina%20-%20MUSD.pdf",
+    twitter: "https://x.com/mezonetowrk",
+    wiki: "https://mezo.org/docs/users/musd/",
   }
 
 ] as PeggedAsset[];
