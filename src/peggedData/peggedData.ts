@@ -6032,7 +6032,7 @@ export default [
   {
     id: "303",
     name: "Mezo USD",
-    address: "mezo:0xdd468a1ddc392dcdbef6db6e34e89aa338f9f186",
+    address: "ethereum:0xdd468a1ddc392dcdbef6db6e34e89aa338f9f186",
     symbol: "MUSD",
     url: "https://mezo.org/",
     description: "MUSD is a permissionless stablecoin 100% backed by Bitcoin reserves and designed to maintain a 1:1 peg with the U.S. dollar.",
