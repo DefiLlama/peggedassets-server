@@ -6046,6 +6046,24 @@ export default [
     auditLinks: "https://mezo.org/docs/audits/2025-04-15%20-%20Cantina%20-%20MUSD.pdf",
     twitter: "https://x.com/mezonetowrk",
     wiki: "https://mezo.org/docs/users/musd/",
+  },
+  {
+    id: "303",
+    name: "USDU Finance",
+    address: "ethereum:0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
+    symbol: "USDU",
+    url: "https://usdu.finance/",
+    description: "USDU is a next-generation stablecoin designed to bring deep liquidity and yield-backed stability to the decentralized finance ecosystem. It is a yield-collateralized stablecoin, fully backed by on-chain lending income from credit-rated markets.",
+    mintRedeemDescription: "USDU uses modular adapters (e.g., Curve, Morpho) to mint or redeem stablecoins based on liquidity conditions. Anyone can interact with the protocol by providing the opposite side of liquidity.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: "https://usdu.finance/wp-content/uploads/2025/07/BlockBite-USDU-Security-Audit-2025.pdf",
+    twitter: "https://x.com/USDUfinance",
+    wiki: "https://usdu.gitbook.io/docs/",
   }
 
 ] as PeggedAsset[];
