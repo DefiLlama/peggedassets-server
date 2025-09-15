@@ -6048,7 +6048,7 @@ export default [
     wiki: "https://mezo.org/docs/users/musd/",
   },
   {
-    id: "303",
+    id: "304",
     name: "USDU Finance",
     address: "ethereum:0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
     symbol: "USDU",
