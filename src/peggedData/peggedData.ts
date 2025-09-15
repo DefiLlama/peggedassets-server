@@ -6056,7 +6056,7 @@ export default [
     description: "USDU is a next-generation stablecoin designed to bring deep liquidity and yield-backed stability to the decentralized finance ecosystem. It is a yield-collateralized stablecoin, fully backed by on-chain lending income from credit-rated markets.",
     mintRedeemDescription: "USDU uses modular adapters (e.g., Curve, Morpho) to mint or redeem stablecoins based on liquidity conditions. Anyone can interact with the protocol by providing the opposite side of liquidity.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "usdu",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
