@@ -300,6 +300,7 @@ import tryb from './bilira';
 import jigsaw_usd from './jigsaw-usd';
 import mezousd from './mezo-usd'
 import hylo_hyusd from './hylo-hyusd';
+import usduFinance from './usdu';
 
 export default {
   tether,
@@ -605,4 +606,5 @@ export default {
   "jigsaw-usd": jigsaw_usd,
   "mezo-usd": mezousd,
   "hylo-hyusd": hylo_hyusd,
+  "usdu": usduFinance,
 };
