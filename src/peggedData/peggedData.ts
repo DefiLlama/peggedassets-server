@@ -6084,6 +6084,7 @@ export default [
     auditLinks: ["https://xsy-1.gitbook.io/xsy-main/audits"],
     twitter: "https://x.com/xsy_fi",
     wiki: "https://xsy.fi",
+    doublecounted: true
   },
 
 ] as PeggedAsset[];
