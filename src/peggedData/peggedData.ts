@@ -6064,6 +6064,26 @@ export default [
     auditLinks: "https://usdu.finance/wp-content/uploads/2025/07/BlockBite-USDU-Security-Audit-2025.pdf",
     twitter: "https://x.com/USDUfinance",
     wiki: "https://usdu.gitbook.io/docs/",
-  }
+  },
+  {
+    id: "305",
+    name: "XSY UTY",
+    address: "0xDBc5192A6B6FfEe7451301bb4ec312f844F02B4A",
+    symbol: "UTY",
+    url: "https://xsy.fi",
+    description:
+      "A delta-neutral asset and serves as the synthetic dollar at the center of XSY's ecosystem of decentralized financial products.",
+    mintRedeemDescription:
+      "XSY enables users to deposit USDC or USDT to mint UTY. Stability is secured through delta-neutral hedging strategies.",
+    onCoinGecko: "true",
+    gecko_id: "unity-2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: ["https://xsy-1.gitbook.io/xsy-main/audits"],
+    twitter: "https://x.com/xsy_fi",
+    wiki: "https://xsy.fi",
+  },
 
 ] as PeggedAsset[];
