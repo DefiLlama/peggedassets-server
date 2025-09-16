@@ -1,7 +1,8 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from '../helper/generalUtil';
 import { addChainExports, cosmosSupply } from "../helper/getSupply";
-import { ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
+import { ChainBlocks, PeggedIssuanceAdapter, Balances } from "../peggedAsset.type";
+import { getTotalSupply as stellarGetTotalSupply } from "../helper/stellar";
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -33,6 +34,19 @@ async function bridgedFromNoble(channel: string) {
   };
 }
 
+async function stellarMinted(assetID: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const totalSupply = await stellarGetTotalSupply(assetID);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
+    return balances;
+  };
+}
+
 const chainContracts = {
   ethereum: {
     issued: [
@@ -59,6 +73,9 @@ const chainContracts = {
   arbitrum: {
     issued: ["0x35e050d3C0eC2d29D269a8EcEa763a183bDF9A9D"]
   },
+  stellar: {
+    issued: ["USDY:GAJMPX5NBOG6TQFPQGRABJEEB2YE7RFRLUKJDZAZGAD5GFX4J7TADAZ6"],
+  },
 };
 
 // Use `addChainExports` to generate the final adapter with combined logic
@@ -78,7 +95,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   penumbra: {
     noble: bridgedFromNoble("channel-89"),
-  }
+  },
+  stellar: {
+    minted: stellarMinted(chainContracts.stellar.issued[0]),
+  },
 };
 
 export default adapter;
