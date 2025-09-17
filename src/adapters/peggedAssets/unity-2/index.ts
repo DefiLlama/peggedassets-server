@@ -1,12 +1,12 @@
-import { addChainExports } from '../helper/getSupply'
-import { PeggedIssuanceAdapter } from '../peggedAsset.type'
+
 
 const chainContracts = {
   avax: {
-    issued: ['0xDBc5192A6B6FfEe7451301bb4ec312f844F02B4A'], // UTY
-  }
-}
+    issued: "0xdbc5192a6b6ffee7451301bb4ec312f844f02b4a",// UTY
+  },
+};
 
-const adapter: PeggedIssuanceAdapter = addChainExports(chainContracts)
 
-export default adapter
+import { addChainExports } from "../helper/getSupply";
+const adapter = addChainExports(chainContracts);
+export default adapter;
