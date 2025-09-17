@@ -301,7 +301,7 @@ import jigsaw_usd from './jigsaw-usd';
 import mezousd from './mezo-usd'
 import hylo_hyusd from './hylo-hyusd';
 import usduFinance from './usdu';
-import xsy_uty from './uty';
+import xsy_uty from './unity-2';
 
 export default {
   tether,
