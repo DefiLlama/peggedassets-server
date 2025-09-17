@@ -471,6 +471,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromNoble: ["0x3894085Ef7Ff0f0aeDf52E2A2704928d1Ec074F1"]
   },
   xdc: {
+    issued: ["0xfa2958cb79b0491cc627c1557f441ef849ca8eb1"],
     bridgeOnETH: ["0x7c62Bb89ABb22a6bA8668bEE8ddEC416bD402492"],
     bridgeOnARB: ["0x7c62Bb89ABb22a6bA8668bEE8ddEC416bD402492"]
   },

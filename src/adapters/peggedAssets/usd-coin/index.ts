@@ -1016,6 +1016,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("flare", 6, chainContracts.flare.bridgedFromETH, "stargate"),
   },
   xdc: {
+    minted: chainMinted("xdc", 6),
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0], 
       chainContracts.xdc.bridgeOnETH[0],
