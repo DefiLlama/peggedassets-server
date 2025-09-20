@@ -124,7 +124,7 @@ export const chainContracts: ChainContracts = {
   },
   ronin: {
     bridgeOnETH: ["0xc2e3a3c18ccb634622b57ff119a1c8c7f12e8c0c"],
-    issued: ["0x0b7007c13325c48911f73a2dad5fa5dcbf808adc"], 
+    issued: ["0x0b7007c13325c48911f73a2dad5fa5dcbf808adc"],
   },
   aurora: {
     bridgeOnETH: ["0x23Ddd3e3692d1861Ed57EDE224608875809e127f"],
@@ -273,6 +273,11 @@ export const chainContracts: ChainContracts = {
       "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
     ],
   },
+  nibiru: {
+    bridgedFromETH: [
+      "0x0829F361A05D993d5CEb035cA6DF3446b060970b" // LayerZero
+    ]
+  },
   defichain: {
     bridgeOnETH: ["0x94fa70d079d76279e1815ce403e9b985bccc82ac"], // seems there is no direct bridge from ETH. but users can withdraw to defichain using cake defi?
   },
@@ -363,7 +368,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0x6de8aCC0D406837030CE4dd28e7c08C5a96a30d2", //maybe native bridge?
       "0xEB466342C4d449BC9f53A865D5Cb90586f405215" //axelar
-      ],
+    ],
   },
   scroll: {
     bridgedFromETH: [
@@ -414,7 +419,7 @@ export const chainContracts: ChainContracts = {
     issued: ["0x078d782b760474a361dda0af3839290b0ef57ad6"],
   },
   vitruveo: {
-  bridgedFromPolygon: ["0xbCfB3FCa16b12C7756CD6C24f1cC0AC0E38569CF"],
+    bridgedFromPolygon: ["0xbCfB3FCa16b12C7756CD6C24f1cC0AC0E38569CF"],
   },
   gravity: {
     bridgedFromETH: ["0xFbDa5F676cB37624f28265A144A48B0d6e87d3b6"],
@@ -463,7 +468,7 @@ export const chainContracts: ChainContracts = {
   },
   bob: {
     bridgedFromETH: ["0xe75D0fB2C24A55cA1e3F96781a2bCC7bdba058F0"],
-  },  
+  },
   ink: {
     bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"]
   },
