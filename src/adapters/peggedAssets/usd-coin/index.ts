@@ -23,6 +23,7 @@ import {
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
 import { call as nearCall } from "../helper/near";
+import { call as nibiruCall } from "../helper/nibiru";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -480,6 +481,25 @@ async function rippleMinted() {
       sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     }
 
+    return balances;
+  };
+}
+
+async function nibiruBridged() {
+  return async function() {
+    const balances = {} as Balances;
+    
+    for (const contract of chainContracts.nibiru.bridgedFromETH) {
+      const totalSupply = await nibiruCall({
+        target: contract,
+        abi: { name: 'totalSupply' }
+      });
+      
+      // Convert from hex to number and divide by 1e6 (USDC has 6 decimals)
+      const supply = parseInt(totalSupply, 16) / 1e6;
+      sumSingleBalance(balances, "peggedUSD", supply, contract, true);
+    }
+    
     return balances;
   };
 }
@@ -1000,7 +1020,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH, "stargate"),
   },
   nibiru: {
-    ethereum: bridgedSupply("nibiru", 6, chainContracts.nibiru.bridgedFromETH, "stargate"),
+    ethereum: nibiruBridged(),
   },
   sei: {
     noble: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromNoble),

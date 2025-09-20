@@ -275,7 +275,7 @@ export const chainContracts: ChainContracts = {
   },
   nibiru: {
     bridgedFromETH: [
-      "0x0829F361A05D993d5CEb035cA6DF3446b060970b" // LayerZero
+      "0x0829F361A05D993d5CEb035cA6DF3446b060970b" // stargate
     ]
   },
   defichain: {
