@@ -6086,5 +6086,25 @@ export default [
     wiki: "https://xsy.fi",
     doublecounted: true
   },
+  {
+    id: "306",
+    name: "Gate USD",
+    address: "0xaf6186b3521b60e27396b5d23b48abc34bf585c5",
+    symbol: "GUSD",
+    url: "https://www.gate.com/gusd",
+    description:
+      "GUSD is a flexible, principal-protected investment product that distributes rewards daily. Its returns are sourced from the Gate ecosystem's revenue, tokenized treasuries or other RWA, and stablecoin-backed yield assets—designed to provide relatively stable yields in both bullish and bearish market conditions. Additionally, GUSD is fully tradable and can be used as collateral.",
+    mintRedeemDescription:
+      "You can stake USDT/USDC to mint GUSD as a yield-bearing certificate. Upon redemption, GUSD will be converted to USDT/USDC at a 1:1 ratio",
+    onCoinGecko: "true",
+    gecko_id: "gusd",
+    cmcId: "38330",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: ["-"],
+    twitter: "https://x.com/Gate",
+    wiki: "-",
+  },
 
 ] as PeggedAsset[];

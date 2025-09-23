@@ -105,6 +105,7 @@ import eusdv2 from "./eusdv2";
 import fdusd from "./first-digital-usd";
 import gho from "./gho";
 import grai from "./grai";
+import gateUsd from "./gusd";
 import gyen from "./gyen";
 import hyusd from "./high-yield-usd";
 import inter from "./inter-stable-token";
@@ -436,6 +437,7 @@ export default {
   "paypal-usd": pyusd,
   psy,
   gyen,
+  gusd: gateUsd,
   "preon-star": star,
   peusd: peusd,
   "eusd-v2": eusdv2,
