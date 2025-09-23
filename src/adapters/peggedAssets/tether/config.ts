@@ -63,6 +63,14 @@ export const chainContracts: ChainContracts = {
     bridgeOnETH: ["0xcee284f754e854890e311e3280b767f80797180d"],
     bridgedFromETH: ["0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"], // USDT0
   },
+  plasma: {
+    bridgeOnETH: [
+      "0x02ca37966753bDdDf11216B73B16C1dE756A7CF9",
+    ],
+    bridgedFromETH: [
+      "0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb", // USDT0
+    ], 
+  },
   optimism: {
     bridgeOnETH: ["0x99c9fc46f92e8a1c0dec1b1747d010903e884be1"],
     bridgedFromETH: [
