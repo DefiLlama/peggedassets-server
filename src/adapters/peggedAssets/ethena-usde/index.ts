@@ -29,6 +29,9 @@ const chainContracts = {
   arbitrum: {
     bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
   },
+  plasma: {
+    bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
+  },
   optimism: {
     bridgedFromETH: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
   },
