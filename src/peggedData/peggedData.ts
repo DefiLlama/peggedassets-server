@@ -6100,11 +6100,10 @@ export default [
     gecko_id: "gusd",
     cmcId: "38330",
     pegType: "peggedUSD",
-    pegMechanism: "crypto-backed",
+    pegMechanism: "fiat-backed",
     priceSource: "coingecko",
-    auditLinks: ["-"],
+    auditLinks: [],
     twitter: "https://x.com/Gate",
-    wiki: "-",
   },
 
 ] as PeggedAsset[];
