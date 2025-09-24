@@ -4,19 +4,23 @@ FROM node:20
 # Set the working directory in the container to /app
 WORKDIR /app
 
-# Clone your repo
-RUN git clone https://github.com/DefiLlama/peggedassets-server /app/repo
+COPY package*.json ./
+RUN npm ci
 
-# Change to the directory of your repo
-WORKDIR /app/repo
+COPY . .
 
-# RUN git checkout api2
-
-# Install any needed packages specified in package.json
-RUN npm install
+RUN set -euo pipefail \
+    && echo "🔍 Validations..." \
+    && npm run prebuild \
+    && npm run build \
+    && test -f api2/index.ts \
+    && test -f api2/ecosystem.config.js \
+    && test -f api2/scripts/prod_start.sh \
+    && test -f src/adapters/peggedAssets/index.ts \
+    && node -e "require('./api2/ecosystem.config.js')"
 
 # Make port 5001 available to the world outside this container
 EXPOSE 5001
 
-# bash command to keep the container running
-CMD ["bash", "-c", "npm run api2-prod; while true; do sleep 10000; done"]
+# Start
+CMD ["bash", "-c", "npm run api2-prod"]
