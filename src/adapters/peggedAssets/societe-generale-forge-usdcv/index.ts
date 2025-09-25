@@ -1,6 +1,6 @@
 const sdk = require("@defillama/sdk");
 import {Balances, ChainBlocks, PeggedAssetType, PeggedIssuanceAdapter} from "../peggedAsset.type";
-import {chainContracts} from "../societe-generale-forge-eurcv/config";
+import {chainContracts} from "../societe-generale-forge-usdcv/config";
 import {getTokenBalance as solanaGetTokenBalance, getTokenSupply as solanaGetTokenSupply} from "../helper/solana";
 import {sumSingleBalance} from "../helper/generalUtil";
 
