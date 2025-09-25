@@ -303,6 +303,7 @@ import mezousd from './mezo-usd'
 import hylo_hyusd from './hylo-hyusd';
 import usduFinance from './usdu';
 import xsy_uty from './unity-2';
+import sagadollar from './saga-dollar';
 
 export default {
   tether,
@@ -610,5 +611,6 @@ export default {
   "mezo-usd": mezousd,
   "hylo-hyusd": hylo_hyusd,
   "usdu": usduFinance,
-  "xsy-uty": xsy_uty
+  "xsy-uty": xsy_uty,
+  "saga-dollar": sagadollar
 };
