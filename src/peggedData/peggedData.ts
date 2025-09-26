@@ -6105,5 +6105,24 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/Gate",
   },
-
+  {
+    id: "307",
+    name: "USD CoinVertible",
+    address: "0x5422374B27757da72d5265cC745ea906E0446634",
+    symbol: "USDCV",
+    url: "https://www.sgforge.com/product/coinvertible/",
+    description: "The institutional investor can buy USDCV, 1:1 by sending USD to SG-FORGE bank account or buy EURCV, 1:1 by sending Euro to SG-FORGE bank account",
+    mintRedeemDescription: "USDCV or EURCV can be redeemed 1:1 against fiat USD (for USDCV) or EUR (for EURCV)",
+    onCoinGecko: "true",
+    gecko_id: "societe-generale-forge-usdcv", // fake coingecko
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://www.sgforge.com/product/coinvertible/"
+    ],
+    twitter: null,
+    wiki: "https://www.sgforge.com/product/coinvertible/",
+  },
 ] as PeggedAsset[];
