@@ -304,6 +304,7 @@ import hylo_hyusd from './hylo-hyusd';
 import usduFinance from './usdu';
 import xsy_uty from './unity-2';
 import usdcv from './societe-generale-forge-usdcv'
+import sagadollar from './saga-dollar';
 
 export default {
   tether,
@@ -612,5 +613,6 @@ export default {
   "hylo-hyusd": hylo_hyusd,
   "usdu": usduFinance,
   "xsy-uty": xsy_uty,
-  "societe-generale-forge-usdcv": usdcv
+  "societe-generale-forge-usdcv": usdcv,
+  "saga-dollar": sagadollar
 };
