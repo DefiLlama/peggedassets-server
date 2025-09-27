@@ -6145,4 +6145,23 @@ export default [
     wiki: "https://coltstable.notion.site/Colt-Stable-Documentation-257c9bce381680ca9f5edcfb47779710",
     doublecounted: true
   },
+  {
+    id: "309",
+    name: "USD.AI",
+    address: "plasma:0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF",
+    symbol: "USDai",
+    url: "https://usd.ai/",
+    description: "USD.AI is a synthetic dollar protocol with USDai, a redeemable stablecoin, and sUSDai, a yield-bearing version backed by infrastructure loans and reserve assets",
+    mintRedeemDescription: "Users mint USDai by depositing USDC into USD.AI and can redeem it 1:1, while sUSDai converts USDai into a yield-bearing token redeemable after a notice period",
+    onCoinGecko: "false",
+    gecko_id: "usd-ai", // fake coingecko
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.usd.ai/technical-overview/audits"],
+    twitter: "https://x.com/USDai_Official",
+    wiki: "https://docs.usd.ai/how-usd.ai-works",
+    doublecounted: true
+  },
 ] as PeggedAsset[];
