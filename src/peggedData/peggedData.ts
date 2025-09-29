@@ -4286,7 +4286,7 @@ export default [
   },
   {
     id: "213",
-    name: "M By M^0",
+    name: "M by M0",
     address: "0x866A2BF4E572CbcF37D5071A7a58503Bfb36be1b",
     symbol: "M",
     url: "https://www.m0.org/",
