@@ -1,6 +1,9 @@
 const chainContracts = {
     plasma: {
       issued: ["0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF"],
+    },
+    arbitrum: {
+      issued: ["0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF"]
     }
   };
   
