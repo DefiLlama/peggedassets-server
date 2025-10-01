@@ -34,7 +34,7 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
         }
         if (peggedAsset.gecko_id === "bitcoin-usd-btcfi") 
           peggedAsset.pegType = "peggedUSD";
-        const adapterModule = importAdapter(peggedAsset);
+        const adapterModule = await importAdapter(peggedAsset);
         if (!adapterModule) console.log("No adapter found for", peggedAsset.name, peggedAsset);
 
         Object.values(adapterModule).forEach((obj: any) => {

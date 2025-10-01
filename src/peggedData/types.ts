@@ -53,6 +53,7 @@ export type PeggedAsset = {
   doublecounted?: boolean;
   deprecated?: boolean;
   yieldBearing?: boolean;
+  module?: string;  // adapter module to use, defaults to gecko_id if not set
 };
 
 type Bridge = {

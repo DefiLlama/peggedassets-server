@@ -774,6 +774,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/algofiorg",
     wiki: "https://wiki.defillama.com/wiki/Algofi",
+    module: 'stbl',
   },
   {
     id: "39",
@@ -1017,6 +1018,7 @@ export default [
     auditLinks: ["https://www.centre.io/usdc-transparency"],
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/EUROC",
+    module: 'eurc',
   },
   {
     id: "51",
@@ -1115,6 +1117,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/AngleProtocol",
     wiki: "https://wiki.defillama.com/wiki/AGEUR",
+    module: 'eura',
   },
   {
     id: "56",
@@ -1353,6 +1356,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/beanstalkfarms",
     wiki: "https://wiki.defillama.com/wiki/Beanstalk",
+    module: 'bean2',
   },
   {
     id: "68",
@@ -2204,6 +2208,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: null,
+    module: 'eusd',
   },
   {
     id: "110",
@@ -2285,6 +2290,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Shade_Protocol",
     wiki: null,
+    module: 'silk',
   },
   {
     id: "114",
@@ -2451,6 +2457,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PSY_stablecoin",
     wiki: null,
+    module: "psy",
   },
   {
     id: "122",
@@ -2490,6 +2497,7 @@ export default [
     auditLinks: ["https://docs.preon.finance/information/security"],
     twitter: "https://twitter.com/PreonFinance",
     wiki: "https://docs.preon.finance/",
+    module: 'star',
   },
   {
     id: "124",
@@ -2510,6 +2518,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
+    module: 'peg-eusd',
   },
   {
     id: "125",
@@ -2530,6 +2539,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
+    module: 'eusdv2',
   },
   {
     id: "126",
@@ -2590,6 +2600,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Nexus_ZDex",
     wiki: "https://docs.zdex.tech/",
+    module: 'nexus',
   },
   {
     id: "129",
@@ -2669,6 +2680,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/MountainUSDM",
     wiki: "https://docs.mountainprotocol.com/reference/usdm-token",
+    module: 'usdm',
   },
   {
     id: "133",
@@ -2689,6 +2701,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Num_Finance",
     wiki: "https://num.finance/transparency",
+    module: 'nars',
   },
   {
     id: "134",
@@ -2875,6 +2888,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/HydtProtocol",
     wiki: "https://hydtprotocol.com/#faqs",
+    module: 'hydt',
   },
   {
     id: "143",
@@ -2895,6 +2909,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/usdv_money",
     wiki: "https://docs.usdv.money/docs/what-is-usdv/faq",
+    module: 'usdv',
   },
   {
     id: "144",
@@ -2935,6 +2950,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PayTrie",
     wiki: "https://faq.paytrie.com/help/what-is-the-cadc-address",
+    module: 'cadc',
   },
   {
     id: "146",
@@ -3055,6 +3071,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Goal3_xyz",
     wiki: "https://docs.goal3.xyz/sportsbook/technical-overview/usdzkusd",
+    module: 'zkusd',
   },
   {
     id: "152",
@@ -3216,6 +3233,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/rifonchain",
     wiki: null,
+    module: 'usd-rif',
   },
   {
     id: "160",
@@ -3316,6 +3334,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/pagolinea",
     wiki: null,
+    module: 'pago-linea-usdcb',
   },
   {
     id: "165",
@@ -3375,6 +3394,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
+    module: 'feth',
   },
   {
     id: "168",
@@ -3395,6 +3415,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
+    module: 'fxusd',
   },
   {
     id: "169",
@@ -3415,6 +3436,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/goku_stable",
     wiki: null,
+    module: 'gai-stablecoin',
   },
   {
     id: "170",
@@ -3499,6 +3521,7 @@ export default [
     auditLinks: [],
     twitter: "https://twitter.com/BlackRock",
     wiki: null,
+    module: 'blackrock-usd',
   },
   {
     id: "174",
@@ -3640,6 +3663,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/breadchain_",
     wiki: null,
+    module: 'bread',
   },
   {
     id: "181",
@@ -3661,6 +3685,7 @@ export default [
       "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+    module: "zun-usd",
   },
   {
     id: "182",
@@ -3682,6 +3707,7 @@ export default [
       "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+    module: "zun-eth",
   },
   {
     id: "183",
@@ -4442,7 +4468,8 @@ export default [
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/avalonfinance_",
-    wiki: "https://docs.avalonfinance.xyz/cedefi-cdp-usda"
+    wiki: "https://docs.avalonfinance.xyz/cedefi-cdp-usda",
+    module: "avalon-usda"
   },
   {
     id: "221",
@@ -4763,6 +4790,7 @@ export default [
     auditLinks: ["https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Synnax-v1.0.pdf"],
     twitter: "https://twitter.com/synnax_labs",
     wiki: "https://docs.synnax.fi",
+    module: 'syusd',
   },
   {
     id: "237",
@@ -6200,5 +6228,6 @@ export default [
     auditLinks: ["https://public.inshallah.fi/iAUSD-audit-v1.pdf"],
     twitter: "https://x.com/inshAllahfi",
     wiki: "https://inshallah.gitbook.io/inshallah/iausd-stablecoin/what-is-iausd",
+    module: 'iAUSD',
   },
 ] as PeggedAsset[];
