@@ -307,7 +307,7 @@ import yu from './yala-stablecoin';
 import ylds from './ylds';
 import zkusd from "./zkusd";
 import zeusd from "./zoth-zeusd";
-import iausd from "./iausd";
+import iausd from "./iAUSD";
 
 export default {
   tether,
