@@ -306,6 +306,7 @@ import xsy_uty from './unity-2';
 import usdcv from './societe-generale-forge-usdcv'
 import sagadollar from './saga-dollar';
 import usdai from './usd-ai';
+import solstice_usx from './usx';
 
 export default {
   tether,
@@ -616,5 +617,6 @@ export default {
   "xsy-uty": xsy_uty,
   "societe-generale-forge-usdcv": usdcv,
   "saga-dollar": sagadollar,
-  "usd-ai": usdai
+  "usd-ai": usdai,
+  "usx": solstice_usx,
 };

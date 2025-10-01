@@ -6164,4 +6164,23 @@ export default [
     wiki: "https://docs.usd.ai/how-usd.ai-works",
     doublecounted: true
   },
+  {
+    id: "310",
+    name: "Solstice USX",
+    address: "solana:6FrrzDk5mQARGc1TDYoyVnSyRdds1t4PbtohCD6p3tgG",
+    symbol: "USX",
+    url: "https://solstice.finance/usx",
+    description: "Solstice USX is a synthetic stablecoin protocol built on Solana",
+    mintRedeemDescription: "Direct Minting and Redemption of USX is reserved for KYC’d institutional investors who deposit USDC or USDT into the Solstice Protocol. Non-KYCd users can access USX permissionlessly via leading DEXs or via the Solstice Platform",
+    onCoinGecko: "true",
+    gecko_id: "usx", 
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://storage.googleapis.com/dapp_prod/audit_reports/halborn_program_audit_250605.pdf"],
+    twitter: "https://x.com/solsticefi",
+    wiki: null,
+    doublecounted: true
+  },
 ] as PeggedAsset[];
