@@ -307,6 +307,7 @@ import yu from './yala-stablecoin';
 import ylds from './ylds';
 import zkusd from "./zkusd";
 import zeusd from "./zoth-zeusd";
+import iausd from "./iausd";
 
 export default {
   tether,
@@ -619,4 +620,5 @@ export default {
   "saga-dollar": sagadollar,
   "usd-ai": usdai,
   "usx": solstice_usx,
+  "iausd": iausd,
 };

@@ -6183,4 +6183,22 @@ export default [
     wiki: null,
     doublecounted: true
   },
+  {
+    id: "311",
+    name: "iAUSD",
+    address: "solana:iAUSDhn2B61LBeCgph6JFxxS5KMYoyeXCbJZ4gyZLr7",
+    symbol: "IAUSD",
+    url: "https://inshallah.fi/stablecoin",
+    description: "The first yield-bearing fully Halal stablecoin",
+    mintRedeemDescription: "iAUSD is minted via iA Borrow, InshAllah's halal lending protocol. iAUSD is fully collateralized using iASOL collateral. iAUSD yield comes form profit sharing. The staking yield from iASOL is split between the iASOL collateral and minted iAUSD creating the first halal yield-bearing stablecoin",
+    onCoinGecko: "false",
+    gecko_id: "iausd", 
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://public.inshallah.fi/iAUSD-audit-v1.pdf"],
+    twitter: "https://x.com/inshAllahfi",
+    wiki: "https://inshallah.gitbook.io/inshallah/iausd-stablecoin/what-is-iausd",
+  },
 ] as PeggedAsset[];
