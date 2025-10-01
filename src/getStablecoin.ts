@@ -11,7 +11,6 @@ import {
   dailyPeggedBalances,
 } from "./peggedAssets/utils/getLastRecord";
 import { getChainDisplayName } from "./utils/normalizeChain";
-import { importAdapter } from "./peggedAssets/utils/importAdapter";
 import { wrapResponseOrRedirect } from "./utils/wrapOrRedirect";
 import { fetchPrices } from "./utils/fetchPrices";
 
@@ -38,7 +37,7 @@ export async function craftProtocolResponse(
       message: "Pegged asset is not in our database",
     });
   }
-  const [lastBalancesHourlyRecord, historicalPeggedBalances, module] =
+  const [lastBalancesHourlyRecord, historicalPeggedBalances,] =
     await Promise.all([
       getLastRecord(hourlyPeggedBalances(peggedData.id)),
       getHistoricalValues(
@@ -47,21 +46,11 @@ export async function craftProtocolResponse(
         ),
         1652241600 // currently frontend does not use data before May 11, 2022 for individual stablecoins
       ),
-      importAdapter(peggedData),
     ]);
   if (!useHourlyData) {
     replaceLast(historicalPeggedBalances, lastBalancesHourlyRecord);
   }
   let response = peggedData as any;
-  if (module.methodology !== undefined) {
-    response.methodology = module.methodology;
-  }
-  if (module.misrepresentedTokens !== undefined) {
-    response.misrepresentedTokens = true;
-  }
-  if (module.hallmarks !== undefined) {
-    response.hallmarks = module.hallmarks;
-  }
   response.chainBalances = {};
   const currentChainBalances: { [chain: string]: object } = {};
   response.currentChainBalances = currentChainBalances;
