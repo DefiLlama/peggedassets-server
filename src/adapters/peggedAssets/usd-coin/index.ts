@@ -1,44 +1,41 @@
 const sdk = require("@defillama/sdk");
-import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
-import * as sui from "../helper/sui";
+import { lookupAccountByID } from "../helper/algorand";
+import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
+import { getTotalSupply } from "../helper/cardano";
 import {
-  sumSingleBalance,
-  sumMultipleBalanceFunctions,
+    sumMultipleBalanceFunctions,
+    sumSingleBalance,
 } from "../helper/generalUtil";
 import {
-  bridgedSupply,
-  supplyInEthereumBridge,
-  solanaMintedOrBridged,
-  terraSupply,
-  cosmosSupply,
-  kujiraSupply,
-  osmosisSupply,
-  getApi,
-  supplyInArbitrumBridge
+    bridgedSupply,
+    cosmosSupply,
+    osmosisSupply,
+    solanaMintedOrBridged,
+    supplyInArbitrumBridge,
+    supplyInEthereumBridge,
+    terraSupply
 } from "../helper/getSupply";
-import {
-  getTotalSupply as ontologyGetTotalSupply,
-  getBalance as ontologyGetBalance,
-} from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
-import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
+import { mixinSupply } from "../helper/mixin";
 import { call as nearCall } from "../helper/near";
 import { call as nibiruCall } from "../helper/nibiru";
 import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances, ChainContracts, PeggedAssetType
-} from "../peggedAsset.type";
+    getBalance as ontologyGetBalance,
+    getTotalSupply as ontologyGetTotalSupply,
+} from "../helper/ontology";
+import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
+import * as sui from "../helper/sui";
 import {
-  getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
+    getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
-import { mixinSupply } from "../helper/mixin";
+import {
+    Balances,
+    ChainBlocks,
+    PeggedIssuanceAdapter
+} from "../peggedAsset.type";
 import { chainContracts } from "./config";
-import { lookupAccountByID } from "../helper/algorand";
 const axios = require("axios");
 const retry = require("async-retry");
-import { ChainApi } from "@defillama/sdk";
-import { getTotalSupply } from "../helper/cardano";
 
 // If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain and fuse
 
@@ -1061,7 +1058,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
   },
   story: {
-    ethereum: bridgedSupply("story", 6, chainContracts.story.bridgedFromETH, "stargate"),
+    ethereum: bridgedSupply("sty", 6, chainContracts.story.bridgedFromETH, "stargate"),
   },
   nero: {
     arbitrum: bridgedSupply("nero", 6, chainContracts.nero.bridgedFromARB, "VIA Labs"),

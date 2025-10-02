@@ -6,6 +6,7 @@ import {
   PeggedTokenBalance,
 } from "../../types";
 import { getCurrentUnixTimestamp } from "../../utils/date";
+import { isDeadChain } from "../../utils/deadChains";
 import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
 import {
   dailyPeggedBalances,
@@ -333,6 +334,12 @@ export async function storePeggedAsset(
             if (typeof issuanceFunction !== "function") {
               return;
             }
+            if (isDeadChain(chain)) {
+              peggedBalances[chain] = peggedBalances[chain] || {};
+              peggedBalances[chain][issuanceType] = { [pegType]: 0 };
+              return;
+            }
+
             const api = new sdk.ChainApi({ 
               chain: (issuanceType === 'minted' || issuanceType === 'unreleased') ? chain : issuanceType, 
               timestamp: unixTimestamp 
