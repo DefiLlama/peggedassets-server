@@ -11,7 +11,6 @@ import {
   dailyPeggedBalances,
   hourlyPeggedBalances,
 } from "../utils/getLastRecord";
-import { executeAndIgnoreErrors } from "./errorDb";
 import storeNewPeggedBalances from "./storeNewPeggedBalances";
 
 type ChainBlocks = {
@@ -147,12 +146,6 @@ async function getPeggedAsset(
           console.error(`${tag} Cache fallback failed for ${peggedAsset.name} on chain ${chain} (${label}):`, cacheError);
         }
         
-        executeAndIgnoreErrors("INSERT INTO `errors2` VALUES (?, ?, ?, ?)", [
-          getCurrentUnixTimestamp(),
-          peggedAsset.gecko_id,
-          chain,
-          String(e),
-        ]);
         peggedBalances[chain][issuanceType] = { [pegType]: null };
       } else {
         await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
@@ -244,15 +237,6 @@ async function calcCirculating(
             console.error(
               `Null balance or 0 circulating error on chain ${chain}`
             );
-            executeAndIgnoreErrors(
-              "INSERT INTO `errors2` VALUES (?, ?, ?, ?)",
-              [
-                getCurrentUnixTimestamp(),
-                peggedAsset.gecko_id,
-                chain,
-                `Null balance or 0 circulating error`,
-              ]
-            );
             return;
           }
           circulating[pegType]! -= balance;
@@ -280,12 +264,6 @@ async function calcCirculating(
             }
           }
         } catch (_) {}
-        executeAndIgnoreErrors("INSERT INTO `errors2` VALUES (?, ?, ?, ?)", [
-          getCurrentUnixTimestamp(),
-          peggedAsset.gecko_id,
-          chain,
-          `Pegged asset has negative circulating amount`,
-        ]);
         throw new Error(
           `Pegged asset on chain ${chain} has negative circulating amount`
         );

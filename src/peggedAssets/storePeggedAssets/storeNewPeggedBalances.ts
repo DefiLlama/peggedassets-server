@@ -13,7 +13,6 @@ import { sendMessage } from "../../utils/discord";
 import dynamodb from "../../utils/shared/dynamodb";
 import getTVLOfRecordClosestToTimestamp from "../../utils/shared/getRecordClosestToTimestamp";
 import { getLastRecord } from "../utils/getLastRecord";
-import { executeAndIgnoreErrors } from "./errorDb";
 import { reconcileDailyFromHourly } from "./reconcileDailyFromHourly";
 
 type PKconverted = (id: string) => string;
@@ -118,20 +117,10 @@ export default async (
         lastHourlyCirculating * 5 < currentCirculating &&
         lastHourlyCirculating > 1000000
       ) {
-        await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
-          unixTimestamp,
-          peggedID,
-          `Circulating has 5x (${change}) within one hour, disabling it`,
-        ]);
         const errorMessage = `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour, disabling it`;
         await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK!);
         throw new Error(errorMessage);
       } else {
-        await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
-          unixTimestamp,
-          peggedID,
-          `Circulating has >2x (${change}) within one hour`,
-        ]);
         console.error(
           `Circulating for ${peggedAsset.name} has >2x (${change}) within one hour`,
           peggedAsset.name
@@ -157,11 +146,6 @@ export default async (
           prevCirculating !== 0 &&
           prevCirculating !== undefined
         ) {
-          await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
-            unixTimestamp,
-            peggedID,
-            `Circulating has dropped to 0 on chain "${chain}" (previous circulating was ${prevCirculating})`,
-          ]);
           console.error(
             `Circulating has dropped to 0 on chain "${chain}" (previous circulating was ${prevCirculating})`,
             peggedAsset.name

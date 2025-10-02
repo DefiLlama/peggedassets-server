@@ -1,5 +1,4 @@
 
-import { importAdapter } from "../../src/peggedAssets/utils/importAdapter";
 import peggedAssets from "../../src/peggedData/peggedData";
 import { getChainDisplayName } from "../../src/utils/normalizeChain";
 import { cache } from "../cache";
@@ -18,16 +17,12 @@ export function getStablecoinData(peggedID: string | undefined) {
 
   const peggedData = peggedAssets.find((pegged) => pegged.id === peggedID);
   if (!peggedData) throw new Error( "Pegged asset is not in our database")
-  const module = importAdapter(peggedData)
   const { balances, lastBalance } = cache.peggedAssetsData?.[peggedData.id] ?? {}
   const lastBalancesHourlyRecord = lastBalance
   const historicalPeggedBalances = balances ?? [];
 
   if (!useHourlyData) replaceLast(historicalPeggedBalances, lastBalancesHourlyRecord);
   let response = peggedData as any;
-  if (module.methodology !== undefined) response.methodology = module.methodology;
-  if (module.misrepresentedTokens !== undefined)  response.misrepresentedTokens = true;
-  if (module.hallmarks !== undefined) response.hallmarks = module.hallmarks;
   response.chainBalances = {};
   const currentChainBalances: { [chain: string]: object } = {};
   response.currentChainBalances = currentChainBalances;
