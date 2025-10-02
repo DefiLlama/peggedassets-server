@@ -1,7 +1,8 @@
 
 export const DEAD_CHAINS = new Set([
   'milkomeda',
-  'real'
+  'real',
+  'concordium'
 ]);
 
 export function isDeadChain(chain: string): boolean {
