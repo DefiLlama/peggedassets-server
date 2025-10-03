@@ -6245,7 +6245,7 @@ export default [
   pegMechanism: "crypto-backed",
   priceSource: "defillama",
   auditLinks: ["https://github.com/galacticcouncil/hydration-security/tree/main/audit-reports"],
-  twitter: null,
+  twitter: "https://x.com/hydration_net",
   wiki: "https://docs.hydration.net/quick_start/hollar",
 },
 ] as PeggedAsset[];
