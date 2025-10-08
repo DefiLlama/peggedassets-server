@@ -6142,8 +6142,8 @@ export default [
     url: "https://www.sgforge.com/product/coinvertible/",
     description: "The institutional investor can buy USDCV, 1:1 by sending USD to SG-FORGE bank account or buy EURCV, 1:1 by sending Euro to SG-FORGE bank account",
     mintRedeemDescription: "USDCV or EURCV can be redeemed 1:1 against fiat USD (for USDCV) or EUR (for EURCV)",
-    onCoinGecko: "false",
-    gecko_id: "societe-generale-forge-usdcv", // fake coingecko
+    onCoinGecko: "true",
+    gecko_id: "usd-coinvertible", 
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
