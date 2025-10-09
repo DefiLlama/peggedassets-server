@@ -48,6 +48,17 @@ export async function getTokenSupply(token: string) {
     }
   }
 
+  // Handle USD1-WLFI fungible asset
+  if (token === '0x05fabd1b12e39967a3c24e91b7b8f67719a6dacee74f3c8b9fb7d93e855437d2') {
+    const concurrentSupply = data.find((coin: any) => coin.type === '0x1::fungible_asset::ConcurrentSupply');
+    const metadata = data.find((coin: any) => coin.type === '0x1::fungible_asset::Metadata');
+    if (concurrentSupply && metadata) {
+      const supply = concurrentSupply.data.current.value;
+      const decimals = metadata.data.decimals;
+      return parseInt(supply) / 10 ** decimals;
+    }
+  }
+
   const coinInfo = data.find((coin: any) => coin.type.startsWith('0x1::coin::CoinInfo'));
 
   return coinInfo.data.supply.vec[0].integer.vec[0].value / 10 ** coinInfo.data.decimals;
