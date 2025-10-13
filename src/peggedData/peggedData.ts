@@ -281,7 +281,7 @@ export default [
     description:
       "USDD is a decentralized cryptocurrency issued by the TRON DAO Reserve.",
     mintRedeemDescription:
-      "Members of the TRON DAO Reserve (TDR) can mint and issue USDD by staking TRX. $1 worth of TRX can be burned to mint 1 USDD, and vice-versa.",
+      "Users can stake assets like TRX, sTRX or USDT to mint USDD. The minimum collateral ratio differs according to vault and collateral type.",
     onCoinGecko: "true",
     gecko_id: "usdd",
     cmcId: "19891",
