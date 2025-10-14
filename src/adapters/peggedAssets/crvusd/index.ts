@@ -134,6 +134,9 @@ const chainContracts = {
   },
   sonic: {
     bridgedFromETH: "0x7fff4c4a827c84e32c5e175052834111b2ccd270"
+  },
+  taiko: {
+    bridgedFromETH: "0xc8F4518ed4bAB9a972808a493107926cE8237068"
   }
 };
 
