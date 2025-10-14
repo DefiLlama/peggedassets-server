@@ -14,6 +14,12 @@ const pegkeepers = [
   "0x338cb2d827112d989a861cde87cd9ffd913a1f9d"  //crvUSD/frxUSD
 ]
 
+const yb_amms = [
+  "0xB42e34Bf1f8627189e099ABDB069B9D73B521E4F", //cbBTC YB AMM
+  "0xb0faaBE84076c6330A9642a6400e87CE4cAec9d4", //tBTC YB AMM
+  "0xa25306937dbA98378c32F167588F5Dc17A95c94b", //WBTC YB AMM
+]
+
 async function chainMinted(chain: string, decimals: number) {
   return async function (
     _timestamp: number,
@@ -61,8 +67,33 @@ async function chainMinted(chain: string, decimals: number) {
         totalPegkeeperDebt += Number(call.output);
     });
     
+    // Get debt from all YB AMMs
+    const ybAmmDebtCalls = yb_amms.map(amm => ({
+      target: amm,
+      params: []
+    }));
+    
+    const ybAmmDebts = await sdk.api.abi.multiCall({
+      abi: {
+        stateMutability: "view",
+        type: "function",
+        name: "get_debt",
+        inputs: [],
+        outputs: [{ name: "", type: "uint256" }],
+      },
+      calls: ybAmmDebtCalls,
+      block: _ethBlock,
+      chain: chain,
+    });
+    
+    // Sum up all YB AMM debts
+    let totalYbAmmDebt = 0;
+    ybAmmDebts.output.forEach((call: any) => {
+        totalYbAmmDebt += Number(call.output);
+    });
+    
     // Add total_debt and pegkeeper debt together
-    const totalSupply = Number(totalDebt) + totalPegkeeperDebt;
+    const totalSupply = Number(totalDebt) + totalPegkeeperDebt + totalYbAmmDebt;
     
     sumSingleBalance(
       balances,
