@@ -8,10 +8,10 @@ import {
 } from "../peggedAsset.type";
 
 const pegkeepers = [
-  "0x9201da0d97caaaff53f01b2fb56767c7072de340",
-  "0xfb726f57d251ab5c731e5c64ed4f5f94351ef9f3",
-  "0x3fa20eaa107de08b38a8734063d605d5842fe09c",
-  "0x503E1Bf274e7a6c64152395aE8eB57ec391F91F8"
+  "0x9201da0d97caaaff53f01b2fb56767c7072de340", //crvUSD/USDC
+  "0xfb726f57d251ab5c731e5c64ed4f5f94351ef9f3", //crvUSD/USDT
+  "0x3fa20eaa107de08b38a8734063d605d5842fe09c", //crvUSD/pyUSD
+  "0x338cb2d827112d989a861cde87cd9ffd913a1f9d"  //crvUSD/frxUSD
 ]
 
 async function chainMinted(chain: string, decimals: number) {
