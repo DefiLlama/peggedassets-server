@@ -27,6 +27,7 @@ async function getCardanoSupply() {
 const chainContracts = {
   ethereum: {
     issued: ["0x6c3ea9036406852006290770BEdFcAbA0e23A0e8"],
+    unreleased: ["0x2fb074FA59c9294c71246825C1c9A0c7782d41a4"], //https://etherscan.io/tx/0xc45dd1a77c05d9ae5b2284eea5393ecce2ac8a7e88e973c6ba3fe7a18bf45634
   },
   solana: {
     issued: ["2b1kV6DkPAnxd5ixfnxCpjxmKwqjjaYmCZfHsFu24GXo"],
