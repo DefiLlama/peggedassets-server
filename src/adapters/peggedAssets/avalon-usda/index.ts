@@ -2,6 +2,7 @@ import { addChainExports } from "../helper/getSupply";
 import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
 import { function_view } from "../helper/aptos";
 import { Balances } from "../peggedAsset.type";
+import { call as nibiruCall } from "../helper/nibiru";
 
 async function moveSupply(): Promise<Balances> {
   const balances = {} as Balances;
@@ -12,6 +13,20 @@ async function moveSupply(): Promise<Balances> {
     args: [chainContracts.move.issued[0]],
   });
   balances["peggedUSD"] = Number(resp.vec[0]) / 1e8;
+
+  return balances;
+}
+
+async function nibiruSupply(): Promise<Balances> {
+  const balances = {} as Balances;
+  
+  const totalSupply = await nibiruCall({
+    target: chainContracts.nibiru.issued[0],
+    abi: { name: 'totalSupply' }
+  });
+  
+  // Convert from hex to number and divide by 1e18 (assuming 18 decimals)
+  balances["peggedUSD"] = parseInt(totalSupply, 16) / 1e18;
 
   return balances;
 }
@@ -65,7 +80,10 @@ const chainContracts = {
     },
     move: {
         issued: ["0x48b904a97eafd065ced05168ec44638a63e1e3bcaec49699f6b8dabbd1424650"],
-    }
+    },
+    nibiru: {
+        issued: ["0xf4e097E36d2064E2bDCA96e60439f3A369522003"]
+    },
   };
 
 
@@ -74,6 +92,10 @@ const adapter: PeggedIssuanceAdapter = {
 
     move: {
         minted: moveSupply,
+    },
+    
+    nibiru: {
+        minted: nibiruSupply,
     }
 };
 

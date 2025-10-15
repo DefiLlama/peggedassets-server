@@ -1,11 +1,8 @@
-
-
 const chainContracts = {
-  avax: {
-    issued: "0xdbc5192a6b6ffee7451301bb4ec312f844f02b4a",// UTY
+  hydradx: {
+    issued: ["0x531a654d1696ed52e7275a8cede955e82620f99a"],
   },
 };
-
 
 import { addChainExports } from "../helper/getSupply";
 const adapter = addChainExports(chainContracts);

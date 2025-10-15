@@ -1,43 +1,41 @@
 const sdk = require("@defillama/sdk");
+import { lookupAccountByID } from "../helper/algorand";
+import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
+import { getTotalSupply } from "../helper/cardano";
+import {
+    sumMultipleBalanceFunctions,
+    sumSingleBalance,
+} from "../helper/generalUtil";
+import {
+    bridgedSupply,
+    cosmosSupply,
+    osmosisSupply,
+    solanaMintedOrBridged,
+    supplyInArbitrumBridge,
+    supplyInEthereumBridge,
+    terraSupply
+} from "../helper/getSupply";
+import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
+import { mixinSupply } from "../helper/mixin";
+import { call as nearCall } from "../helper/near";
+import { call as nibiruCall } from "../helper/nibiru";
+import {
+    getBalance as ontologyGetBalance,
+    getTotalSupply as ontologyGetTotalSupply,
+} from "../helper/ontology";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import * as sui from "../helper/sui";
 import {
-  sumSingleBalance,
-  sumMultipleBalanceFunctions,
-} from "../helper/generalUtil";
-import {
-  bridgedSupply,
-  supplyInEthereumBridge,
-  solanaMintedOrBridged,
-  terraSupply,
-  cosmosSupply,
-  kujiraSupply,
-  osmosisSupply,
-  getApi,
-  supplyInArbitrumBridge
-} from "../helper/getSupply";
-import {
-  getTotalSupply as ontologyGetTotalSupply,
-  getBalance as ontologyGetBalance,
-} from "../helper/ontology";
-import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
-import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
-import { call as nearCall } from "../helper/near";
-import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,  ChainContracts,PeggedAssetType
-} from "../peggedAsset.type";
-import {
-  getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
+    getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
-import { mixinSupply } from "../helper/mixin";
+import {
+    Balances,
+    ChainBlocks,
+    PeggedIssuanceAdapter
+} from "../peggedAsset.type";
 import { chainContracts } from "./config";
-import { lookupAccountByID } from "../helper/algorand";
 const axios = require("axios");
 const retry = require("async-retry");
-import { ChainApi } from "@defillama/sdk";
-import { getTotalSupply } from "../helper/cardano";
 
 // If you are trying to test the adapter locally and it failed, try to comment out the lines related with dogechain and fuse
 
@@ -110,7 +108,7 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
 async function solanaUnreleased() {
   return async function() {
     let balances = {} as Balances;
-    for(let unreleasedAddress of chainContracts["solana"].unreleased){
+    for (let unreleasedAddress of chainContracts["solana"].unreleased) {
       sumSingleBalance(balances, "peggedUSD", await solanaGetTokenBalance(
         chainContracts["solana"].issued[0],
         unreleasedAddress
@@ -120,7 +118,7 @@ async function solanaUnreleased() {
   };
 }
 
-const getBal = (address:string)=>lookupAccountByID(address).then(r=>r.account.assets.find((t:any)=>t["asset-id"]==31566704).amount / 10 ** 6)
+const getBal = (address: string) => lookupAccountByID(address).then(r => r.account.assets.find((t: any) => t["asset-id"] == 31566704).amount / 10 ** 6)
 async function algorandMinted() {
   // I gave up on trying to use the SDK for this
   return async function() {
@@ -137,12 +135,12 @@ async function algorandMinted() {
 }
 
 async function algorandUnreleased() {
-  return async function () {
+  return async function() {
     let balances = {} as Balances;
 
-    sumSingleBalance(balances, "peggedUSD", 
-    (await getBal("OSS3CEB3KK2QGVW4DZYMHLDJMJIY7WKFQCPXV7KOZCGF6GPILAARBOGZHM")) + 
-    (await getBal("SO6ZNE255CHM56JNA6SYDAKIMHC266DGM4G47O6N66UT57HZZ7VV6Y2N7Y")));
+    sumSingleBalance(balances, "peggedUSD",
+      (await getBal("OSS3CEB3KK2QGVW4DZYMHLDJMJIY7WKFQCPXV7KOZCGF6GPILAARBOGZHM")) +
+      (await getBal("SO6ZNE255CHM56JNA6SYDAKIMHC266DGM4G47O6N66UT57HZZ7VV6Y2N7Y")));
     return balances;
   };
 }
@@ -199,7 +197,7 @@ async function suiMinted(): Promise<Balances> {
     "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
   );
   sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
-        return balances;
+  return balances;
 }
 
 async function suiBridged(chain: string) {
@@ -431,7 +429,7 @@ async function flowBridged(address: string, decimals: number) {
 
 async function moveSupply(): Promise<Balances> {
   const balances = {} as Balances;
-  
+
   const resp = await function_view({
     functionStr: '0x1::fungible_asset::supply',
     type_arguments: ['0x1::object::ObjectCore'],
@@ -454,13 +452,13 @@ async function getCardanoSupply() {
 async function rippleMinted() {
   return async function() {
     const balances = {} as Balances;
-    
+
     const NODE_URL = "https://xrplcluster.com";
-    
+
     // Get the USDC token info from config
     const usdcToken = chainContracts.ripple.issued[0]; // "5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"
     const [currencyCode, issuerAddress] = usdcToken.split('.');
-    
+
     const payload = {
       method: "gateway_balances",
       params: [
@@ -472,12 +470,31 @@ async function rippleMinted() {
     };
 
     const res = await retry(async (_bail: any) => axios.post(NODE_URL, payload));
-    
+
     if (res.data.result && res.data.result.obligations && res.data.result.obligations[currencyCode]) {
       const supplyStr = res.data.result.obligations[currencyCode];
       const supply = parseFloat(supplyStr); // XRPL API returns value in correct decimal format
-      
+
       sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
+    }
+
+    return balances;
+  };
+}
+
+async function nibiruBridged() {
+  return async function() {
+    const balances = {} as Balances;
+    
+    for (const contract of chainContracts.nibiru.bridgedFromETH) {
+      const totalSupply = await nibiruCall({
+        target: contract,
+        abi: { name: 'totalSupply' }
+      });
+      
+      // Convert from hex to number and divide by 1e6 (USDC has 6 decimals)
+      const supply = parseInt(totalSupply, 16) / 1e6;
+      sumSingleBalance(balances, "peggedUSD", supply, contract, true);
     }
     
     return balances;
@@ -696,7 +713,7 @@ const adapter: PeggedIssuanceAdapter = {
   stellar: {
     minted: circleAPIChainMinted("XLM"),
   },
-  
+
   xdai: {
     ethereum: bridgedSupply("xdai", 6, chainContracts.xdai.bridgedFromETH),
   },
@@ -741,7 +758,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("dfk", 18, chainContracts.dfk.bridgedFromETH),
   },
   celo: {
-    minted: chainMinted("celo",6),
+    minted: chainMinted("celo", 6),
     ethereum: sumMultipleBalanceFunctions(
       [
         bridgedSupply("celo", 6, chainContracts.celo.bridgedFromETH6Decimals),
@@ -848,10 +865,10 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("base", 6),
     ethereum: bridgedSupply("base", 6, chainContracts.base.bridgedFromETH),
   },
- /* kujira: {
-    ethereum: kujiraSupply(chainContracts.kujira.bridgedFromETH, 6, "Axelar"),
-    noble: kujiraSupply(chainContracts.kujira.bridgedFromNoble, 6, "Noble"),
-  },*/
+  /* kujira: {
+     ethereum: kujiraSupply(chainContracts.kujira.bridgedFromETH, 6, "Axelar"),
+     noble: kujiraSupply(chainContracts.kujira.bridgedFromNoble, 6, "Noble"),
+   },*/
   waves: {
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
@@ -881,7 +898,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   pulse: {
     ethereum: bridgedSupply("pulse", 6, chainContracts.pulse.bridgedFromETH),
-  },  
+  },
   imx: {
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
@@ -914,7 +931,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: circleAPIChainMinted("NOBLE"),
   },
   flow: {
-    ethereum: bridgedSupply("flow",6,chainContracts.flow.bridgedFromETH),
+    ethereum: bridgedSupply("flow", 6, chainContracts.flow.bridgedFromETH),
   },
   polkadot: {
     minted: circleAPIChainMinted("PAH"),
@@ -995,10 +1012,13 @@ const adapter: PeggedIssuanceAdapter = {
   },
   bob: {
     ethereum: bridgedSupply("bob", 6, chainContracts.bob.bridgedFromETH),
-  },  
+  },
   ink: {
     ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH, "stargate"),
-  }, 
+  },
+  nibiru: {
+    ethereum: nibiruBridged(),
+  },
   sei: {
     noble: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromNoble),
     minted: circleAPIChainMinted("SEI"),
@@ -1016,8 +1036,9 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("flare", 6, chainContracts.flare.bridgedFromETH, "stargate"),
   },
   xdc: {
+    minted: chainMinted("xdc", 6),
     ethereum: supplyInEthereumBridge(
-      chainContracts.ethereum.issued[0], 
+      chainContracts.ethereum.issued[0],
       chainContracts.xdc.bridgeOnETH[0],
       6
     ),
@@ -1025,7 +1046,7 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.arbitrum.issued[0],
       chainContracts.xdc.bridgeOnARB[0],
       6
-    ) 
+    )
   },
   move: {
     ethereum: moveSupply,
@@ -1037,7 +1058,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
   },
   story: {
-    ethereum: bridgedSupply("story", 6, chainContracts.story.bridgedFromETH, "stargate"),
+    ethereum: bridgedSupply("sty", 6, chainContracts.story.bridgedFromETH, "stargate"),
   },
   nero: {
     arbitrum: bridgedSupply("nero", 6, chainContracts.nero.bridgedFromARB, "VIA Labs"),

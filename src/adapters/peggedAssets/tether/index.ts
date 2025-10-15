@@ -700,6 +700,13 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.arbitrum.bridgedFromETH
     ),
   },
+  plasma: {
+    ethereum: bridgedSupply(
+      "plasma",
+      6,
+      chainContracts.plasma.bridgedFromETH
+    ),
+  },
   optimism: {
     ethereum: bridgedSupply(
       "optimism",

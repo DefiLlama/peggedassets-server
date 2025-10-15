@@ -10,7 +10,10 @@ const chainContracts = {
   },
   solana: {
     issued: ["USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB"],
-  }
+  },
+  aptos: {
+    issued: ["0x05fabd1b12e39967a3c24e91b7b8f67719a6dacee74f3c8b9fb7d93e855437d2"],
+  },
 };
 
 import { addChainExports } from "../helper/getSupply";

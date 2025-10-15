@@ -281,7 +281,7 @@ export default [
     description:
       "USDD is a decentralized cryptocurrency issued by the TRON DAO Reserve.",
     mintRedeemDescription:
-      "Members of the TRON DAO Reserve (TDR) can mint and issue USDD by staking TRX. $1 worth of TRX can be burned to mint 1 USDD, and vice-versa.",
+      "Users can stake assets like TRX, sTRX or USDT to mint USDD. The minimum collateral ratio differs according to vault and collateral type.",
     onCoinGecko: "true",
     gecko_id: "usdd",
     cmcId: "19891",
@@ -774,6 +774,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/algofiorg",
     wiki: "https://wiki.defillama.com/wiki/Algofi",
+    module: 'stbl',
   },
   {
     id: "39",
@@ -1017,6 +1018,7 @@ export default [
     auditLinks: ["https://www.centre.io/usdc-transparency"],
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/EUROC",
+    module: 'eurc',
   },
   {
     id: "51",
@@ -1115,6 +1117,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/AngleProtocol",
     wiki: "https://wiki.defillama.com/wiki/AGEUR",
+    module: 'eura',
   },
   {
     id: "56",
@@ -1353,6 +1356,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/beanstalkfarms",
     wiki: "https://wiki.defillama.com/wiki/Beanstalk",
+    module: 'bean2',
   },
   {
     id: "68",
@@ -2204,6 +2208,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: null,
+    module: 'eusd',
   },
   {
     id: "110",
@@ -2285,6 +2290,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Shade_Protocol",
     wiki: null,
+    module: 'silk',
   },
   {
     id: "114",
@@ -2451,6 +2457,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PSY_stablecoin",
     wiki: null,
+    module: "psy",
   },
   {
     id: "122",
@@ -2490,6 +2497,7 @@ export default [
     auditLinks: ["https://docs.preon.finance/information/security"],
     twitter: "https://twitter.com/PreonFinance",
     wiki: "https://docs.preon.finance/",
+    module: 'star',
   },
   {
     id: "124",
@@ -2510,6 +2518,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
+    module: 'peg-eusd',
   },
   {
     id: "125",
@@ -2530,6 +2539,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
+    module: 'eusdv2',
   },
   {
     id: "126",
@@ -2590,6 +2600,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Nexus_ZDex",
     wiki: "https://docs.zdex.tech/",
+    module: 'nexus',
   },
   {
     id: "129",
@@ -2669,6 +2680,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/MountainUSDM",
     wiki: "https://docs.mountainprotocol.com/reference/usdm-token",
+    module: 'usdm',
   },
   {
     id: "133",
@@ -2689,6 +2701,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Num_Finance",
     wiki: "https://num.finance/transparency",
+    module: 'nars',
   },
   {
     id: "134",
@@ -2875,6 +2888,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/HydtProtocol",
     wiki: "https://hydtprotocol.com/#faqs",
+    module: 'hydt',
   },
   {
     id: "143",
@@ -2895,6 +2909,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/usdv_money",
     wiki: "https://docs.usdv.money/docs/what-is-usdv/faq",
+    module: 'usdv',
   },
   {
     id: "144",
@@ -2935,6 +2950,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PayTrie",
     wiki: "https://faq.paytrie.com/help/what-is-the-cadc-address",
+    module: 'cadc',
   },
   {
     id: "146",
@@ -3055,6 +3071,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Goal3_xyz",
     wiki: "https://docs.goal3.xyz/sportsbook/technical-overview/usdzkusd",
+    module: 'zkusd',
   },
   {
     id: "152",
@@ -3216,6 +3233,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/rifonchain",
     wiki: null,
+    module: 'usd-rif',
   },
   {
     id: "160",
@@ -3316,6 +3334,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/pagolinea",
     wiki: null,
+    module: 'pago-linea-usdcb',
   },
   {
     id: "165",
@@ -3375,6 +3394,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
+    module: 'feth',
   },
   {
     id: "168",
@@ -3395,6 +3415,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
+    module: 'fxusd',
   },
   {
     id: "169",
@@ -3415,6 +3436,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/goku_stable",
     wiki: null,
+    module: 'gai-stablecoin',
   },
   {
     id: "170",
@@ -3499,6 +3521,7 @@ export default [
     auditLinks: [],
     twitter: "https://twitter.com/BlackRock",
     wiki: null,
+    module: 'blackrock-usd',
   },
   {
     id: "174",
@@ -3640,6 +3663,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/breadchain_",
     wiki: null,
+    module: 'bread',
   },
   {
     id: "181",
@@ -3661,6 +3685,7 @@ export default [
       "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+    module: "zun-usd",
   },
   {
     id: "182",
@@ -3682,6 +3707,7 @@ export default [
       "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+    module: "zun-eth",
   },
   {
     id: "183",
@@ -4286,7 +4312,7 @@ export default [
   },
   {
     id: "213",
-    name: "M By M^0",
+    name: "M by M0",
     address: "0x866A2BF4E572CbcF37D5071A7a58503Bfb36be1b",
     symbol: "M",
     url: "https://www.m0.org/",
@@ -4442,7 +4468,8 @@ export default [
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/avalonfinance_",
-    wiki: "https://docs.avalonfinance.xyz/cedefi-cdp-usda"
+    wiki: "https://docs.avalonfinance.xyz/cedefi-cdp-usda",
+    module: "avalon-usda"
   },
   {
     id: "221",
@@ -4512,7 +4539,7 @@ export default [
     url: "https://dtrinity.org/",
     description:
       `dUSD is a decentralized and full-reserve stablecoin, backed by an on-chain reserve of other USD-denominated stablecoins and yieldcoins. Based on the ERC-20 standard, every dUSD token is backed by at least $1 of collateral and can be minted permissionlessly via smart contracts with no fees (excluding gas).`,
-    mintRedeemDescription: "Mirroring the US Dollar's non-redeemability for its underlying gold reserves post-Nixon Shock (1971), dUSD is also designed to have non-redeemable reserves to maximize float interest generation. In place of redemption, dUSD relies on open market operations to manage liquidity and stability, similar to the Fed.",
+    mintRedeemDescription: "Users can mint and redeem dUSD with other stablecoins and yield-bearing assets.",
     onCoinGecko: "true",
     gecko_id: "dtrinity-usd",
     cmcId: null,
@@ -4763,6 +4790,7 @@ export default [
     auditLinks: ["https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Synnax-v1.0.pdf"],
     twitter: "https://twitter.com/synnax_labs",
     wiki: "https://docs.synnax.fi",
+    module: 'syusd',
   },
   {
     id: "237",
@@ -6086,5 +6114,158 @@ export default [
     wiki: "https://xsy.fi",
     doublecounted: true
   },
-
+  {
+    id: "306",
+    name: "Gate USD",
+    address: "0xaf6186b3521b60e27396b5d23b48abc34bf585c5",
+    symbol: "GUSD",
+    url: "https://www.gate.com/gusd",
+    description:
+      "GUSD is a flexible, principal-protected investment product that distributes rewards daily. Its returns are sourced from the Gate ecosystem's revenue, tokenized treasuries or other RWA, and stablecoin-backed yield assets—designed to provide relatively stable yields in both bullish and bearish market conditions. Additionally, GUSD is fully tradable and can be used as collateral.",
+    mintRedeemDescription:
+      "You can stake USDT/USDC to mint GUSD as a yield-bearing certificate. Upon redemption, GUSD will be converted to USDT/USDC at a 1:1 ratio",
+    onCoinGecko: "true",
+    gecko_id: "gusd",
+    cmcId: "38330",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: [],
+    twitter: "https://x.com/Gate",
+    doublecounted: true
+  },
+  {
+    id: "307",
+    name: "USD CoinVertible",
+    address: "0x5422374B27757da72d5265cC745ea906E0446634",
+    symbol: "USDCV",
+    url: "https://www.sgforge.com/product/coinvertible/",
+    description: "The institutional investor can buy USDCV, 1:1 by sending USD to SG-FORGE bank account or buy EURCV, 1:1 by sending Euro to SG-FORGE bank account",
+    mintRedeemDescription: "USDCV or EURCV can be redeemed 1:1 against fiat USD (for USDCV) or EUR (for EURCV)",
+    onCoinGecko: "true",
+    gecko_id: "usd-coinvertible", 
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://www.sgforge.com/product/coinvertible/"
+    ],
+    twitter: null,
+    wiki: "https://www.sgforge.com/product/coinvertible/",
+    module: 'societe-generale-forge-usdcv'
+  },
+  {
+    id: "308",
+    name: "Saga Dollar",
+    address: "0xB76144F87DF95816e8c55C240F874C554B4553C3",
+    symbol: "D",
+    url: "https://coltstable.com/",
+    description: "Saga Dollar (D) is a fully backed stablecoin by an onchain reserve of other stablecoins and yield-bearing assets on SagaEVM. The yields generated by D’s reserve are redirected to its borrowers on integrated Saga lending protocols, such as Palomino, to subsidize their interest expenses",
+    mintRedeemDescription: "Users can mint and redeem Saga Dollar (D) with other stablecoins and yield-bearing assets on Colt protocol",
+    onCoinGecko: "false",
+    gecko_id: "saga-dollar", // fake coingecko
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/ColtProtocol",
+    wiki: "https://coltstable.notion.site/Colt-Stable-Documentation-257c9bce381680ca9f5edcfb47779710",
+    doublecounted: true
+  },
+  {
+    id: "309",
+    name: "USD.AI",
+    address: "plasma:0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF",
+    symbol: "USDai",
+    url: "https://usd.ai/",
+    description: "USD.AI is a synthetic dollar protocol with USDai, a redeemable stablecoin, and sUSDai, a yield-bearing version backed by infrastructure loans and reserve assets",
+    mintRedeemDescription: "Users mint USDai by depositing USDC into USD.AI and can redeem it 1:1, while sUSDai converts USDai into a yield-bearing token redeemable after a notice period",
+    onCoinGecko: "false",
+    gecko_id: "usd-ai", // fake coingecko
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.usd.ai/technical-overview/audits"],
+    twitter: "https://x.com/USDai_Official",
+    wiki: "https://docs.usd.ai/how-usd.ai-works",
+    doublecounted: true
+  },
+  {
+    id: "310",
+    name: "Solstice USX",
+    address: "solana:6FrrzDk5mQARGc1TDYoyVnSyRdds1t4PbtohCD6p3tgG",
+    symbol: "USX",
+    url: "https://solstice.finance/usx",
+    description: "Solstice USX is a synthetic stablecoin protocol built on Solana",
+    mintRedeemDescription: "Direct Minting and Redemption of USX is reserved for KYC’d institutional investors who deposit USDC or USDT into the Solstice Protocol. Non-KYCd users can access USX permissionlessly via leading DEXs or via the Solstice Platform",
+    onCoinGecko: "true",
+    gecko_id: "usx", 
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://storage.googleapis.com/dapp_prod/audit_reports/halborn_program_audit_250605.pdf"],
+    twitter: "https://x.com/solsticefi",
+    wiki: null,
+    doublecounted: true
+  },
+  {
+    id: "311",
+    name: "iAUSD",
+    address: "solana:iAUSDhn2B61LBeCgph6JFxxS5KMYoyeXCbJZ4gyZLr7",
+    symbol: "IAUSD",
+    url: "https://inshallah.fi/stablecoin",
+    description: "The first yield-bearing fully Halal stablecoin",
+    mintRedeemDescription: "iAUSD is minted via iA Borrow, InshAllah's halal lending protocol. iAUSD is fully collateralized using iASOL collateral. iAUSD yield comes form profit sharing. The staking yield from iASOL is split between the iASOL collateral and minted iAUSD creating the first halal yield-bearing stablecoin",
+    onCoinGecko: "false",
+    gecko_id: "iausd", 
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://public.inshallah.fi/iAUSD-audit-v1.pdf"],
+    twitter: "https://x.com/inshAllahfi",
+    wiki: "https://inshallah.gitbook.io/inshallah/iausd-stablecoin/what-is-iausd",
+    module: 'iAUSD',
+  },
+  {
+  id: "312",
+  name: "Hydrated Dollar",
+  address: "0x531a654d1696ed52e7275a8cede955e82620f99a",
+  symbol: "HOLLAR",
+  url: "https://app.hydration.net",
+  description: "The decentralized digital dollar for trading, saving, and earning",
+  mintRedeemDescription: "HOLLAR is minted against crypto collateral deposited by users into the protocol, inheriting the same proven architecture as the Aave GHO protocol",
+  onCoinGecko: "true",
+  gecko_id: "hydrated-dollar", 
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: ["https://github.com/galacticcouncil/hydration-security/tree/main/audit-reports"],
+  twitter: "https://x.com/hydration_net",
+  wiki: "https://docs.hydration.net/quick_start/hollar",
+},
+{
+  id: "313",
+  name: "Metamask USD",
+  address: "0xaca92e438df0b2401ff60da7e4337b687a2435da",
+  symbol: "MUSD",
+  url: "https://metamask.io/",
+  description: "MetaMask USD (mUSD) is a cryptocurrency stablecoin, launched by MetaMask in September 2025. Issued by Bridge, and powered by M0, mUSD is the first stablecoin created by a self-custodial wallet. A stablecoin is a type of token that’s designed to maintain a steady value, by being pegged to less volatile assets like the US Dollar",
+  mintRedeemDescription: "Issuance using Bridge.xyz , spendable equivalent to USD via metamask card at Mastercard merchants worldwide",
+  onCoinGecko: "true",
+  gecko_id: "metamask-usd",
+  cmcId: "38167",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "coingecko",
+  auditLinks: ["https://diligence.consensys.io/audits/2025/08/metamask-usd-token/"],
+  twitter: "https://x.com/MetaMask",
+  wiki: "https://metamask.io/price/metamask-usd",
+  doublecounted: true
+},
 ] as PeggedAsset[];

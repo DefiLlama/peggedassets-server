@@ -90,6 +90,7 @@
   "kadena",
   "kardia",
   "karura",
+  "katana",
   "kava",
   "kcc",
   "klaytn",
@@ -107,6 +108,7 @@
   "mantra",
   "metis",
   "meter",
+  "mezo",
   "milkomeda",
   "mixin",
   "mode",
@@ -129,6 +131,7 @@
   "palm",
   "penumbra",
   "perennial",
+  "plasma",
   "plume_mainnet",
   "polis",
   "polkadot",
@@ -145,6 +148,7 @@
   "ripple",
   "ronin",
   "rsk",
+  "saga",
   "scroll",
   "secret",
   "sei",
@@ -201,5 +205,6 @@
   "zkfair",
   "zksync",
   "zyx",
-  "zircuit"
+  "zircuit",
+  "hydradx"
 ]
