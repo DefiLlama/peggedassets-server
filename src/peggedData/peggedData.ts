@@ -6249,4 +6249,23 @@ export default [
   twitter: "https://x.com/hydration_net",
   wiki: "https://docs.hydration.net/quick_start/hollar",
 },
+{
+  id: "313",
+  name: "Metamask USD",
+  address: "0xaca92e438df0b2401ff60da7e4337b687a2435da",
+  symbol: "MUSD",
+  url: "https://metamask.io/",
+  description: "MetaMask USD (mUSD) is a cryptocurrency stablecoin, launched by MetaMask in September 2025. Issued by Bridge, and powered by M0, mUSD is the first stablecoin created by a self-custodial wallet. A stablecoin is a type of token that’s designed to maintain a steady value, by being pegged to less volatile assets like the US Dollar",
+  mintRedeemDescription: "Issuance using Bridge.xyz , spendable equivalent to USD via metamask card at Mastercard merchants worldwide",
+  onCoinGecko: "true",
+  gecko_id: "metamask-usd",
+  cmcId: "38167",
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "coingecko",
+  auditLinks: ["https://diligence.consensys.io/audits/2025/08/metamask-usd-token/"],
+  twitter: "https://x.com/MetaMask",
+  wiki: "https://metamask.io/price/metamask-usd",
+  doublecounted: true
+},
 ] as PeggedAsset[];
