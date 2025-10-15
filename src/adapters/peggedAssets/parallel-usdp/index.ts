@@ -48,9 +48,9 @@ const chainContracts:ChainContracts = {
     unichain:{
         issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
     },
-    // tac:{
-    //     issued: ["0x4DeF531c3060686948f00EcC7504f2E0b71EDa14"],
-    // }
+    tac:{
+        issued: ["0x4DeF531c3060686948f00EcC7504f2E0b71EDa14"],
+    }
 };
   
 const adapter = addChainExports(chainContracts);
