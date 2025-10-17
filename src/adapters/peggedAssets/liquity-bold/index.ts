@@ -20,7 +20,7 @@ const chainContracts = {
         bridgedFromETH: ["0x03569CC076654F82679C4BA2124D64774781B01D"],
       },
       hyperliquid: {
-      bridgedFromETH: ["0x03569CC076654F82679C4BA2124D64774781B01D"],
+      bridgedFromETH: ["0x84533b1512A3A23F0c9668D88FDf86FEffdbb11A"],
     },
 };
 
