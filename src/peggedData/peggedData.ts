@@ -6268,4 +6268,23 @@ export default [
   wiki: "https://metamask.io/price/metamask-usd",
   doublecounted: true
 },
+{
+  id: "314",
+  name: "Palm USD",
+  address: "0xFAF0cEe6B20e2Aaa4B80748a6AF4CD89609a3d78",
+  symbol: "PUSD",
+  url: "https://palmfi.xyz/",
+  description: "Palm tokens maintain a 1:1 peg with real-world currencies and are fully backed by cash and Shariah-compliant financial products. This structure provides traders, merchants, and funds with a secure, low-volatility means to exit market positions while adhering to sound finance principles",
+  mintRedeemDescription: "Palm customers and other institutions who have undergone a verification process can exchange currency for PUSD and redeem PUSD for currency",
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/joinpalmfi",
+  wiki: null,
+  module: 'palm-usd',
+},
 ] as PeggedAsset[];
