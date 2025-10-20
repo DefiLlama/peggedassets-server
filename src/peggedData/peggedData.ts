@@ -6183,7 +6183,7 @@ export default [
     description: "USD.AI is a synthetic dollar protocol with USDai, a redeemable stablecoin, and sUSDai, a yield-bearing version backed by infrastructure loans and reserve assets",
     mintRedeemDescription: "Users mint USDai by depositing USDC into USD.AI and can redeem it 1:1, while sUSDai converts USDai into a yield-bearing token redeemable after a notice period",
     onCoinGecko: "false",
-    gecko_id: "usd-ai", // fake coingecko
+    gecko_id: "usdai",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
