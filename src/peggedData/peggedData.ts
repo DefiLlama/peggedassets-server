@@ -6191,7 +6191,8 @@ export default [
     auditLinks: ["https://docs.usd.ai/technical-overview/audits"],
     twitter: "https://x.com/USDai_Official",
     wiki: "https://docs.usd.ai/how-usd.ai-works",
-    doublecounted: true
+    doublecounted: true,
+    module: 'usd-ai'
   },
   {
     id: "310",
