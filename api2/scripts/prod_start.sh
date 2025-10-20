@@ -8,7 +8,7 @@ git pull
 CURRENT_COMMIT_HASH=$(git rev-parse HEAD)
 echo "$CURRENT_COMMIT_HASH" >  $ROOT_DIR/.current_commit_hash
 
-npm run api2-cron-task
+pnpm run api2-cron-task
 
 # start API2 server
 timeout 6m npx pm2 startOrReload api2/ecosystem.config.js
