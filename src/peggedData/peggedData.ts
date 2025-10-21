@@ -786,7 +786,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/algofiorg",
     wiki: "https://wiki.defillama.com/wiki/Algofi",
-
+    module: "stbl",
   },
   {
     id: "39",
@@ -1035,7 +1035,7 @@ export default [
     auditLinks: ["https://www.centre.io/usdc-transparency"],
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/EUROC",
-
+    module: "eurc",
   },
   {
     id: "51",
@@ -1136,7 +1136,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/AngleProtocol",
     wiki: "https://wiki.defillama.com/wiki/AGEUR",
-
+    module: "eura",
   },
   {
     id: "56",
@@ -1386,7 +1386,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/beanstalkfarms",
     wiki: "https://wiki.defillama.com/wiki/Beanstalk",
-
+    module: "bean2",
   },
   {
     id: "68",
@@ -2284,7 +2284,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: null,
-
+    module: "eusd",
   },
   {
     id: "110",
@@ -2366,7 +2366,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Shade_Protocol",
     wiki: null,
-
+    module: "silk",
   },
   {
     id: "114",
@@ -2537,7 +2537,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PSY_stablecoin",
     wiki: null,
-
+    module: "psy",
   },
   {
     id: "122",
@@ -2577,7 +2577,7 @@ export default [
     auditLinks: ["https://docs.preon.finance/information/security"],
     twitter: "https://twitter.com/PreonFinance",
     wiki: "https://docs.preon.finance/",
-
+    module: "star",
   },
   {
     id: "124",
@@ -2598,7 +2598,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
-
+    module: "peg-eusd",
   },
   {
     id: "125",
@@ -2619,7 +2619,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
-
+    module: "eusdv2",
   },
   {
     id: "126",
@@ -2682,7 +2682,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Nexus_ZDex",
     wiki: "https://docs.zdex.tech/",
-
+    module: "nexus",
   },
   {
     id: "129",
@@ -2766,7 +2766,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/MountainUSDM",
     wiki: "https://docs.mountainprotocol.com/reference/usdm-token",
-
+    module: "usdm",
   },
   {
     id: "133",
@@ -2787,7 +2787,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Num_Finance",
     wiki: "https://num.finance/transparency",
-
+    module: "nars",
   },
   {
     id: "134",
@@ -2976,7 +2976,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/HydtProtocol",
     wiki: "https://hydtprotocol.com/#faqs",
-
+    module: "hydt",
   },
   {
     id: "143",
@@ -2997,7 +2997,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/usdv_money",
     wiki: "https://docs.usdv.money/docs/what-is-usdv/faq",
-
+    module: "usdv",
   },
   {
     id: "144",
@@ -3040,7 +3040,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PayTrie",
     wiki: "https://faq.paytrie.com/help/what-is-the-cadc-address",
-
+    module: "cadc",
   },
   {
     id: "146",
@@ -3167,7 +3167,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Goal3_xyz",
     wiki: "https://docs.goal3.xyz/sportsbook/technical-overview/usdzkusd",
-
+    module: "zkusd",
   },
   {
     id: "152",
@@ -3329,7 +3329,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/rifonchain",
     wiki: null,
-
+    module: "usd-rif",
   },
   {
     id: "160",
@@ -3410,6 +3410,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PrismaFi",
     wiki: null,
+    module: "prismalrt-ultra",
 
   },
   {
@@ -3431,6 +3432,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/pagolinea",
     wiki: null,
+    module: "pago-linea-usdcb",
 
   },
   {
@@ -3491,7 +3493,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
-
+    module: "feth",
   },
   {
     id: "168",
@@ -3503,9 +3505,8 @@ export default [
       "fxUSD is unlike anything else in DeFi. It is the first truly decentralized stablecoin with the scalability to compete toe-to-toe with centralized offerings. Its combination of strong peg, built in yield and zero slippage swapping makes it extremely user friendly, while the ingenious economic design grows the available liquidity automatically as a byproduct of providing serious value to constituent LSDs.",
     mintRedeemDescription:
       "Users are able to mint and redeem with USDC,USDT,SETH and more",
-    onCoinGecko: "false",
-    gecko_id: null,
-    module: "f-x-protocol-usd",
+    onCoinGecko: "true",
+    gecko_id: "f-x-protocol-usd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3513,6 +3514,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
+    module: "fxusd",
 
   },
   {
@@ -3534,7 +3536,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/goku_stable",
     wiki: null,
-
+    module: "gai-stablecoin",
   },
   {
     id: "170",
@@ -3621,7 +3623,7 @@ export default [
     auditLinks: [],
     twitter: "https://twitter.com/BlackRock",
     wiki: null,
-
+    module: "blackrock-usd",
   },
   {
     id: "174",
@@ -3763,7 +3765,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/breadchain_",
     wiki: null,
-
+    module: "bread",
   },
   {
     id: "181",
@@ -3785,7 +3787,7 @@ export default [
       "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
-
+    module: "zun-usd",
   },
   {
     id: "182",
@@ -3807,6 +3809,7 @@ export default [
       "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+    module: "zun-eth",
 
   },
   {
@@ -3973,6 +3976,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/rgUSD_Bull",
     wiki: "https://app.reserve.org/ethereum/token/0x78da5799cf427fee11e9996982f4150ece7a99a7/overview",
+    module: "revenue-generating-usd",
 
   },
   {
@@ -3993,6 +3997,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/bitsmiley_labs",
     wiki: "https://github.com/bitSmiley-protocol/whitepaper/blob/main/BitSmiley_White_Paper.pdf",
+    module: "bitsmiley-bitusd",
 
   },
   {
@@ -4589,7 +4594,7 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/avalonfinance_",
     wiki: "https://docs.avalonfinance.xyz/cedefi-cdp-usda",
-
+    module: "avalon-usda",
   },
   {
     id: "221",
@@ -4745,7 +4750,7 @@ export default [
     description:
       `$USDQ is a decentralized, algorithmic stablecoin that is soft-pegged to the U.S. dollar`,
     mintRedeemDescription: "To mint $USDQ, users deposit an eligible collateral asset into their Trove on the Quill platform. Based on the value of the collateral and the protocol's collateralization requirements, users can mint $USDQ up to a certain limit",
-    onCoinGecko: "false",
+    onCoinGecko: "true",
     gecko_id: "quill-usdq",
     cmcId: null,
     pegType: "peggedUSD",
@@ -4754,7 +4759,7 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/QuillFi",
     wiki: "https://docs.quill.finance/faq/usdusdq",
-
+    module: "quill-usd",
   },
   {
     id: "229",
