@@ -18,8 +18,8 @@ importers:
         specifier: ^7.13.0
         version: 7.27.1(@babel/core@7.28.4)
       '@defillama/sdk':
-        specifier: ^5.0.44
-        version: 5.0.175(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+        specifier: ^5.0.177
+        version: 5.0.177(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       '@project-serum/anchor':
         specifier: ^0.26.0
         version: 0.26.0(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)
@@ -903,8 +903,8 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@defillama/sdk@5.0.175':
-    resolution: {integrity: sha512-o6ZiDxEi7ev9C74c8FgSPqc1f+EGi/H+HMz5FJRlTCAeBOiLkMo6N9NfY6Xwhs+nrBqN7PyFR8hXD3tgXQprTQ==}
+  '@defillama/sdk@5.0.177':
+    resolution: {integrity: sha512-H2TdjkO11ofgFq16ioYNgfh+tXMcMHW4fGPGaKlCZp0O4Q8ci09M+0OaajdyyTWY146GnD5ioor7WE9bxou8gw==}
 
   '@effect/platform-node-shared@0.15.5':
     resolution: {integrity: sha512-PXFdIHMNzv19+aaKBo99KVsqJ65il8j7ejze/srkzOkNu4WK/GGpQuYF32NZLirFgXJe/4aYMRgwD+uJ4mCyuw==}
@@ -1724,6 +1724,9 @@ packages:
 
   '@types/node@22.18.11':
     resolution: {integrity: sha512-Gd33J2XIrXurb+eT2ktze3rJAfAp9ZNjlBdh4SVgyrKEOADwCbdUDaK7QgJno8Ue4kcajscsKqu6n8OBG3hhCQ==}
+
+  '@types/node@22.18.12':
+    resolution: {integrity: sha512-BICHQ67iqxQGFSzfCFTT7MRQ5XcBjG5aeKh5Ok38UBbPe5fxTyE+aHFxwVrGyr8GNlqFMLKD1D3P2K/1ks8tog==}
 
   '@types/node@22.7.5':
     resolution: {integrity: sha512-jML7s2NAzMWc//QSJ1a3prpk78cOPchGvXJsC3C6R6PSMoooztvRVQEz89gmBTBY1SPMaqo5teB4uNHPdetShQ==}
@@ -7761,7 +7764,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@defillama/sdk@5.0.175(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
+  '@defillama/sdk@5.0.177(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
     dependencies:
       '@aws-sdk/client-s3': 3.913.0
       '@elastic/elasticsearch': 8.19.1
@@ -9137,6 +9140,10 @@ snapshots:
   '@types/node@12.20.55': {}
 
   '@types/node@22.18.11':
+    dependencies:
+      undici-types: 6.21.0
+
+  '@types/node@22.18.12':
     dependencies:
       undici-types: 6.21.0
 
@@ -12329,7 +12336,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.18.11
+      '@types/node': 22.18.12
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
