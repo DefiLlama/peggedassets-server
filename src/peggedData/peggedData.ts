@@ -6325,7 +6325,7 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/ColtProtocol",
     wiki: "https://coltstable.notion.site/Colt-Stable-Documentation-257c9bce381680ca9f5edcfb47779710",
-
+    module: "saga-dollar",
     doublecounted: true
   },
   {
