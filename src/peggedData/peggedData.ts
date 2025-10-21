@@ -6442,6 +6442,26 @@ export default [
   twitter: "https://x.com/joinpalmfi",
   wiki: null,
   module: "palm-usd",
-
 },
+{
+    id: "315",
+    name: "USD₮0", // name is normalized to get icon in frontend
+    address: "rsk:0x779ded0c9e1022225f8e0630b35a9b54be713736",
+    symbol: "USD₮0",
+    url: "https://usdt0.to/",
+    description:
+      "Launched in 2025, USDT0 unifies USDT liquidity across blockchains using LayerZero’s OFT standard, removing wrapped tokens and fragmented bridges for a seamless, capital-efficient cross-chain stablecoin.",
+    mintRedeemDescription:
+      "USDT0 tokens can be redeemed by unlocking the corresponding USDT on Ethereum. This ensures a consistent and secure relationship between the locked and minted assets.",
+    onCoinGecko: "true",
+    gecko_id: "usdt0", // required: is used as coin's unique id throughout peggedassets-server
+    cmcId: "3594",
+    pegType: "peggedUSD", // must match balance key returned by adapter
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.usdt0.to/technical-documentation/security"],
+    twitter: "https://x.com/usdt0_to",
+    wiki: "https://docs.usdt0.to/",
+    module: "usdt0-rootstock",
+  },
 ] as PeggedAsset[];
