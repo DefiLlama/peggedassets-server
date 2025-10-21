@@ -6306,7 +6306,7 @@ export default [
     ],
     twitter: null,
     wiki: "https://www.sgforge.com/product/coinvertible/",
-
+    module: "societe-generale-forge-usdcv"
   },
   {
     id: "308",
