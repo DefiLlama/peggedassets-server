@@ -6042,6 +6042,7 @@ export default [
     auditLinks: "https://docs.autonomint.com/autonomint",
     twitter: "https://x.com/autonomint",
     wiki: "https://docs.autonomint.com/autonomint",
+    module: "autonomint-usda+",
 
   },
   {
@@ -6330,7 +6331,7 @@ export default [
     url: "https://usd.ai/",
     description: "USD.AI is a synthetic dollar protocol with USDai, a redeemable stablecoin, and sUSDai, a yield-bearing version backed by infrastructure loans and reserve assets",
     mintRedeemDescription: "Users mint USDai by depositing USDC into USD.AI and can redeem it 1:1, while sUSDai converts USDai into a yield-bearing token redeemable after a notice period",
-    onCoinGecko: "false",
+    onCoinGecko: "true",
     gecko_id: "usdai",
     cmcId: null,
     pegType: "peggedUSD",
@@ -6340,7 +6341,7 @@ export default [
     twitter: "https://x.com/USDai_Official",
     wiki: "https://docs.usd.ai/how-usd.ai-works",
     doublecounted: true,
-
+    module: 'usd-ai'
   },
   {
     id: "310",
@@ -6378,6 +6379,7 @@ export default [
     auditLinks: ["https://public.inshallah.fi/iAUSD-audit-v1.pdf"],
     twitter: "https://x.com/inshAllahfi",
     wiki: "https://inshallah.gitbook.io/inshallah/iausd-stablecoin/what-is-iausd",
+    module: "iAUSD",
 
   },
   {
@@ -6434,6 +6436,7 @@ export default [
   auditLinks: [],
   twitter: "https://x.com/joinpalmfi",
   wiki: null,
+  module: "palm-usd",
 
 },
 ] as PeggedAsset[];
