@@ -53,7 +53,7 @@ export const chainContracts: ChainContracts = {
       "FwEHs3kJEdMa2qZHv7SgzCiFXUQPEycEXksfBkwmS8gj", // allbridge
       "B2wfeYz5VtBnQVrX4M8F6FeDrprVrzKPws5qg1in8bzR", // wormhole
     ],
-    unreleased: ["Q6XprfkF8RQQKoQVG33xT88H7wi8Uk1B1CC7YAs69Gi","A3znyaRYUvi7GbQv1pp9CqqiVo7anddU9rPKFH55V28R"],
+    unreleased: ["Q6XprfkF8RQQKoQVG33xT88H7wi8Uk1B1CC7YAs69Gi", "A3znyaRYUvi7GbQv1pp9CqqiVo7anddU9rPKFH55V28R"],
   },
   tron: {
     issued: ["TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"],
@@ -66,7 +66,7 @@ export const chainContracts: ChainContracts = {
   plasma: {
     bridgedFromETH: [
       "0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb", // USDT0
-    ], 
+    ],
   },
   optimism: {
     bridgeOnETH: ["0x99c9fc46f92e8a1c0dec1b1747d010903e884be1"],
@@ -389,9 +389,9 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x447721a30109c662dde9c73a0c2c9c9c459fb5e5a9c92f03c50fa69737f5d08d"], // OFT native bridge
   },
   hemi: {
-    bridgedFromETH: ["0xbB0D083fb1be0A9f6157ec484b6C79E0A4e31C2e"], 
+    bridgedFromETH: ["0xbB0D083fb1be0A9f6157ec484b6C79E0A4e31C2e"],
   },
-  flare: { 
+  flare: {
     bridgedFromETH: ["0xe7cd86e13AC4309349F30B3435a9d337750fC82D"], // USDT0
   },
   plume_mainnet: {
@@ -407,15 +407,19 @@ export const chainContracts: ChainContracts = {
     bridgeOnETH: ["0xBa5E35E26Ae59c7aea6F029B68c6460De2d13eB6"],
     bridgedFromETH: [
       "0x68bcc7F1190AF20e7b572BCfb431c3Ac10A936Ab", // native bridge
-      ],
+    ],
   },
   core: {
-    bridgedFromETH: ["0x900101d06a7426441ae63e9ab3b9b0f63be145f1"], 
+    bridgedFromETH: ["0x900101d06a7426441ae63e9ab3b9b0f63be145f1"],
   },
   soneium: {
-    bridgedFromETH: ["0x102d758f688a4C1C5a80b116bD945d4455460282"], 
+    bridgedFromETH: ["0x102d758f688a4C1C5a80b116bD945d4455460282"],
   },
   cardano: {
     bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534454"],
+  },
+  katana: {
+    bridgeOnETH: ["0x6d4f9f9f8f0155509ecd6Ac6c544fF27999845CC"], // vb usdt (origin) on ethmainnet
+    bridgedFromETH: ["0x2DCa96907fde857dd3D816880A0df407eeB2D2F2"], // vb usdt on katana
   },
 };

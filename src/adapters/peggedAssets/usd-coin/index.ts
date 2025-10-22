@@ -3,35 +3,35 @@ import { lookupAccountByID } from "../helper/algorand";
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
 import { getTotalSupply } from "../helper/cardano";
 import {
-    sumMultipleBalanceFunctions,
-    sumSingleBalance,
+  sumMultipleBalanceFunctions,
+  sumSingleBalance,
 } from "../helper/generalUtil";
 import {
-    bridgedSupply,
-    cosmosSupply,
-    osmosisSupply,
-    solanaMintedOrBridged,
-    supplyInArbitrumBridge,
-    supplyInEthereumBridge,
-    terraSupply
+  bridgedSupply,
+  cosmosSupply,
+  osmosisSupply,
+  solanaMintedOrBridged,
+  supplyInArbitrumBridge,
+  supplyInEthereumBridge,
+  terraSupply
 } from "../helper/getSupply";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { mixinSupply } from "../helper/mixin";
 import { call as nearCall } from "../helper/near";
 import { call as nibiruCall } from "../helper/nibiru";
 import {
-    getBalance as ontologyGetBalance,
-    getTotalSupply as ontologyGetTotalSupply,
+  getBalance as ontologyGetBalance,
+  getTotalSupply as ontologyGetTotalSupply,
 } from "../helper/ontology";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import * as sui from "../helper/sui";
 import {
-    getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
+  getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
 import {
-    Balances,
-    ChainBlocks,
-    PeggedIssuanceAdapter
+  Balances,
+  ChainBlocks,
+  PeggedIssuanceAdapter
 } from "../peggedAsset.type";
 import { chainContracts } from "./config";
 const axios = require("axios");
@@ -64,7 +64,7 @@ Sifchain: not sure where it's coming from/how to track
 */
 
 async function chainMinted(chain: string, decimals: number) {
-  return async function(_: any, _1: any, chainBlocks: ChainBlocks) {
+  return async function (_: any, _1: any, chainBlocks: ChainBlocks) {
     let balances = {} as Balances;
     for (let issued of chainContracts[chain].issued) {
       const totalSupply = (
@@ -88,7 +88,7 @@ async function chainMinted(chain: string, decimals: number) {
 }
 
 async function chainUnreleased(chain: string, decimals: number, owner: string) {
-  return async function(_: any, _1: any, chainBlocks: ChainBlocks) {
+  return async function (_: any, _1: any, chainBlocks: ChainBlocks) {
     let balances = {} as Balances;
     for (let issued of chainContracts[chain].issued) {
       const reserve = (
@@ -106,7 +106,7 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
 }
 
 async function solanaUnreleased() {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     for (let unreleasedAddress of chainContracts["solana"].unreleased) {
       sumSingleBalance(balances, "peggedUSD", await solanaGetTokenBalance(
@@ -121,7 +121,7 @@ async function solanaUnreleased() {
 const getBal = (address: string) => lookupAccountByID(address).then(r => r.account.assets.find((t: any) => t["asset-id"] == 31566704).amount / 10 ** 6)
 async function algorandMinted() {
   // I gave up on trying to use the SDK for this
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const supplyRes = await retry(
       async (_bail: any) =>
@@ -135,7 +135,7 @@ async function algorandMinted() {
 }
 
 async function algorandUnreleased() {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
 
     sumSingleBalance(balances, "peggedUSD",
@@ -146,7 +146,7 @@ async function algorandUnreleased() {
 }
 
 async function tronMinted() {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const totalSupply = await tronGetTotalSupply(
       chainContracts["tron"].issued[0]
@@ -157,7 +157,7 @@ async function tronMinted() {
 }
 
 async function hederaMinted() {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const issuance = await retry(
       async (_bail: any) =>
@@ -173,7 +173,7 @@ async function hederaMinted() {
 }
 
 async function circleAPIChainMinted(chain: string) {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const issuance = await retry(
       async (_bail: any) =>
@@ -201,7 +201,7 @@ async function suiMinted(): Promise<Balances> {
 }
 
 async function suiBridged(chain: string) {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const res = await axios.get(
       `https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdc`
@@ -221,7 +221,7 @@ async function suiBridged(chain: string) {
 }
 
 async function reinetworkBridged(address: string, decimals: number) {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
@@ -237,7 +237,7 @@ async function reinetworkBridged(address: string, decimals: number) {
 }
 
 async function karuraMinted(address: string, decimals: number) {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
@@ -259,7 +259,7 @@ async function karuraMinted(address: string, decimals: number) {
 }
 
 async function ontologyBridged() {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const polyUSDCAddress = chainContracts.ontology.bridgedFromETH[0];
     const polyUSDCReserveAddress = chainContracts.ontology.unreleased[0];
@@ -294,7 +294,7 @@ async function ontologyBridged() {
 }
 
 async function nearBridged(address: string, decimals: number) {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const supply = await nearCall(address, "ft_total_supply");
     sumSingleBalance(
@@ -309,7 +309,7 @@ async function nearBridged(address: string, decimals: number) {
 }
 
 async function nearMint(address: string, decimals: number) {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const mintedAmount = await nearCall(address, "ft_total_supply");
     sumSingleBalance(
@@ -324,7 +324,7 @@ async function nearMint(address: string, decimals: number) {
 }
 
 async function elrondBridged(tokenID: string, decimals: number) {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
@@ -345,7 +345,7 @@ async function elrondBridged(tokenID: string, decimals: number) {
 }
 
 async function kavaBridged() {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     for (const contract of chainContracts.kava.bridgedFromETH) {
       const totalSupply = await kavaGetTotalSupply(contract);
@@ -356,7 +356,7 @@ async function kavaBridged() {
 }
 
 async function aptosBridged() {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const contractStargate =
       "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa";
@@ -393,7 +393,7 @@ async function aptosBridged() {
 }
 
 async function injectiveBridged() {
-  return async function() {
+  return async function () {
     const issuance = await retry(async (_bail: any) =>
       axios.get("https://injective-nuxt-api.vercel.app/api/tokens")
     );
@@ -412,7 +412,7 @@ async function injectiveBridged() {
 }
 
 async function flowBridged(address: string, decimals: number) {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
@@ -441,7 +441,7 @@ async function moveSupply(): Promise<Balances> {
 }
 
 async function getCardanoSupply() {
-  return async function() {
+  return async function () {
     let balances = {} as Balances;
     const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
     sumSingleBalance(balances, "peggedUSD", supply, "wan", true);
@@ -450,7 +450,7 @@ async function getCardanoSupply() {
 }
 
 async function rippleMinted() {
-  return async function() {
+  return async function () {
     const balances = {} as Balances;
 
     const NODE_URL = "https://xrplcluster.com";
@@ -483,20 +483,20 @@ async function rippleMinted() {
 }
 
 async function nibiruBridged() {
-  return async function() {
+  return async function () {
     const balances = {} as Balances;
-    
+
     for (const contract of chainContracts.nibiru.bridgedFromETH) {
       const totalSupply = await nibiruCall({
         target: contract,
         abi: { name: 'totalSupply' }
       });
-      
+
       // Convert from hex to number and divide by 1e6 (USDC has 6 decimals)
       const supply = parseInt(totalSupply, 16) / 1e6;
       sumSingleBalance(balances, "peggedUSD", supply, contract, true);
     }
-    
+
     return balances;
   };
 }
@@ -1080,6 +1080,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   cardano: {
     ethereum: getCardanoSupply(),
+  },
+  katana: {
+    ethereum: bridgedSupply("katana", 6, chainContracts.katana.bridgedFromETH),
   },
 };
 
