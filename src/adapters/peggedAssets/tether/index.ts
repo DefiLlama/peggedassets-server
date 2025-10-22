@@ -899,7 +899,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("theta", 6, chainContracts.theta.bridgedFromETH),
   },
   rsk: {
-    ethereum: bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromETH),
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("rsk", 6, chainContracts.rsk.bridgedFromETH6Decimals),
+        bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromETH18Decimals),
+      ],
+      "peggedUSD"
+    ),
   },
   reinetwork: {
     ethereum: reinetworkBridged(chainContracts.reinetwork.bridgedFromETH[0], 6),

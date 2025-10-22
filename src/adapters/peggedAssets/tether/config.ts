@@ -202,7 +202,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x3c751Feb00364CA9e2d0105c40F0b423abf1DEE3"], // multichain
   },
   rsk: {
-    bridgedFromETH: ["0xef213441a85df4d7acbdae0cf78004e1e486bb96"],
+    bridgedFromETH6Decimals: ["0x779ded0c9e1022225f8e0630b35a9b54be713736"], // usdt0
+    bridgedFromETH18Decimals: ["0xef213441a85df4d7acbdae0cf78004e1e486bb96"], // usdt
   },
   reinetwork: {
     bridgedFromETH: ["0x988a631Caf24E14Bb77EE0f5cA881e8B5dcfceC7"], // celer
