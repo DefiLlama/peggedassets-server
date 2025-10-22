@@ -17,9 +17,9 @@ import { Balances } from "../peggedAsset.type";
  }
 
 const chainContracts = {
-  ethereum: {
-    issued: ["0xcacd6fd266af91b8aed52accc382b4e165586e29"],
-  },
+  // ethereum: {
+  //   issued: ["0xcacd6fd266af91b8aed52accc382b4e165586e29"],
+  // },
   fraxtal: {
     issued: ["0xfc00000000000000000000000000000000000001"],
   },
@@ -62,6 +62,24 @@ const chainContracts = {
   polygon_zkevm: {
     issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
+  base: {
+    issued: "0xe5020A6d073a794B6E7f05678707dE47986Fb0b6",
+  },
+  katana: {
+    issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
+  },
+  solana: {
+    issued: "GzX1ireZDU865FiMaKrdVB1H6AE8LAqWYCg6chrMrfBw",
+  },
+  linea: {
+    issued: "0xC7346783f5e645aa998B106Ef9E7f499528673D8",
+  },
+  unichain: {
+    issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
+  },
+  plume_mainnet: {
+    issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
+  },
 };
 
 const adapter: PeggedIssuanceAdapter = {
@@ -69,7 +87,10 @@ const adapter: PeggedIssuanceAdapter = {
 
   move: {
     minted: moveSupply,
-  }
+  },
+  solana: {
+    minted: solanaMintedOrBridged([chainContracts.solana.issued], "peggedUSD"),
+  },
 };
 
 export default adapter; 
