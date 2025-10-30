@@ -3293,7 +3293,7 @@ export default [
   {
     id: "158",
     name: "VNX EURO",
-    address: null,// needs to stay null to track price, until it has an evm address on coingecko that isn't gecko terminal priced
+    address: "stellar:GDXLSLCOPPHTWOQXLLKSVN4VN3G67WD2ENU7UMVAROEYVJLSPSEWXIZN",
     symbol: "VEUR",
     url: "https://vnx.li/",
     description:
