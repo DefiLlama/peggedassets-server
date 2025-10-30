@@ -6,6 +6,9 @@ const PRICES_API = "https://coins.llama.fi/prices";
 export async function getPrices(assets: any[]) {
   const mapping = {} as any;
   function getTokenAddress(token: any) {
+    if (token.priceSource === "coingecko") {
+      return 'coingecko:' + token.gecko_id;
+    }
     let id = token.address
     if (id)
       return id.startsWith("0x") ? 'ethereum:' + id : id;
