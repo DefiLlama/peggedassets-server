@@ -6519,4 +6519,23 @@ export default [
   module: "lit-usd",
   doublecounted: true
 },
+{
+  id: "319",
+  name: "AllUnity EUR",
+  address: "0x4933a85b5b5466fbaf179f72d3de273c287ec2c2",
+  symbol: "EURAU",
+  url: "https://allunity.com/",
+  description: "EURAU is a MiCAR-compliant, fully backed euro stablecoin that delivers speed, stability, and security in one.",
+  mintRedeemDescription: "EURAU Euro stablecoin can be seamlessly minted and redeemed by Verified Institutions - fully reserved, built for regulatory compliance, speed, and stability. Always redeemable at par value.",
+  onCoinGecko: "true",
+  gecko_id: "allunity-eur",
+  cmcId: null,
+  pegType: "peggedEUR",
+  pegMechanism: "fiat-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/AllUnityStable",
+  wiki: "https://allunity.com/eurau/",
+  doublecounted: true
+},
 ] as PeggedAsset[];
