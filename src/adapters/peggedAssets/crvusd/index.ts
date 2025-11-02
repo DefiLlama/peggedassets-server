@@ -13,6 +13,10 @@ const pegkeepers = [
   "0x338cb2d827112d989a861cde87cd9ffd913a1f9d"  //crvUSD/frxUSD
 ]
 
+const curve_lend_operators = [
+  "0x6119e210e00d4be2df1b240d82b1c3decedbbbf0", //lend operator for sreUSD llamalend market
+]
+
 const yb_amms = [
   "0xB42e34Bf1f8627189e099ABDB069B9D73B521E4F", //cbBTC YB AMM
   "0xb0faaBE84076c6330A9642a6400e87CE4cAec9d4", //tBTC YB AMM
@@ -24,9 +28,9 @@ async function minted(api: ChainApi) {
   const totalDebt = await api.call({ abi: "uint256:total_debt", target: "0xC9332fdCB1C491Dcc683bAe86Fe3cb70360738BC", })
   const pegkeeperDebts = await api.multiCall({ abi: "uint256:debt", calls: pegkeepers, })
   const ybAmmDebts = await api.multiCall({ abi: "uint256:get_debt", calls: yb_amms, })
+  const curveLendOperatorsDebts = await api.multiCall({ abi: "uint256:mintedAmount", calls: curve_lend_operators, })  
 
-  // Add total_debt + pegkeeper debt + YB AMM debt
-  const totalSupply = pegkeeperDebts.concat([totalDebt], ybAmmDebts).reduce((a, b) => a + Number(b), 0) / 1e18
+  const totalSupply = pegkeeperDebts.concat([totalDebt], ybAmmDebts, curveLendOperatorsDebts).reduce((a, b) => a + Number(b), 0) / 1e18
 
   sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
   return balances;
