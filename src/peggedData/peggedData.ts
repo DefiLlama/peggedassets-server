@@ -4476,7 +4476,7 @@ export default [
     name: "Moneta",
     address: "cardano:c48cbb3d5e57ed56e276bc45f99ab39abe94e6cd7ac39fb402da47ad0014df105553444d",
     symbol: "USDM",
-    url: "https://usdx.money/",
+    url: "https://moneta.global/",
     description:
       `Fiat backed stablecoin native to the Cardano blockchain`,
     mintRedeemDescription:
