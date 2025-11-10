@@ -16,6 +16,7 @@
     "test:watch": "jest --watch",
     "build": "sls package",
     "store-all": "set AWS_REGION='eu-central-1' && set tableName='prod-stablecoins-table' && npx ts-node --transpile-only src/cli/storeAllPeggedAssets.ts",
+    "force-update": "set AWS_REGION='eu-central-1' && set tableName='prod-stablecoins-table' && npx ts-node --transpile-only src/cli/forceUpdateAsset.ts",
     "fillOld": "set AWS_REGION='eu-central-1' && set tableName='prod-stablecoins-table' && npx ts-node src/cli/fillOld.ts",
     "fillLast": "export AWS_REGION='eu-central-1' && export tableName='prod-stablecoins-table' && npx ts-node src/cli/fillLast.ts"
   },

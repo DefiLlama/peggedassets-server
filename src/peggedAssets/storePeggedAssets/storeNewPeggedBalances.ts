@@ -13,6 +13,12 @@ import { sendMessage } from "../../utils/discord";
 import dynamodb from "../../utils/shared/dynamodb";
 import getTVLOfRecordClosestToTimestamp from "../../utils/shared/getRecordClosestToTimestamp";
 import { getLastRecord } from "../utils/getLastRecord";
+import {
+  canUpdateAsset,
+  createBlock,
+  getActiveBlock,
+  getRemainingBlockTime,
+} from "./assetBlocking";
 import { reconcileDailyFromHourly } from "./reconcileDailyFromHourly";
 
 type PKconverted = (id: string) => string;
@@ -90,6 +96,39 @@ export default async (
   let lastHourlyCirculating = 0;
   const currentCirculating = peggedBalances.totalCirculating.circulating[pegType] ?? 0;
 
+  const canUpdate = await canUpdateAsset(peggedAsset.id);
+  if (!canUpdate) {
+    const activeBlock = await getActiveBlock(peggedAsset.id);
+    if (activeBlock) {
+      const blockExpiresAt = new Date(activeBlock.expiresAt * 1000).toISOString();
+      const remainingTime = getRemainingBlockTime(activeBlock);
+      const warningMessage = `⚠️ [${peggedAsset.name}|id=${peggedAsset.id}] Update blocked until ${blockExpiresAt}. Reason: ${activeBlock.reason}`;
+      console.warn(warningMessage);
+      
+      if (isDryRun) {
+        console.log(`📢 [DRY RUN] Would send Discord notification:`);
+        const blockNotification = `🚫 **Asset Blocked**\n` +
+          `**Asset:** ${peggedAsset.name} (${peggedAsset.id})\n` +
+          `**Reason:** ${activeBlock.reason}\n` +
+          `**Time Remaining:** ${remainingTime}\n` +
+          `**Expires At:** ${blockExpiresAt}`;
+        console.log(blockNotification);
+      } else if (process.env.OUTDATED_WEBHOOK) {
+        const blockNotification = `🚫 **Asset Blocked**\n` +
+          `**Asset:** ${peggedAsset.name} (${peggedAsset.id})\n` +
+          `**Reason:** ${activeBlock.reason}\n` +
+          `**Time Remaining:** ${remainingTime}\n` +
+          `**Expires At:** ${blockExpiresAt}`;
+        
+        sendMessage(blockNotification, process.env.OUTDATED_WEBHOOK!).catch(error => {
+          console.error('Error sending block notification:', error);
+        });
+      }
+      
+      return;
+    }
+  }
+
   if (!isDryRun) {
     const lastHourlyPeggedRecord = getLastRecord(hourlyPK).then(
       (result) =>
@@ -112,29 +151,35 @@ export default async (
       const change = `${humanizeNumber(
         lastHourlyCirculating
       )} to ${humanizeNumber(currentCirculating)}`;
+      
       if (
         Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR &&
         lastHourlyCirculating * 5 < currentCirculating &&
         lastHourlyCirculating > 1000000
       ) {
-        const errorMessage = `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour, disabling it`;
+        const errorMessage = `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour`;
         await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK!);
-        throw new Error(errorMessage);
+        
+        const block = await createBlock(peggedAsset.id, `5x spike detected: ${change}`, "spike");
+        console.warn(`🚫 Blocked ${peggedAsset.name} until ${new Date(block.expiresAt * 1000).toISOString()}`);
+        return;
       } else {
-        console.error(
-          `Circulating for ${peggedAsset.name} has >2x (${change}) within one hour`,
-          peggedAsset.name
-        );
+        console.error(`Circulating for ${peggedAsset.name} has >2x (${change}) within one hour`, peggedAsset.name);
       }
     }
+    
     if (
       lastHourlyCirculating / 2 > currentCirculating &&
       currentCirculating !== 0 &&
       Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR
     ) {
-      const errorMessage = `Circulating for ${peggedAsset.name} has dropped >50% within one hour, disabling it`;
+      const change = `${humanizeNumber(lastHourlyCirculating)} to ${humanizeNumber(currentCirculating)}`;
+      const errorMessage = `Circulating for ${peggedAsset.name} has dropped >50% within one hour (${change})`;
       await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK!);
-      throw new Error(errorMessage);
+      
+      const block = await createBlock(peggedAsset.id, `>50% drop detected: ${change}`, "drop");
+      console.warn(`🚫 Blocked ${peggedAsset.name} until ${new Date(block.expiresAt * 1000).toISOString()}`);
+      return;
     }
     await Promise.all(
       Object.entries(peggedBalances).map(async ([chain, issuance]) => {
