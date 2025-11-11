@@ -6538,4 +6538,23 @@ export default [
   wiki: "https://allunity.com/eurau/",
   doublecounted: true
 },
+{
+  id: "320",
+  name: "Rocky USDr",
+  address: "sei:0x53fdd705873d8259d6d179901fc3fdcb5339f921",
+  symbol: "USDR",
+  url: "https://rocky.cash/",
+  description: "USDr is the USD stablecoin of Rocky. It is a decentralized, overcollateralized asset backed by a basket of cryptocurrencies and stablecoins, including yield-bearing versions such as Morpho vaults.",
+  mintRedeemDescription: "The Rocketizer Module, which is going to serve as the main minting module, is deployed on Sei. Tokens allowed in the backing of USDr have been carefully reviewed for their stability, robustness, sustainable yield generation and business development potential. Allowed assets and their parameters can be updated at any time by contributors.",
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/rockydotcash",
+  wiki: "https://docs.rocky.cash/products/stablecoins-and-savings/usdr-and-susdr",
+  module: "rocky-usdr",
+},
 ] as PeggedAsset[];
