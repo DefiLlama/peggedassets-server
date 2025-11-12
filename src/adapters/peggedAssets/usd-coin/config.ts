@@ -528,4 +528,8 @@ export const chainContracts: ChainContracts = {
   cardano: {
     bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534443"],
   },
+  katana: {
+    bridgeOnETH: ["0x53E82ABbb12638F09d9e624578ccB666217a765e"], // vb usdc (origin) on ethmainnet
+    bridgedFromETH: ["0x203A662b0BD271A6ed5a60EdFbd04bFce608FD36"], // vb usdc on katana
+  },
 };

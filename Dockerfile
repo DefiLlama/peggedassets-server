@@ -13,7 +13,8 @@ WORKDIR /app/repo
 # RUN git checkout api2
 
 # Install any needed packages specified in package.json
-RUN npm install
+RUN npm i -g pnpm
+RUN pnpm install
 
 # Make port 5001 available to the world outside this container
 EXPOSE 5001

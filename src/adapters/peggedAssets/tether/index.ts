@@ -138,7 +138,7 @@ async function solanaUnreleased() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    
+
     // Check all unreleased accounts and sum their balances
     let totalUnreleased = 0;
     for (const unreleasedAccount of chainContracts["solana"].unreleased) {
@@ -148,7 +148,7 @@ async function solanaUnreleased() {
       );
       totalUnreleased += unreleased;
     }
-    
+
     sumSingleBalance(balances, "peggedUSD", totalUnreleased);
     return balances;
   };
@@ -458,7 +458,7 @@ async function suiWormholeBridged() {
   ) {
     let balances = {} as Balances;
     const res = await axios.get(`https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdt`)
-    const totalSupply = parseInt(res.data.find((t:any)=>t.coin==="USDT_ETH").cumulative_balance);
+    const totalSupply = parseInt(res.data.find((t: any) => t.coin === "USDT_ETH").cumulative_balance);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c", true);
     return balances;
   };
@@ -470,12 +470,12 @@ async function suiBridged(): Promise<Balances> {
     "0x375f70cf2ae4c00bf37117d0c85a2c71545e6ee05c4a5c7d282cd66a4504b068::usdt::USDT",
   );
   sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
-        return balances;
+  return balances;
 }
 
 async function moveSupply(): Promise<Balances> {
   const balances = {} as Balances;
-  
+
   const resp = await function_view({
     functionStr: '0x1::fungible_asset::supply',
     type_arguments: ['0x1::object::ObjectCore'],
@@ -587,8 +587,8 @@ async function injectiveETHBridged(_api: ChainApi) {
   const bscApi = await getApi('ethereum', _api)
   let balances = {} as Balances;
   let assetPegType = "peggedUSD" as PeggedAssetType
-  const bscBal = await bscApi.call({  abi: 'erc20:balanceOf', target: '0xdAC17F958D2ee523a2206206994597C13D831ec7', params: '0xF955C57f9EA9Dc8781965FEaE0b6A2acE2BAD6f3'})
-  sumSingleBalance(balances, assetPegType, bscBal/ 1e6, bridgeName, false, 'ethereum')
+  const bscBal = await bscApi.call({ abi: 'erc20:balanceOf', target: '0xdAC17F958D2ee523a2206206994597C13D831ec7', params: '0xF955C57f9EA9Dc8781965FEaE0b6A2acE2BAD6f3' })
+  sumSingleBalance(balances, assetPegType, bscBal / 1e6, bridgeName, false, 'ethereum')
   return balances;
 }
 
@@ -597,8 +597,8 @@ async function stacksBSCBridged(_api: ChainApi) {
   const bscApi = await getApi('bsc', _api)
   let balances = {} as Balances;
   let assetPegType = "peggedUSD" as PeggedAssetType
-  const bscBal = await bscApi.call({  abi: 'erc20:balanceOf', target: '0x55d398326f99059fF775485246999027B3197955', params: '0x7ceC01355aC0791dE5b887e80fd20e391BCB103a'})
-  sumSingleBalance(balances, assetPegType, bscBal/ 1e18, bridgeName, false, 'bsc')
+  const bscBal = await bscApi.call({ abi: 'erc20:balanceOf', target: '0x55d398326f99059fF775485246999027B3197955', params: '0x7ceC01355aC0791dE5b887e80fd20e391BCB103a' })
+  sumSingleBalance(balances, assetPegType, bscBal / 1e18, bridgeName, false, 'bsc')
   // const ethApi = await getApi('ethereum', _api)
   // const ethBal = await ethApi.call({  abi: 'erc20:balanceOf', target: '0x55d398326f99059fF775485246999027B3197955', params: '0x7ceC01355aC0791dE5b887e80fd20e391BCB103a'})
   // sumSingleBalance(balances, assetPegType, ethBal/ 1e6, bridgeName, false, 'ethereum')
@@ -899,7 +899,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("theta", 6, chainContracts.theta.bridgedFromETH),
   },
   rsk: {
-    ethereum: bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromETH),
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("rsk", 6, chainContracts.rsk.bridgedFromETH6Decimals),
+        bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromETH18Decimals),
+      ],
+      "peggedUSD"
+    ),
   },
   reinetwork: {
     ethereum: reinetworkBridged(chainContracts.reinetwork.bridgedFromETH[0], 6),
@@ -966,7 +972,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   near: {
     minted: nearMint(chainContracts.near.issued[0], 6),
-    unreleased: usdtApiUnreleased("reserve_balance_near"), 
+    unreleased: usdtApiUnreleased("reserve_balance_near"),
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 6),
   },
   wan: {
@@ -1157,7 +1163,9 @@ const adapter: PeggedIssuanceAdapter = {
   cardano: {
     ethereum: getCardanoSupply(),
   },
+  katana: {
+    ethereum: bridgedSupply("katana", 6, chainContracts.katana.bridgedFromETH),
+  },
 };
 
 export default adapter;
-

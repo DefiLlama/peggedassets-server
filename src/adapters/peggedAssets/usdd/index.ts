@@ -24,6 +24,7 @@ const chainContracts: ChainContracts = {
     reserves: ["0x9277a463A508F45115FdEaf22FfeDA1B16352433"],
   },
   bsc: {
+    issued: ["0x45E51bc23D592EB2DBA86da3985299f7895d66Ba"],
     bridgedFromBttc: ["0x392004BEe213F1FF580C867359C246924f21E6Ad"],
     reserves: ["0xCa266910d92a313E5F9eb1AfFC462bcbb7d9c4A9"],
   },

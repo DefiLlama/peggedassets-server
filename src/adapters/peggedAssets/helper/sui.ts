@@ -6,7 +6,7 @@ interface CallOptions {
 }
 
 export const endpoint = (): string => "https://fullnode.mainnet.sui.io/";
-export const graphEndpoint = (): string => "https://sui-mainnet.mystenlabs.com/graphql";
+export const graphEndpoint = (): string => "https://graphql.mainnet.sui.io/graphql";
 
 export async function getObject(objectId: string): Promise<any> {
   return (

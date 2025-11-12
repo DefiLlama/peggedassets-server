@@ -363,7 +363,7 @@ export default [
     mintRedeemDescription:
       "When a stablecoin is bridged between Synapse-enabled chains, the funds are automatically converted to nUSD, and bridged to the destination chain. Once there, this nUSD can be auto-swapped to that chain's native stablecoins using the local nUSD pool.",
     onCoinGecko: false,
-    gecko_id: "nexus-usd",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -371,6 +371,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/SynapseProtocol",
     wiki: "https://wiki.defillama.com/wiki/NUSD",
+    module: "nexus-usd",
   },
   {
     id: "19",
@@ -422,8 +423,8 @@ export default [
       "flexUSD is a multi-yield bearing stablecoin on Ethereum and smartBCH.",
     mintRedeemDescription:
       "Using the CoinFLEX app, users swap USDC to mint flexUSD 1:1. flexUSD can be redeemed for USDC 1:1 at any time.",
-    onCoinGecko: "true",
-    gecko_id: "flex-usd",
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -431,6 +432,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/coinflexdotcom",
     wiki: "https://wiki.defillama.com/wiki/flexUSD",
+    module: "flex-usd",
   },
   {
     id: "22",
@@ -502,8 +504,8 @@ export default [
       "RSV is backed by a basket of on-chain collateral assets, held by the Reserve Vault smart contract. This basket is comprised of equal parts TUSD, PAX, and USDC.",
     mintRedeemDescription:
       "Using the RSV Portal app, equal parts USDC, TUSD, and PAX can be swapped to mint RSV. RSV can be redeemed for its corresponding basket of assets at any time.",
-    onCoinGecko: "true",
-    gecko_id: "reserve",
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: "6727",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -511,6 +513,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/holareserve",
     wiki: "https://wiki.defillama.com/wiki/Reserve_(RSV)",
+    module: "reserve",
   },
   {
     id: "26",
@@ -542,8 +545,8 @@ export default [
       "USDK is a USD-pegged stablecoin, jointly launched by OKLink and Prime Trust, an American Trust company.",
     mintRedeemDescription:
       "OKLink customers who have undergone a verification process can exchange USD for USDK and redeem USDK for USD.",
-    onCoinGecko: "true",
-    gecko_id: "usdk",
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: "4064",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -553,6 +556,7 @@ export default [
     ],
     twitter: "https://twitter.com/OKLink",
     wiki: "https://wiki.defillama.com/wiki/USDK",
+    module: "usdk",
   },
   {
     id: "28",
@@ -605,7 +609,9 @@ export default [
     mintRedeemDescription:
       "Using the Money On Chain app, users mint DoC by depositing rBTC into a vault. When the loan is repaid to retrieve the collateral, the paid back DoC is burned.",
     onCoinGecko: false,
-    gecko_id: "doc",
+    gecko_id: null,
+    module: "doc",
+
     cmcId: "7558",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -624,8 +630,10 @@ export default [
       "Spice USD (Ticker USDS) is a stablecoin soft-pegged to USD in the Spice Protocol on Avalanche.",
     mintRedeemDescription:
       "Using the Spice Trade app, USDS can be minted by locking USDC and burning SPICE in a proportion determined by the protocol's collateral ratio.",
-    onCoinGecko: "true",
-    gecko_id: "spiceusd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "spiceusd",
+
     cmcId: "20306",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -664,8 +672,9 @@ export default [
       "USDP is a decentralized, unbiased, and fully-backed stablecoin whose value is soft-pegged to US Dollar. USDP runs on the Ethereum, BSC, and Fantom networks.",
     mintRedeemDescription:
       "Using the Unit Protocol app, users mint USDP by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back USDP is burned.",
-    onCoinGecko: "true",
-    gecko_id: "usdp",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "usdp",
     cmcId: "8886",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -684,8 +693,9 @@ export default [
       "USDB is an algorithmic stablecoin that powers the FantOHM OHM fork.",
     mintRedeemDescription:
       "Using the USD Balance app, $1 worth of FHM can be burned to mint 1 USDB.",
-    onCoinGecko: "true",
-    gecko_id: "usd-balance",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "usd-balance",
     cmcId: "19224",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -727,6 +737,8 @@ export default [
       "USDr is minted by depositing an accepted collateral asset into Ratio Finance. The collateral is used to generate yield that pays down the USDr debt. Any USDr used to repay the loan to retrieve the collateral is burned.",
     onCoinGecko: "true",
     gecko_id: "ratio-stable-coin",
+    module: "ratio-stable-coin",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -774,7 +786,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/algofiorg",
     wiki: "https://wiki.defillama.com/wiki/Algofi",
-    module: 'stbl',
+    module: "stbl",
   },
   {
     id: "39",
@@ -786,8 +798,9 @@ export default [
       "VOLT is a stablecoin that uses a custom oracle system to stay pegged to the purchasing power of the US Dollar.",
     mintRedeemDescription:
       "Using the Volt Protocol app, users swap FEI or USDC to mint VOLT at the current exchange rate. VOLT can be redeemed for FEI or USDC at any time.",
-    onCoinGecko: "true",
-    gecko_id: "volt-protocol",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "volt-protocol",
     cmcId: null,
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
@@ -826,8 +839,9 @@ export default [
       "FLOAT is a stablecoin that tracks a basket of crypto assets instead of trying to exactly match the price of a dollar.",
     mintRedeemDescription:
       "If the price of FLOAT is away from its target price, the supply is changed by minting (expansion) or buying up and burning FLOAT (contraction). This is done through a dutch auction (in an expansion) and a reverse dutch auction (in a contraction), respectively.",
-    onCoinGecko: "true",
-    gecko_id: "float-protocol-float",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "float-protocol-float",
     cmcId: "9861",
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
@@ -866,8 +880,10 @@ export default [
       "ZUSD is a 100% fiat-backed USD-pegged stablecoin on Ethereum that is always redeemable 1:1.",
     mintRedeemDescription:
       "GMO-Z.com Trust Company customers who have undergone a verification process can exchange USD for ZUSD and redeem ZUSD for USD.",
-    onCoinGecko: "true",
-    gecko_id: "zusd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "zusd",
+
     cmcId: "8772",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -907,11 +923,12 @@ export default [
     mintRedeemDescription:
       "Using the Acala app, users mint aSEED by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back aUSD is burned.",
     onCoinGecko: "true",
-    gecko_id: "acala-dollar", // change to ausd-seed-acala once live on coingecko
+    gecko_id: "ausd-seed-karura",
+    module: "acala-dollar", 
     cmcId: "20411",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "defillama", // coingecko inaccurate
+    priceSource: "defillama", 
     auditLinks: null,
     deadFrom: "2022-08-15",
     twitter: "https://twitter.com/AcalaNetwork",
@@ -1018,7 +1035,7 @@ export default [
     auditLinks: ["https://www.centre.io/usdc-transparency"],
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/EUROC",
-    module: 'eurc',
+    module: "eurc",
   },
   {
     id: "51",
@@ -1088,8 +1105,10 @@ export default [
     description: "USN is a NEAR-native stablecoin.",
     mintRedeemDescription:
       "Using the Decentral Bank app, users swap USDT to mint USN 1:1. USN can be redeemed for USDT 1:1 at any time.",
-    onCoinGecko: "true",
-    gecko_id: "usn",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "usn",
+
     cmcId: "19682",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1117,7 +1136,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/AngleProtocol",
     wiki: "https://wiki.defillama.com/wiki/AGEUR",
-    module: 'eura',
+    module: "eura",
   },
   {
     id: "56",
@@ -1170,7 +1189,9 @@ export default [
     mintRedeemDescription:
       "Using the Karura app, users receive 3USD LP tokens by adding aUSD, USDC, or USDT liquidity. LP tokens can be redeemed for the underlying assets.",
     onCoinGecko: "false",
-    gecko_id: "three-usd",
+    gecko_id: null,
+    module: "three-usd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1190,7 +1211,9 @@ export default [
     mintRedeemDescription:
       "Using the SigmaUSD app, users swap ERG for the equivalent value of SigUSD. The SigUSD is backed by collateral ERG provided by Reserve Providers at a reserve ratio of 400% - 800%.",
     onCoinGecko: "false",
-    gecko_id: "sigmausd",
+    gecko_id: null,
+    module: "sigmausd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1208,8 +1231,10 @@ export default [
     description: "A stablecoin backed by U.S. Homes.",
     mintRedeemDescription:
       "Using the Bacon app, users swap USDC to mint HOME 1:1. HOME can be redeemed for USDC 1:1 at any time.",
-    onCoinGecko: "true",
-    gecko_id: "bacon-protocol-home",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "bacon-protocol-home",
+
     cmcId: "20520",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1228,8 +1253,10 @@ export default [
       "The FIAT protocol allows users to mint a single ERC-20 token, $FIAT, against a universe of accepted fixed income asset collateral.",
     mintRedeemDescription:
       "Using the FIAT DAO app, users by depositing an accepted fixed income collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back FIAT is burned.",
-    onCoinGecko: "true",
-    gecko_id: "fixed-income-asset-token",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "fixed-income-asset-token",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1248,8 +1275,10 @@ export default [
       "PUSd is a synthetic stablecoin minted against NFT collateralized debt positions.",
     mintRedeemDescription:
       "Using the JPEG'd app, users mint PUSd by depositing an accepted NFT into a vault. When the loan is repaid to retrieve the NFT, the paid back PUSd is burned.",
-    onCoinGecko: "true",
-    gecko_id: "pusd-2",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "pusd-2",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1267,8 +1296,9 @@ export default [
     description: "fMint is the gateway to Fantom DeFi.",
     mintRedeemDescription:
       "Mint fUSD, the stablecoin on Fantom pegged 1:1 to the USD price, using your FTM. Choose the amount you want to mint and rebalance at any time by adding or removing FTM. Repay the fUSD you minted at any time, unlocking your FTM.",
-    onCoinGecko: "true",
-    gecko_id: "fantom-usd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "fantom-usd",
     cmcId: "16831",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1356,7 +1386,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/beanstalkfarms",
     wiki: "https://wiki.defillama.com/wiki/Beanstalk",
-    module: 'bean2',
+    module: "bean2",
   },
   {
     id: "68",
@@ -1369,7 +1399,9 @@ export default [
     mintRedeemDescription:
       "Using the Lemma Finance app, users mint USDL by depositing an accepted asset into the protocol where it establishes a market neutral trading position on decentralized exchanges. When the loan is repaid to retrieve the collateral, the paid back USDL is burned.",
     onCoinGecko: "false",
-    gecko_id: "usdlemma",
+    gecko_id: null,
+    module: "usdlemma",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1390,6 +1422,8 @@ export default [
       "Using the Pando Leaf app, users mint PUSD by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back PUSD is burned.",
     onCoinGecko: "true",
     gecko_id: "pando-usd",
+    module: "pando-usd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1409,8 +1443,10 @@ export default [
       "DUSD is a secure, transparent, democratic Digital Dollar on Arbitrum. All DUSD are 1:1 backed by real dollars.",
     mintRedeemDescription:
       "Fluid customers who have undergone a verification process can exchange USD for DUSD and redeem DUSD for USD.",
-    onCoinGecko: "true",
-    gecko_id: "digitaldollar",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "digitaldollar",
+
     cmcId: "19933",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -1431,8 +1467,10 @@ export default [
       "Vesta is a layer 2-first lending protocol where users can deposit collateral to mint VST (Vesta Stable) - a USD-pegged stablecoin.",
     mintRedeemDescription:
       "Using the Vesta Finance app, users mint VST by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back VST is burned.",
-    onCoinGecko: "true",
-    gecko_id: "vesta-stable",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "vesta-stable",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1531,8 +1569,10 @@ export default [
       "Interest Protocol (IP) is a fractional reserve banking protocol on the Ethereum blockchain that pays interest to all depositors. Interest Protocol issues a stablecoin, named USDi, that is both over-collateralized and highly scalable.",
     mintRedeemDescription:
       "Using the Interest Protocol app, users mint USDi by depositing an accepted collateral asset into a vault or swapping for USDC. When the loan is repaid to retrieve the collateral, the paid back USDi is burned.",
-    onCoinGecko: "true",
-    gecko_id: "interest-protocol",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "interest-protocol",
+
     cmcId: "20598",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1556,6 +1596,8 @@ export default [
   //     "Corporates who have undergone a verification process can exchange EUR for EURL and redeem EURL for EUR.",
   //   onCoinGecko: "false",
   //   gecko_id: "lugh",
+  //  module: "lugh",
+  //   module: "lugh",
   //   cmcId: null,
   //   pegType: "peggedEUR",
   //   pegMechanism: "fiat-backed",
@@ -1574,8 +1616,10 @@ export default [
       "NOTE is the unit of account on Canto. NOTE is an over-collateralized currency with a value perpetually rebalanced toward $1 through an algorithmic interest rate policy.",
     mintRedeemDescription:
       "NOTE is a fully immutable ERC-20 token backed by collateral lent to the Canto Lending Market. It can only be borrowed by users who post select collateral assets such as USDC, USDT, CANTO, ETH, ATOM, or Canto LP tokens.",
-    onCoinGecko: "true",
-    gecko_id: "note",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "note",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1617,6 +1661,8 @@ export default [
     "Using the Lago Finance app, users swap kwUSDC to mint USD2 1:1. USD2 can be redeemed for kwUSDC 1:1 at any time.",
     onCoinGecko: "false",
     gecko_id: "usd2",
+    module: "usd2",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed", // currently is crypto-backed for v1, but will change to FRAX mechanism for v2
@@ -1657,7 +1703,9 @@ export default [
     mintRedeemDescription:
       "Using the Arable Finance app, users mint arUSD by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back arUSD is burned.",
     onCoinGecko: "false",
-    gecko_id: "arable-usd",
+    gecko_id: null,
+    module: "arable-usd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1677,7 +1725,9 @@ export default [
     mintRedeemDescription:
       "Using the Real Protocol app, users mint USDW by depositing Ether into a vault. When the loan is repaid to retrieve the collateral, the paid back USDW is burned.",
     onCoinGecko: "false",
-    gecko_id: "usdw",
+    gecko_id: null,
+    module: "usdw",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1739,6 +1789,8 @@ export default [
       "Using the Zunami Protocol app, users can LP in a 3-pool and then deposit the LP tokens to mint UZD. UZD can be redeemed for LP tokens at any time.",
     onCoinGecko: "true",
     gecko_id: "zunami-protocol",
+    module: "zunami-protocol",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1759,7 +1811,9 @@ export default [
     mintRedeemDescription:
       "Using the Bank of Chain app, users can deposit the three major stablecoins (USDT, USDC, DAI) in any desired combination and amount to mint USDi. USDi can be redeemed for its underlying stablecoins 1:1 at any time.",
     onCoinGecko: "false",
-    gecko_id: "bank-of-chain",
+    gecko_id: null,
+    module: "bank-of-chain",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1797,8 +1851,10 @@ export default [
       "XAI is an over-collateralized stablecoin with a soft peg to the US Dollar in the Silo lending protocol.",
     mintRedeemDescription:
       "Using the Silo Finance app, users can borrow XAI by depositing ETH or USDC as collateral. When the loan is repaid to retrieve the collateral, the paid back XAI is burned.",
-    onCoinGecko: "true",
-    gecko_id: "xai",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "xai",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1818,7 +1874,9 @@ export default [
     mintRedeemDescription:
       "Using the Shareslake Dashboard, users can deposit USD on Shareslake or ADA on Cardano to mint RUSD. RUSD can be redeemed for USD at any time.",
     onCoinGecko: "false",
-    gecko_id: "redeemable",
+    gecko_id: null,
+    module: "redeemable",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -1857,8 +1915,10 @@ export default [
       "Pina is also a stable dollar pegged to the value of $1. Using mechanisms inspired by Dynamic Set Dollar (DSD), they have optimized $Pina to better serve the needs of their marketplace.",
     mintRedeemDescription:
       "If the price of PINA is less than 1$, the supply is changed by emitting coupons to reduce the supply. You can stake PINA or LP PINA-USDC in order to get more PINA.",
-    onCoinGecko: "true",
-    gecko_id: "meme-dollar",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "meme-dollar",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1898,8 +1958,10 @@ export default [
       "BaoUSD is a CDP stablecoin, its over-collateralized and issued through our Bao Market",
     mintRedeemDescription:
       "Using the Bao Finance app, users can borrow BAOUSD by depositing ETH, USDC or bSTBL as collateral. When the loan is repaid to retrieve the collateral, the paid back BAOUSD is burned.",
-    onCoinGecko: "true",
-    gecko_id: "baousd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "baousd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1959,7 +2021,9 @@ export default [
     mintRedeemDescription:
       "Users can deposits collateral into the Platypus Main Pool and stake their LP tokens into the MasterPlatypus to farm PTP. At the same time, it is possible for users to mint USP based on the the collateral factor",
     onCoinGecko: "false",
-    gecko_id: "platypus-usd",
+    gecko_id: null,
+    module: "platypus-usd",
+
     cmcId: "20962",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1979,8 +2043,10 @@ export default [
       "EUROe is a fully fiat-backed multichain euro stablecoin. EUROe is issued by Membrane Finance Oy, an electronic money institution registered in Finland. EUROe is a MiCA-compliant stablecoin.",
     mintRedeemDescription:
       "Anyone with a EUROe Account can redeem and mint EUROe with fiat euros in a 1:1 ratio, either through a UI or using EUROe Account APIs.",
-    onCoinGecko: "true",
-    gecko_id: "euroe-stablecoin",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "euroe-stablecoin",
+
     cmcId: null,
     pegType: "peggedEUR",
     pegMechanism: "fiat-backed",
@@ -2019,8 +2085,10 @@ export default [
       "Digital Standard Unit is a wrapper for stablecoins. The protocol consumes a particular collateral, places it into a reserve and issues a stablecoin, known as DSU, against it",
     mintRedeemDescription:
       "Users are able to mint DSU by providing the specified collateral, currently this is USDC. They are also able to redeem USDC from DSU at a 1-to-1 ratio with DSU",
-    onCoinGecko: "true",
-    gecko_id: "digital-standard-unit",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "digital-standard-unit",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2059,8 +2127,10 @@ export default [
       "Offshift anon is an on-chain, non-custodial platform that preserves user privacy while maintaining yield potential. Users can burn XFT to mint on-chain synthetics called anonAssets via Shifting, which makes them anonymous. AnonAssets are standard ERC20 tokens, eliminating yield-related tradeoffs associated with privacy",
     mintRedeemDescription:
       "To mint synthetics in the Offshift Ecosystem, users select and open a PriFi Application, and connect an ERC20 wallet. If a user possesses a positive XFT balance and sufficient ETH to cover gas fees, he/she may conduct a **Shift** and enter the Offshift Ecosystem’s private (anonymous and/or confidential) side via the Burn-and-Mint Mechanism",
-    onCoinGecko: "true",
-    gecko_id: "offshift-anonusd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "offshift-anonusd",
+
     cmcId: "23729",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -2121,8 +2191,10 @@ export default [
       "The DeFi Franc (DCHF) is a decentralized stablecoin, pegged to the Swiss Franc. The DeFi Franc is over-collateralized and is created through loans which are backed by ETH and WBTC",
     mintRedeemDescription:
       "DCHF can be borrowed using ETH and BTC assets as collateral. Users can borrow up to 90% of the value of their ETH or BTC collateral and every DCHF is 100% redeemable for ETH worth 1 CHF",
-    onCoinGecko: "true",
-    gecko_id: "defi-franc",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "defi-franc",
+
     cmcId: "22249",
     pegType: "peggedVAR",
     pegMechanism: "crypto-backed",
@@ -2160,8 +2232,10 @@ export default [
     description:
       "The CZUSD peg to BUSD is maintained by the innovative ScorchPeg system. The ScorchPeg holds a portion of BUSD in reserve and utilizes it to keep CZUSD at a steady $1 value through trades on Pancakeswap. During normal market conditions, the peg remains strong, however, during periods of stress, the ScorchPeg will temporarily pause, and CZUSD will be allowed to float.",
     mintRedeemDescription: "CZUSD and BUSD swapping.",
-    onCoinGecko: "true",
-    gecko_id: "czusd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "czusd",
+
     cmcId: "19366",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2179,8 +2253,10 @@ export default [
     description:
       "d2o is an omnichain native stablecoin with a soft-peg to the United States Dollar",
     mintRedeemDescription: "Add colateral in order to mint d2O.",
-    onCoinGecko: "true",
-    gecko_id: "dam-finance",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "dam-finance",
+
     cmcId: "23529",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2208,7 +2284,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: null,
-    module: 'eusd',
+    module: "eusd",
   },
   {
     id: "110",
@@ -2290,7 +2366,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Shade_Protocol",
     wiki: null,
-    module: 'silk',
+    module: "silk",
   },
   {
     id: "114",
@@ -2302,8 +2378,10 @@ export default [
       "ClevUSD are synthetic versions of their associated real token, representing the future yield of CLever strategies. Each clevToken is backed by one or more equivalent real Tokens in the system.",
     mintRedeemDescription:
       "ClevUSD can be farmed in CLever liquidity pools or swapped for more of the original token.",
-    onCoinGecko: "true",
-    gecko_id: "clever-usd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "clever-usd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2322,8 +2400,10 @@ export default [
       "R is the most capital-efficient USD stablecoin backed by high-quality collateral assets such as stETH (Lido Staked Ether) and rETH (Rocket Pool ETH) and reserve assets such as CHAI, the yield-bearing version of the DAI stablecoin.",
     mintRedeemDescription:
       "Users can deposit any accepted collateral asset of their choice to generate R, and enjoy capital-efficient borrowing.",
-    onCoinGecko: "true",
-    gecko_id: "r",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "r",
+
     cmcId: "24404",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2497,7 +2577,7 @@ export default [
     auditLinks: ["https://docs.preon.finance/information/security"],
     twitter: "https://twitter.com/PreonFinance",
     wiki: "https://docs.preon.finance/",
-    module: 'star',
+    module: "star",
   },
   {
     id: "124",
@@ -2510,7 +2590,7 @@ export default [
     mintRedeemDescription:
       "It can be converted from eUSD through the protocol or minted directly from non-rebase LSTs.",
     onCoinGecko: "true",
-    gecko_id: "peusd",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2518,7 +2598,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
-    module: 'peg-eusd',
+    module: "peg-eusd",
   },
   {
     id: "125",
@@ -2531,7 +2611,7 @@ export default [
     mintRedeemDescription:
       "Users deposit ETH & stETH as collateral with an excess collateral ratio of 150% to maintain safety and decentralization or exchanged by peg-eusd",
     onCoinGecko: "true",
-    gecko_id: "eusd-v2",
+    gecko_id: "eusd-new",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2539,7 +2619,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
-    module: 'eusdv2',
+    module: "eusdv2",
   },
   {
     id: "126",
@@ -2571,8 +2651,10 @@ export default [
       "Alternity protocol is a fork of the initial code of the Liquity Protocol. Minor amendments have been added to the protocol logic in order to make the stablecoin Yuan-pegged.",
     mintRedeemDescription:
       "Users can redeem their LCNY for ETH at any time without limitations. However, a redemption fee might be charged on the redeemed amount.",
-    onCoinGecko: "true",
-    gecko_id: "alternity-cny",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "alternity-cny",
+
     cmcId: null,
     pegType: "peggedCNY",
     pegMechanism: "crypto-backed",
@@ -2591,8 +2673,8 @@ export default [
       "Nexus (NEX) is a revolutionary decentralized finance (DeFi) project that introduces a unique combination of security, scalability, and stability to the Ethereum network and Layer 2 solutions.",
     mintRedeemDescription:
       "Users can trade their NEX token on a uniswap pool.(no redeem process)",
-    onCoinGecko: "true",
-    gecko_id: "nexus1",
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -2600,7 +2682,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Nexus_ZDex",
     wiki: "https://docs.zdex.tech/",
-    module: 'nexus',
+    module: "nexus",
   },
   {
     id: "129",
@@ -2633,8 +2715,10 @@ export default [
       "Access non-liquidating, auto-repaying, 0% interest loans that give you an immediate advance on your future yield.",
     mintRedeemDescription:
       "svUSD are created when users deposit accepted Stablescoins like USDC, USDT, DAI, and more into Savvy protocol. Borrowing is capped at 50% of the value of the collateral deposited.",
-    onCoinGecko: "true",
-    gecko_id: "savvy-usd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "savvy-usd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -2651,8 +2735,10 @@ export default [
     url: "https://uaht.io",
     description: "Borderless protocol for free people.",
     mintRedeemDescription: "UAHT is pegged to UAH Ukraine Currency",
-    onCoinGecko: "true",
-    gecko_id: "uaht",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "uaht",
+
     cmcId: null,
     pegType: "peggedUAH",
     pegMechanism: "fiat-backed",
@@ -2680,7 +2766,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/MountainUSDM",
     wiki: "https://docs.mountainprotocol.com/reference/usdm-token",
-    module: 'usdm',
+    module: "usdm",
   },
   {
     id: "133",
@@ -2701,7 +2787,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Num_Finance",
     wiki: "https://num.finance/transparency",
-    module: 'nars',
+    module: "nars",
   },
   {
     id: "134",
@@ -2861,6 +2947,8 @@ export default [
   //   mintRedeemDescription:"Minting Digital Cash involves depositing a major currency or equivalent asset with trusted third-party brokers. Upon confirmation of the deposit, the corresponding amount of Digital Cash is minted and credited to the user’s account. Redemption involves converting Digital Cash back into the underlying assets or major currencies through these brokers.",
   //   onCoinGecko: "true",
   //   gecko_id: "aryze-esgd",
+  //  module: "aryze-esgd",
+  //   module: "aryze-esgd",
   //   cmcId: null,
   //   pegType: "peggedSGD",
   //   pegMechanism: "government-backed",
@@ -2888,7 +2976,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/HydtProtocol",
     wiki: "https://hydtprotocol.com/#faqs",
-    module: 'hydt',
+    module: "hydt",
   },
   {
     id: "143",
@@ -2909,7 +2997,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/usdv_money",
     wiki: "https://docs.usdv.money/docs/what-is-usdv/faq",
-    module: 'usdv',
+    module: "usdv",
   },
   {
     id: "144",
@@ -2921,8 +3009,10 @@ export default [
       "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.",
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
-    onCoinGecko: "true",
-    gecko_id: "high-yield-usd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "high-yield-usd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -2950,7 +3040,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PayTrie",
     wiki: "https://faq.paytrie.com/help/what-is-the-cadc-address",
-    module: 'cadc',
+    module: "cadc",
   },
   {
     id: "146",
@@ -3002,8 +3092,10 @@ export default [
       "Mynth enables seamless interoperable transfers using Cardano's fully redeemable native stablecoin MyUSD.",
     mintRedeemDescription:
       "User can mint and redeem MyUSD using tether (via TRC 20), user can also redeem using MNT (mynth governance token)",
-    onCoinGecko: "true",
-    gecko_id: "myusd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "myusd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic", //since can also be minted with MNT
@@ -3022,8 +3114,10 @@ export default [
       "Sable Finance offers interest-free loans and is more capital efficient than other borrowing platforms (i.e. less collateral is needed for the same loan).",
     mintRedeemDescription:
       "Redemption allows users to exchange USDS for LSD at face value. This mechanism gives USDS holders the option to redeem USDS for the underlying collateral at any time. Redemptions are always honored such that 1 USDS equals $1 worth of LSD.",
-    onCoinGecko: "true",
-    gecko_id: "sable-coin",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "sable-coin",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3042,8 +3136,10 @@ export default [
       "A USD-backed stablecoin, strictly pegged 1:1 to the United States Dollar and issued in full compliance with Swiss legislation. SCB is fully collateralised by cash and cash equivalents, securely held in custody with a Swiss private bank and verified by third-party attestations.",
     mintRedeemDescription:
       "When a user triggers an SCB issuance request through a USD bank transfer, our compliance team undertakes an initial verification to uphold regulatory adherence. When a whitelisted user decides to redeem SCB, he must firstly sign a transaction in his non-custodial wallet to send the SCB to the burn address. At this stage, our compliance team is informed and undertakes a client file verification. Then, Colb Trust advances to reduce the circulating supply, ultimately burning the stablecoins. Then it is the custodian bank's job to be as efficient as possible to send the USD bank transfer to the user (1 to 4 business days).",
-    onCoinGecko: "true",
-    gecko_id: "colb-usd-stablecolb",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "colb-usd-stablecolb",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -3062,8 +3158,8 @@ export default [
       "zkUSD is an algorithmic stablecoin whose value is pegged to the US Dollar. The peg is maintained by an algorithmic over-collateralization of assets. This means that the value of zkUSD is kept stable at $1 by always having more assets within the sportsbook backing it than its value, ensuring that it is a stable medium of exchange within the Goal3 sportsbook.",
     mintRedeemDescription:
       "The official mint/redemption gateway is the Goal3 Portal. 1 $zkUSD can always be redeemed through the portal into 1 USDC. Other venues of exchange for $zkUSD include SyncSwap and MEXC exchange.",
-    onCoinGecko: "true",
-    gecko_id: "goal3",
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3071,7 +3167,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Goal3_xyz",
     wiki: "https://docs.goal3.xyz/sportsbook/technical-overview/usdzkusd",
-    module: 'zkusd',
+    module: "zkusd",
   },
   {
     id: "152",
@@ -3224,8 +3320,8 @@ export default [
       "RIF US Dollar is a fully crypto collateralized stablecoin. 1:1 pegged to US Dollar guaranteed by the smart contract that creates it. USDRIF is built on Rootstock, the first and longest running Bitcoin sidechain.",
     mintRedeemDescription:
       "The USDRIF stablecoins are minted through the RIF On Chain Protocol whenever there is a certain amount of RIFpro (RIFP) staked in the platform by other users who act as liquidity providers. Users can use the decentralised RIF on Chain dApp to exchange RIF tokens for USDRIF stablecoins and vice versa at any point providing there is a liquidity available in the protocol.",
-    onCoinGecko: false,
-    gecko_id: "rif-us-dollar", //fake coingecko
+    onCoinGecko: "true",
+    gecko_id: "rif-us-dollar", 
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3233,7 +3329,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/rifonchain",
     wiki: null,
-    module: 'usd-rif',
+    module: "usd-rif",
   },
   {
     id: "160",
@@ -3306,7 +3402,7 @@ export default [
     mintRedeemDescription:
       "As a decentralized stablecoin on the Ethereum Mainnet, $ULTRA is minted by users (borrowers). As with all borrowing on Prisma, a user must supply collateral (at a specific collateral ratio) to be able to mint $ULTRA. Correspondingly, when a user repays a debt position (or is liquidated), PrismaLRT protocol burns that user’s $ULTRA.",
     onCoinGecko: false,
-    gecko_id: "prismalrt-ultra", // its a fake coingeckoID , add real one once live there
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3314,6 +3410,8 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PrismaFi",
     wiki: null,
+    module: "prismalrt-ultra",
+
   },
   {
     id: "164",
@@ -3326,7 +3424,7 @@ export default [
     mintRedeemDescription:
       "When Pagolinea users deposit fiat assets, coinback tokens are minted and transferred to the users. When users withdraw fiat, the coinback tokens are burnt.",
     onCoinGecko: false,
-    gecko_id: "usdcb",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -3334,7 +3432,8 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/pagolinea",
     wiki: null,
-    module: 'pago-linea-usdcb',
+    module: "pago-linea-usdcb",
+
   },
   {
     id: "165",
@@ -3385,8 +3484,8 @@ export default [
     description:
       "f(x) splits ETH into a mix of low-volatility “floating stablecoins” called fETH.",
     mintRedeemDescription: "Users can supply ETH or stETH to mint fETH.",
-    onCoinGecko: "true",
-    gecko_id: "f-x-protocol-fractional-eth",
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedVAR",
     pegMechanism: "crypto-backed",
@@ -3394,7 +3493,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
-    module: 'feth',
+    module: "feth",
   },
   {
     id: "168",
@@ -3406,8 +3505,8 @@ export default [
       "fxUSD is unlike anything else in DeFi. It is the first truly decentralized stablecoin with the scalability to compete toe-to-toe with centralized offerings. Its combination of strong peg, built in yield and zero slippage swapping makes it extremely user friendly, while the ingenious economic design grows the available liquidity automatically as a byproduct of providing serious value to constituent LSDs.",
     mintRedeemDescription:
       "Users are able to mint and redeem with USDC,USDT,SETH and more",
-    onCoinGecko: "false",
-    gecko_id: "f-x-protocol-usd", //fcoingecko
+    onCoinGecko: "true",
+    gecko_id: "f-x-protocol-usd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3415,7 +3514,8 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
-    module: 'fxusd',
+    module: "fxusd",
+
   },
   {
     id: "169",
@@ -3427,8 +3527,8 @@ export default [
       "Goku Money is a decentralized borrowing protocol on Manta that allows you to draw interest-free loans against multiple collateral assets (e.g. MANTA, TIA, USDT, and etc.). Loans are paid out in GAI (a USD pegged stablecoin).",
     mintRedeemDescription:
       "Using the Goku Money app, users mint GAI by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back GAI is burned.",
-    onCoinGecko: "true",
-    gecko_id: "goku-money-gai",
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3436,7 +3536,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/goku_stable",
     wiki: null,
-    module: 'gai-stablecoin',
+    module: "gai-stablecoin",
   },
   {
     id: "170",
@@ -3448,8 +3548,10 @@ export default [
       "EURO3 is an over-collateralized, decentralized, variable supply payment coin pegged to the Euro.",
     mintRedeemDescription:
       "EURO3 is created by users minting EURO3 loans and it's removed from circulation (burnt) when users repay their loan or redeem EURO3 for the collateral assets.",
-    onCoinGecko: "true",
-    gecko_id: "euro3",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "euro3",
+
     cmcId: null,
     pegType: "peggedEUR",
     pegMechanism: "crypto-backed",
@@ -3521,7 +3623,7 @@ export default [
     auditLinks: [],
     twitter: "https://twitter.com/BlackRock",
     wiki: null,
-    module: 'blackrock-usd',
+    module: "blackrock-usd",
   },
   {
     id: "174",
@@ -3613,8 +3715,8 @@ export default [
     description: "Earn the DeFi rate any time you're in stables",
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
-    onCoinGecko: null,
-    gecko_id: "web-3-dollar", //fakecg
+    onCoinGecko: "true",
+    gecko_id: "web-3-dollar", 
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3655,7 +3757,7 @@ export default [
     mintRedeemDescription:
       "BREAD is linked to $DAI which is a stablecoin with equal value to USD. User deposited xdai and get bread",
     onCoinGecko: "true",
-    gecko_id: "bread-fake-cg",
+    gecko_id: "bread-3",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3663,7 +3765,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/breadchain_",
     wiki: null,
-    module: 'bread',
+    module: "bread",
   },
   {
     id: "181",
@@ -3676,7 +3778,7 @@ export default [
     mintRedeemDescription:
       "The Algorithmic Peg Stabilizer (APS) stands as the foundational mechanism for both minting and redeeming zunStables, as well as maintaining their peg to USD. The concept of APS draws inspiration from AMO of FRAX and bears resemblance to similar mechanisms such as Elixir from Alchemix.",
     onCoinGecko: "false",
-    gecko_id: "zunUSD",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3698,7 +3800,7 @@ export default [
     mintRedeemDescription:
       "The Algorithmic Peg Stabilizer (APS) stands as the foundational mechanism for both minting and redeeming zunStables, as well as maintaining their peg to ETH. The concept of APS draws inspiration from AMO of FRAX and bears resemblance to similar mechanisms such as Elixir from Alchemix.",
     onCoinGecko: "false",
-    gecko_id: "zunETH",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedVAR",
     pegMechanism: "crypto-backed",
@@ -3708,6 +3810,7 @@ export default [
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
     module: "zun-eth",
+
   },
   {
     id: "183",
@@ -3740,7 +3843,9 @@ export default [
     mintRedeemDescription:
       "Using Magma, users mint WEN by depositing IOTX/uniIOTX as collateral into a Vault. After the WEN loan is repaid to retrieve the collateral, the paid back WEN is burned",
     onCoinGecko: "false",
-    gecko_id: "magma-wen",
+    gecko_id: null,
+    module: "magma-wen",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3800,8 +3905,8 @@ export default [
       "A permissionless, yield-bearing stablecoin designed to be a reliable store of value",
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
-    onCoinGecko: "false",
-    gecko_id: "knox-dollar", //fakecg
+    onCoinGecko: "true",
+    gecko_id: "knox-dollar", 
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3842,7 +3947,7 @@ export default [
     mintRedeemDescription:
       "btcUSD is minted by depositing collateral at a minimum 120% collateral ratio, providing a stablecoin with yields pegged to the USD",
     onCoinGecko: "false",
-    gecko_id: "f-x-btc-usd", //fcoingecko
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3850,6 +3955,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: "https://docs.aladdin.club/f-x-protocol/introduction-of-btcusd-xwbtc",
+    module: "f-x-btc-usd", 
   },
   {
     id: "190",
@@ -3861,8 +3967,8 @@ export default [
       "Hold $1 USD peg, and deploy collateral to generate safe, on-chain yield to incentivize liquidity for itself and partners",
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
-    onCoinGecko: null,
-    gecko_id: "revenue-generating-usd", //fakecg
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3870,6 +3976,8 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/rgUSD_Bull",
     wiki: "https://app.reserve.org/ethereum/token/0x78da5799cf427fee11e9996982f4150ece7a99a7/overview",
+    module: "revenue-generating-usd",
+
   },
   {
     id: "191",
@@ -3880,8 +3988,8 @@ export default [
     description: "Bitcoin stablecoin based on over-collateralization",
     mintRedeemDescription:
       "Users deposit a specific amount of BTC into bitSmiley Treasury to generate bitUSD. To redeem their deposited BTC, users need to repay the generate bitUSD and also pay a certain amount of stability fee.",
-    onCoinGecko: null,
-    gecko_id: "bitsmiley-bitusd", //fakecg
+    onCoinGecko: "false",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3889,6 +3997,8 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/bitsmiley_labs",
     wiki: "https://github.com/bitSmiley-protocol/whitepaper/blob/main/BitSmiley_White_Paper.pdf",
+    module: "bitsmiley-bitusd",
+
   },
   {
     id: "192",
@@ -3920,8 +4030,10 @@ export default [
       "USC is a decentralised, scalable, fully backed stablecoin which is 1-1 USD pegged",
     mintRedeemDescription:
       "To mint USC, you are required to deposit a specific amount of ETH/LST in the reserves. Afterward, you can generate USC tokens with a collateral ratio of 100% against your deposit",
-    onCoinGecko: true,
-    gecko_id: "usc-2",
+    onCoinGecko: false,
+    gecko_id: null,
+    module: "usc-2",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3941,7 +4053,9 @@ export default [
     mintRedeemDescription:
       "The pair of smart contracts work in unison to ensure that the total value of ckUSDC is fully backed 1:1 by USDC. This can always be verified by viewing the on-chain dashboards and metrics of the canisters: ckETH Minter dashboard, ckETH Minter metrics, ckUSDC Ledger metrics.",
     onCoinGecko: true,
-    gecko_id: "ckusdc", //fakecg
+    gecko_id: "ckusdc",
+    module: "ckusdc",
+    module: "ckusdc", //fakecg
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -4022,7 +4136,9 @@ export default [
     mintRedeemDescription:
       "aUSD is a decentralized yield-bearing stablecoin that is fully collateralized and backed by AVAX LSTs.",
     onCoinGecko: false,
-    gecko_id: "stable-jack-ausd",
+    gecko_id: null,
+    module: "stable-jack-ausd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -4121,7 +4237,9 @@ export default [
     mintRedeemDescription:
       "Chad USD, developed by Chad Finance, can be minted by collateralizing your Uni-V3 positions, thereby creating deeper liquidity on Scroll.",
     onCoinGecko: "false",
-    gecko_id: "chad-usd",
+    gecko_id: null,
+    module: "chad-usd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -4220,8 +4338,10 @@ export default [
       "Dackie USD (dckUSD) is the algorithmic stablecoin, designed to enhance liquidity and drive growth within the DackieSwap ecosystem across multiple blockchains",
     mintRedeemDescription:
       "dckUSD is minted by burning DACKIE tokens through a mechanism integrated into the DackieSwap protocol. When users select the DACKIE-dckUSD pair, the mint-burn process is triggered automatically",
-    onCoinGecko: "true",
-    gecko_id: "dackie-usd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "dackie-usd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -4320,8 +4440,9 @@ export default [
       `M^0 democratizes access to money issuance infrastructure. Based on a decentralized architecture and best-in-class collateral design, M^0 allows institutions to issue fungible cryptodollars`,
     mintRedeemDescription:
       "In order to generate M, Minters must have a sufficient off-chain balance of Eligible Collateral which is represented on-chain by a frequently updated and validated number, known as the on-chain Collateral Value",
-    onCoinGecko: "false",
-    gecko_id: "m-by-m^0",
+    onCoinGecko: "true",
+    gecko_id: "m-2",
+    module: "m-by-m^0",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -4355,13 +4476,15 @@ export default [
     name: "Moneta",
     address: "cardano:c48cbb3d5e57ed56e276bc45f99ab39abe94e6cd7ac39fb402da47ad0014df105553444d",
     symbol: "USDM",
-    url: "https://usdx.money/",
+    url: "https://moneta.global/",
     description:
       `Fiat backed stablecoin native to the Cardano blockchain`,
     mintRedeemDescription:
       "Approved business users can mint USDM, after completing KYC. To redeem USDM for USD, verified users request a burn of their USDM tokens, with the equivalent USD amount transferred back to their verified bank account",
     onCoinGecko: "false",
-    gecko_id: "moneta",
+    gecko_id: null,
+    module: "moneta",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -4400,8 +4523,10 @@ export default [
       `Reservoir’s stablecoin, rUSD is available to non-U.S. users and users in non-sanctioned countries. rUSD is built to be extremely scalable and efficient, paving the way for increased utility and cross chain use cases`,
     mintRedeemDescription:
       "Redeemable on a 1:1 basis for USDC or other dollar-denominated stablecoins as directed by governance",
-    onCoinGecko: "false",
-    gecko_id: "reservoir-stablecoin",
+    onCoinGecko: "true",
+    gecko_id: "reservoir-rusd",
+    module: "reservoir-stablecoin",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -4469,7 +4594,7 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/avalonfinance_",
     wiki: "https://docs.avalonfinance.xyz/cedefi-cdp-usda",
-    module: "avalon-usda"
+    module: "avalon-usda",
   },
   {
     id: "221",
@@ -4501,8 +4626,10 @@ export default [
       `paUSD is a USD stablecoin backed by collaterals, and can only be minted with governance-approved collaterals. paUSD are created when users deposit accepted tokens (such as WETH, WBTC, USDC, etc) as collateral in vaults and in turn receive a loan against that collateral`,
     mintRedeemDescription:
       "Tokens are minted by creating a vault on Parallel",
-    onCoinGecko: "true",
-    gecko_id: "parallel-usd",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "parallel-usd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -4521,8 +4648,10 @@ export default [
       `XY is a synthetic dollar debt token in the Tren Finance ecosystem, backed by overcollateralized loans and using LayerZero's OFT standard for cross-chain transfers`,
     mintRedeemDescription:
       "Users mint XY by depositing collateral, while redemption is managed through automated peg stability contracts and buyback-and-burn mechanisms, avoiding direct redemptions to protect user collateral",
-    onCoinGecko: "true",
-    gecko_id: "tren-debt-token",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "tren-debt-token",
+
     cmcId: "16013",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -4561,7 +4690,9 @@ export default [
       `ZeUSD is a fully composable, omnichain, RWA-backed CDP stable token, issued on top of high-quality liquid off-chain or on-chain RWAs like US TBIlls, ETFs, MMFs, Reverse Repos etc`,
     mintRedeemDescription: "ZeUSD is created when users deposit eligible RWA as collateral to open a collateralized debt position",
     onCoinGecko: "false",
-    gecko_id: "zoth-zeusd",
+    gecko_id: null,
+    module: "zoth-zeusd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -4599,7 +4730,9 @@ export default [
       `BOLD is the USD-pegged stablecoin issued in Liquity V2. It’s fully decentralized, overcollateralized and backed only by WETH, wstETH and rETH`,
     mintRedeemDescription: "BOLD is minted in Liquity V2 by borrowing against overcollateralized deposits of WETH, wstETH, or rETH, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
     onCoinGecko: "false",
-    gecko_id: "legacy-bold",
+    gecko_id: null,
+    module: "legacy-bold",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -4617,15 +4750,16 @@ export default [
     description:
       `$USDQ is a decentralized, algorithmic stablecoin that is soft-pegged to the U.S. dollar`,
     mintRedeemDescription: "To mint $USDQ, users deposit an eligible collateral asset into their Trove on the Quill platform. Based on the value of the collateral and the protocol's collateralization requirements, users can mint $USDQ up to a certain limit",
-    onCoinGecko: "false",
-    gecko_id: "quill-usd",
+    onCoinGecko: "true",
+    gecko_id: "quill-usdq",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/QuillFi",
-    wiki: "https://docs.quill.finance/faq/usdusdq"
+    wiki: "https://docs.quill.finance/faq/usdusdq",
+    module: "quill-usd",
   },
   {
     id: "229",
@@ -4782,7 +4916,7 @@ export default [
     mintRedeemDescription:
       "Users mint syUSD by depositing assets into Synnax vaults, where collateral is utilized for market-making strategies. Redemption requires debt repayment",
     onCoinGecko: "true",
-    gecko_id: "synnax-stablecoin",
+    gecko_id: "syusd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -4790,7 +4924,6 @@ export default [
     auditLinks: ["https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Synnax-v1.0.pdf"],
     twitter: "https://twitter.com/synnax_labs",
     wiki: "https://docs.synnax.fi",
-    module: 'syusd',
   },
   {
     id: "237",
@@ -5228,7 +5361,9 @@ export default [
     description: "Arche Protocol is the first native decentralized USD-pegged algorithmic stablecoin with exogenous collateral protocol built on the Movement Blockchain",
     mintRedeemDescription: "Users deposit native assets like APT, SUI, and MOVE as collateral, which are staked via liquid staking providers, to mint MSD stablecoins on the Movement chain",
     onCoinGecko: "false",
-    gecko_id: "arche-protocol-msd",
+    gecko_id: null,
+    module: "arche-protocol-msd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5246,7 +5381,9 @@ export default [
     description: "vUSD is a stablecoin pegged to the US dollar, backed by over-collateralized, interest-generating collateral tokens",
     mintRedeemDescription: "To mint VUSD, the user swaps an acceptable input asset (DAI, USDC, USDT) for newly minted VUSD at a 1:1 ratio, less minting fee (currently zero), in any amount with zero slippage",
     onCoinGecko: "false",
-    gecko_id: "vdollar-finance",
+    gecko_id: null,
+    module: "vdollar-finance",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5339,7 +5476,9 @@ export default [
     description: "USDK is the USD-pegged, overcollateralized and native stablecoin on Swellchain. Issued by Orki Finance and backed by LST/LRT-based assets like swETH and rswETH",
     mintRedeemDescription: "USDK maintains its $1 peg through a market-driven mechanism where borrowers adjust interest rates in response to price fluctuations, and arbitrageurs engage in redemptions when USDK trades below $1. USDK can be redeemed at face value for its underlying collateral, ensuring liquidity and price stability",
     onCoinGecko: "false",
-    gecko_id: "orki-usd",
+    gecko_id: null,
+    module: "orki-usd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5379,7 +5518,7 @@ export default [
       "MEAD is a Berachain-native stablecoin minted against LP tokens and other yield-bearing assets, allowing users to unlock liquidity without giving up rewards.",
     mintRedeemDescription:
       "MEAD is minted by depositing approved LP tokens or collateral into RootsFi, and is redeemed by repaying the MEAD debt to unlock the original collateral.",
-    onCoinGecko: "false",
+    onCoinGecko: "true",
     gecko_id: "mead-2",
     cmcId: null,
     pegType: "peggedUSD",
@@ -5400,8 +5539,9 @@ export default [
       "Yala Protocol allows users to lock Bitcoin as collateral to mint YU stablecoins. YU serves as both an asset and a tool, connecting Bitcoin with any ecosystem. Users can borrow, earn interest, and gain seamless access to DeFi applications across multiple chains.",
     mintRedeemDescription:
       "Users mint YU by depositing Bitcoin as collateral assets into the Yala Protocol. When the loan is repaid to retrieve the collateral, the paid back YU is burned.",
-    onCoinGecko: "false",
-    gecko_id: "yala-stablecoin",
+    onCoinGecko: "true",
+    gecko_id: "yu",
+    module: "yala-stablecoin",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5440,6 +5580,8 @@ export default [
   //   mintRedeemDescription: "Franklin Onchain U.S. Government Money Fund is minted by depositing U.S. government money market funds into the Franklin Onchain U.S. Government Money Fund, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
   //   onCoinGecko: "false",
   //   gecko_id: "franklin-onchain-u-s-government-money-fund",
+  //  module: "franklin-onchain-u-s-government-money-fund",
+  //   module: "franklin-onchain-u-s-government-money-fund",
   //   cmcId: null,
   //   pegType: "peggedUSD",
   //   pegMechanism: "fiat-backed",
@@ -5691,8 +5833,10 @@ export default [
     url: "https://unitas.so/",
     description: "Unitas is a decentralized, yield-bearing stablecoin protocol built for the next generation of finance. It issues stablecoins that earn yield natively — no reliance on traditional banks. Powered by Solana, it's fast, scalable, and censorship-resistant",
     mintRedeemDescription: "Minting and redemption are available only to users who have successfully completed our KYC/KYB process. We provide real-time quotes for both actions, and counterparties can finalize their mint or redeem requests by interacting with our API using the quoted terms.",
-    onCoinGecko: false,
-    gecko_id: "unitas",
+    onCoinGecko: true,
+    gecko_id: "usdu",
+    module: "unitas",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5832,7 +5976,8 @@ export default [
     mintRedeemDescription:
       "Users can get USDp, by swapping their assets on the Parallel app or a DEX.",
     onCoinGecko: false,
-    gecko_id: "parallel-usdp",
+    gecko_id: null,
+    module: "parallel-usdp",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5871,8 +6016,10 @@ export default [
       "bnbUSD is redefining what a stablecoin can be on BNB Chain. Born from the foundation of true decentralization, bnbUSD offers a powerful alternative to centralized stablecoins — combining a robust peg, built-in yield, and zero-slippage swaps for a seamless DeFi experience. Its elegant economic architecture ensures that liquidity scales naturally as users tap into the growing utility of BNB-native assets. Designed for composability and yield generation, bnbUSD isn’t just another stablecoin — it’s the future of stable value on BNB Chain.",
     mintRedeemDescription:
       "Users are able to mint and redeem with BNB, slisBNB, WBNB and more.",
-    onCoinGecko: "false",
-    gecko_id: "bnbusd",
+    onCoinGecko: "true",
+    gecko_id: "sigma-bnb-usd",
+    module: "bnbusd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5892,7 +6039,7 @@ export default [
     mintRedeemDescription:
       "Anyone looking to hedge can deposit ETH & ETH LRT as collateral to mint USDA+, a stablecoin soft pegged to US Dollar.",
     onCoinGecko: "false",
-    gecko_id: "autonomint-usda+", // fake
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5900,6 +6047,8 @@ export default [
     auditLinks: "https://docs.autonomint.com/autonomint",
     twitter: "https://x.com/autonomint",
     wiki: "https://docs.autonomint.com/autonomint",
+    module: "autonomint-usda+",
+
   },
   {
     id: "295",
@@ -5931,8 +6080,10 @@ export default [
       "Cap is a stablecoin protocol that provides credible financial guarantees via two products: the dollar-denominated cUSD and the yield-bearing stcUSD",
     mintRedeemDescription:
       "Users deposit reserve assets to mint cUSD at oracle value. cUSD's reserve is backed by blue chip stablecoins such as USDC, USDT, pyUSD, BUIDL, and BENJI, i.e. issued by regulated institutions with transparent attestations. It is 1:1 redeemable for any of the available reserve assets.",
-    onCoinGecko: "false",
-    gecko_id: "cap-cusd",
+    onCoinGecko: "true",
+    gecko_id: "cap-usd",
+    module: "cap-cusd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -6047,8 +6198,10 @@ export default [
     url: "https://hylo.so/",
     description: "hyUSD is a USD-soft-pegged stablecoin backed by liquid staking tokens (LSTs) and stabilized through a dual-token system with xSOL, liquidation mechanisms, and a stability pool.",
     mintRedeemDescription: "Users mint hyUSD by depositing supported LSTs into Hylo's collateral pool, and redeem it by burning hyUSD to withdraw an equivalent amount of collateral.",
-    onCoinGecko: "false",
-    gecko_id: "hylo-hyusd",
+    onCoinGecko: "true",
+    gecko_id: "hylo-usd",
+    module: "hylo-hyusd",
+
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -6153,7 +6306,7 @@ export default [
     ],
     twitter: null,
     wiki: "https://www.sgforge.com/product/coinvertible/",
-    module: 'societe-generale-forge-usdcv'
+    module: "societe-generale-forge-usdcv"
   },
   {
     id: "308",
@@ -6164,7 +6317,7 @@ export default [
     description: "Saga Dollar (D) is a fully backed stablecoin by an onchain reserve of other stablecoins and yield-bearing assets on SagaEVM. The yields generated by D’s reserve are redirected to its borrowers on integrated Saga lending protocols, such as Palomino, to subsidize their interest expenses",
     mintRedeemDescription: "Users can mint and redeem Saga Dollar (D) with other stablecoins and yield-bearing assets on Colt protocol",
     onCoinGecko: "false",
-    gecko_id: "saga-dollar", // fake coingecko
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -6172,6 +6325,7 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/ColtProtocol",
     wiki: "https://coltstable.notion.site/Colt-Stable-Documentation-257c9bce381680ca9f5edcfb47779710",
+    module: "saga-dollar",
     doublecounted: true
   },
   {
@@ -6182,8 +6336,8 @@ export default [
     url: "https://usd.ai/",
     description: "USD.AI is a synthetic dollar protocol with USDai, a redeemable stablecoin, and sUSDai, a yield-bearing version backed by infrastructure loans and reserve assets",
     mintRedeemDescription: "Users mint USDai by depositing USDC into USD.AI and can redeem it 1:1, while sUSDai converts USDai into a yield-bearing token redeemable after a notice period",
-    onCoinGecko: "false",
-    gecko_id: "usd-ai", // fake coingecko
+    onCoinGecko: "true",
+    gecko_id: "usdai",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -6191,7 +6345,8 @@ export default [
     auditLinks: ["https://docs.usd.ai/technical-overview/audits"],
     twitter: "https://x.com/USDai_Official",
     wiki: "https://docs.usd.ai/how-usd.ai-works",
-    doublecounted: true
+    doublecounted: true,
+    module: 'usd-ai'
   },
   {
     id: "310",
@@ -6221,7 +6376,7 @@ export default [
     description: "The first yield-bearing fully Halal stablecoin",
     mintRedeemDescription: "iAUSD is minted via iA Borrow, InshAllah's halal lending protocol. iAUSD is fully collateralized using iASOL collateral. iAUSD yield comes form profit sharing. The staking yield from iASOL is split between the iASOL collateral and minted iAUSD creating the first halal yield-bearing stablecoin",
     onCoinGecko: "false",
-    gecko_id: "iausd", 
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -6229,7 +6384,8 @@ export default [
     auditLinks: ["https://public.inshallah.fi/iAUSD-audit-v1.pdf"],
     twitter: "https://x.com/inshAllahfi",
     wiki: "https://inshallah.gitbook.io/inshallah/iausd-stablecoin/what-is-iausd",
-    module: 'iAUSD',
+    module: "iAUSD",
+
   },
   {
   id: "312",
@@ -6267,5 +6423,138 @@ export default [
   twitter: "https://x.com/MetaMask",
   wiki: "https://metamask.io/price/metamask-usd",
   doublecounted: true
+},
+{
+  id: "314",
+  name: "Palm USD",
+  address: "0xFAF0cEe6B20e2Aaa4B80748a6AF4CD89609a3d78",
+  symbol: "PUSD",
+  url: "https://palmfi.xyz/",
+  description: "Palm tokens maintain a 1:1 peg with real-world currencies and are fully backed by cash and Shariah-compliant financial products. This structure provides traders, merchants, and funds with a secure, low-volatility means to exit market positions while adhering to sound finance principles",
+  mintRedeemDescription: "Palm customers and other institutions who have undergone a verification process can exchange currency for PUSD and redeem PUSD for currency",
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/joinpalmfi",
+  wiki: null,
+  module: "palm-usd",
+},
+{
+  id: "315",
+  name: "US Permissionless Dollar",
+  address: "0x476ef9ac6D8673E220d0E8BC0a810C2Dc6A2AA84",
+  symbol: "USPD",
+  url: "https://uspd.io",
+  description: "USPD is a permissionless over-collateralized stablecoin backed by staked ETH with built-in yield pass-through to holders and autonomous peg maintenance via a stabilizer architecture",
+  mintRedeemDescription: "Mint or Burn with a guaranteed 1:1 ETH/USD dollar price (USPD Dollar Peg) via https://uspd.io/mint-burn-uspd",
+  onCoinGecko: "true",
+  gecko_id: "us-permissionless-dollar",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: ["https://uspd.io/docs/uspd/audit"],
+  twitter: "https://x.com/USPD_io",
+  wiki: "https://uspd.io/docs/uspd",
+},
+{
+  id: "316",
+  name: "CASH",
+  address: "solana:CASHx9KJUStyftLFWGvEVf59SGeG9sh5FfcnZMVPCASH",
+  symbol: "CASH",
+  url: "https://www.usecash.xyz/",
+  description: "CASH is a stablecoin issued by Bridge Building Inc. (BBI), fully backed 1:1 by U.S. dollars",
+  mintRedeemDescription: "BBI maintains a segregated reserve of liquid, high-quality assets—such as short-term U.S. Treasuries, reverse repos, money market funds, and tokenized equivalents—to support redemptions. The reserves comply with GENIUS Act standards, but holders do not have a direct claim on the underlying assets",
+  onCoinGecko: "true",
+  gecko_id: "cash-4",
+  cmcId: "38760",
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: ["https://uspd.io/docs/uspd/audit"],
+  twitter: "https://x.com/usecash",
+  wiki: null,
+  module: "cash",
+},
+{
+  id: "317",
+  name: "Tokenised GBP",
+  address: "0x27f6c8289550fCE67f6B50BeD1F519966aFE5287",
+  symbol: "tGBP",
+  url: "https://www.tokenisedgbp.com/",
+  description: "Tokenised GBP (tGBP) is the only British Pound backed stablecoin issued by a UK FCA-registered firm. tGBP is fully backed with cash and short-term UK gilts and pegged 1:1 with the British Pound",
+  mintRedeemDescription: "To mint Tokenised GBP (tGBP), eligible businesses need to create a tGBP Mint account and complete the required KYB and AML checks. Once the account is approved, businesses can mint and redeem tGBP with GBP from their UK bank account. Retail users can access mint and redemption services through a variety of exchange and payment partners",
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedGBP",
+  pegMechanism: "fiat-backed",
+  priceSource: "coingecko",
+  auditLinks: ["https://www.openzeppelin.com/news/tgbp-audit"],
+  twitter: "https://x.com/tokenGBP",
+  wiki: null,
+  module: "tgbp",
+},
+{
+  id: "318",
+  name: "litUSD",
+  address: "0x3B5F2810fB2168FfA9C73160F97BF9f2461fFa5c",
+  symbol: "litUSD",
+  url: "https://brale.xyz/stablecoins/litUSD",
+  description: "litUSD is a U.S. dollar stablecoin developed with Brale and Stably for LitFinancial, a U.S-regulated mortgage lender. litUSD enables Lit to tokenize idle treasury cash for more efficient operations and on-chain liquidity.",
+  mintRedeemDescription: "Consumers can mint and redeem litUSD via bank transfer or Circle's USDC stablecoin through Brale's verified business accounts.",
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "fiat-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/LitFinancial_",
+  wiki: "https://brale.xyz/stablecoins/litUSD",
+  module: "lit-usd",
+  doublecounted: true
+},
+{
+  id: "319",
+  name: "AllUnity EUR",
+  address: "0x4933a85b5b5466fbaf179f72d3de273c287ec2c2",
+  symbol: "EURAU",
+  url: "https://allunity.com/",
+  description: "EURAU is a MiCAR-compliant, fully backed euro stablecoin that delivers speed, stability, and security in one.",
+  mintRedeemDescription: "EURAU Euro stablecoin can be seamlessly minted and redeemed by Verified Institutions - fully reserved, built for regulatory compliance, speed, and stability. Always redeemable at par value.",
+  onCoinGecko: "true",
+  gecko_id: "allunity-eur",
+  cmcId: null,
+  pegType: "peggedEUR",
+  pegMechanism: "fiat-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/AllUnityStable",
+  wiki: "https://allunity.com/eurau/",
+  doublecounted: true
+},
+{
+  id: "320",
+  name: "Rocky USDr",
+  address: "sei:0x53fdd705873d8259d6d179901fc3fdcb5339f921",
+  symbol: "USDR",
+  url: "https://rocky.cash/",
+  description: "USDr is the USD stablecoin of Rocky. It is a decentralized, overcollateralized asset backed by a basket of cryptocurrencies and stablecoins, including yield-bearing versions such as Morpho vaults.",
+  mintRedeemDescription: "The Rocketizer Module, which is going to serve as the main minting module, is deployed on Sei. Tokens allowed in the backing of USDr have been carefully reviewed for their stability, robustness, sustainable yield generation and business development potential. Allowed assets and their parameters can be updated at any time by contributors.",
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/rockydotcash",
+  wiki: "https://docs.rocky.cash/products/stablecoins-and-savings/usdr-and-susdr",
+  module: "rocky-usdr",
 },
 ] as PeggedAsset[];
