@@ -1,6 +1,36 @@
 # peggedassets-server
 
+## Quick Start: Create New Adapter
+
+Use interactive CLI tool to automatically generate adapter boilerplate:
+
+```bash
+npm run create-adapter
+```
+
+The CLI will guide you through creating a new pegged asset adapter with proper structure, imports, and configuration. See [Quick Start Guide](src/cli/CREATE_ADAPTER_GUIDE.md) for details.
+---
+
 ## How to list a new pegged asset
+
+### Use the CLI Tool
+
+```bash
+npm run create-adapter -- --help
+```
+
+```bash
+npm run create-adapter -- \
+  --name "PUSD" \
+  --id "pusd" \
+  --chains "ethereum,binance,tron" \
+  --addresses "0xFAF0cEe6B20e2Aaa4B80748a6AF4CD89609a3d78,0xFAF0cEe6B20e2Aaa4B80748a6AF4CD89609a3d78,TF39FD5YwW63mtB1zr9gpVdyFUx1icac2y" \
+  --types "m,m,m" \
+  --pegType "peggedUSD" \
+  --decimals 18
+```
+
+### Manual Creation
 
 1. Fork this repository.
 2. `npm i` in root folder.
