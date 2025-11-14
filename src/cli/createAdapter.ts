@@ -302,6 +302,7 @@ async function promptReserves(): Promise<{ hasReserves: boolean; addresses: stri
 // Code generation functions
 function generateChainContracts(config: AdapterConfig): any {
   const chainContracts: any = {};
+  let unreleasedAdded = false;
 
   for (const chain of config.chains) {
     if (chain.type === "minted") {
@@ -309,8 +310,9 @@ function generateChainContracts(config: AdapterConfig): any {
         issued: [chain.address],
       };
       
-      if (config.hasReserves && chain.chain === "ethereum" && config.reserveAddresses.length > 0) {
+      if (config.hasReserves && !unreleasedAdded && config.reserveAddresses.length > 0) {
         chainContracts[chain.chain].unreleased = config.reserveAddresses;
+        unreleasedAdded = true;
       }
     } else {
       const bridgeFrom = chain.bridgedFrom || "ethereum";
