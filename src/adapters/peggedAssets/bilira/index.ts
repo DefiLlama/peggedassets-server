@@ -20,6 +20,9 @@ const chainContracts = {
     },
     solana: {
         issued: ["A94X2fRy3wydNShU4dRaDyap2UuoeWJGWyATtyp61WZf"], pegType
+    },
+    plasma: {
+        issued: ["0x90729a45948c3078890Bc80F2a4e7870A2Ea4C5E"], pegType
     }
   };
   
