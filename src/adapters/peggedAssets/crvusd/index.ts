@@ -14,8 +14,7 @@ const pegkeepers = [
 ]
 
 const curve_lend_operators = [
-  "0x6119e210e00d4be2df1b240d82b1c3decedbbbf0", //lend operator for sreUSD llamalend market
-  // "" new operator coming soon: https://www.curve.finance/dao/ethereum/proposals/1259-ownership
+  "0x21862cA8d044c104ac9EB728c86Bc38B8625BeCD", //lend operator for sreUSD llamalend market
 ]
 
 const yb_amms = [
