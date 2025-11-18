@@ -1,6 +1,6 @@
 const chainContracts = {
     hyperliquid: {
-      issued: ["0x02c6a2fA58cC01A18B8D9E00eA48d65E4dF26c70"],
+      issued: ["0xca79db4b49f608ef54a5cb813fbed3a6387bc645"],
     },
   };
   
