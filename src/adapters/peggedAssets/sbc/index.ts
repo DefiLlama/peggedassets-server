@@ -12,10 +12,10 @@ const chainContracts = {
     },
     ethereumclassic: {
         issued: ["0xfdcC3dd6671eaB0709A4C0f3F53De9a333d80798"],
-      },
+    },
     arbitrum: {
         issued: ["0xfdcC3dd6671eaB0709A4C0f3F53De9a333d80798"],
-      },
+    },
     avax: {
         issued: ["0xf9FB20B8E097904f0aB7d12e9DbeE88f2dcd0F16"],
     },
@@ -51,6 +51,5 @@ const chainContracts = {
       minted: stellarMinted("SBC-GCQCNWT22JDLENQAVIE6DRJGHWAQ6EX2H5ABGPV55EJUPPZM5UA7KHZR"),
     },
   };
-  
 
   export default adapter;
