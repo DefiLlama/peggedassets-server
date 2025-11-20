@@ -532,4 +532,7 @@ export const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x53E82ABbb12638F09d9e624578ccB666217a765e"], // vb usdc (origin) on ethmainnet
     bridgedFromETH: ["0x203A662b0BD271A6ed5a60EdFbd04bFce608FD36"], // vb usdc on katana
   },
+  monad: {
+    issued: ["0x754704Bc059F8C67012fEd69BC8A327a5aafb603"],
+  }
 };
