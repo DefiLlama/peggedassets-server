@@ -5,6 +5,9 @@ const chainContracts: ChainContracts = {
   polygon: {
     issued: ["0x888883b5F5D21fb10Dfeb70e8f9722B9FB0E5E51"],
   },
+  avax: {
+    issued: ["0x8835a2f66a7aaccb297cb985831a616b75e2e16c"],
+  },
 };
 
 
