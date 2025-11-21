@@ -68,6 +68,9 @@ const chainContracts: ChainContracts = {
   monad: {
     issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
   },
+  plasma: {
+    issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+  },
 };
 
 
