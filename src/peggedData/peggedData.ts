@@ -6629,5 +6629,6 @@ export default [
   auditLinks: [],
   twitter: "https://x.com/stablecoin_xyz",
   wiki: null,
+  module: "sbc",
 },
 ] as PeggedAsset[];
