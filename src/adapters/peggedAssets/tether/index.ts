@@ -1166,6 +1166,9 @@ const adapter: PeggedIssuanceAdapter = {
   katana: {
     ethereum: bridgedSupply("katana", 6, chainContracts.katana.bridgedFromETH),
   },
+  monad: {
+    ethereum: bridgedSupply("monad", 6, chainContracts.monad.bridgedFromETH)
+  },
 };
 
 export default adapter;
