@@ -17,6 +17,9 @@ const chainContracts = {
   plume_mainnet: {
     issued: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
   },
+  monad: {
+    issued: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
+  }
 };
 
 import { addChainExports } from "../helper/getSupply";
