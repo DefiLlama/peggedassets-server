@@ -61,7 +61,14 @@ export const chainContracts: ChainContracts = {
     ],
     bridgedFromCelo: ["DHpoYejUDqzByb6HAdaLWF7KZvwUv2vWYDY9cTENNZui"], // allbridge
     bridgedFromFantom: ["Grk6b4UMRWkgyq4Y6S1BnNRF4hRgtnMFp7Sorkv6Ez4u"], // allbridge
-    unreleased: ["7VHUFJHWu2CuExkJcJrzhQPJ2oygupTWkL2A2For4BmE", "41zCUJsKk6cMB94DDtm99qWmyMZfp4GkAhhuz4xTwePu"], // study https://solscan.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v#holders
+    unreleased: [
+      "7VHUFJHWu2CuExkJcJrzhQPJ2oygupTWkL2A2For4BmE", 
+      "41zCUJsKk6cMB94DDtm99qWmyMZfp4GkAhhuz4xTwePu",
+      "42qwJUTbKf3D8ULfWadUSjnHf6pkJ4H1VjCcfSKHvDTN",  // wormhole to FOGO
+    ], // study https://solscan.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v#holders
+  },
+  fogo: {
+    bridgedFromSol: ['uSd2czE61Evaf76RNbq4KPpXnkiL3irdzgLFUMe3NoG']
   },
   arbitrum: {
     issued: ["0xaf88d065e77c8cc2239327c5edb3a432268e5831"],

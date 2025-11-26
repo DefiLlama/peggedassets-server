@@ -1,8 +1,13 @@
 const axios = require("axios");
 
-const endpoint = process.env.SOLANA_RPC ?? "https://api.mainnet-beta.solana.com";
+const endpoint = process.env.SOLANA_RPC ?? "https://api.mainnet-beta.solana.com"
+const getEndpoints = {
+  solana: () => process.env.SOLANA_RPC ?? "https://api.mainnet-beta.solana.com",
+  fogo: () => process.env.FOGO_RPC ?? "https://mainnet.fogo.io",
+}
 
-async function getTokenSupply(token) {
+async function getTokenSupply(token, chain = "solana") {
+  const endpoint = getEndpoints[chain]();
   const tokenSupply = await axios.post(endpoint, {
     jsonrpc: "2.0",
     id: 1,
@@ -12,7 +17,8 @@ async function getTokenSupply(token) {
   return tokenSupply.data.result.value.uiAmount;
 }
 
-async function getTokenBalance(token, account) {
+async function getTokenBalance(token, account, chain = "solana") {
+  const endpoint = getEndpoints[chain]();
   const tokenBalance = await axios.post(endpoint, {
     jsonrpc: "2.0",
     id: 1,

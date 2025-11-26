@@ -112,15 +112,23 @@ export function solanaMintedOrBridged(
   targets: string[],
   pegType?: PeggedAssetType
 ) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function () {
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     for (let target of targets) {
       const totalSupply = await solanaGetTokenSupply(target);
+      sumSingleBalance(balances, assetPegType, totalSupply, target, true);
+    }
+    return balances;
+  };
+}
+
+export function fogoMintedOrBridged(targets: string[], pegType?: PeggedAssetType) {
+  return async function () {
+    let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
+    for (let target of targets) {
+      const totalSupply = await solanaGetTokenSupply(target, "fogo");
       sumSingleBalance(balances, assetPegType, totalSupply, target, true);
     }
     return balances;

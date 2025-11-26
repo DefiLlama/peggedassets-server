@@ -9,6 +9,7 @@ import {
 import {
   bridgedSupply,
   cosmosSupply,
+  fogoMintedOrBridged,
   osmosisSupply,
   solanaMintedOrBridged,
   supplyInArbitrumBridge,
@@ -539,6 +540,9 @@ const adapter: PeggedIssuanceAdapter = {
     avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
     celo: solanaMintedOrBridged(chainContracts.solana.bridgedFromCelo),
     fantom: solanaMintedOrBridged(chainContracts.solana.bridgedFromFantom),
+  },
+  fogo: {
+    solana: fogoMintedOrBridged(chainContracts.fogo.bridgedFromSol),
   },
   bsc: {
     ethereum: sumMultipleBalanceFunctions(
