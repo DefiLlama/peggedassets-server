@@ -62,7 +62,7 @@ async function chainUnreleased(chain: string, decimals: number) {
     return balances;
   };
 }
-// usn-burn.near
+
 const adapter: PeggedIssuanceAdapter = {
   near: {
     minted: chainMinted("near", 18),
