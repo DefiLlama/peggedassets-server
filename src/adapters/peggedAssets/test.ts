@@ -7,6 +7,7 @@ import peggedAssets from "../../peggedData/peggedData";
 import { PeggedAssetIssuance, PeggedTokenBalance } from "../../types";
 import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
 import { PeggedIssuanceAdapter } from "./peggedAsset.type";
+import { DEAD_CHAINS } from "../../utils/deadChains";
 const {
   humanizeNumber,
 } = require("@defillama/sdk/build/computeTVL/humanizeNumber");
@@ -49,27 +50,33 @@ async function getPeggedAsset(
 ) {
   const maxRetries = 3;
   const timeoutMs = 3 * 60 * 1000; // 3 minutes
-  
+
   for (let i = 0; i < maxRetries; i++) {
     try {
       const chainApi = new sdk.ChainApi({ chain })
-      const balance = await Promise.race([
-        issuanceFunction(
-          chainApi,
-          ethBlock,
-          chainBlocks
-        ) as Promise<PeggedTokenBalance>,
-        new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), timeoutMs)
-        ),
-      ]);
-      
+      let balance: PeggedTokenBalance | null = null;
+      if (!DEAD_CHAINS.has(chain))
+        balance = await Promise.race([
+          issuanceFunction(
+            chainApi,
+            ethBlock,
+            chainBlocks
+          ) as Promise<PeggedTokenBalance>,
+          new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), timeoutMs)
+          ),
+        ])
+      else {
+        console.log(`[${adapterLabel}] Skipping RPC calls for dead chain ${chain}`);
+        balance = {} as PeggedTokenBalance;
+      }
+
       if (balance && Object.keys(balance).length === 0) {
         peggedBalances[chain] = peggedBalances[chain] || {};
         peggedBalances[chain][issuanceType] = { [pegType]: 0 } as any;
         return balance;
       }
-      
+
       if (!balance) {
         throw new Error(`Could not get pegged balance on chain ${chain}`);
       }
@@ -89,20 +96,20 @@ async function getPeggedAsset(
           Bridge data not found on chain ${chain}. Use sumSingleBalance from helper/generalUtil to add bridge data.`
         );
       }
-      
+
       peggedBalances[chain] = peggedBalances[chain] || {};
       peggedBalances[chain][issuanceType] = balance as PeggedTokenBalance;
-      
+
       if (issuanceType !== "minted" && issuanceType !== "unreleased") {
         bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
         bridgedFromMapping[issuanceType].push(balance as PeggedTokenBalance);
       }
-      
+
       return balance as PeggedTokenBalance;
-      
+
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
-      
+
       if (i >= maxRetries - 1) {
         console.warn(`[${adapterLabel}] Chain ${chain} failed after ${maxRetries} attempts:`, errorMessage);
         console.log(`[${adapterLabel}] Using snapshot fallback for failed chain ${chain}`);
@@ -145,7 +152,7 @@ async function getPeggedAsset(
           console.log(`[${adapterLabel}] No cached snapshot found for chain ${chain} (issuance: ${issuanceType})`);
           peggedBalances[chain] = peggedBalances[chain] || {};
           (peggedBalances as any)[chain][issuanceType] = { [pegType]: null as any };
-          
+
           console.error(`Getting ${issuanceType} on chain ${chain} failed.`);
           return null;
         } catch (cacheError) {
@@ -172,7 +179,7 @@ async function calcCirculating(
     async (chain) => {
       let circulating: PeggedTokenBalance = { [pegType]: 0 } as any;
       const chainIssuances = peggedBalances[chain];
-      
+
       Object.entries(chainIssuances).map(
         ([issuanceType, peggedTokenBalance]) => {
           const balance = (peggedTokenBalance as any)[pegType];
@@ -188,7 +195,7 @@ async function calcCirculating(
           }
         }
       );
-      
+
       if (bridgedFromMapping[chain]) {
         bridgedFromMapping[chain].forEach((peggedTokenBalance) => {
           const balance = (peggedTokenBalance as any)[pegType];
@@ -199,7 +206,7 @@ async function calcCirculating(
           (circulating as any)[pegType]! -= balance;
         });
       }
-      
+
       if ((circulating as any)[pegType]! < 0) {
         throw new Error(
           `Pegged asset on chain ${chain} has negative circulating amount`
@@ -215,7 +222,7 @@ async function calcCirculating(
   (peggedBalances as any)["totalCirculating"]["unreleased"] = { [pegType]: 0 } as any;
   let peggedTotalPromises = Object.keys(peggedBalances).map((chain) => {
     const circulating = (peggedBalances as any)[chain].circulating || { [pegType]: 0 };
-    const unreleased  = (peggedBalances as any)[chain].unreleased  || { [pegType]: 0 };
+    const unreleased = (peggedBalances as any)[chain].unreleased || { [pegType]: 0 };
     if (chain !== "totalCirculating") {
       (peggedBalances as any)["totalCirculating"]["circulating"][pegType]! +=
         circulating[pegType] || 0;
@@ -233,25 +240,25 @@ if (process.argv.length < 3) {
 }
 
 const passedFile = path.resolve(process.cwd(), process.argv[2]);
-const dummyFn = () => {};
+const dummyFn = () => { };
 const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
 
 function getStablecoinIdFromPath(filePath: string): string {
   const pathParts = filePath.split(path.sep);
   const stablecoinDir = pathParts[pathParts.length - 1];
-  
+
   if (/^\d+$/.test(stablecoinDir)) {
     return stablecoinDir;
   }
-  
+
   const peggedAsset = peggedAssets.find((pegged) => {
     return pegged.gecko_id === stablecoinDir;
   });
-  
+
   if (peggedAsset) {
     return peggedAsset.id;
   }
-  
+
   console.warn(`[WARNING] Could not determine stablecoin ID for path: ${filePath}, using folder name: ${stablecoinDir}`);
   return stablecoinDir;
 }
@@ -289,7 +296,7 @@ function getAdapterLabelFromPath(filePath: string): string {
   if (!chains.includes("ethereum")) {
     chains.push("ethereum");
   }
-  
+
   const ethBlock = chainBlocks.ethereum;
 
   let pegType = process.argv[3];
@@ -298,7 +305,7 @@ function getAdapterLabelFromPath(filePath: string): string {
   }
   let peggedBalances: PeggedAssetIssuance = {};
   let bridgedFromMapping: BridgeMapping = {};
-  
+
   const extrapolationMetadata = {
     extrapolated: false,
     extrapolatedChains: [] as Array<{ chain: string; timestamp: number }>
@@ -346,7 +353,7 @@ function getAdapterLabelFromPath(filePath: string): string {
     }
   );
   await Promise.all(peggedBalancesPromises);
-  
+
   await Promise.race([
     calcCirculating(peggedBalances, bridgedFromMapping, pegType),
     new Promise<never>((_, reject) =>
@@ -369,12 +376,12 @@ function getAdapterLabelFromPath(filePath: string): string {
     if (chain === "extrapolated" || chain === "extrapolatedChains") {
       return;
     }
-    
-    const item: any = { chain}
+
+    const item: any = { chain }
     if (chain !== "totalCirculating") {
       displayTable.push(item)
       console.log(`--- ${chain} ---`);
-      
+
       if (issuances && typeof issuances === 'object') {
         Object.entries(issuances)
           .filter(([_, issuance]) => issuance && typeof issuance === 'object')
@@ -399,7 +406,7 @@ function getAdapterLabelFromPath(filePath: string): string {
   console.log(`------ Total Circulating ------`);
   const totalItem: any = { chain: "Total Circulating" }
   Object.entries((peggedBalances as any).totalCirculating).forEach(
-    ([issuanceType, issuance]) =>{
+    ([issuanceType, issuance]) => {
       totalItem[issuanceType] = humanizeNumber((issuance as any)[pegType]);
       console.log(
         `Total ${issuanceType}`.padEnd(25, " "),
@@ -407,12 +414,12 @@ function getAdapterLabelFromPath(filePath: string): string {
       )
     }
   );
-  
+
   if (extrapolationMetadata.extrapolated) {
     console.log(`\n------ EXTRAPOLATION INFO ------`);
     console.log(`⚠️  Some chains used extrapolated data from cache`);
     console.log(`Extrapolated chains details:`);
-    
+
     extrapolationMetadata.extrapolatedChains?.forEach((extrapolatedChain: any) => {
       const d = new Date(extrapolatedChain.timestamp * 1000);
       const formattedDate = d.toISOString().slice(0, 10); // YYYY-MM-DD
@@ -422,12 +429,13 @@ function getAdapterLabelFromPath(filePath: string): string {
     console.log(`\n------ NO EXTRAPOLATION ------`);
     console.log(`✅ All chains used real-time data`);
   }
-  
-  console.log(`\n[DEBUG] Final extrapolation state:`, {
-    extrapolated: extrapolationMetadata.extrapolated,
-    extrapolatedChainsCount: extrapolationMetadata.extrapolatedChains?.length || 0,
-    extrapolationMetadata: extrapolationMetadata.extrapolatedChains
-  });
+
+  if (extrapolationMetadata?.extrapolated)
+    console.log(`\n[DEBUG] Final extrapolation state:`, {
+      extrapolated: extrapolationMetadata.extrapolated,
+      extrapolatedChainsCount: extrapolationMetadata.extrapolatedChains?.length || 0,
+      extrapolationMetadata: extrapolationMetadata.extrapolatedChains
+    });
   displayTable.push(totalItem)
   console.table(displayTable);
   process.exit(0);
