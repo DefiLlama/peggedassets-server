@@ -893,7 +893,7 @@ const adapter: PeggedIssuanceAdapter = {
     arbitrum: suiBridged("ARBITRUM_BRIDGED"),
   },
   starknet: {
-    minted: starknetMinted,
+    // minted: starknetMinted,
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.starknet.bridgeOnETH[0],
@@ -1005,9 +1005,9 @@ const adapter: PeggedIssuanceAdapter = {
   wemix: {
     ethereum: bridgedSupply("wemix", 6, chainContracts.wemix.bridgedFromETH),
   },
-  kroma: {
+/*   kroma: {
     ethereum: bridgedSupply("kroma", 6, chainContracts.kroma.bridgedFromETH),
-  },
+  }, */
   berachain: {
     ethereum: bridgedSupply("berachain", 6, chainContracts.berachain.bridgedFromETH),
   },
