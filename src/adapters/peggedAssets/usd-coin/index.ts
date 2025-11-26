@@ -7,6 +7,7 @@ import {
   sumSingleBalance,
 } from "../helper/generalUtil";
 import {
+  addChainExports,
   bridgedSupply,
   cosmosSupply,
   fogoMintedOrBridged,
@@ -502,6 +503,10 @@ async function nibiruBridged() {
   };
 }
 
+const starknetMinted = addChainExports({
+  starknet: { issued: ['0x033068f6539f8e6e6b131e6b2b814e6c34a5224bc66947c47dab9dfee93b35fb'] }
+}).starknet.minted
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -888,6 +893,7 @@ const adapter: PeggedIssuanceAdapter = {
     arbitrum: suiBridged("ARBITRUM_BRIDGED"),
   },
   starknet: {
+    minted: starknetMinted,
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.starknet.bridgeOnETH[0],
