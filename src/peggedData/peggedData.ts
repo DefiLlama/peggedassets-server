@@ -5905,7 +5905,7 @@ export default [
     url: "https://app.nerite.org/",
     description: "USND is an over-collateralized, governance-minimized stablecoin native to Arbitrum and fully backed by crypto collateral. USND also supports token streaming via Superfluid to enable real-time yield distribution.",
     mintRedeemDescription: "Users open vaults (“troves”) and deposit accepted collateral to mint USND up to their chosen collateral ratio. To unlock collateral, borrowers repay and burn USND, or anyone can redeem USND directly for $1 of the lowest-rate collateral, ensuring the peg.",
-    onCoinGecko: true,
+    onCoinGecko: false,
     gecko_id: "us-nerite-dollar",
     cmcId: null,
     pegType: "peggedUSD",
