@@ -1,8 +1,8 @@
 import * as sdk from "@defillama/sdk";
 import { alertOutdated } from "../alertOutdated";
+import { removeBlock } from "../peggedAssets/storePeggedAssets/assetBlocking";
 import storePeggedAssets from "./../peggedAssets/storePeggedAssets/storePegged";
 import peggedAssets from "./../peggedData/peggedData";
-import { removeBlock } from "../peggedAssets/storePeggedAssets/assetBlocking";
 
 const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json'
 
@@ -71,6 +71,8 @@ const handler = async () => {
   await removeBlock(asset.id);
   console.log(`✅ Removed any existing block for asset ID: ${asset.id}`);
 
+  process.env.FORCE_UPDATE = 'true';
+
   await initializeSdkInternalCache();
   
   try {
@@ -92,6 +94,7 @@ const handler = async () => {
 };
 
 handler().catch(console.error).then(async () => {
+  delete process.env.FORCE_UPDATE;
   console.log("✅ Done");
   console.log("💾 Saving cache");
   await saveSdkInternalCache();
