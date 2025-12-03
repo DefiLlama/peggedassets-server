@@ -2252,7 +2252,7 @@ export default [
     url: "https://dam.finance",
     description:
       "d2o is an omnichain native stablecoin with a soft-peg to the United States Dollar",
-    mintRedeemDescription: "Add colateral in order to mint d2O.",
+    mintRedeemDescription: "Add collateral in order to mint d2O.",
     onCoinGecko: "false",
     gecko_id: null,
     module: "dam-finance",
