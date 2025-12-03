@@ -3103,6 +3103,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/_mynth_",
     wiki: "https://www.mynth.ai/faq",
+    deprecated: true
   },
   {
     id: "149",
