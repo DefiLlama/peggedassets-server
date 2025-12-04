@@ -3,7 +3,7 @@ import {addChainExports, solanaMintedOrBridged} from "../helper/getSupply";
 
 const chainContracts = {
     bsc: {
-        bridgedFromETH: "0xeA953eA6634d55dAC6697C436B1e81A679Db5882",
+        issued: "0xeA953eA6634d55dAC6697C436B1e81A679Db5882",
     },
 }
 
