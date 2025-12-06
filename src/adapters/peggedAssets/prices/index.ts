@@ -40,6 +40,7 @@ export default async function getCurrentPeggedPrice(
   priceSource: PriceSource
 ): Promise<number | null> {
   if (token === "terrausd") return 0
+  if (token === "m-2") return 1
   if (priceSource === "defillama" || priceSource === "coingecko") {
     for (let i = 0; i < 5; i++) {
       try {
