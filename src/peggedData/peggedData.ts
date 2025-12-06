@@ -930,7 +930,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama", 
     auditLinks: null,
-    deadFrom: "2022-08-15",
+    deadFrom: "2022-08-15", 
     twitter: "https://twitter.com/AcalaNetwork",
     wiki: "https://wiki.defillama.com/wiki/Acala",
   },
@@ -6461,6 +6461,7 @@ export default [
   auditLinks: ["https://uspd.io/docs/uspd/audit"],
   twitter: "https://x.com/USPD_io",
   wiki: "https://uspd.io/docs/uspd",
+  deadFrom: "2025-12-04",
 },
 {
   id: "316",
