@@ -20,6 +20,18 @@ const chainContracts = {
 };
 
 import { addChainExports } from "../helper/getSupply";
-const adapter = addChainExports(chainContracts);
+const adapter = addChainExports(chainContracts)
+let ethMinted = adapter.ethereum.minted
+adapter.ethereum.minted = async function(...args) {
+    const chainApi = args[0];
+
+    // USPD was hacked
+    if (!chainApi.timestamp || chainApi.timestamp * 1000 > +new Date("2025-12-01T00:00:00Z").getTime()) {
+        return {"peggedUSD":2000,"bridges":{"issued":{"not-found":{"amount":2000}}}}
+    }
+    const balances = await ethMinted(...args);
+    return balances;
+} as any
+
 export default adapter;
 
