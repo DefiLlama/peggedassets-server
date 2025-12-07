@@ -4442,13 +4442,13 @@ export default [
     mintRedeemDescription:
       "In order to generate M, Minters must have a sufficient off-chain balance of Eligible Collateral which is represented on-chain by a frequently updated and validated number, known as the on-chain Collateral Value",
     onCoinGecko: "true",
-    gecko_id: "m-2",
+    gecko_id: "m-2-wrong",
     module: "m-by-m^0",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     auditLinks: null,
-    priceSource: "defillama",
+    priceSource: "coingecko",
     twitter: "https://x.com/m0foundation",
     wiki: "https://docs.m0.org/portal/overview/whitepaper/i.-introduction"
   },
