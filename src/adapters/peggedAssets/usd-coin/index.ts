@@ -957,6 +957,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),
   },
   hyperliquid: {
+    minted: chainMinted("hyperliquid", 6),
     arbitrum: supplyInArbitrumBridge(
       chainContracts.arbitrum.issued[0],
       chainContracts.hyperliquid.bridgeOnARB[0],

@@ -414,6 +414,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x836d275563bAb5E93Fd6Ca62a95dB7065Da94342"],
   },
   hyperliquid: {
+    issued: ["0xb88339CB7199b77E23DB6E890353E22632Ba630f"],
     bridgeOnARB: ["0x2Df1c51E09aECF9cacB7bc98cB1742757f163dF7"],
   },
   sonic: {
