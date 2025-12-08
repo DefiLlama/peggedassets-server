@@ -57,7 +57,10 @@ export const normalizedChainReplacements = {
   "hyperliquid-l1": "hyperliquid",
   "op%20mainnet": "optimism",
   "op mainnet": "optimism",
-  "op-mainnet": "optimism"
+  "op-mainnet": "optimism",
+  "plume%20mainnet": "plume_mainnet",
+  "plume mainnet": "plume_mainnet",
+  "plume-mainnet": "plume_mainnet"
 } as {
   [chain: string]: string;
 };
