@@ -23,21 +23,19 @@ export function craftStablecoinChainsResponse() {
         if (nonChains.includes(normalizedChain)) return;
         if (processedNormalizedChains.has(normalizedChain)) return;
         processedNormalizedChains.add(normalizedChain);
-        const chainName = getChainDisplayName(normalizedChain, true);
-        if (nonChains.includes(chainName)) return;
-        chainCirculating[chainName] = chainCirculating[chainName] || {};
+        chainCirculating[normalizedChain] = chainCirculating[normalizedChain] || {};
         let circulating = issuances.circulating;
-        chainCirculating[chainName][pegType] =
-          chainCirculating[chainName][pegType] ?? 0;
-        chainCirculating[chainName][pegType] += (circulating?.[pegType] ?? 0) * price;
+        chainCirculating[normalizedChain][pegType] =
+          chainCirculating[normalizedChain][pegType] ?? 0;
+        chainCirculating[normalizedChain][pegType] += (circulating?.[pegType] ?? 0) * price;
       });
     })
   const chainData = Object.entries(chainCirculating)
-    .map(([chainName, chainCirculating]) => ({
-      gecko_id: chainCoingeckoIds[chainName]?.geckoId ?? null,
+    .map(([normalizedChain, chainCirculating]) => ({
+      gecko_id: chainCoingeckoIds[getChainDisplayName(normalizedChain, true)]?.geckoId ?? null,
       totalCirculatingUSD: chainCirculating,
-      tokenSymbol: chainCoingeckoIds[chainName]?.symbol ?? null,
-      name: chainName,
+      tokenSymbol: chainCoingeckoIds[getChainDisplayName(normalizedChain, true)]?.symbol ?? null,
+      name: getChainDisplayName(normalizedChain, true),
     }))
   return chainData;
 }

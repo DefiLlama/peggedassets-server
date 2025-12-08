@@ -4,6 +4,7 @@ import {
     addToChains,
     getChainDisplayName,
     nonChains,
+    normalizeChain,
 } from "../../src/utils/normalizeChain";
 import { cache } from "../cache";
 import { storeRouteData } from "../file-cache";
@@ -69,7 +70,8 @@ function craftProtocolsResponse(
         if (nonChains.includes(chain)) {
           return;
         }
-        const chainDisplayName = getChainDisplayName(chain, useNewChainNames);
+        const normalizedChain = normalizeChain(chain);
+        const chainDisplayName = getChainDisplayName(normalizedChain, useNewChainNames);
         chainCirculating[chainDisplayName] =
           chainCirculating[chainDisplayName] || {};
         const currentCirculatingUSD = {} as { [key: string]: number };
