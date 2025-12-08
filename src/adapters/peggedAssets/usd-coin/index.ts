@@ -932,7 +932,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("mantle", 6, chainContracts.mantle.bridgedFromETH),
   },
   linea: {
-    ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
+    minted: chainMinted("linea", 6),
   },
   injective: {
     noble: cosmosSupply('injective', ['ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E'], 6, 'noble'),
@@ -965,7 +965,8 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   sonic: {
-    ethereum: bridgedSupply("sonic", 6, chainContracts.sonic.bridgedFromETH),
+    minted: chainMinted("sonic", 6),
+  //  ethereum: bridgedSupply("sonic", 6, chainContracts.sonic.bridgedFromETH), fix wrongly assigned as bridged
   },
   soneium: {
     ethereum: bridgedSupply("soneium", 6, chainContracts.soneium.bridgedFromETH),
@@ -986,7 +987,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH),
   },
   wc: {
-    ethereum: bridgedSupply("wc", 6, chainContracts.wc.bridgedFromETH),
+    minted: chainMinted("wc", 6),
   },
   shape: {
     ethereum: bridgedSupply("shape", 6, chainContracts.shape.bridgedFromETH),
@@ -1025,6 +1026,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("bob", 6, chainContracts.bob.bridgedFromETH),
   },
   ink: {
+    minted: chainMinted("ink", 6),
     ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH, "stargate"),
   },
   nibiru: {
@@ -1066,6 +1068,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("hemi", 6, chainContracts.hemi.bridgedFromETH, "stargate"),
   },
   plume_mainnet: {
+    minted: chainMinted("plume_mainnet", 6),
     ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
   },
   story: {

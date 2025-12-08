@@ -394,9 +394,7 @@ export const chainContracts: ChainContracts = {
     ],
   },
   linea: {
-    bridgedFromETH: [
-      "0x176211869cA2b568f2A7D4EE941E073a821EE1ff", // USDC
-    ],
+    issued: ["0x176211869cA2b568f2A7D4EE941E073a821EE1ff"],
   },
   flow: {
     bridgedFromETH: [
@@ -418,7 +416,7 @@ export const chainContracts: ChainContracts = {
     bridgeOnARB: ["0x2Df1c51E09aECF9cacB7bc98cB1742757f163dF7"],
   },
   sonic: {
-    bridgedFromETH: ["0x29219dd400f2bf60e5a23d13be72b486d4038894"],
+    issued: ["0x29219dd400f2bf60e5a23d13be72b486d4038894"],
   },
   soneium: {
     bridgedFromETH: ["0xbA9986D2381edf1DA03B0B9c1f8b00dc4AacC369"],
@@ -445,7 +443,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x3b952c8C9C44e8Fe201e2b26F6B2200203214cfF"],
   },
   wc: {
-    bridgedFromETH: ["0x79A02482A880bCE3F13e09Da970dC34db4CD24d1"],
+    issued: ["0x79A02482A880bCe3F13E09da970dC34dB4cD24D1"],
   },
   shape: {
     bridgedFromETH: ["0xdb7DD8B00EdC5778Fe00B2408bf35C7c054f8BBe"],
@@ -478,6 +476,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xe75D0fB2C24A55cA1e3F96781a2bCC7bdba058F0"],
   },
   ink: {
+    issued: ["0x2D270e6886d130D724215A266106e6832161EAEd"],
     bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"]
   },
   sei: {
@@ -507,6 +506,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xad11a8BEb98bbf61dbb1aa0F6d6F2ECD87b35afA"],
   },
   plume_mainnet: {
+    issued: ["0x222365EF19F7947e5484218551B56bb3965Aa7aF"],
     bridgedFromETH: [
       "0x78add880a697070c1e765ac44d65323a0dcce913", // stargate
       //"0x54FD4da2Fa19Cf0f63d8f93A6EA5BEd3F9C042C6", // deprecated - arbitrum native bridge
