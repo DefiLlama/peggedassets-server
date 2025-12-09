@@ -10,7 +10,7 @@ export const chainContracts: ChainContracts = {
   polygon: {
     bridgeOnETH: ["0x40ec5B33f54e0E8A33A975908C5BA1c14e5BbbDf"],
     bridgedFromETH: [
-      "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+      "0xc2132d05d31c914a87c6611c10748aeb04b58e8f", // usdt0
       "0x9417669fBF23357D2774e9D421307bd5eA1006d2", // wormhole
       "0xceed2671d8634e3ee65000edbbee66139b132fbf", // axelar
     ],
@@ -252,6 +252,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0xfe97e85d13abd9c1c33384e796f10b73905637ce", // celer
       "0x8b8689c7f3014a4d86e4d1d0daaf74a47f5e0f27", // (converted address) shuttleflow
+      "0xaf37E8B6C9ED7f6318979f56Fc287d76c30847ff", // usdt0
     ],
   },
   ontology: {
@@ -354,6 +355,7 @@ export const chainContracts: ChainContracts = {
   mantle: {
     bridgedFromETH: [
       "0x201EBa5CC46D216Ce6DC03F6a759e8E766e956aE", // USDT
+      "0x779Ded0c9e1022225f8E0630b35a9b54bE713736", // USDT0
     ],
   },
   linea: {
@@ -425,5 +427,11 @@ export const chainContracts: ChainContracts = {
   },
   monad: {
     bridgedFromETH: ["0xe7cd86e13AC4309349F30B3435a9d337750fC82D"], // USDT0
+  },
+  stable: {
+    bridgedFromETH: ["0x779Ded0c9e1022225f8E0630b35a9b54bE713736"],
+  },
+  xlayer: {
+    bridgedFromETH: ["0x779Ded0c9e1022225f8E0630b35a9b54bE713736"], // usdt0
   }
 };
