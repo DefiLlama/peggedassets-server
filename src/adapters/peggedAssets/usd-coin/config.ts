@@ -542,5 +542,8 @@ export const chainContracts: ChainContracts = {
   },
   monad: {
     issued: ["0x754704Bc059F8C67012fEd69BC8A327a5aafb603"],
+  },
+  etherlink: {
+    bridgedFromETH: ["0x796Ea11Fa2dD751eD01b53C372fFDB4AAa8f00F9"], // Wrapped Asset Bridge
   }
 };

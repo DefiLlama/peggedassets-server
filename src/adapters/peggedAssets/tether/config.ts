@@ -433,5 +433,8 @@ export const chainContracts: ChainContracts = {
   },
   xlayer: {
     bridgedFromETH: ["0x779Ded0c9e1022225f8E0630b35a9b54bE713736"], // usdt0
+  },
+  etherlink: {
+    bridgedFromETH: ["0x2C03058C8AFC06713be23e58D2febC8337dbfE6A"], // Wrapped Asset Bridge
   }
 };
