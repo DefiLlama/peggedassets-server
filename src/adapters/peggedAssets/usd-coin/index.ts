@@ -1101,8 +1101,8 @@ const adapter: PeggedIssuanceAdapter = {
   monad: {
     minted: chainMinted("monad", 6),
   },
-  etherlink: {
-    ethereum: bridgedSupply("etlk", 6, chainContracts.etherlink.bridgedFromETH, "wab"), // Etherlink's Wrapped Asset Bridge
+  etlk: {
+    ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab"), // Etherlink's Wrapped Asset Bridge
   },
 };
 
