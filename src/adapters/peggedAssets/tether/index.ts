@@ -1181,8 +1181,8 @@ const adapter: PeggedIssuanceAdapter = {
   xlayer: {
     ethereum: bridgedSupply("xlayer", 6, chainContracts.xlayer.bridgedFromETH)
   },
-  etherlink: {
-    ethereum: bridgedSupply("etlk", 6, chainContracts.etherlink.bridgedFromETH, "wab") // Etherlink's Wrapped Asset Bridge
+  etlk: {
+    ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab") // Etherlink's Wrapped Asset Bridge
   },
 };
 
