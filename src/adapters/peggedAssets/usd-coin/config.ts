@@ -354,6 +354,7 @@ export const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x0de7b091A21BD439bdB2DfbB63146D9cEa21Ea83"], // PepeTeam Bridge
   },
   starknet: {
+    issued: ["0x033068F6539f8e6e6b131e6B2B814e6c34A5224bC66947c47DaB9dFeE93b35fb"], //native usdc minted on starknet
     bridgeOnETH: ["0xF6080D9fbEEbcd44D89aFfBFd42F098cbFf92816"], // starknet bridge
   },
   mode: {
