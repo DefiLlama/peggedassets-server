@@ -7,7 +7,6 @@ import {
   sumSingleBalance,
 } from "../helper/generalUtil";
 import {
-  addChainExports,
   bridgedSupply,
   cosmosSupply,
   fogoMintedOrBridged,
@@ -27,6 +26,7 @@ import {
 } from "../helper/ontology";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import * as sui from "../helper/sui";
+import * as starknet from "../helper/starknet";
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
@@ -199,6 +199,15 @@ async function suiMinted(): Promise<Balances> {
     "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
   );
   sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
+  return balances;
+}
+
+async function starknetMinted(): Promise<Balances> {
+  let balances = {} as Balances;
+  for (let issued of chainContracts.starknet.issued) {
+    const supply = await starknet.getTotalSupply(issued);
+    sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
+  }
   return balances;
 }
 
@@ -502,10 +511,6 @@ async function nibiruBridged() {
     return balances;
   };
 }
-
-const starknetMinted = addChainExports({
-  starknet: { issued: ['0x033068f6539f8e6e6b131e6b2b814e6c34a5224bc66947c47dab9dfee93b35fb'] }
-}).starknet.minted
 
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
@@ -893,7 +898,7 @@ const adapter: PeggedIssuanceAdapter = {
     arbitrum: suiBridged("ARBITRUM_BRIDGED"),
   },
   starknet: {
-    // minted: starknetMinted,
+    minted: starknetMinted,
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.starknet.bridgeOnETH[0],
