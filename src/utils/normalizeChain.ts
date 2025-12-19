@@ -1209,6 +1209,15 @@ export const chainCoingeckoIds = {
     twitter: "GlueNet",
     url: "https://glue.net/",
   },
+  "Etherlink": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    twitter: "etherlink",
+    url: "https://www.etherlink.com",
+    chainId: 42793,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1531,6 +1540,8 @@ export function getChainDisplayName(
       return "Nero"
     case "glue":
       return "Glue"
+    case "etlk":
+      return "Etherlink"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
