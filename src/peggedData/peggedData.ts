@@ -6733,7 +6733,7 @@ export default [
 {
   id: "330",
   name: "Gaming XP USD",
-  address: "0xcc18b41a0f63c67f17f23388c848aec67b583422",
+  address: "avax:0xcc18b41a0f63c67f17f23388c848aec67b583422",
   symbol: "xpUSD",
   url: "https://growthprotocol.xyz/",
   description: "xpUSD, developed by The Growth Protocol (TGP), is the universal stablecoin powering a new gaming economy, enabling players to earn tokens across games and instantly convert them to xpUSD for real value, while trading skins, NFTs, and in-game assets with true liquidity across PC and mobile ecosystems—unlocking previously siloed items in walled gardens. It provides real ownership for players, boosts retention and engagement through cash-out options, and offers publishers instant xpUSD-backed financing for growth, plus new revenue layers, all unified on a dedicated gaming-optimized layer.",
