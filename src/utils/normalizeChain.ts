@@ -1238,6 +1238,7 @@ chainCoingeckoIds["Move"] = chainCoingeckoIds["Movement"];
 chainCoingeckoIds["Hyperliquid"] = chainCoingeckoIds["Hyperliquid L1"];
 chainCoingeckoIds["Optimism"] = chainCoingeckoIds["OP Mainnet"];
 chainCoingeckoIds["Ripple"] = chainCoingeckoIds["XRPL"];
+chainCoingeckoIds["Etlk"] = chainCoingeckoIds["Etherlink"];
 
 export const extraSections = [
   "staking",
@@ -1277,6 +1278,8 @@ export function transformNewChainName(chain: string) {
       return "ZKsync Era";
     case "Ripple":
       return "XRPL";
+    case "Etlk":
+      return "Etherlink";
     default:
       return chain;
   }
