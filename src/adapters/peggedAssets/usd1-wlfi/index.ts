@@ -1,4 +1,7 @@
 const chainContracts = {
+  abcore: {
+    issued: ["0x111111d2bf19e43c34263401e0cad979ed1cdb61"],
+  },
   bsc: {
     issued: ["0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d"],
   },
