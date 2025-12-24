@@ -1277,8 +1277,6 @@ export function transformNewChainName(chain: string) {
       return "ZKsync Era";
     case "Ripple":
       return "XRPL";
-    case "Etlk":
-      return "Etherlink";
     default:
       return chain;
   }
