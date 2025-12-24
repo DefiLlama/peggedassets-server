@@ -1213,10 +1213,6 @@ export const chainCoingeckoIds = {
     geckoId: null,
     symbol: null,
     cmcId: null,
-    categories: ["EVM"],
-    twitter: "etherlink",
-    url: "https://www.etherlink.com",
-    chainId: 42793,
   },
 } as {
   [chain: string]: {
