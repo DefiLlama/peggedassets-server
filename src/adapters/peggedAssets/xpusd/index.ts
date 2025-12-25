@@ -1,6 +1,6 @@
 const chainContracts = {
-  starknet: {
-    issued: ["0x0498edfaf50ca5855666a700c25dd629d577eb9afccdf3b5977aec79aee55ada"],
+  avax: {
+    issued: "0xcc18b41a0f63c67f17f23388c848aec67b583422",
   },
 };
 

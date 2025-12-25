@@ -90,7 +90,7 @@ async function getPeggedAssetsData() {
   return cache.peggedAssetsData
 }
 
-function replaceAvalanceAvax(obj) {
+function replaceAvalanceAvax(obj: any) {
   if (typeof obj !== 'object' || obj === null) {
     return; // Not an object or is null, do nothing
   }
@@ -201,8 +201,6 @@ export function craftChartsResponse(
    */
   const historicalPeggedBalances = peggedAssets.map((pegged) => {
     if (peggedID && pegged.id !== peggedID) return;
-    // Skip double-counted assets for chain and all charts
-    if (!peggedID && pegged.doublecounted === true) return;
     const chainMap = assetChainMap[pegged.id];
     if (!chainMap || chain !== "all" && !chainMap?.has(chain)) return; // if the coin is not found an given chain or coin has no data, dont process it
     if (!_assetCache[pegged.id]) addToAssetCache(pegged);
@@ -288,7 +286,15 @@ export function craftChartsResponse(
         itemBalance.bridgedTo = { [pegType]: 0 };
         itemBalance.minted = { [pegType]: 0 };
       } else {
-        const chainData = item[normalizedChain];
+        let chainData: any = null;
+        for (const [itemChain, data] of Object.entries(item)) {
+          if (itemChain === 'SK' || itemChain === 'totalCirculating') continue;
+          const itemChainNormalized = normalizeChain(itemChain);
+          if (itemChainNormalized === normalizedChain) {
+            chainData = data;
+            break;
+          }
+        }
       
         if (chainData?.circulating) {
           const itemPegType = Object.keys(chainData.circulating)?.[0];

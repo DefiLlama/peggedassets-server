@@ -1081,7 +1081,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("taiko", 6, chainContracts.taiko.bridgedFromETH),
   },
   mantle: {
-    ethereum: bridgedSupply("mantle", 6, chainContracts.mantle.bridgedFromETH),
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("mantle", 6, [chainContracts.mantle.bridgedFromETH[0]]),
+        bridgedSupply("mantle", 6, [chainContracts.mantle.bridgedFromETH[1]]),
+      ],
+      "peggedUSD"
+    ),
   },
   linea: {
     ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
@@ -1165,6 +1171,18 @@ const adapter: PeggedIssuanceAdapter = {
   },
   katana: {
     ethereum: bridgedSupply("katana", 6, chainContracts.katana.bridgedFromETH),
+  },
+  monad: {
+    ethereum: bridgedSupply("monad", 6, chainContracts.monad.bridgedFromETH)
+  },
+  stable: {
+    ethereum: bridgedSupply("stable", 6, chainContracts.stable.bridgedFromETH)
+  },
+  xlayer: {
+    ethereum: bridgedSupply("xlayer", 6, chainContracts.xlayer.bridgedFromETH)
+  },
+  etlk: {
+    ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab") // Etherlink's Wrapped Asset Bridge
   },
 };
 

@@ -61,7 +61,14 @@ export const chainContracts: ChainContracts = {
     ],
     bridgedFromCelo: ["DHpoYejUDqzByb6HAdaLWF7KZvwUv2vWYDY9cTENNZui"], // allbridge
     bridgedFromFantom: ["Grk6b4UMRWkgyq4Y6S1BnNRF4hRgtnMFp7Sorkv6Ez4u"], // allbridge
-    unreleased: ["7VHUFJHWu2CuExkJcJrzhQPJ2oygupTWkL2A2For4BmE", "41zCUJsKk6cMB94DDtm99qWmyMZfp4GkAhhuz4xTwePu"], // study https://solscan.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v#holders
+    unreleased: [
+      "7VHUFJHWu2CuExkJcJrzhQPJ2oygupTWkL2A2For4BmE", 
+      "41zCUJsKk6cMB94DDtm99qWmyMZfp4GkAhhuz4xTwePu",
+      "42qwJUTbKf3D8ULfWadUSjnHf6pkJ4H1VjCcfSKHvDTN",  // wormhole to FOGO
+    ], // study https://solscan.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v#holders
+  },
+  fogo: {
+    bridgedFromSol: ['uSd2czE61Evaf76RNbq4KPpXnkiL3irdzgLFUMe3NoG']
   },
   arbitrum: {
     issued: ["0xaf88d065e77c8cc2239327c5edb3a432268e5831"],
@@ -347,6 +354,7 @@ export const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x0de7b091A21BD439bdB2DfbB63146D9cEa21Ea83"], // PepeTeam Bridge
   },
   starknet: {
+    issued: ["0x033068F6539f8e6e6b131e6B2B814e6c34A5224bC66947c47DaB9dFeE93b35fb"], //native usdc minted on starknet
     bridgeOnETH: ["0xF6080D9fbEEbcd44D89aFfBFd42F098cbFf92816"], // starknet bridge
   },
   mode: {
@@ -387,9 +395,7 @@ export const chainContracts: ChainContracts = {
     ],
   },
   linea: {
-    bridgedFromETH: [
-      "0x176211869cA2b568f2A7D4EE941E073a821EE1ff", // USDC
-    ],
+    issued: ["0x176211869cA2b568f2A7D4EE941E073a821EE1ff"],
   },
   flow: {
     bridgedFromETH: [
@@ -407,10 +413,11 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x836d275563bAb5E93Fd6Ca62a95dB7065Da94342"],
   },
   hyperliquid: {
+    issued: ["0xb88339CB7199b77E23DB6E890353E22632Ba630f"],
     bridgeOnARB: ["0x2Df1c51E09aECF9cacB7bc98cB1742757f163dF7"],
   },
   sonic: {
-    bridgedFromETH: ["0x29219dd400f2bf60e5a23d13be72b486d4038894"],
+    issued: ["0x29219dd400f2bf60e5a23d13be72b486d4038894"],
   },
   soneium: {
     bridgedFromETH: ["0xbA9986D2381edf1DA03B0B9c1f8b00dc4AacC369"],
@@ -437,7 +444,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x3b952c8C9C44e8Fe201e2b26F6B2200203214cfF"],
   },
   wc: {
-    bridgedFromETH: ["0x79A02482A880bCE3F13e09Da970dC34db4CD24d1"],
+    issued: ["0x79A02482A880bCe3F13E09da970dC34dB4cD24D1"],
   },
   shape: {
     bridgedFromETH: ["0xdb7DD8B00EdC5778Fe00B2408bf35C7c054f8BBe"],
@@ -470,6 +477,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xe75D0fB2C24A55cA1e3F96781a2bCC7bdba058F0"],
   },
   ink: {
+    issued: ["0x2D270e6886d130D724215A266106e6832161EAEd"],
     bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"]
   },
   sei: {
@@ -499,6 +507,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xad11a8BEb98bbf61dbb1aa0F6d6F2ECD87b35afA"],
   },
   plume_mainnet: {
+    issued: ["0x222365EF19F7947e5484218551B56bb3965Aa7aF"],
     bridgedFromETH: [
       "0x78add880a697070c1e765ac44d65323a0dcce913", // stargate
       //"0x54FD4da2Fa19Cf0f63d8f93A6EA5BEd3F9C042C6", // deprecated - arbitrum native bridge
@@ -532,4 +541,10 @@ export const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x53E82ABbb12638F09d9e624578ccB666217a765e"], // vb usdc (origin) on ethmainnet
     bridgedFromETH: ["0x203A662b0BD271A6ed5a60EdFbd04bFce608FD36"], // vb usdc on katana
   },
+  monad: {
+    issued: ["0x754704Bc059F8C67012fEd69BC8A327a5aafb603"],
+  },
+  etlk: {
+    bridgedFromETH: ["0x796Ea11Fa2dD751eD01b53C372fFDB4AAa8f00F9"], // Wrapped Asset Bridge
+  }
 };

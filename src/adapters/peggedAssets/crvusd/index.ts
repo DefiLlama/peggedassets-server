@@ -14,13 +14,16 @@ const pegkeepers = [
 ]
 
 const curve_lend_operators = [
-  "0x6119e210e00d4be2df1b240d82b1c3decedbbbf0", //lend operator for sreUSD llamalend market
+  "0x21862cA8d044c104ac9EB728c86Bc38B8625BeCD", //lend operator for sreUSD llamalend market
 ]
 
 const yb_amms = [
-  "0xB42e34Bf1f8627189e099ABDB069B9D73B521E4F", //cbBTC YB AMM
-  "0xb0faaBE84076c6330A9642a6400e87CE4cAec9d4", //tBTC YB AMM
-  "0xa25306937dbA98378c32F167588F5Dc17A95c94b", //WBTC YB AMM
+  "0xB42e34Bf1f8627189e099ABDB069B9D73B521E4F", //cbBTC YB AMM (legacy)
+  "0xb0faaBE84076c6330A9642a6400e87CE4cAec9d4", //tBTC YB AMM (legacy)
+  "0xa25306937dbA98378c32F167588F5Dc17A95c94b", //WBTC YB AMM (legacy)
+  "0xDC90F6B111DF0c26e349d3cC8d3C357b191e109a", //cbBTC YB AMM (new)
+  "0x61ED017468C8A3bE3Bac972b54fdae6eAfcbcd79", //tBTC YB AMM (new)
+  "0x10B663da78055bDA0c7c26712CE1A0613AF0Ae66", //WBTC YB AMM (new)
 ]
 
 async function minted(api: ChainApi) {

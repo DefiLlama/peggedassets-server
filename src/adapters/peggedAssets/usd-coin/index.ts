@@ -9,6 +9,7 @@ import {
 import {
   bridgedSupply,
   cosmosSupply,
+  fogoMintedOrBridged,
   osmosisSupply,
   solanaMintedOrBridged,
   supplyInArbitrumBridge,
@@ -25,6 +26,7 @@ import {
 } from "../helper/ontology";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import * as sui from "../helper/sui";
+import * as starknet from "../helper/starknet";
 import {
   getTotalSupply as tronGetTotalSupply, // NOTE THIS DEPENDENCY
 } from "../helper/tron";
@@ -197,6 +199,15 @@ async function suiMinted(): Promise<Balances> {
     "0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"
   );
   sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
+  return balances;
+}
+
+async function starknetMinted(): Promise<Balances> {
+  let balances = {} as Balances;
+  for (let issued of chainContracts.starknet.issued) {
+    const supply = await starknet.getTotalSupply(issued);
+    sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
+  }
   return balances;
 }
 
@@ -539,6 +550,9 @@ const adapter: PeggedIssuanceAdapter = {
     avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
     celo: solanaMintedOrBridged(chainContracts.solana.bridgedFromCelo),
     fantom: solanaMintedOrBridged(chainContracts.solana.bridgedFromFantom),
+  },
+  fogo: {
+    solana: fogoMintedOrBridged(chainContracts.fogo.bridgedFromSol),
   },
   bsc: {
     ethereum: sumMultipleBalanceFunctions(
@@ -884,6 +898,7 @@ const adapter: PeggedIssuanceAdapter = {
     arbitrum: suiBridged("ARBITRUM_BRIDGED"),
   },
   starknet: {
+    minted: starknetMinted,
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.starknet.bridgeOnETH[0],
@@ -922,7 +937,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("mantle", 6, chainContracts.mantle.bridgedFromETH),
   },
   linea: {
-    ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
+    minted: chainMinted("linea", 6),
   },
   injective: {
     noble: cosmosSupply('injective', ['ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E'], 6, 'noble'),
@@ -947,6 +962,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),
   },
   hyperliquid: {
+    minted: chainMinted("hyperliquid", 6),
     arbitrum: supplyInArbitrumBridge(
       chainContracts.arbitrum.issued[0],
       chainContracts.hyperliquid.bridgeOnARB[0],
@@ -954,7 +970,8 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   sonic: {
-    ethereum: bridgedSupply("sonic", 6, chainContracts.sonic.bridgedFromETH),
+    minted: chainMinted("sonic", 6),
+  //  ethereum: bridgedSupply("sonic", 6, chainContracts.sonic.bridgedFromETH), fix wrongly assigned as bridged
   },
   soneium: {
     ethereum: bridgedSupply("soneium", 6, chainContracts.soneium.bridgedFromETH),
@@ -975,7 +992,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH),
   },
   wc: {
-    ethereum: bridgedSupply("wc", 6, chainContracts.wc.bridgedFromETH),
+    minted: chainMinted("wc", 6),
   },
   shape: {
     ethereum: bridgedSupply("shape", 6, chainContracts.shape.bridgedFromETH),
@@ -995,9 +1012,9 @@ const adapter: PeggedIssuanceAdapter = {
   wemix: {
     ethereum: bridgedSupply("wemix", 6, chainContracts.wemix.bridgedFromETH),
   },
-  kroma: {
+/*   kroma: {
     ethereum: bridgedSupply("kroma", 6, chainContracts.kroma.bridgedFromETH),
-  },
+  }, */
   berachain: {
     ethereum: bridgedSupply("berachain", 6, chainContracts.berachain.bridgedFromETH),
   },
@@ -1014,6 +1031,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("bob", 6, chainContracts.bob.bridgedFromETH),
   },
   ink: {
+    minted: chainMinted("ink", 6),
     ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH, "stargate"),
   },
   nibiru: {
@@ -1055,6 +1073,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("hemi", 6, chainContracts.hemi.bridgedFromETH, "stargate"),
   },
   plume_mainnet: {
+    minted: chainMinted("plume_mainnet", 6),
     ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
   },
   story: {
@@ -1083,6 +1102,12 @@ const adapter: PeggedIssuanceAdapter = {
   },
   katana: {
     ethereum: bridgedSupply("katana", 6, chainContracts.katana.bridgedFromETH),
+  },
+  monad: {
+    minted: chainMinted("monad", 6),
+  },
+  etlk: {
+    ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab"), // Etherlink's Wrapped Asset Bridge
   },
 };
 

@@ -4,6 +4,7 @@ import * as cardano from "../helper/cardano";
 import { getTokenSupply as solanaGetTokenSupply } from "../helper/solana";
 import * as sui from "../helper/sui";
 import * as tezos from "../helper/tezos";
+import * as starknet from "../helper/starknet";
 import { getZilliqaTokenSupply } from "../helper/zilliqa";
 import type {
   Balances,
@@ -112,15 +113,23 @@ export function solanaMintedOrBridged(
   targets: string[],
   pegType?: PeggedAssetType
 ) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function () {
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     for (let target of targets) {
       const totalSupply = await solanaGetTokenSupply(target);
+      sumSingleBalance(balances, assetPegType, totalSupply, target, true);
+    }
+    return balances;
+  };
+}
+
+export function fogoMintedOrBridged(targets: string[], pegType?: PeggedAssetType) {
+  return async function () {
+    let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
+    for (let target of targets) {
+      const totalSupply = await solanaGetTokenSupply(target, "fogo");
       sumSingleBalance(balances, assetPegType, totalSupply, target, true);
     }
     return balances;
@@ -413,6 +422,13 @@ function getIssued({
         return balances;
       }
     }
+    if (api.chain === 'starknet') {
+      for (const i of issued) {
+        const supply = await starknet.getTotalSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
 
     if (api.chain === 'cardano') {
       for (const i of issued) {
@@ -440,6 +456,9 @@ function getUnreleased({
     const balances = {} as Balances;
     if (typeof issued === "string") issued = [issued];
     if (typeof unreleased === "string") unreleased = [unreleased]
+
+    if (api.chain === 'starknet') return starknet.getUnreleased({ issued, unreleased, balances, sumSingleBalance, pegType})
+
     const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issued })
     for (let i = 0; i < issued.length; i++) {
       const totalSupply = await api.multiCall({ abi: 'erc20:balanceOf', target: issued[i], calls: unreleased })

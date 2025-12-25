@@ -57,7 +57,11 @@ export const normalizedChainReplacements = {
   "hyperliquid-l1": "hyperliquid",
   "op%20mainnet": "optimism",
   "op mainnet": "optimism",
-  "op-mainnet": "optimism"
+  "op-mainnet": "optimism",
+  "plume%20mainnet": "plume_mainnet",
+  "plume mainnet": "plume_mainnet",
+  "plume-mainnet": "plume_mainnet",
+  "etherlink": "etlk"
 } as {
   [chain: string]: string;
 };
@@ -1206,6 +1210,11 @@ export const chainCoingeckoIds = {
     twitter: "GlueNet",
     url: "https://glue.net/",
   },
+  "Etherlink": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1528,6 +1537,8 @@ export function getChainDisplayName(
       return "Nero"
     case "glue":
       return "Glue"
+    case "etlk":
+      return "Etherlink"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

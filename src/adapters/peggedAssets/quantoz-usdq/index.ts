@@ -1,5 +1,6 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
+import { addChainExports } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
@@ -42,9 +43,58 @@ async function algorandMinted() {
   };
 }
 
+async function rippleMinted() {
+  return async function () {
+    const balances = {} as Balances;
+
+    const NODE_URL = "https://xrplcluster.com";
+
+    // Get the USDQ token info from config
+    const usdqToken = chainContracts.ripple.issued[0];// "5553445100000000000000000000000000000000.rDk1xiArDMjDqnrR2yWypwQAKg4mKnQYvs"
+    const [currencyCode, issuerAddress] = usdqToken.split('.');
+
+    const payload = {
+      method: "gateway_balances",
+      params: [
+        {
+          account: issuerAddress,
+          ledger_index: "validated",
+        },
+      ],
+    };
+
+    const res = await retry(async (_bail: any) => axios.post(NODE_URL, payload));
+
+    if (res.data.result && res.data.result.obligations && res.data.result.obligations[currencyCode]) {
+      const supplyStr = res.data.result.obligations[currencyCode];
+      const supply = parseFloat(supplyStr);
+
+      sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
+    }
+
+    return balances;
+  };
+}
+
+const chainContracts: ChainContracts = {
+  ethereum: {
+    issued: ["0xc83e27f270cce0a3a3a29521173a83f402c1768b"],
+  },
+  polygon: {
+    issued: ["0xb291996477504506bf5f583102b5b5ea5d1e40e0"],
+  },
+  ripple: {
+    issued: ["5553445100000000000000000000000000000000.rDk1xiArDMjDqnrR2yWypwQAKg4mKnQYvs"],
+  }
+};
+
 const adapter: PeggedIssuanceAdapter = {
+  ...addChainExports(chainContracts, undefined),
   algorand: {
     minted: algorandMinted(),
+  },
+  ripple: {
+    minted: rippleMinted(),
   },
 };
 
