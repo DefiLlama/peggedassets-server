@@ -60,7 +60,8 @@ export const normalizedChainReplacements = {
   "op-mainnet": "optimism",
   "plume%20mainnet": "plume_mainnet",
   "plume mainnet": "plume_mainnet",
-  "plume-mainnet": "plume_mainnet"
+  "plume-mainnet": "plume_mainnet",
+  "etherlink": "etlk"
 } as {
   [chain: string]: string;
 };
