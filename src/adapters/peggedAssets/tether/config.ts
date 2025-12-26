@@ -436,5 +436,8 @@ export const chainContracts: ChainContracts = {
   },
   etlk: {
     bridgedFromETH: ["0x2C03058C8AFC06713be23e58D2febC8337dbfE6A"], // Wrapped Asset Bridge
+  },
+  rbn: {
+    bridgedFromETH: ["0x8C4aCd74Ff4385f3B7911432FA6787Aa14406f8B"],
   }
 };

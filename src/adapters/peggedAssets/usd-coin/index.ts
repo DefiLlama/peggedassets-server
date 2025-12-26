@@ -1109,6 +1109,9 @@ const adapter: PeggedIssuanceAdapter = {
   etlk: {
     ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab"), // Etherlink's Wrapped Asset Bridge
   },
+  rbn: {
+    ethereum: bridgedSupply("rbn", 6, chainContracts.rbn.bridgedFromETH)
+  }
 };
 
 export default adapter;
