@@ -6769,4 +6769,23 @@ export default [
   module: "usp",
   doublecounted: true
 },
+{
+  id: "332",
+  name: "pmUSD",
+  address: "0xc0c17dd08263c16f6b64e772fb9b723bf1344ddf",
+  symbol: "pmUSD",
+  url: "https://pmusd.raac.io/",
+  description: "pmUSD is an overcollateralized stablecoin backed by tokenized precious metals (XAU).",
+  mintRedeemDescription: "pmUSD is minted against the deposited XAU at a predefined collateral target ratio.",
+  onCoinGecko: "true",
+  gecko_id: "precious-metals-usd",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/Raacfi",
+  wiki: "https://docs.raac.io/rw-fx/",
+  module: "precious-metals-usd",
+},
 ] as PeggedAsset[];
