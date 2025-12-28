@@ -1,8 +1,9 @@
+process.env.MANTRA_RPC = process.env.MANTRA_RPC || 'https://evm.mantrachain.io';
+
 const chainContracts = {
-  // Align the chain name in https://unpkg.com/@defillama/sdk@5.0.195/build/providers.json
-  mantrachain: {
+  mantra: {
     issued: ["0xd2b95283011E47257917770D28Bb3EE44c849f6F"],
-  }
+  },
 };
 
 import { addChainExports } from "../helper/getSupply";
