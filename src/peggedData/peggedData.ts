@@ -6783,7 +6783,7 @@ export default [
   pegType: "peggedUSD",
   pegMechanism: "crypto-backed",
   priceSource: "defillama",
-  auditLinks: [],
+  auditLinks: ["https://docs.raac.io/audits-rwfx/"],
   twitter: "https://x.com/Raacfi",
   wiki: "https://docs.raac.io/rw-fx/",
   module: "precious-metals-usd",
