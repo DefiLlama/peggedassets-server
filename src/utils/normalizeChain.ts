@@ -1215,6 +1215,11 @@ export const chainCoingeckoIds = {
     symbol: null,
     cmcId: null,
   },
+  "Redbelly": {
+    geckoId: "redbelly-network-token",
+    symbol: "RBNT",
+    cmcId: null,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1539,6 +1544,8 @@ export function getChainDisplayName(
       return "Glue"
     case "etlk":
       return "Etherlink"
+    case "rbn":
+      return "Redbelly"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
