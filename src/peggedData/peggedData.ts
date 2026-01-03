@@ -682,6 +682,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/unitprotocol",
     wiki: "https://wiki.defillama.com/wiki/USDP_Stablecoin_(USDP)",
+    deprecated: true,
   },
   {
     id: "34",
