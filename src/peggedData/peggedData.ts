@@ -6809,4 +6809,23 @@ export default [
   module: "mantra-usd",
   doublecounted: true
 },
+{
+  id: "334",
+  name: "Macropod",
+  address: "0x081599e4936d12c46bd48913b2329115cd26cbdd",
+  symbol: "AUDM",
+  url: "https://www.macropod.com",
+  description: "Australia’s first licensed stablecoin issuer, the birthplace of Aussie dollar-pegged AUDM and built for real-world payments.",
+  mintRedeemDescription: "AUDM each fully backed by AUD reserves safeguarded in a trust account with a Big 4 Australian bank.",
+  onCoinGecko: "true",
+  gecko_id: "macropod",
+  cmcId: null,
+  pegType: "peggedAUD",
+  pegMechanism: "fiat-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/Macropod_AU",
+  wiki: null,
+  module: "macropod",
+},
 ] as PeggedAsset[];
