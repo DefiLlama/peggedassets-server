@@ -61,7 +61,8 @@ export const normalizedChainReplacements = {
   "plume%20mainnet": "plume_mainnet",
   "plume mainnet": "plume_mainnet",
   "plume-mainnet": "plume_mainnet",
-  "etherlink": "etlk"
+  "etherlink": "etlk",
+  "redbelly": "rbn"
 } as {
   [chain: string]: string;
 };
