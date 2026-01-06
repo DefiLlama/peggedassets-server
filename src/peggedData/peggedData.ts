@@ -6831,7 +6831,7 @@ export default [
 {
   id: "335",
   name: "JupUSD",
-  address: "solana:JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+  address: "solana:JuprjznTrTSp2UFa3ZBUFgwdAmtZCq4MQCwysN55USD",
   symbol: "JUPUSD",
   url: "https://jupusd.money/",
   description: "JupUSD is a Solana-native, reserve-backed stablecoin pegged to the U.S. dollar, built by Jupiter in partnership with Ethena.",
