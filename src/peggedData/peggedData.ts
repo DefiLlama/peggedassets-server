@@ -6841,7 +6841,7 @@ export default [
   cmcId: null,
   pegType: "peggedUSD",
   pegMechanism: "crypto-backed",
-  priceSource: "defillama",
+  priceSource: "coingecko",
   auditLinks: [],
   twitter: "https://x.com/JupiterExchange",
   wiki: "https://support.jup.ag/hc/en-us/articles/24441706832412-What-is-JupUSD",
