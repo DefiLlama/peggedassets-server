@@ -25,7 +25,16 @@ const chainContracts: ChainContracts = {
   },
   rbn: {
     issued: ["0x54a210e824B0F89dA988E4B5586440aB354f0e46"],
-  }
+  },
+  hedera: {
+    issued: ["0x39ceba2b467fa987546000eb5d1373acf1f3a2e1"],
+  },
+  xdc: {
+    issued: ["0x9fe4e6321eeb7c4bc537570f015e4734b15002b8"],
+  },
+  base: {
+    issued: ["0x449b3317a6d1efb1bc3ba0700c9eaa4ffff4ae65"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -83,6 +92,36 @@ async function fetchStellarCirculatingSupply(): Promise<Balances> {
   return balances;
 }
 
+async function rippleMinted() {
+  return async function () {
+    const balances = {} as Balances;
+    
+    const NODE_URL = "https://xrplcluster.com";
+    const address = "rUN5Zxt3K1AnMRJgEWywDJT8QDMMeLH5ok";
+    const tokenCurrency = "4155444400000000000000000000000000000000"; // AUDD currency code
+    
+    const payload = {
+      method: "gateway_balances",
+      params: [
+        {
+          account: address,
+          ledger_index: "validated",
+        },
+      ],
+    };
+
+    const res = await retry(async (_bail: any) => axios.post(NODE_URL, payload));
+    
+    if (res.data.result && res.data.result.obligations && res.data.result.obligations[tokenCurrency]) {
+      const supplyStr = res.data.result.obligations[tokenCurrency];
+      const supply = parseFloat(supplyStr);
+      sumSingleBalance(balances, "peggedAUD", supply, "issued", false);
+    }
+    
+    return balances;
+  };
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -95,6 +134,18 @@ const adapter: PeggedIssuanceAdapter = {
   },
   rbn: {
     minted: chainMinted("rbn", 6),
+  },
+  hedera: {
+    minted: chainMinted("hedera", 6),
+  },
+  xdc: {
+    minted: chainMinted("xdc", 6),
+  },
+  base: {
+    minted: chainMinted("base", 6),
+  },
+  ripple: {
+    minted: rippleMinted(),
   },
 };
 
