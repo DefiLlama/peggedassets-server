@@ -6848,4 +6848,24 @@ export default [
   module: "jupusd",
   doublecounted: true
 },
+{
+  id: "336",
+  name: "United Stables",
+  address: "bsc:0xce24439f2d9c6a2289f741120fe202248b666666",
+  symbol: "U",
+  url: "https://u.tech/",
+  description: `$U is a next-generation stablecoin backed by fully fluid assets, designed to unify fragmented liquidity across trading, payments, DeFi, institutional settlement, and AI-driven autonomous systems. It is the embodiment of a "fluid" future where value flows seamlessly between humans and AI.`,
+  mintRedeemDescription: "An eligible business can exchange USD and $USDT/USDC/USD1 for $U and redeem $U for USD and $USDT/USDC/USD1 through an United Stables Account.",
+  onCoinGecko: "true",
+  gecko_id: "united-stables",
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "coingecko",
+  auditLinks: [],
+  twitter: "https://x.com/UTechStables",
+  wiki: null,
+  module: "united-stables",
+  doublecounted: true
+},
 ] as PeggedAsset[];
