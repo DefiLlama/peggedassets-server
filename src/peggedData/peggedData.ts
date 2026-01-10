@@ -6868,4 +6868,23 @@ export default [
   module: "united-stables",
   doublecounted: true
 },
+{
+  id: "337",
+  name: "USE",
+  address: "ergo:a55b8735ed1a99e46c2c89f8994aacdf4b1109bdcf682f1e5b34479c6e392669",
+  symbol: "USE",
+  url: "https://cruxfinance.io/use-analytics",
+  description: `$USE (Universal Stablecoin for Ergo) is a new decentralized, algorithmic stablecoin built on the Ergo blockchain. It is designed to be a more resilient and scalable alternative to previous models like SigUSD.`,
+  mintRedeemDescription: `$USE is a next-generation stablecoin that tries to solve the liquidity and "lock-up" issues of older models. It uses a bank-and-arbitrage system to keep its $1 peg and relies on a community-funded liquidity pool to stay healthy.`,
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/StableUSE",
+  wiki: "https://github.com/kushti/dexy-stable/blob/master/paper-lipics/dexy.pdf",
+  module: "use",
+},
 ] as PeggedAsset[];
