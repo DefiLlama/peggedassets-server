@@ -6880,7 +6880,7 @@ export default [
   gecko_id: null,
   cmcId: null,
   pegType: "peggedUSD",
-  pegMechanism: "crypto-backed",
+  pegMechanism: "algorithmic",
   priceSource: "defillama",
   auditLinks: [],
   twitter: "https://x.com/StableUSE",
