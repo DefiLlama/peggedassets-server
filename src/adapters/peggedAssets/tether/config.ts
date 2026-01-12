@@ -439,5 +439,8 @@ export const chainContracts: ChainContracts = {
   },
   rbn: {
     bridgedFromETH: ["0x8C4aCd74Ff4385f3B7911432FA6787Aa14406f8B"],
+  },
+  mantra: {
+    bridgedFromETH: ["0x3806640578b710d8480910bF51510bc538d2F51A"], 
   }
 };
