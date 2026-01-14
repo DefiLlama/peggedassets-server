@@ -6940,7 +6940,7 @@ export default [
   pegType: "peggedUSD",
   pegMechanism: "crypto-backed",
   priceSource: "defillama",
-  auditLinks: [],
+  auditLinks: ["https://docs.multipli.fi/risks/audit-reports"],
   twitter: "https://x.com/multiplifi",
   wiki: "https://docs.multipli.fi/",
   module: "rwausdi",
