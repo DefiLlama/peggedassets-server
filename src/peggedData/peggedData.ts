@@ -6926,4 +6926,23 @@ export default [
   module: "re-protocol-reusd",
   doublecounted: true
 },
+{
+  id: "340",
+  name: "rwaUSDi",
+  address: "0xa39986f96b80d04e8d7aeaaf47175f47c23fd0f4",
+  symbol: "rwaUSDi",
+  url: "https://multipli.fi/",
+  description: `rwaUSD is a credit-backed stablecoin designed to represent value backed by highly liquid tokenized real-world assets (RWAs) and make that value usable across DeFi.`,
+  mintRedeemDescription: `rwaUSD is minted by depositing supported tokenized real-world assets into Multipli's collateral framework under risk-adjusted mint-to-value parameters, and is redeemed by burning rwaUSD to withdraw the underlying collateral.`,
+  onCoinGecko: "false",
+  gecko_id: null,
+  cmcId: null,
+  pegType: "peggedUSD",
+  pegMechanism: "crypto-backed",
+  priceSource: "defillama",
+  auditLinks: [],
+  twitter: "https://x.com/multiplifi",
+  wiki: "https://docs.multipli.fi/",
+  module: "rwausdi",
+},
 ] as PeggedAsset[];
