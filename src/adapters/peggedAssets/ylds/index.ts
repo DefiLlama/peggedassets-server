@@ -1,4 +1,3 @@
-const sdk = require("@defillama/sdk");
 import { addChainExports, cosmosSupply, solanaMintedOrBridged } from "../helper/getSupply";
 import { PeggedIssuanceAdapter } from "../peggedAsset.type";
 
@@ -21,7 +20,7 @@ const adapter: PeggedIssuanceAdapter = {
         minted: provenanceSupply(),
     },
     solana: {
-        bridgedFromProvenance: solanaMintedOrBridged(solanawYLDSContract)
+        provenance: solanaMintedOrBridged(solanawYLDSContract)
     }
 };
 
