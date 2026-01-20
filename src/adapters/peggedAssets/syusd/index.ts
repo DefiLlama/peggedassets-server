@@ -11,4 +11,6 @@ const adapter: PeggedIssuanceAdapter = {
   ...addChainExports(chainContracts),
 };
 
+//adapter.sei.minted = () => ({});
+
 export default adapter; 

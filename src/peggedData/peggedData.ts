@@ -4927,6 +4927,7 @@ export default [
     twitter: "https://twitter.com/synnax_labs",
     wiki: "https://docs.synnax.fi",
     deadFrom: "2026-01-15",
+    deprecated: true,
   },
   {
     id: "237",
