@@ -3,6 +3,7 @@ import { sumSingleBalance } from '../helper/generalUtil';
 import { addChainExports, cosmosSupply } from "../helper/getSupply";
 import { ChainBlocks, PeggedIssuanceAdapter, Balances } from "../peggedAsset.type";
 import { getTotalSupply as stellarGetTotalSupply } from "../helper/stellar";
+import { getResources } from '../helper/aptos';
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -47,6 +48,28 @@ async function stellarMinted(assetID: string) {
   };
 }
 
+async function aptosMinted(coinType: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const endpoint = process.env.APTOS_RPC ?? "https://fullnode.mainnet.aptoslabs.com";
+    const response = await retry(async (_bail: any) =>
+      axios.post(`${endpoint}/v1/view`, {
+        function: "0x1::coin::supply",
+        type_arguments: [coinType],
+        arguments: [],
+      })
+    );
+    const supply = response.data[0].vec[0];
+    const totalSupply = parseInt(supply) / 1e6;
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
+    return balances;
+  };
+}
+
 const chainContracts = {
   ethereum: {
     issued: [
@@ -64,11 +87,6 @@ const chainContracts = {
   },
   solana: {
     issued: ["A1KLoBrKBde8Ty9qtNQUtq3C2ortoC3u7twggz7sEto6"],
-  },
-  aptos: {
-    issued: [
-      "0xcfea864b32833f157f042618bd845145256b1bf4c0da34a7013b76e42daa53cc",
-    ],
   },
   arbitrum: {
     issued: ["0x35e050d3C0eC2d29D269a8EcEa763a183bDF9A9D"]
@@ -98,6 +116,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   stellar: {
     minted: stellarMinted(chainContracts.stellar.issued[0]),
+  },
+  aptos: {
+    minted: aptosMinted("0xcfea864b32833f157f042618bd845145256b1bf4c0da34a7013b76e42daa53cc::usdy::USDY"),
   },
 };
 
