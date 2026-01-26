@@ -63,8 +63,12 @@ async function aptosMinted(coinType: string) {
         arguments: [],
       })
     );
-    const supply = response.data[0].vec[0];
-    const totalSupply = parseInt(supply) / 1e6;
+
+    const supplyVec = response.data?.[0]?.vec;
+    if (!supplyVec || supplyVec.length === 0) {
+      throw new Error(`No supply found for coin type: ${coinType}`);
+    }
+    const totalSupply = parseInt(supplyVec[0]) / 1e6;
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
     return balances;
   };
