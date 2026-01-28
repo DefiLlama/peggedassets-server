@@ -1224,6 +1224,11 @@ export const chainCoingeckoIds = {
     symbol: "RBNT",
     cmcId: null,
   },
+  "MegaETH": {
+    geckoId: "megaeth ",
+    symbol: "MEGA",
+    cmcId: null,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1550,6 +1555,8 @@ export function getChainDisplayName(
       return "Etherlink"
     case "rbn":
       return "Redbelly"
+    case "megaeth":
+      return "MegaETH"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

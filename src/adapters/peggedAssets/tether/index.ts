@@ -1189,6 +1189,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   mantra: {
     ethereum: bridgedSupply("mantra", 6, chainContracts.mantra.bridgedFromETH)
+  },
+  megaeth: {
+    ethereum: bridgedSupply("megaeth", 6, chainContracts.megaeth.bridgedFromETH)
   }
 };
 
