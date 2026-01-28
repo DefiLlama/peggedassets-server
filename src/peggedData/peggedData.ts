@@ -6967,4 +6967,24 @@ export default [
     module: "pleasing-usd",
     doublecounted: true
   },
+  {
+    id: "342",
+    name: "MegaUSD",
+    address: "megaeth:0xEc2AF1C8B110a61fD9C3Fa6a554a031Ca9943926",
+    symbol: "USDM",
+    url: "https://www.megaeth.com/",
+    description: `MegaETH's native stablecoin.`,
+    mintRedeemDescription: `USDm is issued through Ethena's stablecoin stack, with mint/redeem facilitated on Ethereum mainnet via USDC then bridged to MegaETH.`,
+    onCoinGecko: "true",
+    gecko_id: "megausd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/megaeth",
+    wiki: "https://www.megaeth.com/blog-news/megaeth-introduces-usdm",
+    module: "megausd",
+    doublecounted: true
+  },
 ] as PeggedAsset[];
