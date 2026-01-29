@@ -6987,4 +6987,23 @@ export default [
     module: "megausd",
     doublecounted: true
   },
+  {
+    id: "343",
+    name: "USAT",
+    address: "0x07041776f5007ACa2A54844F50503a18A72A8b68",
+    symbol: "USAT",
+    url: "https://usat.io/",
+    description: `USAT (USA₮) is a U.S.-regulated, fully dollar-backed stablecoin issued under the GENIUS Act framework, designed to maintain a 1:1 USD peg with reserves held in U.S. liquid assets and deployed for compliant digital payments and settlement.`,
+    mintRedeemDescription: `USAT is minted when authorized participants deposit U.S. dollars with Anchorage Digital Bank, N.A., which issues USAT 1:1 onchain against segregated liquid reserves.`,
+    onCoinGecko: "true",
+    gecko_id: "usa",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/usat",
+    wiki: null,
+    module: "usat",
+  },
 ] as PeggedAsset[];
