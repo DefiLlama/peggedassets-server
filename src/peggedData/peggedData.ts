@@ -7071,7 +7071,7 @@ export default [
     address: "0x8D82c4E3c936C7B5724A382a9c5a4E6Eb7aB6d5D",
     symbol: "ctUSD",
     url: "https://citrea.xyz/",
-    description: "ctUSD is a stablecoin on Citrea, the first ZK rollup on Bitcoin. ctUSD is issued through M0 technology by MoonPay, backed 1:1 by M tokens.",
+    description: "ctUSD is the native, compliant stablecoin for the Citrea ecosystem, designed to serve as the foundational liquidity standard for Bitcoin applications. Issued by MoonPay, and fully backed 1:1 by U.S. Treasury bills and cash, it eliminates liquidity fragmentation while providing seamless banking rails between on-chain Bitcoin collateral and off-chain fiat systems.",
     mintRedeemDescription: "ctUSD issued through M0 technology, by MoonPay. Mint/Redeem facilitated on Citrea with M token.",
     onCoinGecko: "false",
     gecko_id: null,
