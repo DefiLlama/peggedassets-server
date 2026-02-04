@@ -7065,4 +7065,24 @@ export default [
     module: "neutrl-usd",
     doublecounted: true
   },
+  {
+    id: "347",
+    name: "Citrea USD",
+    address: "0x8D82c4E3c936C7B5724A382a9c5a4E6Eb7aB6d5D",
+    symbol: "ctUSD",
+    url: "https://citrea.xyz/",
+    description: "ctUSD is a stablecoin on Citrea, the first ZK rollup on Bitcoin. ctUSD is issued through M0 technology by MoonPay, backed 1:1 by M tokens.",
+    mintRedeemDescription: "ctUSD issued through M0 technology, by MoonPay. Mint/Redeem facilitated on Citrea with M token.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/citrea_xyz",
+    wiki: "https://docs.citrea.xyz/developer-documentation/citrea-usd-ctusd",
+    module: "citrea-ctusd",
+    doublecounted: true
+  },
 ] as PeggedAsset[];
