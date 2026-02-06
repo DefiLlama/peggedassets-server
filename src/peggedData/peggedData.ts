@@ -97,7 +97,7 @@ export default [
     name: "Dai",
     address: "0x6b175474e89094c44da98b954eedeac495271d0f",
     symbol: "DAI",
-    url: "https://makerdao.com/",
+    url: "https://app.sky.money/",
     description:
       "The Dai stablecoin is a decentralized, unbiased, collateral-backed cryptocurrency soft-pegged to the US Dollar. Dai is held in cryptocurrency wallets or within platforms, and is supported on Ethereum and other popular blockchains.",
     mintRedeemDescription:
@@ -117,7 +117,7 @@ export default [
     name: "Frax",
     address: "0x853d955acef822db058eb8505911ed77f175b99e",
     symbol: "FRAX",
-    url: "https://frax.finance/",
+    url: "https://frax.com/",
     description:
       "Frax attempts to be the first stablecoin protocol to implement design principles of both collateralized and algorithmic stablecoins to create a highly scalable, trustless, extremely stable, and ideologically pure on-chain money.",
     mintRedeemDescription:
@@ -1353,7 +1353,7 @@ export default [
     name: "Frax Price Index",
     address: "0x5ca135cb8527d76e932f34b5145575f9d8cbe08e",
     symbol: "FPI",
-    url: "https://frax.finance/",
+    url: "https://frax.com/",
     description:
       "The Frax Price Index (FPI) is the second stablecoin of the Frax Finance ecosystem. FPI is a stablecoin pegged to a basket of real-world consumer items as defined by the US CPI-U average.",
     mintRedeemDescription:
@@ -4891,7 +4891,7 @@ export default [
     name: "Frax USD",
     address: "0xcacd6fd266af91b8aed52accc382b4e165586e29",
     symbol: "FRXUSD",
-    url: "https://app.frax.finance/",
+    url: "https://frax.com/",
     description:
       "Frax USD (frxUSD) is a fiat-redeemable, fully-collateralized stablecoin issued by the Frax Finance Protocol",
     mintRedeemDescription:
