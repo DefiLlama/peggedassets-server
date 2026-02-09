@@ -7070,9 +7070,11 @@ export default [
     name: "Fidelity Digital Dollar",
     address: "0x7C135549504245B5eAe64fc0E99Fa5ebabb8e35D",
     symbol: "FIDD",
-    url: "http://www.fidelitydigitalassets.com/stablecoin",
+    url: "https://www.fidelitydigitalassets.com/stablecoin",
     description: `Fidelity Digital Dollar℠ (FIDD) is a stablecoin pegged 1:1 to the U.S. dollar and is issued by Fidelity Digital Assets, National Association, a subsidiary of Fidelity Investments®. FIDD is backed by the stringent operational standards of Fidelity Digital Assets® and draws on the history, principles, and expertise of the traditional Fidelity Investments® business.`,
-    mintRedeemDescription: `TODO: FIDD mint/redeem description`,
+    mintRedeemDescription: `FIDD can be bought and sold for $1 (in eligible jurisdictions) by institutional clients on the Fidelity Digital Assets platform, by retail customers through Fidelity Crypto®, and by advisors through Fidelity Crypto® for Wealth Managers.* It is also available on exchanges where FIDD is listed.
+
+*Clients will not be able to transfer to addresses Fidelity Digital Assets has frozen/restricted on the blockchain, even if they hold FIDD off-platform.`,
     onCoinGecko: "true",
     gecko_id: "fidelity-digital-dollar",
     cmcId: null,
