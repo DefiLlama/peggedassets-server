@@ -23,7 +23,7 @@ const handler = async (_event: any) => {
   const timestamp = getCurrentUnixTimestamp();
 
   try {
-    const prices = await getPrices(peggedAssets);
+    prices = await getPrices(peggedAssets);
     peggedAssets.forEach(({ gecko_id }) => {
       if (!prices[gecko_id]) {
         console.log(`Could not get DefiLlama price for token ${gecko_id}`);
