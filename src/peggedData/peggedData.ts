@@ -6985,7 +6985,6 @@ export default [
     twitter: "https://x.com/megaeth",
     wiki: "https://www.megaeth.com/blog-news/megaeth-introduces-usdm",
     module: "megausd",
-    doublecounted: true
   },
   {
     id: "343",
