@@ -1678,7 +1678,7 @@ export default [
     name: "USK",
     address: null,
     symbol: "USK",
-    url: "https://kujira.app/",
+    url: "https://kujira.network/",
     description:
       "USK is an over-collateralized Cosmos stablecoin soft-pegged to the USD and initially backed by ATOM.",
     mintRedeemDescription:
