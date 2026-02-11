@@ -7065,4 +7065,25 @@ export default [
     module: "neutrl-usd",
     doublecounted: true
   },
+  {
+    id: "347",
+    name: "USDGO",
+    address: "solana:72puLt71H93Z9CzHuBRTwFpL4TG3WZUhnoCC7p8gxigu",
+    symbol: "USDGO",
+    url: "https://www.usdgo.com/",
+    description:
+      "USDGO is a regulated, enterprise-grade stablecoin issued by Anchorage Digital Bank and distributed by OSL Group on the Solana network.",
+    mintRedeemDescription:
+      "Eligible users can exchange USD for USDGO and redeem USDGO for USD 1:1 through the issuer and distributor.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/usdgo_official",
+    wiki: null,
+    module: "usdgo",
+  },
 ] as PeggedAsset[];
