@@ -5517,7 +5517,7 @@ export default [
     name: "Mead",
     address: "berachain:0xedb5180661f56077292c92ab40b1ac57a279a396",
     symbol: "MEAD",
-    url: "https://app.rootsfi.com/deposit",
+    url: "https://www.rootsfi.com/",
     description:
       "MEAD is a Berachain-native stablecoin minted against LP tokens and other yield-bearing assets, allowing users to unlock liquidity without giving up rewards.",
     mintRedeemDescription:
@@ -5531,7 +5531,8 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/rootsfi",
     wiki: "https://docs.rootsfi.com/introduction",
-    doublecounted: true
+    doublecounted: true,
+
   },
   {
     id: "268",
