@@ -394,36 +394,37 @@ function getIssued({
 }: { issued: string[] | string, pegType: PeggedAssetType, issuedABI: string }) {
   return async (api: ChainApi) => {
     const balances = {} as Balances;
+    const issuedList = typeof issued === "string" ? [issued] : issued;
     if (api.chain === "solana") {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await solanaGetTokenSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
     }
     if (api.chain === "sui") {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await sui.getTokenSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
     }
     if (api.chain === "aptos") {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await aptos.getTokenSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
     }
     if (api.chain === 'tezos') {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await tezos.getTotalSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
     }
     if (api.chain === 'starknet') {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await starknet.getTotalSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
@@ -431,16 +432,15 @@ function getIssued({
     }
 
     if (api.chain === 'cardano') {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await cardano.getTotalSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
     }
-    if (typeof issued === "string") issued = [issued];
-    const supplies = await api.multiCall({ abi: issuedABI, calls: issued })
-    const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issued })
-    issued.forEach((_address, i) => {
+    const supplies = await api.multiCall({ abi: issuedABI, calls: issuedList })
+    const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issuedList })
+    issuedList.forEach((_address, i) => {
       sumSingleBalance(balances, pegType, supplies[i] / 10 ** decimals[i], 'issued', false);
     })
 
