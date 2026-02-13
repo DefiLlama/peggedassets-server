@@ -1287,6 +1287,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/JPEGd_69",
     wiki: "https://wiki.defillama.com/wiki/JPEGd",
+    deadUrl: true,
   },
   {
     id: "63",
@@ -2286,6 +2287,7 @@ export default [
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: null,
     module: "eusd",
+    deadUrl: true,
   },
   {
     id: "110",
@@ -2458,6 +2460,7 @@ export default [
     auditLinks: [],
     twitter: "https://twitter.com/EthosReserve",
     wiki: null,
+    deadUrl: true,
   },
   {
     id: "118",
@@ -2600,6 +2603,7 @@ export default [
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
     module: "peg-eusd",
+    deadUrl: true,
   },
   {
     id: "125",
@@ -2621,6 +2625,7 @@ export default [
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
     module: "eusdv2",
+    deadUrl: true,
   },
   {
     id: "126",
@@ -3753,7 +3758,7 @@ export default [
     name: "Bread",
     address: "gnosis:0xa555d5344f6fb6c65da19e403cb4c1ec4a1a5ee3",
     symbol: "BREAD",
-    url: "https://breadchain.xyz",
+    url: "https://fund.bread.coop/",
     description:
       "A network of cooperatives projects building solidarity primitives.",
     mintRedeemDescription:
@@ -3765,7 +3770,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
-    twitter: "https://twitter.com/breadchain_",
+    twitter: "https://twitter.com/breadcoop",
     wiki: null,
     module: "bread",
   },
