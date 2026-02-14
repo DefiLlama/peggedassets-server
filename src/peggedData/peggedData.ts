@@ -191,6 +191,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/feiprotocol",
     wiki: "https://wiki.defillama.com/wiki/FEI",
+    deadUrl: true,
   },
   {
     id: "10",
@@ -1672,6 +1673,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/lagofinance",
     wiki: "https://wiki.defillama.com/wiki/Lago_Finance",
+    deadUrl: true,
   },
   */
   {
@@ -1963,7 +1965,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "baousd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1991,6 +1992,7 @@ export default [
       "https://github.com/oak-security/audit-reports/tree/master/Comdex",
     twitter: "https://twitter.com/Composite_Money",
     wiki: null,
+    deadUrl: true,
   },*/
   {
     id: "96",
@@ -2660,7 +2662,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "alternity-cny",
-
     cmcId: null,
     pegType: "peggedCNY",
     pegMechanism: "crypto-backed",
@@ -2668,6 +2669,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/0xAlternity",
     wiki: "https://docs.alternity.finance/faq/redemptions-and-lcny-price-stability",
+    deadUrl: true,
   },
   {
     id: "128",
