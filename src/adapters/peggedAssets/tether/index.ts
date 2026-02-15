@@ -1118,7 +1118,8 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.ethereum.issued[0],
       chainContracts.morph.bridgeOnETH[0],
       6
-    )
+    ),
+    arbitrum: bridgedSupply("morph", 6, chainContracts.morph.bridgedFromETH),
   },
   occ: {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),
