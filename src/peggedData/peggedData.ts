@@ -2418,6 +2418,7 @@ export default [
     ],
     twitter: "https://twitter.com/raft_fi",
     wiki: null,
+    deadUrl: true,
   },
   {
     id: "116",
