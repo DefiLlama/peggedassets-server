@@ -7142,7 +7142,7 @@ export default [
     description: "ctUSD is the native, compliant stablecoin for the Citrea ecosystem, designed to serve as the foundational liquidity standard for Bitcoin applications. Issued by MoonPay, and fully backed 1:1 by U.S. Treasury bills and cash, it eliminates liquidity fragmentation while providing seamless banking rails between on-chain Bitcoin collateral and off-chain fiat systems.",
     mintRedeemDescription: "ctUSD issued through M0 technology, by MoonPay. Mint/Redeem facilitated on Citrea with M token.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "citrea-usd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -7151,5 +7151,6 @@ export default [
     twitter: "https://x.com/citrea_xyz",
     wiki: "https://docs.citrea.xyz/developer-documentation/citrea-usd-ctusd",
     module: "citrea-ctusd",
+    doublecounted: true
   }
 ] as PeggedAsset[];
