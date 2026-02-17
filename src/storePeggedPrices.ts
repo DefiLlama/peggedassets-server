@@ -1,6 +1,6 @@
 import dynamodb from "./utils/shared/dynamodb";
 import peggedAssets from "./peggedData/peggedData";
-import getCurrentPeggedPrice from "./adapters/peggedAssets/prices";
+import { getPrices } from "./adapters/peggedAssets/prices";
 import { wrapScheduledLambda } from "./utils/shared/wrap";
 import { store } from "./utils/s3";
 import getTVLOfRecordClosestToTimestamp from "./utils/shared/getRecordClosestToTimestamp";
@@ -21,44 +21,31 @@ const handler = async (_event: any) => {
   // store hourly prices in db
   let prices = {} as Prices;
   const timestamp = getCurrentUnixTimestamp();
-  for (let i = 0; i < 5; i++) {
-    try {
-      let pricePromises = peggedAssets.map(async (pegged) => {
-        const price = await getCurrentPeggedPrice(
-          pegged.gecko_id,
-          pegged.priceSource
-        );
-        if (typeof price !== "number") {
-          if (price) {
-            throw new Error(`price is NaN. Instead it is ${typeof price}`);
-          }
-        }
-        prices[pegged.gecko_id] = price;
-      });
 
-      await Promise.all(pricePromises);
-      await store("peggedPrices.json", JSON.stringify(prices));
-      await dynamodb.put({
-        PK: hourlyPeggedPrices,
-        SK: timestamp,
-        prices: prices,
-      });
-      break;
-    } catch (e) {
-      if (i >= 5) {
-        await sdk.elastic.addErrorLog({
-          error: e as any,
-          metadata: {
-            application: "pegged-assets",
-            function: "storePeggedPrices",
-          }
-        })
-        throw e;
-      } else {
-        console.error(e);
-        continue;
+  try {
+    prices = await getPrices(peggedAssets);
+    peggedAssets.forEach(({ gecko_id }) => {
+      if (!prices[gecko_id]) {
+        console.log(`Could not get DefiLlama price for token ${gecko_id}`);
+        prices[gecko_id] = null;
       }
-    }
+    });
+
+    await store("peggedPrices.json", JSON.stringify(prices));
+    await dynamodb.put({
+      PK: hourlyPeggedPrices,
+      SK: timestamp,
+      prices: prices,
+    });
+  } catch (e) {
+      await sdk.elastic.addErrorLog({
+        error: e as any,
+        metadata: {
+          application: "pegged-assets",
+          function: "storePeggedPrices",
+        }
+      })
+      throw e;
   }
 
   // store bridge info (name, links) in s3

@@ -17,6 +17,12 @@ const chainContracts = {
   polygon: {
     issued: ["0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99"],
   },
+  bsc: {
+    issued: ["0x2d5bdc96d9c8aabbdb38c9a27398513e7e5ef84f"],
+  },
+  solana: {
+    issued: ["GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr"]
+  }
 };
 
 import { addChainExports } from "../helper/getSupply";

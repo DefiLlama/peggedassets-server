@@ -97,7 +97,7 @@ export default [
     name: "Dai",
     address: "0x6b175474e89094c44da98b954eedeac495271d0f",
     symbol: "DAI",
-    url: "https://makerdao.com/",
+    url: "https://app.sky.money/",
     description:
       "The Dai stablecoin is a decentralized, unbiased, collateral-backed cryptocurrency soft-pegged to the US Dollar. Dai is held in cryptocurrency wallets or within platforms, and is supported on Ethereum and other popular blockchains.",
     mintRedeemDescription:
@@ -117,7 +117,7 @@ export default [
     name: "Frax",
     address: "0x853d955acef822db058eb8505911ed77f175b99e",
     symbol: "FRAX",
-    url: "https://frax.finance/",
+    url: "https://frax.com/",
     description:
       "Frax attempts to be the first stablecoin protocol to implement design principles of both collateralized and algorithmic stablecoins to create a highly scalable, trustless, extremely stable, and ideologically pure on-chain money.",
     mintRedeemDescription:
@@ -191,6 +191,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/feiprotocol",
     wiki: "https://wiki.defillama.com/wiki/FEI",
+    deadUrl: true,
   },
   {
     id: "10",
@@ -1287,6 +1288,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/JPEGd_69",
     wiki: "https://wiki.defillama.com/wiki/JPEGd",
+    deadUrl: true,
   },
   {
     id: "63",
@@ -1353,7 +1355,7 @@ export default [
     name: "Frax Price Index",
     address: "0x5ca135cb8527d76e932f34b5145575f9d8cbe08e",
     symbol: "FPI",
-    url: "https://frax.finance/",
+    url: "https://frax.com/",
     description:
       "The Frax Price Index (FPI) is the second stablecoin of the Frax Finance ecosystem. FPI is a stablecoin pegged to a basket of real-world consumer items as defined by the US CPI-U average.",
     mintRedeemDescription:
@@ -1671,6 +1673,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/lagofinance",
     wiki: "https://wiki.defillama.com/wiki/Lago_Finance",
+    deadUrl: true,
   },
   */
   {
@@ -1678,7 +1681,7 @@ export default [
     name: "USK",
     address: null,
     symbol: "USK",
-    url: "https://kujira.app/",
+    url: "https://kujira.network/",
     description:
       "USK is an over-collateralized Cosmos stablecoin soft-pegged to the USD and initially backed by ATOM.",
     mintRedeemDescription:
@@ -1962,7 +1965,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "baousd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1990,6 +1992,7 @@ export default [
       "https://github.com/oak-security/audit-reports/tree/master/Comdex",
     twitter: "https://twitter.com/Composite_Money",
     wiki: null,
+    deadUrl: true,
   },*/
   {
     id: "96",
@@ -2286,6 +2289,7 @@ export default [
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: null,
     module: "eusd",
+    deadUrl: true,
   },
   {
     id: "110",
@@ -2414,6 +2418,7 @@ export default [
     ],
     twitter: "https://twitter.com/raft_fi",
     wiki: null,
+    deadUrl: true,
   },
   {
     id: "116",
@@ -2458,6 +2463,7 @@ export default [
     auditLinks: [],
     twitter: "https://twitter.com/EthosReserve",
     wiki: null,
+    deadUrl: true,
   },
   {
     id: "118",
@@ -2600,6 +2606,7 @@ export default [
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
     module: "peg-eusd",
+    deadUrl: true,
   },
   {
     id: "125",
@@ -2621,6 +2628,7 @@ export default [
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
     module: "eusdv2",
+    deadUrl: true,
   },
   {
     id: "126",
@@ -2655,7 +2663,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "alternity-cny",
-
     cmcId: null,
     pegType: "peggedCNY",
     pegMechanism: "crypto-backed",
@@ -2663,6 +2670,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/0xAlternity",
     wiki: "https://docs.alternity.finance/faq/redemptions-and-lcny-price-stability",
+    deadUrl: true,
   },
   {
     id: "128",
@@ -3753,7 +3761,7 @@ export default [
     name: "Bread",
     address: "gnosis:0xa555d5344f6fb6c65da19e403cb4c1ec4a1a5ee3",
     symbol: "BREAD",
-    url: "https://breadchain.xyz",
+    url: "https://fund.bread.coop/",
     description:
       "A network of cooperatives projects building solidarity primitives.",
     mintRedeemDescription:
@@ -3765,7 +3773,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
-    twitter: "https://twitter.com/breadchain_",
+    twitter: "https://twitter.com/breadcoop",
     wiki: null,
     module: "bread",
   },
@@ -4891,7 +4899,7 @@ export default [
     name: "Frax USD",
     address: "0xcacd6fd266af91b8aed52accc382b4e165586e29",
     symbol: "FRXUSD",
-    url: "https://app.frax.finance/",
+    url: "https://frax.com/",
     description:
       "Frax USD (frxUSD) is a fiat-redeemable, fully-collateralized stablecoin issued by the Frax Finance Protocol",
     mintRedeemDescription:
@@ -5517,7 +5525,7 @@ export default [
     name: "Mead",
     address: "berachain:0xedb5180661f56077292c92ab40b1ac57a279a396",
     symbol: "MEAD",
-    url: "https://app.rootsfi.com/deposit",
+    url: "https://www.rootsfi.com/",
     description:
       "MEAD is a Berachain-native stablecoin minted against LP tokens and other yield-bearing assets, allowing users to unlock liquidity without giving up rewards.",
     mintRedeemDescription:
@@ -5531,7 +5539,8 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/rootsfi",
     wiki: "https://docs.rootsfi.com/introduction",
-    doublecounted: true
+    doublecounted: true,
+
   },
   {
     id: "268",
@@ -6985,7 +6994,6 @@ export default [
     twitter: "https://x.com/megaeth",
     wiki: "https://www.megaeth.com/blog-news/megaeth-introduces-usdm",
     module: "megausd",
-    doublecounted: true
   },
   {
     id: "343",
@@ -7067,6 +7075,66 @@ export default [
   },
   {
     id: "347",
+    name: "USDGO",
+    address: "solana:72puLt71H93Z9CzHuBRTwFpL4TG3WZUhnoCC7p8gxigu",
+    symbol: "USDGO",
+    url: "https://www.usdgo.com/",
+    description:
+      "USDGO is a regulated, enterprise-grade stablecoin issued by Anchorage Digital Bank and distributed by OSL Group.",
+    mintRedeemDescription:
+      "Eligible users can exchange USD for USDGO and redeem USDGO for USD 1:1 through the issuer and distributor.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/usdgo_official",
+    wiki: null,
+    module: "usdgo",
+  },
+  {
+    id: "348",
+    name: "Fidelity Digital Dollar",
+    address: "0x7C135549504245B5eAe64fc0E99Fa5ebabb8e35D",
+    symbol: "FIDD",
+    url: "https://www.fidelitydigitalassets.com/stablecoin",
+    description: `Fidelity Digital Dollar℠ (FIDD) is a stablecoin pegged 1:1 to the U.S. dollar and is issued by Fidelity Digital Assets, National Association, a subsidiary of Fidelity Investments®. FIDD is backed by the stringent operational standards of Fidelity Digital Assets® and draws on the history, principles, and expertise of the traditional Fidelity Investments® business.`,
+    mintRedeemDescription: `FIDD can be bought and sold for $1 (in eligible jurisdictions) by institutional clients on the Fidelity Digital Assets platform, by retail customers through Fidelity Crypto®, and by advisors through Fidelity Crypto® for Wealth Managers.* It is also available on exchanges where FIDD is listed. Clients will not be able to transfer to addresses Fidelity Digital Assets has frozen/restricted on the blockchain, even if they hold FIDD off-platform.`,
+    onCoinGecko: "true",
+    gecko_id: "fidelity-digital-dollar",
+    cmcId: "39549",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://github.com/fidelity/mintable-token-ethereum-contract/blob/main/audits/Fidelity_Mintable_Token_Audit_Report-OpenZeppelin.pdf"],
+    twitter: "https://x.com/digitalassets",
+    wiki: null,
+    module: "fidelity-digital-dollar",
+  },
+  {
+    id: "349",
+    name: "Pareto USP",
+    address: "0x97ccc1c046d067ab945d3cf3cc6920d3b1e54c88",
+    symbol: "USP",
+    url: "https://pareto.credit",
+    description: `Pareto USP is a synthetic dollar protocol soft-pegged to stablecoins backed by real-world, institutional-grade private credit, alongside a globally accessible savings asset, sUSP.`,
+    mintRedeemDescription: `Users mint USP by depositing stablecoins (such as USDC or USDS) into the USP contract. The contract mints USP and deposits the underlying assets into Credit Vaults, which lend to institutional players executing yield strategies. Generated yield is later distributed to USP stakers (sUSP holders).`,
+    onCoinGecko: "true",
+    gecko_id: "pareto-usp",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/paretocredit",
+    wiki: "https://docs.pareto.credit/product/usp",
+    module: "pareto-usp",
+    doublecounted: true
+  },
+  {
+    id: "350",
     name: "Citrea USD",
     address: "0x8D82c4E3c936C7B5724A382a9c5a4E6Eb7aB6d5D",
     symbol: "ctUSD",
@@ -7083,6 +7151,5 @@ export default [
     twitter: "https://x.com/citrea_xyz",
     wiki: "https://docs.citrea.xyz/developer-documentation/citrea-usd-ctusd",
     module: "citrea-ctusd",
-    doublecounted: true
-  },
+  }
 ] as PeggedAsset[];
