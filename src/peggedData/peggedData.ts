@@ -7152,5 +7152,24 @@ export default [
     wiki: "https://docs.citrea.xyz/developer-documentation/citrea-usd-ctusd",
     module: "citrea-ctusd",
     doublecounted: true
+  },
+  {
+    id: "351",
+    name: "Tetris Money",
+    address: "0xe103f85c23577675f82438a2866C7EE3bBC9c8C8",
+    symbol: "RUBT",
+    url: "https://tetris.money/",
+    description: "RUBT is an ERC-20 token representing a digital claim denominated in Russian rubles. It is used as an on-chain instrument for exchanging ruble liquidity with other digital assets within a regulated operational framework.",
+    mintRedeemDescription: "Fiat-pegged digital claim (1 RUBT = 1 RUB). Legal form: on‑chain digital monetary claim representing a monetary obligation of the Issuer.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedRUB",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/Tetris_Money",
+    wiki: "https://tetrismoney.gitbook.io/docs/en/whitepaper/summary",
+    module: "rubt",
   }
 ] as PeggedAsset[];
