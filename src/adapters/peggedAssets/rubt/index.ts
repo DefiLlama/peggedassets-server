@@ -1,6 +1,7 @@
 const chainContracts = {
   ethereum: {
     issued: ["0xe103f85c23577675f82438a2866C7EE3bBC9c8C8"],
+    unreleased: ["0xc92383f1283ccee38Ef8Ca783a82592E643adFBB"],
   },
   tron: {
     bridgedFromETH: ["TAufZEJdyKLBjBKAPCVBjciabaTci2sUPv"]
