@@ -3659,7 +3659,7 @@ export default [
     name: "PXDC Stablecoin",
     address: "pulse:0xeB6b7932Da20c6D7B3a899D5887d86dfB09A6408",
     symbol: "PXDC",
-    url: "https://www.earn.powercity.io/",
+    url: "https://earn.powercity.io/",
     description:
       "PXDC is a stablecoin with 110% collateralization, no repayment schedule, immutability, and no governance or admin keys",
     mintRedeemDescription:
