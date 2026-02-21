@@ -4198,6 +4198,7 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/hliquity_",
     wiki: "https://docs.hliquity.org/overview/overview#hchf-the-stablecoin",
+    deadUrl: true,
   },
   {
     id: "201",
