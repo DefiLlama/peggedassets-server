@@ -1266,6 +1266,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/fiatdao",
     wiki: "https://wiki.defillama.com/wiki/FIATDAO",
+    deadUrl: true,
   },
   {
     id: "62",
@@ -1709,7 +1710,7 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "arable-usd",
-
+    deadUrl: true,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1802,6 +1803,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
+    deadUrl: true,
   },
   */
   {
@@ -3798,6 +3800,7 @@ export default [
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
     module: "zun-usd",
+    deadUrl: true,
   },
   {
     id: "182",
@@ -3820,7 +3823,7 @@ export default [
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
     module: "zun-eth",
-
+    deadUrl: true,
   },
   {
     id: "183",
@@ -4337,13 +4340,14 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/0xDYAD",
     wiki: "https://dyad.gitbook.io/docs",
+    deadUrl: true,
   },
   {
     id: "208",
     name: "Dackie USD",
     address: "base:0x613ce28076289de255f1a6487437f03e37e4a71d",
     symbol: "DCKUSD",
-    url: "https://www.dyadstable.xyz/",
+    url: "https://www.dackieswap.xyz/swap",
     description:
       "Dackie USD (dckUSD) is the algorithmic stablecoin, designed to enhance liquidity and drive growth within the DackieSwap ecosystem across multiple blockchains",
     mintRedeemDescription:
