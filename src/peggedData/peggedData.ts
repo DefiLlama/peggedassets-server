@@ -1932,6 +1932,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/DontDieMeme",
     wiki: "https://wiki.defillama.com/wiki/DontDieMeme",
+    deadUrl: true,
   },
   {
     id: "93",
