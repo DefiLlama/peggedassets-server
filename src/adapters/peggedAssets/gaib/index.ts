@@ -1,10 +1,10 @@
 // DefiLlama Stablecoin (Pegged Asset) Adapter for AID
 // Repo: DefiLlama/peggedassets-server
-// Path: src/adapters/peggedAssets/gaib-aid/index.ts
+// Path: src/adapters/peggedAssets/gaib/index.ts
 //
 // Lists AID on the DefiLlama Stablecoins dashboard.
 // AID is backed 1:1 by US Treasuries + stablecoins (USDC, USDT).
-// Minted on Ethereum, bridged cross-chain via LayerZero OFT.
+// Natively minted on Ethereum, Arbitrum, Base, and BSC.
 //
 // VERIFY: Confirm AID address is identical on all chains.
 // AIDa Alpha used the same address cross-chain (CREATE2 pattern).
@@ -16,13 +16,13 @@ const chainContracts = {
     issued: ["0x18F52B3fb465118731d9e0d276d4Eb3599D57596"],
   },
   arbitrum: {
-    bridgedFromETH: ["0x18F52B3fb465118731d9e0d276d4Eb3599D57596"],
+    issued: ["0x18F52B3fb465118731d9e0d276d4Eb3599D57596"],
   },
   base: {
-    bridgedFromETH: ["0x18F52B3fb465118731d9e0d276d4Eb3599D57596"],
+    issued: ["0x18F52B3fb465118731d9e0d276d4Eb3599D57596"],
   },
   bsc: {
-    bridgedFromETH: ["0x18F52B3fb465118731d9e0d276d4Eb3599D57596"],
+    issued: ["0x18F52B3fb465118731d9e0d276d4Eb3599D57596"],
   },
 };
 
