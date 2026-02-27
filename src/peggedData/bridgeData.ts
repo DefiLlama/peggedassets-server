@@ -1743,6 +1743,10 @@ export default {
     bridge: "circle",
     sourceChain: formattedSourceChains.eth,
   },
+  "SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx": {
+    bridge: "circle",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {

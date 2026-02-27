@@ -555,5 +555,8 @@ export const chainContracts: ChainContracts = {
   },
   mantra: {
     bridgedFromETH: ["0x5E76be0F4e09057D75140216F70fd4cE3365bb29"],
-  }
+  },
+  stacks: {
+    bridgedFromETH: ["SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx"], // USDCx via Circle xReserve
+  },
 };
