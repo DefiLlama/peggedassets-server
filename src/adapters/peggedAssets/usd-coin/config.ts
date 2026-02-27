@@ -535,7 +535,10 @@ export const chainContracts: ChainContracts = {
     issued: ["5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"],
   },
   cardano: {
-    bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534443"],
+    bridgedFromETH: [
+      "25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534443", // [0] wan
+      "1f3aec8bfe7ea4fe14c5f121e2a92e301afe414147860d557cac7e345553444378", // [1] usdcx via Circle xReserve (policy+hex name)
+    ],
   },
   katana: {
     bridgeOnETH: ["0x53E82ABbb12638F09d9e624578ccB666217a765e"], // vb usdc (origin) on ethmainnet

@@ -454,8 +454,10 @@ async function moveSupply(): Promise<Balances> {
 async function getCardanoSupply() {
   return async function () {
     let balances = {} as Balances;
-    const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
-    sumSingleBalance(balances, "peggedUSD", supply, "wan", true);
+    for (const asset of chainContracts.cardano.bridgedFromETH) {
+      const supply = await getTotalSupply(asset);
+      sumSingleBalance(balances, "peggedUSD", supply, asset, true);
+    }
     return balances;
   };
 }
