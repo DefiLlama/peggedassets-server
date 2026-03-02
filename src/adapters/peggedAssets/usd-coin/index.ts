@@ -454,8 +454,10 @@ async function moveSupply(): Promise<Balances> {
 async function getCardanoSupply() {
   return async function () {
     let balances = {} as Balances;
-    const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
-    sumSingleBalance(balances, "peggedUSD", supply, "wan", true);
+    for (const asset of chainContracts.cardano.bridgedFromETH) {
+      const supply = await getTotalSupply(asset);
+      sumSingleBalance(balances, "peggedUSD", supply, asset, true);
+    }
     return balances;
   };
 }
@@ -508,6 +510,27 @@ async function nibiruBridged() {
       sumSingleBalance(balances, "peggedUSD", supply, contract, true);
     }
 
+    return balances;
+  };
+}
+
+async function stacksBridged() {
+  return async function () {
+    const balances = {} as Balances;
+    for (const contract of chainContracts.stacks.bridgedFromETH) {
+      const res = await retry(
+        async (_bail: any) =>
+          await axios.get(
+            `https://api.hiro.so/metadata/v1/ft/${encodeURIComponent(contract)}`
+          )
+      );
+      const totalSupply = res?.data?.total_supply;
+      const decimals = res?.data?.decimals ?? 6;
+      if (totalSupply) {
+        const supply = Number(totalSupply) / 10 ** decimals;
+        sumSingleBalance(balances, "peggedUSD", supply, contract, true);
+      }
+    }
     return balances;
   };
 }
@@ -1114,7 +1137,10 @@ const adapter: PeggedIssuanceAdapter = {
   },
   mantra: {
     ethereum: bridgedSupply("mantra", 6, chainContracts.mantra.bridgedFromETH)
-  }
+  },
+  stacks: {
+    ethereum: stacksBridged(),
+  },
 };
 
 export default adapter;
