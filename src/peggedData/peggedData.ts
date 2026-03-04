@@ -4431,7 +4431,7 @@ export default [
     name: "Move Dollar",
     address: "aptos:0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_coin::MOD",
     symbol: "MOD",
-    url: "https://app.thala.fi/overview",
+    url: "https://app.thala.fi/",
     description:
       `Thala's stablecoin, Move Dollar (MOD), is backed by both native and multi-chain assets, with an additional ongoing focus on yield-bearing collateral types`,
     mintRedeemDescription:
