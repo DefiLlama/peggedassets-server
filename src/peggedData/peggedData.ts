@@ -604,7 +604,7 @@ export default [
     name: "Dollar on Chain",
     address: "rsk:0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db",
     symbol: "DOC",
-    url: "https://moneyonchain.com/doc-bitcoin-backed-stablecoin/",
+    url: "https://moneyonchain.com/doc-stablecoin/",
     description:
       "Dollar on Chain an over-collateralized USD-pegged stablecoin backed by rBTC on the RSK Blockchain.",
     mintRedeemDescription:
@@ -1405,7 +1405,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "usdlemma",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1413,6 +1412,8 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LemmaFinance",
     wiki: "https://wiki.defillama.com/wiki/LemmaFinance",
+    deprecated: true,
+    deadUrl: true,
   },
   /*{
     id: "69",
@@ -4514,7 +4515,7 @@ export default [
     name: "Solayer USD",
     address: "solana:susdabGDNbhrnCa6ncrYo81u4s9GM8ecK2UwMyZiq4X",
     symbol: "sUSD",
-    url: "https://solayer.org/platform/susd",
+    url: "https://solayer.org/product/susd",
     description:
       `sUSD is a yield-bearing stablecoin on Solana that is pegged to the U.S. dollar and backed by U.S. Treasury Bills (T-bills)`,
     mintRedeemDescription:
