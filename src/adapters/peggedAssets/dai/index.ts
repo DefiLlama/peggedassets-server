@@ -504,9 +504,9 @@ const adapter: PeggedIssuanceAdapter = {
   linea: {
     ethereum: bridgedSupply("linea", 18, chainContracts.linea.bridgedFromETH),
   },
-  elrond: { 
-    ethereum: elrondBridged("WDAI-9eeb54", 18),
-  },
+  // elrond: { 
+  //   ethereum: elrondBridged("WDAI-9eeb54", 18),
+  // },
   morph: {
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],

@@ -1114,11 +1114,17 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: usdtApiUnreleased("reserve_balance_statemine"),
   },
   morph: {
-    ethereum: supplyInEthereumBridge(
-      chainContracts.ethereum.issued[0],
-      chainContracts.morph.bridgeOnETH[0],
-      6
-    )
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        supplyInEthereumBridge(
+          chainContracts.ethereum.issued[0],
+          chainContracts.morph.bridgeOnETH[0],
+          6
+        ),
+        bridgedSupply("morph", 6, chainContracts.morph.bridgedFromETH),
+      ],
+      "peggedUSD"
+    ),
   },
   occ: {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),
@@ -1184,6 +1190,15 @@ const adapter: PeggedIssuanceAdapter = {
   etlk: {
     ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab") // Etherlink's Wrapped Asset Bridge
   },
+  rbn: {
+    ethereum: bridgedSupply("rbn", 6, chainContracts.rbn.bridgedFromETH)
+  },
+  mantra: {
+    ethereum: bridgedSupply("mantra", 6, chainContracts.mantra.bridgedFromETH)
+  },
+  megaeth: {
+    ethereum: bridgedSupply("megaeth", 6, chainContracts.megaeth.bridgedFromETH)
+  }
 };
 
 export default adapter;

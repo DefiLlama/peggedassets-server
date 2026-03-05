@@ -365,12 +365,16 @@ export const chainContracts: ChainContracts = {
   },
   morph: {
     bridgeOnETH: ["0x44c28f61A5C2Dd24Fc71D7Df8E85e18af4ab2Bd8"],
+    bridgedFromETH: ["0xe7cd86e13AC4309349F30B3435a9d337750fC82D"], // USDT0
   },
   occ: {
     bridgedFromETH: ["0x7277Cc818e3F3FfBb169c6Da9CC77Fc2d2a34895"],
   },
   ink: {
     bridgedFromETH: ["0x0200C29006150606B650577BBE7B6248F58470c1"]
+  },
+  megaeth: {
+    bridgedFromETH: ["0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb"] // USDT0
   },
   berachain: {
     bridgedFromETH: ["0x779Ded0c9e1022225f8E0630b35a9b54bE713736"] // USDT0
@@ -436,5 +440,11 @@ export const chainContracts: ChainContracts = {
   },
   etlk: {
     bridgedFromETH: ["0x2C03058C8AFC06713be23e58D2febC8337dbfE6A"], // Wrapped Asset Bridge
+  },
+  rbn: {
+    bridgedFromETH: ["0x8C4aCd74Ff4385f3B7911432FA6787Aa14406f8B"],
+  },
+  mantra: {
+    bridgedFromETH: ["0x3806640578b710d8480910bF51510bc538d2F51A"], 
   }
 };

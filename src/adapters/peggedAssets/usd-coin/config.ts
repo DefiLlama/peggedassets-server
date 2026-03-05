@@ -535,7 +535,10 @@ export const chainContracts: ChainContracts = {
     issued: ["5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"],
   },
   cardano: {
-    bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534443"],
+    bridgedFromETH: [
+      "25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534443", // [0] wan
+      "1f3aec8bfe7ea4fe14c5f121e2a92e301afe414147860d557cac7e345553444378", // [1] usdcx via Circle xReserve (policy+hex name)
+    ],
   },
   katana: {
     bridgeOnETH: ["0x53E82ABbb12638F09d9e624578ccB666217a765e"], // vb usdc (origin) on ethmainnet
@@ -546,5 +549,14 @@ export const chainContracts: ChainContracts = {
   },
   etlk: {
     bridgedFromETH: ["0x796Ea11Fa2dD751eD01b53C372fFDB4AAa8f00F9"], // Wrapped Asset Bridge
-  }
+  },
+  rbn: {
+    bridgedFromETH: ["0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06"]
+  },
+  mantra: {
+    bridgedFromETH: ["0x5E76be0F4e09057D75140216F70fd4cE3365bb29"],
+  },
+  stacks: {
+    bridgedFromETH: ["SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx"], // USDCx via Circle xReserve
+  },
 };

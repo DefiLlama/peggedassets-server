@@ -28,6 +28,9 @@ const chainContracts: ChainContracts = {
   },
   aptos: {
     issued: ["0x7b5e9cac3433e9202f28527f707c89e1e47b19de2c33e4db9521a63ad219b739"]
+  },
+  bsc: {
+    issued: ["0x3d0a2A3a30a43a2C1C4b92033609245E819ae6a6"]
   }
 }
 

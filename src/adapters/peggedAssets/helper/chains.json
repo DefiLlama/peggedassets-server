@@ -32,6 +32,7 @@
   "canto",
   "cardano",
   "celo",
+  "citrea",
   "clover",
   "comdex",
   "concordium",
@@ -109,6 +110,7 @@
   "mantle",
   "manta",
   "mantra",
+  "megaeth",
   "metis",
   "meter",
   "mezo",
@@ -211,5 +213,6 @@
   "zksync",
   "zyx",
   "zircuit",
-  "hydradx"
+  "hydradx",
+  "rbn"
 ]

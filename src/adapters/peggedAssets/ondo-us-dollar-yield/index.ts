@@ -3,6 +3,7 @@ import { sumSingleBalance } from '../helper/generalUtil';
 import { addChainExports, cosmosSupply } from "../helper/getSupply";
 import { ChainBlocks, PeggedIssuanceAdapter, Balances } from "../peggedAsset.type";
 import { getTotalSupply as stellarGetTotalSupply } from "../helper/stellar";
+import { getResources } from '../helper/aptos';
 const axios = require("axios");
 const retry = require("async-retry");
 
@@ -47,6 +48,32 @@ async function stellarMinted(assetID: string) {
   };
 }
 
+async function aptosMinted(coinType: string) {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const endpoint = process.env.APTOS_RPC ?? "https://fullnode.mainnet.aptoslabs.com";
+    const response = await retry(async (_bail: any) =>
+      axios.post(`${endpoint}/v1/view`, {
+        function: "0x1::coin::supply",
+        type_arguments: [coinType],
+        arguments: [],
+      })
+    );
+
+    const supplyVec = response.data?.[0]?.vec;
+    if (!supplyVec || supplyVec.length === 0) {
+      throw new Error(`No supply found for coin type: ${coinType}`);
+    }
+    const totalSupply = parseInt(supplyVec[0]) / 1e6;
+    sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
+    return balances;
+  };
+}
+
 const chainContracts = {
   ethereum: {
     issued: [
@@ -65,13 +92,14 @@ const chainContracts = {
   solana: {
     issued: ["A1KLoBrKBde8Ty9qtNQUtq3C2ortoC3u7twggz7sEto6"],
   },
-  aptos: {
-    issued: [
-      "0xcfea864b32833f157f042618bd845145256b1bf4c0da34a7013b76e42daa53cc",
-    ],
-  },
   arbitrum: {
     issued: ["0x35e050d3C0eC2d29D269a8EcEa763a183bDF9A9D"]
+  },
+  sei : {
+    issued: ["0x54cD901491AeF397084453F4372B93c33260e2A6"],
+  },
+  plume_mainnet: {
+    issued: ["0xD2B65e851Be3d80D3c2ce795eB2E78f16cB088b2"],
   },
   stellar: {
     issued: ["USDY:GAJMPX5NBOG6TQFPQGRABJEEB2YE7RFRLUKJDZAZGAD5GFX4J7TADAZ6"],
@@ -98,6 +126,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   stellar: {
     minted: stellarMinted(chainContracts.stellar.issued[0]),
+  },
+  aptos: {
+    minted: aptosMinted("0xcfea864b32833f157f042618bd845145256b1bf4c0da34a7013b76e42daa53cc::usdy::USDY"),
   },
 };
 

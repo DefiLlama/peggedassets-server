@@ -7,6 +7,9 @@ const chainContracts = {
     },
     ink: {
         bridgedFromETH: ["0xe343167631d89B6Ffc58B88d6b7fB0228795491D"]
+    },
+    xlayer: {
+        issued: ['0x4ae46a509f6b1d9056937ba4500cb143933d2dc8']
     }
 };
 

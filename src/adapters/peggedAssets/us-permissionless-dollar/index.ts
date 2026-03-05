@@ -22,7 +22,7 @@ const chainContracts = {
 import { addChainExports } from "../helper/getSupply";
 const adapter = addChainExports(chainContracts)
 let ethMinted = adapter.ethereum.minted
-adapter.ethereum.minted = async function(...args) {
+adapter.ethereum.minted = async function(...args: any[]) {
     const chainApi = args[0];
 
     // USPD was hacked

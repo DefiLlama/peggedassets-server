@@ -58,10 +58,14 @@ export const normalizedChainReplacements = {
   "op%20mainnet": "optimism",
   "op mainnet": "optimism",
   "op-mainnet": "optimism",
+  "x%20layer": "xlayer",
+  "x layer": "xlayer",
+  "x-layer": "xlayer",
   "plume%20mainnet": "plume_mainnet",
   "plume mainnet": "plume_mainnet",
   "plume-mainnet": "plume_mainnet",
-  "etherlink": "etlk"
+  "etherlink": "etlk",
+  "redbelly": "rbn"
 } as {
   [chain: string]: string;
 };
@@ -1215,6 +1219,16 @@ export const chainCoingeckoIds = {
     symbol: null,
     cmcId: null,
   },
+  "Redbelly": {
+    geckoId: "redbelly-network-token",
+    symbol: "RBNT",
+    cmcId: null,
+  },
+  "MegaETH": {
+    geckoId: "megaeth ",
+    symbol: "MEGA",
+    cmcId: null,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1539,6 +1553,10 @@ export function getChainDisplayName(
       return "Glue"
     case "etlk":
       return "Etherlink"
+    case "rbn":
+      return "Redbelly"
+    case "megaeth":
+      return "MegaETH"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

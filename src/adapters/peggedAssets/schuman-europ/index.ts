@@ -8,6 +8,9 @@ const chainContracts: ChainContracts = {
   avax: {
     issued: ["0x8835a2f66a7aaccb297cb985831a616b75e2e16c"],
   },
+  plasma: {
+    issued: ["0x98658Bd74EF231158Cadc21d8AbA733a4E947e6a"],
+  },
 };
 
 
