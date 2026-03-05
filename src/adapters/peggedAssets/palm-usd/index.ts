@@ -6,9 +6,9 @@ const chainContracts = {
   bsc: {
     issued: ["0xFAF0cEe6B20e2Aaa4B80748a6AF4CD89609a3d78"],
   },
-  tron: {
-    issued: ["TF39FD5YwW63mtB1zr9gpVdyFUx1icac2y"]
-  }
+  solana: {
+    issued: ["CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s"]
+  },
 };
 
 import { addChainExports } from "../helper/getSupply";
