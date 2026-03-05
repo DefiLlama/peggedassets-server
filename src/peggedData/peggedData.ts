@@ -128,7 +128,7 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
     priceSource: "defillama",
-    auditLinks: null,
+    auditLinks: ["https://www.certik.org/projects/fraxfinance"],
     twitter: "https://twitter.com/fraxfinance",
     wiki: "https://wiki.defillama.com/wiki/Frax",
   },
