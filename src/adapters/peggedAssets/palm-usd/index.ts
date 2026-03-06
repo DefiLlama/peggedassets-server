@@ -9,6 +9,9 @@ const chainContracts = {
   solana: {
     issued: ["CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s"]
   },
+  tron: {
+    issued: ["TF39FD5YwW63mtB1zr9gpVdyFUx1icac2y"]
+  }
 };
 
 import { addChainExports } from "../helper/getSupply";
