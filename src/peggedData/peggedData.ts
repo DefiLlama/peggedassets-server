@@ -7273,5 +7273,25 @@ export default [
     twitter: "https://x.com/jpy_coin",
     wiki: "https://drive.google.com/file/d/1LDm-Pl3pxojqJVyMVriQ-_vh0o9zHYtP/view",
     module: "jpycoin",
+  },
+  {
+    id: "356",
+    name: "US Sonic Dollar",
+    address: "0x000000000eCcFf26B795F73fb0A70d48da657fEf",
+    symbol: "USSD",
+    url: "https://www.soniclabs.com/ussd",
+    description: "USSD is Sonic's flagship stablecoin - backed 1:1 by U.S. Treasuries and fully compliant with the GENIUS Act.",
+    mintRedeemDescription: "Anyone can mint USSD by depositing supported USD assets at a 1:1 ratio, with zero minting fees.",
+    onCoinGecko: "true",
+    gecko_id: "us-sonic-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/SonicLabs",
+    wiki: "https://blog.soniclabs.com/ussd-sonics-native-permissionless-usd-stablecoin-built-with-frax/",
+    module: "us-sonic-dollar",
+    doublecounted: true
   }
 ] as PeggedAsset[];
