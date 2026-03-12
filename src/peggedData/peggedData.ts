@@ -7304,12 +7304,17 @@ export default [
     mintRedeemDescription:
       "BYC gets minted when users borrow against collateral they have deposited. BYC gets melted when debt is being repaid.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "bytecash-byc",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: [],
+    auditLinks: [
+      "https://github.com/circuitdao/puzzles/blob/main/audits/Zellic-Audit-Report.pdf",
+      "https://github.com/circuitdao/puzzles/blob/main/audits/Immunefi-invite-only-audit.pdf",
+      "https://github.com/circuitdao/puzzles/blob/main/audits/Cantina-public-competition-audit.pdf",
+      "https://cantina.xyz/bounties/8f671963-4313-4ac3-aed9-3186a240b75a"
+    ],
     twitter: "https://x.com/Circuit_DAO",
     wiki: "https://docs.circuitdao.com",
     module: "bytecash-byc",
