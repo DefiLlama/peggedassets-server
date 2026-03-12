@@ -78,18 +78,9 @@ async function getPeggedAssetsData() {
     }
   }))
 
-  const terraFrozenBalance = cache.peggedAssetsData['3'].balances
+  // remove all Terra data after the depeg timestamp
+  cache.peggedAssetsData['3'].balances = cache.peggedAssetsData['3'].balances
     .filter((item: any) => item.SK <= 1655891865)
-    .slice(-1)[0]
-  if (terraFrozenBalance) {
-    const { SK, ...terraLastBalance } = terraFrozenBalance
-    cache.peggedAssetsData['3'].balances.forEach((item: any, index: any) => { // the token deppeged after this
-      if (item.SK > 1655891865) {
-        cache.peggedAssetsData['3'].balances[index] = { ...item, ...terraLastBalance }
-        return
-      }
-    })
-  }
 
   replaceAvalanceAvax(cache.peggedAssetsData) // convert all 'avalanche' keys to 'avax'
   return cache.peggedAssetsData
