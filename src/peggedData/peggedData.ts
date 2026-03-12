@@ -7293,5 +7293,25 @@ export default [
     wiki: "https://blog.soniclabs.com/ussd-sonics-native-permissionless-usd-stablecoin-built-with-frax/",
     module: "us-sonic-dollar",
     doublecounted: true
+  },
+  {
+    id: "357",
+    name: "Whale Asset Dollar",
+    address: "3334160924",
+    symbol: "WAD",
+    url: "https://dork.fi",
+    description: "WAD is an overcollateralized stablecoin minted through DorkFi, a cross-chain borrow/lend protocol on the Algorand Virtual Machine (AVM). Users deposit collateral assets and borrow WAD at controlled interest rates.",
+    mintRedeemDescription: "WAD is minted by depositing accepted collateral (ALGO, USDC, UNIT, VOI) into DorkFi lending pools. WAD can be repaid at any time to reclaim collateral. The protocol uses utilization-based dynamic interest rates.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/dork_fi",
+    wiki: "https://docs.dork.fi",
+    module: "wad-stablecoin",
+    doublecounted: false
   }
 ] as PeggedAsset[];
