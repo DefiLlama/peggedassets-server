@@ -247,6 +247,7 @@ export function craftChartsResponse(
 
     // fill missing data with last available data
     while (lastTimestamp < lastDailyTimestamp) {
+      if (pegged.deadFrom) break; // don't extend dead assets beyond their last real data point
       lastTimestamp = getClosestDayStartTimestamp(lastTimestamp + 24 * secondsInHour);
       historicalBalance.push({ ...lastBalance, SK: lastTimestamp });
       peggedBalance.lastTimestamp = lastTimestamp;
