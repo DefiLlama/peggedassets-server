@@ -18,12 +18,14 @@ async function bycMinted() {
     }
     // api is a ChainApi object; fall back to current time if timestamp is unavailable.
     const timestamp: number = api?.timestamp ?? Math.round(Date.now() / 1000);
-    // Find the entry whose timestamp is closest to the requested timestamp.
-    // Falls back to the latest entry for future timestamps.
-    const entry = stats.reduce((closest: any, current: any) =>
-      Math.abs(current.timestamp - timestamp) < Math.abs(closest.timestamp - timestamp)
-        ? current
-        : closest
+    // Use the latest sample at or before the requested timestamp.
+    // If the asset had not launched yet, report zero.
+    const entry = stats.reduce(
+      (latest: any, current: any) =>
+        current.timestamp <= timestamp && current.timestamp > latest.timestamp
+          ? current
+          : latest,
+      { timestamp: -Infinity, byc_in_circulation: 0 }
     );
     return { peggedUSD: (entry.byc_in_circulation ?? 0) / MOJOS_PER_BYC };
   };
