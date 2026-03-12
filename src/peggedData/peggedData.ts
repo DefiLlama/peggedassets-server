@@ -3031,8 +3031,7 @@ export default [
     symbol: "HYUSD",
     url: "https://linktr.ee/hyusd",
     description:
-      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.",
-    mintRedeemDescription:
+      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.",    mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: "false",
     gecko_id: null,
@@ -7293,5 +7292,26 @@ export default [
     wiki: "https://blog.soniclabs.com/ussd-sonics-native-permissionless-usd-stablecoin-built-with-frax/",
     module: "us-sonic-dollar",
     doublecounted: true
-  }
+  },
+  {
+    id: "357",
+    name: "Bytecash",
+    address: "chia:ae1536f56760e471ad85ead45f00d680ff9cca73b8cc3407be778f1c0c606eac",
+    symbol: "BYC",
+    url: "https://circuitdao.com",
+    description:
+      "Bytecash (BYC) is a USD-pegged stablecoin natively issued by Circuit, a CDP protocol on Chia. BYC is overcollateralized with XCH, the native coin of Chia.",
+    mintRedeemDescription:
+      "BYC gets minted when users borrow against collateral they have deposited. BYC gets melted when debt is being repaid.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/Circuit_DAO",
+    wiki: "https://docs.circuitdao.com",
+    module: "bytecash-byc",
+  },
 ] as PeggedAsset[];
