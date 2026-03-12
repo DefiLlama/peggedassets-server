@@ -12,7 +12,10 @@ async function bycMinted() {
     _chainBlocks: ChainBlocks
   ) {
     const { data } = await axios.get(`${CIRCUIT_API}/protocol/stats`);
-    const stats = data.stats;
+    const stats = data?.stats;
+    if (!Array.isArray(stats) || stats.length === 0) {
+      throw new Error("No stats data available from Circuit API");
+    }
     // api is a ChainApi object; fall back to current time if timestamp is unavailable.
     const timestamp: number = api?.timestamp ?? Math.round(Date.now() / 1000);
     // Find the entry whose timestamp is closest to the requested timestamp.
@@ -22,7 +25,7 @@ async function bycMinted() {
         ? current
         : closest
     );
-    return { peggedUSD: entry.byc_in_circulation / MOJOS_PER_BYC };
+    return { peggedUSD: (entry.byc_in_circulation ?? 0) / MOJOS_PER_BYC };
   };
 }
 
