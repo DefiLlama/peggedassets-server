@@ -7293,5 +7293,24 @@ export default [
     wiki: "https://blog.soniclabs.com/ussd-sonics-native-permissionless-usd-stablecoin-built-with-frax/",
     module: "us-sonic-dollar",
     doublecounted: true
-  }
+  },
+  {
+    id: "357",
+    name: "Mento British Pound",
+    address: "celo:0xCCF663b1fF11028f0b19058d0f7B674004a40746",
+    symbol: "GBPm",
+    url: "https://www.mento.org/",
+    description:
+      "GBPm is a GBP-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow GBPm against it.",
+    mintRedeemDescription:
+      "GBPm is minted by depositing USDm as collateral into a Mento CDP (trove) and borrowing GBPm against it. Repaying the borrowed GBPm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "mento-british-pound",
+    cmcId: null,
+    pegType: "peggedGBP",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+  },
 ] as PeggedAsset[];
