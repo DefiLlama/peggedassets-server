@@ -7293,5 +7293,25 @@ export default [
     wiki: "https://blog.soniclabs.com/ussd-sonics-native-permissionless-usd-stablecoin-built-with-frax/",
     module: "us-sonic-dollar",
     doublecounted: true
+  },
+  {
+    id: "357",
+    name: "DUSD",
+    address: "0x63d74d22E689C715a04F2C13962b1f77F443d35b",
+    symbol: "DUSD",
+    url: "https://alto.money/",
+    description:
+      "DUSD is Alto’s native stablecoin and the unit of account inside all markets.",
+    mintRedeemDescription:
+      "DUSD is minted through permissioned and permissionless peg stability modules.",
+    onCoinGecko: "true",
+    gecko_id: "alto-dusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/alto_money",
+    wiki: "https://docs.alto.money/",
   }
 ] as PeggedAsset[];
