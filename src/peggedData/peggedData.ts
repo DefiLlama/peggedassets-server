@@ -1069,12 +1069,12 @@ export default [
   },
   {
     id: "52",
-    name: "Celo Euro",
+    name: "Mento Euro",
     address: "celo:0xd8763cba276a3738e6de85b4b3bf5fded6d6ca73",
-    symbol: "CEUR",
-    url: "https://celo.org/",
+    symbol: "EURm",
+    url: "https://www.mento.org/",
     description:
-      "Celo Euros (cEUR) are stablecoins that follow the Euro and are native to the Celo blockchain's Reserve system. The Celo Reserve is a system of smart contracts that uses a portfolio of cryptocurrencies to expand and contract the supply cEUR, similar to MakerDAO's lending protocol.",
+      "Mento Euros (EURm) are stablecoins that follow the Euro and are native to the Celo blockchain's Reserve system. The Mento Reserve is a system of smart contracts that uses a portfolio of cryptocurrencies to expand and contract the supply cEUR, similar to MakerDAO's lending protocol.",
     mintRedeemDescription:
       "Using the Mento app, 1 Euro worth of CELO can be sent to the CELO reserve to mint 1 cEUR, and 1 cEUR can be burned to receive 1 Euro worth of CELO.",
     onCoinGecko: "true",
@@ -1083,8 +1083,8 @@ export default [
     pegType: "peggedEUR",
     pegMechanism: "algorithmic",
     priceSource: "defillama",
-    auditLinks: ["https://celo.org/audits"],
-    twitter: "https://twitter.com/CeloOrg",
+    auditLinks: ["https://docs.mento.org/mento-v3/build/smart-contracts/audits"],
+    twitter: "https://x.com/MentoLabs",
     wiki: "https://wiki.defillama.com/wiki/CEUR",
   },
   {
