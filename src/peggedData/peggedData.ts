@@ -483,22 +483,22 @@ export default [
   },
   {
     id: "24",
-    name: "Celo Dollar",
+    name: "Mento Dollar",
     address: "celo:0x765de816845861e75a25fca122bb6898b8b1282a",
-    symbol: "CUSD",
-    url: "https://celo.org/",
+    symbol: "USDm",
+    url: "https://www.mento.org/",
     description:
-      "Celo Dollars (cUSD) are stablecoins that follow the US Dollar and are native to the Celo blockchain's Reserve system. The Celo Reserve is a system of smart contracts that uses a portfolio of cryptocurrencies to expand and contract the supply cUSD, similar to MakerDAO's lending protocol.",
+      "Mento Dollars (USDm) are stablecoins that follow the US Dollar and are backed by Mento's Reserve system. The Mento Reserve is diversified portfolio of crypto assets.",
     mintRedeemDescription:
-      "Using the Mento app, $1 worth of CELO can be sent to the CELO reserve to mint 1 cUSD, and 1 cUSD can be burned to receive $1 worth of CELO.",
+      "USDm is backed by fiat-backed stablecoins held in the Mento Reserve. Minting and redemption occur through oracle-priced Fixed-Price Market Maker (FPMM) pools.",
     onCoinGecko: "true",
     gecko_id: "celo-dollar",
     cmcId: "7236",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
     priceSource: "defillama", // coingecko not accurate
-    auditLinks: ["https://celo.org/audits"],
-    twitter: "https://twitter.com/CeloOrg",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
     wiki: "https://wiki.defillama.com/wiki/CUSD",
   },
   {
