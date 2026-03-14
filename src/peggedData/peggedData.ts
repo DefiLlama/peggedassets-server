@@ -486,7 +486,7 @@ export default [
     name: "Mento Dollar",
     address: "celo:0x765de816845861e75a25fca122bb6898b8b1282a",
     symbol: "USDm",
-    url: "https://www.mento.org/",
+    url: "https://app.mento.org/",
     description:
       "Mento Dollars (USDm) are stablecoins that follow the US Dollar and are backed by Mento's Reserve system. The Mento Reserve is diversified portfolio of crypto assets.",
     mintRedeemDescription:
@@ -4175,23 +4175,23 @@ export default [
   },
   {
     id: "199",
-    name: "Celo Real",
+    name: "Mento Real",
     address: "celo:0xe8537a3d056DA446677B9E9d6c5dB704EaAb4787",
-    symbol: "CREAL",
-    url: "https://celo.org/",
+    symbol: "BRLm",
+    url: "https://app.mento.org/",
     description:
-      "cREAL is a decentralized, over-collateralized algorithmic stablecoin that tracks the value of the Brazilian real",
+      "BRLm is a decentralized, over-collateralized algorithmic stablecoin that tracks the value of the Brazilian real",
     mintRedeemDescription:
-      "Celo real (cREAL) is based on Mento, the stability protocol on Celo, and supported by multiple digital assets, including BTC and ETH, in the Celo Reserve.",
+      "BRLm is based on Mento, the stability protocol on Celo, and supported by multiple digital assets, including BTC and ETH, in the Mento Reserve.",
     onCoinGecko: "true",
     gecko_id: "celo-real-creal",
     cmcId: "16385",
     pegType: "peggedREAL",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: null,
-    twitter: "https://twitter.com/CeloOrg",
+    twitter: "https://x.com/MentoLabs",
     wiki: "https://blog.celo.org/celo-launches-the-creal-stablecoin-11da0d560c1c",
+    auditLinks: ["https://docs.mento.org/mento-v3/build/smart-contracts/audits"],
   },
   {
     id: "200",
@@ -7324,7 +7324,7 @@ export default [
     name: "Mento British Pound",
     address: "celo:0xCCF663b1fF11028f0b19058d0f7B674004a40746",
     symbol: "GBPm",
-    url: "https://www.mento.org/",
+    url: "https://app.mento.org/",
     description:
       "GBPm is a GBP-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow GBPm against it.",
     mintRedeemDescription:
