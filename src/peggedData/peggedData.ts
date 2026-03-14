@@ -7442,7 +7442,7 @@ export default [
   {
     id: "364",
     name: "Whale Asset Dollar",
-    address: "3334160924",
+    address: "algorand:3334160924",
     symbol: "WAD",
     url: "https://dork.fi",
     description: "WAD is an overcollateralized stablecoin minted through DorkFi, a cross-chain borrow/lend protocol on the Algorand Virtual Machine (AVM). Users deposit collateral assets and borrow WAD at controlled interest rates.",
