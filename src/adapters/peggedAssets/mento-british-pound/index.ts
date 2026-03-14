@@ -10,4 +10,5 @@ const chainContracts: ChainContracts = {
 };
 
 import { addChainExports } from "../helper/getSupply";
-export default addChainExports(chainContracts);
+const adapter = addChainExports(chainContracts, undefined, { pegType: "peggedGBP", });
+export default adapter;

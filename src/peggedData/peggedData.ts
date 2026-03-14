@@ -7339,4 +7339,84 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-british-pound"
   },
+  {
+    id: "359",
+    name: "Mento Philippine Peso",
+    address: "celo:0x105d4a9306d2e55a71d2eb95b81553ae1dc20d7b",
+    symbol: "PHPm",
+    url: "https://app.mento.org/",
+    description:
+      "PHPm is a PHP-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow PHPm against it.",
+    mintRedeemDescription:
+      "PHPm is minted by depositing USDm as collateral into a Mento CDP (trove) and borrowing PHPm against it. Repaying the borrowed PHPm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "puso",
+    cmcId: null,
+    pegType: "peggedPHP",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-philippine-peso"
+  },
+  {
+    id: "360",
+    name: "Mento Canadian Dollar",
+    address: "celo:0xff4ab19391af240c311c54200a492233052b6325",
+    symbol: "CADm",
+    url: "https://app.mento.org/",
+    description:
+      "CADm is a CAD-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow CADm against it.",
+    mintRedeemDescription:
+      "CADm is minted by depositing USDm as collateral into a Mento CDP (trove) and borrowing CADm against it. Repaying the borrowed CADm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "celo-canadian-dollar",
+    cmcId: null,
+    pegType: "peggedCAD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-canadian-dollar"
+  },
+  {
+    id: "361",
+    name: "Mento Australian Dollar",
+    address: "celo:0x7175504c455076f15c04a2f90a8e352281f492f9",
+    symbol: "AUDm",
+    url: "https://app.mento.org/",
+    description:
+      "AUDm is a AUD-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow AUDm against it.",
+    mintRedeemDescription:
+      "AUDm is minted by depositing USDm as collateral into a Mento CDP (trove) and borrowing AUDm against it. Repaying the borrowed AUDm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "celo-australian-dollar",
+    cmcId: null,
+    pegType: "peggedAUD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-australian-dollar"
+  },
+  {
+    id: "362",
+    name: "Mento Colombian Peso",
+    address: "celo:0x8a567e2ae79ca692bd748ab832081c45de4041ea",
+    symbol: "COPm",
+    url: "https://app.mento.org/",
+    description:
+      "COPm is a COP-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow COPm against it.",
+    mintRedeemDescription:
+      "COPm is minted by depositing USDm as collateral into a Mento CDP (trove) and borrowing COPm against it. Repaying the borrowed COPm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "ccop",
+    cmcId: null,
+    pegType: "peggedCOP",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-colombian-peso"
+  },
 ] as PeggedAsset[];
