@@ -7304,7 +7304,7 @@ export default [
     mintRedeemDescription:
       "BYC gets minted when users borrow against collateral they have deposited. BYC gets melted when debt is being repaid.",
     onCoinGecko: "false",
-    gecko_id: "bytecash-byc",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
