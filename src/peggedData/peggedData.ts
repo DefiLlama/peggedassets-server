@@ -3031,8 +3031,7 @@ export default [
     symbol: "HYUSD",
     url: "https://linktr.ee/hyusd",
     description:
-      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.",
-    mintRedeemDescription:
+      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.",    mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: "false",
     gecko_id: null,
@@ -7296,6 +7295,32 @@ export default [
   },
   {
     id: "357",
+    name: "Bytecash",
+    address: "chia:ae1536f56760e471ad85ead45f00d680ff9cca73b8cc3407be778f1c0c606eac",
+    symbol: "BYC",
+    url: "https://circuitdao.com",
+    description:
+      "Bytecash (BYC) is a USD-pegged stablecoin natively issued by Circuit, a CDP protocol on Chia. BYC is overcollateralized with XCH, the native coin of Chia.",
+    mintRedeemDescription:
+      "BYC gets minted when users borrow against collateral they have deposited. BYC gets melted when debt is being repaid.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://github.com/circuitdao/puzzles/blob/main/audits/Zellic-Audit-Report.pdf",
+      "https://github.com/circuitdao/puzzles/blob/main/audits/Immunefi-invite-only-audit.pdf",
+      "https://github.com/circuitdao/puzzles/blob/main/audits/Cantina-public-competition-audit.pdf",
+      "https://cantina.xyz/bounties/8f671963-4313-4ac3-aed9-3186a240b75a"
+    ],
+    twitter: "https://x.com/Circuit_DAO",
+    wiki: "https://docs.circuitdao.com",
+    module: "bytecash-byc",
+  },
+  {
+    id: "358",
     name: "Mento British Pound",
     address: "celo:0xCCF663b1fF11028f0b19058d0f7B674004a40746",
     symbol: "GBPm",
@@ -7312,5 +7337,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
+    module: "mento-british-pound"
   },
 ] as PeggedAsset[];
