@@ -7296,22 +7296,22 @@ export default [
   },
   {
     id: "357",
-    name: "DUSD",
+    name: "Alto DUSD",
     address: "0x63d74d22E689C715a04F2C13962b1f77F443d35b",
     symbol: "DUSD",
-    url: "https://alto.money/",
+    url: "https://altofoundation.org/",
     description:
-      "DUSD is Alto’s native stablecoin and the unit of account inside all markets.",
+      "DUSD is a crypto-backed stablecoin pegged to the US Dollar, issued through the Alto lending protocol. It is minted against collateral assets deposited into Alto markets and can be redeemed 1:1 for USDC via the Permissionless PSM, subject to available USDC liquidity.",
     mintRedeemDescription:
-      "DUSD is minted through permissioned and permissionless peg stability modules.",
+      "Users mint DUSD by depositing collateral into Alto mint markets. DUSD is burned when the loan is repaid. DUSD can also be exchanged 1:1 for USDC through the Permissionless PSM, subject to available USDC liquidity in the PSM.",
     onCoinGecko: "true",
     gecko_id: "alto-dusd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    auditLinks: null,
-    priceSource: "defillama",
+    auditLinks: ["https://github.com/altomoney/Security-Review-Engagements"],
+    priceSource: "coingecko",
     twitter: "https://x.com/alto_money",
     wiki: "https://docs.alto.money/",
-  }
+}
 ] as PeggedAsset[];
