@@ -78,13 +78,9 @@ async function getPeggedAssetsData() {
     }
   }))
 
-  const { SK, ...terraLastBalance } = cache.peggedAssetsData['3'].lastBalance
-  cache.peggedAssetsData['3'].balances.forEach((item: any, index: any) => { // the token deppeged after this
-    if (item.SK > 1655891865) {
-      cache.peggedAssetsData['3'].balances[index] = { ...item, ...terraLastBalance }
-      return
-    }
-  })
+  // remove all Terra data after the depeg timestamp
+  cache.peggedAssetsData['3'].balances = cache.peggedAssetsData['3'].balances
+    .filter((item: any) => item.SK <= 1655891865)
 
   replaceAvalanceAvax(cache.peggedAssetsData) // convert all 'avalanche' keys to 'avax'
   return cache.peggedAssetsData
@@ -242,6 +238,7 @@ export function craftChartsResponse(
 
     // fill missing data with last available data
     while (lastTimestamp < lastDailyTimestamp) {
+      if (pegged.deadFrom) break; // don't extend dead assets beyond their last real data point
       lastTimestamp = getClosestDayStartTimestamp(lastTimestamp + 24 * secondsInHour);
       historicalBalance.push({ ...lastBalance, SK: lastTimestamp });
       peggedBalance.lastTimestamp = lastTimestamp;

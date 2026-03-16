@@ -96,6 +96,11 @@ export default async (
     return;
   }
 
+  if (peggedAsset.deadFrom) {
+    console.log(`Skipping dead pegged asset ${peggedAsset.name} in storeNewPeggedBalances`);
+    return;
+  }
+
   let lastHourlyPeggedObject: any;
   let lastHourlyCirculating = 0;
   const currentCirculating = peggedBalances.totalCirculating.circulating[pegType] ?? 0;

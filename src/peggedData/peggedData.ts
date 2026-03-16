@@ -483,22 +483,22 @@ export default [
   },
   {
     id: "24",
-    name: "Celo Dollar",
+    name: "Mento Dollar",
     address: "celo:0x765de816845861e75a25fca122bb6898b8b1282a",
-    symbol: "CUSD",
-    url: "https://celo.org/",
+    symbol: "USDm",
+    url: "https://app.mento.org/",
     description:
-      "Celo Dollars (cUSD) are stablecoins that follow the US Dollar and are native to the Celo blockchain's Reserve system. The Celo Reserve is a system of smart contracts that uses a portfolio of cryptocurrencies to expand and contract the supply cUSD, similar to MakerDAO's lending protocol.",
+      "Mento Dollars (USDm) are stablecoins that follow the US Dollar and are backed by Mento's Reserve system. The Mento Reserve is diversified portfolio of crypto assets.",
     mintRedeemDescription:
-      "Using the Mento app, $1 worth of CELO can be sent to the CELO reserve to mint 1 cUSD, and 1 cUSD can be burned to receive $1 worth of CELO.",
+      "USDm is backed by fiat-backed stablecoins held in the Mento Reserve. Minting and redemption occur through oracle-priced Fixed-Price Market Maker (FPMM) pools.",
     onCoinGecko: "true",
     gecko_id: "celo-dollar",
     cmcId: "7236",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
     priceSource: "defillama", // coingecko not accurate
-    auditLinks: ["https://celo.org/audits"],
-    twitter: "https://twitter.com/CeloOrg",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
     wiki: "https://wiki.defillama.com/wiki/CUSD",
   },
   {
@@ -1069,12 +1069,12 @@ export default [
   },
   {
     id: "52",
-    name: "Celo Euro",
+    name: "Mento Euro",
     address: "celo:0xd8763cba276a3738e6de85b4b3bf5fded6d6ca73",
-    symbol: "CEUR",
-    url: "https://celo.org/",
+    symbol: "EURm",
+    url: "https://www.mento.org/",
     description:
-      "Celo Euros (cEUR) are stablecoins that follow the Euro and are native to the Celo blockchain's Reserve system. The Celo Reserve is a system of smart contracts that uses a portfolio of cryptocurrencies to expand and contract the supply cEUR, similar to MakerDAO's lending protocol.",
+      "Mento Euros (EURm) are stablecoins that follow the Euro and are native to the Celo blockchain's Reserve system. The Mento Reserve is a system of smart contracts that uses a portfolio of cryptocurrencies to expand and contract the supply cEUR, similar to MakerDAO's lending protocol.",
     mintRedeemDescription:
       "Using the Mento app, 1 Euro worth of CELO can be sent to the CELO reserve to mint 1 cEUR, and 1 cEUR can be burned to receive 1 Euro worth of CELO.",
     onCoinGecko: "true",
@@ -1083,8 +1083,8 @@ export default [
     pegType: "peggedEUR",
     pegMechanism: "algorithmic",
     priceSource: "defillama",
-    auditLinks: ["https://celo.org/audits"],
-    twitter: "https://twitter.com/CeloOrg",
+    auditLinks: ["https://docs.mento.org/mento-v3/build/smart-contracts/audits"],
+    twitter: "https://x.com/MentoLabs",
     wiki: "https://wiki.defillama.com/wiki/CEUR",
   },
   {
@@ -3031,8 +3031,7 @@ export default [
     symbol: "HYUSD",
     url: "https://linktr.ee/hyusd",
     description:
-      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.",
-    mintRedeemDescription:
+      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.",    mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: "false",
     gecko_id: null,
@@ -4176,23 +4175,23 @@ export default [
   },
   {
     id: "199",
-    name: "Celo Real",
+    name: "Mento Real",
     address: "celo:0xe8537a3d056DA446677B9E9d6c5dB704EaAb4787",
-    symbol: "CREAL",
-    url: "https://celo.org/",
+    symbol: "BRLm",
+    url: "https://app.mento.org/",
     description:
-      "cREAL is a decentralized, over-collateralized algorithmic stablecoin that tracks the value of the Brazilian real",
+      "BRLm is a decentralized, over-collateralized algorithmic stablecoin that tracks the value of the Brazilian real",
     mintRedeemDescription:
-      "Celo real (cREAL) is based on Mento, the stability protocol on Celo, and supported by multiple digital assets, including BTC and ETH, in the Celo Reserve.",
+      "BRLm is based on Mento, the stability protocol on Celo, and supported by multiple digital assets, including BTC and ETH, in the Mento Reserve.",
     onCoinGecko: "true",
     gecko_id: "celo-real-creal",
     cmcId: "16385",
     pegType: "peggedREAL",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: null,
-    twitter: "https://twitter.com/CeloOrg",
+    twitter: "https://x.com/MentoLabs",
     wiki: "https://blog.celo.org/celo-launches-the-creal-stablecoin-11da0d560c1c",
+    auditLinks: ["https://docs.mento.org/mento-v3/build/smart-contracts/audits"],
   },
   {
     id: "200",
@@ -7296,6 +7295,171 @@ export default [
   },
   {
     id: "357",
+    name: "Bytecash",
+    address: "chia:ae1536f56760e471ad85ead45f00d680ff9cca73b8cc3407be778f1c0c606eac",
+    symbol: "BYC",
+    url: "https://circuitdao.com",
+    description:
+      "Bytecash (BYC) is a USD-pegged stablecoin natively issued by Circuit, a CDP protocol on Chia. BYC is overcollateralized with XCH, the native coin of Chia.",
+    mintRedeemDescription:
+      "BYC gets minted when users borrow against collateral they have deposited. BYC gets melted when debt is being repaid.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://github.com/circuitdao/puzzles/blob/main/audits/Zellic-Audit-Report.pdf",
+      "https://github.com/circuitdao/puzzles/blob/main/audits/Immunefi-invite-only-audit.pdf",
+      "https://github.com/circuitdao/puzzles/blob/main/audits/Cantina-public-competition-audit.pdf",
+      "https://cantina.xyz/bounties/8f671963-4313-4ac3-aed9-3186a240b75a"
+    ],
+    twitter: "https://x.com/Circuit_DAO",
+    wiki: "https://docs.circuitdao.com",
+    module: "bytecash-byc",
+  },
+  {
+    id: "358",
+    name: "Mento British Pound",
+    address: "celo:0xCCF663b1fF11028f0b19058d0f7B674004a40746",
+    symbol: "GBPm",
+    url: "https://app.mento.org/",
+    description:
+      "GBPm is a GBP-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow GBPm against it.",
+    mintRedeemDescription:
+      "GBPm is minted by depositing collateral into a Mento CDP (trove) and borrowing GBPm against it. Repaying the borrowed GBPm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "mento-british-pound",
+    cmcId: null,
+    pegType: "peggedGBP",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-british-pound"
+  },
+  {
+    id: "359",
+    name: "Mento Philippine Peso",
+    address: "celo:0x105d4a9306d2e55a71d2eb95b81553ae1dc20d7b",
+    symbol: "PHPm",
+    url: "https://app.mento.org/",
+    description:
+      "PHPm is a PHP-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow PHPm against it.",
+    mintRedeemDescription:
+      "PHPm is minted by depositing collateral into a Mento CDP (trove) and borrowing PHPm against it. Repaying the borrowed PHPm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "puso",
+    cmcId: null,
+    pegType: "peggedPHP",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-philippine-peso"
+  },
+  {
+    id: "360",
+    name: "Mento Canadian Dollar",
+    address: "celo:0xff4ab19391af240c311c54200a492233052b6325",
+    symbol: "CADm",
+    url: "https://app.mento.org/",
+    description:
+      "CADm is a CAD-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow CADm against it.",
+    mintRedeemDescription:
+      "CADm is minted by depositing collateral into a Mento CDP (trove) and borrowing CADm against it. Repaying the borrowed CADm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "celo-canadian-dollar",
+    cmcId: null,
+    pegType: "peggedCAD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-canadian-dollar"
+  },
+  {
+    id: "361",
+    name: "Mento Australian Dollar",
+    address: "celo:0x7175504c455076f15c04a2f90a8e352281f492f9",
+    symbol: "AUDm",
+    url: "https://app.mento.org/",
+    description:
+      "AUDm is a AUD-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow AUDm against it.",
+    mintRedeemDescription:
+      "AUDm is minted by depositing collateral into a Mento CDP (trove) and borrowing AUDm against it. Repaying the borrowed AUDm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "celo-australian-dollar",
+    cmcId: null,
+    pegType: "peggedAUD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-australian-dollar"
+  },
+  {
+    id: "362",
+    name: "Mento Colombian Peso",
+    address: "celo:0x8a567e2ae79ca692bd748ab832081c45de4041ea",
+    symbol: "COPm",
+    url: "https://app.mento.org/",
+    description:
+      "COPm is a COP-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow COPm against it.",
+    mintRedeemDescription:
+      "COPm is minted by depositing collateral into a Mento CDP (trove) and borrowing COPm against it. Repaying the borrowed COPm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "ccop",
+    cmcId: null,
+    pegType: "peggedCOP",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-colombian-peso"
+  },
+  {
+    id: "363",
+    name: "Mento Japanese Yen",
+    address: "celo:0xc45ecf20f3cd864b32d9794d6f76814ae8892e20",
+    symbol: "JPYm",
+    url: "https://app.mento.org/",
+    description:
+      "JPYm is a JPY-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow JPYm against it.",
+    mintRedeemDescription:
+      "JPYm is minted by depositing collateral into a Mento CDP (trove) and borrowing JPYm against it. Repaying the borrowed JPYm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "celo-japanese-yen",
+    cmcId: null,
+    pegType: "peggedJPY",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-japanese-yen"
+  },
+  {
+    id: "364",
+    name: "Whale Asset Dollar",
+    address: "algorand:3334160924",
+    symbol: "WAD",
+    url: "https://dork.fi",
+    description: "WAD is an overcollateralized stablecoin minted through DorkFi, a cross-chain borrow/lend protocol on the Algorand Virtual Machine (AVM). Users deposit collateral assets and borrow WAD at controlled interest rates.",
+    mintRedeemDescription: "WAD is minted by depositing accepted collateral (ALGO, USDC, UNIT, VOI) into DorkFi lending pools. WAD can be repaid at any time to reclaim collateral. The protocol uses utilization-based dynamic interest rates.",
+        onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/dork_fi",
+    wiki: "https://docs.dork.fi",
+    module: "wad-stablecoin",
+  },
+  {
+    id: "365",
     name: "Alto DUSD",
     address: "0x63d74d22E689C715a04F2C13962b1f77F443d35b",
     symbol: "DUSD",
@@ -7310,8 +7474,8 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     auditLinks: ["https://github.com/altomoney/Security-Review-Engagements"],
-    priceSource: "coingecko",
+    priceSource: "defillama",
     twitter: "https://x.com/alto_money",
     wiki: "https://docs.alto.money/",
-}
+  },
 ] as PeggedAsset[];

@@ -27,6 +27,9 @@ const chainContracts: ChainContracts = {
   klaytn: {
     bridgedFromCelo: ["0x08745bee17026ed2e0e39a98f81189b9e14ab1b3"], // orbit
   },
+  monad: {
+    issued: ["0xBC69212B8E4d445b2307C9D32dD68E2A4Df00115"]
+  }
 };
 
 

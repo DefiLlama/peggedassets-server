@@ -1229,6 +1229,11 @@ export const chainCoingeckoIds = {
     symbol: "MEGA",
     cmcId: null,
   },
+  "Chia": {
+    geckoId: "chia",
+    symbol: "XCH",
+    cmcId: null,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1557,6 +1562,8 @@ export function getChainDisplayName(
       return "Redbelly"
     case "megaeth":
       return "MegaETH"
+    case "chia":
+      return "Chia"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
