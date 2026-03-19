@@ -193,8 +193,10 @@ async function calcCirculating(
   bridgedFromMapping: BridgeMapping,
   peggedAsset: PeggedAsset,
   pegType: string,
-  extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
+  // extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
 ) {
+  const rawCirculating: { [chain: string]: number } = {};
+
   let chainCirculatingPromises = Object.keys(peggedBalances).map(
     async (chain) => {
       let circulating: PeggedTokenBalance = { [pegType]: 0 };
@@ -243,39 +245,43 @@ async function calcCirculating(
           circulating[pegType]! -= balance;
         });
       }
-      if (circulating[pegType]! < 0) {
-        try {
-          const snap = await getClosestSnapshotForChain(
-            peggedAsset.id,
-            chain,
-            getCurrentUnixTimestamp(),
-          );
-          if (snap && snap.snapshot) {
-            const extractedCirc = extractIssuanceFromSnapshot(snap.snapshot, 'circulating', pegType, chain);
-            const val = extractedCirc?.[pegType];
-            if (typeof val === 'number' && Number.isFinite(val) && val >= 0) {
-              peggedBalances[chain].circulating = { [pegType]: val };
-              if (extrapolationMetadata) {
-                extrapolationMetadata.extrapolated = true;
-                if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
-                  extrapolationMetadata.extrapolatedChains.push({ chain, timestamp: snap.timestamp || 0 });
-                }
-              }
-              return;
-            }
-          }
-        } catch (_) {}
-        throw new Error(
-          `Pegged asset on chain ${chain} has negative circulating amount`
-        );
-      }
-      if (circulating[pegType]! < 10 ** -6) {
-        circulating[pegType] = 0;
-      }
-      peggedBalances[chain].circulating = circulating;
+      rawCirculating[chain] = circulating[pegType]!;
     }
   );
   await Promise.all(chainCirculatingPromises);
+
+  const chains = Object.keys(rawCirculating);
+  const hasNegative = chains.some((c) => rawCirculating[c] < 0);
+
+  if (hasNegative) {
+    const trueTotal = chains.reduce((sum, c) => sum + rawCirculating[c], 0);
+    if (trueTotal > 0) {
+      const positiveSum = chains
+        .filter((c) => rawCirculating[c] > 0)
+        .reduce((sum, c) => sum + rawCirculating[c], 0);
+      const scaleFactor = positiveSum > 0 ? trueTotal / positiveSum : 0;
+      for (const chain of chains) {
+        if (rawCirculating[chain] < 0) {
+          console.log(
+            `${peggedAsset.name}: chain ${chain} circulating was ${rawCirculating[chain]}, clamped to 0 (redistributing to preserve total)`
+          );
+          rawCirculating[chain] = 0;
+        } else {
+          rawCirculating[chain] *= scaleFactor;
+        }
+      }
+    } else {
+      for (const chain of chains) {
+        rawCirculating[chain] = 0;
+      }
+    }
+  }
+
+  for (const chain of chains) {
+    let value = rawCirculating[chain];
+    if (value < 10 ** -6) value = 0;
+    peggedBalances[chain].circulating = { [pegType]: value };
+  }
 
   peggedBalances["totalCirculating"] = {};
   peggedBalances["totalCirculating"]["circulating"] = { [pegType]: 0 };
@@ -374,7 +380,7 @@ export async function storePeggedAsset(
       bridgedFromMapping,
       peggedAsset,
       pegType,
-      extrapolationMetadata
+      // extrapolationMetadata
     );
 
     if (
