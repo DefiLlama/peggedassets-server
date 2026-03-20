@@ -7206,11 +7206,11 @@ export default [
     description: "BRTH is a stablecoin pegged 1:1 to the Brazilian Real (BRL), deployed on the Polygon network. Fiat-backed by reserves held by Develop Ltda.",
     mintRedeemDescription: "BRTH is minted and redeemed through the issuer (Develop Ltda / TokenHaus). Authorized minters can mint new tokens backed by BRL reserves.",
     onCoinGecko: "false",
-    gecko_id: "brth", // (BRTH not on CoinGecko)
+    gecko_id: "brth",
     cmcId: null,
     pegType: "peggedREAL",
     pegMechanism: "fiat-backed",
-    priceSource: "coingecko",
+    priceSource: "defillama",
     auditLinks: null,
     twitter: "https://x.com/BRTH_stablecoin",
     wiki: null,
