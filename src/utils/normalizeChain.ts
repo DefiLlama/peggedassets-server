@@ -1232,7 +1232,7 @@ export const chainCoingeckoIds = {
   "Chia": {
     geckoId: "chia",
     symbol: "XCH",
-    cmcId: null,
+    cmcId: "9258",
   },
 } as {
   [chain: string]: {
