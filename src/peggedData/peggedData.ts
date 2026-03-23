@@ -7083,7 +7083,7 @@ export default [
     name: "Neutrl USD",
     address: "0xe556aba6fe6036275ec1f87eda296be72c811bce",
     symbol: "NUSD",
-    url: "https://www.neutrl.fi/",
+    url: "https://www.neutrl.finance/",
     description: `Neutrl USD (NUSD) is a crypto-native synthetic dollar designed to deliver market-neutral yield while maintaining price stability. It is backed by a diversified, overcollateralized portfolio that combines discounted OTC-acquired crypto assets, liquid stablecoin reserves, and delta-neutral positions, with on-chain transparency and risk management at its core.`,
     mintRedeemDescription: `Users can mint NUSD by depositing supported collateral into the protocol, which is deployed across a delta-neutral portfolio designed to maintain a stable USD peg. Price stability is achieved through fully hedged OTC positions, liquid stablecoin reserves (such as USDC, USDT, and USDe), and duration-matched liquidity management. NUSD can be redeemed against underlying reserves, with peg maintenance supported by arbitrage incentives, dynamic hedging adjustments, and the rapid deployment of liquid reserves during periods of market stress.`,
     onCoinGecko: "true",
