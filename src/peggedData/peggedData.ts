@@ -7477,4 +7477,26 @@ export default [
     wiki: "",
     module: "brla-digital-brla",
   },
+  {
+    id: "366",
+    name: "Alto DUSD",
+    address: "0x63d74d22E689C715a04F2C13962b1f77F443d35b",
+    symbol: "DUSD",
+    url: "https://altofoundation.org/",
+    description:
+      "DUSD is a crypto-backed stablecoin pegged to the US Dollar, issued through the Alto lending protocol. It is minted against collateral assets deposited into Alto markets and can be redeemed 1:1 for USDC via the Permissionless PSM, subject to available USDC liquidity.",
+    mintRedeemDescription:
+      "Users mint DUSD by depositing collateral into Alto mint markets. DUSD is burned when the loan is repaid. DUSD can also be exchanged 1:1 for USDC through the Permissionless PSM, subject to available USDC liquidity in the PSM.",
+    onCoinGecko: "true",
+    gecko_id: "alto-dusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    auditLinks: ["https://github.com/altomoney/Security-Review-Engagements"],
+    priceSource: "defillama",
+    twitter: "https://x.com/alto_money",
+    wiki: "https://docs.alto.money/",
+    module: "alto-dusd",
+    doublecounted: true,
+  },
 ] as PeggedAsset[];
