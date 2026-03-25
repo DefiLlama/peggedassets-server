@@ -7337,7 +7337,8 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-british-pound"
+    module: "mento-british-pound",
+    doublecounted: true,
   },
   {
     id: "359",
@@ -7357,7 +7358,8 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-philippine-peso"
+    module: "mento-philippine-peso",
+    doublecounted: true,
   },
   {
     id: "360",
@@ -7377,7 +7379,8 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-canadian-dollar"
+    module: "mento-canadian-dollar",
+    doublecounted: true,
   },
   {
     id: "361",
@@ -7397,7 +7400,8 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-australian-dollar"
+    module: "mento-australian-dollar",
+    doublecounted: true,
   },
   {
     id: "362",
@@ -7417,7 +7421,8 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-colombian-peso"
+    module: "mento-colombian-peso",
+    doublecounted: true,
   },
   {
     id: "363",
@@ -7437,7 +7442,8 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-japanese-yen"
+    module: "mento-japanese-yen",
+    doublecounted: true,
   },
   {
     id: "364",
@@ -7517,7 +7523,8 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-kenyan-shilling"
+    module: "mento-kenyan-shilling",
+    doublecounted: true,
   },
   {
     id: "368",
@@ -7537,7 +7544,8 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-south-african-rand"
+    module: "mento-south-african-rand",
+    doublecounted: true,
   },
   {
     id: "369",
@@ -7557,6 +7565,7 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-nigerian-naira"
+    module: "mento-nigerian-naira",
+    doublecounted: true,
   },
 ] as PeggedAsset[];
