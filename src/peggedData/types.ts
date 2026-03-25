@@ -16,7 +16,10 @@ type PegType =
   | "peggedCOP" //colombian peso
   | "peggedREAL"//brazilian real 
   | "peggedRUB" //russian ruble
-  | "peggedAUD"; //Australian currency
+  | "peggedAUD" //Australian currency
+  | "peggedKES" //Kenyan shilling
+  | "peggedZAR" //South African rand
+  | "peggedNGN"; //Nigerian naira
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 

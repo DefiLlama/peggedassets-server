@@ -7499,4 +7499,64 @@ export default [
     module: "alto-dusd",
     doublecounted: true,
   },
+  {
+    id: "367",
+    name: "Mento Kenyan Shilling",
+    address: "celo:0x456a3D042C0DbD3db53D5489e98dFb038553B0d0",
+    symbol: "KESm",
+    url: "https://app.mento.org/",
+    description:
+      "KESm is a KES-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow KESm against it.",
+    mintRedeemDescription:
+      "KESm is minted by depositing collateral into a Mento CDP (trove) and borrowing KESm against it. Repaying the borrowed cKES closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "celo-kenyan-shilling",
+    cmcId: null,
+    pegType: "peggedKES",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-kenyan-shilling"
+  },
+  {
+    id: "368",
+    name: "Mento South African Rand",
+    address: "celo:0x4c35853A3B4e647fD266f4de678dCc8fEC410BF6",
+    symbol: "ZARm",
+    url: "https://app.mento.org/",
+    description:
+      "ZARm is a ZAR-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow ZARm against it.",
+    mintRedeemDescription:
+      "ZARm is minted by depositing collateral into a Mento CDP (trove) and borrowing ZARm against it. Repaying the borrowed ZARm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "celo-south-african-rand",
+    cmcId: null,
+    pegType: "peggedZAR",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-south-african-rand"
+  },
+  {
+    id: "369",
+    name: "Mento Nigerian Naira",
+    address: "celo:0xE2702Bd97ee33c88c8f6f92DA3B733608aa76F71",
+    symbol: "NGNm",
+    url: "https://app.mento.org/",
+    description:
+      "NGNm is a NGN-pegged synthetic stablecoin on Celo, part of the Mento Protocol. It is minted via Liquity v2-style CDPs: users deposit USDm as collateral and borrow NGNm against it.",
+    mintRedeemDescription:
+      "NGNm is minted by depositing collateral into a Mento CDP (trove) and borrowing cNGN against it. Repaying the borrowed NGNm closes or reduces the trove and releases the USDm collateral.",
+    onCoinGecko: "true",
+    gecko_id: "celo-nigerian-naira",
+    cmcId: null,
+    pegType: "peggedNGN",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
+    twitter: "https://twitter.com/MentoLabs",
+    module: "mento-nigerian-naira"
+  },
 ] as PeggedAsset[];
