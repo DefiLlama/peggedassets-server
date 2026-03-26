@@ -1234,6 +1234,11 @@ export const chainCoingeckoIds = {
     symbol: "XCH",
     cmcId: "9258",
   },
+  "TAC": {
+    geckoId: "tac",
+    symbol: "TAC",
+    cmcId: null,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1564,6 +1569,8 @@ export function getChainDisplayName(
       return "MegaETH"
     case "chia":
       return "Chia"
+    case "tac":
+      return "TAC"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
