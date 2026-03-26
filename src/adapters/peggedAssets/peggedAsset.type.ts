@@ -26,7 +26,9 @@ export type PeggedAssetType =
   | "peggedAUD"
   | "peggedKES"
   | "peggedZAR"
-  | "peggedNGN";
+  | "peggedNGN"
+  | "peggedXOF"
+  | "peggedGHS";
 
 type StringNumber = string;
 type PeggedBalances = {

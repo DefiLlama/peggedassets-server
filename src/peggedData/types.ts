@@ -19,7 +19,9 @@ type PegType =
   | "peggedAUD" //Australian currency
   | "peggedKES" //Kenyan shilling
   | "peggedZAR" //South African rand
-  | "peggedNGN"; //Nigerian naira
+  | "peggedNGN" //Nigerian naira
+  | "peggedXOF" //West African CFA franc
+  | "peggedGHS"; //Ghanaian cedi
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 
