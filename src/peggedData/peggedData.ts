@@ -6878,9 +6878,9 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "coingecko",
-    auditLinks: ["https://support.jup.ag/hc/en-us/articles/24444189827100-Is-JupUSD-audited"],
+    auditLinks: ["https://docs.jup.ag/user-docs/earn/jupusd#security-and-transparency"],
     twitter: "https://x.com/JupiterExchange",
-    wiki: "https://support.jup.ag/hc/en-us/articles/24441706832412-What-is-JupUSD",
+    wiki: "https://docs.jup.ag/user-docs/earn/jupusd",
     module: "jupusd",
     doublecounted: true
   },
