@@ -1,2 +1,2 @@
-export { default as dynamodb } from "./dynamodb";
-export { getHistoricalValues, } from "./dynamodb";
+export { default as wrap } from "./wrap";
+export * from "./lambda-response";

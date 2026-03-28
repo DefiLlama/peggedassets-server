@@ -1,4 +1,5 @@
 import dynamodb from "./utils/shared/dynamodb";
+import { wrapScheduledLambda } from "./utils/shared/wrap";
 import { store } from "./utils/s3";
 import axios from "axios";
 import { historicalRates } from "./peggedAssets/utils/getLastRecord";
@@ -73,3 +74,4 @@ export const handler = async (_event: any) => {
   await store(filenameFull, JSON.stringify(filteredRatesFull), true, false);
 };
 
+export default wrapScheduledLambda(handler);

@@ -1,4 +1,5 @@
 import * as sdk from "@defillama/sdk";
+import { alertOutdated } from "../alertOutdated";
 import { removeBlock } from "../peggedAssets/storePeggedAssets/assetBlocking";
 import storePeggedAssets from "./../peggedAssets/storePeggedAssets/storePegged";
 import peggedAssets from "./../peggedData/peggedData";
@@ -82,6 +83,14 @@ const handler = async () => {
     process.exit(1);
   }
   
+  if (process.env.OUTDATED_WEBHOOK) {
+    try {
+      console.log('🔍 Checking for outdated stablecoins...');
+      await alertOutdated();
+    } catch (error) {
+      console.error('❌ Error checking outdated stablecoins:', error);
+    }
+  }
 };
 
 handler().catch(console.error).then(async () => {

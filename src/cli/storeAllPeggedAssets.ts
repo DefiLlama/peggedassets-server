@@ -1,5 +1,6 @@
 import * as sdk from "@defillama/sdk";
 import PromisePool from "@supercharge/promise-pool";
+import { alertOutdated } from "../alertOutdated";
 import storePeggedAssets from "./../peggedAssets/storePeggedAssets/storePegged";
 import peggedAssets from "./../peggedData/peggedData";
 
@@ -27,6 +28,16 @@ const handler = async () => {
       // console.timeEnd(timeKey);
     })
     
+  if (process.env.OUTDATED_WEBHOOK) {
+    try {
+      console.log('🔍 Checking for outdated stablecoins...')
+      await alertOutdated()
+    } catch (error) {
+      console.error('❌ Error checking outdated stablecoins:', error)
+    }
+  } else {
+    console.log('⚠️  OUTDATED_WEBHOOK not configured - skipping stablecoin alerts')
+  }
 };
 
 handler().catch(console.error).then(async () => {

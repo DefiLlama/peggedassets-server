@@ -1,0 +1,202 @@
+service: llama-stablecoins
+
+package:
+  individually: true
+  excludeDevDependencies: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  memorySize: 130
+  region: eu-central-1
+  endpointType: REGIONAL # Set to regional because the api gateway will be behind a cloudfront distribution
+  stage: dev # Default to dev if no stage is specified
+  tracing: # Enable X-Ray tracing (debugging)
+    apiGateway: true
+    lambda: true
+  iamRoleStatements:
+    - Effect: Allow # X-Ray permissions
+      Action:
+        - xray:PutTraceSegments
+        - xray:PutTelemetryRecords
+      Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:BatchGetItem
+      Resource:
+        - "Fn::GetAtt": [DynamoTable, Arn]
+    - Effect: "Allow"
+      Action:
+        - dynamodb:GetItem
+      Resource:
+        - "arn:aws:dynamodb:eu-central-1:856461987125:table/secrets"
+    - Effect: Allow # Lambda logs on cloudwatch
+      Action:
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+      Resource:
+        - "Fn::Join":
+            - ":"
+            - - "arn:aws:logs"
+              - Ref: "AWS::Region"
+              - Ref: "AWS::AccountId"
+              - "log-group:/aws/lambda/*:*:*"
+    # For warm-up functions
+    - Effect: "Allow"
+      Action:
+        - "lambda:InvokeFunction"
+      Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - "s3:ListBucket"
+        - "s3:*Object*"
+      Resource: "*"
+  environment:
+    DEFILLAMA_SDK_MUTED: true
+    tableName: ${self:custom.tableName}
+    stage: ${self:custom.stage}
+    ETHEREUM_RPC: ${env:ETHEREUM_RPC}
+    SKIP_RPC_CHECK: true
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  esbuild:
+    bundle: true
+    minify: false
+    concurrency: 4
+    # for debugging
+    #keepOutputDirectory: true
+  prune:
+    automatic: true
+    number: 5 # Number of versions to keep
+  tableName: prod-stablecoins-table
+  domain: stablecoins.llama.fi
+  certificateArn: "arn:aws:acm:us-east-1:856461987125:certificate/b4209013-30a6-417e-847e-6e630c3e77fe"
+  hostedZone: llama.fi
+
+functions:
+  fallback:
+    handler: src/fallback.default
+    events:
+      - http:
+          path: /{params+}
+          method: any
+  stablecoinChart:
+    handler: src/getStablecoinChart.default
+    timeout: 60
+    memorySize: 3000
+    events:
+      - http:
+          path: stablecoincharts/{chain}
+          method: get
+  stablecoinDominance:
+    handler: src/getChainDominance.default
+    timeout: 60
+    memorySize: 3000
+    events:
+      - http:
+          path: stablecoindominance/{chain}
+          method: get
+  stablecoins:
+    handler: src/getStablecoins.default
+    timeout: 120
+    memorySize: 3000
+    events:
+      - http:
+          path: stablecoins
+          method: get
+  config:
+    handler: src/config.default
+    timeout: 120
+    memorySize: 2000
+    events:
+      - http:
+          path: config
+          method: get
+  stablecoin:
+    handler: src/getStablecoin.default
+    timeout: 120
+    memorySize: 2000
+    events:
+      - http:
+          path: stablecoin/{stablecoin}
+          method: get
+  stablecoinchains:
+    handler: src/getStablecoinChains.default
+    timeout: 60
+    memorySize: 2000
+    events:
+      - http:
+          path: stablecoinchains
+          method: get
+  stablecoinprices:
+    handler: src/getStablecoinPrices.default
+    timeout: 60
+    memorySize: 2000
+    events:
+      - http:
+          path: stablecoinprices
+          method: get
+  storeRates:
+    handler: src/storeRates.default
+    timeout: 60
+    memorySize: 3000
+    events:
+      - schedule: cron(30 0 * * ? *)
+  rates:
+    handler: src/getRates.default
+    timeout: 60
+    memorySize: 2000
+    events:
+      - http:
+          path: rates
+          method: get
+  # storePeggedAssets:
+  #   handler: src/storePeggedAssets.default
+  #   timeout: 900
+  #   memorySize: 3000
+  #   environment:
+  #     OUTDATED_WEBHOOK: ${env:OUTDATED_WEBHOOK}
+  # triggerStorePegged:
+  #   handler: src/triggerStorePegged.default
+  #   timeout: 900
+  #   memorySize: 2000
+  #   events:
+  #     - schedule: cron(40 * * * ? *)
+  # alertOutdated:
+  #   handler: src/alertOutdated.default
+  #   timeout: 60
+  #   events:
+  #     - schedule: cron(0 * * * ? *)
+  #   environment:
+  #     OUTDATED_WEBHOOK: ${env:OUTDATED_WEBHOOK}
+  # storePeggedPrices:
+  #   handler: src/storePeggedPrices.default
+  #   timeout: 900
+  #   memorySize: 3000
+  #   events:
+  #     - schedule: cron(15/30 * * * ? *)
+  # storeGetStablecoinChart:
+  #   handler: src/storeGetStablecoinChart.default
+  #   timeout: 900
+  #   memorySize: 5120
+  #   events:
+  #     - schedule: cron(50 * * * ? *)
+
+resources:
+  # DynamoDB and api gateway errors
+  - ${file(resources/table-and-api.yml)}
+  # Cloudfront API distribution
+  - ${file(resources/api-cloudfront-distribution.yml)}
+
+plugins:
+  - serverless-esbuild
+  - serverless-prune-plugin
