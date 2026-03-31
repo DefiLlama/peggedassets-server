@@ -1,9 +1,11 @@
 
 import * as HyperExpress from "hyper-express";
 import { successResponse, errorResponse, errorWrapper as ew } from "./utils";
-import { getRouteDataPath, readRouteData } from "../file-cache";
+import { readRouteData } from "../file-cache";
 import { normalizeChain } from "../../src/utils/normalizeChain";
-import { createReadStream } from 'fs'
+
+const ACCEL_PREFIX = '/_internal/cache'
+const behindNginx = !!process.env.API_STORAGE_HOST
 
 const breakdownData: {
   [chain: string]: any
@@ -75,16 +77,19 @@ export default function setRoutes(router: HyperExpress.Router) {
   }
 
   async function fileResponse(filePath: string, res: HyperExpress.Response) {
+
+    res.setHeader('Content-Type', 'application/json')
+
+    if (behindNginx) {
+      res.setHeader('X-Accel-Redirect', ACCEL_PREFIX + filePath)
+      return res.status(200).send('')
+    }
+
     try {
       res.set('Cache-Control', 'public, max-age=1800'); // Set caching to 30 minutes
-      // set response headers as json
-      res.setHeader('Content-Type', 'application/json');
       res.json(await readRouteData(filePath))
-      // const fileStream = createReadStream(getRouteDataPath(filePath))
-      // fileStream.pipe(res)
     } catch (e) {
-      console.error(e);
-      return errorResponse(res, 'Internal server error', { statusCode: 500 })
+      return errorResponse(res, 'Invalid request', { statusCode: 404 })
     }
   }
 
