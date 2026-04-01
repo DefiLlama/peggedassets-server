@@ -7631,4 +7631,23 @@ export default [
     module: "mento-ghanaian-cedi",
     doublecounted: true,
   },
+  {
+    id: "373",
+    name: "Sui Dollar",
+    address: "sui:0x44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+    symbol: "USDSUI",
+    url: "https://www.sui.io",
+    description:
+      "Sui Dollar (USDsui) is designed to be a foundational digital dollar on Su",
+    mintRedeemDescription:
+      "USDsui is minted when a user deposits USD through Bridge's API, the funds are held in cash and Treasury reserves, and an equivalent amount of USDsui is issued on Sui. Redeeming is the reverse: the tokens are burned on-chain and the user receives USD back. Both operations are 1:1 and handled entirely through Bridge (a Stripe company).",
+    onCoinGecko: "true",
+    gecko_id: "usdsui",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/SuiNetwork",
+    module: "suidollar",
+  },
 ] as PeggedAsset[];
