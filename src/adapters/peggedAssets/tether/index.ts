@@ -1114,17 +1114,7 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: usdtApiUnreleased("reserve_balance_statemine"),
   },
   morph: {
-    ethereum: sumMultipleBalanceFunctions(
-      [
-        supplyInEthereumBridge(
-          chainContracts.ethereum.issued[0],
-          chainContracts.morph.bridgeOnETH[0],
-          6
-        ),
-        bridgedSupply("morph", 6, chainContracts.morph.bridgedFromETH),
-      ],
-      "peggedUSD"
-    ),
+    ethereum: bridgedSupply("morph", 6, chainContracts.morph.bridgedFromETH),
   },
   occ: {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),

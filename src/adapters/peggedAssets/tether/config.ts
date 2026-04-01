@@ -365,7 +365,10 @@ export const chainContracts: ChainContracts = {
   },
   morph: {
     bridgeOnETH: ["0x44c28f61A5C2Dd24Fc71D7Df8E85e18af4ab2Bd8"],
-    bridgedFromETH: ["0xe7cd86e13AC4309349F30B3435a9d337750fC82D"], // USDT0
+    bridgedFromETH: [
+      "0xc7D67A9cBB121b3b0b9c053DD9f469523243379A", // USDT
+      "0xe7cd86e13AC4309349F30B3435a9d337750fC82D", // USDT0
+    ],
   },
   occ: {
     bridgedFromETH: ["0x7277Cc818e3F3FfBb169c6Da9CC77Fc2d2a34895"],

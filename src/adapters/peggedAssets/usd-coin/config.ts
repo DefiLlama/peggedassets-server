@@ -407,7 +407,9 @@ export const chainContracts: ChainContracts = {
     issued: ["0xdba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC"],
   },
   morph: {
+    issued: ["0xCfb1186F4e93D60E60a8bDd997427D1F33bc372B"],
     bridgeOnETH: ["0xc9045350712A1DCC3A74Eca18Bc985424Bbe7535"],
+    bridgedFromETH: ["0xe34c91815d7fc18A9e2148bcD4241d0a5848b693"],
   },
   occ: {
     bridgedFromETH: ["0x836d275563bAb5E93Fd6Ca62a95dB7065Da94342"],
