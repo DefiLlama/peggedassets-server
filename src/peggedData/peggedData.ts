@@ -282,7 +282,7 @@ export default [
   {
     id: "14",
     name: "USDD",
-    address: "tron:TPYmHEhy5n8TCEfYGqW2rPxsghSfzghPDn",
+    address: "tron:TXDk8mbtRbXeYuMNS83CfKPaYYT8XWv9Hz",
     symbol: "USDD",
     url: "https://usdd.io/",
     description:
