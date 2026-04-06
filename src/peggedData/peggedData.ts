@@ -7243,7 +7243,7 @@ export default [
     url: "https://apyx.fi",
     description: "apxUSD is Apyx's synthetic dollar backed by a diversified basket of low-volatility, variable-rate, preferred shares issued by industry leading Digital Asset Treasuries (DATs).",
     mintRedeemDescription: "apxUSD is minted when users deposit collateral through Apyx. It can be redeemed for underlying collateral at any time.",
-    onCoinGecko: "false",
+    onCoinGecko: "true",
     gecko_id: "apxusd",
     cmcId: null,
     pegType: "peggedUSD",
