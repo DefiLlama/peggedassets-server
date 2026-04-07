@@ -8,6 +8,7 @@ export function craftStablecoinChainsResponse() {
   let prices = cache.peggedPrices || cache.lastPrices?.prices || {}
 
   peggedAssets.map((pegged) => {
+      if (pegged.doublecounted) return;
       const pegType = pegged.pegType;
       const lastBalances = cache.peggedAssetsData?.[pegged.id]?.lastBalance;
       if (lastBalances === undefined) {
