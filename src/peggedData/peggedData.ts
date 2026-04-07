@@ -6068,12 +6068,12 @@ export default [
   },
   {
     id: "294",
-    name: "Autonomint",
+    name: "NonDollar", // previous name: Autonomint
     address: "base:0x4e44fB5c61a89CF44a9080AB987335889FCaA6bd",
     symbol: "USDA+",
-    url: "https://www.autonomint.com/",
+    url: "https://nondollar.life/",
     description:
-      "Autonomint has created a new mechanism to drastically reduce the costs incurred to hedge any asset. We do this with a combination of stablecoin and on-chain credit default swaps. ",
+      "NonDollar has created a new mechanism to drastically reduce the costs incurred to hedge any asset. We do this with a combination of stablecoin and on-chain credit default swaps. ",
     mintRedeemDescription:
       "Anyone looking to hedge can deposit ETH & ETH LRT as collateral to mint USDA+, a stablecoin soft pegged to US Dollar.",
     onCoinGecko: "false",
@@ -6082,9 +6082,9 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: "https://docs.autonomint.com/autonomint",
+    auditLinks: "https://docs.nondollar.life/autonomint/technical-docs/audits-and-contract-deployment",
     twitter: "https://x.com/autonomint",
-    wiki: "https://docs.autonomint.com/autonomint",
+    wiki: "https://docs.nondollar.life/autonomint",
     module: "autonomint-usda+",
 
   },
