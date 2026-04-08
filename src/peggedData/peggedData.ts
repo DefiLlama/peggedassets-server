@@ -4499,7 +4499,8 @@ export default [
     auditLinks: ["https://docs.usdx.money/informaiton/audit"],
     priceSource: "defillama",
     twitter: "https://x.com/usdx_money",
-    wiki: "https://docs.usdx.money/a-synthetic-usd/usdx-basics"
+    wiki: "https://docs.usdx.money/a-synthetic-usd/usdx-basics",
+    deadUrl: true,
   },
   {
     id: "215",
