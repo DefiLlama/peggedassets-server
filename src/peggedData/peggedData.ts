@@ -2281,6 +2281,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/DAM_Finance",
     wiki: null,
+    deadUrl: true,
   },
   {
     id: "109",
@@ -3002,6 +3003,7 @@ export default [
     twitter: "https://twitter.com/HydtProtocol",
     wiki: "https://hydtprotocol.com/#faqs",
     module: "hydt",
+    deadUrl: true,
   },
   {
     id: "143",
