@@ -162,13 +162,14 @@ const _assetCache: any = {};
 let lastDailyTimestamp = 0;
 
 export function craftChartsResponse(
-  { chain = 'all', peggedID, startTimestamp, assetChainMap, }: {
+  { chain = 'all', peggedID, startTimestamp, assetChainMap, excludeDoublecounted, }: {
     chain?: string,
     peggedID?: string,
     startTimestamp?: string | number,
     assetChainMap: {
       [asset: string]: Set<string>
-    }
+    },
+    excludeDoublecounted?: boolean,
   }
 ) {
   if (startTimestamp && typeof startTimestamp === 'string') startTimestamp = parseInt(startTimestamp)
@@ -197,6 +198,7 @@ export function craftChartsResponse(
    */
   const historicalPeggedBalances = peggedAssets.map((pegged) => {
     if (peggedID && pegged.id !== peggedID) return;
+    if (excludeDoublecounted && pegged.doublecounted) return;
     const chainMap = assetChainMap[pegged.id];
     if (!chainMap || chain !== "all" && !chainMap?.has(chain)) return; // if the coin is not found an given chain or coin has no data, dont process it
     if (!_assetCache[pegged.id]) addToAssetCache(pegged);

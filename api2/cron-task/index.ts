@@ -119,7 +119,8 @@ async function run() {
     for (const chain of [...allChainsSet]) {
       try {
         const data = await getChainData(chain)
-        chainChartMap[getChainDisplayName(chain, true)] = data.aggregated
+        const aggregatedNoDoublecounted = removeEmptyItems(await craftChartsResponse({ chain, assetChainMap, excludeDoublecounted: true }))
+        chainChartMap[getChainDisplayName(chain, true)] = aggregatedNoDoublecounted
         await storeRouteData('stablecoincharts2/' + chain, data)
         await storeRouteData('stablecoincharts/' + chain, data.aggregated)
       } catch (e) {
