@@ -5206,7 +5206,7 @@ export default [
     name: "Brazilian Digital",
     address: "0x01d33fd36ec67c6ada32cf36b31e88ee190b1839",
     symbol: "BRZ",
-    url: "https://www.brztoken.io/",
+    url: "https://transfero.com/stablecoins/brz/",
     description: "Brazilian Digital Token (BRZ) is a stablecoin, pegged to the official currency of Brazil, the Brazilian Real",
     mintRedeemDescription: "BRZ tokens are minted and redeemed through Transfero, the official issuer of BRZ, by exchanging Brazilian Reais (BRL) directly at a 1:1 ratio, and minting or redeeming requires users to complete a KYC verification process",
     onCoinGecko: "true",
@@ -5217,7 +5217,7 @@ export default [
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/BrzToken",
-    wiki: "https://www.brztoken.io/#brz-token"
+    wiki: "https://transfero.com/stablecoins/brz/#brz-token"
   },
   {
     id: "250",
