@@ -20,7 +20,7 @@
     "@aws-sdk/client-dynamodb": "^3.918.0",
     "@aws-sdk/client-s3": "^3.245.0",
     "@aws-sdk/lib-dynamodb": "^3.918.0",
-    "@defillama/sdk": "^5.0.209",
+    "@defillama/sdk": "^5.0.211",
     "@solana/web3.js": "^1.30.2",
     "@supercharge/promise-pool": "^3.2.0",
     "@types/node": "^22.5.4",
