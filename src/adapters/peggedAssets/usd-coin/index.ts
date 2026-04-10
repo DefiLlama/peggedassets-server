@@ -975,6 +975,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: circleAPIChainMinted("PAH"),
   },
   morph: {
+    minted: chainMinted("morph", 6),
     ethereum: supplyInEthereumBridge(
       chainContracts.ethereum.issued[0],
       chainContracts.morph.bridgeOnETH[0],
