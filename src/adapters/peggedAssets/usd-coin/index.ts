@@ -1142,6 +1142,12 @@ const adapter: PeggedIssuanceAdapter = {
   stacks: {
     ethereum: stacksBridged(),
   },
+  codex: {
+    minted: chainMinted("codex", 6),
+  },
+  edgex: {
+    minted: circleAPIChainMinted("EDGE"),
+  },
 };
 
 export default adapter;

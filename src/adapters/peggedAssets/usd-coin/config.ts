@@ -560,4 +560,10 @@ export const chainContracts: ChainContracts = {
   stacks: {
     bridgedFromETH: ["SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx"], // USDCx via Circle xReserve
   },
+  codex: {
+    issued: ["0xd996633a415985DBd7D6D12f4A4343E31f5037cf"]
+  },
+  edgex: {
+    issued: ["0x98d2919b9A214E6Fa5384AC81E6864bA686Ad74c"]
+  }
 };

@@ -1239,6 +1239,16 @@ export const chainCoingeckoIds = {
     symbol: "TAC",
     cmcId: null,
   },
+  "Codex": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  "edgeX L1": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  }
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1571,6 +1581,10 @@ export function getChainDisplayName(
       return "Chia"
     case "tac":
       return "TAC"
+    case "codex":
+      return "Codex"
+    case "edgex":
+      return "edgeX L1"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
