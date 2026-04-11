@@ -2181,7 +2181,7 @@ export default [
     name: "Davos Protocol",
     address: "0xec38621e72d86775a89c7422746de1f52bba5320",
     symbol: "DUSD",
-    url: "https://davos.xyz/",
+    url: "https://davos.xyz/",//deadUrl
     description:
       "Davos Protocol is an innovative collateralized debt position (CDP) protocol that tackles the limitations of traditional CDPs in the DeFi landscape. It achieves this by implementing an unbiased monetary policy and fair borrowing rates, ensuring user protection and fostering widespread DeFi adoption. Notably, users retain the upside of their collateral, preserving their potential returns.",
     mintRedeemDescription:
@@ -2197,6 +2197,7 @@ export default [
     ],
     twitter: "https://twitter.com/Davos_Protocol",
     wiki: null,
+    deadUrl: true,
   },
   {
     id: "105",
@@ -3549,7 +3550,7 @@ export default [
     name: "GAI Stablecoin",
     address: "manta:0xcd91716ef98798A85E79048B78287B13ae6b99b2",
     symbol: "GAI",
-    url: "https://www.goku.money/",
+    url: "https://www.goku.money/",//deadUrl
     description:
       "Goku Money is a decentralized borrowing protocol on Manta that allows you to draw interest-free loans against multiple collateral assets (e.g. MANTA, TIA, USDT, and etc.). Loans are paid out in GAI (a USD pegged stablecoin).",
     mintRedeemDescription:
@@ -3564,6 +3565,7 @@ export default [
     twitter: "https://twitter.com/goku_stable",
     wiki: null,
     module: "gai-stablecoin",
+    deadUrl: true,
   },
   {
     id: "170",
