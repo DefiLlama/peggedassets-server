@@ -7656,4 +7656,25 @@ export default [
     twitter: "https://x.com/SuiNetwork",
     module: "usdsui",
   },
+  {
+    id: "374",
+    name: "Phoenix USD",
+    address: "0xf3B5B661b92B75C71fA5Aba8Fd95D7514A9CD605",
+    symbol: "phUSD",
+    url: "https://phusd.behodler.io",
+    description:
+      "phUSD is a USD stablecoin on Ethereum backed 1:1 by a basket of yield-bearing stablecoin collateral (DOLA and USDC) held in ERC4626 yield strategies. Deposits earn yield which is streamed to phUSD stakers via the Phlimbo yield farm.",
+    mintRedeemDescription:
+      "phUSD is minted 1:1 by depositing supported stablecoins (DOLA, USDC) through PhusdStableMinter. The underlying stablecoins are routed into ERC4626 yield strategies (AutoDOLA, AutoUSDC). phUSD can be redeemed 1:1 for the underlying stablecoins at any time.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: null,
+    wiki: null,
+    module: "phusd",
+  },
 ] as PeggedAsset[];
