@@ -221,7 +221,7 @@ export function craftChartsResponse(
 
     _assetCache[pegged.id] = {
       pegged,
-      historicalBalance: historicalBalance.Items,
+      historicalBalance: [...historicalBalance.Items],
       lastTimestamp,
     };
   }
@@ -233,7 +233,8 @@ export function craftChartsResponse(
   }
 
   historicalPeggedBalances.forEach((peggedBalance) => {
-    let { historicalBalance, pegged, lastTimestamp } = peggedBalance;
+    let { historicalBalance: _historicalBalance, pegged, lastTimestamp } = peggedBalance;
+    const historicalBalance = [..._historicalBalance];
     const pegType = pegged.pegType;
     const peggedGeckoID = pegged.gecko_id;
     const lastBalance = historicalBalance[historicalBalance.length - 1];
