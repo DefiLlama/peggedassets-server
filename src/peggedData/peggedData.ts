@@ -7657,7 +7657,7 @@ export default [
   },
   {
     id: "374",
-    name: "Stable USDX",
+    name: "USDX",
     address: "solana:9Gst2E7KovZ9jwecyGqnnhpG1mhHKdyLpJQnZonkCFhA",
     symbol: "USDX",
     url: "https://trystable.co",
