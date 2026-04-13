@@ -6961,7 +6961,7 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: [],
+    auditLinks: ["https://docs.re.xyz/security-and-audits"],
     twitter: "https://x.com/re",
     wiki: null,
     module: "re-protocol-reusd",
