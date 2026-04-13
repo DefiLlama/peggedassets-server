@@ -7655,4 +7655,25 @@ export default [
     twitter: "https://x.com/SuiNetwork",
     module: "usdsui",
   },
+  {
+    id: "374",
+    name: "Stable USDX",
+    address: "solana:9Gst2E7KovZ9jwecyGqnnhpG1mhHKdyLpJQnZonkCFhA",
+    symbol: "USDX",
+    url: "https://trystable.co",
+    description:
+      "USDX is a fully-collateralized stablecoin issued by Stable, backed by tokenized real estate mortgage debt NFTs plus on-chain yield reserves (idle USDC, Jupiter Lend, Kamino). It is pegged 1:1 to the US dollar and is primarily active on Solana, with token contracts also deployed on Ethereum and Monad.",
+    mintRedeemDescription:
+      "USDX is minted against tokenized real estate mortgage NFTs through an admin mint flow: a debt position is created on-chain recording the loan terms, a debt NFT is minted as proof of the underlying collateral, and an equivalent amount of USDX is issued to the recipient. Holders can also swap into and out of USDX on Raydium (Solana) and Uniswap (Monad) liquidity pools.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/stable_tweets",
+    wiki: "https://docs.trystable.co",
+    module: "stable-usdx",
+  },
 ] as PeggedAsset[];
