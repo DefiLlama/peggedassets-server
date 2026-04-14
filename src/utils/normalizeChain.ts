@@ -1253,7 +1253,227 @@ export const chainCoingeckoIds = {
     geckoId: null,
     symbol: null,
     cmcId: null,
-  }
+  },
+  Abstract: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Abcore: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  ApeChain: {
+    geckoId: "apecoin",
+    symbol: "APE",
+    cmcId: "18876",
+  },
+  Archway: {
+    geckoId: "archway",
+    symbol: "ARCH",
+    cmcId: "27358",
+  },
+  Berachain: {
+    geckoId: "berachain-bera",
+    symbol: "BERA",
+    cmcId: "24647",
+  },
+  BEVM: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  BOB: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  BSquared: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Citrea: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Comdex: {
+    geckoId: "comdex",
+    symbol: "CMDX",
+    cmcId: "14713",
+  },
+  CORE: {
+    geckoId: "coredaoorg",
+    symbol: "CORE",
+    cmcId: "23254",
+  },
+  Corn: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Filecoin: {
+    geckoId: "filecoin",
+    symbol: "FIL",
+    cmcId: "2280",
+  },
+  Flare: {
+    geckoId: "flare-networks",
+    symbol: "FLR",
+    cmcId: "4172",
+  },
+  Fogo: {
+    geckoId: "fogo",
+    symbol: "FOGO",
+    cmcId: null,
+  },
+  Fraxtal: {
+    geckoId: "fraxtal",
+    symbol: "FXTL",
+    cmcId: null,
+  },
+  GOAT: {
+    geckoId: "goat-network",
+    symbol: "GOATED",
+    cmcId: "38494",
+  },
+  Havah: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Hemi: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  "HashKey Chain": {
+    geckoId: "hashkey-ecopoints",
+    symbol: "HSK",
+    cmcId: "33849",
+  },
+  Hydration: {
+    geckoId: "hydradx",
+    symbol: "HDX",
+    cmcId: "6753",
+  },
+  Katana: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Lisk: {
+    geckoId: "lisk",
+    symbol: "LSK",
+    cmcId: "1214",
+  },
+  MANTRA: {
+    geckoId: "mantra",
+    symbol: "MANTRA",
+    cmcId: "39611",
+  },
+  Mezo: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Monad: {
+    geckoId: "monad",
+    symbol: "MON",
+    cmcId: "30495",
+  },
+  Nibiru: {
+    geckoId: "nibiru",
+    symbol: "NIBI",
+    cmcId: "28508",
+  },
+  Penumbra: {
+    geckoId: "penumbra",
+    symbol: "UM",
+    cmcId: null,
+  },
+  Perennial: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Plasma: {
+    geckoId: "plasma",
+    symbol: "XPL",
+    cmcId: null,
+  },
+  "Q Protocol": {
+    geckoId: null,
+    symbol: "QGOV",
+    cmcId: null,
+  },
+  Saga: {
+    geckoId: "saga-2",
+    symbol: "SAGA",
+    cmcId: "30372",
+  },
+  Sei: {
+    geckoId: "sei-network",
+    symbol: "SEI",
+    cmcId: "23149",
+  },
+  Shape: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Slp: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Stable: {
+    geckoId: "stable-2",
+    symbol: "STABLE",
+    cmcId: null,
+  },
+  Story: {
+    geckoId: "story-2",
+    symbol: "IP",
+    cmcId: "35626",
+  },
+  Superposition: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Swellchain: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Vitruveo: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  "WEMIX3.0": {
+    geckoId: "wemix-token",
+    symbol: "WEMIX",
+    cmcId: "7548",
+  },
+  Xai: {
+    geckoId: "xai-blockchain",
+    symbol: "XAI",
+    cmcId: "28374",
+  },
+  Zkfair: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Zircuit: {
+    geckoId: "zircuit",
+    symbol: "ZRC",
+    cmcId: "29711",
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1268,7 +1488,6 @@ chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
 chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
-chainCoingeckoIds["Klaytn"] = chainCoingeckoIds["Kaia"];
 chainCoingeckoIds["TomoChain"] = chainCoingeckoIds["Viction"];
 chainCoingeckoIds["Move"] = chainCoingeckoIds["Movement"];
 chainCoingeckoIds["Hyperliquid"] = chainCoingeckoIds["Hyperliquid L1"];
@@ -1592,6 +1811,28 @@ export function getChainDisplayName(
       return "edgeX L1"
     case "morph":
       return "Morph"
+    case "apechain":
+      return "ApeChain"
+    case "bevm":
+      return "BEVM"
+    case "bob":
+      return "BOB"
+    case "bsquared":
+      return "BSquared"
+    case "core":
+      return "CORE"
+    case "goat":
+      return "GOAT"
+    case "hsk":
+      return "HashKey Chain"
+    case "hydradx":
+      return "Hydration"
+    case "mantra":
+      return "MANTRA"
+    case "q":
+      return "Q Protocol"
+    case "wemix":
+      return "WEMIX3.0"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
