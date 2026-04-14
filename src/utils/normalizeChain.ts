@@ -1022,6 +1022,11 @@ export const chainCoingeckoIds = {
       types: ["L2", "gas"],
     },
   },
+  Morph: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
   Manta: {
     geckoId: "manta-network",
     symbol: "MANTA",
@@ -1585,6 +1590,8 @@ export function getChainDisplayName(
       return "Codex"
     case "edgex":
       return "edgeX L1"
+    case "morph":
+      return "Morph"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
