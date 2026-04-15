@@ -4503,6 +4503,7 @@ export default [
     twitter: "https://x.com/usdx_money",
     wiki: "https://docs.usdx.money/a-synthetic-usd/usdx-basics",
     deadUrl: true,
+    deadFrom: "2025-11-14",
   },
   {
     id: "215",
