@@ -1474,6 +1474,11 @@ export const chainCoingeckoIds = {
     symbol: "ZRC",
     cmcId: "29711",
   },
+  "Voi Network": {
+    geckoId: "voi-network",
+    symbol: "VOI",
+    cmcId: null,
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1833,6 +1838,8 @@ export function getChainDisplayName(
       return "Q Protocol"
     case "wemix":
       return "WEMIX3.0"
+    case "voi":
+      return "Voi Network"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)
