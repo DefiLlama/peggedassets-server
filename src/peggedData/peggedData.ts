@@ -7667,7 +7667,7 @@ export default [
     mintRedeemDescription:
       "phUSD is minted 1:1 by depositing supported stablecoins (DOLA, USDC) through PhusdStableMinter. The underlying stablecoins are routed into ERC4626 yield strategies (AutoDOLA, AutoUSDC). phUSD can be redeemed 1:1 for the underlying stablecoins at any time.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "phusd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -7676,5 +7676,6 @@ export default [
     twitter: null,
     wiki: null,
     module: "phusd",
+    doublecounted: true
   },
 ] as PeggedAsset[];
