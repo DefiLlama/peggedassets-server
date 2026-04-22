@@ -436,7 +436,28 @@ function getAdapterLabelFromPath(filePath: string): string {
       extrapolatedChainsCount: extrapolationMetadata.extrapolatedChains?.length || 0,
       extrapolationMetadata: extrapolationMetadata.extrapolatedChains
     });
+
   displayTable.push(totalItem)
+  displayTable.sort((a: any, b: any) => valueFromItem(b) - valueFromItem(a))
+
+  function valueFromItem(item: any) {
+    let val = item.circulating || item.unreleased || 0;
+    if (typeof val === 'string') {
+      let [v0, exponent]: any = val.toLowerCase().split(' ');
+      if (exponent === 'k') {
+        exponent = 1e3;
+      } else if (exponent === 'm') {
+        exponent = 1e6;
+      } else if (exponent === 'b') {
+        exponent = 1e9;
+      } else {
+        exponent = 1;
+      }
+      val = parseFloat(v0) * exponent;
+    }
+    return val;
+  }
+
   console.table(displayTable);
   process.exit(0);
 })();
