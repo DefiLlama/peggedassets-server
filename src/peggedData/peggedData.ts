@@ -5406,7 +5406,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "arche-protocol-msd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5414,6 +5413,7 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/archeprotocol",
     wiki: "https://arche-protocol.gitbook.io/arche-protocol",
+    deadUrl: true
   },
   {
     id: "260",
