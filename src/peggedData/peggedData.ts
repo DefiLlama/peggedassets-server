@@ -121,6 +121,11 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/MakerDAO",
     wiki: "https://wiki.defillama.com/wiki/Dai",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["DAI"],
+      }
+    }
   },
   {
     id: "6",
@@ -4343,6 +4348,11 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/withAUSD",
     wiki: null,
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["AUSD"],
+      }
+    }
   },
   {
     id: "206",
@@ -4597,7 +4607,7 @@ export default [
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/__reservoir",
-    wiki: "https://docs.reservoir.xyz/products/stablecoin-rusd"
+    wiki: "https://docs.reservoir.xyz/products/stablecoin-rusd",
   },
   {
     id: "218",
@@ -4659,6 +4669,11 @@ export default [
     twitter: "https://x.com/avalonfinance_",
     wiki: "https://docs.avalonfinance.xyz/cedefi-cdp-usda",
     module: "avalon-usda",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDA"],
+      }
+    }
   },
   {
     id: "221",
@@ -7001,7 +7016,12 @@ export default [
     twitter: "https://x.com/re",
     wiki: null,
     module: "re-protocol-reusd",
-    doublecounted: true
+    doublecounted: true,
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["reUSD"],
+      }
+    }
   },
   {
     id: "340",
