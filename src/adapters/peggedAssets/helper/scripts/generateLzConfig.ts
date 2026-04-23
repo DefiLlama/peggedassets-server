@@ -416,10 +416,21 @@ async function generateForAsset(
     );
   }
 
+  // Surface chains with multiple distinct token deployments (e.g. harmony USDC
+  // has 3 ERC20 variants). The runtime sums them, but it's worth flagging at
+  // generation time so operators can sanity-check each address is legitimate.
+  const hitsByChain = new Map<string, Hit[]>();
+  for (const h of hits) {
+    const list = hitsByChain.get(h.llamaKey) ?? [];
+    list.push(h);
+    hitsByChain.set(h.llamaKey, list);
+  }
+  const duplicateChains = [...hitsByChain.entries()].filter(([, hs]) => hs.length > 1);
+
   const errLines: string[] = [];
   errLines.push(`# ${peggedAsset.name} (${peggedAsset.gecko_id}) — source=${source}`);
   errLines.push(
-    `  matched: ${hits.length}   skipped_no_llama: ${skippedNoMapping.length}   skipped_wrong_type: ${skippedWrongType.length}`
+    `  matched: ${hits.length}   skipped_no_llama: ${skippedNoMapping.length}   skipped_wrong_type: ${skippedWrongType.length}   chains_with_duplicates: ${duplicateChains.length}`
   );
   if (skippedNoMapping.length) {
     errLines.push(
@@ -429,6 +440,18 @@ async function generateForAsset(
       errLines.push(
         `    lz:${s.lzKey}  chainId=${s.chainId ?? "?"}  type=${s.type ?? "?"}  ${s.address}  ${s.symbol}`
       );
+  }
+  if (duplicateChains.length) {
+    errLines.push(
+      `  ## chains with multiple deployments (will be summed by runtime):`
+    );
+    for (const [chain, hs] of duplicateChains) {
+      errLines.push(`    ${chain}:`);
+      for (const h of hs)
+        errLines.push(
+          `      ${h.address}  decimals=${h.decimals}  ${h.type} ${h.symbol} (lz:${h.lzKey})`
+        );
+    }
   }
   process.stderr.write(errLines.join("\n") + "\n");
 
