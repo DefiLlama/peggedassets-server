@@ -1050,9 +1050,9 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
   },
   "Bitlayer": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "bitlayer-bitvm",
+    symbol: "BTR",
+    cmcId: "36277",
     twitter: "BitlayerLabs",
     categories: ["EVM"],
   },
