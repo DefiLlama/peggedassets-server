@@ -11,7 +11,6 @@ const layerzeroConfig: LayerZeroConfig = {
     { chain: "abstract", address: "0x0709f39376deee2a2dfc94a58edeb2eb9df012bd", decimals: 6 }, // HydraOFT USDT (lz:abstract)
     { chain: "apechain", address: "0x674843c06ff83502ddb4d37c2e09c01cda38cbc8", decimals: 6 }, // HydraOFT USDT (lz:ape)
     { chain: "arbitrum", address: "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9", decimals: 6 }, // ERC20 USDT0 (lz:arbitrum)
-    { chain: "berachain", address: "0x779ded0c9e1022225f8e0630b35a9b54be7137", decimals: 6 }, // ERC20 USDT (lz:bera)
     { chain: "berachain", address: "0x779ded0c9e1022225f8e0630b35a9b54be713736", decimals: 6 }, // ERC20 USDT0 (lz:bera)
     { chain: "bsc", address: "0x55d398326f99059ff775485246999027b3197955", decimals: 18 }, // ERC20 USDT (lz:bsc)
     { chain: "celo", address: "0x48065fbbe25f71c9282ddf5e1cd6d6a887483d5e", decimals: 6 }, // ERC20 USDT0 (lz:celo)

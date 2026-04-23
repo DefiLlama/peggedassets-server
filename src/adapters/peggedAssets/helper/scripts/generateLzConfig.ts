@@ -118,6 +118,18 @@ function toLlamaKey(lzName: string | undefined): string | undefined {
   return LZ_NAME_TO_LLAMA[lzName] ?? lzName;
 }
 
+// Validate address shape. LZ metadata occasionally contains malformed EVM
+// addresses (e.g. truncated to 40 chars) and also mixes in non-EVM addresses
+// (Aptos resource paths, TON raw addresses) that wouldn't work with bridgedSupply's
+// EVM multicall anyway. Reject anything that's not a clean 42-char 0x address OR a
+// non-0x address (solana base58, tron T-prefixed, etc).
+function isInvalidBridgedAddress(address: string): string | null {
+  if (!address.startsWith("0x")) return null; // non-0x: let bridgedSupply's chain-specific logic handle it
+  if (address.length !== 42) return "malformed EVM address";
+  if (address.includes("::")) return "non-EVM resource path";
+  return null;
+}
+
 // peggedData.address may be prefixed with a chain key (e.g. "avax:0x...").
 // Return just the lowercase canonical address portion, or undefined if absent.
 function normalizeSourceAddress(raw: string | undefined): string | undefined {
@@ -276,6 +288,13 @@ async function generateForAsset(
     const tokens = info.tokens || {};
     for (const [address, token] of Object.entries<any>(tokens)) {
       if (!matchesAsset(token, normalizedSymbols, sourceAddress)) continue;
+      const invalidReason = isInvalidBridgedAddress(address);
+      if (invalidReason) {
+        console.warn(
+          `[${peggedAsset.gecko_id}] dropping ${invalidReason} on ${lzKey}: ${address} (${token.symbol})`
+        );
+        continue;
+      }
       const symbol = (token.symbol || "").toUpperCase();
       let llamaKey = cid !== undefined ? cidToLlama[cid] : undefined;
       if (llamaKey && CANONICAL_CHAIN_ALIASES[llamaKey]) llamaKey = CANONICAL_CHAIN_ALIASES[llamaKey];
