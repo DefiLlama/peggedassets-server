@@ -30,6 +30,11 @@ export default [
     auditLinks: ["https://tether.to/en/transparency/#reports"],
     twitter: "https://twitter.com/Tether_to",
     wiki: "https://wiki.defillama.com/wiki/USDT",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDT0", 'USDT'],
+      }
+    }
   },
   {
     id: "2",
@@ -50,6 +55,11 @@ export default [
     auditLinks: ["https://www.centre.io/usdc-transparency"],
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/USDC",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDC", 'USDC.e'],
+      }
+    }
   },
   {
     id: "3",
@@ -2539,6 +2549,11 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PayPal",
     wiki: null,
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["PYUSD"],
+      }
+    }
   },
   {
     id: "121",
@@ -2721,6 +2736,11 @@ export default [
       "USDY is accessible to non-US individual and institutional investors and is transferable on-chain 40-50 days after purchase. Users request to mint USDY by sending us USDC. After 40 day mint restriction is lifted it will mint USDY tokens",
     onCoinGecko: "true",
     gecko_id: "ondo-us-dollar-yield",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDY"],
+      }
+    },
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -3088,6 +3108,11 @@ export default [
     auditLinks: ["https://ethena-labs.gitbook.io/ethena-labs/resources/audits#quantstamp-audit-on-v2-of-contracts"],
     twitter: "https://twitter.com/ethena_labs",
     wiki: "https://www.ethena.fi",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDe"],
+      }
+    }
   },
   {
     id: "147",
@@ -4401,6 +4426,11 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/SkyEcosystem",
     wiki: "https://sky.money/faq",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDS"],
+      }
+    }
   },
   {
     id: "210",
@@ -5940,6 +5970,11 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/global_dollar",
     wiki: "https://globaldollar.com/global-dollar",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDG"],
+      }
+    }
   },
   {
     id: "287",

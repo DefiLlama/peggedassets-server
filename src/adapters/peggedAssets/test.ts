@@ -8,6 +8,7 @@ import { PeggedAssetIssuance, PeggedTokenBalance } from "../../types";
 import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
 import { PeggedIssuanceAdapter } from "./peggedAsset.type";
 import { DEAD_CHAINS } from "../../utils/deadChains";
+import { importAdapter } from "../../peggedAssets/utils/importAdapter";
 const {
   humanizeNumber,
 } = require("@defillama/sdk/build/computeTVL/humanizeNumber");
@@ -21,8 +22,6 @@ type ChainBlocks = {
 type BridgeMapping = {
   [chain: string]: PeggedTokenBalance[];
 };
-
-const pegTypes = ["peggedUSD", "peggedEUR", "peggedVAR"];
 
 function detectPegKey(balance: any, wanted: string) {
   if (balance && typeof balance === 'object') {
@@ -170,13 +169,13 @@ async function getPeggedAsset(
   }
 }
 
-async function calcCirculating(
+function calcCirculating(
   peggedBalances: PeggedAssetIssuance,
   bridgedFromMapping: BridgeMapping,
   pegType: string
 ) {
-  let chainCirculatingPromises = Object.keys(peggedBalances).map(
-    async (chain) => {
+  Object.keys(peggedBalances).map(
+    (chain) => {
       let circulating: PeggedTokenBalance = { [pegType]: 0 } as any;
       const chainIssuances = peggedBalances[chain];
 
@@ -215,12 +214,11 @@ async function calcCirculating(
       (peggedBalances as any)[chain].circulating = circulating;
     }
   );
-  await Promise.all(chainCirculatingPromises);
 
   (peggedBalances as any)["totalCirculating"] = {};
   (peggedBalances as any)["totalCirculating"]["circulating"] = { [pegType]: 0 } as any;
   (peggedBalances as any)["totalCirculating"]["unreleased"] = { [pegType]: 0 } as any;
-  let peggedTotalPromises = Object.keys(peggedBalances).map((chain) => {
+  Object.keys(peggedBalances).map((chain) => {
     const circulating = (peggedBalances as any)[chain].circulating || { [pegType]: 0 };
     const unreleased = (peggedBalances as any)[chain].unreleased || { [pegType]: 0 };
     if (chain !== "totalCirculating") {
@@ -230,7 +228,6 @@ async function calcCirculating(
         unreleased[pegType] || 0;
     }
   });
-  await Promise.all(peggedTotalPromises);
 }
 
 if (process.argv.length < 3) {
@@ -275,18 +272,26 @@ function getAdapterLabelFromPath(filePath: string): string {
 
 (async () => {
   let adapter = {} as PeggedIssuanceAdapter;
+  let module: any
   try {
     adapter = require(passedFile);
   } catch (e) {
     console.log(e);
+    return;
   }
-  const module = adapter.default;
+  const stablecoinId = getStablecoinIdFromPath(passedFile);
+  const adapterLabel = getAdapterLabelFromPath(passedFile);
+
+  const peggedAsset = peggedAssets.find((p) => p.id === stablecoinId);
+
+  let relativeModulePath = path.relative(__dirname, passedFile).replace(/\\/g, '/').replace(/\.ts$/, '');
+  module = await importAdapter(peggedAsset ?? {
+    module: relativeModulePath
+  } as any, adapter.default);
+
   const chains = Object.keys(module).filter(
     (chain) => !["minted", "unreleased"].includes(chain)
   );
-
-  const stablecoinId = getStablecoinIdFromPath(passedFile);
-  const adapterLabel = getAdapterLabelFromPath(passedFile);
   console.log(`[INFO] Detected stablecoin: ${adapterLabel} (id: ${stablecoinId}) for file: ${passedFile}`);
 
   checkExportKeys(passedFile, chains);
@@ -354,12 +359,8 @@ function getAdapterLabelFromPath(filePath: string): string {
   );
   await Promise.all(peggedBalancesPromises);
 
-  await Promise.race([
-    calcCirculating(peggedBalances, bridgedFromMapping, pegType),
-    new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error('calcCirculating exceeded the timeout limit')), 3 * 60 * 1000)
-    ),
-  ]);
+  calcCirculating(peggedBalances, bridgedFromMapping, pegType)
+
   if (
     typeof (peggedBalances as any).totalCirculating.circulating[pegType] !== "number"
   ) {
@@ -438,7 +439,7 @@ function getAdapterLabelFromPath(filePath: string): string {
     });
 
   displayTable.push(totalItem)
-  displayTable.sort((a: any, b: any) => valueFromItem(b) - valueFromItem(a))
+  displayTable.sort((a: any, b: any) => valueFromItem(a) - valueFromItem(b))
 
   function valueFromItem(item: any) {
     let val = item.circulating || item.unreleased || 0;
