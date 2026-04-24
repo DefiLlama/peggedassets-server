@@ -19,6 +19,7 @@ import { craftStablecoinChainsResponse } from "./getStablecoinChains";
 import { craftStablecoinPricesResponse } from "./getStablecoinPrices";
 import storeCharts, { craftChartsResponse, storeChartsPart2 } from "./storeCharts";
 import storePeggedPrices from "./storePeggedPrices";
+import { storeVolumesRoutes } from "./storeVolumes";
 
 run().catch(console.error).then(() => process.exit(0))
 
@@ -29,6 +30,7 @@ async function run() {
     storeRates(),
     storeConfig(),
     storePeggedPrices(),
+    storeVolumesRoutes(),
   ])
   // this also pulls data from ddb and sets to cache
   await storeCharts()
