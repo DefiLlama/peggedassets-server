@@ -13,17 +13,16 @@ interface DailyVolume {
   currencies: Record<string, number>;
 }
 
-const STORE_KEY = 'stablecoins/dailyVolumes';
+const R2_STORE_KEY = 'stablecoins/dailyVolumes';
 export async function storeVolumesRoutes() {
-  const r2stablecoinVolumeCache: Record<string, DailyVolume> = await getR2JSONString(STORE_KEY);
-  console.log('read volume cache from R2');
+  const r2stablecoinVolumeCache: Record<string, DailyVolume> = await getR2JSONString(R2_STORE_KEY);
   
-  if (r2stablecoinVolumeCache) {
-    await storeRouteData('stablecoins/volumes/chart-total', formatChartItems(r2stablecoinVolumeCache, 'total'));
-    await storeRouteData('stablecoins/volumes/chart-chain-breakdown', formatChartItems(r2stablecoinVolumeCache, 'chains'));
-    await storeRouteData('stablecoins/volumes/chart-token-breakdown', formatChartItems(r2stablecoinVolumeCache, 'tokens'));
-    await storeRouteData('stablecoins/volumes/chart-currency-breakdown', formatChartItems(r2stablecoinVolumeCache, 'currencies'));
-  }
+  await storeRouteData('volumes/chart-total', formatChartItems(r2stablecoinVolumeCache, 'total'));
+  await storeRouteData('volumes/chart-chain-breakdown', formatChartItems(r2stablecoinVolumeCache, 'chains'));
+  await storeRouteData('volumes/chart-token-breakdown', formatChartItems(r2stablecoinVolumeCache, 'tokens'));
+  await storeRouteData('volumes/chart-currency-breakdown', formatChartItems(r2stablecoinVolumeCache, 'currencies'));
+  
+  console.log('stored volume cache from R2');
   
   function sumTotal(item: Record<string, number>): number {
     let total = 0;

@@ -45,16 +45,16 @@ export default function setRoutes(router: HyperExpress.Router) {
   }));
   
   router.get("/chart/volume", ew(async (req: any, res: any) => {
-    return fileResponse('/stablecoins/volumes/chart-total', res);
+    return fileResponse('/volumes/chart-total', res);
   }));
   router.get("/chart/volume/chain-breakdown", ew(async (req: any, res: any) => {
-    return fileResponse('/stablecoins/volumes/chart-chain-breakdown', res);
+    return fileResponse('/volumes/chart-chain-breakdown', res);
   }));
   router.get("/chart/volume/currency-breakdown", ew(async (req: any, res: any) => {
-    return fileResponse('/stablecoins/volumes/chart-currency-breakdown', res);
+    return fileResponse('/volumes/chart-currency-breakdown', res);
   }));
   router.get("/chart/volume/token-breakdown", ew(async (req: any, res: any) => {
-    return fileResponse('/stablecoins/volumes/chart-token-breakdown', res);
+    return fileResponse('/volumes/chart-token-breakdown', res);
   }));
 
   // TOO: nuke this route to reduce load on the server
