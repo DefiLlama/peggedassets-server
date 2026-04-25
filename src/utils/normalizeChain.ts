@@ -1479,6 +1479,11 @@ export const chainCoingeckoIds = {
     symbol: "VOI",
     cmcId: null,
   },
+  "Eden": {
+    geckoId: "celestia",
+    symbol: "TIA",
+    cmcId: "22861",
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;

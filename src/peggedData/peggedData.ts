@@ -7678,4 +7678,26 @@ export default [
     module: "phusd",
     doublecounted: true
   },
+  {
+    id: "375",
+    name: "Monet USDmo",
+    address: "eden:0x9fa8c4d9f33dcce6eacefb6d5cf9736350a330b1",
+    symbol: "USDMO",
+    url: "https://monet.cash/",
+    description:
+      "USDmo is the USD stablecoin of Monet. It is a decentralized, overcollateralized asset backed by a basket of cryptocurrencies and stablecoins, including yield-bearing versions such as Morpho vaults.",
+    mintRedeemDescription:
+      "The issuance and redemption of USDmo are currently managed by Monet modules. USDmo is deployed on Eden.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.monet.cash/security/audits"],
+    twitter: "https://x.com/monetdotcash",
+    wiki: "https://docs.monet.cash/products/stablecoins-and-savings/usdmo-and-susdmo",
+    module: "monet-usdmo",
+    doublecounted: true
+  },
 ] as PeggedAsset[];
