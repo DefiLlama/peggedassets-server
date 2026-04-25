@@ -44,17 +44,29 @@ export default function setRoutes(router: HyperExpress.Router) {
     return fileResponse('/stablecoincharts2/' + chain, res);
   }));
   
-  router.get("/chart/volume", ew(async (req: any, res: any) => {
-    return fileResponse('/volumes/chart-total', res);
+  router.get("/chart/volume", ew(async (req: any, res: any) => fileResponse('/volume/chart-total', res)));
+  router.get("/chart/volume/chain-breakdown", ew(async (req: any, res: any) => fileResponse('/volume/chart-total-chain-breakdown', res)));
+  router.get("/chart/volume/token-breakdown", ew(async (req: any, res: any) => fileResponse('/volume/chart-total-token-breakdown', res)));
+  router.get("/chart/volume/currency-breakdown", ew(async (req: any, res: any) => fileResponse('/volume/chart-total-currency-breakdown', res)));
+  router.get("/chart/volume/chain/:chain", ew(async (req: any, res: any) => {
+    const { chain } = req.path_parameters;
+    return fileResponse(`/volume/chart-chain-${chain}`, res);
   }));
-  router.get("/chart/volume/chain-breakdown", ew(async (req: any, res: any) => {
-    return fileResponse('/volumes/chart-chain-breakdown', res);
+  router.get("/chart/volume/chain/:chain/token-breakdown", ew(async (req: any, res: any) => {
+    const { chain } = req.path_parameters;
+    return fileResponse(`/volume/chart-chain-${chain}-token-breakdown`, res);
   }));
-  router.get("/chart/volume/currency-breakdown", ew(async (req: any, res: any) => {
-    return fileResponse('/volumes/chart-currency-breakdown', res);
+  router.get("/chart/volume/chain/:chain/currency-breakdown", ew(async (req: any, res: any) => {
+    const { chain } = req.path_parameters;
+    return fileResponse(`/volume/chart-chain-${chain}-currency-breakdown`, res);
   }));
-  router.get("/chart/volume/token-breakdown", ew(async (req: any, res: any) => {
-    return fileResponse('/volumes/chart-token-breakdown', res);
+  router.get("/chart/volume/token/:token", ew(async (req: any, res: any) => {
+    const { token } = req.path_parameters;
+    return fileResponse(`/volume/chart-token-${token}`, res);
+  }));
+  router.get("/chart/volume/token/:token/chain-breakdown", ew(async (req: any, res: any) => {
+    const { token } = req.path_parameters;
+    return fileResponse(`/volume/chart-token-${token}-chain-breakdown`, res);
   }));
 
   // TOO: nuke this route to reduce load on the server
