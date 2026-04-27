@@ -106,9 +106,9 @@ export const chainCoingeckoIds = {
     chainId: 1,
   },
   Arbitrum: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "arbitrum",
+    symbol: "ARB",
+    cmcId: "11841",
     categories: ["EVM", "Rollup"],
     parent: "Ethereum",
     chainId: 42161,
@@ -121,9 +121,9 @@ export const chainCoingeckoIds = {
     chainId: 11297108109,
   },
   "OP Mainnet": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "optimism",
+    symbol: "OP",
+    cmcId: "11840",
     categories: ["EVM", "Rollup"],
     parent: "Ethereum",
     chainId: 10,
@@ -149,9 +149,9 @@ export const chainCoingeckoIds = {
     cmcId: "2092",
   },
   Witnet: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "witnet",
+    symbol: "WIT",
+    cmcId: "14925",
   },
   BSC: {
     geckoId: "binancecoin",
@@ -897,9 +897,9 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
   },
   Canto: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "canto",
+    symbol: "CANTO",
+    cmcId: "21516",
     categories: ["EVM"],
   },
   XRPL: {
@@ -936,9 +936,9 @@ export const chainCoingeckoIds = {
     cmcId: "21794",
   },
   "ZKsync Era": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "zksync",
+    symbol: "ZK",
+    cmcId: "24091",
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
@@ -970,8 +970,8 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
   },
   Linea: {
-    geckoId: null,
-    symbol: null,
+    geckoId: "linea",
+    symbol: "LINEA",
     cmcId: null,
     categories: ["EVM", "Rollup"],
     parent: {
@@ -1003,9 +1003,9 @@ export const chainCoingeckoIds = {
     cmcId: "20947",
   },
   Blast: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "blast",
+    symbol: "BLAST",
+    cmcId: "28480",
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
@@ -1024,7 +1024,7 @@ export const chainCoingeckoIds = {
   },
   Morph: {
     geckoId: null,
-    symbol: null,
+    symbol: "-",
     cmcId: null,
   },
   Manta: {
@@ -1050,9 +1050,9 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
   },
   "Bitlayer": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "bitlayer-bitvm",
+    symbol: "BTR",
+    cmcId: "36277",
     twitter: "BitlayerLabs",
     categories: ["EVM"],
   },
@@ -1080,8 +1080,8 @@ export const chainCoingeckoIds = {
     url: "https://ton.org/",
   },
   "Scroll": {
-    geckoId: null,
-    symbol: null,
+    geckoId: "scroll",
+    symbol: "SCR",
     cmcId: null,
     categories: ["EVM"],
   },
@@ -1092,8 +1092,8 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
   },
   "re.al": {
-    geckoId: null,
-    symbol: null,
+    geckoId: "re-al",
+    symbol: "RWA",
     cmcId: null,
     categories: ["EVM"],
   },
@@ -1163,8 +1163,8 @@ export const chainCoingeckoIds = {
     chainId: 57073,
   },
   "Sophon": {
-    geckoId: null,
-    symbol: null,
+    geckoId: "sophon",
+    symbol: "SOPH",
     cmcId: null,
     categories: ["EVM", "Rollup"],
     parent: {
@@ -1196,9 +1196,9 @@ export const chainCoingeckoIds = {
     url: "https://plume.org/",
   },
   "Provenance": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "hash-2",
+    symbol: "HASH",
+    cmcId: "19960",
     categories: ["Cosmos"],
   },
   "Nero": {
@@ -1285,14 +1285,14 @@ export const chainCoingeckoIds = {
     cmcId: null,
   },
   BOB: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "bob-build-on-bitcoin",
+    symbol: "BOB",
+    cmcId: "38970",
   },
   BSquared: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "bsquared-network",
+    symbol: "B2",
+    cmcId: "36352",
   },
   Citrea: {
     geckoId: null,
@@ -1310,9 +1310,9 @@ export const chainCoingeckoIds = {
     cmcId: "23254",
   },
   Corn: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "corn-3",
+    symbol: "CORN",
+    cmcId: "36164",
   },
   Filecoin: {
     geckoId: "filecoin",
@@ -1345,9 +1345,9 @@ export const chainCoingeckoIds = {
     cmcId: null,
   },
   Hemi: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "hemi",
+    symbol: "HEMI",
+    cmcId: "38159",
   },
   "HashKey Chain": {
     geckoId: "hashkey-ecopoints",
@@ -1375,9 +1375,9 @@ export const chainCoingeckoIds = {
     cmcId: "39611",
   },
   Mezo: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "mezo",
+    symbol: "MEZO",
+    cmcId: "39727",
   },
   Monad: {
     geckoId: "monad",
@@ -1420,8 +1420,8 @@ export const chainCoingeckoIds = {
     cmcId: "23149",
   },
   Shape: {
-    geckoId: null,
-    symbol: null,
+    geckoId: "shape",
+    symbol: "SHAPE",
     cmcId: null,
   },
   Slp: {
@@ -1478,6 +1478,11 @@ export const chainCoingeckoIds = {
     geckoId: "voi-network",
     symbol: "VOI",
     cmcId: null,
+  },
+  "Eden": {
+    geckoId: "celestia",
+    symbol: "TIA",
+    cmcId: "22861",
   },
 } as {
   [chain: string]: {

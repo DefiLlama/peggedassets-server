@@ -5451,7 +5451,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "arche-protocol-msd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5459,6 +5458,7 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/archeprotocol",
     wiki: "https://arche-protocol.gitbook.io/arche-protocol",
+    deadUrl: true
   },
   {
     id: "260",
@@ -7720,7 +7720,7 @@ export default [
     description:
       "phUSD is a USD stablecoin on Ethereum backed 1:1 by a basket of yield-bearing stablecoin collateral (DOLA and USDC) held in ERC4626 yield strategies. Deposits earn yield which is streamed to phUSD stakers via the Phlimbo yield farm.",
     mintRedeemDescription:
-      "phUSD is minted 1:1 by depositing supported stablecoins (DOLA, USDC) through PhusdStableMinter. The underlying stablecoins are routed into ERC4626 yield strategies (AutoDOLA, AutoUSDC). phUSD can be redeemed 1:1 for the underlying stablecoins at any time.",
+      "phUSD is minted 1:1 by depositing supported stablecoins (DOLA, USDC) through PhusdStableMinter. The underlying stablecoins are routed into ERC4626 yield strategies (AutoDOLA, AutoUSDC). phUSD is not redeemable.",
     onCoinGecko: "false",
     gecko_id: "phusd",
     cmcId: null,
@@ -7731,6 +7731,28 @@ export default [
     twitter: null,
     wiki: null,
     module: "phusd",
+    doublecounted: true
+  },
+  {
+    id: "375",
+    name: "Monet USDmo",
+    address: "eden:0x9fa8c4d9f33dcce6eacefb6d5cf9736350a330b1",
+    symbol: "USDMO",
+    url: "https://monet.cash/",
+    description:
+      "USDmo is the USD stablecoin of Monet. It is a decentralized, overcollateralized asset backed by a basket of cryptocurrencies and stablecoins, including yield-bearing versions such as Morpho vaults.",
+    mintRedeemDescription:
+      "The issuance and redemption of USDmo are currently managed by Monet modules. USDmo is deployed on Eden.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.monet.cash/security/audits"],
+    twitter: "https://x.com/monetdotcash",
+    wiki: "https://docs.monet.cash/products/stablecoins-and-savings/usdmo-and-susdmo",
+    module: "monet-usdmo",
     doublecounted: true
   },
 ] as PeggedAsset[];
