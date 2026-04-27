@@ -5650,6 +5650,7 @@ export default [
     mintRedeemDescription: "BOLD is minted in Liquity V2 by borrowing against overcollateralized deposits of WETH, wstETH, or rETH, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
     onCoinGecko: "true",
     gecko_id: "liquity-bold-2",
+    module: "liquity-bold",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
