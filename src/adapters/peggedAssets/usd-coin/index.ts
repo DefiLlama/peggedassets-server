@@ -1003,9 +1003,6 @@ const adapter: PeggedIssuanceAdapter = {
   unichain: {
     minted: chainMinted("unichain", 6),
   },
-  superposition: {
-    ethereum: bridgedSupply("spn", 6, chainContracts.superposition.bridgedFromETH),
-  },
   lisk: {
     ethereum: bridgedSupply("lisk", 6, chainContracts.lisk.bridgedFromETH),
   },
@@ -1039,9 +1036,7 @@ const adapter: PeggedIssuanceAdapter = {
 /*   kroma: {
     ethereum: bridgedSupply("kroma", 6, chainContracts.kroma.bridgedFromETH),
   }, */
-  berachain: {
-    ethereum: bridgedSupply("berachain", 6, chainContracts.berachain.bridgedFromETH),
-  },
+
   core: {
     ethereum: bridgedSupply("core", 6, chainContracts.core.bridgedFromETH),
   },
@@ -1056,7 +1051,6 @@ const adapter: PeggedIssuanceAdapter = {
   },
   ink: {
     minted: chainMinted("ink", 6),
-    ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH, "stargate"),
   },
   nibiru: {
     ethereum: nibiruBridged(),
@@ -1070,12 +1064,6 @@ const adapter: PeggedIssuanceAdapter = {
   },
   xlayer: {
     ethereum: bridgedSupply("xlayer", 6, chainContracts.xlayer.bridgedFromETH),
-  },
-  abstract: {
-    ethereum: bridgedSupply("abstract", 6, chainContracts.abstract.bridgedFromETH, "stargate"),
-  },
-  flare: {
-    ethereum: bridgedSupply("flare", 6, chainContracts.flare.bridgedFromETH, "stargate"),
   },
   xdc: {
     minted: chainMinted("xdc", 6),
@@ -1093,30 +1081,15 @@ const adapter: PeggedIssuanceAdapter = {
   move: {
     ethereum: moveSupply,
   },
-  hemi: {
-    ethereum: bridgedSupply("hemi", 6, chainContracts.hemi.bridgedFromETH, "stargate"),
-  },
   plume_mainnet: {
     minted: chainMinted("plume_mainnet", 6),
     ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
-  },
-  story: {
-    ethereum: bridgedSupply("sty", 6, chainContracts.story.bridgedFromETH, "stargate"),
   },
   nero: {
     arbitrum: bridgedSupply("nero", 6, chainContracts.nero.bridgedFromARB, "VIA Labs"),
   },
   perennial: {
     ethereum: bridgedSupply("perennial", 6, chainContracts.perennial.bridgedFromETH, "conduit"),
-  },
-  apechain: {
-    ethereum: bridgedSupply("apechain", 6, chainContracts.apechain.bridgedFromETH, "stargate"),
-  },
-  glue: {
-    ethereum: bridgedSupply("glue", 6, chainContracts.glue.bridgedFromETH, "stargate"),
-  },
-  goat: {
-    ethereum: bridgedSupply("goat", 6, chainContracts.goat.bridgedFromETH, "stargate"),
   },
   ripple: {
     minted: rippleMinted(),
