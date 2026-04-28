@@ -7765,8 +7765,8 @@ export default [
       description:
         "USDX is a fully-collateralized stablecoin issued by Stable, backed by tokenized real estate mortgage debt NFTs plus on-chain yield reserves (idle USDC, Jupiter Lend, Kamino). It is pegged 1:1 to the US dollar and is primarily active on Solana, with token contracts also deployed on Ethereum and Monad.",
       mintRedeemDescription:
-        "USDX is minted against tokenized real estate mortgage NFTs through an admin mint flow: a debt position is created on-chain recording the loan terms, a debt NFT is minted as proof of the underlying collateral, and an equivalent amount of USDX is issued to the recipient. Holders can also swap into and out of USDX
-  on Raydium (Solana) and Uniswap (Monad) liquidity pools.",
+        `USDX is minted against tokenized real estate mortgage NFTs through an admin mint flow: a debt position is created on-chain recording the loan terms, a debt NFT is minted as proof of the underlying collateral, and an equivalent amount of USDX is issued to the recipient. Holders can also swap into and out of USDX
+  on Raydium (Solana) and Uniswap (Ethereum, Monad) liquidity pools.`,
       onCoinGecko: "false",
       gecko_id: null,
       cmcId: null,
