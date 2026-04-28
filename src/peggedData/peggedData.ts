@@ -7716,48 +7716,70 @@ export default [
     twitter: "https://x.com/SuiNetwork",
     module: "usdsui",
   },
-  {
-    id: "374",
-    name: "Phoenix USD",
-    address: "0xf3B5B661b92B75C71fA5Aba8Fd95D7514A9CD605",
-    symbol: "phUSD",
-    url: "https://phusd.behodler.io",
-    description:
-      "phUSD is a USD stablecoin on Ethereum backed 1:1 by a basket of yield-bearing stablecoin collateral (DOLA and USDC) held in ERC4626 yield strategies. Deposits earn yield which is streamed to phUSD stakers via the Phlimbo yield farm.",
-    mintRedeemDescription:
-      "phUSD is minted 1:1 by depositing supported stablecoins (DOLA, USDC) through PhusdStableMinter. The underlying stablecoins are routed into ERC4626 yield strategies (AutoDOLA, AutoUSDC). phUSD is not redeemable.",
-    onCoinGecko: "false",
-    gecko_id: "phusd",
-    cmcId: null,
-    pegType: "peggedUSD",
-    pegMechanism: "crypto-backed",
-    priceSource: "defillama",
-    auditLinks: null,
-    twitter: null,
-    wiki: null,
-    module: "phusd",
-    doublecounted: true
-  },
-  {
-    id: "375",
-    name: "Monet USDmo",
-    address: "eden:0x9fa8c4d9f33dcce6eacefb6d5cf9736350a330b1",
-    symbol: "USDMO",
-    url: "https://monet.cash/",
-    description:
-      "USDmo is the USD stablecoin of Monet. It is a decentralized, overcollateralized asset backed by a basket of cryptocurrencies and stablecoins, including yield-bearing versions such as Morpho vaults.",
-    mintRedeemDescription:
-      "The issuance and redemption of USDmo are currently managed by Monet modules. USDmo is deployed on Eden.",
-    onCoinGecko: "false",
-    gecko_id: null,
-    cmcId: null,
-    pegType: "peggedUSD",
-    pegMechanism: "crypto-backed",
-    priceSource: "defillama",
-    auditLinks: ["https://docs.monet.cash/security/audits"],
-    twitter: "https://x.com/monetdotcash",
-    wiki: "https://docs.monet.cash/products/stablecoins-and-savings/usdmo-and-susdmo",
-    module: "monet-usdmo",
-    doublecounted: true
-  },
-] as PeggedAsset[];
+    {
+      id: "374",
+      name: "Phoenix USD",
+      address: "0xf3B5B661b92B75C71fA5Aba8Fd95D7514A9CD605",
+      symbol: "phUSD",
+      url: "https://phusd.behodler.io",
+      description:
+        "phUSD is a USD stablecoin on Ethereum backed 1:1 by a basket of yield-bearing stablecoin collateral (DOLA and USDC) held in ERC4626 yield strategies. Deposits earn yield which is streamed to phUSD stakers via the Phlimbo yield farm.",
+      mintRedeemDescription:
+        "phUSD is minted 1:1 by depositing supported stablecoins (DOLA, USDC) through PhusdStableMinter. The underlying stablecoins are routed into ERC4626 yield strategies (AutoDOLA, AutoUSDC). phUSD is not redeemable.",
+      onCoinGecko: "false",
+      gecko_id: "phusd",
+      cmcId: null,
+      pegType: "peggedUSD",
+      pegMechanism: "crypto-backed",
+      priceSource: "defillama",
+      auditLinks: null,
+      twitter: null,
+      wiki: null,
+      module: "phusd",
+      doublecounted: true
+    },
+    {
+      id: "375",
+      name: "Monet USDmo",
+      address: "eden:0x9fa8c4d9f33dcce6eacefb6d5cf9736350a330b1",
+      symbol: "USDMO",
+      url: "https://monet.cash/",
+      description:
+        "USDmo is the USD stablecoin of Monet. It is a decentralized, overcollateralized asset backed by a basket of cryptocurrencies and stablecoins, including yield-bearing versions such as Morpho vaults.",
+      mintRedeemDescription:
+        "The issuance and redemption of USDmo are currently managed by Monet modules. USDmo is deployed on Eden.",
+      onCoinGecko: "false",
+      gecko_id: null,
+      cmcId: null,
+      pegType: "peggedUSD",
+      pegMechanism: "crypto-backed",
+      priceSource: "defillama",
+      auditLinks: ["https://docs.monet.cash/security/audits"],
+      twitter: "https://x.com/monetdotcash",
+      wiki: "https://docs.monet.cash/products/stablecoins-and-savings/usdmo-and-susdmo",
+      module: "monet-usdmo",
+      doublecounted: true
+    },
+    {
+      id: "376",
+      name: "USDX",
+      address: "solana:9Gst2E7KovZ9jwecyGqnnhpG1mhHKdyLpJQnZonkCFhA",
+      symbol: "USDX",
+      url: "https://trystable.co",
+      description:
+        "USDX is a fully-collateralized stablecoin issued by Stable, backed by tokenized real estate mortgage debt NFTs plus on-chain yield reserves (idle USDC, Jupiter Lend, Kamino). It is pegged 1:1 to the US dollar and is primarily active on Solana, with token contracts also deployed on Ethereum and Monad.",
+      mintRedeemDescription:
+        `USDX is minted against tokenized real estate mortgage NFTs through an admin mint flow: a debt position is created on-chain recording the loan terms, a debt NFT is minted as proof of the underlying collateral, and an equivalent amount of USDX is issued to the recipient. USDX can be minted from direct USDC (Solana, Monad) and USDT (Ethereum) deposits as well. Holders can also swap into and out of USDX
+  on Raydium (Solana) and Uniswap (Ethereum, Monad) liquidity pools.`,
+      onCoinGecko: "false",
+      gecko_id: null,
+      cmcId: null,
+      pegType: "peggedUSD",
+      pegMechanism: "crypto-backed",
+      priceSource: "defillama",
+      auditLinks: [],
+      twitter: "https://x.com/stable_tweets",
+      wiki: "https://docs.trystable.co",
+      module: "stable-usdx",
+    },
+  ] as PeggedAsset[];
