@@ -3573,7 +3573,11 @@ export default [
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
     module: "fxusd",
-
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["fxUSD"],
+      },
+    },
   },
   {
     id: "169",
