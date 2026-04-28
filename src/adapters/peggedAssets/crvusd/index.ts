@@ -10,7 +10,8 @@ const pegkeepers = [
   "0x9201da0d97caaaff53f01b2fb56767c7072de340", //crvUSD/USDC
   "0xfb726f57d251ab5c731e5c64ed4f5f94351ef9f3", //crvUSD/USDT
   "0x3fa20eaa107de08b38a8734063d605d5842fe09c", //crvUSD/pyUSD
-  "0x338cb2d827112d989a861cde87cd9ffd913a1f9d"  //crvUSD/frxUSD
+  "0x338cb2d827112d989a861cde87cd9ffd913a1f9d", //crvUSD/frxUSD
+  "0x53876b157decf04389eed66c7c29d73863f8c50b", //crvUSD/GHO
 ]
 
 const curve_lend_operators = [
@@ -24,6 +25,7 @@ const yb_amms = [
   "0xDC90F6B111DF0c26e349d3cC8d3C357b191e109a", //cbBTC YB AMM (new)
   "0x61ED017468C8A3bE3Bac972b54fdae6eAfcbcd79", //tBTC YB AMM (new)
   "0x10B663da78055bDA0c7c26712CE1A0613AF0Ae66", //WBTC YB AMM (new)
+  "0x35095d94E0f1F4a78386B7eB74BB64768A2341e4", //WETH YB AMM
 ]
 
 async function minted(api: ChainApi) {
