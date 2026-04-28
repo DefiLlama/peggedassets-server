@@ -5,7 +5,11 @@ const chainContracts = {
   },
   ethereum: {
     issued: ["0xce24439f2d9c6a2289f741120fe202248b666666"],
-  }
+  },
+  tron: {
+    issued: ["TFNirp6PbqYE1ZTtWuCMUKJWLNZkoCoeFJ"],
+  },
+  
 };
 
 import { addChainExports } from "../helper/getSupply";

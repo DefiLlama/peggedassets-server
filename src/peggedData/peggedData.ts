@@ -30,6 +30,11 @@ export default [
     auditLinks: ["https://tether.to/en/transparency/#reports"],
     twitter: "https://twitter.com/Tether_to",
     wiki: "https://wiki.defillama.com/wiki/USDT",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDT0", 'USDT'],
+      }
+    }
   },
   {
     id: "2",
@@ -50,6 +55,11 @@ export default [
     auditLinks: ["https://www.centre.io/usdc-transparency"],
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/USDC",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDC", 'USDC.e'],
+      }
+    }
   },
   {
     id: "3",
@@ -111,6 +121,11 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/MakerDAO",
     wiki: "https://wiki.defillama.com/wiki/Dai",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["DAI"],
+      }
+    }
   },
   {
     id: "6",
@@ -2539,6 +2554,11 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PayPal",
     wiki: null,
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["PYUSD"],
+      }
+    }
   },
   {
     id: "121",
@@ -2721,6 +2741,11 @@ export default [
       "USDY is accessible to non-US individual and institutional investors and is transferable on-chain 40-50 days after purchase. Users request to mint USDY by sending us USDC. After 40 day mint restriction is lifted it will mint USDY tokens",
     onCoinGecko: "true",
     gecko_id: "ondo-us-dollar-yield",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDY"],
+      }
+    },
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -3088,6 +3113,11 @@ export default [
     auditLinks: ["https://ethena-labs.gitbook.io/ethena-labs/resources/audits#quantstamp-audit-on-v2-of-contracts"],
     twitter: "https://twitter.com/ethena_labs",
     wiki: "https://www.ethena.fi",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDe"],
+      }
+    }
   },
   {
     id: "147",
@@ -4318,6 +4348,11 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/withAUSD",
     wiki: null,
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["AUSD"],
+      }
+    }
   },
   {
     id: "206",
@@ -4401,6 +4436,11 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/SkyEcosystem",
     wiki: "https://sky.money/faq",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDS"],
+      }
+    }
   },
   {
     id: "210",
@@ -4503,6 +4543,7 @@ export default [
     twitter: "https://x.com/usdx_money",
     wiki: "https://docs.usdx.money/a-synthetic-usd/usdx-basics",
     deadUrl: true,
+    deadFrom: "2025-11-14",
   },
   {
     id: "215",
@@ -4566,7 +4607,7 @@ export default [
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/__reservoir",
-    wiki: "https://docs.reservoir.xyz/products/stablecoin-rusd"
+    wiki: "https://docs.reservoir.xyz/products/stablecoin-rusd",
   },
   {
     id: "218",
@@ -4628,6 +4669,11 @@ export default [
     twitter: "https://x.com/avalonfinance_",
     wiki: "https://docs.avalonfinance.xyz/cedefi-cdp-usda",
     module: "avalon-usda",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDA"],
+      }
+    }
   },
   {
     id: "221",
@@ -5405,7 +5451,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "arche-protocol-msd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5413,6 +5458,7 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/archeprotocol",
     wiki: "https://arche-protocol.gitbook.io/arche-protocol",
+    deadUrl: true
   },
   {
     id: "260",
@@ -5603,7 +5649,8 @@ export default [
       `BOLD is the USD-pegged stablecoin issued in Liquity V2. It’s fully decentralized, overcollateralized and backed only by WETH, wstETH and rETH`,
     mintRedeemDescription: "BOLD is minted in Liquity V2 by borrowing against overcollateralized deposits of WETH, wstETH, or rETH, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
     onCoinGecko: "true",
-    gecko_id: "liquity-bold",
+    gecko_id: "liquity-bold-2",
+    module: "liquity-bold",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5939,6 +5986,11 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/global_dollar",
     wiki: "https://globaldollar.com/global-dollar",
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["USDG"],
+      }
+    }
   },
   {
     id: "287",
@@ -6961,11 +7013,16 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: [],
+    auditLinks: ["https://docs.re.xyz/security-and-audits"],
     twitter: "https://x.com/re",
     wiki: null,
     module: "re-protocol-reusd",
-    doublecounted: true
+    doublecounted: true,
+    bridgeConfig: {
+      lzConfig: {
+        symbols: ["reUSD"],
+      }
+    }
   },
   {
     id: "340",
@@ -7655,25 +7712,70 @@ export default [
     twitter: "https://x.com/SuiNetwork",
     module: "usdsui",
   },
-  {
-    id: "374",
-    name: "USDX",
-    address: "solana:9Gst2E7KovZ9jwecyGqnnhpG1mhHKdyLpJQnZonkCFhA",
-    symbol: "USDX",
-    url: "https://trystable.co",
-    description:
-      "USDX is a fully-collateralized stablecoin issued by Stable, backed by tokenized real estate mortgage debt NFTs plus on-chain yield reserves (idle USDC, Jupiter Lend, Kamino). It is pegged 1:1 to the US dollar and is primarily active on Solana, with token contracts also deployed on Ethereum and Monad.",
-    mintRedeemDescription:
-      "USDX is minted against tokenized real estate mortgage NFTs through an admin mint flow: a debt position is created on-chain recording the loan terms, a debt NFT is minted as proof of the underlying collateral, and an equivalent amount of USDX is issued to the recipient. Holders can also swap into and out of USDX on Raydium (Solana) and Uniswap (Monad) liquidity pools.",
-    onCoinGecko: "false",
-    gecko_id: null,
-    cmcId: null,
-    pegType: "peggedUSD",
-    pegMechanism: "crypto-backed",
-    priceSource: "defillama",
-    auditLinks: [],
-    twitter: "https://x.com/stable_tweets",
-    wiki: "https://docs.trystable.co",
-    module: "stable-usdx",
-  },
-] as PeggedAsset[];
+    {
+      id: "374",
+      name: "Phoenix USD",
+      address: "0xf3B5B661b92B75C71fA5Aba8Fd95D7514A9CD605",
+      symbol: "phUSD",
+      url: "https://phusd.behodler.io",
+      description:
+        "phUSD is a USD stablecoin on Ethereum backed 1:1 by a basket of yield-bearing stablecoin collateral (DOLA and USDC) held in ERC4626 yield strategies. Deposits earn yield which is streamed to phUSD stakers via the Phlimbo yield farm.",
+      mintRedeemDescription:
+        "phUSD is minted 1:1 by depositing supported stablecoins (DOLA, USDC) through PhusdStableMinter. The underlying stablecoins are routed into ERC4626 yield strategies (AutoDOLA, AutoUSDC). phUSD is not redeemable.",
+      onCoinGecko: "false",
+      gecko_id: "phusd",
+      cmcId: null,
+      pegType: "peggedUSD",
+      pegMechanism: "crypto-backed",
+      priceSource: "defillama",
+      auditLinks: null,
+      twitter: null,
+      wiki: null,
+      module: "phusd",
+      doublecounted: true
+    },
+    {
+      id: "375",
+      name: "Monet USDmo",
+      address: "eden:0x9fa8c4d9f33dcce6eacefb6d5cf9736350a330b1",
+      symbol: "USDMO",
+      url: "https://monet.cash/",
+      description:
+        "USDmo is the USD stablecoin of Monet. It is a decentralized, overcollateralized asset backed by a basket of cryptocurrencies and stablecoins, including yield-bearing versions such as Morpho vaults.",
+      mintRedeemDescription:
+        "The issuance and redemption of USDmo are currently managed by Monet modules. USDmo is deployed on Eden.",
+      onCoinGecko: "false",
+      gecko_id: null,
+      cmcId: null,
+      pegType: "peggedUSD",
+      pegMechanism: "crypto-backed",
+      priceSource: "defillama",
+      auditLinks: ["https://docs.monet.cash/security/audits"],
+      twitter: "https://x.com/monetdotcash",
+      wiki: "https://docs.monet.cash/products/stablecoins-and-savings/usdmo-and-susdmo",
+      module: "monet-usdmo",
+      doublecounted: true
+    },
+    {
+      id: "376",
+      name: "USDX",
+      address: "solana:9Gst2E7KovZ9jwecyGqnnhpG1mhHKdyLpJQnZonkCFhA",
+      symbol: "USDX",
+      url: "https://trystable.co",
+      description:
+        "USDX is a fully-collateralized stablecoin issued by Stable, backed by tokenized real estate mortgage debt NFTs plus on-chain yield reserves (idle USDC, Jupiter Lend, Kamino). It is pegged 1:1 to the US dollar and is primarily active on Solana, with token contracts also deployed on Ethereum and Monad.",
+      mintRedeemDescription:
+        "USDX is minted against tokenized real estate mortgage NFTs through an admin mint flow: a debt position is created on-chain recording the loan terms, a debt NFT is minted as proof of the underlying collateral, and an equivalent amount of USDX is issued to the recipient. Holders can also swap into and out of USDX
+  on Raydium (Solana) and Uniswap (Monad) liquidity pools.",
+      onCoinGecko: "false",
+      gecko_id: null,
+      cmcId: null,
+      pegType: "peggedUSD",
+      pegMechanism: "crypto-backed",
+      priceSource: "defillama",
+      auditLinks: [],
+      twitter: "https://x.com/stable_tweets",
+      wiki: "https://docs.trystable.co",
+      module: "stable-usdx",
+    },
+  ] as PeggedAsset[];

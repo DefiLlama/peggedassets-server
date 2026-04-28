@@ -429,12 +429,6 @@ export const chainContracts: ChainContracts = {
   vitruveo: {
     bridgedFromPolygon: ["0xbCfB3FCa16b12C7756CD6C24f1cC0AC0E38569CF"],
   },
-  gravity: {
-    bridgedFromETH: ["0xFbDa5F676cB37624f28265A144A48B0d6e87d3b6"],
-  },
-  superposition: {
-    bridgedFromETH: ["0x401eCb1D350407f13ba348573E5630B83638E30D"],
-  },
   lisk: {
     bridgedFromETH: ["0xF242275d3a6527d877f2c927a82D9b057609cc71"],
   },
@@ -462,9 +456,6 @@ export const chainContracts: ChainContracts = {
   kroma: {
     bridgedFromETH: ["0x0257e4d92c00c9efcca1d641b224d7d09cfa4522"],
   },
-  berachain: {
-    bridgedFromETH: ["0x549943e04f40284185054145c6e4e9568c1d3241"],
-  },
   core: {
     bridgedFromETH: ["0xa4151b2b3e269645181dccf2d426ce75fcbdeca9"],
   },
@@ -479,7 +470,6 @@ export const chainContracts: ChainContracts = {
   },
   ink: {
     issued: ["0x2D270e6886d130D724215A266106e6832161EAEd"],
-    bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"]
   },
   sei: {
     bridgedFromNoble: ["0x3894085Ef7Ff0f0aeDf52E2A2704928d1Ec074F1"]
@@ -495,17 +485,8 @@ export const chainContracts: ChainContracts = {
   xlayer: {
     bridgedFromETH: ["0x74b7f16337b8972027f6196a17a631ac6de26d22"],
   },
-  abstract: {
-    bridgedFromETH: ["0x84a71ccd554cc1b02749b35d22f684cc8ec987e1"],
-  },
-  flare: {
-    bridgedFromETH: ["0xFbDa5F676cB37624f28265A144A48B0d6e87d3b6"],
-  },
   move: {
     bridgedFromETH: ["0x83121c9f9b0527d1f056e21a950d6bf3b9e9e2e8353d0e95ccea726713cbea39"], // oft native bridge
-  },
-  hemi: {
-    bridgedFromETH: ["0xad11a8BEb98bbf61dbb1aa0F6d6F2ECD87b35afA"],
   },
   plume_mainnet: {
     issued: ["0x222365EF19F7947e5484218551B56bb3965Aa7aF"],
@@ -514,23 +495,11 @@ export const chainContracts: ChainContracts = {
       //"0x54FD4da2Fa19Cf0f63d8f93A6EA5BEd3F9C042C6", // deprecated - arbitrum native bridge
     ]
   },
-  story: {
-    bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"],
-  },
   nero: {
     bridgedFromARB: ["0x8712796136ac8e0eeec123251ef93702f265aa80"],
   },
   perennial: {
     bridgedFromETH: ["0x39CD9EF9E511ec008247aD5DA01245D84a9521be"],
-  },
-  apechain: {
-    bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"],
-  },
-  glue: {
-    bridgedFromETH: ["0xEe45ed3f6c675F319BB9de62991C1E78B484e0B8"],
-  },
-  goat: {
-    bridgedFromETH: ["0x3022b87ac063DE95b1570F46f5e470F8B53112D8"],
   },
   ripple: {
     issued: ["5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"],

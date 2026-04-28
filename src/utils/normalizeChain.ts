@@ -106,9 +106,9 @@ export const chainCoingeckoIds = {
     chainId: 1,
   },
   Arbitrum: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "arbitrum",
+    symbol: "ARB",
+    cmcId: "11841",
     categories: ["EVM", "Rollup"],
     parent: "Ethereum",
     chainId: 42161,
@@ -121,9 +121,9 @@ export const chainCoingeckoIds = {
     chainId: 11297108109,
   },
   "OP Mainnet": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "optimism",
+    symbol: "OP",
+    cmcId: "11840",
     categories: ["EVM", "Rollup"],
     parent: "Ethereum",
     chainId: 10,
@@ -149,9 +149,9 @@ export const chainCoingeckoIds = {
     cmcId: "2092",
   },
   Witnet: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "witnet",
+    symbol: "WIT",
+    cmcId: "14925",
   },
   BSC: {
     geckoId: "binancecoin",
@@ -897,9 +897,9 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
   },
   Canto: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "canto",
+    symbol: "CANTO",
+    cmcId: "21516",
     categories: ["EVM"],
   },
   XRPL: {
@@ -936,9 +936,9 @@ export const chainCoingeckoIds = {
     cmcId: "21794",
   },
   "ZKsync Era": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "zksync",
+    symbol: "ZK",
+    cmcId: "24091",
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
@@ -970,8 +970,8 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
   },
   Linea: {
-    geckoId: null,
-    symbol: null,
+    geckoId: "linea",
+    symbol: "LINEA",
     cmcId: null,
     categories: ["EVM", "Rollup"],
     parent: {
@@ -1003,9 +1003,9 @@ export const chainCoingeckoIds = {
     cmcId: "20947",
   },
   Blast: {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "blast",
+    symbol: "BLAST",
+    cmcId: "28480",
     categories: ["EVM", "Rollup"],
     parent: {
       chain: "Ethereum",
@@ -1021,6 +1021,11 @@ export const chainCoingeckoIds = {
       chain: "Ethereum",
       types: ["L2", "gas"],
     },
+  },
+  Morph: {
+    geckoId: null,
+    symbol: "-",
+    cmcId: null,
   },
   Manta: {
     geckoId: "manta-network",
@@ -1045,9 +1050,9 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
   },
   "Bitlayer": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "bitlayer-bitvm",
+    symbol: "BTR",
+    cmcId: "36277",
     twitter: "BitlayerLabs",
     categories: ["EVM"],
   },
@@ -1075,8 +1080,8 @@ export const chainCoingeckoIds = {
     url: "https://ton.org/",
   },
   "Scroll": {
-    geckoId: null,
-    symbol: null,
+    geckoId: "scroll",
+    symbol: "SCR",
     cmcId: null,
     categories: ["EVM"],
   },
@@ -1087,8 +1092,8 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
   },
   "re.al": {
-    geckoId: null,
-    symbol: null,
+    geckoId: "re-al",
+    symbol: "RWA",
     cmcId: null,
     categories: ["EVM"],
   },
@@ -1158,8 +1163,8 @@ export const chainCoingeckoIds = {
     chainId: 57073,
   },
   "Sophon": {
-    geckoId: null,
-    symbol: null,
+    geckoId: "sophon",
+    symbol: "SOPH",
     cmcId: null,
     categories: ["EVM", "Rollup"],
     parent: {
@@ -1191,9 +1196,9 @@ export const chainCoingeckoIds = {
     url: "https://plume.org/",
   },
   "Provenance": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "hash-2",
+    symbol: "HASH",
+    cmcId: "19960",
     categories: ["Cosmos"],
   },
   "Nero": {
@@ -1248,7 +1253,237 @@ export const chainCoingeckoIds = {
     geckoId: null,
     symbol: null,
     cmcId: null,
-  }
+  },
+  Abstract: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Abcore: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  ApeChain: {
+    geckoId: "apecoin",
+    symbol: "APE",
+    cmcId: "18876",
+  },
+  Archway: {
+    geckoId: "archway",
+    symbol: "ARCH",
+    cmcId: "27358",
+  },
+  Berachain: {
+    geckoId: "berachain-bera",
+    symbol: "BERA",
+    cmcId: "24647",
+  },
+  BEVM: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  BOB: {
+    geckoId: "bob-build-on-bitcoin",
+    symbol: "BOB",
+    cmcId: "38970",
+  },
+  BSquared: {
+    geckoId: "bsquared-network",
+    symbol: "B2",
+    cmcId: "36352",
+  },
+  Citrea: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Comdex: {
+    geckoId: "comdex",
+    symbol: "CMDX",
+    cmcId: "14713",
+  },
+  CORE: {
+    geckoId: "coredaoorg",
+    symbol: "CORE",
+    cmcId: "23254",
+  },
+  Corn: {
+    geckoId: "corn-3",
+    symbol: "CORN",
+    cmcId: "36164",
+  },
+  Filecoin: {
+    geckoId: "filecoin",
+    symbol: "FIL",
+    cmcId: "2280",
+  },
+  Flare: {
+    geckoId: "flare-networks",
+    symbol: "FLR",
+    cmcId: "4172",
+  },
+  Fogo: {
+    geckoId: "fogo",
+    symbol: "FOGO",
+    cmcId: null,
+  },
+  Fraxtal: {
+    geckoId: "fraxtal",
+    symbol: "FXTL",
+    cmcId: null,
+  },
+  GOAT: {
+    geckoId: "goat-network",
+    symbol: "GOATED",
+    cmcId: "38494",
+  },
+  Havah: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Hemi: {
+    geckoId: "hemi",
+    symbol: "HEMI",
+    cmcId: "38159",
+  },
+  "HashKey Chain": {
+    geckoId: "hashkey-ecopoints",
+    symbol: "HSK",
+    cmcId: "33849",
+  },
+  Hydration: {
+    geckoId: "hydradx",
+    symbol: "HDX",
+    cmcId: "6753",
+  },
+  Katana: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Lisk: {
+    geckoId: "lisk",
+    symbol: "LSK",
+    cmcId: "1214",
+  },
+  MANTRA: {
+    geckoId: "mantra",
+    symbol: "MANTRA",
+    cmcId: "39611",
+  },
+  Mezo: {
+    geckoId: "mezo",
+    symbol: "MEZO",
+    cmcId: "39727",
+  },
+  Monad: {
+    geckoId: "monad",
+    symbol: "MON",
+    cmcId: "30495",
+  },
+  Nibiru: {
+    geckoId: "nibiru",
+    symbol: "NIBI",
+    cmcId: "28508",
+  },
+  Penumbra: {
+    geckoId: "penumbra",
+    symbol: "UM",
+    cmcId: null,
+  },
+  Perennial: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Plasma: {
+    geckoId: "plasma",
+    symbol: "XPL",
+    cmcId: null,
+  },
+  "Q Protocol": {
+    geckoId: null,
+    symbol: "QGOV",
+    cmcId: null,
+  },
+  Saga: {
+    geckoId: "saga-2",
+    symbol: "SAGA",
+    cmcId: "30372",
+  },
+  Sei: {
+    geckoId: "sei-network",
+    symbol: "SEI",
+    cmcId: "23149",
+  },
+  Shape: {
+    geckoId: "shape",
+    symbol: "SHAPE",
+    cmcId: null,
+  },
+  Slp: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Stable: {
+    geckoId: "stable-2",
+    symbol: "STABLE",
+    cmcId: null,
+  },
+  Story: {
+    geckoId: "story-2",
+    symbol: "IP",
+    cmcId: "35626",
+  },
+  Superposition: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Swellchain: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Vitruveo: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  "WEMIX3.0": {
+    geckoId: "wemix-token",
+    symbol: "WEMIX",
+    cmcId: "7548",
+  },
+  Xai: {
+    geckoId: "xai-blockchain",
+    symbol: "XAI",
+    cmcId: "28374",
+  },
+  Zkfair: {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+  },
+  Zircuit: {
+    geckoId: "zircuit",
+    symbol: "ZRC",
+    cmcId: "29711",
+  },
+  "Voi Network": {
+    geckoId: "voi-network",
+    symbol: "VOI",
+    cmcId: null,
+  },
+  "Eden": {
+    geckoId: "celestia",
+    symbol: "TIA",
+    cmcId: "22861",
+  },
 } as {
   [chain: string]: {
     geckoId: string | null;
@@ -1263,7 +1498,6 @@ chainCoingeckoIds["Kucoin"] = chainCoingeckoIds["KCC"];
 chainCoingeckoIds["Cosmos"] = chainCoingeckoIds["CosmosHub"];
 chainCoingeckoIds["Elrond"] = chainCoingeckoIds["MultiversX"];
 chainCoingeckoIds["RSK"] = chainCoingeckoIds["Rootstock"];
-chainCoingeckoIds["Klaytn"] = chainCoingeckoIds["Kaia"];
 chainCoingeckoIds["TomoChain"] = chainCoingeckoIds["Viction"];
 chainCoingeckoIds["Move"] = chainCoingeckoIds["Movement"];
 chainCoingeckoIds["Hyperliquid"] = chainCoingeckoIds["Hyperliquid L1"];
@@ -1585,6 +1819,32 @@ export function getChainDisplayName(
       return "Codex"
     case "edgex":
       return "edgeX L1"
+    case "morph":
+      return "Morph"
+    case "apechain":
+      return "ApeChain"
+    case "bevm":
+      return "BEVM"
+    case "bob":
+      return "BOB"
+    case "bsquared":
+      return "BSquared"
+    case "core":
+      return "CORE"
+    case "goat":
+      return "GOAT"
+    case "hsk":
+      return "HashKey Chain"
+    case "hydradx":
+      return "Hydration"
+    case "mantra":
+      return "MANTRA"
+    case "q":
+      return "Q Protocol"
+    case "wemix":
+      return "WEMIX3.0"
+    case "voi":
+      return "Voi Network"
     default:
       return (
         normalizedChain.slice(0, 1).toUpperCase() + normalizedChain.slice(1)

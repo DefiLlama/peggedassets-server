@@ -33,7 +33,11 @@ async function getTokenBalance(token, account, chain = "solana") {
       },
     ],
   });
-  return tokenBalance.data.result.value.reduce(
+  const accounts = tokenBalance.data.result.value;
+  if (!Array.isArray(accounts) || accounts.length === 0) {
+    throw new Error(`Solana RPC returned empty token accounts for owner ${account} (mint: ${token})`);
+  }
+  return accounts.reduce(
     (total, account) =>
       total + account.account.data.parsed.info.tokenAmount.uiAmount,
     0

@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "api2-dev": "ts-node --transpile-only api2/index.ts",
+    "generate-lz-config": "ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/generateLzConfig.ts",
     "api2-prod": "bash api2/scripts/prod_start.sh",
     "api2-cron-task": "npx ts-node --transpile-only api2/cron-task/index.ts",
     "api2-store-rates": "npx ts-node --transpile-only api2/scripts/storeRates.ts",

@@ -693,20 +693,6 @@ const adapter: PeggedIssuanceAdapter = {
     // heco: solanaMintedOrBridged(chainContracts.solana.bridgedFromHeco),
     avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
   },
-  arbitrum: {
-    ethereum: bridgedSupply(
-      "arbitrum",
-      6,
-      chainContracts.arbitrum.bridgedFromETH
-    ),
-  },
-  plasma: {
-    ethereum: bridgedSupply(
-      "plasma",
-      6,
-      chainContracts.plasma.bridgedFromETH
-    ),
-  },
   optimism: {
     ethereum: bridgedSupply(
       "optimism",
@@ -1129,39 +1115,14 @@ const adapter: PeggedIssuanceAdapter = {
   occ: {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),
   },
-  ink: {
-    ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH),
-  },
-  berachain: {
-    ethereum: bridgedSupply("berachain", 6, chainContracts.berachain.bridgedFromETH),
-  },
   sei: {
     kava: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromKava),
-    ethereum: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromETH),
   },
   zircuit: {
     ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH)
   },
-  unichain: {
-    ethereum: bridgedSupply("unichain", 6, chainContracts.unichain.bridgedFromETH)
-  },
-  corn: {
-    ethereum: bridgedSupply("corn", 6, chainContracts.corn.bridgedFromETH)
-  },
   move: {
     ethereum: moveSupply,
-  },
-  hemi: {
-    ethereum: bridgedSupply("hemi", 6, chainContracts.hemi.bridgedFromETH)
-  },
-  flare: {
-    ethereum: bridgedSupply("flare", 6, chainContracts.flare.bridgedFromETH)
-  },
-  plume_mainnet: {
-    ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
-  },
-  hyperliquid: {
-    ethereum: bridgedSupply("hyperliquid", 6, chainContracts.hyperliquid.bridgedFromETH)
   },
   imx: {
     ethereum: supplyInEthereumBridge(chainContracts.ethereum.issued[0], chainContracts.imx.bridgeOnETH[0], 6),
@@ -1178,15 +1139,6 @@ const adapter: PeggedIssuanceAdapter = {
   katana: {
     ethereum: bridgedSupply("katana", 6, chainContracts.katana.bridgedFromETH),
   },
-  monad: {
-    ethereum: bridgedSupply("monad", 6, chainContracts.monad.bridgedFromETH)
-  },
-  stable: {
-    ethereum: bridgedSupply("stable", 6, chainContracts.stable.bridgedFromETH)
-  },
-  xlayer: {
-    ethereum: bridgedSupply("xlayer", 6, chainContracts.xlayer.bridgedFromETH)
-  },
   etlk: {
     ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab") // Etherlink's Wrapped Asset Bridge
   },
@@ -1196,9 +1148,6 @@ const adapter: PeggedIssuanceAdapter = {
   mantra: {
     ethereum: bridgedSupply("mantra", 6, chainContracts.mantra.bridgedFromETH)
   },
-  megaeth: {
-    ethereum: bridgedSupply("megaeth", 6, chainContracts.megaeth.bridgedFromETH)
-  }
 };
 
 export default adapter;

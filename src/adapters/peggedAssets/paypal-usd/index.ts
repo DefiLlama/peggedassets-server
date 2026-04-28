@@ -34,15 +34,8 @@ const chainContracts = {
   solana: {
     issued: ["2b1kV6DkPAnxd5ixfnxCpjxmKwqjjaYmCZfHsFu24GXo"],
   },
-  berachain: {
-    bridgedFromETH: ["0x688e72142674041f8f6Af4c808a4045cA1D6aC82"],
-  },
   flow: {
-    bridgedFromETH: ["0x2aaBea2058b5aC2D339b163C6Ab6f2b6d53aabED"],
     bridgedFromArbitrum: ['0x99aF3EeA856556646C98c8B9b2548Fe815240750'],
-  },
-  plume_mainnet: {
-    bridgedFromETH: ["0xe9e8330a71912F03E54E7D93795acD9a56f070Aa"],
   },
 };
 
