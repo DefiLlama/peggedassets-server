@@ -3562,7 +3562,7 @@ export default [
     description:
       "fxUSD is unlike anything else in DeFi. It is the first truly decentralized stablecoin with the scalability to compete toe-to-toe with centralized offerings. Its combination of strong peg, built in yield and zero slippage swapping makes it extremely user friendly, while the ingenious economic design grows the available liquidity automatically as a byproduct of providing serious value to constituent LSDs.",
     mintRedeemDescription:
-      "Users are able to mint and redeem with USDC,USDT,SETH and more",
+      "Users are able to mint and redeem with USDC,USDT,stETH,WBTC and more",
     onCoinGecko: "true",
     gecko_id: "f-x-protocol-fxusd",
     cmcId: null,
