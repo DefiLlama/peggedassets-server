@@ -3564,7 +3564,7 @@ export default [
     mintRedeemDescription:
       "Users are able to mint and redeem with USDC,USDT,SETH and more",
     onCoinGecko: "true",
-    gecko_id: "f-x-protocol-usd",
+    gecko_id: "f-x-protocol-fxusd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
