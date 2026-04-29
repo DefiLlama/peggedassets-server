@@ -7760,4 +7760,25 @@ export default [
     module: "monet-usdmo",
     doublecounted: true
   },
+  {
+    id: "376",
+    name: "eSui Dollar",
+    address: "sui:0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE",
+    symbol: "suiUSDe",
+    url: "https://www.sui.io/",
+    description:
+      "eSui Dollar (suiUSDe) is a Sui-native synthetic dollar issued in collaboration with Ethena Labs and integrated across Sui DeFi, including DeepBook Margin for margin trading, lending, and leveraged DeFi strategies.",
+    mintRedeemDescription:
+    ".",
+    onCoinGecko: "true",
+    gecko_id: "esui-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.monet.cash/security/audits"],
+    twitter: "https://x.com/suinetwork",
+    wiki: "https://blog.sui.io/esui-dollar-suiusde-deepbook-margin/",
+    module: "sui-usde",
+  },
 ] as PeggedAsset[];
