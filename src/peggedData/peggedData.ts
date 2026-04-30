@@ -7792,7 +7792,7 @@ export default [
     mintRedeemDescription:
       "Minting and redemption are handled by Frax on Somnia through the BrandedCustodian (an ERC-4626 vault): frxUSD is deposited 1:1 to receive USDso, and USDso can be burned via the same vault to receive the equivalent frxUSD. Cross-chain mint and redeem with USDC on supported chains is provided through Frax's orchestration API and CrossChainRouter.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "usd-somnia",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
