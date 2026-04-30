@@ -7781,4 +7781,25 @@ export default [
     wiki: "https://blog.sui.io/esui-dollar-suiusde-deepbook-margin/",
     module: "sui-usde",
   },
+  {
+    id: "377",
+    name: "USD Somnia",
+    address: "somnia:0x00000022da000002656c64d9ea6011ea952d008a",
+    symbol: "USDso",
+    url: "https://somnia.network/usdso-stablecoin",
+    description:
+      "USDso is a USD-pegged stablecoin available on the Somnia network. Minting and redemption are operated by Frax through its FraxNet branded-stablecoin program: USDso is collateralized 1:1 by frxUSD held in a Frax-operated BrandedCustodian vault on Somnia, with frxUSD's reserves consisting primarily of tokenized US Treasuries (BUIDL, USTB, USCC, WTGXX, JTRSY) and cash equivalents.",
+    mintRedeemDescription:
+      "Minting and redemption are handled by Frax on Somnia through the BrandedCustodian (an ERC-4626 vault): frxUSD is deposited 1:1 to receive USDso, and USDso can be burned via the same vault to receive the equivalent frxUSD. Cross-chain mint and redeem with USDC on supported chains is provided through Frax's orchestration API and CrossChainRouter.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/Somnia_Network",
+    wiki: null,
+    module: "usd-somnia",
+  },
 ] as PeggedAsset[];
