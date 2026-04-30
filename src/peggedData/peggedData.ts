@@ -7781,4 +7781,25 @@ export default [
     wiki: "https://blog.sui.io/esui-dollar-suiusde-deepbook-margin/",
     module: "sui-usde",
   },
+  {
+    id: "377",
+    name: "PathUSD",
+    address: "tempo:0x20c0000000000000000000000000000000000000",
+    symbol: "pathUSD",
+    url: "https://tempo.xyz/",
+    description:
+      "PathUSD is the first native TIP-20 stablecoin on Tempo Mainnet, predeployed at genesis at 0x20c0000000000000000000000000000000000000. It anchors the chain's quote-token chain and is the default fee token for users that haven't configured one. PathUSD is the price-discovery anchor for Tempo's enshrined Stablecoin DEX (CLOB at 0xdec0000000000000000000000000000000000000) and the Fee AMM (precompile at 0xfeec000000000000000000000000000000000000).",
+    mintRedeemDescription:
+      "PathUSD is a TIP-20 token: mint/burn authority is held by an admin role and is centrally controlled (no on-chain CDP/vault collateral and no algorithmic supply controller). Tempo has not published a formal reserve attestation as of Mainnet 'Presto' launch (March 18, 2026), so the precise reserve composition is undisclosed; CoinMarketCap classifies pathUSD under its 'Asset-Backed Stablecoin' tag.",
+    onCoinGecko: "true",
+    gecko_id: "pathusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "asset-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/tempo_xyz",
+    wiki: "https://docs.tempo.xyz/",
+    module: "pathusd",
+  },
 ] as PeggedAsset[];
