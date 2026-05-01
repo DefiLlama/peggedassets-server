@@ -7769,7 +7769,7 @@ export default [
     description:
       "eSui Dollar (suiUSDe) is a Sui-native synthetic dollar issued in collaboration with Ethena Labs and integrated across Sui DeFi, including DeepBook Margin for margin trading, lending, and leveraged DeFi strategies.",
     mintRedeemDescription:
-    ".",
+    "suiUSDe can be minted by KYCed users depositing USDC into the issuer mint contract, which mints new suiUSDe at a 1:1 ratio, minus any applicable mint fee. The USDC is then managed by the issuer, with part kept as a redemption buffer and the rest used to acquire USDe from Ethena or moved to custody. KYCed users can redeem suiUSDe through the mint contract for USDC, assuming the available USDC buffer is sufficient for the redemption amount.",
     onCoinGecko: "true",
     gecko_id: "esui-dollar",
     cmcId: null,
@@ -7780,5 +7780,6 @@ export default [
     twitter: "https://x.com/suinetwork",
     wiki: "https://blog.sui.io/esui-dollar-suiusde-deepbook-margin/",
     module: "sui-usde",
+    doublecounted: true,
   },
 ] as PeggedAsset[];
