@@ -24,7 +24,6 @@ type PegType =
   | "peggedGHS" //Ghanaian cedi
   | "peggedCLP" //chilean peso
   | "peggedPEN" //peruvian sol
-  | "peggedPHP"; //philippine peso
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 
