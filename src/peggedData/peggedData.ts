@@ -7790,10 +7790,10 @@ export default [
     description:
       "PathUSD is the first native TIP-20 stablecoin on Tempo Mainnet, predeployed at genesis at 0x20c0000000000000000000000000000000000000. It anchors the chain's quote-token chain and is the default fee token for users that haven't configured one. PathUSD is the price-discovery anchor for Tempo's enshrined Stablecoin DEX (CLOB at 0xdec0000000000000000000000000000000000000) and the Fee AMM (precompile at 0xfeec000000000000000000000000000000000000).",
     mintRedeemDescription:
-      "PathUSD is a TIP-20 token: mint/burn authority is held by an admin role and is centrally controlled (no on-chain CDP/vault collateral and no algorithmic supply controller). Tempo has not published a formal reserve attestation as of Mainnet 'Presto' launch (March 18, 2026), so the precise reserve composition is undisclosed; CoinMarketCap classifies pathUSD under its 'Asset-Backed Stablecoin' tag.",
+      "PathUSD is issued by Bridge (Stripe's regulated stablecoin issuer) and backed 1:1 by USD-denominated reserves. Per Tempo's protocol docs (https://docs.tempo.xyz/protocol/exchange/quote-tokens#pathusd), pathUSD is minted by depositing USDC.e on Tempo and redeemed back to USDC through Bridge. Reserves are managed under Bridge's GENIUS-ready framework — short-dated US Treasuries, overnight T-bill repos, money market funds and cash, custodied via BlackRock, Fidelity, and Superstate. On-chain: TIP-20 RBAC enforces ISSUER_ROLE; CoinMarketCap classifies pathUSD under its 'Asset-Backed Stablecoin' tag.",
     onCoinGecko: "true",
     gecko_id: "pathusd",
-    cmcId: null,
+    cmcId: "39734",
     pegType: "peggedUSD",
     pegMechanism: "asset-backed",
     priceSource: "defillama",
