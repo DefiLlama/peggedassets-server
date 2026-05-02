@@ -15,6 +15,9 @@ const chainContracts = {
     polygon: {
         issued: [address],
     },
+    wc: {
+        issued: [address],
+    }
 };
 
 import { addChainExports } from "../helper/getSupply";
