@@ -7803,7 +7803,7 @@ export default [
     doublecounted: true
   },
   {
-    id: "377",
+    id: "378",
     name: "USD Somnia",
     address: "somnia:0x00000022da000002656c64d9ea6011ea952d008a",
     symbol: "USDso",
@@ -7822,5 +7822,6 @@ export default [
     twitter: "https://x.com/Somnia_Network",
     wiki: null,
     module: "usd-somnia",
+    doublecounted: true,
   },
 ] as PeggedAsset[];
