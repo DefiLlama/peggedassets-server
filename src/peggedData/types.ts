@@ -21,7 +21,9 @@ type PegType =
   | "peggedZAR" //South African rand
   | "peggedNGN" //Nigerian naira
   | "peggedXOF" //West African CFA franc
-  | "peggedGHS"; //Ghanaian cedi
+  | "peggedGHS" //Ghanaian cedi
+  | "peggedCLP" //chilean peso
+  | "peggedPEN" //peruvian sol
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 
