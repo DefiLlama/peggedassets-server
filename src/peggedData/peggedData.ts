@@ -7933,7 +7933,7 @@ export default [
     module: "peruvian-sol",
   },
   {
-    id: "377",
+    id: "385",
     name: "PathUSD",
     address: "tempo:0x20c0000000000000000000000000000000000000",
     symbol: "pathUSD",
