@@ -23,6 +23,9 @@ const chainContracts = {
   move: {
     bridgedFromETH: "0x9d146a4c9472a7e7b0dbc72da0eafb02b54173a956ef22a9fba29756f8661c6c",
   },
+  tempo: {
+    issued: ["0x20c0000000000000000000002f52d5cc21a3207b"], // USDe on Tempo Mainnet (Stargate Hydra OFT, decimals=6)
+  },
 };
 
 const adapter: PeggedIssuanceAdapter = {

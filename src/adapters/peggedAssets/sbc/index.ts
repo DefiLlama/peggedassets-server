@@ -33,6 +33,9 @@ const chainContracts = {
     }, 
     solana: {
         issued: ["DBAzBUXaLj1qANCseUPZz4sp9F8d2sc78C4vKjhbTGMA"],
+    },
+    tempo: {
+        issued: ["0x20c000000000000000000000ae247a1130450f09"], // SBC on Tempo Mainnet
     }
   };
 

@@ -46,6 +46,9 @@ const chainContracts = {
     },
     monad: {
       bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+    },
+    tempo: {
+      issued: ["0x20c0000000000000000000007f7ba549dd0251b9"], // rUSD on Tempo Mainnet (Stargate Hydra OFT, decimals=6)
     }
   };
   

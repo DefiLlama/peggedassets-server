@@ -16,6 +16,9 @@ const chainContracts = {
     },
     bsc: {
       issued: ["0xba9425ec55ee0e72216d18e0ad8bbba2553bfb60"],
+    },
+    tempo: {
+      issued: ["0x20c000000000000000000000383a23bacb546ab9"], // reUSD on Tempo Mainnet
     }
   };
   

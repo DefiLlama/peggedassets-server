@@ -114,6 +114,9 @@ const chainContracts = {
   plume_mainnet: {
     issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
   },
+  tempo: {
+    issued: ["0x20c0000000000000000000003554d28269e0f3c2"], // frxUSD on Tempo Mainnet (Stargate Hydra OFT, decimals=6)
+  },
 };
 
 const adapter: PeggedIssuanceAdapter = {
