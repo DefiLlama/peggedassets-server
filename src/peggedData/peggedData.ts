@@ -7946,7 +7946,7 @@ export default [
     gecko_id: "pathusd",
     cmcId: "39734",
     pegType: "peggedUSD",
-    pegMechanism: "asset-backed",
+    pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://x.com/tempo_xyz",
