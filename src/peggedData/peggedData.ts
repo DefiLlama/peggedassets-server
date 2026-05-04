@@ -7953,4 +7953,25 @@ export default [
     wiki: "https://docs.tempo.xyz/",
     module: "pathusd",
   },
+  {
+    id: "386",
+    name: "Western Union USDPT",
+    address: "solana:HVWf8JmLoHs99Lw8Psf3fyqAtA4crWxCPkrmSdNjhNH3",
+    symbol: "USDPT",
+    url: "https://www.westernunion.com/",
+    description:
+      "USDPT is a U.S. dollar-denominated payment stablecoin launched by Western Union, issued by Anchorage Digital Bank N.A. and built on Solana. It is designed for regulated digital payments, always-on settlement, exchange support, and treasury/agent settlement across Western Union's global payments network",
+    mintRedeemDescription:
+      "USDPT is fully backed by U.S. dollars and issued by Anchorage Digital Bank N.A., a federally regulated U.S. crypto bank",
+    onCoinGecko: "true",
+    gecko_id: "usdpt-western-union",
+    cmcId: "38850",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/WesternUnion",
+    wiki: "https://ir.westernunion.com/news/archived-press-releases/press-release-details/2026/Western-Union-Launches-USDPT-on-Solana-Advancing-Regulated-Digital-Infrastructure-for-Global-Payments/default.aspx",
+    module: "usdpt-western-union",
+  },
 ] as PeggedAsset[];
