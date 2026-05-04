@@ -7974,4 +7974,25 @@ export default [
     wiki: "https://ir.westernunion.com/news/archived-press-releases/press-release-details/2026/Western-Union-Launches-USDPT-on-Solana-Advancing-Regulated-Digital-Infrastructure-for-Global-Payments/default.aspx",
     module: "usdpt-western-union",
   },
+  {
+    id: "387",
+    name: "CAD Digital",
+    address: "0x16f93ebc5320c89efc8701577efe49d14a276a06",
+    symbol: "CADD",
+    url: "https://tetradg.com/cadd-stablecoin/",
+    description:
+      "CADD is a Canadian dollar-backed payment stablecoin issued by Tetra Trust Company via its agent CAD Digital Inc. It is backed 1:1 by Canadian dollars",
+    mintRedeemDescription:
+      "CADD is backed 1:1 by Canadian dollars, with minting funds held in trust and dedicated exclusively to redemption",
+    onCoinGecko: "true",
+    gecko_id: "cad-digital",
+    cmcId: null,
+    pegType: "peggedCAD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/TetraDigitalGrp",
+    wiki: "https://tetradg.com/cadd-stablecoin/",
+    module: "cad-digital",
+  },
 ] as PeggedAsset[];
