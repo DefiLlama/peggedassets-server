@@ -23,7 +23,7 @@ type PegType =
   | "peggedXOF" //West African CFA franc
   | "peggedGHS"; //Ghanaian cedi
 
-type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed" | "asset-backed";
+type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 
 export type PriceSource =
   | "chainlink"
