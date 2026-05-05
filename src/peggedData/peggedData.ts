@@ -6188,7 +6188,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: "https://docs.cap.app/resources/audits",
-    twitter: "https://x.com/capmoney_",
+    twitter: "https://x.com/CapApp",
     wiki: "https://docs.cap.app/",
     doublecounted: true
   },
