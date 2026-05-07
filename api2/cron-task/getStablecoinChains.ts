@@ -1,5 +1,6 @@
+import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../src/peggedData/peggedData";
-import { chainCoingeckoIds, getChainDisplayName, nonChains, normalizeChain } from "../../src/utils/normalizeChain";
+import { nonChains, normalizeChain } from "../../src/utils/normalizeChain";
 import { cache } from "../cache";
 type balance = { [token: string]: number };
 
@@ -33,10 +34,8 @@ export function craftStablecoinChainsResponse() {
     })
   const chainData = Object.entries(chainCirculating)
     .map(([normalizedChain, chainCirculating]) => ({
-      gecko_id: chainCoingeckoIds[getChainDisplayName(normalizedChain, true)]?.geckoId ?? null,
       totalCirculatingUSD: chainCirculating,
-      tokenSymbol: chainCoingeckoIds[getChainDisplayName(normalizedChain, true)]?.symbol ?? null,
-      name: getChainDisplayName(normalizedChain, true),
+      name: sdk.chainUtils.getChainLabelFromKey(normalizedChain),
     }))
   return chainData;
 }

@@ -9,7 +9,8 @@ process.on('uncaughtException', (error) => {
 import * as rates from "../../src/getRates";
 import sluggifyPegged from "../../src/peggedAssets/utils/sluggifyPegged";
 import peggedAssets from "../../src/peggedData/peggedData";
-import { getChainDisplayName, normalizeChain } from "../../src/utils/normalizeChain";
+import * as sdk from "@defillama/sdk";
+import { normalizeChain } from "../../src/utils/normalizeChain";
 import { CacheType, cache, initCache, saveCache } from "../cache";
 import { storeRouteData } from "../file-cache";
 import { chainCacheSlug } from "../utils/cachePath";
@@ -96,7 +97,7 @@ async function run() {
     for (const chain of [...allChainsSet]) {
       try {
         const data = await craftChainDominanceResponse(chain)
-        dominanceMap[getChainDisplayName(chain, true)] = data
+        dominanceMap[sdk.chainUtils.getChainLabelFromKey(chain)] = data
         await storeRouteData('stablecoindominance/' + chainCacheSlug(chain), data)
       } catch (e) {
         console.error('Error fetching chain data', e)
@@ -123,7 +124,7 @@ async function run() {
       try {
         const data = await getChainData(chain)
         const aggregatedNoDoublecounted = removeEmptyItems(await craftChartsResponse({ chain, assetChainMap, excludeDoublecounted: true }))
-        chainChartMap[getChainDisplayName(chain, true)] = aggregatedNoDoublecounted
+        chainChartMap[sdk.chainUtils.getChainLabelFromKey(chain)] = aggregatedNoDoublecounted
         const chainSlug = chainCacheSlug(chain)
         await storeRouteData('stablecoincharts2/' + chainSlug, data)
         await storeRouteData('stablecoincharts/' + chainSlug, data.aggregated)

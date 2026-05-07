@@ -1,6 +1,6 @@
 
+import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../src/peggedData/peggedData";
-import { getChainDisplayName } from "../../src/utils/normalizeChain";
 import { cache } from "../cache";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
@@ -30,7 +30,7 @@ export function getStablecoinData(peggedID: string | undefined) {
 
   Object.entries(lastBalancesHourlyRecord!).map(([chain, issuances]: any) => {
     const normalizedChain = chain;
-    const displayChainName = getChainDisplayName(chain, useNewChainNames);
+    const displayChainName = sdk.chainUtils.getChainLabelFromKey(chain);
     if (chain !== "totalCirculating") currentChainBalances[displayChainName] = issuances.circulating;
     const container = {} as any;
 

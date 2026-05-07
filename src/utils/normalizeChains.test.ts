@@ -1,21 +1,4 @@
-import { getChainDisplayName, addToChains } from "./normalizeChain";
-
-const tests = [
-  ["gochain", "GoChain"],
-  ["ethereum", "Ethereum"],
-  ["ethereum-staking", "Ethereum-staking"],
-  ["hpb-borrowed", "HPB-borrowed"],
-  ["staking", "staking"],
-];
-
-test("getChainDisplayName", () => {
-  tests.forEach((t) => expect(getChainDisplayName(t[0], false)).toBe(t[1]));
-});
-
-test("getChainDisplayName useNewChainNames", () => {
-  expect(getChainDisplayName("bsc", false)).toBe("Binance");
-  expect(getChainDisplayName("bsc", true)).toBe("BSC");
-});
+import { addToChains } from "./normalizeChain";
 
 test("addToChains", () => {
   const chains = [] as string[];
