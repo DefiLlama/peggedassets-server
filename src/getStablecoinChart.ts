@@ -17,6 +17,7 @@ import {
   secondsInDay,
   getClosestDayStartTimestamp,
 } from "./utils/date";
+import { buildFxRateMap, lookupFxRate } from "./utils/fxRates";
 import backfilledChains from "./peggedData/backfilledChains";
 const axios = require("axios");
 
@@ -32,12 +33,6 @@ const formatTokenBalance = (tokenBalance: TokenBalance) => {
   }
   return formattedTokenBalance;
 };
-
-// needed because new daily rates is not stored on same day it is queried for
-function ratesCompareFn(a: number, b: number) {
-  if (Math.abs(a - b) <= secondsInDay) return 0;
-  return a - b;
-}
 
 // this should not get prices from the previous day
 function pricesCompareFn(a: number, b: number) {
@@ -153,7 +148,7 @@ export async function craftChartsResponse(
       message: "Could not get historical fiat prices.",
     });
   }
-  const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
+  const fxRateMap = buildFxRateMap(historicalRates);
 
   const historicalPrices = await (
     await axios.get(
@@ -283,20 +278,10 @@ export async function craftChartsResponse(
       if (pegType === "peggedVAR") {
         fallbackPrice = 0;
       } else if (pegType !== "peggedUSD" && !historicalPrice) {
-        const closestRatesIndex = timestampsBinarySearch(
-          rateTimestamps,
-          timestamp,
-          ratesCompareFn
-        );
-        const closestRates = extractResultOfBinarySearch(
-          historicalRates,
-          closestRatesIndex
-        );
         const ticker = pegType.slice(-3);
-        fallbackPrice = 1 / closestRates?.rates?.[ticker];
-        if (typeof fallbackPrice !== "number") {
-          fallbackPrice = 0;
-        }
+        const rate = fxRateMap ? lookupFxRate(fxRateMap, ticker, timestamp) : null;
+        fallbackPrice = rate ? 1 / rate : 0;
+        if (!isFinite(fallbackPrice)) fallbackPrice = 0;
       }
 
       const price = historicalPrice ? historicalPrice : fallbackPrice;
