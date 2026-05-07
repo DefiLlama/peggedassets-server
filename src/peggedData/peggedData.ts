@@ -7995,4 +7995,25 @@ export default [
     wiki: "https://tetradg.com/cadd-stablecoin/",
     module: "cad-digital",
   },
+  {
+    id: "388",
+    name: "Initia USD",
+    address: "initia:move/6c69733a9e722f3660afb524f89fce957801fa7e4408b8ef8fe89db9627b570e",
+    symbol: "iUSD",
+    url: "https://initia.xyz/",
+    description:
+      "iUSD is the native stablecoin of the Initia network, backed 1:1 by Agora's AUSD bridged to Initia via LayerZero. Unlike traditional stablecoins where the yield from reserves accrues to the issuer, iUSD's yield flows back into the Initia ecosystem.",
+    mintRedeemDescription:
+      "iUSD is minted on Initia 1:1 against AUSD bridged in via LayerZero from Ethereum and Arbitrum. Holders can redeem iUSD by burning it on Initia to unlock the underlying AUSD, which can then be redeemed for USD through Agora.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/initia",
+    wiki: null,
+    module: "initia-iUSD",
+  },
 ] as PeggedAsset[];
