@@ -6,6 +6,7 @@ import { chainCoingeckoIds, normalizeChain, normalizedChainReplacements } from "
 import { getHistoricalValues } from "../../src/utils/shared/dynamodb";
 import { cache } from "../cache";
 import { storeRouteData } from "../file-cache";
+import { chainCacheSlug } from "../utils/cachePath";
 
 type TokenBalance = {
   [token: string]: number | undefined;
@@ -48,7 +49,7 @@ export async function storeChartsPart2(assetChainMap: any) {
   for (let chain of chains) {
     const normalizedChain = normalizeChain(chain);
     const chainData = await craftChartsResponse({ ...commonOptions, chain: normalizedChain, });
-    await storeRouteData(`charts/${normalizedChain}`, chainData)
+    await storeRouteData(`charts/${chainCacheSlug(normalizedChain)}`, chainData)
   }
 
   // store pegged asset charts

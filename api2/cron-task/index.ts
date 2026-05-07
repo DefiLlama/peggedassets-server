@@ -12,6 +12,7 @@ import peggedAssets from "../../src/peggedData/peggedData";
 import { getChainDisplayName, normalizeChain } from "../../src/utils/normalizeChain";
 import { CacheType, cache, initCache, saveCache } from "../cache";
 import { storeRouteData } from "../file-cache";
+import { chainCacheSlug } from "../utils/cachePath";
 import { craftChainDominanceResponse } from "../routes/getChainDominance";
 import { getStablecoinData } from "../routes/getStableCoin";
 import storeStablecoins from "./getStableCoins";
@@ -96,7 +97,7 @@ async function run() {
       try {
         const data = await craftChainDominanceResponse(chain)
         dominanceMap[getChainDisplayName(chain, true)] = data
-        await storeRouteData('stablecoindominance/' + chain, data)
+        await storeRouteData('stablecoindominance/' + chainCacheSlug(chain), data)
       } catch (e) {
         console.error('Error fetching chain data', e)
       }
@@ -123,8 +124,9 @@ async function run() {
         const data = await getChainData(chain)
         const aggregatedNoDoublecounted = removeEmptyItems(await craftChartsResponse({ chain, assetChainMap, excludeDoublecounted: true }))
         chainChartMap[getChainDisplayName(chain, true)] = aggregatedNoDoublecounted
-        await storeRouteData('stablecoincharts2/' + chain, data)
-        await storeRouteData('stablecoincharts/' + chain, data.aggregated)
+        const chainSlug = chainCacheSlug(chain)
+        await storeRouteData('stablecoincharts2/' + chainSlug, data)
+        await storeRouteData('stablecoincharts/' + chainSlug, data.aggregated)
       } catch (e) {
         console.error('Error fetching chain data', e)
       }
