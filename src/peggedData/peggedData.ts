@@ -353,6 +353,7 @@ export default [
     auditLinks: ["https://doc.parrot.fi/security/"],
     twitter: "https://twitter.com/gopartyparrot",
     wiki: "https://wiki.defillama.com/wiki/Parrot_USD_(PAI)",
+    deadUrl: true,
   },
   {
     id: "17",
@@ -2473,6 +2474,7 @@ export default [
     ],
     twitter: "https://twitter.com/gravitaprotocol",
     wiki: "https://docs.gravitaprotocol.com/",
+    deadUrl: true,
   },
   {
     id: "117",
