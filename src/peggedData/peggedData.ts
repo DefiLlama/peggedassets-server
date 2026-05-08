@@ -7997,10 +7997,10 @@ export default [
   },
   {
     id: "388",
-    name: "Initia USD",
+    name: "iUSD",
     address: "initia:move/6c69733a9e722f3660afb524f89fce957801fa7e4408b8ef8fe89db9627b570e",
     symbol: "iUSD",
-    url: "https://initia.xyz/",
+    url: "https://app.testnet.initia.xyz/iusd",
     description:
       "iUSD is the native stablecoin of the Initia network, backed 1:1 by Agora's AUSD bridged to Initia via LayerZero. Unlike traditional stablecoins where the yield from reserves accrues to the issuer, iUSD's yield flows back into the Initia ecosystem.",
     mintRedeemDescription:
