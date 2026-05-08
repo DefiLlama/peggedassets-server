@@ -8006,7 +8006,7 @@ export default [
     mintRedeemDescription:
       "iUSD is minted on Initia 1:1 against AUSD bridged in via LayerZero from Ethereum and Arbitrum. Holders can redeem iUSD by burning it on Initia to unlock the underlying AUSD, which can then be redeemed for USD through Agora.",
     onCoinGecko: "true",
-    gecko_id: "iusd",
+    gecko_id: "iusd-2",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
