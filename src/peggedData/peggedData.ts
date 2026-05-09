@@ -8017,5 +8017,6 @@ export default [
     twitter: "https://x.com/initia",
     wiki: null,
     module: "initia-iUSD",
+    doublecounted: true,
   },
 ] as PeggedAsset[];
