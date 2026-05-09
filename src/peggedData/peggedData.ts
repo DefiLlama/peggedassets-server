@@ -8011,7 +8011,7 @@ export default [
     gecko_id: "iusd-2",
     cmcId: null,
     pegType: "peggedUSD",
-    pegMechanism: "fiat-backed",
+    pegMechanism: "crytpo-backed",
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://x.com/initia",
