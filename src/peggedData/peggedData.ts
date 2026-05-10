@@ -8107,4 +8107,25 @@ export default [
     wiki: null,
     module: "usdst",
   },
+  {
+    id: "392",
+    name: "StableNaira",
+    address: "bsc:0x6B6f93a12705b6eB60490A8b8a9aC15b3B1ce0f2",
+    symbol: "SNR",
+    url: "https://stablenaira.com",
+    description:
+      "SNR is a regulator-aligned, fiat-backed Nigerian Naira stablecoin issued natively on Ethereum, Base, and BNB Chain. Each unit is backed 1:1 by Naira held in segregated trust accounts at CBN-licensed Nigerian banks, with monthly attestations by an ICAN-accredited auditor.",
+    mintRedeemDescription:
+      "SNR is minted only after Naira is received into the issuer's segregated reserve accounts at CBN-licensed banks; the API signer then mints SNR 1:1 to the user's wallet. Holders redeem by burning SNR on-chain (which emits a RedeemRequested event), after which the issuer wires the equivalent Naira from reserves to the user's bank account. Cross-chain transfers use a native burn-and-mint protocol with no canonical/locked chain.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedNGN",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/stablenaira",
+    wiki: null,
+    module: "stablenaira",
+  },
 ] as PeggedAsset[];
