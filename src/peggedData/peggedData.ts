@@ -8019,4 +8019,25 @@ export default [
     module: "initia-iusd",
     doublecounted: true,
   },
+  {
+    id: "389",
+    name: "FinChain Dollar",
+    address: "0x9f6714C302ffe3c3bAFaf2Ccb44201fF64f6371C",
+    symbol: "FUSD",
+    url: "https://github.com/DefiLlama/DefiLlama-Adapters/tree/main/projects/finchain-dollar",
+    description:
+      "FinChain Dollar (FUSD) is an RWA-backed stablecoin designed to maintain a USD peg across EVM networks.",
+    mintRedeemDescription:
+      "FUSD is minted and redeemed through FinChain protocol gateway contracts under protocol access controls and reserve constraints.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: null,
+    wiki: null,
+    module: "finchain-dollar",
+  },
 ] as PeggedAsset[];
