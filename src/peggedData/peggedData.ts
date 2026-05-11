@@ -8001,7 +8001,7 @@ export default [
   {
     id: "388",
     name: "Initia iUSD",
-    address: "initia:move/6c69733a9e722f3660afb524f89fce957801fa7e4408b8ef8fe89db9627b570e",
+    address: "move:6c69733a9e722f3660afb524f89fce957801fa7e4408b8ef8fe89db9627b570e",
     symbol: "iUSD",
     url: "https://app.testnet.initia.xyz/iusd",
     description:
