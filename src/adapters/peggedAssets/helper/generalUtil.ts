@@ -2,6 +2,7 @@ import type {
   Balances,
   PeggedAssetType,
   ChainBlocks,
+  Fetch,
 } from "../peggedAsset.type";
 import bridgeMapping, { BridgeID } from "../../../peggedData/bridgeData";
 const axios = require("axios");
@@ -37,6 +38,26 @@ export function sumSingleBalance(
       bridgedFromChain
     );
   }
+}
+
+export function addBridgeMetadata(
+  fetch: Fetch,
+  pegType: PeggedAssetType,
+  bridgeName: string,
+  bridgedFromChain: string
+): Fetch {
+  return async function (
+    timestamp: number,
+    ethBlock: number,
+    chainBlocks: ChainBlocks
+  ) {
+    const balances = await fetch(timestamp, ethBlock, chainBlocks);
+    const balance = balances[pegType];
+    if (balance !== undefined) {
+      appendBridgeData(balances, balance, bridgeName, false, bridgedFromChain);
+    }
+    return balances;
+  };
 }
 
 function appendBridgeData(

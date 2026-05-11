@@ -1,7 +1,7 @@
 const sdk = require("@defillama/sdk");
 import { ChainApi } from "@defillama/sdk";
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
-import { getTetherTransparency, sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
+import { addBridgeMetadata, getTetherTransparency, sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
 import {
   bridgedSupply,
   getApi,
@@ -1122,7 +1122,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH)
   },
   move: {
-    ethereum: moveSupply,
+    ethereum: addBridgeMetadata(moveSupply, "peggedUSD", "layerzero", "ethereum"),
   },
   imx: {
     ethereum: supplyInEthereumBridge(chainContracts.ethereum.issued[0], chainContracts.imx.bridgeOnETH[0], 6),

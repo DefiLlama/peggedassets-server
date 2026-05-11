@@ -3,6 +3,7 @@ import { lookupAccountByID } from "../helper/algorand";
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
 import { getTotalSupply } from "../helper/cardano";
 import {
+  addBridgeMetadata,
   sumMultipleBalanceFunctions,
   sumSingleBalance,
 } from "../helper/generalUtil";
@@ -1079,7 +1080,7 @@ const adapter: PeggedIssuanceAdapter = {
     )
   },
   move: {
-    ethereum: moveSupply,
+    ethereum: addBridgeMetadata(moveSupply, "peggedUSD", "layerzero", "ethereum"),
   },
   plume_mainnet: {
     minted: chainMinted("plume_mainnet", 6),

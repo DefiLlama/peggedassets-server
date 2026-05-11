@@ -1,5 +1,4 @@
 import { addChainExports,solanaMintedOrBridged, tonTokenSupply } from "../helper/getSupply";
-import { sumSingleBalance } from "../helper/generalUtil";
 import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
 import { function_view } from "../helper/aptos";
 import { Balances } from "../peggedAsset.type";
@@ -12,7 +11,7 @@ import { Balances } from "../peggedAsset.type";
      type_arguments: ['0x1::object::ObjectCore'],
      args: [chainContracts.move.bridgedFromETH[0]],
    });
-   sumSingleBalance(balances, "peggedUSD", Number(resp.vec[0]) / 1e6, "layerzero", false, "ethereum");
+   balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
  
    return balances;
  }
@@ -25,7 +24,7 @@ const chainContracts = {
     bridgedFromETH: "0x9d146a4c9472a7e7b0dbc72da0eafb02b54173a956ef22a9fba29756f8661c6c",
   },
   tempo: {
-    issued: ["0x20c0000000000000000000002f52d5cc21a3207b"], // USDe on Tempo Mainnet (Stargate Hydra OFT, decimals=6)
+    bridgedFromETH: ["0x20c0000000000000000000002f52d5cc21a3207b"], // USDe on Tempo Mainnet (Stargate Hydra OFT, decimals=6)
   },
 };
 
