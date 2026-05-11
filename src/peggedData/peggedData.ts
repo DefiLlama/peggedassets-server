@@ -8020,4 +8020,25 @@ export default [
     module: "initia-iusd",
     doublecounted: true,
   },
+  {
+    id: "389",
+    name: "CFX MoveUSD",
+    address: "solana:3AdhVEX6k85yNivHVXDEiY3WyP2WgFQTUZCahGaeC2qm",
+    symbol: "MOVEUSD",
+    url: "https://cfx.to/",
+    description:
+      "MoveUSD is a USD-backed stablecoin issued by CFX Labs on Solana.",
+    mintRedeemDescription:
+      "CFX-issued digital assets are redeemable 1:1 for U.S. dollars.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/MoveUSD",
+    wiki: "https://docs.cfx.to/",
+    module: "cfx-moveusd",
+  },
 ] as PeggedAsset[];
