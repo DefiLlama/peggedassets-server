@@ -1042,6 +1042,7 @@ export default [
     auditLinks: ["https://tether.to/en/transparency/#reports"],
     twitter: "https://twitter.com/Tether_to",
     wiki: "https://wiki.defillama.com/wiki/EURT",
+    deadFrom: "2025-12-15"
   },
   {
     id: "50",
