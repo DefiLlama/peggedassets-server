@@ -1,4 +1,5 @@
 import { getLastRecord, historicalRates } from "../src/peggedAssets/utils/getLastRecord";
+import { FxRateMap } from "../src/utils/fxRates";
 import { readFromPGCache, writeToPGCache } from "./file-cache";
 
 export enum CacheType {
@@ -19,10 +20,9 @@ type DailyPeggedPrices = {
 export const cache: {
   peggedPrices?: Prices;
   rates?: any;
-  historicalRates?: any;
+  fxRateMap?: FxRateMap | null;
   lastPrices?: any;
   priceTimestamps?: any;
-  rateTimestamps?: any;
   peggedAssetsData?: any;
   historicalPrices?: DailyPeggedPrices[]
 } = {}
