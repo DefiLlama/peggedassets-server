@@ -1,4 +1,5 @@
 import { addChainExports,solanaMintedOrBridged, tonTokenSupply } from "../helper/getSupply";
+import { sumSingleBalance } from "../helper/generalUtil";
 import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
 import { function_view } from "../helper/aptos";
 import { Balances } from "../peggedAsset.type";
@@ -11,7 +12,7 @@ import { Balances } from "../peggedAsset.type";
      type_arguments: ['0x1::object::ObjectCore'],
      args: [chainContracts.move.bridgedFromETH[0]],
    });
-   balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
+   sumSingleBalance(balances, "peggedUSD", Number(resp.vec[0]) / 1e6, "layerzero", false, "ethereum");
  
    return balances;
  }
