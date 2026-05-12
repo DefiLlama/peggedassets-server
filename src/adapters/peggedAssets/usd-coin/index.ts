@@ -3,7 +3,6 @@ import { lookupAccountByID } from "../helper/algorand";
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
 import { getTotalSupply } from "../helper/cardano";
 import {
-  addBridgeMetadata,
   sumMultipleBalanceFunctions,
   sumSingleBalance,
 } from "../helper/generalUtil";
@@ -443,11 +442,11 @@ async function moveSupply(): Promise<Balances> {
   const balances = {} as Balances;
 
   const resp = await function_view({
-    functionStr: '0x1::fungible_asset::supply',
-    type_arguments: ['0x1::object::ObjectCore'],
+    functionStr: "0x1::fungible_asset::supply",
+    type_arguments: ["0x1::object::ObjectCore"],
     args: [chainContracts.move.bridgedFromETH[0]],
   });
-  balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
+  sumSingleBalance(balances, "peggedUSD", Number(resp.vec[0]) / 1e6, "layerzero", false, "ethereum");
 
   return balances;
 }
@@ -1080,7 +1079,7 @@ const adapter: PeggedIssuanceAdapter = {
     )
   },
   move: {
-    ethereum: addBridgeMetadata(moveSupply, "peggedUSD", "layerzero", "ethereum"),
+    ethereum: moveSupply,
   },
   plume_mainnet: {
     minted: chainMinted("plume_mainnet", 6),

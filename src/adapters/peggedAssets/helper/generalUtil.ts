@@ -40,26 +40,6 @@ export function sumSingleBalance(
   }
 }
 
-export function addBridgeMetadata(
-  fetch: Fetch,
-  pegType: PeggedAssetType,
-  bridgeName: string,
-  bridgedFromChain: string
-): Fetch {
-  return async function (
-    timestamp: number,
-    ethBlock: number,
-    chainBlocks: ChainBlocks
-  ) {
-    const balances = await fetch(timestamp, ethBlock, chainBlocks);
-    const balance = balances[pegType];
-    if (balance !== undefined) {
-      appendBridgeData(balances, balance, bridgeName, false, bridgedFromChain);
-    }
-    return balances;
-  };
-}
-
 function appendBridgeData(
   balances: Balances,
   balance: string | number,
