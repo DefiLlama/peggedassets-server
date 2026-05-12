@@ -16,8 +16,22 @@ export type LayerZeroConfig = {
   pegType?: string;
 };
 
+export type HyperlaneToken = {
+  chain: string;
+  address: string;
+  decimals: number;
+};
+
+export type HyperlaneConfig = {
+  sourceChain: string;
+  tokens: HyperlaneToken[];
+  bridgeName?: string;
+  pegType?: string;
+};
+
 export type BridgeConfigs = {
   layerzero?: LayerZeroConfig;
+  hyperlane?: HyperlaneConfig;
 };
 
 export function addBridgeConfigs(
@@ -25,6 +39,7 @@ export function addBridgeConfigs(
   configs: BridgeConfigs
 ): PeggedIssuanceAdapter {
   if (configs.layerzero) applyLayerZero(adapter, configs.layerzero);
+  if (configs.hyperlane) applyHyperlane(adapter, configs.hyperlane);
   return adapter;
 }
 
@@ -72,6 +87,13 @@ function applyLayerZero(
       pegType
     );
   }
+}
+
+function applyHyperlane(
+  _adapter: PeggedIssuanceAdapter,
+  _config: HyperlaneConfig
+) {
+  // stub: implementation pending
 }
 
 function buildLayerZeroFetcher(
