@@ -93,7 +93,8 @@ function applyHyperlane(
   _adapter: PeggedIssuanceAdapter,
   _config: HyperlaneConfig
 ) {
-  // stub: implementation pending
+  // Stub. Full apply logic (mirrors applyLayerZero above) lands in the
+  // follow-up commit; this stub keeps the generator shippable independently.
 }
 
 function buildLayerZeroFetcher(
