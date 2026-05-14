@@ -2,6 +2,7 @@ import type {
   Balances,
   PeggedAssetType,
   ChainBlocks,
+  Fetch,
 } from "../peggedAsset.type";
 import bridgeMapping, { BridgeID } from "../../../peggedData/bridgeData";
 const axios = require("axios");

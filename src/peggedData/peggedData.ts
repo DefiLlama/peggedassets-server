@@ -1042,6 +1042,7 @@ export default [
     auditLinks: ["https://tether.to/en/transparency/#reports"],
     twitter: "https://twitter.com/Tether_to",
     wiki: "https://wiki.defillama.com/wiki/EURT",
+    deadFrom: "2025-12-15"
   },
   {
     id: "50",
@@ -7996,5 +7997,48 @@ export default [
     twitter: "https://x.com/TetraDigitalGrp",
     wiki: "https://tetradg.com/cadd-stablecoin/",
     module: "cad-digital",
+  },
+  {
+    id: "388",
+    name: "Initia iUSD",
+    address: "move:6c69733a9e722f3660afb524f89fce957801fa7e4408b8ef8fe89db9627b570e",
+    symbol: "iUSD",
+    url: "https://app.testnet.initia.xyz/iusd",
+    description:
+      "iUSD is the native stablecoin of the Initia network, backed 1:1 by Agora's AUSD bridged to Initia via LayerZero. Unlike traditional stablecoins where the yield from reserves accrues to the issuer, iUSD's yield flows back into the Initia ecosystem.",
+    mintRedeemDescription:
+      "iUSD is minted on Initia 1:1 against AUSD bridged in via LayerZero from Ethereum and Arbitrum. Holders can redeem iUSD by burning it on Initia to unlock the underlying AUSD, which can then be redeemed for USD through Agora.",
+    onCoinGecko: "true",
+    gecko_id: "iusd-2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crytpo-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/initia",
+    wiki: null,
+    module: "initia-iusd",
+    doublecounted: true,
+  },
+  {
+    id: "389",
+    name: "CFX MoveUSD",
+    address: "solana:3AdhVEX6k85yNivHVXDEiY3WyP2WgFQTUZCahGaeC2qm",
+    symbol: "MOVEUSD",
+    url: "https://cfx.to/",
+    description:
+      "MoveUSD is a USD-backed stablecoin issued by CFX Labs on Solana.",
+    mintRedeemDescription:
+      "CFX-issued digital assets are redeemable 1:1 for U.S. dollars.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/MoveUSD",
+    wiki: "https://docs.cfx.to/",
+    module: "cfx-moveusd",
   },
 ] as PeggedAsset[];

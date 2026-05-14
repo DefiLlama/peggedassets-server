@@ -481,7 +481,7 @@ async function moveSupply(): Promise<Balances> {
     type_arguments: ['0x1::object::ObjectCore'],
     args: [chainContracts.move.bridgedFromETH[0]],
   });
-  balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
+  sumSingleBalance(balances, "peggedUSD", Number(resp.vec[0]) / 1e6, "layerzero", false, "ethereum");
 
   return balances;
 }
