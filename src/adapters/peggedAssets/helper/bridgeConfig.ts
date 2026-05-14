@@ -3,11 +3,13 @@ import { ChainApi } from "@defillama/sdk";
 import { bridgedSupply, getApi } from "./getSupply";
 import { sumSingleBalance } from "./generalUtil";
 
-export type LayerZeroToken = {
+type BridgeToken = {
   chain: string;
   address: string;
   decimals: number;
 };
+
+export type LayerZeroToken = BridgeToken;
 
 export type LayerZeroConfig = {
   sourceChain: string;
@@ -16,11 +18,7 @@ export type LayerZeroConfig = {
   pegType?: string;
 };
 
-export type HyperlaneToken = {
-  chain: string;
-  address: string;
-  decimals: number;
-};
+export type HyperlaneToken = BridgeToken;
 
 export type HyperlaneConfig = {
   sourceChain: string;
@@ -79,7 +77,7 @@ function applyLayerZero(
       );
       continue;
     }
-    adapter[chain][sourceChain] = buildLayerZeroFetcher(
+    adapter[chain][sourceChain] = buildBridgeFetcher(
       chain,
       chainTokens,
       bridgeName,
@@ -90,16 +88,47 @@ function applyLayerZero(
 }
 
 function applyHyperlane(
-  _adapter: PeggedIssuanceAdapter,
-  _config: HyperlaneConfig
+  adapter: PeggedIssuanceAdapter,
+  config: HyperlaneConfig
 ) {
-  // Stub. Full apply logic (mirrors applyLayerZero above) lands in the
-  // follow-up commit; this stub keeps the generator shippable independently.
+  const bridgeName = config.bridgeName ?? "hyperlane";
+  const { sourceChain, tokens, pegType } = config;
+
+  const byChain = new Map<string, HyperlaneToken[]>();
+  for (const token of tokens) {
+    if (token.chain === sourceChain) continue;
+    const list = byChain.get(token.chain) ?? [];
+    list.push(token);
+    byChain.set(token.chain, list);
+  }
+
+  for (const [chain, chainTokens] of byChain) {
+    adapter[chain] = adapter[chain] ?? {};
+    if (adapter[chain][sourceChain]) {
+      console.log(
+        `[bridgeConfig] skipping ${bridgeName} entry for ${chain}.${sourceChain} (${chainTokens.length} token${chainTokens.length === 1 ? "" : "s"}); manual entry exists`
+      );
+      continue;
+    }
+    if (adapter[chain].minted) {
+      console.log(
+        `[bridgeConfig] skipping ${bridgeName} entry for ${chain}.${sourceChain} (${chainTokens.length} token${chainTokens.length === 1 ? "" : "s"}); chain already has native minted`
+      );
+      continue;
+    }
+    adapter[chain][sourceChain] = buildBridgeFetcher(
+      chain,
+      chainTokens,
+      bridgeName,
+      sourceChain,
+      pegType
+    );
+  }
 }
 
-function buildLayerZeroFetcher(
+function buildBridgeFetcher(
   chain: string,
-  tokens: LayerZeroToken[],
+  tokens: BridgeToken[],
   bridgeName: string,
   sourceChain: string,
   pegType: string | undefined
