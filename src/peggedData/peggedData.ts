@@ -33,7 +33,13 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["USDT0", 'USDT'],
-      }
+      },
+      hyperlaneConfig: {
+        // "USD₮0" uses the Unicode Tugrik Sign (U+20AE), NOT ASCII "T". Visually
+        // similar, distinct bytes. Do not normalize or substitute when editing.
+        // "USDT0" is the ASCII-T variant; both appear in the Hyperlane registry.
+        symbols: ["USDT", "USD₮0", "USDT0"],
+      },
     }
   },
   {
@@ -58,7 +64,10 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["USDC", 'USDC.e'],
-      }
+      },
+      hyperlaneConfig: {
+        // Default matching by gecko_id "usd-coin" and symbol "USDC".
+      },
     }
   },
   {
@@ -124,7 +133,15 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["DAI"],
-      }
+      },
+      hyperlaneConfig: {
+        // DAI has no Hyperlane collateral deployment on ethereum. Source chain
+        // resolves to arbitrum via the voting algorithm (collateral votes:
+        // arbitrum/bsc/polygon tied at 1 each, alphabetical tiebreaker). This is
+        // a two-hop attribution: DAI is canonical on ethereum, bridged to
+        // arbitrum, then Hyperlane bridges arbitrum -> linea. The math is
+        // correct; the label reflects Hyperlane's actual lock point.
+      },
     }
   },
   {
@@ -1064,6 +1081,13 @@ export default [
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/EUROC",
     module: "eurc",
+    bridgeConfig: {
+      hyperlaneConfig: {
+        // Hyperlane has one EURC warp route with two EvmHypCollateral endpoints
+        // and zero synthetic destinations. The generated config will have an
+        // empty tokens[]. Wiring included for consistency and future routes.
+      },
+    },
   },
   {
     id: "51",
