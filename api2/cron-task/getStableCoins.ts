@@ -1,8 +1,8 @@
+import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../src/peggedData/peggedData";
 import { secondsInDay, secondsInWeek } from "../../src/utils/date";
 import {
     addToChains,
-    getChainDisplayName,
     nonChains,
     normalizeChain,
 } from "../../src/utils/normalizeChain";
@@ -71,7 +71,7 @@ function craftProtocolsResponse(
           return;
         }
         const normalizedChain = normalizeChain(chain);
-        const chainDisplayName = getChainDisplayName(normalizedChain, useNewChainNames);
+        const chainDisplayName = sdk.chainUtils.getChainLabelFromKey(normalizedChain);
         chainCirculating[chainDisplayName] =
           chainCirculating[chainDisplayName] || {};
         const currentCirculatingUSD = {} as { [key: string]: number };

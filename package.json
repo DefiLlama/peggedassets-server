@@ -5,6 +5,7 @@
   "scripts": {
     "api2-dev": "ts-node --transpile-only api2/index.ts",
     "generate-lz-config": "ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/generateLzConfig.ts",
+    "generate-hyperlane-config": "ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/generateHyperlaneConfig.ts",
     "api2-prod": "bash api2/scripts/prod_start.sh",
     "api2-cron-task": "npx ts-node --transpile-only api2/cron-task/index.ts",
     "api2-store-rates": "npx ts-node --transpile-only api2/scripts/storeRates.ts",
@@ -21,7 +22,7 @@
     "@aws-sdk/client-dynamodb": "^3.918.0",
     "@aws-sdk/client-s3": "^3.245.0",
     "@aws-sdk/lib-dynamodb": "^3.918.0",
-    "@defillama/sdk": "^5.0.211",
+    "@defillama/sdk": "5.0.213",
     "@solana/web3.js": "^1.30.2",
     "@supercharge/promise-pool": "^3.2.0",
     "@types/node": "^22.5.4",
@@ -38,5 +39,8 @@
     "starknet": "^6.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@hyperlane-xyz/registry": "25.0.0"
   }
 }

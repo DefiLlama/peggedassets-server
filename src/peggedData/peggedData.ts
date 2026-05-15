@@ -33,7 +33,13 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["USDT0", 'USDT'],
-      }
+      },
+      hyperlaneConfig: {
+        // "USD₮0" uses the Unicode Tugrik Sign (U+20AE), NOT ASCII "T". Visually
+        // similar, distinct bytes. Do not normalize or substitute when editing.
+        // "USDT0" is the ASCII-T variant; both appear in the Hyperlane registry.
+        symbols: ["USDT", "USD₮0", "USDT0"],
+      },
     }
   },
   {
@@ -58,7 +64,10 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["USDC", 'USDC.e'],
-      }
+      },
+      hyperlaneConfig: {
+        // Default matching by gecko_id "usd-coin" and symbol "USDC".
+      },
     }
   },
   {
@@ -124,7 +133,15 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["DAI"],
-      }
+      },
+      hyperlaneConfig: {
+        // Pin to arbitrum: Hyperlane locks DAI collateral on arbitrum, so
+        // the linea synthetic must use a different source key than the
+        // manual `linea.ethereum` entry to avoid the collision-skip
+        // dropping its supply. Pinning also stabilises against the 3-way
+        // alphabetical tie (arbitrum/bsc/polygon) the voting algorithm hits.
+        sourceChain: "arbitrum",
+      },
     }
   },
   {
@@ -1042,6 +1059,7 @@ export default [
     auditLinks: ["https://tether.to/en/transparency/#reports"],
     twitter: "https://twitter.com/Tether_to",
     wiki: "https://wiki.defillama.com/wiki/EURT",
+    deadFrom: "2025-12-15"
   },
   {
     id: "50",
@@ -1063,6 +1081,13 @@ export default [
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/EUROC",
     module: "eurc",
+    bridgeConfig: {
+      hyperlaneConfig: {
+        // Hyperlane has one EURC warp route with two EvmHypCollateral endpoints
+        // and zero synthetic destinations. The generated config will have an
+        // empty tokens[]. Wiring included for consistency and future routes.
+      },
+    },
   },
   {
     id: "51",
@@ -7176,9 +7201,9 @@ export default [
       "USDGO is a regulated, enterprise-grade stablecoin issued by Anchorage Digital Bank and distributed by OSL Group.",
     mintRedeemDescription:
       "Eligible users can exchange USD for USDGO and redeem USDGO for USD 1:1 through the issuer and distributor.",
-    onCoinGecko: "false",
-    gecko_id: null,
-    cmcId: null,
+    onCoinGecko: "true",
+    gecko_id: "usdgo",
+    cmcId: "39683",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
@@ -8000,7 +8025,7 @@ export default [
   {
     id: "388",
     name: "Initia iUSD",
-    address: "initia:move/6c69733a9e722f3660afb524f89fce957801fa7e4408b8ef8fe89db9627b570e",
+    address: "move:6c69733a9e722f3660afb524f89fce957801fa7e4408b8ef8fe89db9627b570e",
     symbol: "iUSD",
     url: "https://app.testnet.initia.xyz/iusd",
     description:
@@ -8021,6 +8046,27 @@ export default [
   },
   {
     id: "389",
+    name: "CFX MoveUSD",
+    address: "solana:3AdhVEX6k85yNivHVXDEiY3WyP2WgFQTUZCahGaeC2qm",
+    symbol: "MOVEUSD",
+    url: "https://cfx.to/",
+    description:
+      "MoveUSD is a USD-backed stablecoin issued by CFX Labs on Solana.",
+    mintRedeemDescription:
+      "CFX-issued digital assets are redeemable 1:1 for U.S. dollars.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/MoveUSD",
+    wiki: "https://docs.cfx.to/",
+    module: "cfx-moveusd",
+  },
+  {
+    id: "390",
     name: "FinChain Dollar",
     address: "0x9f6714C302ffe3c3bAFaf2Ccb44201fF64f6371C",
     symbol: "FUSD",

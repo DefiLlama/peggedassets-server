@@ -442,11 +442,11 @@ async function moveSupply(): Promise<Balances> {
   const balances = {} as Balances;
 
   const resp = await function_view({
-    functionStr: '0x1::fungible_asset::supply',
-    type_arguments: ['0x1::object::ObjectCore'],
+    functionStr: "0x1::fungible_asset::supply",
+    type_arguments: ["0x1::object::ObjectCore"],
     args: [chainContracts.move.bridgedFromETH[0]],
   });
-  balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
+  sumSingleBalance(balances, "peggedUSD", Number(resp.vec[0]) / 1e6, "layerzero", false, "ethereum");
 
   return balances;
 }

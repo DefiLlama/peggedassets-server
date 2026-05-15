@@ -4,6 +4,7 @@
 
 import * as sdk from '@defillama/sdk';
 import { storeRouteData } from '../file-cache';
+import { chainCacheSlug } from '../utils/cachePath';
 
 interface DailyVolume {
   timestamp: number;
@@ -112,13 +113,13 @@ export async function storeVolumesRoutes() {
   }
   
   for (const [chain, chartItems] of Object.entries(chartChainTotal)) {
-    await storeRouteData(`volume/chart-chain-${chain}`, sortByFirstItemIsNumber(chartItems));
+    await storeRouteData(`volume/chart-chain-${chainCacheSlug(chain)}`, sortByFirstItemIsNumber(chartItems));
   }
   for (const [chain, chartItems] of Object.entries(chartChainTokenBreakdown)) {
-    await storeRouteData(`volume/chart-chain-${chain}-token-breakdown`, sortByFirstItemIsNumber(chartItems));
+    await storeRouteData(`volume/chart-chain-${chainCacheSlug(chain)}-token-breakdown`, sortByFirstItemIsNumber(chartItems));
   }
   for (const [chain, chartItems] of Object.entries(chartChainCurrencyBreakdown)) {
-    await storeRouteData(`volume/chart-chain-${chain}-currency-breakdown`, sortByFirstItemIsNumber(chartItems));
+    await storeRouteData(`volume/chart-chain-${chainCacheSlug(chain)}-currency-breakdown`, sortByFirstItemIsNumber(chartItems));
   }
   
   const chartTokenTotal: Record<string, Array<Array<any>>> = {};

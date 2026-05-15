@@ -2,10 +2,13 @@ import axios from "axios";
 import { dailyPeggedBalances, getLastRecord, hourlyPeggedBalances, hourlyPeggedPrices } from "../../src/peggedAssets/utils/getLastRecord";
 import peggedAssets from "../../src/peggedData/peggedData";
 import { getClosestDayStartTimestamp, secondsInDay, secondsInHour, } from "../../src/utils/date";
-import { chainCoingeckoIds, normalizeChain, normalizedChainReplacements } from "../../src/utils/normalizeChain";
+import * as sdk from "@defillama/sdk";
+import { normalizeChain } from "../../src/utils/normalizeChain";
 import { getHistoricalValues } from "../../src/utils/shared/dynamodb";
+import { buildFxRateMap, lookupFxRate } from "../../src/utils/fxRates";
 import { cache } from "../cache";
 import { storeRouteData } from "../file-cache";
+import { chainCacheSlug } from "../utils/cachePath";
 
 type TokenBalance = {
   [token: string]: number | undefined;
@@ -18,25 +21,22 @@ export default async function handler() {
   const historicalRates = (await axios.get(`https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`))?.data;
   const lastPrices = await getLastRecord(hourlyPeggedPrices);
   const priceTimestamps = cache.historicalPrices?.map((item: any) => item.SK);
-  const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
   await getPeggedAssetsData()
-  cache.historicalRates = historicalRates
+  cache.fxRateMap = buildFxRateMap(historicalRates)
   cache.lastPrices = lastPrices
   cache.priceTimestamps = priceTimestamps
-  cache.rateTimestamps = rateTimestamps
   console.timeEnd(timeKey)
 }
 
 export async function storeChartsPart2(assetChainMap: any) {
-  const { lastPrices, historicalRates, priceTimestamps, rateTimestamps, } = cache
+  const { lastPrices, fxRateMap, priceTimestamps, } = cache
 
   const commonOptions = {
     assetChainMap,
     lastPrices,
     historicalPrices: cache.historicalPrices,
-    historicalRates,
+    fxRateMap,
     priceTimestamps,
-    rateTimestamps,
     peggedAssetsData: cache.peggedAssetsData,
   }
   // store overall chart
@@ -44,11 +44,12 @@ export async function storeChartsPart2(assetChainMap: any) {
   await storeRouteData('charts/all/all', allData)
 
   // store chain charts
-  const chains = [Object.keys(chainCoingeckoIds), Object.values(normalizedChainReplacements)].flat()
-  for (let chain of chains) {
-    const normalizedChain = normalizeChain(chain);
+  const chainKeys = new Set<string>(
+    Object.values(sdk.chainUtils.chainLabelsToKeyMap as Record<string, string>),
+  );
+  for (const normalizedChain of chainKeys) {
     const chainData = await craftChartsResponse({ ...commonOptions, chain: normalizedChain, });
-    await storeRouteData(`charts/${normalizedChain}`, chainData)
+    await storeRouteData(`charts/${chainCacheSlug(normalizedChain)}`, chainData)
   }
 
   // store pegged asset charts
@@ -113,12 +114,6 @@ const formatTokenBalance = (tokenBalance: TokenBalance) => {
   return formattedTokenBalance;
 };
 
-// needed because new daily rates is not stored on same day it is queried for
-function ratesCompareFn(a: number, b: number) {
-  if (Math.abs(a - b) <= secondsInDay) return 0;
-  return a - b;
-}
-
 // this should not get prices from the previous day
 function pricesCompareFn(a: number, b: number) {
   if (Math.abs(a - b) < secondsInDay) return 0;
@@ -179,7 +174,7 @@ export function craftChartsResponse(
     return chart.filter((entry: any) => entry)
   }
 
-  const { historicalPrices, historicalRates, lastPrices, priceTimestamps, rateTimestamps, peggedAssetsData, } = cache as any
+  const { historicalPrices, fxRateMap, lastPrices, priceTimestamps, peggedAssetsData, } = cache as any
   const sumDailyBalances = {} as {
     [timestamp: number]: {
       circulating: TokenBalance;
@@ -259,11 +254,10 @@ export function craftChartsResponse(
       if (pegType === "peggedVAR") {
         fallbackPrice = 0;
       } else if (pegType !== "peggedUSD" && !historicalPrice) {
-        const closestRatesIndex = timestampsBinarySearch(rateTimestamps, timestamp, ratesCompareFn);
-        const closestRates = extractResultOfBinarySearch(historicalRates, closestRatesIndex);
         const ticker = pegType.slice(-3);
-        fallbackPrice = 1 / closestRates?.rates?.[ticker];
-        if (typeof fallbackPrice !== "number") fallbackPrice = 0;
+        const rate = fxRateMap ? lookupFxRate(fxRateMap, ticker, timestamp) : null;
+        fallbackPrice = rate ? 1 / rate : 0;
+        if (!isFinite(fallbackPrice)) fallbackPrice = 0;
       }
 
       const price = historicalPrice ? historicalPrice : fallbackPrice;
