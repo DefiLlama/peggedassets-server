@@ -23,7 +23,6 @@
     "@aws-sdk/client-s3": "^3.245.0",
     "@aws-sdk/lib-dynamodb": "^3.918.0",
     "@defillama/sdk": "5.0.213",
-    "@hyperlane-xyz/registry": "25.0.0",
     "@solana/web3.js": "^1.30.2",
     "@supercharge/promise-pool": "^3.2.0",
     "@types/node": "^22.5.4",
@@ -40,5 +39,8 @@
     "starknet": "^6.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@hyperlane-xyz/registry": "25.0.0"
   }
 }

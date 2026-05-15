@@ -135,12 +135,12 @@ export default [
         symbols: ["DAI"],
       },
       hyperlaneConfig: {
-        // DAI has no Hyperlane collateral deployment on ethereum. Source chain
-        // resolves to arbitrum via the voting algorithm (collateral votes:
-        // arbitrum/bsc/polygon tied at 1 each, alphabetical tiebreaker). This is
-        // a two-hop attribution: DAI is canonical on ethereum, bridged to
-        // arbitrum, then Hyperlane bridges arbitrum -> linea. The math is
-        // correct; the label reflects Hyperlane's actual lock point.
+        // Pin to arbitrum: Hyperlane locks DAI collateral on arbitrum, so
+        // the linea synthetic must use a different source key than the
+        // manual `linea.ethereum` entry to avoid the collision-skip
+        // dropping its supply. Pinning also stabilises against the 3-way
+        // alphabetical tie (arbitrum/bsc/polygon) the voting algorithm hits.
+        sourceChain: "arbitrum",
       },
     }
   },

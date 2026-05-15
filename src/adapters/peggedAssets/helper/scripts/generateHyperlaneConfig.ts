@@ -10,9 +10,12 @@
  * synthetic entries often lack coinGeckoId and need symbol matching; collateral
  * entries often have coinGeckoId but the symbol-only match catches edge cases.
  *
- * Source chain detection: votes on collateral-side token chainNames across all warp
- * routes matching the asset. Most-voted llamaKey wins; explicit alphabetical tiebreaker
- * avoids iteration-order dependence. Non-EVM chains contribute to the vote (same as LZ).
+ * Source chain detection: explicit `hyperlaneConfig.sourceChain` wins if set.
+ * Otherwise votes on collateral-side token chainNames across all warp routes
+ * matching the asset; most-voted llamaKey wins with an alphabetical tiebreaker.
+ * If the top vote is tied, stderr emits a hint suggesting to pin via
+ * sourceChain to protect against silent flips. Non-EVM chains contribute to
+ * the vote (same as LZ).
  *
  * Filter: only EvmHypSynthetic* tokens (destination-side) are emitted. Collateral
  * entries are used only for source chain voting. Non-EVM standards are logged and skipped.
@@ -42,24 +45,42 @@
 import axios from "axios";
 import * as fs from "fs";
 import * as path from "path";
-
-// @hyperlane-xyz/registry@25.0.0 only exposes ".", "./chains/*", and "./fs" via
-// its package.json `exports` field.  Direct subpath imports like
-// "@hyperlane-xyz/registry/dist/warpRouteConfigs" throw ERR_PACKAGE_PATH_NOT_EXPORTED
-// at runtime.  We resolve the package root via the allowed "." entry point and
-// then load the sibling dist files by absolute path — robust across npm/pnpm/yarn.
-const _registryPkgDir = path.dirname(
-  require.resolve("@hyperlane-xyz/registry")
-);
-const { warpRouteConfigs }: { warpRouteConfigs: Record<string, any> } =
-  require(path.join(_registryPkgDir, "warpRouteConfigs.js"));
-const { chainMetadata }: { chainMetadata: Record<string, any> } =
-  require(path.join(_registryPkgDir, "chainMetadata.js"));
-const REGISTRY_VERSION: string = (
-  require(path.join(_registryPkgDir, "..", "package.json")) as { version: string }
-).version;
+import { pathToFileURL } from "url";
 
 import peggedAssets from "../../../../peggedData/peggedData";
+
+// @hyperlane-xyz/registry@25.0.0 ships as ESM (`"type": "module"`) and its
+// package.json `exports` field only exposes ".", "./chains/*", and "./fs". We
+// resolve the package root via the "." entry point and then dynamic-import the
+// sibling dist files by absolute file URL. `dynamicImport` is wrapped via
+// `new Function` so TypeScript (compiling to CommonJS) doesn't rewrite the
+// import() call into a synchronous require().
+const dynamicImport = new Function(
+  "specifier",
+  "return import(specifier)"
+) as (specifier: string) => Promise<any>;
+
+async function loadHyperlaneRegistry() {
+  const registryPkgDir = path.dirname(require.resolve("@hyperlane-xyz/registry"));
+  const warpRouteConfigsUrl = pathToFileURL(
+    path.join(registryPkgDir, "warpRouteConfigs.js")
+  ).href;
+  const chainMetadataUrl = pathToFileURL(
+    path.join(registryPkgDir, "chainMetadata.js")
+  ).href;
+  const [warpRouteConfigsModule, chainMetadataModule] = await Promise.all([
+    dynamicImport(warpRouteConfigsUrl),
+    dynamicImport(chainMetadataUrl),
+  ]);
+  const registryPackageJson = require(
+    path.join(registryPkgDir, "..", "package.json")
+  ) as { version: string };
+  return {
+    warpRouteConfigs: warpRouteConfigsModule.warpRouteConfigs as Record<string, any>,
+    chainMetadata: chainMetadataModule.chainMetadata as Record<string, any>,
+    registryVersion: registryPackageJson.version,
+  };
+}
 
 const DEFILLAMA_ADAPTERS_CHAINS_URL =
   "https://raw.githubusercontent.com/DefiLlama/DefiLlama-Adapters/main/projects/helper/chains.json";
@@ -130,29 +151,31 @@ const HYPERLANE_NAME_TO_LLAMA: Record<string, string> = {
   hyperevm: "hyperliquid", // HyperEVM — the EVM execution layer of Hyperliquid
 };
 
-// Collateral-side standards vote for source-chain detection.
-//
-// Verified against the 29 standards present in @hyperlane-xyz/registry on 2026-05-13:
-//
-//   VOTE (Collateral pattern):
-//     Evm/Sealevel/Cosmos/Cw/Starknet/Tron/Radix HypCollateral,
-//     EvmHypCollateralFiat, EvmHypOwnerCollateral, EvmHypRebaseCollateral
-//   VOTE (Lockbox pattern):
-//     EvmHypXERC20Lockbox, EvmHypVSXERC20Lockbox
-//   VOTE (Native pattern):
-//     Evm/Sealevel/Aleo/Cw HypNative, EvmNative
-//   NO VOTE (in SYNTHETIC_TYPES):
-//     EvmHypSynthetic, EvmHypSyntheticRebase, EvmHypXERC20, EvmHypVSXERC20
-//   NO VOTE (non-EVM synthetic, also not emitted):
-//     Sealevel/Aleo/Starknet/Radix/CosmosNative HypSynthetic
-//   NO VOTE (special bridges):
-//     EvmM0Portal, EvmM0PortalLite, CosmosIbc
-//
-// When a new standard appears (logged in the unknown-skip summary at generator
-// runtime), re-run this verification before adjusting.
+// Collateral-side standards. Explicit allow-list (not a substring/regex match)
+// so a future standard containing "Native" or "Collateral" cannot be
+// misclassified. Verified against @hyperlane-xyz/registry@25.0.0.
+const COLLATERAL_TYPES = new Set<string>([
+  "EvmHypCollateral",
+  "EvmHypCollateralFiat",
+  "EvmHypOwnerCollateral",
+  "EvmHypRebaseCollateral",
+  "SealevelHypCollateral",
+  "CosmosHypCollateral",
+  "CwHypCollateral",
+  "StarknetHypCollateral",
+  "TronHypCollateral",
+  "RadixHypCollateral",
+  "EvmHypXERC20Lockbox",
+  "EvmHypVSXERC20Lockbox",
+  "EvmHypNative",
+  "EvmNative",
+  "SealevelHypNative",
+  "AleoHypNative",
+  "CwHypNative",
+]);
+
 function isCollateralStandard(standard: string): boolean {
-  if (SYNTHETIC_TYPES.has(standard)) return false;
-  return /(Collateral|Lockbox|Native)/.test(standard);
+  return COLLATERAL_TYPES.has(standard);
 }
 
 // Resolve a Hyperlane chainName to the canonical DefiLlama llamaKey.
@@ -197,12 +220,15 @@ type Hit = {
   symbol: string;
 };
 
+type HyperlaneRegistry = Awaited<ReturnType<typeof loadHyperlaneRegistry>>;
+
 async function main() {
   const { asset, dry } = parseArgs(process.argv.slice(2));
   const localChains: string[] = JSON.parse(
     fs.readFileSync(LOCAL_CHAINS_PATH, "utf8")
   );
   const localChainsSet = new Set(localChains);
+  const registry = await loadHyperlaneRegistry();
 
   let targets: any[];
 
@@ -242,7 +268,8 @@ async function main() {
     const { chains, unknownChains } = await generateForAsset(
       peggedAsset,
       localChainsSet,
-      dry
+      dry,
+      registry
     );
     allNeededChains.push(...chains);
     for (const [cn, label] of unknownChains) {
@@ -280,8 +307,10 @@ async function main() {
 async function generateForAsset(
   peggedAsset: any,
   localChainsSet: Set<string>,
-  dry: boolean
+  dry: boolean,
+  registry: HyperlaneRegistry
 ): Promise<{ chains: string[]; unknownChains: Map<string, string> }> {
+  const { warpRouteConfigs, chainMetadata, registryVersion } = registry;
   const hyperlaneConfig = peggedAsset.bridgeConfig?.hyperlaneConfig ?? {};
   const symbols: string[] = hyperlaneConfig.symbols?.length
     ? hyperlaneConfig.symbols
@@ -306,38 +335,60 @@ async function generateForAsset(
     return /sepolia|testnet/i.test(chainName);
   }
 
-  // Step 1: Vote on source chain via collateral-side entries.
-  // Non-EVM chains contribute to the vote (same as LZ generator): voting should
-  // reflect where collateral physically lives, independent of which chains we
-  // can track as output.
-  const collateralVotes: Record<string, number> = {};
-  for (const [, config] of Object.entries(warpRouteConfigs)) {
-    const tokens: any[] = config.tokens ?? [];
-    if (!tokens.some(matchesAsset)) continue;
-    for (const token of tokens) {
-      if (!matchesAsset(token)) continue;
-      if (isTestnet(token.chainName ?? "")) continue;
-      if (!isCollateralStandard(token.standard ?? "")) continue;
-      const llamaKey = toHyperlaneChainLlamaKey(token.chainName, localChainsSet);
-      if (!llamaKey) continue;
-      collateralVotes[llamaKey] = (collateralVotes[llamaKey] ?? 0) + 1;
+  // Step 1: determine source chain — explicit override wins, otherwise vote on
+  // collateral-side entries. Non-EVM chains contribute to the vote.
+  const explicitSourceChain: string | undefined = hyperlaneConfig.sourceChain;
+  let sourceChain: string | undefined;
+  let sourceChainIsExplicit = false;
+
+  if (explicitSourceChain) {
+    sourceChain = explicitSourceChain;
+    sourceChainIsExplicit = true;
+  } else {
+    const collateralVotesByChain: Record<string, number> = {};
+    for (const [, warpRoute] of Object.entries(warpRouteConfigs)) {
+      const routeTokens: any[] = warpRoute.tokens ?? [];
+      if (!routeTokens.some(matchesAsset)) continue;
+      for (const routeToken of routeTokens) {
+        if (!matchesAsset(routeToken)) continue;
+        if (isTestnet(routeToken.chainName ?? "")) continue;
+        if (!isCollateralStandard(routeToken.standard ?? "")) continue;
+        const llamaKey = toHyperlaneChainLlamaKey(routeToken.chainName, localChainsSet);
+        if (!llamaKey) continue;
+        collateralVotesByChain[llamaKey] = (collateralVotesByChain[llamaKey] ?? 0) + 1;
+      }
+    }
+
+    // Alphabetical tiebreaker keeps the result independent of Object.entries
+    // iteration order.
+    let bestVoteCount = 0;
+    for (const [chainKey, voteCount] of Object.entries(collateralVotesByChain)) {
+      const beatsCurrent = voteCount > bestVoteCount;
+      const tiesAndSortsEarlier =
+        voteCount === bestVoteCount && (sourceChain === undefined || chainKey < sourceChain);
+      if (beatsCurrent || tiesAndSortsEarlier) {
+        sourceChain = chainKey;
+        bestVoteCount = voteCount;
+      }
+    }
+
+    const sortedVotes = Object.entries(collateralVotesByChain).sort(
+      (a, b) => b[1] - a[1]
+    );
+    const hasTieAtTop = sortedVotes.length >= 2 && sortedVotes[0][1] === sortedVotes[1][1];
+    if (hasTieAtTop) {
+      const tiedChains = sortedVotes
+        .filter(([, voteCount]) => voteCount === sortedVotes[0][1])
+        .map(([chainKey]) => chainKey);
+      process.stderr.write(
+        `[${peggedAsset.gecko_id}] WARN: source-chain vote tied (${tiedChains.join(", ")} at ${sortedVotes[0][1]} each). Alphabetical tiebreaker chose "${sourceChain}". Pin via bridgeConfig.hyperlaneConfig.sourceChain to protect against silent flips.\n`
+      );
     }
   }
 
-  // Explicit alphabetical tiebreaker: avoids dependence on Object.entries iteration
-  // order, which has caused subtle issues in similar voting algorithms.
-  let source: string | undefined;
-  let bestCount = 0;
-  for (const [key, n] of Object.entries(collateralVotes)) {
-    if (n > bestCount || (n === bestCount && (source === undefined || key < source))) {
-      source = key;
-      bestCount = n;
-    }
-  }
-
-  if (!source) {
+  if (!sourceChain) {
     process.stderr.write(
-      `[${peggedAsset.gecko_id}] Could not detect source chain: no collateral-side entries found matching this asset. Ensure gecko_id or symbols match at least one warp route token. Skipping.\n`
+      `[${peggedAsset.gecko_id}] Could not detect source chain: no collateral-side entries found matching this asset. Ensure gecko_id or symbols match at least one warp route token, or set hyperlaneConfig.sourceChain explicitly. Skipping.\n`
     );
     return { chains: [], unknownChains: new Map() };
   }
@@ -392,7 +443,7 @@ async function generateForAsset(
       }
 
       if (chainMap[llamaKey]) llamaKey = chainMap[llamaKey];
-      if (llamaKey === source) continue;
+      if (llamaKey === sourceChain) continue;
       if (excludeChains.has(llamaKey)) continue;
 
       if (typeof token.decimals !== "number") {
@@ -435,17 +486,17 @@ async function generateForAsset(
     `// Auto-generated by src/adapters/peggedAssets/helper/scripts/generateHyperlaneConfig.ts`
   );
   lines.push(
-    `// Asset: ${peggedAsset.name} (${peggedAsset.gecko_id})   Source (auto-detected): ${source}`
+    `// Asset: ${peggedAsset.name} (${peggedAsset.gecko_id})   Source (${sourceChainIsExplicit ? "pinned via hyperlaneConfig.sourceChain" : "auto-detected"}): ${sourceChain}`
   );
   lines.push(
     `// Re-run: ts-node src/adapters/peggedAssets/helper/scripts/generateHyperlaneConfig.ts --asset ${peggedAsset.gecko_id}`
   );
-  lines.push(`// Registry: @hyperlane-xyz/registry@${REGISTRY_VERSION}`);
+  lines.push(`// Registry: @hyperlane-xyz/registry@${registryVersion}`);
   lines.push(``);
   lines.push(`import type { HyperlaneConfig } from "../helper/bridgeConfig";`);
   lines.push(``);
   lines.push(`const hyperlaneConfig: HyperlaneConfig = {`);
-  lines.push(`  sourceChain: "${source}",`);
+  lines.push(`  sourceChain: "${sourceChain}",`);
   lines.push(`  tokens: [`);
   for (const h of dedupedHits) {
     lines.push(
@@ -475,7 +526,7 @@ async function generateForAsset(
   } else {
     fs.writeFileSync(outPath, content);
     console.log(
-      `[${peggedAsset.gecko_id}] wrote ${path.relative(process.cwd(), outPath)} (${dedupedHits.length} tokens, source=${source})`
+      `[${peggedAsset.gecko_id}] wrote ${path.relative(process.cwd(), outPath)} (${dedupedHits.length} tokens, source=${sourceChain})`
     );
   }
 
@@ -490,13 +541,37 @@ async function generateForAsset(
     ([, hs]) => hs.length > 1
   );
 
+  // Flag entries whose decimals diverge from the asset's modal value — likely
+  // a registry error, would skew supply by orders of magnitude if applied.
+  const decimalsFrequency: Record<number, number> = {};
+  for (const hit of dedupedHits) {
+    decimalsFrequency[hit.decimals] = (decimalsFrequency[hit.decimals] ?? 0) + 1;
+  }
+  const modalDecimals = Object.entries(decimalsFrequency).sort(
+    (a, b) => b[1] - a[1]
+  )[0]?.[0];
+  const decimalOutliers = modalDecimals
+    ? dedupedHits.filter((hit) => String(hit.decimals) !== modalDecimals)
+    : [];
+
   const errLines: string[] = [];
   errLines.push(
-    `# ${peggedAsset.name} (${peggedAsset.gecko_id}) — source=${source}`
+    `# ${peggedAsset.name} (${peggedAsset.gecko_id}) — source=${sourceChain}`
   );
   errLines.push(
-    `  matched: ${dedupedHits.length}   skipped_no_llama: ${skippedNoLlama.length}   skipped_non_evm: ${skippedNonEvm.length}   skipped_wrong_type: ${skippedWrongType.length}   chains_with_duplicates: ${duplicateChains.length}`
+    `  matched: ${dedupedHits.length}   skipped_no_llama: ${skippedNoLlama.length}   skipped_non_evm: ${skippedNonEvm.length}   skipped_wrong_type: ${skippedWrongType.length}   chains_with_duplicates: ${duplicateChains.length}   decimal_outliers: ${decimalOutliers.length}`
   );
+
+  if (decimalOutliers.length) {
+    errLines.push(
+      `  ## WARN: decimals outliers (modal=${modalDecimals}, registry may be wrong — verify on-chain before trusting):`
+    );
+    for (const h of decimalOutliers) {
+      errLines.push(
+        `    ${h.llamaKey}  ${h.address}  decimals=${h.decimals}  ${h.standard} ${h.symbol}`
+      );
+    }
+  }
 
   if (skippedNonEvm.length) {
     errLines.push(

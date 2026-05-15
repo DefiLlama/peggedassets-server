@@ -77,6 +77,7 @@ type BridgeConfig = {
     excludeChains?: string[]; // DefiLlama chain keys to skip in generated config (avoids collisions with manual bridgedFrom entries)
     standardTypes?: string[]; // advanced override: explicit Hyperlane standard types to include; bypasses default synthetic-only filter
     chainMap?: { [llamaKey: string]: string }; // per-asset chain key rename on top of the generator's global Hyperlane→DefiLlama mapping
+    sourceChain?: string; // pin the source chain (DefiLlama llamaKey) instead of relying on collateral-side voting; protects against silent flips when the registry adds new collateral entries
   };
 }
 
