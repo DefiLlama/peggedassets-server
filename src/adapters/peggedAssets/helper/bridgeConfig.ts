@@ -3,11 +3,13 @@ import { ChainApi } from "@defillama/sdk";
 import { bridgedSupply, getApi } from "./getSupply";
 import { sumSingleBalance } from "./generalUtil";
 
-export type LayerZeroToken = {
+type BridgeToken = {
   chain: string;
   address: string;
   decimals: number;
 };
+
+export type LayerZeroToken = BridgeToken;
 
 export type LayerZeroConfig = {
   sourceChain: string;
@@ -16,102 +18,213 @@ export type LayerZeroConfig = {
   pegType?: string;
 };
 
+export type HyperlaneToken = BridgeToken;
+
+export type HyperlaneConfig = {
+  sourceChain: string;
+  tokens: HyperlaneToken[];
+  bridgeName?: string;
+  pegType?: string;
+};
+
 export type BridgeConfigs = {
   layerzero?: LayerZeroConfig;
+  hyperlane?: HyperlaneConfig;
+};
+
+type BridgeContribution = {
+  bridgeName: string;
+  pegType?: string;
+  tokens: BridgeToken[];
+};
+
+type DestinationGroup = {
+  destinationChain: string;
+  sourceChain: string;
+  contributions: BridgeContribution[];
 };
 
 export function addBridgeConfigs(
   adapter: PeggedIssuanceAdapter,
   configs: BridgeConfigs
 ): PeggedIssuanceAdapter {
-  if (configs.layerzero) applyLayerZero(adapter, configs.layerzero);
+  const groupsByDestination = collectContributionsByDestination(configs);
+
+  for (const group of groupsByDestination.values()) {
+    applyDestinationGroup(adapter, group);
+  }
+
   return adapter;
 }
 
-function applyLayerZero(
-  adapter: PeggedIssuanceAdapter,
-  config: LayerZeroConfig
-) {
-  const bridgeName = config.bridgeName ?? "layerzero";
-  const { sourceChain, tokens, pegType } = config;
+function collectContributionsByDestination(
+  configs: BridgeConfigs
+): Map<string, DestinationGroup> {
+  const groups = new Map<string, DestinationGroup>();
 
-  // Group tokens by destination chain. LZ metadata can list multiple distinct
-  // deployments on the same chain (e.g. harmony USDC has 3 ERC20 variants with
-  // different decimals) — all of them contribute to bridged supply and must be
-  // summed, not skipped as duplicates.
-  const byChain = new Map<string, LayerZeroToken[]>();
+  enrollBridge(groups, configs.layerzero, "layerzero");
+  enrollBridge(groups, configs.hyperlane, "hyperlane");
+
+  return groups;
+}
+
+function enrollBridge(
+  groups: Map<string, DestinationGroup>,
+  config: LayerZeroConfig | HyperlaneConfig | undefined,
+  defaultBridgeName: string
+) {
+  if (!config) return;
+
+  const bridgeName = config.bridgeName ?? defaultBridgeName;
+  const { sourceChain, tokens, pegType } = config;
+  const tokensByDestinationChain = new Map<string, BridgeToken[]>();
+
   for (const token of tokens) {
     if (token.chain === sourceChain) continue;
-    const list = byChain.get(token.chain) ?? [];
-    list.push(token);
-    byChain.set(token.chain, list);
+    const existing = tokensByDestinationChain.get(token.chain) ?? [];
+    existing.push(token);
+    tokensByDestinationChain.set(token.chain, existing);
   }
 
-  for (const [chain, chainTokens] of byChain) {
-    adapter[chain] = adapter[chain] ?? {};
-    if (adapter[chain][sourceChain]) {
-      console.log(
-        `[bridgeConfig] skipping ${bridgeName} entry for ${chain}.${sourceChain} (${chainTokens.length} token${chainTokens.length === 1 ? "" : "s"}); manual entry exists`
-      );
-      continue;
-    }
-    if (adapter[chain].minted) {
-      // Chain has a native `minted` entry — treating this token as bridged-from-source
-      // would both double-count the chain's own circulating and negatively subtract
-      // from the source chain's circulating. Skip.
-      console.log(
-        `[bridgeConfig] skipping ${bridgeName} entry for ${chain}.${sourceChain} (${chainTokens.length} token${chainTokens.length === 1 ? "" : "s"}); chain already has native minted`
-      );
-      continue;
-    }
-    adapter[chain][sourceChain] = buildLayerZeroFetcher(
-      chain,
-      chainTokens,
-      bridgeName,
+  for (const [destinationChain, destinationTokens] of tokensByDestinationChain) {
+    const groupKey = `${destinationChain}|${sourceChain}`;
+    const group = groups.get(groupKey) ?? {
+      destinationChain,
       sourceChain,
-      pegType
-    );
+      contributions: [],
+    };
+    group.contributions.push({ bridgeName, pegType, tokens: destinationTokens });
+    groups.set(groupKey, group);
   }
 }
 
-function buildLayerZeroFetcher(
-  chain: string,
-  tokens: LayerZeroToken[],
-  bridgeName: string,
-  sourceChain: string,
-  pegType: string | undefined
+function applyDestinationGroup(
+  adapter: PeggedIssuanceAdapter,
+  group: DestinationGroup
 ) {
-  if (tokens.length === 1) {
-    const t = tokens[0];
+  const { destinationChain, sourceChain, contributions } = group;
+  adapter[destinationChain] = adapter[destinationChain] ?? {};
+
+  if (adapter[destinationChain][sourceChain]) {
+    logManualCollisionSkip(destinationChain, sourceChain, contributions);
+    return;
+  }
+
+  if (adapter[destinationChain].minted) {
+    logNativeMintedSkip(destinationChain, sourceChain, contributions);
+    return;
+  }
+
+  const dedupedContributions = dedupeContributionsByAddress(contributions);
+  if (dedupedContributions.length === 0) return;
+
+  adapter[destinationChain][sourceChain] = buildBridgeFetcher(
+    destinationChain,
+    sourceChain,
+    dedupedContributions
+  );
+}
+
+function dedupeContributionsByAddress(
+  contributions: BridgeContribution[]
+): BridgeContribution[] {
+  // Dedup by ERC20 address only: distinct addresses across bridges are kept
+  // and summed; same address listed in multiple bridges (XERC20 / canonical
+  // multi-bridge tokens) is counted once, attributed to the first-enrolled
+  // bridge to avoid double-counting `totalSupply()`.
+  const seenAddresses = new Set<string>();
+  const deduped: BridgeContribution[] = [];
+
+  for (const contribution of contributions) {
+    const uniqueTokens: BridgeToken[] = [];
+    for (const token of contribution.tokens) {
+      const normalizedAddress = token.address.toLowerCase();
+      if (seenAddresses.has(normalizedAddress)) continue;
+      seenAddresses.add(normalizedAddress);
+      uniqueTokens.push(token);
+    }
+    if (uniqueTokens.length > 0) {
+      deduped.push({ ...contribution, tokens: uniqueTokens });
+    }
+  }
+
+  return deduped;
+}
+
+function logManualCollisionSkip(
+  destinationChain: string,
+  sourceChain: string,
+  contributions: BridgeContribution[]
+) {
+  const bridgeNames = [...new Set(contributions.map((c) => c.bridgeName))].join("+");
+  const tokenCount = contributions.reduce((total, c) => total + c.tokens.length, 0);
+  console.log(
+    `[bridgeConfig] skipping ${bridgeNames} entry for ${destinationChain}.${sourceChain} (${tokenCount} token${tokenCount === 1 ? "" : "s"}); manual entry exists`
+  );
+}
+
+function logNativeMintedSkip(
+  destinationChain: string,
+  sourceChain: string,
+  contributions: BridgeContribution[]
+) {
+  // Native minted on this chain: treating these as bridged-from-source would
+  // double-count the chain's own circulating AND negatively subtract from the
+  // source chain's circulating.
+  const tokenCount = contributions.reduce(
+    (total, contribution) => total + contribution.tokens.length,
+    0
+  );
+  console.log(
+    `[bridgeConfig] skipping ${destinationChain}.${sourceChain} (${tokenCount} token${tokenCount === 1 ? "" : "s"}); chain already has native minted`
+  );
+}
+
+function buildBridgeFetcher(
+  destinationChain: string,
+  sourceChain: string,
+  contributions: BridgeContribution[]
+) {
+  const isSingleBridgeSingleToken =
+    contributions.length === 1 && contributions[0].tokens.length === 1;
+
+  if (isSingleBridgeSingleToken) {
+    const contribution = contributions[0];
+    const token = contribution.tokens[0];
     return bridgedSupply(
-      chain,
-      t.decimals,
-      [t.address],
-      bridgeName,
+      destinationChain,
+      token.decimals,
+      [token.address],
+      contribution.bridgeName,
       sourceChain,
-      pegType as PeggedAssetType
+      contribution.pegType as PeggedAssetType | undefined
     );
   }
 
-  // Multiple tokens on the same chain (distinct deployments of the same asset,
-  // e.g. three ERC20 USDC variants on harmony). Sum all of them with one
-  // multicall, applying per-token decimals.
-  const assetPegType = (pegType ?? "peggedUSD") as PeggedAssetType;
-  return async function (_api: ChainApi) {
-    const api = await getApi(chain, _api);
+  return async function fetchComposedBridgedSupply(_api: ChainApi) {
+    const api = await getApi(destinationChain, _api);
     const balances: Balances = {} as Balances;
-    const addresses = tokens.map((t) => t.address);
-    const supplies = await api.multiCall({ abi: "erc20:totalSupply", calls: addresses });
-    for (let i = 0; i < supplies.length; i++) {
-      sumSingleBalance(
-        balances,
-        assetPegType,
-        supplies[i] / 10 ** tokens[i].decimals,
-        bridgeName,
-        false,
-        sourceChain
-      );
+
+    for (const contribution of contributions) {
+      const pegType = (contribution.pegType ?? "peggedUSD") as PeggedAssetType;
+      const addresses = contribution.tokens.map((token) => token.address);
+      const supplies = await api.multiCall({
+        abi: "erc20:totalSupply",
+        calls: addresses,
+      });
+
+      for (let i = 0; i < supplies.length; i++) {
+        sumSingleBalance(
+          balances,
+          pegType,
+          supplies[i] / 10 ** contribution.tokens[i].decimals,
+          contribution.bridgeName,
+          false,
+          sourceChain
+        );
+      }
     }
+
     return balances;
   };
 }
