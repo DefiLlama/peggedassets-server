@@ -8070,7 +8070,7 @@ export default [
     name: "FinChain Dollar",
     address: "0x9f6714C302ffe3c3bAFaf2Ccb44201fF64f6371C",
     symbol: "FUSD",
-    url: "https://fusd.finchain.global/#reserves",
+    url: "https://fusd.finchain.global/",
     description:
       "FinChain Dollar (FUSD) is an RWA-backed stablecoin designed to maintain a USD peg across EVM networks.",
     mintRedeemDescription:
@@ -8081,9 +8081,9 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
-    auditLinks: [],
-    twitter: null,
-    wiki: null,
+    auditLinks: ["https://finchain.gitbook.io/finchain-docs/en/fusd/risks/smart-contract-risks"],
+    twitter: "https://x.com/FinChain_CN",
+    wiki: "https://finchain.gitbook.io/finchain-docs/en/fusd/introduction",
     module: "finchain-dollar",
   },
 ] as PeggedAsset[];
