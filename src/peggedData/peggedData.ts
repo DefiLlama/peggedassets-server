@@ -8070,7 +8070,7 @@ export default [
     name: "FinChain Dollar",
     address: "0x9f6714C302ffe3c3bAFaf2Ccb44201fF64f6371C",
     symbol: "FUSD",
-    url: "https://github.com/DefiLlama/DefiLlama-Adapters/tree/main/projects/finchain-dollar",
+    url: "https://fusd.finchain.global/#reserves",
     description:
       "FinChain Dollar (FUSD) is an RWA-backed stablecoin designed to maintain a USD peg across EVM networks.",
     mintRedeemDescription:
