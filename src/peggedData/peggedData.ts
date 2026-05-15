@@ -7177,9 +7177,9 @@ export default [
       "USDGO is a regulated, enterprise-grade stablecoin issued by Anchorage Digital Bank and distributed by OSL Group.",
     mintRedeemDescription:
       "Eligible users can exchange USD for USDGO and redeem USDGO for USD 1:1 through the issuer and distributor.",
-    onCoinGecko: "false",
-    gecko_id: null,
-    cmcId: null,
+    onCoinGecko: "true",
+    gecko_id: "usdgo",
+    cmcId: "39683",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
