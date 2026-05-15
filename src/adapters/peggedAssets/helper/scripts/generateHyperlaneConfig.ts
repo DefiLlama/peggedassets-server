@@ -49,16 +49,13 @@ import { pathToFileURL } from "url";
 
 import peggedAssets from "../../../../peggedData/peggedData";
 
-// @hyperlane-xyz/registry@25.0.0 ships as ESM (`"type": "module"`) and its
-// package.json `exports` field only exposes ".", "./chains/*", and "./fs". We
-// resolve the package root via the "." entry point and then dynamic-import the
-// sibling dist files by absolute file URL. `dynamicImport` is wrapped via
-// `new Function` so TypeScript (compiling to CommonJS) doesn't rewrite the
-// import() call into a synchronous require().
+// `@hyperlane-xyz/registry` is ESM-only. The `new Function` wrapper preserves
+// the runtime import() that TS would otherwise downlevel to require() in this
+// CommonJS script, which throws ERR_REQUIRE_ESM. See TS issue #43329.
 const dynamicImport = new Function(
   "specifier",
   "return import(specifier)"
-) as (specifier: string) => Promise<any>;
+) as (specifier: string) => Promise<unknown>;
 
 async function loadHyperlaneRegistry() {
   const registryPkgDir = path.dirname(require.resolve("@hyperlane-xyz/registry"));
@@ -68,16 +65,19 @@ async function loadHyperlaneRegistry() {
   const chainMetadataUrl = pathToFileURL(
     path.join(registryPkgDir, "chainMetadata.js")
   ).href;
-  const [warpRouteConfigsModule, chainMetadataModule] = await Promise.all([
+  const [warpRouteConfigsModule, chainMetadataModule] = (await Promise.all([
     dynamicImport(warpRouteConfigsUrl),
     dynamicImport(chainMetadataUrl),
-  ]);
+  ])) as [
+    { warpRouteConfigs: Record<string, any> },
+    { chainMetadata: Record<string, any> }
+  ];
   const registryPackageJson = require(
     path.join(registryPkgDir, "..", "package.json")
   ) as { version: string };
   return {
-    warpRouteConfigs: warpRouteConfigsModule.warpRouteConfigs as Record<string, any>,
-    chainMetadata: chainMetadataModule.chainMetadata as Record<string, any>,
+    warpRouteConfigs: warpRouteConfigsModule.warpRouteConfigs,
+    chainMetadata: chainMetadataModule.chainMetadata,
     registryVersion: registryPackageJson.version,
   };
 }
