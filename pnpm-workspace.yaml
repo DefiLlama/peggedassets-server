@@ -1,4 +1,4 @@
-packages: []  
+packages: []
 minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
   - '@defillama/sdk'

@@ -2,11 +2,13 @@ import axios from "axios";
 import { dailyPeggedBalances, getLastRecord, hourlyPeggedBalances, hourlyPeggedPrices } from "../../src/peggedAssets/utils/getLastRecord";
 import peggedAssets from "../../src/peggedData/peggedData";
 import { getClosestDayStartTimestamp, secondsInDay, secondsInHour, } from "../../src/utils/date";
-import { chainCoingeckoIds, normalizeChain, normalizedChainReplacements } from "../../src/utils/normalizeChain";
+import * as sdk from "@defillama/sdk";
+import { normalizeChain } from "../../src/utils/normalizeChain";
 import { getHistoricalValues } from "../../src/utils/shared/dynamodb";
 import { buildFxRateMap, lookupFxRate } from "../../src/utils/fxRates";
 import { cache } from "../cache";
 import { storeRouteData } from "../file-cache";
+import { chainCacheSlug } from "../utils/cachePath";
 
 type TokenBalance = {
   [token: string]: number | undefined;
@@ -42,11 +44,12 @@ export async function storeChartsPart2(assetChainMap: any) {
   await storeRouteData('charts/all/all', allData)
 
   // store chain charts
-  const chains = [Object.keys(chainCoingeckoIds), Object.values(normalizedChainReplacements)].flat()
-  for (let chain of chains) {
-    const normalizedChain = normalizeChain(chain);
+  const chainKeys = new Set<string>(
+    Object.values(sdk.chainUtils.chainLabelsToKeyMap as Record<string, string>),
+  );
+  for (const normalizedChain of chainKeys) {
     const chainData = await craftChartsResponse({ ...commonOptions, chain: normalizedChain, });
-    await storeRouteData(`charts/${normalizedChain}`, chainData)
+    await storeRouteData(`charts/${chainCacheSlug(normalizedChain)}`, chainData)
   }
 
   // store pegged asset charts
