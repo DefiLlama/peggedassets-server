@@ -33,7 +33,13 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["USDT0", 'USDT'],
-      }
+      },
+      hyperlaneConfig: {
+        // "USD₮0" uses the Unicode Tugrik Sign (U+20AE), NOT ASCII "T". Visually
+        // similar, distinct bytes. Do not normalize or substitute when editing.
+        // "USDT0" is the ASCII-T variant; both appear in the Hyperlane registry.
+        symbols: ["USDT", "USD₮0", "USDT0"],
+      },
     }
   },
   {
@@ -58,7 +64,10 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["USDC", 'USDC.e'],
-      }
+      },
+      hyperlaneConfig: {
+        // Default matching by gecko_id "usd-coin" and symbol "USDC".
+      },
     }
   },
   {
@@ -124,7 +133,15 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["DAI"],
-      }
+      },
+      hyperlaneConfig: {
+        // Pin to arbitrum: Hyperlane locks DAI collateral on arbitrum, so
+        // the linea synthetic must use a different source key than the
+        // manual `linea.ethereum` entry to avoid the collision-skip
+        // dropping its supply. Pinning also stabilises against the 3-way
+        // alphabetical tie (arbitrum/bsc/polygon) the voting algorithm hits.
+        sourceChain: "arbitrum",
+      },
     }
   },
   {
@@ -1064,6 +1081,13 @@ export default [
     twitter: "https://twitter.com/circlepay",
     wiki: "https://wiki.defillama.com/wiki/EUROC",
     module: "eurc",
+    bridgeConfig: {
+      hyperlaneConfig: {
+        // Hyperlane has one EURC warp route with two EvmHypCollateral endpoints
+        // and zero synthetic destinations. The generated config will have an
+        // empty tokens[]. Wiring included for consistency and future routes.
+      },
+    },
   },
   {
     id: "51",
@@ -7177,9 +7201,9 @@ export default [
       "USDGO is a regulated, enterprise-grade stablecoin issued by Anchorage Digital Bank and distributed by OSL Group.",
     mintRedeemDescription:
       "Eligible users can exchange USD for USDGO and redeem USDGO for USD 1:1 through the issuer and distributor.",
-    onCoinGecko: "false",
-    gecko_id: null,
-    cmcId: null,
+    onCoinGecko: "true",
+    gecko_id: "usdgo",
+    cmcId: "39683",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",

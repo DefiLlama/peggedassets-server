@@ -23,5 +23,17 @@ export async function importAdapter(asset: PeggedAsset, adapter?: any): Promise<
     }
   }
 
+  if (asset.bridgeConfig?.hyperlaneConfig) {
+    const hyperlaneConfigPath = path.join(modulePath, 'hyperlaneConfig');
+    try {
+      const hyperlaneConfig = (await import(hyperlaneConfigPath)).default;
+      addBridgeConfigs(adapter, { hyperlane: hyperlaneConfig });
+    } catch (e) {
+      console.warn(
+        `[${asset.name}] bridgeConfig.hyperlaneConfig declared but ${key}/hyperlaneConfig.ts not found; skipping. Run the generator: npx ts-node src/adapters/peggedAssets/helper/scripts/generateHyperlaneConfig.ts --asset ${asset.gecko_id}`
+      );
+    }
+  }
+
   return adapter;
 }
