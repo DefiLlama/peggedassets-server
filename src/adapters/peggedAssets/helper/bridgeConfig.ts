@@ -10,22 +10,27 @@ type BridgeToken = {
 };
 
 export type LayerZeroToken = BridgeToken;
-
-export type LayerZeroConfig = {
-  sourceChain: string;
-  tokens: LayerZeroToken[];
-  bridgeName?: string;
-  pegType?: string;
-};
-
 export type HyperlaneToken = BridgeToken;
 
-export type HyperlaneConfig = {
+// Common attribution shape used by all bridges in this framework.
+//
+// Topology mapping (current bridges):
+//   - LayerZero (`layerzero`)  → BridgeAttribution       (single-source, issuer-designated)
+//   - Hyperlane (`hyperlane`)  → BridgeAttribution       (single-source, mesh-collapsed by voting)
+//   - Wormhole  (`wormhole`)   → BridgeAttribution[]     (multi-source, permissionless attestation)
+//
+// When adding a new bridge: pick the topology that matches its data shape, not its product identity.
+export type BridgeAttribution = {
   sourceChain: string;
-  tokens: HyperlaneToken[];
+  tokens: BridgeToken[];
   bridgeName?: string;
   pegType?: string;
 };
+
+// Single-source bridges (issuer-designated like LayerZero, or mesh-collapsed like Hyperlane):
+// config emits a single BridgeAttribution per asset.
+export type LayerZeroConfig = BridgeAttribution;
+export type HyperlaneConfig = BridgeAttribution;
 
 export type BridgeConfigs = {
   layerzero?: LayerZeroConfig;
@@ -62,19 +67,26 @@ function collectContributionsByDestination(
 ): Map<string, DestinationGroup> {
   const groups = new Map<string, DestinationGroup>();
 
-  enrollBridge(groups, configs.layerzero, "layerzero");
-  enrollBridge(groups, configs.hyperlane, "hyperlane");
+  enrollSingleSource(groups, configs.layerzero, "layerzero");
+  enrollSingleSource(groups, configs.hyperlane, "hyperlane");
 
   return groups;
 }
 
-function enrollBridge(
+function enrollSingleSource(
   groups: Map<string, DestinationGroup>,
-  config: LayerZeroConfig | HyperlaneConfig | undefined,
+  config: BridgeAttribution | undefined,
   defaultBridgeName: string
 ) {
   if (!config) return;
+  enrollAttribution(groups, config, defaultBridgeName);
+}
 
+function enrollAttribution(
+  groups: Map<string, DestinationGroup>,
+  config: BridgeAttribution,
+  defaultBridgeName: string
+) {
   const bridgeName = config.bridgeName ?? defaultBridgeName;
   const { sourceChain, tokens, pegType } = config;
   const tokensByDestinationChain = new Map<string, BridgeToken[]>();
