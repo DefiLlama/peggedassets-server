@@ -8086,4 +8086,25 @@ export default [
     wiki: "https://finchain.gitbook.io/finchain-docs/en/fusd/introduction",
     module: "finchain-dollar",
   },
+  {
+    id: "391",
+    name: "USDST",
+    address: "strato:0x937efa7e3a77e20bbdbd7c0d32b6514f368c1010",
+    symbol: "USDST",
+    url: "https://strato.nexus/",
+    description:
+      "USDST is the native USD-pegged stablecoin of the STRATO chain (BlockApps Mercata), used as the unit of account across its DeFi suite (lending, savings, CDPs, AMM pools). STRATO is the chain/platform; there is no separate STRATO token.",
+    mintRedeemDescription:
+      "USDST is minted and redeemed 1:1 against USD by BlockApps and via the on-chain CDPEngine, which mints USDST against approved on-chain collateral and burns it on debt repayment.",
+    onCoinGecko: "false",
+    gecko_id: "usdst",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/strato_net",
+    wiki: null,
+    module: "usdst",
+  },
 ] as PeggedAsset[];
