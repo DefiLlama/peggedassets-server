@@ -129,6 +129,9 @@ function parseArgs(argv: string[]): Args {
     const key = a.slice(2);
     const next = argv[i + 1];
     if (next === undefined || next.startsWith("--")) {
+      if (key === "asset") {
+        throw new Error(`--asset requires a value (e.g. --asset usd-coin)`);
+      }
       args[key] = true;
     } else {
       args[key] = next;
@@ -372,8 +375,10 @@ async function generateForAsset(
           continue;
         }
 
-        // decimals must be a finite numeric value in a plausible range
-        if (typeof token.decimals !== "number" || token.decimals < 0 || token.decimals > 77) {
+        // decimals must be a finite numeric value in a plausible range.
+        // `Number.isFinite` rejects NaN and ±Infinity (both pass typeof "number"
+        // and pass the < 0 / > 77 comparisons since NaN comparisons are always false).
+        if (typeof token.decimals !== "number" || !Number.isFinite(token.decimals) || token.decimals < 0 || token.decimals > 77) {
           process.stderr.write(
             `[${peggedAsset.gecko_id}] WARN: ${token.chain} token ${token.address} has invalid decimals (${token.decimals}); skipping\n`
           );
