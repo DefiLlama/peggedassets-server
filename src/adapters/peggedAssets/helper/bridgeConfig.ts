@@ -32,9 +32,14 @@ export type BridgeAttribution = {
 export type LayerZeroConfig = BridgeAttribution;
 export type HyperlaneConfig = BridgeAttribution;
 
+// Multi-source bridges (permissionless multi-attestation like Wormhole):
+// config emits an array, one BridgeAttribution per source chain.
+export type WormholeConfig = BridgeAttribution[];
+
 export type BridgeConfigs = {
-  layerzero?: LayerZeroConfig;
-  hyperlane?: HyperlaneConfig;
+  layerzero?: BridgeAttribution;        // single
+  hyperlane?: BridgeAttribution;        // single
+  wormhole?: BridgeAttribution[];       // multi
 };
 
 type BridgeContribution = {
@@ -69,6 +74,7 @@ function collectContributionsByDestination(
 
   enrollSingleSource(groups, configs.layerzero, "layerzero");
   enrollSingleSource(groups, configs.hyperlane, "hyperlane");
+  enrollMultiSource(groups, configs.wormhole, "wormhole");
 
   return groups;
 }
@@ -80,6 +86,17 @@ function enrollSingleSource(
 ) {
   if (!config) return;
   enrollAttribution(groups, config, defaultBridgeName);
+}
+
+function enrollMultiSource(
+  groups: Map<string, DestinationGroup>,
+  configs: BridgeAttribution[] | undefined,
+  defaultBridgeName: string
+) {
+  if (!configs) return;
+  for (const config of configs) {
+    enrollAttribution(groups, config, defaultBridgeName);
+  }
 }
 
 function enrollAttribution(
