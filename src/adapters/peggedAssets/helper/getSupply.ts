@@ -17,6 +17,7 @@ const axios = require("axios");
 const retry = require("async-retry");
 process.env.TAIKO_RPC = 'https://rpc.taiko.xyz'
 process.env.REAL_RPC = 'https://tangible-real.gateway.tenderly.co'
+process.env.STRATO_RPC = process.env.STRATO_RPC || 'https://noderpc.strato.nexus/rpc'
 
 type BridgeAndReserveAddressPair = [string, string[]];
 
@@ -438,6 +439,14 @@ function getIssued({
         return balances;
       }
     }
+    if (api.chain === 'strato') {
+      for (const i of issuedList) {
+        const supply = await api.call({ abi: issuedABI, target: i })
+        const tokenDecimals = await api.call({ abi: 'erc20:decimals', target: i })
+        sumSingleBalance(balances, pegType, supply / 10 ** tokenDecimals, 'issued', false);
+      }
+      return balances;
+    }
     const supplies = await api.multiCall({ abi: issuedABI, calls: issuedList })
     const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issuedList })
     issuedList.forEach((_address, i) => {
@@ -458,6 +467,17 @@ function getUnreleased({
     if (typeof unreleased === "string") unreleased = [unreleased]
 
     if (api.chain === 'starknet') return starknet.getUnreleased({ issued, unreleased, balances, sumSingleBalance, pegType})
+
+    if (api.chain === 'strato') {
+      for (const token of issued) {
+        const decimals = await api.call({ abi: 'erc20:decimals', target: token })
+        for (const reserve of unreleased) {
+          const supply = await api.call({ abi: 'erc20:balanceOf', target: token, params: reserve })
+          sumSingleBalance(balances, pegType, supply / 10 ** decimals);
+        }
+      }
+      return balances;
+    }
 
     const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issued })
     for (let i = 0; i < issued.length; i++) {
