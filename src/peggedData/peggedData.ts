@@ -8107,4 +8107,25 @@ export default [
     wiki: null,
     module: "usdst",
   },
+  {
+    id: "392",
+    name: "Newrails Euro",
+    address: "monad:0x1111b3ded9f1fe1801ad4ebef8e2788183a24111",
+    symbol: "EURW",
+    url: "https://www.newrails.xyz/",
+    description:
+      "EURW is a MiCA-compliant Euro stablecoin issued by Newrails, an EU-licensed Electronic Money Institution regulated by the Bank of Lithuania. Each EURW token is fully backed 1:1 by Euro reserves.",
+    mintRedeemDescription:
+      "EURW token holders can redeem EURW for fiat Euros with 1:1 redeemability.",
+    onCoinGecko: "true",
+    gecko_id: "newrails-euro",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/Newrails_xyz",
+    wiki: null,
+    module: "newrails-euro",
+  },
 ] as PeggedAsset[];
