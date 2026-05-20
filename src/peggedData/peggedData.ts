@@ -318,7 +318,7 @@ export default [
     symbol: "USDD",
     url: "https://usdd.io/",
     description:
-      "USDD is a decentralized cryptocurrency issued by the TRON DAO Reserve.",
+      "USDD is a decentralized, over-collateralized stablecoin that is designed to be pegged 1:1 to the US dollar with enhanced stability and transparency.",
     mintRedeemDescription:
       "Users can stake assets like TRX, sTRX or USDT to mint USDD. The minimum collateral ratio differs according to vault and collateral type.",
     onCoinGecko: "true",
