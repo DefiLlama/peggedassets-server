@@ -8107,4 +8107,25 @@ export default [
     wiki: null,
     module: "usdst",
   },
+  {
+    id: "392",
+    name: "Harbor haEUR",
+    address: "ethereum:0x83Fd69E0FF5767972b46E61C6833408361bF7346",
+    symbol: "haEUR",
+    url: "https://docs.harborfinance.io/",
+    description:
+      "haEUR is a Harbor Anchored Token (haTOKEN): a synthetic euro stablecoin pegged via oracle feeds, fully collateralized and redeemable through Harbor Finance CDP markets.",
+    mintRedeemDescription:
+      "Users mint haEUR by depositing approved collateral (e.g. fxUSD or stETH) into Harbor minters on Ethereum and burn haEUR to redeem collateral.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/0xHarborFi",
+    wiki: null,
+    module: "haeur",
+  },
 ] as PeggedAsset[];
