@@ -7,12 +7,13 @@ const maxRetries = 3;
 const chainBlocks = undefined; // not needed by any adapters
 
 const timeout = (prom: any, time: number, peggedID: string) =>
-  Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
-    async (err) => {
-      console.info("storepegged timedout");
-      console.error(`Could not store peggedAsset ${peggedID}`, err);
-    }
-  );
+  Promise.race([
+    prom,
+    new Promise((_r, rej) => setTimeout(
+      () => rej(new Error(`storePeggedAsset for ${peggedID} timed out after ${time}ms`)),
+      time
+    ))
+  ]);
 
 const stubFn = () => ({})
 

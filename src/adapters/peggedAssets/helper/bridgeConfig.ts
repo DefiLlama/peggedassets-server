@@ -156,6 +156,7 @@ function logManualCollisionSkip(
   sourceChain: string,
   contributions: BridgeContribution[]
 ) {
+  if (process.env.VERBOSE !== 'true') return;
   const bridgeNames = [...new Set(contributions.map((c) => c.bridgeName))].join("+");
   const tokenCount = contributions.reduce((total, c) => total + c.tokens.length, 0);
   console.log(
@@ -168,6 +169,7 @@ function logNativeMintedSkip(
   sourceChain: string,
   contributions: BridgeContribution[]
 ) {
+  if (process.env.VERBOSE !== 'true') return;
   // Native minted on this chain: treating these as bridged-from-source would
   // double-count the chain's own circulating AND negatively subtract from the
   // source chain's circulating.
