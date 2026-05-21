@@ -8107,4 +8107,25 @@ export default [
     wiki: null,
     module: "usdst",
   },
+  {
+    id: "392",
+    name: "Generic USD",
+    address: "citrea:0xac8c1aeb584765db16ac3e08d4736cfce198589b",
+    symbol: "GUSD",
+    url: "https://www.generic.money/",
+    description:
+      "GUSD is a fully collateralized USD stablecoin issued by Generic Money and made accessible across ecosystems.",
+    mintRedeemDescription:
+      "GUSD is minted against collateral on Ethereum and represented on destination chains for ecosystem liquidity.",
+    onCoinGecko: "true",
+    gecko_id: "generic-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: ["https://www.generic.money/whitepaper.pdf"],
+    twitter: "https://x.com/GenericMoney",
+    wiki: "https://www.generic.money/",
+    doublecounted: true,
+  },
 ] as PeggedAsset[];
