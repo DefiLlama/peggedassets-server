@@ -8110,7 +8110,7 @@ export default [
   {
     id: "392",
     name: "Generic USD",
-    address: "0xac8c1aeb584765db16ac3e08d4736cfce198589b",
+    address: "citrea:0xac8c1aeb584765db16ac3e08d4736cfce198589b",
     symbol: "GUSD",
     url: "https://www.generic.money/",
     description:
