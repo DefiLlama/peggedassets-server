@@ -52,7 +52,7 @@ async function getPeggedAsset(
 
   for (let i = 0; i < maxRetries; i++) {
     try {
-      const chainApi = new sdk.ChainApi({ chain })
+      const chainApi = new sdk.ChainApi({ chain, timestamp: _unixTimestamp })
       let balance: PeggedTokenBalance | null = null;
       if (!DEAD_CHAINS.has(chain))
         balance = await Promise.race([
@@ -295,7 +295,30 @@ function getAdapterLabelFromPath(filePath: string): string {
   console.log(`[INFO] Detected stablecoin: ${adapterLabel} (id: ${stablecoinId}) for file: ${passedFile}`);
 
   checkExportKeys(passedFile, chains);
-  const unixTimestamp = Math.round(Date.now() / 1000) - 60;
+
+  // Parse optional date and pegType from argv. Accepts either:
+  //   --date=YYYY-MM-DD   or a bare YYYY-MM-DD positional
+  //   pegType as any remaining positional (e.g. peggedEUR)
+  let dateTimestamp: number | undefined;
+  let pegType: string | undefined;
+  for (const arg of process.argv.slice(3)) {
+    if (arg.startsWith("--date=")) {
+      const parsed = new Date(arg.slice("--date=".length));
+      if (!isNaN(parsed.getTime())) dateTimestamp = Math.round(parsed.getTime() / 1000);
+    } else if (/^\d{4}-\d{2}-\d{2}$/.test(arg)) {
+      const parsed = new Date(arg);
+      if (!isNaN(parsed.getTime())) dateTimestamp = Math.round(parsed.getTime() / 1000);
+    } else if (!pegType) {
+      pegType = arg;
+    }
+  }
+  pegType = pegType ?? "peggedUSD";
+
+  const unixTimestamp = dateTimestamp ?? Math.round(Date.now() / 1000) - 60;
+  if (dateTimestamp) {
+    console.log(`[INFO] Using historical timestamp: ${new Date(dateTimestamp * 1000).toISOString()} (${dateTimestamp})`);
+  }
+
   const chainBlocks = {} as ChainBlocks;
 
   if (!chains.includes("ethereum")) {
@@ -303,11 +326,6 @@ function getAdapterLabelFromPath(filePath: string): string {
   }
 
   const ethBlock = chainBlocks.ethereum;
-
-  let pegType = process.argv[3];
-  if (pegType === undefined) {
-    pegType = "peggedUSD";
-  }
   let peggedBalances: PeggedAssetIssuance = {};
   let bridgedFromMapping: BridgeMapping = {};
 
