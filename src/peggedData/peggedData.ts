@@ -1682,6 +1682,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/CantoPublic",
     wiki: "https://wiki.defillama.com/wiki/Canto",
+    deadUrl: true,
   },
   {
     id: "79",
