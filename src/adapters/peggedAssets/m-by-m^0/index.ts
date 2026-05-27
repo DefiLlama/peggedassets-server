@@ -41,6 +41,9 @@ const chainContracts = {
   hyperliquid: {
     bridgedFromETH: [M_TOKEN_ADDRESS],
   },
+  monad: {
+    bridgedFromETH: [M_TOKEN_ADDRESS],
+  },
 };
 
 const adapter: PeggedIssuanceAdapter = {
