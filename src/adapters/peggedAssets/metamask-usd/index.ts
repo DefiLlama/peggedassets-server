@@ -4,7 +4,10 @@ const chainContracts = {
     },
     linea: {
         issued: ["0xaca92e438df0b2401ff60da7e4337b687a2435da"]
-    }
+    },
+    monad: {
+        issued: ["0xaca92e438df0b2401ff60da7e4337b687a2435da"]
+    },
 };
 
 import { addChainExports } from "../helper/getSupply";
