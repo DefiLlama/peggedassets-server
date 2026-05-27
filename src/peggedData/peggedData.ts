@@ -8134,7 +8134,7 @@ export default [
     name: "Harbor haEUR",
     address: "ethereum:0x83Fd69E0FF5767972b46E61C6833408361bF7346",
     symbol: "haEUR",
-    url: "https://docs.harborfinance.io/",
+    url: "https://www.harborfinance.io/",
     description:
       "haEUR is a Harbor Anchored Token (haTOKEN): a synthetic euro stablecoin pegged via oracle feeds, fully collateralized and redeemable through Harbor Finance markets.",
     mintRedeemDescription:
@@ -8149,5 +8149,6 @@ export default [
     twitter: "https://x.com/0xHarborFi",
     wiki: null,
     module: "haeur",
+    yieldBearing: true,
   },
 ] as PeggedAsset[];
