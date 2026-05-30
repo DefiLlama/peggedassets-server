@@ -681,6 +681,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/spicetradeai",
     wiki: "https://wiki.defillama.com/wiki/SpiceUSD_(USDS)",
+    deadFrom: "2022-11-20",
   },
   {
     id: "32",
@@ -1360,6 +1361,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/fantomfdn/",
     wiki: "https://wiki.defillama.com/wiki/Fantom",
+    deadFrom: "2022-04-17",
   },
   {
     id: "64",
