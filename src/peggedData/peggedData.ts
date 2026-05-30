@@ -473,6 +473,7 @@ export default [
     twitter: "https://twitter.com/coinflexdotcom",
     wiki: "https://wiki.defillama.com/wiki/flexUSD",
     module: "flex-usd",
+    deadFrom: "2022-06-23",
   },
   {
     id: "22",
