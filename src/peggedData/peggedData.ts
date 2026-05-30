@@ -1513,6 +1513,7 @@ export default [
     ],
     twitter: "https://twitter.com/fluid_fi/",
     wiki: "https://wiki.defillama.com/wiki/Fluid_Finance",
+    deadFrom: "2024-04-21",
   },
   {
     id: "71",
