@@ -2090,6 +2090,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Platypusdefi",
     deprecated: true,
+    deadFrom: "2023-02-16",
     wiki: null,
   },
   {
