@@ -5440,7 +5440,7 @@ export default [
     wiki: "https://docs.resupply.fi/resupply-protocol/overview",
     doublecounted: true
   },
-  {
+  /*{ not a stablecoin
     id: "257",
     name: "OpenEden TBILL",
     address: "0xdd50c053c096cb04a3e3362e2b622529ec5f2e8a",
@@ -5458,7 +5458,7 @@ export default [
     twitter: "https://x.com/OpenEden_X",
     wiki: "https://docs.openeden.com/",
     yieldBearing: true,
-  },
+  },*/
   {
     id: "258",
     name: "A7A5",
