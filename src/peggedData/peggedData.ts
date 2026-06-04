@@ -8156,4 +8156,25 @@ export default [
     module: "haeur",
     yieldBearing: true,
   },
+  {
+    id: "394",
+    name: "invUSD Stablecoin",
+    address: "ethereum:0x5377680B5986296AA4F9e684e5315a4F24832e56",
+    symbol: "invUSD",
+    url: "https://app.monolith.market/1/coin/0",
+    description:
+      "Monolith Stablecoin backed by sINV launched on Monolith protocol by the Inverse Finance team.",
+    mintRedeemDescription:
+      "invUSD can be minted against sINV, when the loan is repaid to retrieve the collateral, the paid back invUSD is burned. invUSD can also be redeemed for collateral minus a redemption fee.",
+    onCoinGecko: "true",
+    gecko_id: "inverse-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/InverseFinance",
+    wiki: "https://docs.monolith.market/protocol/stablecoin-factory",
+    module: "inverse-usd",
+  },
 ] as PeggedAsset[];
