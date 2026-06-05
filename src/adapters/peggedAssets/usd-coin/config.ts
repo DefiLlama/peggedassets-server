@@ -537,5 +537,8 @@ export const chainContracts: ChainContracts = {
   },
   pharos: {
     issued: ["0xC879C018dB60520F4355C26eD1a6D572cdAC1815"]
+  },
+  injective: {
+    issued: ["0xa00C59fF5a080D2b954d0c75e46E22a0c371235a"], // native USDC on Injective EVM
   }
 };
