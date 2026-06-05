@@ -1121,6 +1121,9 @@ const adapter: PeggedIssuanceAdapter = {
   edgex: {
     minted: circleAPIChainMinted("EDGE"),
   },
+  pharos: {
+    minted: chainMinted("pharos", 6),
+  },
 };
 
 export default adapter;
