@@ -397,5 +397,8 @@ export const chainContracts: ChainContracts = {
   },
   mantra: {
     bridgedFromETH: ["0x3806640578b710d8480910bF51510bc538d2F51A"], 
+  },
+  citrea: {
+    bridgedFromETH: ["0x9f3096Bac87e7F03DC09b0B416eB0DF837304dc4"], // USDT.e
   }
 };

@@ -1148,6 +1148,9 @@ const adapter: PeggedIssuanceAdapter = {
   mantra: {
     ethereum: bridgedSupply("mantra", 6, chainContracts.mantra.bridgedFromETH)
   },
+  citrea: {
+    ethereum: bridgedSupply("citrea", 6, chainContracts.citrea.bridgedFromETH), // USDT.e
+  },
 };
 
 export default adapter;

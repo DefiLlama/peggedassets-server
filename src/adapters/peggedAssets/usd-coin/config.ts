@@ -534,5 +534,8 @@ export const chainContracts: ChainContracts = {
   },
   edgex: {
     issued: ["0x98d2919b9A214E6Fa5384AC81E6864bA686Ad74c"]
+  },
+  citrea: {
+    bridgedFromETH: ["0xE045e6c36cF77FAA2CfB54466D71A3aEF7bbE839"], // USDC.e
   }
 };
