@@ -8177,4 +8177,26 @@ export default [
     wiki: "https://docs.monolith.market/protocol/stablecoin-factory",
     module: "inverse-usd",
   },
+  {
+    id: "395",
+    name: "PayFi Strategy Token USDC",
+    address: "ethereum:0x22aE3D9a738471f405169Af055d31c687087d4c7",
+    symbol: "PSTUSDC",
+    url: "https://app.huma.finance/",
+    description:
+      "PayFi Strategy Token USDC (PSTUSDC) is a yield-bearing token issued by Huma Finance. Users deposit USDC to mint PSTUSDC, which accrues yield generated from Huma's PayFi receivables financing strategy.",
+    mintRedeemDescription:
+      "PSTUSDC is minted against USDC deposited into Huma's PayFi strategy and is burned on redemption, with the token's USDC exchange rate increasing over time as yield accrues.",
+    onCoinGecko: "true",
+    gecko_id: "payfi-strategy-token-usdc",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/humafinance",
+    wiki: "https://docs.huma.finance/",
+    module: "payfi-strategy-token-usdc",
+    yieldBearing: true,
+  },
 ] as PeggedAsset[];
