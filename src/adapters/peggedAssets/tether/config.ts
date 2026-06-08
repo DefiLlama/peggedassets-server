@@ -10,7 +10,7 @@ export const chainContracts: ChainContracts = {
   polygon: {
     bridgeOnETH: ["0x40ec5B33f54e0E8A33A975908C5BA1c14e5BbbDf"],
     bridgedFromETH: [
-      "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+      "0xc2132d05d31c914a87c6611c10748aeb04b58e8f", // usdt0
       "0x9417669fBF23357D2774e9D421307bd5eA1006d2", // wormhole
       "0xceed2671d8634e3ee65000edbbee66139b132fbf", // axelar
     ],
@@ -53,26 +53,17 @@ export const chainContracts: ChainContracts = {
       "FwEHs3kJEdMa2qZHv7SgzCiFXUQPEycEXksfBkwmS8gj", // allbridge
       "B2wfeYz5VtBnQVrX4M8F6FeDrprVrzKPws5qg1in8bzR", // wormhole
     ],
-    unreleased: ["Q6XprfkF8RQQKoQVG33xT88H7wi8Uk1B1CC7YAs69Gi","A3znyaRYUvi7GbQv1pp9CqqiVo7anddU9rPKFH55V28R"],
+    unreleased: ["Q6XprfkF8RQQKoQVG33xT88H7wi8Uk1B1CC7YAs69Gi", "A3znyaRYUvi7GbQv1pp9CqqiVo7anddU9rPKFH55V28R"],
   },
   tron: {
     issued: ["TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"],
     unreleased: ["TKHuVq1oKVruCGLvqVexFs6dawKv6fQgFs"],
   },
-  arbitrum: {
-    bridgeOnETH: ["0xcee284f754e854890e311e3280b767f80797180d"],
-    bridgedFromETH: ["0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9"], // USDT0
-  },
-  plasma: {
-    bridgedFromETH: [
-      "0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb", // USDT0
-    ], 
-  },
   optimism: {
     bridgeOnETH: ["0x99c9fc46f92e8a1c0dec1b1747d010903e884be1"],
     bridgedFromETH: [
       "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58",
-      "0x01bff41798a0bcf287b996046ca68b395dbc1071" // USDT0
+      "0x01bff41798a0bcf287b996046ca68b395dbc1071", // USDT0
     ],
   },
   boba: {
@@ -202,7 +193,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x3c751Feb00364CA9e2d0105c40F0b423abf1DEE3"], // multichain
   },
   rsk: {
-    bridgedFromETH: ["0xef213441a85df4d7acbdae0cf78004e1e486bb96"],
+    bridgedFromETH6Decimals: ["0x779ded0c9e1022225f8e0630b35a9b54be713736"], // usdt0
+    bridgedFromETH18Decimals: ["0xef213441a85df4d7acbdae0cf78004e1e486bb96"], // usdt
   },
   reinetwork: {
     bridgedFromETH: ["0x988a631Caf24E14Bb77EE0f5cA881e8B5dcfceC7"], // celer
@@ -251,6 +243,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: [
       "0xfe97e85d13abd9c1c33384e796f10b73905637ce", // celer
       "0x8b8689c7f3014a4d86e4d1d0daaf74a47f5e0f27", // (converted address) shuttleflow
+      "0xaf37E8B6C9ED7f6318979f56Fc287d76c30847ff", // usdt0
     ],
   },
   ontology: {
@@ -353,6 +346,7 @@ export const chainContracts: ChainContracts = {
   mantle: {
     bridgedFromETH: [
       "0x201EBa5CC46D216Ce6DC03F6a759e8E766e956aE", // USDT
+      "0x779Ded0c9e1022225f8E0630b35a9b54bE713736", // USDT0
     ],
   },
   linea: {
@@ -362,60 +356,46 @@ export const chainContracts: ChainContracts = {
   },
   morph: {
     bridgeOnETH: ["0x44c28f61A5C2Dd24Fc71D7Df8E85e18af4ab2Bd8"],
+    bridgedFromETH: ["0xe7cd86e13AC4309349F30B3435a9d337750fC82D"], // USDT0
   },
   occ: {
     bridgedFromETH: ["0x7277Cc818e3F3FfBb169c6Da9CC77Fc2d2a34895"],
   },
-  ink: {
-    bridgedFromETH: ["0x0200C29006150606B650577BBE7B6248F58470c1"]
-  },
-  berachain: {
-    bridgedFromETH: ["0x779Ded0c9e1022225f8E0630b35a9b54bE713736"] // USDT0
-  },
   sei: {
     bridgedFromKava: ["0xB75D0B03c06A926e488e2659DF1A861F860bD3d1"],
-    bridgedFromETH: ["0x9151434b16b9763660705744891fa906f660ecc5"], // USDT0
   },
   zircuit: {
     bridgedFromETH: ["0x46dDa6a5a559d861c06EC9a95Fb395f5C3Db0742"],
   },
-  unichain: {
-    bridgedFromETH: ["0x9151434b16b9763660705744891fa906f660ecc5"], // USDT0
-  },
-  corn: {
-    bridgedFromETH: ["0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb"], // USDT0
-  },
   move: {
     bridgedFromETH: ["0x447721a30109c662dde9c73a0c2c9c9c459fb5e5a9c92f03c50fa69737f5d08d"], // OFT native bridge
-  },
-  hemi: {
-    bridgedFromETH: ["0xbB0D083fb1be0A9f6157ec484b6C79E0A4e31C2e"], 
-  },
-  flare: { 
-    bridgedFromETH: ["0xe7cd86e13AC4309349F30B3435a9d337750fC82D"], // USDT0
-  },
-  plume_mainnet: {
-    bridgedFromETH: [
-      "0xda6087E69C51E7D31b6DBAD276a3c44703DFdCAd", // stargate
-      //"0x7c5568fd326086D35B002Cc705C852dbaB7438a8", // deprecated - arbitrum native bridge
-    ]
-  },
-  hyperliquid: {
-    bridgedFromETH: ["0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb"], // USDT0
   },
   imx: {
     bridgeOnETH: ["0xBa5E35E26Ae59c7aea6F029B68c6460De2d13eB6"],
     bridgedFromETH: [
       "0x68bcc7F1190AF20e7b572BCfb431c3Ac10A936Ab", // native bridge
-      ],
+    ],
   },
   core: {
-    bridgedFromETH: ["0x900101d06a7426441ae63e9ab3b9b0f63be145f1"], 
+    bridgedFromETH: ["0x900101d06a7426441ae63e9ab3b9b0f63be145f1"],
   },
   soneium: {
-    bridgedFromETH: ["0x102d758f688a4C1C5a80b116bD945d4455460282"], 
+    bridgedFromETH: ["0x102d758f688a4C1C5a80b116bD945d4455460282"],
   },
   cardano: {
     bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534454"],
   },
+  katana: {
+    bridgeOnETH: ["0x6d4f9f9f8f0155509ecd6Ac6c544fF27999845CC"], // vb usdt (origin) on ethmainnet
+    bridgedFromETH: ["0x2DCa96907fde857dd3D816880A0df407eeB2D2F2"], // vb usdt on katana
+  },
+  etlk: {
+    bridgedFromETH: ["0x2C03058C8AFC06713be23e58D2febC8337dbfE6A"], // Wrapped Asset Bridge
+  },
+  rbn: {
+    bridgedFromETH: ["0x8C4aCd74Ff4385f3B7911432FA6787Aa14406f8B"],
+  },
+  mantra: {
+    bridgedFromETH: ["0x3806640578b710d8480910bF51510bc538d2F51A"], 
+  }
 };

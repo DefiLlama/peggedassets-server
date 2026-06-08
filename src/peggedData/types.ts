@@ -16,7 +16,14 @@ type PegType =
   | "peggedCOP" //colombian peso
   | "peggedREAL"//brazilian real 
   | "peggedRUB" //russian ruble
-  | "peggedAUD"; //Australian currency
+  | "peggedAUD" //Australian currency
+  | "peggedKES" //Kenyan shilling
+  | "peggedZAR" //South African rand
+  | "peggedNGN" //Nigerian naira
+  | "peggedXOF" //West African CFA franc
+  | "peggedGHS" //Ghanaian cedi
+  | "peggedCLP" //chilean peso
+  | "peggedPEN" //peruvian sol
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 
@@ -53,7 +60,26 @@ export type PeggedAsset = {
   doublecounted?: boolean;
   deprecated?: boolean;
   yieldBearing?: boolean;
+  bridgeConfig?: BridgeConfig;
+  module?: string;  // adapter module to use, defaults to gecko_id if not set
 };
+
+type BridgeConfig = {
+  lzConfig?: {
+    symbols?: string[]; // list of symbols to include in the config, if empty or not set, includes all
+    excludeChains?: string[]; // llama chain keys to skip in generated LZ config (avoids collisions with manual entries on wrong-key chains)
+    oftTypes?: string[]; // advanced override: explicit LZ types to include; bypasses auto-inference.
+    chainMap?: { [llamaKey: string]: string }; // rename emitted chain keys: { frax: "fraxtal" } maps LZ's frax to adapter's fraxtal
+    requirePeggedToSource?: boolean; // advanced: force oftTypes override to additionally require peggedTo.chainName === detected source
+  };
+  hyperlaneConfig?: {
+    symbols?: string[]; // list of symbols to match against registry tokens; default: [peggedAsset.symbol]
+    excludeChains?: string[]; // DefiLlama chain keys to skip in generated config (avoids collisions with manual bridgedFrom entries)
+    standardTypes?: string[]; // advanced override: explicit Hyperlane standard types to include; bypasses default synthetic-only filter
+    chainMap?: { [llamaKey: string]: string }; // per-asset chain key rename on top of the generator's global Hyperlane→DefiLlama mapping
+    sourceChain?: string; // pin the source chain (DefiLlama llamaKey) instead of relying on collateral-side voting; protects against silent flips when the registry adds new collateral entries
+  };
+}
 
 type Bridge = {
   name: string;

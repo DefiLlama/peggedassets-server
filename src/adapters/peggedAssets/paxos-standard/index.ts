@@ -8,6 +8,9 @@ const chainContracts = {
   linea: {
     bridgedFromETH: ["0xd2bc272EA0154A93bf00191c8a1DB23E67643EC5"],
   },
+  solana: {
+    issued: ["HVbpJAQGNpkgBaYBZQBR1t7yFdvaYVp2vCQQfKKEN4tM"],
+  },
 };
 import { addChainExports } from "../helper/getSupply";
 const adapter = addChainExports(chainContracts);

@@ -15,6 +15,9 @@ const chainContracts: ChainContracts = {
   ethereum: {
     bridgedFromRSK: ["0x69f6d4d4813f8e2e618dae7572e04b6d5329e207"],
   },
+  arbitrum: {
+    bridgedFromRSK: ["0x2ad62eb9744c720364f6ac856360a43e8a2229b5"],
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -51,6 +54,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   ethereum: {
     rsk: bridgedSupply("ethereum", 18, chainContracts.ethereum.bridgedFromRSK),
+  },
+  arbitrum: {
+    rsk: bridgedSupply("arbitrum", 18, chainContracts.arbitrum.bridgedFromRSK),
   },
 };
 

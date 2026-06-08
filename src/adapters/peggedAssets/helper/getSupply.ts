@@ -4,6 +4,7 @@ import * as cardano from "../helper/cardano";
 import { getTokenSupply as solanaGetTokenSupply } from "../helper/solana";
 import * as sui from "../helper/sui";
 import * as tezos from "../helper/tezos";
+import * as starknet from "../helper/starknet";
 import { getZilliqaTokenSupply } from "../helper/zilliqa";
 import type {
   Balances,
@@ -16,6 +17,7 @@ const axios = require("axios");
 const retry = require("async-retry");
 process.env.TAIKO_RPC = 'https://rpc.taiko.xyz'
 process.env.REAL_RPC = 'https://tangible-real.gateway.tenderly.co'
+process.env.STRATO_RPC = process.env.STRATO_RPC || 'https://noderpc.strato.nexus/rpc'
 
 type BridgeAndReserveAddressPair = [string, string[]];
 
@@ -112,15 +114,23 @@ export function solanaMintedOrBridged(
   targets: string[],
   pegType?: PeggedAssetType
 ) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
+  return async function () {
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     for (let target of targets) {
       const totalSupply = await solanaGetTokenSupply(target);
+      sumSingleBalance(balances, assetPegType, totalSupply, target, true);
+    }
+    return balances;
+  };
+}
+
+export function fogoMintedOrBridged(targets: string[], pegType?: PeggedAssetType) {
+  return async function () {
+    let balances = {} as Balances;
+    let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
+    for (let target of targets) {
+      const totalSupply = await solanaGetTokenSupply(target, "fogo");
       sumSingleBalance(balances, assetPegType, totalSupply, target, true);
     }
     return balances;
@@ -385,46 +395,61 @@ function getIssued({
 }: { issued: string[] | string, pegType: PeggedAssetType, issuedABI: string }) {
   return async (api: ChainApi) => {
     const balances = {} as Balances;
+    const issuedList = typeof issued === "string" ? [issued] : issued;
     if (api.chain === "solana") {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await solanaGetTokenSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
     }
     if (api.chain === "sui") {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await sui.getTokenSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
     }
     if (api.chain === "aptos") {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await aptos.getTokenSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
     }
     if (api.chain === 'tezos') {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await tezos.getTotalSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
+    if (api.chain === 'starknet') {
+      for (const i of issuedList) {
+        const supply = await starknet.getTotalSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
     }
 
     if (api.chain === 'cardano') {
-      for (const i of issued) {
+      for (const i of issuedList) {
         const supply = await cardano.getTotalSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
     }
-    if (typeof issued === "string") issued = [issued];
-    const supplies = await api.multiCall({ abi: issuedABI, calls: issued })
-    const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issued })
-    issued.forEach((_address, i) => {
+    if (api.chain === 'strato') {
+      for (const i of issuedList) {
+        const supply = await api.call({ abi: issuedABI, target: i })
+        const tokenDecimals = await api.call({ abi: 'erc20:decimals', target: i })
+        sumSingleBalance(balances, pegType, supply / 10 ** tokenDecimals, 'issued', false);
+      }
+      return balances;
+    }
+    const supplies = await api.multiCall({ abi: issuedABI, calls: issuedList })
+    const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issuedList })
+    issuedList.forEach((_address, i) => {
       sumSingleBalance(balances, pegType, supplies[i] / 10 ** decimals[i], 'issued', false);
     })
 
@@ -440,6 +465,20 @@ function getUnreleased({
     const balances = {} as Balances;
     if (typeof issued === "string") issued = [issued];
     if (typeof unreleased === "string") unreleased = [unreleased]
+
+    if (api.chain === 'starknet') return starknet.getUnreleased({ issued, unreleased, balances, sumSingleBalance, pegType})
+
+    if (api.chain === 'strato') {
+      for (const token of issued) {
+        const decimals = await api.call({ abi: 'erc20:decimals', target: token })
+        for (const reserve of unreleased) {
+          const supply = await api.call({ abi: 'erc20:balanceOf', target: token, params: reserve })
+          sumSingleBalance(balances, pegType, supply / 10 ** decimals);
+        }
+      }
+      return balances;
+    }
+
     const decimals = await api.multiCall({ abi: 'erc20:decimals', calls: issued })
     for (let i = 0; i < issued.length; i++) {
       const totalSupply = await api.multiCall({ abi: 'erc20:balanceOf', target: issued[i], calls: unreleased })

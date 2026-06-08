@@ -4,7 +4,8 @@ const chainContracts = {
     issued: "0x6fA0BE17e4beA2fCfA22ef89BF8ac9aab0AB0fc9", pegType
   },
   tron: {
-    issued: "TLeVfrdym8RoJreJ23dAGyfJDygRtiWKBZ", pegType
+    issued: "TLeVfrdym8RoJreJ23dAGyfJDygRtiWKBZ", pegType,
+    issuedABI: "function totalLiquidity() view returns (uint256)",
   },
 };
 

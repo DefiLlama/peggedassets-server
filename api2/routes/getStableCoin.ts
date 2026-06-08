@@ -1,7 +1,6 @@
 
-import { importAdapter } from "../../src/peggedAssets/utils/importAdapter";
+import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../src/peggedData/peggedData";
-import { getChainDisplayName } from "../../src/utils/normalizeChain";
 import { cache } from "../cache";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
@@ -18,16 +17,12 @@ export function getStablecoinData(peggedID: string | undefined) {
 
   const peggedData = peggedAssets.find((pegged) => pegged.id === peggedID);
   if (!peggedData) throw new Error( "Pegged asset is not in our database")
-  const module = importAdapter(peggedData)
   const { balances, lastBalance } = cache.peggedAssetsData?.[peggedData.id] ?? {}
   const lastBalancesHourlyRecord = lastBalance
   const historicalPeggedBalances = balances ?? [];
 
   if (!useHourlyData) replaceLast(historicalPeggedBalances, lastBalancesHourlyRecord);
   let response = peggedData as any;
-  if (module.methodology !== undefined) response.methodology = module.methodology;
-  if (module.misrepresentedTokens !== undefined)  response.misrepresentedTokens = true;
-  if (module.hallmarks !== undefined) response.hallmarks = module.hallmarks;
   response.chainBalances = {};
   const currentChainBalances: { [chain: string]: object } = {};
   response.currentChainBalances = currentChainBalances;
@@ -35,7 +30,7 @@ export function getStablecoinData(peggedID: string | undefined) {
 
   Object.entries(lastBalancesHourlyRecord!).map(([chain, issuances]: any) => {
     const normalizedChain = chain;
-    const displayChainName = getChainDisplayName(chain, useNewChainNames);
+    const displayChainName = sdk.chainUtils.getChainLabelFromKey(chain);
     if (chain !== "totalCirculating") currentChainBalances[displayChainName] = issuances.circulating;
     const container = {} as any;
 

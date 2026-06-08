@@ -6,12 +6,12 @@ import {
   PeggedTokenBalance,
 } from "../../types";
 import { getCurrentUnixTimestamp } from "../../utils/date";
+import { isDeadChain } from "../../utils/deadChains";
 import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
 import {
   dailyPeggedBalances,
   hourlyPeggedBalances,
 } from "../utils/getLastRecord";
-import { executeAndIgnoreErrors } from "./errorDb";
 import storeNewPeggedBalances from "./storeNewPeggedBalances";
 
 type ChainBlocks = {
@@ -100,8 +100,10 @@ async function getPeggedAsset(
       const errorMessage = e instanceof Error ? e.message : String(e);
       
       if (i >= maxRetries - 1) {
-        console.warn(`${tag} Chain ${chain} failed after ${maxRetries} attempts (${label}):`, errorMessage);
-        console.log(`${tag} Using snapshot fallback for chain ${chain} (${label})`);
+        if (process.env.VERBOSE === 'true') {
+          console.warn(`${tag} Chain ${chain} failed after ${maxRetries} attempts (${label}):`, errorMessage);
+          console.log(`${tag} Using snapshot fallback for chain ${chain} (${label})`);
+        }
 
         try {
           const snap = await getClosestSnapshotForChain(
@@ -123,36 +125,30 @@ async function getPeggedAsset(
                 bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
                 bridgedFromMapping[issuanceType].push(extracted as any);
               }
-              
-              console.log(`✅ ${tag} Cache fallback successful for ${chain} (${label})`);
-              
+
+              if (process.env.VERBOSE === 'true') console.log(`✅ ${tag} Cache fallback successful for ${chain} (${label})`);
+
               if (extrapolationMetadata) {
                 extrapolationMetadata.extrapolated = true;
                 if (!extrapolationMetadata.extrapolatedChains.find(ec => ec.chain === chain)) {
-                  extrapolationMetadata.extrapolatedChains.push({ 
-                    chain, 
-                    timestamp: timestamp 
+                  extrapolationMetadata.extrapolatedChains.push({
+                    chain,
+                    timestamp: timestamp
                   });
                 }
               }
-              
+
               return;
             } else {
-              console.warn(`${tag} No data extracted from snapshot for chain ${chain} (${label})`);
+              if (process.env.VERBOSE === 'true') console.warn(`${tag} No data extracted from snapshot for chain ${chain} (${label})`);
             }
           } else {
-            console.warn(`${tag} No cached snapshot found for chain ${chain} (${label})`);
+            if (process.env.VERBOSE === 'true') console.warn(`${tag} No cached snapshot found for chain ${chain} (${label})`);
           }
         } catch (cacheError) {
           console.error(`${tag} Cache fallback failed for ${peggedAsset.name} on chain ${chain} (${label}):`, cacheError);
         }
-        
-        executeAndIgnoreErrors("INSERT INTO `errors2` VALUES (?, ?, ?, ?)", [
-          getCurrentUnixTimestamp(),
-          peggedAsset.gecko_id,
-          chain,
-          String(e),
-        ]);
+
         peggedBalances[chain][issuanceType] = { [pegType]: null };
       } else {
         await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
@@ -244,15 +240,6 @@ async function calcCirculating(
             console.error(
               `Null balance or 0 circulating error on chain ${chain}`
             );
-            executeAndIgnoreErrors(
-              "INSERT INTO `errors2` VALUES (?, ?, ?, ?)",
-              [
-                getCurrentUnixTimestamp(),
-                peggedAsset.gecko_id,
-                chain,
-                `Null balance or 0 circulating error`,
-              ]
-            );
             return;
           }
           circulating[pegType]! -= balance;
@@ -280,12 +267,6 @@ async function calcCirculating(
             }
           }
         } catch (_) {}
-        executeAndIgnoreErrors("INSERT INTO `errors2` VALUES (?, ?, ?, ?)", [
-          getCurrentUnixTimestamp(),
-          peggedAsset.gecko_id,
-          chain,
-          `Pegged asset has negative circulating amount`,
-        ]);
         throw new Error(
           `Pegged asset on chain ${chain} has negative circulating amount`
         );
@@ -355,6 +336,12 @@ export async function storePeggedAsset(
             if (typeof issuanceFunction !== "function") {
               return;
             }
+            if (isDeadChain(chain)) {
+              peggedBalances[chain] = peggedBalances[chain] || {};
+              peggedBalances[chain][issuanceType] = { [pegType]: 0 };
+              return;
+            }
+
             const api = new sdk.ChainApi({ 
               chain: (issuanceType === 'minted' || issuanceType === 'unreleased') ? chain : issuanceType, 
               timestamp: unixTimestamp 

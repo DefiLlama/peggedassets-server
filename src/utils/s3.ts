@@ -1,5 +1,7 @@
-import aws from "aws-sdk";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import type { Readable } from "stream";
+
+const s3 = new S3Client({});
 
 export const datasetBucket = "llama-stablecoins-data";
 
@@ -16,8 +18,8 @@ export async function store(
   hourlyCache = false,
   compressed = true
 ) {
-  await new aws.S3()
-    .upload({
+  await s3.send(
+    new PutObjectCommand({
       Bucket: datasetBucket,
       Key: filename,
       Body: body,
@@ -30,7 +32,7 @@ export async function store(
         ContentType: "application/json",
       }),
     })
-    .promise();
+  );
 }
 
 export async function storeDataset(
@@ -38,13 +40,13 @@ export async function storeDataset(
   body: string,
   ContentType = "text/csv"
 ) {
-  await new aws.S3()
-    .upload({
+  await s3.send(
+    new PutObjectCommand({
       Bucket: datasetBucket,
       Key: `temp/${filename}`,
       Body: body,
       ACL: "public-read",
       ContentType,
     })
-    .promise();
+  );
 }

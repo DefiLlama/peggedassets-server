@@ -1,4 +1,3 @@
-import { successResponse, wrap, IResponse } from "./utils/shared";
 const axios = require("axios");
 
 export async function craftRatesResponse() {
@@ -10,12 +9,3 @@ export async function craftRatesResponse() {
 
   return rates;
 }
-
-const handler = async (
-  _event: AWSLambda.APIGatewayEvent
-): Promise<IResponse> => {
-  const chainData = await craftRatesResponse();
-  return successResponse(chainData, 10 * 60); // 10 mins cache
-};
-
-export default wrap(handler);

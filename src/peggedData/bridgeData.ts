@@ -1739,6 +1739,14 @@ export default {
     bridge: "wan",
     sourceChain: formattedSourceChains.eth,
   },
+  "1f3aec8bfe7ea4fe14c5f121e2a92e301afe414147860d557cac7e345553444378": {
+    bridge: "circle",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx": {
+    bridge: "circle",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1975,5 +1983,9 @@ export const bridgeInfo = {
   layerzero: {
     name: "LayerZero",
     link: "https://layerzero.network/",
+  },
+  circle: {
+    name: "Circle xReserve",
+    link: "https://www.circle.com/",
   },
 } as BridgeInfo;

@@ -36,6 +36,9 @@ const chainContracts: ChainContracts = {
   cardano: {
     bridgedFromETH: ["25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93545555243"],
   },
+  tempo: {
+    bridgedFromETH: ["0x20c0000000000000000000001621e21f71cf12fb"], // EURC.e (Bridged EURC via Stargate) on Tempo Mainnet
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -192,6 +195,16 @@ const adapter: PeggedIssuanceAdapter = {
   },
   cardano: {
     ethereum: getCardanoSupply(),
+  },
+  tempo: {
+    ethereum: bridgedSupply(
+      "tempo",
+      6,
+      chainContracts.tempo.bridgedFromETH,
+      "tempo",
+      "Ethereum",
+      "peggedEUR"
+    ),
   },
 };
 

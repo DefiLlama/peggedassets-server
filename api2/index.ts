@@ -1,6 +1,7 @@
 import * as HyperExpress from "hyper-express";
 import { initCache } from "./cache";
 import setRoutes from "./routes";
+import { setupHealthRoutes } from "./routes/healthz";
 import process from "process";
 import fs from 'fs'
 
@@ -25,6 +26,7 @@ async function main() {
 
   setRoutes(router)
   webserver.get('/hash', (_req, res) => res.send(process.env.CURRENT_COMMIT_HASH))
+  setupHealthRoutes(webserver)
 
   webserver.listen(port)
     .then(() => {

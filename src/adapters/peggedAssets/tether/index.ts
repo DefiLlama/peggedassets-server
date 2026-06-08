@@ -138,7 +138,7 @@ async function solanaUnreleased() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    
+
     // Check all unreleased accounts and sum their balances
     let totalUnreleased = 0;
     for (const unreleasedAccount of chainContracts["solana"].unreleased) {
@@ -148,7 +148,7 @@ async function solanaUnreleased() {
       );
       totalUnreleased += unreleased;
     }
-    
+
     sumSingleBalance(balances, "peggedUSD", totalUnreleased);
     return balances;
   };
@@ -458,7 +458,7 @@ async function suiWormholeBridged() {
   ) {
     let balances = {} as Balances;
     const res = await axios.get(`https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdt`)
-    const totalSupply = parseInt(res.data.find((t:any)=>t.coin==="USDT_ETH").cumulative_balance);
+    const totalSupply = parseInt(res.data.find((t: any) => t.coin === "USDT_ETH").cumulative_balance);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c", true);
     return balances;
   };
@@ -470,18 +470,18 @@ async function suiBridged(): Promise<Balances> {
     "0x375f70cf2ae4c00bf37117d0c85a2c71545e6ee05c4a5c7d282cd66a4504b068::usdt::USDT",
   );
   sumSingleBalance(balances, "peggedUSD", supply, 'issued', false);
-        return balances;
+  return balances;
 }
 
 async function moveSupply(): Promise<Balances> {
   const balances = {} as Balances;
-  
+
   const resp = await function_view({
     functionStr: '0x1::fungible_asset::supply',
     type_arguments: ['0x1::object::ObjectCore'],
     args: [chainContracts.move.bridgedFromETH[0]],
   });
-  balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
+  sumSingleBalance(balances, "peggedUSD", Number(resp.vec[0]) / 1e6, "layerzero", false, "ethereum");
 
   return balances;
 }
@@ -587,8 +587,8 @@ async function injectiveETHBridged(_api: ChainApi) {
   const bscApi = await getApi('ethereum', _api)
   let balances = {} as Balances;
   let assetPegType = "peggedUSD" as PeggedAssetType
-  const bscBal = await bscApi.call({  abi: 'erc20:balanceOf', target: '0xdAC17F958D2ee523a2206206994597C13D831ec7', params: '0xF955C57f9EA9Dc8781965FEaE0b6A2acE2BAD6f3'})
-  sumSingleBalance(balances, assetPegType, bscBal/ 1e6, bridgeName, false, 'ethereum')
+  const bscBal = await bscApi.call({ abi: 'erc20:balanceOf', target: '0xdAC17F958D2ee523a2206206994597C13D831ec7', params: '0xF955C57f9EA9Dc8781965FEaE0b6A2acE2BAD6f3' })
+  sumSingleBalance(balances, assetPegType, bscBal / 1e6, bridgeName, false, 'ethereum')
   return balances;
 }
 
@@ -597,8 +597,8 @@ async function stacksBSCBridged(_api: ChainApi) {
   const bscApi = await getApi('bsc', _api)
   let balances = {} as Balances;
   let assetPegType = "peggedUSD" as PeggedAssetType
-  const bscBal = await bscApi.call({  abi: 'erc20:balanceOf', target: '0x55d398326f99059fF775485246999027B3197955', params: '0x7ceC01355aC0791dE5b887e80fd20e391BCB103a'})
-  sumSingleBalance(balances, assetPegType, bscBal/ 1e18, bridgeName, false, 'bsc')
+  const bscBal = await bscApi.call({ abi: 'erc20:balanceOf', target: '0x55d398326f99059fF775485246999027B3197955', params: '0x7ceC01355aC0791dE5b887e80fd20e391BCB103a' })
+  sumSingleBalance(balances, assetPegType, bscBal / 1e18, bridgeName, false, 'bsc')
   // const ethApi = await getApi('ethereum', _api)
   // const ethBal = await ethApi.call({  abi: 'erc20:balanceOf', target: '0x55d398326f99059fF775485246999027B3197955', params: '0x7ceC01355aC0791dE5b887e80fd20e391BCB103a'})
   // sumSingleBalance(balances, assetPegType, ethBal/ 1e6, bridgeName, false, 'ethereum')
@@ -692,20 +692,6 @@ const adapter: PeggedIssuanceAdapter = {
     bsc: solanaMintedOrBridged(chainContracts.solana.bridgedFromBSC),
     // heco: solanaMintedOrBridged(chainContracts.solana.bridgedFromHeco),
     avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
-  },
-  arbitrum: {
-    ethereum: bridgedSupply(
-      "arbitrum",
-      6,
-      chainContracts.arbitrum.bridgedFromETH
-    ),
-  },
-  plasma: {
-    ethereum: bridgedSupply(
-      "plasma",
-      6,
-      chainContracts.plasma.bridgedFromETH
-    ),
   },
   optimism: {
     ethereum: bridgedSupply(
@@ -899,7 +885,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("theta", 6, chainContracts.theta.bridgedFromETH),
   },
   rsk: {
-    ethereum: bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromETH),
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("rsk", 6, chainContracts.rsk.bridgedFromETH6Decimals),
+        bridgedSupply("rsk", 18, chainContracts.rsk.bridgedFromETH18Decimals),
+      ],
+      "peggedUSD"
+    ),
   },
   reinetwork: {
     ethereum: reinetworkBridged(chainContracts.reinetwork.bridgedFromETH[0], 6),
@@ -966,7 +958,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   near: {
     minted: nearMint(chainContracts.near.issued[0], 6),
-    unreleased: usdtApiUnreleased("reserve_balance_near"), 
+    unreleased: usdtApiUnreleased("reserve_balance_near"),
     ethereum: nearBridged(chainContracts.near.bridgedFromETH[0], 6),
   },
   wan: {
@@ -1075,7 +1067,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("taiko", 6, chainContracts.taiko.bridgedFromETH),
   },
   mantle: {
-    ethereum: bridgedSupply("mantle", 6, chainContracts.mantle.bridgedFromETH),
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("mantle", 6, [chainContracts.mantle.bridgedFromETH[0]]),
+        bridgedSupply("mantle", 6, [chainContracts.mantle.bridgedFromETH[1]]),
+      ],
+      "peggedUSD"
+    ),
   },
   linea: {
     ethereum: bridgedSupply("linea", 6, chainContracts.linea.bridgedFromETH),
@@ -1102,48 +1100,29 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: usdtApiUnreleased("reserve_balance_statemine"),
   },
   morph: {
-    ethereum: supplyInEthereumBridge(
-      chainContracts.ethereum.issued[0],
-      chainContracts.morph.bridgeOnETH[0],
-      6
-    )
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        supplyInEthereumBridge(
+          chainContracts.ethereum.issued[0],
+          chainContracts.morph.bridgeOnETH[0],
+          6
+        ),
+        bridgedSupply("morph", 6, chainContracts.morph.bridgedFromETH),
+      ],
+      "peggedUSD"
+    ),
   },
   occ: {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),
   },
-  ink: {
-    ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH),
-  },
-  berachain: {
-    ethereum: bridgedSupply("berachain", 6, chainContracts.berachain.bridgedFromETH),
-  },
   sei: {
     kava: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromKava),
-    ethereum: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromETH),
   },
   zircuit: {
     ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH)
   },
-  unichain: {
-    ethereum: bridgedSupply("unichain", 6, chainContracts.unichain.bridgedFromETH)
-  },
-  corn: {
-    ethereum: bridgedSupply("corn", 6, chainContracts.corn.bridgedFromETH)
-  },
   move: {
     ethereum: moveSupply,
-  },
-  hemi: {
-    ethereum: bridgedSupply("hemi", 6, chainContracts.hemi.bridgedFromETH)
-  },
-  flare: {
-    ethereum: bridgedSupply("flare", 6, chainContracts.flare.bridgedFromETH)
-  },
-  plume_mainnet: {
-    ethereum: bridgedSupply("plume_mainnet", 6, chainContracts.plume_mainnet.bridgedFromETH),
-  },
-  hyperliquid: {
-    ethereum: bridgedSupply("hyperliquid", 6, chainContracts.hyperliquid.bridgedFromETH)
   },
   imx: {
     ethereum: supplyInEthereumBridge(chainContracts.ethereum.issued[0], chainContracts.imx.bridgeOnETH[0], 6),
@@ -1157,7 +1136,18 @@ const adapter: PeggedIssuanceAdapter = {
   cardano: {
     ethereum: getCardanoSupply(),
   },
+  katana: {
+    ethereum: bridgedSupply("katana", 6, chainContracts.katana.bridgedFromETH),
+  },
+  etlk: {
+    ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab") // Etherlink's Wrapped Asset Bridge
+  },
+  rbn: {
+    ethereum: bridgedSupply("rbn", 6, chainContracts.rbn.bridgedFromETH)
+  },
+  mantra: {
+    ethereum: bridgedSupply("mantra", 6, chainContracts.mantra.bridgedFromETH)
+  },
 };
 
 export default adapter;
-

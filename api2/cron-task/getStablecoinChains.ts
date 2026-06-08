@@ -1,42 +1,41 @@
+import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../src/peggedData/peggedData";
-import { getChainDisplayName, chainCoingeckoIds } from "../../src/utils/normalizeChain";
+import { nonChains, normalizeChain } from "../../src/utils/normalizeChain";
 import { cache } from "../cache";
 type balance = { [token: string]: number };
 
 export function craftStablecoinChainsResponse() {
   const chainCirculating = {} as { [chain: string]: balance };
-  let prices = cache.lastPrices.prices
+  let prices = cache.peggedPrices || cache.lastPrices?.prices || {}
 
   peggedAssets.map((pegged) => {
+      if (pegged.doublecounted) return;
       const pegType = pegged.pegType;
       const lastBalances = cache.peggedAssetsData?.[pegged.id]?.lastBalance;
       if (lastBalances === undefined) {
         return;
       }
-      let chainsAdded = 0;
       const fallbackPrice = pegType === "peggedUSD" ? 1 : 0; // must be updated with each new pegType added
       const currentPrice = prices[pegged.gecko_id] || null;
       const price = currentPrice ? currentPrice : fallbackPrice;
+      const processedNormalizedChains = new Set<string>();
       Object.entries(lastBalances).forEach(([chain, issuances]: any) => {
-        const chainName = getChainDisplayName(chain, true);
-        if (chainCoingeckoIds[chainName] === undefined) {
-          return;
-        }
-        chainCirculating[chainName] = chainCirculating[chainName] || {};
+        if (nonChains.includes(chain)) return;
+        const normalizedChain = normalizeChain(chain);
+        if (nonChains.includes(normalizedChain)) return;
+        if (processedNormalizedChains.has(normalizedChain)) return;
+        processedNormalizedChains.add(normalizedChain);
+        chainCirculating[normalizedChain] = chainCirculating[normalizedChain] || {};
         let circulating = issuances.circulating;
-        chainCirculating[chainName][pegType] =
-          chainCirculating[chainName][pegType] ?? 0;
-        chainCirculating[chainName][pegType] += circulating[pegType] * price;
-        chainsAdded += 1;
+        chainCirculating[normalizedChain][pegType] =
+          chainCirculating[normalizedChain][pegType] ?? 0;
+        chainCirculating[normalizedChain][pegType] += (circulating?.[pegType] ?? 0) * price;
       });
     })
-  const chainData = Object.entries(chainCirculating).map(
-    ([chainName, chainCirculating]) => ({
-      gecko_id: chainCoingeckoIds[chainName]?.geckoId ?? null,
+  const chainData = Object.entries(chainCirculating)
+    .map(([normalizedChain, chainCirculating]) => ({
       totalCirculatingUSD: chainCirculating,
-      tokenSymbol: chainCoingeckoIds[chainName]?.symbol ?? null,
-      name: chainName,
-    })
-  );
+      name: sdk.chainUtils.getChainLabelFromKey(normalizedChain),
+    }))
   return chainData;
 }

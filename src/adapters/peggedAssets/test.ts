@@ -7,6 +7,8 @@ import peggedAssets from "../../peggedData/peggedData";
 import { PeggedAssetIssuance, PeggedTokenBalance } from "../../types";
 import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
 import { PeggedIssuanceAdapter } from "./peggedAsset.type";
+import { DEAD_CHAINS } from "../../utils/deadChains";
+import { importAdapter } from "../../peggedAssets/utils/importAdapter";
 const {
   humanizeNumber,
 } = require("@defillama/sdk/build/computeTVL/humanizeNumber");
@@ -20,8 +22,6 @@ type ChainBlocks = {
 type BridgeMapping = {
   [chain: string]: PeggedTokenBalance[];
 };
-
-const pegTypes = ["peggedUSD", "peggedEUR", "peggedVAR"];
 
 function detectPegKey(balance: any, wanted: string) {
   if (balance && typeof balance === 'object') {
@@ -49,27 +49,33 @@ async function getPeggedAsset(
 ) {
   const maxRetries = 3;
   const timeoutMs = 3 * 60 * 1000; // 3 minutes
-  
+
   for (let i = 0; i < maxRetries; i++) {
     try {
-      const chainApi = new sdk.ChainApi({ chain })
-      const balance = await Promise.race([
-        issuanceFunction(
-          chainApi,
-          ethBlock,
-          chainBlocks
-        ) as Promise<PeggedTokenBalance>,
-        new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), timeoutMs)
-        ),
-      ]);
-      
+      const chainApi = new sdk.ChainApi({ chain, timestamp: _unixTimestamp })
+      let balance: PeggedTokenBalance | null = null;
+      if (!DEAD_CHAINS.has(chain))
+        balance = await Promise.race([
+          issuanceFunction(
+            chainApi,
+            ethBlock,
+            chainBlocks
+          ) as Promise<PeggedTokenBalance>,
+          new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), timeoutMs)
+          ),
+        ])
+      else {
+        console.log(`[${adapterLabel}] Skipping RPC calls for dead chain ${chain}`);
+        balance = {} as PeggedTokenBalance;
+      }
+
       if (balance && Object.keys(balance).length === 0) {
         peggedBalances[chain] = peggedBalances[chain] || {};
         peggedBalances[chain][issuanceType] = { [pegType]: 0 } as any;
         return balance;
       }
-      
+
       if (!balance) {
         throw new Error(`Could not get pegged balance on chain ${chain}`);
       }
@@ -89,20 +95,20 @@ async function getPeggedAsset(
           Bridge data not found on chain ${chain}. Use sumSingleBalance from helper/generalUtil to add bridge data.`
         );
       }
-      
+
       peggedBalances[chain] = peggedBalances[chain] || {};
       peggedBalances[chain][issuanceType] = balance as PeggedTokenBalance;
-      
+
       if (issuanceType !== "minted" && issuanceType !== "unreleased") {
         bridgedFromMapping[issuanceType] = bridgedFromMapping[issuanceType] || [];
         bridgedFromMapping[issuanceType].push(balance as PeggedTokenBalance);
       }
-      
+
       return balance as PeggedTokenBalance;
-      
+
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
-      
+
       if (i >= maxRetries - 1) {
         console.warn(`[${adapterLabel}] Chain ${chain} failed after ${maxRetries} attempts:`, errorMessage);
         console.log(`[${adapterLabel}] Using snapshot fallback for failed chain ${chain}`);
@@ -145,7 +151,7 @@ async function getPeggedAsset(
           console.log(`[${adapterLabel}] No cached snapshot found for chain ${chain} (issuance: ${issuanceType})`);
           peggedBalances[chain] = peggedBalances[chain] || {};
           (peggedBalances as any)[chain][issuanceType] = { [pegType]: null as any };
-          
+
           console.error(`Getting ${issuanceType} on chain ${chain} failed.`);
           return null;
         } catch (cacheError) {
@@ -163,16 +169,16 @@ async function getPeggedAsset(
   }
 }
 
-async function calcCirculating(
+function calcCirculating(
   peggedBalances: PeggedAssetIssuance,
   bridgedFromMapping: BridgeMapping,
   pegType: string
 ) {
-  let chainCirculatingPromises = Object.keys(peggedBalances).map(
-    async (chain) => {
+  Object.keys(peggedBalances).map(
+    (chain) => {
       let circulating: PeggedTokenBalance = { [pegType]: 0 } as any;
       const chainIssuances = peggedBalances[chain];
-      
+
       Object.entries(chainIssuances).map(
         ([issuanceType, peggedTokenBalance]) => {
           const balance = (peggedTokenBalance as any)[pegType];
@@ -188,7 +194,7 @@ async function calcCirculating(
           }
         }
       );
-      
+
       if (bridgedFromMapping[chain]) {
         bridgedFromMapping[chain].forEach((peggedTokenBalance) => {
           const balance = (peggedTokenBalance as any)[pegType];
@@ -199,7 +205,7 @@ async function calcCirculating(
           (circulating as any)[pegType]! -= balance;
         });
       }
-      
+
       if ((circulating as any)[pegType]! < 0) {
         throw new Error(
           `Pegged asset on chain ${chain} has negative circulating amount`
@@ -208,14 +214,13 @@ async function calcCirculating(
       (peggedBalances as any)[chain].circulating = circulating;
     }
   );
-  await Promise.all(chainCirculatingPromises);
 
   (peggedBalances as any)["totalCirculating"] = {};
   (peggedBalances as any)["totalCirculating"]["circulating"] = { [pegType]: 0 } as any;
   (peggedBalances as any)["totalCirculating"]["unreleased"] = { [pegType]: 0 } as any;
-  let peggedTotalPromises = Object.keys(peggedBalances).map((chain) => {
+  Object.keys(peggedBalances).map((chain) => {
     const circulating = (peggedBalances as any)[chain].circulating || { [pegType]: 0 };
-    const unreleased  = (peggedBalances as any)[chain].unreleased  || { [pegType]: 0 };
+    const unreleased = (peggedBalances as any)[chain].unreleased || { [pegType]: 0 };
     if (chain !== "totalCirculating") {
       (peggedBalances as any)["totalCirculating"]["circulating"][pegType]! +=
         circulating[pegType] || 0;
@@ -223,7 +228,6 @@ async function calcCirculating(
         unreleased[pegType] || 0;
     }
   });
-  await Promise.all(peggedTotalPromises);
 }
 
 if (process.argv.length < 3) {
@@ -233,25 +237,25 @@ if (process.argv.length < 3) {
 }
 
 const passedFile = path.resolve(process.cwd(), process.argv[2]);
-const dummyFn = () => {};
+const dummyFn = () => { };
 const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
 
 function getStablecoinIdFromPath(filePath: string): string {
   const pathParts = filePath.split(path.sep);
   const stablecoinDir = pathParts[pathParts.length - 1];
-  
+
   if (/^\d+$/.test(stablecoinDir)) {
     return stablecoinDir;
   }
-  
+
   const peggedAsset = peggedAssets.find((pegged) => {
     return pegged.gecko_id === stablecoinDir;
   });
-  
+
   if (peggedAsset) {
     return peggedAsset.id;
   }
-  
+
   console.warn(`[WARNING] Could not determine stablecoin ID for path: ${filePath}, using folder name: ${stablecoinDir}`);
   return stablecoinDir;
 }
@@ -268,37 +272,63 @@ function getAdapterLabelFromPath(filePath: string): string {
 
 (async () => {
   let adapter = {} as PeggedIssuanceAdapter;
+  let module: any
   try {
     adapter = require(passedFile);
   } catch (e) {
     console.log(e);
+    return;
   }
-  const module = adapter.default;
+  const stablecoinId = getStablecoinIdFromPath(passedFile);
+  const adapterLabel = getAdapterLabelFromPath(passedFile);
+
+  const peggedAsset = peggedAssets.find((p) => p.id === stablecoinId);
+
+  let relativeModulePath = path.relative(__dirname, passedFile).replace(/\\/g, '/').replace(/\.ts$/, '');
+  module = await importAdapter(peggedAsset ?? {
+    module: relativeModulePath
+  } as any, adapter.default);
+
   const chains = Object.keys(module).filter(
     (chain) => !["minted", "unreleased"].includes(chain)
   );
-
-  const stablecoinId = getStablecoinIdFromPath(passedFile);
-  const adapterLabel = getAdapterLabelFromPath(passedFile);
   console.log(`[INFO] Detected stablecoin: ${adapterLabel} (id: ${stablecoinId}) for file: ${passedFile}`);
 
   checkExportKeys(passedFile, chains);
-  const unixTimestamp = Math.round(Date.now() / 1000) - 60;
+
+  // Parse optional date and pegType from argv. Accepts either:
+  //   --date=YYYY-MM-DD   or a bare YYYY-MM-DD positional
+  //   pegType as any remaining positional (e.g. peggedEUR)
+  let dateTimestamp: number | undefined;
+  let pegType: string | undefined;
+  for (const arg of process.argv.slice(3)) {
+    if (arg.startsWith("--date=")) {
+      const parsed = new Date(arg.slice("--date=".length));
+      if (!isNaN(parsed.getTime())) dateTimestamp = Math.round(parsed.getTime() / 1000);
+    } else if (/^\d{4}-\d{2}-\d{2}$/.test(arg)) {
+      const parsed = new Date(arg);
+      if (!isNaN(parsed.getTime())) dateTimestamp = Math.round(parsed.getTime() / 1000);
+    } else if (!pegType) {
+      pegType = arg;
+    }
+  }
+  pegType = pegType ?? "peggedUSD";
+
+  const unixTimestamp = dateTimestamp ?? Math.round(Date.now() / 1000) - 60;
+  if (dateTimestamp) {
+    console.log(`[INFO] Using historical timestamp: ${new Date(dateTimestamp * 1000).toISOString()} (${dateTimestamp})`);
+  }
+
   const chainBlocks = {} as ChainBlocks;
 
   if (!chains.includes("ethereum")) {
     chains.push("ethereum");
   }
-  
-  const ethBlock = chainBlocks.ethereum;
 
-  let pegType = process.argv[3];
-  if (pegType === undefined) {
-    pegType = "peggedUSD";
-  }
+  const ethBlock = chainBlocks.ethereum;
   let peggedBalances: PeggedAssetIssuance = {};
   let bridgedFromMapping: BridgeMapping = {};
-  
+
   const extrapolationMetadata = {
     extrapolated: false,
     extrapolatedChains: [] as Array<{ chain: string; timestamp: number }>
@@ -346,13 +376,9 @@ function getAdapterLabelFromPath(filePath: string): string {
     }
   );
   await Promise.all(peggedBalancesPromises);
-  
-  await Promise.race([
-    calcCirculating(peggedBalances, bridgedFromMapping, pegType),
-    new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error('calcCirculating exceeded the timeout limit')), 3 * 60 * 1000)
-    ),
-  ]);
+
+  calcCirculating(peggedBalances, bridgedFromMapping, pegType)
+
   if (
     typeof (peggedBalances as any).totalCirculating.circulating[pegType] !== "number"
   ) {
@@ -369,12 +395,12 @@ function getAdapterLabelFromPath(filePath: string): string {
     if (chain === "extrapolated" || chain === "extrapolatedChains") {
       return;
     }
-    
-    const item: any = { chain}
+
+    const item: any = { chain }
     if (chain !== "totalCirculating") {
       displayTable.push(item)
       console.log(`--- ${chain} ---`);
-      
+
       if (issuances && typeof issuances === 'object') {
         Object.entries(issuances)
           .filter(([_, issuance]) => issuance && typeof issuance === 'object')
@@ -399,7 +425,7 @@ function getAdapterLabelFromPath(filePath: string): string {
   console.log(`------ Total Circulating ------`);
   const totalItem: any = { chain: "Total Circulating" }
   Object.entries((peggedBalances as any).totalCirculating).forEach(
-    ([issuanceType, issuance]) =>{
+    ([issuanceType, issuance]) => {
       totalItem[issuanceType] = humanizeNumber((issuance as any)[pegType]);
       console.log(
         `Total ${issuanceType}`.padEnd(25, " "),
@@ -407,12 +433,12 @@ function getAdapterLabelFromPath(filePath: string): string {
       )
     }
   );
-  
+
   if (extrapolationMetadata.extrapolated) {
     console.log(`\n------ EXTRAPOLATION INFO ------`);
     console.log(`⚠️  Some chains used extrapolated data from cache`);
     console.log(`Extrapolated chains details:`);
-    
+
     extrapolationMetadata.extrapolatedChains?.forEach((extrapolatedChain: any) => {
       const d = new Date(extrapolatedChain.timestamp * 1000);
       const formattedDate = d.toISOString().slice(0, 10); // YYYY-MM-DD
@@ -422,13 +448,35 @@ function getAdapterLabelFromPath(filePath: string): string {
     console.log(`\n------ NO EXTRAPOLATION ------`);
     console.log(`✅ All chains used real-time data`);
   }
-  
-  console.log(`\n[DEBUG] Final extrapolation state:`, {
-    extrapolated: extrapolationMetadata.extrapolated,
-    extrapolatedChainsCount: extrapolationMetadata.extrapolatedChains?.length || 0,
-    extrapolationMetadata: extrapolationMetadata.extrapolatedChains
-  });
+
+  if (extrapolationMetadata?.extrapolated)
+    console.log(`\n[DEBUG] Final extrapolation state:`, {
+      extrapolated: extrapolationMetadata.extrapolated,
+      extrapolatedChainsCount: extrapolationMetadata.extrapolatedChains?.length || 0,
+      extrapolationMetadata: extrapolationMetadata.extrapolatedChains
+    });
+
   displayTable.push(totalItem)
+  displayTable.sort((a: any, b: any) => valueFromItem(a) - valueFromItem(b))
+
+  function valueFromItem(item: any) {
+    let val = item.circulating || item.unreleased || 0;
+    if (typeof val === 'string') {
+      let [v0, exponent]: any = val.toLowerCase().split(' ');
+      if (exponent === 'k') {
+        exponent = 1e3;
+      } else if (exponent === 'm') {
+        exponent = 1e6;
+      } else if (exponent === 'b') {
+        exponent = 1e9;
+      } else {
+        exponent = 1;
+      }
+      val = parseFloat(v0) * exponent;
+    }
+    return val;
+  }
+
   console.table(displayTable);
   process.exit(0);
 })();

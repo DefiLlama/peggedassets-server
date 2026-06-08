@@ -13,10 +13,10 @@ const { sliceIntoChunks, sleep } = require("./utils");
 const _rateLimited = plimit(1);
 const rateLimited =
   (fn) =>
-  (...args) =>
-    _rateLimited(() => fn(...args));
+    (...args) =>
+      _rateLimited(() => fn(...args));
 
-const STARKNET_RPC = "https://starknet-mainnet.public.blastapi.io";
+const STARKNET_RPC = "https://rpc.starknet.lava.build/";
 
 function formCallBody(
   { abi, target, params = [], allAbi = [] },
@@ -107,36 +107,78 @@ async function multiCall({
   return response;
 }
 
-const balanceOfABI = {
-  name: "balanceOf",
-  type: "function",
-  inputs: [
-    {
-      name: "account",
-      type: "felt",
-    },
-  ],
-  outputs: [
-    {
-      name: "balance",
-      type: "Uint256",
-    },
-  ],
-  stateMutability: "view",
-  customInput: "address",
-};
+async function getTotalSupply(tokenAddress) {
+  const decimals = await call({ target: tokenAddress, abi: defaultAbis.decimals, });
+  const supply = await call({ target: tokenAddress, abi: defaultAbis.totalSupply, });
+  return supply / 10 ** decimals;
+}
+
+async function getUnreleased({ issued, unreleased, balances, sumSingleBalance, pegType }) {
+  for (const tokenAddress of issued) {
+    const decimals = await call({ target: tokenAddress, abi: defaultAbis.decimals, });
+    for (const unreleasedAddress of unreleased) {
+      const balance = await call({ target: tokenAddress, abi: defaultAbis.balanceOf, params: [unreleasedAddress], });
+      console.log(`Starknet - unreleased balance of token ${tokenAddress} in account ${unreleasedAddress}: ${balance / 10 ** decimals}`);
+      sumSingleBalance(balances, pegType, balance / 10 ** decimals, 'unreleased', false);
+    }
+  }
+  return balances
+}
 
 const api = {
   chain: "starknet",
 };
 
 const defaultAbis = {
-  balanceOf: balanceOfABI,
-};
+  balanceOf: {
+    name: "balanceOf",
+    type: "function",
+    inputs: [
+      {
+        name: "account",
+        type: "felt",
+      },
+    ],
+    outputs: [
+      {
+        name: "balance",
+        type: "Uint256",
+      },
+    ],
+    stateMutability: "view",
+    customInput: "address",
+  },
+  totalSupply: {
+    name: "totalSupply",
+    type: "function",
+    inputs: [],
+    outputs: [
+      {
+        name: "totalSupply",
+        type: "Uint256",
+      },
+    ],
+    stateMutability: "view",
+  },
+  decimals: {
+    name: "decimals",
+    type: "function",
+    inputs: [],
+    outputs: [
+      {
+        name: "decimals",
+        type: "felt",
+      },
+    ],
+    stateMutability: "view",
+  },
+}
 
 module.exports = {
   call: rateLimited(call),
   multiCall: rateLimited(multiCall),
+  getTotalSupply: rateLimited(getTotalSupply),
+  getUnreleased: rateLimited(getUnreleased),
   parseAddress: validateAndParseAddress,
   number,
 };

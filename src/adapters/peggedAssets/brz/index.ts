@@ -43,10 +43,10 @@ const chainContracts = {
         issued: "0x05539F021b66Fd01d1FB1ff8E167CdD09bf7c2D0", pegType
     },
     tron: {
-        issued: "TYCE84KFUKx4wCevYpBeYWHxPAKzQvgkc9", pegType
+        issued: "TGastcpw5NHre1MAspBTzursyaLNWG85Qq", pegType 
     },
     solana: {
-        issued:["FtgGSFADXBtroxq8VCausXRr2of47QBf5AS1NtZCu4GD"], pegType
+        issued:["BRZbFNQDcWLfcdHmAkqEVnLHCAWKTRf6eHyEaWdZp3JN"], pegType
     },
 };
 

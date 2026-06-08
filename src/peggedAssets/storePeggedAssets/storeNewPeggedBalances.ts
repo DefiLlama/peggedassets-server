@@ -5,6 +5,7 @@ import { PeggedAsset } from "../../peggedData/peggedData";
 import { PeggedAssetIssuance } from "../../types";
 import {
   HOUR,
+  getCurrentUnixTimestamp,
   getDay,
   getTimestampAtStartOfDay,
   secondsInDay,
@@ -13,7 +14,12 @@ import { sendMessage } from "../../utils/discord";
 import dynamodb from "../../utils/shared/dynamodb";
 import getTVLOfRecordClosestToTimestamp from "../../utils/shared/getRecordClosestToTimestamp";
 import { getLastRecord } from "../utils/getLastRecord";
-import { executeAndIgnoreErrors } from "./errorDb";
+import {
+  createBlock,
+  getActiveBlock,
+  getRemainingBlockTime,
+  removeBlock
+} from "./assetBlocking";
 import { reconcileDailyFromHourly } from "./reconcileDailyFromHourly";
 
 type PKconverted = (id: string) => string;
@@ -29,9 +35,11 @@ function logPromote(peggedAsset: PeggedAsset, daySK: number, reason: string, isR
       `**Reason:** ${reason}\n` +
       `**Type:** Replacing existing daily with hourly data`;
     
-    sendMessage(alertMessage, process.env.OUTDATED_WEBHOOK!).catch(error => {
-      console.error('Error sending promotion alert:', error);
-    });
+    if (process.env.OUTDATED_WEBHOOK) {
+      sendMessage(alertMessage, process.env.OUTDATED_WEBHOOK).catch(error => {
+        console.error('Error sending promotion alert:', error);
+      });
+    }
   }
 }
 
@@ -80,73 +88,230 @@ export default async (
   const pegType = peggedAsset.pegType;
   const peggedID = peggedAsset.gecko_id;
   const isDryRun = process.env.DRY_RUN_MODE === 'true';
+  // FORCE_UPDATE should only be set by the CLI script forceUpdateAsset.ts
+  let isForceUpdate = process.env.FORCE_UPDATE === 'true' && !process.env.AWS_LAMBDA_FUNCTION_NAME;
   const daySK = getTimestampAtStartOfDay(unixTimestamp);
 
   if (Object.keys(peggedBalances).length === 0) {
     return;
   }
 
-  // In DRY mode, avoid DynamoDB calls and heavy checks
+  if (peggedAsset.deadFrom) {
+    console.log(`Skipping dead pegged asset ${peggedAsset.name} in storeNewPeggedBalances`);
+    return;
+  }
+
   let lastHourlyPeggedObject: any;
   let lastHourlyCirculating = 0;
   const currentCirculating = peggedBalances.totalCirculating.circulating[pegType] ?? 0;
 
-  if (!isDryRun) {
-    const lastHourlyPeggedRecord = getLastRecord(hourlyPK).then(
-      (result) =>
-        result ?? {
+  const loadLastHourlyIfNeeded = async () => {
+    if (isDryRun) {
+      if (!lastHourlyPeggedObject) {
+        lastHourlyPeggedObject = {
           SK: undefined,
           totalCirculating: {
-            circulating: {
-              [pegType]: 0,
-            },
+            circulating: { [pegType]: 0 },
           },
-        }
-    );
-    lastHourlyPeggedObject = await lastHourlyPeggedRecord;
-    lastHourlyCirculating = lastHourlyPeggedObject.totalCirculating.circulating[pegType];
+        };
+        lastHourlyCirculating = 0;
+      }
+      return;
+    }
+    if (!lastHourlyPeggedObject) {
+      const lastHourlyPeggedRecord = getLastRecord(hourlyPK).then(
+        (result) =>
+          result ?? {
+            SK: undefined,
+            totalCirculating: {
+              circulating: {
+                [pegType]: 0,
+              },
+            },
+          }
+      );
+      lastHourlyPeggedObject = await lastHourlyPeggedRecord;
+      lastHourlyCirculating = lastHourlyPeggedObject.totalCirculating.circulating[pegType] ?? 0;
+    } else {
+      lastHourlyCirculating = lastHourlyPeggedObject.totalCirculating?.circulating?.[pegType] ?? 0;
+    }
+  };
 
-    if (
-      lastHourlyCirculating * 2 < currentCirculating &&
-      lastHourlyCirculating !== 0
-    ) {
-      const change = `${humanizeNumber(
-        lastHourlyCirculating
-      )} to ${humanizeNumber(currentCirculating)}`;
-      if (
-        Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR &&
-        lastHourlyCirculating * 5 < currentCirculating &&
-        lastHourlyCirculating > 1000000
-      ) {
-        await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
-          unixTimestamp,
-          peggedID,
-          `Circulating has 5x (${change}) within one hour, disabling it`,
-        ]);
-        const errorMessage = `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour, disabling it`;
-        await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK!);
-        throw new Error(errorMessage);
-      } else {
-        await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
-          unixTimestamp,
-          peggedID,
-          `Circulating has >2x (${change}) within one hour`,
-        ]);
-        console.error(
-          `Circulating for ${peggedAsset.name} has >2x (${change}) within one hour`,
-          peggedAsset.name
-        );
+  // Skip blocking checks in force update mode
+  if (!isForceUpdate) {
+    const activeBlock = await getActiveBlock(peggedAsset.id);
+    if (activeBlock) {
+      const blockExpiresAt = new Date(activeBlock.expiresAt * 1000).toISOString();
+      const remainingTime = getRemainingBlockTime(activeBlock);
+      const now = getCurrentUnixTimestamp();
+      
+      const timeSinceExpiration = now - activeBlock.expiresAt;
+      const JUST_EXPIRED_THRESHOLD = 2 * HOUR;
+
+      if (activeBlock.expiresAt <= now && timeSinceExpiration <= JUST_EXPIRED_THRESHOLD) {
+        // Block just expired - automatically force update this asset once
+        console.log(`🔄 [AUTO FORCE UPDATE] Block for ${peggedAsset.name} just expired - forcing update to reset baseline`);
+        if (!isDryRun) {
+          await removeBlock(peggedAsset.id);
+        } else {
+          console.log(`📢 [DRY RUN] Would remove expired block for ${peggedAsset.name}`);
+        }
+        isForceUpdate = true;
+        console.log(`🔓 [AUTO FORCE UPDATE] Skipping spike/drop detection for this update`);
+        
+        if (process.env.OUTDATED_WEBHOOK) {
+          const autoForceUpdateMessage = `🔄 **Auto Force Update**\n` +
+            `**Asset:** ${peggedAsset.name} (${peggedAsset.id})\n` +
+            `**Reason:** Block expired - automatically forcing update to reset baseline\n` +
+            `**Previous Block Reason:** ${activeBlock.reason}\n` +
+            `**Block Type:** ${activeBlock.blockType}\n` +
+            `**Time Since Expiration:** ${(timeSinceExpiration / 60).toFixed(1)} minutes`;
+          
+          try {
+            if (!isDryRun) {
+              await sendMessage(autoForceUpdateMessage, process.env.OUTDATED_WEBHOOK);
+            } else {
+              console.log(`📢 [DRY RUN] Would send auto force-update notification:\n${autoForceUpdateMessage}`);
+            }
+          } catch (error) {
+            console.error('Error sending auto force-update notification:', error);
+          }
+        }
+      } else if (timeSinceExpiration > JUST_EXPIRED_THRESHOLD) {
+        // Block expired a while ago -> clean it up
+        if (!isDryRun) {
+          await removeBlock(peggedAsset.id);
+          console.log(`🧹 [BLOCK CLEANUP] Removed expired block for ${peggedAsset.name} (expired more than ${(JUST_EXPIRED_THRESHOLD / HOUR)} hours ago)`);
+        } else {
+          console.log(`📢 [DRY RUN] Would clean up expired block for ${peggedAsset.name}`);
+        }
+      } else if (activeBlock.expiresAt > now) {
+        if (!isDryRun) {
+          await loadLastHourlyIfNeeded();
+          const baselineCirculating = lastHourlyPeggedObject.totalCirculating?.circulating?.[pegType] ?? 0;
+
+          const spikeStillThere =
+            baselineCirculating * 2 < currentCirculating && baselineCirculating !== 0;
+          const dropStillThere =
+            baselineCirculating / 2 > currentCirculating && currentCirculating !== 0;
+
+          if (!spikeStillThere && !dropStillThere) {
+            await removeBlock(peggedAsset.id);
+            console.log(`✅ [UNBLOCK] Metrics normalized for ${peggedAsset.name}, block removed (was: ${activeBlock.reason})`);
+
+            if (process.env.OUTDATED_WEBHOOK) {
+              const unblockMessage = `✅ **Asset Unblocked**\n` +
+                `**Asset:** ${peggedAsset.name} (${peggedAsset.id})\n` +
+                `**Reason:** Metrics normalized (previous block: ${activeBlock.reason})\n` +
+                `**Block Type:** ${activeBlock.blockType}\n` +
+                `**Was Expiring At:** ${blockExpiresAt}`;
+              try {
+                await sendMessage(unblockMessage, process.env.OUTDATED_WEBHOOK);
+              } catch (error) {
+                console.error('Error sending unblock notification:', error);
+              }
+            }
+          } else {
+            const warningMessage = `⚠️ [${peggedAsset.name}|id=${peggedAsset.id}] Update blocked until ${blockExpiresAt}. Reason: ${activeBlock.reason}`;
+            console.warn(warningMessage);
+            
+            if (process.env.OUTDATED_WEBHOOK) {
+              const blockNotification = `🚫 **Asset Blocked**\n` +
+                `**Asset:** ${peggedAsset.name} (${peggedAsset.id})\n` +
+                `**Reason:** ${activeBlock.reason}\n` +
+                `**Time Remaining:** ${remainingTime}\n` +
+                `**Expires At:** ${blockExpiresAt}`;
+              
+              sendMessage(blockNotification, process.env.OUTDATED_WEBHOOK!).catch(error => {
+                console.error('Error sending block notification:', error);
+              });
+            }
+            
+            return;
+          }
+        } else {
+          const warningMessage = `⚠️ [${peggedAsset.name}|id=${peggedAsset.id}] (DRY RUN) Update would be blocked until ${blockExpiresAt}. Reason: ${activeBlock.reason}`;
+          console.warn(warningMessage);
+          return;
+        }
       }
     }
-    if (
-      lastHourlyCirculating / 2 > currentCirculating &&
-      currentCirculating !== 0 &&
-      Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR
-    ) {
-      const errorMessage = `Circulating for ${peggedAsset.name} has dropped >50% within one hour, disabling it`;
-      await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK!);
-      throw new Error(errorMessage);
+  } else {
+    console.log(`🔓 [FORCE UPDATE] Skipping blocking checks for ${peggedAsset.name}`);
+  }
+
+  if (!isDryRun) {
+    await loadLastHourlyIfNeeded();
+
+    // Skip spike/drop detection in force update mode
+    if (!isForceUpdate) {
+      if (
+        lastHourlyCirculating * 2 < currentCirculating &&
+        lastHourlyCirculating !== 0
+      ) {
+        const change = `${humanizeNumber(
+          lastHourlyCirculating
+        )} to ${humanizeNumber(currentCirculating)}`;
+        
+        if (
+          Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR &&
+          lastHourlyCirculating * 5 < currentCirculating &&
+          lastHourlyCirculating > 1000000
+        ) {
+          const errorMessage = `Circulating for ${peggedAsset.name} has 5x (${change}) within one hour`;
+          if (process.env.OUTDATED_WEBHOOK) {
+            try {
+              await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK);
+            } catch (error) {
+              console.error('Error sending Discord message:', error);
+            }
+          }
+          
+          const block = await createBlock(peggedAsset.id, `5x spike detected: ${change}`, "spike");
+          console.warn(`🚫 Blocked ${peggedAsset.name} until ${new Date(block.expiresAt * 1000).toISOString()}`);
+          return;
+        } else {
+          console.error(`Circulating for ${peggedAsset.name} has >2x (${change}) within one hour`, peggedAsset.name);
+        }
+      }
+      
+      if (
+        lastHourlyCirculating / 2 > currentCirculating &&
+        currentCirculating !== 0 &&
+        Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR
+      ) {
+        const change = `${humanizeNumber(lastHourlyCirculating)} to ${humanizeNumber(currentCirculating)}`;
+        const errorMessage = `Circulating for ${peggedAsset.name} has dropped >50% within one hour (${change})`;
+        if (process.env.OUTDATED_WEBHOOK) {
+          try {
+            await sendMessage(errorMessage, process.env.OUTDATED_WEBHOOK);
+          } catch (error) {
+            console.error('Error sending Discord message:', error);
+          }
+        }
+        
+        const block = await createBlock(peggedAsset.id, `>50% drop detected: ${change}`, "drop");
+        console.warn(`🚫 Blocked ${peggedAsset.name} until ${new Date(block.expiresAt * 1000).toISOString()}`);
+        return;
+      }
+    } else {
+      // In force update mode, log the change but don't block
+      if (
+        lastHourlyCirculating * 2 < currentCirculating &&
+        lastHourlyCirculating !== 0
+      ) {
+        const change = `${humanizeNumber(lastHourlyCirculating)} to ${humanizeNumber(currentCirculating)}`;
+        console.log(`⚠️ [FORCE UPDATE] Detected spike for ${peggedAsset.name} (${change}) - proceeding anyway`);
+      }
+      if (
+        lastHourlyCirculating / 2 > currentCirculating &&
+        currentCirculating !== 0
+      ) {
+        const change = `${humanizeNumber(lastHourlyCirculating)} to ${humanizeNumber(currentCirculating)}`;
+        console.log(`⚠️ [FORCE UPDATE] Detected drop for ${peggedAsset.name} (${change}) - proceeding anyway`);
+      }
     }
+
     await Promise.all(
       Object.entries(peggedBalances).map(async ([chain, issuance]) => {
         const prevCirculating = lastHourlyPeggedObject[chain]
@@ -157,11 +322,6 @@ export default async (
           prevCirculating !== 0 &&
           prevCirculating !== undefined
         ) {
-          await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
-            unixTimestamp,
-            peggedID,
-            `Circulating has dropped to 0 on chain "${chain}" (previous circulating was ${prevCirculating})`,
-          ]);
           console.error(
             `Circulating has dropped to 0 on chain "${chain}" (previous circulating was ${prevCirculating})`,
             peggedAsset.name
@@ -177,6 +337,7 @@ export default async (
         circulating: { [pegType]: 0 },
       },
     };
+    lastHourlyCirculating = 0;
   }
 
   const itemToStore: any = {
@@ -197,10 +358,10 @@ export default async (
       fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    const hourlyFile = path.join(outputDir, `debug-${peggedAsset.gecko_id}-hourly-${unixTimestamp}.json`);
+    const hourlyFile = path.join(outputDir, `debug-${peggedID}-hourly-${unixTimestamp}.json`);
     fs.writeFileSync(hourlyFile, JSON.stringify(itemToStore, null, 2));
 
-    const dailyFile = path.join(outputDir, `debug-${peggedAsset.gecko_id}-daily-${daySK}.json`);
+    const dailyFile = path.join(outputDir, `debug-${peggedID}-daily-${daySK}.json`);
     let existingDailyOverride: any | undefined = undefined;
     if (fs.existsSync(dailyFile)) {
       try {
@@ -258,3 +419,4 @@ export default async (
     await dynamodb.put(dailyItemToStore);
   }
 };
+

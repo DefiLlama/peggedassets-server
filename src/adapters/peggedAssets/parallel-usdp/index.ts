@@ -48,9 +48,33 @@ const chainContracts:ChainContracts = {
     unichain:{
         issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
     },
-    // tac:{
-    //     issued: ["0x4DeF531c3060686948f00EcC7504f2E0b71EDa14"],
-    // }
+    tac:{
+        issued: ["0x4DeF531c3060686948f00EcC7504f2E0b71EDa14"],
+    },
+    hemi:{
+        issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+    },
+    wc:{
+        issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+    },
+    fraxtal:{
+        issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+    },
+    katana:{
+        issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+    },
+    "plume_mainnet":{
+        issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+    },
+    plasma:{
+        issued: ["0xC2f8B5d893217462aE9c9879c9285A5a3AAbcb8F"],
+    },
+    xlayer:{
+        issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+    },
+    linea:{
+        issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+    }
 };
   
 const adapter = addChainExports(chainContracts);

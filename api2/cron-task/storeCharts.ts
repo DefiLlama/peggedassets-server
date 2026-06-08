@@ -2,10 +2,13 @@ import axios from "axios";
 import { dailyPeggedBalances, getLastRecord, hourlyPeggedBalances, hourlyPeggedPrices } from "../../src/peggedAssets/utils/getLastRecord";
 import peggedAssets from "../../src/peggedData/peggedData";
 import { getClosestDayStartTimestamp, secondsInDay, secondsInHour, } from "../../src/utils/date";
-import { chainCoingeckoIds, normalizeChain, normalizedChainReplacements } from "../../src/utils/normalizeChain";
+import * as sdk from "@defillama/sdk";
+import { normalizeChain } from "../../src/utils/normalizeChain";
 import { getHistoricalValues } from "../../src/utils/shared/dynamodb";
+import { buildFxRateMap, lookupFxRate } from "../../src/utils/fxRates";
 import { cache } from "../cache";
 import { storeRouteData } from "../file-cache";
+import { chainCacheSlug } from "../utils/cachePath";
 
 type TokenBalance = {
   [token: string]: number | undefined;
@@ -18,25 +21,22 @@ export default async function handler() {
   const historicalRates = (await axios.get(`https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`))?.data;
   const lastPrices = await getLastRecord(hourlyPeggedPrices);
   const priceTimestamps = cache.historicalPrices?.map((item: any) => item.SK);
-  const rateTimestamps = historicalRates?.map((entry: any) => entry.date);
   await getPeggedAssetsData()
-  cache.historicalRates = historicalRates
+  cache.fxRateMap = buildFxRateMap(historicalRates)
   cache.lastPrices = lastPrices
   cache.priceTimestamps = priceTimestamps
-  cache.rateTimestamps = rateTimestamps
   console.timeEnd(timeKey)
 }
 
 export async function storeChartsPart2(assetChainMap: any) {
-  const { lastPrices, historicalRates, priceTimestamps, rateTimestamps, } = cache
+  const { lastPrices, fxRateMap, priceTimestamps, } = cache
 
   const commonOptions = {
     assetChainMap,
     lastPrices,
     historicalPrices: cache.historicalPrices,
-    historicalRates,
+    fxRateMap,
     priceTimestamps,
-    rateTimestamps,
     peggedAssetsData: cache.peggedAssetsData,
   }
   // store overall chart
@@ -44,11 +44,12 @@ export async function storeChartsPart2(assetChainMap: any) {
   await storeRouteData('charts/all/all', allData)
 
   // store chain charts
-  const chains = [Object.keys(chainCoingeckoIds), Object.values(normalizedChainReplacements)].flat()
-  for (let chain of chains) {
-    const normalizedChain = normalizeChain(chain);
+  const chainKeys = new Set<string>(
+    Object.values(sdk.chainUtils.chainLabelsToKeyMap as Record<string, string>),
+  );
+  for (const normalizedChain of chainKeys) {
     const chainData = await craftChartsResponse({ ...commonOptions, chain: normalizedChain, });
-    await storeRouteData(`charts/${normalizedChain}`, chainData)
+    await storeRouteData(`charts/${chainCacheSlug(normalizedChain)}`, chainData)
   }
 
   // store pegged asset charts
@@ -78,19 +79,15 @@ async function getPeggedAssetsData() {
     }
   }))
 
-  const { SK, ...terraLastBalance } = cache.peggedAssetsData['3'].lastBalance
-  cache.peggedAssetsData['3'].balances.forEach((item: any, index: any) => { // the token deppeged after this
-    if (item.SK > 1655891865) {
-      cache.peggedAssetsData['3'].balances[index] = { ...item, ...terraLastBalance }
-      return
-    }
-  })
+  // remove all Terra data after the depeg timestamp
+  cache.peggedAssetsData['3'].balances = cache.peggedAssetsData['3'].balances
+    .filter((item: any) => item.SK <= 1655891865)
 
   replaceAvalanceAvax(cache.peggedAssetsData) // convert all 'avalanche' keys to 'avax'
   return cache.peggedAssetsData
 }
 
-function replaceAvalanceAvax(obj) {
+function replaceAvalanceAvax(obj: any) {
   if (typeof obj !== 'object' || obj === null) {
     return; // Not an object or is null, do nothing
   }
@@ -116,12 +113,6 @@ const formatTokenBalance = (tokenBalance: TokenBalance) => {
   }
   return formattedTokenBalance;
 };
-
-// needed because new daily rates is not stored on same day it is queried for
-function ratesCompareFn(a: number, b: number) {
-  if (Math.abs(a - b) <= secondsInDay) return 0;
-  return a - b;
-}
 
 // this should not get prices from the previous day
 function pricesCompareFn(a: number, b: number) {
@@ -166,13 +157,14 @@ const _assetCache: any = {};
 let lastDailyTimestamp = 0;
 
 export function craftChartsResponse(
-  { chain = 'all', peggedID, startTimestamp, assetChainMap, }: {
+  { chain = 'all', peggedID, startTimestamp, assetChainMap, excludeDoublecounted, }: {
     chain?: string,
     peggedID?: string,
     startTimestamp?: string | number,
     assetChainMap: {
       [asset: string]: Set<string>
-    }
+    },
+    excludeDoublecounted?: boolean,
   }
 ) {
   if (startTimestamp && typeof startTimestamp === 'string') startTimestamp = parseInt(startTimestamp)
@@ -182,7 +174,7 @@ export function craftChartsResponse(
     return chart.filter((entry: any) => entry)
   }
 
-  const { historicalPrices, historicalRates, lastPrices, priceTimestamps, rateTimestamps, peggedAssetsData, } = cache as any
+  const { historicalPrices, fxRateMap, lastPrices, priceTimestamps, peggedAssetsData, } = cache as any
   const sumDailyBalances = {} as {
     [timestamp: number]: {
       circulating: TokenBalance;
@@ -201,8 +193,7 @@ export function craftChartsResponse(
    */
   const historicalPeggedBalances = peggedAssets.map((pegged) => {
     if (peggedID && pegged.id !== peggedID) return;
-    // Skip double-counted assets for chain and all charts
-    if (!peggedID && pegged.doublecounted === true) return;
+    if (excludeDoublecounted && pegged.doublecounted) return;
     const chainMap = assetChainMap[pegged.id];
     if (!chainMap || chain !== "all" && !chainMap?.has(chain)) return; // if the coin is not found an given chain or coin has no data, dont process it
     if (!_assetCache[pegged.id]) addToAssetCache(pegged);
@@ -225,7 +216,7 @@ export function craftChartsResponse(
 
     _assetCache[pegged.id] = {
       pegged,
-      historicalBalance: historicalBalance.Items,
+      historicalBalance: [...historicalBalance.Items],
       lastTimestamp,
     };
   }
@@ -237,13 +228,15 @@ export function craftChartsResponse(
   }
 
   historicalPeggedBalances.forEach((peggedBalance) => {
-    let { historicalBalance, pegged, lastTimestamp } = peggedBalance;
+    let { historicalBalance: _historicalBalance, pegged, lastTimestamp } = peggedBalance;
+    const historicalBalance = [..._historicalBalance];
     const pegType = pegged.pegType;
     const peggedGeckoID = pegged.gecko_id;
     const lastBalance = historicalBalance[historicalBalance.length - 1];
 
     // fill missing data with last available data
     while (lastTimestamp < lastDailyTimestamp) {
+      if (pegged.deadFrom) break; // don't extend dead assets beyond their last real data point
       lastTimestamp = getClosestDayStartTimestamp(lastTimestamp + 24 * secondsInHour);
       historicalBalance.push({ ...lastBalance, SK: lastTimestamp });
       peggedBalance.lastTimestamp = lastTimestamp;
@@ -261,11 +254,10 @@ export function craftChartsResponse(
       if (pegType === "peggedVAR") {
         fallbackPrice = 0;
       } else if (pegType !== "peggedUSD" && !historicalPrice) {
-        const closestRatesIndex = timestampsBinarySearch(rateTimestamps, timestamp, ratesCompareFn);
-        const closestRates = extractResultOfBinarySearch(historicalRates, closestRatesIndex);
         const ticker = pegType.slice(-3);
-        fallbackPrice = 1 / closestRates?.rates?.[ticker];
-        if (typeof fallbackPrice !== "number") fallbackPrice = 0;
+        const rate = fxRateMap ? lookupFxRate(fxRateMap, ticker, timestamp) : null;
+        fallbackPrice = rate ? 1 / rate : 0;
+        if (!isFinite(fallbackPrice)) fallbackPrice = 0;
       }
 
       const price = historicalPrice ? historicalPrice : fallbackPrice;
@@ -288,7 +280,15 @@ export function craftChartsResponse(
         itemBalance.bridgedTo = { [pegType]: 0 };
         itemBalance.minted = { [pegType]: 0 };
       } else {
-        const chainData = item[normalizedChain];
+        let chainData: any = null;
+        for (const [itemChain, data] of Object.entries(item)) {
+          if (itemChain === 'SK' || itemChain === 'totalCirculating') continue;
+          const itemChainNormalized = normalizeChain(itemChain);
+          if (itemChainNormalized === normalizedChain) {
+            chainData = data;
+            break;
+          }
+        }
       
         if (chainData?.circulating) {
           const itemPegType = Object.keys(chainData.circulating)?.[0];

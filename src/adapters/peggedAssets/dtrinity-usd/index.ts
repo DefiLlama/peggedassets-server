@@ -1,4 +1,7 @@
 const chainContracts = {
+  ethereum: {
+    issued: "0x07fFf99e1664d9B116fbC158c0E99785F81cA236",
+  },
   fraxtal: {
     issued: "0x788D96f655735f52c676A133f4dFC53cEC614d4A",
   },
@@ -8,6 +11,9 @@ const chainContracts = {
   ronin: {
     issued: "0x0043a403ada6b63045112d7e979a057c82714fe7",
   },
+  katana: {
+    issued: "0xcA52d08737E6Af8763a2bF6034B3B03868f24DDA",
+  }
 };
 
 import { addChainExports } from "../helper/getSupply";

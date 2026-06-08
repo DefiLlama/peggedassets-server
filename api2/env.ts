@@ -19,6 +19,6 @@ export default function geEnv() {
   return {
     tableName: ENV.tableName,
     AWS_REGION: ENV.AWS_REGION,
-    api2CacheDir: __dirname + '/.api2-cache',
+    api2CacheDir: ENV.CACHE_DIR || __dirname + '/.api2-cache',
   }
 }

@@ -1,24 +1,19 @@
 import peggedAssets from "../../peggedData/peggedData";
 import { getCurrentUnixTimestamp } from "../../utils/date";
 import { importAdapter } from "../utils/importAdapter";
-import { executeAndIgnoreErrors } from "./errorDb";
 import { storePeggedAsset } from "./getAndStorePeggedAssets";
 
 const maxRetries = 3;
 const chainBlocks = undefined; // not needed by any adapters
 
 const timeout = (prom: any, time: number, peggedID: string) =>
-  Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
-    async (err) => {
-      console.info("storepegged timedout");
-      await executeAndIgnoreErrors("INSERT INTO `errors` VALUES (?, ?, ?)", [
-        getCurrentUnixTimestamp(),
-        peggedID,
-        String(err),
-      ]);
-      console.error(`Could not store peggedAsset ${peggedID}`, err);
-    }
-  );
+  Promise.race([
+    prom,
+    new Promise((_r, rej) => setTimeout(
+      () => rej(new Error(`storePeggedAsset for ${peggedID} timed out after ${time}ms`)),
+      time
+    ))
+  ]);
 
 const stubFn = () => ({})
 
@@ -40,7 +35,7 @@ async function iteratePeggedAssets(peggedIndexes: number[]) {
         }
         if (peggedAsset.gecko_id === "bitcoin-usd-btcfi") 
           peggedAsset.pegType = "peggedUSD";
-        const adapterModule = importAdapter(peggedAsset);
+        const adapterModule = await importAdapter(peggedAsset);
         if (!adapterModule) console.log("No adapter found for", peggedAsset.name, peggedAsset);
 
         Object.values(adapterModule).forEach((obj: any) => {
