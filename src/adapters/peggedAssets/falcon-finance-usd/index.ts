@@ -9,5 +9,5 @@ const chainContracts = {
   },
 };
 
-const adapter = addChainExports(chainContracts);
+const adapter = addChainExports(chainContracts, {}, { pegType: "peggedUSD" });
 export default adapter;
