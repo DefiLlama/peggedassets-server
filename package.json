@@ -6,6 +6,7 @@
     "api2-dev": "ts-node --transpile-only api2/index.ts",
     "generate-lz-config": "ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/generateLzConfig.ts",
     "generate-hyperlane-config": "ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/generateHyperlaneConfig.ts",
+    "generate-wormhole-config": "ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/generateWormholeConfig.ts",
     "api2-prod": "bash api2/scripts/prod_start.sh",
     "api2-cron-task": "npx ts-node --transpile-only api2/cron-task/index.ts",
     "api2-store-rates": "npx ts-node --transpile-only api2/scripts/storeRates.ts",
@@ -41,6 +42,7 @@
     "typescript": "^5.6.2"
   },
   "devDependencies": {
-    "@hyperlane-xyz/registry": "25.0.0"
+    "@hyperlane-xyz/registry": "25.0.0",
+    "@wormhole-foundation/sdk-base": "4.20.0"
   }
 }

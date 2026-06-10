@@ -79,6 +79,12 @@ type BridgeConfig = {
     chainMap?: { [llamaKey: string]: string }; // per-asset chain key rename on top of the generator's global Hyperlane→DefiLlama mapping
     sourceChain?: string; // pin the source chain (DefiLlama llamaKey) instead of relying on collateral-side voting; protects against silent flips when the registry adds new collateral entries
   };
+  wormholeConfig?: {
+    symbols?: string[]; // list of symbols to match against registry tokens; default: [peggedAsset.symbol]
+    excludeChains?: string[]; // DefiLlama destination chain keys to skip in generated config
+    excludeSources?: string[]; // DefiLlama source chain keys to skip (multi-source-specific — filters out WH-wrappings from named sources)
+    chainMap?: { [whLowerName: string]: string }; // per-asset chain name rename, applied bilaterally to source and destination
+  };
 }
 
 type Bridge = {
