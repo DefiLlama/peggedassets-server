@@ -5249,7 +5249,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: ["https://docs.falcon.finance/resources/audits"],
-    twitter: "https://x.com/FalconStable"
+    twitter: "https://x.com/falconfinance"
   },
   {
     id: "247",
@@ -8176,5 +8176,22 @@ export default [
     twitter: "https://twitter.com/InverseFinance",
     wiki: "https://docs.monolith.market/protocol/stablecoin-factory",
     module: "inverse-usd",
+  },
+  {
+    id: "395",
+    name: "fUSD",
+    address: "0x1676b80edd36b18a3c3432c11ed25d37fde9c92a",
+    symbol: "FUSD",
+    url: "https://falcon.finance/",
+    description: "fUSD is a GENIUS Act-compliant USD payment stablecoin issued by Anchorage Digital Bank, N.A. and distributed by Falcon Finance. Backed 1:1 by cash, short-dated U.S. Treasuries, and Treasury repos, with monthly Deloitte attestations.",
+    mintRedeemDescription: "fUSD is minted and redeemed through Anchorage Digital Bank, N.A.",
+    onCoinGecko: "true",
+    gecko_id: "falcon-finance-usd",
+    cmcId: "40048",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/falconfinance",
+    module: "falcon-finance-usd",
   },
 ] as PeggedAsset[];
