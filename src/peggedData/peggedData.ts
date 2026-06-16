@@ -8211,5 +8211,6 @@ export default [
     auditLinks: ["https://skynet.certik.com/projects/deaderal-reserve-protocol"],
     twitter: "https://x.com/USDeADBOX",
     wiki: null,
+    module: "usdead",
   },
 ] as PeggedAsset[];
