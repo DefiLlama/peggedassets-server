@@ -4,6 +4,9 @@ const chainContracts: ChainContracts = {
   celo: {
     issued: ["0xb55a79F398E759E43C95b979163f30eC87Ee131D"],
   },
+  monad: {
+    issued: ["0xF64e91fFEf7ef43aA314F0Bc2AC39f770797990C"],
+  }
 };
 
 import { addChainExports } from "../helper/getSupply";

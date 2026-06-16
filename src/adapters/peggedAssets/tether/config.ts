@@ -397,5 +397,5 @@ export const chainContracts: ChainContracts = {
   },
   mantra: {
     bridgedFromETH: ["0x3806640578b710d8480910bF51510bc538d2F51A"], 
-  }
+  },
 };
