@@ -534,5 +534,11 @@ export const chainContracts: ChainContracts = {
   },
   edgex: {
     issued: ["0x98d2919b9A214E6Fa5384AC81E6864bA686Ad74c"]
+  },
+  pharos: {
+    issued: ["0xC879C018dB60520F4355C26eD1a6D572cdAC1815"]
+  },
+  injective: {
+    issued: ["0xa00C59fF5a080D2b954d0c75e46E22a0c371235a"], // native USDC on Injective EVM
   }
 };
