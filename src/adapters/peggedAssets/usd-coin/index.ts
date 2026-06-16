@@ -963,6 +963,7 @@ const adapter: PeggedIssuanceAdapter = {
     minted: chainMinted("linea", 6),
   },
   injective: {
+    minted: chainMinted("injective", 6), // native USDC on Injective EVM (chainId 1776)
     noble: cosmosSupply('injective', ['ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E'], 6, 'noble'),
   },
   noble: {
@@ -1120,6 +1121,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   edgex: {
     minted: circleAPIChainMinted("EDGE"),
+  },
+  pharos: {
+    minted: chainMinted("pharos", 6),
   },
 };
 
