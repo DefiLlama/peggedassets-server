@@ -1834,6 +1834,7 @@ export default [
     pegMechanism: "algorithmic",
     priceSource: "coingecko",
     auditLinks: null,
+    deadFrom: "2023-10-11",
     twitter: "https://twitter.com/tangibleDAO",
     wiki: "https://wiki.defillama.com/wiki/Tangible",
   },
