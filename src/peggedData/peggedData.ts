@@ -8195,7 +8195,7 @@ export default [
     module: "falcon-finance-usd",
   },
   {
-    id: "395",
+    id: "396",
     name: "Deaderal Reserve Note",
     address: "ethereum:0x9Bc2C28DF6560C343d3fa9c152Bed80D4511DEAd",
     symbol: "USDeAD",
