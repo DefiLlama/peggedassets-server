@@ -282,6 +282,7 @@ export default [
     pegMechanism: "algorithmic",
     priceSource: "defillama",
     auditLinks: null,
+    deadFrom: "2023-02-01",
     twitter: "https://twitter.com/neutrino_proto",
     wiki: "https://wiki.defillama.com/wiki/Neutrino",
   },
