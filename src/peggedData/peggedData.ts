@@ -1254,6 +1254,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/TaigaProtocol",
     wiki: "https://wiki.defillama.com/wiki/Taiga_Protocol",
+    deadUrl: true,
   },
   {
     id: "59",
