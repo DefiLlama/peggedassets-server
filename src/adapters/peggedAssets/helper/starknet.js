@@ -33,8 +33,7 @@ function formCallBody(
   requestData.calldata = params;
   delete requestData.contractAddress;
   delete requestData.entrypoint;
-  if (abi.customInput === "address")
-    requestData.calldata = params.map((i) => i.slice(2));
+  // The Starknet RPC requires the '0x' prefix on felt calldata; do not strip it.
   return getCallBody(requestData, id);
 
   function getCallBody(i) {
@@ -48,6 +47,8 @@ function formCallBody(
 }
 
 function parseOutput(result, abi, allAbi) {
+  if (!result)
+    throw new Error(`Starknet call for ${abi.name} returned no result`);
   let response = new CallData([abi, ...allAbi]).parse(abi.name, result)
   // convert BigInt to string
   for (const key in response) {
