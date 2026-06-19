@@ -8216,4 +8216,26 @@ export default [
     wiki: null,
     module: "usdead",
   },
+  {
+    id: "397",
+    name: "Hyperbeat USD",
+    address: "hyperliquid:0x669abe85F96a9e3B34723F7Be9bC6F250aBC0Cc1",
+    symbol: "beatUSD",
+    url: "https://www.hyperbeat.org/",
+    description:
+      "Hyperbeat USD (beatUSD) is a treasury-backed stablecoin issued on HyperEVM through Hyperbeat's Liquid banking accounts.",
+    mintRedeemDescription:
+      "Every dollar deposited into a Hyperbeat Liquid banking account mints Hyperbeat USD, a treasury backed stablecoin.",
+    onCoinGecko: "false",
+    gecko_id: "beatusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: null,
+    wiki: null,
+    module: "beatusd",
+    doublecounted: true,
+  },
 ] as PeggedAsset[];
