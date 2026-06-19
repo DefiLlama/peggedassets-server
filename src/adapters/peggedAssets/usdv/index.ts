@@ -1,98 +1,58 @@
-const sdk = require("@defillama/sdk");
-import { sumSingleBalance } from "../helper/generalUtil";
-import { bridgedSupply } from "../helper/getSupply";
-import {
-  ChainBlocks,
-  PeggedIssuanceAdapter,
-  Balances,  ChainContracts,
-} from "../peggedAsset.type";
+import { PeggedIssuanceAdapter } from "../peggedAsset.type";
 
+const XRPL_RPC = "https://s1.ripple.com:51234/";
 
-const chainContracts: ChainContracts = {
-  ethereum: {
-    issued: ["0x0E573Ce2736Dd9637A0b21058352e1667925C7a8"],
-  },
-  bsc: {
-    bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
-  },
-  optimism: {
-    bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
-  },
-  arbitrum: {
-    bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
-  },
-  avax: {
-    bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
-  },
-  polygon: {
-    bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
-  },
-  tomochain: {
-    bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
-  },
+const USDV_ISSUER = "rfffsukWALJB1PXYk7H8xkR6UJUDT8nMJE";
+const USDV_CURRENCY = "5553445600000000000000000000000000000000";
+
+type XrplGatewayBalancesResult = {
+  obligations?: Record<string, string>;
+  status?: string;
+  error?: string;
+  error_message?: string;
 };
 
-async function chainMinted(chain: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let issued of chainContracts[chain].issued) {
-      const totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: issued,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        totalSupply / 10 ** decimals,
-        "issued",
-        false
-      );
-    }
-    return balances;
+async function xrplRpc<T>(method: string, params: Record<string, unknown>): Promise<T> {
+  const response = await fetch(XRPL_RPC, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      method,
+      params: [params],
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`XRPL RPC HTTP ${response.status}`);
+  }
+
+  const json = await response.json();
+  const result = json.result as XrplGatewayBalancesResult | undefined;
+
+  if (!result || result.status === "error") {
+    throw new Error(result?.error_message || result?.error || "XRPL RPC failed");
+  }
+
+  return result as T;
+}
+
+async function minted() {
+  const result = await xrplRpc<XrplGatewayBalancesResult>("gateway_balances", {
+    account: USDV_ISSUER,
+    ledger_index: "validated",
+  });
+
+  const obligations = result.obligations || {};
+
+  return {
+    peggedUSD: Number(obligations[USDV_CURRENCY] || obligations.USDV || 0),
   };
 }
 
 const adapter: PeggedIssuanceAdapter = {
-  ethereum: {
-    minted: chainMinted("ethereum", 6),
-  },
-  bsc: {
-    minted: bridgedSupply("bsc", 6, chainContracts.bsc.bridgedFromETH),
-  },
-  optimism: {
-    minted: bridgedSupply(
-      "optimism",
-      6,
-      chainContracts.optimism.bridgedFromETH
-    ),
-  },
-  arbitrum: {
-    minted: bridgedSupply(
-      "arbitrum",
-      6,
-      chainContracts.arbitrum.bridgedFromETH
-    ),
-  },
-  polygon: {
-    minted: bridgedSupply("polygon", 6, chainContracts.polygon.bridgedFromETH),
-  },
-  tomochain: {
-    minted: bridgedSupply(
-      "tomochain",
-      6,
-      chainContracts.tomochain.bridgedFromETH
-    ),
-  },
-  avax: {
-    minted: bridgedSupply("avax", 6, chainContracts.avax.bridgedFromETH),
+  ripple: {
+    minted,
+    unreleased: async () => ({}),
   },
 };
 
