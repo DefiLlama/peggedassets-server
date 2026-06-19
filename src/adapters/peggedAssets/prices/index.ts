@@ -32,6 +32,5 @@ export async function getPrices(assets: any[]) {
   }
   finalRes["m-2"] = 1
   finalRes["terrausd"] = 0
-  finalRes["beatusd"] = 1 // beatUSD is a flat $1 token; DefiLlama has no price feed for it
   return finalRes
 }
