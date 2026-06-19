@@ -8221,7 +8221,7 @@ export default [
     name: "Hyperbeat USD",
     address: "hyperliquid:0x669abe85F96a9e3B34723F7Be9bC6F250aBC0Cc1",
     symbol: "beatUSD",
-    url: "https://www.hyperbeat.org/",
+    url: "https://hyperbeat.org/",
     description:
       "Hyperbeat USD (beatUSD) is a treasury-backed stablecoin issued on HyperEVM through Hyperbeat's Liquid banking accounts.",
     mintRedeemDescription:
@@ -8233,8 +8233,8 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: null,
-    twitter: null,
-    wiki: null,
+    twitter: "https://x.com/hyperbeat",
+    wiki: "https://docs.hyperbeat.org",
     module: "beatusd",
     doublecounted: true,
   },
