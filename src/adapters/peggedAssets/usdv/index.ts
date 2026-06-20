@@ -45,8 +45,7 @@ async function minted() {
   const obligations = result.obligations || {};
 
   return {
-    peggedUSD: Number(obligations[USDV_CURRENCY] || obligations.USDV || 0),
-  };
+peggedUSD: Number(obligations[USDV_CURRENCY] || 0),  };
 }
 
 const adapter: PeggedIssuanceAdapter = {
