@@ -8216,18 +8216,18 @@ export default [
     wiki: null,
     module: "usdead",
   },
-    {
-    id: "397",
-    name: "USDV",
+   {
+    id: "398",
+    name: "Valtorum USD",
     address: null,
     symbol: "USDV",
     url: "https://valtorum.com",
     description:
-      "USDV is a USD-pegged stablecoin issued by Valtorum on the XRP Ledger.",
+      "Valtorum USD (USDV) is a permissioned USD-pegged stablecoin issued by Valtorum on the XRP Ledger. Holder trustlines require issuer authorization.",
     mintRedeemDescription:
-      "USDV is issued and redeemed by Valtorum through its XRP Ledger issuer account.",
+      "Valtorum USD is issued and redeemed by Valtorum through its XRP Ledger issuer account.",
     onCoinGecko: "false",
-    gecko_id: "usdv",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
