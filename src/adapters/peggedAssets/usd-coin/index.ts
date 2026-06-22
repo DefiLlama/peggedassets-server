@@ -428,7 +428,7 @@ async function flowBridged(address: string, decimals: number) {
     const res = await retry(
       async (_bail: any) =>
         await axios.get(
-          `https://evm.flowscan.io/api/v2/addresses/${address}`
+          `https://evm.flow.com/api/v2/addresses/${address}`
         )
     );
     const totalSupply =
