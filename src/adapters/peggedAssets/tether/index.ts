@@ -977,6 +977,8 @@ const adapter: PeggedIssuanceAdapter = {
   // resolves. Removed to stop breaking the run.
   // neo: { ethereum: polyNetworkBridged(4, "Neo", "pnUSDT") },
   // zilliqa: { ethereum: polyNetworkBridged(18, "Zilliqa", "zUSDT") },
+  neo: {},
+  zilliqa: {},
   arbitrum_nova: {
     ethereum: bridgedSupply(
       "arbitrum_nova",
