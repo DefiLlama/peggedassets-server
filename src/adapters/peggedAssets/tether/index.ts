@@ -17,7 +17,6 @@ import {
   getBalance as ontologyGetBalance,
   getTotalSupply as ontologyGetTotalSupply,
 } from "../helper/ontology";
-import { getTotalBridged as pnGetTotalBridged } from "../helper/polynetwork";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import {
   getTokenBalance as tronGetTokenBalance,
@@ -486,30 +485,6 @@ async function moveSupply(): Promise<Balances> {
   return balances;
 }
 
-
-async function polyNetworkBridged(
-  chainID: number,
-  chainName: string,
-  assetName: string
-) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const totalSupply = await pnGetTotalBridged(chainID, chainName, assetName);
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      totalSupply,
-      "polynetwork",
-      false,
-      "Ethereum"
-    );
-    return balances;
-  };
-}
 
 async function kavaBridged() {
   return async function (
@@ -997,12 +972,11 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.dogechain.bridgedFromETH
     ),
   },
-  neo: {
-    ethereum: polyNetworkBridged(4, "Neo", "pnUSDT"),
-  },
-  zilliqa: {
-    ethereum: polyNetworkBridged(18, "Zilliqa", "zUSDT"),
-  },
+  // neo and zilliqa USDT were bridged via PolyNetwork, whose explorer API
+  // (explorer.poly.network) was abandoned after the 2023 hack and no longer
+  // resolves. Removed to stop breaking the run.
+  // neo: { ethereum: polyNetworkBridged(4, "Neo", "pnUSDT") },
+  // zilliqa: { ethereum: polyNetworkBridged(18, "Zilliqa", "zUSDT") },
   arbitrum_nova: {
     ethereum: bridgedSupply(
       "arbitrum_nova",
