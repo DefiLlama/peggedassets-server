@@ -8259,4 +8259,25 @@ export default [
     wiki: "https://valtorum.com/about/",
     module: "valtorum-usdv",
   },
+  {
+    id: "399",
+    name: "Kerne USD",
+    address: "0x5C2EfdF0D8D286959b42308966bc2B97f5680AA3",
+    symbol: "kUSD",
+    url: "https://kerne.fi",
+    description:
+      "Kerne USD (kUSD) is the synthetic dollar of Kerne Protocol on Base. kUSD is minted and redeemed 1:1 against USDC through an on-chain Peg Stability Module and is backed 1:1 by USDC reserves. Holders can stake kUSD into skUSD, a vault that accrues yield from a delta-neutral basis trade pairing Ethereum staking rewards with Hyperliquid perpetual funding, hedged so holders carry no directional ETH exposure. This is Kerne Protocol's kUSD on Base, independent of KernelDAO's KUSD and Kernel Protocol's kUSD.",
+    mintRedeemDescription:
+      "kUSD is minted by depositing USDC into the Kerne Peg Stability Module on Base on a 1:1 value basis, and redeemed 1:1 for USDC through the same module. Supply is uncapped and changes with mints and redemptions.",
+    onCoinGecko: "false",
+    gecko_id: "kerne-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://twitter.com/KerneProtocol",
+    wiki: "https://kerne.fi/docs",
+    module: "kerne-usd",
+  },
 ] as PeggedAsset[];
