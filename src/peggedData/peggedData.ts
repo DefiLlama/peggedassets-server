@@ -8237,7 +8237,8 @@ export default [
     wiki: "https://docs.hyperbeat.org",
     module: "beatusd",
     doublecounted: true,
- {
+  },
+  {
     id: "398",
     name: "Valtorum USD",
     address: null,
