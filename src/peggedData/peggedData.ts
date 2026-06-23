@@ -8232,6 +8232,11 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/hyperbeat",
+    wiki: "https://docs.hyperbeat.org",
+    module: "beatusd",
+    doublecounted: true,
  {
     id: "398",
     name: "Valtorum USD",
