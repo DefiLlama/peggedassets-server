@@ -495,6 +495,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/synthetix_io",
     wiki: "https://wiki.defillama.com/wiki/Synthetix",
+    deadFrom: "2026-06-23",
   },
   {
     id: "23",
