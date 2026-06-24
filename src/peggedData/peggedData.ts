@@ -8260,4 +8260,25 @@ export default [
     wiki: "https://valtorum.com/about/",
     module: "valtorum-usdv",
   },
+  {
+    id: "399",
+    name: "Agant GBP",
+    address: "0xbBe6aAB0Ed76e90AeA0d1cd978EC231c8AdCDF8b",
+    symbol: "GBPA",
+    url: "https://www.agant.io/gbpa",
+    description:
+      "Agant GBP (GBPA) is a pound sterling stablecoin issued by Agant Finance Limited, a UK-based issuer registered with the UK Financial Conduct Authority as a cryptoasset firm under the Money Laundering Regulations (FRN: 1037671). GBPA is designed to be fully backed and redeemable 1:1 for pound sterling, and used for GBP-denominated payments, settlement, treasury operations, and on-chain financial applications.",
+    mintRedeemDescription:
+      "Eligible clients can exchange GBP for GBPA and redeem GBPA for GBP through Agant Finance Limited, subject to Agant's terms, onboarding requirements, compliance checks, and applicable regulatory obligations.",
+    onCoinGecko: "true",
+    gecko_id: "agant-gbp",
+    cmcId: null,
+    pegType: "peggedGBP",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/AgantFinance",
+    wiki: "https://docs.agant.io/XDREhsGKwMiuddKPr5Rt",
+    module: "agant-gbp",
+  },
 ] as PeggedAsset[];
