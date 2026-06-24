@@ -40,6 +40,7 @@ export default [
         // "USDT0" is the ASCII-T variant; both appear in the Hyperlane registry.
         symbols: ["USDT", "USD₮0", "USDT0"],
       },
+      wormholeConfig: {},
     }
   },
   {
@@ -68,6 +69,7 @@ export default [
       hyperlaneConfig: {
         // Default matching by gecko_id "usd-coin" and symbol "USDC".
       },
+      wormholeConfig: {},
     }
   },
   {
@@ -142,6 +144,7 @@ export default [
         // alphabetical tie (arbitrum/bsc/polygon) the voting algorithm hits.
         sourceChain: "arbitrum",
       },
+      wormholeConfig: {},
     }
   },
   {
@@ -1090,6 +1093,11 @@ export default [
         // Hyperlane has one EURC warp route with two EvmHypCollateral endpoints
         // and zero synthetic destinations. The generated config will have an
         // empty tokens[]. Wiring included for consistency and future routes.
+      },
+      wormholeConfig: {
+        // Wormhole registry currently has no EURC entries. The generated config
+        // will be an empty array. Wiring included for forward compatibility —
+        // if Wormhole attests EURC in the future, regenerating picks it up.
       },
     },
   },
