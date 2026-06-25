@@ -23,6 +23,9 @@ const chainContracts: ChainContracts = {
   solana: {
     bridgedFromCelo: ["7g166TuBmnoHKvS2PEkZx6kREZtbfjUxCHGWjCqoDXZv"], // allbridge
   },
+  monad: {
+    bridgedFromCelo: ["0x4D502d735B4C574B487Ed641ae87cEaE884731C7"]
+  }
 };
 
 async function chainMinted(chain: string, decimals: number) {
