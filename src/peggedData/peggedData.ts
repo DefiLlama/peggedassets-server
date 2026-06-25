@@ -6558,7 +6558,6 @@ export default [
     auditLinks: ["https://diligence.consensys.io/audits/2025/08/metamask-usd-token/"],
     twitter: "https://x.com/MetaMask",
     wiki: "https://metamask.io/price/metamask-usd",
-    doublecounted: true
   },
   {
     id: "314",
