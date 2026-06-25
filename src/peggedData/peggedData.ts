@@ -8276,4 +8276,25 @@ export default [
     wiki: "https://docs.agant.io/XDREhsGKwMiuddKPr5Rt",
     module: "agant-gbp",
   },
+  {
+    id: "400",
+    name: "Saturn Dollar",
+    address: "0x23238f20b894f29041f48D88eE91131C395Aaa71",
+    symbol: "USDAT",
+    url: "https://saturn.credit/",
+    description:
+      "USDat is a stablecoin fully backed by Tokenized U.S. Treasuries and Stablecoins.",
+    mintRedeemDescription:
+      "To mint USDat, users must first complete Saturn's onboarding process. Only whitelisted addresses, both the depositor and the recipient, are permitted to interact with the protocol.",
+    onCoinGecko: "true",
+    gecko_id: "saturn-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/saturn_credit",
+    wiki: "https://saturncredit.gitbook.io/saturn-docs/solution/usdat-overview",
+    module: "saturn-dollar",
+  },
 ] as PeggedAsset[];
