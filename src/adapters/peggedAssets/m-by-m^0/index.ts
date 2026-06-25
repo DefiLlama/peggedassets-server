@@ -1,8 +1,11 @@
-import { addChainExports, solanaMintedOrBridged } from "../helper/getSupply";
+import { ChainApi } from "@defillama/sdk";
+import { addChainExports, getApi, solanaMintedOrBridged } from "../helper/getSupply";
 import { cosmosSupply } from "../helper/getSupply";
-import { PeggedIssuanceAdapter } from "../peggedAsset.type";
+import { sumSingleBalance } from "../helper/generalUtil";
+import { Balances, PeggedIssuanceAdapter } from "../peggedAsset.type";
 
 const M_TOKEN_ADDRESS = "0x866A2BF4E572CbcF37D5071A7a58503Bfb36be1b";
+const CTUSD_ADDRESS = "0x8D82c4E3c936C7B5724A382a9c5a4E6Eb7aB6d5D";
 
 /**
  * M token is the native token of M^0 protocol on Ethereum, backed by U.S. Treasuries.
@@ -23,6 +26,21 @@ async function nobleUSDNAsBridgedM() {
     'ethereum',
     'peggedUSD'
   );
+}
+
+/**
+ * ctUSD on Citrea is fully backed 1:1 by M held in custody.
+ * Since ctUSD is counted on Citrea, we subtract its totalSupply from M on
+ * Ethereum to avoid double-counting the same T-bill backing.
+ */
+async function ctUSDBackingOffset() {
+  return async function (_api: ChainApi) {
+    const citreaApi = await getApi("citrea", _api);
+    const balances = {} as Balances;
+    const supply = await citreaApi.call({ abi: "erc20:totalSupply", target: CTUSD_ADDRESS });
+    sumSingleBalance(balances, "peggedUSD", Number(supply) / 1e6);
+    return balances;
+  };
 }
 
 const chainContracts = {
@@ -46,8 +64,14 @@ const chainContracts = {
   },
 };
 
+const baseAdapter = addChainExports(chainContracts, {}, { decimals: 6 });
+
 const adapter: PeggedIssuanceAdapter = {
-  ...addChainExports(chainContracts, {}, { decimals: 6 }),
+  ...baseAdapter,
+  ethereum: {
+    ...baseAdapter.ethereum,
+    unreleased: ctUSDBackingOffset(),
+  },
   solana: {
     ethereum: solanaMintedOrBridged(["mzerokyEX9TNDoK4o2YZQBDmMzjokAeN6M2g2S3pLJo"]),
   },

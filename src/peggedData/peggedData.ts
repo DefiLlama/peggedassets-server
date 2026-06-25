@@ -7278,7 +7278,10 @@ export default [
     twitter: "https://x.com/citrea_xyz",
     wiki: "https://docs.citrea.xyz/developer-documentation/citrea-usd-ctusd",
     module: "citrea-ctusd",
-    doublecounted: true
+    // ctUSD is the foundational stablecoin of the Citrea ecosystem, so it is
+    // counted on Citrea. To avoid double-counting its M0 backing, an equivalent
+    // amount is subtracted from M's circulating on Ethereum via the M adapter's
+    // `unreleased` function.
   },
   {
     id: "351",
