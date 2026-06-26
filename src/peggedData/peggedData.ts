@@ -8297,4 +8297,27 @@ export default [
     wiki: "https://saturncredit.gitbook.io/saturn-docs/solution/usdat-overview",
     module: "saturn-dollar",
   },
+  {
+    id: "401",
+    name: "Tori trUSD",
+    address: "0xd0580192E98eA6CEB9c7b6191Ed2E27560911697",
+    symbol: "trUSD",
+    url: "https://tori.finance",
+    description:
+      "trUSD is a crypto-native synthetic dollar issued by Tori Finance that provides an embedded, performance-based yield and targets price stability through delta-neutral, market-neutral trading positions managed by a regulated institutional asset manager.",
+    mintRedeemDescription:
+      "Whitelisted users deposit eligible collateral with Tori Finance to mint trUSD, and redeem trUSD for collateral. Stability is targeted through delta-neutral hedging of the backing positions across trading venues.",
+    onCoinGecko: false,
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://github.com/sherlock-protocol/sherlock-reports/blob/main/audits/2026.02.10%20-%20Final%20-%20Tori%20Finance%20Collaborative%20Audit%20Report%201770734349.pdf",
+    ],
+    twitter: "https://x.com/tori_finance",
+    wiki: "https://docs.tori.finance",
+    module: "tori-usd",
+  },
 ] as PeggedAsset[];
