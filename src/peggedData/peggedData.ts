@@ -8343,5 +8343,6 @@ export default [
     twitter: "https://twitter.com/KerneProtocol",
     wiki: "https://kerne.fi/docs",
     module: "kerne-usd",
+    doublecounted: true,
   },
 ] as PeggedAsset[];
