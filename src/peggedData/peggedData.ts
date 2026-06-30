@@ -8307,11 +8307,11 @@ export default [
     symbol: "trUSD",
     url: "https://tori.finance",
     description:
-      "trUSD is a crypto-native synthetic dollar issued by Tori Finance that provides an embedded, performance-based yield and targets price stability through delta-neutral, market-neutral trading positions managed by a regulated institutional asset manager.",
+      "trUSD is a crypto-native synthetic dollar issued by Tori Finance that provides an embedded, performance-based yield and targets price stability through delta-neutral trading positions.",
     mintRedeemDescription:
       "Whitelisted users deposit eligible collateral with Tori Finance to mint trUSD, and redeem trUSD for collateral. Stability is targeted through delta-neutral hedging of the backing positions across trading venues.",
-    onCoinGecko: false,
-    gecko_id: null,
+    onCoinGecko: true,
+    gecko_id: "tori-trusd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
