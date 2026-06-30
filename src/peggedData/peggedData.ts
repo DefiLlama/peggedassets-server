@@ -1170,6 +1170,7 @@ export default [
     pegMechanism: "algorithmic",
     priceSource: "defillama",
     auditLinks: null,
+    deadFrom: "2022-10-24",
     twitter: "https://twitter.com/DcntrlBank",
     wiki: "https://wiki.defillama.com/wiki/USN",
   },
@@ -2482,6 +2483,7 @@ export default [
     auditLinks: [
       "https://github.com/trailofbits/publications/blob/master/reviews/2023-04-tempus-raft-securityreview.pdf",
     ],
+    deadFrom: "2023-11-10",
     twitter: "https://twitter.com/raft_fi",
     wiki: null,
     deadUrl: true,
@@ -4819,6 +4821,7 @@ export default [
     pegMechanism: "fiat-backed",
     auditLinks: ["https://docs.zoth.io/zoth/resources/audits"],
     priceSource: "defillama",
+    deadFrom: "2025-03-19",
     twitter: "https://x.com/zothdotio",
     wiki: "https://docs.zoth.io/zoth/products/zeusd-an-omni-chain-and-composable-stable-token"
   },
