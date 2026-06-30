@@ -8345,4 +8345,25 @@ export default [
     module: "kerne-usd",
     doublecounted: true,
   },
+  {
+    id: "403",
+    name: "Money Protocol",
+    address: "rsk:0x1fe2f558e2120c4bDf4217248D2940043a8E1208",
+    symbol: "BPD",
+    url: "https://www.moneyprotocol.co/",
+    description:
+      "Money Protocol is a decentralized system that allows anyone to monetize or borrow against their Bitcoin without paying an annual interest rate. When locking up BTC as collateral in Money Protocol and creating a Vault, the user can get instant liquidity by minting BPD. Bitcoin Protocol Dollar or BPD is a decentralized, collateral-backed stablecoin target pegged to the US Dollar.",
+    mintRedeemDescription:
+      "Each Vault is required to be collateralized at a minimum of 110%. Holders of BPD can redeem their stablecoin for the underlying BTC collateral at any time.",
+    onCoinGecko: "false",
+    gecko_id: "money-protocol", //fake
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/money_protocol",
+    wiki: "https://docs.moneyprotocol.co/docs/intro",
+    module: "money-protocol",
+  },
 ] as PeggedAsset[];
