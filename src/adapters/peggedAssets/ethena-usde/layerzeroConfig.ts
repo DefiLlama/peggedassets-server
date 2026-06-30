@@ -30,6 +30,7 @@ const layerzeroConfig: LayerZeroConfig = {
     { chain: "swellchain", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:swell)
     { chain: "xlayer", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:xlayer)
     { chain: "zircuit", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:zircuit)
+    { chain: "monad", address: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:monad)
   ],
 };
 

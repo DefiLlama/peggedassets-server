@@ -30,6 +30,9 @@ const chainContracts: ChainContracts = {
   scroll: {
     issued: ["0xd7BB130A48595fCDf9480E36C1aE97ff2938aC21"],
   },
+  base: {
+    issued: ["0xbf6e2966A9C3D99C9E4D069E04f7Bdb9C8aa762C"],
+  },
 
 };
 
@@ -112,6 +115,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   scroll: {
     minted: chainMinted("scroll", 18),
+  },
+  base: {
+    minted: chainMinted("base",18),
   },
   algorand: {
     minted: algorandMinted(),

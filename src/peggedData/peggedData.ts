@@ -495,6 +495,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/synthetix_io",
     wiki: "https://wiki.defillama.com/wiki/Synthetix",
+    deadFrom: "2026-06-23",
   },
   {
     id: "23",
@@ -1169,6 +1170,7 @@ export default [
     pegMechanism: "algorithmic",
     priceSource: "defillama",
     auditLinks: null,
+    deadFrom: "2022-10-24",
     twitter: "https://twitter.com/DcntrlBank",
     wiki: "https://wiki.defillama.com/wiki/USN",
   },
@@ -2481,6 +2483,7 @@ export default [
     auditLinks: [
       "https://github.com/trailofbits/publications/blob/master/reviews/2023-04-tempus-raft-securityreview.pdf",
     ],
+    deadFrom: "2023-11-10",
     twitter: "https://twitter.com/raft_fi",
     wiki: null,
     deadUrl: true,
@@ -4561,6 +4564,7 @@ export default [
     auditLinks: null,
     priceSource: "coingecko",
     twitter: "https://x.com/m0foundation",
+    doublecounted: true, // double count on this, and all the ones using them dont need double count
     wiki: "https://docs.m0.org/portal/overview/whitepaper/i.-introduction"
   },
   {
@@ -4817,6 +4821,7 @@ export default [
     pegMechanism: "fiat-backed",
     auditLinks: ["https://docs.zoth.io/zoth/resources/audits"],
     priceSource: "defillama",
+    deadFrom: "2025-03-19",
     twitter: "https://x.com/zothdotio",
     wiki: "https://docs.zoth.io/zoth/products/zeusd-an-omni-chain-and-composable-stable-token"
   },
@@ -5606,7 +5611,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "orki-usd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5953,7 +5957,6 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/noble_xyz/",
     wiki: "https://dollar.noble.xyz/how-noble-dollar-works",
-    doublecounted: true
   },
   {
     id: "283",
@@ -6557,7 +6560,6 @@ export default [
     auditLinks: ["https://diligence.consensys.io/audits/2025/08/metamask-usd-token/"],
     twitter: "https://x.com/MetaMask",
     wiki: "https://metamask.io/price/metamask-usd",
-    doublecounted: true
   },
   {
     id: "314",
@@ -6940,7 +6942,6 @@ export default [
     twitter: "https://x.com/mantraUSD",
     wiki: null,
     module: "mantra-usd",
-    doublecounted: true
   },
   {
     id: "334",
@@ -7278,7 +7279,6 @@ export default [
     twitter: "https://x.com/citrea_xyz",
     wiki: "https://docs.citrea.xyz/developer-documentation/citrea-usd-ctusd",
     module: "citrea-ctusd",
-    doublecounted: true
   },
   {
     id: "351",
@@ -7836,7 +7836,6 @@ export default [
     twitter: "https://x.com/Neronaxyz",
     wiki: "https://docs.nerona.xyz/welcome",
     module: "nerona-usdnr",
-    doublecounted: true
   },
   {
     id: "378",
