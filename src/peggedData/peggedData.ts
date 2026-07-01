@@ -8367,4 +8367,25 @@ export default [
     wiki: "https://docs.moneyprotocol.co/docs/intro",
     module: "money-protocol",
   },
+  {
+    id: "404",
+    name: "Monetrix USDM",
+    address: "hyperliquid:0xE2d2959f89B6389DeB624bF076Fe7D9E5401f377",
+    symbol: "USDM",
+    url: "https://www.monetrix.xyz/",
+    description:
+      "USDM is a delta-neutral, yield-bearing synthetic dollar on HyperEVM. It is backed by USDC collateral deployed into delta-neutral basis-trading positions (funding payments, HLP and borrow-lend yield) on Hyperliquid Core, and mints/redeems 1:1 against USDC.",
+    mintRedeemDescription:
+      "Users mint USDM 1:1 by depositing USDC, which the protocol deploys into delta-neutral positions on Hyperliquid Core. USDM can be staked for sUSDM to earn the strategy yield, and is redeemed back to USDC 1:1.",
+    onCoinGecko: "false",
+    gecko_id: "monetrix-usdm", // placeholder: USDM is not yet listed on CoinGecko
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: null,
+    wiki: null,
+    module: "monetrix-usdm",
+  },
 ] as PeggedAsset[];
