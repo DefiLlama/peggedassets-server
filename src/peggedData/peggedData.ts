@@ -5057,6 +5057,7 @@ export default [
     wiki: "https://docs.synnax.fi",
     deadFrom: "2026-01-15",
     deprecated: true,
+    deadUrl: true,
   },
   {
     id: "237",
