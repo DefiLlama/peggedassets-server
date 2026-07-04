@@ -8377,15 +8377,16 @@ export default [
       "USDM is a delta-neutral, yield-bearing synthetic dollar on HyperEVM. It is backed by USDC collateral deployed into delta-neutral basis-trading positions (funding payments, HLP and borrow-lend yield) on Hyperliquid Core, and mints/redeems 1:1 against USDC.",
     mintRedeemDescription:
       "Users mint USDM 1:1 by depositing USDC, which the protocol deploys into delta-neutral positions on Hyperliquid Core. USDM can be staked for sUSDM to earn the strategy yield, and is redeemed back to USDC 1:1.",
-    onCoinGecko: "false",
-    gecko_id: "monetrix-usdm", // placeholder: USDM is not yet listed on CoinGecko
+    onCoinGecko: "true",
+    gecko_id: "monetrix-usd", 
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: null,
+    priceSource: "defillama",
     auditLinks: null,
-    twitter: null,
-    wiki: null,
+    twitter: "https://x.com/monetrix_xyz",
+    wiki: "https://doc.monetrix.xyz/guide/mint",
     module: "monetrix-usdm",
+    doublecounted: true,
   },
 ] as PeggedAsset[];
