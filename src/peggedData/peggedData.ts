@@ -5687,7 +5687,7 @@ export default [
   {
     id: "269",
     name: "Liquity BOLD",
-    address: "0xb01dd87b29d187f3e3a4bf6cdaebfb97f3d9ab98",
+    address: "0x6440f144b7e50D6a8439336510312d2F54beB01D",
     symbol: "BOLD",
     url: "https://www.liquity.org/bold",
     description:
