@@ -5433,7 +5433,7 @@ export default [
   {
     id: "256",
     name: "Resupply USD",
-    address: "0x4274cd7277c7bb0806bd5fe84b9adae466a8da0a",
+    address: "0x57ab1e0003f623289cd798b1824be09a793e4bec",
     symbol: "REUSD",
     url: "https://resupply.fi/",
     description: "A decentralized stablecoin backed by stablecoin collateral in yield-bearing Curve Lend and Frax Lend markets, designed to maintain a 1:1 USD peg while sharing earned lending fees with borrowers.",
