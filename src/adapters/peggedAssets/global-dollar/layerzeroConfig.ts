@@ -8,6 +8,7 @@ const layerzeroConfig: LayerZeroConfig = {
   sourceChain: "ethereum",
   tokens: [
     { chain: "hyperliquid", address: "0x9522133c663ba8c2a8a7b4f63dd2ac8dccce1505", decimals: 6 }, // ERC20 USDG0 (lz:hyperliquid)
+    { chain: "robinhood", address: "0x5fc5360d0400a0fd4f2af552add042d716f1d168", decimals: 6 }, // ERC20 USDG (lz:robinhood)
     { chain: "xlayer", address: "0x4ae46a509f6b1d9056937ba4500cb143933d2dc8", decimals: 6 }, // ERC20 USDG (lz:xlayer)
   ],
 };

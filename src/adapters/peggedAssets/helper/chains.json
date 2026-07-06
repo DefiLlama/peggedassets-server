@@ -21,6 +21,7 @@
   "bfc",
   "binance",
   "bitcoin",
+  "bittensor_evm",
   "bittorent",
   "bittorrent",
   "blast",
@@ -118,6 +119,7 @@
   "katana",
   "kava",
   "kcc",
+  "kiteai",
   "klaytn",
   "kroma",
   "kujira",
@@ -181,6 +183,8 @@
   "rei",
   "reinetwork",
   "ripple",
+  "rls",
+  "robinhood",
   "ronin",
   "rsk",
   "saga",
@@ -251,5 +255,6 @@
   "zircuit",
   "zkfair",
   "zksync",
+  "zora",
   "zyx"
 ]
