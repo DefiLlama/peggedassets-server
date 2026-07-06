@@ -8389,4 +8389,25 @@ export default [
     module: "monetrix-usdm",
     doublecounted: true,
   },
+  {
+    id: "409",
+    name: "Ondo U.S. Dollar Token",
+    address: "0xace8e719899f6e91831b18ae746c9a965c2119f1",
+    symbol: "USDon",
+    url: "https://app.ondo.finance/",
+    description:
+      "USDon is a USD-pegged stablecoin issued by Ondo Finance that serves as the settlement currency for tokenized stocks and ETFs on Ondo Global Markets.",
+    mintRedeemDescription:
+      "USDon is backed 1:1 by US dollars held in Ondo Global Markets' brokerage accounts. It is minted by converting USDC 1:1 when buying tokenized assets and redeemed 1:1 back to USDC.",
+    onCoinGecko: "true",
+    gecko_id: "ondo-u-s-dollar-token",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/OndoFinance",
+    wiki: "https://docs.ondo.finance/ondo-global-markets/investing-and-redeeming",
+    module: "ondo-u-s-dollar-token",
+  },
 ] as PeggedAsset[];
