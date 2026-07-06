@@ -8432,4 +8432,25 @@ export default [
     module: "polymarket-usd",
     doublecounted: true,
   },
+  {
+    id: "412",
+    name: "Universal USD",
+    address: "0xe4ca6596d2c28014c6f89964f57838e0be9f369b",
+    symbol: "USDU",
+    url: "https://www.universal.ae/",
+    description:
+      "Universal USD (USDU) is a fiat-referenced token pegged 1:1 to the US Dollar, issued by Universal Digital Intl Limited, a financial entity based in Abu Dhabi Global Market. It is designed to provide a compliant, institutional-grade USD-denominated settlement layer for digital assets and virtual asset derivatives within regulated financial frameworks.",
+    mintRedeemDescription:
+      "USDU is minted when professional and institutional clients deposit US dollars with the issuer, and it can be redeemed 1:1 against liquid USD reserves held in safeguarded accounts with regulated commercial banks, with monthly independent reserve attestations.",
+    onCoinGecko: "true",
+    gecko_id: "universal-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/Universal_USDU",
+    wiki: null,
+    module: "universal-usd",
+  },
 ] as PeggedAsset[];
