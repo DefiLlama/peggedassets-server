@@ -8389,4 +8389,25 @@ export default [
     module: "monetrix-usdm",
     doublecounted: true,
   },
+  {
+    id: "407",
+    name: "USDA",
+    address: "bsc:0x17eafd08994305d8ace37efb82f1523177ec70ee",
+    symbol: "USDA",
+    url: "https://alphapartner.vip/",
+    description:
+      "USDA is a compliant, cross-chain stablecoin issued by the AP Web3 ecosystem, anchored 1:1 to the US Dollar and designed as secure digital payment and asset settlement infrastructure for global users.",
+    mintRedeemDescription:
+      "USDA is minted when users deposit USD with the issuer, and it can be redeemed 1:1 for the USD held in its reserves.",
+    onCoinGecko: "true",
+    gecko_id: "usda-3",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/APalphalabs",
+    wiki: null,
+    module: "usda-3",
+  },
 ] as PeggedAsset[];
