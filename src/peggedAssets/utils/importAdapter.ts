@@ -35,5 +35,17 @@ export async function importAdapter(asset: PeggedAsset, adapter?: any): Promise<
     }
   }
 
+  if (asset.bridgeConfig?.wormholeConfig) {
+    const wormholeConfigPath = path.join(modulePath, 'wormholeConfig');
+    try {
+      const wormholeConfig = (await import(wormholeConfigPath)).default;
+      addBridgeConfigs(adapter, { wormhole: wormholeConfig });
+    } catch (e) {
+      console.warn(
+        `[${asset.name}] bridgeConfig.wormholeConfig declared but ${key}/wormholeConfig.ts not found; skipping. Run the generator: npx ts-node src/adapters/peggedAssets/helper/scripts/generateWormholeConfig.ts --asset ${asset.gecko_id}`
+      );
+    }
+  }
+
   return adapter;
 }
