@@ -8390,7 +8390,7 @@ export default [
     doublecounted: true,
   },
   {
-    id: "407",
+    id: "405",
     name: "USDA",
     address: "bsc:0x17eafd08994305d8ace37efb82f1523177ec70ee",
     symbol: "USDA",
@@ -8409,5 +8409,27 @@ export default [
     twitter: "https://x.com/APalphalabs",
     wiki: null,
     module: "usda-3",
+  },
+  {
+    id: "406",
+    name: "Polymarket USD",
+    address: "polygon:0xc011a7e12a19f7b1f670d46f03b03f3342e82dfb",
+    symbol: "pUSD",
+    url: "https://polymarket.com/",
+    description:
+      "pUSD is Polymarket's USD-pegged settlement coin on Polygon, backed 1:1 by USDC. It is used as the collateral and settlement currency for Polymarket prediction markets.",
+    mintRedeemDescription:
+      "pUSD is minted 1:1 by depositing USDC into Polymarket and is redeemed 1:1 back to USDC when funds are withdrawn.",
+    onCoinGecko: "true",
+    gecko_id: "polymarket-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/Polymarket",
+    wiki: null,
+    module: "polymarket-usd",
+    doublecounted: true,
   },
 ] as PeggedAsset[];
