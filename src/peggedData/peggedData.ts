@@ -8389,4 +8389,26 @@ export default [
     module: "monetrix-usdm",
     doublecounted: true,
   },
+  {
+    id: "405",
+    name: "Polymarket USD",
+    address: "polygon:0xc011a7e12a19f7b1f670d46f03b03f3342e82dfb",
+    symbol: "pUSD",
+    url: "https://polymarket.com/",
+    description:
+      "pUSD is Polymarket's USD-pegged settlement coin on Polygon, backed 1:1 by USDC. It is used as the collateral and settlement currency for Polymarket prediction markets.",
+    mintRedeemDescription:
+      "pUSD is minted 1:1 by depositing USDC into Polymarket and is redeemed 1:1 back to USDC when funds are withdrawn.",
+    onCoinGecko: "true",
+    gecko_id: "polymarket-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/Polymarket",
+    wiki: null,
+    module: "polymarket-usd",
+    doublecounted: true,
+  },
 ] as PeggedAsset[];
