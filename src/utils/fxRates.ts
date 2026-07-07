@@ -10,6 +10,26 @@ export type FxRateMap = {
   latest: Record<string, number>;
 };
 
+// pegTypes follow the "pegged" + ISO 4217 ticker convention, except the ones
+// mapped here (the FX feed keys rates by ISO code, e.g. BRL, not REAL).
+const pegTypeTickerOverrides: Record<string, string> = {
+  peggedREAL: "BRL", // brazilian real
+};
+
+export function pegTypeFxTicker(pegType: string): string {
+  return pegTypeTickerOverrides[pegType] ?? pegType.replace(/^pegged/, "");
+}
+
+// USD price to assume for a pegged asset that has no market price: 1 for USD
+// pegs, the fiat FX rate for other fiat pegs, 0 when the rate is unknown.
+export function fxFallbackPrice(rates: Record<string, number> | undefined, pegType: string): number {
+  if (pegType === "peggedUSD") return 1;
+  if (pegType === "peggedVAR") return 0;
+  const rate = rates?.[pegTypeFxTicker(pegType)];
+  const price = rate ? 1 / rate : 0;
+  return isFinite(price) ? price : 0;
+}
+
 export function buildFxRateMap(rows: FxRateRow[]): FxRateMap | null {
   if (!Array.isArray(rows) || !rows.length) return null;
   const sorted = rows.slice().sort((a, b) => a.date - b.date);

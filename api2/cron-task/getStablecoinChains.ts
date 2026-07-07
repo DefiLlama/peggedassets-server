@@ -1,5 +1,6 @@
 import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../src/peggedData/peggedData";
+import { fxFallbackPrice } from "../../src/utils/fxRates";
 import { nonChains, normalizeChain } from "../../src/utils/normalizeChain";
 import { cache } from "../cache";
 type balance = { [token: string]: number };
@@ -15,7 +16,8 @@ export function craftStablecoinChainsResponse() {
       if (lastBalances === undefined) {
         return;
       }
-      const fallbackPrice = pegType === "peggedUSD" ? 1 : 0; // must be updated with each new pegType added
+      // assets without a market price fall back to their peg's fiat FX rate, same as charts and dominance
+      const fallbackPrice = fxFallbackPrice(cache.fxRateMap?.latest ?? cache.rates?.rates, pegType);
       const currentPrice = prices[pegged.gecko_id] || null;
       const price = currentPrice ? currentPrice : fallbackPrice;
       const processedNormalizedChains = new Set<string>();
