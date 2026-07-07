@@ -5,9 +5,11 @@ import { sumSingleBalance } from "../helper/generalUtil";
 import { Balances, PeggedIssuanceAdapter } from "../peggedAsset.type";
 
 const NODE_URL = "https://xrplcluster.com";
+const STELLAR_HORIZON = "https://horizon.stellar.org";
 
 const USDV_ISSUER = "rfffsukWALJB1PXYk7H8xkR6UJUDT8nMJE";
 const USDV_CURRENCY = "5553445600000000000000000000000000000000";
+const STELLAR_USDV_ISSUER = "GBLAJOKBIIT7P32BJQFCSRJVOE2SXHI4D5ZGLFJ4DLMFJXI2NN6R37G5";
 
 async function minted() {
   const balances = {} as Balances;
@@ -27,10 +29,27 @@ async function minted() {
   sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
   return balances;
 }
+async function stellarMinted() {
+  const balances = {} as Balances;
 
+  const res = await retry(async (_bail: any) =>
+    axios.get(
+      `${STELLAR_HORIZON}/assets?asset_code=USDV&asset_issuer=${STELLAR_USDV_ISSUER}`
+    )
+  );
+
+  const supply = parseFloat(res.data._embedded?.records?.[0]?.amount ?? "0");
+
+  sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
+  return balances;
+}
 const adapter: PeggedIssuanceAdapter = {
   ripple: {
     minted,
+    unreleased: async () => ({}),
+  },
+  stellar: {
+    minted: stellarMinted,
     unreleased: async () => ({}),
   },
 };
