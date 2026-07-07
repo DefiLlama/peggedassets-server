@@ -8439,7 +8439,7 @@ export default [
     symbol: "elUSD",
     url: "https://elara.fi/",
     description:
-      "Elara USD (elUSD) is a USD-pegged stablecoin issued by Elara on Ethereum. It is minted against supported stablecoin collateral deposited into Elara treasury wallets.",
+      "Elara Finance is a treasury management product from the Brila ecosystem that helps treasuries, allocators, institutions, and individuals earn dollar-denominated yield on stablecoins without manually coordinating strategies across DeFi venues.",
     mintRedeemDescription:
       "Users mint elUSD by depositing supported stablecoin collateral into Elara and redeem elUSD for supported collateral through the Elara Vault.",
     onCoinGecko: "false",
