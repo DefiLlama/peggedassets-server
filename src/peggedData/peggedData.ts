@@ -8433,7 +8433,7 @@ export default [
     doublecounted: true,
   },
   {
-    id: "407",
+    id: "418",
     name: "Cod3x USD",
     address: "base:0xc0d3700000987c99b3c9009069e4f8413fd22330",
     symbol: "cdxUSD",
