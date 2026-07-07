@@ -8432,4 +8432,25 @@ export default [
     module: "polymarket-usd",
     doublecounted: true,
   },
+  {
+    id: "417",
+    name: "Defi.money",
+    address: "optimism:0x69420f9e38a4e60a62224c489be4bf7a94402496",
+    symbol: "MONEY",
+    url: "https://defi.money/",
+    description:
+      "$MONEY is a USD-denominated decentralized stablecoin from defi.money, a crvUSD-based protocol on Optimism and Arbitrum, pegged to the US Dollar and minted against crypto collateral.",
+    mintRedeemDescription:
+      "Users deposit crypto collateral to borrow MONEY, and repay MONEY to unlock their collateral.",
+    onCoinGecko: "true",
+    gecko_id: "defi-money",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/defidotmoney",
+    wiki: null,
+    module: "defi-money",
+  },
 ] as PeggedAsset[];
