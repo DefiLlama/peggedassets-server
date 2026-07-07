@@ -8432,4 +8432,25 @@ export default [
     module: "polymarket-usd",
     doublecounted: true,
   },
+  {
+    id: "416",
+    name: "Telcoin eUSD",
+    address: "0x14913815bcfde78baead2111f463d038ac9c2949",
+    symbol: "eUSD",
+    url: "https://www.telcoin.org/",
+    description:
+      "eUSD is a fiat-backed stablecoin issued by Telcoin Bank, the first US bank-issued stablecoin, pegged 1:1 to the US Dollar and fully backed by cash and cash-equivalent reserves.",
+    mintRedeemDescription:
+      "eUSD is minted when users deposit USD with Telcoin Bank and can be redeemed 1:1 for the USD held in its reserves.",
+    onCoinGecko: "true",
+    gecko_id: "eusd-2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/telcoin",
+    wiki: null,
+    module: "eusd-2",
+  },
 ] as PeggedAsset[];
