@@ -8432,4 +8432,26 @@ export default [
     module: "polymarket-usd",
     doublecounted: true,
   },
+  {
+    id: "413",
+    name: "SoulPeg USD",
+    address: "0x40ff3dea2eec93a7b71879874dc4407918da77a6",
+    symbol: "SPUSD",
+    url: "https://www.soulpeg.io/",
+    description:
+      "SoulPeg USD (SPUSD) is a BEP-20 stablecoin wrapper for the non-transferable sUSDC deposit token, whose reserves are deployed in transparent lending strategies (currently Venus). Its $1 target is maintained on-chain by a market-making bot trading the SPUSD/USDC PancakeSwap v2 pool.",
+    mintRedeemDescription:
+      "SPUSD is minted by wrapping sUSDC and can always be unwrapped back to sUSDC, with SPUSD burned on redeem. The peg is supported by reserves deployed in on-chain lending strategies and an automated market-making bot on the SPUSD/USDC PancakeSwap pool.",
+    onCoinGecko: "true",
+    gecko_id: "soulpeg-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/soulpeglabs",
+    wiki: null,
+    module: "soulpeg-usd",
+    doublecounted: true,
+  },
 ] as PeggedAsset[];
