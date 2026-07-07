@@ -38,8 +38,12 @@ async function stellarMinted() {
     )
   );
 
-  const supply = parseFloat(res.data._embedded?.records?.[0]?.amount ?? "0");
-
+const record = res.data._embedded?.records?.[0];
+const supply = parseFloat(record?.balances?.authorized ?? "0")
+  + parseFloat(record?.balances?.authorized_to_maintain_liabilities ?? "0")
+  + parseFloat(record?.claimable_balances_amount ?? "0")
+  + parseFloat(record?.liquidity_pools_amount ?? "0")
+  + parseFloat(record?.contracts_amount ?? "0");
   sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
   return balances;
 }
