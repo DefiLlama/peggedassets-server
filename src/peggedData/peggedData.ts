@@ -8432,4 +8432,25 @@ export default [
     module: "polymarket-usd",
     doublecounted: true,
   },
+  {
+    id: "415",
+    name: "Freedom Dollar",
+    address: "zano:86143388bd056a8f0bab669f78f14873fac8e2dd8d57898cdb725a2d5e2e4f8f",
+    symbol: "fUSD",
+    url: "https://www.freedomdollar.com/",
+    description:
+      "Freedom Dollar (fUSD) is an over-collateralized, algorithmic stable asset issued on the Zano privacy blockchain. Each fUSD targets one U.S. dollar of purchasing power and is backed by a public reserve of ZANO that initially exceeds the liability by roughly a factor of ten. Collateral is held in transparent on-chain addresses and is continuously staked, so its yield compounds the buffer automatically. Because Zano uses ring signatures and stealth addresses, fUSD transfers inherit native Zano-level privacy while remaining censorship-resistant, with no admin freeze key or custodial bank account.",
+    mintRedeemDescription:
+      "fUSD is minted against an over-collateralized public reserve of staked ZANO that targets roughly ten times the fUSD liability, and redeemed against that reserve to maintain the 1:1 U.S. dollar target. Anyone can help maintain the peg by running an open-source market-making node.",
+    onCoinGecko: "true",
+    gecko_id: "freedom-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/freedomdollar5",
+    wiki: null,
+    module: "freedom-dollar",
+  },
 ] as PeggedAsset[];
