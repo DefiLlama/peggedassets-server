@@ -8857,4 +8857,25 @@ export default [
     wiki: null,
     module: "usd-2",
   },
+  {
+    id: "427",
+    name: "Bankcoin kUSD",
+    address: "base:0x6FB09847417e33A1CE75d3B324015D4C0AeF4D61",
+    symbol: "kUSD",
+    url: "https://bankcoin.capital",
+    description:
+      "kUSD is a fiat-referenced USD stablecoin issued by Bankcoin Capital, part of a 38-currency kStable family natively issued on Base and Arbitrum One. Every on-chain mint declares the collateral backing it, and the issuer publishes a machine-readable circulating-supply API and exclusion registry.",
+    mintRedeemDescription:
+      "kUSD is minted by the issuer against declared collateral (each on-chain mint carries its fiat/crypto backing declaration) and burned on redemption, releasing backing at the oracle FX rate. The issuer publishes a public solvency/redemption-waterfall view.",
+    onCoinGecko: "false",
+    gecko_id: null, // not yet listed on CoinGecko; will backfill once assigned
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: null,
+    auditLinks: null,
+    twitter: "https://x.com/bankcoincapital",
+    wiki: null,
+    module: "kusd",
+  },
 ] as PeggedAsset[];
