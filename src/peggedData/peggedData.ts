@@ -8665,4 +8665,25 @@ export default [
     wiki: null,
     module: "defi-money",
   },
+  {
+    id: "418",
+    name: "Cod3x USD",
+    address: "base:0xc0d3700000987c99b3c9009069e4f8413fd22330",
+    symbol: "cdxUSD",
+    url: "https://cod3x.org/",
+    description:
+      "cdxUSD is an overcollateralized CDP stablecoin native to the Cod3x ecosystem, pegged to the US Dollar and minted against crypto collateral in the Cod3x lending markets.",
+    mintRedeemDescription:
+      "Users deposit crypto collateral to mint cdxUSD and repay cdxUSD to redeem their collateral.",
+    onCoinGecko: "true",
+    gecko_id: "cod3x-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/Cod3xOrg",
+    wiki: null,
+    module: "cod3x-usd",
+  },
 ] as PeggedAsset[];
