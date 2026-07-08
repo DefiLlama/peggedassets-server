@@ -86,6 +86,16 @@ const adapter: PeggedIssuanceAdapter = {
       "peggedEUR"
     ),
   },
+  monad: {
+    celo: bridgedSupply(
+      "monad",
+      18,
+      chainContracts.monad.bridgedFromCelo,
+      undefined,
+      "Celo",
+      "peggedEUR"
+    ),
+  },
 };
 
 export default adapter;

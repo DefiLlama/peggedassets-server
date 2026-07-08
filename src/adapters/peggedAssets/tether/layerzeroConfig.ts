@@ -28,6 +28,7 @@ const layerzeroConfig: LayerZeroConfig = {
     { chain: "harmony", address: "0x2da729ba5231d2c79290aba4a8b85a5c94da4724", decimals: 6 }, // ERC20 USDT (lz:harmony)
     { chain: "harmony", address: "0x9a89d0e1b051640c6704dde4df881f73adfef39a", decimals: 18 }, // ERC20 USDT (lz:harmony)
     { chain: "harmony", address: "0xf2732e8048f1a411c63e2df51d08f4f52e598005", decimals: 6 }, // ERC20 USDT (lz:harmony)
+    { chain: "hedera", address: "0x00000000000000000000000000000000009ce723", decimals: 6 }, // ERC20 USDT0 (lz:hedera)
     { chain: "hemi", address: "0xbb0d083fb1be0a9f6157ec484b6c79e0a4e31c2e", decimals: 6 }, // HydraOFT USDT (lz:hemi)
     { chain: "hyperliquid", address: "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb", decimals: 6 }, // ERC20 USDT0 (lz:hyperliquid)
     { chain: "ink", address: "0x0200c29006150606b650577bbe7b6248f58470c1", decimals: 6 }, // ERC20 USDT0 (lz:ink)
@@ -37,6 +38,7 @@ const layerzeroConfig: LayerZeroConfig = {
     { chain: "mantle", address: "0x779ded0c9e1022225f8e0630b35a9b54be713736", decimals: 6 }, // ERC20 USDT (lz:mantle)
     { chain: "megaeth", address: "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb", decimals: 6 }, // ERC20 USDT (lz:megaeth)
     { chain: "monad", address: "0xe7cd86e13ac4309349f30b3435a9d337750fc82d", decimals: 6 }, // ERC20 USDT0 (lz:monad)
+    { chain: "morph", address: "0xe7cd86e13ac4309349f30b3435a9d337750fc82d", decimals: 6 }, // ERC20 USDT (lz:morph)
     { chain: "nibiru", address: "0x43f2376d5d03553ae72f4a8093bbe9de4336eb08", decimals: 6 }, // HydraOFT USDT (lz:nibiru)
     { chain: "optimism", address: "0x01bff41798a0bcf287b996046ca68b395dbc1071", decimals: 6 }, // ERC20 USDT0 (lz:optimism)
     { chain: "peaq", address: "0xf4d9235269a96aadafc9adae454a0618ebe37949", decimals: 6 }, // HydraOFT USDT (lz:peaq)
@@ -44,6 +46,7 @@ const layerzeroConfig: LayerZeroConfig = {
     { chain: "plume_mainnet", address: "0xda6087e69c51e7d31b6dbad276a3c44703dfdcad", decimals: 6 }, // HydraOFT USDT (lz:plumephoenix)
     { chain: "polygon", address: "0xc2132d05d31c914a87c6611c10748aeb04b58e8f", decimals: 6 }, // ERC20 USDT0 (lz:polygon)
     { chain: "rari", address: "0x362fae9a75b27bbc550aac28a7c1f96c8d483120", decimals: 6 }, // HydraOFT USDT (lz:rarible)
+    { chain: "rls", address: "0x1343994e136b6b15cbb2eb4075e0e73b8c4ebce0", decimals: 6 }, // ERC20 USDT0.s (lz:rayls)
     { chain: "rsk", address: "0x779ded0c9e1022225f8e0630b35a9b54be713736", decimals: 6 }, // ERC20 USDT (lz:rootstock)
     { chain: "rsk", address: "0xaf368c91793cb22739386dfcbbb2f1a9e4bcbebf", decimals: 6 }, // HydraOFT USDT (lz:rootstock)
     { chain: "sei", address: "0x9151434b16b9763660705744891fa906f660ecc5", decimals: 6 }, // ERC20 USDT0 (lz:sei)
@@ -58,6 +61,7 @@ const layerzeroConfig: LayerZeroConfig = {
     { chain: "vana", address: "0x88853d410299bcbfe5fcc9eef93c03115e908279", decimals: 6 }, // HydraOFT USDT (lz:islander)
     { chain: "xdc", address: "0xcda5b77e2e2268d9e09c874c1b9a4c3f07b37555", decimals: 6 }, // HydraOFT USDT (lz:xdc)
     { chain: "xlayer", address: "0x779ded0c9e1022225f8e0630b35a9b54be713736", decimals: 6 }, // ERC20 USDT0 (lz:xlayer)
+    { chain: "zora", address: "0x102d758f688a4c1c5a80b116bd945d4455460282", decimals: 6 }, // ERC20 USDT0.s (lz:zora)
   ],
 };
 

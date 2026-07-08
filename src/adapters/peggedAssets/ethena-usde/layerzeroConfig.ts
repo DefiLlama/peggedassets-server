@@ -24,13 +24,16 @@ const layerzeroConfig: LayerZeroConfig = {
     { chain: "megaeth", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:megaeth)
     { chain: "metis", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:metis)
     { chain: "mode", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:mode)
+    { chain: "monad", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:monad)
+    { chain: "morph", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:morph)
     { chain: "optimism", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:optimism)
     { chain: "plasma", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:plasma)
+    { chain: "robinhood", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:robinhood)
     { chain: "scroll", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:scroll)
     { chain: "swellchain", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:swell)
+    { chain: "tempo", address: "0x20c0000000000000000000002f52d5cc21a3207b", decimals: 6 }, // ERC20 USDE (lz:tempo)
     { chain: "xlayer", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:xlayer)
     { chain: "zircuit", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:zircuit)
-    { chain: "monad", address: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:monad)
   ],
 };
 
