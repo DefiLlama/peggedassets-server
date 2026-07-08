@@ -8601,5 +8601,26 @@ export default [
     twitter: "https://x.com/rcoins_official",
     wiki: null,
     module: "royal-euro",
-  }
+  },
+  {
+    id: "415",
+    name: "Royal Dollar",
+    address: "0x44bb433d29fe966992a9c812da7f252c9c53f285",
+    symbol: "RUSD",
+    url: "https://www.rcoins.digital/",
+    description:
+      "Royal Dollar (RUSD) is the flagship token of the RCOINS digital asset family developed under the RIB Digital brand. It is a USD-referenced stable-value digital asset issued by The RIB Digital Holdings Limited, Hong Kong, designed for payments, treasury operations, OTC trading, exchange liquidity, and selected on-chain financial applications, aiming to deliver a transparent digital dollar experience.",
+    mintRedeemDescription:
+      "RUSD is issued by RIB Digital against reserves held to target a 1:1 value with the US Dollar, and is redeemable subject to reserve sufficiency and the issuer's redemption terms.",
+    onCoinGecko: "true",
+    gecko_id: "royal-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/rcoins_official",
+    wiki: null,
+    module: "royal-dollar",
+  },
 ] as PeggedAsset[];
