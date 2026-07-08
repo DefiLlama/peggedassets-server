@@ -6,6 +6,7 @@ type PegType =
   | "peggedJPY" //japan
   | "peggedCNY" //china
   | "peggedMXN" //mexican peso
+  | "peggedMYR" //malaysian ringgit
   | "peggedUAH" //ukraine
   | "peggedARS" //ARGENTINE
   | "peggedGBP" //GB
