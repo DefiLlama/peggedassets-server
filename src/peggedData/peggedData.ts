@@ -8537,5 +8537,26 @@ export default [
     twitter: "https://x.com/StableMintLtd",
     wiki: null,
     module: "stable-mint-usd",
-  }
+  },
+  {
+    id: "412",
+    name: "MYR Stablecoin",
+    address: "0x3Fc98a885E99420d0ce43Bcb81bF21A4e3F45E5f",
+    symbol: "MYRT",
+    url: "https://myrt.money/",
+    description:
+      "MYRT is an ERC-20 stablecoin for Malaysian ringgit-denominated value. MYRT is pegged 1:1 to the Malaysian ringgit and backed by ringgit reserves.",
+    mintRedeemDescription:
+      "MYRT is issued 1:1 against Malaysian ringgit reserves. All issued MYRT is treated as circulating supply, with no treasury, team, reserve, unreleased, or project-owned token balances to subtract.",
+    onCoinGecko: "false",
+    gecko_id: "myr-stablecoin",
+    cmcId: null,
+    pegType: "peggedMYR",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://github.com/myrt-money/myrt-smart-contract/blob/main/docs/AUDIT_NOTICE.md"],
+    twitter: "https://x.com/MYRT_money",
+    wiki: "https://github.com/myrt-money/myrt-smart-contract",
+    module: "myr-stablecoin",
+  },
 ] as PeggedAsset[];
