@@ -8686,4 +8686,26 @@ export default [
     wiki: null,
     module: "cod3x-usd",
   },
+  {
+    id: "419",
+    name: "Elara USD",
+    address: "0x65Fb0f9b196d524De0C4F3BAF572F0a79eb21194",
+    symbol: "elUSD",
+    url: "https://elara.fi/",
+    description:
+      "Elara Finance is a treasury management product from the Brila ecosystem that helps treasuries, allocators, institutions, and individuals earn dollar-denominated yield on stablecoins without manually coordinating strategies across DeFi venues.",
+    mintRedeemDescription:
+      "Users mint elUSD by depositing supported stablecoin collateral into Elara and redeem elUSD for supported collateral through the Elara Vault.",
+    onCoinGecko: "false",
+    gecko_id: "elara-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://sherlock-files.ams3.digitaloceanspaces.com/reports/2026.06.14%20-%20Final%20-%20Elara%20Finance%20Collaborative%20Audit%20Report%201781450009.pdf"],
+    twitter: "https://x.com/Elara_HQ",
+    wiki: "https://docs.elara.fi/",
+    module: "elara-usd",
+    doublecounted: true,
+  },
 ] as PeggedAsset[];
