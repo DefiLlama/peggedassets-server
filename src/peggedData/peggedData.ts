@@ -8433,7 +8433,7 @@ export default [
     doublecounted: true,
   },
   {
-    id: "413",
+    id: "411",
     name: "Stable Mint USD",
     address: "0x399B29975CBE313C56269cD5097F5AE097Fa2741",
     symbol: "USDSM",
