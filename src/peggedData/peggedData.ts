@@ -8708,4 +8708,25 @@ export default [
     module: "elara-usd",
     doublecounted: true,
   },
+  {
+    id: "420",
+    name: "Startale USD",
+    address: "soneium:0x3f99231dd03a9f0e7e3421c92b7b90fbe012985a",
+    symbol: "USDSC",
+    url: "https://www.startale.com/",
+    description:
+      "Startale USD (USDSC) is a fully backed U.S. dollar stablecoin issued by Startale Group and built on M0's universal stablecoin platform. This digital dollar is backed by short-term U.S. Treasuries and issued through structures designed to keep user assets secure.",
+    mintRedeemDescription:
+      "USDSC can be minted with USDC.e or ETH via the Startale App on Soneium, is fully backed 1:1 by short-term U.S. Treasuries held in bankruptcy-remote structures, and can be redeemed at any time with no lock-ups.",
+    onCoinGecko: "true",
+    gecko_id: "startale-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/StartaleGroup",
+    wiki: null,
+    module: "startale-usd",
+  },
 ] as PeggedAsset[];
