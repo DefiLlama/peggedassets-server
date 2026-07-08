@@ -8517,4 +8517,25 @@ export default [
     wiki: null,
     module: "universal-usd",
   },
+  {
+    id: "411",
+    name: "Stable Mint USD",
+    address: "0x399B29975CBE313C56269cD5097F5AE097Fa2741",
+    symbol: "USDSM",
+    url: "https://stablemint.io/stablecoins/",
+    description:
+      "Stable Mint USD (USDSM) is a USD-denominated Electronic Money Token (EMT) issued under the EU's MiCA framework by Stable Mint Limited, a Malta-based Electronic Money Institution authorised by the Malta Financial Services Authority (MFSA). It provides a regulated digital representation of the US dollar for on-chain payments, settlement, treasury management and digital asset markets.",
+    mintRedeemDescription:
+      "USDSM is issued 1:1 against received US dollar fiat deposits, and is redeemable for fiat on demand through Stable Mint's onboarding and compliance framework. Reserves are held in dollar-denominated cash deposits and high-quality liquid assets.",
+    onCoinGecko: "true",
+    gecko_id: "stable-mint-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/StableMintLtd",
+    wiki: null,
+    module: "stable-mint-usd",
+  }
 ] as PeggedAsset[];
