@@ -23,6 +23,7 @@ export type PeggedAssetType =
   | "peggedRUB"
   | "peggedPHP"
   | "peggedMXN"
+  | "peggedMYR"
   | "peggedAUD"
   | "peggedKES"
   | "peggedZAR"
