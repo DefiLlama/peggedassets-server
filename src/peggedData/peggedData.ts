@@ -8736,9 +8736,9 @@ export default [
     symbol: "dEURO",
     url: "https://deuro.com/",
     description:
-      "dEURO is a collateralized, oracle-free stablecoin that tracks the value of the Euro, minted against crypto collateral and secured by a challenge and auction system.",
+      "dEURO is a collateralized, oracle-free stablecoin that tracks the value of the Euro, backed by overcollateralized crypto positions.",
     mintRedeemDescription:
-      "To mint dEURO, open a collateralized position (or clone an existing one); collateral integrity is maintained through a challenge and auction system, and dEURO is redeemed by repaying positions to reclaim the underlying collateral.",
+      "dEURO is minted when users deposit supported crypto collateral (e.g., BTC or ETH) into the protocol's smart contracts and generate new tokens against it based on required overcollateralization ratios, with automated liquidations keeping the system solvent if collateral values fall; it is redeemed by repaying the position to reclaim the underlying collateral.",
     onCoinGecko: "true",
     gecko_id: "decentralized-euro",
     cmcId: null,
