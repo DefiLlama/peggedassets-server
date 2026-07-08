@@ -8581,4 +8581,25 @@ export default [
     module: "soulpeg-usd",
     doublecounted: true,
   },
+  {
+    id: "414",
+    name: "Royal Euro",
+    address: "0x3ed0b3c4c0168a560d34e361b8130dcca4677736",
+    symbol: "REUR",
+    url: "https://www.rcoins.digital/",
+    description:
+      "Royal Euro Token (REUR) is a EUR-referenced stable-value token (crypto-asset) designed to target a 1:1 value with the Euro (EUR), subject to reserve sufficiency, redemption terms, and market conditions. REUR is issued by The RIB Digital Holdings Limited, Hong Kong, and is engineered for fast, transparent settlement across multiple public blockchains, providing a bank-grade settlement instrument for payments, treasury operations, OTC trading, and exchange liquidity.",
+    mintRedeemDescription:
+      "REUR is issued by RIB Digital against reserves held to target a 1:1 value with the Euro, and is redeemable subject to reserve sufficiency and the issuer's redemption terms.",
+    onCoinGecko: "true",
+    gecko_id: "royal-euro",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/rcoins_official",
+    wiki: null,
+    module: "royal-euro",
+  }
 ] as PeggedAsset[];
