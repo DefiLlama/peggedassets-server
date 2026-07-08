@@ -44,6 +44,10 @@ const LOCAL_CHAINS_PATH = path.resolve(__dirname, "..", "..", "helper", "chains.
 // providers.json maps multiple keys to the same chainId; prefer the canonical DefiLlama key.
 const CANONICAL_CHAIN_ALIASES: Record<string, string> = {
   frax: "fraxtal",
+  // chainId 4217 has both tempo_presto and tempo; tempo is the canonical llama key.
+  tempo_presto: "tempo",
+  // chainId 4663 is only listed as robinhoodchain; robinhood is the canonical llama key.
+  robinhoodchain: "robinhood",
 };
 
 // LZ metadata uses its own chain naming (chainName and peggedTo.chainName fields).
