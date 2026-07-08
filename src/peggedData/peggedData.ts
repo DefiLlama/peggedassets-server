@@ -8475,4 +8475,25 @@ export default [
     wiki: "https://docs.ondo.finance/ondo-global-markets/investing-and-redeeming",
     module: "ondo-u-s-dollar-token",
   },
+  {
+    id: "409",
+    name: "USDKG",
+    address: "0xe820c06321e60d36257c666643fa5436643445e3",
+    symbol: "USDKG",
+    url: "https://www.usdkg.com/",
+    description:
+      "USDKG is a 1:1 USD-pegged stablecoin fully collateralized by physical gold reserves held in a custodian bank within Kyrgyzstan, backed by the Ministry of Finance of the Kyrgyz Republic.",
+    mintRedeemDescription:
+      "USDKG is minted and redeemed directly by institutional clients subject to KYC/AML verification, against U.S. dollars or supported cryptocurrencies, with gold redemption handled on a case-by-case basis. Retail users trade USDKG on supported exchanges.",
+    onCoinGecko: "true",
+    gecko_id: "usdkg",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/USDKG_Official",
+    wiki: null,
+    module: "usdkg",
+  },
 ] as PeggedAsset[];
