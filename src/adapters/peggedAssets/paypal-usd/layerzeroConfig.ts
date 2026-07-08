@@ -17,6 +17,8 @@ const layerzeroConfig: LayerZeroConfig = {
     { chain: "fraxtal", address: "0x99af3eea856556646c98c8b9b2548fe815240750", decimals: 6 }, // ERC20 PYUSD0 (lz:fraxtal)
     { chain: "glue", address: "0x1c7c36b193224d0f72454f2a178e3b98aaefe8a5", decimals: 6 }, // NativeOFT PYUSD (lz:glue)
     { chain: "ink", address: "0x142cdc44890978b506e745bb3bd11607b7f7faef", decimals: 6 }, // ERC20 PYUSD0 (lz:ink)
+    { chain: "kiteai", address: "0xa0c9b923f4551f1ec1a49665943160b18704ce06", decimals: 6 }, // ERC20 PYUSD0 (lz:kite)
+    { chain: "optimism", address: "0xa0c9b923f4551f1ec1a49665943160b18704ce06", decimals: 6 }, // ERC20 PYUSD0 (lz:optimism)
     { chain: "plume_mainnet", address: "0x142cdc44890978b506e745bb3bd11607b7f7faef", decimals: 6 }, // ERC20 PYUSD0 (lz:plumephoenix)
     { chain: "plume_mainnet", address: "0xe9e8330a71912f03e54e7d93795acd9a56f070aa", decimals: 6 }, // NativeOFT PYUSD (lz:plumephoenix)
     { chain: "polygon", address: "0x99af3eea856556646c98c8b9b2548fe815240750", decimals: 6 }, // ERC20 PYUSD0 (lz:polygon)

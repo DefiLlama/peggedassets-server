@@ -5433,7 +5433,7 @@ export default [
   {
     id: "256",
     name: "Resupply USD",
-    address: "0x4274cd7277c7bb0806bd5fe84b9adae466a8da0a",
+    address: "0x57ab1e0003f623289cd798b1824be09a793e4bec",
     symbol: "REUSD",
     url: "https://resupply.fi/",
     description: "A decentralized stablecoin backed by stablecoin collateral in yield-bearing Curve Lend and Frax Lend markets, designed to maintain a 1:1 USD peg while sharing earned lending fees with borrowers.",
@@ -5687,7 +5687,7 @@ export default [
   {
     id: "269",
     name: "Liquity BOLD",
-    address: "0xb01dd87b29d187f3e3a4bf6cdaebfb97f3d9ab98",
+    address: "0x6440f144b7e50D6a8439336510312d2F54beB01D",
     symbol: "BOLD",
     url: "https://www.liquity.org/bold",
     description:
@@ -8388,6 +8388,27 @@ export default [
     wiki: "https://doc.monetrix.xyz/guide/mint",
     module: "monetrix-usdm",
     doublecounted: true,
+  },
+  {
+    id: "405",
+    name: "USDA",
+    address: "bsc:0x17eafd08994305d8ace37efb82f1523177ec70ee",
+    symbol: "USDA",
+    url: "https://alphapartner.vip/",
+    description:
+      "USDA is a compliant, cross-chain stablecoin issued by the AP Web3 ecosystem, anchored 1:1 to the US Dollar and designed as secure digital payment and asset settlement infrastructure for global users.",
+    mintRedeemDescription:
+      "USDA is minted when users deposit USD with the issuer, and it can be redeemed 1:1 for the USD held in its reserves.",
+    onCoinGecko: "true",
+    gecko_id: "usda-3",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/APalphalabs",
+    wiki: null,
+    module: "usda-3",
   },
   {
     id: "406",
