@@ -8432,4 +8432,26 @@ export default [
     module: "polymarket-usd",
     doublecounted: true,
   },
+  {
+    id: "407",
+    name: "Unity USD",
+    address: "bsc:0x61a10e8556bed032ea176330e7f17d6a12a10000",
+    symbol: "UUSD",
+    url: "https://uusd.ai/",
+    description:
+      "UUSD is a USD-pegged stablecoin built by Anything Labs, designed as a settlement currency and stablecoin issuance network for the AI agent economy.",
+    mintRedeemDescription:
+      "UUSD is backed by a reserve of stablecoins including USDT and USDC, and is redeemable 1:1 for fiat-equivalent value at any time.",
+    onCoinGecko: "true",
+    gecko_id: "unity-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/UUSDai",
+    wiki: null,
+    module: "unity-usd",
+    doublecounted: true,
+  },
 ] as PeggedAsset[];
