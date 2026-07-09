@@ -8729,4 +8729,26 @@ export default [
     wiki: null,
     module: "startale-usd",
   },
+  {
+    id: "421",
+    name: "Flying Tulip USD",
+    address: "0xf7d85ec4e7710f71992752eac2111312e73e9c9c",
+    symbol: "ftUSD",
+    url: "https://flyingtulip.com/",
+    description:
+      "ftUSD is Flying Tulip's dollar-pegged token designed for stability first, usable as a composable on-chain dollar with optional yield when staked as sftUSD.",
+    mintRedeemDescription:
+      "ftUSD is minted by depositing a stablecoin such as USDC or USDT, and redeemed by converting ftUSD back to the input asset at the prevailing rate; holders can stake ftUSD as sftUSD to earn yield.",
+    onCoinGecko: "true",
+    gecko_id: "flying-tulip-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/flyingtulip_",
+    wiki: null,
+    module: "flying-tulip-usd",
+    doublecounted: true,
+  },
 ] as PeggedAsset[];
