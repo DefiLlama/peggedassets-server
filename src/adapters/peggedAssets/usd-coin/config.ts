@@ -540,5 +540,27 @@ export const chainContracts: ChainContracts = {
   },
   injective: {
     issued: ["0xa00C59fF5a080D2b954d0c75e46E22a0c371235a"], // native USDC on Injective EVM
+    // bridged USDC arrives as Cosmos bank denoms (Noble CCTP, Peggy legacy bridge, Wormhole, Axelar)
+    bridgedFromNoble: [
+      "ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E", // Noble USDC (CCTP)
+      "ibc/7BE71BB68C781453F6BB10114F8E2DF8DC37BA791C502F5389EA10E7BEA68323", // Noble USDC (Gateway)
+    ],
+    bridgedFromETH: [
+      "peggy0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", // Peggy (legacy Injective bridge) USDC
+      "factory/inj14ejqjyq8um4p3xfqj74yld5waqljf88f9eneuk/inj1q6zlut7gtkzknkk773jecujwsdkgq882akqksk", // Wormhole USDCet
+      "ibc/7E1AF94AD246BE522892751046F0C959B768642E5671CC3742264068D49553C0", // Axelar USDC
+    ],
+    bridgedFromSol: [
+      "factory/inj14ejqjyq8um4p3xfqj74yld5waqljf88f9eneuk/inj12pwnhtv7yat2s30xuf4gdk9qm85v4j3e60dgvu", // Wormhole USDCso
+    ],
+    bridgedFromPolygon: [
+      "factory/inj14ejqjyq8um4p3xfqj74yld5waqljf88f9eneuk/inj19s2r64ghfqq3py7f5dr0ynk8yj0nmngca3yvy3", // Wormhole USDCpoly
+    ],
+    bridgedFromBSC: [
+      "factory/inj14ejqjyq8um4p3xfqj74yld5waqljf88f9eneuk/inj1dngqzz6wphf07fkdam7dn55t8t3r6qenewy9zu", // Wormhole USDCbsc
+    ],
+    bridgedFromArbitrum: [
+      "factory/inj14ejqjyq8um4p3xfqj74yld5waqljf88f9eneuk/inj1lmcfftadjkt4gt3lcvmz6qn4dhx59dv2m7yv8r", // Wormhole USDCarb
+    ],
   }
 };
