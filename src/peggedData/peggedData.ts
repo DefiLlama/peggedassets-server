@@ -3098,7 +3098,8 @@ export default [
     symbol: "HYUSD",
     url: "https://linktr.ee/hyusd",
     description:
-      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.", mintRedeemDescription:
+      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.", 
+    mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: "false",
     gecko_id: null,
@@ -8327,7 +8328,7 @@ export default [
   {
     id: "402",
     name: "Kerne USD",
-    address: "0x5C2EfdF0D8D286959b42308966bc2B97f5680AA3",
+    address: "base:0x5C2EfdF0D8D286959b42308966bc2B97f5680AA3",
     symbol: "kUSD",
     url: "https://kerne.fi",
     description:
@@ -8728,6 +8729,49 @@ export default [
     twitter: "https://x.com/StartaleGroup",
     wiki: null,
     module: "startale-usd",
+  },
+  {
+    id: "421",
+    name: "Flying Tulip USD",
+    address: "0xf7d85ec4e7710f71992752eac2111312e73e9c9c",
+    symbol: "ftUSD",
+    url: "https://flyingtulip.com/",
+    description:
+      "ftUSD is Flying Tulip's dollar-pegged token designed for stability first, usable as a composable on-chain dollar with optional yield when staked as sftUSD.",
+    mintRedeemDescription:
+      "ftUSD is minted by depositing a stablecoin such as USDC or USDT, and redeemed by converting ftUSD back to the input asset at the prevailing rate; holders can stake ftUSD as sftUSD to earn yield.",
+    onCoinGecko: "true",
+    gecko_id: "flying-tulip-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/flyingtulip_",
+    wiki: null,
+    module: "flying-tulip-usd",
+    doublecounted: true,
+  },
+  {
+    id: "422",
+    name: "Forte AUD",
+    address: "0xd2a530170d71a9cfe1651fb468e2b98f7ed7456b",
+    symbol: "AUDF",
+    url: "https://www.forteaud.com/",
+    description:
+      "AUDF is a digital Australian Dollar stablecoin issued by Forte Securities Australia, pegged 1:1 to the Australian Dollar and fully backed by AUD reserves.",
+    mintRedeemDescription:
+      "Users deposit AUD to mint AUDF 1:1 and can redeem AUDF back to AUD in their bank account, with issuance and redemption available 24/7.",
+    onCoinGecko: "true",
+    gecko_id: "forte-aud",
+    cmcId: null,
+    pegType: "peggedAUD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/ForteAUD",
+    wiki: null,
+    module: "forte-aud",
   },
   {
     id: "423",

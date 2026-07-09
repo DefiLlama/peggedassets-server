@@ -403,25 +403,6 @@ async function aptosBridged() {
   };
 }
 
-async function injectiveBridged() {
-  return async function () {
-    const issuance = await retry(async (_bail: any) =>
-      axios.get("https://injective-nuxt-api.vercel.app/api/tokens")
-    );
-
-    const targetDenom = "ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E";
-    const targetToken = issuance?.data?.supply?.find(
-      (token: any) => token.denom === targetDenom
-    );
-
-    const circulatingSupply = targetToken ? targetToken.amount / 1e6 : 0;
-    let balances = {};
-    sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued", false);
-
-    return balances;
-  };
-}
-
 async function flowBridged(address: string, decimals: number) {
   return async function () {
     let balances = {} as Balances;
@@ -964,7 +945,12 @@ const adapter: PeggedIssuanceAdapter = {
   },
   injective: {
     minted: chainMinted("injective", 6), // native USDC on Injective EVM (chainId 1776)
-    noble: cosmosSupply('injective', ['ibc/2CBC2EA121AE42563B08028466F37B600F2D7D4282342DE938283CC3FB2BC00E'], 6, 'noble'),
+    noble: cosmosSupply("injective", chainContracts.injective.bridgedFromNoble, 6, "noble"),
+    ethereum: cosmosSupply("injective", chainContracts.injective.bridgedFromETH, 6, "ethereum"),
+    solana: cosmosSupply("injective", chainContracts.injective.bridgedFromSol, 6, "solana"),
+    polygon: cosmosSupply("injective", chainContracts.injective.bridgedFromPolygon, 6, "polygon"),
+    bsc: cosmosSupply("injective", chainContracts.injective.bridgedFromBSC, 6, "bsc"),
+    arbitrum: cosmosSupply("injective", chainContracts.injective.bridgedFromArbitrum, 6, "arbitrum"),
   },
   noble: {
     minted: circleAPIChainMinted("NOBLE"),
