@@ -8773,4 +8773,25 @@ export default [
     wiki: null,
     module: "forte-aud",
   },
+  {
+    id: "423",
+    name: "Decentralized Euro",
+    address: "0xba3f535bbcccca2a154b573ca6c5a49baae0a3ea",
+    symbol: "dEURO",
+    url: "https://deuro.com/",
+    description:
+      "dEURO is a collateralized, oracle-free stablecoin that tracks the value of the Euro, backed by overcollateralized crypto positions.",
+    mintRedeemDescription:
+      "dEURO is minted when users deposit supported crypto collateral (e.g., BTC or ETH) into the protocol's smart contracts and generate new tokens against it based on required overcollateralization ratios, with automated liquidations keeping the system solvent if collateral values fall; it is redeemed by repaying the position to reclaim the underlying collateral.",
+    onCoinGecko: "true",
+    gecko_id: "decentralized-euro",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/deuro_com",
+    wiki: null,
+    module: "decentralized-euro",
+  },
 ] as PeggedAsset[];
