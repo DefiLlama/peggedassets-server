@@ -3098,7 +3098,7 @@ export default [
     symbol: "HYUSD",
     url: "https://linktr.ee/hyusd",
     description:
-      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.",    mintRedeemDescription:
+      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.", mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: "false",
     gecko_id: null,
@@ -7556,7 +7556,7 @@ export default [
     url: "https://dork.fi",
     description: "WAD is an overcollateralized stablecoin minted through DorkFi, a cross-chain borrow/lend protocol on the Algorand Virtual Machine (AVM). Users deposit collateral assets and borrow WAD at controlled interest rates.",
     mintRedeemDescription: "WAD is minted by depositing accepted collateral (ALGO, USDC, UNIT, VOI) into DorkFi lending pools. WAD can be repaid at any time to reclaim collateral. The protocol uses utilization-based dynamic interest rates.",
-        onCoinGecko: "false",
+    onCoinGecko: "false",
     gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
@@ -7806,7 +7806,7 @@ export default [
     description:
       "eSui Dollar (suiUSDe) is a Sui-native synthetic dollar issued in collaboration with Ethena Labs and integrated across Sui DeFi, including DeepBook Margin for margin trading, lending, and leveraged DeFi strategies.",
     mintRedeemDescription:
-    "suiUSDe can be minted by KYCed users depositing USDC into the issuer mint contract, which mints new suiUSDe at a 1:1 ratio, minus any applicable mint fee. The USDC is then managed by the issuer, with part kept as a redemption buffer and the rest used to acquire USDe from Ethena or moved to custody. KYCed users can redeem suiUSDe through the mint contract for USDC, assuming the available USDC buffer is sufficient for the redemption amount.",
+      "suiUSDe can be minted by KYCed users depositing USDC into the issuer mint contract, which mints new suiUSDe at a 1:1 ratio, minus any applicable mint fee. The USDC is then managed by the issuer, with part kept as a redemption buffer and the rest used to acquire USDe from Ethena or moved to custody. KYCed users can redeem suiUSDe through the mint contract for USDC, assuming the available USDC buffer is sufficient for the redemption amount.",
     onCoinGecko: "true",
     gecko_id: "esui-dollar",
     cmcId: null,
@@ -8378,7 +8378,7 @@ export default [
     mintRedeemDescription:
       "Users mint USDM 1:1 by depositing USDC, which the protocol deploys into delta-neutral positions on Hyperliquid Core. USDM can be staked for sUSDM to earn the strategy yield, and is redeemed back to USDC 1:1.",
     onCoinGecko: "true",
-    gecko_id: "monetrix-usd", 
+    gecko_id: "monetrix-usd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -8750,5 +8750,26 @@ export default [
     wiki: null,
     module: "flying-tulip-usd",
     doublecounted: true,
+  },
+  {
+    id: "422",
+    name: "Forte AUD",
+    address: "0xd2a530170d71a9cfe1651fb468e2b98f7ed7456b",
+    symbol: "AUDF",
+    url: "https://www.forteaud.com/",
+    description:
+      "AUDF is a digital Australian Dollar stablecoin issued by Forte Securities Australia, pegged 1:1 to the Australian Dollar and fully backed by AUD reserves.",
+    mintRedeemDescription:
+      "Users deposit AUD to mint AUDF 1:1 and can redeem AUDF back to AUD in their bank account, with issuance and redemption available 24/7.",
+    onCoinGecko: "true",
+    gecko_id: "forte-aud",
+    cmcId: null,
+    pegType: "peggedAUD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/ForteAUD",
+    wiki: null,
+    module: "forte-aud",
   },
 ] as PeggedAsset[];
