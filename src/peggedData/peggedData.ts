@@ -8327,7 +8327,7 @@ export default [
   {
     id: "402",
     name: "Kerne USD",
-    address: "0x5C2EfdF0D8D286959b42308966bc2B97f5680AA3",
+    address: "base:0x5C2EfdF0D8D286959b42308966bc2B97f5680AA3",
     symbol: "kUSD",
     url: "https://kerne.fi",
     description:
