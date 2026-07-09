@@ -3098,7 +3098,8 @@ export default [
     symbol: "HYUSD",
     url: "https://linktr.ee/hyusd",
     description:
-      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.", mintRedeemDescription:
+      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.", 
+    mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: "false",
     gecko_id: null,
