@@ -1,108 +1,74 @@
-const sdk = require("@defillama/sdk");
-import {Balances, ChainBlocks, PeggedAssetType, PeggedIssuanceAdapter} from "../peggedAsset.type";
-import {chainContracts} from "../societe-generale-forge-eurcv/config";
-import {getTokenBalance as solanaGetTokenBalance, getTokenSupply as solanaGetTokenSupply} from "../helper/solana";
-import {sumSingleBalance} from "../helper/generalUtil";
+import { Balances, PeggedIssuanceAdapter } from "../peggedAsset.type";
+import { chainContracts } from "./config";
+import { addChainExports } from "../helper/getSupply";
+import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
+import { sumSingleBalance } from "../helper/generalUtil";
+const axios = require("axios");
+const retry = require("async-retry");
 
+const XRPL_NODE_URL = "https://xrplcluster.com";
+const STELLAR_EXPERT_API = "https://api.stellar.expert/explorer/public";
 
-
-async function chainMinted(chain: string, decimals: number) {
-    return async function (
-        _timestamp: number,
-        _ethBlock: number,
-        _chainBlocks: ChainBlocks
-    ) {
-        let balances = {} as Balances;
-        for (let issued of chainContracts[chain].issued) {
-            const totalSupply = (
-                await sdk.api.abi.call({
-                    abi: "erc20:totalSupply",
-                    target: issued,
-                    block: _chainBlocks?.[chain],
-                    chain: chain,
-                })
-            ).output;
-            sumSingleBalance(
-                balances,
-                "peggedEUR",
-                totalSupply / 10 ** decimals,
-                "issued",
-                false
-            );
-        }
-        return balances;
-    };
+function solanaUnreleased() {
+  return async function () {
+    let balances = {} as Balances;
+    for (const unreleasedAddress of chainContracts.solana.unreleased) {
+      const balance = await solanaGetTokenBalance(
+        chainContracts.solana.issued[0],
+        unreleasedAddress
+      );
+      sumSingleBalance(balances, "peggedEUR", balance, unreleasedAddress, false);
+    }
+    return balances;
+  };
 }
 
-async function chainUnreleased(chain: string, decimals: number, owner: string) {
-    return async function (
-        _timestamp: number,
-        _ethBlock: number,
-        _chainBlocks: ChainBlocks
-    ) {
-        let balances = {} as Balances;
-        for (let issued of chainContracts[chain].issued) {
-            const reserve = (
-                await sdk.api.erc20.balanceOf({
-                    target: issued,
-                    owner: owner,
-                    block: _chainBlocks?.[chain],
-                    chain: chain,
-                })
-            ).output;
-            sumSingleBalance(balances, "peggedEUR", reserve / 10 ** decimals, "issued", false);
-        }
-        return balances;
-    };
+async function rippleMinted() {
+  const balances = {} as Balances;
+  const [currencyCode, issuer] = chainContracts.ripple.issued[0].split(".");
+  const response = await retry(() =>
+    axios.post(XRPL_NODE_URL, {
+      method: "gateway_balances",
+      params: [{ account: issuer, ledger_index: "validated" }],
+    })
+  );
+  const supply = Number(response.data.result?.obligations?.[currencyCode] ?? 0);
+
+  sumSingleBalance(balances, "peggedEUR", supply, "issued", false);
+  return balances;
 }
 
-export function solanaMintedOrBridged(
-    targets: string[]
-) {
-    return async function (
-        _timestamp: number,
-        _ethBlock: number,
-        _chainBlocks: ChainBlocks
-    ) {
-        let balances = {} as Balances;
-        for (let target of targets) {
-            const totalSupply = await solanaGetTokenSupply(target);
-            sumSingleBalance(balances, "peggedEUR", totalSupply, target, false);
-        }
-        return balances;
-    };
+async function stellarMinted() {
+  const balances = {} as Balances;
+  const contract = chainContracts.stellar.issued[0];
+  const contractResponse = await retry(() =>
+    axios.get(`${STELLAR_EXPERT_API}/contract/${contract}`)
+  );
+  const asset = contractResponse.data.asset;
+  const assetResponse = await retry(() =>
+    axios.get(`${STELLAR_EXPERT_API}/asset/${asset}`)
+  );
+  const supply =
+    Number(assetResponse.data.supply) / 10 ** assetResponse.data.decimals;
+
+  sumSingleBalance(balances, "peggedEUR", supply, "issued", false);
+  return balances;
 }
 
-async function solanaUnreleased() {
-    return async function (
-        _timestamp: number,
-        _ethBlock: number,
-        _chainBlocks: ChainBlocks
-    ) {
-        let balances = {} as Balances;
-        for (let unreleasedAddress of chainContracts["solana"].unreleased) {
-            sumSingleBalance(balances, "peggedEUR", await solanaGetTokenBalance(
-                chainContracts["solana"].issued[0],
-                unreleasedAddress
-            ),unreleasedAddress, false);
-        }
-        return balances;
-    };
-}
-
-const adapter: PeggedIssuanceAdapter = {
-    ethereum: {
-        minted: chainMinted("ethereum", 18),
-        unreleased: chainUnreleased(
-            "ethereum",
-            18,
-            chainContracts.ethereum.unreleased[0]
-        ),
-    },
+const adapter: PeggedIssuanceAdapter = addChainExports(
+  chainContracts,
+  {
     solana: {
-        minted: solanaMintedOrBridged(chainContracts.solana.issued),
-        unreleased: solanaUnreleased()
+      unreleased: solanaUnreleased(),
     },
-}
+    ripple: {
+      minted: rippleMinted,
+    },
+    stellar: {
+      minted: stellarMinted,
+    },
+  },
+  { pegType: "peggedEUR" }
+);
 
 export default adapter;

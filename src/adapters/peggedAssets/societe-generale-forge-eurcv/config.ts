@@ -8,5 +8,11 @@ export const chainContracts: ChainContracts = {
     solana: {
         issued: ["DghpMkatCiUsofbTmid3M3kAbDTPqDwKiYHnudXeGG52"], // mainnet token
         unreleased: ["4N1WwAaSukn7YtRKRArA3Ntp4CfcB1nCiqCDGEjEBhEj", "5tg4qRdiXJ7XxYd6KK4UnnNvxgHJqfBUygPqZLwSnhnt"], // Operation registrar
+    },
+    ripple: {
+        issued: ["4555524356000000000000000000000000000000.rUNaS5sqRuxZz6V7rBGhoSaZiVYA3ut4UL"],
+    },
+    stellar: {
+        issued: ["CANKBYNNAYKEZXLB655F2UPNTAZFK5HILZUXL7ZTFR3NF6LKDSVY7KFH"],
     }
 }
