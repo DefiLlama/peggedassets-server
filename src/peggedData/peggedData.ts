@@ -8794,4 +8794,25 @@ export default [
     wiki: null,
     module: "decentralized-euro",
   },
+  {
+    id: "424",
+    name: "The Fedz FUSD",
+    address: "arbitrum:0x894341be568eae3697408c420f1d0acfce6e55f9",
+    symbol: "FUSD",
+    url: "https://thefedz.xyz/",
+    description:
+      "FUSD is an under-collateralized stablecoin issued by The Fedz on Arbitrum, using a fractional-reserve model with private liquidity pools to maintain a US Dollar peg while improving capital efficiency.",
+    mintRedeemDescription:
+      "FUSD is minted against collateral in The Fedz protocol under a fractional-reserve model, with private liquidity pools (accessible to Fedz NFT holders) supporting its peg and redemptions.",
+    onCoinGecko: "true",
+    gecko_id: "fusd-by-the-fedz",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/thefedznft",
+    wiki: null,
+    module: "fusd-by-the-fedz",
+  },
 ] as PeggedAsset[];
