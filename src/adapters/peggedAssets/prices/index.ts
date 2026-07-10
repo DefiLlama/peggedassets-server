@@ -31,6 +31,7 @@ export async function getPrices(assets: any[]) {
     })
   }
   finalRes["m-2"] = 1
+  finalRes["kerne-usd"] = 1
   finalRes["terrausd"] = 0
   return finalRes
 }
