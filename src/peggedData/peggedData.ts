@@ -8384,7 +8384,7 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: null,
+    auditLinks: ["https://code4rena.com/reports/2026-04-monetrix"],
     twitter: "https://x.com/monetrix_xyz",
     wiki: "https://doc.monetrix.xyz/guide/mint",
     module: "monetrix-usdm",
