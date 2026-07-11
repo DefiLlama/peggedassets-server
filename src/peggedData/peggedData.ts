@@ -8794,4 +8794,25 @@ export default [
     wiki: null,
     module: "decentralized-euro",
   },
+  {
+    id: "424",
+    name: "Stablecorp QCAD",
+    address: "0x3fa142dd3f384414e05e71ad0939274edc82ec0a",
+    symbol: "QCAD",
+    url: "https://stablecorp.ca/",
+    description:
+      "QCAD is Canada's first compliant CAD stablecoin, issued by Stablecorp and fully 1:1 fiat-backed by Canadian dollar reserves held with regulated Canadian financial institutions under a dedicated, third-party-audited trust.",
+    mintRedeemDescription:
+      "QCAD is minted 1:1 when users deposit Canadian dollars with the issuer and is redeemable 1:1 for CAD, with reserves held in a regulated Canadian trust and monthly attestation reports published.",
+    onCoinGecko: "true",
+    gecko_id: "stablecorp-qcad",
+    cmcId: null,
+    pegType: "peggedCAD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/stablecorp",
+    wiki: null,
+    module: "stablecorp-qcad",
+  },
 ] as PeggedAsset[];
