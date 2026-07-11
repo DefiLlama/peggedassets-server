@@ -3098,7 +3098,7 @@ export default [
     symbol: "HYUSD",
     url: "https://linktr.ee/hyusd",
     description:
-      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.", 
+      "hyUSD is a secure high yield savings flatcoin with up to 6% rewards outpacing inflation in over 100 countries around the world.",
     mintRedeemDescription:
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: "false",
@@ -8835,5 +8835,26 @@ export default [
     twitter: "https://x.com/thefedznft",
     wiki: null,
     module: "fusd-by-the-fedz",
+  },
+  {
+    id: "426",
+    name: "USD+",
+    address: "solana:usdsfJbX78ktZUnoRC7dwvvQz7xH3WdkpGne76gdUia",
+    symbol: "USD+",
+    url: "https://usd-plus.com/",
+    description:
+      "USD+ is a U.S. Treasury bill-backed stablecoin on Solana, powered by the M0 universal stablecoin platform, that streams yield from underlying T-Bills directly to holders' wallets daily while maintaining a $1 peg.",
+    mintRedeemDescription:
+      "USD+ is minted 1:1 against U.S. Treasury bill reserves via the M0 platform and is redeemable 1:1 for its underlying reserves, with yield from the T-Bills streamed daily to holders and no staking or lockups required.",
+    onCoinGecko: "true",
+    gecko_id: "usd-2",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/streamflow_fi",
+    wiki: null,
+    module: "usd-2",
   },
 ] as PeggedAsset[];
