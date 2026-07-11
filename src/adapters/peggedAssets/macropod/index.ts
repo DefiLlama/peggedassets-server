@@ -8,8 +8,11 @@ const chainContracts: ChainContracts = {
   solana: {
     issued: ["CiYXBwHPrdNkMtxR8YEWKv78K6bQjFoEWhPQrZqEmubi"],
   },
+  base: {
+    issued: ["0xeded6ae915b129b67a4ad49901518f2736427063"],
+  },
 };
 import { addChainExports } from "../helper/getSupply";
 import { ChainContracts } from "../peggedAsset.type";
-const adapter = addChainExports(chainContracts);
+const adapter = addChainExports(chainContracts, undefined, { pegType: "peggedAUD" });
 export default adapter;
