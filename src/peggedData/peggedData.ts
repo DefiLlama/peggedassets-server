@@ -8246,9 +8246,9 @@ export default [
     symbol: "USDV",
     url: "https://valtorum.com",
     description:
-      "Valtorum USD (USDV) is a permissioned USD-pegged stablecoin issued by Valtorum on the XRP Ledger. Holder trustlines require issuer authorization.",
+      "Valtorum USD (USDV) is a permissioned USD-pegged stablecoin issued by Valtorum across supported networks, including XRP Ledger, Stellar, TRON, Base, Polygon, and BNB Chain.",
     mintRedeemDescription:
-      "Valtorum USD is issued and redeemed by Valtorum through its XRP Ledger issuer account.",
+      "Valtorum USD is issued and redeemed by Valtorum through supported issuer and contract accounts, subject to Valtorum's terms and compliance requirements.",
     onCoinGecko: "false",
     gecko_id: "valtorum-usdv",
     cmcId: null,
