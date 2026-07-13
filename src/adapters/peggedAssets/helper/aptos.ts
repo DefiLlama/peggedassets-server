@@ -33,8 +33,13 @@ export async function getTokenSupply(token: string) {
   const { data } = await axios.get(`${endpoint}/v1/accounts/${token}/resources`);
 
   if (token === '0x50038be55be5b964cfa32cf128b5cf05f123959f286b4cc02b86cafd48945f89') {
-    const coinInfo = data.find((coin: any) => coin.type === '0x4de5876d8a8e2be7af6af9f3ca94d9e4fafb24b5f4a5848078d8eb08f08e808a::ds_token::TokenData')
-    return coinInfo.data.total_issued / 1e6
+    const concurrentSupply = data.find((coin: any) => coin.type === '0x1::fungible_asset::ConcurrentSupply');
+    const metadata = data.find((coin: any) => coin.type === '0x1::fungible_asset::Metadata');
+    if (concurrentSupply && metadata) {
+      const supply = concurrentSupply.data.current.value;
+      const decimals = metadata.data.decimals;
+      return parseInt(supply) / 10 ** decimals;
+    }
   }
 
   // Handle Franklin Onchain U.S. Government Money Fund token
