@@ -21,15 +21,21 @@ const STELLAR_USDV_ISSUER =
 const chainContracts: ChainContracts = {
   tron: {
     issued: ["TAPR48oEGf6e8EqWsqSkLQ6wQKLfYimHGd"],
+    unreleased: [
+      "TTGKRCFPYpwuY4MU7NaVoqz2vWoUYy1gXG",
+    ],
   },
   base: {
     issued: ["0xB719f73b4a47Fa22e0fA00cedF5B7FB37f1e6866"],
+    unreleased: ["0x3c8d9271cc15a225bd3a1345c1412b76f12a3a4d"],
   },
   polygon: {
     issued: ["0x2b9bBfFCF4ACF9A5A545295bDF84713e477B28Cb"],
+    unreleased: ["0xd4bD9ffbba98ffA3E5F6a72b5240A9e315668910"],
   },
   bsc: {
     issued: ["0x96c2402d369C8C0aE1dFd4fA066F79F81A98A4b9"],
+    unreleased: ["0x2b5967F7Da644e046e202b62Be4b7192d0d6785b"],
   },
 };
 
