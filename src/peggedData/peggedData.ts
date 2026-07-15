@@ -3373,11 +3373,11 @@ export default [
     name: "VNX Swiss Franc",
     address: "0x79d4f0232A66c4c91b89c76362016A1707CFBF4f",
     symbol: "VCHF",
-    url: "https://vnx.li/",
+    url: "https://vnx.io/swiss-franc ",
     description:
-      "VNX Swiss Franc (VCHF) is a multichain token referencing Swiss Franc from a token generator licensed under the Blockchain act in Liechtenstein",
+      "VNX Swiss Franc (VCHF) is a fully regulated stablecoin referencing the Swiss franc. The token is issued by VNX Global Ltd., which is licensed to conduct digital asset business activities under a Class M digital assets business licence issued by the Bermuda Monetary Authority. Each VCHF token is designed to be fully backed 1:1 by Swiss francs and redeemable against the underlying Swiss franc reserve",
     mintRedeemDescription:
-      "VNX Swiss Franc (VCHF) multichain token referencing CHF, issued by VNX Commodities AG (registered with the FMA) and supported by assets held in reserve.",
+      "VNX stablecoins (VCHF, VGBP) are minted upon confirmation of fiat funding of the segregated fiduciary account, and redeemed at par at any time per customer instruction. The flow supports two execution paths on the mint side (new issuance against new reserve, or proprietary-trade fill from VNX's liquidity pool) and two paths on the redeem side (direct cancellation against reserves, or buyback into the liquidity pool). An optional crypto-conversion leg is available on either side via VNX's external regulated provider. This page is the institutional-track summary; see Developer Track for sequence-level integration.",
     onCoinGecko: "true",
     gecko_id: "vnx-swiss-franc",
     cmcId: "24130",
@@ -3385,8 +3385,8 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
     auditLinks: "https://vnx.li/transparency/",
-    twitter: "https://twitter.com/vnx_platform",
-    wiki: null,
+    twitter: "https://twitter.com/VNX_Global",
+    wiki: "https://vnx.gitbook.io/vnx-global",
   },
   {
     id: "158",
@@ -6131,11 +6131,11 @@ export default [
     name: "VNX British Pound",
     address: "solana:5H4voZhzySsVvwVYDAKku8MZGuYBC7cXaBKDPW4YHWW1",
     symbol: "VGBP",
-    url: "https://vnx.li/",
+    url: "https://vnx.io/british-pound",
     description:
-      "VNX British Pound (VGBP) is a token referencing British Pound from a token generator licensed under the Blockchain act in Liechtenstein.",
+      "VGBP (VNX British Pound) is a fully regulated stablecoin referencing pound sterling. The token is issued by VNX Global Ltd., which is licensed to conduct digital asset business activities under a Class M digital assets business licence issued by the Bermuda Monetary Authority. Each VGBP token is designed to be fully backed 1:1 by pound sterling and redeemable against the underlying pound sterling reserve.",
     mintRedeemDescription:
-      "VGBP is minted by depositing GBP or VNX Gold and redeemed by returning the tokens in exchange for the underlying assets, maintaining a 1:1 backing.",
+      "VGBP is minted upon confirmation of fiat funding of the segregated fiduciary account, and redeemed at par at any time per customer instruction. The flow supports two execution paths on the mint side (new issuance against new reserve, or proprietary-trade fill from VNX's liquidity pool) and two paths on the redeem side (direct cancellation against reserves, or buyback into the liquidity pool). An optional crypto-conversion leg is available on either side via VNX's external regulated provider. This page is the institutional-track summary; see Developer Track for sequence-level integration.",
     onCoinGecko: "true",
     gecko_id: "vnx-british-pound",
     cmcId: "36339",
@@ -6143,8 +6143,8 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: "https://vnx.li/transparency/",
-    twitter: "https://twitter.com/vnx_platform",
-    wiki: "https://vnx.li/vgbp/",
+    twitter: "https://twitter.com/VNX_Global",
+    wiki: "https://vnx.gitbook.io/vnx-global",
   },
   {
     id: "293",
