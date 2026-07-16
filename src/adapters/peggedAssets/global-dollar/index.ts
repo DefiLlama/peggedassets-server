@@ -10,6 +10,9 @@ const chainContracts = {
     },
     xlayer: {
         issued: ['0x4ae46a509f6b1d9056937ba4500cb143933d2dc8']
+    },
+    robinhood: {
+        issued: ['0x5fc5360d0400a0fd4f2af552add042d716f1d168']
     }
 };
 
