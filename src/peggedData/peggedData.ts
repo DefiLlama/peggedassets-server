@@ -8255,7 +8255,7 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
-    auditLinks: [],
+    auditLinks: ["https://valtorum.com/por"],    
     twitter: null,
     wiki: "https://valtorum.com/about/",
     module: "valtorum-usdv",
