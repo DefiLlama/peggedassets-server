@@ -32,14 +32,19 @@ async function rippleMinted(
     ],
   };
 
-  const res = await retry(async () =>
-    axios.post(XRPL_NODE_URL, payload)
-  );
+  const res = await retry(async () => {
+    const response = await axios.post(XRPL_NODE_URL, payload);
+    if (response.data?.result?.error) {
+      throw new Error(
+        `XRPL API error: ${response.data.result.error_message || response.data.result.error}`
+      );
+    }
+    return response;
+  });
 
   const supplyStr =
-    res.data.result.obligations[XRPL_CURRENCY];
+    res.data.result?.obligations?.[XRPL_CURRENCY] || "0";
   const supply = parseFloat(supplyStr);
-
   sumSingleBalance(
     balances,
     "peggedEUR",
