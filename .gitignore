@@ -1,6 +1,5 @@
 node_modules
 .webpack
-.env
 .serverless
 imported-db
 docker
@@ -18,3 +17,4 @@ package-lock.json
 src/adapters/peggedAssets/storeCoinGeckoPriceHistory.ts
 api2/.api2-cache/*
 .current_commit_hash
+config.bat
