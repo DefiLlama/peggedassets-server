@@ -29,6 +29,12 @@ export function craftChainDominanceResponse(chain: string | undefined) {
   const lastRates = cache.rates
 
   const lastPeggedBalances = peggedAssets.map((pegged) => {
+      // Same exclusions the chain totals apply in craftStablecoinChainsResponse: a
+      // doublecounted asset is already represented by the collateral backing it, and a dead
+      // asset's lastBalance is frozen at its final day with no price, so it would be valued
+      // at par forever. Without these the dominance figures disagree with the chain totals.
+      if (pegged.doublecounted) return undefined;
+      if (pegged.deadFrom) return undefined;
       const lastBalance = cache.peggedAssetsData?.[pegged.id]?.lastBalance;
       if (!lastBalance?.[normalizedChain]) {
         return undefined;
