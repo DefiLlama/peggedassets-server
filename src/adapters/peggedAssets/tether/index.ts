@@ -449,6 +449,14 @@ async function nearMint(address: string, decimals: number) {
   };
 }
 
+// Wormhole keeps a wrapped coin's TreasuryCap inside the token bridge's WrappedAsset, so
+// suix_getTotalSupply and coinMetadata don't expose the supply for it. The WrappedAsset is a
+// dynamic field on the token registry, which is the `token_registry` field of the bridge state
+// object 0xc57508ee0d4595e5a8728974a4a93a787d38f339757230d441e895422c07aba9.
+const SUI_WORMHOLE_TOKEN_BRIDGE = "0x26efee2b51c911237888e5dc6702868abca3c7ac12c53f76ef8eba0697695e3d";
+const SUI_WORMHOLE_TOKEN_REGISTRY = "0x334881831bd89287554a6121087e498fa023ce52c037001b53a4563a00a281a5";
+const SUI_WORMHOLE_USDT = "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c";
+
 async function suiWormholeBridged() {
   return async function (
     _timestamp: number,
@@ -456,9 +464,17 @@ async function suiWormholeBridged() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const res = await axios.get(`https://kx58j6x5me.execute-api.us-east-1.amazonaws.com/sui/usdt`)
-    const totalSupply = parseInt(res.data.find((t: any) => t.coin === "USDT_ETH").cumulative_balance);
-    sumSingleBalance(balances, "peggedUSD", totalSupply, "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c", true);
+    const wrappedAsset = await sui.call("suix_getDynamicFieldObject", [
+      SUI_WORMHOLE_TOKEN_REGISTRY,
+      {
+        type: `${SUI_WORMHOLE_TOKEN_BRIDGE}::token_registry::Key<${SUI_WORMHOLE_USDT}::coin::COIN>`,
+        value: { dummy_field: false },
+      },
+    ]);
+    const wrapped = wrappedAsset.content.fields.value.fields;
+    const totalSupply =
+      Number(wrapped.treasury_cap.fields.total_supply.fields.value) / 10 ** Number(wrapped.decimals);
+    sumSingleBalance(balances, "peggedUSD", totalSupply, SUI_WORMHOLE_USDT, true);
     return balances;
   };
 }
