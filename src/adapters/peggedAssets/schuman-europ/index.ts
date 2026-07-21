@@ -4,7 +4,6 @@ import {
   Balances,
   ChainBlocks,
   ChainContracts,
-  PeggedIssuanceAdapter,
 } from "../peggedAsset.type";
 
 const axios = require("axios");
@@ -33,13 +32,7 @@ async function rippleMinted(
   };
 
   const res = await retry(async () => {
-    const response = await axios.post(XRPL_NODE_URL, payload);
-    if (response.data?.result?.error) {
-      throw new Error(
-        `XRPL API error: ${response.data.result.error_message || response.data.result.error}`
-      );
-    }
-    return response;
+    return axios.post(XRPL_NODE_URL, payload);
   });
 
   const supplyStr =
@@ -83,15 +76,14 @@ const chainContracts: ChainContracts = {
   },
 };
 
-const adapter: PeggedIssuanceAdapter = {
-  ...addChainExports(
-    chainContracts,
-    undefined,
-    { pegType: "peggedEUR" }
-  ),
-  ripple: {
-    minted: rippleMinted,
+const adapter = addChainExports(
+  chainContracts,
+  {
+    ripple: {
+      minted: rippleMinted,
+    },
   },
-};
+  { pegType: "peggedEUR" }
+);
 
 export default adapter;
