@@ -249,7 +249,7 @@ function getStablecoinIdFromPath(filePath: string): string {
   }
 
   const peggedAsset = peggedAssets.find((pegged) => {
-    return pegged.gecko_id === stablecoinDir;
+    return pegged.gecko_id === stablecoinDir || pegged.module === stablecoinDir;
   });
 
   if (peggedAsset) {
@@ -267,22 +267,29 @@ function getAdapterLabelFromPath(filePath: string): string {
     const found = peggedAssets.find(p => p.id === last);
     return (found?.gecko_id || found?.name || last) as string;
   }
-  return last;
+  const byName = peggedAssets.find(p => p.gecko_id === last || p.module === last);
+  return (byName?.gecko_id || byName?.module || last) as string;
 }
 
 (async () => {
   let adapter = {} as PeggedIssuanceAdapter;
   let module: any
-  try {
-    adapter = require(passedFile);
-  } catch (e) {
-    console.log(e);
-    return;
-  }
   const stablecoinId = getStablecoinIdFromPath(passedFile);
   const adapterLabel = getAdapterLabelFromPath(passedFile);
 
   const peggedAsset = peggedAssets.find((p) => p.id === stablecoinId);
+
+  try {
+    adapter = require(passedFile);
+  } catch (e) {
+    // No adapter file: assets defined purely via `chainConfig` in peggedData have
+    // no module file — importAdapter builds them below. Only bail if there's also
+    // no chainConfig to build from.
+    if (!peggedAsset?.chainConfig) {
+      console.log(e);
+      return;
+    }
+  }
 
   let relativeModulePath = path.relative(__dirname, passedFile).replace(/\\/g, '/').replace(/\.ts$/, '');
   module = await importAdapter(peggedAsset ?? {

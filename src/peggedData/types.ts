@@ -64,6 +64,19 @@ export type PeggedAsset = {
   yieldBearing?: boolean;
   bridgeConfig?: BridgeConfig;
   module?: string;  // adapter module to use, defaults to gecko_id if not set
+  chainConfig?: ChainConfig; // inline declarative adapter: chain -> contracts, built via addChainExports. Avoids needing an adapter file for simple issued/bridged configs.
+};
+
+// map of llama chain key -> contract config consumed by addChainExports.
+// per-chain keys: issued | unreleased | reserves | bridgedFromETH | bridgeOnETH | bridgedFrom<Chain>.
+// values are address strings or arrays of address strings.
+export type ChainConfig = {
+  decimals?: number; // token decimals passed to addChainExports (default 18)
+  chains: {
+    [chain: string]: {
+      [key: string]: string | string[];
+    };
+  };
 };
 
 type BridgeConfig = {
