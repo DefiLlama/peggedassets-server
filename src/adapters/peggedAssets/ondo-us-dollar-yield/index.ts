@@ -3,7 +3,6 @@ import { sumSingleBalance } from '../helper/generalUtil';
 import { addChainExports, cosmosSupply } from "../helper/getSupply";
 import { ChainBlocks, PeggedIssuanceAdapter, Balances } from "../peggedAsset.type";
 import { getTotalSupply as stellarGetTotalSupply } from "../helper/stellar";
-import { getResources } from '../helper/aptos';
 const axios = require("axios");
 const retry = require("async-retry");
 

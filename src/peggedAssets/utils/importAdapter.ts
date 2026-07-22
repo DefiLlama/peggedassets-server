@@ -1,17 +1,25 @@
 import { PeggedAsset } from "../../peggedData/types";
 import path from "path";
 import { addBridgeConfigs } from "../../adapters/peggedAssets/helper/bridgeConfig";
+import { addChainExports } from "../../adapters/peggedAssets/helper/getSupply";
 import { PeggedIssuanceAdapter } from "../../adapters/peggedAssets/peggedAsset.type";
 
 export async function importAdapter(asset: PeggedAsset, adapter?: any): Promise<PeggedIssuanceAdapter> {
   let key = asset.module ?? asset.gecko_id
-  const modulePath = path.join(__dirname, '../../adapters/peggedAssets', key);
-  
-  if (!adapter) {
-    adapter = (await import(modulePath)).default;
+  const modulePath = key != null ? path.join(__dirname, '../../adapters/peggedAssets', key) : null;
+
+  if (!adapter && asset.chainConfig) {
+    adapter = addChainExports(asset.chainConfig.chains, undefined, {
+      pegType: asset.pegType,
+      decimals: asset.chainConfig.decimals,
+    });
   }
 
-  if (asset.bridgeConfig?.lzConfig) {
+  if (!adapter) {
+    adapter = (await import(modulePath!)).default;
+  }
+
+  if (asset.bridgeConfig?.lzConfig && modulePath) {
     const lzConfigPath = path.join(modulePath, 'layerzeroConfig');
     try {
       const layerzeroConfig = (await import(lzConfigPath)).default;
@@ -23,7 +31,7 @@ export async function importAdapter(asset: PeggedAsset, adapter?: any): Promise<
     }
   }
 
-  if (asset.bridgeConfig?.hyperlaneConfig) {
+  if (asset.bridgeConfig?.hyperlaneConfig && modulePath) {
     const hyperlaneConfigPath = path.join(modulePath, 'hyperlaneConfig');
     try {
       const hyperlaneConfig = (await import(hyperlaneConfigPath)).default;

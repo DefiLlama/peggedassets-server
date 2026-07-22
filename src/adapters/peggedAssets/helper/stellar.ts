@@ -21,3 +21,16 @@ export async function getTotalSupply(assetID: string) {
   const supply = asset?.supply;
   return supply / 10 ** decimals;
 }
+
+// resolve a Soroban contract address to its underlying asset, then read supply
+export async function getTotalSupplyByContract(contract: string) {
+  const endpoint = "https://api.stellar.expert/explorer/public";
+  const contractRes = await retry(
+    async (_bail: any) => await axios.get(`${endpoint}/contract/${contract}`)
+  );
+  const asset = contractRes.data.asset;
+  const assetRes = await retry(
+    async (_bail: any) => await axios.get(`${endpoint}/asset/${asset}`)
+  );
+  return Number(assetRes.data.supply) / 10 ** assetRes.data.decimals;
+}

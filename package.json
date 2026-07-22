@@ -9,6 +9,7 @@
     "api2-cron-task": "npx ts-node --transpile-only api2/cron-task/index.ts",
     "api2-store-rates": "npx ts-node --transpile-only api2/scripts/storeRates.ts",
     "test": "cd src/adapters/peggedAssets && npx ts-node --transpile-only test",
+    "test-interactive": "cd src/adapters/peggedAssets && npx ts-node --transpile-only testInteractive.ts",
     "store-all": "set AWS_REGION='eu-central-1' && set tableName='prod-stablecoins-table' && npx ts-node --transpile-only src/cli/storeAllPeggedAssets.ts",
     "force-update": "set AWS_REGION='eu-central-1' && set tableName='prod-stablecoins-table' && npx ts-node --transpile-only src/cli/forceUpdateAsset.ts",
     "fillOld": "set AWS_REGION='eu-central-1' && set tableName='prod-stablecoins-table' && npx ts-node src/cli/fillOld.ts",
@@ -38,5 +39,8 @@
     "starknet": "^6.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "inquirer": "^14.0.2"
   }
 }

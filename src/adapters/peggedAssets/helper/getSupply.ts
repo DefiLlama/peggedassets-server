@@ -1,9 +1,11 @@
 import { ChainApi } from "@defillama/sdk";
 import * as aptos from "../helper/aptos";
 import * as cardano from "../helper/cardano";
-import { getTokenSupply as solanaGetTokenSupply } from "../helper/solana";
+import { getTokenSupply as solanaGetTokenSupply, getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import * as sui from "../helper/sui";
 import * as tezos from "../helper/tezos";
+import * as stellar from "../helper/stellar";
+import { getTotalSupply as tronGetTotalSupply, getTokenBalance as tronGetTokenBalance } from "../helper/tron";
 import * as starknet from "../helper/starknet";
 import { getZilliqaTokenSupply } from "../helper/zilliqa";
 import type {
@@ -354,6 +356,13 @@ export function addChainExports(config: any, adapter: any = {}, {
           if (!cExports.minted)
             cExports.minted = getIssued(chainConfig)
           break;
+        case "cosmosIssued":
+          // cosmos LCD supply query: value is a denom (or array of denoms) queried
+          // on `chain` via cosmosSupply. decimals comes from the options arg.
+          if (!Array.isArray(chainConfig.cosmosIssued)) chainConfig.cosmosIssued = [chainConfig.cosmosIssued]
+          if (!cExports.minted)
+            cExports.minted = cosmosSupply(chain, chainConfig.cosmosIssued, decimals, "", pegType as any)
+          break;
         case "unreleased":
         case "reserves":
           if (!cExports.unreleased)
@@ -369,13 +378,22 @@ export function addChainExports(config: any, adapter: any = {}, {
           }
           break;
         default: {
-          if (key.startsWith("bridgedFrom")) {
+          if (key.startsWith("cosmosBridgedFrom")) {
+            // cosmos LCD supply of a denom bridged in from another chain, queried on
+            // `chain` and attributed to the source chain (e.g. cosmosBridgedFromAgoric).
+            const srcChain = key.slice("cosmosBridgedFrom".length).toLowerCase()
+            if (!Array.isArray(chainConfig[key])) chainConfig[key] = [chainConfig[key]]
+            if (!cExports[srcChain])
+              cExports[srcChain] = cosmosSupply(chain, chainConfig[key], decimals, srcChain, pegType as any)
+          } else if (key.startsWith("bridgedFrom")) {
             let srcChain = key.slice("bridgedFrom".length).toLowerCase()
             if (srcChain === "ETH") srcChain = "ethereum"
             if (!Array.isArray(chainConfig[key])) chainConfig[key] = [chainConfig[key]]
             if (!cExports[srcChain]) {
               if (chain === 'solana')
                 cExports[srcChain] = solanaMintedOrBridged(chainConfig[key])
+              else if (chain === 'sui' || chain === 'cardano')
+                cExports[srcChain] = getIssued({...chainConfig[key], pegType })
               else
                 cExports[srcChain] = bridgedSupply(chain, decimals, chainConfig[key], undefined, srcChain, pegType as any)
             }
@@ -424,6 +442,25 @@ function getIssued({
         return balances;
       }
     }
+    if (api.chain === 'stellar') {
+      for (const i of issuedList) {
+        // a Soroban contract address (starts with 'C', no asset-code separator)
+        // must be resolved to its underlying asset first
+        const isContract = i.startsWith("C") && !i.includes(":") && !i.includes("-");
+        const supply = isContract
+          ? await stellar.getTotalSupplyByContract(i)
+          : await stellar.getTotalSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
+    if (api.chain === 'tron') {
+      for (const i of issuedList) {
+        const supply = await tronGetTotalSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
     if (api.chain === 'starknet') {
       for (const i of issuedList) {
         const supply = await starknet.getTotalSupply(i)
@@ -435,6 +472,20 @@ function getIssued({
     if (api.chain === 'cardano') {
       for (const i of issuedList) {
         const supply = await cardano.getTotalSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
+    if (api.chain === 'ripple') {
+      for (const i of issuedList) {
+        const supply = await rippleGetTotalSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+        return balances;
+      }
+    }
+    if (api.chain === 'algorand') {
+      for (const i of issuedList) {
+        const supply = await algorandGetTotalSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
         return balances;
       }
@@ -457,6 +508,45 @@ function getIssued({
   }
 }
 
+// ripple token format: "<currencyCode>.<issuerAddress>"
+async function rippleGetTotalSupply(token: string) {
+  const [currencyCode, issuerAddress] = token.split(".");
+  const payload = {
+    method: "gateway_balances",
+    params: [{ account: issuerAddress, ledger_index: "validated" }],
+  };
+  const res = await retry(async (_bail: any) =>
+    axios.post("https://xrplcluster.com", payload)
+  );
+  const obligations = res.data?.result?.obligations;
+  return obligations?.[currencyCode] ? parseFloat(obligations[currencyCode]) : 0;
+}
+
+async function algorandGetAssetParams(assetId: string) {
+  const res = await retry(async (_bail: any) =>
+    axios.get(`https://mainnet-idx.algonode.cloud/v2/assets/${assetId}`)
+  );
+  return res.data.asset.params;
+}
+
+// total supply of an Algorand Standard Asset, scaled by its own decimals
+async function algorandGetTotalSupply(assetId: string) {
+  const params = await algorandGetAssetParams(assetId);
+  return params.total / 10 ** params.decimals;
+}
+
+// amount of `assetId` held by `account`, scaled by the asset's decimals
+async function algorandGetBalance(assetId: string, account: string) {
+  const params = await algorandGetAssetParams(assetId);
+  const res = await retry(async (_bail: any) =>
+    axios.get(`https://mainnet-idx.algonode.cloud/v2/accounts/${account}`)
+  );
+  const holdings = (res.data.account.assets ?? []).filter(
+    (asset: any) => String(asset["asset-id"]) === String(assetId)
+  );
+  return (holdings[0]?.amount ?? 0) / 10 ** params.decimals;
+}
+
 function getUnreleased({
   issued, pegType = "peggedUSD", unreleased, reserves,
 }: { issued: string[] | string, pegType: PeggedAssetType, issuedABI: string, unreleased: string[] | string, reserves: any }) {
@@ -467,6 +557,36 @@ function getUnreleased({
     if (typeof unreleased === "string") unreleased = [unreleased]
 
     if (api.chain === 'starknet') return starknet.getUnreleased({ issued, unreleased, balances, sumSingleBalance, pegType})
+
+    if (api.chain === 'algorand') {
+      for (const assetId of issued) {
+        for (const account of unreleased) {
+          const balance = await algorandGetBalance(assetId, account)
+          sumSingleBalance(balances, pegType, balance);
+        }
+      }
+      return balances;
+    }
+
+    if (api.chain === 'solana') {
+      for (const token of issued) {
+        for (const account of unreleased) {
+          const balance = await solanaGetTokenBalance(token, account)
+          sumSingleBalance(balances, pegType, balance);
+        }
+      }
+      return balances;
+    }
+
+    if (api.chain === 'tron') {
+      for (const token of issued) {
+        for (const reserve of unreleased) {
+          const balance = await tronGetTokenBalance(token, reserve)
+          sumSingleBalance(balances, pegType, balance);
+        }
+      }
+      return balances;
+    }
 
     if (api.chain === 'strato') {
       for (const token of issued) {

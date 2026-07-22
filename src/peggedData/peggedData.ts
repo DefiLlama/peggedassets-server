@@ -203,6 +203,41 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LiquityProtocol",
     wiki: "https://wiki.defillama.com/wiki/Liquity",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x5f98805a4e8be255a32880fdec7f6728c6568ba0"],
+        },
+        polygon: {
+          bridgedFromETH: ["0x23001f892c0C82b79303EDC9B9033cD190BB21c7"],
+        },
+        optimism: {
+          bridgedFromETH: ["0xc40F949F8a4e094D1b49a23ea9241D289B7b2819"],
+        },
+        bsc: {
+          bridgedFromETH: ["0x181002D60d504d30a39601Ae13Af3191cb102580"],
+        },
+        avax: {
+          bridgedFromETH: ["0xDA0019E7e50Ee4990440b1aa5dFFCAC6E27Ee27B"],
+        },
+        fantom: {
+          bridgedFromETH: ["0x16365b45EB269B5B5dACB34B4a15399Ec79b95eB"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x93b346b6BC2548dA6A1E7d98E9a421B42541425b"],
+        },
+        polygon_zkevm: {
+          bridgedFromETH: ["0x01E9A866c361eAd20Ab4e838287DD464dc67A50e"],
+        },
+        era: {
+          bridgeOnETH: ["0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB"],
+          bridgedFromETH: ["0x503234f203fc7eb888eec8513210612a43cf6115"],
+        },
+        scroll: {
+          bridgedFromETH: ["0xeDEAbc3A1e7D21fE835FFA6f83a710c70BB1a051"],
+        },
+      },
+    },
   },
   {
     id: "9",
@@ -224,6 +259,13 @@ export default [
     twitter: "https://twitter.com/feiprotocol",
     wiki: "https://wiki.defillama.com/wiki/FEI",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x956F47F50A910163D8BF957Cf5846D573E7f87CA"],
+        },
+      },
+    },
   },
   {
     id: "10",
@@ -264,6 +306,22 @@ export default [
     auditLinks: ["https://paxos.com/attestations/"],
     twitter: "https://twitter.com/paxosglobal",
     wiki: "https://wiki.defillama.com/wiki/USDP",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x8E870D67F660D95d5be530380D0eC0bd388289E1"],
+        },
+        bsc: {
+          bridgedFromETH: ["0xb3c11196A4f3b1da7c23d9FB0A3dDE9c6340934F"],
+        },
+        linea: {
+          bridgedFromETH: ["0xd2bc272EA0154A93bf00191c8a1DB23E67643EC5"],
+        },
+        solana: {
+          issued: ["HVbpJAQGNpkgBaYBZQBR1t7yFdvaYVp2vCQQfKKEN4tM"],
+        },
+      },
+    },
   },
   {
     id: "12",
@@ -311,6 +369,13 @@ export default [
     ],
     twitter: "https://twitter.com/YetiFinance",
     wiki: "https://wiki.defillama.com/wiki/Yeti_Finance",
+    chainConfig: {
+      chains: {
+        avax: {
+          issued: ["0x111111111111ed1d73f860f57b2798b683f2d325"],
+        },
+      },
+    },
   },
   {
     id: "14",
@@ -351,6 +416,34 @@ export default [
     auditLinks: "https://inverse.finance/audits",
     twitter: "https://twitter.com/InverseFinance",
     wiki: "https://wiki.defillama.com/wiki/DOLA",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x865377367054516e17014CcdED1e7d814EDC9ce4"],
+        },
+        fantom: {
+          bridgedFromETH: ["0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c"],
+        },
+        optimism: {
+          bridgedFromETH: ["0x8aE125E8653821E851F12A49F7765db9a9ce7384"],
+        },
+        bsc: {
+          bridgedFromETH: ["0x2f29bc0ffaf9bff337b31cbe6cb5fb3bf12e5840"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x6a7661795c374c0bfc635934efaddff3a7ee23b6"],
+        },
+        polygon: {
+          bridgedFromETH: ["0xbc2b48bc930ddc4e5cfb2e87a45c379aab3aac5c"],
+        },
+        avax: {
+          bridgedFromETH: ["0x221743dc9e954be4f86844649bf19b43d6f8366d"],
+        },
+        base: {
+          bridgedFromETH: ["0x4621b7A9c75199271F773Ebd9A499dbd165c3191"],
+        },
+      },
+    },
   },
   {
     id: "16",
@@ -372,6 +465,11 @@ export default [
     twitter: "https://twitter.com/gopartyparrot",
     wiki: "https://wiki.defillama.com/wiki/Parrot_USD_(PAI)",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        solana: { issued: ["Ea5SjE2Y6yvCeW5dYTn7PYMuW5ikXkvbGdcmSnXeaLjS"] },
+      },
+    },
   },
   {
     id: "17",
@@ -392,6 +490,20 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Stablecoin_HUSD",
     wiki: "https://wiki.defillama.com/wiki/HUSD",
+    chainConfig: {
+      decimals: 8,
+      chains: {
+        ethereum: { issued: ["0xdF574c24545E5FfEcb9a659c229253D4111d87e1"] },
+        tron: { issued: ["TL2FiXffdjG5Ep8eqPN6ouLyydvmgoR95h"] },
+        // heco and elastos were disabled in the old adapter; kept out here.
+        solana: {
+          bridgedFromETH: [
+            "7VQo3HFLNH5QqGtM8eC3XQbPkJUu7nS9LeGWjerRh5Sw", // wormhole v2
+            "BybpSTBoZHsmKnfxYG47GDhVPKrnEKX31CScShbrzUhX", // wormhole v1
+          ],
+        },
+      },
+    },
   },
   {
     id: "18",
@@ -413,6 +525,49 @@ export default [
     twitter: "https://twitter.com/SynapseProtocol",
     wiki: "https://wiki.defillama.com/wiki/NUSD",
     module: "nexus-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x1B84765dE8B7566e4cEAF4D0fD3c5aF52D3DdE4F"],
+        },
+        bsc: {
+          bridgedFromETH: ["0x23b891e5c62e0955ae2bd185990103928ab817b3"],
+        },
+        polygon: {
+          bridgedFromETH: ["0xb6c473756050de474286bed418b77aeac39b02af"],
+        },
+        avax: {
+          bridgedFromETH: ["0xcfc37a6ab183dd4aed08c204d1c2773c0b1bdf46"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x2913e812cf0dcca30fb28e6cac3d2dcff4497688"],
+        },
+        fantom: {
+          bridgedFromETH: ["0xed2a7edd7413021d440b09d654f3b87712abab66"],
+        },
+        harmony: {
+          bridgedFromETH: ["0xed2a7edd7413021d440b09d654f3b87712abab66"],
+        },
+        boba: {
+          bridgedFromETH: ["0x6b4712ae9797c199edd44f897ca09bc57628a1cf"],
+        },
+        optimism: {
+          bridgedFromETH: ["0x67c10c397dd0ba417329543c1a40eb48aaa7cd00"],
+        },
+        cronos: {
+          bridgedFromETH: ["0x396c9c192dd323995346632581bef92a31ac623b"],
+        },
+        metis: {
+          bridgedFromETH: ["0x961318fc85475e125b99cc9215f62679ae5200ab"],
+        },
+        dfk: {
+          bridgedFromETH: ["0x52285d426120ab91f378b3df4a15a036a62200ae"],
+        },
+        aurora: {
+          bridgedFromETH: ["0x07379565cD8B0CaE7c60Dc78e7f601b34AF2A21c"],
+        },
+      },
+    },
   },
   {
     id: "19",
@@ -433,6 +588,16 @@ export default [
     auditLinks: ["https://www.gemini.com/dollar"],
     twitter: "https://twitter.com/gemini",
     wiki: "https://wiki.defillama.com/wiki/GUSD",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x056fd409e1d7a124bd7017459dfea2f387b6d5cd"],
+        },
+        wan: {
+          bridgedFromETH: ["0xcF422327dDaAa409C2976d01131d8a3457F03251"],
+        },
+      },
+    },
   },
   {
     id: "20",
@@ -453,6 +618,23 @@ export default [
     auditLinks: ["https://github.com/runtimeverification/publications/blob/main/reports/smart-contracts/Alchemix_v2.pdf"],
     twitter: "https://twitter.com/AlchemixFi",
     wiki: "https://wiki.defillama.com/wiki/Alchemix",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xbc6da0fe9ad5f3b0d58160288917aa56653660e9"],
+          unreleased: ["0x9735f7d3ea56b454b24ffd74c58e9bd85cfad31b"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0"],
+        },
+        optimism: {
+          bridgedFromETH: ["0xb2c22A9fb4FC02eb9D1d337655Ce079a04a526C7", "0xCB8FA9a76b8e203D8C3797bF438d8FB81Ea3326A"],
+        },
+        fantom: {
+          bridgedFromETH: ["0xB67FA6deFCe4042070Eb1ae1511Dcd6dcc6a532E"],
+        },
+      },
+    },
   },
   {
     id: "21",
@@ -475,6 +657,16 @@ export default [
     wiki: "https://wiki.defillama.com/wiki/flexUSD",
     module: "flex-usd",
     deadFrom: "2022-06-23",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xa774ffb4af6b0a91331c084e1aebae6ad535e6f3"],
+        },
+        smartbch: {
+          issued: ["0x7b2b3c5308ab5b2a1d9a94d20d35ccdf61e05b72"],
+        },
+      },
+    },
   },
   {
     id: "22",
@@ -496,6 +688,15 @@ export default [
     twitter: "https://twitter.com/synthetix_io",
     wiki: "https://wiki.defillama.com/wiki/Synthetix",
     deadFrom: "2026-06-23",
+    chainConfig: {
+      chains: {
+        ethereum: { issued: ["0x57ab1ec28d129707052df4df418d58a2d46d5f51"] },
+        optimism: { issued: ["0x8c6f28f2f1a3c87f0f938b96d27520d9751ec8d9"] },
+        arbitrum: { bridgedFromETH: ["0xa970af1a584579b618be4d69ad6f73459d112f95"] },
+        fantom: { bridgedFromETH: ["0x0e1694483ebb3b74d3054e383840c6cf011e518e"] },
+        // ontology (poly-network bridge) was a no-op in the old adapter; dropped.
+      },
+    },
   },
   {
     id: "23",
@@ -516,6 +717,13 @@ export default [
     auditLinks: ["https://docs.ousd.com/v/en/security-and-risks/audits"],
     twitter: "https://twitter.com/originprotocol",
     wiki: "https://wiki.defillama.com/wiki/Origin_Dollar",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x2a8e1e676ec238d8a992307b495b45b3feaa5e86"],
+        },
+      },
+    },
   },
   {
     id: "24",
@@ -536,6 +744,25 @@ export default [
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
     wiki: "https://wiki.defillama.com/wiki/CUSD",
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0x765de816845861e75a25fca122bb6898b8b1282a"],
+        },
+        ethereum: {
+          bridgedFromCelo: ["0xd8F3208c045DD69D27938346275165998359D8fF", "0x9b9E2De4cB4ca479943F36DfFc72c7253bb1f66a", "0xad3E3Fc59dff318BecEaAb7D00EB4F68b1EcF195"],
+        },
+        solana: {
+          bridgedFromCelo: ["EwxNF8g9UfmsJVcZFTpL9Hx5MCkoQFoJi6XNWzKf1j8e"],
+        },
+        klaytn: {
+          bridgedFromCelo: ["0x08745bee17026ed2e0e39a98f81189b9e14ab1b3"],
+        },
+        monad: {
+          issued: ["0xBC69212B8E4d445b2307C9D32dD68E2A4Df00115"],
+        },
+      },
+    },
   },
   {
     id: "25",
@@ -557,6 +784,16 @@ export default [
     twitter: "https://twitter.com/holareserve",
     wiki: "https://wiki.defillama.com/wiki/Reserve_(RSV)",
     module: "reserve",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x196f4727526ea7fb1e17b2071b3d8eaa38486988"],
+        },
+        xdai: {
+          bridgedFromETH: ["0xD9C31db155a48f3d7304De85EC7AB7B705659bE9"],
+        },
+      },
+    },
   },
   {
     id: "26",
@@ -577,6 +814,19 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/mstable_",
     wiki: "https://wiki.defillama.com/wiki/MUSD",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xe2f2a5c287993345a840db3b0845fbc70f5935a5"],
+        },
+        xdai: {
+          bridgedFromETH: ["0x7300AaFC0Ef0d47Daeb850f8b6a1931b40aCab33"],
+        },
+        polygon: {
+          issued: ["0xE840B73E5287865EEc17d250bFb1536704B43B21"],
+        },
+      },
+    },
   },
   {
     id: "27",
@@ -600,6 +850,22 @@ export default [
     twitter: "https://twitter.com/OKLink",
     wiki: "https://wiki.defillama.com/wiki/USDK",
     module: "usdk",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x1c48f86ae57291f7686349f12601910bd8d470bb"],
+        },
+        polygon: {
+          bridgedFromETH: ["0xD07A7FAc2857901E4bEC0D89bBDAe764723AAB86"],
+        },
+        okexchain: {
+          bridgedFromETH: ["0xdcac52e001f5bd413aa6ea83956438f29098166b"],
+        },
+        solana: {
+          bridgedFromETH: ["43m2ewFV5nDepieFjT9EmAQnc1HRtAF247RBpLGFem5F"],
+        },
+      },
+    },
   },
   {
     id: "28",
@@ -620,6 +886,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/VenusProtocol",
     wiki: "https://wiki.defillama.com/wiki/VAI",
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0x4bd17003473389a42daf6a0a729f6fdb328bbbd7"],
+        },
+      },
+    },
   },
   {
     id: "29",
@@ -640,6 +913,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/HectorDAO_HEC",
     wiki: "https://wiki.defillama.com/wiki/TOR",
+    chainConfig: {
+      chains: {
+        fantom: {
+          issued: ["0x74e23df9110aa9ea0b6ff2faee01e740ca1c642e"],
+        },
+      },
+    },
   },
   {
     id: "30",
@@ -662,6 +942,19 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/moneyonchainok",
     wiki: "https://wiki.defillama.com/wiki/DOC",
+    chainConfig: {
+      chains: {
+        rsk: {
+          issued: ["0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db"],
+        },
+        ethereum: {
+          bridgedFromRsk: ["0x69f6d4d4813f8e2e618dae7572e04b6d5329e207"],
+        },
+        arbitrum: {
+          bridgedFromRsk: ["0x2ad62eb9744c720364f6ac856360a43e8a2229b5"],
+        },
+      },
+    },
   },
   {
     id: "31",
@@ -685,6 +978,23 @@ export default [
     twitter: "https://twitter.com/spicetradeai",
     wiki: "https://wiki.defillama.com/wiki/SpiceUSD_(USDS)",
     deadFrom: "2022-11-20",
+    chainConfig: {
+      chains: {
+        avax: {
+          issued: ["0xab05b04743e0aeaf9d2ca81e5d3b8385e4bf961e"],
+        },
+        ethereum: {
+          issued: ["0x45fdb1b92a649fb6a64ef1511d3ba5bf60044838"],
+          unreleased: ["0xe85131becf5298db58d60e5d628f2c927c7f88cc"],
+        },
+        polygon: {
+          issued: ["0x2f1b1662a895c6ba01a99dcaf56778e7d77e5609"],
+        },
+        bsc: {
+          issued: ["0xde7d1ce109236b12809c45b23d22f30dba0ef424"],
+        },
+      },
+    },
   },
   {
     id: "32",
@@ -708,6 +1018,13 @@ export default [
     ],
     twitter: "https://twitter.com/SperaxUSD",
     wiki: "https://wiki.defillama.com/wiki/Sperax_USD_(USDS)",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xd74f5255d557944cf7dd0e45ff521520002d5748"],
+        },
+      },
+    },
   },
   {
     id: "33",
@@ -730,6 +1047,22 @@ export default [
     twitter: "https://twitter.com/unitprotocol",
     wiki: "https://wiki.defillama.com/wiki/USDP_Stablecoin_(USDP)",
     deprecated: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x1456688345527be1f37e9e627da0837d6f08c925"],
+        },
+        xdai: {
+          bridgedFromETH: ["0xFe7ed09C4956f7cdb54eC4ffCB9818Db2D7025b8"],
+        },
+        bsc: {
+          issued: ["0xDACD011A71f8c9619642bf482f1D4CeB338cfFCf"],
+        },
+        fantom: {
+          issued: ["0x3129aC70c738D398d1D74c87EAB9483FD56D16f8"],
+        },
+      },
+    },
   },
   {
     id: "34",
@@ -751,6 +1084,14 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/USDB_",
     wiki: "https://wiki.defillama.com/wiki/FantOHM",
+    chainConfig: {
+      chains: {
+        fantom: {
+          issued: ["0x6Fc9383486c163fA48becdEC79d6058f984f62cA"],
+          unreleased: ["0xa3b52d5a6d2f8932a5cd921e09da840092349d71", "0x34f93b12ca2e13c6e64f45cfa36eabadd0ba30fc"],
+        },
+      },
+    },
   },
   /*
   {
@@ -814,6 +1155,18 @@ export default [
     auditLinks: ["https://just.tronscan.org/docs/audit-report-just_cn.pdf"],
     twitter: "https://twitter.com/defi_just",
     wiki: "https://wiki.defillama.com/wiki/USDJ",
+    chainConfig: {
+      chains: {
+        tron: {
+          issued: ["TMwFHYXLJaRUPeW6421aqXL4ZEzPRFGkGT"],
+          // Tron Foundation-held reserves, subtracted from circulating.
+          reserves: [
+            "TL5x9MtSnDy537FXKx53yAaHRRNdg9TkkA",
+            "TPyjyZfsYaXStgz2NmAraF1uZcMtkgNan5",
+          ],
+        },
+      },
+    },
   },
   {
     id: "38",
@@ -876,6 +1229,31 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/reflexerfinance",
     wiki: "https://wiki.defillama.com/wiki/RAI",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x03ab458634910aad20ef5f1c8ee96f1d6ac54919"],
+        },
+        polygon: {
+          bridgedFromETH: ["0x00e5646f60ac6fb446f621d146b6e1886f002905"],
+        },
+        optimism: {
+          bridgedFromETH: ["0x7fb688ccf682d58f86d7e38e03f9d22e7705448b"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0xaeF5bbcbFa438519a5ea80B4c7181B4E78d419f2"],
+        },
+        avax: {
+          bridgedFromETH: ["0x97cd1cfe2ed5712660bb6c14053c0ecb031bff7d"],
+        },
+        xdai: {
+          bridgedFromETH: ["0xd7a28Aa9c470e7e9D8c676BCd5dd2f40c5683afa"],
+        },
+        loopring: {
+          bridgeOnETH: ["0x674bdf20A0F284D710BC40872100128e2d66Bd3f"],
+        },
+      },
+    },
   },
   {
     id: "41",
@@ -897,6 +1275,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/FloatProtocol",
     wiki: "https://wiki.defillama.com/wiki/Float_Protocol",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xb05097849bca421a3f51b249ba6cca4af4b97cb9"],
+        },
+      },
+    },
   },
   {
     id: "42",
@@ -959,6 +1344,46 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/dForcenet",
     wiki: "https://wiki.defillama.com/wiki/USX",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x0a5E677a6A24b2F1A2Bf4F3bFfC443231d2fDEc8"],
+          unreleased: ["0x9e8b68e17441413b26c2f18e741eaba69894767c", "0x40be37096ce3b8a2e9ec002468ab91071501c499", "0x5427fefa711eff984124bfbb1ab6fbf5e3da1820"],
+        },
+        polygon: {
+          issued: ["0xCf66EB3D546F0415b368d98A95EAF56DeD7aA752"],
+          unreleased: ["0x88DCDC47D2f83a99CF0000FDF667A468bB958a78"],
+        },
+        bsc: {
+          issued: ["0xb5102cee1528ce2c760893034a4603663495fd72"],
+          unreleased: ["0xdd90e5e87a2081dcf0391920868ebc2ffb81a1af"],
+        },
+        avax: {
+          issued: ["0x853ea32391AaA14c112C645FD20BA389aB25C5e0"],
+          unreleased: ["0xef3c714c9425a8F3697A9C969Dc1af30ba82e5d4", "0x73C01B355F2147E5FF315680E068354D6344Eb0b"],
+        },
+        kava: {
+          issued: ["0xDb0E1e86B01c4ad25241b1843E407Efc4D615248"],
+          unreleased: ["0xb51541df05DE07be38dcfc4a80c05389A54502BB", "0x9787aF345E765a3fBf0F881c49f8A6830D94A514"],
+        },
+        arbitrum: {
+          issued: ["0x641441c631e2f909700d2f41fd87f0aa6a6b4edb"],
+          unreleased: ["0x9e8b68e17441413b26c2f18e741eaba69894767c", "0x1619de6b6b20ed217a58d00f37b9d47c7663feca"],
+        },
+        optimism: {
+          issued: ["0xbfD291DA8A403DAAF7e5E9DC1ec0aCEaCd4848B9"],
+          unreleased: ["0x40a33fb67b8dafe88a5b1930be03c82157f47c65", "0x9D39Fc627A6d9d9F8C831c16995b209548cc3401"],
+        },
+        conflux: {
+          issued: ["0x422a86f57b6b6F1e557d406331c25EEeD075E7aA"],
+          unreleased: ["0x841ce48F9446C8E281D3F1444cB859b4A6D0738C", "0x6f87b39a2e36F205706921d81a6861B655db6358"],
+        },
+        base: {
+          issued: ["0xc142171B138DB17a1B7Cb999C44526094a4dae05"],
+          unreleased: ["0x7d43AABC515C356145049227CeE54B608342c0ad"],
+        },
+      },
+    },
   },
   {
     id: "45",
@@ -972,7 +1397,6 @@ export default [
       "Using the Acala app, users mint aSEED by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back aUSD is burned.",
     onCoinGecko: "true",
     gecko_id: "ausd-seed-karura",
-    module: "acala-dollar",
     cmcId: "20411",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -981,6 +1405,12 @@ export default [
     deadFrom: "2022-08-15",
     twitter: "https://twitter.com/AcalaNetwork",
     wiki: "https://wiki.defillama.com/wiki/Acala",
+    chainConfig: {
+      chains: {
+        acala: {},
+        karura: {},
+      },
+    },
   },
   {
     id: "46",
@@ -1001,6 +1431,37 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/overnight_fi",
     wiki: "https://wiki.defillama.com/wiki/Overnight",
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0x236eec6359fb44cce8f97e99387aa7f8cd5cde1f"],
+        },
+        bsc: {
+          issued: ["0xe80772Eaf6e2E18B651F160Bc9158b2A5caFCA65"],
+        },
+        arbitrum: {
+          issued: ["0xe80772Eaf6e2E18B651F160Bc9158b2A5caFCA65"],
+        },
+        optimism: {
+          issued: ["0x73cb180bf0521828d8849bc8CF2B920918e23032"],
+        },
+        era: {
+          issued: ["0x8E86e46278518EFc1C5CEd245cBA2C7e3ef11557"],
+        },
+        avax: {
+          issued: ["0xe80772Eaf6e2E18B651F160Bc9158b2A5caFCA65"],
+        },
+        linea: {
+          issued: ["0xB79DD08EA68A908A97220C76d19A6aA9cBDE4376"],
+        },
+        base: {
+          issued: ["0xB79DD08EA68A908A97220C76d19A6aA9cBDE4376"],
+        },
+        blast: {
+          issued: ["0x4fEE793d435c6D2c10C135983BB9d6D4fC7B9BBd", "0x870a8F46b62B8BDeda4c02530C1750CddF2ED32e"],
+        },
+      },
+    },
   },
   /*
   {
@@ -1043,6 +1504,13 @@ export default [
     auditLinks: ["https://www.certik.com/projects/astriddao"],
     twitter: "https://twitter.com/AstridDAO",
     wiki: "https://wiki.defillama.com/wiki/AstridDAO",
+    chainConfig: {
+      chains: {
+        astar: {
+          issued: ["0x733ebcC6DF85f8266349DEFD0980f8Ced9B45f35"],
+        },
+      },
+    },
   },
   {
     id: "49",
@@ -1063,7 +1531,19 @@ export default [
     auditLinks: ["https://tether.to/en/transparency/#reports"],
     twitter: "https://twitter.com/Tether_to",
     wiki: "https://wiki.defillama.com/wiki/EURT",
-    deadFrom: "2025-12-15"
+    deadFrom: "2025-12-15",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0xC581b735A1688071A1746c968e0798D642EDE491"],
+          unreleased: ["0x5754284f345afc66a98fbb0a0afe71e0f007b949"],
+        },
+        polygon: {
+          bridgedFromETH: ["0x7BDF330f423Ea880FF95fC41A280fD5eCFD3D09f"],
+        },
+      },
+    },
   },
   {
     id: "50",
@@ -1131,6 +1611,25 @@ export default [
     auditLinks: ["https://docs.mento.org/mento-v3/build/smart-contracts/audits"],
     twitter: "https://x.com/MentoLabs",
     wiki: "https://wiki.defillama.com/wiki/CEUR",
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0xd8763cba276a3738e6de85b4b3bf5fded6d6ca73"],
+        },
+        ethereum: {
+          bridgedFromCelo: ["0x977453366b8d205f5c9266b6ba271e850a814a50"],
+        },
+        polygon: {
+          bridgedFromCelo: ["0x2f0173dFE97a7Dc670D5A10b35C4263cfEcFa853"],
+        },
+        solana: {
+          bridgedFromCelo: ["7g166TuBmnoHKvS2PEkZx6kREZtbfjUxCHGWjCqoDXZv"],
+        },
+        monad: {
+          bridgedFromCelo: ["0x4D502d735B4C574B487Ed641ae87cEaE884731C7"],
+        },
+      },
+    },
   },
   {
     id: "53",
@@ -1151,6 +1650,16 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/synthetix_io",
     wiki: "https://wiki.defillama.com/wiki/Synthetix",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xd71ecff9342a5ced620049e616c5035f1db98620"],
+        },
+        optimism: {
+          issued: ["0xFBc4198702E81aE77c06D58f81b629BDf36f0a71"],
+        },
+      },
+    },
   },
   {
     id: "54",
@@ -1193,7 +1702,37 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/AngleProtocol",
     wiki: "https://wiki.defillama.com/wiki/AGEUR",
-    module: "eura",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x1a7e4e63778b4f12a199c062f3efdd288afcbce8"],
+        },
+        polygon: {
+          bridgedFromETH: ["0xe0b52e49357fd4daf2c15e02058dce6bc0057db4"],
+        },
+        optimism: {
+          issued: ["0x9485aca5bbBE1667AD97c7fE7C4531a624C8b1ED"],
+        },
+        arbitrum: {
+          issued: ["0xFA5Ed56A203466CbBC2430a43c66b9D8723528E7"],
+        },
+        solana: {
+          bridgedFromETH: ["CbNYA9n3927uXUukee2Hf4tm3xxkffJPPZvGazc2EAH1"],
+        },
+        fuse: {
+          bridgedFromETH: ["0xeFAeeE334F0Fd1712f9a8cc375f427D9Cdd40d73"],
+        },
+        zksync: {
+          bridgeOnETH: ["0xabea9132b05a70803a4e85094fd0e1800777fbef"],
+        },
+        fantom: {
+          bridgedFromETH: ["0x02a2b736F9150d36C0919F3aCEE8BA2A92FBBb40"],
+        },
+        aurora: {
+          bridgedFromETH: ["0xdc7AcDE9ff18B4D189010a21a44cE51ec874eA7C"],
+        },
+      },
+    },
   },
   {
     id: "56",
@@ -1214,6 +1753,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/mimodefi",
     wiki: "https://wiki.defillama.com/wiki/PAR",
+    chainConfig: {
+      chains: {
+        ethereum: { issued: ["0x68037790a0229e9ce6eaa8a99ea92964106c4703"] },
+        polygon: { bridgedFromETH: ["0xe2aa7db6da1dae97c5f5c6914d285fbfcc32a128"] },
+        fantom: { bridgedFromETH: ["0x13082681e8ce9bd0af505912d306403592490fc7"] },
+      },
+    },
   },
   {
     id: "57",
@@ -1234,6 +1780,14 @@ export default [
     auditLinks: ["https://docs.hedge.so/protocol-overview/security"],
     twitter: "https://twitter.com/HedgeLabs",
     wiki: "https://wiki.defillama.com/wiki/USH",
+    chainConfig: {
+      decimals: 9,
+      chains: {
+        solana: {
+          issued: ["9iLH8T7zoWhY7sBmj1WK9ENbWdS1nL8n9wAxaeRitTa6"],
+        },
+      },
+    },
   },
   {
     id: "58",
@@ -1247,7 +1801,6 @@ export default [
       "Using the Karura app, users receive 3USD LP tokens by adding aUSD, USDC, or USDT liquidity. LP tokens can be redeemed for the underlying assets.",
     onCoinGecko: "false",
     gecko_id: null,
-    module: "three-usd",
 
     cmcId: null,
     pegType: "peggedUSD",
@@ -1257,6 +1810,13 @@ export default [
     twitter: "https://twitter.com/TaigaProtocol",
     wiki: "https://wiki.defillama.com/wiki/Taiga_Protocol",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        karura: {
+          issued: ["0x0000000000000000000300000000000000000001"],
+        },
+      },
+    },
   },
   {
     id: "59",
@@ -1300,6 +1860,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/homecoinfinance",
     wiki: "https://wiki.defillama.com/wiki/HomeCoin",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xb8919522331C59f5C16bDfAA6A121a6E03A91F62"],
+        },
+      },
+    },
   },
   {
     id: "61",
@@ -1323,6 +1890,13 @@ export default [
     twitter: "https://twitter.com/fiatdao",
     wiki: "https://wiki.defillama.com/wiki/FIATDAO",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x586aa273f262909eef8fa02d90ab65f5015e0516"],
+        },
+      },
+    },
   },
   {
     id: "62",
@@ -1346,6 +1920,14 @@ export default [
     twitter: "https://twitter.com/JPEGd_69",
     wiki: "https://wiki.defillama.com/wiki/JPEGd",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x466a756e9a7401b5e2444a3fcb3c2c12fbea0a54"],
+          unreleased: ["0x51c2cef9efa48e08557a361b52db34061c025a1b"],
+        },
+      },
+    },
   },
   {
     id: "63",
@@ -1367,6 +1949,14 @@ export default [
     twitter: "https://twitter.com/fantomfdn/",
     wiki: "https://wiki.defillama.com/wiki/Fantom",
     deadFrom: "2022-04-17",
+    chainConfig: {
+      chains: {
+        fantom: {
+          issued: ["0xad84341756bf337f5a0164515b1f6f993d194e1f"],
+          unreleased: ["0x431e81e5dfb5a24541b5ff8762bdef3f32f96354", "0x9c8aef3a8792094aede3cd67f52296e21c801b81"],
+        },
+      },
+    },
   },
   {
     id: "64",
@@ -1387,6 +1977,13 @@ export default [
     auditLinks: ["https://docs.uxd.fi/uxdprotocol/resources/audits"],
     twitter: "https://twitter.com/UXDProtocol",
     wiki: "https://wiki.defillama.com/wiki/UXD_Protocol",
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["7kbnvuGBxxj8AG9qp8Scn56muWGaRaFqxg1FsRp3PaFT"],
+        },
+      },
+    },
   },
   {
     id: "65",
@@ -1407,6 +2004,13 @@ export default [
     auditLinks: ["https://hubble-markets.gitbook.io/hubble-protocol-official-docs/documentation/security-audits"],
     twitter: "https://twitter.com/hubbleprotocol",
     wiki: "https://wiki.defillama.com/wiki/Hubble_Protocol",
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX"],
+        },
+      },
+    },
   },
   {
     id: "66",
@@ -1427,6 +2031,16 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/fraxfinance",
     wiki: "https://wiki.defillama.com/wiki/Frax",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x5ca135cb8527d76e932f34b5145575f9d8cbe08e"],
+        },
+        era: {
+          issued: ["0xD405617DB7473b0A3158356Be7bC9EbEc6D88b85"],
+        },
+      },
+    },
   },
   {
     id: "67",
@@ -1448,6 +2062,13 @@ export default [
     twitter: "https://twitter.com/beanstalkfarms",
     wiki: "https://wiki.defillama.com/wiki/Beanstalk",
     module: "bean2",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xBEA0000029AD1c77D3d5D23Ba2D8893dB9d1Efab"],
+        },
+      },
+    },
   },
   {
     id: "68",
@@ -1471,6 +2092,16 @@ export default [
     wiki: "https://wiki.defillama.com/wiki/LemmaFinance",
     deprecated: true,
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xdb41ab644AbcA7f5ac579A5Cf2F41e606C2d6abc"],
+        },
+        optimism: {
+          issued: ["0x96F2539d3684dbde8B3242A51A73B66360a5B541"],
+        },
+      },
+    },
   },
   /*{
     id: "69",
@@ -1519,6 +2150,13 @@ export default [
     twitter: "https://twitter.com/fluid_fi/",
     wiki: "https://wiki.defillama.com/wiki/Fluid_Finance",
     deadFrom: "2024-04-21",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xF0B5cEeFc89684889e5F7e0A7775Bd100FcD3709"],
+        },
+      },
+    },
   },
   {
     id: "71",
@@ -1541,6 +2179,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/vestafinance",
     wiki: "https://wiki.defillama.com/wiki/Vesta_Finance",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x64343594ab9b56e99087bfa6f2335db24c2d1f17"],
+        },
+      },
+    },
   },
   {
     id: "72",
@@ -1561,6 +2206,13 @@ export default [
     auditLinks: ["https://kolibri.finance/docs/security-report.pdf"],
     twitter: "https://twitter.com/HoverEng",
     wiki: "https://wiki.defillama.com/wiki/Kolibri",
+    chainConfig: {
+      chains: {
+        tezos: {
+          issued: ["KT1K9gCRgaLRFKTErYt1wVxA3Frb9FjasjTV"],
+        },
+      },
+    },
   },
   {
     id: "73",
@@ -1581,6 +2233,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/usdtz",
     wiki: "https://wiki.defillama.com/wiki/USDtez",
+    chainConfig: {
+      chains: {
+        tezos: {
+          issued: ["KT1LN4LPSqTMS7Sd2CJw4bbDGRkMv2t68Fy9"],
+        },
+      },
+    },
   },
   {
     id: "74",
@@ -1601,6 +2260,13 @@ export default [
     auditLinks: ["https://github.com/MoreMoney-Finance/audits/blob/main/PeckShield-Audit-Report-Moremoney-1.0.pdf"],
     twitter: "https://twitter.com/Moremoneyfi",
     wiki: "https://wiki.defillama.com/wiki/Moremoney_Finance",
+    chainConfig: {
+      chains: {
+        avax: {
+          issued: ["0x0f577433Bf59560Ef2a79c124E9Ff99fCa258948"],
+        },
+      },
+    },
   },
   {
     id: "75",
@@ -1621,6 +2287,13 @@ export default [
     auditLinks: ["https://github.com/youves-com/youves-smart-contract/blob/main/audits/09212021-LeastAuthority-TezosFoundationSyntheticAssetPlatformSmartContractsFinalAuditReport.pdf"],
     twitter: "https://twitter.com/youves_com",
     wiki: "https://wiki.defillama.com/wiki/Youves",
+    chainConfig: {
+      chains: {
+        tezos: {
+          issued: ["KT1XRPEPXbZK25r3Htzp2o1x7xdMMmfocKNW"],
+        },
+      },
+    },
   },
   {
     id: "76",
@@ -1643,6 +2316,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/InterestDeFi",
     wiki: "https://wiki.defillama.com/wiki/Interest_Protocol",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x2A54bA2964C8Cd459Dc568853F79813a60761B58"],
+        },
+      },
+    },
   },
   /**
    * Due to the upcoming entry into force of MiCA and in accordance with its commitment to compliance, LUGH announces the cessation of the issuance of its stablecoin EURL and guarantees the redemption of existing EURLs until August 30, 2024.
@@ -1681,13 +2361,19 @@ export default [
       "NOTE is a fully immutable ERC-20 token backed by collateral lent to the Canto Lending Market. It can only be borrowed by users who post select collateral assets such as USDC, USDT, CANTO, ETH, ATOM, or Canto LP tokens.",
     onCoinGecko: "false",
     gecko_id: null,
-    module: "note",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
+    chainConfig: {
+      chains: {
+        canto: {
+          // cNote address; cNote and NOTE should be 1 to 1(?)
+          issued: ["0xEe602429Ef7eCe0a13e4FfE8dBC16e101049504C"],
+        },
+      },
+    },
     twitter: "https://twitter.com/CantoPublic",
     wiki: "https://wiki.defillama.com/wiki/Canto",
     deadUrl: true,
@@ -1711,6 +2397,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LISTA_DAO",
     wiki: "https://wiki.defillama.com/wiki/Helio_Protocol",
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0x0782b6d8c4551B9760e74c0545a9bCD90bdc41E5"],
+        },
+      },
+    },
   },
   /*
   {
@@ -1778,6 +2471,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/ArableProtocol",
     wiki: "https://wiki.defillama.com/wiki/Arable_Protocol",
+    chainConfig: {
+      chains: {
+        avax: {
+          issued: ["0x025AB35fF6AbccA56d57475249baaEae08419039"],
+        },
+      },
+    },
   },
   {
     id: "83",
@@ -1800,6 +2500,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/realprotocoleth",
     wiki: "https://wiki.defillama.com/wiki/Real_Protocol",
+    chainConfig: {
+      chains: {
+        ethpow: {
+          issued: ["0x520A36eE3aa0b506288915f91Fb4BBB23d09a7D7"],
+        },
+      },
+    },
   },
   {
     id: "84",
@@ -1841,6 +2548,17 @@ export default [
     deadFrom: "2023-10-11",
     twitter: "https://twitter.com/tangibleDAO",
     wiki: "https://wiki.defillama.com/wiki/Tangible",
+    chainConfig: {
+      decimals: 9,
+      chains: {
+        polygon: {
+          issued: ["0x40379a439D4F6795B6fc9aa5687dB461677A2dBa"],
+        },
+        real: {
+          bridgedFromPolygon: ["0xb2d75f8Aa33608cF15940Ed47bF139F7CD15d073"],
+        },
+      },
+    },
   },
   /*
   {
@@ -1888,6 +2606,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/bankofchain_dao",
     wiki: "https://wiki.defillama.com/wiki/BankOfChain",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x83131242843257bc6C43771762ba467346Efb2CF"],
+        },
+      },
+    },
   },
   {
     id: "88",
@@ -1907,6 +2632,15 @@ export default [
     auditLinks: ["https://docs.indigoprotocol.io/resources/audit"],
     twitter: "https://twitter.com/Indigo_protocol",
     wiki: "https://wiki.defillama.com/wiki/Indigo_Protocol",
+    chainConfig: {
+      chains: {
+        cardano: {
+          issued: [
+            "f66d78b4a3cb3d37afa0ec36461e51ecbde00f26c8f0a68f94b6988069555344",
+          ],
+        },
+      },
+    },
   },
   {
     id: "89",
@@ -1929,6 +2663,14 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/SiloFinance",
     wiki: "https://wiki.defillama.com/wiki/Silo_Finance",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xd7C9F0e536dC865Ae858b0C0453Fe76D13c3bEAc"],
+          unreleased: ["0xc8cd77d4cd9511f2822f24ad14fe9e3c97c57836", "0xfccc27aabd0ab7a0b2ad2b7760037b1eab61616b", "0x92e7e77163ffed918421e3cb6e0a22f2fe8b37fa", "0x6543ee07Cf5Dd7Ad17AeECF22ba75860ef3bBAAa", "0x629b9e70a7d32c718318d691dda5da585e468b82", "0xd953cc57d906e1f2d7d6c8c50a369ff64096ddc5", "0xC413DD03555F3eB29D834B482d386b2999dc2EB0", "0xa104f14aeeb9b7246367d6a6e1f4e2c61a70e5d3", "0xf39f64d85ad89200e3b06c67f679c45798bf6a5b", "0xdff2aea378e41632e45306a6de26a7e0fd93ab07"],
+        },
+      },
+    },
   },
   {
     id: "90",
@@ -1951,6 +2693,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/shareslake",
     wiki: "https://wiki.defillama.com/wiki/Shareslake",
+    chainConfig: {
+      chains: {
+        cardano: {
+          issued: ["cd5b9dd91319edbb19477ad00cbef673a221e70a17ef043951fc678652656465656d61626c65"],
+        },
+      },
+    },
   },
   {
     id: "91",
@@ -1971,6 +2720,14 @@ export default [
     auditLinks: ["https://github.com/trailofbits/publications/blob/master/reviews/CREAMSummary.pdf"],
     twitter: "https://twitter.com/ibdotxyz",
     wiki: "https://wiki.defillama.com/wiki/Iron_Bank",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x96E61422b6A9bA0e068B6c5ADd4fFaBC6a4aae27"],
+          reserves: ["0x0D5Dc686d0a2ABBfDaFDFb4D0533E886517d4E83"],
+        },
+      },
+    },
   },
   {
     id: "92",
@@ -1994,6 +2751,13 @@ export default [
     twitter: "https://twitter.com/DontDieMeme",
     wiki: "https://wiki.defillama.com/wiki/DontDieMeme",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x02814F435dD04e254Be7ae69F61FCa19881a780D"],
+        },
+      },
+    },
   },
   {
     id: "93",
@@ -2036,6 +2800,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/BaoCommunity",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x7945b0A6674b175695e5d1D08aE1e6F13744Abb0"],
+        },
+      },
+    },
   },
   /*{
     id: "95",
@@ -2077,6 +2848,19 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/coin98_wallet",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xC285B7E09A4584D027E5BC36571785B515898246"],
+        },
+        bsc: {
+          issued: ["0xFa4BA88Cf97e282c505BEa095297786c16070129"],
+        },
+        solana: {
+          issued: ["CUSDvqAQLbt7fRofcmV2EXfPA2t36kzj7FjzdmqDiNQL"],
+        },
+      },
+    },
   },
   {
     id: "97",
@@ -2101,6 +2885,13 @@ export default [
     deprecated: true,
     deadFrom: "2023-02-16",
     wiki: null,
+    chainConfig: {
+      chains: {
+        avax: {
+          issued: ["0xdaCDe03d7Ab4D81fEDdc3a20fAA89aBAc9072CE2"],
+        },
+      },
+    },
   },
   {
     id: "98",
@@ -2143,6 +2934,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Stabl_Fi",
     wiki: null,
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0x80487b4f8f70e793a81a42367c225ee0b94315df", "0x5D066D022EDE10eFa2717eD3D79f22F949F8C175"],
+        },
+      },
+    },
   },
   {
     id: "100",
@@ -2165,6 +2963,23 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/dsumoney",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x605D26FBd5be761089281d5cec2Ce86eeA667109"],
+          unreleased: [
+            "0xAEf566ca7E84d1E736f999765a804687f39D9094", // TwoWayBatcher
+            "0x0B663CeaCEF01f2f88EB7451C70Aa069f19dB997", // WrapOnlyBatcher
+          ],
+        },
+        arbitrum: {
+          issued: ["0x52C64b8998eB7C80b6F526E99E29ABdcC86B841b"],
+        },
+        optimism: {
+          issued: ["0x52C64b8998eB7C80b6F526E99E29ABdcC86B841b"],
+        },
+      },
+    },
   },
   {
     id: "101",
@@ -2207,6 +3022,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/OffshiftXFT",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x5a7E6C8204A1359DB9AAcab7bA5Fc309B7981eFd"],
+        },
+      },
+    },
   },
   {
     id: "103",
@@ -2227,6 +3049,18 @@ export default [
     auditLinks: ["https://docs.nereus.finance/nereus-protocol/security-audit"],
     twitter: "https://twitter.com/nereusfinance",
     wiki: null,
+    chainConfig: {
+      chains: {
+        avax: {
+          issued: ["0xf14f4ce569cb3679e99d5059909e23b07bd2f387"],
+          unreleased: ["0x0b1f9c2211f77ec3fa2719671c5646cf6e59b775"],
+        },
+        polygon: {
+          issued: ["0xf955a6694C6F5629f5Ecd514094B3bd450b59000"],
+          unreleased: ["0x7195d3A344106b877F8D5f62CA570Fd25D43D180"],
+        },
+      },
+    },
   },
   {
     id: "104",
@@ -2250,6 +3084,25 @@ export default [
     twitter: "https://twitter.com/Davos_Protocol",
     wiki: null,
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0xec38621e72d86775a89c7422746de1f52bba5320"],
+        },
+        ethereum: {
+          issued: ["0xa48F322F8b3edff967629Af79E027628b9Dd1298"],
+        },
+        arbitrum: {
+          issued: ["0x8ec1877698acf262fe8ad8a295ad94d6ea258988"],
+        },
+        optimism: {
+          issued: ["0xb396b31599333739a97951b74652c117be86ee1d"],
+        },
+        bsc: {
+          issued: ["0x8ec1877698acf262fe8ad8a295ad94d6ea258988"],
+        },
+      },
+    },
   },
   {
     id: "105",
@@ -2272,6 +3125,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/monetadao",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x045da4bFe02B320f4403674B3b7d121737727A36"],
+        },
+      },
+    },
   },
   {
     id: "106",
@@ -2292,6 +3152,19 @@ export default [
     auditLinks: ["https://reserve.org/protocol/security/?search=audit#s-result"],
     twitter: "https://twitter.com/reserveprotocol",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xA0d69E286B938e21CBf7E51D71F6A4c8918f482F"],
+        },
+        base: {
+          bridgedFromETH: ["0xCfA3Ef56d303AE4fAabA0592388F19d7C3399FB4"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x12275DCB9048680c4Be40942eA4D92c74C63b844"],
+        },
+      },
+    },
   },
   {
     id: "107",
@@ -2313,6 +3186,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/zodiacs_c",
     wiki: null,
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0xE68b79e51bf826534Ff37AA9CeE71a3842ee9c70"],
+        },
+      },
+    },
   },
   {
     id: "108",
@@ -2335,6 +3215,16 @@ export default [
     twitter: "https://twitter.com/DAM_Finance",
     wiki: null,
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x2FdA8c6783Aa36BeD645baD28a4cDC8769dCD252"],
+        },
+        moonbeam: {
+          issued: ["0xc806B0600cbAfA0B197562a9F7e3B9856866E9bF"],
+        },
+      },
+    },
   },
   {
     id: "109",
@@ -2357,6 +3247,13 @@ export default [
     wiki: null,
     module: "eusd",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x97de57eC338AB5d51557DA3434828C5DbFaDA371"],
+        },
+      },
+    },
   },
   {
     id: "110",
@@ -2398,6 +3295,19 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/overnight_fi",
     wiki: null,
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xeb8E93A0c7504Bffd8A8fFa56CD754c63aAeBFe8"],
+        },
+        optimism: {
+          issued: ["0x970D50d09F3a656b43E11B0D45241a84e3a6e011"],
+        },
+        base: {
+          issued: ["0x65a2508C429a6078a7BC2f7dF81aB575BD9D9275"],
+        },
+      },
+    },
   },
   {
     id: "112",
@@ -2418,6 +3328,19 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/overnight_fi",
     wiki: null,
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0x5335E87930b410b8C5BB4D43c3360ACa15ec0C8C"],
+        },
+        linea: {
+          issued: ["0x1E1F509963A6D33e169D9497b11c7DbFe73B7F13"],
+        },
+        arbitrum: {
+          issued: ["0xb1084db8D3C05CEbd5FA9335dF95EE4b8a0edc30"],
+        },
+      },
+    },
   },
   {
     id: "113",
@@ -2461,6 +3384,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/0xc_lever",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x3c20ac688410be8f391be1fb00afc5c212972f86"],
+        },
+      },
+    },
   },
   {
     id: "115",
@@ -2487,6 +3417,17 @@ export default [
     twitter: "https://twitter.com/raft_fi",
     wiki: null,
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x183015a9bA6fF60230fdEaDc3F43b3D788b13e21"],
+          unreleased: ["0x2ba26baE6dF1153e29813d7f926143f9c94402f3"],
+        },
+        base: {
+          issued: ["0xafb2820316e7bc5ef78d295ab9b8bb2257534576"],
+        },
+      },
+    },
   },
   {
     id: "116",
@@ -2512,6 +3453,31 @@ export default [
     twitter: "https://twitter.com/gravitaprotocol",
     wiki: "https://docs.gravitaprotocol.com/",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x15f74458aE0bFdAA1a96CA1aa779D715Cc1Eefe4"],
+        },
+        optimism: {
+          issued: ["0x894134a25a5faC1c2C26F1d8fBf05111a3CB9487"],
+        },
+        arbitrum: {
+          issued: ["0x894134a25a5faC1c2C26F1d8fBf05111a3CB9487"],
+        },
+        era: {
+          issued: ["0x5FC44E95eaa48F9eB84Be17bd3aC66B6A82Af709"],
+        },
+        polygon_zkevm: {
+          issued: ["0xCA68ad4EE5c96871EC6C6dac2F714a8437A3Fe66"],
+        },
+        mantle: {
+          issued: ["0x894134a25a5faC1c2C26F1d8fBf05111a3CB9487"],
+        },
+        linea: {
+          issued: ["0x894134a25a5faC1c2C26F1d8fBf05111a3CB9487"],
+        },
+      },
+    },
   },
   {
     id: "117",
@@ -2533,6 +3499,13 @@ export default [
     twitter: "https://twitter.com/EthosReserve",
     wiki: null,
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        optimism: {
+          issued: ["0xc5b001dc33727f8f26880b184090d3e252470d45"],
+        },
+      },
+    },
   },
   {
     id: "118",
@@ -2553,6 +3526,16 @@ export default [
     auditLinks: ["https://github.com/aave/gho-core/tree/main/audits"],
     twitter: "https://twitter.com/GHOAave",
     wiki: "https://docs.gho.xyz",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f"],
+        },
+        monad: {
+          bridgedFromETH: ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
+        },
+      },
+    },
   },
   {
     id: "119",
@@ -2619,6 +3602,13 @@ export default [
     twitter: "https://twitter.com/PSY_stablecoin",
     wiki: null,
     module: "psy",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x63d4dc5376cfb48a885a165cd97ba208b87881c7"],
+        },
+      },
+    },
   },
   {
     id: "122",
@@ -2659,6 +3649,19 @@ export default [
     twitter: "https://twitter.com/PreonFinance",
     wiki: "https://docs.preon.finance/",
     module: "star",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xC19669A405067927865B40Ea045a2baabbbe57f5"],
+        },
+        polygon: {
+          issued: ["0xC19669A405067927865B40Ea045a2baabbbe57f5"],
+        },
+        base: {
+          issued: ["0xC19669A405067927865B40Ea045a2baabbbe57f5"],
+        },
+      },
+    },
   },
   {
     id: "124",
@@ -2681,6 +3684,16 @@ export default [
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
     module: "peg-eusd",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xd585aaafa2b58b1cd75092b51ade9fa4ce52f247"],
+        },
+        arbitrum: {
+          issued: ["0xdce765f021410B3266aA0053c93Cb4535F1e12e0"],
+        },
+      },
+    },
   },
   {
     id: "125",
@@ -2703,6 +3716,13 @@ export default [
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
     module: "eusdv2",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xdf3ac4f479375802a821f7b7b46cd7eb5e4262cc"],
+        },
+      },
+    },
   },
   {
     id: "126",
@@ -2723,6 +3743,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PrismaFi",
     wiki: "https://docs.prismafinance.com/protocol-concepts/depositing-collateral-and-minting-mkusd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x4591dbff62656e7859afe5e45f6f47d3669fbb28"],
+        },
+      },
+    },
   },
   {
     id: "127",
@@ -2746,6 +3773,13 @@ export default [
     wiki: "https://docs.alternity.finance/faq/redemptions-and-lcny-price-stability",
     deadUrl: true,
     deprecated: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x7635b612792e4bfb7f2fa12a3e5d5a3f2e3c34bc"],
+        },
+      },
+    },
   },
   {
     id: "128",
@@ -2767,6 +3801,16 @@ export default [
     twitter: "https://twitter.com/Nexus_ZDex",
     wiki: "https://docs.zdex.tech/",
     module: "nexus",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x92211b6B68a39F4f68E722f3A3A4810A2Ebc8383"],
+        },
+        arbitrum: {
+          issued: ["0x773fAf6B9424abFc199cc28A5320C3C2d151E3bF"],
+        },
+      },
+    },
   },
   {
     id: "129",
@@ -2815,6 +3859,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/SavvyDefi",
     wiki: "https://app.savvydefi.io/dashboard",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xF202Ab403Cd7E90197ec0f010ee897E283037706"],
+        },
+      },
+    },
   },
   {
     id: "131",
@@ -2834,6 +3885,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/uaht_io",
     wiki: "https://github.com/starscrowding/UAHT#readme",
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0x0d9447e16072b636b4a1e8f2b8c644e58f3eaa6a"],
+        },
+      },
+    },
   },
   {
     id: "132",
@@ -2855,6 +3913,28 @@ export default [
     twitter: "https://twitter.com/MountainUSDM",
     wiki: "https://docs.mountainprotocol.com/reference/usdm-token",
     module: "usdm",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x59d9356e565ab3a36dd77763fc0d87feaf85508c"],
+        },
+        polygon: {
+          issued: ["0x59d9356e565ab3a36dd77763fc0d87feaf85508c"],
+        },
+        base: {
+          issued: ["0x59d9356e565ab3a36dd77763fc0d87feaf85508c"],
+        },
+        optimism: {
+          issued: ["0x59d9356e565ab3a36dd77763fc0d87feaf85508c"],
+        },
+        arbitrum: {
+          issued: ["0x59d9356e565ab3a36dd77763fc0d87feaf85508c"],
+        },
+        era: {
+          issued: ["0x7715c206A14Ac93Cb1A6c0316A6E5f8aD7c9Dc31"],
+        },
+      },
+    },
   },
   {
     id: "133",
@@ -2876,6 +3956,14 @@ export default [
     twitter: "https://twitter.com/Num_Finance",
     wiki: "https://num.finance/transparency",
     module: "nars",
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0x65517425ac3ce259a34400bb67ceb39ff3ddc0bd"],
+          unreleased: ["0x8388A0f91875e74Dc4705Abf2C9bBDD1bD40C585"],
+        },
+      },
+    },
   },
   {
     id: "134",
@@ -2899,6 +3987,13 @@ export default [
     ],
     twitter: "https://twitter.com/0xPhase",
     wiki: "https://docs.phase.cash/protocol/what-is-phase",
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0xbe92452bb46485AF3308e6d77786bFBE3557808d"],
+        },
+      },
+    },
   },
   {
     id: "135",
@@ -2920,6 +4015,17 @@ export default [
       "https://assets.ctfassets.net/xm0kp9xt5r54/1pucZFh1QsF1PgL5vhGAtS/054cd042b32f962fce8843758d6f3483/Atredis_Partners_-_Agoric_Vaults_Implementation_Assessment__-_Report_v1.0___1_.pdf",
     twitter: "https://twitter.com/inter_protocol",
     wiki: "https://docs.inter.trade/",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        agoric: {
+          cosmosIssued: ["uist"],
+        },
+        osmosis: {
+          cosmosBridgedFromAgoric: ["ibc/92BE0717F4678905E53F4E45B2DED18BC0CB97BF1F8B6A25AFEDF3D5A879B4D5"],
+        },
+      },
+    },
   },
   /*{
     id: "136", // stablecoin cancellation announced
@@ -2983,6 +4089,19 @@ export default [
     twitter: "https://twitter.com/ARYZEofficial",
     wiki: "https://docs.aryze.io/en/products-and-services/aryze-digital-cash",
     yieldBearing: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xa4335da338ec4C07C391Fc1A9bF75F306adadc08"],
+        },
+        polygon: {
+          issued: ["0xa4335da338ec4C07C391Fc1A9bF75F306adadc08"],
+        },
+        bsc: {
+          issued: ["0xa4335da338ec4C07C391Fc1A9bF75F306adadc08"],
+        },
+      },
+    },
   },
   {
     id: "139",
@@ -3005,6 +4124,19 @@ export default [
     twitter: "https://twitter.com/ARYZEofficial",
     wiki: "https://docs.aryze.io/en/products-and-services/aryze-digital-cash",
     yieldBearing: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x735fa792e731a2e8F83F32eb539841b7B72e6d8f"],
+        },
+        polygon: {
+          issued: ["0x735fa792e731a2e8F83F32eb539841b7B72e6d8f"],
+        },
+        bsc: {
+          issued: ["0x735fa792e731a2e8F83F32eb539841b7B72e6d8f"],
+        },
+      },
+    },
   },
   {
     id: "140",
@@ -3026,6 +4158,19 @@ export default [
       "https://3838260506-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FTmzl9GX7emUArB9s00Rz%2Fuploads%2FvK1ML7oM7IwFeeR3bHaF%2FARYZE%20-%20eEUR%2C%20eGBP%2C%20eUSD%20and%20RYZE%20Code%20Audit.pdf?alt=media&token=0e1f74c0-0278-42bb-a7cd-c22ea0bf7b5d",
     twitter: "https://twitter.com/ARYZEofficial",
     wiki: "https://docs.aryze.io/en/products-and-services/aryze-digital-cash",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xD711D7D893de57dc13Ff465763218770Bd42DB1D"],
+        },
+        polygon: {
+          issued: ["0xD711D7D893de57dc13Ff465763218770Bd42DB1D"],
+        },
+        bsc: {
+          issued: ["0xD711D7D893de57dc13Ff465763218770Bd42DB1D"],
+        },
+      },
+    },
   },
   // Pending for 100% backing, will be added soon
   // {
@@ -3069,6 +4214,13 @@ export default [
     wiki: "https://hydtprotocol.com/#faqs",
     module: "hydt",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0x9810512Be701801954449408966c630595D0cD51"],
+        },
+      },
+    },
   },
   {
     id: "143",
@@ -3089,7 +4241,32 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/usdv_money",
     wiki: "https://docs.usdv.money/docs/what-is-usdv/faq",
-    module: "usdv",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0x0E573Ce2736Dd9637A0b21058352e1667925C7a8"],
+        },
+        bsc: {
+          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+        },
+        optimism: {
+          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+        },
+        avax: {
+          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+        },
+        polygon: {
+          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+        },
+        tomochain: {
+          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+        },
+      },
+    },
   },
   {
     id: "144",
@@ -3112,6 +4289,16 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/HighYieldUSD",
     wiki: "https://linktr.ee/hyusd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xaCdf0DBA4B9839b96221a8487e9ca660a48212be"],
+        },
+        base: {
+          issued: ["0xCc7FF230365bD730eE4B352cC2492CEdAC49383e"],
+        },
+      },
+    },
   },
   {
     id: "145",
@@ -3133,6 +4320,22 @@ export default [
     twitter: "https://twitter.com/PayTrie",
     wiki: "https://faq.paytrie.com/help/what-is-the-cadc-address",
     module: "cadc",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xcaDC0acd4B445166f12d2C07EAc6E2544FbE2Eef"],
+        },
+        polygon: {
+          issued: ["0x9de41aFF9f55219D5bf4359F167d1D0c772A396D"],
+        },
+        arbitrum: {
+          issued: ["0x2b28E826b55e399F4d4699b85f68666AC51e6f70"],
+        },
+        base: {
+          issued: ["0x043eb4b75d0805c43d7c834902e335621983cf03"],
+        },
+      },
+    },
   },
   {
     id: "146",
@@ -3178,6 +4381,16 @@ export default [
     auditLinks: null,
     twitter: null,
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xA40640458FBc27b6EefEdeA1E9C9E17d4ceE7a21"],
+        },
+        bsc: {
+          issued: ["0xA40640458FBc27b6EefEdeA1E9C9E17d4ceE7a21"],
+        },
+      },
+    },
   },
   {
     id: "148",
@@ -3191,8 +4404,6 @@ export default [
       "User can mint and redeem MyUSD using tether (via TRC 20), user can also redeem using MNT (mynth governance token)",
     onCoinGecko: "false",
     gecko_id: null,
-    module: "myusd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic", //since can also be minted with MNT
@@ -3200,7 +4411,16 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/_mynth_",
     wiki: "https://www.mynth.ai/faq",
-    deprecated: true
+    deprecated: true,
+    chainConfig: {
+      chains: {
+        cardano: {
+          issued: [
+            "92776616f1f32c65a173392e4410a3d8c39dcf6ef768c73af164779c4d79555344",
+          ],
+        },
+      },
+    },
   },
   {
     id: "149",
@@ -3223,6 +4443,16 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/SableFinance",
     wiki: "https://sable-finance.gitbook.io/docs/",
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0x0c6Ed1E73BA73B8441868538E210ebD5DD240FA0"],
+        },
+        base: {
+          issued: ["0xecf3e9B8ccb6F4A6EFD68058FD706561c1727031"],
+        },
+      },
+    },
   },
   {
     id: "150",
@@ -3245,6 +4475,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/colb_finance",
     wiki: "https://www.colb.finance/faq",
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0x72C96C73207936E94066b4C8566C6987c9a1f1dE"],
+        },
+      },
+    },
   },
   {
     id: "151",
@@ -3266,6 +4503,13 @@ export default [
     twitter: "https://twitter.com/Goal3_xyz",
     wiki: "https://docs.goal3.xyz/sportsbook/technical-overview/usdzkusd",
     module: "zkusd",
+    chainConfig: {
+      chains: {
+        era: {
+          issued: ["0xfc7e56298657b002b3e656400e746b7212912757"],
+        },
+      },
+    },
   },
   {
     id: "152",
@@ -3286,6 +4530,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/liquidloansio",
     wiki: null,
+    chainConfig: {
+      chains: {
+        pulse: {
+          issued: ["0x0deed1486bc52aa0d3e6f8849cec5add6598a162"],
+        },
+      },
+    },
   },
   {
     id: "153",
@@ -3345,6 +4596,20 @@ export default [
     auditLinks: "https://www.glodollar.org/articles/smart-contract-audits",
     twitter: "https://twitter.com/glodollar",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: { issued: ["0x4F604735c1cF31399C6E711D5962b2B3E0225AD3"] },
+        polygon: { issued: ["0x4F604735c1cF31399C6E711D5962b2B3E0225AD3"] },
+        optimism: { issued: ["0x4F604735c1cF31399C6E711D5962b2B3E0225AD3"] },
+        celo: { issued: ["0x4F604735c1cF31399C6E711D5962b2B3E0225AD3"] },
+        arbitrum: { issued: ["0x4F604735c1cF31399C6E711D5962b2B3E0225AD3"] },
+        base: { issued: ["0x4F604735c1cF31399C6E711D5962b2B3E0225AD3"] },
+        vechain: { issued: ["0x29c630cce4ddb23900f5fe66ab55e488c15b9f5e"] },
+        stellar: {
+          issued: ["USDGLO:GBBS25EGYQPGEZCGCFBKG4OAGFXU6DSOQBGTHELLJT3HZXZJ34HWS6XV"],
+        },
+      },
+    },
   },
   /*
   {
@@ -3387,6 +4652,25 @@ export default [
     auditLinks: "https://vnx.li/transparency/",
     twitter: "https://twitter.com/VNX_Global",
     wiki: "https://vnx.gitbook.io/vnx-global",
+    chainConfig: {
+      chains: {
+        ethereum: { issued: ["0x79d4f0232A66c4c91b89c76362016A1707CFBF4f"] },
+        polygon: { issued: ["0xCdB3867935247049e87c38eA270edD305D84c9AE"] },
+        avax: { issued: ["0x228a48df6819ccc2eca01e2192ebafffdad56c19"] },
+        solana: { issued: ["AhhdRu5YZdjVkKR3wbnUDaymVQL2ucjMQ63sZ3LFHsch"] },
+        q: { issued: ["0x65b9d36281e97418793f3430793f88440dab68d7"] },
+        tezos: { issued: ["KT1LssxZqfQtRFv1CRkzX9E9gzap9iFrtWmq"] },
+        stellar: {
+          issued: ["VCHF:GDXLSLCOPPHTWOQXLLKSVN4VN3G67WD2ENU7UMVAROEYVJLSPSEWXIZN"],
+        },
+        base: { issued: ["0x1fcA74D9ef54a6AC80ffE7D3b14e76c4330Fd5D8"] },
+        celo: { issued: ["0xc5ebea9984c485ec5d58ca5a2d376620d93af871"] },
+        arbitrum: { issued: ["0x02cea97794D2cFB5f560e1fF4e9C59D1BEC75969"] },
+        fraxtal: { issued: ["0x418126BB59457aFDbA1eCF376f97400B4157425D"] },
+        // icp (ly36x-wiaaa-aaaai-aqj7q-cai) was declared but never exported by
+        // the old adapter and isn't supported by addChainExports; left out.
+      },
+    },
   },
   {
     id: "158",
@@ -3407,6 +4691,23 @@ export default [
     auditLinks: "https://vnx.li/transparency/",
     twitter: "https://twitter.com/vnx_platform",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: { issued: ["0x6ba75d640bebfe5da1197bb5a2aff3327789b5d3"] },
+        polygon: { issued: ["0xE4095d9372E68d108225c306A4491cacfB33B097"] },
+        avax: { issued: ["0x7678e162f38ec9ef2bfd1d0aaf9fd93355e5fa0b"] },
+        solana: { issued: ["C4Kkr9NZU3VbyedcgutU6LKmi6MKz81sx6gRmk5pX519"] },
+        q: { issued: ["0x513f99dee650f529d7c65bb5679f092b64003520"] },
+        tezos: { issued: ["KT1FenS7BCUjn1otfFyfrfxguiGnL4UTF3aG"] },
+        stellar: {
+          issued: ["VEUR:GDXLSLCOPPHTWOQXLLKSVN4VN3G67WD2ENU7UMVAROEYVJLSPSEWXIZN"],
+        },
+        base: { issued: ["0x4ed9Df25d38795a47f52614126e47f564D37F347"] },
+        celo: { issued: ["0x9346f43c1588b6df1d52bdd6bf846064f92d9cba"] },
+        fraxtal: { issued: ["0x4c0bd74da8237c08840984fdb33a84b4586aaee6"] },
+        arbitrum: { issued: ["0x4883C8f0529F37e40eBeA870F3C13cDfAD5d01f8"] },
+      },
+    },
   },
   {
     id: "159",
@@ -3428,6 +4729,13 @@ export default [
     twitter: "https://twitter.com/rifonchain",
     wiki: null,
     module: "usd-rif",
+    chainConfig: {
+      chains: {
+        rsk: {
+          issued: ["0x3a15461d8ae0f0fb5fa2629e9da7d66a794a6e37"],
+        },
+      },
+    },
   },
   {
     id: "160",
@@ -3448,6 +4756,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/SovrynBTC",
     wiki: null,
+    chainConfig: {
+      chains: {
+        rsk: {
+          issued: ["0xc1411567d2670e24d9c4daaa7cda95686e1250aa"],
+        },
+      },
+    },
   },
   {
     id: "161",
@@ -3468,6 +4783,15 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Quantoz",
     wiki: null,
+    chainConfig: {
+      decimals: 2,
+      chains: {
+        algorand: {
+          issued: ["1221682136"],
+          unreleased: ["R2LPJRKONXXURMO6F65VHGCXPKAZM4GGDC5KH5VZ2W3ZFIZYQRAQT7GLM4"],
+        },
+      },
+    },
   },
   {
     id: "162",
@@ -3488,6 +4812,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/babelfishmoney",
     wiki: null,
+    chainConfig: {
+      chains: {
+        rsk: {
+          issued: ["0xb5999795be0ebb5bab23144aa5fd6a02d080299f"],
+        },
+      },
+    },
   },
   {
     id: "163",
@@ -3510,6 +4841,13 @@ export default [
     wiki: null,
     module: "prismalrt-ultra",
 
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x35282d87011f87508D457F08252Bc5bFa52E10A0"],
+        },
+      },
+    },
   },
   {
     id: "164",
@@ -3532,6 +4870,13 @@ export default [
     wiki: null,
     module: "pago-linea-usdcb",
 
+    chainConfig: {
+      chains: {
+        rsk: {
+          issued: ["0xaa5dc2ea0e056fc962f48ab25547d66d3586ee8a"],
+        },
+      },
+    },
   },
   {
     id: "165",
@@ -3552,6 +4897,34 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/audd_digital",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x4cce605ed955295432958d8951d0b176c10720d5"],
+        },
+        solana: {
+          issued: ["AUDDttiEpCydTm7joUMbYddm72jAWXZnCpPZtDoxqBSw"],
+        },
+        rbn: {
+          issued: ["0x54a210e824B0F89dA988E4B5586440aB354f0e46"],
+        },
+        hedera: {
+          issued: ["0x39ceba2b467fa987546000eb5d1373acf1f3a2e1"],
+        },
+        xdc: {
+          issued: ["0x9fe4e6321eeb7c4bc537570f015e4734b15002b8"],
+        },
+        base: {
+          issued: ["0x449b3317a6d1efb1bc3ba0700c9eaa4ffff4ae65"],
+        },
+        stellar: {
+          issued: ["AUDD-GDC7X2MXTYSAKUUGAIQ7J7RPEIM7GXSAIWFYWWH4GLNFECQVJJLB2EEU"],
+        },
+        ripple: {
+          issued: ["4155444400000000000000000000000000000000.rUN5Zxt3K1AnMRJgEWywDJT8QDMMeLH5ok"],
+        },
+      },
+    },
   },
   {
     id: "166",
@@ -3572,6 +4945,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/CygnusFi",
     wiki: "https://wiki.cygnus.finance/whitepaper",
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0xCa72827a3D211CfD8F6b00Ac98824872b72CAb49"],
+        },
+      },
+    },
   },
   {
     id: "167",
@@ -3592,6 +4972,13 @@ export default [
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
     module: "feth",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726"],
+        },
+      },
+    },
   },
   {
     id: "168",
@@ -3618,6 +5005,13 @@ export default [
         symbols: ["fxUSD"],
       },
     },
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x085780639CC2cACd35E474e71f4d000e2405d8f6", "0xD6B8162e2fb9F3EFf09bb8598ca0C8958E33A23D", "0xa87F04c9743Fd1933F82bdDec9692e9D97673769"],
+        },
+      },
+    },
   },
   {
     id: "169",
@@ -3640,6 +5034,13 @@ export default [
     wiki: null,
     module: "gai-stablecoin",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        manta: {
+          issued: ["0xcd91716ef98798A85E79048B78287B13ae6b99b2"],
+        },
+      },
+    },
   },
   {
     id: "170",
@@ -3666,6 +5067,16 @@ export default [
     ],
     twitter: "https://twitter.com/3aaaDAO",
     wiki: null,
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0xA0e4c84693266a9d3BBef2f394B33712c76599Ab"],
+        },
+        linea: {
+          issued: ["0x3f817b28da4940f018c6b5c0a11c555ebb1264f9"],
+        },
+      },
+    },
   },
   {
     id: "171",
@@ -3686,6 +5097,13 @@ export default [
     auditLinks: [],
     twitter: "https://twitter.com/letsgethai",
     wiki: null,
+    chainConfig: {
+      chains: {
+        optimism: {
+          issued: ["0x10398abc267496e49106b07dd6be13364d10dc71"],
+        },
+      },
+    },
   },
   {
     id: "172",
@@ -3706,6 +5124,13 @@ export default [
     auditLinks: [],
     twitter: "https://twitter.com/Blast_L2",
     wiki: null,
+    chainConfig: {
+      chains: {
+        blast: {
+          issued: ["0x4300000000000000000000000000000000000003"],
+        },
+      },
+    },
   },
   {
     id: "173",
@@ -3727,6 +5152,34 @@ export default [
     twitter: "https://twitter.com/BlackRock",
     wiki: null,
     module: "blackrock-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x7712c34205737192402172409a8F7ccef8aA2AEc", "0x6a9DA2D710BB9B700acde7Cb81F10F1fF8C89041"],
+        },
+        aptos: {
+          issued: ["0x50038be55be5b964cfa32cf128b5cf05f123959f286b4cc02b86cafd48945f89"],
+        },
+        arbitrum: {
+          issued: ["0xA6525Ae43eDCd03dC08E775774dCAbd3bb925872"],
+        },
+        avax: {
+          issued: ["0x53FC82f14F009009b440a706e31c9021E1196A2F"],
+        },
+        optimism: {
+          issued: ["0xa1CDAb15bBA75a80dF4089CaFbA013e376957cF5"],
+        },
+        polygon: {
+          issued: ["0x2893Ef551B6dD69F661Ac00F11D93E5Dc5Dc0e99"],
+        },
+        bsc: {
+          issued: ["0x2d5bdc96d9c8aabbdb38c9a27398513e7e5ef84f"],
+        },
+        solana: {
+          issued: ["GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr"],
+        },
+      },
+    },
   },
   {
     id: "174",
@@ -3746,6 +5199,13 @@ export default [
     auditLinks: [],
     twitter: "https://twitter.com/0xc_lever",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x65D72AA8DA931F047169112fcf34f52DbaAE7D18", "0x9216272158F563488FfC36AFB877acA2F265C560", "0x50B4DC15b34E31671c9cA40F9eb05D7eBd6b13f9"],
+        },
+      },
+    },
   },
   {
     id: "175",
@@ -3767,6 +5227,13 @@ export default [
       "https://omniscia.io/reports/powercity-earn-implementation-646b3050e69c940014643ed6",
     twitter: "https://twitter.com/POWERCITYio",
     wiki: "https://docs.powercity.io/earn-protocol",
+    chainConfig: {
+      chains: {
+        pulse: {
+          issued: ["0xeB6b7932Da20c6D7B3a899D5887d86dfB09A6408"],
+        },
+      },
+    },
   },
   {
     id: "176",
@@ -3787,6 +5254,13 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Fathom_fi",
     wiki: "https://gist.github.com/BaldyAsh/3676a18b003758057f634c9af2cfe49a",
+    chainConfig: {
+      chains: {
+        xdc: {
+          issued: ["0x49d3f7543335cf38Fa10889CCFF10207e22110B5"],
+        },
+      },
+    },
   },
   {
     id: "177",
@@ -3808,6 +5282,18 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/nostrafinance",
     wiki: null,
+    chainConfig: {
+      chains: {
+        starknet: {
+          issued: [
+            "0x719b5092403233201aa822ce928bd4b551d0cdb071a724edd7dc5e5f57b7f34",
+          ],
+          unreleased: [
+            "0x07daadaa043b22429020efb9ac16bcc5f6a9b6ed3305de48e65a0ad5dcb76759",
+          ],
+        },
+      },
+    },
   },
   {
     id: "178",
@@ -3828,6 +5314,16 @@ export default [
     twitter: "https://twitter.com/USD_3",
     wiki: "https://app.reserve.org/ethereum/token/0x0d86883faf4ffd7aeb116390af37746f45b6f378/overview",
     yieldBearing: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x0d86883FAf4FfD7aEb116390af37746F45b6f378"],
+        },
+        base: {
+          bridgedFromETH: ["0xEFb97aaF77993922aC4be4Da8Fbc9A2425322677"],
+        },
+      },
+    },
   },
   {
     id: "179",
@@ -3848,6 +5344,13 @@ export default [
     auditLinks: "https://docs.yamato.fi/v/en/audit",
     twitter: "https://twitter.com/YamatoProtocol",
     wiki: "https://docs.yamato.fi/v/en",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x1cfa5641c01406ab8ac350ded7d735ec41298372"],
+        },
+      },
+    },
   },
   {
     id: "180",
@@ -3869,6 +5372,13 @@ export default [
     twitter: "https://twitter.com/breadcoop",
     wiki: null,
     module: "bread",
+    chainConfig: {
+      chains: {
+        xdai: {
+          issued: ["0xa555d5344f6fb6c65da19e403cb4c1ec4a1a5ee3"],
+        },
+      },
+    },
   },
   {
     id: "181",
@@ -3892,6 +5402,13 @@ export default [
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
     module: "zun-usd",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x8C0D76C9B18779665475F3E212D9Ca1Ed6A1A0e6"],
+        },
+      },
+    },
   },
   {
     id: "182",
@@ -3915,6 +5432,13 @@ export default [
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
     module: "zun-eth",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xc2e660C62F72c2ad35AcE6DB78a616215E2F2222"],
+        },
+      },
+    },
   },
   {
     id: "183",
@@ -3935,6 +5459,16 @@ export default [
     auditLinks: null,
     twitter: null,
     wiki: "https://docs.bifrostnetwork.com/eng.btcfi.one",
+    chainConfig: {
+      chains: {
+        bfc: {
+          issued: ["0x6906Ccda405926FC3f04240187dd4fAd5DF6d555"],
+        },
+        base: {
+          bridgedFromBfc: ["0xe4b20925d9e9a62f1e492e15a81dc0de62804dd4"],
+        },
+      },
+    },
   },
   {
     id: "184",
@@ -3958,6 +5492,13 @@ export default [
       "https://github.com/magma-fi/Audits/blob/main/MagmaStablecoin_final_Secure3_Audit_Report.pdf",
     twitter: "https://twitter.com/MagmaProtocol",
     wiki: "https://docs.magma.finance/",
+    chainConfig: {
+      chains: {
+        iotex: {
+          issued: ["0x6C0bf4b53696b5434A0D21C7D13Aa3cbF754913E"],
+        },
+      },
+    },
   },
   {
     id: "185",
@@ -3978,6 +5519,16 @@ export default [
     auditLinks: "https://docs.gyro.finance/gyroscope-protocol/audit-reports",
     twitter: "https://twitter.com/gyrostable",
     wiki: "https://docs.gyro.finance/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xe07f9d810a48ab5c3c914ba3ca53af14e4491e8a"],
+        },
+        polygon: {
+          issued: ["0x37b8E1152fB90A867F3dccA6e8d537681B04705E"],
+        },
+      },
+    },
   },
   {
     id: "186",
@@ -3998,6 +5549,14 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/ISC_money",
     wiki: "https://wp.isc.money",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        solana: {
+          issued: ["J9BcrQfX4p9D1bvLzRNCbMDv8f44a9LFdeqNE4Yk2WMD"],
+        },
+      },
+    },
   },
   {
     id: "187",
@@ -4019,6 +5578,13 @@ export default [
     twitter: "https://twitter.com/KNOX_Dollar",
     wiki: "https://app.reserve.org/arbitrum/token/0x0bbf664d46becc28593368c97236faa0fb397595/overview",
     yieldBearing: true,
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x0BBF664D46becc28593368c97236FAa0fb397595"],
+        },
+      },
+    },
   },
   {
     id: "188",
@@ -4039,6 +5605,13 @@ export default [
     auditLinks: "https://doc.orby.network/overview/security-and-audits",
     twitter: "https://twitter.com/OrbyNetwork",
     wiki: "https://doc.orby.network/introduction/what-is-usdusc",
+    chainConfig: {
+      chains: {
+        cronos: {
+          issued: ["0xD42E078ceA2bE8D03cd9dFEcC1f0d28915Edea78"],
+        },
+      },
+    },
   },
   {
     id: "189",
@@ -4060,6 +5633,13 @@ export default [
     twitter: "https://twitter.com/protocol_fx",
     wiki: "https://docs.aladdin.club/f-x-protocol/introduction-of-btcusd-xwbtc",
     module: "f-x-btc-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x9D11ab23d33aD026C466CE3c124928fDb69Ba20E", "0x576b4779727F5998577bb4e25bf726abE742b9F7"],
+        },
+      },
+    },
   },
   {
     id: "190",
@@ -4082,6 +5662,19 @@ export default [
     wiki: "https://app.reserve.org/ethereum/token/0x78da5799cf427fee11e9996982f4150ece7a99a7/overview",
     module: "revenue-generating-usd",
 
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x78da5799CF427Fee11e9996982F4150eCe7a99A7"],
+        },
+        base: {
+          bridgedFromETH: ["0x8E5E9DF4F0EA39aE5270e79bbABFCc34203A3470"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x96a993f06951b01430523d0d5590192d650ebf3e"],
+        },
+      },
+    },
   },
   {
     id: "191",
@@ -4103,6 +5696,13 @@ export default [
     wiki: "https://github.com/bitSmiley-protocol/whitepaper/blob/main/BitSmiley_White_Paper.pdf",
     module: "bitsmiley-bitusd",
 
+    chainConfig: {
+      chains: {
+        btr: {
+          issued: ["0x07373d112edc4570b46996ad1187bc4ac9fb5ed0"],
+        },
+      },
+    },
   },
   {
     id: "192",
@@ -4123,6 +5723,13 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/AngleProtocol",
     wiki: "https://docs.angle.money/transmuter/implementation/collateralsmanagement#for-eura-and-usda",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x0000206329b97DB379d5E1Bf586BbDB969C63274"],
+        },
+      },
+    },
   },
   {
     id: "193",
@@ -4145,6 +5752,13 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/ProtocolChi",
     wiki: "https://chi-protocol.gitbook.io/docs/overview/introduction-to-chi-protocol",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x38547d918b9645f2d94336b6b61aeb08053e142c"],
+        },
+      },
+    },
   },
   /* // we added under usdc on icp network
   {
@@ -4188,6 +5802,16 @@ export default [
     auditLinks: "https://gitbook.usual.money/ressources-and-ecosystem/audits",
     twitter: "https://x.com/usualmoney",
     wiki: "https://gitbook.usual.money/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5"],
+        },
+        arbitrum: {
+          issued: ["0x35f1C5cB7Fb977E669fD244C567Da99d8a3a6850"],
+        },
+      },
+    },
   },
   {
     id: "196",
@@ -4208,6 +5832,16 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/Classic_USD",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereumclassic: {
+          issued: ["0xDE093684c796204224BC081f937aa059D903c52a"],
+        },
+        polygon: {
+          issued: ["0x131409b31bf446737dd04353d43dacada544b6fa"],
+        },
+      },
+    },
   },
   {
     id: "197",
@@ -4228,6 +5862,28 @@ export default [
     auditLinks: "https://docs.resolv.im/resources/security",
     twitter: "https://twitter.com/ResolvLabs",
     wiki: "https://docs.resolv.im/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x66a1e37c9b0eaddca17d3662d6c05f4decf3e110"],
+        },
+        base: {
+          bridgedFromETH: ["0x35E5dB674D8e93a03d814FA0ADa70731efe8a4b9"],
+        },
+        bsc: {
+          bridgedFromETH: ["0x2492D0006411Af6C8bbb1c8afc1B0197350a79e9"],
+        },
+        berachain: {
+          bridgedFromETH: ["0x2492D0006411Af6C8bbb1c8afc1B0197350a79e9"],
+        },
+        hyperliquid: {
+          bridgedFromETH: ["0x0aD339d66BF4AeD5ce31c64Bc37B3244b6394A77"],
+        },
+        soneium: {
+          bridgedFromETH: ["0xb1b385542b6e80f77b94393ba8342c3af699f15c"],
+        },
+      },
+    },
   },
   {
     id: "198",
@@ -4250,6 +5906,13 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/StableJack_xyz",
     wiki: "https://docs.stablejack.xyz/stablejack",
+    chainConfig: {
+      chains: {
+        avax: {
+          issued: ["0xaBe7a9dFDA35230ff60D1590a929aE0644c47DC1"],
+        },
+      },
+    },
   },
   {
     id: "199",
@@ -4270,6 +5933,13 @@ export default [
     twitter: "https://x.com/MentoLabs",
     wiki: "https://blog.celo.org/celo-launches-the-creal-stablecoin-11da0d560c1c",
     auditLinks: ["https://docs.mento.org/mento-v3/build/smart-contracts/audits"],
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0xe8537a3d056DA446677B9E9d6c5dB704EaAb4787"],
+        },
+      },
+    },
   },
   {
     id: "200",
@@ -4290,6 +5960,14 @@ export default [
     twitter: "https://x.com/hliquity_",
     wiki: "https://docs.hliquity.org/overview/overview#hchf-the-stablecoin",
     deadUrl: true,
+    chainConfig: {
+      decimals: 8,
+      chains: {
+        hedera: {
+          issued: ["0x00000000000000000000000000000000005c9f6b"],
+        },
+      },
+    },
   },
   {
     id: "201",
@@ -4310,6 +5988,13 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/POWERCITYio",
     wiki: "https://docs.powercity.io/flex-protocol",
+    chainConfig: {
+      chains: {
+        pulse: {
+          issued: ["0x1fe0319440a672526916c232eaee4808254bdb00"],
+        },
+      },
+    },
   },
   {
     id: "202",
@@ -4330,6 +6015,22 @@ export default [
     auditLinks: "https://docs.anzen.finance/developer-resources/audits",
     twitter: "https://x.com/AnzenFinance",
     wiki: "https://docs.anzen.finance/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xa469b7ee9ee773642b3e93e842e5d9b5baa10067"],
+        },
+        base: {
+          issued: ["0x04d5ddf5f3a8939889f11e97f8c4bb48317f1938"],
+        },
+        blast: {
+          issued: ["0x52056ed29fe015f4ba2e3b079d10c0b87f46e8c6"],
+        },
+        manta: {
+          issued: ["0x73d23f3778a90be8846e172354a115543df2a7e4"],
+        },
+      },
+    },
   },
   {
     id: "203",
@@ -4392,11 +6093,53 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/withAUSD",
     wiki: null,
-    bridgeConfig: {
-      lzConfig: {
-        symbols: ["AUSD"],
-      }
-    }
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        sui: {
+          issued: ["0x2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD"],
+        },
+        avax: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        ethereum: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        mantle: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        polygon: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        arbitrum: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        core: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        bsc: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        imx: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        plume_mainnet: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        solana: {
+          issued: ["AUSD1jCcCyPLybk1YnvPWsHQSrZ46dxwoMniN4N2UEB9"],
+        },
+        katana: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        monad: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+        plasma: {
+          issued: ["0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a"],
+        },
+      },
+    },
   },
   {
     id: "206",
@@ -4417,6 +6160,13 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/OpusMoney",
     wiki: null,
+    chainConfig: {
+      chains: {
+        starknet: {
+          issued: ["0x0498edfaf50ca5855666a700c25dd629d577eb9afccdf3b5977aec79aee55ada"],
+        },
+      },
+    },
   },
   {
     id: "207",
@@ -4438,6 +6188,13 @@ export default [
     twitter: "https://x.com/0xDYAD",
     wiki: "https://dyad.gitbook.io/docs",
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xFd03723a9A3AbE0562451496a9a394D2C4bad4ab"],
+        },
+      },
+    },
   },
   {
     id: "208",
@@ -4460,6 +6217,13 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/DackieSwap",
     wiki: "https://docs.dackieswap.xyz/products/product-features/dackie-usd-dckusd#introduction",
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x613ce28076289DE255f1a6487437F03E37E4a71d"],
+        },
+      },
+    },
   },
   {
     id: "209",
@@ -4484,7 +6248,29 @@ export default [
       lzConfig: {
         symbols: ["USDS"],
       }
-    }
+    },
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xdC035D45d973E3EC169d2276DDab16f1e407384F"],
+        },
+        base: {
+          issued: ["0x820c137fa70c8691f0e44dc420a5e53c168921dc"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x6491c05A82219b8D1479057361ff1654749b876b"],
+        },
+        optimism: {
+          issued: ["0x4F13a96EC5C4Cf34e442b46Bbd98a0791F20edC3"],
+        },
+        unichain: {
+          issued: ["0x7E10036Acc4B56d4dFCa3b77810356CE52313F9C"],
+        },
+        solana: {
+          bridgedFromETH: ["USDSwr9ApdHk5bvJKMjzff41FfuX8bSxdKcR81vTwcA"],
+        },
+      },
+    },
   },
   {
     id: "210",
@@ -4505,6 +6291,22 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/elixir",
     wiki: "https://docs.elixir.xyz/deusd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x15700B564Ca08D9439C58cA5053166E8317aa138"],
+        },
+        sei: {
+          bridgedFromETH: ["0x37a4dd9ced2b19cfe8fac251cd727b5787e45269"],
+        },
+        avax: {
+          bridgedFromETH: ["0xB57B25851fE2311CC3fE511c8F10E868932e0680"],
+        },
+        polygon: {
+          bridgedFromETH: ["0xB57B25851fE2311CC3fE511c8F10E868932e0680"],
+        },
+      },
+    },
   },
   {
     id: "211",
@@ -4589,6 +6391,19 @@ export default [
     wiki: "https://docs.usdx.money/a-synthetic-usd/usdx-basics",
     deadUrl: true,
     deadFrom: "2025-11-14",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xf3527ef8dE265eAa3716FB312c12847bFBA66Cef"],
+        },
+        bsc: {
+          issued: ["0xf3527ef8dE265eAa3716FB312c12847bFBA66Cef"],
+        },
+        arbitrum: {
+          issued: ["0xf3527ef8dE265eAa3716FB312c12847bFBA66Cef"],
+        },
+      },
+    },
   },
   {
     id: "215",
@@ -4630,7 +6445,14 @@ export default [
     auditLinks: ["https://docs.solayer.org/security/audits"],
     priceSource: "defillama",
     twitter: "https://x.com/solayer_labs",
-    wiki: "https://docs.solayer.org/susd/what-is-susd"
+    wiki: "https://docs.solayer.org/susd/what-is-susd",
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["susdabGDNbhrnCa6ncrYo81u4s9GM8ecK2UwMyZiq4X"],
+        },
+      },
+    },
   },
   {
     id: "217",
@@ -4653,6 +6475,61 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/__reservoir",
     wiki: "https://docs.reservoir.xyz/products/stablecoin-rusd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x09d4214c03d01f49544c0448dbe3a27f768f2b34"],
+        },
+        berachain: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        base: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        plume_mainnet: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        sonic: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        wc: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        sei: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        unichain: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        hyperliquid: {
+          bridgedFromETH: ["0x866d66F64FB81461903E1e38d998E747EcF35E78"],
+        },
+        bsc: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        avax: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        katana: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        solana: {
+          bridgedFromETH: ["Ejqkht2dyN1BaaEtK92zBKY6S8HbVH8APB5sDK9Rmokt"],
+        },
+        linea: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        monad: {
+          bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+        },
+        tempo: {
+          issued: ["0x20c0000000000000000000007f7ba549dd0251b9"],
+        },
+      },
+    },
   },
   {
     id: "218",
@@ -4672,7 +6549,44 @@ export default [
     auditLinks: ["https://github.com/Satoshi-Protocol/satoshi-audit-report"],
     priceSource: "defillama",
     twitter: "https://x.com/River4fun",
-    wiki: "https://docs.river.inc/"
+    wiki: "https://docs.river.inc/",
+    chainConfig: {
+      chains: {
+        bevm: {
+          issued: ["0xF2692468666E459D87052f68aE474E36C1a34fbB", "0x2031c8848775a5EFB7cfF2A4EdBE3F04c50A1478"],
+        },
+        btr: {
+          issued: ["0xa1e63CB2CE698CfD3c2Ac6704813e3b870FEDADf", "0xba50dDac6B2F5482cA064EFAc621E0C7c0f6A783"],
+        },
+        bob: {
+          issued: ["0x78Fea795cBFcC5fFD6Fb5B845a4f53d25C283bDB", "0xecf21b335B41f9d5A89f6186A99c19a3c467871f"],
+        },
+        bsquared: {
+          issued: ["0x62b4B8F5a03e40b9dAAf95c7A6214969406e28c3", "0x8dD8b12d55C73c08294664a5915475eD1c8b1F6f"],
+        },
+        bsc: {
+          issued: ["0xb4818BB69478730EF4e33Cc068dD94278e2766cB"],
+        },
+        hemi: {
+          issued: ["0xb4818BB69478730EF4e33Cc068dD94278e2766cB"],
+        },
+        base: {
+          issued: ["0x70654AaD8B7734dc319d0C3608ec7B32e03FA162"],
+        },
+        arbitrum: {
+          issued: ["0xb4818BB69478730EF4e33Cc068dD94278e2766cB"],
+        },
+        sonic: {
+          issued: ["0xb4818BB69478730EF4e33Cc068dD94278e2766cB"],
+        },
+        xlayer: {
+          issued: ["0xceF6c74Ce218c0E1F48cA2430635D0a65Cd3737A"],
+        },
+        ethereum: {
+          issued: ["0x1958853A8BE062dc4f401750Eb233f5850F0D0d2"],
+        },
+      },
+    },
   },
   {
     id: "219",
@@ -4692,7 +6606,14 @@ export default [
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/AstherusHub",
-    wiki: "https://docs.astherus.com/"
+    wiki: "https://docs.astherus.com/",
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0x5A110fC00474038f6c02E89C707D638602EA44B5"],
+        },
+      },
+    },
   },
   {
     id: "220",
@@ -4738,7 +6659,17 @@ export default [
     auditLinks: ["https://docs.usdtb.money/audits"],
     priceSource: "defillama",
     twitter: "https://x.com/ethena_labs",
-    wiki: "https://docs.usdtb.money/"
+    wiki: "https://docs.usdtb.money/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xC139190F447e929f090Edeb554D95AbB8b18aC1C"],
+        },
+        solana: {
+          issued: ["8yXrtJ54jZtE84xEBzTESKuegjcAkAuDrdAhRd8i8n3T"],
+        },
+      },
+    },
   },
   {
     id: "222",
@@ -4760,7 +6691,17 @@ export default [
     auditLinks: ["https://docs.usdtb.money/audits"],
     priceSource: "defillama",
     twitter: "https://x.com/ParallelMoney",
-    wiki: "https://docs.mimo.capital/parallel-protocol/parallel-protocol/par-1"
+    wiki: "https://docs.mimo.capital/parallel-protocol/parallel-protocol/par-1",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x571f54D23cDf2211C83E9A0CbD92AcA36c48Fa02"],
+        },
+        polygon: {
+          issued: ["0x8054d4D130C3A84852f379424Bcac75673a7486B"],
+        },
+      },
+    },
   },
   {
     id: "223",
@@ -4782,7 +6723,14 @@ export default [
     auditLinks: ["https://github.com/zokyo-sec/audit-reports/blob/main/Tren%20Finance/Tren%20Finance_Zokyo_audit_report_Nov19th_2024.pdf"],
     priceSource: "defillama",
     twitter: "https://x.com/TrenFinance",
-    wiki: "https://docs.tren.finance/tokens/xy"
+    wiki: "https://docs.tren.finance/tokens/xy",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xD4fe6e1e37dfCf35E9EEb54D4cca149d1c10239f"],
+        },
+      },
+    },
   },
   {
     id: "224",
@@ -4803,6 +6751,25 @@ export default [
     twitter: "https://x.com/dtrinity_defi",
     wiki: "https://docs.dtrinity.org",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x07fFf99e1664d9B116fbC158c0E99785F81cA236"],
+        },
+        fraxtal: {
+          issued: ["0x788D96f655735f52c676A133f4dFC53cEC614d4A"],
+        },
+        sonic: {
+          issued: ["0x53a6aBb52B2F968fA80dF6A894e4f1b1020DA975"],
+        },
+        ronin: {
+          issued: ["0x0043a403ada6b63045112d7e979a057c82714fe7"],
+        },
+        katana: {
+          issued: ["0xcA52d08737E6Af8763a2bF6034B3B03868f24DDA"],
+        },
+      },
+    },
   },
   {
     id: "225",
@@ -4824,7 +6791,24 @@ export default [
     priceSource: "defillama",
     deadFrom: "2025-03-19",
     twitter: "https://x.com/zothdotio",
-    wiki: "https://docs.zoth.io/zoth/products/zeusd-an-omni-chain-and-composable-stable-token"
+    wiki: "https://docs.zoth.io/zoth/products/zeusd-an-omni-chain-and-composable-stable-token",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0x7DC9748DA8E762e569F9269f48F69A1a9F8Ea761"],
+        },
+        metis: {
+          bridgedFromETH: ["0x2d3D1a6982840Dd88bC2380Fd557F8A9D5e27a77"],
+        },
+        manta: {
+          bridgedFromETH: ["0x7DC9748DA8E762e569F9269f48F69A1a9F8Ea761"],
+        },
+        avax: {
+          bridgedFromETH: ["0x7DC9748DA8E762e569F9269f48F69A1a9F8Ea761"],
+        },
+      },
+    },
   },
   {
     id: "226",
@@ -4850,7 +6834,40 @@ export default [
     ],
     priceSource: "defillama",
     twitter: "https://x.com/frankencoinzchf",
-    wiki: "https://docs.frankencoin.com/#frankencoin-zchf-and-frankencoin-pool-shares-fps"
+    wiki: "https://docs.frankencoin.com/#frankencoin-zchf-and-frankencoin-pool-shares-fps",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xB58E61C3098d85632Df34EecfB899A1Ed80921cB"],
+        },
+        polygon: {
+          issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
+          bridgedFromETH: ["0x02567e4b14b25549331fCEe2B56c647A8bAB16FD"],
+        },
+        arbitrum: {
+          issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
+          bridgedFromETH: ["0xB33c4255938de7A6ec1200d397B2b2F329397F9B"],
+        },
+        optimism: {
+          issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
+          bridgedFromETH: ["0x4F8a84C442F9675610c680990EdDb2CCDDB8aB6f"],
+        },
+        base: {
+          issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
+          bridgedFromETH: ["0x20D1c515e38aE9c345836853E2af98455F919637"],
+        },
+        xdai: {
+          issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
+          bridgedFromETH: ["0x4cde2b4e7254e6ec5b450d50e3607bade6be3980"],
+        },
+        avax: {
+          issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
+        },
+        sonic: {
+          issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
+        },
+      },
+    },
   },
   {
     id: "227",
@@ -4871,7 +6888,29 @@ export default [
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/LiquityProtocol",
-    wiki: "https://docs.liquity.org/v2-documentation/technical-resources"
+    wiki: "https://docs.liquity.org/v2-documentation/technical-resources",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xb01dd87b29d187f3e3a4bf6cdaebfb97f3d9ab98"],
+        },
+        base: {
+          bridgedFromETH: ["0x087c440f251ff6cfe62b86dde1be558b95b4bb9b"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x087c440f251ff6cfe62b86dde1be558b95b4bb9b"],
+        },
+        optimism: {
+          bridgedFromETH: ["0x087c440f251ff6cfe62b86dde1be558b95b4bb9b"],
+        },
+        scroll: {
+          bridgedFromETH: ["0x087c440f251ff6cfe62b86dde1be558b95b4bb9b"],
+        },
+        avax: {
+          bridgedFromETH: ["0x087c440f251ff6cfe62b86dde1be558b95b4bb9b"],
+        },
+      },
+    },
   },
   {
     id: "228",
@@ -4892,6 +6931,13 @@ export default [
     twitter: "https://x.com/QuillFi",
     wiki: "https://docs.quill.finance/faq/usdusdq",
     module: "quill-usd",
+    chainConfig: {
+      chains: {
+        scroll: {
+          issued: ["0xdb9e8f82d6d45fff803161f2a5f75543972b229a"],
+        },
+      },
+    },
   },
   {
     id: "229",
@@ -4912,6 +6958,13 @@ export default [
     twitter: "https://twitter.com/levelusd",
     wiki: "https://level-money.gitbook.io/docs/level-usd/level-usd-a-new-primitive",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x7c1156e515aa1a2e851674120074968c905aaf37"],
+        },
+      },
+    },
   },
   {
     id: "230",
@@ -4932,7 +6985,20 @@ export default [
     auditLinks: ["https://docs.noon.capital/security/smart-contract-audits"],
     twitter: "https://twitter.com/noon_capital",
     wiki: "https://docs.noon.capital",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xdA67B4284609d2d48e5d10cfAc411572727dc1eD"],
+        },
+        era: {
+          issued: ["0x0469d9d1dE0ee58fA1153ef00836B9BbCb84c0B6"],
+        },
+        sophon: {
+          issued: ["0xC1AA99c3881B26901aF70738A7C217dc32536d36"],
+        },
+      },
+    },
   },
   {
     id: "231",
@@ -4953,7 +7019,14 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/berachain",
     wiki: "https://docs.berachain.com/learn/pol/tokens/honey",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        berachain: {
+          issued: ["0xfcbd14dc51f0a4d49d5e53c2e0950e0bc26d0dce"],
+        },
+      },
+    },
   },
   {
     id: "232",
@@ -4974,7 +7047,14 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/pintodotmoney",
     wiki: "https://docs.pinto.money/",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0xb170000aeeFa790fa61D6e837d1035906839a3c8"],
+        },
+      },
+    },
   },
   {
     id: "233",
@@ -4995,6 +7075,13 @@ export default [
     auditLinks: ["https://docs.thestandard.io/tst/security-and-risk-management/audits-and-safety-measures"],
     twitter: "https://x.com/thestandard_io",
     wiki: "https://docs.thestandard.io/tst/introduction/usds-and-euros",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x2Ea0bE86990E8Dac0D09e4316Bb92086F304622d"],
+        },
+      },
+    },
   },
   {
     id: "234",
@@ -5015,6 +7102,16 @@ export default [
     auditLinks: ["https://wspn.io/Certik%20Smart%20Contract%20Audit%20Report.pdf"],
     twitter: "https://x.com/WSPNpayment",
     wiki: "https://wspn.io/documentation.html",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x7Cd017ca5ddb86861FA983a34b5F495C6F898c41"],
+        },
+        polygon: {
+          issued: ["0x7Cd017ca5ddb86861FA983a34b5F495C6F898c41"],
+        },
+      },
+    },
   },
   {
     id: "235",
@@ -5059,6 +7156,13 @@ export default [
     deadFrom: "2026-01-15",
     deprecated: true,
     deadUrl: true,
+    chainConfig: {
+      chains: {
+        sei: {
+          issued: ["0x059A6b0bA116c63191182a0956cF697d0d2213eC"],
+        },
+      },
+    },
   },
   {
     id: "237",
@@ -5081,6 +7185,16 @@ export default [
     wiki: "https://www.circle.com/usyc",
     doublecounted: true,
     yieldBearing: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x136471a34f6ef19fe571effc1ca711fdb8e49f2b"],
+        },
+        bsc: {
+          issued: ["0x8d0fa28f221eb5735bc71d3a0da67ee5bc821311"],
+        },
+      },
+    },
   },
   {
     id: "238",
@@ -5101,6 +7215,13 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/Rings_Protocol",
     wiki: "https://docs.rings.money/tutorials/introduction",
+    chainConfig: {
+      chains: {
+        sonic: {
+          issued: ["0xd3DCe716f3eF535C5Ff8d041c1A41C3bd89b97aE"],
+        },
+      },
+    },
   },
   {
     id: "239",
@@ -5160,7 +7281,23 @@ export default [
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/OpenEden_X",
-    wiki: "https://docs.openeden.com/usdo/introduction"
+    wiki: "https://docs.openeden.com/usdo/introduction",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x8238884Ec9668Ef77B90C6dfF4D1a9F4F4823BFe"],
+        },
+        base: {
+          issued: ["0xaD55aebc9b8c03FC43cd9f62260391c13c23e7c0"],
+        },
+        plasma: {
+          issued: ["0x87e617C7484aDE79FcD90db58BEB82B057facb48"],
+        },
+        bsc: {
+          issued: ["0x302e52AFf9815B9D1682473DBFB9C74F9B750AA8"],
+        },
+      },
+    },
   },
   {
     id: "242",
@@ -5203,6 +7340,13 @@ export default [
     wiki: "https://docs.coinshift.xyz/coinshift-assets/csusdl/coinshift-usdl-vault/how-csusdl-vault-works",
     doublecounted: true,
     yieldBearing: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xbEeFc011e94f43b8B7b455eBaB290C7Ab4E216f1"],
+        },
+      },
+    },
   },
   {
     id: "244",
@@ -5223,6 +7367,16 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/LiftDollar_USDL",
     wiki: "https://docs.liftdollar.com/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xbdC7c08592Ee4aa51D06C27Ee23D5087D65aDbcD"],
+        },
+        arbitrum: {
+          issued: ["0x7F850b0aB1988Dd17B69aC564c1E2857949e4dEe"],
+        },
+      },
+    },
   },
   {
     id: "245",
@@ -5242,7 +7396,14 @@ export default [
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/AnzensOfficial",
-    wiki: "https://anzens.com/"
+    wiki: "https://anzens.com/",
+    chainConfig: {
+      chains: {
+        cardano: {
+          issued: ["fe7c786ab321f41c654ef6c1af7b3250a613c24e4213e0425a7ae45655534441"],
+        },
+      },
+    },
   },
   {
     id: "246",
@@ -5259,7 +7420,17 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: ["https://docs.falcon.finance/resources/audits"],
-    twitter: "https://x.com/falconfinance"
+    twitter: "https://x.com/falconfinance",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xFa2B947eEc368f42195f24F36d2aF29f7c24CeC2"],
+        },
+        bsc: {
+          bridgedFromETH: ["0xb3b02E4A9Fb2bD28CC2ff97B0aB3F6B3Ec1eE9D2"],
+        },
+      },
+    },
   },
   {
     id: "247",
@@ -5277,7 +7448,7 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://skynet.certik.com/projects/schuman-financial"],
     twitter: "https://x.com/Schuman_io",
-    wiki: "https://schuman.io/europ/"
+    wiki: "https://schuman.io/europ/",
   },
   {
     id: "248",
@@ -5295,7 +7466,14 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.secured.finance/fixed-rate-lending-protocol/security-and-safety-measures/smart-contract-audits"],
     twitter: "https://x.com/USDFC_Protocol",
-    wiki: "https://docs.secured.finance/usdfc-stablecoin-protocol/introduction"
+    wiki: "https://docs.secured.finance/usdfc-stablecoin-protocol/introduction",
+    chainConfig: {
+      chains: {
+        filecoin: {
+          issued: ["0x80B98d3aa09ffff255c3ba4A241111Ff1262F045"],
+        },
+      },
+    },
   },
   // { No new attestations provided
   //   id: "249",
@@ -5331,7 +7509,17 @@ export default [
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/Ripple",
-    wiki: "https://docs.ripple.com/stablecoin/"
+    wiki: "https://docs.ripple.com/stablecoin/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x8292bb45bf1ee4d140127049757c2e0ff06317ed"],
+        },
+        ripple: {
+          issued: ["524C555344000000000000000000000000000000.rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De"],
+        },
+      },
+    },
   },
   {
     id: "251",
@@ -5349,7 +7537,14 @@ export default [
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/felixprotocol",
-    wiki: "https://usefelix.gitbook.io/felix-docs"
+    wiki: "https://usefelix.gitbook.io/felix-docs",
+    chainConfig: {
+      chains: {
+        hyperliquid: {
+          issued: ["0x02c6a2fA58cC01A18B8D9E00eA48d65E4dF26c70"],
+        },
+      },
+    },
   },
   {
     id: "252",
@@ -5368,7 +7563,17 @@ export default [
     auditLinks: ["https://docs.standx.com/docs/solutions/audits"],
     twitter: "https://x.com/StandX_Official",
     wiki: "https://docs.standx.com/docs/dusd-overview",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0xaf44A1E76F56eE12ADBB7ba8acD3CbD474888122"],
+        },
+        solana: {
+          issued: ["DUSDt4AeLZHWYmcXnVGYdgAzjtzU5mXUVnTMdnSzAttM"],
+        },
+      },
+    },
   },
   {
     id: "253",
@@ -5391,6 +7596,44 @@ export default [
     ],
     twitter: "https://x.com/BimaBTC",
     wiki: "https://docs.bima.money/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x6bedE1c6009a78c222D9BDb7974bb67847fdB68c"],
+          unreleased: [
+            "0xF0DE02A2d05A82222CBB98df3EEA10CAFc8c92C1", // burner
+            "0xEA811C2C400EE846E352D45C849657D920A888fe", // psm
+            "0x97bb3167A88FE34B1EC6d7F02560c4F0aa6009E9", // psm
+            "0x42Ad6834a6599a0B7a7812F01f8092B580523d67", // psm
+            "0x705fd2306bf6E4dec47bF8Aaab378B04024792d4", // psm
+          ],
+        },
+        core: {
+          issued: ["0x6bedE1c6009a78c222D9BDb7974bb67847fdB68c"],
+          unreleased: ["0xBA4197EF8DdDa01E628FA98d0b1E87751628a3B2"], // burner
+        },
+        hemi: {
+          issued: ["0x6bedE1c6009a78c222D9BDb7974bb67847fdB68c"],
+          unreleased: ["0xf9240FeEe9d1d6e8614a8d22D6864fFbc3f52235"], // burner
+        },
+        bsc: {
+          issued: ["0x6bedE1c6009a78c222D9BDb7974bb67847fdB68c"],
+          unreleased: ["0x93ee18e6d372a2c9bf8c876932e39c4126f80f09"], // burner
+        },
+        sonic: {
+          issued: ["0x6bedE1c6009a78c222D9BDb7974bb67847fdB68c"],
+          unreleased: ["0x93EE18e6d372A2C9Bf8c876932E39C4126F80f09"], // burner
+        },
+        plume_mainnet: {
+          issued: ["0x6bedE1c6009a78c222D9BDb7974bb67847fdB68c"],
+          unreleased: ["0x71E7c8F2B7D7F6c99E375023916CB3ed9ffC4621"], // burner
+        },
+        goat: {
+          issued: ["0x6bedE1c6009a78c222D9BDb7974bb67847fdB68c"],
+          unreleased: ["0x93EE18e6d372A2C9Bf8c876932E39C4126F80f09"], // burner
+        },
+      },
+    },
   },
   {
     id: "254",
@@ -5411,6 +7654,32 @@ export default [
     ],
     twitter: null,
     wiki: "https://www.sgforge.com/product/coinvertible/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x5F7827FDeb7c20b443265Fc2F40845B715385Ff2"],
+          unreleased: [
+            "0xc98Cb9F53e20AFbbeb75Caf6456eD52D5d7903f6",
+            "0x7dE0bbdfCd4A6a956F149bEFcca30D6B5Bc5DA69",
+          ],
+        },
+        solana: {
+          issued: ["DghpMkatCiUsofbTmid3M3kAbDTPqDwKiYHnudXeGG52"],
+          unreleased: [
+            "4N1WwAaSukn7YtRKRArA3Ntp4CfcB1nCiqCDGEjEBhEj",
+            "5tg4qRdiXJ7XxYd6KK4UnnNvxgHJqfBUygPqZLwSnhnt",
+          ],
+        },
+        ripple: {
+          issued: [
+            "4555524356000000000000000000000000000000.rUNaS5sqRuxZz6V7rBGhoSaZiVYA3ut4UL",
+          ],
+        },
+        stellar: {
+          issued: ["CANKBYNNAYKEZXLB655F2UPNTAZFK5HILZUXL7ZTFR3NF6LKDSVY7KFH"],
+        },
+      },
+    },
   },
   {
     id: "255",
@@ -5429,7 +7698,17 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/aegis_im",
     wiki: "https://docs.aegis.im/",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x4274cd7277c7bb0806bd5fe84b9adae466a8da0a"],
+        },
+        bsc: {
+          issued: ["0xAB3dBcD9B096C3fF76275038bf58eAC10D22C61f"],
+        },
+      },
+    },
   },
   {
     id: "256",
@@ -5448,7 +7727,14 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/ResupplyFi",
     wiki: "https://docs.resupply.fi/resupply-protocol/overview",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x57ab1e0003f623289cd798b1824be09a793e4bec"],
+        },
+      },
+    },
   },
   /*{ not a stablecoin
     id: "257",
@@ -5526,7 +7812,20 @@ export default [
     auditLinks: [],
     twitter: null,
     wiki: "https://docs.vdollar.finance/",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x677ddbd918637E5F2c79e164D402454dE7dA8619"],
+        },
+        base: {
+          bridgedFromETH: ["0x0937876EFd6C4101Be68cd89ba58D5Ecf0d53A64"],
+        },
+        hemi: {
+          bridgedFromETH: ["0x7A06C4AeF988e7925575C50261297a946aD204A8"],
+        },
+      },
+    },
   },
   {
     id: "261",
@@ -5546,6 +7845,14 @@ export default [
     twitter: "https://x.com/solomon_labs",
     wiki: "https://docs.solomonlabs.org/",
     yieldBearing: true,
+    chainConfig: {
+      decimals: 9,
+      chains: {
+        solana: {
+          issued: ["Ex5DaKYMCN6QWFA4n67TmMwsH8MJV68RX6YXTmVM532C"],
+        },
+      },
+    },
   },
   {
     id: "262",
@@ -5564,6 +7871,34 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/worldlibertyfi",
     wiki: null,
+    chainConfig: {
+      chains: {
+        abcore: {
+          issued: ["0x111111d2bf19e43c34263401e0cad979ed1cdb61"],
+        },
+        bsc: {
+          issued: ["0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d"],
+        },
+        ethereum: {
+          issued: ["0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d"],
+        },
+        tron: {
+          issued: ["TPFqcBAaaUMCSVRCqPaQ9QnzKhmuoLR6Rc"],
+        },
+        solana: {
+          issued: ["USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB"],
+        },
+        aptos: {
+          issued: ["0x05fabd1b12e39967a3c24e91b7b8f67719a6dacee74f3c8b9fb7d93e855437d2"],
+        },
+        plume_mainnet: {
+          issued: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
+        },
+        monad: {
+          issued: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
+        },
+      },
+    },
   },
   {
     id: "263",
@@ -5582,6 +7917,19 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/_HTDA",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x7a486f809c952a6f8dec8cb0ff68173f2b8ed56c"],
+        },
+        flare: {
+          issued: ["0x4A771Cc1a39FDd8AA08B8EA51F7Fd412e73B3d2B"],
+        },
+        songbird: {
+          issued: ["0x4A771Cc1a39FDd8AA08B8EA51F7Fd412e73B3d2B"],
+        },
+      },
+    },
   },
   {
     id: "264",
@@ -5600,7 +7948,14 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/xbanking",
     wiki: null,
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["8dt9fQhoRKuWCSAsYweG2UMF3rbcG9xzNCTWXXSmdmEi"],
+        },
+      },
+    },
   },
   {
     id: "265",
@@ -5620,6 +7975,13 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/OrkiFi",
     wiki: "https://orki-finance.gitbook.io/orki-finance-docs/products/usdk",
+    chainConfig: {
+      chains: {
+        swellchain: {
+          issued: ["0x0000bAa0b1678229863c0A941C1056b83a1955F5"],
+        },
+      },
+    },
   },
   {
     id: "266",
@@ -5640,7 +8002,17 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/plumenetwork",
     wiki: "https://docs.plume.org/plume/plume-chain/official-tokens/plume-usd",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        plume_mainnet: {
+          issued: ["0xdddD73F5Df1F0DC31373357beAC77545dC5A6f3F"],
+        },
+        ethereum: {
+          issued: ["0xdddD73F5Df1F0DC31373357beAC77545dC5A6f3F"],
+        },
+      },
+    },
   },
   {
     id: "267",
@@ -5663,6 +8035,13 @@ export default [
     wiki: "https://docs.rootsfi.com/introduction",
     doublecounted: true,
 
+    chainConfig: {
+      chains: {
+        berachain: {
+          issued: ["0xedb5180661f56077292c92ab40b1ac57a279a396"],
+        },
+      },
+    },
   },
   {
     id: "268",
@@ -5676,7 +8055,6 @@ export default [
       "Users mint YU by depositing Bitcoin as collateral assets into the Yala Protocol. When the loan is repaid to retrieve the collateral, the paid back YU is burned.",
     onCoinGecko: "true",
     gecko_id: "yu",
-    module: "yala-stablecoin",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5684,6 +8062,22 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/yalaorg",
     wiki: "https://docs.yala.org/user-guide-mainnet/metamint-usdyu",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xE868084cf08F3c3db11f4B73a95473762d9463f7"],
+        },
+        bsc: {
+          issued: ["0xE868084cf08F3c3db11f4B73a95473762d9463f7"],
+        },
+        base: {
+          issued: ["0xE868084cf08F3c3db11f4B73a95473762d9463f7"],
+        },
+        solana: {
+          issued: ["YUYAiJo8KVbnc6Fb6h3MnH2VGND4uGWDH4iLnw7DLEu"],
+        },
+      },
+    },
   },
   {
     id: "269",
@@ -5703,7 +8097,32 @@ export default [
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/LiquityProtocol",
-    wiki: "https://docs.liquity.org/v2-documentation/technical-resources"
+    wiki: "https://docs.liquity.org/v2-documentation/technical-resources",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x6440f144b7e50D6a8439336510312d2F54beB01D"],
+        },
+        base: {
+          bridgedFromETH: ["0x03569CC076654F82679C4BA2124D64774781B01D"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x03569CC076654F82679C4BA2124D64774781B01D"],
+        },
+        optimism: {
+          bridgedFromETH: ["0x03569CC076654F82679C4BA2124D64774781B01D"],
+        },
+        scroll: {
+          bridgedFromETH: ["0x03569CC076654F82679C4BA2124D64774781B01D"],
+        },
+        avax: {
+          bridgedFromETH: ["0x03569CC076654F82679C4BA2124D64774781B01D"],
+        },
+        hyperliquid: {
+          bridgedFromETH: ["0x84533b1512A3A23F0c9668D88FDf86FEffdbb11A"],
+        },
+      },
+    },
   },
   // {
   //   id: "270",
@@ -5744,7 +8163,17 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/avantprotocol",
     wiki: "https://docs.avantprotocol.com/overview/core-tokens",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        avax: {
+          issued: ["0x24dE8771bC5DdB3362Db529Fc3358F2df3A0E346"],
+        },
+        monad: {
+          bridgedFromAvax: ["0x0D9D741FE423Cd5419e4BCb6cB2FfA87AFa93bA4"],
+        },
+      },
+    },
   },
   {
     id: "272",
@@ -5782,6 +8211,13 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/asymmetryfin",
     wiki: "https://docs.asymmetry.finance/usdaf-stablecoin/what-is-usdaf",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x85e30b8b263bc64d94b827ed450f2edfee8579da"],
+        },
+      },
+    },
   },
   {
     id: "274",
@@ -5802,6 +8238,28 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Quantoz",
     wiki: null,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0x8df723295214ea6f21026eeeb4382d475f146f9f"],
+        },
+        polygon: {
+          issued: ["0xd571edb2ef29df10fcd6200fd6d0ed2389983db3"],
+        },
+        ripple: {
+          issued: [
+            "4555525100000000000000000000000000000000.rDk1xiArDMjDqnrR2yWypwQAKg4mKnQYvs",
+          ],
+        },
+        algorand: {
+          issued: ["2768422954"],
+          unreleased: [
+            "3PJ3E3D6XI7YWMJAUX6WDCHWZ4GC2WHTAQIWJBYVJ326LM2I6NSMSLGCDY",
+          ],
+        },
+      },
+    },
   },
   {
     id: "275",
@@ -5822,6 +8280,28 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Quantoz",
     wiki: null,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0xc83e27f270cce0a3a3a29521173a83f402c1768b"],
+        },
+        polygon: {
+          issued: ["0xb291996477504506bf5f583102b5b5ea5d1e40e0"],
+        },
+        ripple: {
+          issued: [
+            "5553445100000000000000000000000000000000.rDk1xiArDMjDqnrR2yWypwQAKg4mKnQYvs",
+          ],
+        },
+        algorand: {
+          issued: ["2768603795"],
+          unreleased: [
+            "3PJ3E3D6XI7YWMJAUX6WDCHWZ4GC2WHTAQIWJBYVJ326LM2I6NSMSLGCDY",
+          ],
+        },
+      },
+    },
   },
   {
     id: "276",
@@ -5842,6 +8322,13 @@ export default [
     auditLinks: ["https://docs.hyperstable.xyz/docs/security/audits/"],
     twitter: "https://x.com/hyperstableX",
     wiki: "https://docs.hyperstable.xyz/docs/protocol/ush/",
+    chainConfig: {
+      chains: {
+        hyperliquid: {
+          issued: ["0x8ff0dd9f9c40a0d76ef1bcfaf5f98c1610c74bd8"],
+        },
+      },
+    },
   },
   {
     id: "277",
@@ -5860,6 +8347,13 @@ export default [
     auditLinks: ["https://docs.smardex.io/ultimate-synthetic-delta-neutral/audits"],
     twitter: "https://x.com/SmarDex",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xde17a000ba631c5d7c2bd9fb692efea52d90dee2"],
+        },
+      },
+    },
   },
   {
     id: "278",
@@ -5902,6 +8396,13 @@ export default [
     auditLinks: ["https://github.com/Parabol-Finance/parabol-protocol-contracts/blob/main/audits/trailofbits-audit-250124.pdf", "https://github.com/Parabol-Finance/parabol-protocol-contracts/blob/main/audits/trailofbits-audit-240514.pdf"],
     twitter: "https://x.com/parabolfi",
     wiki: "https://docs.parabol.fi/",
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x1f94d6A61973eDf53252b9E61c6250F303957b9D"],
+        },
+      },
+    },
   },
   {
     id: "280",
@@ -5996,6 +8497,13 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/MNEE_cash",
     wiki: "https://www.mnee.io/faq",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf"],
+        },
+      },
+    },
   },
   {
     id: "285",
@@ -6013,7 +8521,21 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/fslweb3",
     wiki: "https://fsl.com/ggusd",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        polygon: {
+          issued: ["0xFFFFFF9936BD58a008855b0812B44D2c8dffE2aA"],
+        },
+        bsc: {
+          bridgedFromPolygon: ["0xFFFFFF9936BD58a008855b0812B44D2c8dffE2aA"],
+        },
+        solana: {
+          bridgedFromPolygon: ["GGUSDyBUPFg5RrgWwqEqhXoha85iYGs6cL57SyK4G2Y7"],
+        },
+      },
+    },
   },
   {
     id: "286",
@@ -6035,7 +8557,27 @@ export default [
       lzConfig: {
         symbols: ["USDG"],
       }
-    }
+    },
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0xe343167631d89B6Ffc58B88d6b7fB0228795491D"],
+        },
+        solana: {
+          issued: ["2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH"],
+        },
+        ink: {
+          bridgedFromETH: ["0xe343167631d89B6Ffc58B88d6b7fB0228795491D"],
+        },
+        xlayer: {
+          issued: ["0x4ae46a509f6b1d9056937ba4500cb143933d2dc8"],
+        },
+        robinhood: {
+          issued: ["0x5fc5360d0400a0fd4f2af552add042d716f1d168"],
+        },
+      },
+    },
   },
   {
     id: "287",
@@ -6053,6 +8595,13 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/neriteorg",
     wiki: "https://docs.nerite.org/",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x4ecf61a6c2FaB8A047CEB3B3B263B401763e9D49"],
+        },
+      },
+    },
   },
   {
     id: "288",
@@ -6070,6 +8619,16 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/Ebisu_Finance",
     wiki: "https://ebisu.gitbook.io/ebisu-money",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x09fD37d9AA613789c517e76DF1c53aEce2b60Df4"],
+        },
+        plasma: {
+          issued: ["0xef7b1a03e0897c33b63159e38d779e3970c0e2fc"],
+        },
+      },
+    },
   },
   {
     id: "289",
@@ -6104,6 +8663,16 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/straitsx",
     wiki: "https://www.straitsx.com/xusd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xC08e7E23C235073C6807C2EFE7021304cb7c2815"],
+        },
+        bsc: {
+          issued: ["0xF81aC2E1A0373ddE1BcE01E2Fe694a9b7E3bfcB9"],
+        },
+      },
+    },
   },
   {
     id: "291",
@@ -6125,6 +8694,82 @@ export default [
     auditLinks: ["https://github.com/parallel-protocol/parrallel-tokens/blob/main/docs/audits/Bailsec%20-%20Parallel%20Protocol%20-%20V3%20Core%20-%20Final%20Report.pdf"],
     twitter: "https://x.com/ParallelMoney",
     wiki: "https://docs.parallel.best/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x9B3a8f7CEC208e247d97dEE13313690977e24459"],
+        },
+        avax: {
+          issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
+        },
+        arbitrum: {
+          issued: ["0x76A9A0062ec6712b99B4f63bD2b4270185759dd5"],
+        },
+        base: {
+          issued: ["0x76A9A0062ec6712b99B4f63bD2b4270185759dd5"],
+        },
+        bsc: {
+          issued: ["0x048C4e07D170eEdEE8772cA76AEE1C4e2D133d5c"],
+        },
+        ink: {
+          issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
+        },
+        optimism: {
+          issued: ["0x90337e484B1Cb02132fc150d3Afa262147348545"],
+        },
+        xdai: {
+          issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
+        },
+        hyperliquid: {
+          issued: ["0xBE65F0F410A72BeC163dC65d46c83699e957D588"],
+        },
+        sonic: {
+          issued: ["0x08417cdb7F52a5021bB4eb6E0deAf3f295c3f182"],
+        },
+        polygon: {
+          issued: ["0x1250304F66404cd153fA39388DDCDAec7E0f1707"],
+        },
+        sei: {
+          issued: ["0x048C4e07D170eEdEE8772cA76AEE1C4e2D133d5c"],
+        },
+        berachain: {
+          issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
+        },
+        scroll: {
+          issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
+        },
+        unichain: {
+          issued: ["0x9eE1963f05553eF838604Dd39403be21ceF26AA4"],
+        },
+        tac: {
+          issued: ["0x4DeF531c3060686948f00EcC7504f2E0b71EDa14"],
+        },
+        hemi: {
+          issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+        },
+        wc: {
+          issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+        },
+        fraxtal: {
+          issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+        },
+        katana: {
+          issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+        },
+        plume_mainnet: {
+          issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+        },
+        plasma: {
+          issued: ["0xC2f8B5d893217462aE9c9879c9285A5a3AAbcb8F"],
+        },
+        xlayer: {
+          issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+        },
+        linea: {
+          issued: ["0x8fCf9118fdD359f6277cDd143c2Da206e64140F3"],
+        },
+      },
+    },
   },
   {
     id: "292",
@@ -6145,6 +8790,22 @@ export default [
     auditLinks: "https://vnx.li/transparency/",
     twitter: "https://twitter.com/VNX_Global",
     wiki: "https://vnx.gitbook.io/vnx-global",
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["5H4voZhzySsVvwVYDAKku8MZGuYBC7cXaBKDPW4YHWW1"],
+        },
+        celo: {
+          issued: ["0x7ae4265ecfc1f31bc0e112dfcfe3d78e01f4bb7f"],
+        },
+        base: {
+          issued: ["0xaeb4bb7debd1e5e82266f7c3b5cff56b3a7bf411"],
+        },
+        ethereum: {
+          issued: ["0x34C9C643Becd939c950bB9F141E35777559817CB"],
+        },
+      },
+    },
   },
   {
     id: "293",
@@ -6167,6 +8828,13 @@ export default [
     auditLinks: "https://docs.sigma.money/risk-management/audit-reports",
     twitter: "https://x.com/sigmadotmoney",
     wiki: "https://docs.sigma.money/",
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0x5519a479Da8Ce3Af7f373c16f14870BbeaFDa265"],
+        },
+      },
+    },
   },
   {
     id: "294",
@@ -6189,6 +8857,16 @@ export default [
     wiki: "https://docs.nondollar.life/autonomint",
     module: "autonomint-usda+",
 
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x4e44fB5c61a89CF44a9080AB987335889FCaA6bd"],
+        },
+        optimism: {
+          issued: ["0x4e44fB5c61a89CF44a9080AB987335889FCaA6bd"],
+        },
+      },
+    },
   },
   {
     id: "295",
@@ -6209,6 +8887,13 @@ export default [
     auditLinks: "https://docs.asymmetry.finance/security/audits-bug-bounties",
     twitter: "https://x.com/asymmetryfin",
     wiki: "https://docs.asymmetry.finance/usdaf-stablecoin/what-is-usdaf",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x9cf12ccd6020b6888e4d4c4e4c7aca33c1eb91f8"],
+        },
+      },
+    },
   },
   {
     id: "296",
@@ -6231,7 +8916,20 @@ export default [
     auditLinks: "https://docs.cap.app/resources/audits",
     twitter: "https://x.com/CapApp",
     wiki: "https://docs.cap.app/",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xcCcc62962d17b8914c62D74FfB843d73B2a3cccC"],
+        },
+        megaeth: {
+          issued: ["0xcCcc62962d17b8914c62D74FfB843d73B2a3cccC"],
+        },
+        tempo: {
+          issued: ["0x20c0000000000000000000000520792dcccccccc"],
+        },
+      },
+    },
   },
   {
     id: "297",
@@ -6252,7 +8950,17 @@ export default [
     auditLinks: "https://mainstreet-finance.gitbook.io/mainstreet.finance/audits/watchpug-security-audit",
     twitter: "https://x.com/Main_St_Finance",
     wiki: "https://mainstreet-finance.gitbook.io/mainstreet.finance",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        sonic: {
+          bridgedFromETH: ["0xE5Fb2Ed6832deF99ddE57C0b9d9A56537C89121D"],
+        },
+        ethereum: {
+          issued: ["0x4ba01f22827018b4772CD326C7627FB4956A7C00"],
+        },
+      },
+    },
   },
   {
     id: "298",
@@ -6273,7 +8981,18 @@ export default [
     auditLinks: "https://docs.infinifi.xyz/audits",
     twitter: "https://x.com/infiniFi_",
     wiki: "https://docs.infinifi.xyz/infiniFi-Docs-1ed44c414f36805a8642e0dcdabae970",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      decimals: 18,
+      chains: {
+        ethereum: {
+          issued: ["0x48f9e38f3070AD8945DFEae3FA70987722E3D89c"],
+        },
+        tempo: {
+          issued: ["0x20c000000000000000000000ab02d39df30bd17e"],
+        },
+      },
+    },
   },
   {
     id: "299",
@@ -6292,7 +9011,21 @@ export default [
     auditLinks: "https://docs.apacx.io/technical-references/smart-contract-audits",
     twitter: "https://x.com/apacx_io",
     wiki: "https://docs.apacx.io/",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      decimals: 18,
+      chains: {
+        ethereum: {
+          issued: ["0xBe370Ad45D44eB45174C4Ec60b88839feF32C077"],
+        },
+        polygon: {
+          bridgedFromETH: ["0xe75220cB014Dfb2D354bb59be26d7458bB8d0706"],
+        },
+        tron: {
+          bridgedFromETH: ["TXdN5fvFjCdqjWJRvWmBzSRLBN7JLYmmrs"],
+        },
+      },
+    },
   },
   {
     id: "300",
@@ -6311,6 +9044,32 @@ export default [
     auditLinks: "https://www.bilira.co/en/audit-reports",
     twitter: "https://x.com/BiLira_Kripto",
     wiki: "https://iq.wiki/wiki/bilira",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x2c537e5624e4af88a7ae4060c022609376c8d0eb"],
+          unreleased: ["0xd03846601b6b77965693741aAF296491Bc10A0EB"],
+        },
+        base: {
+          issued: ["0xfb8718a69aed7726afb3f04d2bd4bfde1bdcb294"],
+        },
+        avax: {
+          issued: ["0x564a341df6c126f90cf3ecb92120fd7190acb401"],
+        },
+        bsc: {
+          issued: ["0xc1fdbed7dac39cae2ccc0748f7a80dc446f6a594"],
+        },
+        polygon: {
+          issued: ["0x4fb71290ac171e1d144f7221d882becac7196eb5"],
+        },
+        solana: {
+          issued: ["A94X2fRy3wydNShU4dRaDyap2UuoeWJGWyATtyp61WZf"],
+        },
+        plasma: {
+          issued: ["0x90729a45948c3078890Bc80F2a4e7870A2Ea4C5E"],
+        },
+      },
+    },
   },
   {
     id: "301",
@@ -6329,6 +9088,13 @@ export default [
     auditLinks: "https://jigsaw.gitbook.io/jigsaw-protocol/security/smart-contract-audits",
     twitter: "https://x.com/jigsawdefi",
     wiki: "https://jigsaw.gitbook.io/jigsaw-protocol",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x000000096cb3d4007fc2b79b935c4540c5c2d745"],
+        },
+      },
+    },
   },
   {
     id: "302",
@@ -6349,6 +9115,13 @@ export default [
     auditLinks: "https://docs.hylo.so/security/audits",
     twitter: "https://x.com/hylo_so",
     wiki: "https://docs.hylo.so/protocol-overview/hyUSD-&-xSOL",
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["5YMkXAYccHSGnHn9nob9xEvv6Pvka9DZWH7nTbotTu9E"],
+        },
+      },
+    },
   },
   {
     id: "303",
@@ -6367,6 +9140,16 @@ export default [
     auditLinks: "https://mezo.org/docs/audits/2025-04-15%20-%20Cantina%20-%20MUSD.pdf",
     twitter: "https://x.com/mezonetowrk",
     wiki: "https://mezo.org/docs/users/musd/",
+    chainConfig: {
+      chains: {
+        mezo: {
+          issued: ["0xdD468A1DDc392dcdbEf6db6e34E89AA338F9F186"],
+        },
+        ethereum: {
+          bridgedFromMezo: ["0xdD468A1DDc392dcdbEf6db6e34E89AA338F9F186"],
+        },
+      },
+    },
   },
   {
     id: "304",
@@ -6385,6 +9168,13 @@ export default [
     auditLinks: "https://usdu.finance/wp-content/uploads/2025/07/BlockBite-USDU-Security-Audit-2025.pdf",
     twitter: "https://x.com/USDUfinance",
     wiki: "https://usdu.gitbook.io/docs/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55"],
+        },
+      },
+    },
   },
   {
     id: "305",
@@ -6405,7 +9195,14 @@ export default [
     auditLinks: ["https://xsy-1.gitbook.io/xsy-main/audits"],
     twitter: "https://x.com/xsy_fi",
     wiki: "https://xsy.fi",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        avax: {
+          issued: ["0xdbc5192a6b6ffee7451301bb4ec312f844f02b4a"],
+        },
+      },
+    },
   },
   {
     id: "306",
@@ -6446,7 +9243,24 @@ export default [
     ],
     twitter: null,
     wiki: "https://www.sgforge.com/product/coinvertible/",
-    module: "societe-generale-forge-usdcv"
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x5422374B27757da72d5265cC745ea906E0446634"],
+          unreleased: [
+            "0xc98Cb9F53e20AFbbeb75Caf6456eD52D5d7903f6",
+            "0x7dE0bbdfCd4A6a956F149bEFcca30D6B5Bc5DA69",
+          ],
+        },
+        solana: {
+          issued: ["8smindLdDuySY6i2bStQX9o8DVhALCXCMbNxD98unx35"],
+          unreleased: [
+            "4N1WwAaSukn7YtRKRArA3Ntp4CfcB1nCiqCDGEjEBhEj",
+            "5tg4qRdiXJ7XxYd6KK4UnnNvxgHJqfBUygPqZLwSnhnt",
+          ],
+        },
+      },
+    },
   },
   {
     id: "308",
@@ -6466,7 +9280,14 @@ export default [
     twitter: "https://x.com/ColtProtocol",
     wiki: "https://coltstable.notion.site/Colt-Stable-Documentation-257c9bce381680ca9f5edcfb47779710",
     module: "saga-dollar",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        saga: {
+          issued: ["0xB76144F87DF95816e8c55C240F874C554B4553C3"],
+        },
+      },
+    },
   },
   {
     id: "309",
@@ -6486,7 +9307,20 @@ export default [
     twitter: "https://x.com/USDai_Official",
     wiki: "https://docs.usd.ai/how-usd.ai-works",
     doublecounted: true,
-    module: 'usd-ai'
+    module: 'usd-ai',
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF"],
+        },
+        plasma: {
+          bridgedFromArb: ["0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF"],
+        },
+        ethereum: {
+          bridgedFromArb: ["0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF"],
+        },
+      },
+    },
   },
   {
     id: "310",
@@ -6505,7 +9339,14 @@ export default [
     auditLinks: ["https://storage.googleapis.com/dapp_prod/audit_reports/halborn_program_audit_250605.pdf"],
     twitter: "https://x.com/solsticefi",
     wiki: null,
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["6FrrzDk5mQARGc1TDYoyVnSyRdds1t4PbtohCD6p3tgG"],
+        },
+      },
+    },
   },
   {
     id: "311",
@@ -6526,6 +9367,13 @@ export default [
     wiki: "https://inshallah.gitbook.io/inshallah/iausd-stablecoin/what-is-iausd",
     module: "iAUSD",
 
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["iAUSDhn2B61LBeCgph6JFxxS5KMYoyeXCbJZ4gyZLr7"],
+        },
+      },
+    },
   },
   {
     id: "312",
@@ -6544,6 +9392,13 @@ export default [
     auditLinks: ["https://github.com/galacticcouncil/hydration-security/tree/main/audit-reports"],
     twitter: "https://x.com/hydration_net",
     wiki: "https://docs.hydration.net/quick_start/hollar",
+    chainConfig: {
+      chains: {
+        hydradx: {
+          issued: ["0x531a654d1696ed52e7275a8cede955e82620f99a"],
+        },
+      },
+    },
   },
   {
     id: "313",
@@ -6562,6 +9417,19 @@ export default [
     auditLinks: ["https://diligence.consensys.io/audits/2025/08/metamask-usd-token/"],
     twitter: "https://x.com/MetaMask",
     wiki: "https://metamask.io/price/metamask-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xaca92e438df0b2401ff60da7e4337b687a2435da"],
+        },
+        linea: {
+          issued: ["0xaca92e438df0b2401ff60da7e4337b687a2435da"],
+        },
+        monad: {
+          issued: ["0xaca92e438df0b2401ff60da7e4337b687a2435da"],
+        },
+      },
+    },
   },
   {
     id: "314",
@@ -6581,6 +9449,23 @@ export default [
     twitter: "https://x.com/joinpalmfi",
     wiki: null,
     module: "palm-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xFAF0cEe6B20e2Aaa4B80748a6AF4CD89609a3d78"],
+          reserves: ["0x4b3974aaabdc251b3086ae4a8163110d766c88c8", "0x1760bFB0f8461Fcf4c6768a82436840d23F40252", "0xa1B2A2dFe6300D3f2174e0a4f073Fc0F78F5169F"],
+        },
+        bsc: {
+          issued: ["0xFAF0cEe6B20e2Aaa4B80748a6AF4CD89609a3d78"],
+        },
+        solana: {
+          issued: ["CZzgUBvxaMLwMhVSLgqJn3npmxoTo6nzMNQPAnwtHF3s"],
+        },
+        tron: {
+          issued: ["TF39FD5YwW63mtB1zr9gpVdyFUx1icac2y"],
+        },
+      },
+    },
   },
   {
     id: "315",
@@ -6619,6 +9504,13 @@ export default [
     twitter: "https://x.com/usecash",
     wiki: null,
     module: "cash",
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["CASHx9KJUStyftLFWGvEVf59SGeG9sh5FfcnZMVPCASH"],
+        },
+      },
+    },
   },
   {
     id: "317",
@@ -6638,6 +9530,34 @@ export default [
     twitter: "https://x.com/tokenGBP",
     wiki: null,
     module: "tgbp",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x27f6c8289550fCE67f6B50BeD1F519966aFE5287"],
+        },
+        bsc: {
+          issued: ["0x27f6c8289550fCE67f6B50BeD1F519966aFE5287"],
+        },
+        base: {
+          issued: ["0x27f6c8289550fCE67f6B50BeD1F519966aFE5287"],
+        },
+        polygon: {
+          issued: ["0x27f6c8289550fCE67f6B50BeD1F519966aFE5287"],
+        },
+        avax: {
+          issued: ["0x27f6c8289550fCE67f6B50BeD1F519966aFE5287"],
+        },
+        solana: {
+          issued: ["2zMqyX4AYCk6mgy5UZ2S7zUaLxwERhK5WjqDzkPPbSpW"],
+        },
+        arbitrum: {
+          issued: ["0x27f6c8289550fCE67f6B50BeD1F519966aFE5287"],
+        },
+        xdai: {
+          issued: ["0x1F34490F8e8E776FFc547b39B864364035Eaf44F"],
+        },
+      },
+    },
   },
   {
     id: "318",
@@ -6657,7 +9577,14 @@ export default [
     twitter: "https://x.com/LitFinancial_",
     wiki: "https://brale.xyz/stablecoins/litUSD",
     module: "lit-usd",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x3B5F2810fB2168FfA9C73160F97BF9f2461fFa5c"],
+        },
+      },
+    },
   },
   {
     id: "319",
@@ -6676,7 +9603,16 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/AllUnityStable",
     wiki: "https://allunity.com/eurau/",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: { issued: "0x4933a85b5b5466fbaf179f72d3de273c287ec2c2" },
+        polygon: { issued: "0x4933a85b5b5466fbaf179f72d3de273c287ec2c2" },
+        base: { issued: "0x4933a85b5b5466fbaf179f72d3de273c287ec2c2" },
+        optimism: { issued: "0x4933a85b5b5466fbaf179f72d3de273c287ec2c2" },
+        tempo: { issued: "0x20c0000000000000000000009a4a4b17e0dc6651" }, // EURAU on Tempo Mainnet
+      },
+    },
   },
   {
     id: "320",
@@ -6696,6 +9632,13 @@ export default [
     twitter: "https://x.com/rockydotcash",
     wiki: "https://docs.rocky.cash/products/stablecoins-and-savings/usdr-and-susdr",
     module: "rocky-usdr",
+    chainConfig: {
+      chains: {
+        sei: {
+          issued: ["0x53fdd705873d8259d6d179901fc3fdcb5339f921"],
+        },
+      },
+    },
   },
   {
     id: "321",
@@ -6715,6 +9658,14 @@ export default [
     twitter: "https://x.com/nativemarkets",
     wiki: null,
     module: "hyperliquid-native-stablecoin",
+    chainConfig: {
+      chains: {
+        hyperliquid: {
+          issued: ["0x111111a1a0667d36bd57c0a9f569b98057111111"],
+          unreleased: ["0x4c2c0f0bb2631b02ac9299c59690914ee7a200b8", "0xc5c21723fdd9e74fd853dd19c8dded71c3767cc2"],
+        },
+      },
+    },
   },
   {
     id: "322",
@@ -6733,6 +9684,13 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/lastdotnet",
     wiki: null,
+    chainConfig: {
+      chains: {
+        hyperliquid: {
+          issued: ["0xca79db4b49f608ef54a5cb813fbed3a6387bc645"],
+        },
+      },
+    },
   },
   {
     id: "323",
@@ -6751,6 +9709,13 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/KeikoFinance",
     wiki: "https://docs.keikofinance.com/protocol-overview/kei-stablecoin",
+    chainConfig: {
+      chains: {
+        hyperliquid: {
+          issued: ["0xb5fe77d323d69eb352a02006ea8ecc38d882620c"],
+        },
+      },
+    },
   },
   {
     id: "324",
@@ -6769,7 +9734,23 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/stablecoin_xyz",
     wiki: null,
-    module: "sbc",
+    chainConfig: {
+      chains: {
+        ethereum: { issued: ["0xf9FB20B8E097904f0aB7d12e9DbeE88f2dcd0F16"] },
+        ethereumclassic: { issued: ["0xfdcC3dd6671eaB0709A4C0f3F53De9a333d80798"] },
+        arbitrum: { issued: ["0xfdcC3dd6671eaB0709A4C0f3F53De9a333d80798"] },
+        avax: { issued: ["0xf9FB20B8E097904f0aB7d12e9DbeE88f2dcd0F16"] },
+        base: { issued: ["0xfdcC3dd6671eaB0709A4C0f3F53De9a333d80798"] },
+        celo: { issued: ["0xDE093684c796204224BC081f937aa059D903c52a"] },
+        optimism: { issued: ["0xf9FB20B8E097904f0aB7d12e9DbeE88f2dcd0F16"] },
+        polygon: { issued: ["0xfdcC3dd6671eaB0709A4C0f3F53De9a333d80798"] },
+        solana: { issued: ["DBAzBUXaLj1qANCseUPZz4sp9F8d2sc78C4vKjhbTGMA"] },
+        tempo: { issued: ["0x20c000000000000000000000ae247a1130450f09"] },
+        stellar: {
+          issued: ["SBC-GCQCNWT22JDLENQAVIE6DRJGHWAQ6EX2H5ABGPV55EJUPPZM5UA7KHZR"],
+        },
+      },
+    },
   },
   {
     id: "325",
@@ -6788,6 +9769,16 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/Eurite_BC",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x9d1a7a3191102e9f900faa10540837ba84dcbae7"],
+        },
+        bsc: {
+          issued: ["0x9d1a7a3191102e9f900faa10540837ba84dcbae7"],
+        },
+      },
+    },
   },
   {
     id: "326",
@@ -6806,6 +9797,22 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/MetronomeDAO",
     wiki: null,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xab5eb14c09d416f0ac63661e57edb7aecdb9befa"],
+        },
+        optimism: {
+          issued: ["0x9dabae7274d28a45f0b65bf8ed201a5731492ca0"],
+        },
+        base: {
+          issued: ["0x526728dbc96689597f85ae4cd716d4f7fccbae9d"],
+        },
+        plasma: {
+          issued: ["0x29ad7fe4516909b9e498b5a65339e54791293234"],
+        },
+      },
+    },
   },
   {
     id: "327",
@@ -6827,6 +9834,13 @@ export default [
     ],
     twitter: "https://x.com/MuDigitalHQ",
     wiki: null,
+    chainConfig: {
+      chains: {
+        monad: {
+          issued: ["0x4917a5ec9fCb5e10f47CBB197aBe6aB63be81fE8"],
+        },
+      },
+    },
   },
   {
     id: "328",
@@ -6848,6 +9862,13 @@ export default [
     twitter: "https://x.com/mustangfinance",
     wiki: "https://docs.must.finance/",
     module: "mustng-usd",
+    chainConfig: {
+      chains: {
+        saga: {
+          issued: ["0xA8b56ce258a7f55327BdE886B0e947EE059ca434"],
+        },
+      },
+    },
   },
   {
     id: "329",
@@ -6867,6 +9888,13 @@ export default [
     twitter: "https://x.com/beraborrow",
     wiki: null,
     module: "nectar",
+    chainConfig: {
+      chains: {
+        berachain: {
+          issued: ["0x1ce0a25d13ce4d52071ae7e02cf1f6606f4c79d3"],
+        },
+      },
+    },
   },
   {
     id: "330",
@@ -6886,6 +9914,16 @@ export default [
     twitter: "https://x.com/GrowthProtocol_",
     wiki: null,
     module: "xpusd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x31Bc2bAa782e5180e9EfA32261D2Bb33Ce8918Bc"],
+        },
+        avax: {
+          issued: ["0xcc18b41a0f63c67f17f23388c848aec67b583422"],
+        },
+      },
+    },
   },
   {
     id: "331",
@@ -6905,7 +9943,14 @@ export default [
     twitter: "https://x.com/piku_dao",
     wiki: "https://docs.piku.co/piku/piku/usp",
     module: "usp",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x098697bA3Fee4eA76294C5d6A466a4e3b3E95FE6"],
+        },
+      },
+    },
   },
   {
     id: "332",
@@ -6924,7 +9969,13 @@ export default [
     auditLinks: ["https://docs.raac.io/audits-rwfx/"],
     twitter: "https://x.com/Raacfi",
     wiki: "https://docs.raac.io/rw-fx/",
-    module: "precious-metals-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xc0c17dd08263c16f6b64e772fb9b723bf1344ddf"],
+        },
+      },
+    },
   },
   {
     id: "333",
@@ -6943,7 +9994,13 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/mantraUSD",
     wiki: null,
-    module: "mantra-usd",
+    chainConfig: {
+      chains: {
+        mantra: {
+          issued: ["0xd2b95283011E47257917770D28Bb3EE44c849f6F"],
+        },
+      },
+    },
   },
   {
     id: "334",
@@ -6963,6 +10020,22 @@ export default [
     twitter: "https://x.com/Macropod_AU",
     wiki: null,
     module: "macropod",
+    chainConfig: {
+      chains: {
+        rbn: {
+          issued: ["0x081599E4936D12c46Bd48913B2329115Cd26cbdd"],
+        },
+        ethereum: {
+          issued: ["0x081599E4936D12c46Bd48913B2329115Cd26cbdd"],
+        },
+        solana: {
+          issued: ["CiYXBwHPrdNkMtxR8YEWKv78K6bQjFoEWhPQrZqEmubi"],
+        },
+        base: {
+          issued: ["0xeded6ae915b129b67a4ad49901518f2736427063"],
+        },
+      },
+    },
   },
   {
     id: "335",
@@ -6982,7 +10055,14 @@ export default [
     twitter: "https://x.com/JupiterExchange",
     wiki: "https://docs.jup.ag/user-docs/earn/jupusd",
     module: "jupusd",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["JuprjznTrTSp2UFa3ZBUFgwdAmtZCq4MQCwysN55USD"],
+        },
+      },
+    },
   },
   {
     id: "336",
@@ -7002,7 +10082,20 @@ export default [
     twitter: "https://x.com/UTechStables",
     wiki: null,
     module: "united-stables",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0xce24439f2d9c6a2289f741120fe202248b666666"],
+        },
+        ethereum: {
+          issued: ["0xce24439f2d9c6a2289f741120fe202248b666666"],
+        },
+        tron: {
+          issued: ["TFNirp6PbqYE1ZTtWuCMUKJWLNZkoCoeFJ"],
+        },
+      },
+    },
   },
   {
     id: "337",
@@ -7041,6 +10134,13 @@ export default [
     twitter: "https://x.com/fuse_network",
     wiki: null,
     module: "fuse-dollar-v3",
+    chainConfig: {
+      chains: {
+        fuse: {
+          issued: ["0xCE86a1cf3cFf48139598De6bf9B1dF2E0f79F86F"],
+        },
+      },
+    },
   },
   {
     id: "339",
@@ -7065,7 +10165,35 @@ export default [
       lzConfig: {
         symbols: ["reUSD"],
       }
-    }
+    },
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x5086bf358635b81d8c47c66d1c8b9e567db70c72"],
+        },
+        arbitrum: {
+          issued: ["0x76ce01f0ef25aa66cc5f1e546a005e4a63b25609"],
+        },
+        base: {
+          issued: ["0x7d214438d0f27afccc23b3d1e1a53906ace5cfea"],
+        },
+        avax: {
+          issued: ["0x180af87b47bf272b2df59dccf2d76a6eafa625bf"],
+        },
+        ink: {
+          issued: ["0x5bcf6b008bf80b9296238546bace1797657b05d6"],
+        },
+        bsc: {
+          issued: ["0xba9425ec55ee0e72216d18e0ad8bbba2553bfb60"],
+        },
+        tempo: {
+          issued: ["0x20c000000000000000000000383a23bacb546ab9"],
+        },
+        monad: {
+          issued: ["0xD25f563e12FF616262F8c947feC108db934F8059"],
+        },
+      },
+    },
   },
   {
     id: "340",
@@ -7085,6 +10213,22 @@ export default [
     twitter: "https://x.com/multiplifi",
     wiki: "https://docs.multipli.fi/",
     module: "rwausdi",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xa39986f96b80d04e8d7aeaaf47175f47c23fd0f4"],
+        },
+        monad: {
+          issued: ["0x650b616b46fF94000Eb115926aB8393B90788D76"],
+        },
+        base: {
+          issued: ["0xd74FB32112b1eF5b4C428Fead8dA8d85A0019009"],
+        },
+        arbitrum: {
+          issued: ["0xa39986f96b80d04e8d7aeaaf47175f47c23fd0f4"],
+        },
+      },
+    },
   },
   {
     id: "341",
@@ -7104,7 +10248,14 @@ export default [
     twitter: "https://x.com/PleasingGolden",
     wiki: null,
     module: "pleasing-usd",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xc8fb643d18f1e53698cfda5c8fdf0cdc03c1dbec"],
+        },
+      },
+    },
   },
   {
     id: "342",
@@ -7124,6 +10275,16 @@ export default [
     twitter: "https://x.com/megaeth",
     wiki: "https://www.megaeth.com/blog-news/megaeth-introduces-usdm",
     module: "megausd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xEc2AF1C8B110a61fD9C3Fa6a554a031Ca9943926"],
+        },
+        megaeth: {
+          issued: ["0xFAfDdbb3FC7688494971a79cc65DCa3EF82079E7"],
+        },
+      },
+    },
   },
   {
     id: "343",
@@ -7143,6 +10304,13 @@ export default [
     twitter: "https://x.com/usat",
     wiki: null,
     module: "usat",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x07041776f5007ACa2A54844F50503a18A72A8b68"],
+        },
+      },
+    },
   },
   {
     id: "344",
@@ -7162,7 +10330,17 @@ export default [
     twitter: "https://x.com/YuzuMoneyX",
     wiki: null,
     module: "yuzu-usd",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        plasma: {
+          issued: ["0x6695c0f8706c5ace3bdf8995073179cca47926dc"],
+        },
+        monad: {
+          bridgedFromPlasma: ["0x9dcB0D17eDDE04D27F387c89fECb78654C373858"],
+        },
+      },
+    },
   },
   {
     id: "345",
@@ -7182,6 +10360,13 @@ export default [
     twitter: "https://x.com/uncapfinance",
     wiki: null,
     module: "uncap-usd",
+    chainConfig: {
+      chains: {
+        starknet: {
+          issued: ["0x2F94539F80158f9a48a7acF3747718dfBec9B6f639E2742c1FB44aE7ab5AA04"],
+        },
+      },
+    },
     deadUrl: true,
     deadFrom: "2026-03-04",
   },
@@ -7203,7 +10388,14 @@ export default [
     twitter: "https://x.com/neutrl",
     wiki: null,
     module: "neutrl-usd",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xe556aba6fe6036275ec1f87eda296be72c811bce"],
+        },
+      },
+    },
   },
   {
     id: "347",
@@ -7224,7 +10416,13 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/usdgo_official",
     wiki: null,
-    module: "usdgo",
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["72puLt71H93Z9CzHuBRTwFpL4TG3WZUhnoCC7p8gxigu"],
+        },
+      },
+    },
   },
   {
     id: "348",
@@ -7244,6 +10442,13 @@ export default [
     twitter: "https://x.com/digitalassets",
     wiki: null,
     module: "fidelity-digital-dollar",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x7C135549504245B5eAe64fc0E99Fa5ebabb8e35D"],
+        },
+      },
+    },
   },
   {
     id: "349",
@@ -7263,7 +10468,14 @@ export default [
     twitter: "https://x.com/paretocredit",
     wiki: "https://docs.pareto.credit/product/usp",
     module: "pareto-usp",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x97ccc1c046d067ab945d3cf3cc6920d3b1e54c88"],
+        },
+      },
+    },
   },
   {
     id: "350",
@@ -7283,6 +10495,13 @@ export default [
     twitter: "https://x.com/citrea_xyz",
     wiki: "https://docs.citrea.xyz/developer-documentation/citrea-usd-ctusd",
     module: "citrea-ctusd",
+    chainConfig: {
+      chains: {
+        citrea: {
+          issued: ["0x8D82c4E3c936C7B5724A382a9c5a4E6Eb7aB6d5D"],
+        },
+      },
+    },
   },
   {
     id: "351",
@@ -7302,6 +10521,21 @@ export default [
     twitter: "https://x.com/Tetris_Money",
     wiki: "https://tetrismoney.gitbook.io/docs/en/whitepaper/summary",
     module: "rubt",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0xe103f85c23577675f82438a2866C7EE3bBC9c8C8"],
+          unreleased: ["0xc92383f1283ccee38Ef8Ca783a82592E643adFBB"],
+        },
+        tron: {
+          bridgedFromETH: ["TAufZEJdyKLBjBKAPCVBjciabaTci2sUPv"],
+        },
+        hyperliquid: {
+          bridgedFromETH: ["0xead4BCe5B9b5777cDc45B94DFa88209dE7A4EfBe"],
+        },
+      },
+    },
   },
   {
     id: "352",
@@ -7321,6 +10555,13 @@ export default [
     twitter: "https://x.com/BRTH_stablecoin",
     wiki: null,
     module: "brth",
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0x38fd02Dc840F099772392f2DFe3A3BEE9Aab3AB7"],
+        },
+      },
+    },
   },
   {
     id: "353",
@@ -7340,6 +10581,22 @@ export default [
     twitter: "https://x.com/gaib_ai",
     wiki: "https://docs.gaib.ai/",
     module: "gaib-aid",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x18f52b3fb465118731d9e0d276d4eb3599d57596"],
+        },
+        arbitrum: {
+          issued: ["0x18f52b3fb465118731d9e0d276d4eb3599d57596"],
+        },
+        base: {
+          issued: ["0x18f52b3fb465118731d9e0d276d4eb3599d57596"],
+        },
+        bsc: {
+          issued: ["0x18f52b3fb465118731d9e0d276d4eb3599d57596"],
+        },
+      },
+    },
   },
   {
     id: "354",
@@ -7359,6 +10616,19 @@ export default [
     twitter: "https://x.com/apyx_fi",
     wiki: "https://docs.apyx.fi",
     module: "apxusd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x98A878b1Cd98131B271883B390f68D2c90674665"],
+        },
+        base: {
+          issued: ["0xd993935e13851dd7517af10687ec7e5022127228"],
+        },
+        bsc: {
+          issued: ["0x6b3788fd6604bbf03c5378d24e57bb334baad4af"],
+        },
+      },
+    },
   },
   {
     id: "355",
@@ -7378,6 +10648,38 @@ export default [
     twitter: "https://x.com/jpy_coin",
     wiki: "https://drive.google.com/file/d/1LDm-Pl3pxojqJVyMVriQ-_vh0o9zHYtP/view",
     module: "jpycoin",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xe7c3d8c9a439fede00d2600032d5db0be71c3c29"],
+          unreleased: [
+            "0x8549e82239a88f463ab6e55ad1895b629a00def3", // issuer wallet
+            "0xb808af91bdc577bfb3f9c91470f3286dd076e5c1", // redemption wallet
+          ],
+        },
+        avax: {
+          issued: ["0xe7c3d8c9a439fede00d2600032d5db0be71c3c29"],
+          unreleased: [
+            "0x8549e82239a88f463ab6e55ad1895b629a00def3", // issuer wallet
+            "0xb808af91bdc577bfb3f9c91470f3286dd076e5c1", // redemption wallet
+          ],
+        },
+        polygon: {
+          issued: ["0xe7c3d8c9a439fede00d2600032d5db0be71c3c29"],
+          unreleased: [
+            "0x8549e82239a88f463ab6e55ad1895b629a00def3", // issuer wallet
+            "0xb808af91bdc577bfb3f9c91470f3286dd076e5c1", // redemption wallet
+          ],
+        },
+        klaytn: {
+          issued: ["0xe7c3d8c9a439fede00d2600032d5db0be71c3c29"],
+          unreleased: [
+            "0x8549e82239a88f463ab6e55ad1895b629a00def3", // issuer wallet
+            "0xb808af91bdc577bfb3f9c91470f3286dd076e5c1", // redemption wallet
+          ],
+        },
+      },
+    },
   },
   {
     id: "356",
@@ -7397,7 +10699,14 @@ export default [
     twitter: "https://x.com/SonicLabs",
     wiki: "https://blog.soniclabs.com/ussd-sonics-native-permissionless-usd-stablecoin-built-with-frax/",
     module: "us-sonic-dollar",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        sonic: {
+          issued: ["0x000000000eCcFf26B795F73fb0A70d48da657fEf"],
+        },
+      },
+    },
   },
   {
     id: "357",
@@ -7445,6 +10754,16 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-british-pound",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0xCCF663b1fF11028f0b19058d0f7B674004a40746"],
+        },
+        monad: {
+          bridgedFromCelo: ["0x39bb4E0a204412bB98e821d25e7d955e69d40Fd1"],
+        },
+      },
+    },
   },
   {
     id: "359",
@@ -7466,6 +10785,13 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-philippine-peso",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0x105d4A9306D2E55a71d2Eb95B81553AE1dC20d7B"],
+        },
+      },
+    },
   },
   {
     id: "360",
@@ -7487,6 +10813,13 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-canadian-dollar",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0xff4Ab19391af240c311c54200a492233052B6325"],
+        },
+      },
+    },
   },
   {
     id: "361",
@@ -7508,6 +10841,13 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-australian-dollar",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0x7175504c455076f15c04a2f90a8e352281f492f9"],
+        },
+      },
+    },
   },
   {
     id: "362",
@@ -7529,6 +10869,13 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-colombian-peso",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0x8A567e2aE79CA692Bd748aB832081C45de4041eA"],
+        },
+      },
+    },
   },
   {
     id: "363",
@@ -7550,6 +10897,16 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-japanese-yen",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0xc45ecf20f3cd864b32d9794d6f76814ae8892e20"],
+        },
+        monad: {
+          issued: ["0x22f6A6752800eAB67b84748FeFc3cC658384aF72"],
+        },
+      },
+    },
   },
   {
     id: "364",
@@ -7588,6 +10945,22 @@ export default [
     twitter: "https://x.com/aveniaio",
     wiki: "",
     module: "brla-digital-brla",
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0xe6a537a407488807f0bbeb0038b79004f19dddfb"],
+        },
+        xdai: {
+          issued: ["0xfecb3f7c54e2caae9dc6ac9060a822d47e053760"],
+        },
+        celo: {
+          issued: ["0xfecb3f7c54e2caae9dc6ac9060a822d47e053760"],
+        },
+        moonbeam: {
+          issued: ["0xfeb25f3fddad13f82c4d6dbc1481516f62236429"],
+        },
+      },
+    },
   },
   {
     id: "366",
@@ -7610,6 +10983,13 @@ export default [
     wiki: "https://docs.alto.money/",
     module: "alto-dusd",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x63d74d22E689C715a04F2C13962b1f77F443d35b"],
+        },
+      },
+    },
   },
   {
     id: "367",
@@ -7631,6 +11011,13 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-kenyan-shilling",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0x456a3D042C0DbD3db53D5489e98dFb038553B0d0"],
+        },
+      },
+    },
   },
   {
     id: "368",
@@ -7652,6 +11039,13 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-south-african-rand",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0x4c35853A3B4e647fD266f4de678dCc8fEC410BF6"],
+        },
+      },
+    },
   },
   {
     id: "369",
@@ -7673,6 +11067,13 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-nigerian-naira",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0xE2702Bd97ee33c88c8f6f92DA3B733608aa76F71"],
+        },
+      },
+    },
   },
   {
     id: "370",
@@ -7694,6 +11095,16 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-swiss-franc",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0xb55a79F398E759E43C95b979163f30eC87Ee131D"],
+        },
+        monad: {
+          issued: ["0xF64e91fFEf7ef43aA314F0Bc2AC39f770797990C"],
+        },
+      },
+    },
   },
   {
     id: "371",
@@ -7715,6 +11126,13 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-west-african-cfa-franc",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0x73F93dcc49cB8A239e2032663e9475dd5ef29A08"],
+        },
+      },
+    },
   },
   {
     id: "372",
@@ -7736,6 +11154,13 @@ export default [
     twitter: "https://twitter.com/MentoLabs",
     module: "mento-ghanaian-cedi",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        celo: {
+          issued: ["0xfAeA5F3404bbA20D3cc2f8C4B0A888F55a3c7313"],
+        },
+      },
+    },
   },
   {
     id: "373",
@@ -7776,7 +11201,14 @@ export default [
     twitter: null,
     wiki: null,
     module: "phusd",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xf3B5B661b92B75C71fA5Aba8Fd95D7514A9CD605"],
+        },
+      },
+    },
   },
   {
     id: "375",
@@ -7798,7 +11230,14 @@ export default [
     twitter: "https://x.com/monetdotcash",
     wiki: "https://docs.monet.cash/products/stablecoins-and-savings/usdmo-and-susdmo",
     module: "monet-usdmo",
-    doublecounted: true
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        eden: {
+          issued: ["0x9fa8c4d9f33dcce6eacefb6d5cf9736350a330b1"],
+        },
+      },
+    },
   },
   {
     id: "376",
@@ -7821,6 +11260,13 @@ export default [
     wiki: "https://blog.sui.io/esui-dollar-suiusde-deepbook-margin/",
     module: "sui-usde",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        sui: {
+          issued: ["0x41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE"],
+        },
+      },
+    },
   },
   {
     id: "377",
@@ -7840,6 +11286,16 @@ export default [
     twitter: "https://x.com/Neronaxyz",
     wiki: "https://docs.nerona.xyz/welcome",
     module: "nerona-usdnr",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xD48e565561416dE59DA1050ED70b8d75e8eF28f9"],
+        },
+        fluent: {
+          issued: ["0xD48e565561416dE59DA1050ED70b8d75e8eF28f9"],
+        },
+      },
+    },
   },
   {
     id: "378",
@@ -7862,6 +11318,14 @@ export default [
     wiki: null,
     module: "usd-somnia",
     doublecounted: true,
+    chainConfig: {
+      decimals: 18,
+      chains: {
+        somnia: {
+          issued: ["0x00000022dA000002656c64D9eA6011ea952D008A"],
+        },
+      },
+    },
   },
   {
     id: "379",
@@ -7879,7 +11343,29 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/RipioApp",
     wiki: "https://www.ripio.com/en/cryptocurrencies/wars",
-    module: "argentine-peso"
+    module: "argentine-peso",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
+        },
+        bsc: {
+          issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
+        },
+        base: {
+          issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
+        },
+        xdai: {
+          issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
+        },
+        polygon: {
+          issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
+        },
+        wc: {
+          issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
+        },
+      },
+    },
   },
   {
     id: "380",
@@ -7897,7 +11383,29 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/RipioApp",
     wiki: "https://www.ripio.com/en/cryptocurrencies/wbrl",
-    module: "brazilian-real"
+    module: "brazilian-real",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
+        },
+        bsc: {
+          issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
+        },
+        base: {
+          issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
+        },
+        xdai: {
+          issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
+        },
+        polygon: {
+          issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
+        },
+        wc: {
+          issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
+        },
+      },
+    },
   },
   {
     id: "381",
@@ -7916,6 +11424,28 @@ export default [
     twitter: "https://x.com/RipioApp",
     wiki: "",
     module: "chilean-peso",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
+        },
+        bsc: {
+          issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
+        },
+        base: {
+          issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
+        },
+        xdai: {
+          issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
+        },
+        polygon: {
+          issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
+        },
+        wc: {
+          issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
+        },
+      },
+    },
   },
   {
     id: "382",
@@ -7934,6 +11464,28 @@ export default [
     twitter: "https://x.com/RipioApp",
     wiki: "https://www.ripio.com/en/cryptocurrencies/wcop",
     module: "colombian-peso",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
+        },
+        bsc: {
+          issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
+        },
+        base: {
+          issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
+        },
+        xdai: {
+          issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
+        },
+        polygon: {
+          issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
+        },
+        wc: {
+          issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
+        },
+      },
+    },
   },
   {
     id: "383",
@@ -7952,6 +11504,28 @@ export default [
     twitter: "https://x.com/RipioApp",
     wiki: "https://www.ripio.com/en/cryptocurrencies/wmxn",
     module: "mexican-peso",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
+        },
+        bsc: {
+          issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
+        },
+        base: {
+          issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
+        },
+        xdai: {
+          issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
+        },
+        polygon: {
+          issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
+        },
+        wc: {
+          issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
+        },
+      },
+    },
   },
   {
     id: "384",
@@ -7970,6 +11544,28 @@ export default [
     twitter: "https://x.com/RipioApp",
     wiki: "",
     module: "peruvian-sol",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE"],
+        },
+        bsc: {
+          issued: ["0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE"],
+        },
+        base: {
+          issued: ["0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE"],
+        },
+        xdai: {
+          issued: ["0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE"],
+        },
+        polygon: {
+          issued: ["0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE"],
+        },
+        wc: {
+          issued: ["0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE"],
+        },
+      },
+    },
   },
   {
     id: "385",
@@ -7991,6 +11587,13 @@ export default [
     twitter: "https://x.com/tempo_xyz",
     wiki: "https://docs.tempo.xyz/",
     module: "pathusd",
+    chainConfig: {
+      chains: {
+        tempo: {
+          issued: ["0x20c0000000000000000000000000000000000000"],
+        },
+      },
+    },
   },
   {
     id: "386",
@@ -8012,6 +11615,13 @@ export default [
     twitter: "https://x.com/WesternUnion",
     wiki: "https://ir.westernunion.com/news/archived-press-releases/press-release-details/2026/Western-Union-Launches-USDPT-on-Solana-Advancing-Regulated-Digital-Infrastructure-for-Global-Payments/default.aspx",
     module: "usdpt-western-union",
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["HVWf8JmLoHs99Lw8Psf3fyqAtA4crWxCPkrmSdNjhNH3"],
+        },
+      },
+    },
   },
   {
     id: "387",
@@ -8033,6 +11643,16 @@ export default [
     twitter: "https://x.com/TetraDigitalGrp",
     wiki: "https://tetradg.com/cadd-stablecoin/",
     module: "cad-digital",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x16f93ebc5320c89efc8701577efe49d14a276a06"],
+        },
+        base: {
+          issued: ["0x16F93eBC5320C89EfC8701577efe49d14A276a06"],
+        },
+      },
+    },
   },
   {
     id: "388",
@@ -8053,8 +11673,15 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/initia",
     wiki: null,
-    module: "initia-iusd",
     doublecounted: true,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        initia: {
+          cosmosIssued: ["move/6c69733a9e722f3660afb524f89fce957801fa7e4408b8ef8fe89db9627b570e"],
+        },
+      },
+    },
   },
   {
     id: "389",
@@ -8076,6 +11703,14 @@ export default [
     twitter: "https://x.com/MoveUSD",
     wiki: "https://docs.cfx.to/",
     module: "cfx-moveusd",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        solana: {
+          issued: ["3AdhVEX6k85yNivHVXDEiY3WyP2WgFQTUZCahGaeC2qm"],
+        },
+      },
+    },
   },
   {
     id: "390",
@@ -8097,6 +11732,25 @@ export default [
     twitter: "https://x.com/FinChain_CN",
     wiki: "https://finchain.gitbook.io/finchain-docs/en/fusd/introduction",
     module: "finchain-dollar",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x9f6714C302ffe3c3bAFaf2Ccb44201fF64f6371C"],
+        },
+        monad: {
+          issued: ["0x9f6714C302ffe3c3bAFaf2Ccb44201fF64f6371C"],
+        },
+        sonic: {
+          issued: ["0x9f6714C302ffe3c3bAFaf2Ccb44201fF64f6371C"],
+        },
+        avax: {
+          issued: ["0x9f6714C302ffe3c3bAFaf2Ccb44201fF64f6371C"],
+        },
+        xsat: {
+          issued: ["0x9f6714C302ffe3c3bAFaf2Ccb44201fF64f6371C"],
+        },
+      },
+    },
   },
   {
     id: "391",
@@ -8118,6 +11772,13 @@ export default [
     twitter: "https://x.com/strato_net",
     wiki: null,
     module: "usdst",
+    chainConfig: {
+      chains: {
+        strato: {
+          issued: ["0x937efa7e3a77e20bbdbd7c0d32b6514f368c1010"],
+        },
+      },
+    },
   },
   {
     id: "392",
@@ -8138,7 +11799,14 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/Newrails_xyz",
     wiki: null,
-    module: "newrails-euro",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        monad: {
+          issued: ["0x1111b3ded9f1fe1801ad4ebef8e2788183a24111"],
+        },
+      },
+    },
   },
   {
     id: "393",
@@ -8161,6 +11829,13 @@ export default [
     wiki: null,
     module: "haeur",
     yieldBearing: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x83Fd69E0FF5767972b46E61C6833408361bF7346"],
+        },
+      },
+    },
   },
   {
     id: "394",
@@ -8182,6 +11857,13 @@ export default [
     twitter: "https://twitter.com/InverseFinance",
     wiki: "https://docs.monolith.market/protocol/stablecoin-factory",
     module: "inverse-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x5377680B5986296AA4F9e684e5315a4F24832e56"],
+        },
+      },
+    },
   },
   {
     id: "395",
@@ -8199,6 +11881,16 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/falconfinance",
     module: "falcon-finance-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x1676b80edd36b18a3c3432c11ed25d37fde9c92a"],
+        },
+        bsc: {
+          issued: ["0x1676b80edd36b18a3c3432c11ed25d37fde9c92a"],
+        },
+      },
+    },
   },
   {
     id: "396",
@@ -8218,6 +11910,44 @@ export default [
     twitter: "https://x.com/USDeADBOX",
     wiki: null,
     module: "usdead",
+    chainConfig: {
+      decimals: 18,
+      chains: {
+        ethereum: {
+          issued: ["0x9Bc2C28DF6560C343d3fa9c152Bed80D4511DEAd"],
+        },
+        base: {
+          issued: ["0x9Bc2C28DF6560C343d3fa9c152Bed80D4511DEAd"],
+        },
+        optimism: {
+          issued: ["0x9Bc2C28DF6560C343d3fa9c152Bed80D4511DEAd"],
+        },
+        arbitrum: {
+          issued: ["0x9Bc2C28DF6560C343d3fa9c152Bed80D4511DEAd"],
+        },
+        bsc: {
+          issued: ["0x9Bc2C28DF6560C343d3fa9c152Bed80D4511DEAd"],
+        },
+        scroll: {
+          issued: ["0x9Bc2C28DF6560C343d3fa9c152Bed80D4511DEAd"],
+        },
+        megaeth: {
+          issued: ["0x23A873d375a21Bb6649aa68FD664acBbDDBbdead"],
+        },
+        monad: {
+          issued: ["0x41201e7083569de72dc057d960429cddb305dead"],
+        },
+        hyperliquid: {
+          issued: ["0x7f71d0888defA07833E19f195D5c4A78e170F289"],
+        },
+        solana: {
+          issued: ["CeALVyCeC6RdrRTAz21PVmMD6miUMdqGn8MevHGSC5sg"],
+        },
+        tron: {
+          issued: ["TCReUYWrZCqxbBgJ2Ns7UKBA79gWeMVciJ"],
+        },
+      },
+    },
   },
   {
     id: "397",
@@ -8240,6 +11970,13 @@ export default [
     wiki: "https://docs.hyperbeat.org",
     module: "beatusd",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        hyperliquid: {
+          issued: ["0x669abe85F96a9e3B34723F7Be9bC6F250aBC0Cc1"],
+        },
+      },
+    },
   },
   {
     id: "398",
@@ -8257,7 +11994,7 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
-    auditLinks: ["https://valtorum.com/por"],    
+    auditLinks: ["https://valtorum.com/por"],
     twitter: null,
     wiki: "https://valtorum.com/about/",
     module: "valtorum-usdv",
@@ -8282,6 +12019,22 @@ export default [
     twitter: "https://twitter.com/AgantFinance",
     wiki: "https://docs.agant.io/XDREhsGKwMiuddKPr5Rt",
     module: "agant-gbp",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xbBe6aAB0Ed76e90AeA0d1cd978EC231c8AdCDF8b"],
+        },
+        base: {
+          issued: ["0xbBe6aAB0Ed76e90AeA0d1cd978EC231c8AdCDF8b"],
+        },
+        solana: {
+          issued: ["DYoCmA91VE8REbWNw3kM736PN7vv97qc2jr5wmUbuNtZ"],
+        },
+        tempo: {
+          issued: ["0x20C0000000000000000000000a6Da882d075a4C3"],
+        },
+      },
+    },
   },
   {
     id: "400",
@@ -8326,6 +12079,13 @@ export default [
     twitter: "https://x.com/tori_finance",
     wiki: "https://docs.tori.finance",
     module: "tori-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xd0580192E98eA6CEB9c7b6191Ed2E27560911697"],
+        },
+      },
+    },
   },
   {
     id: "402",
@@ -8348,6 +12108,13 @@ export default [
     wiki: "https://kerne.fi/docs",
     module: "kerne-usd",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x5C2EfdF0D8D286959b42308966bc2B97f5680AA3"],
+        },
+      },
+    },
   },
   {
     id: "403",
@@ -8369,6 +12136,13 @@ export default [
     twitter: "https://x.com/money_protocol",
     wiki: "https://docs.moneyprotocol.co/docs/intro",
     module: "money-protocol",
+    chainConfig: {
+      chains: {
+        rsk: {
+          issued: ["0x1fe2f558e2120c4bDf4217248D2940043a8E1208"],
+        },
+      },
+    },
   },
   {
     id: "404",
@@ -8391,6 +12165,14 @@ export default [
     wiki: "https://doc.monetrix.xyz/guide/mint",
     module: "monetrix-usdm",
     doublecounted: true,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        hyperliquid: {
+          issued: ["0xE2d2959f89B6389DeB624bF076Fe7D9E5401f377"],
+        },
+      },
+    },
   },
   {
     id: "405",
@@ -8412,6 +12194,13 @@ export default [
     twitter: "https://x.com/APalphalabs",
     wiki: null,
     module: "usda-3",
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0x17eafd08994305d8ace37efb82f1523177ec70ee"],
+        },
+      },
+    },
   },
   {
     id: "406",
@@ -8434,6 +12223,14 @@ export default [
     wiki: null,
     module: "polymarket-usd",
     doublecounted: true,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        polygon: {
+          issued: ["0xc011a7e12a19f7b1f670d46f03b03f3342e82dfb"],
+        },
+      },
+    },
   },
   {
     id: "407",
@@ -8456,6 +12253,13 @@ export default [
     wiki: null,
     module: "unity-usd",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0x61a10e8556bed032ea176330e7f17d6a12a10000"],
+        },
+      },
+    },
   },
   {
     id: "408",
@@ -8477,6 +12281,16 @@ export default [
     twitter: "https://x.com/OndoFinance",
     wiki: "https://docs.ondo.finance/ondo-global-markets/investing-and-redeeming",
     module: "ondo-u-s-dollar-token",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xace8e719899f6e91831b18ae746c9a965c2119f1"],
+        },
+        bsc: {
+          issued: ["0x1f8955e640cbd9abc3c3bb408c9e2e1f5f20dfe6"],
+        },
+      },
+    },
   },
   {
     id: "409",
@@ -8498,6 +12312,16 @@ export default [
     twitter: "https://x.com/USDKG_Official",
     wiki: null,
     module: "usdkg",
+    chainConfig: {
+      chains: {
+        tron: {
+          issued: ["TXZo12qvnEVKvU2zbfuQeMXKusWyxonwEG"],
+        },
+        ethereum: {
+          issued: ["0xe820c06321e60d36257c666643fa5436643445e3"],
+        },
+      },
+    },
   },
   {
     id: "410",
@@ -8519,6 +12343,13 @@ export default [
     twitter: "https://x.com/Universal_USDU",
     wiki: null,
     module: "universal-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xe4ca6596d2c28014c6f89964f57838e0be9f369b"],
+        },
+      },
+    },
   },
   {
     id: "411",
@@ -8540,6 +12371,22 @@ export default [
     twitter: "https://x.com/StableMintLtd",
     wiki: null,
     module: "stable-mint-usd",
+    chainConfig: {
+      chains: {
+        etlk: {
+          issued: ["0x6bDE51212203aE5d592Cc5180DA2ABBd41c922dE"],
+        },
+        ethereum: {
+          issued: ["0x399B29975CBE313C56269cD5097F5AE097Fa2741"],
+        },
+        base: {
+          issued: ["0x26C358F7c5fEdB20a6ddEf108cD91Efb6B8Da0Cb"],
+        },
+        arbitrum: {
+          issued: ["0x26C358F7c5fEdB20a6ddEf108cD91Efb6B8Da0Cb"],
+        },
+      },
+    },
   },
   {
     id: "412",
@@ -8561,6 +12408,14 @@ export default [
     twitter: "https://x.com/MYRT_money",
     wiki: "https://github.com/myrt-money/myrt-smart-contract",
     module: "myr-stablecoin",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0x3Fc98a885E99420d0ce43Bcb81bF21A4e3F45E5f"],
+        },
+      },
+    },
   },
   {
     id: "413",
@@ -8583,6 +12438,13 @@ export default [
     wiki: null,
     module: "soulpeg-usd",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        bsc: {
+          issued: ["0x40ff3dea2eec93a7b71879874dc4407918da77a6"],
+        },
+      },
+    },
   },
   {
     id: "414",
@@ -8604,6 +12466,22 @@ export default [
     twitter: "https://x.com/rcoins_official",
     wiki: null,
     module: "royal-euro",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x3ed0b3c4c0168a560d34e361b8130dcca4677736"],
+          reserves: ["0xc50ebe57ae937a8ac0bcaab8945777c3be54a511"],
+        },
+        bsc: {
+          issued: ["0x3ed0b3c4c0168a560d34e361b8130dcca4677736"],
+          reserves: ["0xc50ebe57ae937a8ac0bcaab8945777c3be54a511"],
+        },
+        tron: {
+          issued: ["TXUi9vL8Ltz4dVpC6RM8CdtKSTHxFZuFbz"],
+          reserves: ["TQ1jtDoSd3m7AP8HHYBLxWJE8ucL8SXyGX"],
+        },
+      },
+    },
   },
   {
     id: "415",
@@ -8625,6 +12503,22 @@ export default [
     twitter: "https://x.com/rcoins_official",
     wiki: null,
     module: "royal-dollar",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x44bb433d29fe966992a9c812da7f252c9c53f285"],
+          reserves: ["0xc50ebe57ae937a8ac0bcaab8945777c3be54a511"],
+        },
+        bsc: {
+          issued: ["0x44bb433d29fe966992a9c812da7f252c9c53f285"],
+          reserves: ["0xc50ebe57ae937a8ac0bcaab8945777c3be54a511"],
+        },
+        tron: {
+          issued: ["TUvns399UpycBBpVsCVJLCjXFBjzHrNUR1"],
+          reserves: ["TQ1jtDoSd3m7AP8HHYBLxWJE8ucL8SXyGX", "TV2VoR52hEsAPEwkVXFWckfWNb2oRQo8oz"],
+        },
+      },
+    },
   },
   {
     id: "416",
@@ -8646,6 +12540,22 @@ export default [
     twitter: "https://x.com/telcoin",
     wiki: null,
     module: "eusd-2",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x14913815bcfde78baead2111f463d038ac9c2949"],
+        },
+        polygon: {
+          issued: ["0x14913815bcfde78baead2111f463d038ac9c2949"],
+        },
+        base: {
+          issued: ["0x14913815bcfde78baead2111f463d038ac9c2949"],
+        },
+        solana: {
+          issued: ["HQMYCZTDq9g3oZejDRUeQsFtLKgyfvBpD3yHaTnain3L"],
+        },
+      },
+    },
   },
   {
     id: "417",
@@ -8667,6 +12577,19 @@ export default [
     twitter: "https://x.com/defidotmoney",
     wiki: null,
     module: "defi-money",
+    chainConfig: {
+      chains: {
+        optimism: {
+          issued: ["0x69420f9e38a4e60a62224c489be4bf7a94402496"],
+        },
+        arbitrum: {
+          issued: ["0x69420f9e38a4e60a62224c489be4bf7a94402496"],
+        },
+        base: {
+          issued: ["0x69420f9e38a4e60a62224c489be4bf7a94402496"],
+        },
+      },
+    },
   },
   {
     id: "418",
@@ -8688,6 +12611,13 @@ export default [
     twitter: "https://x.com/Cod3xOrg",
     wiki: null,
     module: "cod3x-usd",
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0xc0d3700000987c99b3c9009069e4f8413fd22330"],
+        },
+      },
+    },
   },
   {
     id: "419",
@@ -8710,6 +12640,13 @@ export default [
     wiki: "https://docs.elara.fi/",
     module: "elara-usd",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x65Fb0f9b196d524De0C4F3BAF572F0a79eb21194"],
+        },
+      },
+    },
   },
   {
     id: "420",
@@ -8731,6 +12668,13 @@ export default [
     twitter: "https://x.com/StartaleGroup",
     wiki: null,
     module: "startale-usd",
+    chainConfig: {
+      chains: {
+        soneium: {
+          issued: ["0x3f99231dd03a9f0e7e3421c92b7b90fbe012985a"],
+        },
+      },
+    },
   },
   {
     id: "421",
@@ -8753,6 +12697,13 @@ export default [
     wiki: null,
     module: "flying-tulip-usd",
     doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xf7d85ec4e7710f71992752eac2111312e73e9c9c"],
+        },
+      },
+    },
   },
   {
     id: "422",
@@ -8774,6 +12725,22 @@ export default [
     twitter: "https://x.com/ForteAUD",
     wiki: null,
     module: "forte-aud",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xd2a530170d71a9cfe1651fb468e2b98f7ed7456b"],
+        },
+        base: {
+          issued: ["0xd2a530170d71a9cfe1651fb468e2b98f7ed7456b"],
+        },
+        polygon: {
+          issued: ["0xd2a530170d71a9cfe1651fb468e2b98f7ed7456b"],
+        },
+        avax: {
+          issued: ["0xd2a530170d71a9cfe1651fb468e2b98f7ed7456b"],
+        },
+      },
+    },
   },
   {
     id: "423",
@@ -8795,6 +12762,25 @@ export default [
     twitter: "https://x.com/deuro_com",
     wiki: null,
     module: "decentralized-euro",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xba3f535bbcccca2a154b573ca6c5a49baae0a3ea"],
+        },
+        base: {
+          bridgedFromETH: ["0x1b5f7fa46ed0f487f049c42f374ca4827d65a264"],
+        },
+        polygon: {
+          bridgedFromETH: ["0xc2ff25dd99e467d2589b2c26edd270f220f14e47"],
+        },
+        optimism: {
+          bridgedFromETH: ["0x1b5f7fa46ed0f487f049c42f374ca4827d65a264"],
+        },
+        arbitrum: {
+          bridgedFromETH: ["0x5e85faf503621830ca857a5f38b982e0cc57d537"],
+        },
+      },
+    },
   },
   {
     id: "424",
@@ -8816,6 +12802,19 @@ export default [
     twitter: "https://x.com/stablecorp",
     wiki: null,
     module: "stablecorp-qcad",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x3fa142dd3f384414e05e71ad0939274edc82ec0a"],
+        },
+        base: {
+          issued: ["0xa15705e6fc8b3e08e7253f3758de1a754baa0761"],
+        },
+        solana: {
+          issued: ["EeBX9JLdvsp4HnBbMgC1HnAjBkBQxgxtWxspcCLtT6ci"],
+        },
+      },
+    },
   },
   {
     id: "425",
@@ -8837,6 +12836,13 @@ export default [
     twitter: "https://x.com/thefedznft",
     wiki: null,
     module: "fusd-by-the-fedz",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x894341be568eae3697408c420f1d0acfce6e55f9"],
+        },
+      },
+    },
   },
   {
     id: "426",
@@ -8858,6 +12864,13 @@ export default [
     twitter: "https://x.com/streamflow_fi",
     wiki: null,
     module: "usd-2",
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["usdsfJbX78ktZUnoRC7dwvvQz7xH3WdkpGne76gdUia"],
+        },
+      },
+    },
   },
   {
     id: "427",
