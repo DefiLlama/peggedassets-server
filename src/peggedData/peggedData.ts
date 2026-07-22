@@ -8857,4 +8857,25 @@ export default [
     wiki: null,
     module: "usd-2",
   },
+  {
+    id: "427",
+    name: "JPYSC",
+    address: "0x6781d5631bfe47432b089e64e3eab3b6edd26177",
+    symbol: "JPYSC",
+    url: "https://www.shinseitrust.com/stablecoin/jpysc.html",
+    description:
+      "JPYSC is a trust-type Japanese yen stablecoin issued by SBI Shinsei Trust & Banking under Japan's Electronic Payment Instruments framework, in partnership with Startale Group. Each JPYSC is fully backed 1:1 by Japanese yen held in trust.",
+    mintRedeemDescription:
+      "JPYSC is minted by SBI Shinsei Trust & Banking when Japanese yen is entrusted to the issuing trust, and redeemed 1:1 for yen through the trust; issuance and redemption are centrally controlled by the licensed trust bank.",
+    onCoinGecko: "true",
+    gecko_id: "jpysc",
+    cmcId: null,
+    pegType: "peggedJPY",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/JPYStableCoin",
+    wiki: null,
+    module: "jpysc",
+  },
 ] as PeggedAsset[];
