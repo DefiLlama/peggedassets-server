@@ -984,7 +984,7 @@ export default [
   },
   {
     id: "46",
-    name: "USD+",
+    name: "Overnight USD+",
     address: "polygon:0x236eec6359fb44cce8f97e99387aa7f8cd5cde1f",
     symbol: "USD+",
     url: "https://overnight.fi/",
@@ -4106,7 +4106,7 @@ export default [
   },
   {
     id: "192",
-    name: "USDA",
+    name: "Angle USDA",
     address: "0x0000206329b97db379d5e1bf586bbdb969c63274",
     symbol: "USDA",
     url: "https://angle.money/usda",
@@ -8392,7 +8392,7 @@ export default [
   },
   {
     id: "405",
-    name: "USDA",
+    name: "AP USDA",
     address: "bsc:0x17eafd08994305d8ace37efb82f1523177ec70ee",
     symbol: "USDA",
     url: "https://alphapartner.vip/",
@@ -8838,7 +8838,7 @@ export default [
   },
   {
     id: "426",
-    name: "USD+",
+    name: "Streamflow USD+",
     address: "solana:usdsfJbX78ktZUnoRC7dwvvQz7xH3WdkpGne76gdUia",
     symbol: "USD+",
     url: "https://usd-plus.com/",
