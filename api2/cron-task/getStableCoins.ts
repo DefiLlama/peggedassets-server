@@ -1,6 +1,7 @@
 import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../src/peggedData/peggedData";
 import { secondsInDay, secondsInWeek } from "../../src/utils/date";
+import { fxFallbackPrice } from "../../src/utils/fxRates";
 import {
     addToChains,
     nonChains,
@@ -59,7 +60,8 @@ function craftProtocolsResponse(
         lastSK - secondsInDay * 30,
         secondsInDay // temporary, update later
       );
-      const fallbackPrice = pegType === "peggedUSD" ? 1 : 0;
+      // assets without a market price fall back to their peg's fiat FX rate, same as charts and dominance
+      const fallbackPrice = fxFallbackPrice(cache.fxRateMap?.latest ?? cache.rates?.rates, pegType);
       const currentPrice = prices[pegged.gecko_id] || null;
       const price = currentPrice ? currentPrice : fallbackPrice;
       const chainCirculating = {} as {

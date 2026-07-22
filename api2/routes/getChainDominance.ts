@@ -1,5 +1,6 @@
 import peggedAssets from "../../src/peggedData/peggedData";
 import { getTimestampAtStartOfDay } from "../../src/utils/date";
+import { pegTypeFxTicker } from "../../src/utils/fxRates";
 import { normalizeChain } from "../../src/utils/normalizeChain";
 import { cache } from "../cache";
 
@@ -65,9 +66,9 @@ export function craftChainDominanceResponse(chain: string | undefined) {
     if (pegType === "peggedVAR") {
       fallbackPrice = 0;
     } else if (pegType !== "peggedUSD" && !historicalPrice) {
-      const ticker = pegType.slice(-3);
+      const ticker = pegTypeFxTicker(pegType);
       fallbackPrice = 1 / lastRates?.rates?.[ticker];
-      if (typeof fallbackPrice !== "number") {
+      if (!isFinite(fallbackPrice)) {
         fallbackPrice = 0;
       }
     }

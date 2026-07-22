@@ -5,7 +5,7 @@ import { getClosestDayStartTimestamp, secondsInDay, secondsInHour, } from "../..
 import * as sdk from "@defillama/sdk";
 import { normalizeChain } from "../../src/utils/normalizeChain";
 import { getHistoricalValues } from "../../src/utils/shared/dynamodb";
-import { buildFxRateMap, lookupFxRate } from "../../src/utils/fxRates";
+import { buildFxRateMap, lookupFxRate, pegTypeFxTicker } from "../../src/utils/fxRates";
 import { cache } from "../cache";
 import { storeRouteData } from "../file-cache";
 import { chainCacheSlug } from "../utils/cachePath";
@@ -254,7 +254,7 @@ export function craftChartsResponse(
       if (pegType === "peggedVAR") {
         fallbackPrice = 0;
       } else if (pegType !== "peggedUSD" && !historicalPrice) {
-        const ticker = pegType.slice(-3);
+        const ticker = pegTypeFxTicker(pegType);
         const rate = fxRateMap ? lookupFxRate(fxRateMap, ticker, timestamp) : null;
         fallbackPrice = rate ? 1 / rate : 0;
         if (!isFinite(fallbackPrice)) fallbackPrice = 0;
