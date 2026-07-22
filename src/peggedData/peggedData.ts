@@ -8875,7 +8875,7 @@ export default [
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://x.com/JPYStableCoin",
-    wiki: null,
+    wiki: "https://jpysc-info.com/jpysc",
     module: "jpysc",
   },
 ] as PeggedAsset[];
