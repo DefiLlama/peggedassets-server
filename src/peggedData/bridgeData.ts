@@ -1719,6 +1719,26 @@ export default {
     bridge: "layerzero",
     sourceChain: formattedSourceChains.eth,
   },
+    "0x370923d39f139c64813f173a1bf0b4f9ba36a24f": {
+    bridge: "layerzero",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0x44c3950a6ed303c863a6568ea18c1a01e504ffd2": {
+    bridge: "layerzero",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xbe5b2eb217bb04a7ddd1a451e6a1567dc15e2fd6": {
+    bridge: "layerzero",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "0xe898e1cffa565aae8bacc364aa7d65d6a2d20f16": {
+    bridge: "layerzero",
+    sourceChain: formattedSourceChains.eth,
+  },
+  "GSuBmsfco2DGNLSxHhgbFH1MaEfzqexDWq3aJs9XufkF": {
+    bridge: "layerzero",
+    sourceChain: formattedSourceChains.eth,
+  },
   "25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534454": {
     bridge: "wan",
     sourceChain: formattedSourceChains.eth,

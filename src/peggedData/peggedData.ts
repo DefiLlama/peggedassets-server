@@ -8878,4 +8878,25 @@ export default [
     wiki: "https://jpysc-info.com/jpysc",
     module: "jpysc",
   },
+  {
+    id: "428",
+    name: "KRWQ",
+    address: "0xc00db6b41473d065027f5ed6fada20fde75f142e",
+    symbol: "KRWQ",
+    url: "https://www.krwq.cash/",
+    description:
+      "KRWQ is a fully reserved Korean won-denominated stablecoin developed by IQ in partnership with Frax. It is designed to track one Korean won and is backed by disclosed reserve assets including Korean Treasury Bonds and approved stablecoins.",
+    mintRedeemDescription:
+      "Eligible KYC-approved counterparties can mint KRWQ after the issuer receives fiat or approved collateral and redeem it through partner services; redeemed KRWQ is burned.",
+    onCoinGecko: "true",
+    gecko_id: "krwt",
+    cmcId: "38807",
+    pegType: "peggedKRW",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/krwqcash",
+    wiki: "https://www.krwq.cash/whitepaper.pdf",
+    module: "krwt",
+  },
 ] as PeggedAsset[];
