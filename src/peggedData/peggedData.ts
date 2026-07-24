@@ -7182,6 +7182,8 @@ export default [
     twitter: "https://x.com/uncapfinance",
     wiki: null,
     module: "uncap-usd",
+    deadUrl: true,
+    deadFrom: "2026-03-04",
   },
   {
     id: "346",
