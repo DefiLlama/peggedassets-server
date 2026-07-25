@@ -8880,4 +8880,25 @@ export default [
     wiki: "https://jpysc-info.com/jpysc",
     module: "jpysc",
   },
+  {
+    id: "428",
+    name: "Naira Stablecoin",
+    address: "0xF50FFf154E63E510e494929E9eab1E9C5047429E",
+    symbol: "ENSC",
+    url: "https://prosperavest.com/ensc",
+    description:
+      "eNsc is a Real-World Asset (RWA) stablecoin issued by ProsperaVest & pegged 1:1 with the Nigerian Naira reserves. More than just a digital Naira, eNsc powers payments/settlement rails and provides institutional access to tokenized Nigerian Treasuries.",
+    mintRedeemDescription:
+      "eNsc is minted 1:1 against fiat naira deposits with ProsperaVest and redeemed 1:1 for the naira.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedNGN",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://prosperavest.com/transparency"],
+    twitter: "https://x.com/prosperavest",
+    wiki: "https://whitepaper.prosperavest.com/ensc/the-naira-stablecoin-engnsc",
+    module: "ensc",
+  },
 ] as PeggedAsset[];
