@@ -350,6 +350,7 @@ export function addChainExports(config: any, adapter: any = {}, {
       switch (key) {
         case 'bridgeOnETH':
           cExports.ethereum = supplyInEthereumBridge(config.ethereum.issued[0], chainConfig.bridgeOnETH[0], decimals, pegType as any);
+          break;
         case 'pegType':
           break;
         case "issued":
@@ -393,7 +394,7 @@ export function addChainExports(config: any, adapter: any = {}, {
               if (chain === 'solana')
                 cExports[srcChain] = solanaMintedOrBridged(chainConfig[key], pegType as any)
               else if (chain === 'sui' || chain === 'cardano')
-                cExports[srcChain] = getIssued({...chainConfig[key], pegType })
+                cExports[srcChain] = getIssued({ issued: chainConfig[key], pegType: pegType as PeggedAssetType })
               else
                 cExports[srcChain] = bridgedSupply(chain, decimals, chainConfig[key], undefined, srcChain, pegType as any)
             }
@@ -410,7 +411,7 @@ export function addChainExports(config: any, adapter: any = {}, {
 
 function getIssued({
   issued, pegType = "peggedUSD", issuedABI = "erc20:totalSupply",
-}: { issued: string[] | string, pegType: PeggedAssetType, issuedABI: string }) {
+}: { issued: string[] | string, pegType?: PeggedAssetType, issuedABI?: string }) {
   return async (api: ChainApi) => {
     const balances = {} as Balances;
     const issuedList = typeof issued === "string" ? [issued] : issued;
@@ -418,29 +419,29 @@ function getIssued({
       for (const i of issuedList) {
         const supply = await solanaGetTokenSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
-        return balances;
       }
+      return balances;
     }
     if (api.chain === "sui") {
       for (const i of issuedList) {
         const supply = await sui.getTokenSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
-        return balances;
       }
+      return balances;
     }
     if (api.chain === "aptos") {
       for (const i of issuedList) {
         const supply = await aptos.getTokenSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
-        return balances;
       }
+      return balances;
     }
     if (api.chain === 'tezos') {
       for (const i of issuedList) {
         const supply = await tezos.getTotalSupply(i)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
-        return balances;
       }
+      return balances;
     }
     if (api.chain === 'stellar') {
       for (const i of issuedList) {
@@ -572,9 +573,12 @@ function getUnreleased({
       for (const token of issued) {
         for (const account of unreleased) {
           // solanaGetTokenBalance throws when the wallet holds no token account;
-          // an empty reserve should contribute 0, not fail the whole fetch.
+          // an empty reserve should contribute 0, but RPC/network failures must
+          // still fail the fetch instead of silently undercounting unreleased.
           let balance = 0;
-          try { balance = await solanaGetTokenBalance(token, account) } catch { }
+          try { balance = await solanaGetTokenBalance(token, account) } catch (e: any) {
+            if (!String(e?.message ?? "").includes("empty token accounts")) throw e;
+          }
           sumSingleBalance(balances, pegType, balance);
         }
       }
