@@ -28,7 +28,6 @@ function nobleSupply() {
 const adapter: PeggedIssuanceAdapter = {
   noble: {
     minted: nobleSupply(),
-    unreleased: async () => ({}), // no unreleased tokens
   },
 };
 
