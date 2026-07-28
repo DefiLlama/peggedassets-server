@@ -32,5 +32,9 @@ export async function getPrices(assets: any[]) {
   }
   finalRes["m-2"] = 1
   finalRes["terrausd"] = 0
+  // kUSD has no price feed yet. It is minted and redeemed 1:1 for USDC through an on-chain
+  // PSM, so read USDC's fetched price instead of pinning kUSD to a constant. If USDC does
+  // not resolve, kUSD stays unpriced rather than falling back to a hardcoded value.
+  if (finalRes["usd-coin"] !== undefined) finalRes["kerne-usd"] = finalRes["usd-coin"]
   return finalRes
 }
