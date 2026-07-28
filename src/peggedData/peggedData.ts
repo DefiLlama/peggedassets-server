@@ -9841,6 +9841,7 @@ export default [
         },
       },
     },
+    delisted: true, // Mu Digital orderly wind-down 2026-07; peg broken (no market price, unredeemable at $1) — stop reporting monad supply at face value
   },
   {
     id: "328",
