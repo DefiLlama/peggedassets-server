@@ -20,12 +20,14 @@ type Choice = {
 };
 
 // Resolve the on-disk adapter key for an asset: `module` overrides gecko_id.
-function adapterKey(asset: any): string {
-  return asset.module ?? asset.gecko_id;
+// May be null for chainConfig-only assets (gecko_id can be null and no module).
+function adapterKey(asset: any): string | null {
+  return asset.module ?? asset.gecko_id ?? null;
 }
 
 // Does an adapter source file exist for this key? (folder/index.ts or key.ts)
-function adapterFileExists(key: string): boolean {
+function adapterFileExists(key: string | null): boolean {
+  if (!key) return false;
   return (
     fs.existsSync(path.join(PEGGED_DIR, key, "index.ts")) ||
     fs.existsSync(path.join(PEGGED_DIR, key + ".ts"))
@@ -83,7 +85,7 @@ function buildChoices(): Choice[] {
 
     let tag: string | null = null;
     if (isDead) tag = "dead";
-    else if (changed.has(key)) tag = "changed";
+    else if (key && changed.has(key)) tag = "changed";
     else if (!hasFile) tag = "chainConfig";
 
     const label = `${asset.name} (${asset.symbol}) [${asset.pegType}] :: ${value}`;
