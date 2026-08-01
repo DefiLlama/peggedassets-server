@@ -7,6 +7,7 @@
     "generate-lz-config": "ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/generateLzConfig.ts",
     "api2-prod": "bash api2/scripts/prod_start.sh",
     "api2-cron-task": "npx ts-node --transpile-only api2/cron-task/index.ts",
+    "test:charts": "node --test --require ts-node/register/transpile-only api2/cron-task/storeCharts.test.ts",
     "api2-store-rates": "npx ts-node --transpile-only api2/scripts/storeRates.ts",
     "test": "cd src/adapters/peggedAssets && npx ts-node --transpile-only test",
     "test-interactive": "cd src/adapters/peggedAssets && npx ts-node --transpile-only testInteractive.ts",
