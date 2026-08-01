@@ -12105,7 +12105,7 @@ export default [
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: [],
+    auditLinks: ["https://github.com/kerne-protocol/contracts-public/blob/main/audits/hexens-kerne-protocol-final-2026-07-31.pdf"],
     twitter: "https://twitter.com/KerneProtocol",
     wiki: "https://kerne.fi/docs",
     doublecounted: true,
