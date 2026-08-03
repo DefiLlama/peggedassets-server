@@ -236,9 +236,11 @@ export function craftChartsResponse(
 
     // fill missing data with last available data
     while (lastTimestamp < lastDailyTimestamp) {
-      if (pegged.deadFrom) break; // don't extend dead assets beyond their last real data point
+      if (pegged.deadFrom || pegged.delisted) break; // don't extend inactive assets beyond their last real data point
       lastTimestamp = getClosestDayStartTimestamp(lastTimestamp + 24 * secondsInHour);
-      historicalBalance.push({ ...lastBalance, SK: lastTimestamp });
+      const syntheticBalance = { ...lastBalance, SK: lastTimestamp };
+      historicalBalance.push(syntheticBalance);
+      peggedBalance.historicalBalance.push(syntheticBalance);
       peggedBalance.lastTimestamp = lastTimestamp;
     }
 
