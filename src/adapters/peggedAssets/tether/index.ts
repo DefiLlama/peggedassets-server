@@ -464,16 +464,15 @@ async function suiWormholeBridged() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const wrappedAsset = await sui.call("suix_getDynamicFieldObject", [
+    const wrappedAsset = await sui.getDynamicFieldObject(
       SUI_WORMHOLE_TOKEN_REGISTRY,
-      {
-        type: `${SUI_WORMHOLE_TOKEN_BRIDGE}::token_registry::Key<${SUI_WORMHOLE_USDT}::coin::COIN>`,
-        value: { dummy_field: false },
-      },
-    ]);
-    const wrapped = wrappedAsset.content.fields.value.fields;
+      `${SUI_WORMHOLE_TOKEN_BRIDGE}::token_registry::Key<${SUI_WORMHOLE_USDT}::coin::COIN>`
+    );
+    // GraphQL returns the Move value as plain nested JSON, without JSON-RPC's `fields` wrappers.
+    const wrapped = wrappedAsset?.fields?.value ?? wrappedAsset?.fields;
+    if (!wrapped) throw new Error("sui: wormhole USDT WrappedAsset not found");
     const totalSupply =
-      Number(wrapped.treasury_cap.fields.total_supply.fields.value) / 10 ** Number(wrapped.decimals);
+      Number(wrapped.treasury_cap.total_supply.value) / 10 ** Number(wrapped.decimals);
     sumSingleBalance(balances, "peggedUSD", totalSupply, SUI_WORMHOLE_USDT, true);
     return balances;
   };

@@ -21,7 +21,7 @@ async function suiMinted() {
       chainContracts.sui.issued[0]
     );
     const mintedAmount =
-      buckAmount.buck_treasury_cap.fields.total_supply.fields.value;
+      buckAmount.buck_treasury_cap.total_supply.value;
 
     sumSingleBalance(
       balances,
