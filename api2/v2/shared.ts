@@ -30,15 +30,15 @@ export type AssetRegistry = {
   byGeckoId: Map<string, AssetInfo>;
   bySymbol: Map<string, AssetInfo[]>;
   all: AssetInfo[];
-  // entries that couldn't be keyed at all; build refuses to publish while non-empty
+  // unkeyable entries; build refuses to publish while non-empty
   issues: string[];
-  // asset is fine but a secondary index is ambiguous; logged, not fatal
+  // asset is usable but a secondary index is ambiguous; logged, not fatal
   warnings: string[];
 };
 
 let _registry: AssetRegistry | null = null;
 
-// skips unusable peggedData entries into `issues` rather than throwing; build refuses to publish while `issues` is non-empty
+// unusable peggedData entries go to `issues` instead of throwing - the caller decides what to do
 export function assetRegistry(): AssetRegistry {
   if (_registry) return _registry;
   const bySlug = new Map<string, AssetInfo>();
@@ -67,7 +67,6 @@ export function assetRegistry(): AssetRegistry {
 
     let slug = sluggifyPegged(pegged);
     if (bySlug.has(slug)) {
-      // slug collision can't be resolved without diverging from v1 - record and skip so one doesn't silently overwrite the other's files
       issues.push(`slug collision on "${slug}" (ids ${bySlug.get(slug)!.id}, ${id}) - v1 keys by the same slug`);
       continue;
     }
@@ -115,7 +114,7 @@ export function assetRegistry(): AssetRegistry {
   return _registry;
 }
 
-// v2's public chain slug, derived from the display label - NOT v1's per-chain cache filename, which slugs the lowercased chain key instead
+// v2's public chain slug, from the display label
 export function chainSlugFromLabel(label: string): string {
   return sdk.chainUtils.sluggifyString(label);
 }
@@ -150,14 +149,14 @@ export function identitySeriesFields(info: AssetInfo) {
   };
 }
 
-// weekly = Monday-start UTC, monthly = UTC calendar month; keeps the last point per bucket (period-end, no averaging)
+// weekly = Monday-start UTC, monthly = UTC calendar month
 function bucketOf(ts: number, resolution: Resolution): number {
   const day = Math.floor(ts / 86400);
   if (resolution === "weekly") return Math.floor((day - 4) / 7); // epoch day 4 = Monday 1970-01-05
   return monthIndexOfDay(day);
 }
 
-// UTC year*12+month via civil-calendar arithmetic - avoids allocating a Date per point
+// UTC year*12+month by civil-calendar arithmetic - no Date allocation per point
 function monthIndexOfDay(day: number): number {
   const z = day + 719468;
   const era = Math.floor(z / 146097);
@@ -170,7 +169,8 @@ function monthIndexOfDay(day: number): number {
   return year * 12 + (month - 1);
 }
 
-// PRECONDITION: `data` is ascending by timestamp, so "last write wins" is the chronologically last point
+// keeps one point per bucket, no averaging. PRECONDITION: `data` ascends by timestamp, so the last
+// write into a bucket is its period-end point
 export function sampleTuples(data: Tuple[], resolution: Resolution): Tuple[] {
   if (resolution === "daily") return data;
   const byBucket = new Map<number, Tuple>();
@@ -178,7 +178,7 @@ export function sampleTuples(data: Tuple[], resolution: Resolution): Tuple[] {
   return [...byBucket.values()];
 }
 
-// PRECONDITION: `data` is ascending by timestamp - binary search finds the contiguous range; hot path, must not be linear
+// PRECONDITION: `data` ascends by timestamp - hot path, so the range is found by binary search
 export function sliceTuples(data: Tuple[], start?: number, end?: number): Tuple[] {
   if (start === undefined && end === undefined) return data;
   const from = start === undefined ? 0 : lowerBound(data, start);

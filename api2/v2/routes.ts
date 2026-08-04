@@ -2,12 +2,11 @@ import * as HyperExpress from "hyper-express";
 import { Resolution, assetRegistry, sliceTuples } from "./shared";
 import {
   Gate,
-  V2_MAX_AGE,
-  V2_STALE_AFTER,
   buildGate,
-  loadManifest,
+  checkedEpoch,
   loadV2File,
   parsedOf,
+  sendV2Empty,
   sendV2Entry,
   sendV2Error,
   sendV2Redirect,
@@ -76,7 +75,7 @@ function validate(req: HyperExpress.Request, res: HyperExpress.Response, metric:
     return;
   }
 
-  // canonicalize: lowercase slugs, fixed order, defaults elided -> one CDN entry per resource
+  // canonicalize - lowercase slugs, fixed order, defaults elided: one CDN entry per resource
   const canonical: Query = {};
   for (const key of PARAM_ORDER) {
     if (query[key] === undefined) continue;
@@ -88,8 +87,10 @@ function validate(req: HyperExpress.Request, res: HyperExpress.Response, metric:
         return;
       }
     }
+    if (key === "start" || key === "end") value = String(Number(value));
     if (key === "resolution" && value === "daily") continue;
     if (key === "includeUnreleased" && value === "false") continue;
+    if (key === "start" && value === "0") continue;
     canonical[key] = value;
   }
   const canonicalQs = Object.entries(canonical)
@@ -110,19 +111,25 @@ function resolveAsset(res: HyperExpress.Response, slug: string) {
   return info;
 }
 
-// chain identity: union of the `chains` snapshot and market-cap per-chain files; cached per build epoch
+// known chains: the `chains` snapshot plus per-chain market-cap files; cached per build epoch
 let chainSlugCache: { epoch: number; slugs: Set<string> } | null = null;
 async function knownChains(gate: Gate): Promise<Set<string>> {
   if (chainSlugCache?.epoch === gate.manifest.generatedAt) return chainSlugCache.slugs;
   const entry = await loadV2File("chains");
   const slugs = new Set<string>();
-  if (entry) for (const c of parsedOf(entry).chains ?? []) if (c?.slug) slugs.add(c.slug);
+  if (entry) {
+    try {
+      for (const c of parsedOf(entry).chains ?? []) if (c?.slug) slugs.add(c.slug);
+    } catch {}
+  }
   chainSlugCache = { epoch: gate.manifest.generatedAt, slugs };
   return slugs;
 }
 async function chainExists(slug: string, gate: Gate): Promise<boolean> {
   if ((await knownChains(gate)).has(slug)) return true;
-  return (await loadV2File(`history/market-cap/daily/total-chain/${slug}`)) !== null;
+  if ((await loadV2File(`history/market-cap/daily/total-chain/${slug}`)) !== null) return true;
+
+  return (await loadV2File(`history/volume/daily/chain/${slug}/total`)) !== null;
 }
 
 async function serveHistory(
@@ -134,9 +141,17 @@ async function serveHistory(
 ) {
   const entry = await loadV2File(filePath);
   if (!entry) {
-    // scope was validated so the entity exists
-    return sendV2Error(res, 503, "data_unavailable", `the last build did not produce data for this request (${filePath})`);
+    if (!query.asset && !query.chain) {
+      console.error(`v2: no artifact for an unscoped request: ${filePath}`);
+      return sendV2Error(res, 503, "data_unavailable", "data is temporarily unavailable");
+    }
+    const grouped = query.groupBy !== undefined && extractChainSlug === undefined;
+    const empty = grouped
+      ? { generatedAt: gate.manifest.generatedAt, unit, series: [] }
+      : { generatedAt: gate.manifest.generatedAt, unit, data: [] };
+    return sendV2Empty(req, res, `${filePath}|empty`, "history", gate, empty);
   }
+  if (checkedEpoch(res, entry, gate) === undefined) return;
   const start = query.start !== undefined ? Number(query.start) : undefined;
   const end = query.end !== undefined ? Number(query.end) : undefined;
 
@@ -144,7 +159,7 @@ async function serveHistory(
     return sendV2Entry(req, res, entry, "history", gate);
   }
 
-  // unknown chain must 404, not return empty
+  // an unknown chain must 404
   if (extractChainSlug !== undefined && !(parsedOf(entry).series ?? []).some((s: any) => s.slug === extractChainSlug)) {
     if (!(await chainExists(extractChainSlug, gate))) return sendV2Error(res, 404, "not_found", `unknown chain "${extractChainSlug}"`);
   }
@@ -175,7 +190,7 @@ export function setV2Routes(router: HyperExpress.Router) {
     const entry = await loadV2File(file);
     if (!entry) {
       if (query.chain) return sendV2Error(res, 404, "not_found", `unknown chain "${query.chain}"`);
-      return sendV2Error(res, 503, "data_unavailable", "the last build did not produce the asset snapshot");
+      return sendV2Error(res, 503, "data_unavailable", "data is temporarily unavailable");
     }
 
     return sendV2Entry(req, res, entry, "current", gate);
@@ -184,7 +199,12 @@ export function setV2Routes(router: HyperExpress.Router) {
   router.get("/v2/assets/:asset", v2Wrapper(async (req: any, res: any) => {
     if (Object.keys(req.query ?? {}).length) return sendV2Error(res, 400, "unknown_param", "this endpoint takes no query parameters");
 
-    const rawSlug = decodeURIComponent(req.path_parameters.asset);
+    let rawSlug: string;
+    try {
+      rawSlug = decodeURIComponent(req.path_parameters.asset);
+    } catch {
+      return sendV2Error(res, 400, "invalid_param", "asset is not a valid slug");
+    }
     const slug = rawSlug.toLowerCase();
     if (slug !== rawSlug) return sendV2Redirect(res, `/v2/assets/${encodeURIComponent(slug)}`);
 
@@ -194,8 +214,8 @@ export function setV2Routes(router: HyperExpress.Router) {
     if (!gate) return;
 
     const entry = await loadV2File(`asset/${info.slug}`);
-    // the asset is in the registry
-    if (!entry) return sendV2Error(res, 503, "data_unavailable", `the last build did not produce data for asset "${slug}"`);
+    // the registry has the asset, so only the build's file is missing
+    if (!entry) return sendV2Error(res, 503, "data_unavailable", "data is temporarily unavailable");
 
     return sendV2Entry(req, res, entry, "current", gate);
   }));
@@ -206,7 +226,7 @@ export function setV2Routes(router: HyperExpress.Router) {
     if (!gate) return;
 
     const entry = await loadV2File("chains");
-    if (!entry) return sendV2Error(res, 503, "data_unavailable", "the last build did not produce the chains snapshot");
+    if (!entry) return sendV2Error(res, 503, "data_unavailable", "data is temporarily unavailable");
 
     return sendV2Entry(req, res, entry, "current", gate);
   }));

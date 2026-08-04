@@ -43,7 +43,7 @@ function evict() {
   }
 }
 
-// dedupes concurrent misses on the same file - avoids a post-cron stampede re-reading the same buffer
+// dedupes concurrent misses on one file - avoids a post-cron stampede re-reading the same buffer
 const inflight = new Map<string, Promise<Entry | null>>();
 
 export async function loadV2File(subPath: string): Promise<Entry | null> {
@@ -67,44 +67,33 @@ export async function loadV2File(subPath: string): Promise<Entry | null> {
   return pending;
 }
 
-// decompresses only until `bytes` of output exist, so checking a sibling costs one chunk, not a full inflate
-function inflateHead(buf: Buffer, bytes: number): Promise<string> {
+function brotliMatches(br: Buffer, digest: string): Promise<boolean> {
   return new Promise((resolve) => {
     const stream = zlib.createBrotliDecompress();
-    let out = "";
-    let settled = false;
-    const finish = () => {
-      if (settled) return;
-      settled = true;
-      stream.destroy();
-      resolve(out);
-    };
-    stream.on("data", (chunk: Buffer) => {
-      out += chunk.toString("utf8");
-      if (out.length >= bytes) finish();
-    });
-    stream.on("end", finish);
-    stream.on("error", finish);
-    stream.end(buf);
+    const hash = crypto.createHash("md5");
+    stream.on("data", (chunk: Buffer) => hash.update(chunk));
+    stream.on("end", () => resolve(hash.digest("hex") === digest));
+    stream.on("error", () => resolve(false));
+    stream.end(br);
   });
 }
 
 async function readEntry(subPath: string, filePath: string): Promise<Entry | null> {
-  // read both files then re-stat both - if either moved, we may have mixed two builds and must retry
+  // read both, then re-stat both: if either moved, the pair may straddle two builds - retry
   for (let attempt = 0; attempt < 3; attempt++) {
     const [m0, b0] = await Promise.all([mtimeOf(filePath), mtimeOf(filePath + ".br")]);
     if (m0 === undefined) return null;
     const [buf, brRead] = await Promise.all([
       fs.promises.readFile(filePath),
-      // absent/unreadable .br just means "send it raw"
+      // an absent or unreadable .br just means "send it raw"
       b0 === undefined ? Promise.resolve(undefined) : fs.promises.readFile(filePath + ".br").catch(() => undefined),
     ]);
     const [m1, b1] = await Promise.all([mtimeOf(filePath), mtimeOf(filePath + ".br")]);
     if (m1 !== m0 || b1 !== b0) continue;
 
-    // sibling accepted only if it decompresses to the same build epoch - else a compressed client could get another build's bytes under this ETag
-    const epoch = epochOfHead(buf.subarray(0, 200).toString("utf8"));
-    const br = brRead && epoch !== undefined && epochOfHead(await inflateHead(brRead, 200)) === epoch ? brRead : undefined;
+    // byte-identity also settles the epoch: a sibling left over from another run cannot match
+    const digest = crypto.createHash("md5").update(buf).digest("hex");
+    const br = brRead && (await brotliMatches(brRead, digest)) ? brRead : undefined;
     const entry: Entry = {
       key: subPath,
       mtimeMs: m0,
@@ -112,7 +101,7 @@ async function readEntry(subPath: string, filePath: string): Promise<Entry | nul
       buf,
       br,
       bytes: buf.length + (br?.length ?? 0),
-      etag: '"' + crypto.createHash("md5").update(buf).digest("hex") + '"',
+      etag: '"' + digest + '"',
     };
     retain(entry);
     return entry;
@@ -124,15 +113,17 @@ export function parsedOf(entry: Entry): any {
   if (entry.parsed === undefined) {
     entry.parsed = JSON.parse(entry.buf.toString("utf8"));
     if (lru.get(entry.key) === entry) {
-      entry.bytes += entry.buf.length;
-      lruBytes += entry.buf.length;
+      const cost = entry.buf.length * 4;
+      entry.bytes += cost;
+      lruBytes += cost;
       evict();
     }
   }
   return entry.parsed;
 }
 
-// build freshness: answerable only when a completed build exists, isn't past the age ceiling, and the file's epoch matches `_manifest`'s
+// freshness: serve only when a completed build exists, is within the age ceiling, and the file's
+// epoch matches `_manifest`'s
 
 // mark responses stale past this age; refuse to serve past the ceiling
 export const V2_STALE_AFTER = num(process.env.STABLECOINS_V2_STALE_AFTER, 3 * 3600);
@@ -154,7 +145,7 @@ export async function loadManifest(): Promise<Manifest | null> {
   }
 }
 
-// build epoch of a stored artifact, read without a full parse; no generatedAt means it's not a v2 artifact
+// an artifact's build epoch without a full parse; no generatedAt means it isn't a v2 artifact
 export function storedEpoch(entry: Entry): number | undefined {
   return epochOfHead(entry.buf.subarray(0, 200).toString("utf8"));
 }
@@ -165,12 +156,15 @@ export type Gate = { manifest: Manifest; age: number; stale: boolean };
 export async function buildGate(res: HyperExpress.Response): Promise<Gate | null> {
   const manifest = await loadManifest();
   if (!manifest) {
-    sendV2Error(res, 503, "build_unavailable", "no completed v2 build is available yet");
+    // client-facing messages stay generic - the operational detail goes to the log, not the response
+    console.error("v2: no readable _manifest, refusing to serve");
+    sendV2Error(res, 503, "build_unavailable", "data is not available yet");
     return null;
   }
   const age = Math.floor(Date.now() / 1e3) - manifest.generatedAt;
   if (age > V2_MAX_AGE) {
-    sendV2Error(res, 503, "build_stale", `the last v2 build is ${age}s old, past the ${V2_MAX_AGE}s ceiling`);
+    console.error(`v2: refusing to serve, data is ${age}s old against a ${V2_MAX_AGE}s ceiling`);
+    sendV2Error(res, 503, "build_stale", "data is temporarily unavailable");
     return null;
   }
   return { manifest, age, stale: age > V2_STALE_AFTER };
@@ -186,18 +180,17 @@ function setCommonHeaders(res: HyperExpress.Response, kind: CacheKind, generated
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Cache-Control", CACHE_HEADERS[kind]);
   res.setHeader("ETag", etag);
-  // every response can vary by encoding - a shared cache mustn't key differently-encoded responses as one
+  // a shared cache must not key differently-encoded responses as one
   res.setHeader("Vary", "Accept-Encoding");
   if (generatedAt !== undefined) res.setHeader("x-generated-at", String(generatedAt));
   if (gate?.stale) {
-    // loud, machine-readable degradation rather than a silently old 200
     res.setHeader("Warning", `110 - "Response is Stale"`);
     res.setHeader("x-stale", "true");
     res.setHeader("x-build-age", String(gate.age));
   }
 }
 
-// RFC 7232 §3.2: If-None-Match is weak-compared, comma-list + `*`; Cloudflare weakens ETags on compressed responses
+// RFC 7232 §3.2: comma-list + `*`, weak comparison - Cloudflare weakens ETags on compressed responses
 function ifNoneMatchHits(header: string | undefined, etag: string): boolean {
   if (!header) return false;
   const opaque = (t: string) => t.trim().replace(/^W\//, "");
@@ -223,7 +216,7 @@ function acceptsBrotli(header: string | undefined): boolean {
   return wildcard;
 }
 
-// whole-file path never parses, so this is the only check that a truncated payload doesn't go out as a cacheable 200
+// the whole-file path never parses, so this is the only thing stopping a truncated payload from going out as a cacheable 200
 function endsClosed(buf: Buffer): boolean {
   for (let i = buf.length - 1; i >= 0 && i > buf.length - 8; i--) {
     const c = buf[i];
@@ -233,17 +226,19 @@ function endsClosed(buf: Buffer): boolean {
   return false;
 }
 
-// checks the stored file's epoch matches the completed build; responds and returns undefined if it may not be served
-function checkedEpoch(res: HyperExpress.Response, entry: Entry, gate?: Gate): number | undefined {
+// checks the file's epoch against the completed build; responds and returns undefined if unservable
+export function checkedEpoch(res: HyperExpress.Response, entry: Entry, gate?: Gate): number | undefined {
   const epoch = storedEpoch(entry);
   if (epoch === undefined || !endsClosed(entry.buf)) {
-    // not a v2 artifact, or one that does not close: never serve it as if it were
-    sendV2Error(res, 500, "corrupt_artifact", "stored artifact is not a valid v2 payload");
+    // not a v2 artifact, or one that doesn't close: never serve it as if it were
+    console.error(`v2: refusing to serve "${entry.key}" - not a valid v2 payload`);
+    sendV2Error(res, 500, "corrupt_artifact", "data is temporarily unavailable");
     return undefined;
   }
   if (gate && epoch !== gate.manifest.generatedAt) {
-    // a file from a different cron run than the completed build: the set on disk is torn
-    sendV2Error(res, 503, "build_torn", "the stored build is incoherent; a cron run did not complete");
+    // a file from a different run than the completed build - the set on disk is torn
+    console.error(`v2: refusing to serve "${entry.key}" - epoch ${epoch} against manifest ${gate.manifest.generatedAt}`);
+    sendV2Error(res, 503, "build_torn", "data is temporarily unavailable");
     return undefined;
   }
   return epoch;
@@ -252,7 +247,7 @@ function checkedEpoch(res: HyperExpress.Response, entry: Entry, gate?: Gate): nu
 export function sendV2Entry(req: HyperExpress.Request, res: HyperExpress.Response, entry: Entry, kind: CacheKind, gate?: Gate) {
   const epoch = checkedEpoch(res, entry, gate);
   if (epoch === undefined) return;
-  // compressed and identity responses are different representations - must not share an ETag
+  // compressed and identity are different representations - they must not share an ETag
   const wantsBr = entry.br !== undefined && acceptsBrotli(String(req.headers["accept-encoding"] ?? ""));
   const etag = wantsBr ? entry.etag.slice(0, -1) + '-br"' : entry.etag;
   setCommonHeaders(res, kind, epoch, etag, gate);
@@ -264,7 +259,7 @@ export function sendV2Entry(req: HyperExpress.Request, res: HyperExpress.Respons
   return res.send(entry.buf as any);
 }
 
-// a sliced response's ETag is derivable before the payload is built, so a 304 never parses/slices/hashes the file
+// the ETag is derivable before the payload is built, so a 304 never parses, slices or hashes
 export function sendV2Sliced(
   req: HyperExpress.Request,
   res: HyperExpress.Response,
@@ -280,6 +275,22 @@ export function sendV2Sliced(
   setCommonHeaders(res, kind, epoch, etag, gate);
   if (ifNoneMatchHits(req.headers["if-none-match"], etag)) return res.status(304).send("");
   return res.send(JSON.stringify(build(epoch)));
+}
+
+// A scoped entity that this metric simply has no data for is a permanently correct empty answer, not an origin failure
+export function sendV2Empty(
+  req: HyperExpress.Request,
+  res: HyperExpress.Response,
+  discriminator: string,
+  kind: CacheKind,
+  gate: Gate,
+  payload: any
+) {
+  const epoch = gate.manifest.generatedAt;
+  const etag = '"' + crypto.createHash("md5").update(`empty ${epoch} ${discriminator}`).digest("hex") + '"';
+  setCommonHeaders(res, kind, epoch, etag, gate);
+  if (ifNoneMatchHits(req.headers["if-none-match"], etag)) return res.status(304).send("");
+  return res.send(JSON.stringify(payload));
 }
 
 export function sendV2Error(res: HyperExpress.Response, statusCode: number, code: string, message: string) {
