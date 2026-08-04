@@ -13,7 +13,7 @@ import {
   chainSlugFromLabel,
   identitySeriesFields,
   pointsToTuples,
-  sampleTuples,
+  sampleByResolution,
   sumRecord,
   sumRecordOrNull,
 } from "./shared";
@@ -37,6 +37,18 @@ function sortDedupe(tuples: Tuple[]): Tuple[] {
 }
 
 let writtenPaths = new Set<string>();
+let dirsCreated = new Map<string, Promise<unknown>>();
+const ensureDir = (dir: string): Promise<unknown> => {
+  let created = dirsCreated.get(dir);
+  if (!created) {
+    created = fs.promises.mkdir(dir, { recursive: true }).catch((e) => {
+      dirsCreated.delete(dir);
+      throw e;
+    });
+    dirsCreated.set(dir, created);
+  }
+  return created;
+};
 
 const BR_MIN_BYTES = 1024;
 const brotli = (buf: Buffer): Promise<Buffer> =>
@@ -48,28 +60,25 @@ const brotli = (buf: Buffer): Promise<Buffer> =>
     )
   );
 
-async function writeAtomic(filePath: string, buf: Buffer) {
-  const tmp = filePath + ".tmp";
-  await fs.promises.writeFile(tmp, buf);
-  await fs.promises.rename(tmp, filePath);
-}
-
 async function writeV2(subPath: string, data: any) {
   const filePath = getRouteDataPath(`v2/${subPath}`);
-  await fs.promises.mkdir(path.dirname(filePath), { recursive: true });
+  await ensureDir(path.dirname(filePath));
   const buf = Buffer.from(JSON.stringify(data));
-  // .br is written/removed before the plain file is visible, so reads never see a mismatched pair
-  if (buf.length >= BR_MIN_BYTES) {
-    await writeAtomic(filePath + ".br", await brotli(buf));
+  const tmp = filePath + ".tmp";
+  const brWrite = buf.length >= BR_MIN_BYTES ? brotli(buf).then((out) => fs.promises.writeFile(filePath + ".br.tmp", out)) : null;
+  await Promise.all([fs.promises.writeFile(tmp, buf), brWrite]);
+  if (brWrite) {
+    await fs.promises.rename(filePath + ".br.tmp", filePath + ".br");
     writtenPaths.add(subPath + ".br");
   } else {
     await fs.promises.unlink(filePath + ".br").catch(() => {});
   }
-  await writeAtomic(filePath, buf);
+  await fs.promises.rename(tmp, filePath);
   writtenPaths.add(subPath);
 }
 
 const IO_CONCURRENCY = 8;
+const PARSE_CONCURRENCY = 3;
 async function mapPool<T, R>(items: T[], limit: number, fn: (item: T, index: number) => Promise<R>): Promise<R[]> {
   const out: R[] = new Array(items.length);
   let next = 0;
@@ -116,12 +125,13 @@ const exists = (filePath: string): Promise<boolean> =>
     .then(() => true)
     .catch(() => false);
 
-async function assertSourcesNotRegressed(chainLabels: string[], listed: [any, AssetInfo][]) {
+type PublishedBefore = { chains: Set<string>; assets: Set<string> };
+
+async function assertSourcesNotRegressed(chainLabels: string[], listed: [any, AssetInfo][]): Promise<PublishedBefore> {
   const lostChains = (
     await mapPool(chainLabels, IO_CONCURRENCY, async (label) => {
       const slug = chainSlugFromLabel(label);
       if (await exists(getRouteDataPath(`stablecoincharts2/${slug}`))) return null;
-      // no source now - was there an artifact from a previous build?
       return (await exists(getRouteDataPath(`v2/history/market-cap/daily/by-asset-chain/${slug}`))) ? slug : null;
     })
   ).filter(Boolean);
@@ -131,15 +141,42 @@ async function assertSourcesNotRegressed(chainLabels: string[], listed: [any, As
       return (await exists(getRouteDataPath(`v2/asset/${info.slug}`))) ? info.slug : null;
     })
   ).filter(Boolean);
-  if (!lostChains.length && !lostAssets.length) return;
-  const detail = `chains [${lostChains.join(", ") || "none"}], assets [${lostAssets.join(", ") || "none"}]`;
+  const publishedSlugs = async (dir: string) =>
+    (await fs.promises.readdir(getRouteDataPath(dir)).catch(() => [] as string[])).filter((f) => !f.endsWith(".br"));
+  const publishedChains = await publishedSlugs("v2/history/market-cap/daily/by-asset-chain");
+  const publishedAssets = await publishedSlugs("v2/asset");
+  const nowChains = new Set(chainLabels.map(chainSlugFromLabel));
+  const nowAssets = new Set(listed.map(([, info]) => info.slug));
+  const retiredChains = publishedChains.filter((s) => !nowChains.has(s));
+  const retiredAssets = publishedAssets.filter((s) => !nowAssets.has(s));
+
+  const droppedChains = nowChains.size < publishedChains.length ? retiredChains : [];
+  const droppedAssets = nowAssets.size < publishedAssets.length ? retiredAssets : [];
+  if (retiredChains.length || retiredAssets.length) {
+    console.error(
+      `v2 build: slugs retired since the last build - chains [${retiredChains.join(", ") || "none"}], ` +
+        `assets [${retiredAssets.join(", ") || "none"}]. Entity counts: chains ${publishedChains.length} -> ` +
+        `${nowChains.size}, assets ${publishedAssets.length} -> ${nowAssets.size}` +
+        (droppedChains.length || droppedAssets.length ? " - COUNT FELL, treating as source loss" : " (count held, treating as renames)")
+    );
+  }
+
+  // volume is deliberately unguarded: aborting on it would freeze market-cap and supply too,
+  // so a missing volume source is reported through `_manifest` instead
+  const published: PublishedBefore = { chains: new Set(publishedChains), assets: new Set(publishedAssets) };
+  const lost = lostChains.length + lostAssets.length + droppedChains.length + droppedAssets.length;
+  if (!lost) return published;
+  const detail =
+    `unreadable chains [${lostChains.join(", ") || "none"}], unreadable assets [${lostAssets.join(", ") || "none"}], ` +
+    `chains gone from the listing [${droppedChains.join(", ") || "none"}], ` +
+    `assets gone from the listing [${droppedAssets.join(", ") || "none"}]`;
   if (process.env.STABLECOINS_V2_ALLOW_SOURCE_REGRESSION === "1") {
     console.error(`v2 build: source regression accepted via STABLECOINS_V2_ALLOW_SOURCE_REGRESSION: ${detail}`);
-    return;
+    return published;
   }
   throw new Error(
-    `v2 build: ${lostChains.length + lostAssets.length} source(s) that previously published artifacts are now ` +
-      `unreadable - refusing to publish a build with holes in it: ${detail}. ` +
+    `v2 build: ${lost} source(s) that previously published artifacts are now ` +
+      `missing - refusing to publish a build with holes in it: ${detail}. ` +
       `The previous build is left intact and will be served until it ages out. If this is a genuine delisting, ` +
       `rerun once with STABLECOINS_V2_ALLOW_SOURCE_REGRESSION=1.`
   );
@@ -152,31 +189,49 @@ function sortSeries(series: SeriesEntry[]): SeriesEntry[] {
   return series.filter((s) => s.data.length).sort((a, b) => last(b) - last(a));
 }
 
-// writes {unit, data} or {unit, series} under every resolution
+// writes {unit, data} or {unit, series} at every resolution
 async function writeHistory(pathFor: (res: Resolution) => string, generatedAt: number, unit: string, payload: { data?: Tuple[]; series?: SeriesEntry[] }) {
-  await mapPool(RESOLUTIONS, RESOLUTIONS.length, async (res) => {
-    const out: any = { generatedAt, unit };
-    if (payload.data) out.data = sampleTuples(payload.data, res);
-    else out.series = sortSeries((payload.series ?? []).map((s) => ({ ...s, data: sampleTuples(s.data, res) })));
-    await writeV2(pathFor(res), out);
-  });
+  if (payload.data) {
+    const sampled = sampleByResolution(payload.data);
+    await mapPool(RESOLUTIONS, RESOLUTIONS.length, (res) => writeV2(pathFor(res), { generatedAt, unit, data: sampled[res] }));
+    return;
+  }
+  // sortSeries keys on each series' LAST point, and sampling moves neither: the last bucket's period-end point IS the last daily point, and a non-empty series can't sample down to empty.
+  const ordered = sortSeries(payload.series ?? []);
+  const sampled = ordered.map((s) => sampleByResolution(s.data));
+  await mapPool(RESOLUTIONS, RESOLUTIONS.length, (res) =>
+    writeV2(pathFor(res), {
+      generatedAt,
+      unit,
+      series: res === "daily" ? ordered : ordered.map((s, i) => ({ ...s, data: sampled[i][res] })),
+    })
+  );
 }
 
 export async function buildV2Files() {
   const generatedAt = Math.floor(Date.now() / 1e3);
   const reg = assetRegistry();
+  if (reg.issues.length) {
+    throw new Error(
+      `v2 build: ${reg.issues.length} unusable peggedData entries - refusing to publish: ${reg.issues.join("; ")}. ` +
+        `The previous build is left intact and will be served until it ages out; fix peggedData to unblock.`
+    );
+  }
   const stats = {
     written: 0,
     missingChainFiles: [] as string[],
     missingAssetFiles: [] as string[],
+    missingVolumeFiles: [] as string[],
+    volumeSources: 0,
     removed: 0,
     droppedPoints: 0,
     sweepSkipped: false,
     derivedVolume: 0,
   };
   writtenPaths = new Set<string>();
+  dirsCreated = new Map<string, Promise<unknown>>();
 
-  const [stablecoins, stablecoinChains, chartsAll, domFile, rates] = await Promise.all([
+  let [stablecoins, stablecoinChains, chartsAll, domFile, rates] = await Promise.all([
     readRouteData("stablecoins"),
     readRouteData("stablecoinchains"),
     readRouteData("stablecoincharts2/all"),
@@ -184,7 +239,7 @@ export async function buildV2Files() {
     readRouteData("rates"),
   ]);
 
-  // guard on content not key presence - an empty-but-present source would otherwise publish an empty dataset as healthy
+  // guard on content, not key presence - an empty-but-present source would publish as healthy
   const sourceAssets: any[] = Array.isArray(stablecoins?.peggedAssets) ? stablecoins.peggedAssets : [];
   const breakdownIds = chartsAll?.breakdown && typeof chartsAll.breakdown === "object" ? Object.keys(chartsAll.breakdown) : [];
   if (!sourceAssets.length) throw new Error("v2 build: /stablecoins has no peggedAssets - refusing to publish an empty dataset");
@@ -249,8 +304,8 @@ export async function buildV2Files() {
     listed.push([a, info]);
   }
 
-  // pre-flight: refuse to publish if sources regressed (skipping just the sweep isn't enough); only counts as regression if a previous build published that entity
-  await assertSourcesNotRegressed(chainLabels, listed);
+  // pre-flight: refuse to publish if a source that previously published artifacts is now unreadable
+  const publishedBefore = await assertSourcesNotRegressed(chainLabels, listed);
 
   await writeV2("assets", {
     generatedAt,
@@ -258,7 +313,7 @@ export async function buildV2Files() {
   });
   stats.written++;
 
-  for (const label of chainLabels) {
+  await mapPool(chainLabels, IO_CONCURRENCY, async (label) => {
     const scoped = listed
       .map(([a, info]) => {
         const chainScope = a.chainCirculating?.[label];
@@ -271,16 +326,15 @@ export async function buildV2Files() {
       assets: scoped.sort((x, y) => y.circulatingUsd - x.circulatingUsd),
     });
     stats.written++;
-  }
+  });
 
-  // chains snapshot: totals from /stablecoinchains, prev* from the per-chain series, dominant asset from dominanceMap
-  const chainChartMap = domFile?.chainChartMap ?? {};
-  const dominanceMap = domFile?.dominanceMap ?? {};
+  // chains snapshot: totals from /stablecoinchains, prev* from the per-chain series, dominant from dominanceMap
+  let chainChartMap = domFile?.chainChartMap ?? {};
+  let dominanceMap = domFile?.dominanceMap ?? {};
   const valueAtOffset = (tuples: Tuple[], last: number, offsetDays: number): number | null => {
     const target = last - offsetDays * 86400;
     let best: Tuple | null = null;
     for (const t of tuples) {
-      // closest record within 1.5 days, same tolerance class as v1 snapshot offsets
       if (Math.abs(t[0] - target) <= 86400 * 1.5 && (!best || Math.abs(t[0] - target) < Math.abs(best[0] - target))) best = t;
     }
     return best ? best[1] : null;
@@ -308,70 +362,92 @@ export async function buildV2Files() {
 
   // ---------- market-cap histories ----------
 
-  // global total excludes doublecounted (v1 aggregated does not - sum the clean series instead)
+  // global total excludes doublecounted, so it's summed from the clean series rather than v1's aggregate
   const globalByDate = new Map<number, number>();
   const assetSeriesGlobal: SeriesEntry[] = [];
+  const assetTotals: [AssetInfo, Tuple[]][] = [];
   for (const [id, points] of Object.entries(chartsAll.breakdown)) {
     const info = reg.byId.get(id);
     if (!info) continue;
     const tuples = pointsToTuples(points as any[], "totalCirculatingUSD");
     assetSeriesGlobal.push({ ...identitySeriesFields(info), data: tuples });
     if (!doubleIds.has(id)) for (const [ts, v] of tuples) globalByDate.set(ts, (globalByDate.get(ts) ?? 0) + v);
+    assetTotals.push([info, tuples]);
+  }
+  await mapPool(assetTotals, IO_CONCURRENCY, async ([info, tuples]) => {
     await writeHistory((r) => `history/market-cap/${r}/total-asset/${info.slug}`, generatedAt, "usd", { data: tuples });
     stats.written += 3;
-  }
+  });
+  chartsAll.breakdown = null;
+  assetTotals.length = 0;
   const globalTotal: Tuple[] = [...globalByDate.entries()].sort((a, b) => a[0] - b[0]).map(([t, v]) => [t, round(v)]);
+  globalByDate.clear();
   await writeHistory((r) => `history/market-cap/${r}/total`, generatedAt, "usd", { data: globalTotal });
   await writeHistory((r) => `history/market-cap/${r}/by-asset`, generatedAt, "usd", { series: assetSeriesGlobal });
   stats.written += 6;
+  assetSeriesGlobal.length = 0;
 
   const chainSeriesGlobal: SeriesEntry[] = Object.entries(chainChartMap).map(([label, points]) => ({
     slug: chainSlugFromLabel(label),
     name: label,
     data: pointsToTuples(points as any[], "totalCirculatingUSD"),
   }));
+  domFile = null;
+  chainChartMap = {};
+  dominanceMap = {};
   await writeHistory((r) => `history/market-cap/${r}/by-chain`, generatedAt, "usd", { series: chainSeriesGlobal });
   stats.written += 3;
-  for (const s of chainSeriesGlobal) {
+  await mapPool(chainSeriesGlobal, IO_CONCURRENCY, async (s) => {
     await writeHistory((r) => `history/market-cap/${r}/total-chain/${s.slug}`, generatedAt, "usd", { data: s.data });
     stats.written += 3;
-  }
+  });
+  chainSeriesGlobal.length = 0;
 
-  // per-chain asset breakdowns + per-asset chain breakdowns, one pass over the v1 chain files
+  // per-chain asset breakdowns + per-asset chain breakdowns in one pass over the v1 chain files
   const perAssetChains = new Map<string, SeriesEntry[]>();
-  for (const label of chainLabels) {
+  const chainResults = await mapPool(chainLabels, PARSE_CONCURRENCY, async (label) => {
     const chainSlug = chainSlugFromLabel(label);
     const chainFile = await readRouteData(`stablecoincharts2/${chainSlug}`);
-    if (!chainFile?.breakdown) {
-      stats.missingChainFiles.push(chainSlug);
-      continue;
-    }
+    if (!chainFile?.breakdown) return { chainSlug, perAsset: null };
     const series: SeriesEntry[] = [];
+    const perAsset: [string, SeriesEntry][] = [];
     for (const [id, points] of Object.entries(chainFile.breakdown)) {
       const info = reg.byId.get(id);
       if (!info) continue;
       const tuples = pointsToTuples(points as any[], "totalCirculatingUSD");
       if (!tuples.length) continue;
       series.push({ ...identitySeriesFields(info), data: tuples });
-      if (!perAssetChains.has(id)) perAssetChains.set(id, []);
-      perAssetChains.get(id)!.push({ slug: chainSlug, name: label, data: tuples });
+      perAsset.push([id, { slug: chainSlug, name: label, data: tuples }]);
     }
     await writeHistory((r) => `history/market-cap/${r}/by-asset-chain/${chainSlug}`, generatedAt, "usd", { series });
     stats.written += 3;
+    return { chainSlug, perAsset };
+  });
+  // folded back in chain-list order
+  for (const { chainSlug, perAsset } of chainResults) {
+    if (!perAsset) {
+      stats.missingChainFiles.push(chainSlug);
+      continue;
+    }
+    for (const [id, entry] of perAsset) {
+      if (!perAssetChains.has(id)) perAssetChains.set(id, []);
+      perAssetChains.get(id)!.push(entry);
+    }
   }
-  for (const [id, series] of perAssetChains) {
+  await mapPool([...perAssetChains], IO_CONCURRENCY, async ([id, series]) => {
     const info = reg.byId.get(id)!;
     await writeHistory((r) => `history/market-cap/${r}/by-chain-asset/${info.slug}`, generatedAt, "usd", { series });
     stats.written += 3;
-  }
+  });
+  perAssetChains.clear();
 
   // ---------- supply histories (raw token counts, from the v1 asset detail files) ----------
 
-  // one unit of work per asset; misses are collected and folded back afterwards for deterministic stats
-  const assetMisses = await mapPool(listed, IO_CONCURRENCY, async ([listedAsset, info]) => {
+  // one unit of work per asset; misses are folded back afterwards so stats stay deterministic
+  const assetMisses = await mapPool(listed, PARSE_CONCURRENCY, async ([listedAsset, info]) => {
     const detail = await readRouteData(`stablecoin/${info.id}`);
     if (!detail) return info.slug;
-    // both variants share one walk of the token array: they differ only by the unreleased addend
+    // both variants share one walk of the token array; they differ only by the unreleased addend
     const tuplesBoth = (tokens: any[]): { plain: Tuple[]; unreleased: Tuple[] } => {
       const plain: Tuple[] = [];
       const unreleased: Tuple[] = [];
@@ -401,10 +477,10 @@ export async function buildV2Files() {
     await writeHistory((r) => `history/supply/${r}/${info.slug}/by-chain-unreleased`, generatedAt, "count", { series: chainSeriesFor("unreleased") });
     stats.written += 4 * RESOLUTIONS.length;
 
-    // circulatingUsd must match /v2/assets' source or directory and detail pages disagree; only unpriced quantities are converted here
     const priceUsd = typeof detail.price === "number" ? detail.price : null;
     const refUsd = referenceUsdFor(info);
-    const price = priceUsd ?? refUsd ?? 0;
+    const price = priceUsd ?? refUsd;
+    const toUsd = (rec: any): number | null => (price === null ? null : round(sumRecord(rec) * price));
     const lastOf = (tokens: any[]) => (tokens?.length ? tokens[tokens.length - 1] : null);
     const chainsCurrent = Object.entries(detail.chainBalances ?? {})
       .map(([label, v]: [string, any]) => {
@@ -414,14 +490,14 @@ export async function buildV2Files() {
         return {
           slug: chainSlugFromLabel(label),
           name: label,
-          circulatingUsd: scope ? sumRecordOrNull(scope.current) ?? 0 : round(sumRecord(last.circulating) * price),
-          unreleasedUsd: round(sumRecord(last.unreleased) * price),
-          bridgedInUsd: round(sumRecord(last.bridgedTo) * price),
-          mintedUsd: round(sumRecord(last.minted) * price),
+          circulatingUsd: scope ? sumRecordOrNull(scope.current) ?? 0 : toUsd(last.circulating),
+          unreleasedUsd: toUsd(last.unreleased),
+          bridgedInUsd: toUsd(last.bridgedTo),
+          mintedUsd: toUsd(last.minted),
         };
       })
       .filter(Boolean)
-      .sort((a: any, b: any) => b.circulatingUsd - a.circulatingUsd);
+      .sort((a: any, b: any) => (b.circulatingUsd ?? -1) - (a.circulatingUsd ?? -1));
     const globalLast = lastOf(detail.tokens);
     const raw = info.raw;
     await writeV2(`asset/${info.slug}`, {
@@ -446,7 +522,7 @@ export async function buildV2Files() {
       auditLinks: raw.auditLinks ?? raw.audit_links ?? [],
       onCoinGecko: raw.onCoinGecko === "true" || raw.onCoinGecko === true,
       circulatingUsd: sumRecordOrNull(listedAsset.circulating) ?? 0,
-      unreleasedUsd: globalLast ? round(sumRecord(globalLast.unreleased) * price) : 0,
+      unreleasedUsd: globalLast ? toUsd(globalLast.unreleased) : 0,
       ...(info.doublecounted ? { doublecounted: true } : {}),
       ...(info.deprecated ? { deprecated: true } : {}),
       ...(info.delisted ? { delisted: true } : {}),
@@ -465,14 +541,28 @@ export async function buildV2Files() {
   // sweep only runs if no sources regressed vs the previous build - a missing source could be delisted or just unreadable, and deleting on the latter is catastrophic
   const prevMissingChains = typeof previousManifest?.missingChainSources === "number" ? previousManifest.missingChainSources : Infinity;
   const prevMissingAssets = typeof previousManifest?.missingAssetSources === "number" ? previousManifest.missingAssetSources : Infinity;
-  const degraded = stats.missingChainFiles.length > prevMissingChains || stats.missingAssetFiles.length > prevMissingAssets;
+  const unreadableChains = stats.missingChainFiles.filter((s) => publishedBefore.chains.has(s));
+  const unreadableAssets = stats.missingAssetFiles.filter((s) => publishedBefore.assets.has(s));
+  const degraded =
+    stats.missingChainFiles.length > prevMissingChains ||
+    stats.missingAssetFiles.length > prevMissingAssets ||
+    unreadableChains.length > 0 ||
+    unreadableAssets.length > 0;
   if (degraded) {
     stats.sweepSkipped = true;
     console.error(
       `v2 build: SOURCES REGRESSED (chains ${prevMissingChains} -> ${stats.missingChainFiles.length}, ` +
         `assets ${prevMissingAssets} -> ${stats.missingAssetFiles.length}) - skipping orphan sweep to avoid ` +
         `deleting still-good data. Missing chains: ${stats.missingChainFiles.join(", ") || "none"}; ` +
-        `missing assets: ${stats.missingAssetFiles.join(", ") || "none"}`
+        `missing assets: ${stats.missingAssetFiles.join(", ") || "none"}; ` +
+        `previously published but unreadable now: chains [${unreadableChains.join(", ") || "none"}], ` +
+        `assets [${unreadableAssets.join(", ") || "none"}]`
+    );
+  }
+  if (stats.missingVolumeFiles.length) {
+    console.error(
+      `v2 build: ${stats.missingVolumeFiles.length} volume source(s) unreadable - those routes will answer ` +
+        `data_unavailable until the next run: ${stats.missingVolumeFiles.join(", ")}`
     );
   }
   const removed = degraded ? [] : await sweepOrphans();
@@ -486,15 +576,25 @@ export async function buildV2Files() {
     chains: chainLabels.length,
     missingChainSources: stats.missingChainFiles.length,
     missingAssetSources: stats.missingAssetFiles.length,
+    missingVolumeSources: stats.missingVolumeFiles.length,
+    volumeSources: stats.volumeSources,
   });
 
   console.log(
     `v2 build done: ${stats.written} files, ${removed.length} orphans removed` +
       (stats.missingChainFiles.length ? `; missing chain sources: ${stats.missingChainFiles.length}` : "") +
-      (stats.missingAssetFiles.length ? `; missing asset sources: ${stats.missingAssetFiles.length}` : "")
+      (stats.missingAssetFiles.length ? `; missing asset sources: ${stats.missingAssetFiles.length}` : "") +
+      (stats.missingVolumeFiles.length ? `; missing volume sources: ${stats.missingVolumeFiles.length}` : "")
   );
   return stats;
 }
+
+const TOP_LEVEL_VOLUME = [
+  "chart-total",
+  "chart-total-chain-breakdown",
+  "chart-total-token-breakdown",
+  "chart-total-currency-breakdown",
+];
 
 async function buildVolume(generatedAt: number, reg: ReturnType<typeof assetRegistry>, stats: any) {
   const volumeDir = getRouteDataPath("volume");
@@ -502,11 +602,13 @@ async function buildVolume(generatedAt: number, reg: ReturnType<typeof assetRegi
   try {
     files = await fs.promises.readdir(volumeDir);
   } catch {
+    stats.missingVolumeFiles.push(...TOP_LEVEL_VOLUME);
     console.error("v2 build: no volume files found, skipping volume endpoints");
     return;
   }
-  // filter to names the v1 writer actually produces - a stray .tmp/.br file would leak into a route path
+  // drop stray .tmp/.br files - their names would leak into route paths
   files = files.filter((f) => !/\.(tmp|br)$/.test(f));
+  stats.volumeSources = files.length;
   const readVolume = (name: string) => readRouteData(`volume/${name}`);
 
   const totalTuples = (rows: any[]): Tuple[] => {
@@ -543,7 +645,7 @@ async function buildVolume(generatedAt: number, reg: ReturnType<typeof assetRegi
 
   const assetIdentity = (symbol: string) => {
     const matches = reg.bySymbol.get(symbol.toUpperCase()) ?? [];
-    // volume source data is keyed by token symbol; only a unique match gets asset identity
+    // volume sources are keyed by symbol; only a unique match earns an asset identity
     if (matches.length === 1) return { id: matches[0].id, slug: matches[0].slug, name: matches[0].name, symbol: matches[0].symbol };
     return { slug: null, name: symbol, symbol };
   };
@@ -552,7 +654,8 @@ async function buildVolume(generatedAt: number, reg: ReturnType<typeof assetRegi
     const name = sdk.chainUtils.getChainLabelFromKey(key);
     return { slug: chainSlugFromLabel(name), name };
   };
-  // slugs from volume filenames are label-slugs, not chain keys - resolve via chain list, not getChainLabelFromKey (mangles them, e.g. "op-mainnet" -> "Op-mainnet")
+  // volume filenames carry label-slugs, not chain keys, so resolve via the chain list:
+  // getChainLabelFromKey mangles them (e.g. "op-mainnet" -> "Op-mainnet")
   const labelBySlug = new Map<string, string>();
   for (const label of Object.values(sdk.chainUtils.chainKeyToChainLabelMap ?? {}) as string[]) {
     if (label) labelBySlug.set(chainSlugFromLabel(label), label);
@@ -566,13 +669,14 @@ async function buildVolume(generatedAt: number, reg: ReturnType<typeof assetRegi
     stats.written += 3;
   };
 
-  const [totalRows, chainBreakdown, tokenBreakdown, currencyBreakdown] = await Promise.all([
-    readVolume("chart-total"),
-    readVolume("chart-total-chain-breakdown"),
-    readVolume("chart-total-token-breakdown"),
-    readVolume("chart-total-currency-breakdown"),
-  ]);
-  // each breakdown is pivoted once, reused by its own endpoint and the derived families below
+  const [totalRows, chainBreakdown, tokenBreakdown, currencyBreakdown] = await Promise.all(
+    TOP_LEVEL_VOLUME.map(readVolume)
+  );
+  // readRouteData nulls both unreadable and deleted sources - count either rather than skip silently
+  for (const [i, rows] of [totalRows, chainBreakdown, tokenBreakdown, currencyBreakdown].entries()) {
+    if (!rows) stats.missingVolumeFiles.push(TOP_LEVEL_VOLUME[i]);
+  }
+  // pivoted once, reused by its own endpoint and the derived families below
   const chainSeries = chainBreakdown ? breakdownSeries(chainBreakdown, chainIdentity) : [];
   const tokenSeries = tokenBreakdown ? breakdownSeries(tokenBreakdown, assetIdentity) : [];
   if (totalRows) await writeIf(totalRows, (r) => `history/volume/${r}/total`, { data: totalTuples(totalRows) });
@@ -580,10 +684,10 @@ async function buildVolume(generatedAt: number, reg: ReturnType<typeof assetRegi
   if (tokenBreakdown) await writeIf(tokenBreakdown, (r) => `history/volume/${r}/by-asset`, { series: tokenSeries });
   if (currencyBreakdown) await writeIf(currencyBreakdown, (r) => `history/volume/${r}/by-pegcurrency`, { series: breakdownSeries(currencyBreakdown, currencyIdentity) });
 
-  // asset -> per-chain volume series, pivoted out of the per-chain token breakdowns below
+  // asset -> per-chain volume, pivoted out of the per-chain token breakdowns below
   const perAssetChainVolume = new Map<string, SeriesEntry[]>();
 
-  for (const file of files) {
+  const fileResults = await mapPool(files, PARSE_CONCURRENCY, async (file) => {
     if (file.startsWith("chart-chain-")) {
       const rest = file.slice("chart-chain-".length);
       if (rest.endsWith("-token-breakdown")) {
@@ -591,11 +695,9 @@ async function buildVolume(generatedAt: number, reg: ReturnType<typeof assetRegi
         const rows = await readVolume(file);
         const series = breakdownSeries(rows, assetIdentity);
         await writeIf(rows, (r) => `history/volume/${r}/chain/${chainSlug}/by-asset`, { series });
-        for (const s of series) {
-          if (!s.slug || !s.data.length) continue; // ambiguous symbol: not attributable to one asset
-          if (!perAssetChainVolume.has(s.slug)) perAssetChainVolume.set(s.slug, []);
-          perAssetChainVolume.get(s.slug)!.push({ ...chainIdentityFromSlug(chainSlug), data: s.data });
-        }
+        return series
+          .filter((s) => s.slug && s.data.length)
+          .map((s): [string, SeriesEntry] => [s.slug, { ...chainIdentityFromSlug(chainSlug), data: s.data }]);
       } else if (rest.endsWith("-currency-breakdown")) {
         const chainSlug = rest.slice(0, -"-currency-breakdown".length);
         const rows = await readVolume(file);
@@ -609,31 +711,45 @@ async function buildVolume(generatedAt: number, reg: ReturnType<typeof assetRegi
       const isChainBreakdown = rest.endsWith("-chain-breakdown");
       const symbol = isChainBreakdown ? rest.slice(0, -"-chain-breakdown".length) : rest;
       const matches = reg.bySymbol.get(symbol.toUpperCase()) ?? [];
-      if (matches.length !== 1) continue; // ambiguous or unknown symbol: not routable by asset slug
+      if (matches.length !== 1) return null;
       const slug = matches[0].slug;
       const rows = await readVolume(file);
       if (isChainBreakdown) await writeIf(rows, (r) => `history/volume/${r}/asset/${slug}/by-chain`, { series: breakdownSeries(rows, chainIdentity) });
       else await writeIf(rows, (r) => `history/volume/${r}/asset/${slug}/total`, { data: totalTuples(rows) });
     }
+    return null;
+  });
+  for (const entries of fileResults) {
+    for (const [slug, entry] of entries ?? []) {
+      if (!perAssetChainVolume.has(slug)) perAssetChainVolume.set(slug, []);
+      perAssetChainVolume.get(slug)!.push(entry);
+    }
   }
 
-  // derives routes with no dedicated v1 source file from the breakdowns above; dedicated files take precedence when present
-  const derive = async (subPath: (r: Resolution) => string, payload: { data?: Tuple[]; series?: SeriesEntry[] }) => {
-    if (writtenPaths.has(subPath("daily"))) return; // an authoritative source file already wrote it
-    await writeHistory(subPath, generatedAt, "usd", payload);
-    stats.written += 3;
-    stats.derivedVolume = (stats.derivedVolume ?? 0) + 3;
+  type Derived = [(r: Resolution) => string, { data?: Tuple[]; series?: SeriesEntry[] }];
+  const pending: Derived[] = [];
+  const queued = new Set<string>();
+  const derive = (subPath: (r: Resolution) => string, payload: Derived[1]) => {
+    const daily = subPath("daily");
+    if (writtenPaths.has(daily) || queued.has(daily)) return; // a dedicated source file already wrote it
+    queued.add(daily);
+    pending.push([subPath, payload]);
   };
 
   for (const s of chainSeries) {
     if (!s.slug || !s.data.length) continue;
-    await derive((r) => `history/volume/${r}/chain/${s.slug}/total`, { data: s.data });
+    derive((r) => `history/volume/${r}/chain/${s.slug}/total`, { data: s.data });
   }
   for (const s of tokenSeries) {
     if (!s.slug || !s.data.length) continue;
-    await derive((r) => `history/volume/${r}/asset/${s.slug}/total`, { data: s.data });
+    derive((r) => `history/volume/${r}/asset/${s.slug}/total`, { data: s.data });
   }
   for (const [slug, series] of perAssetChainVolume) {
-    await derive((r) => `history/volume/${r}/asset/${slug}/by-chain`, { series });
+    derive((r) => `history/volume/${r}/asset/${slug}/by-chain`, { series });
   }
+  await mapPool(pending, IO_CONCURRENCY, async ([subPath, payload]) => {
+    await writeHistory(subPath, generatedAt, "usd", payload);
+    stats.written += 3;
+    stats.derivedVolume = (stats.derivedVolume ?? 0) + 3;
+  });
 }

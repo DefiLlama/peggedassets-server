@@ -169,13 +169,15 @@ function monthIndexOfDay(day: number): number {
   return year * 12 + (month - 1);
 }
 
-// keeps one point per bucket, no averaging. PRECONDITION: `data` ascends by timestamp, so the last
-// write into a bucket is its period-end point
-export function sampleTuples(data: Tuple[], resolution: Resolution): Tuple[] {
-  if (resolution === "daily") return data;
-  const byBucket = new Map<number, Tuple>();
-  for (const point of data) byBucket.set(bucketOf(point[0], resolution), point);
-  return [...byBucket.values()];
+export function sampleByResolution(data: Tuple[]): Record<Resolution, Tuple[]> {
+  const weekly = new Map<number, Tuple>();
+  const monthly = new Map<number, Tuple>();
+  for (const point of data) {
+    const day = Math.floor(point[0] / 86400);
+    weekly.set(Math.floor((day - 4) / 7), point);
+    monthly.set(monthIndexOfDay(day), point);
+  }
+  return { daily: data, weekly: [...weekly.values()], monthly: [...monthly.values()] };
 }
 
 // PRECONDITION: `data` ascends by timestamp - hot path, so the range is found by binary search
