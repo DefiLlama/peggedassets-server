@@ -171,14 +171,21 @@ export async function buildGate(res: HyperExpress.Response): Promise<Gate | null
 }
 
 export type CacheKind = "current" | "history";
-const CACHE_HEADERS: Record<CacheKind, string> = {
-  current: "public, max-age=300, stale-while-revalidate=600",
-  history: "public, max-age=1800, stale-while-revalidate=3600",
+const CACHE_TTL: Record<CacheKind, { maxAge: number; swr: number }> = {
+  current: { maxAge: 300, swr: 600 },
+  history: { maxAge: 1800, swr: 3600 },
 };
+
+function cacheControl(kind: CacheKind, gate?: Gate): string {
+  const { maxAge, swr } = CACHE_TTL[kind];
+  const budget = gate ? (gate.stale ? V2_MAX_AGE : V2_STALE_AFTER) - gate.age : Infinity;
+  const cappedMaxAge = Math.min(maxAge, budget);
+  return `public, max-age=${cappedMaxAge}, stale-while-revalidate=${Math.min(swr, budget - cappedMaxAge)}`;
+}
 
 function setCommonHeaders(res: HyperExpress.Response, kind: CacheKind, generatedAt: number | undefined, etag: string, gate?: Gate) {
   res.setHeader("Content-Type", "application/json");
-  res.setHeader("Cache-Control", CACHE_HEADERS[kind]);
+  res.setHeader("Cache-Control", cacheControl(kind, gate));
   res.setHeader("ETag", etag);
   // a shared cache must not key differently-encoded responses as one
   res.setHeader("Vary", "Accept-Encoding");

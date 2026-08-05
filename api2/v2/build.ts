@@ -142,7 +142,7 @@ async function assertSourcesNotRegressed(chainLabels: string[], listed: [any, As
     })
   ).filter(Boolean);
   const publishedSlugs = async (dir: string) =>
-    (await fs.promises.readdir(getRouteDataPath(dir)).catch(() => [] as string[])).filter((f) => !f.endsWith(".br"));
+    (await fs.promises.readdir(getRouteDataPath(dir)).catch(() => [] as string[])).filter((f) => !/\.(br|tmp)$/.test(f));
   const publishedChains = await publishedSlugs("v2/history/market-cap/daily/by-asset-chain");
   const publishedAssets = await publishedSlugs("v2/asset");
   const nowChains = new Set(chainLabels.map(chainSlugFromLabel));
@@ -256,9 +256,6 @@ export async function buildV2Files() {
       : Array.isArray(previousAssets?.assets)
       ? previousAssets.assets.length
       : 0;
-  if (previousCount && sourceAssets.length < previousCount / 2) {
-    throw new Error(`v2 build: asset count collapsed ${previousCount} -> ${sourceAssets.length} - refusing to publish`);
-  }
 
   const latestRates: Record<string, number> = rates?.[rates.length - 1]?.rates ?? {};
   const referenceUsdFor = (info: AssetInfo): number | null => {
@@ -302,6 +299,13 @@ export async function buildV2Files() {
       continue;
     }
     listed.push([a, info]);
+  }
+
+  if (!listed.length) {
+    throw new Error(`v2 build: none of the ${sourceAssets.length} /stablecoins assets resolved against peggedData - refusing to publish an empty dataset`);
+  }
+  if (previousCount && listed.length < previousCount / 2) {
+    throw new Error(`v2 build: asset count collapsed ${previousCount} -> ${listed.length} - refusing to publish`);
   }
 
   // pre-flight: refuse to publish if a source that previously published artifacts is now unreadable
