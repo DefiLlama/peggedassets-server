@@ -12923,4 +12923,25 @@ export default [
     wiki: "https://www.krwq.cash/whitepaper.pdf",
     module: "krwt",
   },
+  {
+    id: "429",
+    name: "KRW1",
+    address: "0xb83fc84df7028251066c25f5d61d12fd9d9c8be4",
+    symbol: "KRW1",
+    url: "https://krw1.kr/",
+    description:
+      "KRW1 is a Korean won-denominated stablecoin issued by BDACS and backed 1:1 by Korean won reserves held in segregated bank accounts.",
+    mintRedeemDescription:
+      "BDACS mints KRW1 after receiving Korean won into segregated bank accounts and burns tokens when users redeem them for won through its compliance-controlled service.",
+    onCoinGecko: "true",
+    gecko_id: "krw1",
+    cmcId: null,
+    pegType: "peggedKRW",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/BDACSKorea",
+    wiki: "https://krw1.kr/pdf/BDACS_KRW1_White%20Paper_EN.pdf",
+    module: "krw1",
+  },
 ] as PeggedAsset[];
