@@ -2316,6 +2316,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/InterestDeFi",
     wiki: "https://wiki.defillama.com/wiki/Interest_Protocol",
+    deadUrl: true,
     chainConfig: {
       chains: {
         ethereum: {
