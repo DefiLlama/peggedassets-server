@@ -12952,7 +12952,8 @@ export default [
     url: "https://www.sofi.com/crypto/sofiusd/",
     description:
       "SOFID is a U.S. dollar stablecoin issued by SoFi Bank, N.A., a nationally chartered U.S. bank. It is designed to enable 24/7 settlement and programmable dollar movement while operating within the U.S. banking regulatory framework.",
-    mintRedeemDescription: null,
+    mintRedeemDescription:
+      "SOFID is issued by SoFi Bank, N.A. and is intended to be redeemable 1:1 for U.S. dollars through supported SoFi channels.",
     onCoinGecko: "true",
     gecko_id: "sofiusd",
     cmcId: null,
