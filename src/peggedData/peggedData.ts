@@ -12944,4 +12944,35 @@ export default [
     wiki: "https://krw1.kr/pdf/BDACS_KRW1_White%20Paper_EN.pdf",
     module: "krw1",
   },
+  {
+    id: "430",
+    name: "SoFiUSD",
+    address: "0x0cb6d03b0ac88a463f67b7ad99f9f3ec4678092e",
+    symbol: "SOFID",
+    url: "https://www.sofi.com/crypto/sofiusd/",
+    description:
+      "SOFID is a U.S. dollar stablecoin issued by SoFi Bank, N.A., a nationally chartered U.S. bank. It is designed to enable 24/7 settlement and programmable dollar movement while operating within the U.S. banking regulatory framework.",
+    mintRedeemDescription:
+      "SOFID is issued by SoFi Bank, N.A. and is intended to be redeemable 1:1 for U.S. dollars through supported SoFi channels.",
+    onCoinGecko: "true",
+    gecko_id: "sofiusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/SoFi",
+    wiki: null,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0x0cb6d03b0ac88a463f67b7ad99f9f3ec4678092e"],
+        },
+        solana: {
+          issued: ["APhcqtzE73es3KAGiVksZFMLGwJDiAey5qZKUrQHEHfS"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
