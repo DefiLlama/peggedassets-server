@@ -12975,4 +12975,31 @@ export default [
       },
     },
   },
+  {
+    id: "431",
+    name: "Delpho USDV",
+    address: "hyperliquid:0x8c6EB3C8d1FdDC752684274Fb4A3EB98DBE9cd26",
+    symbol: "USDV",
+    url: "https://www.delpho.xyz/",
+    description:
+      "USDV is an overcollateralized stablecoin minted against supported crypto collateral on Delpho, a CDP protocol on HyperEVM.",
+    mintRedeemDescription:
+      "Users deposit supported collateral into Delpho to mint USDV at 0% interest. Borrowers can withdraw collateral or fully repay their USDV debt to close a position, provided the position remains above its liquidation threshold. USDV can also be redeemed for underlying collateral through Delpho's open redemption mechanism.",
+    onCoinGecko: "true",
+    gecko_id: "delpho-usdv",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: ["https://sherlock-files.ams3.digitaloceanspaces.com/reports/2026.07.01%20-%20Final%20-%20Delpho%20Collaborative%20Audit%20Report%201782919020.pdf"],
+    twitter: "https://x.com/delpho_labs",
+    wiki: "https://delpho.gitbook.io/delpho-docs/delpho-101/usdv-minting-against-collateral",
+    chainConfig: {
+      chains: {
+        hyperliquid: {
+          issued: ["0x8c6EB3C8d1FdDC752684274Fb4A3EB98DBE9cd26"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
