@@ -10230,6 +10230,15 @@ export default [
         arbitrum: {
           issued: ["0xa39986f96b80d04e8d7aeaaf47175f47c23fd0f4"],
         },
+        robinhood: {
+          issued: ["0x9000123cb195804f35cee9553E2596978227910F"],
+        },
+        xlayer: {
+          issued: ["0x3b274e3fe48e34f032920f766f750bdeafd80068"],
+        },
+        pharos: {
+          issued: ["0xa39986f96b80d04e8d7aeaaf47175f47c23fd0f4"],
+        },
       },
     },
   },
