@@ -12995,6 +12995,7 @@ export default [
     twitter: "https://x.com/delpho_labs",
     wiki: "https://delpho.gitbook.io/delpho-docs/delpho-101/usdv-minting-against-collateral",
     chainConfig: {
+      decimals: 6,
       chains: {
         hyperliquid: {
           issued: ["0x8c6EB3C8d1FdDC752684274Fb4A3EB98DBE9cd26"],
