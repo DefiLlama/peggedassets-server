@@ -11329,7 +11329,6 @@ export default [
     twitter: "https://x.com/Somnia_Network",
     wiki: null,
     module: "usd-somnia",
-    doublecounted: true,
     chainConfig: {
       decimals: 18,
       chains: {
