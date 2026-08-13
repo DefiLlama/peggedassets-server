@@ -12972,6 +12972,15 @@ export default [
         solana: {
           issued: ["APhcqtzE73es3KAGiVksZFMLGwJDiAey5qZKUrQHEHfS"],
         },
+        polygon: {
+          issued: ["0x0cb6d03b0ac88a463f67b7ad99f9f3ec4678092e"],
+        },
+        monad: {
+          issued: ["0x0cb6d03b0ac88a463f67b7ad99f9f3ec4678092e"],
+        },
+        tempo: {
+          issued: ["0x20c00000000000000000000050f1d06232a0290f"],
+        },
       },
     },
   },
