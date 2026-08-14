@@ -147,6 +147,7 @@ async function solanaUnreleased() {
       );
       totalUnreleased += unreleased;
     }
+
     sumSingleBalance(balances, "peggedUSD", totalUnreleased);
     return balances;
   };
@@ -215,7 +216,7 @@ async function algorandMinted() {
       async (_bail: any) =>
         await axios.get("https://mainnet-idx.algonode.cloud/v2/assets/312769")
     );
-    const supply = res.data.asset.params.total;
+    const supply = supplyRes.data.asset.params.total;
     const reserveRes = await retry(
       async (_bail: any) =>
         await axios.get(
