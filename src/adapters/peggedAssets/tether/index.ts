@@ -147,7 +147,6 @@ async function solanaUnreleased() {
       );
       totalUnreleased += unreleased;
     }
-
     sumSingleBalance(balances, "peggedUSD", totalUnreleased);
     return balances;
   };
@@ -216,7 +215,7 @@ async function algorandMinted() {
       async (_bail: any) =>
         await axios.get("https://mainnet-idx.algonode.cloud/v2/assets/312769")
     );
-    const supply = supplyRes.data.asset.params.total;
+    const supply = res.data.asset.params.total;
     const reserveRes = await retry(
       async (_bail: any) =>
         await axios.get(
@@ -752,7 +751,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("iotex", 6, chainContracts.iotex.bridgedFromETH),
   },
   tomochain: {
-    ethereum: bridgedSupply("tomochain", 6, chainContracts.tomochain.bridgedFromETH2),
+    ethereum: bridgedSupply(
+      "tomochain",
+      6,
+      chainContracts.tomochain.bridgedFromETH,
+      "tomochain",
+      "Ethereum"
+    ),
   },
   kardia: {
     ethereum: bridgedSupply("kardia", 6, chainContracts.kardia.bridgedFromETH),
