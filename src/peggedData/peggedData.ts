@@ -13011,4 +13011,35 @@ export default [
       },
     },
   },
+  {
+    id: "432",
+    name: "rwaUSD",
+    address: "0x8Fcd23142047A3073ed332a0Ed07d1e8D2BD5177",
+    symbol: "rwaUSD",
+    url: "https://multipli.fi/",
+    description: `rwaUSD is an overcollateralized stablecoin backed by liquid tokenized real-world assets, including U.S. Treasuries, stablecoins, and tokenized commodities such as gold.`,
+    mintRedeemDescription: `rwaUSD is minted by depositing eligible liquid tokenized real-world assets as collateral, subject to asset-specific collateral ratios and risk parameters. It can be redeemed by repaying rwaUSD to unlock the corresponding collateral.`,
+    onCoinGecko: "false",
+    gecko_id: "rwausd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.multipli.fi/risks/audit-reports"],
+    twitter: "https://x.com/multiplifi",
+    wiki: "https://docs.multipli.fi/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x8Fcd23142047A3073ed332a0Ed07d1e8D2BD5177"],
+        },
+        ink: {
+          issued: ["0x2A66Bb2dA3AD1c854E79307F64b862DECD860D4c"],
+        },
+        base: {
+          issued: ["0x272Ec977f4575df41cD47b1b254954E1C7972789"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
