@@ -13043,10 +13043,10 @@ export default [
           issued: ["0x8Fcd23142047A3073ed332a0Ed07d1e8D2BD5177"],
         },
         ink: {
-          bridgedFromETH: ["0x2A66Bb2dA3AD1c854E79307F64b862DECD860D4c"],
+          issued: ["0x2A66Bb2dA3AD1c854E79307F64b862DECD860D4c"], // ccip burn and mint
         },
         base: {
-          bridgedFromETH: ["0x272Ec977f4575df41cD47b1b254954E1C7972789"],
+          issued: ["0x272Ec977f4575df41cD47b1b254954E1C7972789"], // ccip burn and mint
         },
       },
     },
