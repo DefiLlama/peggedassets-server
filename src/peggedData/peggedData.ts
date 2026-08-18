@@ -13037,18 +13037,6 @@ export default [
     auditLinks: ["https://docs.multipli.fi/risks/audit-reports"],
     twitter: "https://x.com/multiplifi",
     wiki: "https://docs.multipli.fi/",
-    chainConfig: {
-      chains: {
-        ethereum: {
-          issued: ["0x8Fcd23142047A3073ed332a0Ed07d1e8D2BD5177"],
-        },
-        ink: {
-          issued: ["0x2A66Bb2dA3AD1c854E79307F64b862DECD860D4c"], // ccip burn and mint
-        },
-        base: {
-          issued: ["0x272Ec977f4575df41cD47b1b254954E1C7972789"], // ccip burn and mint
-        },
-      },
-    },
+    module: "rwausd",
   },
 ] as PeggedAsset[];
