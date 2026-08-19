@@ -343,6 +343,7 @@ export default [
     deadFrom: "2023-02-01",
     twitter: "https://twitter.com/neutrino_proto",
     wiki: "https://wiki.defillama.com/wiki/Neutrino",
+    deadUrl: true,
   },
   {
     id: "13",
