@@ -13053,4 +13053,29 @@ export default [
       },
     },
   },
+  {
+    id: "433",
+    name: "HRUSD",
+    address: "base:0x5587AD03F9565F1B86cfA51a3C744Bcc4039dAf0",
+    symbol: "HRUSD",
+    url: "https://hyperoute.xyz/",
+    description: "HRUSD is a USDC-backed stablecoin protocol that automatically deploys liquidity into delta-neutral strategies to generate yield from perpetual funding rates, trading fees, and market-neutral arbitrage",
+    mintRedeemDescription: "HRUSD is minted 1:1 against USDC through a Peg Stability Module",
+    onCoinGecko: "false",
+    gecko_id: "hrusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/hyperoute",
+    wiki: "https://hyperoute.xyz/",
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x5587AD03F9565F1B86cfA51a3C744Bcc4039dAf0"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
