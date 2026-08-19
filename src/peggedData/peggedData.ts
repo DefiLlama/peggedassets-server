@@ -7004,14 +7004,15 @@ export default [
   },
   {
     id: "231",
-    name: "Honey",
+    name: "Bera USD",
+    // previously Honey
     address: "berachain:0xfcbd14dc51f0a4d49d5e53c2e0950e0bc26d0dce",
-    symbol: "HONEY",
+    symbol: "BUSD",
     url: "https://honey.berachain.com/",
     description:
-      "HONEY is Berachain's native stablecoin",
+      "BUSD is Berachain's native stablecoin",
     mintRedeemDescription:
-      "The initial collateral options will be USDC and BYUSD (pyUSD). New assets used to mint $HONEY can be added via governance",
+      "The initial collateral options will be USDC and BYUSD (pyUSD). New assets used to mint $BUSD can be added via governance",
     onCoinGecko: "true",
     gecko_id: "honey-3",
     cmcId: "35670",
@@ -7020,7 +7021,7 @@ export default [
     priceSource: "defillama",
     auditLinks: [],
     twitter: "https://x.com/berachain",
-    wiki: "https://docs.berachain.com/learn/pol/tokens/honey",
+    wiki: "https://docs.berachain.com/general/help/glossary#busd",
     doublecounted: true,
     chainConfig: {
       chains: {
