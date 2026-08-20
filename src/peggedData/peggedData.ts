@@ -13074,6 +13074,10 @@ export default [
       chains: {
         base: {
           issued: ["0x5587AD03F9565F1B86cfA51a3C744Bcc4039dAf0"],
+          unreleased: [
+            "0xb72f376ae7732a76F1C18e0547553A616a33a2bd",
+            "0xA61C08DeC414416E55de7b4510bA8Ef25C89886a",
+          ],
         },
       },
     },
