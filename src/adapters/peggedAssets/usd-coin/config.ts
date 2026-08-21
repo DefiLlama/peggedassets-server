@@ -460,7 +460,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xa4151b2b3e269645181dccf2d426ce75fcbdeca9"],
   },
   cronos: {
-    bridgedFromETH: ["0xc21223249ca28397b4b6541dffaecc539bff0c59"],
+    issued: ["0x3D7F2C478aAfdB65542BCB44bCeeC05849999d2D"], // Circle-issued native USDC
+    bridgedFromETH: ["0xc21223249ca28397b4b6541dffaecc539bff0c59"], // USDC.e, not Circle-issued
   },
   bsquared: {
     bridgedFromETH: ["0xE544e8a38aDD9B1ABF21922090445Ba93f74B9E5"],
@@ -470,6 +471,7 @@ export const chainContracts: ChainContracts = {
   },
   ink: {
     issued: ["0x2D270e6886d130D724215A266106e6832161EAEd"],
+    bridgedFromETH: ["0xF1815bd50389c46847f0Bda824eC8da914045D14"], // Bridged USDC (Stargate)
   },
   sei: {
     bridgedFromNoble: ["0x3894085Ef7Ff0f0aeDf52E2A2704928d1Ec074F1"]
@@ -483,7 +485,8 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xDF0B24095e15044538866576754F3C964e902Ee6"],
   },
   xlayer: {
-    bridgedFromETH: ["0x74b7f16337b8972027f6196a17a631ac6de26d22"],
+    issued: ["0xB6CEceAB302E2E4948951eE7843FC24E92933061"], // Circle-issued native USDC
+    bridgedFromETH: ["0x74b7f16337b8972027f6196a17a631ac6de26d22"], // USDC.e, not Circle-issued
   },
   move: {
     bridgedFromETH: ["0x83121c9f9b0527d1f056e21a950d6bf3b9e9e2e8353d0e95ccea726713cbea39"], // oft native bridge
