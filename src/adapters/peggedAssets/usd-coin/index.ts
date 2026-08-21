@@ -231,6 +231,33 @@ async function suiBridged(chain: string) {
   };
 }
 
+// Wormhole keeps a wrapped coin's TreasuryCap inside the token bridge's WrappedAsset, so
+// coinMetadata (and the decommissioned suix_getTotalSupply) don't expose its supply. The
+// WrappedAsset is a dynamic field on the token registry, which is the `token_registry` field
+// of the bridge state object 0xc57508ee0d4595e5a8728974a4a93a787d38f339757230d441e895422c07aba9.
+// Same approach as the Wormhole USDT reader in the tether adapter.
+const SUI_WORMHOLE_TOKEN_BRIDGE =
+  "0x26efee2b51c911237888e5dc6702868abca3c7ac12c53f76ef8eba0697695e3d";
+const SUI_WORMHOLE_TOKEN_REGISTRY =
+  "0x334881831bd89287554a6121087e498fa023ce52c037001b53a4563a00a281a5";
+const SUI_WORMHOLE_USDC =
+  "0x5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf";
+
+async function suiWormholeBridged(): Promise<Balances> {
+  let balances = {} as Balances;
+  const wrappedAsset = await sui.getDynamicFieldObject(
+    SUI_WORMHOLE_TOKEN_REGISTRY,
+    `${SUI_WORMHOLE_TOKEN_BRIDGE}::token_registry::Key<${SUI_WORMHOLE_USDC}::coin::COIN>`
+  );
+  // GraphQL returns the Move value as plain nested JSON, without JSON-RPC's `fields` wrappers.
+  const wrapped = wrappedAsset?.fields?.value ?? wrappedAsset?.fields;
+  if (!wrapped) throw new Error("sui: wormhole USDC WrappedAsset not found");
+  const totalSupply =
+    Number(wrapped.treasury_cap.total_supply.value) / 10 ** Number(wrapped.decimals);
+  sumSingleBalance(balances, "peggedUSD", totalSupply, SUI_WORMHOLE_USDC, true);
+  return balances;
+}
+
 async function reinetworkBridged(address: string, decimals: number) {
   return async function () {
     let balances = {} as Balances;
@@ -894,7 +921,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   sui: {
     minted: suiMinted,
-    ethereum: suiBridged("ETH"),
+    ethereum: suiWormholeBridged,
     bsc: suiBridged("BSC"),
     solana: suiBridged("SOLANA"),
     arbitrum: suiBridged("ARBITRUM_BRIDGED"),
@@ -1026,6 +1053,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("core", 6, chainContracts.core.bridgedFromETH),
   },
   cronos: {
+    minted: chainMinted("cronos", 6),
     ethereum: bridgedSupply("cronos", 6, chainContracts.cronos.bridgedFromETH),
   },
   bsquared: {
@@ -1036,6 +1064,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   ink: {
     minted: chainMinted("ink", 6),
+    ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH),
   },
   nibiru: {
     ethereum: nibiruBridged(),
@@ -1048,6 +1077,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("corn", 6, chainContracts.corn.bridgedFromETH),
   },
   xlayer: {
+    minted: chainMinted("xlayer", 6),
     ethereum: bridgedSupply("xlayer", 6, chainContracts.xlayer.bridgedFromETH),
   },
   xdc: {

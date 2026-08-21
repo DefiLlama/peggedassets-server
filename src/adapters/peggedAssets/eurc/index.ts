@@ -26,6 +26,12 @@ const chainContracts: ChainContracts = {
   base: {
     issued: ["0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42"],
   },
+  cronos: {
+    issued: ["0xA6dE01a2d62C6B5f3525d768f34d276652C554c8"],
+  },
+  wc: {  // World Chain (Wanchain is "wan")
+    issued: ["0x1C60ba0A0eD1019e8Eb035E6daF4155A5cE2380B"],
+  },
   solana: {
     issued: ["HzwqbKZw8HxMN6bF2yFZNrht3c2iXXzpKcFu7uBEDKtr"],
     unreleased: ["7VHUFJHWu2CuExkJcJrzhQPJ2oygupTWkL2A2For4BmE"], 
@@ -170,6 +176,12 @@ const adapter: PeggedIssuanceAdapter = {
   },
   base: {
     minted: chainMinted("base", 6),
+  },
+  cronos: {
+    minted: chainMinted("cronos", 6),
+  },
+  wc: {  // World Chain (Wanchain is "wan")
+    minted: chainMinted("wc", 6),
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedEUR"),
