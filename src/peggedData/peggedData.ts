@@ -13082,4 +13082,29 @@ export default [
       },
     },
   },
+  {
+    id: "434",
+    name: "Base Dollar",
+    address: "base:0x5587AD03F9565F1B86cfA51a3C744Bcc4039dAf0",
+    symbol: "BD",
+    url: "https://basedollar.org",
+    description: "Base Dollar is a decentralized borrowing protocol that lets users deposit collateral, and mint BD at an interest rate depositors choose. Base Dollar is a Liquity V2 fork built specifically for Base with innovative LP token collateral and AERO farming revenue",
+    mintRedeemDescription: "BD is minted by borrowing against overcollateralized deposits of WETH, wstETH, rETH, cbBTC, cbETH, AERO, and Aero LP tokens as collateral",
+    onCoinGecko: "false",
+    gecko_id: "base-dollar",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    twitter: "https://x.com/BaseDollarOrg",
+    wiki: "https://docs.basedollar.org/docs/category/technical-documentation",
+    audit_links: ["https://docs.basedollar.org/docs/technical-documentation/audits"],
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x252D36F435582EcB01686448d21e8C9eA0B2Ca65"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
