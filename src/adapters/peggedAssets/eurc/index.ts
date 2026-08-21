@@ -29,7 +29,7 @@ const chainContracts: ChainContracts = {
   cronos: {
     issued: ["0xA6dE01a2d62C6B5f3525d768f34d276652C554c8"],
   },
-  wc: {
+  wc: {  // World Chain (Wanchain is "wan")
     issued: ["0x1C60ba0A0eD1019e8Eb035E6daF4155A5cE2380B"],
   },
   solana: {
@@ -180,7 +180,7 @@ const adapter: PeggedIssuanceAdapter = {
   cronos: {
     minted: chainMinted("cronos", 6),
   },
-  wc: {
+  wc: {  // World Chain (Wanchain is "wan")
     minted: chainMinted("wc", 6),
   },
   solana: {
