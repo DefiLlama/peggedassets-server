@@ -13085,7 +13085,7 @@ export default [
   {
     id: "434",
     name: "Base Dollar",
-    address: "base:0x5587AD03F9565F1B86cfA51a3C744Bcc4039dAf0",
+    address: "base:0x252D36F435582EcB01686448d21e8C9eA0B2Ca65",
     symbol: "BD",
     url: "https://basedollar.org",
     description: "Base Dollar is a decentralized borrowing protocol that lets users deposit collateral, and mint BD at an interest rate depositors choose. Base Dollar is a Liquity V2 fork built specifically for Base with innovative LP token collateral and AERO farming revenue",
