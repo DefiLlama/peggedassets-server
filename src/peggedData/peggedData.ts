@@ -13050,6 +13050,15 @@ export default [
         base: {
           issued: ["0x272Ec977f4575df41cD47b1b254954E1C7972789"], // ccip burn and mint
         },
+        monad: {
+          issued: ["0x9aBb5aaAA4c63ABee1b6617843fd818c99C52c69"], // ccip burn and mint
+        },
+        xlayer: {
+          issued: ["0xF83D9FA66162B887dCA53D246ca7c3706C9D6E2c"], // ccip burn and mint
+        },
+        robinhood: {
+          issued: ["0xF83D9FA66162B887dCA53D246ca7c3706C9D6E2c"], // ccip burn and mint
+        },
       },
     },
   },

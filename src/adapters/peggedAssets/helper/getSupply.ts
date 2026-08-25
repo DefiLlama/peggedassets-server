@@ -20,6 +20,7 @@ const retry = require("async-retry");
 process.env.TAIKO_RPC = 'https://rpc.taiko.xyz'
 process.env.REAL_RPC = 'https://tangible-real.gateway.tenderly.co'
 process.env.STRATO_RPC = process.env.STRATO_RPC || 'https://noderpc.strato.nexus/rpc'
+process.env.ROBINHOOD_RPC = process.env.ROBINHOOD_RPC || 'https://rpc.mainnet.chain.robinhood.com'
 
 type BridgeAndReserveAddressPair = [string, string[]];
 
