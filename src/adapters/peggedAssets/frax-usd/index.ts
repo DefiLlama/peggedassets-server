@@ -1,22 +1,40 @@
-import { addChainExports,solanaMintedOrBridged } from "../helper/getSupply";
-import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
+import { addChainExports, solanaMintedOrBridged } from "../helper/getSupply";
 import { function_view } from "../helper/aptos";
-import { Balances, ChainBlocks } from "../peggedAsset.type";
+import { Balances, ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
 import { sumSingleBalance } from "../helper/generalUtil";
 const sdk = require("@defillama/sdk");
- 
- async function moveSupply(): Promise<Balances> {
-   const balances = {} as Balances;
-   
-   const resp = await function_view({
-     functionStr: '0x1::fungible_asset::supply',
-     type_arguments: ['0x1::object::ObjectCore'],
-     args: ["0xe4354602aa4311f36240dd57f3f3435ffccdbd0cd2963f1a69da39a2dbcd59b5"],
-   });
-   balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
+const axios = require("axios");
+const retry = require("async-retry");
 
-   return balances;
- }
+const FRXUSD_MOVE_ASSET = "0xe4354602aa4311f36240dd57f3f3435ffccdbd0cd2963f1a69da39a2dbcd59b5";
+
+async function moveSupply(): Promise<Balances> {
+  const balances = {} as Balances;
+
+  const resp = await function_view({
+    functionStr: "0x1::fungible_asset::supply",
+    type_arguments: ["0x1::object::ObjectCore"],
+    args: [FRXUSD_MOVE_ASSET],
+  });
+  balances["peggedUSD"] = Number(resp.vec[0]) / 1e6;
+
+  return balances;
+}
+
+async function aptosSupply(): Promise<Balances> {
+  const endpoint = process.env.APTOS_RPC ?? "https://fullnode.mainnet.aptoslabs.com";
+  const response = await retry(async () =>
+    axios.post(`${endpoint}/v1/view`, {
+      function: "0x1::fungible_asset::supply",
+      type_arguments: ["0x1::object::ObjectCore"],
+      arguments: [FRXUSD_MOVE_ASSET],
+    })
+  );
+  const supply = response.data[0]?.vec?.[0];
+  if (supply === undefined) throw new Error("No Aptos frxUSD supply found");
+
+  return { peggedUSD: Number(supply) / 1e6 } as Balances;
+}
 
 async function ethereumMinted() {
   return async function(_: any, _1: any, chainBlocks: ChainBlocks) {
@@ -51,8 +69,14 @@ async function ethereumMinted() {
 }
 
 const chainContracts = {
-   ethereum: {
-     issued: ["0xcacd6fd266af91b8aed52accc382b4e165586e29"],
+  abstract: {
+    issued: "0xEa77c590Bb36c43ef7139cE649cFBCFD6163170d",
+  },
+  aptos: {
+    issued: FRXUSD_MOVE_ASSET,
+  },
+  ethereum: {
+    issued: ["0xcacd6fd266af91b8aed52accc382b4e165586e29"],
   },
   fraxtal: {
     issued: ["0xfc00000000000000000000000000000000000001"],
@@ -63,6 +87,12 @@ const chainContracts = {
   arbitrum: {
     issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
+  aurora: {
+    issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
+  },
+  berachain: {
+    issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
+  },
   optimism: {
     issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
   },
@@ -71,6 +101,9 @@ const chainContracts = {
   },
   ink: {
     issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
+  },
+  hyperliquid: {
+    issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
   },
   sonic: {
     issued: "0x80eede496655fb9047dd39d9f418d5483ed600df",
@@ -108,8 +141,26 @@ const chainContracts = {
   linea: {
     issued: "0xC7346783f5e645aa998B106Ef9E7f499528673D8",
   },
+  monad: {
+    issued: "0x58e3ee6accd124642ddb5d3f91928816be8d8ed3",
+  },
+  move: {
+    issued: FRXUSD_MOVE_ASSET,
+  },
+  scroll: {
+    issued: "0x397F939C3b91A74C321ea7129396492bA9Cdce82",
+  },
+  stable: {
+    issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
+  },
   unichain: {
     issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
+  },
+  wc: {
+    issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
+  },
+  era: {
+    issued: "0xEa77c590Bb36c43ef7139cE649cFBCFD6163170d",
   },
   plume_mainnet: {
     issued: "0x80Eede496655FB9047dd39d9f418d5483ED600df",
@@ -125,6 +176,9 @@ const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: ethereumMinted(),
   },
+  aptos: {
+    minted: aptosSupply,
+  },
   move: {
     minted: moveSupply,
   },
@@ -133,7 +187,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
 };
 
-export default adapter; 
+export default adapter;
 
 
-// frxUSD, use LayerZero OFT (Mint-Burn) Modal to bridge 
+// frxUSD, use LayerZero OFT (Mint-Burn) Modal to bridge
