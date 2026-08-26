@@ -10204,7 +10204,7 @@ export default [
   },
   {
     id: "340",
-    name: "rwaUSDi",
+    name: "Multipli rwaUSDi",
     address: "0xa39986f96b80d04e8d7aeaaf47175f47c23fd0f4",
     symbol: "rwaUSDi",
     url: "https://multipli.fi/",
@@ -13026,7 +13026,7 @@ export default [
   },
   {
     id: "432",
-    name: "rwaUSD",
+    name: "Multipli rwaUSD",
     address: "0x8Fcd23142047A3073ed332a0Ed07d1e8D2BD5177",
     symbol: "rwaUSD",
     url: "https://multipli.fi/",
