@@ -2936,6 +2936,8 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Stabl_Fi",
     wiki: null,
+    deadUrl: true,
+    deadFrom: "2024-03-01",
     chainConfig: {
       chains: {
         polygon: {
@@ -6718,7 +6720,7 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "tren-debt-token",
-
+    deadUrl: true,
     cmcId: "16013",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
