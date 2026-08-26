@@ -13118,4 +13118,32 @@ export default [
       },
     },
   },
+  {
+    id: "435",
+    name: "USDR",
+    address: "rise:0x62b7f5A5Be488ea58f660C5aff465647213Bc6e9",
+    symbol: "USDR",
+    url: "https://docs.risechain.com/docs/rise-evm/usdr",
+    description:
+      "USDR is a U.S. Treasury bill-backed stablecoin built on the M^0 protocol and issued on RISE.",
+    mintRedeemDescription:
+      "USDR is minted against M deposited into its JMIExtension contract and is backed 1:1 by the contract's M balance.",
+    onCoinGecko: "false",
+    gecko_id: "rise-usdr",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.m0.org/resources/audits"],
+    twitter: "https://x.com/risechain",
+    wiki: "https://docs.risechain.com/docs/rise-evm/usdr",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        rise: {
+          issued: ["0x62b7f5A5Be488ea58f660C5aff465647213Bc6e9"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
