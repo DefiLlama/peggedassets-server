@@ -13146,4 +13146,53 @@ export default [
       },
     },
   },
+  {
+    id: "436",
+    name: "Revolut Euro",
+    address: "0x8e9c32a536ab623a2e0e9961bce6f5fe7504e084",
+    symbol: "EURR",
+    url: "https://www.revolut.com/",
+    description:
+      "Revolut Euro is a euro-denominated stablecoin issued by Revolut.",
+    mintRedeemDescription:
+      "Issued by Bridge Building S.A. (a Stripe-owned entity regulated under MiCA in Luxembourg) and distributed by Revolut, EURR is designed to hold a €1 value with reserves in cash deposits, enabling direct on-chain transfers between euros, crypto, external wallets, and networks like Ethereum and Polygon.",
+    onCoinGecko: "false",
+    gecko_id: "revolut-euro",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/Revolut",
+    wiki: null,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0x8e9c32a536ab623a2e0e9961bce6f5fe7504e084"],
+        },
+      },
+    },
+  },
+  {
+    id: "437",
+    name: "HKD At Par",
+    address: "0x87622385F960fcCB3121d6D0A9513bd1D9Bed6cA",
+    symbol: "HKDAP",
+    url: "https://anchorpoint.hk/",
+    description:
+      "HKDAP (HKD At Par) is a Hong Kong dollar-denominated stablecoin issued by Anchorpoint Financial Limited.",
+    mintRedeemDescription:
+      "Issued by Anchorpoint Financial Limited (an HKMA-licensed stablecoin issuer and Standard Chartered Bank (Hong Kong) subsidiary, formed as a joint venture with HKT and Animoca Brands) and distributed through authorised partners. HKDAP is designed to hold a HK$1 value with reserves in cash and highly liquid HKD assets held in trust by Standard Chartered Trustee (Hong Kong) Limited, enabling 1:1 mint and redemption in HKD for eligible institutional and professional-investors.",
+    onCoinGecko: "false",
+    gecko_id: "anchorpoint-hkd-at-par",
+    cmcId: null,
+    pegType: "peggedHKD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: null,
+    wiki: "https://anchorpoint.hk/transparency/",
+    module: "anchorpoint-hkd-at-par",
+  },
 ] as PeggedAsset[];
