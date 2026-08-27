@@ -1139,6 +1139,9 @@ const adapter: PeggedIssuanceAdapter = {
   pharos: {
     minted: chainMinted("pharos", 6),
   },
+  rise: {
+    ethereum: bridgedSupply("rise", 6, chainContracts.rise.bridgedFromETH),
+  },
 };
 
 export default adapter;
