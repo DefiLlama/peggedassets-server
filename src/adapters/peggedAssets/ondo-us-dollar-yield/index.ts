@@ -103,6 +103,9 @@ const chainContracts = {
   stellar: {
     issued: ["USDY:GAJMPX5NBOG6TQFPQGRABJEEB2YE7RFRLUKJDZAZGAD5GFX4J7TADAZ6"],
   },
+  tempo: {
+    issued: ["0x20c000000000000000000000D479B9f6eC0ceFf9"], // USDY on Tempo Mainnet (decimals=6)
+  },
 };
 
 // Use `addChainExports` to generate the final adapter with combined logic
