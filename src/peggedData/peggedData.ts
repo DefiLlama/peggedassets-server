@@ -8197,6 +8197,7 @@ export default [
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/figuremarkets",
+    yieldBearing: true,
   },
   {
     id: "273",
