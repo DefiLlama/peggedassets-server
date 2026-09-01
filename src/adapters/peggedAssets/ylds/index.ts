@@ -20,9 +20,6 @@ async function stellarMinted(assetID: string) {
   };
 }
 
-const solanawYLDSContract = ['8fr7WGTVFszfyNWRMXj6fRjZZAnDwmXwEpCrtzmUkdih']
-const ethereumWYLDSContract = ['0x6aD038cA6C04e885630851278ca0a856Ad9a66Cc']
-
 const chainContracts = {
     stellar: {
         issued: ['YLDS:GAC7MOPTQLQUM3KC24AW4GHS3RLF72LPEZO54AH7EZ6TSMGRB5SOAVH3']
@@ -32,18 +29,8 @@ const chainContracts = {
 // Use `addChainExports` to generate the final adapter with combined logic
 const adapter: PeggedIssuanceAdapter = {
     ...addChainExports(chainContracts),
-    ethereum: {
-        provenance: bridgedSupply('ethereum', 6, ethereumWYLDSContract)
-    },
-    provenance: {
-        minted: provenanceSupply(),
-    },
-    solana: {
-        provenance: solanaMintedOrBridged(solanawYLDSContract)
-    },
-    stellar: {
-        minted: stellarMinted(chainContracts.stellar.issued[0]),
-    },
+    provenance: { minted: provenanceSupply() },
+    stellar: { minted: stellarMinted(chainContracts.stellar.issued[0]) },
 };
 
 export default adapter;
