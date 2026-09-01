@@ -16,12 +16,10 @@ async function stellarMinted(assetID: string) {
     let balances = {} as Balances;
     const totalSupply = await stellarGetTotalSupply(assetID);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
+    console.log("stellar", balances)
     return balances;
   };
 }
-
-const solanawYLDSContract = ['8fr7WGTVFszfyNWRMXj6fRjZZAnDwmXwEpCrtzmUkdih']
-const ethereumWYLDSContract = ['0x6aD038cA6C04e885630851278ca0a856Ad9a66Cc']
 
 const chainContracts = {
     stellar: {
@@ -32,18 +30,8 @@ const chainContracts = {
 // Use `addChainExports` to generate the final adapter with combined logic
 const adapter: PeggedIssuanceAdapter = {
     ...addChainExports(chainContracts),
-    ethereum: {
-        provenance: bridgedSupply('ethereum', 6, ethereumWYLDSContract)
-    },
-    provenance: {
-        minted: provenanceSupply(),
-    },
-    solana: {
-        provenance: solanaMintedOrBridged(solanawYLDSContract)
-    },
-    stellar: {
-        minted: stellarMinted(chainContracts.stellar.issued[0]),
-    },
+    provenance: { minted: provenanceSupply() },
+    stellar: { minted: stellarMinted(chainContracts.stellar.issued[0]) },
 };
 
 export default adapter;
