@@ -13214,5 +13214,6 @@ export default [
     twitter: "",
     wiki: "https://gitlab.com/PlasticDigits/cl8y-dex-terraclassic/-/blob/main/docs/DEFILLAMA.md",
     module: "ust1",
+    doublecounted: true,
   },
 ] as PeggedAsset[];
