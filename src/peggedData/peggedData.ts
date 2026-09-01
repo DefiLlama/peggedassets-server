@@ -13195,4 +13195,24 @@ export default [
     wiki: "https://anchorpoint.hk/transparency/",
     module: "anchorpoint-hkd-at-par",
   },
+  {
+    id: "438",
+    name: "UST1",
+    address: "terra1f0eqgy9w7e5e7up97vjudqwx38tesf8ylx75x2lv3nwm0clry0pqmgfy72",
+    symbol: "UST1",
+    url: "https://dex.cl8y.com",
+    description:
+      "UST1 is an unstablecoin on Terra Classic. It targets USD via the ust1-window against vFDUSD (crypto-backed). Circulating supply is the CW20 total_supply. Price is market / Llama — not hardcoded to $1.",
+    mintRedeemDescription:
+      "Mint and redeem through the ust1-window oracle against vFDUSD. Secondary AMM price can deviate from the window rate.",
+    onCoinGecko: "false",
+    gecko_id: "ust1",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    twitter: "",
+    wiki: "https://gitlab.com/PlasticDigits/cl8y-dex-terraclassic/-/blob/main/docs/DEFILLAMA.md",
+    module: "ust1",
+  },
 ] as PeggedAsset[];
