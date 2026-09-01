@@ -565,5 +565,9 @@ export const chainContracts: ChainContracts = {
     bridgedFromArbitrum: [
       "factory/inj14ejqjyq8um4p3xfqj74yld5waqljf88f9eneuk/inj1lmcfftadjkt4gt3lcvmz6qn4dhx59dv2m7yv8r", // Wormhole USDCarb
     ],
-  }
+  },
+  rise: {
+    // Circle Bridged USDC Standard (FiatTokenProxy), symbol USDC.e, name "Bridged USDC"
+    bridgedFromETH: ["0xe436820ba0C69702c1d3E601d421c0eF38262739"],
+  },
 };
