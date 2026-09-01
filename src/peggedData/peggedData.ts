@@ -13202,9 +13202,9 @@ export default [
     symbol: "UST1",
     url: "https://dex.cl8y.com",
     description:
-      "UST1 is an unstablecoin on Terra Classic. It targets USD via the ust1-window against vFDUSD (crypto-backed). Circulating supply is the CW20 total_supply. Price is market / Llama — not hardcoded to $1.",
+      "UST1 is a USD-targeting stablecoin on Terra Classic that uses an oracle-priced mint and redemption window against vFDUSD. Its secondary-market price may deviate from the window exchange rate.",
     mintRedeemDescription:
-      "Mint and redeem through the ust1-window oracle against vFDUSD. Secondary AMM price can deviate from the window rate.",
+      "UST1 can be minted and redeemed against vFDUSD through the UST1 window at an oracle-derived exchange rate, subject to protocol fees, rate limits, available vFDUSD inventory and other protocol controls.",
     onCoinGecko: "false",
     gecko_id: "ust1",
     cmcId: null,
