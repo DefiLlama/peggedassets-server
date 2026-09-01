@@ -32,6 +32,7 @@ export type PeggedAssetType =
   | "peggedGHS"
   | "peggedCLP"
   | "peggedPEN"
+  | "peggedHKD"
   | "peggedKRW";
 
 type StringNumber = string;

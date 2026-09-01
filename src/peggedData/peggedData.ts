@@ -2936,6 +2936,8 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Stabl_Fi",
     wiki: null,
+    deadUrl: true,
+    deadFrom: "2024-03-01",
     chainConfig: {
       chains: {
         polygon: {
@@ -6718,7 +6720,7 @@ export default [
     onCoinGecko: "false",
     gecko_id: null,
     module: "tren-debt-token",
-
+    deadUrl: true,
     cmcId: "16013",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -10202,7 +10204,7 @@ export default [
   },
   {
     id: "340",
-    name: "rwaUSDi",
+    name: "Multipli rwaUSDi",
     address: "0xa39986f96b80d04e8d7aeaaf47175f47c23fd0f4",
     symbol: "rwaUSDi",
     url: "https://multipli.fi/",
@@ -13024,7 +13026,7 @@ export default [
   },
   {
     id: "432",
-    name: "rwaUSD",
+    name: "Multipli rwaUSD",
     address: "0x8Fcd23142047A3073ed332a0Ed07d1e8D2BD5177",
     symbol: "rwaUSD",
     url: "https://multipli.fi/",
@@ -13049,6 +13051,15 @@ export default [
         },
         base: {
           issued: ["0x272Ec977f4575df41cD47b1b254954E1C7972789"], // ccip burn and mint
+        },
+        monad: {
+          issued: ["0x9aBb5aaAA4c63ABee1b6617843fd818c99C52c69"], // ccip burn and mint
+        },
+        xlayer: {
+          issued: ["0xF83D9FA66162B887dCA53D246ca7c3706C9D6E2c"], // ccip burn and mint
+        },
+        robinhood: {
+          issued: ["0xF83D9FA66162B887dCA53D246ca7c3706C9D6E2c"], // ccip burn and mint
         },
       },
     },
@@ -13106,6 +13117,83 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "435",
+    name: "USDR",
+    address: "rise:0x62b7f5A5Be488ea58f660C5aff465647213Bc6e9",
+    symbol: "USDR",
+    url: "https://docs.risechain.com/docs/rise-evm/usdr",
+    description:
+      "USDR is a U.S. Treasury bill-backed stablecoin built on the M^0 protocol and issued on RISE.",
+    mintRedeemDescription:
+      "USDR is minted against M deposited into its JMIExtension contract and is backed 1:1 by the contract's M balance.",
+    onCoinGecko: "false",
+    gecko_id: "rise-usdr",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.m0.org/resources/audits"],
+    twitter: "https://x.com/risechain",
+    wiki: "https://docs.risechain.com/docs/rise-evm/usdr",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        rise: {
+          issued: ["0x62b7f5A5Be488ea58f660C5aff465647213Bc6e9"],
+        },
+      },
+    },
+  },
+  {
+    id: "436",
+    name: "Revolut Euro",
+    address: "0x8e9c32a536ab623a2e0e9961bce6f5fe7504e084",
+    symbol: "EURR",
+    url: "https://www.revolut.com/",
+    description:
+      "Revolut Euro is a euro-denominated stablecoin issued by Revolut.",
+    mintRedeemDescription:
+      "Issued by Bridge Building S.A. (a Stripe-owned entity regulated under MiCA in Luxembourg) and distributed by Revolut, EURR is designed to hold a €1 value with reserves in cash deposits, enabling direct on-chain transfers between euros, crypto, external wallets, and networks like Ethereum and Polygon.",
+    onCoinGecko: "false",
+    gecko_id: "revolut-euro",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/Revolut",
+    wiki: null,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0x8e9c32a536ab623a2e0e9961bce6f5fe7504e084"],
+        },
+      },
+    },
+  },
+  {
+    id: "437",
+    name: "HKD At Par",
+    address: "0x87622385F960fcCB3121d6D0A9513bd1D9Bed6cA",
+    symbol: "HKDAP",
+    url: "https://anchorpoint.hk/",
+    description:
+      "HKDAP (HKD At Par) is a Hong Kong dollar-denominated stablecoin issued by Anchorpoint Financial Limited.",
+    mintRedeemDescription:
+      "Issued by Anchorpoint Financial Limited (an HKMA-licensed stablecoin issuer and Standard Chartered Bank (Hong Kong) subsidiary, formed as a joint venture with HKT and Animoca Brands) and distributed through authorised partners. HKDAP is designed to hold a HK$1 value with reserves in cash and highly liquid HKD assets held in trust by Standard Chartered Trustee (Hong Kong) Limited, enabling 1:1 mint and redemption in HKD for eligible institutional and professional-investors.",
+    onCoinGecko: "false",
+    gecko_id: "anchorpoint-hkd-at-par",
+    cmcId: null,
+    pegType: "peggedHKD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: null,
+    wiki: "https://anchorpoint.hk/transparency/",
+    module: "anchorpoint-hkd-at-par",
   },
   {
     id: "435",

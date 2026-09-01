@@ -26,6 +26,7 @@ type PegType =
   | "peggedCLP" //chilean peso
   | "peggedPEN" //peruvian sol
   | "peggedKRW" //South Korean won
+  | "peggedHKD" //Hong Kong dollar
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 
