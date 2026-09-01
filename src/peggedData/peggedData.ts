@@ -13196,7 +13196,7 @@ export default [
     module: "anchorpoint-hkd-at-par",
   },
   {
-    id: "435",
+    id: "438",
     name: "UST1",
     address: "terra1f0eqgy9w7e5e7up97vjudqwx38tesf8ylx75x2lv3nwm0clry0pqmgfy72",
     symbol: "UST1",
