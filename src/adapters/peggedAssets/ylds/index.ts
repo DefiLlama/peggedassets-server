@@ -16,7 +16,6 @@ async function stellarMinted(assetID: string) {
     let balances = {} as Balances;
     const totalSupply = await stellarGetTotalSupply(assetID);
     sumSingleBalance(balances, "peggedUSD", totalSupply, "issued", false);
-    console.log("stellar", balances)
     return balances;
   };
 }
