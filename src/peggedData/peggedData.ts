@@ -13216,4 +13216,31 @@ export default [
     module: "ust1",
     doublecounted: true,
   },
+  {
+    id: "439",
+    name: "USDBridge",
+    address: "tempo:0x20c0000000000000000000003158081efd85bfc2",
+    symbol: "USDB",
+    url: "https://www.bridge.xyz/",
+    description:
+      "USDB is a U.S. dollar-backed stablecoin issued and managed by Bridge.",
+    mintRedeemDescription:
+      "USDB is backed 1:1 by U.S. dollar-denominated reserve assets and can be exchanged for fiat or other stablecoins through Bridge's Orchestration APIs.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/Stablecoin",
+    wiki: "https://apidocs.bridge.xyz/platform/issuance/usdb",
+    chainConfig: {
+      chains: {
+        tempo: {
+          issued: ["0x20c0000000000000000000003158081efd85bfc2"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
