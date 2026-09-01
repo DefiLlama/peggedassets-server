@@ -13216,4 +13216,31 @@ export default [
     module: "ust1",
     doublecounted: true,
   },
+  {
+    id: "440",
+    name: "Deel USD",
+    address: "tempo:0x20c0000000000000000000006fD9A167923ba194",
+    symbol: "DLUSD",
+    url: "https://www.deel.com/",
+    description:
+      "DLUSD is Deel's U.S. dollar-denominated stablecoin for contractor payments, issued through Bridge's Open Issuance platform and settled on Tempo.",
+    mintRedeemDescription:
+      "Bridge converts employer U.S. dollar payments into DLUSD, which is designed to track the U.S. dollar 1:1 and is redeemable for U.S. dollar value within Deel.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/deel",
+    wiki: "https://www.deel.com/blog/introducing-stablecoin-wallet/",
+    chainConfig: {
+      chains: {
+        tempo: {
+          issued: ["0x20c0000000000000000000006fD9A167923ba194"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
