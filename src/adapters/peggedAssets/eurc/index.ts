@@ -125,7 +125,7 @@ async function circleAPIChainMinted(chain: string) {
         await axios.get("https://api.circle.com/v1/stablecoins")
     );
     const eurcData = issuance.data.data.filter(
-      (obj: any) => obj.symbol === "EUROC"
+      (obj: any) => obj.symbol === "EURC"
     );
     const filteredChainsData = await eurcData[0].chains.filter(
       (obj: any) => obj.chain === chain
