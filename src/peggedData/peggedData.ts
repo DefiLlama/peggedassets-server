@@ -12281,6 +12281,7 @@ export default [
       chains: {
         bsc: {
           issued: ["0x61a10e8556bed032ea176330e7f17d6a12a10000"],
+          unreleased: ["0xd73Ad673103C44649F40e0328b81391D34738804"],
         },
       },
     },
