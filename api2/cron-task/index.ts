@@ -22,8 +22,12 @@ import { craftStablecoinPricesResponse } from "./getStablecoinPrices";
 import storeCharts, { craftChartsResponse, storeChartsPart2 } from "./storeCharts";
 import storePeggedPrices from "./storePeggedPrices";
 import { storeVolumesRoutes } from "./storeVolumes";
+import { pushHeartbeat } from "./heartbeat";
 
-run().catch(console.error).then(() => process.exit(0))
+run()
+  .then(() => pushHeartbeat())
+  .catch(console.error)
+  .then(() => process.exit(0))
 
 async function run() {
   await initCache(CacheType.CRON)
