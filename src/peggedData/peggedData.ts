@@ -5231,6 +5231,7 @@ export default [
       "https://omniscia.io/reports/powercity-earn-implementation-646b3050e69c940014643ed6",
     twitter: "https://twitter.com/POWERCITYio",
     wiki: "https://docs.powercity.io/earn-protocol",
+    deadUrl: true,
     chainConfig: {
       chains: {
         pulse: {
@@ -5992,6 +5993,7 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/POWERCITYio",
     wiki: "https://docs.powercity.io/flex-protocol",
+    deadUrl: true,
     chainConfig: {
       chains: {
         pulse: {
@@ -8188,7 +8190,7 @@ export default [
     url: "https://www.figuremarkets.com/c/learn/ylds",
     description:
       `YLDS is a fixed price, daily accrual public debt security native to blockchain. It is the first interest-bearing transferable stablecoin native to a public blockchain, registered with the Securities and Exchange Commission. YLDS can be transferred peer-to-peer and is backed by the same securities that prime money market funds hold.`,
-    mintRedeemDescription: "Minted when users purchase YLDS on figuremarkets.com and can be redeemed 1:1 for USD/USDC 24/7.",
+    mintRedeemDescription: "YLDS is minted by eligible KYC/KYB-approved users through Figure Markets in exchange for USD or supported stablecoins. YLDS is issued by Figure Certificate Company at a fixed $1 face value and can be redeemed through Figure Markets for USD, with stablecoin conversion also available through Figure Exchange.",
     onCoinGecko: "false",
     gecko_id: "ylds",
     cmcId: null,
@@ -12633,6 +12635,7 @@ export default [
     twitter: "https://x.com/Cod3xOrg",
     wiki: null,
     module: "cod3x-usd",
+    deadUrl: true,
     chainConfig: {
       chains: {
         base: {
