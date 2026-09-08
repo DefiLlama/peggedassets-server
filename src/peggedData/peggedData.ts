@@ -7980,6 +7980,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: [],
+    deadFrom: "2026-06-23",
     twitter: "https://x.com/OrkiFi",
     wiki: "https://orki-finance.gitbook.io/orki-finance-docs/products/usdk",
     chainConfig: {
@@ -9285,6 +9286,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: [],
+    deadFrom: "2026-02-16",
     twitter: "https://x.com/ColtProtocol",
     wiki: "https://coltstable.notion.site/Colt-Stable-Documentation-257c9bce381680ca9f5edcfb47779710",
     module: "saga-dollar",
@@ -9868,6 +9870,7 @@ export default [
     auditLinks: [
       "https://github.com/MustangProtocol/audit-reports",
     ],
+    deadFrom: "2026-02-16",
     twitter: "https://x.com/mustangfinance",
     wiki: "https://docs.must.finance/",
     module: "mustng-usd",
@@ -10103,6 +10106,9 @@ export default [
         },
         tron: {
           issued: ["TFNirp6PbqYE1ZTtWuCMUKJWLNZkoCoeFJ"],
+        },
+        robinhood: {
+          issued: ["0xcE24439F2D9C6a2289F741120FE202248B666666"],
         },
       },
     },
