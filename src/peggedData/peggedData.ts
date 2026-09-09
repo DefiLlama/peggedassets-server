@@ -13265,7 +13265,7 @@ export default [
     mintRedeemDescription:
       "Bridge converts employer U.S. dollar payments into DLUSD, which is designed to track the U.S. dollar 1:1 and is redeemable for U.S. dollar value within Deel.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "deelusd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
