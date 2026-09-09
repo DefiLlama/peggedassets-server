@@ -324,6 +324,16 @@ export async function storePeggedAsset(
     extrapolatedChains: [] as Array<{ chain: string; timestamp: number }>
   };
   
+  const moduleChains = Object.entries(module)
+    .filter(([, issuances]) => typeof issuances === "object" && issuances !== null)
+    .map(([chain]) => chain);
+  if (moduleChains.length > 0 && moduleChains.every(isDeadChain)) {
+    console.log(
+      `[${peggedAsset.name}|id=${peggedAsset.id}] Skipping: all chains are dead (${moduleChains.join(", ")})`
+    );
+    return;
+  }
+
   try {
     let peggedBalancesPromises = Object.entries(module).map(
       async ([chain, issuances]) => {

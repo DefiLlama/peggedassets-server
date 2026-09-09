@@ -5231,6 +5231,7 @@ export default [
       "https://omniscia.io/reports/powercity-earn-implementation-646b3050e69c940014643ed6",
     twitter: "https://twitter.com/POWERCITYio",
     wiki: "https://docs.powercity.io/earn-protocol",
+    deadUrl: true,
     chainConfig: {
       chains: {
         pulse: {
@@ -5992,6 +5993,7 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/POWERCITYio",
     wiki: "https://docs.powercity.io/flex-protocol",
+    deadUrl: true,
     chainConfig: {
       chains: {
         pulse: {
@@ -7978,6 +7980,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: [],
+    deadFrom: "2026-06-23",
     twitter: "https://x.com/OrkiFi",
     wiki: "https://orki-finance.gitbook.io/orki-finance-docs/products/usdk",
     chainConfig: {
@@ -8188,7 +8191,7 @@ export default [
     url: "https://www.figuremarkets.com/c/learn/ylds",
     description:
       `YLDS is a fixed price, daily accrual public debt security native to blockchain. It is the first interest-bearing transferable stablecoin native to a public blockchain, registered with the Securities and Exchange Commission. YLDS can be transferred peer-to-peer and is backed by the same securities that prime money market funds hold.`,
-    mintRedeemDescription: "Minted when users purchase YLDS on figuremarkets.com and can be redeemed 1:1 for USD/USDC 24/7.",
+    mintRedeemDescription: "YLDS is minted by eligible KYC/KYB-approved users through Figure Markets in exchange for USD or supported stablecoins. YLDS is issued by Figure Certificate Company at a fixed $1 face value and can be redeemed through Figure Markets for USD, with stablecoin conversion also available through Figure Exchange.",
     onCoinGecko: "false",
     gecko_id: "ylds",
     cmcId: null,
@@ -8197,6 +8200,7 @@ export default [
     auditLinks: null,
     priceSource: "defillama",
     twitter: "https://x.com/figuremarkets",
+    yieldBearing: true,
   },
   {
     id: "273",
@@ -9282,6 +9286,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: [],
+    deadFrom: "2026-02-16",
     twitter: "https://x.com/ColtProtocol",
     wiki: "https://coltstable.notion.site/Colt-Stable-Documentation-257c9bce381680ca9f5edcfb47779710",
     module: "saga-dollar",
@@ -9865,6 +9870,7 @@ export default [
     auditLinks: [
       "https://github.com/MustangProtocol/audit-reports",
     ],
+    deadFrom: "2026-02-16",
     twitter: "https://x.com/mustangfinance",
     wiki: "https://docs.must.finance/",
     module: "mustng-usd",
@@ -10100,6 +10106,9 @@ export default [
         },
         tron: {
           issued: ["TFNirp6PbqYE1ZTtWuCMUKJWLNZkoCoeFJ"],
+        },
+        robinhood: {
+          issued: ["0xcE24439F2D9C6a2289F741120FE202248B666666"],
         },
       },
     },
@@ -12278,6 +12287,7 @@ export default [
       chains: {
         bsc: {
           issued: ["0x61a10e8556bed032ea176330e7f17d6a12a10000"],
+          unreleased: ["0xd73Ad673103C44649F40e0328b81391D34738804"],
         },
       },
     },
@@ -12632,6 +12642,7 @@ export default [
     twitter: "https://x.com/Cod3xOrg",
     wiki: null,
     module: "cod3x-usd",
+    deadUrl: true,
     chainConfig: {
       chains: {
         base: {
@@ -13217,6 +13228,33 @@ export default [
     doublecounted: true,
   },
   {
+    id: "439",
+    name: "USDBridge",
+    address: "tempo:0x20c0000000000000000000003158081efd85bfc2",
+    symbol: "USDB",
+    url: "https://www.bridge.xyz/",
+    description:
+      "USDB is a U.S. dollar-backed stablecoin issued and managed by Bridge.",
+    mintRedeemDescription:
+      "USDB is backed 1:1 by U.S. dollar-denominated reserve assets and can be exchanged for fiat or other stablecoins through Bridge's Orchestration APIs.",
+    onCoinGecko: "false",
+    gecko_id: "usdbridge",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/Stablecoin",
+    wiki: "https://apidocs.bridge.xyz/platform/issuance/usdb",
+    chainConfig: {
+      chains: {
+        tempo: {
+          issued: ["0x20c0000000000000000000003158081efd85bfc2"],
+        },
+      },
+    },
+  },
+  {
     id: "440",
     name: "Deel USD",
     address: "tempo:0x20c0000000000000000000006fD9A167923ba194",
@@ -13242,5 +13280,5 @@ export default [
         },
       },
     },
-  },
+  }
 ] as PeggedAsset[];
