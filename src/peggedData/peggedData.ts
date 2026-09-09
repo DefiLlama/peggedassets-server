@@ -13238,7 +13238,7 @@ export default [
     mintRedeemDescription:
       "USDB is backed 1:1 by U.S. dollar-denominated reserve assets and can be exchanged for fiat or other stablecoins through Bridge's Orchestration APIs.",
     onCoinGecko: "false",
-    gecko_id: null,
+    gecko_id: "usdbridge",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
