@@ -16,7 +16,7 @@ const rateLimited =
     (...args) =>
       _rateLimited(() => fn(...args));
 
-const STARKNET_RPC = "https://rpc.starknet.lava.build/";
+const STARKNET_RPC = process.env.STARKNET_RPC || "https://api.zan.top/public/starknet-mainnet";
 
 function formCallBody(
   { abi, target, params = [], allAbi = [] },
