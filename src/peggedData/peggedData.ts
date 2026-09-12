@@ -6542,7 +6542,7 @@ export default [
     name: "River Stablecoin",
     address: "bob:0xecf21b335B41f9d5A89f6186A99c19a3c467871f",
     symbol: "satUSD",
-    url: "https://riverai.inc/",
+    url: "https://www.riverai.inc/",
     description:
       `River is building the circulatory system for crypto, connecting liquidity, yield and contributions across chains. Powered by the omni-CDP stablecoin protocol, earn, leverage, and scale — all without selling your assets.`,
     mintRedeemDescription:
