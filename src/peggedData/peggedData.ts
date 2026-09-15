@@ -13283,5 +13283,53 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "441",
+    name: "Frontier Stable Token",
+    address: "0x5E817F2AbCCB9095585D26c2a3ce234a440574Fc",
+    symbol: "FRNT",
+    url: "https://stabletoken.wyo.gov/",
+    description:
+      "FRNT is a U.S. dollar stablecoin issued by the Wyoming Stable Token Commission and backed by cash, short-term U.S. Treasuries, and repurchase agreements held in the state's stable token trust account.",
+    mintRedeemDescription:
+      "FRNT is issued in exchange for U.S. dollars and is redeemable for one U.S. dollar under the Wyoming Stable Token program's eligibility and compliance requirements.",
+    onCoinGecko: "true",
+    gecko_id: "frontier-stable-token",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://stabletoken.wyo.gov/attestation"],
+    twitter: "https://x.com/wyostable",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x5E817F2AbCCB9095585D26c2a3ce234a440574Fc"],
+        },
+        avax: {
+          issued: ["0x5E817F2AbCCB9095585D26c2a3ce234a440574Fc"],
+        },
+        base: {
+          issued: ["0x5E817F2AbCCB9095585D26c2a3ce234a440574Fc"],
+        },
+        ethereum: {
+          issued: ["0x5E817F2AbCCB9095585D26c2a3ce234a440574Fc"],
+        },
+        hedera: {
+          issued: ["0x5E817F2AbCCB9095585D26c2a3ce234a440574Fc"],
+        },
+        optimism: {
+          issued: ["0x5E817F2AbCCB9095585D26c2a3ce234a440574Fc"],
+        },
+        polygon: {
+          issued: ["0x5E817F2AbCCB9095585D26c2a3ce234a440574Fc"],
+        },
+        solana: {
+          issued: ["FRNTPi9V3Sw9b9U8d5Q3WY7tNANT6Q394d7dYtv7Jdog"],
+        },
+      },
+    },
   }
 ] as PeggedAsset[];
