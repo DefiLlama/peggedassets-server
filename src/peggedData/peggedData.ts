@@ -12108,6 +12108,9 @@ export default [
         ethereum: {
           issued: ["0xd0580192E98eA6CEB9c7b6191Ed2E27560911697"],
         },
+        monad: {
+          bridgedFromETH: ["0x770a579Ea200784723B31b8668b0773ba80393c9"],
+        },
       },
     },
   },
