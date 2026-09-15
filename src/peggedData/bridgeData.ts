@@ -1767,6 +1767,10 @@ export default {
     bridge: "circle",
     sourceChain: formattedSourceChains.eth,
   },
+  "usdcx_stablecoin.aleo": {
+    bridge: "circle",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
