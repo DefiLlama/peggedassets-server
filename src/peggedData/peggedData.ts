@@ -13300,5 +13300,6 @@ export default [
     auditLinks: null,
     twitter: null,
     wiki: null,
+    module: "qvtx-usd",
   }
 ] as PeggedAsset[];
