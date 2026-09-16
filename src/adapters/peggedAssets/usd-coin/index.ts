@@ -1142,6 +1142,9 @@ const adapter: PeggedIssuanceAdapter = {
   rise: {
     ethereum: bridgedSupply("rise", 6, chainContracts.rise.bridgedFromETH),
   },
+  arc: {
+    minted: chainMinted("arc", 6),
+  },
 };
 
 export default adapter;

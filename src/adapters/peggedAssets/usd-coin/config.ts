@@ -570,4 +570,7 @@ export const chainContracts: ChainContracts = {
     // Circle Bridged USDC Standard (FiatTokenProxy), symbol USDC.e, name "Bridged USDC"
     bridgedFromETH: ["0xe436820ba0C69702c1d3E601d421c0eF38262739"],
   },
+  arc: {
+    issued: ["0x3600000000000000000000000000000000000000"], // Circle-issued native USDC
+  },
 };

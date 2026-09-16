@@ -45,6 +45,9 @@ const chainContracts: ChainContracts = {
   tempo: {
     bridgedFromETH: ["0x20c0000000000000000000001621e21f71cf12fb"], // EURC.e (Bridged EURC via Stargate) on Tempo Mainnet
   },
+  arc: {
+    issued: ["0xbEf5f6d51CB62b58e6A8f77868681825C6fe21c1"], // Circle-issued native EURC
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -217,6 +220,9 @@ const adapter: PeggedIssuanceAdapter = {
       "Ethereum",
       "peggedEUR"
     ),
+  },
+  arc: {
+    minted: chainMinted("arc", 6),
   },
 };
 
