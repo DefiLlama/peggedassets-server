@@ -12102,7 +12102,6 @@ export default [
     ],
     twitter: "https://x.com/tori_finance",
     wiki: "https://docs.tori.finance",
-    module: "tori-usd",
     chainConfig: {
       chains: {
         ethereum: {
