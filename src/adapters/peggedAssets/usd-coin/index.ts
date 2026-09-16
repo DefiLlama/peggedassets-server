@@ -543,6 +543,34 @@ async function stacksBridged() {
   };
 }
 
+// Circle xReserve domain id for Aleo. The endpoint reports the USDC collateral
+// locked on Ethereum backing USDCx, already adjusted for decimals.
+const aleoXReserveDomain = 10002;
+
+async function aleoBridged(): Promise<Balances> {
+  const balances = {} as Balances;
+  const res = await retry(
+    async (_bail: any) =>
+      await axios.get(
+        `https://xreserve-api.circle.com/v1/balances/${aleoXReserveDomain}`
+      )
+  );
+  const collateral = res?.data?.balances?.find(
+    (balance: any) => balance.token === "USDC"
+  );
+  if (!collateral?.balance) {
+    throw new Error("Unable to read Aleo USDCx collateral from Circle xReserve");
+  }
+  sumSingleBalance(
+    balances,
+    "peggedUSD",
+    Number(collateral.balance),
+    chainContracts.aleo.bridgedFromETH[0],
+    true
+  );
+  return balances;
+}
+
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 6),
@@ -1112,6 +1140,9 @@ const adapter: PeggedIssuanceAdapter = {
   cardano: {
     ethereum: getCardanoSupply(),
   },
+  aleo: {
+    ethereum: aleoBridged,
+  },
   katana: {
     ethereum: bridgedSupply("katana", 6, chainContracts.katana.bridgedFromETH),
   },
@@ -1141,6 +1172,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   rise: {
     ethereum: bridgedSupply("rise", 6, chainContracts.rise.bridgedFromETH),
+  },
+  arc: {
+    minted: chainMinted("arc", 6),
   },
 };
 

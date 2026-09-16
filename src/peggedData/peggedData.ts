@@ -13331,6 +13331,34 @@ export default [
   },
   {
     id: "442",
+    name: "Axis USD",
+    address: "0xa1fA7777974312f7d801A8880714a218F76233f8",
+    symbol: "USDx",
+    url: "https://axis.to/",
+    description:
+      "USDx is Axis's dollar-pegged synthetic dollar, backed by liquid reserves deployed across market-neutral trading strategies. It is used for settlement and liquidity across the Axis ecosystem. sUSDx is the separate yield-bearing vault product.",
+    mintRedeemDescription:
+      "Approved counterparties mint USDx against supported assets through signed orders settled by authorized operators. Redemption burns USDx and returns the assets specified in the order.",
+    onCoinGecko: "true",
+    gecko_id: "axis-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.axis.to/backing-reserves-and-transparency/audits"],
+    twitter: "https://x.com/AxisFDN",
+    wiki: "https://docs.axis.to/usdx-the-synthetic-dollar/usdx",
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xa1fA7777974312f7d801A8880714a218F76233f8"],
+        },
+      },
+    },
+  },
+  {
+    id: "443",
     name: "QVTX USD",
     address: "0xb57bf3c50f20096723b46645f741f632aef220fa",
     symbol: "QUSD",

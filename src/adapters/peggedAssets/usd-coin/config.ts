@@ -513,6 +513,9 @@ export const chainContracts: ChainContracts = {
       "1f3aec8bfe7ea4fe14c5f121e2a92e301afe414147860d557cac7e345553444378", // [1] usdcx via Circle xReserve (policy+hex name)
     ],
   },
+  aleo: {
+    bridgedFromETH: ["usdcx_stablecoin.aleo"], // USDCx via Circle xReserve
+  },
   katana: {
     bridgeOnETH: ["0x53E82ABbb12638F09d9e624578ccB666217a765e"], // vb usdc (origin) on ethmainnet
     bridgedFromETH: ["0x203A662b0BD271A6ed5a60EdFbd04bFce608FD36"], // vb usdc on katana
@@ -569,5 +572,8 @@ export const chainContracts: ChainContracts = {
   rise: {
     // Circle Bridged USDC Standard (FiatTokenProxy), symbol USDC.e, name "Bridged USDC"
     bridgedFromETH: ["0xe436820ba0C69702c1d3E601d421c0eF38262739"],
+  },
+  arc: {
+    issued: ["0x3600000000000000000000000000000000000000"], // Circle-issued native USDC
   },
 };
