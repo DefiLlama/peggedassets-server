@@ -21,6 +21,9 @@ process.env.TAIKO_RPC = 'https://rpc.taiko.xyz'
 process.env.REAL_RPC = 'https://tangible-real.gateway.tenderly.co'
 process.env.STRATO_RPC = process.env.STRATO_RPC || 'https://noderpc.strato.nexus/rpc'
 process.env.ROBINHOOD_RPC = process.env.ROBINHOOD_RPC || 'https://rpc.mainnet.chain.robinhood.com'
+process.env.ARC_RPC = process.env.ARC_RPC || 'https://rpc.mainnet.arc.io'
+process.env.ARC_RPC_CHAIN_ID = process.env.ARC_RPC_CHAIN_ID || '5042'
+process.env.ARC_ARCHIVAL_RPC = process.env.ARC_ARCHIVAL_RPC || 'https://explorer.arc.io/api/eth-rpc'
 
 type BridgeAndReserveAddressPair = [string, string[]];
 
