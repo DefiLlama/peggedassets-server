@@ -1,7 +1,29 @@
-import { addChainExports,solanaMintedOrBridged, tonTokenSupply } from "../helper/getSupply";
+import { ChainApi } from "@defillama/sdk";
+import {
+  addChainExports,
+  getApi,
+  solanaMintedOrBridged,
+  tonTokenSupply,
+} from "../helper/getSupply";
 import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
 import { function_view } from "../helper/aptos";
 import { Balances } from "../peggedAsset.type";
+import layerzeroConfig from "./layerzeroConfig";
+
+const PREMINT_WALLET = "0xD7fCaDe52aFb60FbF0E1E5F72A683F43820f56A0";
+
+function unreleasedSupply(chain: string, token: string, decimals: number) {
+  return async function (_api: ChainApi): Promise<Balances> {
+    const api = await getApi(chain, _api);
+    const balance = await api.call({
+      abi: "erc20:balanceOf",
+      target: token,
+      params: PREMINT_WALLET,
+    });
+
+    return { peggedUSD: Number(balance) / 10 ** decimals } as Balances;
+  };
+}
 
  async function moveSupply(): Promise<Balances> {
    const balances = {} as Balances;
@@ -41,5 +63,19 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: tonTokenSupply("EQAIb6KmdfdDR7CN1GBqVJuP25iCnLKCvBlJ07Evuu2dzP5f"),
   },
 };
+
+// Tokens held here facilitate primary L2 distribution and are not circulating
+// until external parties receive them in exchange for additional backing.
+for (const { chain, address, decimals } of [
+  {
+    chain: "ethereum",
+    address: chainContracts.ethereum.issued[0],
+    decimals: 18,
+  },
+  ...layerzeroConfig.tokens,
+]) {
+  adapter[chain] ??= {};
+  adapter[chain].unreleased = unreleasedSupply(chain, address, decimals);
+}
 
 export default adapter; 
