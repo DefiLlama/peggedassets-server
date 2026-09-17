@@ -12045,6 +12045,9 @@ export default [
     module: "agant-gbp",
     chainConfig: {
       chains: {
+        arc: {
+          issued: ["0xbBe6aAB0Ed76e90AeA0d1cd978EC231c8AdCDF8b"],
+        },
         ethereum: {
           issued: ["0xbBe6aAB0Ed76e90AeA0d1cd978EC231c8AdCDF8b"],
         },
