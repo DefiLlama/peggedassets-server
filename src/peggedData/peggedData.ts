@@ -13358,5 +13358,26 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "443",
+    name: "QVTX USD",
+    address: "0xb57bf3c50f20096723b46645f741f632aef220fa",
+    symbol: "QUSD",
+    url: "https://qusd.quantvestrix.io",
+    description:
+      "QVTX USD is a fiat-inside stablecoin: the dollar is carried inside the coin itself as a recoverable identifier, and every deployment exposes totalBackingCents() alongside totalSupply(), so 100% cover is enforced per mint and verifiable directly on-chain without trusting any custodian. Redeemable at par in both directions.",
+    mintRedeemDescription:
+      "QUSD is minted against a recorded dollar and redeemed at par; redemption is never priced below 1.00 USD. Live supply and per-chain reserve/cover figures are served publicly at https://qusd.quantvestrix.io/v1/supply/total and https://qusd.quantvestrix.io/v1/proof-of-reserve.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: null,
+    wiki: null,
+    module: "qvtx-usd",
   }
 ] as PeggedAsset[];
