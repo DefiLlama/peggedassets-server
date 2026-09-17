@@ -1,27 +1,29 @@
-import { ChainApi } from "@defillama/sdk";
+import type { ChainApi } from "@defillama/sdk";
 import {
   addChainExports,
   getApi,
   solanaMintedOrBridged,
   tonTokenSupply,
 } from "../helper/getSupply";
-import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
 import { function_view } from "../helper/aptos";
-import { Balances } from "../peggedAsset.type";
+import { sumSingleBalance } from "../helper/generalUtil";
+import type { Balances, PeggedIssuanceAdapter } from "../peggedAsset.type";
 import layerzeroConfig from "./layerzeroConfig";
 
 const PREMINT_WALLET = "0xD7fCaDe52aFb60FbF0E1E5F72A683F43820f56A0";
 
-function unreleasedSupply(chain: string, token: string, decimals: number) {
+function chainUnreleased(chain: string, token: string, decimals: number) {
   return async function (_api: ChainApi): Promise<Balances> {
     const api = await getApi(chain, _api);
+    const balances = {} as Balances;
     const balance = await api.call({
       abi: "erc20:balanceOf",
       target: token,
       params: PREMINT_WALLET,
     });
 
-    return { peggedUSD: Number(balance) / 10 ** decimals } as Balances;
+    sumSingleBalance(balances, "peggedUSD", Number(balance) / 10 ** decimals);
+    return balances;
   };
 }
 
@@ -75,7 +77,7 @@ for (const { chain, address, decimals } of [
   ...layerzeroConfig.tokens,
 ]) {
   adapter[chain] ??= {};
-  adapter[chain].unreleased = unreleasedSupply(chain, address, decimals);
+  adapter[chain].unreleased = chainUnreleased(chain, address, decimals);
 }
 
 export default adapter; 
