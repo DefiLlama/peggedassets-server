@@ -4653,8 +4653,8 @@ export default [
     pegType: "peggedCHF",
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
-    auditLinks: "https://vnx.li/transparency/",
-    twitter: "https://twitter.com/VNX_Global",
+    auditLinks: "https://vnx.io/transparency/",
+    twitter: "https://x.com/VNX_Global",
     wiki: "https://vnx.gitbook.io/vnx-global",
     chainConfig: {
       chains: {
@@ -4681,7 +4681,7 @@ export default [
     name: "VNX EURO",
     address: "stellar:GDXLSLCOPPHTWOQXLLKSVN4VN3G67WD2ENU7UMVAROEYVJLSPSEWXIZN",
     symbol: "VEUR",
-    url: "https://vnx.li/",
+    url: "https://vnx.io/",
     description:
       "VNX Euro (VEUR) is a token referencing Euro from a token generator licensed under the Blockchain act in Liechtenstein.",
     mintRedeemDescription:
@@ -4692,8 +4692,8 @@ export default [
     pegType: "peggedEUR",
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
-    auditLinks: "https://vnx.li/transparency/",
-    twitter: "https://twitter.com/vnx_platform",
+    auditLinks: "https://vnx.io/transparency/",
+    twitter: "https://x.com/VNX_Global",
     wiki: null,
     chainConfig: {
       chains: {
@@ -8796,8 +8796,8 @@ export default [
     pegType: "peggedGBP",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
-    auditLinks: "https://vnx.li/transparency/",
-    twitter: "https://twitter.com/VNX_Global",
+    auditLinks: "https://vnx.io/transparency/",
+    twitter: "https://x.com/VNX_Global",
     wiki: "https://vnx.gitbook.io/vnx-global",
     chainConfig: {
       chains: {
