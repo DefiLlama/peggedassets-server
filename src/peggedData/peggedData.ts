@@ -13358,5 +13358,33 @@ export default [
         },
       },
     },
-  }
+  },
+  {
+    id: "443",
+    name: "Solomon USDv",
+    address: "solana:USDvUSpnhCr9yBgj3UyVrD239HRUv4RsHwH2FxsWuMk",
+    symbol: "USDV",
+    url: "https://solomonlabs.org/",
+    description: "USDv is a USD-pegged dollar issued by Solomon on Solana that generates yield.",
+    mintRedeemDescription:
+      "Authorized users mint USDv against deposited collateral and redeem by burning it through the Solomon issuer.",
+    onCoinGecko: "true",
+    gecko_id: "solomon-usdv",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: ["https://github.com/SolomonLabs/solana-program-audits-public"],
+    twitter: "https://x.com/solomon_labs",
+    wiki: "https://docs.solomonlabs.org/",
+    yieldBearing: true,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        solana: {
+          issued: ["USDvUSpnhCr9yBgj3UyVrD239HRUv4RsHwH2FxsWuMk"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
