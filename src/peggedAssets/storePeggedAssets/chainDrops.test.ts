@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { CHAIN_DROP_FLOOR, findChainDrops, formatChainDrops } from "./chainDrops";
+import { HOUR } from "../../utils/date";
+import { findChainDrops, formatChainDrops } from "./chainDrops";
 
 const usdc = { name: "USD Coin", id: "2" };
+const unixTimestamp = 1789003600;
 
 const chain = (circulating: number | null, extra: any = {}) => ({
   minted: { peggedUSD: 0 },
@@ -24,31 +26,63 @@ test("missing chain is reported as missing", () => {
   const prev = record({ starknet: chain(141560445.7) });
   const next = record({ ethereum: chain(46e9) });
 
-  assert.deepEqual(findChainDrops(prev, next, "peggedUSD", usdc), [
+  assert.deepEqual(findChainDrops(prev, next, "peggedUSD", usdc, unixTimestamp), [
     {
       chain: "starknet",
       assetName: "USD Coin",
       assetId: "2",
       previous: 141560445.7,
+      current: 0,
       missing: true,
     },
   ]);
 });
 
-test("drop is reported only when previous supply is at or above the floor", () => {
+test("only drops strictly greater than 50% are reported, without an absolute floor", () => {
   const prev = record({
-    below: chain(CHAIN_DROP_FLOOR - 1),
-    edge: chain(CHAIN_DROP_FLOOR),
+    partial: chain(100),
+    half: chain(100),
+    smallerDrop: chain(100),
+    zero: chain(100),
+    tiny: chain(10),
+    unchanged: chain(100),
+    increased: chain(100),
+    empty: chain(0),
   });
   const next = record({
-    below: chain(0),
-    edge: chain(0),
+    partial: chain(49),
+    half: chain(50),
+    smallerDrop: chain(51),
+    zero: chain(0),
+    tiny: chain(4),
+    unchanged: chain(100),
+    increased: chain(200),
+    empty: chain(0),
+    newChain: chain(100),
   });
 
   assert.deepEqual(
-    findChainDrops(prev, next, "peggedUSD", usdc).map((d) => d.chain),
-    ["edge"],
+    findChainDrops(prev, next, "peggedUSD", usdc, unixTimestamp).map((d) => [d.chain, d.current]),
+    [["partial", 49], ["zero", 0], ["tiny", 4]],
   );
+});
+
+test("the previous hourly record must be strictly less than 12 hours old", () => {
+  const next = record({ ethereum: chain(0) });
+  const baseline = (age: number) => record(
+    { ethereum: chain(100) },
+    { SK: unixTimestamp - age },
+  );
+
+  assert.equal(findChainDrops(baseline(12 * HOUR - 1), next, "peggedUSD", usdc, unixTimestamp).length, 1);
+  assert.deepEqual(findChainDrops(baseline(12 * HOUR), next, "peggedUSD", usdc, unixTimestamp), []);
+  assert.deepEqual(findChainDrops(baseline(13 * HOUR), next, "peggedUSD", usdc, unixTimestamp), []);
+  for (const SK of [undefined, null, NaN, Infinity]) {
+    assert.deepEqual(
+      findChainDrops(record({ ethereum: chain(100) }, { SK }), next, "peggedUSD", usdc, unixTimestamp),
+      [],
+    );
+  }
 });
 
 test("non-chain metadata and totalCirculating are ignored", () => {
@@ -64,14 +98,14 @@ test("non-chain metadata and totalCirculating are ignored", () => {
     totalCirculating: { circulating: { peggedUSD: 0 } },
   };
 
-  assert.deepEqual(findChainDrops(prev, next, "peggedUSD", usdc), []);
+  assert.deepEqual(findChainDrops(prev, next, "peggedUSD", usdc, unixTimestamp), []);
 });
 
 test("missing previous record yields no drops", () => {
   const next = record({ ethereum: chain(46e9) });
 
   assert.deepEqual(
-    findChainDrops(undefined, next, "peggedUSD", usdc),
+    findChainDrops(undefined, next, "peggedUSD", usdc, unixTimestamp),
     [],
   );
   assert.deepEqual(
@@ -80,6 +114,7 @@ test("missing previous record yields no drops", () => {
       next,
       "peggedUSD",
       usdc,
+      unixTimestamp,
     ),
     [],
   );
@@ -98,7 +133,7 @@ test("null or absent circulating supply is treated as zero", () => {
   });
 
   assert.deepEqual(
-    findChainDrops(prev, next, "peggedUSD", usdc).map((d) => [d.chain, d.missing]),
+    findChainDrops(prev, next, "peggedUSD", usdc, unixTimestamp).map((d) => [d.chain, d.missing]),
     [["dropped", false]],
   );
 });
@@ -107,24 +142,24 @@ test("only the requested peg type is compared", () => {
   const prev = record({ ethereum: { circulating: { peggedEUR: 5e6 } } });
   const next = record({ ethereum: { circulating: { peggedEUR: 0 } } });
 
-  assert.deepEqual(findChainDrops(prev, next, "peggedUSD", usdc), []);
-  assert.equal(findChainDrops(prev, next, "peggedEUR", usdc).length, 1);
+  assert.deepEqual(findChainDrops(prev, next, "peggedUSD", usdc, unixTimestamp), []);
+  assert.equal(findChainDrops(prev, next, "peggedEUR", usdc, unixTimestamp).length, 1);
 });
 
 test("formatChainDrops groups, sorts, and marks missing chains", () => {
   assert.deepEqual(
     formatChainDrops([
-      { chain: "tron", assetName: "Tether", assetId: "1", previous: 2e6, missing: false },
-      { chain: "starknet", assetName: "USD Coin", assetId: "2", previous: 141560445.7, missing: false },
-      { chain: "starknet", assetName: "Tether", assetId: "1", previous: 3600000, missing: true },
+      { chain: "tron", assetName: "Tether", assetId: "1", previous: 2e6, current: 0, missing: false },
+      { chain: "starknet", assetName: "USD Coin", assetId: "2", previous: 141560445.7, current: 60e6, missing: false },
+      { chain: "starknet", assetName: "Tether", assetId: "1", previous: 3600000, current: 0, missing: true },
     ]),
     [
-      "**Chains whose supply dropped to 0 since last hour:**",
+      "**Chain-level circulating alerts:**",
       "• [2] starknet",
-      "    - USD Coin (id=2): 141.56 M → 0",
+      "    - USD Coin (id=2): 141.56 M → 60.00 M",
       "    - Tether (id=1): 3.60 M → missing",
       "• [1] tron",
-      "    - Tether (id=1): 2.00 M → 0",
+      "    - Tether (id=1): 2.00 M → 0.00",
     ],
   );
 });
@@ -139,6 +174,7 @@ test("formatChainDrops caps chains and assets per chain", () => {
         assetName: `asset${a}`,
         assetId: String(a),
         previous: 1e6 * (12 - c),
+        current: 0,
         missing: false,
       });
     }

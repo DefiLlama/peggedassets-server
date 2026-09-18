@@ -12,7 +12,8 @@ import {
   dailyPeggedBalances,
   hourlyPeggedBalances,
 } from "../utils/getLastRecord";
-import storeNewPeggedBalances from "./storeNewPeggedBalances";
+import { ExtrapolationMetadata } from "./chainProtection";
+import storeNewPeggedBalances, { ZeroCirculatingError } from "./storeNewPeggedBalances";
 
 type ChainBlocks = {
   [chain: string]: number;
@@ -46,7 +47,7 @@ async function getPeggedAsset(
   pegType: string,
   bridgedFromMapping: BridgeMapping = {},
   maxRetries: number,
-  extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
+  extrapolationMetadata?: ExtrapolationMetadata
 ) {
   const timeoutMs = 3 * 60 * 1000; // 3 minutes
   const label = (issuanceType === 'minted' || issuanceType === 'unreleased' || issuanceType === 'circulating')
@@ -195,7 +196,7 @@ async function calcCirculating(
   bridgedFromMapping: BridgeMapping,
   peggedAsset: PeggedAsset,
   pegType: string,
-  extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
+  extrapolationMetadata?: ExtrapolationMetadata
 ) {
   let chainCirculatingPromises = Object.keys(peggedBalances).map(
     async (chain) => {
@@ -319,9 +320,9 @@ export async function storePeggedAsset(
   let peggedBalances: PeggedAssetIssuance = {};
   let bridgedFromMapping: BridgeMapping = {};
   
-  const extrapolationMetadata = {
+  const extrapolationMetadata: ExtrapolationMetadata = {
     extrapolated: false,
-    extrapolatedChains: [] as Array<{ chain: string; timestamp: number }>
+    extrapolatedChains: [],
   };
   
   const moduleChains = Object.entries(module)
@@ -401,15 +402,6 @@ export async function storePeggedAsset(
     console.error(peggedAsset.name, e);
     return;
   }
-  if (
-    breakIfIssuanceIsZero &&
-    peggedBalances.totalCirculating.circulating[pegType] === 0
-  ) {
-    throw new Error(
-      `Returned 0 total circulating at timestamp ${unixTimestamp}`
-    );
-  }
-
   if (extrapolationMetadata.extrapolated) {
     (peggedBalances as any).extrapolated = extrapolationMetadata.extrapolated;
     (peggedBalances as any).extrapolatedChains = extrapolationMetadata.extrapolatedChains;
@@ -423,16 +415,18 @@ export async function storePeggedAsset(
       peggedBalances,
       hourlyPeggedBalances,
       dailyPeggedBalances,
-      extrapolationMetadata
+      extrapolationMetadata,
+      breakIfIssuanceIsZero,
     );
     await storeTokensAction;
   } catch (e) {
     console.error(peggedAsset.name, e);
+    if (e instanceof ZeroCirculatingError) throw e;
     return;
   }
 
   if (extrapolationMetadata.extrapolated) {
-    console.log(`[${peggedAsset.name}|id=${peggedAsset.id}] ⚠️  Used cache fallback for some chains:`, extrapolationMetadata.extrapolatedChains.map(ec => ec.chain).join(', '));
+    console.log(`[${peggedAsset.name}|id=${peggedAsset.id}] ⚠️  Used extrapolated balances for some chains:`, extrapolationMetadata.extrapolatedChains.map(ec => ec.chain).join(', '));
   }
 
   return peggedBalances;

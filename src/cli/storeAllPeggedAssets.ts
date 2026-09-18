@@ -1,6 +1,7 @@
 import * as sdk from "@defillama/sdk";
 import PromisePool from "@supercharge/promise-pool";
-import { chainDrops, formatChainDrops } from "./../peggedAssets/storePeggedAssets/chainDrops";
+import { chainDrops } from "./../peggedAssets/storePeggedAssets/chainDrops";
+import { postChainDrops } from "./../peggedAssets/storePeggedAssets/postChainDrops";
 import storePeggedAssets from "./../peggedAssets/storePeggedAssets/storePegged";
 import peggedAssets from "./../peggedData/peggedData";
 import { sendMessage } from "./../utils/discord";
@@ -132,18 +133,6 @@ async function postSummaryDigest(summary: {
   }
 }
 
-// Same channel as the per-asset spike/drop alerts; one message per run, grouped by chain.
-async function postChainDrops() {
-  const drops = chainDrops.splice(0);
-  const webhook = process.env.OUTDATED_WEBHOOK;
-  if (!webhook || drops.length === 0) return;
-  try {
-    await sendMessage(formatChainDrops(drops).join('\n'), webhook, false);
-  } catch (e) {
-    console.error('Failed to send chain drops:', e);
-  }
-}
-
 handler()
   .then(async (summary) => {
     if (process.env.SUMMARY_JSON === 'true') {
@@ -159,7 +148,7 @@ handler()
       console.log('--- SUMMARY_JSON_END ---');
     }
     await postSummaryDigest(summary);
-    await postChainDrops();
+    await postChainDrops(chainDrops.splice(0));
     console.log("done");
     console.log("saving cache");
     await saveSdkInternalCache();
@@ -168,6 +157,7 @@ handler()
   })
   .catch(async (e) => {
     console.error('Fatal error in handler:', e);
+    try { await postChainDrops(chainDrops.splice(0)); } catch (error) { console.error('Failed to flush chain alerts:', error); }
     try { await saveSdkInternalCache(); } catch { }
     process.exit(2);
   });
