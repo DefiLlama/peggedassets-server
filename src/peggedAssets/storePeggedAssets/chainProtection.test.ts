@@ -123,11 +123,20 @@ test("missing, null, or snapshot-backed fetches stay protected after expiration"
 
 test("a failed issuance cannot be mistaken for a valid computed circulating balance", () => {
   const initial = initialProtection();
-  const next = balances({ starknet: 40, ethereum: 1000 });
+  const next = balances({ starknet: 80, ethereum: 1000 });
   next.starknet.minted.peggedUSD = null;
   const result = protect(record(initial.next, now + 11 * HOUR, initial.extra), next, now + 12 * HOUR);
   assert.equal(result.alerts[0].protection, "fetch-failed");
   assert.equal(next.starknet.circulating.peggedUSD, 100);
+});
+
+test("a non-finite circulating balance retains the previous chain", () => {
+  const next = balances({ starknet: Number.NaN, ethereum: 1000 });
+  const result = protect(record(balances({ starknet: 100, ethereum: 1000 })), next);
+
+  assert.equal(result.alerts[0].protection, "fetch-failed");
+  assert.equal(next.starknet.circulating.peggedUSD, 100);
+  assert.equal(next.totalCirculating.circulating.peggedUSD, 1100);
 });
 
 test("does not initiate protection from a stale baseline or without a previous record", () => {
@@ -182,6 +191,45 @@ test("valid bridged-from issuances and nested bridge details can be accepted aft
   assert.equal(result.alerts[0].protection, "accepted");
   assert.equal(next.starknet.ethereum.peggedUSD, 10);
   assert.deepEqual(next.starknet.bridgedTo.bridges, { sampleBridge: { ethereum: { amount: 10 } } });
+});
+
+test("retaining a bridge destination keeps its source debit consistent", () => {
+  const prev = balances({ ethereum: 200, polygon: 800 });
+  prev.ethereum.minted.peggedUSD = 1000;
+  prev.polygon.ethereum = { peggedUSD: 800 };
+  prev.polygon.bridgedTo.peggedUSD = 800;
+
+  const next = balances({ ethereum: 900, polygon: 100 });
+  next.ethereum.minted.peggedUSD = 1000;
+  next.polygon.ethereum = { peggedUSD: 100 };
+  next.polygon.bridgedTo.peggedUSD = 100;
+
+  const result = protect(record(prev), next);
+
+  assert.equal(result.alerts[0].chain, "polygon");
+  assert.equal(next.polygon.circulating.peggedUSD, 800);
+  assert.equal(next.ethereum.circulating.peggedUSD, 200);
+  assert.equal(next.totalCirculating.circulating.peggedUSD, 1000);
+});
+
+test("an incompatible fresh source balance falls back with its retained bridge", () => {
+  const prev = balances({ ethereum: 200, polygon: 800 });
+  prev.ethereum.minted.peggedUSD = 1000;
+  prev.polygon.ethereum = { peggedUSD: 800 };
+  prev.polygon.bridgedTo.peggedUSD = 800;
+
+  const next = balances({ ethereum: 400, polygon: 100 });
+  next.ethereum.minted.peggedUSD = 500;
+  next.polygon.ethereum = { peggedUSD: 100 };
+  next.polygon.bridgedTo.peggedUSD = 100;
+
+  const extra = metadata();
+  protectChainDrops(record(prev), next, "peggedUSD", asset, now, extra);
+
+  assert.equal(next.polygon.circulating.peggedUSD, 800);
+  assert.equal(next.ethereum.circulating.peggedUSD, 200);
+  assert.equal(next.totalCirculating.circulating.peggedUSD, 1000);
+  assert.ok(extra.extrapolatedChains.some((entry) => entry.chain === "ethereum"));
 });
 
 test("recalculating totals also handles an absent unreleased total", () => {

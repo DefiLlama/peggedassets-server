@@ -89,6 +89,15 @@ export async function getActiveBlock(assetId: string): Promise<AssetBlock | null
   }
 }
 
+export async function getAssetBlock(assetId: string): Promise<AssetBlock | null> {
+  try {
+    return loadBlocks()[assetId] ?? null;
+  } catch (error) {
+    console.error(`Error checking block for asset ${assetId}:`, error);
+    return null;
+  }
+}
+
 export async function createBlock(
   assetId: string,
   reason: string,
@@ -143,4 +152,3 @@ export function getRemainingBlockTime(block: AssetBlock): string {
   }
   return `${minutes}m`;
 }
-

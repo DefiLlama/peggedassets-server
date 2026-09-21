@@ -57,7 +57,7 @@ function setup(t: TestContext, supplies: Record<string, number>) {
     return { $metadata: {} };
   };
   const put = t.mock.method(dynamodb, "put", persist);
-  const getActiveBlock = t.mock.method(assetBlocking, "getActiveBlock", async (): Promise<assetBlocking.AssetBlock | null> => null);
+  const getAssetBlock = t.mock.method(assetBlocking, "getAssetBlock", async (): Promise<assetBlocking.AssetBlock | null> => null);
   const removeBlock = t.mock.method(assetBlocking, "removeBlock", async () => {});
   const createBlock = t.mock.method(assetBlocking, "createBlock", async () => {
     throw new Error("Unexpected asset-level block");
@@ -66,9 +66,10 @@ function setup(t: TestContext, supplies: Record<string, number>) {
 
   return {
     latest: () => clone(latest),
+    setLatest: (value: any) => { latest = clone(value); },
     daily,
     createBlock,
-    getActiveBlock,
+    getAssetBlock,
     removeBlock,
     put,
     persist,
@@ -152,7 +153,7 @@ test("the existing zero-total safeguard still applies without a recent baseline"
 
 test("active asset blocks do not announce unpersisted chain protections", async (t) => {
   const storage = setup(t, { starknet: 100e6, ethereum: 900e6 });
-  storage.getActiveBlock.mock.mockImplementation(async () => ({
+  storage.getAssetBlock.mock.mockImplementation(async () => ({
     assetId: asset.id, blockedAt: now, expiresAt: now + 12 * HOUR,
     reason: "spike", blockType: "spike" as const,
   }));
@@ -186,6 +187,42 @@ test("acceptance does not lower the baseline used for asset spike detection", as
   assert.equal(storage.latest().starknet.circulating.peggedUSD, 40e6);
   assert.equal(storage.createBlock.mock.callCount(), 0);
   assert.equal(chainDrops[chainDrops.length - 1]?.protection, "accepted");
+});
+
+test("accepting a bridge move does not hide a genuine asset supply drop", async (t) => {
+  const storage = setup(t, { ethereum: 200, polygon: 800 });
+  const bridgedBalances = (minted: number, bridged: number): PeggedAssetIssuance => ({
+    ethereum: {
+      minted: { peggedUSD: minted },
+      unreleased: { peggedUSD: 0 },
+      circulating: { peggedUSD: minted - bridged },
+      bridgedTo: { peggedUSD: 0 },
+    },
+    polygon: {
+      minted: { peggedUSD: 0 },
+      unreleased: { peggedUSD: 0 },
+      ethereum: { peggedUSD: bridged },
+      circulating: { peggedUSD: bridged },
+      bridgedTo: { peggedUSD: bridged },
+    },
+    totalCirculating: {
+      circulating: { peggedUSD: minted },
+      unreleased: { peggedUSD: 0 },
+    },
+  });
+  storage.setLatest({ PK: hourlyPK(asset.id), SK: now - HOUR, ...bridgedBalances(1000, 800) });
+  await storage.store(bridgedBalances(1000, 100));
+  await storage.store(bridgedBalances(1000, 100), now + 11 * HOUR);
+  const before = storage.latest();
+  storage.createBlock.mock.mockImplementation(async () => ({
+    assetId: asset.id, blockedAt: now + 12 * HOUR, expiresAt: now + 24 * HOUR,
+    reason: "drop", blockType: "drop" as const,
+  }));
+
+  await storage.store(bridgedBalances(400, 100), now + 12 * HOUR);
+
+  assert.equal(storage.createBlock.mock.callCount(), 1);
+  assert.deepEqual(storage.latest(), before);
 });
 
 test("genuine asset spikes are still blocked during a chain acceptance", async (t) => {
@@ -236,7 +273,7 @@ test("an auto-force update bypasses chain protection before resetting the baseli
   const storage = setup(t, { starknet: 900, ethereum: 100 });
   await storage.store(balances({ starknet: 40, ethereum: 110 }));
   const alertCount = chainDrops.length;
-  storage.getActiveBlock.mock.mockImplementation(async () => ({
+  storage.getAssetBlock.mock.mockImplementation(async () => ({
     assetId: asset.id, blockedAt: now - 12 * HOUR, expiresAt: now,
     reason: "drop", blockType: "drop" as const,
   }));

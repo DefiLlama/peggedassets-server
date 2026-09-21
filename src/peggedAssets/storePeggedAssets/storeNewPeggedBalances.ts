@@ -16,7 +16,7 @@ import getTVLOfRecordClosestToTimestamp from "../../utils/shared/getRecordCloses
 import { getLastRecord } from "../utils/getLastRecord";
 import {
   createBlock,
-  getActiveBlock,
+  getAssetBlock,
   getRemainingBlockTime,
   removeBlock
 } from "./assetBlocking";
@@ -25,6 +25,13 @@ import { ExtrapolationMetadata, protectChainDrops } from "./chainProtection";
 import { reconcileDailyFromHourly } from "./reconcileDailyFromHourly";
 
 type PKconverted = (id: string) => string;
+
+function getNativeSupply(balance: any, pegType: string) {
+  const minted = balance?.minted?.[pegType];
+  const unreleased = balance?.unreleased?.[pegType];
+  return (typeof minted === "number" && Number.isFinite(minted) ? minted : 0) -
+    (typeof unreleased === "number" && Number.isFinite(unreleased) ? unreleased : 0);
+}
 
 export class ZeroCirculatingError extends Error {
   constructor(unixTimestamp: number) {
@@ -149,7 +156,7 @@ export default async (
     }
   };
 
-  const activeBlock = isForceUpdate ? null : await getActiveBlock(peggedAsset.id);
+  const activeBlock = isForceUpdate ? null : await getAssetBlock(peggedAsset.id);
   const now = getCurrentUnixTimestamp();
   const willAutoForceUpdate = activeBlock !== null &&
     activeBlock.expiresAt <= now && now - activeBlock.expiresAt <= 2 * HOUR;
@@ -161,7 +168,11 @@ export default async (
     );
     for (const alert of pendingChainAlerts) {
       console.warn(`Chain protection: ${peggedAsset.name} on ${alert.chain}: ${alert.previous} → ${alert.missing ? "missing" : alert.current} (${alert.protection})`);
-      if (alert.protection === "accepted") acceptedDropAdjustment += alert.previous - alert.current;
+      if (alert.protection === "accepted") {
+        const previousSupply = getNativeSupply(lastHourlyPeggedObject?.[alert.chain], pegType);
+        const currentSupply = getNativeSupply(peggedBalances[alert.chain], pegType);
+        acceptedDropAdjustment += Math.max(previousSupply - currentSupply, 0);
+      }
     }
     currentCirculating = peggedBalances.totalCirculating.circulating[pegType] ?? 0;
   }

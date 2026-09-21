@@ -35,9 +35,12 @@ export function findChainDrops(
   );
   const drops: ChainDrop[] = [];
   for (const chain of chains) {
-    const previous = prev?.[chain]?.circulating?.[pegType] ?? 0;
-    const current = next?.[chain]?.circulating?.[pegType] ?? 0;
-    if (previous > 0 && previous / 2 > current) {
+    const previousValue = prev?.[chain]?.circulating?.[pegType];
+    const currentValue = next?.[chain]?.circulating?.[pegType];
+    const previous = typeof previousValue === "number" && Number.isFinite(previousValue) ? previousValue : 0;
+    const validCurrent = typeof currentValue === "number" && Number.isFinite(currentValue);
+    const current = validCurrent ? currentValue : 0;
+    if (previous > 0 && (!validCurrent || previous / 2 > current)) {
       drops.push({
         chain,
         assetName: asset.name,
@@ -66,7 +69,8 @@ export function formatChainDrops(drops: ChainDrop[]): string[] {
   const lines = [`**Chain-level circulating alerts:**`];
   for (const [chain, ds] of sorted.slice(0, MAX_CHAINS)) {
     lines.push(`• [${ds.length}] ${chain}`);
-    for (const d of ds.slice(0, MAX_ASSETS_PER_CHAIN)) {
+    const ranked = [...ds].sort((a, b) => b.previous - a.previous);
+    for (const d of ranked.slice(0, MAX_ASSETS_PER_CHAIN)) {
       let status = "";
       if (d.protection === "held") status = ` (last valid balance retained until ${new Date(d.expiresAt! * 1000).toISOString()})`;
       if (d.protection === "fetch-failed") status = " (fetch unavailable; last valid balance retained)";

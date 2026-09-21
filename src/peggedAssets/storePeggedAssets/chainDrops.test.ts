@@ -138,6 +138,20 @@ test("null or absent circulating supply is treated as zero", () => {
   );
 });
 
+test("non-finite and non-number balances are reported as failed drops", () => {
+  const prev = record({ nan: chain(100), infinity: chain(100), text: chain(100) });
+  const next = record({
+    nan: chain(Number.NaN),
+    infinity: chain(Number.POSITIVE_INFINITY),
+    text: chain("invalid" as any),
+  });
+
+  assert.deepEqual(
+    findChainDrops(prev, next, "peggedUSD", usdc, unixTimestamp).map((drop) => [drop.chain, drop.current]),
+    [["nan", 0], ["infinity", 0], ["text", 0]],
+  );
+});
+
 test("only the requested peg type is compared", () => {
   const prev = record({ ethereum: { circulating: { peggedEUR: 5e6 } } });
   const next = record({ ethereum: { circulating: { peggedEUR: 0 } } });
@@ -185,4 +199,19 @@ test("formatChainDrops caps chains and assets per chain", () => {
   assert.equal(lines.filter((l) => l.startsWith("• ")).length, 10);
   assert.equal(lines.filter((l) => l === "    ... and 2 more").length, 10);
   assert.equal(lines[lines.length - 1], "... and 2 more chains");
+});
+
+test("formatChainDrops keeps the largest assets when a chain is capped", () => {
+  const drops = [1, 10, 3, 8, 5, 6].map((previous) => ({
+    chain: "ethereum",
+    assetName: `asset${previous}`,
+    assetId: String(previous),
+    previous,
+    current: 0,
+    missing: false,
+  }));
+
+  const output = formatChainDrops(drops).join("\n");
+  assert.ok(!output.includes("asset1 (id=1)"));
+  for (const previous of [10, 8, 6, 5, 3]) assert.ok(output.includes(`asset${previous} (id=${previous})`));
 });
