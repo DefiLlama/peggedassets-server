@@ -232,6 +232,25 @@ test("an incompatible fresh source balance falls back with its retained bridge",
   assert.ok(extra.extrapolatedChains.some((entry) => entry.chain === "ethereum"));
 });
 
+test("rejects fresh bridge totals that exceed a retained source balance", () => {
+  const prev = balances({ ethereum: 50, polygon: 50, arbitrum: 0 });
+  prev.ethereum.minted.peggedUSD = 100;
+  prev.polygon.ethereum = { peggedUSD: 50 };
+  prev.polygon.bridgedTo.peggedUSD = 50;
+
+  const next = balances({ ethereum: 20, polygon: 50, arbitrum: 200 });
+  next.ethereum.minted.peggedUSD = 270;
+  next.polygon.ethereum = { peggedUSD: 50 };
+  next.polygon.bridgedTo.peggedUSD = 50;
+  next.arbitrum.ethereum = { peggedUSD: 200 };
+  next.arbitrum.bridgedTo.peggedUSD = 200;
+
+  assert.throws(
+    () => protect(record(prev), next),
+    /Incompatible retained bridge total for ethereum/,
+  );
+});
+
 test("recalculating totals also handles an absent unreleased total", () => {
   const next = balances({ starknet: 40, ethereum: 1000 });
   delete next.totalCirculating.unreleased;

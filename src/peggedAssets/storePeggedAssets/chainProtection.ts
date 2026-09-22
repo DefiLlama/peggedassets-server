@@ -169,6 +169,9 @@ export function protectChainDrops(
         ? previousBridgeTotals.get(sourceChain) ?? 0
         : rawBridgeTotals.get(sourceChain) ?? 0;
       const adjusted = base + baseBridged - (finalBridgeTotals.get(sourceChain) ?? 0);
+      if (adjusted < -(10 ** -6)) {
+        throw new Error(`Incompatible retained bridge total for ${sourceChain}`);
+      }
       balance.circulating[pegType] = adjusted < 10 ** -6 ? 0 : adjusted;
     }
 
