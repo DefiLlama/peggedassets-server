@@ -13169,7 +13169,7 @@ export default [
     symbol: "EURR",
     url: "https://www.revolut.com/",
     description:
-      "Revolut Euro is a euro-denominated stablecoin issued by Revolut.",
+      "Revolut Euro (EURR) is a euro-denominated stablecoin issued by Bridge Building S.A. and distributed by Revolut.",
     mintRedeemDescription:
       "Issued by Bridge Building S.A. (a Stripe-owned entity regulated under MiCA in Luxembourg) and distributed by Revolut, EURR is designed to hold a €1 value with reserves in cash deposits, enabling direct on-chain transfers between euros, crypto, external wallets, and networks like Ethereum and Polygon.",
     onCoinGecko: "false",
