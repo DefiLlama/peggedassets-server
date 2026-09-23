@@ -364,6 +364,7 @@ async function nearMint(address: string, decimals: number) {
 async function elrondBridged(tokenID: string, decimals: number) {
   return async function () {
     let balances = {} as Balances;
+    return balances
     const res = await retry(
       async (_bail: any) =>
         await axios.get(

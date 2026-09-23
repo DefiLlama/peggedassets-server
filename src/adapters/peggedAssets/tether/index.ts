@@ -602,6 +602,7 @@ async function elrondBridged(tokenID: string, decimals: number) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
+    return balances
     const res = await retry(
       async (_bail: any) =>
         await axios.get(
