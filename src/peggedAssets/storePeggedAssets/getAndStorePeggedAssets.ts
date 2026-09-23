@@ -48,7 +48,8 @@ async function getPeggedAsset(
   maxRetries: number,
   extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
 ) {
-  const timeoutMs = 3 * 60 * 1000; // 3 minutes
+  // Three attempts plus backoff must leave room for fallback before the chain deadline.
+  const timeoutMs = 45 * 1000;
   const label = (issuanceType === 'minted' || issuanceType === 'unreleased' || issuanceType === 'circulating')
     ? issuanceType
     : `bridgedFrom ${issuanceType} → ${chain}`;
@@ -58,12 +59,12 @@ async function getPeggedAsset(
     try {
       peggedBalances[chain] = peggedBalances[chain] || {};
       
-      const balance = await Promise.race([
-        issuanceFunction(api, ethBlock, chainBlocks) as Promise<PeggedTokenBalance>,
-        new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), timeoutMs)
-        ),
-      ]);
+      const balance = await timeout(
+        Promise.resolve().then(() => issuanceFunction(api, ethBlock, chainBlocks)) as Promise<PeggedTokenBalance>,
+        timeoutMs,
+        peggedAsset.name,
+        `${chain} (${issuanceType})`
+      );
       
       if (balance && Object.keys(balance).length === 0) {
         peggedBalances[chain][issuanceType] = { [pegType]: 0 };
@@ -149,7 +150,9 @@ async function getPeggedAsset(
           console.error(`${tag} Cache fallback failed for ${peggedAsset.name} on chain ${chain} (${label}):`, cacheError);
         }
 
-        peggedBalances[chain][issuanceType] = { [pegType]: null };
+        throw new Error(
+          `${tag} Could not fetch ${chain} (${issuanceType}) after ${maxRetries} attempts and no usable cached snapshot: ${errorMessage}`
+        );
       } else {
         await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
       }
@@ -295,16 +298,21 @@ async function calcCirculating(
   await Promise.all(peggedTotalPromises);
 }
 
-const timeout = (prom: any, time: number, peggedID: string, chain: string) =>
-  Promise.race([prom, new Promise((_r, rej) => setTimeout(rej, time))]).catch(
-    async (err) => {
-      console.error(
-        `Could not store peggedAsset ${peggedID} on chain ${chain}`,
-        err
-      );
-      throw err;
-    }
-  );
+async function timeout<T>(prom: Promise<T>, time: number, peggedID: string, chain: string): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      prom,
+      new Promise<never>((_, reject) => {
+        timer = setTimeout(() => reject(new Error(
+          `Could not store peggedAsset ${peggedID} on chain ${chain}: timed out after ${time}ms`
+        )), time);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 export async function storePeggedAsset(
   unixTimestamp: number,
@@ -399,7 +407,7 @@ export async function storePeggedAsset(
     }
   } catch (e) {
     console.error(peggedAsset.name, e);
-    return;
+    throw e;
   }
   if (
     breakIfIssuanceIsZero &&
@@ -428,7 +436,7 @@ export async function storePeggedAsset(
     await storeTokensAction;
   } catch (e) {
     console.error(peggedAsset.name, e);
-    return;
+    throw e;
   }
 
   if (extrapolationMetadata.extrapolated) {

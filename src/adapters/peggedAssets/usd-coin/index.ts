@@ -364,12 +364,11 @@ async function nearMint(address: string, decimals: number) {
 async function elrondBridged(tokenID: string, decimals: number) {
   return async function () {
     let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          // `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
-          `https://gateway.multiversx.com/network/esdt/supply/${tokenID}`
-        )
+    // Retries are handled by the store runner so snapshot fallback can run in time.
+    const res = await axios.get(
+      // `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
+      `https://gateway.multiversx.com/network/esdt/supply/${tokenID}`,
+      { timeout: 15000 }
     );
     const supply = res?.data?.data?.supply / 10 ** decimals;
     sumSingleBalance(
