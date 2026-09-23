@@ -25,13 +25,22 @@ test('price response presents the latest hour without changing cached daily hist
   assertCanonicalPricesUnchanged()
 })
 
-test('chart construction leaves the shared daily and hourly price records intact', () => {
+test('chart uses the hourly price and balance without changing cached daily or hourly records', () => {
   setPriceCache()
+  const dailyBalance = { SK: day, totalCirculating: { circulating: { peggedUSD: 100 }, unreleased: { peggedUSD: 0 } } }
+  const hourlyBalance = { SK: day + 3600, totalCirculating: { circulating: { peggedUSD: 150 }, unreleased: { peggedUSD: 0 } } }
   cache.peggedAssetsData['1'] = {
-    balances: [{ SK: day, totalCirculating: { circulating: { peggedUSD: 100 }, unreleased: { peggedUSD: 0 } } }],
+    balances: [dailyBalance],
+    lastBalance: hourlyBalance,
   }
   const chart = craftChartsResponse({ assetChainMap: { '1': new Set(['ethereum']) } })
-  assert.deepEqual(chart[0].totalCirculatingUSD, { peggedUSD: 200 })
+  assert.deepEqual(chart[0].totalCirculating, { peggedUSD: 150 })
+  assert.deepEqual(chart[0].totalCirculatingUSD, { peggedUSD: 300 })
+  assert.deepEqual(cache.peggedAssetsData['1'].balances, [dailyBalance])
+  assert.equal(cache.peggedAssetsData['1'].balances[0].SK, day)
+  assert.equal(cache.peggedAssetsData['1'].balances[0].totalCirculating.circulating.peggedUSD, 100)
+  assert.equal(cache.peggedAssetsData['1'].lastBalance.SK, day + 3600)
+  assert.equal(cache.peggedAssetsData['1'].lastBalance.totalCirculating.circulating.peggedUSD, 150)
   assertCanonicalPricesUnchanged()
 })
 

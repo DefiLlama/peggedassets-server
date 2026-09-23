@@ -1,9 +1,9 @@
 
 import { cache } from "../cache";
-import { getEffectivePriceHistory } from "./getEffectivePriceHistory";
+import { getEffectiveDailyHistory } from "./getEffectiveDailyHistory";
 
 export function craftStablecoinPricesResponse() {
-  const historicalPeggedPrices = getEffectivePriceHistory(cache.historicalPrices ?? [], cache.lastPrices)
+  const historicalPeggedPrices = getEffectiveDailyHistory(cache.historicalPrices ?? [], cache.lastPrices)
 
   let response = historicalPeggedPrices
     ?.map((item) =>
