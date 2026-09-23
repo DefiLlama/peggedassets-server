@@ -367,7 +367,8 @@ async function elrondBridged(tokenID: string, decimals: number) {
     const res = await retry(
       async (_bail: any) =>
         await axios.get(
-          `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
+          // `https://gateway.elrond.com/network/esdt/supply/${tokenID}`
+          `https://gateway.multiversx.com/network/esdt/supply/${tokenID}`
         )
     );
     const supply = res?.data?.data?.supply / 10 ** decimals;
