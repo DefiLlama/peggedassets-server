@@ -12626,6 +12626,7 @@ export default [
         },
       },
     },
+    deadUrl: true,
   },
   {
     id: "418",
