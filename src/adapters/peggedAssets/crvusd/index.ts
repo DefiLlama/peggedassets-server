@@ -35,9 +35,10 @@ const yb_amms = [
 async function minted(api: ChainApi) {
   let balances = {} as Balances;
   const totalDebt = await api.call({ abi: "uint256:total_debt", target: "0xC9332fdCB1C491Dcc683bAe86Fe3cb70360738BC", })
-  const pegkeeperDebts = await api.multiCall({ abi: "uint256:debt", calls: pegkeepers, })
-  const ybAmmDebts = await api.multiCall({ abi: "uint256:get_debt", calls: yb_amms, })
-  const curveLendOperatorsDebts = await api.multiCall({ abi: "uint256:mintedAmount", calls: curve_lend_operators, })  
+  // permitFailure so a single market/pegkeeper that reverts (e.g. not yet deployed at a historical block, or later deprecated) doesn't throw and zero out the whole ethereum leg
+  const pegkeeperDebts = await api.multiCall({ abi: "uint256:debt", calls: pegkeepers, permitFailure: true })
+  const ybAmmDebts = await api.multiCall({ abi: "uint256:get_debt", calls: yb_amms, permitFailure: true })
+  const curveLendOperatorsDebts = await api.multiCall({ abi: "uint256:mintedAmount", calls: curve_lend_operators, permitFailure: true })
 
   const totalSupply = pegkeeperDebts.concat([totalDebt], ybAmmDebts, curveLendOperatorsDebts).reduce((a, b) => a + Number(b), 0) / 1e18
 
