@@ -10,9 +10,11 @@ import { isDeadChain } from "../../utils/deadChains";
 import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
 import {
   dailyPeggedBalances,
+  getLastRecord,
   hourlyPeggedBalances,
 } from "../utils/getLastRecord";
-import storeNewPeggedBalances from "./storeNewPeggedBalances";
+import { ExtrapolationMetadata } from "./chainProtection";
+import storeNewPeggedBalances, { ZeroCirculatingError } from "./storeNewPeggedBalances";
 
 type ChainBlocks = {
   [chain: string]: number;
@@ -24,11 +26,49 @@ type BridgeMapping = {
 
 type EmptyObject = { [key: string]: undefined };
 
+function isFinitePegBalance(balance: PeggedTokenBalance | undefined, pegType: string) {
+  return typeof balance?.[pegType] === "number" && Number.isFinite(balance[pegType]);
+}
+
+export function restoreFailedIssuances(
+  peggedBalances: PeggedAssetIssuance,
+  previous: any,
+  bridgedFromMapping: BridgeMapping,
+  pegType: string,
+  extrapolationMetadata: ExtrapolationMetadata,
+) {
+  for (const [chain, issuances] of Object.entries(peggedBalances)) {
+    for (const [issuanceType, balance] of Object.entries(issuances)) {
+      if (isFinitePegBalance(balance, pegType)) continue;
+      const previousBalance = previous?.[chain]?.[issuanceType];
+      if (!isFinitePegBalance(previousBalance, pegType)) continue;
+
+      const restored = JSON.parse(JSON.stringify(previousBalance));
+      peggedBalances[chain][issuanceType] = restored;
+      extrapolationMetadata.extrapolated = true;
+      if (!extrapolationMetadata.extrapolatedChains.some((entry) => entry.chain === chain)) {
+        const timestamp = typeof previous.SK === "number" && Number.isFinite(previous.SK) ? previous.SK : 0;
+        extrapolationMetadata.extrapolatedChains.push({ chain, timestamp });
+      }
+    }
+  }
+
+  for (const sourceChain of Object.keys(bridgedFromMapping)) delete bridgedFromMapping[sourceChain];
+  for (const issuances of Object.values(peggedBalances)) {
+    for (const [issuanceType, balance] of Object.entries(issuances)) {
+      if (["minted", "unreleased", "circulating", "bridgedTo"].includes(issuanceType)) continue;
+      if (!isFinitePegBalance(balance, pegType)) continue;
+      bridgedFromMapping[issuanceType] ??= [];
+      bridgedFromMapping[issuanceType].push(balance);
+    }
+  }
+}
+
 function detectPegKey(balance: any, wanted: string) {
   if (balance && typeof balance === 'object') {
-    if (wanted in balance && typeof balance[wanted] === 'number' && !Number.isNaN(balance[wanted]))
+    if (wanted in balance && typeof balance[wanted] === 'number' && Number.isFinite(balance[wanted]))
       return wanted;
-    const found = Object.keys(balance).find(k => k.startsWith('pegged') && typeof balance[k] === 'number' && !Number.isNaN(balance[k]));
+    const found = Object.keys(balance).find(k => k.startsWith('pegged') && typeof balance[k] === 'number' && Number.isFinite(balance[k]));
     if (found) return found;
   }
   return wanted;
@@ -46,7 +86,7 @@ async function getPeggedAsset(
   pegType: string,
   bridgedFromMapping: BridgeMapping = {},
   maxRetries: number,
-  extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
+  extrapolationMetadata?: ExtrapolationMetadata
 ) {
   const timeoutMs = 3 * 60 * 1000; // 3 minutes
   const label = (issuanceType === 'minted' || issuanceType === 'unreleased' || issuanceType === 'circulating')
@@ -78,7 +118,7 @@ async function getPeggedAsset(
       const pegKey = detectPegKey(balance, pegType);
       if (
         typeof balance[pegKey] !== "number" ||
-        Number.isNaN(balance[pegKey])
+        !Number.isFinite(balance[pegKey])
       ) {
         throw new Error(
           `Pegged balance for ${peggedAsset.name} is not a number, instead it is ${balance[pegKey]}`
@@ -190,12 +230,12 @@ function mergeBridges(
   return bridgeBalances;
 }
 
-async function calcCirculating(
+export async function calcCirculating(
   peggedBalances: PeggedAssetIssuance,
   bridgedFromMapping: BridgeMapping,
   peggedAsset: PeggedAsset,
   pegType: string,
-  extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
+  extrapolationMetadata?: ExtrapolationMetadata
 ) {
   let chainCirculatingPromises = Object.keys(peggedBalances).map(
     async (chain) => {
@@ -319,9 +359,9 @@ export async function storePeggedAsset(
   let peggedBalances: PeggedAssetIssuance = {};
   let bridgedFromMapping: BridgeMapping = {};
   
-  const extrapolationMetadata = {
+  const extrapolationMetadata: ExtrapolationMetadata = {
     extrapolated: false,
-    extrapolatedChains: [] as Array<{ chain: string; timestamp: number }>
+    extrapolatedChains: [],
   };
   
   const moduleChains = Object.entries(module)
@@ -381,6 +421,21 @@ export async function storePeggedAsset(
       }
     );
     await Promise.all(peggedBalancesPromises);
+    const hasFailedIssuance = Object.values(peggedBalances).some((issuances) =>
+      Object.values(issuances).some((balance) => !isFinitePegBalance(balance, pegType)),
+    );
+    if (hasFailedIssuance) {
+      const previous = await getLastRecord(hourlyPeggedBalances(peggedAsset.id));
+      if (previous) {
+        restoreFailedIssuances(
+          peggedBalances,
+          previous,
+          bridgedFromMapping,
+          pegType,
+          extrapolationMetadata,
+        );
+      }
+    }
     await calcCirculating(
       peggedBalances,
       bridgedFromMapping,
@@ -401,15 +456,6 @@ export async function storePeggedAsset(
     console.error(peggedAsset.name, e);
     return;
   }
-  if (
-    breakIfIssuanceIsZero &&
-    peggedBalances.totalCirculating.circulating[pegType] === 0
-  ) {
-    throw new Error(
-      `Returned 0 total circulating at timestamp ${unixTimestamp}`
-    );
-  }
-
   if (extrapolationMetadata.extrapolated) {
     (peggedBalances as any).extrapolated = extrapolationMetadata.extrapolated;
     (peggedBalances as any).extrapolatedChains = extrapolationMetadata.extrapolatedChains;
@@ -423,16 +469,18 @@ export async function storePeggedAsset(
       peggedBalances,
       hourlyPeggedBalances,
       dailyPeggedBalances,
-      extrapolationMetadata
+      extrapolationMetadata,
+      breakIfIssuanceIsZero,
     );
     await storeTokensAction;
   } catch (e) {
     console.error(peggedAsset.name, e);
+    if (e instanceof ZeroCirculatingError) throw e;
     return;
   }
 
   if (extrapolationMetadata.extrapolated) {
-    console.log(`[${peggedAsset.name}|id=${peggedAsset.id}] ⚠️  Used cache fallback for some chains:`, extrapolationMetadata.extrapolatedChains.map(ec => ec.chain).join(', '));
+    console.log(`[${peggedAsset.name}|id=${peggedAsset.id}] ⚠️  Used extrapolated balances for some chains:`, extrapolationMetadata.extrapolatedChains.map(ec => ec.chain).join(', '));
   }
 
   return peggedBalances;
