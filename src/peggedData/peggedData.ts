@@ -7840,7 +7840,7 @@ export default [
     address: "solana:USDvUSpnhCr9yBgj3UyVrD239HRUv4RsHwH2FxsWuMk",
     symbol: "USDV",
     url: "https://solomonlabs.org/",
-    description: "USDv is a Solana-native synthetic stablecoin backed by delta-hedged spot positions and perpetual shorts, designed to maintain a 1:1 USD peg while generating yield for stakers",
+    description: "Whitelisted users can mint and redeem USDv through Solomon. Each USDv is fully backed 1:1 by short-dated U.S. Treasuries and cash reserves",
     mintRedeemDescription: "Whitelisted users mint USDv by depositing assets that are delta-hedged into market-neutral positions, and redeem USDv by burning it to unlock the underlying collateral through the Solomon protocol",
     onCoinGecko: "true",
     gecko_id: "solomon-usdv",
