@@ -12113,6 +12113,9 @@ export default [
         monad: {
           bridgedFromETH: ["0x770a579Ea200784723B31b8668b0773ba80393c9"],
         },
+        pharos: {
+          bridgedFromETH: ["0x3816102CDaff06e2a5A362CA7f767CCfD2337003"],
+        },
       },
     },
   },
