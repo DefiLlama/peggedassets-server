@@ -1,43 +1,35 @@
-// documentation: https://developer.algorand.org/docs/get-details/indexer/?from_query=curl#sdk-client-instantiations
+// documentation: https://developer.algorand.org/docs/get-details/indexer/
+// `ALGORAND_INDEXER` env overrides the indexer url; requests are rate limited by the sdk
 
-const axios = require('axios')
-const { getApplicationAddress } = require('./algorandUtils/address')
-const { RateLimiter } = require("limiter");
+const { chains } = require("@defillama/sdk");
+const { algorand } = chains;
 
-const axiosObj = axios.create({
-  baseURL: 'https://mainnet-idx.algonode.cloud',
-  timeout: 300000,
-})
-
-const indexerLimiter = new RateLimiter({ tokensPerInterval: 10, interval: "second" });
-
+/**
+ * `{ application }`, the raw indexer response shape
+ * @param {number | string} appId
+ * @returns {Promise<any>}
+ */
 async function lookupApplications(appId) {
-  return (await axiosObj.get(`/v2/applications/${appId}`)).data
+  return { application: await algorand.lookupApplication({ appId }) }
 }
 
-async function lookupAccountByID(appId) {
-  return (await axiosObj.get(`/v2/accounts/${appId}`)).data
+/**
+ * `{ account }`, the raw indexer response shape (`account` is undefined for unknown addresses)
+ * @param {string} address
+ * @returns {Promise<any>}
+ */
+async function lookupAccountByID(address) {
+  return { account: await algorand.lookupAccount({ address }) }
 }
 
+/** @returns {Promise<any>} one page: `{ accounts, 'next-token' }` */
 async function searchAccounts({ appId, limit = 1000, nexttoken, }) {
-  const response = (await axiosObj.get('/v2/accounts', {
-    params: {
-      'application-id': appId,
-      limit,
-      next: nexttoken
-    }
-  }))
-  return response.data
-}
-
-const withLimiter = (fn, tokensToRemove = 1) => async (...args) => {
-  await indexerLimiter.removeTokens(tokensToRemove);
-  return fn(...args);
+  return algorand.searchAccounts({ appId, limit, nextToken: nexttoken })
 }
 
 module.exports = {
-  getApplicationAddress,
-  lookupApplications: withLimiter(lookupApplications),
-  lookupAccountByID: withLimiter(lookupAccountByID),
-  searchAccounts: withLimiter(searchAccounts),
+  getApplicationAddress: algorand.getApplicationAddress,
+  lookupApplications,
+  lookupAccountByID,
+  searchAccounts,
 }

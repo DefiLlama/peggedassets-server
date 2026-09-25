@@ -1,6 +1,8 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
+  algorandGetBalance,
+  algorandGetTotalSupply,
   bridgedSupply,
   bridgedSupplySubtractReserve,
   supplyInEthereumBridge,
@@ -11,8 +13,6 @@ import {
   Balances,  ChainContracts,
 } from "../peggedAsset.type";
 import { getTotalSupply as stellarGetTotalSupply } from "../helper/stellar";
-const axios = require("axios");
-const retry = require("async-retry");
 
 
 const chainContracts: ChainContracts = {
@@ -126,32 +126,17 @@ async function ethereumUnreleased(decimals: number, reserves: string[]) {
 }
 
 async function algorandMinted() {
-  // I gave up on trying to use the SDK for this
+  // ASA total minus the reserve account's holding
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const supplyRes = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/assets/227855942"
-        )
-    );
-    const supply = supplyRes.data.asset.params.total;
-    const reserveRes = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/accounts/KJIKORX3CEQWN4VBI3A2MILSLZ7ITYWY7JRUYN4TK33KXCZSFOGSO2WIH4"
-        )
-    );
-    const reserveAccount = reserveRes.data.account.assets.filter(
-      (asset: any) => asset["asset-id"] === 227855942
-    );
-    const reserves = reserveAccount[0].amount;
-    const balance = (supply - reserves) / 10 ** 6;
-    sumSingleBalance(balances, "peggedEUR", balance, "issued", false);
+    const assetId = 227855942;
+    const supply = await algorandGetTotalSupply(assetId);
+    const reserves = await algorandGetBalance(assetId, "KJIKORX3CEQWN4VBI3A2MILSLZ7ITYWY7JRUYN4TK33KXCZSFOGSO2WIH4");
+    sumSingleBalance(balances, "peggedEUR", supply - reserves, "issued", false);
     return balances;
   };
 }

@@ -1,4 +1,4 @@
-import { ChainApi } from "@defillama/sdk";
+import { ChainApi, chains } from "@defillama/sdk";
 import * as aptos from "../helper/aptos";
 import * as cardano from "../helper/cardano";
 import { getTokenSupply as solanaGetTokenSupply, getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
@@ -169,14 +169,8 @@ export function tonTokenSupply(address: string) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          `https://toncenter.com/api/v3/jetton/masters?address=${address}&limit=1&offset=0`
-        )
-    );
-    const supply = res.data.jetton_masters[0].total_supply;
-    sumSingleBalance(balances, "peggedUSD", (supply) / 10 ** 6, address, false);
+    const { supply } = await chains.ton.getJettonSupply({ address });
+    sumSingleBalance(balances, "peggedUSD", Number(supply) / 10 ** 6, address, false);
     return balances;
   };
 }
@@ -220,49 +214,8 @@ export function osmosisLiquidity(
   };
 }
 
-const cosmosEndpoints: any = {
-  crescent: "https://mainnet.crescent.network:1317",
-  osmosis: "https://rest.cosmos.directory/osmosis",
-  cosmos: "https://cosmoshub-lcd.stakely.io",
-  kujira: "https://kuji-api.kleomedes.network",
-  comdex: "https://rest.comdex.one",
-  terra: "https://terra-classic-lcd.publicnode.com",
-  terra2: "https://terra-lcd.publicnode.com",
-  umee: "https://umee-api.polkachu.com",
-  orai: "https://lcd.orai.io",
-  juno: "https://juno.api.m.stavr.tech",
-  cronos: "https://rest.mainnet.crypto.org",
-  chihuahua: "https://rest.cosmos.directory/chihuahua",
-  stargaze: "https://rest.stargaze-apis.com",
-  quicksilver: "https://rest.cosmos.directory/quicksilver",
-  persistence: "https://rest.cosmos.directory/persistence",
-  secret: "https://rpc.ankr.com/http/scrt_cosmos",
-  // chihuahua: "https://api.chihuahua.wtf",
-  injective: "https://injective-rest.publicnode.com",
-  migaloo: "https://migaloo-api.polkachu.com",
-  fxcore: "https://fx-rest.functionx.io",
-  xpla: "https://dimension-lcd.xpla.dev",
-  kava: "https://api2.kava.io",
-  neutron: "https://rest-kralum.neutron-1.neutron.org",
-  quasar: "https://quasar-api.polkachu.com",
-  gravitybridge: "https://gravitychain.io:1317",
-  sei: "https://sei-rest.publicnode.com",
-  aura: "https://lcd.aura.network",
-  archway: "https://api.mainnet.archway.io",
-  sifchain: "https://sifchain-api.polkachu.com",
-  nolus: "https://pirin-cl.nolus.network:1317",
-  nibiru: "https://lcd.nibiru.fi",
-  bostrom: "https://lcd.bostrom.cybernode.ai",
-  joltify: "https://lcd.joltify.io",
-  noble: "https://noble-api.polkachu.com"
-};
-
-
-function getCosmosRPC(chain: string) {
-  if (cosmosEndpoints[chain]) return cosmosEndpoints[chain];
-  return `https://rest.cosmos.directory/${chain}/`;
-}
-
+// bank total supply of native denoms on a cosmos-sdk chain. LCD endpoints come from the sdk map
+// (`<CHAIN>_LCD` env overrides, `https://rest.cosmos.directory/<chain>` fallback).
 export function cosmosSupply(
   chain: string,
   tokens: string[],
@@ -277,17 +230,11 @@ export function cosmosSupply(
   ) {
     let balances = {} as Balances;
     for (let token of tokens) {
-      let api = `cosmos/bank/v1beta1/supply/by_denom?denom=${token}`
-      const res = await retry(
-        async (_bail: any) =>
-          await axios.get(
-            `${getCosmosRPC(chain)}/${api}`
-          )
-      );
+      const amount = await chains.cosmos.totalSupply({ chain, denom: token });
       sumSingleBalance(
         balances,
         pegType,
-        parseInt(res.data.amount.amount) / 10 ** decimals,
+        Number(amount) / 10 ** decimals,
         token,
         false,
         bridgedFromChain
@@ -302,30 +249,7 @@ export function osmosisSupply(
   decimals: number,
   bridgedFromChain: string
 ) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    for (let token of tokens) {
-      const res = await retry(
-        async (_bail: any) =>
-          await axios.get(
-            `https://rest-osmosis.ecostake.com/osmosis/superfluid/v1beta1/supply?denom=${token}`
-          )
-      );
-      sumSingleBalance(
-        balances,
-        "peggedUSD",
-        parseInt(res.data.amount.amount) / 10 ** decimals,
-        token,
-        false,
-        bridgedFromChain
-      );
-    }
-    return balances;
-  };
+  return cosmosSupply("osmosis", tokens, decimals, bridgedFromChain);
 }
 
 export function kujiraSupply(
@@ -513,43 +437,30 @@ function getIssued({
   }
 }
 
-// ripple token format: "<currencyCode>.<issuerAddress>"
-async function rippleGetTotalSupply(token: string) {
-  const [currencyCode, issuerAddress] = token.split(".");
-  const payload = {
-    method: "gateway_balances",
-    params: [{ account: issuerAddress, ledger_index: "validated" }],
-  };
-  const res = await retry(async (_bail: any) =>
-    axios.post("https://xrplcluster.com", payload)
-  );
-  const obligations = res.data?.result?.obligations;
-  return obligations?.[currencyCode] ? parseFloat(obligations[currencyCode]) : 0;
+// ripple token format: "<currencyCode>.<issuerAddress>" (currency as 3-char code or 40-char hex);
+// the issuer's obligations for that currency, 0 when there are none. `XRPL_RPC` env overrides the nodes.
+export async function rippleGetTotalSupply(token: string): Promise<number> {
+  return Number(await chains.xrpl.getTokenSupply(token));
 }
 
-async function algorandGetAssetParams(assetId: string) {
-  const res = await retry(async (_bail: any) =>
-    axios.get(`https://mainnet-idx.algonode.cloud/v2/assets/${assetId}`)
-  );
-  return res.data.asset.params;
+// asset params (total, decimals, reserve, unit-name, ...) of an Algorand Standard Asset
+export async function algorandGetAssetParams(assetId: string | number) {
+  return chains.algorand.getAssetInfo({ assetId });
 }
 
 // total supply of an Algorand Standard Asset, scaled by its own decimals
-async function algorandGetTotalSupply(assetId: string) {
+export async function algorandGetTotalSupply(assetId: string | number): Promise<number> {
   const params = await algorandGetAssetParams(assetId);
-  return params.total / 10 ** params.decimals;
+  return Number(params.total) / 10 ** params.decimals;
 }
 
-// amount of `assetId` held by `account`, scaled by the asset's decimals
-async function algorandGetBalance(assetId: string, account: string) {
-  const params = await algorandGetAssetParams(assetId);
-  const res = await retry(async (_bail: any) =>
-    axios.get(`https://mainnet-idx.algonode.cloud/v2/accounts/${account}`)
-  );
-  const holdings = (res.data.account.assets ?? []).filter(
-    (asset: any) => String(asset["asset-id"]) === String(assetId)
-  );
-  return (holdings[0]?.amount ?? 0) / 10 ** params.decimals;
+// amount of `assetId` held by `account`, scaled by the asset's decimals (0 when not opted in)
+export async function algorandGetBalance(assetId: string | number, account: string): Promise<number> {
+  const [params, balance] = await Promise.all([
+    algorandGetAssetParams(assetId),
+    chains.algorand.getAssetBalance({ address: account, assetId }),
+  ]);
+  return Number(balance) / 10 ** params.decimals;
 }
 
 function getUnreleased({

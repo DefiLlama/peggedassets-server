@@ -26,7 +26,7 @@ import {
   Balances,
 } from "../peggedAsset.type";
 import { sumSingleBalance } from "../helper/generalUtil";
-import { lookupAccountByID } from "../helper/algorand";
+import { algorandGetBalance, algorandGetTotalSupply } from "../helper/getSupply";
 
 const axios = require("axios");
 const retry = require("async-retry");
@@ -35,31 +35,17 @@ const WAD_ASSET_ID = 3334160924;
 const WAD_DECIMALS = 6;
 // Creator wallet - holds all un-minted WAD supply on Algorand
 const WAD_CREATOR = "KTKMGUA2YWZ4OF4P2UBDE57CYS2YRF6S7275EAF6VVC5D2Z3T6YNMBIMQM";
-const ALGONODE_INDEXER = "https://mainnet-idx.algonode.cloud";
 
 const WAD_VOI_APP_ID = 47138068;
 const VOI_INDEXER = "https://mainnet-idx.voi.nodely.dev";
 
 /**
- * minted (Algorand) = total ASA supply (uint64 max).
- * BigInt used to avoid float precision loss.
+ * minted (Algorand) = total ASA supply (uint64 max), scaled by the asset's decimals.
  */
 async function algorandMinted() {
   return async function (_ts: any, _block: any, _chainBlocks: ChainBlocks) {
     const balances = {} as Balances;
-
-    const assetRes = await retry(
-      async (_bail: any) =>
-        await axios.get(`${ALGONODE_INDEXER}/v2/assets/${WAD_ASSET_ID}`, {
-          timeout: 30000,
-        })
-    );
-
-    const totalRaw: string = String(
-      assetRes?.data?.asset?.params?.total ?? "0"
-    );
-    const totalWAD = Number(BigInt(totalRaw)) / 10 ** WAD_DECIMALS;
-
+    const totalWAD = await algorandGetTotalSupply(WAD_ASSET_ID);
     sumSingleBalance(balances, "peggedUSD", totalWAD, "issued", false);
     return balances;
   };
@@ -72,15 +58,7 @@ async function algorandMinted() {
 async function algorandUnreleased() {
   return async function (_ts: any, _block: any, _chainBlocks: ChainBlocks) {
     const balances = {} as Balances;
-
-    const creatorAccount = await lookupAccountByID(WAD_CREATOR);
-    const creatorBalanceRaw: number =
-      creatorAccount?.account?.assets?.find(
-        (a: any) => a["asset-id"] === WAD_ASSET_ID
-      )?.amount ?? 0;
-
-    const creatorWAD = creatorBalanceRaw / 10 ** WAD_DECIMALS;
-
+    const creatorWAD = await algorandGetBalance(WAD_ASSET_ID, WAD_CREATOR);
     sumSingleBalance(balances, "peggedUSD", creatorWAD);
     return balances;
   };

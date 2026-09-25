@@ -1,7 +1,7 @@
 {
   "name": "stablecoin-server",
   "private": true,
-  "version": "1.0.0",
+  "version": "4.2.0",
   "scripts": {
     "api2-dev": "ts-node --transpile-only api2/index.ts",
     "generate-lz-config": "ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/generateLzConfig.ts",

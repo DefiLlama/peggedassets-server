@@ -1,23 +1,8 @@
-const axios = require("axios")
-const endpoint = "https://rpc.mainnet.near.org";
+const { chains } = require("@defillama/sdk");
 
+// view call; returns the JSON decoded result (`NEAR_RPC` env overrides the endpoint list)
 async function call(contract, method, args = {}) {
-  const result = await axios.post(endpoint, {
-    jsonrpc: "2.0",
-    id: "1",
-    method: "query",
-    params: {
-      request_type: "call_function",
-      finality: "final",
-      account_id: contract,
-      method_name: method,
-      args_base64: Buffer.from(JSON.stringify(args)).toString("base64"),
-    },
-  });
-  if (result.data.error) {
-    throw new Error(`${result.data.error.message}: ${result.data.error.data}`);
-  }
-  return JSON.parse(Buffer.from(result.data.result.result).toString());
+  return chains.near.call({ contract, method, args });
 }
 
 module.exports = {
