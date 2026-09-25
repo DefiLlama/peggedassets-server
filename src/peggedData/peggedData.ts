@@ -12780,6 +12780,9 @@ export default [
         avax: {
           issued: ["0xd2a530170d71a9cfe1651fb468e2b98f7ed7456b"],
         },
+        rbn: {
+          issued: ["0xd2a530170D71a9Cfe1651Fb468E2B98F7Ed7456b"],
+        }
       },
     },
   },

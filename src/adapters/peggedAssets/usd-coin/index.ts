@@ -1155,7 +1155,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab"), // Etherlink's Wrapped Asset Bridge
   },
   rbn: {
-    ethereum: bridgedSupply("rbn", 6, chainContracts.rbn.bridgedFromETH)
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("rbn", 6, [chainContracts.rbn.bridgedFromETH[0]]), // Lucid Labs
+        bridgedSupply("rbn", 6, [chainContracts.rbn.bridgedFromETH[1]], "layerzero", "ethereum"),
+      ],
+      "peggedUSD"
+    ),
   },
   mantra: {
     ethereum: bridgedSupply("mantra", 6, chainContracts.mantra.bridgedFromETH)
