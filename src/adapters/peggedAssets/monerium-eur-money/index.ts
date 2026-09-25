@@ -1,14 +1,12 @@
 const sdk = require("@defillama/sdk");
 import { sumSingleBalance } from "../helper/generalUtil";
-import { cosmosSupply } from "../helper/getSupply";
+import { algorandGetBalance, algorandGetTotalSupply, cosmosSupply } from "../helper/getSupply";
 import {
   Balances,
   ChainBlocks,
   ChainContracts,
   PeggedIssuanceAdapter,
 } from "../peggedAsset.type";
-const axios = require("axios");
-const retry = require("async-retry");
 
 
 const chainContracts: ChainContracts = {
@@ -71,23 +69,11 @@ async function algorandMinted() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const supplyRes = await retry(
-      async (_bail: any) =>
-        await axios.get("https://mainnet-idx.algonode.cloud/v2/assets/83209012")
-    );
-    const supply = supplyRes.data.asset.params.total;
-    const reserveRes = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/accounts/XSAED32VYAQK42TQHKCRHYK7P6LBBPQ2237PALQZAGL2XJTNNOPD523CNA"
-        )
-    );
-    const reserveAccount = reserveRes.data.account.assets.filter(
-      (asset: any) => asset["asset-id"] === 83209012
-    );
-    const reserves = reserveAccount[0].amount;
-    const balance = (supply - reserves) / 10 ** 8;
-    sumSingleBalance(balances, "peggedEUR", balance, "issued", false);
+    // ASA total minus the reserve account's holding
+    const assetId = 83209012;
+    const supply = await algorandGetTotalSupply(assetId);
+    const reserves = await algorandGetBalance(assetId, "XSAED32VYAQK42TQHKCRHYK7P6LBBPQ2237PALQZAGL2XJTNNOPD523CNA");
+    sumSingleBalance(balances, "peggedEUR", supply - reserves, "issued", false);
     return balances;
   };
 }

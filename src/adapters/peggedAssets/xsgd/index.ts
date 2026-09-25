@@ -1,4 +1,4 @@
-import { addChainExports } from "../helper/getSupply";
+import { addChainExports, rippleGetTotalSupply } from "../helper/getSupply";
 import { sumSingleBalance } from "../helper/generalUtil";
 import { Balances, ChainContracts, ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
 const axios = require("axios");
@@ -22,29 +22,11 @@ const chainContracts: ChainContracts = {
 async function rippleMinted() {
   return async function (  ) {
     const balances = {} as Balances;
-    
-    const NODE_URL = "https://xrplcluster.com";
     const address = "rK67JczCpaYXVtfw3qJVmqwpSfa1bYTptw";
     const tokenCurrency = "5853474400000000000000000000000000000000"; // XSGD currency code
-    
-    const payload = {
-      method: "gateway_balances",
-      params: [
-        {
-          account: address,
-          ledger_index: "validated",
-        },
-      ],
-    };
-
-    const res = await retry(async (_bail: any) => axios.post(NODE_URL, payload));
-    
-    if (res.data.result && res.data.result.obligations && res.data.result.obligations[tokenCurrency]) {
-      const supplyStr = res.data.result.obligations[tokenCurrency];
-      const supply = parseFloat(supplyStr);
-      sumSingleBalance(balances, "peggedSGD", supply, "issued", false);
-    }
-    
+    // issuer obligations for XSGD, already in whole units
+    const supply = await rippleGetTotalSupply(`${tokenCurrency}.${address}`);
+    if (supply) sumSingleBalance(balances, "peggedSGD", supply, "issued", false);
     return balances;
   };
 }

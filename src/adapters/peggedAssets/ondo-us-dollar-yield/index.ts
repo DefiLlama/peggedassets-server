@@ -1,33 +1,30 @@
-const sdk = require("@defillama/sdk");
+import { chains } from "@defillama/sdk";
 import { sumSingleBalance } from '../helper/generalUtil';
+import { function_view } from "../helper/aptos";
 import { addChainExports, cosmosSupply } from "../helper/getSupply";
 import { ChainBlocks, PeggedIssuanceAdapter, Balances } from "../peggedAsset.type";
 import { getTotalSupply as stellarGetTotalSupply } from "../helper/stellar";
-const axios = require("axios");
-const retry = require("async-retry");
 
 function nobleSupply() {
   return cosmosSupply("noble", ['ausdy'], 18, '', 'peggedUSD');
 }
 
+// USDY locked in the Noble IBC escrow account of `channel` (what is bridged to the counterparty chain)
 async function bridgedFromNoble(channel: string) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
-    // Fetch the escrow address for the given IBC channel
-    const escrowResponse = await retry(async (_bail: any) =>
-      axios.get(`https://noble-api.polkachu.com/ibc/apps/transfer/v1/channels/${channel}/ports/transfer/escrow_address`)
-    );
-    const escrowAddress = escrowResponse?.data?.escrow_address;
+    const escrowResponse = await chains.cosmos.query({
+      chain: "noble",
+      path: `ibc/apps/transfer/v1/channels/${channel}/ports/transfer/escrow_address`,
+    });
+    const escrowAddress = escrowResponse?.escrow_address;
+    if (!escrowAddress) throw new Error(`noble: no escrow address for ${channel}`);
 
-    // Fetch the balance of the escrow address
-    const balanceResponse = await retry(async (_bail: any) =>
-      axios.get(`https://noble-api.polkachu.com/cosmos/bank/v1beta1/balances/${escrowAddress}/by_denom?denom=ausdy`)
-    );
-
-    const circulatingSupply = balanceResponse?.data?.balance?.amount / 1e18;
+    const amount = await chains.cosmos.getDenomBalance({ chain: "noble", denom: "ausdy", owner: escrowAddress });
+    const circulatingSupply = Number(amount) / 1e18;
     let balances = {};
     sumSingleBalance(balances, "peggedUSD", circulatingSupply, "issued", false);
     return balances;
@@ -54,16 +51,14 @@ async function aptosMinted(coinType: string) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const endpoint = process.env.APTOS_RPC ?? "https://fullnode.mainnet.aptoslabs.com";
-    const response = await retry(async (_bail: any) =>
-      axios.post(`${endpoint}/v1/view`, {
-        function: "0x1::coin::supply",
-        type_arguments: [coinType],
-        arguments: [],
-      })
-    );
+    const resp = await function_view({
+      functionStr: "0x1::coin::supply",
+      type_arguments: [coinType],
+      args: [],
+      chain: "aptos",
+    });
 
-    const supplyVec = response.data?.[0]?.vec;
+    const supplyVec = resp?.vec;
     if (!supplyVec || supplyVec.length === 0) {
       throw new Error(`No supply found for coin type: ${coinType}`);
     }

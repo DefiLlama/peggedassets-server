@@ -1,93 +1,62 @@
-const axios = require("axios");
-const retry = require("async-retry");
-const endpoint = process.env.APTOS_RPC ?? "https://fullnode.mainnet.aptoslabs.com";
-import http from "../helper/http";
+import { chains } from "@defillama/sdk";
 
-export async function aQuery(api: string) {
-  const query = await retry(
-    async (_bail: any) => await axios.get(`${endpoint}${api}`)
-  );
-  return query;
+const { aptos } = chains;
+
+const COIN_INFO_PREFIX = "0x1::coin::CoinInfo<";
+const FA_METADATA_TYPE = "0x1::fungible_asset::Metadata";
+
+// `APTOS_RPC` / `MOVE_RPC` env override the endpoints. All resources of `account`, or the single
+// `{ type, data }` resource of `type` (undefined when the account does not hold it).
+export async function getResources(account: string, type?: string): Promise<any> {
+  if (!type) return aptos.getResources({ account });
+  const data = await aptos.getResource({ account, type });
+  return data ? { type, data } : undefined;
 }
 
-export async function getResources(account: string, type?: string) {
-  const resources = await retry(
-    async (_bail: any) =>
-      await axios.get(`${endpoint}/v1/accounts/${account}/resources`)
-  );
-  const data = resources.data;
-  if (type) {
-    return data.filter((obj: any) => obj.type === type)[0];
-  }
-  return data;
-}
-
+// supply of a `0x1::coin::CoinInfo<T>` resource held by `account`, in whole units
 export async function getTotalSupply(account: string, type?: string) {
-  const resources = await getResources(account, type);
-  const decimals = resources?.data?.decimals;
-  const supply = resources?.data?.supply?.vec?.[0].integer?.vec?.[0].value;
+  const resource = await getResources(account, type);
+  const decimals = resource?.data?.decimals;
+  const supply = resource?.data?.supply?.vec?.[0]?.integer?.vec?.[0]?.value;
   return supply / 10 ** decimals;
 }
 
-export async function getTokenSupply(token: string) {
-  const { data } = await axios.get(`${endpoint}/v1/accounts/${token}/resources`);
-
-  if (token === '0x50038be55be5b964cfa32cf128b5cf05f123959f286b4cc02b86cafd48945f89') {
-    const concurrentSupply = data.find((coin: any) => coin.type === '0x1::fungible_asset::ConcurrentSupply');
-    const metadata = data.find((coin: any) => coin.type === '0x1::fungible_asset::Metadata');
-    if (concurrentSupply && metadata) {
-      const supply = concurrentSupply.data.current.value;
-      const decimals = metadata.data.decimals;
-      return parseInt(supply) / 10 ** decimals;
-    }
+// `token` is either a coin type (`addr::module::Name`), a coin module account holding the
+// `CoinInfo<T>` resource, or a fungible asset metadata object address. Returns whole units.
+export async function getTokenSupply(token: string): Promise<number> {
+  if (aptos.isFungibleAssetAddress(token)) {
+    const resources: any[] = await aptos.getResources({ account: token });
+    const coinInfo = resources.find((r) => typeof r.type === "string" && r.type.startsWith(COIN_INFO_PREFIX));
+    if (coinInfo)
+      return Number(coinInfo.data.supply.vec[0].integer.vec[0].value) / 10 ** Number(coinInfo.data.decimals);
+    const metadata = resources.find((r) => r.type === FA_METADATA_TYPE);
+    if (!metadata) throw new Error(`aptos: no CoinInfo or fungible asset Metadata resource at ${token}`);
+    // fungible asset: supply view, falling back to the ConcurrentSupply / Supply resources
+    const supply = await aptos.getCoinSupply({ coinType: token });
+    return Number(supply) / 10 ** Number(metadata.data.decimals);
   }
-
-  // Handle Franklin Onchain U.S. Government Money Fund token
-  if (token === '0x7b5e9cac3433e9202f28527f707c89e1e47b19de2c33e4db9521a63ad219b739') {
-    const concurrentSupply = data.find((coin: any) => coin.type === '0x1::fungible_asset::ConcurrentSupply');
-    const metadata = data.find((coin: any) => coin.type === '0x1::fungible_asset::Metadata');
-    if (concurrentSupply && metadata) {
-      const supply = concurrentSupply.data.current.value;
-      const decimals = metadata.data.decimals;
-      return parseInt(supply) / 10 ** decimals;
-    }
-  }
-
-  // Handle USD1-WLFI fungible asset
-  if (token === '0x05fabd1b12e39967a3c24e91b7b8f67719a6dacee74f3c8b9fb7d93e855437d2') {
-    const concurrentSupply = data.find((coin: any) => coin.type === '0x1::fungible_asset::ConcurrentSupply');
-    const metadata = data.find((coin: any) => coin.type === '0x1::fungible_asset::Metadata');
-    if (concurrentSupply && metadata) {
-      const supply = concurrentSupply.data.current.value;
-      const decimals = metadata.data.decimals;
-      return parseInt(supply) / 10 ** decimals;
-    }
-  }
-
-  const coinInfo = data.find((coin: any) => coin.type.startsWith('0x1::coin::CoinInfo'));
-
-  return coinInfo.data.supply.vec[0].integer.vec[0].value / 10 ** coinInfo.data.decimals;
+  const [supply, info] = await Promise.all([
+    aptos.getCoinSupply({ coinType: token }),
+    aptos.getCoinInfo({ coinType: token }),
+  ]);
+  return Number(supply) / 10 ** info.decimals;
 }
 
-const MOVEMENT_RPC = "https://mainnet.movementnetwork.xyz";
-
+// `#[view]` function call; defaults to the Movement network (`chain: 'move'`), pass `chain: 'aptos'` for Aptos.
+// A single return value is unwrapped, otherwise the result array is returned.
 export async function function_view({
   functionStr,
   type_arguments = [],
   args = [],
   ledgerVersion,
+  chain = "move",
 }: {
   functionStr: string;
   type_arguments?: string[];
   args?: any[];
   ledgerVersion?: number;
+  chain?: string;
 }) {
-  let path = `${MOVEMENT_RPC}/v1/view`;
-  if (ledgerVersion !== undefined) path += `?ledger_version=${ledgerVersion}`;
-  const response = await http.post(path, {
-    function: functionStr,
-    type_arguments,
-    arguments: args,
-  });
+  const response = await aptos.view({ chain, function: functionStr, typeArguments: type_arguments, args, ledgerVersion });
   return response.length === 1 ? response[0] : response;
 }

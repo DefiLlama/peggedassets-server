@@ -1,8 +1,10 @@
 const sdk = require("@defillama/sdk");
-import { ChainApi } from "@defillama/sdk";
+import { ChainApi, chains } from "@defillama/sdk";
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
 import { getTetherTransparency, sumMultipleBalanceFunctions, sumSingleBalance } from "../helper/generalUtil";
 import {
+  algorandGetBalance,
+  algorandGetTotalSupply,
   bridgedSupply,
   getApi,
   osmosisSupply,
@@ -186,17 +188,11 @@ async function tonMinted() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://toncenter.com/api/v3/jetton/masters?address=EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs&limit=128&offset=0"
-        )
-    );
-    const issued = res.data.jetton_masters[0].total_supply;
+    const { supply } = await chains.ton.getJettonSupply({ address: "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs" });
     sumSingleBalance(
       balances,
       "peggedUSD",
-      (issued) / 10 ** 6,
+      Number(supply) / 10 ** 6,
       "issued",
       false
     );
@@ -205,30 +201,17 @@ async function tonMinted() {
 }
 
 async function algorandMinted() {
-  // I gave up on trying to use the SDK for this
+  // ASA total minus the reserve account's holding
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const supplyRes = await retry(
-      async (_bail: any) =>
-        await axios.get("https://mainnet-idx.algonode.cloud/v2/assets/312769")
-    );
-    const supply = supplyRes.data.asset.params.total;
-    const reserveRes = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/accounts/XIU7HGGAJ3QOTATPDSIIHPFVKMICXKHMOR2FJKHTVLII4FAOA3CYZQDLG4"
-        )
-    );
-    const reserveAccount = reserveRes.data.account.assets.filter(
-      (asset: any) => asset["asset-id"] === 312769
-    );
-    const reserves = reserveAccount[0].amount;
-    const balance = (supply - reserves) / 10 ** 6;
-    sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
+    const assetId = 312769;
+    const supply = await algorandGetTotalSupply(assetId);
+    const reserves = await algorandGetBalance(assetId, "XIU7HGGAJ3QOTATPDSIIHPFVKMICXKHMOR2FJKHTVLII4FAOA3CYZQDLG4");
+    sumSingleBalance(balances, "peggedUSD", supply - reserves, "issued", false);
     return balances;
   };
 }
@@ -449,12 +432,7 @@ async function nearMint(address: string, decimals: number) {
   };
 }
 
-// Wormhole keeps a wrapped coin's TreasuryCap inside the token bridge's WrappedAsset, so
-// suix_getTotalSupply and coinMetadata don't expose the supply for it. The WrappedAsset is a
-// dynamic field on the token registry, which is the `token_registry` field of the bridge state
-// object 0xc57508ee0d4595e5a8728974a4a93a787d38f339757230d441e895422c07aba9.
-const SUI_WORMHOLE_TOKEN_BRIDGE = "0x26efee2b51c911237888e5dc6702868abca3c7ac12c53f76ef8eba0697695e3d";
-const SUI_WORMHOLE_TOKEN_REGISTRY = "0x334881831bd89287554a6121087e498fa023ce52c037001b53a4563a00a281a5";
+// Wormhole wrapped USDT: supply read from the token bridge's WrappedAsset (see helper/sui.ts)
 const SUI_WORMHOLE_USDT = "0xc060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c";
 
 async function suiWormholeBridged() {
@@ -464,15 +442,7 @@ async function suiWormholeBridged() {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
-    const wrappedAsset = await sui.getDynamicFieldObject(
-      SUI_WORMHOLE_TOKEN_REGISTRY,
-      `${SUI_WORMHOLE_TOKEN_BRIDGE}::token_registry::Key<${SUI_WORMHOLE_USDT}::coin::COIN>`
-    );
-    // GraphQL returns the Move value as plain nested JSON, without JSON-RPC's `fields` wrappers.
-    const wrapped = wrappedAsset?.fields?.value ?? wrappedAsset?.fields;
-    if (!wrapped) throw new Error("sui: wormhole USDT WrappedAsset not found");
-    const totalSupply =
-      Number(wrapped.treasury_cap.total_supply.value) / 10 ** Number(wrapped.decimals);
+    const totalSupply = await sui.getWormholeWrappedSupply(SUI_WORMHOLE_USDT);
     sumSingleBalance(balances, "peggedUSD", totalSupply, SUI_WORMHOLE_USDT, true);
     return balances;
   };
