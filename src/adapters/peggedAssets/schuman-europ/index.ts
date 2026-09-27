@@ -1,15 +1,11 @@
 import { sumSingleBalance } from "../helper/generalUtil";
-import { addChainExports } from "../helper/getSupply";
+import { addChainExports, rippleGetTotalSupply } from "../helper/getSupply";
 import {
   Balances,
   ChainBlocks,
   ChainContracts,
 } from "../peggedAsset.type";
 
-const axios = require("axios");
-const retry = require("async-retry");
-
-const XRPL_NODE_URL = "https://xrplcluster.com";
 const XRPL_ISSUER = "rMkEuRii9w9uBMQDnWV5AA43gvYZR9JxVK";
 const XRPL_CURRENCY =
   "4555524F50000000000000000000000000000000";
@@ -20,24 +16,8 @@ async function rippleMinted(
   _chainBlocks: ChainBlocks
 ): Promise<Balances> {
   const balances = {} as Balances;
-
-  const payload = {
-    method: "gateway_balances",
-    params: [
-      {
-        account: XRPL_ISSUER,
-        ledger_index: "validated",
-      },
-    ],
-  };
-
-  const res = await retry(async () => {
-    return axios.post(XRPL_NODE_URL, payload);
-  });
-
-  const supplyStr =
-    res.data.result?.obligations?.[XRPL_CURRENCY] || "0";
-  const supply = parseFloat(supplyStr);
+  // issuer obligations for EUROP, already in whole units
+  const supply = await rippleGetTotalSupply(`${XRPL_CURRENCY}.${XRPL_ISSUER}`);
   sumSingleBalance(
     balances,
     "peggedEUR",

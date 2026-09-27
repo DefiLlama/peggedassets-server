@@ -1,40 +1,21 @@
-const axios = require("axios");
-const retry = require("async-retry");
+import { chains } from "@defillama/sdk";
 
-const stellarExpertEndpoint = (assetID: string): string =>
-  `https://api.stellar.expert/explorer/public/asset/${assetID.replace(":", "-")}`;
+const { stellar } = chains;
 
-export async function getAsset(assetID: string) {
-  // assetID is concatenation of the assetCode and assetIssuer, separated by a colon
-  const asset = await retry(
-    async (_bail: any) =>
-      await axios.get(stellarExpertEndpoint(assetID))
-  );
-  const data = asset.data;
-  return data;
+// assetID is "CODE:ISSUER" (or "CODE-ISSUER"); returns the circulating supply in whole units (7 decimals):
+// authorized trustlines + accounts authorized to maintain liabilities + Soroban contracts + liquidity pools + claimable balances
+export async function getTotalSupply(assetID: string): Promise<number> {
+  const { supply, authorizedToMaintainLiabilities, decimals } = await stellar.getAssetSupply({ asset: assetID });
+  return Number(BigInt(supply) + BigInt(authorizedToMaintainLiabilities)) / 10 ** decimals;
 }
 
-export async function getTotalSupply(assetID: string) {
-  // assetID is concatenation of the assetCode and assetIssuer, separated by a colon
-  const asset = await getAsset(assetID);
-  const decimals = 7;
-  const supply = asset?.supply;
-  return supply / 10 ** decimals;
-}
-
-// resolve a Soroban contract address to its underlying asset, then read supply
-export async function getTotalSupplyByContract(contract: string) {
-  const endpoint = "https://api.stellar.expert/explorer/public";
-  const contractRes = await retry(
-    async (_bail: any) => await axios.get(`${endpoint}/contract/${contract}`, { timeout: 30_000 })
-  );
-  const asset = contractRes.data.asset;
-  if (!asset) throw new Error(`stellar: contract ${contract} has no underlying asset`);
-  const assetRes = await retry(
-    async (_bail: any) => await axios.get(`${endpoint}/asset/${asset}`, { timeout: 30_000 })
-  );
-  const { supply, decimals } = assetRes.data;
-  if (supply == null || decimals == null)
-    throw new Error(`stellar: incomplete asset record for ${asset}`);
+// resolve a Soroban contract: a Stellar Asset Contract maps back to its classic asset, any other token
+// exposes total_supply() / decimals()
+export async function getTotalSupplyByContract(contract: string): Promise<number> {
+  const classic = await stellar.getSacClassicAsset({ contractId: contract });
+  if (classic) return getTotalSupply(stellar.assetToString(classic));
+  const supply = await stellar.getSorobanTokenTotalSupply({ contractId: contract });
+  if (supply === undefined) throw new Error(`stellar: contract ${contract} exposes no total_supply()`);
+  const decimals = await stellar.getSorobanTokenDecimals({ contractId: contract });
   return Number(supply) / 10 ** decimals;
 }

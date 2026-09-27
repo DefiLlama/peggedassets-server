@@ -1,51 +1,22 @@
-const axios = require("axios");
+const { chains } = require("@defillama/sdk");
 
-const endpoint = process.env.SOLANA_RPC ?? "https://api.mainnet-beta.solana.com"
-const getEndpoints = {
-  solana: () => process.env.SOLANA_RPC ?? "https://api.mainnet-beta.solana.com",
-  fogo: () => process.env.FOGO_RPC ?? "https://mainnet.fogo.io",
-}
-
+// total supply of a mint as a ui amount (number); `<CHAIN>_RPC` env overrides the endpoint
 async function getTokenSupply(token, chain = "solana") {
-  const endpoint = getEndpoints[chain]();
-  const tokenSupply = await axios.post(endpoint, {
-    jsonrpc: "2.0",
-    id: 1,
-    method: "getTokenSupply",
-    params: [token],
-  });
-  return tokenSupply.data.result.value.uiAmount;
+  const { uiAmount } = await chains.svm.getTokenSupply({ chain, token });
+  return uiAmount;
 }
 
+// ui amount (number) of `token` held by `account`, summed over all of its token accounts
 async function getTokenBalance(token, account, chain = "solana") {
-  const endpoint = getEndpoints[chain]();
-  const tokenBalance = await axios.post(endpoint, {
-    jsonrpc: "2.0",
-    id: 1,
-    method: "getTokenAccountsByOwner",
-    params: [
-      account,
-      {
-        mint: token,
-      },
-      {
-        encoding: "jsonParsed",
-      },
-    ],
-  });
-  const accounts = tokenBalance.data.result.value;
-  if (!Array.isArray(accounts) || accounts.length === 0) {
+  const accounts = await chains.svm.getTokenAccountsByOwner({ chain, owner: account, mint: token });
+  if (!accounts.length) {
+    // getSupply.ts string-matches this message to treat an empty reserve as 0
     throw new Error(`Solana RPC returned empty token accounts for owner ${account} (mint: ${token})`);
   }
-  return accounts.reduce(
-    (total, account) =>
-      total + account.account.data.parsed.info.tokenAmount.uiAmount,
-    0
-  );
+  return accounts.reduce((total, i) => total + i.uiAmount, 0);
 }
 
 module.exports = {
   getTokenSupply,
   getTokenBalance,
-  endpoint
 };

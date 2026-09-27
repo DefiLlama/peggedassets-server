@@ -1,5 +1,4 @@
 const sdk = require("@defillama/sdk");
-import { lookupAccountByID } from "../helper/algorand";
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
 import { getTotalSupply } from "../helper/cardano";
 import {
@@ -7,10 +6,13 @@ import {
   sumSingleBalance,
 } from "../helper/generalUtil";
 import {
+  algorandGetBalance,
+  algorandGetTotalSupply,
   bridgedSupply,
   cosmosSupply,
   fogoMintedOrBridged,
   osmosisSupply,
+  rippleGetTotalSupply,
   solanaMintedOrBridged,
   supplyInArbitrumBridge,
   supplyInEthereumBridge,
@@ -120,17 +122,14 @@ async function solanaUnreleased() {
   };
 }
 
-const getBal = (address: string) => lookupAccountByID(address).then(r => r.account.assets.find((t: any) => t["asset-id"] == 31566704).amount / 10 ** 6)
+const ALGORAND_USDC = 31566704;
+const getBal = (address: string) => algorandGetBalance(ALGORAND_USDC, address)
 async function algorandMinted() {
-  // I gave up on trying to use the SDK for this
+  // ASA total minus the reserve account's holding
   return async function () {
     let balances = {} as Balances;
-    const supplyRes = await retry(
-      async (_bail: any) =>
-        await axios.get("https://mainnet-idx.algonode.cloud/v2/assets/31566704")
-    );
-    const supply = supplyRes?.data?.asset?.params?.total;
-    let balance = (supply / 10 ** 6 - await getBal("2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM"));
+    const supply = await algorandGetTotalSupply(ALGORAND_USDC);
+    let balance = supply - await getBal("2UEQTE5QDNXPI7M3TU44G6SYKLFWLPQO7EBZM7K7MHMQQMFI4QJPLHQFHM");
     sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
     return balances;
   };
@@ -231,29 +230,13 @@ async function suiBridged(chain: string) {
   };
 }
 
-// Wormhole keeps a wrapped coin's TreasuryCap inside the token bridge's WrappedAsset, so
-// coinMetadata (and the decommissioned suix_getTotalSupply) don't expose its supply. The
-// WrappedAsset is a dynamic field on the token registry, which is the `token_registry` field
-// of the bridge state object 0xc57508ee0d4595e5a8728974a4a93a787d38f339757230d441e895422c07aba9.
-// Same approach as the Wormhole USDT reader in the tether adapter.
-const SUI_WORMHOLE_TOKEN_BRIDGE =
-  "0x26efee2b51c911237888e5dc6702868abca3c7ac12c53f76ef8eba0697695e3d";
-const SUI_WORMHOLE_TOKEN_REGISTRY =
-  "0x334881831bd89287554a6121087e498fa023ce52c037001b53a4563a00a281a5";
+// Wormhole wrapped USDC: supply read from the token bridge's WrappedAsset (see helper/sui.ts)
 const SUI_WORMHOLE_USDC =
   "0x5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf";
 
 async function suiWormholeBridged(): Promise<Balances> {
   let balances = {} as Balances;
-  const wrappedAsset = await sui.getDynamicFieldObject(
-    SUI_WORMHOLE_TOKEN_REGISTRY,
-    `${SUI_WORMHOLE_TOKEN_BRIDGE}::token_registry::Key<${SUI_WORMHOLE_USDC}::coin::COIN>`
-  );
-  // GraphQL returns the Move value as plain nested JSON, without JSON-RPC's `fields` wrappers.
-  const wrapped = wrappedAsset?.fields?.value ?? wrappedAsset?.fields;
-  if (!wrapped) throw new Error("sui: wormhole USDC WrappedAsset not found");
-  const totalSupply =
-    Number(wrapped.treasury_cap.total_supply.value) / 10 ** Number(wrapped.decimals);
+  const totalSupply = await sui.getWormholeWrappedSupply(SUI_WORMHOLE_USDC);
   sumSingleBalance(balances, "peggedUSD", totalSupply, SUI_WORMHOLE_USDC, true);
   return balances;
 }
@@ -475,32 +458,10 @@ async function getCardanoSupply() {
 async function rippleMinted() {
   return async function () {
     const balances = {} as Balances;
-
-    const NODE_URL = "https://xrplcluster.com";
-
-    // Get the USDC token info from config
+    // "<currencyHex>.<issuer>": the issuer's obligations for USDC, already in whole units
     const usdcToken = chainContracts.ripple.issued[0]; // "5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"
-    const [currencyCode, issuerAddress] = usdcToken.split('.');
-
-    const payload = {
-      method: "gateway_balances",
-      params: [
-        {
-          account: issuerAddress,
-          ledger_index: "validated",
-        },
-      ],
-    };
-
-    const res = await retry(async (_bail: any) => axios.post(NODE_URL, payload));
-
-    if (res.data.result && res.data.result.obligations && res.data.result.obligations[currencyCode]) {
-      const supplyStr = res.data.result.obligations[currencyCode];
-      const supply = parseFloat(supplyStr); // XRPL API returns value in correct decimal format
-
-      sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
-    }
-
+    const supply = await rippleGetTotalSupply(usdcToken);
+    if (supply) sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
     return balances;
   };
 }
