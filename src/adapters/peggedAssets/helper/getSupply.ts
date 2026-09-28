@@ -252,14 +252,6 @@ export function osmosisSupply(
   return cosmosSupply("osmosis", tokens, decimals, bridgedFromChain);
 }
 
-export function kujiraSupply(
-  tokens: string[],
-  decimals: number,
-  bridgedFromChain: string
-) {
-  return cosmosSupply("kujira", tokens, decimals, bridgedFromChain);
-}
-
 // const dummyFn = () => ({})
 
 export function addChainExports(config: any, adapter: any = {}, {
@@ -280,6 +272,7 @@ export function addChainExports(config: any, adapter: any = {}, {
           cExports.ethereum = supplyInEthereumBridge(config.ethereum.issued[0], chainConfig.bridgeOnETH[0], decimals, pegType as any);
           break;
         case 'pegType':
+        case 'issuedABI': // consumed by getIssued together with `issued`
           break;
         case "issued":
           if (!cExports.minted)
@@ -385,7 +378,7 @@ function getIssued({
     }
     if (api.chain === 'tron') {
       for (const i of issuedList) {
-        const supply = await tronGetTotalSupply(i)
+        const supply = await tronGetTotalSupply(i, issuedABI)
         sumSingleBalance(balances, pegType, supply, 'issued', false);
       }
       return balances;

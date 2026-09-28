@@ -3,9 +3,9 @@ const sdk = require('@defillama/sdk')
 // a fresh api per call: a module level ChainApi would pin the block/timestamp of the first run
 const getApi = () => new sdk.ChainApi({ chain: 'tron' })
 
-async function getTotalSupply(token) {
+async function getTotalSupply(token, abi = 'erc20:totalSupply') {
   const api = getApi()
-  const supply = await api.call({ target: token, abi: 'erc20:totalSupply' })
+  const supply = await api.call({ target: token, abi })
   const decimals = await api.call({ target: token, abi: 'erc20:decimals' })
   return supply / 10 ** decimals;
 }

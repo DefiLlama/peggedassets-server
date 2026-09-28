@@ -2437,6 +2437,7 @@ export default [
     name: "USK",
     address: null,
     symbol: "USK",
+    deadFrom: "2026-06-11", // Kujira chain is dead
     url: "https://kujira.network/",
     description:
       "USK is an over-collateralized Cosmos stablecoin soft-pegged to the USD and initially backed by ATOM.",
@@ -3348,6 +3349,7 @@ export default [
   },
   {
     id: "113",
+    deadFrom: "2026-09-01",  // secret chain is dead
     name: "SILK",
     address: null,
     symbol: "SILK",
@@ -4248,26 +4250,29 @@ export default [
     chainConfig: {
       decimals: 6,
       chains: {
+        // USDV is a LayerZero OFT: each chain mints natively, nothing is locked on
+        // ethereum, so the per-chain supply is issued rather than bridged from ETH
+        // (ethereum supply is smaller than the other chains combined -> negative circulating)
         ethereum: {
           issued: ["0x0E573Ce2736Dd9637A0b21058352e1667925C7a8"],
         },
         bsc: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
         optimism: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
         arbitrum: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
         avax: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
         polygon: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
         tomochain: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
       },
     },
@@ -4787,6 +4792,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Quantoz",
     wiki: null,
+    deadFrom: "2026-07-21", // entire supply sits in the reserve account, 0 circulating since July 2026 (Quantoz moved to EURQ)
     chainConfig: {
       decimals: 2,
       chains: {
@@ -7374,6 +7380,7 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/LiftDollar_USDL",
     wiki: "https://docs.liftdollar.com/",
+    deadFrom: "2026-04-04", // totalSupply is 0 on both ethereum and arbitrum, USDL was wound down
     chainConfig: {
       chains: {
         ethereum: {
@@ -8431,6 +8438,7 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/Tether_to",
     wiki: "https://tether.to/en/",
+    deadFrom: "2026-07-03", // Tether discontinued CNHT; removed from transparency.json in July 2026
   },
   {
     id: "281",
