@@ -15,9 +15,7 @@ export function getCurrentUnixTimestamp() {
 }
 
 export function getTimestampAtStartOfDay(timestamp: number) {
-  const dt = new Date(timestamp * 1000);
-  dt.setHours(0, 0, 0, 0);
-  return toUNIXTimestamp(dt.getTime() - dt.getTimezoneOffset() * 6e4);
+  return Math.floor(timestamp / secondsInDay) * secondsInDay;
 }
 
 export const getTimestampAtStartOfDayUTC = (timestamp: number) => {
