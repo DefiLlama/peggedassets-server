@@ -14,6 +14,7 @@ test("getTimestampAtStartOfDay uses UTC regardless of server timezone", () => {
     for (const timezone of ["UTC", "America/New_York", "Asia/Tokyo"]) {
       process.env.TZ = timezone;
       expect(getTimestampAtStartOfDay(1704074400)).toBe(1704067200);
+      expect(getTimestampAtStartOfDay(1704128400)).toBe(1704067200);
       expect(getTimestampAtStartOfDay(1704067199)).toBe(1703980800);
     }
   } finally {
