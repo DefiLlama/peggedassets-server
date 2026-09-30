@@ -23,6 +23,9 @@ async function stellarMinted(assetID: string) {
 const chainContracts = {
     stellar: {
         issued: ['YLDS:GAC7MOPTQLQUM3KC24AW4GHS3RLF72LPEZO54AH7EZ6TSMGRB5SOAVH3']
+    },
+    tempo: {
+        issued: ['0x20C0000000000000000000003337951A5a9d94b2'] // YLDS on Tempo Mainnet (decimals=6)
     }
 }
 
