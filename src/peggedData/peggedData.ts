@@ -10455,6 +10455,12 @@ export default [
         solana: {
           issued: ["72puLt71H93Z9CzHuBRTwFpL4TG3WZUhnoCC7p8gxigu"],
         },
+        ethereum: {
+          issued: ["0x4CF5920Df52F5b1f246e2E38E1786Ae1Cf03ECF5"],
+        },
+        morph: {
+          issued: ["0x4CF5920Df52F5b1f246e2E38E1786Ae1Cf03ECF5"],
+        },
       },
     },
   },
