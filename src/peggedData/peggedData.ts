@@ -9650,6 +9650,7 @@ export default [
     twitter: "https://x.com/rockydotcash",
     wiki: "https://docs.rocky.cash/products/stablecoins-and-savings/usdr-and-susdr",
     module: "rocky-usdr",
+    deadUrl: true,
     chainConfig: {
       chains: {
         sei: {
