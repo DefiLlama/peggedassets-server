@@ -13373,5 +13373,45 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "443",
+    name: "Open USD",
+    address: "base:0xB2000000000000000000002fEb517dFeC7415344",
+    symbol: "OUSD",
+    url: "https://joinopenstandard.com/",
+    description:
+      "Open USD (OUSD) is a US dollar stablecoin operated by Open Standard, an independent company whose founding partners include Coinbase, Mastercard, Shopify, Stripe and Visa. Partners receive the earnings from OUSD's reserves, less a small management fee, and reserves are maintained at major financial institutions in compliance with US regulatory requirements.",
+    mintRedeemDescription:
+      "Businesses mint and redeem OUSD directly at no cost and with no artificial limits on volume. OUSD is issued through Bridge, which publishes live supply and reserve data.",
+    onCoinGecko: "true",
+    gecko_id: "open-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://reserves.bridge.xyz/ousd",
+      "https://github.com/withbridge/erc20-stablecoin-template/tree/main/audits",
+    ],
+    twitter: "https://x.com/openstandard",
+    wiki: "https://joinopenstandard.com/blog/introducing-open-usd",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0x9f6F3991D525015a6F8CaF062C83b62fD3AC4436"],
+        },
+        base: {
+          issued: ["0xB2000000000000000000002fEb517dFeC7415344"],
+        },
+        solana: {
+          issued: ["ousd2mJsPEckLHcSCDxyKD7NDGARZcfLbDZkKiatYHB"],
+        },
+        tempo: {
+          issued: ["0x20c0000000000000000000006a37DA5C996874BE"],
+        },
+      },
+    },
   }
 ] as PeggedAsset[];
