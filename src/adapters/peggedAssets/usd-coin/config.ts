@@ -527,7 +527,10 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x796Ea11Fa2dD751eD01b53C372fFDB4AAa8f00F9"], // Wrapped Asset Bridge
   },
   rbn: {
-    bridgedFromETH: ["0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06"]
+    bridgedFromETH: [
+      "0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06", // Lucid Labs
+      "0xE08DED898D7782B085cD240d7B234063696765aD", // LayerZero USDC.e
+    ],
   },
   mantra: {
     bridgedFromETH: ["0x5E76be0F4e09057D75140216F70fd4cE3365bb29"],
