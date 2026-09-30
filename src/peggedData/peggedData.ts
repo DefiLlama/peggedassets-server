@@ -2437,6 +2437,7 @@ export default [
     name: "USK",
     address: null,
     symbol: "USK",
+    deadFrom: "2026-06-11", // Kujira chain is dead
     url: "https://kujira.network/",
     description:
       "USK is an over-collateralized Cosmos stablecoin soft-pegged to the USD and initially backed by ATOM.",
@@ -3348,6 +3349,7 @@ export default [
   },
   {
     id: "113",
+    deadFrom: "2026-09-01",  // secret chain is dead
     name: "SILK",
     address: null,
     symbol: "SILK",
@@ -4248,26 +4250,29 @@ export default [
     chainConfig: {
       decimals: 6,
       chains: {
+        // USDV is a LayerZero OFT: each chain mints natively, nothing is locked on
+        // ethereum, so the per-chain supply is issued rather than bridged from ETH
+        // (ethereum supply is smaller than the other chains combined -> negative circulating)
         ethereum: {
           issued: ["0x0E573Ce2736Dd9637A0b21058352e1667925C7a8"],
         },
         bsc: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
         optimism: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
         arbitrum: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
         avax: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
         polygon: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
         tomochain: {
-          bridgedFromETH: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
+          issued: ["0x323665443CEf804A3b5206103304BD4872EA4253"],
         },
       },
     },
@@ -4653,8 +4658,8 @@ export default [
     pegType: "peggedCHF",
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
-    auditLinks: "https://vnx.li/transparency/",
-    twitter: "https://twitter.com/VNX_Global",
+    auditLinks: "https://vnx.io/transparency/",
+    twitter: "https://x.com/VNX_Global",
     wiki: "https://vnx.gitbook.io/vnx-global",
     chainConfig: {
       chains: {
@@ -4681,7 +4686,7 @@ export default [
     name: "VNX EURO",
     address: "stellar:GDXLSLCOPPHTWOQXLLKSVN4VN3G67WD2ENU7UMVAROEYVJLSPSEWXIZN",
     symbol: "VEUR",
-    url: "https://vnx.li/",
+    url: "https://vnx.io/",
     description:
       "VNX Euro (VEUR) is a token referencing Euro from a token generator licensed under the Blockchain act in Liechtenstein.",
     mintRedeemDescription:
@@ -4692,8 +4697,8 @@ export default [
     pegType: "peggedEUR",
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
-    auditLinks: "https://vnx.li/transparency/",
-    twitter: "https://twitter.com/vnx_platform",
+    auditLinks: "https://vnx.io/transparency/",
+    twitter: "https://x.com/VNX_Global",
     wiki: null,
     chainConfig: {
       chains: {
@@ -4787,6 +4792,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Quantoz",
     wiki: null,
+    deadFrom: "2026-07-21", // entire supply sits in the reserve account, 0 circulating since July 2026 (Quantoz moved to EURQ)
     chainConfig: {
       decimals: 2,
       chains: {
@@ -7374,6 +7380,7 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/LiftDollar_USDL",
     wiki: "https://docs.liftdollar.com/",
+    deadFrom: "2026-04-04", // totalSupply is 0 on both ethereum and arbitrum, USDL was wound down
     chainConfig: {
       chains: {
         ethereum: {
@@ -7837,10 +7844,10 @@ export default [
   {
     id: "261",
     name: "Solomon USDv",
-    address: "solana:Ex5DaKYMCN6QWFA4n67TmMwsH8MJV68RX6YXTmVM532C",
+    address: "solana:USDvUSpnhCr9yBgj3UyVrD239HRUv4RsHwH2FxsWuMk",
     symbol: "USDV",
     url: "https://solomonlabs.org/",
-    description: "USDv is a Solana-native synthetic stablecoin backed by delta-hedged spot positions and perpetual shorts, designed to maintain a 1:1 USD peg while generating yield for stakers",
+    description: "Whitelisted users can mint and redeem USDv through Solomon. Each USDv is fully backed 1:1 by short-dated U.S. Treasuries and cash reserves",
     mintRedeemDescription: "Whitelisted users mint USDv by depositing assets that are delta-hedged into market-neutral positions, and redeem USDv by burning it to unlock the underlying collateral through the Solomon protocol",
     onCoinGecko: "true",
     gecko_id: "solomon-usdv",
@@ -7853,10 +7860,10 @@ export default [
     wiki: "https://docs.solomonlabs.org/",
     yieldBearing: true,
     chainConfig: {
-      decimals: 9,
+      decimals: 6,
       chains: {
         solana: {
-          issued: ["Ex5DaKYMCN6QWFA4n67TmMwsH8MJV68RX6YXTmVM532C"],
+          issued: ["USDvUSpnhCr9yBgj3UyVrD239HRUv4RsHwH2FxsWuMk"],
         },
       },
     },
@@ -8431,6 +8438,7 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/Tether_to",
     wiki: "https://tether.to/en/",
+    deadFrom: "2026-07-03", // Tether discontinued CNHT; removed from transparency.json in July 2026
   },
   {
     id: "281",
@@ -8796,8 +8804,8 @@ export default [
     pegType: "peggedGBP",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
-    auditLinks: "https://vnx.li/transparency/",
-    twitter: "https://twitter.com/VNX_Global",
+    auditLinks: "https://vnx.io/transparency/",
+    twitter: "https://x.com/VNX_Global",
     wiki: "https://vnx.gitbook.io/vnx-global",
     chainConfig: {
       chains: {
@@ -9642,6 +9650,7 @@ export default [
     twitter: "https://x.com/rockydotcash",
     wiki: "https://docs.rocky.cash/products/stablecoins-and-savings/usdr-and-susdr",
     module: "rocky-usdr",
+    deadUrl: true,
     chainConfig: {
       chains: {
         sei: {
@@ -12045,6 +12054,9 @@ export default [
     module: "agant-gbp",
     chainConfig: {
       chains: {
+        arc: {
+          issued: ["0xbBe6aAB0Ed76e90AeA0d1cd978EC231c8AdCDF8b"],
+        },
         ethereum: {
           issued: ["0xbBe6aAB0Ed76e90AeA0d1cd978EC231c8AdCDF8b"],
         },
@@ -12102,7 +12114,6 @@ export default [
     ],
     twitter: "https://x.com/tori_finance",
     wiki: "https://docs.tori.finance",
-    module: "tori-usd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -12110,6 +12121,9 @@ export default [
         },
         monad: {
           bridgedFromETH: ["0x770a579Ea200784723B31b8668b0773ba80393c9"],
+        },
+        pharos: {
+          bridgedFromETH: ["0x3816102CDaff06e2a5A362CA7f767CCfD2337003"],
         },
       },
     },
@@ -12624,6 +12638,7 @@ export default [
         },
       },
     },
+    deadUrl: true,
   },
   {
     id: "418",
@@ -12774,6 +12789,9 @@ export default [
         avax: {
           issued: ["0xd2a530170d71a9cfe1651fb468e2b98f7ed7456b"],
         },
+        rbn: {
+          issued: ["0xd2a530170D71a9Cfe1651Fb468E2B98F7Ed7456b"],
+        }
       },
     },
   },
@@ -13167,7 +13185,7 @@ export default [
     symbol: "EURR",
     url: "https://www.revolut.com/",
     description:
-      "Revolut Euro is a euro-denominated stablecoin issued by Revolut.",
+      "Revolut Euro (EURR) is a euro-denominated stablecoin issued by Bridge Building S.A. and distributed by Revolut.",
     mintRedeemDescription:
       "Issued by Bridge Building S.A. (a Stripe-owned entity regulated under MiCA in Luxembourg) and distributed by Revolut, EURR is designed to hold a €1 value with reserves in cash deposits, enabling direct on-chain transfers between euros, crypto, external wallets, and networks like Ethereum and Polygon.",
     onCoinGecko: "false",
@@ -13359,14 +13377,54 @@ export default [
   },
   {
     id: "443",
+    name: "Open USD",
+    address: "base:0xB2000000000000000000002fEb517dFeC7415344",
+    symbol: "OUSD",
+    url: "https://joinopenstandard.com/",
+    description:
+      "Open USD (OUSD) is a US dollar stablecoin operated by Open Standard, an independent company whose founding partners include Coinbase, Mastercard, Shopify, Stripe and Visa. Partners receive the earnings from OUSD's reserves, less a small management fee, and reserves are maintained at major financial institutions in compliance with US regulatory requirements.",
+    mintRedeemDescription:
+      "Businesses mint and redeem OUSD directly at no cost and with no artificial limits on volume. OUSD is issued through Bridge, which publishes live supply and reserve data.",
+    onCoinGecko: "true",
+    gecko_id: "open-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://reserves.bridge.xyz/ousd",
+      "https://github.com/withbridge/erc20-stablecoin-template/tree/main/audits",
+    ],
+    twitter: "https://x.com/openstandard",
+    wiki: "https://joinopenstandard.com/blog/introducing-open-usd",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0x9f6F3991D525015a6F8CaF062C83b62fD3AC4436"],
+        },
+        base: {
+          issued: ["0xB2000000000000000000002fEb517dFeC7415344"],
+        },
+        solana: {
+          issued: ["ousd2mJsPEckLHcSCDxyKD7NDGARZcfLbDZkKiatYHB"],
+        },
+        tempo: {
+          issued: ["0x20c0000000000000000000006a37DA5C996874BE"],
+        },
+      },
+    },
+  },
+  {
+    id: "444",
     name: "QVTX USD",
     address: "0xb57bf3c50f20096723b46645f741f632aef220fa",
     symbol: "QUSD",
     url: "https://qusd.quantvestrix.io",
     description:
-      "QVTX USD is a fiat-inside stablecoin: the dollar is carried inside the coin itself as a recoverable identifier, and every deployment exposes totalBackingCents() alongside totalSupply(), so 100% cover is enforced per mint and verifiable directly on-chain without trusting any custodian. Redeemable at par in both directions.",
+      "QVTX USD is a fiat-backed stablecoin redeemable at par in both directions. Each deployment exposes totalBackingCents() alongside totalSupply(), so cover can be checked directly on-chain without trusting the issuer; read 2026-09-14 the two match exactly on every chain.",
     mintRedeemDescription:
-      "QUSD is minted against a recorded dollar and redeemed at par; redemption is never priced below 1.00 USD. Live supply and per-chain reserve/cover figures are served publicly at https://qusd.quantvestrix.io/v1/supply/total and https://qusd.quantvestrix.io/v1/proof-of-reserve.",
+      "QUSD is minted against a recorded dollar and redeemed at par. Redemption is never priced below 1.00 USD. Supply and reserve figures are served publicly at https://qusd.quantvestrix.io/v1/supply/total and https://qusd.quantvestrix.io/v1/proof-of-reserve, and each coin can be verified individually at https://exchange.quantvestrix.io/qusd.",
     onCoinGecko: "false",
     gecko_id: null,
     cmcId: null,

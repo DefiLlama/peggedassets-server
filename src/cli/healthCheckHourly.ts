@@ -56,6 +56,7 @@ async function main() {
     try {
       await sendMessage(alertMsg, WEBHOOK, false);
       console.log("Discord alert sent");
+      process.exit(0);
     } catch (e) {
       console.error("Failed to send Discord alert:", e);
     }

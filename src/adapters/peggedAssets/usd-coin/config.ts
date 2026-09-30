@@ -333,14 +333,14 @@ export const chainContracts: ChainContracts = {
     issued: ["0x833589FCD6EDB6E08F4C7C32D4F71B54BDA02913"],
     bridgedFromETH: ["0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA"], //
   },
-  kujira: {
-    bridgedFromETH: [
-      "ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F",
-    ],
-    bridgedFromNoble: [
-      "ibc/FE98AAD68F02F03565E9FA39A5E627946699B2B07115889ED812D8BA639576A9",
-    ],
-  },
+  // kujira: {
+  //   bridgedFromETH: [
+  //     "ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F",
+  //   ],
+  //   bridgedFromNoble: [
+  //     "ibc/FE98AAD68F02F03565E9FA39A5E627946699B2B07115889ED812D8BA639576A9",
+  //   ],
+  // },
   osmosis: {
     bridgedFromETH: [
       "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858", // axelar
@@ -527,7 +527,10 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x796Ea11Fa2dD751eD01b53C372fFDB4AAa8f00F9"], // Wrapped Asset Bridge
   },
   rbn: {
-    bridgedFromETH: ["0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06"]
+    bridgedFromETH: [
+      "0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06", // Lucid Labs
+      "0xE08DED898D7782B085cD240d7B234063696765aD", // LayerZero USDC.e
+    ],
   },
   mantra: {
     bridgedFromETH: ["0x5E76be0F4e09057D75140216F70fd4cE3365bb29"],

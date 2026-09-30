@@ -3,8 +3,6 @@ import { function_view } from "../helper/aptos";
 import { Balances, ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
 import { sumSingleBalance } from "../helper/generalUtil";
 const sdk = require("@defillama/sdk");
-const axios = require("axios");
-const retry = require("async-retry");
 
 const FRXUSD_MOVE_ASSET = "0xe4354602aa4311f36240dd57f3f3435ffccdbd0cd2963f1a69da39a2dbcd59b5";
 
@@ -22,15 +20,13 @@ async function moveSupply(): Promise<Balances> {
 }
 
 async function aptosSupply(): Promise<Balances> {
-  const endpoint = process.env.APTOS_RPC ?? "https://fullnode.mainnet.aptoslabs.com";
-  const response = await retry(async () =>
-    axios.post(`${endpoint}/v1/view`, {
-      function: "0x1::fungible_asset::supply",
-      type_arguments: ["0x1::object::ObjectCore"],
-      arguments: [FRXUSD_MOVE_ASSET],
-    })
-  );
-  const supply = response.data[0]?.vec?.[0];
+  const resp = await function_view({
+    functionStr: "0x1::fungible_asset::supply",
+    type_arguments: ["0x1::object::ObjectCore"],
+    args: [FRXUSD_MOVE_ASSET],
+    chain: "aptos",
+  });
+  const supply = resp?.vec?.[0];
   if (supply === undefined) throw new Error("No Aptos frxUSD supply found");
 
   return { peggedUSD: Number(supply) / 1e6 } as Balances;

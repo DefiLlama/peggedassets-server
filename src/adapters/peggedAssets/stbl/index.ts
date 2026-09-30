@@ -1,12 +1,11 @@
 import { sumSingleBalance } from "../helper/generalUtil";
+import { algorandGetBalance, algorandGetTotalSupply } from "../helper/getSupply";
 import {
   ChainBlocks,
   PeggedIssuanceAdapter,
   Balances,
 } from "../peggedAsset.type";
 const { lookupApplications } = require("../helper/algorand");
-const axios = require("axios");
-const retry = require("async-retry");
 
 type price = {
   [asset: string]: number;
@@ -68,23 +67,10 @@ async function supply() {
   ) {
     let balances = {} as Balances;
 
-    const supplyRes = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/assets/465865291"
-        )
-    );
-    const supply = supplyRes.data.asset.params.total;
-    const reserveRes = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          "https://mainnet-idx.algonode.cloud/v2/accounts/OPY7XNB5LVMECF3PHJGQV2U33LZPM5FBUXA3JJPHANAG5B7GEYUPZJVYRE"
-        )
-    );
-    const reserveAccount = reserveRes.data.account.assets.filter(
-      (asset: any) => asset["asset-id"] === 465865291
-    );
-    const reserves = reserveAccount[0].amount;
+    // ASA total minus the reserve account's holding, in whole units
+    const assetId = 465865291;
+    const supply = await algorandGetTotalSupply(assetId);
+    const reserves = await algorandGetBalance(assetId, "OPY7XNB5LVMECF3PHJGQV2U33LZPM5FBUXA3JJPHANAG5B7GEYUPZJVYRE");
 
     let prices = { STBL: 1 };
     let collateralSTBL = 0;
@@ -100,7 +86,7 @@ async function supply() {
       collateralSTBL += assetTvl;
     }
 
-    const balance = collateralSTBL + (supply - reserves) / 10 ** 6;
+    const balance = collateralSTBL + (supply - reserves);
 
     sumSingleBalance(balances, "peggedUSD", balance, "issued", false);
     return balances;
