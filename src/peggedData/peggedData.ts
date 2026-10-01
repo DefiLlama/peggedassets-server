@@ -10455,6 +10455,12 @@ export default [
         solana: {
           issued: ["72puLt71H93Z9CzHuBRTwFpL4TG3WZUhnoCC7p8gxigu"],
         },
+        ethereum: {
+          issued: ["0x4CF5920Df52F5b1f246e2E38E1786Ae1Cf03ECF5"],
+        },
+        morph: {
+          issued: ["0x4CF5920Df52F5b1f246e2E38E1786Ae1Cf03ECF5"],
+        },
       },
     },
   },
@@ -13417,6 +13423,33 @@ export default [
   },
   {
     id: "444",
+    name: "Quantillon Euro",
+    address: "base:0x69aD4e6c49d6275D0e11b5515D98a89f029869AA",
+    symbol: "QEURO",
+    url: "https://quantillon.money/",
+    description:
+      "QEURO is Quantillon Protocol's euro-pegged token on Base. Users mint it against USDC, and a separate hedger pool collateralizes the EUR/USD exposure so the token targets one euro.",
+    mintRedeemDescription:
+      "Users deposit USDC into QuantillonVault to mint QEURO and burn QEURO to redeem USDC, subject to the protocol's pricing, collateralization, liquidity and fee rules. Collateral may be deployed to external yield vaults. QEURO held in stQEURO vaults remains issued supply; stQEURO is a separate wrapper and is not counted again.",
+    onCoinGecko: "false",
+    gecko_id: "quantillon-euro",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/QuantillonLabs",
+    wiki: "https://quantillon.gitbook.io/quantillon/qeuro-first-deployment/quantillon-protocols-tokens/qeuro-token",
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x69aD4e6c49d6275D0e11b5515D98a89f029869AA"],
+        },
+      },
+    },
+  },
+  {
+    id: "445",
     name: "QVTX USD",
     address: "0xb57bf3c50f20096723b46645f741f632aef220fa",
     symbol: "QUSD",
