@@ -4,6 +4,7 @@ import { successResponse, errorResponse, errorWrapper as ew } from "./utils";
 import { readRouteData } from "../file-cache";
 import { normalizeChain } from "../../src/utils/normalizeChain";
 import { chainCacheSlug } from "../utils/cachePath";
+import { setV2Routes } from "../v2/routes";
 
 const ACCEL_PREFIX = '/_internal/cache'
 const behindNginx = !!process.env.API_STORAGE_HOST
@@ -13,6 +14,8 @@ const breakdownData: {
 } = {}
 
 export default function setRoutes(router: HyperExpress.Router) {
+
+  setV2Routes(router)
 
   router.get("/config", defaultFileHandler);
   router.get("/rates", defaultFileHandler);
