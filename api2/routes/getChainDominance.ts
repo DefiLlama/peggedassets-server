@@ -30,6 +30,10 @@ export function craftChainDominanceResponse(chain: string | undefined) {
   const lastRates = cache.rates
 
   const lastPeggedBalances = peggedAssets.map((pegged) => {
+      // dead assets keep a lastBalance frozen on their final day and most have no price left, so
+      // the par fallback below would hold them at face value forever and can even hand a chain's
+      // dominance to a collapsed asset; storeCharts already stops extending them
+      if (pegged.deadFrom) return undefined;
       const lastBalance = cache.peggedAssetsData?.[pegged.id]?.lastBalance;
       if (!lastBalance?.[normalizedChain]) {
         return undefined;
