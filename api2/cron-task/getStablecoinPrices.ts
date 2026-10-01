@@ -1,22 +1,9 @@
 
-import { secondsInHour } from "../../src/utils/date";
 import { cache } from "../cache";
+import { getEffectiveDailyHistory } from "./getEffectiveDailyHistory";
 
 export function craftStablecoinPricesResponse() {
-  const historicalPeggedPrices = cache.historicalPrices!
-
-  const lastPrices = cache.lastPrices
-
-  const lastDailyItem =
-    historicalPeggedPrices[historicalPeggedPrices.length - 1];
-  if (
-    lastPrices !== undefined &&
-    lastPrices.SK > lastDailyItem.SK &&
-    lastDailyItem.SK + secondsInHour * 25 > lastPrices.SK
-  ) {
-    lastPrices.SK = lastDailyItem.SK;
-    historicalPeggedPrices[historicalPeggedPrices.length - 1] = lastPrices;
-  }
+  const historicalPeggedPrices = getEffectiveDailyHistory(cache.historicalPrices ?? [], cache.lastPrices)
 
   let response = historicalPeggedPrices
     ?.map((item) =>

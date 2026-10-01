@@ -9,6 +9,7 @@ import { buildFxRateMap, lookupFxRate, pegTypeFxTicker } from "../../src/utils/f
 import { cache } from "../cache";
 import { storeRouteData } from "../file-cache";
 import { chainCacheSlug } from "../utils/cachePath";
+import { getEffectiveDailyHistory } from "./getEffectiveDailyHistory";
 
 type TokenBalance = {
   [token: string]: number | undefined;
@@ -202,30 +203,21 @@ export function craftChartsResponse(
 
 
   function addToAssetCache(pegged: any) {
-    const { balance: lastBalance, balances } = peggedAssetsData[pegged.id]
-    let historicalBalance = { Items: balances } as any;
-    if (!historicalBalance.Items || historicalBalance.Items.length < 1) return undefined;
+    const { lastBalance, balances } = peggedAssetsData[pegged.id]
+    if (!balances?.length) return undefined;
 
-    const lastDailyItem = historicalBalance.Items[historicalBalance.Items.length - 1];
-    if (lastBalance && lastBalance.SK > lastDailyItem.SK && lastDailyItem.SK + secondsInHour * 25 > lastBalance.SK) {
-      lastBalance.SK = lastDailyItem.SK;
-      historicalBalance.Items[historicalBalance.Items.length - 1] = lastBalance;
-    }
-    const lastTimestamp = getClosestDayStartTimestamp(historicalBalance.Items[historicalBalance.Items.length - 1].SK);
+    const historicalBalance = getEffectiveDailyHistory(balances, lastBalance);
+    const lastTimestamp = getClosestDayStartTimestamp(historicalBalance[historicalBalance.length - 1].SK);
     lastDailyTimestamp = Math.max(lastDailyTimestamp, lastTimestamp);
 
     _assetCache[pegged.id] = {
       pegged,
-      historicalBalance: [...historicalBalance.Items],
+      historicalBalance: [...historicalBalance],
       lastTimestamp,
     };
   }
 
-  const lastDailyItem = historicalPrices[historicalPrices.length - 1];
-  if (lastPrices && lastPrices.SK > lastDailyItem.SK && lastDailyItem.SK + secondsInHour * 25 > lastPrices.SK) {
-    lastPrices.SK = lastDailyItem.SK;
-    historicalPrices[historicalPrices.length - 1] = lastPrices;
-  }
+  const effectivePrices = getEffectiveDailyHistory(historicalPrices, lastPrices);
 
   historicalPeggedBalances.forEach((peggedBalance) => {
     let { historicalBalance: _historicalBalance, pegged, lastTimestamp } = peggedBalance;
@@ -249,7 +241,7 @@ export function craftChartsResponse(
       let itemBalance: any = {};
 
       const closestPriceIndex = timestampsBinarySearch(priceTimestamps, timestamp, pricesCompareFn);
-      const closestPrices = extractResultOfBinarySearch(historicalPrices, closestPriceIndex);
+      const closestPrices = extractResultOfBinarySearch(effectivePrices, closestPriceIndex);
 
       let fallbackPrice = 1;
       const historicalPrice = closestPrices?.prices[peggedGeckoID];
