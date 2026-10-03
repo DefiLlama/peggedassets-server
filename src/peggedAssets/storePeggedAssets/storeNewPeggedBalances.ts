@@ -20,6 +20,7 @@ import {
   getRemainingBlockTime,
   removeBlock
 } from "./assetBlocking";
+import { chainDrops, findChainDrops } from "./chainDrops";
 import { reconcileDailyFromHourly } from "./reconcileDailyFromHourly";
 
 type PKconverted = (id: string) => string;
@@ -312,23 +313,13 @@ export default async (
       }
     }
 
-    await Promise.all(
-      Object.entries(peggedBalances).map(async ([chain, issuance]) => {
-        const prevCirculating = lastHourlyPeggedObject[chain]
-          ? lastHourlyPeggedObject[chain].circulating[pegType]
-          : 0;
-        if (
-          issuance.circulating[pegType] === 0 &&
-          prevCirculating !== 0 &&
-          prevCirculating !== undefined
-        ) {
-          console.error(
-            `Circulating has dropped to 0 on chain "${chain}" (previous circulating was ${prevCirculating})`,
-            peggedAsset.name
-          );
-        }
-      })
-    );
+    for (const drop of findChainDrops(lastHourlyPeggedObject, peggedBalances, pegType, peggedAsset)) {
+      console.error(
+        `Circulating on chain "${drop.chain}" went from ${drop.previous} to ${drop.missing ? "missing" : "0"}`,
+        peggedAsset.name
+      );
+      chainDrops.push(drop);
+    }
   } else {
     // DRY mode: default baseline
     lastHourlyPeggedObject = {
