@@ -13447,5 +13447,31 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "445",
+    name: "Nova USD",
+    address: "0xeC747DAf41A4Ca4ebE72356592F8301924132907",
+    symbol: "USDN",
+    url: "https://novausd.xyz/",
+    description: "Nova USD (USDN) is a fully reserved, USD-pegged stablecoin issued by Coconut Financial Holdings Ltd, a British Virgin Islands (BVI) company. Each USDN is backed 1:1 by USD-equivalent reserves held in segregated accounts at licensed banks. The reserves are maintained in AED, which has been pegged to the US dollar since 1997, and are subject to monthly CPA attestations conducted under ISAE 3000.",
+    mintRedeemDescription: "USDN has a demand-driven supply model. Tokens are minted only when a licensed, KYB-verified distributor deposits the corresponding fiat amount and are burned when redeemed.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/getnovausd",
+    wiki: null,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0xeC747DAf41A4Ca4ebE72356592F8301924132907"],
+        },
+      },
+    },
   }
 ] as PeggedAsset[];
