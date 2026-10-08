@@ -13447,5 +13447,27 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "445",
+    name: "RealFi USDrf",
+    address:
+      "cardano:7d9e4a0ee1a3f5d5ff8159ea91a83310cf2795ee7a87170c7aea05ae55534472",
+    symbol: "USDRF",
+    url: "https://realfi.co/",
+    description:
+      "USDrf is a US dollar stablecoin on Cardano backed by a portfolio of real-world assets, including money market funds, collateralized loan obligation funds, corporate bonds, and private credit. Those underlying assets are held off-chain.",
+    mintRedeemDescription:
+      "USDrf is minted and redeemed by verified users through RealFi, which purchases and sells the backing real-world assets off-chain. Redemption is against reserve assets at a rate set in protocol settings; USDrf is not rebased. Holders can stake USDrf for sUSDrf, the junior token, whose exchange rate rises as the backing portfolio earns and falls when it loses.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "realfi-usdrf",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: "https://x.com/realfi_co",
+    wiki: "https://docs.realfi.co/",
   }
 ] as PeggedAsset[];
