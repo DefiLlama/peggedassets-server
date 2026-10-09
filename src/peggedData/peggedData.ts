@@ -8700,15 +8700,21 @@ export default [
     description:
       "Parallel's Dollar stablecoin (USDp) is a USD stablecoin supported by a robust Price Stability Module. USDp is over-collateralized, decentralized, transparent, generates yield, and offers competitive pricing for on-chain USD",
     mintRedeemDescription:
-      "Users can get USDp, by swapping their assets on the Parallel app or a DEX.",
-    onCoinGecko: false,
-    gecko_id: null,
+      "Anyone can mint USDp by depositing an accepted reserve asset into the Parallelizer on Ethereum, Base, Avalanche or HyperEVM (0% mint fee today), and burn it for one reserve asset, or redeem it at any time for a proportional share of the whole reserve basket.",
+    onCoinGecko: "true",
+    gecko_id: "parallel-usdp",
     module: "parallel-usdp",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: ["https://github.com/parallel-protocol/parrallel-tokens/blob/main/docs/audits/Bailsec%20-%20Parallel%20Protocol%20-%20V3%20Core%20-%20Final%20Report.pdf"],
+    auditLinks: [
+      "https://github.com/parallel-protocol/parallel-tokens/blob/main/docs/audits/v3/Bailsec%20-%20Parallel%20Protocol%20-%20V3%20Core%20-%20Final%20Report.pdf",
+      "https://github.com/parallel-protocol/parallel-tokens/blob/main/docs/audits/v3/Certora_Report_Parallel_Parallelizer_BridgeToken_final.pdf",
+      "https://github.com/parallel-protocol/parallel-tokens/blob/main/docs/audits/v3.1/Cyfrin%20-%20Parallel%20Protocol%20-%20V3.1%20-%202026-03-04.pdf",
+      "https://github.com/parallel-protocol/parallel-tokens/blob/main/docs/audits/v3.2/Bailsec%20-%20Parallel%20Protocol%20-%20Upgrade%20V3.2%20-%20Final%20Report.pdf",
+      "https://github.com/parallel-protocol/parallel-tokens/blob/main/docs/audits/v3.2/Cyfrin-Parallel%20Protocol%20-%20Upgrade-3.2%20-%20Final%20report.pdf",
+    ],
     twitter: "https://x.com/ParallelMoney",
     wiki: "https://docs.parallel.best/",
     chainConfig: {
