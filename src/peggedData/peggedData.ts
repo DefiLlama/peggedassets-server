@@ -13469,5 +13469,26 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/realfi_co",
     wiki: "https://docs.realfi.co/",
+  },
+  {
+    id: "446",
+    name: "QUSD",
+    address: "polygon:0xb57bf3c50f20096723b46645f741f632aef220fa",
+    symbol: "QUSD",
+    url: "https://qusd.us",
+    description:
+      "QUSD is a 1:1 fiat-backed US dollar stablecoin issued by QUANTVESTRIX. The peg is enforced on chain rather than only asserted: QUSD_PEG() returns 100000000 (1.00 at 8 decimals), backing()/backingBps() returns 10000 bps for exactly 1:1, and AggregatorV3 peg oracles on Polygon, BSC, Base and Arbitrum each return latestAnswer 100000000. Reserve and supply documents are published openly at https://audit.quantvestrix.io/qusd/reserves and https://audit.quantvestrix.io/qusd/supply.",
+    mintRedeemDescription:
+      "Minted and redeemed with the issuer at par in both directions. A redemption is never priced below par. The canonical contract is deployed at the same address on several chains via CREATE2.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "qusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    auditLinks: null,
+    priceSource: "defillama",
+    twitter: null,
+    wiki: null,
   }
 ] as PeggedAsset[];
