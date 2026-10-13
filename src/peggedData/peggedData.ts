@@ -4688,7 +4688,7 @@ export default [
     symbol: "VEUR",
     url: "https://vnx.io/",
     description:
-      "VNX Euro (VEUR) is a token referencing Euro from a token generator licensed under the Blockchain act in Liechtenstein.",
+      "VEUR exchange services provided by VNX Commodities AG were fully discontinued on 22 May 2026. Existing holders were asked to address any arrangements relating to their holdings by that date.",
     mintRedeemDescription:
       "VNX Euro (VEUR) is a multichain token referencing the Euro, issued by VNX Commodities AG (registered with the FMA) and supported by assets held in reserve.",
     onCoinGecko: "true",
@@ -4700,6 +4700,7 @@ export default [
     auditLinks: "https://vnx.io/transparency/",
     twitter: "https://x.com/VNX_Global",
     wiki: null,
+    deadFrom: "2026-05-22",
     chainConfig: {
       chains: {
         ethereum: { issued: ["0x6ba75d640bebfe5da1197bb5a2aff3327789b5d3"] },
