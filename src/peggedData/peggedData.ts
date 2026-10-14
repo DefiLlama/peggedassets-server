@@ -5102,7 +5102,7 @@ export default [
     onCoinGecko: "true",
     gecko_id: "let-s-get-hai",
     cmcId: null,
-    pegType: "peggedUSD",
+    pegType: "peggedVAR",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: [],
@@ -6459,6 +6459,7 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/solayer_labs",
     wiki: "https://docs.solayer.org/susd/what-is-susd",
+    yieldBearing: true,
     chainConfig: {
       chains: {
         solana: {
@@ -9965,6 +9966,7 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/piku_dao",
     wiki: "https://docs.piku.co/piku/piku/usp",
+    yieldBearing: true,
     module: "usp",
     doublecounted: true,
     chainConfig: {
@@ -10185,6 +10187,7 @@ export default [
     auditLinks: ["https://docs.re.xyz/security-and-audits"],
     twitter: "https://x.com/re",
     wiki: null,
+    yieldBearing: true,
     module: "re-protocol-reusd",
     doublecounted: true,
     bridgeConfig: {
