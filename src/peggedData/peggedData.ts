@@ -3818,6 +3818,7 @@ export default [
       },
     },
   },
+  /* not pegged to 1$
   {
     id: "129",
     name: "Ondo US Dollar Yield",
@@ -3844,6 +3845,7 @@ export default [
     wiki: "https://docs.ondo.finance/general-access-products/usdy/faq/",
     yieldBearing: true,
   },
+  */
   {
     id: "130",
     name: "Savvy USD",
