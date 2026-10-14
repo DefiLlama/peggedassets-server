@@ -8597,6 +8597,12 @@ export default [
         robinhood: {
           issued: ["0x5fc5360d0400a0fd4f2af552add042d716f1d168"],
         },
+        arbitrum: {
+          issued: ["0x004B506865409877C9fA29bfb1ebA929984B9bbC"],
+        },
+        mantle: {
+          issued: ["0x063C1d1ef6e9099Ce3E8e9AD5C6173d12C49C086"],
+        },
       },
     },
   },
