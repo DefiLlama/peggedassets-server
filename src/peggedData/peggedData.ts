@@ -9017,6 +9017,9 @@ export default [
         tempo: {
           issued: ["0x20c000000000000000000000ab02d39df30bd17e"],
         },
+        monad: {
+          issued: ["0x127066E1982940c33fDC882D9c138296AB15F97f"],
+        },
       },
     },
   },
@@ -10673,10 +10676,13 @@ export default [
           issued: ["0x98A878b1Cd98131B271883B390f68D2c90674665"],
         },
         base: {
-          issued: ["0xd993935e13851dd7517af10687ec7e5022127228"],
+          bridgedFromETH: ["0xd993935e13851dd7517af10687ec7e5022127228"],
         },
         bsc: {
-          issued: ["0x6b3788fd6604bbf03c5378d24e57bb334baad4af"],
+          bridgedFromETH: ["0x6b3788fd6604bbf03c5378d24e57bb334baad4af"],
+        },
+        monad: {
+          bridgedFromETH: ["0x3D78455E22D5dd49709eC135A59CB1c5a87AC3C6"],
         },
       },
     },
