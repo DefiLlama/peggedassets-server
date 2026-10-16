@@ -11,6 +11,10 @@ export function craftStablecoinChainsResponse() {
 
   peggedAssets.map((pegged) => {
       if (pegged.doublecounted) return;
+      // dead assets are never re-run (storePegged skips them) and storeCharts stops extending
+      // them past their last real point, so lastBalance is frozen on their final day and the FX
+      // fallback below values every unit at par — the chain totals would carry them forever
+      if (pegged.deadFrom) return;
       const pegType = pegged.pegType;
       const lastBalances = cache.peggedAssetsData?.[pegged.id]?.lastBalance;
       if (lastBalances === undefined) {
