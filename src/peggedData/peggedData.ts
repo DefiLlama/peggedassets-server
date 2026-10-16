@@ -11420,6 +11420,9 @@ export default [
         wc: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
         },
+        celo: {
+          issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
+        },
       },
     },
   },
@@ -11458,6 +11461,9 @@ export default [
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
         },
         wc: {
+          issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
+        },
+        celo: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
         },
       },
@@ -11500,6 +11506,9 @@ export default [
         wc: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
         },
+        celo: {
+          issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
+        },
       },
     },
   },
@@ -11538,6 +11547,9 @@ export default [
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
         },
         wc: {
+          issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
+        },
+        celo: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
         },
       },
@@ -11580,6 +11592,9 @@ export default [
         wc: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
         },
+        celo: {
+          issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
+        },
       },
     },
   },
@@ -11618,6 +11633,9 @@ export default [
           issued: ["0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE"],
         },
         wc: {
+          issued: ["0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE"],
+        },
+        celo: {
           issued: ["0x4F34c8b3b5FB6D98Da888F0feA543d4d9C9F2eBE"],
         },
       },
