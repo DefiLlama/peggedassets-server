@@ -13486,5 +13486,35 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/realfi_co",
     wiki: "https://docs.realfi.co/",
+  },
+  {
+    id: "446",
+    name: "Monerium GBP emoney",
+    address: "gnosis:0x8E34bfEC4f6Eb781f9743D9b4af99CD23F9b7053",
+    symbol: "GBPE",
+    url: "https://monerium.com/tokens/",
+    description:
+      "Monerium GBP e-money (GBPE) is a pound sterling e-money token issued by Monerium, an authorised electronic money institution in the European Economic Area. GBPE is pegged 1:1 to the British pound.",
+    mintRedeemDescription:
+      "To mint Monerium GBP e-money (GBPE), users need to create an account with Monerium and complete KYC and AML checks. Once approved, users can send British pounds to their Monerium account by bank transfer and receive GBPE in their linked wallet. Redemption works the same way in reverse.",
+    onCoinGecko: "true",
+    gecko_id: "monerium-gbp-emoney",
+    cmcId: null,
+    pegType: "peggedGBP",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/monerium",
+    wiki: "https://docs.monerium.com/tokens",
+    chainConfig: {
+      chains: {
+        ethereum: { issued: ["0x7ba92741Bf2A568abC6f1D3413c58c6e0244F8fD"] },
+        xdai: { issued: ["0x8E34bfEC4f6Eb781f9743D9b4af99CD23F9b7053"] },
+        polygon: { issued: ["0x646BEea7a02FdAdA34c8e118949fE32350aB2206"] },
+        arbitrum: { issued: ["0x2D80dBf04D0802abD7A342DaFA5d7cB42bfbb52f"] },
+        base: { issued: ["0xc4759Ed641DA77CbDc9fA2f37E9260a29BF7cC52"] },
+        linea: { issued: ["0x3Bce82cf1A2bc357F956dd494713Fe11DC54780f"] },
+      },
+    },
   }
 ] as PeggedAsset[];
