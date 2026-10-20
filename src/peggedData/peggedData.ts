@@ -13490,7 +13490,7 @@ export default [
   {
     id: "446",
     name: "Monerium GBP emoney",
-    address: "gnosis:0x8E34bfEC4f6Eb781f9743D9b4af99CD23F9b7053",
+    address: "xdai:0x8E34bfEC4f6Eb781f9743D9b4af99CD23F9b7053",
     symbol: "GBPE",
     url: "https://monerium.com/tokens/",
     description:
