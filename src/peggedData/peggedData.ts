@@ -13514,7 +13514,7 @@ export default [
     description:
       "Monerium GBP e-money (GBPE) is a pound sterling e-money token issued by Monerium, an authorised electronic money institution in the European Economic Area. GBPE is pegged 1:1 to the British pound.",
     mintRedeemDescription:
-      "To mint Monerium GBP e-money (GBPE), users need to create an account with Monerium and complete KYC and AML checks. Once approved, users can send British pounds to their Monerium account by bank transfer and receive GBPE in their linked wallet. Redemption works the same way in reverse.",
+      "GBPE is issued by Monerium. Monerium does not currently offer GBP IBANs to its customers, so GBPE cannot be minted directly by bank transfer. Users can obtain GBPE by swapping on Gnosis Chain, where a GBPe liquidity pool is live (for example via CoW Swap).",
     onCoinGecko: "true",
     gecko_id: "monerium-gbp-emoney",
     cmcId: null,
