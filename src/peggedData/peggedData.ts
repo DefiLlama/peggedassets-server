@@ -13534,5 +13534,33 @@ export default [
         linea: { issued: ["0x3Bce82cf1A2bc357F956dd494713Fe11DC54780f"] },
       },
     },
-  }
+  },
+  {
+    id: "447",
+    name: "JPYdf",
+    address: "0xb122f4a154f84708407213d6a715181180012f45",
+    symbol: "JPYdf",
+    url: "https://app.jpydf.com",
+    description:
+      "JPYdf is a crypto-asset-backed stablecoin that aims to track the value of the Japanese yen, with a reference target of ¥1 per JPYdf. It is issued on-chain on an over-collateralised basis against crypto assets and stablecoins through JPY DeFi, a protocol derived from Liquity v2. Its market price can rise above or fall below the target. JPYdf does not represent a yen-denominated monetary claim or a right to redemption in yen. Tracking the yen, price stability, redemption in yen, and preservation of principal are not guaranteed.",
+    mintRedeemDescription:
+      "JPYdf is issued by opening collateralised debt positions backed by dwstETH or dUSDC. Normal redemptions exchange JPYdf for collateral at the protocol oracle value, subject to redemption fees and protocol availability checks. This is not a fiat redemption service.",
+    onCoinGecko: "false",
+    gecko_id: "jpydf",
+    cmcId: null,
+    pegType: "peggedJPY",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://jpydf.gitbook.io/jpy-defi/technical-information/audits-and-bug-bounty"],
+    twitter: "https://x.com/JPYDeFi",
+    wiki: "https://jpydf.gitbook.io/jpy-defi",
+    module: "jpydf",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xb122f4a154f84708407213d6a715181180012f45"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
