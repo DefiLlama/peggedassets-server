@@ -13550,8 +13550,9 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
+    doublecounted: true,
     priceSource: "defillama",
-    auditLinks: null,
+    auditLinks: ["https://usdf.fi/transparency", "https://api.usdf.fi/v1/reserve"],
     twitter: "https://twitter.com/foundry_fi",
     wiki: "https://docs.usdf.fi",
     chainConfig: {
