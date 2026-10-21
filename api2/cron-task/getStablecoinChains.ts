@@ -1,25 +1,22 @@
 import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../src/peggedData/peggedData";
-import { fxFallbackPrice } from "../../src/utils/fxRates";
+import { isInactive } from "../../src/utils/listingStatus";
 import { nonChains, normalizeChain } from "../../src/utils/normalizeChain";
 import { cache } from "../cache";
+import { currentPricing } from "../utils/currentPricing";
 type balance = { [token: string]: number };
 
 export function craftStablecoinChainsResponse() {
   const chainCirculating = {} as { [chain: string]: balance };
-  let prices = cache.peggedPrices || cache.lastPrices?.prices || {}
 
   peggedAssets.map((pegged) => {
-      if (pegged.doublecounted) return;
+      if (pegged.doublecounted || isInactive(pegged)) return;
       const pegType = pegged.pegType;
       const lastBalances = cache.peggedAssetsData?.[pegged.id]?.lastBalance;
       if (lastBalances === undefined) {
         return;
       }
-      // assets without a market price fall back to their peg's fiat FX rate, same as charts and dominance
-      const fallbackPrice = fxFallbackPrice(cache.fxRateMap?.latest ?? cache.rates?.rates, pegType);
-      const currentPrice = prices[pegged.gecko_id] || null;
-      const price = currentPrice ? currentPrice : fallbackPrice;
+      const { price } = currentPricing(pegged);
       const processedNormalizedChains = new Set<string>();
       Object.entries(lastBalances).forEach(([chain, issuances]: any) => {
         if (nonChains.includes(chain)) return;
