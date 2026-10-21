@@ -17,6 +17,7 @@ test("deadFrom becomes the UTC day start, and a missing deadFrom is null", () =>
 test("a deadFrom that is not strictly YYYY-MM-DD throws an error naming it", () => {
   assert.throws(() => deadFromSK({ deadFrom: "2022-6-22" }), /2022-6-22/);
   assert.throws(() => deadFromSK({ deadFrom: "22-06-2022" }), /22-06-2022/);
+  assert.throws(() => deadFromSK({ deadFrom: "2023-02-30" }), /2023-02-30/);
 });
 
 const d3 = 1790985600;
