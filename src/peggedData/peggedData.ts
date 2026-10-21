@@ -87,7 +87,8 @@ export default [
     pegMechanism: "algorithmic",
     priceSource: "coingecko",
     auditLinks: null,
-    deadFrom: "2022-05-09",
+    // its balances end on this day, six weeks after the depeg
+    deadFrom: "2022-06-22",
     twitter: "https://twitter.com/terra_money",
     wiki: "https://wiki.defillama.com/wiki/UST",
   },
@@ -489,6 +490,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: null,
+    deadFrom: "2022-10-28",
     twitter: "https://twitter.com/Stablecoin_HUSD",
     wiki: "https://wiki.defillama.com/wiki/HUSD",
     chainConfig: {
@@ -912,6 +914,7 @@ export default [
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
+    deadFrom: "2023-07-17",
     twitter: "https://twitter.com/HectorDAO_HEC",
     wiki: "https://wiki.defillama.com/wiki/TOR",
     chainConfig: {
@@ -6303,6 +6306,7 @@ export default [
     pegMechanism: "crypto-backed",
     auditLinks: ["https://docs.elixir.xyz/audit"],
     priceSource: "defillama",
+    deadFrom: "2025-11-06",
     twitter: "https://x.com/elixir",
     wiki: "https://docs.elixir.xyz/deusd",
     chainConfig: {
