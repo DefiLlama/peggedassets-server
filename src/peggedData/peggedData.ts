@@ -13534,5 +13534,31 @@ export default [
         linea: { issued: ["0x3Bce82cf1A2bc357F956dd494713Fe11DC54780f"] },
       },
     },
+  },
+  {
+    id: "447",
+    name: "BRL1",
+    address: "polygon:0x5c067c80c00ecd2345b05e83a3e758ef799c40b5",
+    symbol: "BRL1",
+    url: "https://brl1.io/en/",
+    description:
+      "BRL1 is a stablecoin pegged 1:1 to the Brazilian Real, issued by the BRL1 consortium (Mercado Bitcoin, Foxbit, Bitso and Cainvest) and backed by reserves of Brazilian government bonds held at financial institutions, with periodic external proof-of-reserves reports.",
+    mintRedeemDescription:
+      "BRL1 is minted and burned by the consortium for qualified institutional clients, 1:1 against Brazilian Reais, through API or web integration. Other users buy and sell BRL1 on partner exchanges such as Mercado Bitcoin, Bitso, Foxbit, Kraken and OKX.",
+    onCoinGecko: "true",
+    gecko_id: "brl1",
+    cmcId: null,
+    pegType: "peggedREAL",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://drive.google.com/file/d/1BuRUC6u3UTzf17kOChhKby_L9hE5IU73/view"],
+    twitter: "https://x.com/BRL1Coin",
+    wiki: "https://drive.google.com/file/d/1aOuxzC0DAiRKuUDklpifvdxMsSqR06Vr/view",
+    chainConfig: {
+      chains: {
+        polygon: { issued: ["0x5c067c80c00ecd2345b05e83a3e758ef799c40b5"] },
+        rls: { bridgedFromPolygon: ["0xA069d3798FEAb32994aC5D98A9F011DA6024f334"] },
+      },
+    },
   }
 ] as PeggedAsset[];
