@@ -1,13 +1,15 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
 import { addToChains } from "./normalizeChain";
 
 test("addToChains", () => {
   const chains = [] as string[];
   addToChains(chains, "Ethereum");
-  expect(chains).toEqual(["Ethereum"]);
+  assert.deepEqual(chains, ["Ethereum"]);
   addToChains(chains, "Ethereum-borrowed");
-  expect(chains).toEqual(["Ethereum"]);
+  assert.deepEqual(chains, ["Ethereum"]);
   addToChains(chains, "BSC-staking");
-  expect(chains).toEqual(["Ethereum", "BSC"]);
+  assert.deepEqual(chains, ["Ethereum", "BSC"]);
   addToChains(chains, "Heco");
-  expect(chains).toEqual(["Ethereum", "BSC", "Heco"]);
+  assert.deepEqual(chains, ["Ethereum", "BSC", "Heco"]);
 });
