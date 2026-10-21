@@ -13534,5 +13534,26 @@ export default [
         linea: { issued: ["0x3Bce82cf1A2bc357F956dd494713Fe11DC54780f"] },
       },
     },
-  }
+  },
+  {
+    id: "447",
+    name: "Mehen USDM",
+    address:
+      "cardano:c48cbb3d5e57ed56e276bc45f99ab39abe94e6cd7ac39fb402da47ad0014df105553444d",
+    symbol: "USDM",
+    url: "https://mehen.io/",
+    description:
+      "USDM is an institutional-grade 1:1 fiat-backed stablecoin native to the Cardano blockchain, redeemable 1:1 for US dollars with reserves held in US-regulated depository institutions.",
+    mintRedeemDescription:
+      "Users complete KYC through Mehen and wire fiat USD to receive USDM minted directly to their Cardano wallet. Redemptions burn USDM and wire USD back to verified bank accounts.",
+    onCoinGecko: "true",
+    gecko_id: "mehen-usdm",
+    cmcId: "29749",
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://mehen.io/transparency"],
+    twitter: "https://twitter.com/MehenOfficial",
+    wiki: "https://mehen.gitbook.io/usdm-docs",
+  },
 ] as PeggedAsset[];
