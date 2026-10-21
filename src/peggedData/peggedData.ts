@@ -6421,25 +6421,25 @@ export default [
   },
   {
     id: "215",
-    name: "Moneta",
+    name: "Mehen USDM",
     address: "cardano:c48cbb3d5e57ed56e276bc45f99ab39abe94e6cd7ac39fb402da47ad0014df105553444d",
     symbol: "USDM",
-    url: "https://moneta.global/",
+    url: "https://mehen.io/",
     description:
       `Fiat backed stablecoin native to the Cardano blockchain`,
     mintRedeemDescription:
       "Approved business users can mint USDM, after completing KYC. To redeem USDM for USD, verified users request a burn of their USDM tokens, with the equivalent USD amount transferred back to their verified bank account",
-    onCoinGecko: "false",
-    gecko_id: null,
+    onCoinGecko: "true",
+    gecko_id: "mehen-usdm",
     module: "moneta",
 
-    cmcId: null,
+    cmcId: "29749",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
-    auditLinks: null,
+    auditLinks: ["https://mehen.io/transparency"],
     priceSource: "defillama",
-    twitter: "https://x.com/USDMOfficial",
-    wiki: "https://moneta.global/moneta-usdm/"
+    twitter: "https://twitter.com/MehenOfficial",
+    wiki: "https://mehen.gitbook.io/usdm-docs"
   },
   { 
     id: "216",
@@ -13534,26 +13534,5 @@ export default [
         linea: { issued: ["0x3Bce82cf1A2bc357F956dd494713Fe11DC54780f"] },
       },
     },
-  },
-  {
-    id: "447",
-    name: "Mehen USDM",
-    address:
-      "cardano:c48cbb3d5e57ed56e276bc45f99ab39abe94e6cd7ac39fb402da47ad0014df105553444d",
-    symbol: "USDM",
-    url: "https://mehen.io/",
-    description:
-      "USDM is an institutional-grade 1:1 fiat-backed stablecoin native to the Cardano blockchain, redeemable 1:1 for US dollars with reserves held in US-regulated depository institutions.",
-    mintRedeemDescription:
-      "Users complete KYC through Mehen and wire fiat USD to receive USDM minted directly to their Cardano wallet. Redemptions burn USDM and wire USD back to verified bank accounts.",
-    onCoinGecko: "true",
-    gecko_id: "mehen-usdm",
-    cmcId: "29749",
-    pegType: "peggedUSD",
-    pegMechanism: "fiat-backed",
-    priceSource: "defillama",
-    auditLinks: ["https://mehen.io/transparency"],
-    twitter: "https://twitter.com/MehenOfficial",
-    wiki: "https://mehen.gitbook.io/usdm-docs",
-  },
+  }
 ] as PeggedAsset[];
