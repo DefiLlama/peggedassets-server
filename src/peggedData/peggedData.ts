@@ -13534,5 +13534,31 @@ export default [
         linea: { issued: ["0x3Bce82cf1A2bc357F956dd494713Fe11DC54780f"] },
       },
     },
-  }
+  },
+  {
+    id: "447",
+    name: "Foundry Compute Dollar",
+    address: "robinhood:0x4A35a5eC2A50A4d2957B2F2366E017f526cAB318",
+    symbol: "USDF",
+    url: "https://usdf.fi",
+    description:
+      "USDF is the compute dollar: 1 USDF = $1 of compute, backed 1:1 by USDG held in the USDF token contract on Robinhood Chain and redeemable 1:1 for USDG at any time.",
+    mintRedeemDescription:
+      "USDF is minted by depositing USDG into the USDF token contract and redeemed for the same amount of USDG with withdrawTo, permissionless and at 1:1, from any wallet.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://twitter.com/foundry_fi",
+    wiki: "https://docs.usdf.fi",
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        robinhood: { issued: ["0x4A35a5eC2A50A4d2957B2F2366E017f526cAB318"] },
+      },
+    },
+  },
 ] as PeggedAsset[];
