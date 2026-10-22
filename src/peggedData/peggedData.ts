@@ -4676,8 +4676,7 @@ export default [
         celo: { issued: ["0xc5ebea9984c485ec5d58ca5a2d376620d93af871"] },
         arbitrum: { issued: ["0x02cea97794D2cFB5f560e1fF4e9C59D1BEC75969"] },
         fraxtal: { issued: ["0x418126BB59457aFDbA1eCF376f97400B4157425D"] },
-        // icp (ly36x-wiaaa-aaaai-aqj7q-cai) was declared but never exported by
-        // the old adapter and isn't supported by addChainExports; left out.
+        icp: { issued: ["ly36x-wiaaa-aaaai-aqj7q-cai"] },
       },
     },
   },
