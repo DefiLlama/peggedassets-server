@@ -6421,25 +6421,25 @@ export default [
   },
   {
     id: "215",
-    name: "Mehen USDM",
+    name: "Moneta USDM",
     address: "cardano:c48cbb3d5e57ed56e276bc45f99ab39abe94e6cd7ac39fb402da47ad0014df105553444d",
     symbol: "USDM",
-    url: "https://mehen.io/",
+    url: "https://moneta.global/",
     description:
       `Fiat backed stablecoin native to the Cardano blockchain`,
     mintRedeemDescription:
       "Approved business users can mint USDM, after completing KYC. To redeem USDM for USD, verified users request a burn of their USDM tokens, with the equivalent USD amount transferred back to their verified bank account",
     onCoinGecko: "true",
-    gecko_id: "mehen-usdm",
+    gecko_id: "usdm-2",
     module: "moneta",
 
     cmcId: "29749",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
-    auditLinks: ["https://mehen.io/transparency"],
+    auditLinks: ["https://moneta.global/transparency/"],
     priceSource: "defillama",
-    twitter: "https://twitter.com/MehenOfficial",
-    wiki: "https://mehen.gitbook.io/usdm-docs"
+    twitter: "https://x.com/USDMOfficial",
+    wiki: "https://moneta.global/moneta-usdm/"
   },
   { 
     id: "216",
