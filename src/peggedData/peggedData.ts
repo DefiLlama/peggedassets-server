@@ -13590,4 +13590,38 @@ export default [
       },
     },
   },
+  {
+    id: "449",
+    name: "QVTX USD",
+    address: "0xA225D99ED91c3592bE1396324B81A52A184b30E2",
+    symbol: "QUSD",
+    url: "https://qone.qusd.us",
+    description:
+      "QVTX USD (QUSD) is a US dollar stablecoin issued by QUANTVESTRIX, INC. Each issuance carries its backing reference inside the mint identifier (a ByteID) rather than in an off-chain pool reference, and that identifier is readable from the contract. QUSD is deployed on Polygon and BNB Smart Chain.",
+    mintRedeemDescription:
+      "QUSD is minted by the issuer against recorded backing, with the backing reference carried in the mint ByteID and readable on chain. Redemption is handled by the issuer at par.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/qvtxqusd",
+    wiki: null,
+    module: "qvtx-usd",
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: [
+            "0xA225D99ED91c3592bE1396324B81A52A184b30E2",
+            "0xb57bf3c50f20096723b46645f741f632aef220fa",
+          ],
+        },
+        bsc: {
+          issued: ["0x5a8BA77Fcc84f6766f6EB54477149C7b9Aa0A2fa"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
