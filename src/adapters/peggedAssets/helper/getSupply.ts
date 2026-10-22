@@ -412,6 +412,13 @@ function getIssued({
       }
       return balances;
     }
+    if (api.chain === 'icp') {
+      for (const i of issuedList) {
+        const supply = await icpGetTotalSupply(i)
+        sumSingleBalance(balances, pegType, supply, 'issued', false);
+      }
+      return balances;
+    }
     if (api.chain === 'strato') {
       for (const i of issuedList) {
         const supply = await api.call({ abi: issuedABI, target: i })
@@ -445,6 +452,15 @@ export async function algorandGetAssetParams(assetId: string | number) {
 export async function algorandGetTotalSupply(assetId: string | number): Promise<number> {
   const params = await algorandGetAssetParams(assetId);
   return Number(params.total) / 10 ** params.decimals;
+}
+
+// total supply of an ICRC-1 ledger canister, scaled by the ledger's own decimals
+export async function icpGetTotalSupply(canisterId: string): Promise<number> {
+  const [supply, decimals] = await Promise.all([
+    chains.icp.getIcrcTotalSupply({ ledger: canisterId }),
+    chains.icp.getIcrcDecimals({ ledger: canisterId }),
+  ]);
+  return Number(supply) / 10 ** decimals;
 }
 
 // amount of `assetId` held by `account`, scaled by the asset's decimals (0 when not opted in)
