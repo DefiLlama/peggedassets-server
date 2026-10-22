@@ -6420,7 +6420,7 @@ export default [
   },
   {
     id: "215",
-    name: "Moneta",
+    name: "Moneta USDM",
     address: "cardano:c48cbb3d5e57ed56e276bc45f99ab39abe94e6cd7ac39fb402da47ad0014df105553444d",
     symbol: "USDM",
     url: "https://moneta.global/",
@@ -6428,14 +6428,14 @@ export default [
       `Fiat backed stablecoin native to the Cardano blockchain`,
     mintRedeemDescription:
       "Approved business users can mint USDM, after completing KYC. To redeem USDM for USD, verified users request a burn of their USDM tokens, with the equivalent USD amount transferred back to their verified bank account",
-    onCoinGecko: "false",
-    gecko_id: null,
+    onCoinGecko: "true",
+    gecko_id: "usdm-2",
     module: "moneta",
 
-    cmcId: null,
+    cmcId: "29749",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
-    auditLinks: null,
+    auditLinks: ["https://moneta.global/transparency/"],
     priceSource: "defillama",
     twitter: "https://x.com/USDMOfficial",
     wiki: "https://moneta.global/moneta-usdm/"
