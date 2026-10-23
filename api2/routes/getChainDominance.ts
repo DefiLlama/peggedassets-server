@@ -1,8 +1,9 @@
 import peggedAssets from "../../src/peggedData/peggedData";
 import { getTimestampAtStartOfDay } from "../../src/utils/date";
-import { pegTypeFxTicker } from "../../src/utils/fxRates";
+import { isInactive } from "../../src/utils/listingStatus";
 import { normalizeChain } from "../../src/utils/normalizeChain";
 import { cache } from "../cache";
+import { currentPricing } from "../utils/currentPricing";
 
 type tokenBalance = {
   [token: string]: number | undefined;
@@ -26,10 +27,8 @@ export function craftChainDominanceResponse(chain: string | undefined) {
 
   const normalizedChain = normalizeChain(chain);
 
-  const lastPrices = cache.peggedPrices
-  const lastRates = cache.rates
-
   const lastPeggedBalances = peggedAssets.map((pegged) => {
+      if (isInactive(pegged)) return undefined;
       const lastBalance = cache.peggedAssetsData?.[pegged.id]?.lastBalance;
       if (!lastBalance?.[normalizedChain]) {
         return undefined;
@@ -59,20 +58,8 @@ export function craftChainDominanceResponse(chain: string | undefined) {
     }
     let { pegged, lastBalance } = peggedBalance;
     const pegType = pegged.pegType;
-    const peggedGeckoID = pegged.gecko_id;
 
-    let fallbackPrice = 1;
-    const historicalPrice = lastPrices?.[peggedGeckoID];
-    if (pegType === "peggedVAR") {
-      fallbackPrice = 0;
-    } else if (pegType !== "peggedUSD" && !historicalPrice) {
-      const ticker = pegTypeFxTicker(pegType);
-      fallbackPrice = 1 / lastRates?.rates?.[ticker];
-      if (!isFinite(fallbackPrice)) {
-        fallbackPrice = 0;
-      }
-    }
-    const price = historicalPrice ? historicalPrice : fallbackPrice;
+    const { price } = currentPricing(pegged);
 
     let itemBalance: any = {};
     itemBalance.circulating = lastBalance[normalizedChain]?.circulating ?? {

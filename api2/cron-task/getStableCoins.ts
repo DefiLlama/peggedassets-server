@@ -1,14 +1,15 @@
 import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../src/peggedData/peggedData";
-import { secondsInDay, secondsInWeek } from "../../src/utils/date";
-import { fxFallbackPrice } from "../../src/utils/fxRates";
+import { getCurrentUnixTimestamp, secondsInDay, secondsInWeek } from "../../src/utils/date";
 import {
     addToChains,
     nonChains,
     normalizeChain,
 } from "../../src/utils/normalizeChain";
+import { pegFallbackLines } from "../../src/utils/priceFeedReport";
 import { cache } from "../cache";
 import { storeRouteData } from "../file-cache";
+import { currentPricing } from "../utils/currentPricing";
 import { craftStablecoinChainsResponse } from "./getStablecoinChains";
 
 function getTVLOfRecordClosestToTimestamp(
@@ -32,6 +33,8 @@ function craftProtocolsResponse(
   useNewChainNames: boolean,
 ) {
   let prices = cache.peggedPrices!
+  const now = getCurrentUnixTimestamp();
+  const pricedRows: Parameters<typeof pegFallbackLines>[0] = [];
 
   const response = (
     peggedAssets.map((pegged) => {
@@ -60,10 +63,7 @@ function craftProtocolsResponse(
         lastSK - secondsInDay * 30,
         secondsInDay // temporary, update later
       );
-      // assets without a market price fall back to their peg's fiat FX rate, same as charts and dominance
-      const fallbackPrice = fxFallbackPrice(cache.fxRateMap?.latest ?? cache.rates?.rates, pegType);
-      const currentPrice = prices[pegged.gecko_id] || null;
-      const price = currentPrice ? currentPrice : fallbackPrice;
+      const pricing = currentPricing(pegged, now);
       const chainCirculating = {} as {
         [chain: string]: any;
       };
@@ -78,7 +78,7 @@ function craftProtocolsResponse(
           chainCirculating[chainDisplayName] || {};
         const currentCirculatingUSD = {} as { [key: string]: number };
         Object.keys(issuances.circulating || {}).forEach((pt) => {
-          currentCirculatingUSD[pt] = (issuances.circulating[pt] || 0) * price;
+          currentCirculatingUSD[pt] = (issuances.circulating[pt] || 0) * pricing.price;
         });
         chainCirculating[chainDisplayName].current = currentCirculatingUSD;
         const prevDayCirculating = lastDailyPeggedRecord && lastDailyPeggedRecord[chain]
@@ -86,7 +86,7 @@ function craftProtocolsResponse(
           : {};
         const prevDayCirculatingUSD = {} as { [key: string]: number };
         Object.keys(prevDayCirculating).forEach((pt) => {
-          prevDayCirculatingUSD[pt] = (prevDayCirculating[pt] || 0) * price;
+          prevDayCirculatingUSD[pt] = (prevDayCirculating[pt] || 0) * pricing.price;
         });
         chainCirculating[chainDisplayName].circulatingPrevDay = prevDayCirculatingUSD;
         const prevWeekCirculating = lastWeeklyPeggedRecord && lastWeeklyPeggedRecord[chain]
@@ -94,7 +94,7 @@ function craftProtocolsResponse(
           : {};
         const prevWeekCirculatingUSD = {} as { [key: string]: number };
         Object.keys(prevWeekCirculating).forEach((pt) => {
-          prevWeekCirculatingUSD[pt] = (prevWeekCirculating[pt] || 0) * price;
+          prevWeekCirculatingUSD[pt] = (prevWeekCirculating[pt] || 0) * pricing.price;
         });
         chainCirculating[chainDisplayName].circulatingPrevWeek = prevWeekCirculatingUSD;
         const prevMonthCirculating = lastMonthlyPeggedRecord && lastMonthlyPeggedRecord[chain]
@@ -102,7 +102,7 @@ function craftProtocolsResponse(
           : {};
         const prevMonthCirculatingUSD = {} as { [key: string]: number };
         Object.keys(prevMonthCirculating).forEach((pt) => {
-          prevMonthCirculatingUSD[pt] = (prevMonthCirculating[pt] || 0) * price;
+          prevMonthCirculatingUSD[pt] = (prevMonthCirculating[pt] || 0) * pricing.price;
         });
         chainCirculating[chainDisplayName].circulatingPrevMonth = prevMonthCirculatingUSD;
         addToChains(chains, chainDisplayName);
@@ -111,28 +111,28 @@ function craftProtocolsResponse(
       const totalCirculating = lastHourlyRecord.totalCirculating.circulating || {};
       const totalCirculatingUSD = {} as { [key: string]: number };
       Object.keys(totalCirculating).forEach((pt) => {
-        totalCirculatingUSD[pt] = (totalCirculating[pt] || 0) * price;
+        totalCirculatingUSD[pt] = (totalCirculating[pt] || 0) * pricing.price;
       });
       const totalCirculatingPrevDay = lastDailyPeggedRecord
         ? (lastDailyPeggedRecord.totalCirculating.circulating || {})
         : {};
       const totalCirculatingPrevDayUSD = {} as { [key: string]: number };
       Object.keys(totalCirculatingPrevDay).forEach((pt) => {
-        totalCirculatingPrevDayUSD[pt] = (totalCirculatingPrevDay[pt] || 0) * price;
+        totalCirculatingPrevDayUSD[pt] = (totalCirculatingPrevDay[pt] || 0) * pricing.price;
       });
       const totalCirculatingPrevWeek = lastWeeklyPeggedRecord
         ? (lastWeeklyPeggedRecord.totalCirculating.circulating || {})
         : {};
       const totalCirculatingPrevWeekUSD = {} as { [key: string]: number };
       Object.keys(totalCirculatingPrevWeek).forEach((pt) => {
-        totalCirculatingPrevWeekUSD[pt] = (totalCirculatingPrevWeek[pt] || 0) * price;
+        totalCirculatingPrevWeekUSD[pt] = (totalCirculatingPrevWeek[pt] || 0) * pricing.price;
       });
       const totalCirculatingPrevMonth = lastMonthlyPeggedRecord
         ? (lastMonthlyPeggedRecord.totalCirculating.circulating || {})
         : {};
       const totalCirculatingPrevMonthUSD = {} as { [key: string]: number };
       Object.keys(totalCirculatingPrevMonth).forEach((pt) => {
-        totalCirculatingPrevMonthUSD[pt] = (totalCirculatingPrevMonth[pt] || 0) * price;
+        totalCirculatingPrevMonthUSD[pt] = (totalCirculatingPrevMonth[pt] || 0) * pricing.price;
       });
 
       const dataToReturn = {
@@ -158,12 +158,15 @@ function craftProtocolsResponse(
         ...(pegged.deadFrom ? { deadFrom: pegged.deadFrom } : {}),
       } as any;
       dataToReturn.price = prices[pegged.gecko_id] ?? null;
+      dataToReturn.pricing = pricing;
       if (pegged.delisted) dataToReturn.delisted = true;
+      pricedRows.push({ id: pegged.id, symbol: pegged.symbol, circulating: totalCirculating[pegType] ?? 0, pricing });
       return dataToReturn;
     })
   )
     .filter((pegged) => pegged !== null)
     .sort((a, b) => (b.circulating.peggedUSD || 0) - (a.circulating.peggedUSD || 0));
+  pegFallbackLines(pricedRows, now).forEach((line) => console.info(line));
   return response;
 }
 
