@@ -1,5 +1,5 @@
 
-import * as HyperExpress from "hyper-express";
+import { Request, Response, Router } from "express";
 import { successResponse, errorResponse, errorWrapper as ew } from "./utils";
 import { readRouteData } from "../file-cache";
 import { normalizeChain } from "../../src/utils/normalizeChain";
@@ -8,11 +8,19 @@ import { chainCacheSlug } from "../utils/cachePath";
 const ACCEL_PREFIX = '/_internal/cache'
 const behindNginx = !!process.env.API_STORAGE_HOST
 
+// express decodes path params (%2f -> /), so only allow chars used by chain labels, token symbols and ids
+// e.g. "Arbitrum Nova", "re.al", "USD+", "ETH:GUSDTQ", "plume-(deprecated)"
+const VALID_PARAM = /^(?!\.+$)[\w .:+()-]+$/
+const PATH_PARAMS = ['stablecoin', 'peggedID', 'chain', 'token']
+
 const breakdownData: {
   [chain: string]: any
 } = {}
 
-export default function setRoutes(router: HyperExpress.Router) {
+export default function setRoutes(router: Router) {
+
+  for (const param of PATH_PARAMS)
+    router.param(param, (_req, res, next, value) => VALID_PARAM.test(value) ? next() : errorResponse(res, 'Invalid request'))
 
   router.get("/config", defaultFileHandler);
   router.get("/rates", defaultFileHandler);
@@ -22,25 +30,24 @@ export default function setRoutes(router: HyperExpress.Router) {
   router.get("/stablecoin/:stablecoin", defaultFileHandler);
 
   router.get("/charts/all/:peggedID", ew(async (req: any, res: any) => {
-    let { peggedID } = req.path_parameters;
+    let { peggedID } = req.params;
     peggedID = normalizeChain(peggedID)
     return fileResponse('/charts/all/' + peggedID, res);
   }))
 
   router.get("/charts/:chain", ew(async (req: any, res: any) => {
-    let { chain } = req.path_parameters;
+    let { chain } = req.params;
     chain = chainCacheSlug(chain)
     return fileResponse('/charts/' + chain, res);
   }))
 
   router.get("/stablecoindominance/:chain", ew(async (req: any, res: any) => {
-    let { chain } = req.path_parameters;
+    let { chain } = req.params;
     chain = chainCacheSlug(chain)
     return fileResponse('/stablecoindominance/' + chain, res);
   }))
   router.get("/stablecoincharts2/:chain", ew(async (req: any, res: any) => {
-    let { chain } = req.path_parameters;
-    chain = decodeURIComponent(chain)
+    let { chain } = req.params;
     chain = chainCacheSlug(chain)
     return fileResponse('/stablecoincharts2/' + chain, res);
   }));
@@ -50,30 +57,29 @@ export default function setRoutes(router: HyperExpress.Router) {
   router.get("/chart/volume/token-breakdown", ew(async (req: any, res: any) => fileResponse('/volume/chart-total-token-breakdown', res)));
   router.get("/chart/volume/currency-breakdown", ew(async (req: any, res: any) => fileResponse('/volume/chart-total-currency-breakdown', res)));
   router.get("/chart/volume/chain/:chain", ew(async (req: any, res: any) => {
-    const chain = chainCacheSlug(req.path_parameters.chain);
+    const chain = chainCacheSlug(req.params.chain);
     return fileResponse(`/volume/chart-chain-${chain}`, res);
   }));
   router.get("/chart/volume/chain/:chain/token-breakdown", ew(async (req: any, res: any) => {
-    const chain = chainCacheSlug(req.path_parameters.chain);
+    const chain = chainCacheSlug(req.params.chain);
     return fileResponse(`/volume/chart-chain-${chain}-token-breakdown`, res);
   }));
   router.get("/chart/volume/chain/:chain/currency-breakdown", ew(async (req: any, res: any) => {
-    const chain = chainCacheSlug(req.path_parameters.chain);
+    const chain = chainCacheSlug(req.params.chain);
     return fileResponse(`/volume/chart-chain-${chain}-currency-breakdown`, res);
   }));
   router.get("/chart/volume/token/:token", ew(async (req: any, res: any) => {
-    const { token } = req.path_parameters;
+    const { token } = req.params;
     return fileResponse(`/volume/chart-token-${token}`, res);
   }));
   router.get("/chart/volume/token/:token/chain-breakdown", ew(async (req: any, res: any) => {
-    const { token } = req.path_parameters;
+    const { token } = req.params;
     return fileResponse(`/volume/chart-token-${token}-chain-breakdown`, res);
   }));
 
   // TOO: nuke this route to reduce load on the server
   router.get("/stablecoincharts/:chain", ew(async (req: any, res: any) => {
-    let { chain } = req.path_parameters
-    chain = decodeURIComponent(chain)
+    let { chain } = req.params
     let { stablecoin, starts, startts } = req.query
     chain = chainCacheSlug(chain)
     if (!stablecoin) return fileResponse('/stablecoincharts/' + chain, res);
@@ -97,12 +103,12 @@ export default function setRoutes(router: HyperExpress.Router) {
     return successResponse(res, data);
   }));
 
-  function defaultFileHandler(req: HyperExpress.Request, res: HyperExpress.Response) {
+  function defaultFileHandler(req: Request, res: Response) {
     const fullPath = req.path;
     return fileResponse(fullPath, res);
   }
 
-  async function fileResponse(filePath: string, res: HyperExpress.Response) {
+  async function fileResponse(filePath: string, res: Response) {
 
     res.setHeader('Content-Type', 'application/json')
 
