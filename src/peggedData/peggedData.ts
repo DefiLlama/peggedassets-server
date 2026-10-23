@@ -12165,6 +12165,9 @@ export default [
         pharos: {
           bridgedFromETH: ["0x3816102CDaff06e2a5A362CA7f767CCfD2337003"],
         },
+        arbitrum: {
+          bridgedFromETH: ["0xDbEc7b2F9435d4FCbDf9CFCab626a6Eb88b5d0D1"],
+        },
       },
     },
   },
