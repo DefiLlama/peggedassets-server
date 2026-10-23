@@ -9549,7 +9549,7 @@ export default [
     address: "0x27f6c8289550fCE67f6B50BeD1F519966aFE5287",
     symbol: "tGBP",
     url: "https://www.tokenisedgbp.com/",
-    description: "Tokenised GBP (tGBP) is the only British Pound backed stablecoin issued by a UK FCA-registered firm. tGBP is fully backed with cash and short-term UK gilts and pegged 1:1 with the British Pound",
+    description: "Tokenised GBP (tGBP) is a British Pound backed stablecoin issued by BCP Technologies Ltd, a UK firm registered with the Financial Conduct Authority as a cryptoasset firm under the Money Laundering Regulations. tGBP is fully backed with cash and short-term UK gilts and pegged 1:1 with the British Pound",
     mintRedeemDescription: "To mint Tokenised GBP (tGBP), eligible businesses need to create a tGBP Mint account and complete the required KYB and AML checks. Once the account is approved, businesses can mint and redeem tGBP with GBP from their UK bank account. Retail users can access mint and redemption services through a variety of exchange and payment partners",
     onCoinGecko: "true",
     gecko_id: "tokenised-gbp",
