@@ -5542,6 +5542,7 @@ export default [
       },
     },
   },
+  /* basket RWA (cash, bonds, stocks, gold), not pegged to 1$ - tracked in RWA instead
   {
     id: "186",
     name: "International Stable Currency",
@@ -5570,6 +5571,7 @@ export default [
       },
     },
   },
+  */
   // { comment out yieldBearing coins for now
   //   id: "187",
   //   name: "KNOX Dollar",
