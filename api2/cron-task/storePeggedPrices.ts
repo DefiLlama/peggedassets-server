@@ -10,6 +10,7 @@ import {
 import { bridgeInfo } from "../../src/peggedData/bridgeData";
 import { getCurrentUnixTimestamp } from "../../src/utils/date";
 import { cache } from "../cache";
+import { storeDailyPriceOnce } from "./storeDailyPriceOnce";
 
 export default async function handler() {
   const prices = await getPrices(peggedAssets)
@@ -24,7 +25,11 @@ export default async function handler() {
 
   // store hourly prices in db
   await dynamodb.put({ PK: hourlyPeggedPrices, SK: hourTimestamp, prices: prices, })
-  await dynamodb.put({ PK: dailyPeggedPrices, SK: dayTimestamp, prices: prices, })
+  await storeDailyPriceOnce(dynamodb.put, {
+    PK: dailyPeggedPrices,
+    SK: dayTimestamp,
+    prices: prices,
+  })
 
   const highestSK = cache.historicalPrices.reduce((highest, item) => Math.max(highest, item.SK), -1)
   const newItems = await getHistoricalValues(dailyPeggedPrices, highestSK)
