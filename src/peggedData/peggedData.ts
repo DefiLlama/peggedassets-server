@@ -4904,7 +4904,7 @@ export default [
     pegType: "peggedAUD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
-    auditLinks: "https://www.audd.digital/security-audits/",
+    auditLinks: ["https://www.audd.digital/security-audits/", "https://www.audd.digital/transparency/"],
     twitter: "https://twitter.com/audd_digital",
     wiki: null,
     chainConfig: {
