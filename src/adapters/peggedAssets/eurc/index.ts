@@ -9,7 +9,7 @@ import {
 const axios = require("axios");
 const retry = require("async-retry");
 
-import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
+import { getSolanaUnreleased } from "./solana";
 import { getTotalSupply } from "../helper/cardano";
 
 const chainContracts: ChainContracts = {
@@ -34,7 +34,7 @@ const chainContracts: ChainContracts = {
   },
   solana: {
     issued: ["HzwqbKZw8HxMN6bF2yFZNrht3c2iXXzpKcFu7uBEDKtr"],
-    unreleased: ["7VHUFJHWu2CuExkJcJrzhQPJ2oygupTWkL2A2For4BmE"], 
+    // Pre-mint token accounts are discovered from Circle's registry in solana.ts.
   },
   sonic: {
     bridgedFromETH: ["0xe715cbA7B5cCb33790ceBFF1436809d36cb17E57"],
@@ -96,22 +96,6 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
       ).output;
       sumSingleBalance(balances, "peggedEUR", reserve / 10 ** decimals);
     }
-    return balances;
-  };
-}
-
-async function solanaUnreleased() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const unreleased = await solanaGetTokenBalance(
-      chainContracts["solana"].issued[0],
-      chainContracts["solana"].unreleased[0]
-    );
-    sumSingleBalance(balances, "peggedEUR", unreleased);
     return balances;
   };
 }
@@ -188,7 +172,7 @@ const adapter: PeggedIssuanceAdapter = {
   },
   solana: {
     minted: solanaMintedOrBridged(chainContracts.solana.issued, "peggedEUR"),
-    unreleased: solanaUnreleased(),
+    unreleased: () => getSolanaUnreleased(chainContracts.solana.issued[0]),
   },
   icp: {
     ethereum: supplyInEthereumBridge(

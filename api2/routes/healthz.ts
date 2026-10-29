@@ -1,8 +1,8 @@
-import * as HyperExpress from "hyper-express";
+import { Express } from "express";
 import { getLastRecord, hourlyPeggedBalances } from "../../src/peggedAssets/utils/getLastRecord";
 import { getCurrentUnixTimestamp } from "../../src/utils/date";
 
-export function setupHealthRoutes(webserver: HyperExpress.Server) {
+export function setupHealthRoutes(webserver: Express) {
   const HEALTHZ_TOKEN = process.env.HEALTHZ_TOKEN;
 
   webserver.get('/healthz/hourly', async (req, res) => {

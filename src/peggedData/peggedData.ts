@@ -4676,8 +4676,7 @@ export default [
         celo: { issued: ["0xc5ebea9984c485ec5d58ca5a2d376620d93af871"] },
         arbitrum: { issued: ["0x02cea97794D2cFB5f560e1fF4e9C59D1BEC75969"] },
         fraxtal: { issued: ["0x418126BB59457aFDbA1eCF376f97400B4157425D"] },
-        // icp (ly36x-wiaaa-aaaai-aqj7q-cai) was declared but never exported by
-        // the old adapter and isn't supported by addChainExports; left out.
+        icp: { issued: ["ly36x-wiaaa-aaaai-aqj7q-cai"] },
       },
     },
   },
@@ -4896,16 +4895,16 @@ export default [
     symbol: "AUDD",
     url: "https://www.audd.digital/",
     description:
-      "AUDD is an Australian Dollar Stablecoin 1:1 backed by Australian Dollars. It is currently available on Ethereum, Stellar, XRP Ledger, and Solana",
+      "AUDD is an Australian dollar stablecoin issued by AUDC Pty Ltd under AFSL 700123. It is backed 1:1 by Australian dollars held in cash on trust for AUDD holders, and is redeemable at par with the issuer, on demand. AUDD is issued natively on Ethereum, Stellar, XRP Ledger, Solana, Hedera, Base, XDC, Redbelly and Arc",
     mintRedeemDescription:
-      "AUDD is collateralised on a 1:1 basis by Australia's sovereign currency by way of cash in bank accounts or government-backed instruments such as Treasury Bills and Notes",
+      "AUDD is collateralised on a 1:1 basis by Australia's sovereign currency by way of cash in bank accounts or government-backed by cash held on trust for AUDD holders, separately from AUDC's operating funds.",
     onCoinGecko: true,
     gecko_id: "novatti-australian-digital-dollar",
     cmcId: null,
     pegType: "peggedAUD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
-    auditLinks: null,
+    auditLinks: ["https://www.audd.digital/security-audits/", "https://www.audd.digital/transparency/"],
     twitter: "https://twitter.com/audd_digital",
     wiki: null,
     chainConfig: {
@@ -4933,6 +4932,9 @@ export default [
         },
         ripple: {
           issued: ["4155444400000000000000000000000000000000.rUN5Zxt3K1AnMRJgEWywDJT8QDMMeLH5ok"],
+        },
+        arc: {
+          issued: ["0xdeC15d98D8C16d9cA2F8Cc94bA4B88FE4f259393"],
         },
       },
     },
@@ -5543,6 +5545,7 @@ export default [
       },
     },
   },
+  /* basket RWA (cash, bonds, stocks, gold), not pegged to 1$ - tracked in RWA instead
   {
     id: "186",
     name: "International Stable Currency",
@@ -5571,6 +5574,7 @@ export default [
       },
     },
   },
+  */
   // { comment out yieldBearing coins for now
   //   id: "187",
   //   name: "KNOX Dollar",
@@ -6421,7 +6425,7 @@ export default [
   },
   {
     id: "215",
-    name: "Moneta",
+    name: "Moneta USDM",
     address: "cardano:c48cbb3d5e57ed56e276bc45f99ab39abe94e6cd7ac39fb402da47ad0014df105553444d",
     symbol: "USDM",
     url: "https://moneta.global/",
@@ -6429,14 +6433,14 @@ export default [
       `Fiat backed stablecoin native to the Cardano blockchain`,
     mintRedeemDescription:
       "Approved business users can mint USDM, after completing KYC. To redeem USDM for USD, verified users request a burn of their USDM tokens, with the equivalent USD amount transferred back to their verified bank account",
-    onCoinGecko: "false",
-    gecko_id: null,
+    onCoinGecko: "true",
+    gecko_id: "usdm-2",
     module: "moneta",
 
-    cmcId: null,
+    cmcId: "29749",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
-    auditLinks: null,
+    auditLinks: ["https://moneta.global/transparency/"],
     priceSource: "defillama",
     twitter: "https://x.com/USDMOfficial",
     wiki: "https://moneta.global/moneta-usdm/"
@@ -8709,15 +8713,21 @@ export default [
     description:
       "Parallel's Dollar stablecoin (USDp) is a USD stablecoin supported by a robust Price Stability Module. USDp is over-collateralized, decentralized, transparent, generates yield, and offers competitive pricing for on-chain USD",
     mintRedeemDescription:
-      "Users can get USDp, by swapping their assets on the Parallel app or a DEX.",
-    onCoinGecko: false,
-    gecko_id: null,
+      "Anyone can mint USDp by depositing an accepted reserve asset into the Parallelizer on Ethereum, Base, Avalanche or HyperEVM (0% mint fee today), and burn it for one reserve asset, or redeem it at any time for a proportional share of the whole reserve basket.",
+    onCoinGecko: "true",
+    gecko_id: "parallel-usdp",
     module: "parallel-usdp",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: ["https://github.com/parallel-protocol/parrallel-tokens/blob/main/docs/audits/Bailsec%20-%20Parallel%20Protocol%20-%20V3%20Core%20-%20Final%20Report.pdf"],
+    auditLinks: [
+      "https://github.com/parallel-protocol/parallel-tokens/blob/main/docs/audits/v3/Bailsec%20-%20Parallel%20Protocol%20-%20V3%20Core%20-%20Final%20Report.pdf",
+      "https://github.com/parallel-protocol/parallel-tokens/blob/main/docs/audits/v3/Certora_Report_Parallel_Parallelizer_BridgeToken_final.pdf",
+      "https://github.com/parallel-protocol/parallel-tokens/blob/main/docs/audits/v3.1/Cyfrin%20-%20Parallel%20Protocol%20-%20V3.1%20-%202026-03-04.pdf",
+      "https://github.com/parallel-protocol/parallel-tokens/blob/main/docs/audits/v3.2/Bailsec%20-%20Parallel%20Protocol%20-%20Upgrade%20V3.2%20-%20Final%20Report.pdf",
+      "https://github.com/parallel-protocol/parallel-tokens/blob/main/docs/audits/v3.2/Cyfrin-Parallel%20Protocol%20-%20Upgrade-3.2%20-%20Final%20report.pdf",
+    ],
     twitter: "https://x.com/ParallelMoney",
     wiki: "https://docs.parallel.best/",
     chainConfig: {
@@ -12166,6 +12176,9 @@ export default [
         pharos: {
           bridgedFromETH: ["0x3816102CDaff06e2a5A362CA7f767CCfD2337003"],
         },
+        arbitrum: {
+          bridgedFromETH: ["0xDbEc7b2F9435d4FCbDf9CFCab626a6Eb88b5d0D1"],
+        },
       },
     },
   },
@@ -13514,7 +13527,7 @@ export default [
     description:
       "Monerium GBP e-money (GBPE) is a pound sterling e-money token issued by Monerium, an authorised electronic money institution in the European Economic Area. GBPE is pegged 1:1 to the British pound.",
     mintRedeemDescription:
-      "To mint Monerium GBP e-money (GBPE), users need to create an account with Monerium and complete KYC and AML checks. Once approved, users can send British pounds to their Monerium account by bank transfer and receive GBPE in their linked wallet. Redemption works the same way in reverse.",
+      "GBPE is issued by Monerium. Monerium does not currently offer GBP IBANs to its customers, so GBPE cannot be minted directly by bank transfer. Users can obtain GBPE by swapping on Gnosis Chain, where a GBPe liquidity pool is live (for example via CoW Swap).",
     onCoinGecko: "true",
     gecko_id: "monerium-gbp-emoney",
     cmcId: null,
@@ -13532,6 +13545,92 @@ export default [
         arbitrum: { issued: ["0x2D80dBf04D0802abD7A342DaFA5d7cB42bfbb52f"] },
         base: { issued: ["0xc4759Ed641DA77CbDc9fA2f37E9260a29BF7cC52"] },
         linea: { issued: ["0x3Bce82cf1A2bc357F956dd494713Fe11DC54780f"] },
+      },
+    },
+  },
+  {
+    id: "447",
+    name: "URM",
+    address: "base:0xf0e3349f00972475a5d16721796091aa3b997837",
+    symbol: "URM",
+    url: "https://ultraroundmoney.com",
+    description:
+      "URM is a dollar stablecoin on Base, minted against collateral in CDPs and backed by reserves held in the Fortress, which also defends the peg. Fountain (fURM) is its yield vault. No token emissions.",
+    mintRedeemDescription:
+      "Users lock RAGE, HESTIA or ULTRAROUND as collateral in CDPs to mint URM. Positions can be settled by repaying URM to release collateral. The Fortress manages supply and liquidity to defend the peg to USDC.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://github.com/user-attachments/files/33641733/Cybersecurity_Audit_CTDSEC_URMFOUNTAIN_PASS.pdf"],
+    twitter: "https://twitter.com/URMdollar",
+    wiki: "https://ultraroundmoney.com/urm",
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0xf0e3349f00972475a5d16721796091aa3b997837"],
+        },
+      },
+    },
+  },
+  {
+    id: "448",
+    name: "JPYdf",
+    address: "0xb122f4a154f84708407213d6a715181180012f45",
+    symbol: "JPYdf",
+    url: "https://app.jpydf.com",
+    description:
+      "JPYdf is a crypto-asset-backed stablecoin that aims to track the value of the Japanese yen, with a reference target of ¥1 per JPYdf. It is issued on-chain on an over-collateralised basis against crypto assets and stablecoins through JPY DeFi, a protocol derived from Liquity v2. Its market price can rise above or fall below the target. JPYdf does not represent a yen-denominated monetary claim or a right to redemption in yen. Tracking the yen, price stability, redemption in yen, and preservation of principal are not guaranteed.",
+    mintRedeemDescription:
+      "JPYdf is issued by opening collateralised debt positions backed by dwstETH or dUSDC. Normal redemptions exchange JPYdf for collateral at the protocol oracle value, subject to redemption fees and protocol availability checks. This is not a fiat redemption service.",
+    onCoinGecko: "false",
+    gecko_id: "jpydf",
+    cmcId: null,
+    pegType: "peggedJPY",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://jpydf.gitbook.io/jpy-defi/technical-information/audits-and-bug-bounty"],
+    twitter: "https://x.com/JPYDeFi",
+    wiki: "https://jpydf.gitbook.io/jpy-defi",
+    module: "jpydf",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xb122f4a154f84708407213d6a715181180012f45"],
+        },
+      },
+    },
+  },
+  {
+    id: "449",
+    name: "Nova USD",
+    address: "0xeC747DAf41A4Ca4ebE72356592F8301924132907",
+    symbol: "USDN",
+    url: "https://novausd.xyz/",
+    description: "Nova USD (USDN) is a fully reserved, USD-pegged stablecoin issued by Coconut Financial Holdings Ltd, a British Virgin Islands (BVI) company. Each USDN is backed 1:1 by USD-equivalent reserves held in segregated accounts at licensed banks. The reserves are maintained in AED, which has been pegged to the US dollar since 1997, and are subject to monthly CPA attestations conducted under ISAE 3000.",
+    mintRedeemDescription: "USDN has a demand-driven supply model. Tokens are minted only when a licensed, KYB-verified distributor deposits the corresponding fiat amount and are burned when redeemed.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/getnovausd",
+    wiki: null,
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0xeC747DAf41A4Ca4ebE72356592F8301924132907"],
+          unreleased: [
+            "0xB2Fb8238eAEF392837E8673ae045C5980fBd1AC1", // Mint-receiving Safe
+            "0x072B909bd90F3cac65059657Cf4D822a3212f147", // Safe sharing a signer with the mint-receiving Safe
+            "0xA36531F19de8555404FC355d0B979bd0B479CEf0", // Distribution wallet and signer of the second Safe
+          ],
+        },
       },
     },
   },
