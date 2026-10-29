@@ -13603,7 +13603,7 @@ export default [
       },
     },
   },
-    {
+  {
     id: "449",
     name: "Nova USD",
     address: "0xeC747DAf41A4Ca4ebE72356592F8301924132907",
@@ -13625,6 +13625,11 @@ export default [
       chains: {
         ethereum: {
           issued: ["0xeC747DAf41A4Ca4ebE72356592F8301924132907"],
+          unreleased: [
+            "0xB2Fb8238eAEF392837E8673ae045C5980fBd1AC1", // Mint-receiving Safe
+            "0x072B909bd90F3cac65059657Cf4D822a3212f147", // Safe sharing a signer with the mint-receiving Safe
+            "0xA36531F19de8555404FC355d0B979bd0B479CEf0", // Distribution wallet and signer of the second Safe
+          ],
         },
       },
     },
