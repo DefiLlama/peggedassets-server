@@ -6,6 +6,7 @@ import {
   tonTokenSupply,
 } from "../helper/getSupply";
 import { function_view } from "../helper/aptos";
+import { getTotalSupply as stellarGetTotalSupply } from "../helper/stellar";
 import { sumSingleBalance } from "../helper/generalUtil";
 import type { Balances, PeggedIssuanceAdapter } from "../peggedAsset.type";
 import layerzeroConfig from "./layerzeroConfig";
@@ -23,6 +24,14 @@ function chainUnreleased(chain: string, token: string, decimals: number) {
     });
 
     sumSingleBalance(balances, "peggedUSD", Number(balance) / 10 ** decimals);
+    return balances;
+  };
+}
+
+function stellarBridged(assetID: string) {
+  return async function (): Promise<Balances> {
+    const balances = {} as Balances;
+    sumSingleBalance(balances, "peggedUSD", await stellarGetTotalSupply(assetID), assetID, true);
     return balances;
   };
 }
@@ -50,6 +59,9 @@ const chainContracts = {
   tempo: {
     issued: ["0x20c0000000000000000000002f52d5cc21a3207b"], // USDe on Tempo Mainnet (Stargate Hydra OFT, decimals=6)
   },
+  stellar: {
+    bridgedFromETH: ["USDE:GDJ5BNU5NN6NQ54D7OX6NQTUYNBZ42CAT33QGM5BIQ2QIYADAC5ICH47"], // SAC CCNOV6XVI2O5BSTA3232GIRUQULDEBV7IWGKM6QKI6II5OIIQTU24JJN
+  },
 };
 
 const adapter: PeggedIssuanceAdapter = {
@@ -63,6 +75,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   ton: {
     ethereum: tonTokenSupply("EQAIb6KmdfdDR7CN1GBqVJuP25iCnLKCvBlJ07Evuu2dzP5f"),
+  },
+  stellar: {
+    ethereum: stellarBridged(chainContracts.stellar.bridgedFromETH[0]),
   },
 };
 
