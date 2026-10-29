@@ -53,6 +53,7 @@ const chainContracts = {
   },
   xdai: {
     bridgedFromETH: ["0x7300AaFC0Ef0d47Daeb850f8b6a1931b40aCab33"],
+    bridge: "gnosis", // optional: bridge id from src/peggedData/bridgeData.ts bridgeInfo; without it the token address is looked up in the bridge address mapping
   },
   polygon: {
     issued: ["0xE840B73E5287865EEc17d250bFb1536704B43B21"],

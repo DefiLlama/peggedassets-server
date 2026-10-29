@@ -7,22 +7,23 @@ import { bridgedSupply } from "../helper/getSupply";
 import {
   Balances,
   ChainBlocks,
-  ChainContracts,
   PeggedIssuanceAdapter,
 } from "../peggedAsset.type";
 const axios = require("axios");
 const retry = require("async-retry");
 
 
-const chainContracts: ChainContracts = {
+const chainContracts = {
   ethereum: {
     issued: ["0xc56c2b7e71b54d38aab6d52e94a04cbfa8f604fa"],
   },
   optimism: {
     bridgedFromETH: ["0x6e4cc0ab2b4d2edafa6723cfa1582229f1dd1be1"],
+    bridge: "optimism",
   },
   arbitrum: {
     bridgedFromETH: ["0x6e4cc0ab2b4d2edafa6723cfa1582229f1dd1be1"],
+    bridge: "arbitrum",
   },
 };
 
