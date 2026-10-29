@@ -13655,7 +13655,18 @@ export default [
     wiki: "https://drive.google.com/file/d/1aOuxzC0DAiRKuUDklpifvdxMsSqR06Vr/view",
     chainConfig: {
       chains: {
-        polygon: { issued: ["0x5c067c80c00ecd2345b05e83a3e758ef799c40b5"] },
+        polygon: {
+          issued: ["0x5c067c80c00ecd2345b05e83a3e758ef799c40b5"],
+          unreleased: [
+            "0x5c067c80c00ecd2345b05e83a3e758ef799c40b5", // Tokens held by the token contract
+            "0xccfc24f563fbd798f171d16cc0706529c4739217", // Default admin
+            "0x04412afc0a6fa21b255c6ccff28e97073d7750b3", // Minter
+            "0xb190f8cf030aa7b79bb8bec8c78ccd617a842f04", // Pauser
+            "0xd81d414f7b902fe7070ed52500886b89722ccd3b", // Contract admin
+            "0x91f87ce42af3b8f20deac91f7bed63e69806f775", // Recovery operator
+            "0xf0e67fb618496fbe0a44934d370738a611bc8fd1", // Burner
+          ],
+        },
         rls: { bridgedFromPolygon: ["0xA069d3798FEAb32994aC5D98A9F011DA6024f334"] },
       },
     },
