@@ -89,6 +89,9 @@ const chainContracts = {
   arbitrum: {
     issued: ["0x35e050d3C0eC2d29D269a8EcEa763a183bDF9A9D"]
   },
+  bsc: {
+    issued: ["0x608593d17A2decBbc4399e4185bE4922F97eD32E"], // natively minted on BNB Chain since 2026-08
+  },
   sei : {
     issued: ["0x54cD901491AeF397084453F4372B93c33260e2A6"],
   },

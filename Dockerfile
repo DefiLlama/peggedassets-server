@@ -1,5 +1,8 @@
 # Use an official Node.js runtime as a parent image
-FROM node:23
+FROM node:26
+
+# Production mode: express hides stack traces in error responses
+ENV NODE_ENV=production
 
 # Set the working directory in the container
 WORKDIR /app/repo
