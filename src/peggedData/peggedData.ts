@@ -4895,16 +4895,16 @@ export default [
     symbol: "AUDD",
     url: "https://www.audd.digital/",
     description:
-      "AUDD is an Australian Dollar Stablecoin 1:1 backed by Australian Dollars. It is currently available on Ethereum, Stellar, XRP Ledger, and Solana",
+      "AUDD is an Australian dollar stablecoin issued by AUDC Pty Ltd under AFSL 700123. It is backed 1:1 by Australian dollars held in cash on trust for AUDD holders, and is redeemable at par with the issuer, on demand. AUDD is issued natively on Ethereum, Stellar, XRP Ledger, Solana, Hedera, Base, XDC, Redbelly and Arc",
     mintRedeemDescription:
-      "AUDD is collateralised on a 1:1 basis by Australia's sovereign currency by way of cash in bank accounts or government-backed instruments such as Treasury Bills and Notes",
+      "AUDD is collateralised on a 1:1 basis by Australia's sovereign currency by way of cash in bank accounts or government-backed by cash held on trust for AUDD holders, separately from AUDC's operating funds.",
     onCoinGecko: true,
     gecko_id: "novatti-australian-digital-dollar",
     cmcId: null,
     pegType: "peggedAUD",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
-    auditLinks: null,
+    auditLinks: "https://www.audd.digital/security-audits/",
     twitter: "https://twitter.com/audd_digital",
     wiki: null,
     chainConfig: {
@@ -4932,6 +4932,9 @@ export default [
         },
         ripple: {
           issued: ["4155444400000000000000000000000000000000.rUN5Zxt3K1AnMRJgEWywDJT8QDMMeLH5ok"],
+        },
+        arc: {
+          issued: ["0xdeC15d98D8C16d9cA2F8Cc94bA4B88FE4f259393"],
         },
       },
     },
