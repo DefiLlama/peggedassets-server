@@ -2012,4 +2012,8 @@ export const bridgeInfo = {
     name: "Circle xReserve",
     link: "https://www.circle.com/",
   },
+  ethena: {
+    name: "Ethena",
+    link: "https://ethena.fi/",
+  },
 } as BridgeInfo;

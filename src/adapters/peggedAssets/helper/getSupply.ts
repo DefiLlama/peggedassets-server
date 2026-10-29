@@ -166,7 +166,7 @@ export function zilliqaMintedOrBridged(
   };
 }
 
-export function tonTokenSupply(address: string) {
+export function tonTokenSupply(address: string, bridgeName?: string, bridgedFromChain?: string) {
   return async function (
     _timestamp: number,
     _ethBlock: number,
@@ -174,7 +174,10 @@ export function tonTokenSupply(address: string) {
   ) {
     let balances = {} as Balances;
     const { supply } = await chains.ton.getJettonSupply({ address });
-    sumSingleBalance(balances, "peggedUSD", Number(supply) / 10 ** 6, address, false);
+    const amount = Number(supply) / 10 ** 6;
+    bridgeName
+      ? sumSingleBalance(balances, "peggedUSD", amount, bridgeName, false, bridgedFromChain)
+      : sumSingleBalance(balances, "peggedUSD", amount, address, false);
     return balances;
   };
 }

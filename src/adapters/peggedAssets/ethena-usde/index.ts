@@ -31,7 +31,7 @@ function chainUnreleased(chain: string, token: string, decimals: number) {
 function stellarBridged(assetID: string) {
   return async function (): Promise<Balances> {
     const balances = {} as Balances;
-    sumSingleBalance(balances, "peggedUSD", await stellarGetTotalSupply(assetID), assetID, true);
+    sumSingleBalance(balances, "peggedUSD", await stellarGetTotalSupply(assetID), "ethena", false, "ethereum");
     return balances;
   };
 }
@@ -68,13 +68,13 @@ const adapter: PeggedIssuanceAdapter = {
   ...addChainExports(chainContracts),
  
   solana: {
-    ethereum: solanaMintedOrBridged(["DEkqHyPN7GMRJ5cArtQFAWefqbZb33Hyf6s5iCwjEonT"]),
+    ethereum: solanaMintedOrBridged(["DEkqHyPN7GMRJ5cArtQFAWefqbZb33Hyf6s5iCwjEonT"], undefined, "layerzero", "ethereum"),
   },
   move: {
     minted: moveSupply,
   },
   ton: {
-    ethereum: tonTokenSupply("EQAIb6KmdfdDR7CN1GBqVJuP25iCnLKCvBlJ07Evuu2dzP5f"),
+    ethereum: tonTokenSupply("EQAIb6KmdfdDR7CN1GBqVJuP25iCnLKCvBlJ07Evuu2dzP5f", "layerzero", "ethereum"),
   },
   stellar: {
     ethereum: stellarBridged(chainContracts.stellar.bridgedFromETH[0]),
