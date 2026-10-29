@@ -118,14 +118,18 @@ export function supplyInArbitrumBridge(
 
 export function solanaMintedOrBridged(
   targets: string[],
-  pegType?: PeggedAssetType
+  pegType?: PeggedAssetType,
+  bridgeName?: string,
+  bridgedFromChain?: string
 ) {
   return async function () {
     let balances = {} as Balances;
     let assetPegType = pegType ? pegType : ("peggedUSD" as PeggedAssetType);
     for (let target of targets) {
       const totalSupply = await solanaGetTokenSupply(target);
-      sumSingleBalance(balances, assetPegType, totalSupply, target, true);
+      bridgeName
+        ? sumSingleBalance(balances, assetPegType, totalSupply, bridgeName, false, bridgedFromChain)
+        : sumSingleBalance(balances, assetPegType, totalSupply, target, true);
     }
     return balances;
   };
@@ -273,6 +277,7 @@ export function addChainExports(config: any, adapter: any = {}, {
           break;
         case 'pegType':
         case 'issuedABI': // consumed by getIssued together with `issued`
+        case 'bridge': // bridge name for bridgedFrom* keys (e.g. "layerzero"); without it the token address is looked up in bridgeMapping
           break;
         case "issued":
           if (!cExports.minted)
@@ -294,9 +299,9 @@ export function addChainExports(config: any, adapter: any = {}, {
           if (!Array.isArray(chainConfig.bridgedFromETH)) chainConfig.bridgedFromETH = [chainConfig.bridgedFromETH]
           if (!cExports.ethereum) {
             if (chain === 'solana')
-              cExports.ethereum = solanaMintedOrBridged(chainConfig[key], pegType as any)
+              cExports.ethereum = solanaMintedOrBridged(chainConfig[key], pegType as any, chainConfig.bridge, "ethereum")
             else
-              cExports.ethereum = bridgedSupply(chain, decimals, chainConfig.bridgedFromETH, undefined, "ethereum", pegType as any)
+              cExports.ethereum = bridgedSupply(chain, decimals, chainConfig.bridgedFromETH, chainConfig.bridge, "ethereum", pegType as any)
           }
           break;
         default: {
@@ -313,11 +318,11 @@ export function addChainExports(config: any, adapter: any = {}, {
             if (!Array.isArray(chainConfig[key])) chainConfig[key] = [chainConfig[key]]
             if (!cExports[srcChain]) {
               if (chain === 'solana')
-                cExports[srcChain] = solanaMintedOrBridged(chainConfig[key], pegType as any)
+                cExports[srcChain] = solanaMintedOrBridged(chainConfig[key], pegType as any, chainConfig.bridge, srcChain)
               else if (chain === 'sui' || chain === 'cardano')
                 cExports[srcChain] = getIssued({ issued: chainConfig[key], pegType: pegType as PeggedAssetType })
               else
-                cExports[srcChain] = bridgedSupply(chain, decimals, chainConfig[key], undefined, srcChain, pegType as any)
+                cExports[srcChain] = bridgedSupply(chain, decimals, chainConfig[key], chainConfig.bridge, srcChain, pegType as any)
             }
           } else
             console.log(`Ignored: Unknown key ${key} in ${chain} config for addChainExports`)

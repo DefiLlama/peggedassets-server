@@ -36,6 +36,12 @@ const chainContracts = {
   },
   flow: {
     bridgedFromArbitrum: ['0x99aF3EeA856556646C98c8B9b2548Fe815240750'],
+    bridge: "layerzero",
+  },
+  stable: {
+    issued: ["0x28F1f38a9F7dB1f769A71aF0a13E8BACe2ab0E9f"],
+    bridgedFromETH: ["0x99aF3EeA856556646C98c8B9b2548Fe815240750"],
+    bridge: "layerzero",
   },
 };
 
