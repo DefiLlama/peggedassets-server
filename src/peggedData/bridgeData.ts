@@ -1771,6 +1771,10 @@ export default {
     bridge: "circle",
     sourceChain: formattedSourceChains.eth,
   },
+  "usad_stablecoin.aleo": {
+    bridge: "usad",
+    sourceChain: formattedSourceChains.eth,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -2011,6 +2015,10 @@ export const bridgeInfo = {
   circle: {
     name: "Circle xReserve",
     link: "https://www.circle.com/",
+  },
+  usad: {
+    name: "USAD Vault",
+    link: "https://aleo.org/usad/",
   },
   ethena: {
     name: "Ethena",
