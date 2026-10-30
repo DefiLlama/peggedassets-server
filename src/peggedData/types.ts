@@ -69,7 +69,7 @@ export type PeggedAsset = {
 };
 
 // map of llama chain key -> contract config consumed by addChainExports.
-// per-chain keys: issued | unreleased | reserves | bridgedFromETH | bridgeOnETH | bridgedFrom<Chain> | bridge.
+// per-chain keys: issued | unreleased | reserves | bridgedFromETH | bridgeOnETH | bridgeOnSolana | bridgedFrom<Chain> | bridge.
 // values are address strings or arrays of address strings.
 // `bridge` names the bridge (id from bridgeData.bridgeInfo, e.g. "layerzero", "ccip") used by the
 // bridgedFrom* entries on that chain; without it the token address is looked up in bridgeData's
