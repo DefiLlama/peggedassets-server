@@ -116,6 +116,20 @@ export function supplyInArbitrumBridge(
   };
 }
 
+export function supplyInSolanaBridge(
+  target: string,
+  owner: string,
+  pegType: PeggedAssetType = "peggedUSD"
+) {
+  return async function () {
+    const balances = {} as Balances;
+    // The Solana helper returns a decimal-adjusted amount.
+    const bridged = await solanaGetTokenBalance(target, owner);
+    sumSingleBalance(balances, pegType, bridged, owner, true);
+    return balances;
+  };
+}
+
 export function solanaMintedOrBridged(
   targets: string[],
   pegType?: PeggedAssetType,
@@ -277,6 +291,9 @@ export function addChainExports(config: any, adapter: any = {}, {
       switch (key) {
         case 'bridgeOnETH':
           cExports.ethereum = supplyInEthereumBridge(config.ethereum.issued[0], chainConfig.bridgeOnETH[0], decimals, pegType as any);
+          break;
+        case 'bridgeOnSolana':
+          cExports.solana = supplyInSolanaBridge(config.solana.issued[0], chainConfig.bridgeOnSolana[0], pegType as PeggedAssetType);
           break;
         case 'pegType':
         case 'issuedABI': // consumed by getIssued together with `issued`

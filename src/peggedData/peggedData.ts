@@ -8650,6 +8650,15 @@ export default [
         mantle: {
           issued: ["0x063C1d1ef6e9099Ce3E8e9AD5C6173d12C49C086"],
         },
+        // Hyperlane USDG: hyp_warp_token_usdg_v2.aleo mints
+        // shield_arc22_usdg.aleo against these two collateral escrows.
+        // https://github.com/hyperlane-xyz/hyperlane-registry/blob/main/deployments/warp_routes/USDG/aleo-config.yaml
+        aleo: {
+          bridgeOnETH: ["0xe5A2cCf532919f93855F324c1F8a7996065f53Da"],
+          // PDA seeds: ["hyperlane_token", "-", "escrow"] for
+          // AhNVa6VpZwDwgD3U66CGUwCMRcFSFiTfBse2D495SPxW.
+          bridgeOnSolana: ["AijEjuEXnmgEWsBT9kyxosWG7iiFkU1dkeF6WEX5dZDg"],
+        },
       },
     },
   },
