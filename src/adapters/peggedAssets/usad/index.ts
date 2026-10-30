@@ -5,7 +5,6 @@ import type { Balances, PeggedIssuanceAdapter } from "../peggedAsset.type";
 async function minted(): Promise<Balances> {
   // token_info[true].supply includes both public and private USAD, and is
   // updated by every mint/burn. AMM wrappers must not be counted again.
-  // USDG bridged via hyp_warp_token_usdg_v2.aleo is a separate token.
   const { data } = await axios.get<string>(
     "https://api.explorer.provable.com/v1/mainnet/program/usad_stablecoin.aleo/mapping/token_info/true",
     { timeout: 30000 }
