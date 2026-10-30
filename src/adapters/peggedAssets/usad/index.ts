@@ -6,7 +6,7 @@ async function minted(): Promise<Balances> {
   // token_info[true].supply includes both public and private USAD, and is
   // updated by every mint/burn. AMM wrappers must not be counted again.
   const { data } = await axios.get<string>(
-    "https://api.explorer.provable.com/v1/mainnet/program/usad_stablecoin.aleo/mapping/token_info/true",
+    "https://api.provable.com/v1/mainnet/program/usad_stablecoin.aleo/mapping/token_info/true",
     { timeout: 30000 }
   );
   const supply = typeof data === "string" && data.match(/\bsupply:\s*(\d+)u128\b/);
