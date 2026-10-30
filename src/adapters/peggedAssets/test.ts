@@ -9,6 +9,7 @@ import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../u
 import { PeggedIssuanceAdapter } from "./peggedAsset.type";
 import { DEAD_CHAINS } from "../../utils/deadChains";
 import { importAdapter } from "../../peggedAssets/utils/importAdapter";
+import { excludeHackedBridges } from "../../peggedData/hackedBridges";
 const {
   humanizeNumber,
 } = require("@defillama/sdk/build/computeTVL/humanizeNumber");
@@ -95,6 +96,10 @@ async function getPeggedAsset(
           Bridge data not found on chain ${chain}. Use sumSingleBalance from helper/generalUtil to add bridge data.`
         );
       }
+
+      const removed = excludeHackedBridges(balance as any, pegType, _unixTimestamp);
+      if (removed)
+        console.log(`[${adapterLabel}] Excluded ${humanizeNumber(removed)} from hacked bridge(s) on ${chain} (${issuanceType})`);
 
       peggedBalances[chain] = peggedBalances[chain] || {};
       peggedBalances[chain][issuanceType] = balance as PeggedTokenBalance;

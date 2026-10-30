@@ -8,6 +8,7 @@ import {
 import { getCurrentUnixTimestamp } from "../../utils/date";
 import { isDeadChain } from "../../utils/deadChains";
 import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../utils/extrapolatedCacheFallback";
+import { excludeHackedBridges } from "../../peggedData/hackedBridges";
 import {
   dailyPeggedBalances,
   hourlyPeggedBalances,
@@ -87,6 +88,10 @@ async function getPeggedAsset(
       if (pegKey !== pegType) {
         (balance as any)[pegType] = (balance as any)[pegKey];
       }
+
+      const removed = excludeHackedBridges(balance, pegType, api.timestamp ?? getCurrentUnixTimestamp());
+      if (removed && process.env.VERBOSE === 'true')
+        console.log(`${tag} Excluded ${removed} from hacked bridge(s) on ${chain} (${label})`);
 
       peggedBalances[chain][issuanceType] = balance;
       if (issuanceType !== "minted" && issuanceType !== "unreleased") {
