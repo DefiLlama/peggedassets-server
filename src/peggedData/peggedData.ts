@@ -13728,5 +13728,27 @@ export default [
         rls: { bridgedFromPolygon: ["0xA069d3798FEAb32994aC5D98A9F011DA6024f334"] },
       },
     },
-  }
+  },
+  {
+    id: "451",
+    name: "USAD",
+    address: "aleo:usad_stablecoin.aleo",
+    symbol: "USAD",
+    url: "https://aleo.org/usad/",
+    description:
+      "USAD is a US dollar-pegged stablecoin issued by Paxos Labs on Aleo, with private balances and transfers. It is backed 1:1 by USDG held in an Ethereum vault.",
+    mintRedeemDescription:
+      "Users deposit USDG to mint USAD on Aleo and redeem USAD for USDG on Ethereum. USDG can then be redeemed for US dollars through Paxos.",
+    onCoinGecko: "true",
+    gecko_id: "usad",
+    cmcId: "39542",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: [],
+    twitter: "https://x.com/aleohq",
+    wiki: "https://aleo.org/usad/",
+    // Its USDG backing is already included in tracked stablecoin supply.
+    doublecounted: true,
+  },
 ] as PeggedAsset[];
