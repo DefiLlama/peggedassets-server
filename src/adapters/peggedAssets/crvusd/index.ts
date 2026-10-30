@@ -47,19 +47,24 @@ async function minted(api: ChainApi) {
 
 const chainContracts = {
   arbitrum: {
-    bridgedFromETH: "0x498Bf2B1e120FeD3ad3D42EA2165E9b73f99C1e5"
+    bridgedFromETH: "0x498Bf2B1e120FeD3ad3D42EA2165E9b73f99C1e5",
+    bridge: "arbitrum",
   },
   optimism: {
-    bridgedFromETH: "0xC52D7F23a2e460248Db6eE192Cb23dD12bDDCbf6"
+    bridgedFromETH: "0xC52D7F23a2e460248Db6eE192Cb23dD12bDDCbf6",
+    bridge: "optimism",
   },
   base: {
-    bridgedFromETH: "0x417Ac0e078398C154EdFadD9Ef675d30Be60Af93"
+    bridgedFromETH: "0x417Ac0e078398C154EdFadD9Ef675d30Be60Af93",
+    bridge: "base",
   },
   xdai: {
-    bridgedFromETH: "0xaBEf652195F98A91E490f047A5006B71c85f058d"
+    bridgedFromETH: "0xaBEf652195F98A91E490f047A5006B71c85f058d",
+    bridge: "gnosis",
   },
   polygon: {
-    bridgedFromETH: "0xc4Ce1D6F5D98D65eE25Cf85e9F2E9DcFEe6Cb5d6"
+    bridgedFromETH: "0xc4Ce1D6F5D98D65eE25Cf85e9F2E9DcFEe6Cb5d6",
+    bridge: "polygon",
   },
   fraxtal: {
     bridgedFromETH: "0xB102f7Efa0d5dE071A8D37B3548e1C7CB148Caf3"
@@ -68,13 +73,15 @@ const chainContracts = {
     bridgedFromETH: "0xe2fb3F127f5450DeE44afe054385d74C392BdeF4"
   },
   era: {
-    bridgedFromETH: "0x43cD37CC4B9EC54833c8aC362Dd55E58bFd62b86"
+    bridgedFromETH: "0x43cD37CC4B9EC54833c8aC362Dd55E58bFd62b86",
+    bridge: "zksync",
   },
   sonic: {
     bridgedFromETH: "0x7fff4c4a827c84e32c5e175052834111b2ccd270"
   },
   taiko: {
-    bridgedFromETH: "0xc8F4518ed4bAB9a972808a493107926cE8237068"
+    bridgedFromETH: "0xc8F4518ed4bAB9a972808a493107926cE8237068",
+    bridge: "celer",
   }
 };
 

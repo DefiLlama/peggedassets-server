@@ -31,18 +31,23 @@ const chainContracts = {
   },
   arbitrum: {
     bridgedFromETH: [M_TOKEN_ADDRESS],
+    bridge: "wormhole",
   },
   optimism: {
     bridgedFromETH: [M_TOKEN_ADDRESS],
+    bridge: "wormhole",
   },
   plume_mainnet: {
     bridgedFromETH: [M_TOKEN_ADDRESS],
+    bridge: "wormhole",
   },
   hyperliquid: {
     bridgedFromETH: [M_TOKEN_ADDRESS],
+    bridge: "wormhole",
   },
   monad: {
     bridgedFromETH: [M_TOKEN_ADDRESS],
+    bridge: "wormhole",
   },
 };
 

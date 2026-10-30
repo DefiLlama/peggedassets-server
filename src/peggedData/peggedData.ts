@@ -232,6 +232,7 @@ export default [
         era: {
           bridgeOnETH: ["0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB"],
           bridgedFromETH: ["0x503234f203fc7eb888eec8513210612a43cf6115"],
+          bridge: "zksync",
         },
         scroll: {
           bridgedFromETH: ["0xeDEAbc3A1e7D21fE835FFA6f83a710c70BB1a051"],
@@ -436,12 +437,15 @@ export default [
         },
         polygon: {
           bridgedFromETH: ["0xbc2b48bc930ddc4e5cfb2e87a45c379aab3aac5c"],
+          bridge: "polygon",
         },
         avax: {
           bridgedFromETH: ["0x221743dc9e954be4f86844649bf19b43d6f8366d"],
+          bridge: "multichain",
         },
         base: {
           bridgedFromETH: ["0x4621b7A9c75199271F773Ebd9A499dbd165c3191"],
+          bridge: "base",
         },
       },
     },
@@ -953,6 +957,7 @@ export default [
         },
         arbitrum: {
           bridgedFromRsk: ["0x2ad62eb9744c720364f6ac856360a43e8a2229b5"],
+          bridge: "layerzero",
         },
       },
     },
@@ -1710,6 +1715,7 @@ export default [
         },
         polygon: {
           bridgedFromETH: ["0xe0b52e49357fd4daf2c15e02058dce6bc0057db4"],
+          bridge: "polygon",
         },
         optimism: {
           issued: ["0x9485aca5bbBE1667AD97c7fE7C4531a624C8b1ED"],
@@ -1728,6 +1734,7 @@ export default [
         },
         fantom: {
           bridgedFromETH: ["0x02a2b736F9150d36C0919F3aCEE8BA2A92FBBb40"],
+          bridge: "multichain",
         },
         aurora: {
           bridgedFromETH: ["0xdc7AcDE9ff18B4D189010a21a44cE51ec874eA7C"],
@@ -3164,9 +3171,11 @@ export default [
         },
         base: {
           bridgedFromETH: ["0xCfA3Ef56d303AE4fAabA0592388F19d7C3399FB4"],
+          bridge: "base",
         },
         arbitrum: {
           bridgedFromETH: ["0x12275DCB9048680c4Be40942eA4D92c74C63b844"],
+          bridge: "arbitrum",
         },
       },
     },
@@ -3539,6 +3548,7 @@ export default [
         },
         monad: {
           bridgedFromETH: ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
+          bridge: "ccip",
         },
       },
     },
@@ -5686,9 +5696,11 @@ export default [
         },
         base: {
           bridgedFromETH: ["0x8E5E9DF4F0EA39aE5270e79bbABFCc34203A3470"],
+          bridge: "base",
         },
         arbitrum: {
           bridgedFromETH: ["0x96a993f06951b01430523d0d5590192d650ebf3e"],
+          bridge: "arbitrum",
         },
       },
     },
@@ -5886,18 +5898,23 @@ export default [
         },
         base: {
           bridgedFromETH: ["0x35E5dB674D8e93a03d814FA0ADa70731efe8a4b9"],
+          bridge: "layerzero",
         },
         bsc: {
           bridgedFromETH: ["0x2492D0006411Af6C8bbb1c8afc1B0197350a79e9"],
+          bridge: "layerzero",
         },
         berachain: {
           bridgedFromETH: ["0x2492D0006411Af6C8bbb1c8afc1B0197350a79e9"],
+          bridge: "layerzero",
         },
         hyperliquid: {
           bridgedFromETH: ["0x0aD339d66BF4AeD5ce31c64Bc37B3244b6394A77"],
+          bridge: "layerzero",
         },
         soneium: {
           bridgedFromETH: ["0xb1b385542b6e80f77b94393ba8342c3af699f15c"],
+          bridge: "layerzero",
         },
       },
     },
@@ -6501,48 +6518,62 @@ export default [
         },
         berachain: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         base: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         plume_mainnet: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         sonic: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         wc: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         arbitrum: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         sei: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         unichain: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         hyperliquid: {
           bridgedFromETH: ["0x866d66F64FB81461903E1e38d998E747EcF35E78"],
+          bridge: "layerzero",
         },
         bsc: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         avax: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         katana: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         solana: {
           bridgedFromETH: ["Ejqkht2dyN1BaaEtK92zBKY6S8HbVH8APB5sDK9Rmokt"],
         },
         linea: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         monad: {
           bridgedFromETH: ["0x09D4214C03D01F49544C0448DBE3A27f768F2b34"],
+          bridge: "layerzero",
         },
         tempo: {
           issued: ["0x20c0000000000000000000007f7ba549dd0251b9"],
@@ -6819,12 +6850,15 @@ export default [
         },
         metis: {
           bridgedFromETH: ["0x2d3D1a6982840Dd88bC2380Fd557F8A9D5e27a77"],
+          bridge: "layerzero",
         },
         manta: {
           bridgedFromETH: ["0x7DC9748DA8E762e569F9269f48F69A1a9F8Ea761"],
+          bridge: "layerzero",
         },
         avax: {
           bridgedFromETH: ["0x7DC9748DA8E762e569F9269f48F69A1a9F8Ea761"],
+          bridge: "layerzero",
         },
       },
     },
@@ -6862,22 +6896,27 @@ export default [
         polygon: {
           issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
           bridgedFromETH: ["0x02567e4b14b25549331fCEe2B56c647A8bAB16FD"],
+          bridge: "polygon",
         },
         arbitrum: {
           issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
           bridgedFromETH: ["0xB33c4255938de7A6ec1200d397B2b2F329397F9B"],
+          bridge: "arbitrum",
         },
         optimism: {
           issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
           bridgedFromETH: ["0x4F8a84C442F9675610c680990EdDb2CCDDB8aB6f"],
+          bridge: "optimism",
         },
         base: {
           issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
           bridgedFromETH: ["0x20D1c515e38aE9c345836853E2af98455F919637"],
+          bridge: "base",
         },
         xdai: {
           issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
           bridgedFromETH: ["0x4cde2b4e7254e6ec5b450d50e3607bade6be3980"],
+          bridge: "gnosis",
         },
         avax: {
           issued: ["0xD4dD9e2F021BB459D5A5f6c24C12fE09c5D45553"],
@@ -7449,6 +7488,7 @@ export default [
         },
         bsc: {
           bridgedFromETH: ["0xb3b02E4A9Fb2bD28CC2ff97B0aB3F6B3Ec1eE9D2"],
+          bridge: "ccip",
         },
       },
     },
@@ -7841,6 +7881,7 @@ export default [
         },
         base: {
           bridgedFromETH: ["0x0937876EFd6C4101Be68cd89ba58D5Ecf0d53A64"],
+          bridge: "base",
         },
         hemi: {
           bridgedFromETH: ["0x7A06C4AeF988e7925575C50261297a946aD204A8"],
@@ -8142,6 +8183,7 @@ export default [
         },
         hyperliquid: {
           bridgedFromETH: ["0x84533b1512A3A23F0c9668D88FDf86FEffdbb11A"],
+          bridge: "ccip",
         },
       },
     },
@@ -8193,6 +8235,7 @@ export default [
         },
         monad: {
           bridgedFromAvax: ["0x0D9D741FE423Cd5419e4BCb6cB2FfA87AFa93bA4"],
+          bridge: "ccip",
         },
       },
     },
@@ -8554,6 +8597,7 @@ export default [
         },
         bsc: {
           bridgedFromPolygon: ["0xFFFFFF9936BD58a008855b0812B44D2c8dffE2aA"],
+          bridge: "layerzero",
         },
         solana: {
           bridgedFromPolygon: ["GGUSDyBUPFg5RrgWwqEqhXoha85iYGs6cL57SyK4G2Y7"],
@@ -8991,6 +9035,7 @@ export default [
       chains: {
         sonic: {
           bridgedFromETH: ["0xE5Fb2Ed6832deF99ddE57C0b9d9A56537C89121D"],
+          bridge: "layerzero",
         },
         ethereum: {
           issued: ["0x4ba01f22827018b4772CD326C7627FB4956A7C00"],
@@ -9059,6 +9104,7 @@ export default [
         },
         polygon: {
           bridgedFromETH: ["0xe75220cB014Dfb2D354bb59be26d7458bB8d0706"],
+          bridge: "layerzero",
         },
         tron: {
           bridgedFromETH: ["TXdN5fvFjCdqjWJRvWmBzSRLBN7JLYmmrs"],
@@ -10396,6 +10442,7 @@ export default [
         },
         monad: {
           bridgedFromPlasma: ["0x9dcB0D17eDDE04D27F387c89fECb78654C373858"],
+          bridge: "layerzero",
         },
       },
     },
@@ -10597,6 +10644,7 @@ export default [
         },
         hyperliquid: {
           bridgedFromETH: ["0xead4BCe5B9b5777cDc45B94DFa88209dE7A4EfBe"],
+          bridge: "layerzero",
         },
       },
     },
@@ -10687,12 +10735,15 @@ export default [
         },
         base: {
           bridgedFromETH: ["0xd993935e13851dd7517af10687ec7e5022127228"],
+          bridge: "ccip",
         },
         bsc: {
           bridgedFromETH: ["0x6b3788fd6604bbf03c5378d24e57bb334baad4af"],
+          bridge: "ccip",
         },
         monad: {
           bridgedFromETH: ["0x3D78455E22D5dd49709eC135A59CB1c5a87AC3C6"],
+          bridge: "ccip",
         },
       },
     },
@@ -12172,12 +12223,15 @@ export default [
         },
         monad: {
           bridgedFromETH: ["0x770a579Ea200784723B31b8668b0773ba80393c9"],
+          bridge: "ccip",
         },
         pharos: {
           bridgedFromETH: ["0x3816102CDaff06e2a5A362CA7f767CCfD2337003"],
+          bridge: "ccip",
         },
         arbitrum: {
           bridgedFromETH: ["0xDbEc7b2F9435d4FCbDf9CFCab626a6Eb88b5d0D1"],
+          bridge: "ccip",
         },
       },
     },
@@ -12876,15 +12930,19 @@ export default [
         },
         base: {
           bridgedFromETH: ["0x1b5f7fa46ed0f487f049c42f374ca4827d65a264"],
+          bridge: "base",
         },
         polygon: {
           bridgedFromETH: ["0xc2ff25dd99e467d2589b2c26edd270f220f14e47"],
+          bridge: "polygon",
         },
         optimism: {
           bridgedFromETH: ["0x1b5f7fa46ed0f487f049c42f374ca4827d65a264"],
+          bridge: "optimism",
         },
         arbitrum: {
           bridgedFromETH: ["0x5e85faf503621830ca857a5f38b982e0cc57d537"],
+          bridge: "arbitrum",
         },
       },
     },
