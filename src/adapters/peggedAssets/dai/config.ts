@@ -11,7 +11,7 @@ export const chainContracts: ChainContracts = {
     ],
     bridgedFromPolygon: ["4Fo67MYQpVhZj9R7jQTd63FPAnWbPpaafAUxsMGX2geP"], // wormhole
     bridgedFromAvax: ["EgQ3yNtVhdHz7g1ZhjfGbxhFKMPPaFkz8QHXM5RBZBgi"], // allbridge
-    bridgedFromFantom: ["HjUhUzi6fVkY1BndaSc4Dcg2mCzvnqzXjVJtXsj78ver"], // allbridge
+    // bridgedFromFantom: ["HjUhUzi6fVkY1BndaSc4Dcg2mCzvnqzXjVJtXsj78ver"], // allbridge, ~1k of re-bridged multichain DAI; exceeds fantom's non-multichain supply after the hack cutoff
   },
   polygon: {
     bridgedFromETH: [
