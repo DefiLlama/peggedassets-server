@@ -7,7 +7,7 @@ export type FxRateRow = { date: number; rates: Record<string, number> };
 
 export type FxRateMap = {
   byDay: Map<number, Record<string, number>>;
-  latest: Record<string, number>;
+  lastDay: number;
 };
 
 // pegTypes follow the "pegged" + ISO 4217 ticker convention, except the ones
@@ -39,20 +39,20 @@ export function buildFxRateMap(rows: FxRateRow[]): FxRateMap | null {
     byDay.set(getTimestampAtStartOfDayUTC(entry.date), entry.rates);
   }
   if (!byDay.size) return null;
-  return { byDay, latest: sorted[sorted.length - 1].rates };
+  return { byDay, lastDay: Math.max(...byDay.keys()) };
 }
 
-// Latest rate when timestamp == 0; otherwise prefer the exact UTC day, then
-// fall back to ±1 day (matching the prior ratesCompareFn tolerance).
 export function lookupFxRate(fx: FxRateMap, currency: string, timestamp: number): number | null {
-  if (timestamp === 0) {
-    const r = fx.latest?.[currency];
-    return typeof r === "number" && r > 0 ? r : null;
-  }
-  const day = getTimestampAtStartOfDayUTC(timestamp);
+  const day = timestamp === 0 ? fx.lastDay : getTimestampAtStartOfDayUTC(timestamp);
   for (const d of [day, day - secondsInDay, day + secondsInDay]) {
     const r = fx.byDay.get(d)?.[currency];
     if (typeof r === "number" && r > 0) return r;
   }
   return null;
+}
+
+export function pegPriceAt(fx: FxRateMap | null | undefined, pegType: string, timestamp: number): number {
+  const ticker = pegTypeFxTicker(pegType);
+  const rate = fx ? lookupFxRate(fx, ticker, timestamp) : null;
+  return fxFallbackPrice(rate === null ? undefined : { [ticker]: rate }, pegType);
 }

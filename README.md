@@ -12,6 +12,10 @@
 
 After submitting a PR, you can submit basic info about the pegged asset (website, ticker, icon, etc.) in the [Defillama Discord](https://discord.defillama.com/).
 
+## Pricing
+
+A listing with no fresh market price is valued at the last price seen in the daily price records, else at the peg price. Every row in `/stablecoins` carries `pricing` with `price`, `asOf` and `source`, where `source` is `market`, `last-known` or `peg`. A `deadFrom` date is the day the listing stopped and must not lie in the future. `PRICE_CARRY_MAX_DAYS` caps how old a carried price may be; unset means no limit. `PRICES_WEBHOOK` is a Discord webhook that receives one message per cron run when the price feed drops an asset or fails.
+
 ## Pegged asset adapters
 
 An adapter is a Typescript file that exports an object in the following format:

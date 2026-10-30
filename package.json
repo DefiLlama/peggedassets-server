@@ -2,6 +2,9 @@
   "name": "stablecoin-server",
   "private": true,
   "version": "4.2.0",
+  "engines": {
+    "node": ">=21"
+  },
   "scripts": {
     "api2-dev": "ts-node --transpile-only api2/index.ts",
     "generate-lz-config": "ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/generateLzConfig.ts",
@@ -13,7 +16,8 @@
     "store-all": "set AWS_REGION='eu-central-1' && set tableName='prod-stablecoins-table' && npx ts-node --transpile-only src/cli/storeAllPeggedAssets.ts",
     "force-update": "set AWS_REGION='eu-central-1' && set tableName='prod-stablecoins-table' && npx ts-node --transpile-only src/cli/forceUpdateAsset.ts",
     "fillOld": "set AWS_REGION='eu-central-1' && set tableName='prod-stablecoins-table' && npx ts-node src/cli/fillOld.ts",
-    "fillLast": "export AWS_REGION='eu-central-1' && export tableName='prod-stablecoins-table' && npx ts-node src/cli/fillLast.ts"
+    "fillLast": "export AWS_REGION='eu-central-1' && export tableName='prod-stablecoins-table' && npx ts-node src/cli/fillLast.ts",
+    "test:unit": "TZ=UTC CACHE_DIR=/tmp/stablecoin-test-cache TS_NODE_TRANSPILE_ONLY=true node -r ts-node/register --test 'src/**/*.test.ts' 'api2/**/*.test.ts'"
   },
   "overrides": {
     "ansi-regex": "5.0.1"
