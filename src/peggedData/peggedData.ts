@@ -8626,6 +8626,32 @@ export default [
         symbols: ["USDG"],
       }
     },
+    chainConfig: {
+      decimals: 6,
+      chains: {
+        ethereum: {
+          issued: ["0xe343167631d89B6Ffc58B88d6b7fB0228795491D"],
+        },
+        solana: {
+          issued: ["2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH"],
+        },
+        ink: {
+          bridgedFromETH: ["0xe343167631d89B6Ffc58B88d6b7fB0228795491D"],
+        },
+        xlayer: {
+          issued: ["0x4ae46a509f6b1d9056937ba4500cb143933d2dc8"],
+        },
+        robinhood: {
+          issued: ["0x5fc5360d0400a0fd4f2af552add042d716f1d168"],
+        },
+        arbitrum: {
+          issued: ["0x004B506865409877C9fA29bfb1ebA929984B9bbC"],
+        },
+        mantle: {
+          issued: ["0x063C1d1ef6e9099Ce3E8e9AD5C6173d12C49C086"],
+        },
+      },
+    },
   },
   {
     id: "287",
@@ -13702,5 +13728,27 @@ export default [
         rls: { bridgedFromPolygon: ["0xA069d3798FEAb32994aC5D98A9F011DA6024f334"] },
       },
     },
-  }
+  },
+  {
+    id: "451",
+    name: "USAD",
+    address: "aleo:usad_stablecoin.aleo",
+    symbol: "USAD",
+    url: "https://aleo.org/usad/",
+    description:
+      "USAD is a US dollar-pegged stablecoin issued by Paxos Labs on Aleo, with private balances and transfers. It is backed 1:1 by USDG held in an Ethereum vault.",
+    mintRedeemDescription:
+      "Users deposit USDG to mint USAD on Aleo and redeem USAD for USDG on Ethereum. USDG can then be redeemed for US dollars through Paxos.",
+    onCoinGecko: "true",
+    gecko_id: "usad",
+    cmcId: "39542",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: [],
+    twitter: "https://x.com/aleohq",
+    wiki: "https://aleo.org/usad/",
+    // Its USDG backing is already included in tracked stablecoin supply.
+    doublecounted: true,
+  },
 ] as PeggedAsset[];
