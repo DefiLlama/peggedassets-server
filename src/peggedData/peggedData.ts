@@ -3000,7 +3000,7 @@ export default [
     symbol: "EURE",
     url: "https://monerium.com/tokens/",
     description:
-      "Monerium EUR e-money (EURE) is a digital currency issued by Monerium, an electronic money institution licensed and regulated by the Financial Supervisory Authority of Iceland. EURE is a stablecoin that is pegged to the Euro at a 1:1 ratio",
+      "Monerium EUR e-money (EURE) is a digital currency issued by Monerium, an electronic money institution authorised and supervised by the Financial Supervisory Authority of the Central Bank of Iceland. EURE is a stablecoin that is pegged to the Euro at a 1:1 ratio",
     mintRedeemDescription:
       "To mint Monerium EUR e-money (EURE), users need to first create an account with Monerium and complete the required KYC and AML checks. Once the account is approved, users can then fund their account with Euros via bank transfer",
     onCoinGecko: "true",
