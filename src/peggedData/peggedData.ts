@@ -7490,6 +7490,14 @@ export default [
           bridgedFromETH: ["0xb3b02E4A9Fb2bD28CC2ff97B0aB3F6B3Ec1eE9D2"],
           bridge: "ccip",
         },
+        xdc: {
+          bridgedFromETH: ["0x8210c0634AB8f273806e4b7866E9Db353773c44B"],
+          bridge: "ccip",
+        },
+        base: {
+          bridgedFromETH: ["0x8210c0634AB8f273806e4b7866E9Db353773c44B"],
+          bridge: "ccip",
+        },
       },
     },
   },
