@@ -7579,6 +7579,18 @@ export default [
         ripple: {
           issued: ["524C555344000000000000000000000000000000.rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De"],
         },
+        base: {
+          issued: ["0x8d58c0c60b8d6b88fa98b291a646db34d0f98258"],
+        },
+        optimism: {
+          issued: ["0x8d58c0c60b8d6b88fa98b291a646db34d0f98258"],
+        },
+        ink: {
+          issued: ["0x8d58c0c60b8d6b88fa98b291a646db34d0f98258"],
+        },
+        unichain: {
+          issued: ["0x8d58c0c60b8d6b88fa98b291a646db34d0f98258"],
+        },
       },
     },
   },
