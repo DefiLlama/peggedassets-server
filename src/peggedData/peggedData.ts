@@ -3595,6 +3595,7 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["PYUSD"],
+        excludeChains: ["flow"],
       }
     }
   },

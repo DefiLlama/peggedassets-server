@@ -12,8 +12,6 @@ const layerzeroConfig: LayerZeroConfig = {
     { chain: "avax", address: "0x142cdc44890978b506e745bb3bd11607b7f7faef", decimals: 6 }, // ERC20 PYUSD0 (lz:avalanche)
     { chain: "berachain", address: "0x688e72142674041f8f6af4c808a4045ca1d6ac82", decimals: 6 }, // NativeOFT BYUSD (lz:bera)
     { chain: "codex", address: "0x99af3eea856556646c98c8b9b2548fe815240750", decimals: 6 }, // ERC20 PYUSD0 (lz:codex)
-    { chain: "flow", address: "0x2aabea2058b5ac2d339b163c6ab6f2b6d53aabed", decimals: 6 }, // NativeOFT PYUSD (lz:flow)
-    { chain: "flow", address: "0x99af3eea856556646c98c8b9b2548fe815240750", decimals: 6 }, // ERC20 PYUSD0 (lz:flow)
     { chain: "fraxtal", address: "0x99af3eea856556646c98c8b9b2548fe815240750", decimals: 6 }, // ERC20 PYUSD0 (lz:fraxtal)
     { chain: "glue", address: "0x1c7c36b193224d0f72454f2a178e3b98aaefe8a5", decimals: 6 }, // NativeOFT PYUSD (lz:glue)
     { chain: "ink", address: "0x142cdc44890978b506e745bb3bd11607b7f7faef", decimals: 6 }, // ERC20 PYUSD0 (lz:ink)
