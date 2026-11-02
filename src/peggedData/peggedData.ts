@@ -4907,7 +4907,7 @@ export default [
     description:
       "AUDD is an Australian dollar stablecoin issued by AUDC Pty Ltd under AFSL 700123. It is backed 1:1 by Australian dollars held in cash on trust for AUDD holders, and is redeemable at par with the issuer, on demand. AUDD is issued natively on Ethereum, Stellar, XRP Ledger, Solana, Hedera, Base, XDC, Redbelly and Arc",
     mintRedeemDescription:
-      "AUDD is collateralised on a 1:1 basis by Australia's sovereign currency by way of cash in bank accounts or government-backed by cash held on trust for AUDD holders, separately from AUDC's operating funds.",
+      "AUDD is backed 1:1 by Australian dollars held in cash on trust for AUDD holders, separately from AUDC’s operating funds, and is redeemable at par with the issuer, on demand.",
     onCoinGecko: true,
     gecko_id: "novatti-australian-digital-dollar",
     cmcId: null,
