@@ -27,6 +27,8 @@ type PegType =
   | "peggedPEN" //peruvian sol
   | "peggedKRW" //South Korean won
   | "peggedHKD" //Hong Kong dollar
+  | "peggedAED" //UAE dirham
+  | "peggedIDR" //Indonesian rupiah
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 
