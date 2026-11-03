@@ -13728,5 +13728,190 @@ export default [
         rls: { bridgedFromPolygon: ["0xA069d3798FEAb32994aC5D98A9F011DA6024f334"] },
       },
     },
+  },
+  {
+    id: "458",
+    name: "Dirham-Backed Stablecoin",
+    address: "adi:0x1211f0cfe66739433c1330e21f4951b80e813479",
+    symbol: "DDSC",
+    url: "https://www.ddsc.ai/",
+    description:
+      "DDSC is a UAE dirham stablecoin on ADI Chain issued by AEDC Stable Coin Network and Distribution L.L.C., licensed by the Central Bank of the UAE under its Payment Token Services and Stored Value Facilities regulations. Each DDSC is backed 1:1 by dirham reserves held with licensed UAE custodians, and Crowe attests the reserves monthly.",
+    mintRedeemDescription:
+      "DDSC is issued against dirhams sent through CBUAE-licensed bank rails and reaches users through licensed distribution partners after KYC or KYB. Holders redeem at par, one DDSC for one dirham, paid to a UAE bank account.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedAED",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://www.ddsc.ai/transparency"],
+    twitter: "https://x.com/DDSCAI",
+    wiki: "https://www.ddsc.ai/DDSC_Whitepaper.pdf",
+    chainConfig: {
+      chains: {
+        adi: {
+          issued: ["0x1211f0cfe66739433c1330e21f4951b80e813479"],
+        },
+      },
+    },
+  },
+  {
+    id: "459",
+    name: "Brix iTRY",
+    address: "0xb492b4afd9658093694cf9452d5c272e8230f3b0",
+    symbol: "iTRY",
+    url: "https://brix.money/",
+    description:
+      "iTRY is a Turkish lira stablecoin issued by Brix and fully backed by DLF tokens of the Digital Liquidity Fund, a regulated basket of Turkish money market funds, with Zodia Custody as the main custodian. Accountable publishes daily proof of reserves, and the fund publishes its NAV every business day.",
+    mintRedeemDescription:
+      "Market makers, liquidity providers and institutions that pass KYC and AML and are whitelisted on chain mint and redeem iTRY at mint.brix.money around the clock. Everyone else trades iTRY on the secondary market and can stake it for wiTRY, which earns the fund yield.",
+    onCoinGecko: "true",
+    gecko_id: "brix-itry",
+    cmcId: null,
+    pegType: "peggedTRY",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.brix.money/resources/audits"],
+    twitter: "https://x.com/brix_money",
+    wiki: "https://docs.brix.money",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xb492b4afd9658093694cf9452d5c272e8230f3b0"],
+        },
+        megaeth: {
+          bridgedFromETH: ["0x996ce957408804fec19237d866799d9c7076e48c"],
+          bridge: "layerzero",
+        },
+      },
+    },
+  },
+  {
+    id: "460",
+    name: "COPM by Minteo",
+    address: "polygon:0x12050c705152931cfee3dd56c52fb09dea816c23",
+    symbol: "COPM",
+    url: "https://minteo.com/",
+    description:
+      "COPM is a Colombian peso stablecoin issued by Minteo and backed 1:1 by liquid peso reserves held at regulated financial institutions. BDO audits the reserves monthly, and Minteo publishes the reports on its transparency site.",
+    mintRedeemDescription:
+      "Businesses onboard with Minteo through a manual KYC and AML review, then tokenize or redeem COPM 1:1 against Colombian pesos by bank transfer. Local tax withholdings may apply and are shown before each operation.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedCOP",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [
+      "https://transparency.minteo.com/assets/files/minteo-hacken-audit-c7bdd6c4dd28325e6f502306e50e89c0.pdf",
+      "https://transparency.minteo.com/assets/files/minteo-cyberscope-audit-c471f96441dda2a5a7e137fad56524a5.pdf",
+    ],
+    twitter: "https://x.com/minteocom",
+    wiki: "https://transparency.minteo.com/",
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0x12050c705152931cfee3dd56c52fb09dea816c23"],
+        },
+        celo: {
+          issued: ["0xc92e8fc2947e32f2b574cca9f2f12097a71d5606"],
+        },
+        solana: {
+          issued: ["Copm5KwCLXDTWYgXJYmo6ixmMZrxd1wabkujkcuaK47C"],
+        },
+      },
+    },
+  },
+  {
+    id: "461",
+    name: "CryptoFranc",
+    address: "0xb4272071ecadd69d933adcd19ca99fe80664fc08",
+    symbol: "XCHF",
+    url: "https://www.bitcoinsuisse.com/cryptofranc",
+    description:
+      "CryptoFranc (XCHF) is a Swiss franc token issued by Bitcoin Suisse AG, where each token is a claim of one franc against the issuer backed by a bank guarantee. Bitcoin Suisse discontinued XCHF on 16 August 2024, and the remaining funds sit with CMP Group AG for the holders under a Zug court order of 5 February 2025.",
+    mintRedeemDescription:
+      "Issuance and redemption ended in 2024. Remaining holders contact Bitcoin Suisse support with the subject XCHF Exit, send their tokens to a designated address, and CMP Group AG pays francs to their bank account after compliance checks.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedCHF",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: null,
+    wiki: "https://www.bitcoinsuisse.com/cryptofranc",
+    deprecated: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xb4272071ecadd69d933adcd19ca99fe80664fc08"],
+        },
+      },
+    },
+  },
+  {
+    id: "462",
+    name: "StraitsX XIDR",
+    address: "0xebf2096e01455108badcbaf86ce30b6e5a72aa52",
+    symbol: "XIDR",
+    url: "https://www.straitsx.com/xidr",
+    description:
+      "XIDR is the StraitsX digital Indonesian rupiah, issued by StraitsX for rupiah transfers and payments on public blockchains. StraitsX states 1:1 reserve backing held under regulated custody and publishes third-party attestations.",
+    mintRedeemDescription:
+      "Verified StraitsX users mint XIDR by sending rupiah to the bank account shown in the StraitsX Mint tab and redeem it 1:1 for rupiah on the StraitsX platform.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedIDR",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/straitsx",
+    wiki: "https://docs.straitsx.com/",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xebf2096e01455108badcbaf86ce30b6e5a72aa52"],
+        },
+        polygon: {
+          issued: ["0x2c826035c1C36986117A0e949bD6ad4baB54afE2"],
+        },
+      },
+    },
+  },
+  {
+    id: "463",
+    name: "Real MXN",
+    address: "solana:6zYgzrT7X2wi9a9NeMtUvUWLLmf2a8vBsbYkocYdB9wa",
+    symbol: "MXNe",
+    url: "https://brale.xyz/stablecoins/MXNe",
+    description:
+      "Real MXN (MXNe) is a Mexican peso stablecoin issued by Brale in partnership with Etherfuse. Its reserves include Etherfuse Stablebonds, which are tokenized Mexican government CETES.",
+    mintRedeemDescription:
+      "U.S. businesses in supported states mint and redeem MXNe 1:1 with USDC or USDP from their Brale accounts after onboarding. Everyone else buys and sells MXNe on the secondary market.",
+    onCoinGecko: "true",
+    gecko_id: "real-mxn",
+    cmcId: null,
+    pegType: "peggedMXN",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://brale.xyz/security"],
+    twitter: "https://x.com/brale_xyz",
+    wiki: "https://etherfuse.substack.com/p/etherfuse-introduces-real-mxn-mxne",
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["6zYgzrT7X2wi9a9NeMtUvUWLLmf2a8vBsbYkocYdB9wa"],
+        },
+        base: {
+          issued: ["0x269cae7dc59803e5c596c95756faeebb6030e0af"],
+        },
+        stellar: {
+          issued: ["MXNe-GCQCNWT22JDLENQAVIE6DRJGHWAQ6EX2H5ABGPV55EJUPPZM5UA7KHZR"],
+        },
+      },
+    },
   }
 ] as PeggedAsset[];
