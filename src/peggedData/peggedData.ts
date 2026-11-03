@@ -13913,5 +13913,68 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "464",
+    name: "R25 rcUSD",
+    address: "sui:0x4dea4916aa61f522aca69c4e7265b8e3bdd65d3947f4fb9aaa6d87e0dfac35fd::rcusd::RCUSD",
+    symbol: "rcUSD",
+    url: "https://www.r25.xyz/",
+    description:
+      "rcUSD is a tokenized dollar on Sui issued by R25 Labs and designed to hold a value of one US dollar. R25 backs it with a diversified portfolio of tokenized money market funds, short-duration US Treasury bills and stablecoins.",
+    mintRedeemDescription:
+      "rcUSD is obtained and redeemed on the exchange page of the R25 app, and R25 does not publish eligibility, fees or settlement times. Holders can stake rcUSD for rcUSDp, a receipt token that earns the portfolio yield.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.r25.xyz/docs/security/audit-reports"],
+    twitter: "https://x.com/R25Official",
+    wiki: "https://www.sui.io/blog/r25-rwa-assets-rcusd-rcusdp",
+    chainConfig: {
+      chains: {
+        sui: {
+          issued: ["0x4dea4916aa61f522aca69c4e7265b8e3bdd65d3947f4fb9aaa6d87e0dfac35fd::rcusd::RCUSD"],
+        },
+      },
+    },
+  },
+  {
+    id: "465",
+    name: "Dinari USD+",
+    address: "0x98c6616f1cc0d3e938a16200830dd55663dd7dd3",
+    symbol: "USD+",
+    url: "https://dinari.com/usdplus",
+    description:
+      "USD+ is a yield-bearing dollar stablecoin issued by Dinari and backed by short-term US Treasuries, cash and equivalents. It rebases daily, so the yield lands in each holder's wallet balance, and it is the default dollar on Dinari's dShares platform.",
+    mintRedeemDescription:
+      "Holders with a Dinari account, after KYC and AML onboarding, mint USD+ with USDC or USDT and redeem it at any time for 1 USD per token in USDC, settled in zero to three days. Transfers on the secondary market stay permissionless.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://hacken.io/audits/dinari"],
+    twitter: "https://x.com/DinariGlobal",
+    wiki: "https://docs.dinari.com/docs/what-is-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x98c6616f1cc0d3e938a16200830dd55663dd7dd3", "0xC9E3df3D230980B45adC623C81C3DF4A73a5350f"],
+        },
+        arbitrum: {
+          issued: ["0xfc90518d5136585ba45e34ed5e1d108bd3950cfa", "0xC9E3df3D230980B45adC623C81C3DF4A73a5350f"],
+        },
+        base: {
+          issued: ["0x98c6616f1cc0d3e938a16200830dd55663dd7dd3", "0xC9E3df3D230980B45adC623C81C3DF4A73a5350f"],
+        },
+        plume_mainnet: {
+          issued: ["0x1fa3671df7300df728858b88c7216708f22da3fb", "0xC9E3df3D230980B45adC623C81C3DF4A73a5350f"],
+        },
+      },
+    },
   }
 ] as PeggedAsset[];
