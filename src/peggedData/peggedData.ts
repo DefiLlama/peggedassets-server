@@ -13913,5 +13913,68 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "464",
+    name: "R25 rcUSD",
+    address: "sui:0x4dea4916aa61f522aca69c4e7265b8e3bdd65d3947f4fb9aaa6d87e0dfac35fd::rcusd::RCUSD",
+    symbol: "rcUSD",
+    url: "https://www.r25.xyz/",
+    description:
+      "rcUSD is a tokenized dollar on Sui issued by R25 Labs and designed to hold a value of one US dollar. R25 backs it with a diversified portfolio of tokenized money market funds and stablecoins.",
+    mintRedeemDescription:
+      "rcUSD is obtained and redeemed in the R25 app. R25's terms bar residents of the United States, China including Hong Kong, the Marshall Islands and sanctioned countries, and R25 does not publish fees or settlement times. Holders can stake rcUSD for rcUSDp, a receipt token that earns the portfolio yield plus chain incentives.",
+    onCoinGecko: "false",
+    gecko_id: "r25-rcusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://x.com/R25Official",
+    wiki: "https://www.sui.io/blog/r25-rwa-assets-rcusd-rcusdp",
+    chainConfig: {
+      chains: {
+        sui: {
+          issued: ["0x4dea4916aa61f522aca69c4e7265b8e3bdd65d3947f4fb9aaa6d87e0dfac35fd::rcusd::RCUSD"],
+        },
+      },
+    },
+  },
+  {
+    id: "465",
+    name: "Dinari USD+",
+    address: "0xC9E3df3D230980B45adC623C81C3DF4A73a5350f",
+    symbol: "USD+",
+    url: "https://dinari.com/usdplus",
+    description:
+      "USD+ is a yield-bearing dollar stablecoin issued by Dinari and backed by short-term US Treasuries, cash and equivalents. It rebases daily, so the yield lands in each holder's wallet balance, and it is the default dollar on Dinari's dShares platform.",
+    mintRedeemDescription:
+      "USD+ is minted with USDC or USDT on usd.dinari.com or through Dinari's Minter contract, and redeemed at any time for 1 USD per token in USDC through the Redeemer contract, settled in zero to three days. Transfers are open, though Dinari can restrict addresses through its transfer restrictor.",
+    onCoinGecko: "false",
+    gecko_id: "dinari-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://hacken.io/audits/dinari"],
+    twitter: "https://x.com/DinariGlobal",
+    wiki: "https://docs.dinari.com/docs/what-is-usd",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xC9E3df3D230980B45adC623C81C3DF4A73a5350f"],
+        },
+        arbitrum: {
+          issued: ["0xC9E3df3D230980B45adC623C81C3DF4A73a5350f"],
+        },
+        base: {
+          issued: ["0xC9E3df3D230980B45adC623C81C3DF4A73a5350f"],
+        },
+        plume_mainnet: {
+          issued: ["0xC9E3df3D230980B45adC623C81C3DF4A73a5350f"],
+        },
+      },
+    },
   }
 ] as PeggedAsset[];
