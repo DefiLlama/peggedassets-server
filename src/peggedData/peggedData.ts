@@ -12234,6 +12234,10 @@ export default [
           bridgedFromETH: ["0xDbEc7b2F9435d4FCbDf9CFCab626a6Eb88b5d0D1"],
           bridge: "ccip",
         },
+        solana: {
+          bridgedFromETH: ["94fSzNv2u6mZJHRvcR4ZcDuXrrVJTa45QYbfb2Jfnw8x"],
+          bridge: "ccip",
+        },
       },
     },
   },
