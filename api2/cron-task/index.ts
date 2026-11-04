@@ -11,7 +11,7 @@ import sluggifyPegged from "../../src/peggedAssets/utils/sluggifyPegged";
 import peggedAssets from "../../src/peggedData/peggedData";
 import * as sdk from "@defillama/sdk";
 import { normalizeChain } from "../../src/utils/normalizeChain";
-import { CacheType, cache, initCache, saveCache } from "../cache";
+import { CacheType, cache, initCache, processQueuedCacheResets, saveCache } from "../cache";
 import { storeRouteData } from "../file-cache";
 import { chainCacheSlug } from "../utils/cachePath";
 import { craftChainDominanceResponse } from "../routes/getChainDominance";
@@ -26,6 +26,16 @@ import { storeVolumesRoutes } from "./storeVolumes";
 run().catch(console.error).then(() => process.exit(0))
 
 async function run() {
+  // there is a queue of stablecoin ids in R2 which need their cache reset
+  // get them, delete them from the local pg-cache file, clear them from the R2 queue
+  if (process.env.STABLECOINS_CACHE_RESET_R2_FLAG === 'true') {
+    try {
+      await processQueuedCacheResets()
+    } catch (e) {
+      console.error('Failed to process queued stablecoin cache resets:', (e as any)?.message ?? e)
+    }
+  }
+
   await initCache(CacheType.CRON)
 
   await Promise.all([
