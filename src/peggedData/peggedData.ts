@@ -5148,6 +5148,7 @@ export default [
     twitter: "https://twitter.com/Blast_L2",
     yieldBearing: true,
     wiki: null,
+    deadFrom: "2026-10-26", // Blast chain shut down
     chainConfig: {
       chains: {
         blast: {
