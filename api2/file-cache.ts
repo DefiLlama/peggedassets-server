@@ -84,3 +84,20 @@ export async function deleteFromPGCache(key: string) {
   const id = getCacheFile(key)
   return deleteFileData(id)
 }
+
+// Delete old cache versions from pg-cache: every entry starting with prefix except the current one
+export function clearOldPGCacheFiles(prefix: string, current: string) {
+  try {
+    const parentPath = path.join(CACHE_DIR!, 'pg-cache')
+    if (!fs.existsSync(parentPath)) return
+    const oldEntries = fs.readdirSync(parentPath)
+      .filter((name) => name.startsWith(prefix) && name !== current)
+
+    for (const name of oldEntries) {
+      fs.rmSync(path.join(parentPath, name), { recursive: true, force: true })
+      log(`Deleted old cache: ${name}`)
+    }
+  } catch (e) {
+    console.error('Error clearing old cache files:', e)
+  }
+}

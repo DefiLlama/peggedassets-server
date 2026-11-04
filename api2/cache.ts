@@ -1,6 +1,6 @@
 import { getLastRecord, historicalRates } from "../src/peggedAssets/utils/getLastRecord";
 import { FxRateMap } from "../src/utils/fxRates";
-import { readFromPGCache, writeToPGCache } from "./file-cache";
+import { clearOldPGCacheFiles, readFromPGCache, writeToPGCache } from "./file-cache";
 import { getR2JSON, storeR2JSON } from "./utils/r2";
 
 export enum CacheType {
@@ -28,7 +28,12 @@ export const cache: {
   historicalPrices?: DailyPeggedPrices[]
 } = {}
 
-const cacheFile = 'stablecoin-cache-v7'
+const cacheFile = 'stablecoin-cache-v7' // update the version number to reset the cache
+
+// to ensure that we dont run out of disk space, old cache versions are removed
+export function clearOldCacheFiles() {
+  return clearOldPGCacheFiles('stablecoin-cache-v', cacheFile)
+}
 
 export async function initCache(cacheType = CacheType.API_SERVER) {
   console.time('Cache initialized')
