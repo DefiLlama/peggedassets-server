@@ -5,10 +5,14 @@ import { getClosestDayStartTimestamp, secondsInDay, secondsInHour, } from "../..
 import * as sdk from "@defillama/sdk";
 import { normalizeChain } from "../../src/utils/normalizeChain";
 import { getHistoricalValues } from "../../src/utils/shared/dynamodb";
-import { buildFxRateMap, lookupFxRate, pegTypeFxTicker } from "../../src/utils/fxRates";
+import { buildFxRateMap, pegPriceAt } from "../../src/utils/fxRates";
+import { balancesUntilDeadFrom, isInactive } from "../../src/utils/listingStatus";
+import { buildPriceSeries, resolvePricing, withLatestHourly } from "../../src/utils/pricing";
 import { cache } from "../cache";
+import getEnv from "../env";
 import { storeRouteData } from "../file-cache";
 import { chainCacheSlug } from "../utils/cachePath";
+import { cachedSeries } from "../utils/currentPricing";
 
 type TokenBalance = {
   [token: string]: number | undefined;
@@ -20,27 +24,16 @@ export default async function handler() {
   console.time(timeKey);
   const historicalRates = (await axios.get(`https://llama-stablecoins-data.s3.eu-central-1.amazonaws.com/rates/full`))?.data;
   const lastPrices = await getLastRecord(hourlyPeggedPrices);
-  const priceTimestamps = cache.historicalPrices?.map((item: any) => item.SK);
   await getPeggedAssetsData()
   cache.fxRateMap = buildFxRateMap(historicalRates)
   cache.lastPrices = lastPrices
-  cache.priceTimestamps = priceTimestamps
+  cache.priceSeries = buildPriceSeries(withLatestHourly(cache.historicalPrices ?? [], cache.lastPrices))
   console.timeEnd(timeKey)
 }
 
 export async function storeChartsPart2(assetChainMap: any) {
-  const { lastPrices, fxRateMap, priceTimestamps, } = cache
-
-  const commonOptions = {
-    assetChainMap,
-    lastPrices,
-    historicalPrices: cache.historicalPrices,
-    fxRateMap,
-    priceTimestamps,
-    peggedAssetsData: cache.peggedAssetsData,
-  }
   // store overall chart
-  const allData = await craftChartsResponse({ ...commonOptions, chain: "all" });
+  const allData = await craftChartsResponse({ assetChainMap, chain: "all" });
   await storeRouteData('charts/all/all', allData)
 
   // store chain charts
@@ -48,14 +41,14 @@ export async function storeChartsPart2(assetChainMap: any) {
     Object.values(sdk.chainUtils.chainLabelsToKeyMap as Record<string, string>),
   );
   for (const normalizedChain of chainKeys) {
-    const chainData = await craftChartsResponse({ ...commonOptions, chain: normalizedChain, });
+    const chainData = await craftChartsResponse({ assetChainMap, chain: normalizedChain, });
     await storeRouteData(`charts/${chainCacheSlug(normalizedChain)}`, chainData)
   }
 
   // store pegged asset charts
   for (const pegged of peggedAssets) {
     const id = pegged.id;
-    const chart = await craftChartsResponse({ ...commonOptions, peggedID: id });
+    const chart = await craftChartsResponse({ assetChainMap, peggedID: id });
     await storeRouteData(`charts/all/${id}`, chart)
   }
 }
@@ -78,10 +71,6 @@ async function getPeggedAssetsData() {
       lastBalance
     }
   }))
-
-  // remove all Terra data after the depeg timestamp
-  cache.peggedAssetsData['3'].balances = cache.peggedAssetsData['3'].balances
-    .filter((item: any) => item.SK <= 1655891865)
 
   replaceAvalanceAvax(cache.peggedAssetsData) // convert all 'avalanche' keys to 'avax'
   return cache.peggedAssetsData
@@ -114,45 +103,6 @@ const formatTokenBalance = (tokenBalance: TokenBalance) => {
   return formattedTokenBalance;
 };
 
-// this should not get prices from the previous day
-function pricesCompareFn(a: number, b: number) {
-  if (Math.abs(a - b) < secondsInDay) return 0;
-  return a - b;
-}
-
-// returns index of element or -n-1 where n is index of closest element
-// uses compare_fn to consider timestamps the same if they are within 1 day range
-function timestampsBinarySearch(
-  ar: number[],
-  el: number,
-  compare_fn: (a: number, b: number) => number
-) {
-  var m = 0;
-  var n = ar.length - 1;
-  while (m <= n) {
-    var k = (n + m) >> 1;
-    var cmp = compare_fn(el, ar[k]);
-    if (cmp > 0) {
-      m = k + 1;
-    } else if (cmp < 0) {
-      n = k - 1;
-    } else {
-      return k;
-    }
-  }
-  return -m - 1;
-}
-
-function extractResultOfBinarySearch(ar: any[], binarySearchResult: number) {
-  if (binarySearchResult < 0) {
-    if (binarySearchResult === -1 || ar.length < -binarySearchResult) {
-      return null;
-    }
-    return ar[-binarySearchResult - 1];
-  }
-  return ar[binarySearchResult];
-}
-
 const _assetCache: any = {};
 let lastDailyTimestamp = 0;
 
@@ -174,7 +124,9 @@ export function craftChartsResponse(
     return chart.filter((entry: any) => entry)
   }
 
-  const { historicalPrices, fxRateMap, lastPrices, priceTimestamps, peggedAssetsData, } = cache as any
+  const { fxRateMap, peggedAssetsData, } = cache as any
+  const priceSeries = cachedSeries()
+  const maxAgeDays = getEnv().priceCarryMaxDays
   const sumDailyBalances = {} as {
     [timestamp: number]: {
       circulating: TokenBalance;
@@ -203,8 +155,8 @@ export function craftChartsResponse(
 
   function addToAssetCache(pegged: any) {
     const { balance: lastBalance, balances } = peggedAssetsData[pegged.id]
-    let historicalBalance = { Items: balances } as any;
-    if (!historicalBalance.Items || historicalBalance.Items.length < 1) return undefined;
+    let historicalBalance = { Items: balancesUntilDeadFrom(balances ?? [], pegged) } as any;
+    if (historicalBalance.Items.length < 1) return undefined;
 
     const lastDailyItem = historicalBalance.Items[historicalBalance.Items.length - 1];
     if (lastBalance && lastBalance.SK > lastDailyItem.SK && lastDailyItem.SK + secondsInHour * 25 > lastBalance.SK) {
@@ -221,12 +173,6 @@ export function craftChartsResponse(
     };
   }
 
-  const lastDailyItem = historicalPrices[historicalPrices.length - 1];
-  if (lastPrices && lastPrices.SK > lastDailyItem.SK && lastDailyItem.SK + secondsInHour * 25 > lastPrices.SK) {
-    lastPrices.SK = lastDailyItem.SK;
-    historicalPrices[historicalPrices.length - 1] = lastPrices;
-  }
-
   historicalPeggedBalances.forEach((peggedBalance) => {
     let { historicalBalance: _historicalBalance, pegged, lastTimestamp } = peggedBalance;
     const historicalBalance = [..._historicalBalance];
@@ -236,7 +182,7 @@ export function craftChartsResponse(
 
     // fill missing data with last available data
     while (lastTimestamp < lastDailyTimestamp) {
-      if (pegged.deadFrom || pegged.delisted) break; // don't extend inactive assets beyond their last real data point
+      if (isInactive(pegged)) break; // don't extend inactive assets beyond their last real data point
       lastTimestamp = getClosestDayStartTimestamp(lastTimestamp + 24 * secondsInHour);
       const syntheticBalance = { ...lastBalance, SK: lastTimestamp };
       historicalBalance.push(syntheticBalance);
@@ -248,21 +194,12 @@ export function craftChartsResponse(
       const timestamp = getClosestDayStartTimestamp(item.SK)
       let itemBalance: any = {};
 
-      const closestPriceIndex = timestampsBinarySearch(priceTimestamps, timestamp, pricesCompareFn);
-      const closestPrices = extractResultOfBinarySearch(historicalPrices, closestPriceIndex);
-
-      let fallbackPrice = 1;
-      const historicalPrice = closestPrices?.prices[peggedGeckoID];
-      if (pegType === "peggedVAR") {
-        fallbackPrice = 0;
-      } else if (pegType !== "peggedUSD" && !historicalPrice) {
-        const ticker = pegTypeFxTicker(pegType);
-        const rate = fxRateMap ? lookupFxRate(fxRateMap, ticker, timestamp) : null;
-        fallbackPrice = rate ? 1 / rate : 0;
-        if (!isFinite(fallbackPrice)) fallbackPrice = 0;
-      }
-
-      const price = historicalPrice ? historicalPrice : fallbackPrice;
+      const pricing = resolvePricing(
+        { gecko_id: peggedGeckoID, pegType },
+        { series: priceSeries, daySK: timestamp, pegPrice: pegPriceAt(fxRateMap, pegType, timestamp) },
+        { maxAgeDays }
+      );
+      const price = pricing.price;
       const isAllChain = (chain === "all");
 
       if (isAllChain) {

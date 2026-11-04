@@ -20,7 +20,7 @@ import storeStablecoins from "./getStableCoins";
 import { craftStablecoinChainsResponse } from "./getStablecoinChains";
 import { craftStablecoinPricesResponse } from "./getStablecoinPrices";
 import storeCharts, { craftChartsResponse, storeChartsPart2 } from "./storeCharts";
-import storePeggedPrices from "./storePeggedPrices";
+import storePeggedPrices, { sendPriceFeedReport } from "./storePeggedPrices";
 import { storeVolumesRoutes } from "./storeVolumes";
 
 run().catch(console.error).then(() => process.exit(0))
@@ -69,6 +69,7 @@ async function run() {
   await storeRouteData('stablecoincharts2/all-dominance-chain-breakdown', { dominanceMap, chainChartMap, })
   await storeRouteData('stablecoincharts2/recent-protocol-data', recentProtocolData)
   await saveCache()
+  await sendPriceFeedReport()
 
   async function storePeggedAssets() {
     for (const peggedAssetData of allStablecoinsData.peggedAssets) {

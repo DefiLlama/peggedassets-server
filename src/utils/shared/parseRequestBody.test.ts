@@ -1,15 +1,18 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
 import parseRequestBody from "./parseRequestBody";
 
 test("invalid json body is rejected", () => {
-  expect(() => {
-    parseRequestBody("fake");
-  }).toThrowErrorMatchingInlineSnapshot(
-    `"Message body is not a valid JSON object"`
+  assert.throws(
+    () => {
+      parseRequestBody("fake");
+    },
+    { message: "Message body is not a valid JSON object" }
   );
 });
 
 test("parsed JSON object is returned", () => {
-  expect(parseRequestBody('{"a":"b"}')).toEqual({
+  assert.deepEqual(parseRequestBody('{"a":"b"}'), {
     a: "b",
   });
 });
