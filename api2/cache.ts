@@ -58,8 +58,29 @@ async function readCacheResetQueue(): Promise<Record<string, number>> {
   return (await getR2JSON(CACHE_RESET_R2_KEY)) ?? {}
 }
 
+// Drops asset ids from the cron cache file so this run refetches their full history from DDB.
+// Must run before initCache(CacheType.CRON).
+async function resetCachedAssets(ids: string[]) {
+  const data = await readFromPGCache(cacheFile)
+  if (data?.peggedAssetsData) {
+    ids.forEach((id) => delete data.peggedAssetsData[id])
+    await writeToPGCache(cacheFile, data)
+  }
+  console.log(`Reset stablecoin cache for ids: ${ids.join(', ')}`)
+}
+
+// Manual reset, e.g. after editing records directly in DDB:
+// STABLECOINS_CACHE_RESET_ASSETS=1,2 pnpm run api2-cron-task
+export async function resetCacheAssetsFromEnv() {
+  const ids = (process.env.STABLECOINS_CACHE_RESET_ASSETS ?? '')
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean)
+  if (!ids.length) return
+  await resetCachedAssets(ids)
+}
+
 // R2 queue of asset ids ({ [id]: queuedAt }) to reset, e.g. after a backfill.
-// Drops them from the cron cache file so this run refetches their full history from DDB.
 // Must run before initCache(CacheType.CRON).
 export async function processQueuedCacheResets() {
   const queued = await readCacheResetQueue()
@@ -69,12 +90,7 @@ export async function processQueuedCacheResets() {
     return
   }
 
-  const data = await readFromPGCache(cacheFile)
-  if (data?.peggedAssetsData) {
-    ids.forEach((id) => delete data.peggedAssetsData[id])
-    await writeToPGCache(cacheFile, data)
-  }
-  console.log(`Reset stablecoin cache for ids: ${ids.join(', ')}`)
+  await resetCachedAssets(ids)
 
   // Re-read before clearing so ids queued (or re-queued) meanwhile are kept for the next run.
   const latest = await readCacheResetQueue()

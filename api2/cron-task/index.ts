@@ -11,7 +11,7 @@ import sluggifyPegged from "../../src/peggedAssets/utils/sluggifyPegged";
 import peggedAssets from "../../src/peggedData/peggedData";
 import * as sdk from "@defillama/sdk";
 import { normalizeChain } from "../../src/utils/normalizeChain";
-import { CacheType, cache, clearOldCacheFiles, initCache, processQueuedCacheResets, saveCache } from "../cache";
+import { CacheType, cache, clearOldCacheFiles, initCache, processQueuedCacheResets, resetCacheAssetsFromEnv, saveCache } from "../cache";
 import { storeRouteData } from "../file-cache";
 import { chainCacheSlug } from "../utils/cachePath";
 import { craftChainDominanceResponse } from "../routes/getChainDominance";
@@ -38,6 +38,9 @@ async function run() {
       console.error('Failed to process queued stablecoin cache resets:', (e as any)?.message ?? e)
     }
   }
+
+  // manual reset of specific assets: STABLECOINS_CACHE_RESET_ASSETS=1,2 pnpm run api2-cron-task
+  await resetCacheAssetsFromEnv()
 
   await initCache(CacheType.CRON)
 
