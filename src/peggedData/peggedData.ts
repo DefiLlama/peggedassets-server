@@ -9137,25 +9137,54 @@ export default [
       chains: {
         ethereum: {
           issued: ["0x2c537e5624e4af88a7ae4060c022609376c8d0eb"],
-          unreleased: ["0xd03846601b6b77965693741aAF296491Bc10A0EB"],
+          unreleased: [
+            "0xd03846601b6b77965693741aAF296491Bc10A0EB", // treasury
+            "0x8f58955bb4dff80f956b4683d29b62c984d4657f", // redemption / burn wallet
+            "0xb4d3796a4f9b4b4181661ae0372bd8c604f34c65", // ops wallet
+          ],
         },
         base: {
           issued: ["0xfb8718a69aed7726afb3f04d2bd4bfde1bdcb294"],
+          unreleased: [
+            "0xd03846601b6b77965693741aAF296491Bc10A0EB", // treasury
+            "0x8f58955bb4dff80f956b4683d29b62c984d4657f", // redemption / burn wallet
+            "0xb4d3796a4f9b4b4181661ae0372bd8c604f34c65", // ops wallet
+          ],
         },
         avax: {
           issued: ["0x564a341df6c126f90cf3ecb92120fd7190acb401"],
+          unreleased: [
+            "0xd03846601b6b77965693741aAF296491Bc10A0EB", // treasury
+            "0x8f58955bb4dff80f956b4683d29b62c984d4657f", // redemption / burn wallet
+            "0xb4d3796a4f9b4b4181661ae0372bd8c604f34c65", // ops wallet
+          ],
         },
         bsc: {
           issued: ["0xc1fdbed7dac39cae2ccc0748f7a80dc446f6a594"],
+          unreleased: [
+            "0xd03846601b6b77965693741aAF296491Bc10A0EB", // treasury
+            "0x8f58955bb4dff80f956b4683d29b62c984d4657f", // redemption / burn wallet
+            "0xb4d3796a4f9b4b4181661ae0372bd8c604f34c65", // ops wallet
+          ],
         },
         polygon: {
           issued: ["0x4fb71290ac171e1d144f7221d882becac7196eb5"],
+          unreleased: [
+            "0xd03846601b6b77965693741aAF296491Bc10A0EB", // treasury
+            "0x8f58955bb4dff80f956b4683d29b62c984d4657f", // redemption / burn wallet
+            "0xb4d3796a4f9b4b4181661ae0372bd8c604f34c65", // ops wallet
+          ],
         },
         solana: {
           issued: ["A94X2fRy3wydNShU4dRaDyap2UuoeWJGWyATtyp61WZf"],
         },
         plasma: {
           issued: ["0x90729a45948c3078890Bc80F2a4e7870A2Ea4C5E"],
+          unreleased: [
+            "0xd03846601b6b77965693741aAF296491Bc10A0EB", // treasury
+            "0x8f58955bb4dff80f956b4683d29b62c984d4657f", // redemption / burn wallet
+            "0xb4d3796a4f9b4b4181661ae0372bd8c604f34c65", // ops wallet
+          ],
         },
       },
     },
