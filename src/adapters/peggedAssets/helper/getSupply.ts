@@ -31,8 +31,10 @@ const tweleveHoursAgo = () => Math.round(Date.now() / 1000) - 12 * 60 * 60;
 
 export async function getApi(chain: string, _api: ChainApi) {
   if (chain === _api.chain) return _api;
-  const api = new ChainApi({ chain });
-  if (_api.timestamp && _api.timestamp < tweleveHoursAgo()) await api.getBlock()
+  // Historical run: keep the timestamp so the cross-chain api resolves that day's block, not latest.
+  const historical = !!_api.timestamp && _api.timestamp < tweleveHoursAgo();
+  const api = new ChainApi(historical ? { chain, timestamp: _api.timestamp } : { chain });
+  if (historical) await api.getBlock()
   return api;
 }
 
