@@ -6051,6 +6051,7 @@ export default [
     auditLinks: "https://docs.anzen.finance/developer-resources/audits",
     twitter: "https://x.com/AnzenFinance",
     wiki: "https://docs.anzen.finance/",
+    deadUrl: true,
     chainConfig: {
       chains: {
         ethereum: {
@@ -6327,6 +6328,7 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/elixir",
     wiki: "https://docs.elixir.xyz/deusd",
+    deadUrl: true,
     chainConfig: {
       chains: {
         ethereum: {
@@ -11405,6 +11407,7 @@ export default [
     twitter: "https://x.com/Neronaxyz",
     wiki: "https://docs.nerona.xyz/welcome",
     module: "nerona-usdnr",
+    deadUrl: true,
     chainConfig: {
       chains: {
         ethereum: {
