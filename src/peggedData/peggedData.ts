@@ -1868,6 +1868,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/homecoinfinance",
     wiki: "https://wiki.defillama.com/wiki/HomeCoin",
+    deadUrl: true,
     chainConfig: {
       chains: {
         ethereum: {
