@@ -4,14 +4,22 @@
  *
  * Sources (all public, no key):
  *   - ticker list:   https://apidocs.bridge.xyz/platform/issuance/reporting-and-transparency.md
- *                    (fallback: slugs linked from https://reserves.bridge.xyz/)
+ *                    (supplemented by slugs linked from https://reserves.bridge.xyz/)
  *   - supply:        https://transparency.bridge.xyz/v0/stablecoins/<ticker>
  *   - deployments:   https://reserves.bridge.xyz/<ticker>  (explorer links -> chain + contract)
  *
  * Usage:
  *   npx ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/checkBridgeStablecoins.ts [--json out.json] [--min-supply 1000]
  *
- * Exit code 1 when something is missing (so a scheduler can key off it), 0 when fully in sync.
+ * Exit codes:
+ *   0  every discovered token is fully tracked and every check completed
+ *   1  something is missing or needs a human look
+ *   2  the check itself was incomplete (ticker discovery or a per-ticker fetch failed, bad CLI args)
+ *
+ * Matching is done on (DefiLlama chain, normalized address), using only the primary `address` and the
+ * token-deployment keys of `chainConfig.chains` (issued, bridgedFrom*, cosmosIssued, cosmosBridgedFrom*).
+ * Assets whose deployments live in an adapter file are only known by their primary address, so a
+ * deployment tracked only in an adapter file shows up as a missing chain.
  * The report is meant to be read by whoever adds the peggedData entries; it never edits files.
  */
 import * as fs from "fs";
@@ -51,58 +59,105 @@ const EXPLORER_CHAINS: Record<string, string> = {
   "tronscan.org": "tron",
 };
 
+// chainConfig keys that hold addresses of the token itself (see addChainExports in helper/getSupply.ts).
+// unreleased / reserves (treasury wallets), bridgeOnETH (bridge contract), bridge (a name), issuedABI are excluded.
+function isDeploymentKey(key: string) {
+  return key === "issued" || key === "cosmosIssued" || key.startsWith("bridgedFrom") || key.startsWith("cosmosBridgedFrom");
+}
+
+const MOVE_CHAINS = new Set(["aptos", "sui", "movement", "move"]);
+
+// Comparable form of an address on a given chain. Hex is case-insensitive; base58 (solana, tron) is not.
+export function normalizeAddress(chain: string, address: string): string {
+  let a = address.trim();
+  if (chain === "stellar") return a.replace(/^([^:-]+)-(G[A-Z2-7]{55})$/, "$1:$2").toLowerCase(); // CODE-ISSUER == CODE:ISSUER
+  if (/^0x[0-9a-f]/i.test(a)) {
+    a = a.toLowerCase();
+    if (MOVE_CHAINS.has(chain)) a = a.replace(/0x0*([0-9a-f]+)/g, (_m, h) => `0x${h}`); // 0x05ab == 0x5ab
+  }
+  return a;
+}
+
+export const deploymentKey = (chain: string, address: string) => `${chain}|${normalizeAddress(chain, address)}`;
+
 type Deployment = { chain: string; address: string; source: string };
-type Token = {
+type Supply = { status: "ok"; value: number } | { status: "unknown"; reason: string };
+export type Token = {
   ticker: string;
   name: string;
   symbol: string;
   pegType: string;
-  supply: number | null;
+  supply: Supply;
   deployments: Deployment[];
   unmapped: string[]; // explorer links the script could not attribute to a chain
   bareAddresses: string[]; // addresses shown on the page without an explorer link (chain unknown)
 };
+type Fetcher = (url: string) => Promise<string>;
 
-async function text(url: string): Promise<string> {
+const defaultFetch: Fetcher = async (url) => {
   const res = await fetch(url, { headers: { "user-agent": "defillama-peggedassets-bridge-check" } });
   if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
   return res.text();
-}
+};
 
-async function getTickers(): Promise<Map<string, string>> {
+export type Discovery = { tickers: Map<string, string>; docsOk: boolean; indexOk: boolean; errors: string[] };
+
+export async function getTickers(text: Fetcher): Promise<Discovery> {
   const tickers = new Map<string, string>(); // ticker -> pegType
+  const errors: string[] = [];
+  let docsOk = false;
+  let indexOk = false;
   try {
     const md = await text(TICKERS_MD);
     const start = md.search(/Supported stablecoin tickers/i);
-    const section = start >= 0 ? md.slice(start, md.indexOf("\n## ", start) > 0 ? md.indexOf("\n## ", start) : undefined) : "";
+    if (start < 0) throw new Error(`"Supported stablecoin tickers" section not found in ${TICKERS_MD}`);
+    const end = md.indexOf("\n## ", start);
+    const section = md.slice(start, end > 0 ? end : undefined);
     let peg = "peggedUSD";
+    let found = 0;
     for (const line of section.split("\n")) {
       const heading = line.match(/\*\*([A-Z]{3})-pegged\*\*/);
       if (heading) peg = `pegged${heading[1]}`;
-      for (const m of line.matchAll(/`([a-z0-9_]+)`/g)) tickers.set(m[1], peg);
+      for (const m of line.matchAll(/`([a-z0-9_]+)`/g)) {
+        tickers.set(m[1], peg);
+        found++;
+      }
     }
+    if (!found) throw new Error(`no tickers parsed from the "Supported stablecoin tickers" section of ${TICKERS_MD}`);
+    docsOk = true;
   } catch (e: any) {
-    console.error(`[bridge-check] ticker list from docs failed: ${e.message}`);
+    errors.push(`ticker list from docs failed: ${e.message}`);
   }
-  // the reserves index links the top 20 tokens; union in case the docs lag behind
+  // the reserves index links the top tokens; union in case the docs lag behind. It is not a complete list.
   try {
     const html = await text(RESERVES + "/");
     for (const m of html.matchAll(/href="\/([a-z0-9_]+)"/g)) if (!tickers.has(m[1])) tickers.set(m[1], "peggedUSD");
+    indexOk = true;
   } catch (e: any) {
-    console.error(`[bridge-check] reserves index failed: ${e.message}`);
+    errors.push(`reserves index failed: ${e.message}`);
   }
-  return tickers;
+  return { tickers, docsOk, indexOk, errors };
 }
 
-async function getToken(ticker: string, pegType: string): Promise<Token> {
-  const token: Token = { ticker, name: ticker, symbol: ticker.toUpperCase(), pegType, supply: null, deployments: [], unmapped: [], bareAddresses: [] };
-  try {
-    const api = JSON.parse(await text(`${TRANSPARENCY}/${ticker}`));
-    token.supply = Number(api.total_onchain_amount);
-  } catch (e: any) {
-    console.error(`[bridge-check] ${ticker}: transparency api failed: ${e.message}`);
+export function parseSupply(raw: unknown): Supply {
+  if (typeof raw === "number" || (typeof raw === "string" && raw.trim() !== "")) {
+    const value = Number(raw);
+    if (Number.isFinite(value) && value >= 0) return { status: "ok", value };
   }
-  const html = await text(`${RESERVES}/${ticker}`);
+  return { status: "unknown", reason: `invalid total_onchain_amount ${JSON.stringify(raw)}` };
+}
+
+export async function getToken(ticker: string, pegType: string, text: Fetcher): Promise<Token> {
+  const token: Token = {
+    ticker, name: ticker, symbol: ticker.toUpperCase(), pegType,
+    supply: { status: "unknown", reason: "not fetched" }, deployments: [], unmapped: [], bareAddresses: [],
+  };
+  try {
+    token.supply = parseSupply(JSON.parse(await text(`${TRANSPARENCY}/${ticker}`)).total_onchain_amount);
+  } catch (e: any) {
+    token.supply = { status: "unknown", reason: `transparency api failed: ${e.message}` };
+  }
+  const html = await text(`${RESERVES}/${ticker}`); // throws -> the ticker is recorded as a failed check
   const title = html.match(/<title>([^<]*?)\s*\|\s*Bridge<\/title>/);
   const nameSym = title?.[1].match(/^(.*)\s\(([^)]+)\)$/);
   if (nameSym) {
@@ -112,16 +167,20 @@ async function getToken(ticker: string, pegType: string): Promise<Token> {
   const links = new Set<string>();
   for (const m of html.matchAll(/https?:\/\/[^"'\s<>)\\]+\/(?:address|token|account|coin|object|contract)\/[^"'\s<>)\\]+/g))
     links.add(m[0].replace(/\\$/, ""));
+  const seen = new Set<string>();
   for (const link of links) {
     const host = new URL(link).host.replace(/^www\./, "");
     const chain = EXPLORER_CHAINS[host];
     let address = decodeURIComponent(link.split(/\/(?:address|token|account|coin|object|contract)\//)[1] || "").replace(/\/$/, "");
-    if (!chain) {
+    if (!chain || !address) {
       token.unmapped.push(link);
       continue;
     }
     if (chain === "sui") address = address.split("/")[0]; // suiscan appends /traders etc.
-    if (chain === "stellar" && /^G[A-Z2-7]{55}$/.test(address)) address = `${token.symbol.toUpperCase()}:${address}`; // asset = CODE:ISSUER
+    if (chain === "stellar" && /^G[A-Z2-7]{55}$/.test(address)) address = `${token.symbol}:${address}`; // asset = CODE:ISSUER
+    const key = deploymentKey(chain, address);
+    if (seen.has(key)) continue; // same contract linked from two explorers
+    seen.add(key);
     token.deployments.push({ chain, address, source: link });
   }
   // some pages (e.g. Aptos fungible assets) show the address without an explorer link
@@ -131,101 +190,227 @@ async function getToken(ticker: string, pegType: string): Promise<Token> {
   return token;
 }
 
-function trackedAddresses(): Map<string, string> {
-  // lowercase address -> peggedData id
-  const map = new Map<string, string>();
-  for (const asset of peggedAssets as any[]) {
-    const main = String(asset.address || "").split(":").pop()!;
-    if (main) map.set(main.toLowerCase(), asset.id);
-    for (const chainCfg of Object.values(asset.chainConfig?.chains ?? {}) as any[]) {
-      for (const value of Object.values(chainCfg) as any[]) {
-        const list = Array.isArray(value) ? value : [value];
-        for (const v of list) if (typeof v === "string") map.set(v.split(":").pop()!.toLowerCase(), asset.id);
+type Asset = { id: string; name: string; address?: string | null; chainConfig?: { chains?: Record<string, Record<string, unknown>> } };
+
+export type AddressIndex = {
+  byKey: Map<string, Set<string>>; // chain|address -> peggedData ids
+  stellarByIssuer: Map<string, Set<string>>; // stellar issuer -> peggedData ids (issuer pages don't name the asset code)
+};
+
+// Primary `address` is "chain:address"; DefiLlama treats an unprefixed 0x address as ethereum.
+// Anything else (no recognizable chain) is skipped rather than guessed.
+function primaryDeployment(address: string): [string, string] | null {
+  const m = address.match(/^([a-z0-9_]+):(.+)$/);
+  if (m && !/^0x/.test(address)) return [m[1], m[2]];
+  if (/^0x[0-9a-fA-F]{40}$/.test(address)) return ["ethereum", address];
+  return null;
+}
+
+export function buildIndex(assets: Asset[]): AddressIndex {
+  const index: AddressIndex = { byKey: new Map(), stellarByIssuer: new Map() };
+  const add = (chain: string, address: string, id: string) => {
+    if (!address) return;
+    const key = deploymentKey(chain, address);
+    if (!index.byKey.has(key)) index.byKey.set(key, new Set());
+    index.byKey.get(key)!.add(id);
+    if (chain === "stellar") {
+      const issuer = address.match(/(G[A-Z2-7]{55})$/)?.[1];
+      if (issuer) {
+        if (!index.stellarByIssuer.has(issuer)) index.stellarByIssuer.set(issuer, new Set());
+        index.stellarByIssuer.get(issuer)!.add(id);
+      }
+    }
+  };
+  for (const asset of assets) {
+    const primary = primaryDeployment(String(asset.address || ""));
+    if (primary) add(primary[0], primary[1], asset.id);
+    for (const [chain, chainCfg] of Object.entries(asset.chainConfig?.chains ?? {})) {
+      for (const [key, value] of Object.entries(chainCfg ?? {})) {
+        if (!isDeploymentKey(key)) continue;
+        for (const v of Array.isArray(value) ? value : [value]) if (typeof v === "string") add(chain, v, asset.id);
       }
     }
   }
-  return map;
+  return index;
 }
 
-function addrKey(address: string) {
-  return address.split(":").pop()!.toLowerCase();
+// peggedData ids tracking this deployment on this chain (empty when untracked, >1 when ambiguous)
+export function lookup(index: AddressIndex, d: { chain: string; address: string }): string[] {
+  const exact = index.byKey.get(deploymentKey(d.chain, d.address));
+  if (exact) return [...exact];
+  if (d.chain === "stellar") {
+    // the page only links the issuer and the code comes from the page title; fall back to the issuer.
+    // One issuer can issue several codes (e.g. VCHF/VEUR), so >1 id comes back as ambiguous, never picked.
+    const issuer = d.address.match(/(G[A-Z2-7]{55})$/)?.[1];
+    const ids = issuer ? index.stellarByIssuer.get(issuer) : undefined;
+    if (ids) return [...ids];
+  }
+  return [];
 }
 
-(async () => {
-  const args = process.argv.slice(2);
-  const jsonOut = args.includes("--json") ? args[args.indexOf("--json") + 1] : null;
-  const minSupply = args.includes("--min-supply") ? Number(args[args.indexOf("--min-supply") + 1]) : 0;
+// a bare address has no chain; accept it only when it is tracked under exactly one chain
+function lookupBare(index: AddressIndex, address: string): { chain: string; ids: string[] }[] {
+  const hits: { chain: string; ids: string[] }[] = [];
+  for (const [key, ids] of index.byKey) {
+    const [chain, addr] = key.split("|");
+    if (addr === normalizeAddress(chain, address)) hits.push({ chain, ids: [...ids] });
+  }
+  return hits;
+}
 
-  const tickers = await getTickers();
-  if (!tickers.size) throw new Error("no Bridge tickers discovered");
-  const tracked = trackedAddresses();
-  const assetById = new Map((peggedAssets as any[]).map((a) => [a.id, a]));
+type Attention = { token: Token; reasons: string[] };
+type MissingChain = { token: Token; id: string; name: string; deployments: Deployment[] };
+export type Result = {
+  discovery: { docsOk: boolean; indexOk: boolean; errors: string[]; tickers: string[] };
+  failures: { ticker: string; error: string }[];
+  missingTokens: Token[];
+  belowMinSupply: Token[];
+  missingChains: MissingChain[];
+  needsAttention: Attention[];
+  inSync: string[];
+  exitCode: 0 | 1 | 2;
+};
 
-  const missingTokens: Token[] = [];
-  const missingChains: { token: Token; id: string; name: string; deployments: Deployment[] }[] = [];
-  const needsAttention: Token[] = [];
-  let inSync = 0;
-
-  for (const [ticker, pegType] of [...tickers.entries()].sort()) {
-    let token: Token;
-    try {
-      token = await getToken(ticker, pegType);
-    } catch (e: any) {
-      console.error(`[bridge-check] ${ticker}: ${e.message}`);
-      continue;
-    }
-    const known = token.deployments.filter((d) => tracked.has(addrKey(d.address)));
-    const unknown = token.deployments.filter((d) => !tracked.has(addrKey(d.address)));
-    const bareTracked = token.bareAddresses.some((a) => tracked.has(addrKey(a)));
-    if (!token.deployments.length) {
-      if (bareTracked) inSync++;
-      else needsAttention.push(token);
-    } else if (!known.length) {
-      if ((token.supply ?? 0) >= minSupply) missingTokens.push(token);
-      else inSync++;
-    } else if (unknown.length) {
-      const id = tracked.get(addrKey(known[0].address))!;
-      missingChains.push({ token, id, name: assetById.get(id)?.name ?? id, deployments: unknown });
+export function classify(token: Token, index: AddressIndex, assetName: (id: string) => string, minSupply: number, out: Result) {
+  const reasons: string[] = [];
+  const ids = new Set<string>();
+  const unknown: Deployment[] = [];
+  for (const d of token.deployments) {
+    const hit = lookup(index, d);
+    if (hit.length > 1) reasons.push(`${d.chain} \`${d.address}\` is tracked by several peggedData ids: ${hit.join(", ")}`);
+    if (hit.length) hit.forEach((id) => ids.add(id));
+    else unknown.push(d);
+  }
+  for (const a of token.bareAddresses) {
+    const hits = lookupBare(index, a);
+    const hitIds = new Set(hits.flatMap((h) => h.ids));
+    if (hits.length === 1 && hitIds.size === 1) {
+      ids.add([...hitIds][0]);
+    } else if (hits.length) {
+      reasons.push(`address without explorer link \`${a}\` matches several tracked entries: ${hits.map((h) => `${h.chain}:${h.ids.join("/")}`).join(", ")}`);
     } else {
-      inSync++;
-      if (token.unmapped.length) needsAttention.push(token);
+      reasons.push(`address without explorer link (chain unknown, untracked): \`${a}\``);
     }
   }
+  for (const u of token.unmapped) reasons.push(`unknown explorer: ${u}`);
+  if (!token.deployments.length && !token.bareAddresses.length && !token.unmapped.length)
+    reasons.push("no deployments found on the reserves page (page layout may have changed)");
+  if (token.supply.status === "unknown") reasons.push(`supply unknown (${token.supply.reason})`);
+  if (ids.size > 1) reasons.push(`deployments match different peggedData ids: ${[...ids].map((id) => `${id} (${assetName(id)})`).join(", ")}`);
 
-  const fmt = (n: number | null) => (n == null ? "?" : n.toLocaleString("en-US", { maximumFractionDigits: 0 }));
+  if (!ids.size) {
+    if (!token.deployments.length) {
+      // nothing attributable to a chain: only a human can tell what this is
+      out.needsAttention.push({ token, reasons });
+    } else if (token.supply.status === "ok" && token.supply.value < minSupply) {
+      out.belowMinSupply.push(token);
+    } else {
+      out.missingTokens.push(token); // unmapped / bare / unknown supply are listed alongside it
+    }
+    return;
+  }
+  if (ids.size === 1 && unknown.length) {
+    const id = [...ids][0];
+    out.missingChains.push({ token, id, name: assetName(id), deployments: unknown });
+  } else if (unknown.length) {
+    reasons.push(`untracked deployments, owner ambiguous: ${unknown.map((d) => `${d.chain} \`${d.address}\``).join(", ")}`);
+  }
+  if (reasons.length) out.needsAttention.push({ token, reasons });
+  else if (!unknown.length) out.inSync.push(token.ticker);
+}
+
+export async function run({ text = defaultFetch, assets = peggedAssets as any as Asset[], minSupply = 0 } = {}): Promise<Result> {
+  const discovery = await getTickers(text);
+  const index = buildIndex(assets);
+  const assetById = new Map(assets.map((a) => [a.id, a]));
+  const out: Result = {
+    discovery: { docsOk: discovery.docsOk, indexOk: discovery.indexOk, errors: discovery.errors, tickers: [...discovery.tickers.keys()] },
+    failures: [], missingTokens: [], belowMinSupply: [], missingChains: [], needsAttention: [], inSync: [], exitCode: 0,
+  };
+  for (const [ticker, pegType] of [...discovery.tickers.entries()].sort()) {
+    let token: Token;
+    try {
+      token = await getToken(ticker, pegType, text);
+    } catch (e: any) {
+      out.failures.push({ ticker, error: e.message });
+      continue;
+    }
+    classify(token, index, (id) => assetById.get(id)?.name ?? id, minSupply, out);
+  }
+  const incomplete = !discovery.docsOk || !discovery.indexOk || !discovery.tickers.size || out.failures.length > 0;
+  const findings = out.missingTokens.length || out.missingChains.length || out.needsAttention.length;
+  out.exitCode = incomplete ? 2 : findings ? 1 : 0;
+  return out;
+}
+
+export function render(r: Result, date = new Date()): string {
+  const fmt = (s: Supply) => (s.status === "ok" ? s.value.toLocaleString("en-US", { maximumFractionDigits: 0 }) : "?");
   const lines: string[] = [];
-  lines.push(`# Bridge stablecoin check (${new Date().toISOString().slice(0, 10)})`);
-  lines.push(`Tickers discovered: ${tickers.size}. In sync: ${inSync}. Missing tokens: ${missingTokens.length}. Missing chains: ${missingChains.length}. Needs attention: ${needsAttention.length}.`);
-  if (missingTokens.length) {
+  lines.push(`# Bridge stablecoin check (${date.toISOString().slice(0, 10)})`);
+  lines.push(
+    `Tickers discovered: ${r.discovery.tickers.length}. In sync: ${r.inSync.length}. Missing tokens: ${r.missingTokens.length}. ` +
+      `Missing chains: ${r.missingChains.length}. Needs attention: ${r.needsAttention.length}. Below --min-supply: ${r.belowMinSupply.length}. Failed checks: ${r.failures.length}.`
+  );
+  if (!r.discovery.docsOk || !r.discovery.indexOk || r.failures.length) {
+    lines.push("", "## INCOMPLETE CHECK (results below are partial, do not treat as in sync)");
+    if (!r.discovery.docsOk) lines.push("- ticker discovery from Bridge docs failed; the ticker list may be incomplete");
+    if (!r.discovery.indexOk) lines.push("- reserves index could not be read; tickers only listed there may be missing");
+    for (const e of r.discovery.errors) lines.push(`  - ${e}`);
+    for (const f of r.failures) lines.push(`- ticker \`${f.ticker}\` not checked: ${f.error}`);
+  }
+  if (r.missingTokens.length) {
     lines.push("", "## Not tracked in peggedData");
-    for (const t of missingTokens) {
+    for (const t of r.missingTokens) {
       lines.push(`- **${t.name} (${t.symbol})** ticker \`${t.ticker}\`, ${t.pegType}, supply ${fmt(t.supply)}  <${RESERVES}/${t.ticker}>`);
+      if (t.supply.status === "unknown") lines.push(`  - supply unknown: ${t.supply.reason}`);
       for (const d of t.deployments) lines.push(`  - ${d.chain}: \`${d.address}\``);
       for (const u of t.unmapped) lines.push(`  - UNMAPPED: ${u}`);
       for (const a of t.bareAddresses) lines.push(`  - address without explorer link (chain unknown): \`${a}\``);
     }
   }
-  if (missingChains.length) {
+  if (r.missingChains.length) {
     lines.push("", "## Tracked, but missing chains");
-    for (const m of missingChains) {
+    for (const m of r.missingChains) {
       lines.push(`- **${m.name}** (peggedData id ${m.id}, ticker \`${m.token.ticker}\`, supply ${fmt(m.token.supply)})`);
       for (const d of m.deployments) lines.push(`  - ${d.chain}: \`${d.address}\``);
     }
   }
-  if (needsAttention.length) {
-    lines.push("", "## Needs a human look (no explorer link, or unknown explorer host)");
-    for (const t of needsAttention) {
+  if (r.needsAttention.length) {
+    lines.push("", "## Needs a human look");
+    for (const { token: t, reasons } of r.needsAttention) {
       lines.push(`- **${t.name} (${t.symbol})** ticker \`${t.ticker}\`, supply ${fmt(t.supply)}  <${RESERVES}/${t.ticker}>`);
-      for (const u of t.unmapped) lines.push(`  - unknown explorer: ${u}`);
-      for (const a of t.bareAddresses) lines.push(`  - address without explorer link (chain unknown): \`${a}\``);
+      for (const reason of reasons) lines.push(`  - ${reason}`);
     }
   }
-  if (!missingTokens.length && !missingChains.length && !needsAttention.length) lines.push("", "Everything on reserves.bridge.xyz is already tracked.");
+  if (r.belowMinSupply.length) lines.push("", `Skipped (untracked, below --min-supply): ${r.belowMinSupply.map((t) => `\`${t.ticker}\` (${fmt(t.supply)})`).join(", ")}`);
+  if (r.exitCode === 0) lines.push("", "Everything on reserves.bridge.xyz is already tracked.");
+  return lines.join("\n");
+}
 
-  console.log(lines.join("\n"));
-  if (jsonOut) fs.writeFileSync(jsonOut, JSON.stringify({ missingTokens, missingChains, needsAttention, tickers: [...tickers.keys()] }, null, 2));
-  process.exit(missingTokens.length || missingChains.length || needsAttention.length ? 1 : 0);
-})().catch((e) => {
-  console.error(e);
-  process.exit(2);
-});
+export function parseArgs(args: string[]): { jsonOut: string | null; minSupply: number } {
+  const value = (flag: string) => {
+    const i = args.indexOf(flag);
+    if (i < 0) return null;
+    const v = args[i + 1];
+    if (v === undefined || v.startsWith("--")) throw new Error(`${flag} needs a value`);
+    return v;
+  };
+  const jsonOut = value("--json");
+  const rawMin = value("--min-supply");
+  const minSupply = rawMin === null ? 0 : Number(rawMin);
+  if (!Number.isFinite(minSupply) || minSupply < 0) throw new Error(`--min-supply must be a non-negative number, got ${rawMin}`);
+  return { jsonOut, minSupply };
+}
+
+if (require.main === module) {
+  (async () => {
+    const { jsonOut, minSupply } = parseArgs(process.argv.slice(2));
+    const result = await run({ minSupply });
+    console.log(render(result));
+    if (jsonOut) fs.writeFileSync(jsonOut, JSON.stringify(result, null, 2));
+    process.exit(result.exitCode);
+  })().catch((e) => {
+    console.error(e);
+    process.exit(2);
+  });
+}
