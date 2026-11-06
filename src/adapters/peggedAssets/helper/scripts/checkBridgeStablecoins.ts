@@ -165,13 +165,13 @@ export async function getToken(ticker: string, pegType: string, text: Fetcher): 
     token.symbol = nameSym[2].trim();
   }
   const links = new Set<string>();
-  for (const m of html.matchAll(/https?:\/\/[^"'\s<>)\\]+\/(?:address|token|account|coin|object|contract)\/[^"'\s<>)\\]+/g))
+  for (const m of html.matchAll(/https?:\/\/[^"'\s<>)\\]+\/(?:address|token|account|coin|object|contract|fungible-asset)\/[^"'\s<>)\\]+/g))
     links.add(m[0].replace(/\\$/, ""));
   const seen = new Set<string>();
   for (const link of links) {
     const host = new URL(link).host.replace(/^www\./, "");
     const chain = EXPLORER_CHAINS[host];
-    let address = decodeURIComponent(link.split(/\/(?:address|token|account|coin|object|contract)\//)[1] || "").replace(/\/$/, "");
+    let address = decodeURIComponent(link.split(/\/(?:address|token|account|coin|object|contract|fungible-asset)\//)[1] || "").replace(/\/$/, "");
     if (!chain || !address) {
       token.unmapped.push(link);
       continue;
@@ -183,7 +183,7 @@ export async function getToken(ticker: string, pegType: string, text: Fetcher): 
     seen.add(key);
     token.deployments.push({ chain, address, source: link });
   }
-  // some pages (e.g. Aptos fungible assets) show the address without an explorer link
+  // addresses shown without any explorer link: the chain is unknown, so they are only ever reported
   if (!token.deployments.length) {
     for (const m of html.matchAll(/0x[0-9a-fA-F]{64}/g)) if (!token.bareAddresses.includes(m[0])) token.bareAddresses.push(m[0]);
   }
@@ -234,28 +234,17 @@ export function buildIndex(assets: Asset[]): AddressIndex {
   return index;
 }
 
-// peggedData ids tracking this deployment on this chain (empty when untracked, >1 when ambiguous)
+// peggedData ids tracking exactly this deployment on this chain (empty when untracked, >1 when ambiguous)
 export function lookup(index: AddressIndex, d: { chain: string; address: string }): string[] {
-  const exact = index.byKey.get(deploymentKey(d.chain, d.address));
-  if (exact) return [...exact];
-  if (d.chain === "stellar") {
-    // the page only links the issuer and the code comes from the page title; fall back to the issuer.
-    // One issuer can issue several codes (e.g. VCHF/VEUR), so >1 id comes back as ambiguous, never picked.
-    const issuer = d.address.match(/(G[A-Z2-7]{55})$/)?.[1];
-    const ids = issuer ? index.stellarByIssuer.get(issuer) : undefined;
-    if (ids) return [...ids];
-  }
-  return [];
+  return [...(index.byKey.get(deploymentKey(d.chain, d.address)) ?? [])];
 }
 
-// a bare address has no chain; accept it only when it is tracked under exactly one chain
-function lookupBare(index: AddressIndex, address: string): { chain: string; ids: string[] }[] {
-  const hits: { chain: string; ids: string[] }[] = [];
-  for (const [key, ids] of index.byKey) {
-    const [chain, addr] = key.split("|");
-    if (addr === normalizeAddress(chain, address)) hits.push({ chain, ids: [...ids] });
-  }
-  return hits;
+// Stellar pages only link the issuer; the asset code comes from the page title. An issuer can issue several
+// codes (e.g. VCHF/VEUR), so an issuer-only match is a candidate for a human to confirm, never proof of tracking.
+export function stellarIssuerCandidates(index: AddressIndex, d: { chain: string; address: string }): string[] {
+  if (d.chain !== "stellar") return [];
+  const issuer = d.address.match(/(G[A-Z2-7]{55})$/)?.[1];
+  return [...((issuer && index.stellarByIssuer.get(issuer)) || [])];
 }
 
 type Attention = { token: Token; reasons: string[] };
@@ -268,6 +257,7 @@ export type Result = {
   missingChains: MissingChain[];
   needsAttention: Attention[];
   inSync: string[];
+  minSupply: number;
   exitCode: 0 | 1 | 2;
 };
 
@@ -275,23 +265,23 @@ export function classify(token: Token, index: AddressIndex, assetName: (id: stri
   const reasons: string[] = [];
   const ids = new Set<string>();
   const unknown: Deployment[] = [];
+  let candidates = false; // an unknown deployment may belong to a tracked asset; a human has to confirm
   for (const d of token.deployments) {
     const hit = lookup(index, d);
     if (hit.length > 1) reasons.push(`${d.chain} \`${d.address}\` is tracked by several peggedData ids: ${hit.join(", ")}`);
-    if (hit.length) hit.forEach((id) => ids.add(id));
-    else unknown.push(d);
-  }
-  for (const a of token.bareAddresses) {
-    const hits = lookupBare(index, a);
-    const hitIds = new Set(hits.flatMap((h) => h.ids));
-    if (hits.length === 1 && hitIds.size === 1) {
-      ids.add([...hitIds][0]);
-    } else if (hits.length) {
-      reasons.push(`address without explorer link \`${a}\` matches several tracked entries: ${hits.map((h) => `${h.chain}:${h.ids.join("/")}`).join(", ")}`);
-    } else {
-      reasons.push(`address without explorer link (chain unknown, untracked): \`${a}\``);
+    if (hit.length) {
+      hit.forEach((id) => ids.add(id));
+      continue;
+    }
+    unknown.push(d);
+    const cand = stellarIssuerCandidates(index, d);
+    if (cand.length) {
+      candidates = true;
+      reasons.push(`stellar \`${d.address}\`: asset code not tracked, but its issuer is used by ${cand.map((id) => `${id} (${assetName(id)})`).join(", ")}; confirm the asset code`);
     }
   }
+  // the chain of an address shown without an explorer link cannot be established from the page
+  for (const a of token.bareAddresses) reasons.push(`address without explorer link (chain unknown): \`${a}\``);
   for (const u of token.unmapped) reasons.push(`unknown explorer: ${u}`);
   if (!token.deployments.length && !token.bareAddresses.length && !token.unmapped.length)
     reasons.push("no deployments found on the reserves page (page layout may have changed)");
@@ -299,8 +289,8 @@ export function classify(token: Token, index: AddressIndex, assetName: (id: stri
   if (ids.size > 1) reasons.push(`deployments match different peggedData ids: ${[...ids].map((id) => `${id} (${assetName(id)})`).join(", ")}`);
 
   if (!ids.size) {
-    if (!token.deployments.length) {
-      // nothing attributable to a chain: only a human can tell what this is
+    if (!token.deployments.length || candidates) {
+      // nothing attributable to a chain, or possibly an existing asset: only a human can tell what this is
       out.needsAttention.push({ token, reasons });
     } else if (token.supply.status === "ok" && token.supply.value < minSupply) {
       out.belowMinSupply.push(token);
@@ -325,7 +315,7 @@ export async function run({ text = defaultFetch, assets = peggedAssets as any as
   const assetById = new Map(assets.map((a) => [a.id, a]));
   const out: Result = {
     discovery: { docsOk: discovery.docsOk, indexOk: discovery.indexOk, errors: discovery.errors, tickers: [...discovery.tickers.keys()] },
-    failures: [], missingTokens: [], belowMinSupply: [], missingChains: [], needsAttention: [], inSync: [], exitCode: 0,
+    failures: [], missingTokens: [], belowMinSupply: [], missingChains: [], needsAttention: [], inSync: [], minSupply, exitCode: 0,
   };
   for (const [ticker, pegType] of [...discovery.tickers.entries()].sort()) {
     let token: Token;
@@ -382,8 +372,18 @@ export function render(r: Result, date = new Date()): string {
       for (const reason of reasons) lines.push(`  - ${reason}`);
     }
   }
-  if (r.belowMinSupply.length) lines.push("", `Skipped (untracked, below --min-supply): ${r.belowMinSupply.map((t) => `\`${t.ticker}\` (${fmt(t.supply)})`).join(", ")}`);
-  if (r.exitCode === 0) lines.push("", "Everything on reserves.bridge.xyz is already tracked.");
+  if (r.belowMinSupply.length) {
+    lines.push("", `## Skipped: untracked, supply below --min-supply ${fmt({ status: "ok", value: r.minSupply })}`);
+    for (const t of r.belowMinSupply) {
+      lines.push(`- ${t.name} (${t.symbol}) ticker \`${t.ticker}\`, supply ${fmt(t.supply)}`);
+      for (const d of t.deployments) lines.push(`  - ${d.chain}: \`${d.address}\``);
+      for (const u of t.unmapped) lines.push(`  - UNMAPPED: ${u}`);
+    }
+  }
+  if (r.exitCode === 0)
+    lines.push("", r.belowMinSupply.length
+      ? `Every Bridge token with supply >= ${fmt({ status: "ok", value: r.minSupply })} is tracked; ${r.belowMinSupply.length} smaller untracked token(s) were not checked (listed above).`
+      : "Everything on reserves.bridge.xyz is already tracked.");
   return lines.join("\n");
 }
 

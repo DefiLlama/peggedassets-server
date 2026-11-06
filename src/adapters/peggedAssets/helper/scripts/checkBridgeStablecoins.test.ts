@@ -2,7 +2,7 @@
 //   npx ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/checkBridgeStablecoins.test.ts
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildIndex, lookup, parseArgs, parseSupply, render, run } from "./checkBridgeStablecoins";
+import { buildIndex, lookup, parseArgs, parseSupply, render, run, stellarIssuerCandidates } from "./checkBridgeStablecoins";
 
 const DOCS = "https://apidocs.bridge.xyz/platform/issuance/reporting-and-transparency.md";
 const INDEX = "https://reserves.bridge.xyz/";
@@ -156,9 +156,19 @@ test("unknown explorer host next to a tracked bare address needs attention, not 
   assert.ok(r.needsAttention[0].reasons.some((x) => x.includes("newchainscan.io")));
 });
 
-test("a tracked bare address alone (Aptos FA page) is in sync", async () => {
+test("a bare address is never assumed to be on the chain where peggedData tracks it", async () => {
   const assets = [asset("1", `aptos:${APTOS}`, { aptos: { issued: [APTOS] } })];
   const r = await run({ text: fetcher(world("usdcbl", reservesPage("Dec", "USDCBL", [], `<p>${APTOS}</p>`))), assets });
+  assert.equal(r.inSync.length, 0);
+  assert.equal(r.needsAttention.length, 1);
+  assert.match(r.needsAttention[0].reasons.join(), /chain unknown/);
+  assert.equal(r.exitCode, 1);
+});
+
+test("Aptos fungible-asset explorer links establish the chain (live usdcbl page layout)", async () => {
+  const assets = [asset("1", `aptos:${APTOS}`, { aptos: { issued: [APTOS] } })];
+  const html = reservesPage("Decibel Dollar", "usDCBL", [`https://aptoscan.com/fungible-asset/${APTOS}`], `<p>${APTOS}</p>`);
+  const r = await run({ text: fetcher(world("usdcbl", html)), assets });
   assert.deepEqual(r.inSync, ["usdcbl"]);
   assert.equal(r.exitCode, 0);
 });
@@ -214,13 +224,39 @@ test("one deployment tracked by two assets is flagged as conflicting", async () 
   assert.match(r.needsAttention[0].reasons.join("\n"), /several peggedData ids: 1, 2/);
 });
 
-test("stellar: shared issuer with several codes is ambiguous, unique code:issuer matches", () => {
+test("stellar: only an exact code+issuer match counts as tracked; issuer-only hits are candidates", () => {
   const index = buildIndex([
     asset("157", "stellar:GDXL", { stellar: { issued: [`VCHF:${ISSUER}`] } }),
     asset("158", "stellar:GDXL", { stellar: { issued: [`VEUR-${ISSUER}`] } }),
   ]);
   assert.deepEqual(lookup(index, { chain: "stellar", address: `veur:${ISSUER}` }), ["158"]);
-  assert.deepEqual(lookup(index, { chain: "stellar", address: `XYZ:${ISSUER}` }).sort(), ["157", "158"]);
+  assert.deepEqual(lookup(index, { chain: "stellar", address: `XYZ:${ISSUER}` }), []);
+  assert.deepEqual(stellarIssuerCandidates(index, { chain: "stellar", address: `XYZ:${ISSUER}` }).sort(), ["157", "158"]);
+});
+
+test("stellar: exact code+issuer match is in sync", async () => {
+  const assets = [asset("469", `stellar:MGUSD:${ISSUER}`, { stellar: { issued: [`MGUSD:${ISSUER}`] } })];
+  const r = await run({ text: fetcher(world("mgusd", reservesPage("MoneyGram USD", "MGUSD", [`https://stellarchain.io/address/${ISSUER}`]))), assets });
+  assert.deepEqual(r.inSync, ["mgusd"]);
+});
+
+test("stellar: new code from an issuer with one tracked code is not in sync", async () => {
+  const assets = [asset("469", `stellar:MGUSD:${ISSUER}`, { stellar: { issued: [`MGUSD:${ISSUER}`] } })];
+  const r = await run({ text: fetcher(world("mgeur", reservesPage("MoneyGram EUR", "MGEUR", [`https://stellarchain.io/address/${ISSUER}`]))), assets });
+  assert.equal(r.inSync.length, 0);
+  assert.equal(r.needsAttention.length, 1);
+  assert.match(r.needsAttention[0].reasons.join(), /issuer is used by 469/);
+  assert.equal(r.exitCode, 1);
+});
+
+test("stellar: new code from an issuer with several tracked codes lists all candidates", async () => {
+  const assets = [
+    asset("157", "stellar:GDXL", { stellar: { issued: [`VCHF:${ISSUER}`] } }),
+    asset("158", "stellar:GDXL", { stellar: { issued: [`VEUR-${ISSUER}`] } }),
+  ];
+  const r = await run({ text: fetcher(world("vgbp", reservesPage("VGBP", "VGBP", [`https://stellarchain.io/address/${ISSUER}`]))), assets });
+  assert.equal(r.inSync.length, 0);
+  assert.match(r.needsAttention[0].reasons.join(), /157 .*158/);
 });
 
 test("address normalization: base58 is case-sensitive, hex is not, move hex ignores leading zeros, sui keeps the type", () => {
@@ -244,6 +280,45 @@ test("CLI args: missing or invalid values are rejected", () => {
   assert.throws(() => parseArgs(["--min-supply"]), /needs a value/);
   assert.throws(() => parseArgs(["--min-supply", "abc"]), /non-negative number/);
   assert.throws(() => parseArgs(["--min-supply", "-5"]), /needs a value|non-negative/);
+});
+
+test("low-supply untracked token keeps its unresolved links visible and is not in sync", async () => {
+  const html = reservesPage("Tok", "TOK", [`https://basescan.org/token/${EVM_A}`, "https://newchainscan.io/token/0xabc"]);
+  const r = await run({ text: fetcher(world("tok", html, "10")), assets: [], minSupply: 1000 });
+  assert.equal(r.belowMinSupply.length, 1);
+  assert.equal(r.inSync.length, 0);
+  const report = render(r);
+  assert.match(report, /Skipped: untracked, supply below --min-supply 1,000/);
+  assert.match(report, /UNMAPPED: https:\/\/newchainscan\.io/);
+});
+
+test("low-supply token with only unresolved links (no attributable deployment) is not skipped", async () => {
+  const r = await run({ text: fetcher(world("tok", reservesPage("Tok", "TOK", ["https://newchainscan.io/token/0xabc"]), "10")), assets: [], minSupply: 1000 });
+  assert.equal(r.belowMinSupply.length, 0);
+  assert.equal(r.needsAttention.length, 1);
+  assert.equal(r.exitCode, 1);
+});
+
+test("success message is scoped to the --min-supply threshold when tokens were skipped", async () => {
+  const assets = [asset("1", `base:${EVM_A}`, { base: { issued: [EVM_A] } })];
+  const routes: Routes = {
+    [DOCS]: docs(["big", "small"]), [INDEX]: "",
+    [api("big")]: supply("5000"), [page("big")]: reservesPage("Big", "BIG", [`https://basescan.org/token/${EVM_A}`]),
+    [api("small")]: supply("5"), [page("small")]: reservesPage("Small", "SML", [`https://basescan.org/token/${EVM_B}`]),
+  };
+  const r = await run({ text: fetcher(routes), assets, minSupply: 1000 });
+  assert.equal(r.exitCode, 0);
+  const report = render(r);
+  assert.doesNotMatch(report, /Everything on reserves\.bridge\.xyz is already tracked/);
+  assert.match(report, /supply >= 1,000 is tracked; 1 smaller untracked token/);
+});
+
+test("incomplete checks never print a success line, even with --min-supply", async () => {
+  const routes = world("tok", reservesPage("Tok", "TOK", [`https://basescan.org/token/${EVM_A}`]), "5");
+  routes[INDEX] = new Error("HTTP 502");
+  const r = await run({ text: fetcher(routes), assets: [], minSupply: 1000 });
+  assert.equal(r.exitCode, 2);
+  assert.doesNotMatch(render(r), /is tracked|already tracked/);
 });
 
 test("clean run exits 0 and says so", async () => {
