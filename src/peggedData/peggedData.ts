@@ -820,6 +820,7 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/mstable_",
     wiki: "https://wiki.defillama.com/wiki/MUSD",
+    deprecated: true,
     chainConfig: {
       chains: {
         ethereum: {
