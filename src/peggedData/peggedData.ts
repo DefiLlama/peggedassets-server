@@ -13740,7 +13740,7 @@ export default [
     gecko_id: "twin-brat",
     cmcId: null,
     pegType: "peggedREAL",
-    pegMechanism: "fiat-backed",
+    pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: null,
     twitter: "https://x.com/twinfinance_",
