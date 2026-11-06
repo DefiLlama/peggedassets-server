@@ -1771,6 +1771,14 @@ export default {
     bridge: "circle",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xe5A2cCf532919f93855F324c1F8a7996065f53Da": {
+    bridge: "hyperlane",
+    sourceChain: formattedSourceChains.eth,
+  },
+  AijEjuEXnmgEWsBT9kyxosWG7iiFkU1dkeF6WEX5dZDg: {
+    bridge: "hyperlane",
+    sourceChain: formattedSourceChains.sol,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -2007,6 +2015,10 @@ export const bridgeInfo = {
   layerzero: {
     name: "LayerZero",
     link: "https://layerzero.network/",
+  },
+  hyperlane: {
+    name: "Hyperlane",
+    link: "https://www.hyperlane.xyz/",
   },
   circle: {
     name: "Circle xReserve",
