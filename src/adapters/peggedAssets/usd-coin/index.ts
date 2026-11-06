@@ -21,11 +21,6 @@ import {
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { mixinSupply } from "../helper/mixin";
 import { call as nearCall } from "../helper/near";
-import { call as nibiruCall } from "../helper/nibiru";
-import {
-  getBalance as ontologyGetBalance,
-  getTotalSupply as ontologyGetTotalSupply,
-} from "../helper/ontology";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import * as sui from "../helper/sui";
 import * as starknet from "../helper/starknet";
@@ -279,41 +274,6 @@ async function karuraMinted(address: string, decimals: number) {
   };
 }
 
-async function ontologyBridged() {
-  return async function () {
-    let balances = {} as Balances;
-    const polyUSDCAddress = chainContracts.ontology.bridgedFromETH[0];
-    const polyUSDCReserveAddress = chainContracts.ontology.unreleased[0];
-    const polyNetworkSupply = await ontologyGetTotalSupply(
-      polyUSDCAddress,
-      "oep4"
-    );
-    const polyNetworkReserve = await ontologyGetBalance(
-      polyUSDCAddress,
-      "oep4",
-      polyUSDCReserveAddress
-    );
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      polyNetworkSupply - polyNetworkReserve,
-      polyUSDCAddress,
-      true
-    );
-
-    const celerUSDCAddress = chainContracts.ontology.bridgedFromETH[1];
-    const celerSupply = await ontologyGetTotalSupply(celerUSDCAddress, "orc20");
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      celerSupply,
-      celerUSDCAddress,
-      true
-    );
-    return balances;
-  };
-}
-
 async function nearBridged(address: string, decimals: number) {
   return async function () {
     let balances = {} as Balances;
@@ -462,25 +422,6 @@ async function rippleMinted() {
     const usdcToken = chainContracts.ripple.issued[0]; // "5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"
     const supply = await rippleGetTotalSupply(usdcToken);
     if (supply) sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
-    return balances;
-  };
-}
-
-async function nibiruBridged() {
-  return async function () {
-    const balances = {} as Balances;
-
-    for (const contract of chainContracts.nibiru.bridgedFromETH) {
-      const totalSupply = await nibiruCall({
-        target: contract,
-        abi: { name: 'totalSupply' }
-      });
-
-      // Convert from hex to number and divide by 1e6 (USDC has 6 decimals)
-      const supply = parseInt(totalSupply, 16) / 1e6;
-      sumSingleBalance(balances, "peggedUSD", supply, contract, true);
-    }
-
     return balances;
   };
 }
@@ -1058,7 +999,7 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH),
   },
   nibiru: {
-    ethereum: nibiruBridged(),
+    ethereum: bridgedSupply("nibiru", 6, chainContracts.nibiru.bridgedFromETH),
   },
   sei: {
     noble: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromNoble),

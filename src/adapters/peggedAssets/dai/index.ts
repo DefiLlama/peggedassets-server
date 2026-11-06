@@ -10,10 +10,6 @@ import {
   terraSupply,
   osmosisSupply,
 } from "../helper/getSupply";
-import {
-  getTotalSupply as ontologyGetTotalSupply,
-  getBalance as ontologyGetBalance,
-} from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { call as nearCall } from "../helper/near";
 import {
@@ -149,54 +145,6 @@ async function getCardanoSupply() {
     let balances = {} as Balances;
     const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
     sumSingleBalance(balances, "peggedUSD", supply, "wan", true);
-    return balances;
-  };
-}
-
-async function reinetworkMinted(address: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          `https://scan.rei.network/api?module=token&action=getToken&contractaddress=${address}`
-        )
-    );
-    const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
-    return balances;
-  };
-}
-
-async function ontologyBridged() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const polyDAIAddress = chainContracts.ontology.bridgedFromETH[0];
-    const polyDAIReserveAddress = chainContracts.ontology.unreleased[0];
-    const polyNetworkSupply = await ontologyGetTotalSupply(
-      polyDAIAddress,
-      "oep4"
-    );
-    const polyNetworkReserve = await ontologyGetBalance(
-      polyDAIAddress,
-      "oep4",
-      polyDAIReserveAddress
-    );
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      polyNetworkSupply - polyNetworkReserve,
-      polyDAIAddress,
-      true
-    );
     return balances;
   };
 }

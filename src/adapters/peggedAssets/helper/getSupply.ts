@@ -7,7 +7,6 @@ import * as tezos from "../helper/tezos";
 import * as stellar from "../helper/stellar";
 import { getTotalSupply as tronGetTotalSupply, getTokenBalance as tronGetTokenBalance } from "../helper/tron";
 import * as starknet from "../helper/starknet";
-import { getZilliqaTokenSupply } from "../helper/zilliqa";
 import type {
   Balances,
   ChainBlocks,
@@ -147,6 +146,15 @@ export function fogoMintedOrBridged(targets: string[], pegType?: PeggedAssetType
     }
     return balances;
   };
+}
+
+// ZRC-2 total supply in whole tokens; decimals come from the contract init params (6 when the contract has none)
+async function getZilliqaTokenSupply(contract: string): Promise<number> {
+  const [supply, decimals] = await Promise.all([
+    chains.zilliqa.getTokenTotalSupply({ token: contract }),
+    chains.zilliqa.getTokenDecimals({ token: contract }),
+  ]);
+  return Number(supply) / 10 ** (decimals ?? 6);
 }
 
 export function zilliqaMintedOrBridged(

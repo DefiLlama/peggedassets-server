@@ -246,13 +246,13 @@ export const chainContracts: ChainContracts = {
       "0xaf37E8B6C9ED7f6318979f56Fc287d76c30847ff", // usdt0
     ],
   },
-  ontology: {
-    bridgedFromETH: [
-      "ac654837a90eee8fccabd87a2d4fc7637484f01a", // poly network
-      "0xd85e30c5d372942810c86c4ac9d7b3bb24cc1965", // celer
-    ],
-    unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"], // poly network reserve
-  },
+  // ontology: {
+  //   bridgedFromETH: [
+  //     "ac654837a90eee8fccabd87a2d4fc7637484f01a", // poly network
+  //     "0xd85e30c5d372942810c86c4ac9d7b3bb24cc1965", // celer
+  //   ],
+  //   unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"], // poly network reserve
+  // },
   sx: {
     bridgedFromETH: ["0x03Cc0D20B5eA163Aa3c0851235f4653F6Fe61017"], // celer
   },

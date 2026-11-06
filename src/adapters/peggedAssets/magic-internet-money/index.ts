@@ -7,7 +7,6 @@ import {
 } from "../peggedAsset.type";
 import { BENTOBOX_ABI } from "./abis/bentobox";
 import { CAULDRON_V1_ABI } from "./abis/cauldron-v1";
-import * as nibiruHelper from "../helper/nibiru";
 
 
 type Address = `0x${string}`;
@@ -209,25 +208,14 @@ async function chainReleased(
   ) {
     const balances: Balances = {};
 
-    let totalSupply;
-    if (chain === 'nibiru') {
-      totalSupply = await nibiruHelper.call({
-        abi: { name: 'totalSupply' },
+    const totalSupply = (
+      await sdk.api.abi.call({
+        abi: "erc20:totalSupply",
         target: address,
         block: _chainBlocks?.[chain],
-      });
-      // Convert hex string to number
-      totalSupply = parseInt(totalSupply, 16);
-    } else {
-      totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: address,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-    }
+        chain: chain,
+      })
+    ).output;
 
     sumSingleBalance(
       balances,
@@ -253,16 +241,7 @@ async function chainUnreleased(
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) => {
-    let ownerPromise;
-    if (chain === 'nibiru') {
-      ownerPromise = nibiruHelper.call({
-        abi: { name: 'owner' },
-        target: address,
-        block: _chainBlocks?.[chain],
-      }).then(result => `0x${result.slice(26)}` as Address); // Convert the last 20 bytes to address with proper type
-    } else {
-      ownerPromise = ownerOf(address, chain, _chainBlocks);
-    }
+    const ownerPromise = ownerOf(address, chain, _chainBlocks);
 
     const [
       ownerBalance,
@@ -272,15 +251,6 @@ async function chainUnreleased(
     ] = await Promise.all([
       ownerPromise.then(
         async (owner) => {
-          if (chain === 'nibiru') {
-            const result = await nibiruHelper.call({
-              abi: { name: 'balanceOf' },
-              target: address,
-              params: [owner],
-              block: _chainBlocks?.[chain],
-            });
-            return parseInt(result, 16);
-          }
           return (
             await sdk.api.erc20.balanceOf({
               target: address,
