@@ -244,7 +244,6 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
     avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
-    fantom: solanaMintedOrBridged(chainContracts.solana.bridgedFromFantom),
   },
   polygon: {
     ethereum: bridgedSupply(

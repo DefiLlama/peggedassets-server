@@ -100,7 +100,7 @@ export default {
     sourceChain: formattedSourceChains.eth,
   },
   "0x3Ca3fEFA944753b43c751336A5dF531bDD6598B6": {
-    bridge: "multichain",
+    bridge: "passport", // USDC on Theta, "wrapped by passport.meter.io"
     sourceChain: formattedSourceChains.eth,
   },
   "0xfa9343c3897324496a05fc75abed6bac29f8a40f": {
@@ -276,7 +276,7 @@ export default {
     sourceChain: formattedSourceChains.eth,
   },
   "0x3c751Feb00364CA9e2d0105c40F0b423abf1DEE3": {
-    bridge: "multichain",
+    bridge: "passport", // USDT on Theta and Moonbeam, "wrapped by passport.meter.io"
     sourceChain: formattedSourceChains.eth,
   },
   "0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844": {
@@ -1002,7 +1002,7 @@ export default {
   "0x7B37d0787A3424A0810E02b24743a45eBd5530B2": {
     bridge: "passport",
     sourceChain: formattedSourceChains.bsc,
-  }, // this is a BUSD multichain address on Theta but a BUSD meter.passport address on Moonbeam
+  }, // BUSD.bsc "wrapped by passport.meter.io" on both Theta and Moonbeam
   "0x47ac0Fb4F2D84898e4D9E7b4DaB3C24507a6D503": {
     bridge: "bsc",
     sourceChain: formattedSourceChains.eth,
