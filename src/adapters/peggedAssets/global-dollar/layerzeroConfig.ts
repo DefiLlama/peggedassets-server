@@ -7,7 +7,10 @@ import type { LayerZeroConfig } from "../helper/bridgeConfig";
 const layerzeroConfig: LayerZeroConfig = {
   sourceChain: "ethereum",
   tokens: [
+    { chain: "arbitrum", address: "0x004b506865409877c9fa29bfb1eba929984b9bbc", decimals: 6 }, // ERC20 USDG (lz:arbitrum)
     { chain: "hyperliquid", address: "0x9522133c663ba8c2a8a7b4f63dd2ac8dccce1505", decimals: 6 }, // ERC20 USDG0 (lz:hyperliquid)
+    { chain: "mantle", address: "0x063c1d1ef6e9099ce3e8e9ad5c6173d12c49c086", decimals: 6 }, // ERC20 USDG (lz:mantle)
+    { chain: "robinhood", address: "0x5fc5360d0400a0fd4f2af552add042d716f1d168", decimals: 6 }, // ERC20 USDG (lz:robinhood)
     { chain: "xlayer", address: "0x4ae46a509f6b1d9056937ba4500cb143933d2dc8", decimals: 6 }, // ERC20 USDG (lz:xlayer)
   ],
 };

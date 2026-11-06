@@ -135,7 +135,10 @@ export const chainContracts: ChainContracts = {
   },
   aurora: {
     bridgeOnETH: ["0x23Ddd3e3692d1861Ed57EDE224608875809e127f"],
-    bridgedFromNear: ["0xB12BFcA5A55806AaF64E99521918A4bf0fC40802"], // rainbow bridge
+    bridgedFromNear: [
+      "0xB12BFcA5A55806AaF64E99521918A4bf0fC40802", // USDC.e, rainbow bridge
+      "0x368EBb46ACa6b8D0787C96B2b20bD3CC3F2c45F7", // USDC: Near-native USDC bridged to Aurora. LZ metadata lists it as pegged to Ethereum, hence aurora in lzConfig.excludeChains
+    ],
     /*
     this is claimed by both rainbow bridge and celer. there does not appear to be enough in the
     rainbow bridge and celer bridge contracts on ethereum for both aurora and near to have
