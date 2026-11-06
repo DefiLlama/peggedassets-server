@@ -14260,7 +14260,7 @@ export default [
   // Check for new ones with: npx ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/checkBridgeStablecoins.ts
   {
     id: "466",
-    name: "SQUSD",
+    name: "Squads USD",
     address: "solana:8D9XrAWLNHYY3skSrpgkcwrr3zTp7Jr5pkiQyjfsiv7t",
     symbol: "SQUSD",
     url: "https://reserves.bridge.xyz/squsd",
@@ -14287,7 +14287,7 @@ export default [
   },
   {
     id: "467",
-    name: "USDs (ARQ)",
+    name: "ARQ USDs",
     address: "tempo:0x20c000000000000000000000301EcC78Ead01357",
     symbol: "USDS",
     url: "https://www.arqfinance.com/",
