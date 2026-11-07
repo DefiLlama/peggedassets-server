@@ -14280,7 +14280,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/squsd"],
-    twitter: "https://x.com/Stablecoin",
+    twitter: null,
     wiki: null,
     chainConfig: {
       chains: {
@@ -14307,7 +14307,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/usds_arq"],
-    twitter: null,
+    twitter: "https://x.com/arq_finance",
     wiki: null,
     chainConfig: {
       chains: {
@@ -14388,7 +14388,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/tako"],
-    twitter: null,
+    twitter: "https://x.com/TakenosApp",
     wiki: null,
     chainConfig: {
       chains: {
@@ -14415,7 +14415,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/lava_usd"],
-    twitter: null,
+    twitter: "https://x.com/lava_xyz",
     wiki: null,
     chainConfig: {
       chains: {
@@ -14496,7 +14496,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/dkusd"],
-    twitter: null,
+    twitter: "https://x.com/dakota_xyz",
     wiki: null,
     chainConfig: {
       chains: {
@@ -14523,7 +14523,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/usd2"],
-    twitter: "https://x.com/Stablecoin",
+    twitter: null,
     wiki: null,
     chainConfig: {
       chains: {
@@ -14550,7 +14550,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/usdsl"],
-    twitter: "https://x.com/slash",
+    twitter: "https://x.com/slashapp",
     wiki: null,
     chainConfig: {
       chains: {
@@ -14604,7 +14604,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/afri"],
-    twitter: null,
+    twitter: "https://x.com/Africa_Afris",
     wiki: null,
     chainConfig: {
       chains: {
@@ -14631,7 +14631,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/gusd"],
-    twitter: null,
+    twitter: "https://x.com/gaiaonline",
     wiki: null,
     chainConfig: {
       chains: {
@@ -14658,7 +14658,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/pyre_usd"],
-    twitter: "https://x.com/sophon",
+    twitter: null,
     wiki: null,
     chainConfig: {
       chains: {
@@ -14685,7 +14685,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/usdz"],
-    twitter: "https://x.com/Stablecoin",
+    twitter: null,
     wiki: null,
     chainConfig: {
       chains: {
@@ -14739,7 +14739,7 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: ["https://reserves.bridge.xyz/fnd"],
-    twitter: "https://x.com/Stablecoin",
+    twitter: null,
     wiki: null,
     chainConfig: {
       chains: {
