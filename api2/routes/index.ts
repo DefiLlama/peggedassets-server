@@ -4,6 +4,7 @@ import { successResponse, errorResponse, errorWrapper as ew } from "./utils";
 import { readRouteData } from "../file-cache";
 import { normalizeChain } from "../../src/utils/normalizeChain";
 import { chainCacheSlug } from "../utils/cachePath";
+import { setV2Routes } from "../v2/routes";
 
 const ACCEL_PREFIX = '/_internal/cache'
 const behindNginx = !!process.env.API_STORAGE_HOST
@@ -21,6 +22,8 @@ export default function setRoutes(router: Router) {
 
   for (const param of PATH_PARAMS)
     router.param(param, (_req, res, next, value) => VALID_PARAM.test(value) ? next() : errorResponse(res, 'Invalid request'))
+
+  setV2Routes(router)
 
   router.get("/config", defaultFileHandler);
   router.get("/rates", defaultFileHandler);
