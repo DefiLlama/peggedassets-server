@@ -9615,6 +9615,9 @@ export default [
         monad: {
           issued: ["0xaca92e438df0b2401ff60da7e4337b687a2435da"],
         },
+        bsc: {
+          issued: ["0xaca92e438df0b2401ff60da7e4337b687a2435da"],
+        },
       },
     },
   },
@@ -9695,6 +9698,9 @@ export default [
       chains: {
         solana: {
           issued: ["CASHx9KJUStyftLFWGvEVf59SGeG9sh5FfcnZMVPCASH"],
+        },
+        hyperliquid: {
+          issued: ["0x061af032ccf1ce35a39b556e0f442bf2dbe1ed06"],
         },
       },
     },
@@ -13559,6 +13565,9 @@ export default [
         ethereum: {
           issued: ["0x8e9c32a536ab623a2e0e9961bce6f5fe7504e084"],
         },
+        polygon: {
+          issued: ["0x11b20f798b70df2201D8F550ADDcc3378b33dd4A"],
+        },
       },
     },
   },
@@ -13628,6 +13637,15 @@ export default [
         tempo: {
           issued: ["0x20c0000000000000000000003158081efd85bfc2"],
         },
+        ethereum: {
+          issued: ["0xeac4269c9a01190b1400c4dc728864e61895fdf3"],
+        },
+        base: {
+          issued: ["0x100faa513ac917181eb29f73b64bf7a434a206fe"],
+        },
+        solana: {
+          issued: ["ENL66PGy8d8j5KNqLtCcg4uidDUac5ibt45wbjH9REzB"],
+        },
       },
     },
   },
@@ -13654,6 +13672,9 @@ export default [
       chains: {
         tempo: {
           issued: ["0x20c0000000000000000000006fD9A167923ba194"],
+        },
+        base: {
+          issued: ["0x73b5d86deae56497f852fd79dd6fe68c7270fb6b"],
         },
       },
     },
@@ -14235,6 +14256,495 @@ export default [
         },
         plume_mainnet: {
           issued: ["0xC9E3df3D230980B45adC623C81C3DF4A73a5350f"],
+        },
+      },
+    },
+  },
+  // Bridge (Stripe) Open Issuance stablecoins, listed at https://reserves.bridge.xyz/
+  // Each has a public reserves endpoint at https://transparency.bridge.xyz/v0/stablecoins/<ticker>
+  // Check for new ones with: npx ts-node --transpile-only src/adapters/peggedAssets/helper/scripts/checkBridgeStablecoins.ts
+  {
+    id: "466",
+    name: "Squads USD",
+    address: "solana:8D9XrAWLNHYY3skSrpgkcwrr3zTp7Jr5pkiQyjfsiv7t",
+    symbol: "SQUSD",
+    url: "https://reserves.bridge.xyz/squsd",
+    description:
+      "SQUSD is a US dollar stablecoin issued on Solana through Bridge's Open Issuance platform, backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "SQUSD is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/squsd"],
+    twitter: "https://x.com/Stablecoin",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["8D9XrAWLNHYY3skSrpgkcwrr3zTp7Jr5pkiQyjfsiv7t"],
+        },
+      },
+    },
+  },
+  {
+    id: "467",
+    name: "ARQ USDs",
+    address: "tempo:0x20c000000000000000000000301EcC78Ead01357",
+    symbol: "USDS",
+    url: "https://www.arqfinance.com/",
+    description:
+      "USDs is the digital dollar behind ARQ, a Mexico-based financial app giving travelers, investors and professionals access to dollar savings and global markets. It is issued on Tempo through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries.",
+    mintRedeemDescription:
+      "USDs is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/usds_arq"],
+    twitter: null,
+    wiki: null,
+    chainConfig: {
+      chains: {
+        tempo: {
+          issued: ["0x20c000000000000000000000301EcC78Ead01357"],
+        },
+      },
+    },
+  },
+  {
+    id: "468",
+    name: "Decibel Dollar",
+    address: "aptos:0x96401f1e3ab3245d056d5a1ba67eef066ac3edc4d5f1b16adc5d567e79a845b0",
+    symbol: "USDCBL",
+    url: "https://decibel.trade/",
+    description:
+      "Decibel Dollar (usDCBL) is the native US dollar stablecoin of Decibel, a perpetuals exchange on Aptos. It is issued through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "usDCBL is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/usdcbl"],
+    twitter: "https://x.com/decibel_trade",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        aptos: {
+          issued: ["0x96401f1e3ab3245d056d5a1ba67eef066ac3edc4d5f1b16adc5d567e79a845b0"],
+        },
+      },
+    },
+  },
+  {
+    id: "469",
+    name: "MoneyGram USD",
+    address: "stellar:MGUSD:GAIUGZZZSL47BKH27SUDZESZELFJDPE2UM52RACOSFJ7BIVBGKUEJSUZ",
+    symbol: "MGUSD",
+    url: "https://www.moneygram.com/",
+    description:
+      "MGUSD is a native US dollar stablecoin that serves as the foundation of the MoneyGram app balance, giving customers a stable digital dollar connected to MoneyGram's global money movement and cash access network. It is issued on Stellar through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries.",
+    mintRedeemDescription:
+      "MGUSD is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/mgusd"],
+    twitter: "https://x.com/MoneyGram",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        stellar: {
+          issued: ["MGUSD:GAIUGZZZSL47BKH27SUDZESZELFJDPE2UM52RACOSFJ7BIVBGKUEJSUZ"],
+        },
+      },
+    },
+  },
+  {
+    id: "470",
+    name: "Takenos USD",
+    address: "solana:He1ZD1o5WTUCHz5QoVMSdfhZjyqecVgYK75TUg95rnhL",
+    symbol: "TAKO",
+    url: "https://takenos.com/",
+    description:
+      "TAKO is a US dollar-backed stablecoin that lets Takenos users, primarily freelancers across Latin America, store value and earn rewards in a stable digital dollar. It is issued on Solana through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries.",
+    mintRedeemDescription:
+      "TAKO connects to Bridge's fiat on- and off-ramp infrastructure: it is minted when US dollars are deposited and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/tako"],
+    twitter: null,
+    wiki: null,
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["He1ZD1o5WTUCHz5QoVMSdfhZjyqecVgYK75TUg95rnhL"],
+        },
+      },
+    },
+  },
+  {
+    id: "471",
+    name: "LavaUSD",
+    address: "solana:ENiQN61NU5Sq2h3QY5ZpV9SJpyfRvRCNGNgUdB3Lr6yP",
+    symbol: "LAVAUSD",
+    url: "https://www.lava.xyz/",
+    description:
+      "LavaUSD is a US dollar stablecoin available to Lava users to fund their Lava account and use for payments and other financial services. It can be moved without gas fees through the Lava app and converted to other stablecoins. It is issued on Solana through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries.",
+    mintRedeemDescription:
+      "LavaUSD is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/lava_usd"],
+    twitter: null,
+    wiki: null,
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["ENiQN61NU5Sq2h3QY5ZpV9SJpyfRvRCNGNgUdB3Lr6yP"],
+        },
+      },
+    },
+  },
+  {
+    id: "472",
+    name: "Lisk USD",
+    address: "base:0x1eb9c1d6cA4f8e2A2cc4f8b7b5C05251f3bBc845",
+    symbol: "USDL",
+    url: "https://lisk.com/",
+    description:
+      "Lisk USD (USDL) is a US dollar stablecoin for the Lisk ecosystem, issued through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "USDL is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/usdl_lisk"],
+    twitter: "https://x.com/LiskHQ",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x1eb9c1d6cA4f8e2A2cc4f8b7b5C05251f3bBc845"],
+        },
+      },
+    },
+  },
+  {
+    id: "473",
+    name: "Veem USD",
+    address: "solana:u2jUWdHS5HxpHvea2s653JZ4cTg3HFD4K1KkSuPRrua",
+    symbol: "USDV",
+    url: "https://www.veem.com/",
+    description:
+      "USDV is Veem's digital dollar, designed to make global business payments faster, simpler and available around the clock. Eligible businesses can receive, hold, convert and send dollar value through Veem's payment network without managing blockchain infrastructure themselves. It is issued on Solana through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries.",
+    mintRedeemDescription:
+      "USDV is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/usdv"],
+    twitter: "https://x.com/Veem",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["u2jUWdHS5HxpHvea2s653JZ4cTg3HFD4K1KkSuPRrua"],
+        },
+      },
+    },
+  },
+  {
+    id: "474",
+    name: "Dakota USD",
+    address: "base:0xfa2acd0861bd3219d5764d349d3a970ae8321620",
+    symbol: "DKUSD",
+    url: "https://www.dakota.io/",
+    description:
+      "Dakota USD (DKUSD) is the US dollar stablecoin of Dakota, a stablecoin-powered business banking platform. It is issued on Base through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "DKUSD is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/dkusd"],
+    twitter: null,
+    wiki: null,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0xfa2acd0861bd3219d5764d349d3a970ae8321620"],
+        },
+      },
+    },
+  },
+  {
+    id: "475",
+    name: "USD II",
+    address: "base:0xfe26e72431Bd82c285655e897F25104E547c4c07",
+    symbol: "USD2",
+    url: "https://reserves.bridge.xyz/usd2",
+    description:
+      "USD II (USD2) is a US dollar stablecoin issued on Base through Bridge's Open Issuance platform, backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "USD2 is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/usd2"],
+    twitter: "https://x.com/Stablecoin",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0xfe26e72431Bd82c285655e897F25104E547c4c07"],
+        },
+      },
+    },
+  },
+  {
+    id: "476",
+    name: "USD Slash",
+    address: "base:0xCC7B940E22e1eEF83C0170608AED6D5Fd386Cdad",
+    symbol: "USDSL",
+    url: "https://www.slash.com/",
+    description:
+      "USD Slash (USDSL) is the US dollar stablecoin of Slash, a business banking platform. It is issued on Base through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "USDSL is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "true",
+    gecko_id: "usd-slash",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/usdsl"],
+    twitter: "https://x.com/slash",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0xCC7B940E22e1eEF83C0170608AED6D5Fd386Cdad"],
+        },
+      },
+    },
+  },
+  {
+    id: "477",
+    name: "Linea USD",
+    address: "linea:0x91C4596B9Aba38CB46318F01A0C1943922f47aE5",
+    symbol: "USDL",
+    url: "https://linea.build/",
+    description:
+      "Linea USD (USDL) is a US dollar stablecoin for the Linea ecosystem, issued natively on Linea through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "USDL is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/usdl_linea"],
+    twitter: "https://x.com/LineaBuild",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        linea: {
+          issued: ["0x91C4596B9Aba38CB46318F01A0C1943922f47aE5"],
+        },
+      },
+    },
+  },
+  {
+    id: "478",
+    name: "AFRi",
+    address: "solana:Fk9mK6eHhPbzx2FEJZY9Usxt2jBS3dz8fu8a7wijRzy3",
+    symbol: "AFRI",
+    url: "https://afri.africa/",
+    description:
+      "AFRi is a US dollar stablecoin designed to make moving, storing and settling value across African markets simpler and faster, serving as a settlement and payment layer connecting wallets, businesses and financial institutions. It is issued on Solana through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries.",
+    mintRedeemDescription:
+      "AFRi is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/afri"],
+    twitter: null,
+    wiki: null,
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["Fk9mK6eHhPbzx2FEJZY9Usxt2jBS3dz8fu8a7wijRzy3"],
+        },
+      },
+    },
+  },
+  {
+    id: "479",
+    name: "GAIA USD",
+    address: "solana:32BnUibEKwa8oAwmMK4kToMFQBJKureAkrD334vw3oaU",
+    symbol: "GUSD",
+    url: "https://www.gaiaonline.com/",
+    description:
+      "GAIA USD (GUSD) is the US dollar stablecoin of Gaia Online, issued on Solana through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "GUSD is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/gusd"],
+    twitter: null,
+    wiki: null,
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["32BnUibEKwa8oAwmMK4kToMFQBJKureAkrD334vw3oaU"],
+        },
+      },
+    },
+  },
+  {
+    id: "480",
+    name: "Pyre Dollar",
+    address: "base:0x05Dec3e8D1B2dC6670D981A3c58A9eE41F243894",
+    symbol: "PYREUSD",
+    url: "https://sophon.com/",
+    description:
+      "PYREUSD is a US dollar stablecoin intended for payments, transfers and other financial activity within the Pyre ecosystem (by Sophon), providing a consistent unit of value across Pyre's products. It is issued on Base through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries.",
+    mintRedeemDescription:
+      "PYREUSD is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/pyre_usd"],
+    twitter: "https://x.com/sophon",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x05Dec3e8D1B2dC6670D981A3c58A9eE41F243894"],
+        },
+      },
+    },
+  },
+  {
+    id: "481",
+    name: "Blitz USD",
+    address: "solana:usdz3KLJgC2CSkQMcoJfN2c1MLrrjcGWVk3tjdiX9C2",
+    symbol: "USDZ",
+    url: "https://reserves.bridge.xyz/usdz",
+    description:
+      "USDZ (Blitz on Solana) is a US dollar stablecoin issued on Solana through Bridge's Open Issuance platform, backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "USDZ is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/usdz"],
+    twitter: "https://x.com/Stablecoin",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        solana: {
+          issued: ["usdz3KLJgC2CSkQMcoJfN2c1MLrrjcGWVk3tjdiX9C2"],
+        },
+      },
+    },
+  },
+  {
+    id: "482",
+    name: "Global Dollars",
+    address: "polygon:0x75dC96CA760A000EfF7DC4eB4C701467e66d12c6",
+    symbol: "GDUS",
+    url: "https://glonari.net/",
+    description:
+      "Global Dollars (GDUS) is the US dollar stablecoin of Glonari, issued on Polygon through Bridge's Open Issuance platform and backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "GDUS is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/gdus"],
+    twitter: null,
+    wiki: null,
+    chainConfig: {
+      chains: {
+        polygon: {
+          issued: ["0x75dC96CA760A000EfF7DC4eB4C701467e66d12c6"],
+        },
+      },
+    },
+  },
+  {
+    id: "483",
+    name: "Frontier Dollar",
+    address: "base:0x2e35045e37f7fc9f02eba7018981e14a3211dbf1",
+    symbol: "FND",
+    url: "https://reserves.bridge.xyz/fnd",
+    description:
+      "Frontier Dollar (FND) is a US dollar stablecoin issued on Base through Bridge's Open Issuance platform, backed 1:1 by cash and short-dated US Treasuries held in reserve by Bridge (a Stripe company).",
+    mintRedeemDescription:
+      "FND is minted when US dollars are deposited through Bridge's issuance APIs and burned on redemption, both 1:1. Bridge publishes live supply and reserve data at reserves.bridge.xyz.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://reserves.bridge.xyz/fnd"],
+    twitter: "https://x.com/Stablecoin",
+    wiki: null,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x2e35045e37f7fc9f02eba7018981e14a3211dbf1"],
         },
       },
     },
