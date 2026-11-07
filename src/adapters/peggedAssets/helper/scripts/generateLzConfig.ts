@@ -191,9 +191,17 @@ function matchesAsset(
 }
 
 function buildChainIdToLlamaKey(): Record<number, string> {
+  // providers.json lists several keys for some chainIds (e.g. 1514 = data + sty). Prefer the key this
+  // repo already uses (helper/chains.json) so a new alias upstream does not rename a chain here.
+  let localChains = new Set<string>();
+  try {
+    localChains = new Set<string>(JSON.parse(fs.readFileSync(LOCAL_CHAINS_PATH, "utf8")));
+  } catch { }
   const map: Record<number, string> = {};
   for (const [key, info] of Object.entries<any>(providers)) {
-    if (typeof info?.chainId === "number" && map[info.chainId] === undefined) {
+    if (typeof info?.chainId !== "number") continue;
+    const current = map[info.chainId];
+    if (current === undefined || (!localChains.has(current) && localChains.has(key))) {
       map[info.chainId] = key;
     }
   }
@@ -207,7 +215,27 @@ type Hit = {
   decimals: number;
   type: string;
   symbol: string;
+  kept?: boolean; // carried over from the previous file: no longer in LZ metadata, never dropped
 };
+
+// Entries already in the generated file are never removed, even when LZ metadata stops listing them
+// (a chain leaving a registry is not evidence the token is gone). Returns the previous lines that the
+// fresh metadata did not reproduce, minus chains the asset now excludes on purpose.
+function carryOverPreviousTokens(outPath: string, hits: Hit[], excludeChains: Set<string>): Hit[] {
+  if (!fs.existsSync(outPath)) return [];
+  const have = new Set(hits.map((h) => `${h.llamaKey}|${h.address.toLowerCase()}`));
+  const kept: Hit[] = [];
+  const re = /\{\s*chain:\s*"([^"]+)",\s*address:\s*"([^"]+)",\s*decimals:\s*(\d+)\s*\},?\s*(?:\/\/\s*(\S+)\s+(\S+)\s+\(lz:([^)]+)\))?/;
+  for (const line of fs.readFileSync(outPath, "utf8").split("\n")) {
+    const m = line.match(re);
+    if (!m) continue;
+    const [, llamaKey, address, decimals, type, symbol, lzKey] = m;
+    if (excludeChains.has(llamaKey)) continue;
+    if (have.has(`${llamaKey}|${address.toLowerCase()}`)) continue;
+    kept.push({ llamaKey, lzKey: lzKey ?? "?", address, decimals: Number(decimals), type: type ?? "?", symbol: symbol ?? "?", kept: true });
+  }
+  return kept;
+}
 
 async function main() {
   const { asset, dry } = parseArgs(process.argv.slice(2));
@@ -363,6 +391,23 @@ async function generateForAsset(
     }
   }
 
+  const adapterKey = peggedAsset.module ?? peggedAsset.gecko_id;
+  const outPath = path.resolve(
+    __dirname,
+    "..",
+    "..",
+    adapterKey,
+    "layerzeroConfig.ts"
+  );
+
+  const kept = carryOverPreviousTokens(outPath, hits, excludeChains);
+  if (kept.length) {
+    console.log(
+      `[${peggedAsset.gecko_id}] kept ${kept.length} previous token(s) no longer in LZ metadata: ${kept.map((k) => `${k.llamaKey}:${k.address}`).join(", ")}`
+    );
+    hits.push(...kept);
+  }
+
   hits.sort(
     (a, b) =>
       a.llamaKey.localeCompare(b.llamaKey) || a.address.localeCompare(b.address)
@@ -382,6 +427,11 @@ async function generateForAsset(
   lines.push(
     `// Re-run: ts-node src/adapters/peggedAssets/helper/scripts/generateLzConfig.ts --asset ${peggedAsset.gecko_id}`
   );
+  if (excludeChains.size) {
+    lines.push(
+      `// Excluded (bridgeConfig.lzConfig.excludeChains in peggedData, tracked by hand in the adapter): ${[...excludeChains].sort().join(", ")}`
+    );
+  }
   lines.push(``);
   lines.push(`import type { LayerZeroConfig } from "../helper/bridgeConfig";`);
   lines.push(``);
@@ -390,7 +440,7 @@ async function generateForAsset(
   lines.push(`  tokens: [`);
   for (const h of hits) {
     lines.push(
-      `    { chain: "${h.llamaKey}", address: "${h.address}", decimals: ${h.decimals} }, // ${h.type} ${h.symbol} (lz:${h.lzKey})`
+      `    { chain: "${h.llamaKey}", address: "${h.address}", decimals: ${h.decimals} }, // ${h.type} ${h.symbol} (lz:${h.lzKey})${h.kept ? " kept: no longer in LZ metadata" : ""}`
     );
   }
   lines.push(`  ],`);
@@ -400,15 +450,6 @@ async function generateForAsset(
   lines.push(``);
 
   const content = lines.join("\n");
-
-  const adapterKey = peggedAsset.module ?? peggedAsset.gecko_id;
-  const outPath = path.resolve(
-    __dirname,
-    "..",
-    "..",
-    adapterKey,
-    "layerzeroConfig.ts"
-  );
 
   if (dry) {
     process.stdout.write(`\n===== ${peggedAsset.gecko_id} =====\n`);

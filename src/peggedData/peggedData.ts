@@ -33,6 +33,7 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["USDT0", 'USDT'],
+        excludeChains: ["sei"], // USDT.kava + USDT0 tracked by hand in tether/config.ts (LZ metadata pegs USDT.kava to Ethereum)
       },
       hyperlaneConfig: {
         // "USD₮0" uses the Unicode Tugrik Sign (U+20AE), NOT ASCII "T". Visually
@@ -64,6 +65,7 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["USDC", 'USDC.e'],
+        excludeChains: ["aurora"], // Aurora USDC is Near-native USDC bridged over; tracked as bridgedFromNear in usd-coin/config.ts
       },
       hyperlaneConfig: {
         // Default matching by gecko_id "usd-coin" and symbol "USDC".
@@ -3633,6 +3635,9 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["PYUSD"],
+        // PYUSD0 chains are backed by PYUSD locked on Arbitrum (OFT adapter 0x3cd2b89c...), not Ethereum
+        // as LZ metadata claims; they are tracked by hand as bridgedFromArbitrum in paypal-usd/index.ts
+        excludeChains: ["flow", "sei", "abstract", "avax", "ink", "plume_mainnet", "codex", "fraxtal", "stable", "kiteai", "optimism", "tron"],
       }
     }
   },

@@ -240,9 +240,17 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
 const dummyFn = () => { };
 const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
 
+// `paypal-usd`, `paypal-usd/index`, `paypal-usd/index.ts` and `120` all name the same asset.
+// Resolving the asset matters: it is what loads bridgeConfig (LayerZero / Hyperlane) and chainConfig,
+// so a path that does not resolve silently tests the manual adapter alone.
+function getAssetDirFromPath(filePath: string): string {
+  const pathParts = filePath.replace(/\.ts$/, "").split(path.sep).filter(Boolean);
+  if (pathParts[pathParts.length - 1] === "index") pathParts.pop();
+  return pathParts[pathParts.length - 1];
+}
+
 function getStablecoinIdFromPath(filePath: string): string {
-  const pathParts = filePath.split(path.sep);
-  const stablecoinDir = pathParts[pathParts.length - 1];
+  const stablecoinDir = getAssetDirFromPath(filePath);
 
   if (/^\d+$/.test(stablecoinDir)) {
     return stablecoinDir;
@@ -256,13 +264,12 @@ function getStablecoinIdFromPath(filePath: string): string {
     return peggedAsset.id;
   }
 
-  console.warn(`[WARNING] Could not determine stablecoin ID for path: ${filePath}, using folder name: ${stablecoinDir}`);
+  console.warn(`[WARNING] Could not determine stablecoin ID for path: ${filePath}, using folder name: ${stablecoinDir}. No peggedData entry matched, so bridgeConfig (LayerZero / Hyperlane) and chainConfig will NOT be applied: this run tests the manual adapter only.`);
   return stablecoinDir;
 }
 
 function getAdapterLabelFromPath(filePath: string): string {
-  const parts = filePath.split(path.sep);
-  const last = parts[parts.length - 1] || 'unknown-adapter';
+  const last = getAssetDirFromPath(filePath) || 'unknown-adapter';
   if (/^\d+$/.test(last)) {
     const found = peggedAssets.find(p => p.id === last);
     return (found?.gecko_id || found?.name || last) as string;

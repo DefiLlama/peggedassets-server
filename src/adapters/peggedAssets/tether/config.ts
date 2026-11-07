@@ -362,7 +362,10 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x7277Cc818e3F3FfBb169c6Da9CC77Fc2d2a34895"],
   },
   sei: {
-    bridgedFromKava: ["0xB75D0B03c06A926e488e2659DF1A861F860bD3d1"],
+    // both are LayerZero/Stargate OFTs, wired by hand in index.ts; sei is in lzConfig.excludeChains so
+    // the generated config does not add USDT.kava again under "ethereum"
+    bridgedFromKava: ["0xB75D0B03c06A926e488e2659DF1A861F860bD3d1"], // USDT.kava
+    bridgedFromETH: ["0x9151434b16b9763660705744891fa906f660ecc5"], // USDT0
   },
   zircuit: {
     bridgedFromETH: ["0x46dDa6a5a559d861c06EC9a95Fb395f5C3Db0742"],
