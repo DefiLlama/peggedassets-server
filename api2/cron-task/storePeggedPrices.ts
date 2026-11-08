@@ -36,4 +36,10 @@ export default async function handler() {
     }
   })
   cache.historicalPrices.push(...newItems)
+
+  // older records (including ones already in the cache) stored every asset without
+  // a gecko_id under one shared "null" key; drop it so it isn't served or used
+  cache.historicalPrices.forEach(item => {
+    if (item?.prices) delete item.prices["null"]
+  })
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { dailyPeggedBalances, getLastRecord, hourlyPeggedBalances, hourlyPeggedPrices } from "../../src/peggedAssets/utils/getLastRecord";
 import peggedAssets from "../../src/peggedData/peggedData";
+import { getPeggedPrice } from "../../src/adapters/peggedAssets/prices";
 import { getClosestDayStartTimestamp, secondsInDay, secondsInHour, } from "../../src/utils/date";
 import * as sdk from "@defillama/sdk";
 import { normalizeChain } from "../../src/utils/normalizeChain";
@@ -252,7 +253,7 @@ export function craftChartsResponse(
       const closestPrices = extractResultOfBinarySearch(historicalPrices, closestPriceIndex);
 
       let fallbackPrice = 1;
-      const historicalPrice = closestPrices?.prices[peggedGeckoID];
+      const historicalPrice = getPeggedPrice(closestPrices?.prices, peggedGeckoID);
       if (pegType === "peggedVAR") {
         fallbackPrice = 0;
       } else if (pegType !== "peggedUSD" && !historicalPrice) {
