@@ -523,7 +523,7 @@ export default [
       'nUSD, or "nexus" USD, is a cross-chain stablecoin fully backed by the nexus stablecoin liquidity pool on Ethereum consisting of DAI, USDC, and USDT.',
     mintRedeemDescription:
       "When a stablecoin is bridged between Synapse-enabled chains, the funds are automatically converted to nUSD, and bridged to the destination chain. Once there, this nUSD can be auto-swapped to that chain's native stablecoins using the local nUSD pool.",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "nexus-usd",
     cmcId: null,
     pegType: "peggedUSD",
@@ -1180,7 +1180,7 @@ export default [
       "STBL is an algorithmic over-collateralized stablecoin that is native to the Algofi protocol.",
     mintRedeemDescription:
       "Using the Algofi app, users mint STBL by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back STBL is burned.",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "algostable",
     cmcId: null,
     pegType: "peggedUSD",
@@ -4724,7 +4724,7 @@ export default [
       "The Sovryn Dollar (DLLR) is an aggregation of purely BTC-backed “constituent” stablecoins into a single stablecoin",
     mintRedeemDescription:
       "The Sovryn Dollar (DLLR) is minted through Mynt, a smart contract system, by aggregating various BTC-backed stablecoins into a single, more resilient stablecoin",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "sovryn-dollar",
     cmcId: "27363",
     pegType: "peggedUSD",
@@ -4751,7 +4751,7 @@ export default [
       "EURD is a regulated, programmable E-Money Token, fully backed by euro managed by the Quantoz Foundation under supervision by the Dutch Central Bank. Quantoz Payments handles the KYC and AML procedures, limiting the regulatory burden for merchants and service providers",
     mintRedeemDescription:
       "All funded EURD can be redeemed 1:1 to the whitelisted bank account of the EURD users",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "quantoz-eurd",
     cmcId: null,
     pegType: "peggedEUR",
@@ -4781,7 +4781,7 @@ export default [
       "XUSD is a USD-pegged stablecoin aggregator of the Babelfish protocol",
     mintRedeemDescription:
       "Its purpose is to act as a trustless stablecoin translation device - meaning it facilitates the conversion of multiple USD-pegged stablecoins with each other at a fixed 1:1 ratio.",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "xusd-babelfish",
     cmcId: null,
     pegType: "peggedUSD",
@@ -4808,7 +4808,7 @@ export default [
       "ULTRA is a new stablecoin issued by PrismaLRT, a new borrowing protocol developed by Prisma focused on unlocking liquidity for Liquid Restaking Tokens (LRTs).",
     mintRedeemDescription:
       "As a decentralized stablecoin on the Ethereum Mainnet, $ULTRA is minted by users (borrowers). As with all borrowing on Prisma, a user must supply collateral (at a specific collateral ratio) to be able to mint $ULTRA. Correspondingly, when a user repays a debt position (or is liquidated), PrismaLRT protocol burns that user’s $ULTRA.",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "prismalrt-ultra",
     cmcId: null,
     pegType: "peggedUSD",
@@ -4835,7 +4835,7 @@ export default [
       "Coinback token, collateralized stablecoin on Rootstock backed by the corresponding fiat asset.",
     mintRedeemDescription:
       "When Pagolinea users deposit fiat assets, coinback tokens are minted and transferred to the users. When users withdraw fiat, the coinback tokens are burnt.",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "usdcb",
     cmcId: null,
     pegType: "peggedUSD",
@@ -4862,7 +4862,7 @@ export default [
       "AUDD is an Australian dollar stablecoin issued by AUDC Pty Ltd under AFSL 700123. It is backed 1:1 by Australian dollars held in cash on trust for AUDD holders, and is redeemable at par with the issuer, on demand. AUDD is issued natively on Ethereum, Stellar, XRP Ledger, Solana, Hedera, Base, XDC, Redbelly and Arc",
     mintRedeemDescription:
       "AUDD is backed 1:1 by Australian dollars held in cash on trust for AUDD holders, separately from AUDC’s operating funds, and is redeemable at par with the issuer, on demand.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "novatti-australian-digital-dollar",
     cmcId: null,
     pegType: "peggedAUD",
@@ -4913,7 +4913,7 @@ export default [
       "The cgUSD token, an ERC20 rebasing token, is backed by US Treasury bills. Every New York banking day, the total issuance of cgUSD aligns with the net value of its asset portfolio, encompassing on-chain stablecoins, the market value of U.S. Treasury Bills, and accrued interest.",
     mintRedeemDescription:
       "Users can mint cgUSD by using assets from multiple chains USDT, USDC. Users can use our Withdrawals Request and Claim tabs to withdraw cgUSD and receive USDC at a 1:1 ratio. Under normal circumstances, withdrawal periods can take anywhere between 5-7 days. After that, you can claim your cgUSD using the Claim tab.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "cygnus-finance-global-usd",
     cmcId: null,
     pegType: "peggedUSD",
@@ -5683,7 +5683,7 @@ export default [
       "Angle's Dollar stablecoin (USDA) is a USD stablecoin supported by a robust Price Stability Module. USDA is over-collateralized, decentralized, transparent, generates yield, and offers competitive pricing for on-chain USD to Euro exchanges",
     mintRedeemDescription:
       "Users can get USDA, by swapping their assets on the Angle app or a DEX. It is also possible to acquire USDA by borrowing it against a variety of collaterals",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "angle-usd",
     cmcId: null,
     pegType: "peggedUSD",
@@ -5710,7 +5710,7 @@ export default [
       "USC is a decentralised, scalable, fully backed stablecoin which is 1-1 USD pegged",
     mintRedeemDescription:
       "To mint USC, you are required to deposit a specific amount of ETH/LST in the reserves. Afterward, you can generate USC tokens with a collateral ratio of 100% against your deposit",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "chi-usc",
     cmcId: null,
     pegType: "peggedUSD",
@@ -5737,7 +5737,7 @@ export default [
     description: "ckUSDC is a fully backed stablecoin which is 1-1 USDC pegged",
     mintRedeemDescription:
       "The pair of smart contracts work in unison to ensure that the total value of ckUSDC is fully backed 1:1 by USDC. This can always be verified by viewing the on-chain dashboards and metrics of the canisters: ckETH Minter dashboard, ckETH Minter metrics, ckUSDC Ledger metrics.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "ckusdc",
     module: "ckusdc",
     module: "ckusdc", //fakecg
@@ -5760,7 +5760,7 @@ export default [
       "Usual enables an RWA-stablecoin that provides a high standard of security and transparency, while redistributing the generated value in the form of speculative yield in $USUAL, the Usual governance token.",
     mintRedeemDescription:
       "Usual enables users to deposit either USYC or USDC as collateral to mint USD0. USD0 is backed 1:1 by collateral exclusively in the form of very short-term RWAs (Real-World Assets).",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "usual-usd",
     cmcId: null,
     pegType: "peggedUSD",
@@ -5790,7 +5790,7 @@ export default [
       "Launched in 2024, Classic USD (USC) is a fiat-collateralized stablecoin issued through a partnership between Brale and EthereumClassic.com. Classic USD is the premiere native stablecoin for Ethereum Classi's decentralized finance ecosystem, global payments, and on-chain fiat settlement. As of 2022, Ethereum Classic is the largest and most secure Proof-of-Work smart contract network in the world",
     mintRedeemDescription:
       "USC, issued by Brale Inc., with Brale ensuring liquidity to meet redemption obligations and managing reserve allocations",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "classic-usd",
     cmcId: null,
     pegType: "peggedUSD",
@@ -5820,7 +5820,7 @@ export default [
       "An overcollateralized stablecoin natively backed by Ether (ETH). USR achieves its peg by hedging its collateral pool and maintaining a tokenized insurance fund called RLP. Users can stake USR to obtain the yield-bearing version called stUSR.",
     mintRedeemDescription:
       "USR is minted by depositing liquid assets, such as USDC or USDT, on 1:1 value basis. When USR is redeemed, a user receives a 1:1 equivalent to the notional amount.",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "resolv-usr",
     cmcId: null,
     pegType: "peggedUSD",
@@ -5867,7 +5867,7 @@ export default [
       "Stable Jack allows users to exchange the yield, volatility, and points of the collateral asset while maintaining their principal. This will allow new DeFi primitives to be built on yield-bearing assets, lending markets, DEXs, or volatile assets.",
     mintRedeemDescription:
       "aUSD is a decentralized yield-bearing stablecoin that is fully collateralized and backed by AVAX LSTs.",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "stable-jack-ausd",
     cmcId: null,
     pegType: "peggedUSD",
@@ -8235,7 +8235,7 @@ export default [
       "The Quantoz EURQ is a stablecoin pegged 1:1 to the euro. The EURQ is issued by Quantoz Payments BV, an Electronic Money Institution under supervision of the Dutch Central Bank (DNB). The EURQ is designed to be Micar compliant and its whitepaper as Electronic Money Token (EMT) has been submitted to the Dutch Financial Authorities (AFM). The EURQs are distributed through Authorized Participants.",
     mintRedeemDescription:
       "All funded EURQ can be redeemed 1:1 to the whitelisted bank account of the EURQ users",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "quantoz-eurq",
     cmcId: null,
     pegType: "peggedEUR",
@@ -8277,7 +8277,7 @@ export default [
       "The Quantoz USDQ is a stablecoin pegged 1:1 to the dollar. The USDQ is issued by Quantoz Payments BV, an Electronic Money Institution under supervision of the Dutch Central Bank (DNB). The USDQ is designed to be Micar compliant and its whitepaper as Electronic Money Token (EMT) has been submitted to the Dutch Financial Authorities (AFM). The USDQs are distributed through Authorized Participants.",
     mintRedeemDescription:
       "All funded USDQ can be redeemed 1:1 to the whitelisted bank account of the USDQ users",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "quantoz-usdq",
     cmcId: null,
     pegType: "peggedUSD",
@@ -8319,7 +8319,7 @@ export default [
       "USH is an over-collateralized, crypto-backed stablecoin designed to maintain a 1:1 peg to the US dollar, with decentralized, non-custodial vaults and onchain interest rate adjustments to ensure stability and resilience",
     mintRedeemDescription:
       "To mint the USH stablecoin, users deposit one of the supported collateral types into the designated vault. Each vault has its own minimum health factor requirement and interest rate",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "hyperstable",
     cmcId: null,
     pegType: "peggedUSD",
@@ -8393,7 +8393,7 @@ export default [
       "Parabol USD (paraUSD) is a fiat-backed stablecoin built on the Parabol Protocol, offering a revolutionary approach to yield generation in the stablecoin ecosystem. The protocol enables savers to access risk-free yields as a baseline through its innovative Reserve Stability Pool (RSP). Users can lend their paraUSD for specific time periods (like 28-day notes), earning both fixed income based on T-Bill rates and additional floating income derived from overnight repo market performance. Treasury departments can optimize cash management while maintaining security, and developers can easily embed these institutional-grade yields into their applications through Parabol's comprehensive APIs and SDKs. All positions are represented as NFTs that can be transferred across markets.",
     mintRedeemDescription:
       "paraUSD can be obtained in three ways: (1) minting it directly with fiat after completing Know Your Business (KYB) or Know Your Customer (KYC) verification; (2) trading on centralized exchanges; or (3) trading on decentralized exchanges.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "parabol-usd",
     cmcId: null,
     pegType: "peggedUSD",
@@ -8420,7 +8420,7 @@ export default [
       "All Tether tokens are pegged at 1-to-1 with a matching fiat currency and are backed 100% by Tether’s Reserves. Information about Tether Tokens in circulation is typically published daily.",
     mintRedeemDescription:
       "Redeem 1:1",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "cnh-tether",
     cmcId: null,
     pegType: "peggedCNY",
@@ -8440,7 +8440,7 @@ export default [
       "All Tether tokens are pegged at 1-to-1 with a matching fiat currency and are backed 100% by Tether’s Reserves. Information about Tether Tokens in circulation is typically published daily.",
     mintRedeemDescription:
       "Redeem 1:1",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "mexican-peso-tether",
     cmcId: null,
     pegType: "peggedMXN",
@@ -8459,7 +8459,7 @@ export default [
       "Noble Dollar (USDN) is a yield-bearing stablecoin backed by U.S. Treasuries and built on the M^0 protocol",
     mintRedeemDescription:
       "Users can mint or redeem USDN by depositing or withdrawing USDC via the Noble Express app using supported chains like Ethereum, Solana, or Cosmos",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "noble-dollar-usdn",
     cmcId: null,
     pegType: "peggedUSD",
@@ -8476,7 +8476,7 @@ export default [
     url: "https://unitas.so/",
     description: "Unitas is a decentralized, yield-bearing stablecoin protocol built for the next generation of finance. It issues stablecoins that earn yield natively — no reliance on traditional banks. Powered by Solana, it's fast, scalable, and censorship-resistant",
     mintRedeemDescription: "Minting and redemption are available only to users who have successfully completed our KYC/KYB process. We provide real-time quotes for both actions, and counterparties can finalize their mint or redeem requests by interacting with our API using the quoted terms.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "usdu",
     module: "unitas",
     cmcId: null,
@@ -8495,7 +8495,7 @@ export default [
     url: "https://www.mnee.io/",
     description: "MNEE is revolutionizing the way we move money. It's the fastest, most scalable, lowest-fee fully regulated stablecoin on the market.",
     mintRedeemDescription: "MNEE is fully backed 1‑for‑1 by U.S. dollars. Reserves are held in regulated financial institutions and are regularly audited by independent third parties to ensure full collateralization.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "mnee-usd-stablecoin",
     cmcId: null,
     pegType: "peggedUSD",
@@ -8519,7 +8519,7 @@ export default [
     url: "https://fsl.com/ggusd",
     description: "GGUSD is a USD-pegged stablecoin developed with Agora (backed by VanEck) and secured by U.S. Treasuries. It combines stability with on-chain rewards - becoming the first flexible stablecoin to pay yield with no staking or lockups. As the native currency of 2184, GGUSD powers purchases, rewards, trading, real-world spending via the GMT Pay Card, and earns daily yield. Live on Polygon and BNB, it delivers an industry-leading APY for FSL ID holders.",
     mintRedeemDescription: "All users can 1:1 mint GGUSD by depositting AUSD on Polygon",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "good-game-us-dollar",
     cmcId: null,
     pegType: "peggedUSD",
@@ -8552,7 +8552,7 @@ export default [
     url: "https://globaldollar.com/",
     description: "Global Dollar (USDG) is a single currency stablecoin pegged to the US dollar that is regulated under the Monetary Authority of Singapore (MAS). USDG is issued by Paxos Digital Singapore (PDS) and will always be fully redeemable from Paxos on a one-to-one basis for US dollars.",
     mintRedeemDescription: "KYC'ed users can mint and redeem USDG through paxos dashboard or through the Paxos API. USDG is redeemable 1:1 for US dollars.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "global-dollar",
     cmcId: "33793",
     pegType: "peggedUSD",
@@ -8600,7 +8600,7 @@ export default [
     url: "https://app.nerite.org/",
     description: "USND is an over-collateralized, governance-minimized stablecoin native to Arbitrum and fully backed by crypto collateral. USND also supports token streaming via Superfluid to enable real-time yield distribution.",
     mintRedeemDescription: "Users open vaults (“troves”) and deposit accepted collateral to mint USND up to their chosen collateral ratio. To unlock collateral, borrowers repay and burn USND, or anyone can redeem USND directly for $1 of the lowest-rate collateral, ensuring the peg.",
-    onCoinGecko: false,
+    onCoinGecko: "false",
     gecko_id: "us-nerite-dollar",
     cmcId: null,
     pegType: "peggedUSD",
@@ -8624,7 +8624,7 @@ export default [
     url: "https://ebisu.money/",
     description: "Ebisu Money is a stablecoin credit market on Ethereum where users can mint ebUSD by depositing collateral and earn yield by providing ebUSD liquidity. The protocol features market-driven interest rates and a liquidation-backed stability mechanism to maintain solvency and capital efficiency.",
     mintRedeemDescription: "Users mint ebUSD by opening a vault and depositing supported collateral. ebUSD can be redeemed by repaying debt and reclaiming collateral, or via redemptions that exchange ebUSD for collateral from the lowest-rate vaults.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "ebusd-stablecoin",
     cmcId: null,
     pegType: "peggedUSD",
@@ -8651,7 +8651,7 @@ export default [
     url: "https://www.straitsx.com/",
     description: "XSGD is the StraitsX digital Singapore Dollar, designed to revolutionise money transfers across the region. XSGD is fully backed by reserve assets and is always redeemable on a 1:1 basis with the Singapore Dollar.",
     mintRedeemDescription: "Verified StraitsX users can access the StraitsX platform to set up their StraitsX Mint function and directly mint XSGD into their preferred blockchain address by sending Singapore dollars to the bank account number available in the Mint tab. It can always be redeemed at a 1:1 ratio with SGD on the StraitsX platform.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "xsgd",
     cmcId: "8489",
     pegType: "peggedSGD",
@@ -8668,7 +8668,7 @@ export default [
     url: "https://www.straitsx.com/",
     description: "XUSD is the StraitsX digital US Dollar, designed to revolutionise global payments with stability, transparency, and seamless integration for consumers and businesses",
     mintRedeemDescription: "Verified StraitsX users can access the StraitsX platform to set up their StraitsX Mint function and directly mint XUSD into their preferred blockchain address by sending US dollars to the bank account number available in the Mint tab. It can always be redeemed at a 1:1 ratio with USD on the StraitsX platform.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "straitsx-xusd",
     cmcId: "32372",
     pegType: "peggedUSD",
@@ -12243,7 +12243,7 @@ export default [
       "trUSD is a crypto-native synthetic dollar issued by Tori Finance that provides an embedded, performance-based yield and targets price stability through delta-neutral trading positions.",
     mintRedeemDescription:
       "Whitelisted users deposit eligible collateral with Tori Finance to mint trUSD, and redeem trUSD for collateral. Stability is targeted through delta-neutral hedging of the backing positions across trading venues.",
-    onCoinGecko: true,
+    onCoinGecko: "true",
     gecko_id: "tori-trusd",
     cmcId: null,
     pegType: "peggedUSD",
