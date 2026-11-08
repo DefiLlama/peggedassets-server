@@ -532,7 +532,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/SynapseProtocol",
     wiki: "https://wiki.defillama.com/wiki/NUSD",
-    module: "nexus-usd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -663,7 +662,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/coinflexdotcom",
     wiki: "https://wiki.defillama.com/wiki/flexUSD",
-    module: "flex-usd",
     deadFrom: "2022-06-23",
     chainConfig: {
       chains: {
@@ -791,7 +789,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/holareserve",
     wiki: "https://wiki.defillama.com/wiki/Reserve_(RSV)",
-    module: "reserve",
     chainConfig: {
       chains: {
         ethereum: {
@@ -861,7 +858,6 @@ export default [
     ],
     twitter: "https://twitter.com/OKLink",
     wiki: "https://wiki.defillama.com/wiki/USDK",
-    module: "usdk",
     chainConfig: {
       chains: {
         ethereum: {
@@ -945,8 +941,6 @@ export default [
       "Using the Money On Chain app, users mint DoC by depositing rBTC into a vault. When the loan is repaid to retrieve the collateral, the paid back DoC is burned.",
     onCoinGecko: "true",
     gecko_id: "dollar-on-chain",
-    module: "doc",
-
     cmcId: "7558",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -981,8 +975,6 @@ export default [
       "Using the Spice Trade app, USDS can be minted by locking USDC and burning SPICE in a proportion determined by the protocol's collateral ratio.",
     onCoinGecko: "false",
     gecko_id: "spiceusd",
-    module: "spiceusd",
-
     cmcId: "20306",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1051,7 +1043,6 @@ export default [
       "Using the Unit Protocol app, users mint USDP by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back USDP is burned.",
     onCoinGecko: "false",
     gecko_id: "usdp-stablecoin",
-    module: "usdp",
     cmcId: "8886",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1089,7 +1080,6 @@ export default [
       "Using the USD Balance app, $1 worth of FHM can be burned to mint 1 USDB.",
     onCoinGecko: "false",
     gecko_id: "usd-balance",
-    module: "usd-balance",
     cmcId: "19224",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1140,7 +1130,6 @@ export default [
     onCoinGecko: "true",
     gecko_id: "ratio-stable-coin",
     module: "ratio-stable-coin",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1280,7 +1269,6 @@ export default [
       "If the price of FLOAT is away from its target price, the supply is changed by minting (expansion) or buying up and burning FLOAT (contraction). This is done through a dutch auction (in an expansion) and a reverse dutch auction (in a contraction), respectively.",
     onCoinGecko: "false",
     gecko_id: "float-protocol-float",
-    module: "float-protocol-float",
     cmcId: "9861",
     pegType: "peggedVAR",
     pegMechanism: "algorithmic",
@@ -1329,7 +1317,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: "zusd",
     module: "zusd",
-
     cmcId: "8772",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -1686,7 +1673,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: "usn",
     module: "usn",
-
     cmcId: "19682",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1816,7 +1802,6 @@ export default [
       "Using the Karura app, users receive 3USD LP tokens by adding aUSD, USDC, or USDT liquidity. LP tokens can be redeemed for the underlying assets.",
     onCoinGecko: "false",
     gecko_id: "3usd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1846,7 +1831,6 @@ export default [
     onCoinGecko: "true",
     gecko_id: "sigusd",
     module: "sigmausd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -1866,8 +1850,6 @@ export default [
       "Using the Bacon app, users swap USDC to mint HOME 1:1. HOME can be redeemed for USDC 1:1 at any time.",
     onCoinGecko: "false",
     gecko_id: "homecoin",
-    module: "bacon-protocol-home",
-
     cmcId: "20520",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1896,8 +1878,6 @@ export default [
       "Using the FIAT DAO app, users by depositing an accepted fixed income collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back FIAT is burned.",
     onCoinGecko: "false",
     gecko_id: "fixed-income-asset-token",
-    module: "fixed-income-asset-token",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1926,8 +1906,6 @@ export default [
       "Using the JPEG'd app, users mint PUSd by depositing an accepted NFT into a vault. When the loan is repaid to retrieve the NFT, the paid back PUSd is burned.",
     onCoinGecko: "false",
     gecko_id: "pusd-stablecoin",
-    module: "pusd-2",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -1956,7 +1934,6 @@ export default [
       "Mint fUSD, the stablecoin on Fantom pegged 1:1 to the USD price, using your FTM. Choose the amount you want to mint and rebalance at any time by adding or removing FTM. Repay the fUSD you minted at any time, unlocking your FTM.",
     onCoinGecko: "false",
     gecko_id: "fantom-usd",
-    module: "fantom-usd",
     cmcId: "16831",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2077,7 +2054,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/beanstalkfarms",
     wiki: "https://wiki.defillama.com/wiki/Beanstalk",
-    module: "bean2",
     chainConfig: {
       chains: {
         ethereum: {
@@ -2098,7 +2074,6 @@ export default [
       "Using the Lemma Finance app, users mint USDL by depositing an accepted asset into the protocol where it establishes a market neutral trading position on decentralized exchanges. When the loan is repaid to retrieve the collateral, the paid back USDL is burned.",
     onCoinGecko: "false",
     gecko_id: "usdlemma",
-    module: "usdlemma",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -2132,7 +2107,6 @@ export default [
     onCoinGecko: "true",
     gecko_id: "pando-usd",
     module: "pando-usd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2154,8 +2128,6 @@ export default [
       "Fluid customers who have undergone a verification process can exchange USD for DUSD and redeem DUSD for USD.",
     onCoinGecko: "false",
     gecko_id: "digitaldollar",
-    module: "digitaldollar",
-
     cmcId: "19933",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -2186,8 +2158,6 @@ export default [
       "Using the Vesta Finance app, users mint VST by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back VST is burned.",
     onCoinGecko: "false",
     gecko_id: "vesta-stable",
-    module: "vesta-stable",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2323,8 +2293,6 @@ export default [
       "Using the Interest Protocol app, users mint USDi by depositing an accepted collateral asset into a vault or swapping for USDC. When the loan is repaid to retrieve the collateral, the paid back USDi is burned.",
     onCoinGecko: "false",
     gecko_id: "interest-protocol",
-    module: "interest-protocol",
-
     cmcId: "20598",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2436,7 +2404,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: "usd2",
     module: "usd2",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed", // currently is crypto-backed for v1, but will change to FRAX mechanism for v2
@@ -2480,7 +2447,6 @@ export default [
       "Using the Arable Finance app, users mint arUSD by depositing an accepted collateral asset into a vault. When the loan is repaid to retrieve the collateral, the paid back arUSD is burned.",
     onCoinGecko: "false",
     gecko_id: "arusd",
-    module: "arable-usd",
     deadUrl: true,
     cmcId: null,
     pegType: "peggedUSD",
@@ -2509,8 +2475,6 @@ export default [
       "Using the Real Protocol app, users mint USDW by depositing Ether into a vault. When the loan is repaid to retrieve the collateral, the paid back USDW is burned.",
     onCoinGecko: "false",
     gecko_id: "usdw",
-    module: "usdw",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2592,7 +2556,6 @@ export default [
     onCoinGecko: "true",
     gecko_id: "zunami-protocol",
     module: "zunami-protocol",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2615,8 +2578,6 @@ export default [
       "Using the Bank of Chain app, users can deposit the three major stablecoins (USDT, USDC, DAI) in any desired combination and amount to mint USDi. USDi can be redeemed for its underlying stablecoins 1:1 at any time.",
     onCoinGecko: "false",
     gecko_id: "usdi",
-    module: "bank-of-chain",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2672,8 +2633,6 @@ export default [
       "Using the Silo Finance app, users can borrow XAI by depositing ETH or USDC as collateral. When the loan is repaid to retrieve the collateral, the paid back XAI is burned.",
     onCoinGecko: "false",
     gecko_id: "xai",
-    module: "xai",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2702,8 +2661,6 @@ export default [
       "Using the Shareslake Dashboard, users can deposit USD on Shareslake or ADA on Cardano to mint RUSD. RUSD can be redeemed for USD at any time.",
     onCoinGecko: "false",
     gecko_id: "redeemable-usd",
-    module: "redeemable",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -2759,8 +2716,6 @@ export default [
       "If the price of PINA is less than 1$, the supply is changed by emitting coupons to reduce the supply. You can stake PINA or LP PINA-USDC in order to get more PINA.",
     onCoinGecko: "false",
     gecko_id: "meme-dollar",
-    module: "meme-dollar",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -2810,7 +2765,6 @@ export default [
       "Using the Bao Finance app, users can borrow BAOUSD by depositing ETH, USDC or bSTBL as collateral. When the loan is repaid to retrieve the collateral, the paid back BAOUSD is burned.",
     onCoinGecko: "false",
     gecko_id: "baousd",
-    module: "baousd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2892,8 +2846,6 @@ export default [
       "Users can deposits collateral into the Platypus Main Pool and stake their LP tokens into the MasterPlatypus to farm PTP. At the same time, it is possible for users to mint USP based on the the collateral factor",
     onCoinGecko: "false",
     gecko_id: "usp-stablecoin",
-    module: "platypus-usd",
-
     cmcId: "20962",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -2924,7 +2876,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: "euroe-stablecoin",
     module: "euroe-stablecoin",
-
     cmcId: null,
     pegType: "peggedEUR",
     pegMechanism: "fiat-backed",
@@ -2974,8 +2925,6 @@ export default [
       "Users are able to mint DSU by providing the specified collateral, currently this is USDC. They are also able to redeem USDC from DSU at a 1-to-1 ratio with DSU",
     onCoinGecko: "false",
     gecko_id: "digital-standard-unit",
-    module: "digital-standard-unit",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3033,8 +2982,6 @@ export default [
       "To mint synthetics in the Offshift Ecosystem, users select and open a PriFi Application, and connect an ERC20 wallet. If a user possesses a positive XFT balance and sufficient ETH to cover gas fees, he/she may conduct a **Shift** and enter the Offshift Ecosystem’s private (anonymous and/or confidential) side via the Burn-and-Mint Mechanism",
     onCoinGecko: "false",
     gecko_id: "offshift-anonusd",
-    module: "offshift-anonusd",
-
     cmcId: "23729",
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -3136,8 +3083,6 @@ export default [
       "DCHF can be borrowed using ETH and BTC assets as collateral. Users can borrow up to 90% of the value of their ETH or BTC collateral and every DCHF is 100% redeemable for ETH worth 1 CHF",
     onCoinGecko: "false",
     gecko_id: "defi-franc",
-    module: "defi-franc",
-
     cmcId: "22249",
     pegType: "peggedVAR",
     pegMechanism: "crypto-backed",
@@ -3199,8 +3144,6 @@ export default [
     mintRedeemDescription: "CZUSD and BUSD swapping.",
     onCoinGecko: "false",
     gecko_id: "czodiac-usd",
-    module: "czusd",
-
     cmcId: "19366",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3227,8 +3170,6 @@ export default [
     mintRedeemDescription: "Add collateral in order to mint d2O.",
     onCoinGecko: "false",
     gecko_id: "deuterium",
-    module: "dam-finance",
-
     cmcId: "23529",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3267,7 +3208,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: null,
-    module: "eusd",
     deadUrl: true,
     chainConfig: {
       chains: {
@@ -3398,8 +3338,6 @@ export default [
       "ClevUSD can be farmed in CLever liquidity pools or swapped for more of the original token.",
     onCoinGecko: "false",
     gecko_id: "clever-usd",
-    module: "clever-usd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3427,8 +3365,6 @@ export default [
       "Users can deposit any accepted collateral asset of their choice to generate R, and enjoy capital-efficient borrowing.",
     onCoinGecko: "false",
     gecko_id: "r",
-    module: "r",
-
     cmcId: "24404",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -3660,7 +3596,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PSY_stablecoin",
     wiki: null,
-    module: "psy",
     chainConfig: {
       chains: {
         arbitrum: {
@@ -3707,7 +3642,6 @@ export default [
     auditLinks: ["https://docs.preon.finance/information/security"],
     twitter: "https://twitter.com/PreonFinance",
     wiki: "https://docs.preon.finance/",
-    module: "star",
     chainConfig: {
       chains: {
         arbitrum: {
@@ -3741,7 +3675,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
-    module: "peg-eusd",
     deadUrl: true,
     chainConfig: {
       chains: {
@@ -3773,7 +3706,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/LybraFinanceLSD",
     wiki: "https://docs.lybra.finance/lybra-finance-docs/background/stablecoins-on-the-market",
-    module: "eusdv2",
     deadUrl: true,
     chainConfig: {
       chains: {
@@ -3822,7 +3754,6 @@ export default [
       "Users can redeem their LCNY for ETH at any time without limitations. However, a redemption fee might be charged on the redeemed amount.",
     onCoinGecko: "false",
     gecko_id: "alternity-cny",
-    module: "alternity-cny",
     cmcId: null,
     pegType: "peggedCNY",
     pegMechanism: "crypto-backed",
@@ -3859,7 +3790,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Nexus_ZDex",
     wiki: "https://docs.zdex.tech/",
-    module: "nexus",
     chainConfig: {
       chains: {
         ethereum: {
@@ -3911,8 +3841,6 @@ export default [
       "svUSD are created when users deposit accepted Stablescoins like USDC, USDT, DAI, and more into Savvy protocol. Borrowing is capped at 50% of the value of the collateral deposited.",
     onCoinGecko: "false",
     gecko_id: "savvy-usd",
-    module: "savvy-usd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -3938,7 +3866,6 @@ export default [
     mintRedeemDescription: "UAHT is pegged to UAH Ukraine Currency",
     onCoinGecko: "false",
     gecko_id: "uaht",
-    module: "uaht",
     cmcId: null,
     pegType: "peggedUAH",
     pegMechanism: "fiat-backed",
@@ -3973,7 +3900,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/MountainUSDM",
     wiki: "https://docs.mountainprotocol.com/reference/usdm-token",
-    module: "usdm",
     chainConfig: {
       chains: {
         ethereum: {
@@ -4016,7 +3942,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Num_Finance",
     wiki: "https://num.finance/transparency",
-    module: "nars",
     chainConfig: {
       chains: {
         polygon: {
@@ -4271,7 +4196,6 @@ export default [
     auditLinks: ["https://www.cyberscope.io/audits/hydt"],
     twitter: "https://twitter.com/HydtProtocol",
     wiki: "https://hydtprotocol.com/#faqs",
-    module: "hydt",
     deadUrl: true,
     chainConfig: {
       chains: {
@@ -4342,8 +4266,6 @@ export default [
       "Minting requires a deposit of the defined collateral tokens in equal value amounts to the RToken smart contracts.",
     onCoinGecko: "true",
     gecko_id: "high-yield-usd-base",
-    module: "high-yield-usd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -4381,7 +4303,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PayTrie",
     wiki: "https://faq.paytrie.com/help/what-is-the-cadc-address",
-    module: "cadc",
     chainConfig: {
       chains: {
         ethereum: {
@@ -4496,8 +4417,6 @@ export default [
       "Redemption allows users to exchange USDS for LSD at face value. This mechanism gives USDS holders the option to redeem USDS for the underlying collateral at any time. Redemptions are always honored such that 1 USDS equals $1 worth of LSD.",
     onCoinGecko: "false",
     gecko_id: "sable-coin",
-    module: "sable-coin",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -4528,8 +4447,6 @@ export default [
       "When a user triggers an SCB issuance request through a USD bank transfer, our compliance team undertakes an initial verification to uphold regulatory adherence. When a whitelisted user decides to redeem SCB, he must firstly sign a transaction in his non-custodial wallet to send the SCB to the burn address. At this stage, our compliance team is informed and undertakes a client file verification. Then, Colb Trust advances to reduce the circulating supply, ultimately burning the stablecoins. Then it is the custodian bank's job to be as efficient as possible to send the USD bank transfer to the user (1 to 4 business days).",
     onCoinGecko: "false",
     gecko_id: "usd-stable-colb",
-    module: "colb-usd-stablecolb",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -4564,7 +4481,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/Goal3_xyz",
     wiki: "https://docs.goal3.xyz/sportsbook/technical-overview/usdzkusd",
-    module: "zkusd",
     chainConfig: {
       chains: {
         era: {
@@ -4790,7 +4706,6 @@ export default [
     auditLinks: ["https://github.com/money-on-chain/Audits"],
     twitter: "https://twitter.com/rifonchain",
     wiki: null,
-    module: "usd-rif",
     chainConfig: {
       chains: {
         rsk: {
@@ -4902,8 +4817,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/PrismaFi",
     wiki: null,
-    module: "prismalrt-ultra",
-
     chainConfig: {
       chains: {
         ethereum: {
@@ -4931,8 +4844,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/pagolinea",
     wiki: null,
-    module: "pago-linea-usdcb",
-
     chainConfig: {
       chains: {
         rsk: {
@@ -5037,7 +4948,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: null,
-    module: "feth",
     chainConfig: {
       chains: {
         ethereum: {
@@ -5098,7 +5008,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/goku_stable",
     wiki: null,
-    module: "gai-stablecoin",
     deadUrl: true,
     chainConfig: {
       chains: {
@@ -5120,8 +5029,6 @@ export default [
       "EURO3 is created by users minting EURO3 loans and it's removed from circulation (burnt) when users repay their loan or redeem EURO3 for the collateral assets.",
     onCoinGecko: "false",
     gecko_id: "euro3",
-    module: "euro3",
-
     cmcId: null,
     pegType: "peggedEUR",
     pegMechanism: "crypto-backed",
@@ -5219,7 +5126,6 @@ export default [
     auditLinks: [],
     twitter: "https://twitter.com/BlackRock",
     wiki: null,
-    module: "blackrock-usd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -5440,7 +5346,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/breadcoop",
     wiki: null,
-    module: "bread",
     chainConfig: {
       chains: {
         xdai: {
@@ -5469,7 +5374,6 @@ export default [
       "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
-    module: "zun-usd",
     deadUrl: true,
     chainConfig: {
       chains: {
@@ -5499,7 +5403,6 @@ export default [
       "https://github.com/ZunamiProtocol/ZunamiProtocolV2/tree/main/audit",
     twitter: "https://twitter.com/ZunamiProtocol",
     wiki: "https://wiki.defillama.com/wiki/Zunami_Protocol",
-    module: "zun-eth",
     deadUrl: true,
     chainConfig: {
       chains: {
@@ -5551,8 +5454,6 @@ export default [
       "Using Magma, users mint WEN by depositing IOTX/uniIOTX as collateral into a Vault. After the WEN loan is repaid to retrieve the collateral, the paid back WEN is burned",
     onCoinGecko: "false",
     gecko_id: "magma-wen",
-    module: "magma-wen",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5703,7 +5604,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/protocol_fx",
     wiki: "https://docs.aladdin.club/f-x-protocol/introduction-of-btcusd-xwbtc",
-    module: "f-x-btc-usd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -5731,8 +5631,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/rgUSD_Bull",
     wiki: "https://app.reserve.org/ethereum/token/0x78da5799cf427fee11e9996982f4150ece7a99a7/overview",
-    module: "revenue-generating-usd",
-
     chainConfig: {
       chains: {
         ethereum: {
@@ -5767,8 +5665,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/bitsmiley_labs",
     wiki: "https://github.com/bitSmiley-protocol/whitepaper/blob/main/BitSmiley_White_Paper.pdf",
-    module: "bitsmiley-bitusd",
-
     chainConfig: {
       chains: {
         btr: {
@@ -5816,8 +5712,6 @@ export default [
       "To mint USC, you are required to deposit a specific amount of ETH/LST in the reserves. Afterward, you can generate USC tokens with a collateral ratio of 100% against your deposit",
     onCoinGecko: false,
     gecko_id: "chi-usc",
-    module: "usc-2",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -5975,8 +5869,6 @@ export default [
       "aUSD is a decentralized yield-bearing stablecoin that is fully collateralized and backed by AVAX LSTs.",
     onCoinGecko: false,
     gecko_id: "stable-jack-ausd",
-    module: "stable-jack-ausd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -6125,7 +6017,6 @@ export default [
     onCoinGecko: "false",
     gecko_id: "chad-usd",
     module: "chad-usd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -6288,8 +6179,6 @@ export default [
       "dckUSD is minted by burning DACKIE tokens through a mechanism integrated into the DackieSwap protocol. When users select the DACKIE-dckUSD pair, the mint-burn process is triggered automatically",
     onCoinGecko: "false",
     gecko_id: "dackie-usd",
-    module: "dackie-usd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "algorithmic",
@@ -6499,7 +6388,6 @@ export default [
     onCoinGecko: "true",
     gecko_id: "usdm-2",
     module: "moneta",
-
     cmcId: "29749",
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -6549,7 +6437,6 @@ export default [
     onCoinGecko: "true",
     gecko_id: "reservoir-rusd",
     module: "reservoir-stablecoin",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -6779,8 +6666,6 @@ export default [
       "Tokens are minted by creating a vault on Parallel",
     onCoinGecko: "false",
     gecko_id: "parallel-usd",
-    module: "parallel-usd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -6811,7 +6696,6 @@ export default [
       "Users mint XY by depositing collateral, while redemption is managed through automated peg stability contracts and buyback-and-burn mechanisms, avoiding direct redemptions to protect user collateral",
     onCoinGecko: "false",
     gecko_id: "tren-debt-token",
-    module: "tren-debt-token",
     deadUrl: true,
     cmcId: "16013",
     pegType: "peggedUSD",
@@ -6878,8 +6762,6 @@ export default [
     mintRedeemDescription: "ZeUSD is created when users deposit eligible RWA as collateral to open a collateralized debt position",
     onCoinGecko: "true",
     gecko_id: "zeusd",
-    module: "zoth-zeusd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "fiat-backed",
@@ -6984,8 +6866,6 @@ export default [
     mintRedeemDescription: "BOLD is minted in Liquity V2 by borrowing against overcollateralized deposits of WETH, wstETH, or rETH, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
     onCoinGecko: "false",
     gecko_id: "legacy-bold",
-    module: "legacy-bold",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -7034,7 +6914,6 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/QuillFi",
     wiki: "https://docs.quill.finance/faq/usdusdq",
-    module: "quill-usd",
     chainConfig: {
       chains: {
         scroll: {
@@ -7930,8 +7809,6 @@ export default [
     mintRedeemDescription: "To mint VUSD, the user swaps an acceptable input asset (DAI, USDC, USDT) for newly minted VUSD at a 1:1 ratio, less minting fee (currently zero), in any amount with zero slippage",
     onCoinGecko: "false",
     gecko_id: "vdollar-finance",
-    module: "vdollar-finance",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -8095,7 +7972,6 @@ export default [
     mintRedeemDescription: "USDK maintains its $1 peg through a market-driven mechanism where borrowers adjust interest rates in response to price fluctuations, and arbitrageurs engage in redemptions when USDK trades below $1. USDK can be redeemed at face value for its underlying collateral, ensuring liquidity and price stability",
     onCoinGecko: "false",
     gecko_id: "orki-usd",
-    module: "orki-usd",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -8163,7 +8039,6 @@ export default [
     twitter: "https://x.com/rootsfi",
     wiki: "https://docs.rootsfi.com/introduction",
     doublecounted: true,
-
     chainConfig: {
       chains: {
         berachain: {
@@ -8219,7 +8094,6 @@ export default [
     mintRedeemDescription: "BOLD is minted in Liquity V2 by borrowing against overcollateralized deposits of WETH, wstETH, or rETH, and it can always be redeemed directly for these underlying assets at a 1:1 USD value",
     onCoinGecko: "true",
     gecko_id: "liquity-bold-2",
-    module: "liquity-bold",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -8605,7 +8479,6 @@ export default [
     onCoinGecko: true,
     gecko_id: "usdu",
     module: "unitas",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -8826,7 +8699,6 @@ export default [
       "Anyone can mint USDp by depositing an accepted reserve asset into the Parallelizer on Ethereum, Base, Avalanche or HyperEVM (0% mint fee today), and burn it for one reserve asset, or redeem it at any time for a proportional share of the whole reserve basket.",
     onCoinGecko: "true",
     gecko_id: "parallel-usdp",
-    module: "parallel-usdp",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -8965,8 +8837,6 @@ export default [
       "Users are able to mint and redeem with BNB, slisBNB, WBNB and more.",
     onCoinGecko: "true",
     gecko_id: "sigma-bnb-usd",
-    module: "bnbusd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -9001,8 +8871,6 @@ export default [
     auditLinks: "https://docs.nondollar.life/autonomint/technical-docs/audits-and-contract-deployment",
     twitter: "https://x.com/autonomint",
     wiki: "https://docs.nondollar.life/autonomint",
-    module: "autonomint-usda+",
-
     chainConfig: {
       chains: {
         base: {
@@ -9053,8 +8921,6 @@ export default [
       "Users deposit reserve assets to mint cUSD at oracle value. cUSD's reserve is backed by blue chip stablecoins such as USDC, USDT, pyUSD, BUIDL, and BENJI, i.e. issued by regulated institutions with transparent attestations. It is 1:1 redeemable for any of the available reserve assets.",
     onCoinGecko: "true",
     gecko_id: "cap-usd",
-    module: "cap-cusd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -9292,8 +9158,6 @@ export default [
     mintRedeemDescription: "Users mint hyUSD by depositing supported LSTs into Hylo's collateral pool, and redeem it by burning hyUSD to withdraw an equivalent amount of collateral.",
     onCoinGecko: "true",
     gecko_id: "hylo-usd",
-    module: "hylo-hyusd",
-
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
@@ -9466,7 +9330,6 @@ export default [
     deadFrom: "2026-02-16",
     twitter: "https://x.com/ColtProtocol",
     wiki: "https://coltstable.notion.site/Colt-Stable-Documentation-257c9bce381680ca9f5edcfb47779710",
-    module: "saga-dollar",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -9494,7 +9357,6 @@ export default [
     twitter: "https://x.com/USDai_Official",
     wiki: "https://docs.usd.ai/how-usd.ai-works",
     doublecounted: true,
-    module: 'usd-ai',
     chainConfig: {
       chains: {
         arbitrum: {
@@ -9552,8 +9414,6 @@ export default [
     auditLinks: ["https://public.inshallah.fi/iAUSD-audit-v1.pdf"],
     twitter: "https://x.com/inshAllahfi",
     wiki: "https://inshallah.gitbook.io/inshallah/iausd-stablecoin/what-is-iausd",
-    module: "iAUSD",
-
     chainConfig: {
       chains: {
         solana: {
@@ -9638,7 +9498,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/joinpalmfi",
     wiki: null,
-    module: "palm-usd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -9693,7 +9552,6 @@ export default [
     auditLinks: ["https://uspd.io/docs/uspd/audit"],
     twitter: "https://x.com/usecash",
     wiki: null,
-    module: "cash",
     chainConfig: {
       chains: {
         solana: {
@@ -9722,7 +9580,6 @@ export default [
     auditLinks: ["https://www.openzeppelin.com/news/tgbp-audit"],
     twitter: "https://x.com/tokenGBP",
     wiki: null,
-    module: "tgbp",
     chainConfig: {
       chains: {
         ethereum: {
@@ -9769,7 +9626,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/LitFinancial_",
     wiki: "https://brale.xyz/stablecoins/litUSD",
-    module: "lit-usd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -9824,7 +9680,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/rockydotcash",
     wiki: "https://docs.rocky.cash/products/stablecoins-and-savings/usdr-and-susdr",
-    module: "rocky-usdr",
     deadUrl: true,
     chainConfig: {
       chains: {
@@ -9851,7 +9706,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/nativemarkets",
     wiki: null,
-    module: "hyperliquid-native-stablecoin",
     chainConfig: {
       chains: {
         hyperliquid: {
@@ -10057,7 +9911,6 @@ export default [
     deadFrom: "2026-02-16",
     twitter: "https://x.com/mustangfinance",
     wiki: "https://docs.must.finance/",
-    module: "mustng-usd",
     chainConfig: {
       chains: {
         saga: {
@@ -10084,7 +9937,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/beraborrow",
     wiki: null,
-    module: "nectar",
     chainConfig: {
       chains: {
         berachain: {
@@ -10110,7 +9962,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/GrowthProtocol_",
     wiki: null,
-    module: "xpusd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -10217,7 +10068,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/Macropod_AU",
     wiki: null,
-    module: "macropod",
     chainConfig: {
       chains: {
         rbn: {
@@ -10252,7 +10102,6 @@ export default [
     auditLinks: ["https://docs.jup.ag/user-docs/earn/jupusd#security-and-transparency"],
     twitter: "https://x.com/JupiterExchange",
     wiki: "https://docs.jup.ag/user-docs/earn/jupusd",
-    module: "jupusd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -10279,7 +10128,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/UTechStables",
     wiki: null,
-    module: "united-stables",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -10334,7 +10182,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/fuse_network",
     wiki: null,
-    module: "fuse-dollar-v3",
     chainConfig: {
       chains: {
         fuse: {
@@ -10414,7 +10261,6 @@ export default [
     auditLinks: ["https://docs.multipli.fi/risks/audit-reports"],
     twitter: "https://x.com/multiplifi",
     wiki: "https://docs.multipli.fi/",
-    module: "rwausdi",
     chainConfig: {
       chains: {
         ethereum: {
@@ -10458,7 +10304,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/PleasingGolden",
     wiki: null,
-    module: "pleasing-usd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -10485,7 +10330,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/megaeth",
     wiki: "https://www.megaeth.com/blog-news/megaeth-introduces-usdm",
-    module: "megausd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -10514,7 +10358,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/usat",
     wiki: null,
-    module: "usat",
     chainConfig: {
       chains: {
         ethereum: {
@@ -10540,7 +10383,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/YuzuMoneyX",
     wiki: null,
-    module: "yuzu-usd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -10571,7 +10413,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/uncapfinance",
     wiki: null,
-    module: "uncap-usd",
     chainConfig: {
       chains: {
         starknet: {
@@ -10599,7 +10440,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/neutrl",
     wiki: null,
-    module: "neutrl-usd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -10659,7 +10499,6 @@ export default [
     auditLinks: ["https://github.com/fidelity/mintable-token-ethereum-contract/blob/main/audits/Fidelity_Mintable_Token_Audit_Report-OpenZeppelin.pdf"],
     twitter: "https://x.com/digitalassets",
     wiki: null,
-    module: "fidelity-digital-dollar",
     chainConfig: {
       chains: {
         ethereum: {
@@ -10685,7 +10524,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/paretocredit",
     wiki: "https://docs.pareto.credit/product/usp",
-    module: "pareto-usp",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -10712,7 +10550,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/citrea_xyz",
     wiki: "https://docs.citrea.xyz/developer-documentation/citrea-usd-ctusd",
-    module: "citrea-ctusd",
     chainConfig: {
       chains: {
         citrea: {
@@ -10738,7 +10575,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/Tetris_Money",
     wiki: "https://tetrismoney.gitbook.io/docs/en/whitepaper/summary",
-    module: "rubt",
     chainConfig: {
       decimals: 6,
       chains: {
@@ -10773,7 +10609,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/BRTH_stablecoin",
     wiki: null,
-    module: "brth",
     chainConfig: {
       chains: {
         polygon: {
@@ -10799,7 +10634,6 @@ export default [
     auditLinks: ["https://docs.gaib.ai/audits"],
     twitter: "https://x.com/gaib_ai",
     wiki: "https://docs.gaib.ai/",
-    module: "gaib-aid",
     chainConfig: {
       chains: {
         ethereum: {
@@ -10834,7 +10668,6 @@ export default [
     auditLinks: ["https://certificate.quantstamp.com/full/apx-usd-stablecoin/2a5be074-3d9f-49e7-aa08-46fb5f1e5bd6/index.html"],
     twitter: "https://x.com/apyx_fi",
     wiki: "https://docs.apyx.fi",
-    module: "apxusd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -10923,7 +10756,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/SonicLabs",
     wiki: "https://blog.soniclabs.com/ussd-sonics-native-permissionless-usd-stablecoin-built-with-frax/",
-    module: "us-sonic-dollar",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -10977,7 +10809,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-british-pound",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11008,7 +10839,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-philippine-peso",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11036,7 +10866,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-canadian-dollar",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11064,7 +10893,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-australian-dollar",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11092,7 +10920,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-colombian-peso",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11120,7 +10947,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-japanese-yen",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11169,7 +10995,6 @@ export default [
     auditLinks: ["https://brladigital.notion.site/BRLA-Transparency-Page-238ba143aa2f4338902ee91ebe50298a"],
     twitter: "https://x.com/aveniaio",
     wiki: "",
-    module: "brla-digital-brla",
     chainConfig: {
       chains: {
         polygon: {
@@ -11206,7 +11031,6 @@ export default [
     priceSource: "defillama",
     twitter: "https://x.com/alto_money",
     wiki: "https://docs.alto.money/",
-    module: "alto-dusd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11234,7 +11058,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-kenyan-shilling",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11262,7 +11085,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-south-african-rand",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11290,7 +11112,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-nigerian-naira",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11318,7 +11139,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-swiss-franc",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11349,7 +11169,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-west-african-cfa-franc",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11377,7 +11196,6 @@ export default [
     priceSource: "defillama",
     auditLinks: ["https://docs.mento.org/mento-v3/dive-deeper/security/audit-reports"],
     twitter: "https://twitter.com/MentoLabs",
-    module: "mento-ghanaian-cedi",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11425,7 +11243,6 @@ export default [
     auditLinks: null,
     twitter: null,
     wiki: null,
-    module: "phusd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11454,7 +11271,6 @@ export default [
     auditLinks: ["https://docs.monet.cash/security/audits"],
     twitter: "https://x.com/monetdotcash",
     wiki: "https://docs.monet.cash/products/stablecoins-and-savings/usdmo-and-susdmo",
-    module: "monet-usdmo",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11483,7 +11299,6 @@ export default [
     auditLinks: ["https://docs.monet.cash/security/audits"],
     twitter: "https://x.com/suinetwork",
     wiki: "https://blog.sui.io/esui-dollar-suiusde-deepbook-margin/",
-    module: "sui-usde",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -11510,7 +11325,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/Neronaxyz",
     wiki: "https://docs.nerona.xyz/welcome",
-    module: "nerona-usdnr",
     deadUrl: true,
     chainConfig: {
       chains: {
@@ -11542,7 +11356,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/Somnia_Network",
     wiki: null,
-    module: "usd-somnia",
     chainConfig: {
       decimals: 18,
       chains: {
@@ -11568,7 +11381,6 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/RipioApp",
     wiki: "https://www.ripio.com/en/cryptocurrencies/wars",
-    module: "argentine-peso",
     chainConfig: {
       chains: {
         ethereum: {
@@ -11632,7 +11444,6 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/RipioApp",
     wiki: "https://www.ripio.com/en/cryptocurrencies/wbrl",
-    module: "brazilian-real",
     chainConfig: {
       chains: {
         ethereum: {
@@ -11696,7 +11507,6 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/RipioApp",
     wiki: "",
-    module: "chilean-peso",
     chainConfig: {
       chains: {
         ethereum: {
@@ -11760,7 +11570,6 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/RipioApp",
     wiki: "https://www.ripio.com/en/cryptocurrencies/wcop",
-    module: "colombian-peso",
     chainConfig: {
       chains: {
         ethereum: {
@@ -11824,7 +11633,6 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/RipioApp",
     wiki: "https://www.ripio.com/en/cryptocurrencies/wmxn",
-    module: "mexican-peso",
     chainConfig: {
       chains: {
         ethereum: {
@@ -11888,7 +11696,6 @@ export default [
     priceSource: "coingecko",
     twitter: "https://x.com/RipioApp",
     wiki: "",
-    module: "peruvian-sol",
     chainConfig: {
       chains: {
         ethereum: {
@@ -11955,7 +11762,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/tempo_xyz",
     wiki: "https://docs.tempo.xyz/",
-    module: "pathusd",
     chainConfig: {
       chains: {
         tempo: {
@@ -11983,7 +11789,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/WesternUnion",
     wiki: "https://ir.westernunion.com/news/archived-press-releases/press-release-details/2026/Western-Union-Launches-USDPT-on-Solana-Advancing-Regulated-Digital-Infrastructure-for-Global-Payments/default.aspx",
-    module: "usdpt-western-union",
     chainConfig: {
       chains: {
         solana: {
@@ -12011,7 +11816,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/TetraDigitalGrp",
     wiki: "https://tetradg.com/cadd-stablecoin/",
-    module: "cad-digital",
     chainConfig: {
       chains: {
         ethereum: {
@@ -12071,7 +11875,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/MoveUSD",
     wiki: "https://docs.cfx.to/",
-    module: "cfx-moveusd",
     chainConfig: {
       decimals: 6,
       chains: {
@@ -12100,7 +11903,6 @@ export default [
     auditLinks: ["https://finchain.gitbook.io/finchain-docs/en/fusd/risks/smart-contract-risks"],
     twitter: "https://x.com/FinChain_CN",
     wiki: "https://finchain.gitbook.io/finchain-docs/en/fusd/introduction",
-    module: "finchain-dollar",
     chainConfig: {
       chains: {
         ethereum: {
@@ -12140,7 +11942,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/strato_net",
     wiki: null,
-    module: "usdst",
     chainConfig: {
       chains: {
         strato: {
@@ -12196,7 +11997,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/0xHarborFi",
     wiki: null,
-    module: "haeur",
     yieldBearing: true,
     chainConfig: {
       chains: {
@@ -12225,7 +12025,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/InverseFinance",
     wiki: "https://docs.monolith.market/protocol/stablecoin-factory",
-    module: "inverse-usd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -12249,7 +12048,6 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     twitter: "https://x.com/falconfinance",
-    module: "falcon-finance-usd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -12278,7 +12076,6 @@ export default [
     auditLinks: ["https://skynet.certik.com/projects/deaderal-reserve-protocol"],
     twitter: "https://x.com/USDeADBOX",
     wiki: null,
-    module: "usdead",
     chainConfig: {
       decimals: 18,
       chains: {
@@ -12337,7 +12134,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/hyperbeat",
     wiki: "https://docs.hyperbeat.org",
-    module: "beatusd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -12387,7 +12183,6 @@ export default [
     auditLinks: null,
     twitter: "https://twitter.com/AgantFinance",
     wiki: "https://docs.agant.io/XDREhsGKwMiuddKPr5Rt",
-    module: "agant-gbp",
     chainConfig: {
       chains: {
         arc: {
@@ -12537,7 +12332,6 @@ export default [
     auditLinks: [],
     twitter: "https://x.com/money_protocol",
     wiki: "https://docs.moneyprotocol.co/docs/intro",
-    module: "money-protocol",
     chainConfig: {
       chains: {
         rsk: {
@@ -12565,7 +12359,6 @@ export default [
     auditLinks: ["https://code4rena.com/reports/2026-04-monetrix"],
     twitter: "https://x.com/monetrix_xyz",
     wiki: "https://doc.monetrix.xyz/guide/mint",
-    module: "monetrix-usdm",
     doublecounted: true,
     chainConfig: {
       decimals: 6,
@@ -12595,7 +12388,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/APalphalabs",
     wiki: null,
-    module: "usda-3",
     chainConfig: {
       chains: {
         bsc: {
@@ -12623,7 +12415,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/Polymarket",
     wiki: null,
-    module: "polymarket-usd",
     doublecounted: true,
     chainConfig: {
       decimals: 6,
@@ -12653,7 +12444,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/UUSDai",
     wiki: null,
-    module: "unity-usd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -12683,7 +12473,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/OndoFinance",
     wiki: "https://docs.ondo.finance/ondo-global-markets/investing-and-redeeming",
-    module: "ondo-u-s-dollar-token",
     chainConfig: {
       chains: {
         ethereum: {
@@ -12714,7 +12503,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/USDKG_Official",
     wiki: null,
-    module: "usdkg",
     chainConfig: {
       chains: {
         tron: {
@@ -12745,7 +12533,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/Universal_USDU",
     wiki: null,
-    module: "universal-usd",
     chainConfig: {
       chains: {
         ethereum: {
@@ -12773,7 +12560,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/StableMintLtd",
     wiki: null,
-    module: "stable-mint-usd",
     chainConfig: {
       chains: {
         etlk: {
@@ -12810,7 +12596,6 @@ export default [
     auditLinks: ["https://github.com/myrt-money/myrt-smart-contract/blob/main/docs/AUDIT_NOTICE.md"],
     twitter: "https://x.com/MYRT_money",
     wiki: "https://github.com/myrt-money/myrt-smart-contract",
-    module: "myr-stablecoin",
     chainConfig: {
       decimals: 6,
       chains: {
@@ -12842,7 +12627,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/soulpeglabs",
     wiki: null,
-    module: "soulpeg-usd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -12871,7 +12655,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/rcoins_official",
     wiki: null,
-    module: "royal-euro",
     chainConfig: {
       chains: {
         ethereum: {
@@ -12908,7 +12691,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/rcoins_official",
     wiki: null,
-    module: "royal-dollar",
     chainConfig: {
       chains: {
         ethereum: {
@@ -12945,7 +12727,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/telcoin",
     wiki: null,
-    module: "eusd-2",
     chainConfig: {
       chains: {
         ethereum: {
@@ -12982,7 +12763,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/defidotmoney",
     wiki: null,
-    module: "defi-money",
     chainConfig: {
       chains: {
         optimism: {
@@ -13017,7 +12797,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/Cod3xOrg",
     wiki: null,
-    module: "cod3x-usd",
     deadUrl: true,
     chainConfig: {
       chains: {
@@ -13046,7 +12825,6 @@ export default [
     auditLinks: ["https://sherlock-files.ams3.digitaloceanspaces.com/reports/2026.06.14%20-%20Final%20-%20Elara%20Finance%20Collaborative%20Audit%20Report%201781450009.pdf"],
     twitter: "https://x.com/Elara_HQ",
     wiki: "https://docs.elara.fi/",
-    module: "elara-usd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -13075,7 +12853,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/StartaleGroup",
     wiki: null,
-    module: "startale-usd",
     chainConfig: {
       chains: {
         soneium: {
@@ -13103,7 +12880,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/flyingtulip_",
     wiki: null,
-    module: "flying-tulip-usd",
     doublecounted: true,
     chainConfig: {
       chains: {
@@ -13132,7 +12908,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/ForteAUD",
     wiki: null,
-    module: "forte-aud",
     chainConfig: {
       chains: {
         ethereum: {
@@ -13172,7 +12947,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/deuro_com",
     wiki: null,
-    module: "decentralized-euro",
     chainConfig: {
       chains: {
         ethereum: {
@@ -13216,7 +12990,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/stablecorp",
     wiki: null,
-    module: "stablecorp-qcad",
     chainConfig: {
       chains: {
         ethereum: {
@@ -13250,7 +13023,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/thefedznft",
     wiki: null,
-    module: "fusd-by-the-fedz",
     chainConfig: {
       chains: {
         arbitrum: {
@@ -13278,7 +13050,6 @@ export default [
     auditLinks: null,
     twitter: "https://x.com/streamflow_fi",
     wiki: null,
-    module: "usd-2",
     chainConfig: {
       chains: {
         solana: {
@@ -13935,7 +13706,6 @@ export default [
     auditLinks: ["https://jpydf.gitbook.io/jpy-defi/technical-information/audits-and-bug-bounty"],
     twitter: "https://x.com/JPYDeFi",
     wiki: "https://jpydf.gitbook.io/jpy-defi",
-    module: "jpydf",
     chainConfig: {
       chains: {
         ethereum: {
