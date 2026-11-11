@@ -1775,7 +1775,7 @@ export default {
 
 export const bridgeInfo = {
   "kinetiq-elysium": {
-    name: "Kinetiq Elysium Bridge",
+    name: "Elysium",
     link: "https://elysium.kinetiq.xyz/bridge",
   },
   issued: {
