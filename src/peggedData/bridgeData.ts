@@ -1774,6 +1774,10 @@ export default {
 } as BridgeMapping;
 
 export const bridgeInfo = {
+  "elysium": {
+    name: "Elysium",
+    link: "https://elysium.kinetiq.xyz/bridge",
+  },
   issued: {
     name: "Natively Issued",
   },
