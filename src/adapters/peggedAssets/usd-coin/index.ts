@@ -940,7 +940,7 @@ const adapter: PeggedIssuanceAdapter = {
   elysium: {
     hyperliquid: bridgedSupply(
       "elysium", 6, chainContracts.elysium.bridgedFromHyperliquid,
-      "kinetiq-elysium", "hyperliquid"
+      "elysium", "hyperliquid"
     ),
   },
   sonic: {
