@@ -937,6 +937,12 @@ const adapter: PeggedIssuanceAdapter = {
       6
     ),
   },
+  elysium: {
+    hyperliquid: bridgedSupply(
+      "elysium", 6, chainContracts.elysium.bridgedFromHyperliquid,
+      "kinetiq-elysium", "hyperliquid"
+    ),
+  },
   sonic: {
     minted: chainMinted("sonic", 6),
   //  ethereum: bridgedSupply("sonic", 6, chainContracts.sonic.bridgedFromETH), fix wrongly assigned as bridged

@@ -1,6 +1,11 @@
 import * as sdk from "@defillama/sdk";
 
+// SDK 5.0.250 has the Elysium RPC but lacks Kinetiq's label; Elysium is already elsm.
+Object.assign(sdk.chainUtils.chainKeyToChainLabelMap, { elysium: "Elysium Kinetiq" });
+Object.assign(sdk.chainUtils.chainLabelsToKeyMap, { "Elysium Kinetiq": "elysium" });
+
 export function normalizeChain(chain: string) {
+  if (chain.toLowerCase().replace(/-/g, " ") === "elysium kinetiq") return "elysium";
   return sdk.chainUtils.getChainKeyFromLabel(chain);
 }
 

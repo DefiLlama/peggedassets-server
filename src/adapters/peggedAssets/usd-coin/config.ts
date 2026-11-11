@@ -420,6 +420,9 @@ export const chainContracts: ChainContracts = {
     issued: ["0xb88339CB7199b77E23DB6E890353E22632Ba630f"],
     bridgeOnARB: ["0x2Df1c51E09aECF9cacB7bc98cB1742757f163dF7"],
   },
+  elysium: {
+    bridgedFromHyperliquid: ["0xb47c4C8F73F009CC0C0d3f92B388d13E293F0B65"],
+  },
   sonic: {
     issued: ["0x29219dd400f2bf60e5a23d13be72b486d4038894"],
   },
