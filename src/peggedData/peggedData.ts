@@ -5107,7 +5107,7 @@ export default [
       },
     },
   },
-  /*{ Tracked as a RWA on the RWA dashboard since it as a tokenized Treasury fund
+  {
     id: "173",
     name: "BlackRock USD",
     address: "0x7712c34205737192402172409a8F7ccef8aA2AEc",
@@ -5154,7 +5154,7 @@ export default [
         },
       },
     },
-  },*/
+  },
   {
     id: "174",
     name: "rUSD",
