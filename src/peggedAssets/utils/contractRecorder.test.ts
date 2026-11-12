@@ -3,6 +3,7 @@ import {
   getSeenContracts,
   installContractRecorder,
   mergeAssetContracts,
+  mergeRecordedContracts,
   recordContract,
   runWithContractRecording,
 } from "./contractRecorder";
@@ -36,6 +37,24 @@ test("ChainApi patch records totalSupply targets only", async () => {
     await api.call({ abi: "erc20:balanceOf", target: "0xcollateral", params: ["0xwallet"] }).catch(() => {});
   });
   expect(getSeenContracts()["test-d"]).toEqual({ "nonexistent-chain": ["0xtoken", "0xtoken2"] });
+});
+
+test("multicall records each call target, falling back to the default target", async () => {
+  installContractRecorder();
+  const api = new ChainApi({ chain: "nonexistent-chain" });
+  await runWithContractRecording(scope("test-e", "nonexistent-chain"), async () => {
+    await api.multiCall({ abi: "erc20:totalSupply", target: "0xdefault", calls: [{ target: "0xB" }, { params: [] }, "0xC"] } as any).catch(() => {});
+  });
+  expect(getSeenContracts()["test-e"]).toEqual({ "nonexistent-chain": ["0xB", "0xdefault", "0xC"] });
+});
+
+test("mergeRecordedContracts prunes stored assets that recorded nothing this run", () => {
+  const now = 1_000_000_000;
+  const stored = { gone: { ethereum: { "0xold": now - 30 * 86400 } }, kept: { ethereum: { "0xrecent": now - 86400 } }, fresh: {} };
+  expect(mergeRecordedContracts(stored, { added: { base: ["0xnew"] } }, now)).toEqual({
+    kept: { ethereum: { "0xrecent": now - 86400 } },
+    added: { base: { "0xnew": now } },
+  });
 });
 
 test("mergeAssetContracts refreshes seen addresses and prunes stale ones", () => {

@@ -22,7 +22,7 @@ function recordSupplyCall(chain: string, params: any) {
   try {
     const abi = typeof params?.abi === "string" ? params.abi : params?.abi?.name;
     if (!/totalSupply/i.test(String(abi))) return;
-    const targets = params.target ? [params.target] : (params.calls ?? []).map((c: any) => (typeof c === "string" ? c : c?.target));
+    const targets = params.calls ? params.calls.map((c: any) => (typeof c === "string" ? c : c?.target ?? params.target)) : [params.target];
     targets.forEach((target: string) => recordContract(target, chain));
   } catch (e) {}
 }
@@ -56,12 +56,14 @@ export function getSeenContracts(): { [assetId: string]: { [chain: string]: stri
   return result;
 }
 
+export const RECORDED_CONTRACTS_TTL_DAYS = 7;
+
 // merge one asset's seen addresses into its stored map (address -> last seen unix seconds), pruning addresses unseen for ttlDays
 export function mergeAssetContracts(
   stored: RecordedContracts[string] | undefined,
   seenNow: { [chain: string]: string[] },
   now = Math.round(Date.now() / 1000),
-  ttlDays = 7
+  ttlDays = RECORDED_CONTRACTS_TTL_DAYS
 ): RecordedContracts[string] {
   const cutoff = now - ttlDays * 86400;
   const result: RecordedContracts[string] = {};
@@ -70,5 +72,19 @@ export function mergeAssetContracts(
       if (lastSeen >= cutoff) (result[chain] ??= {})[address] = lastSeen;
   for (const [chain, addresses] of Object.entries(seenNow))
     for (const address of addresses) (result[chain] ??= {})[address] = now;
+  return result;
+}
+
+// every stored asset is pruned, including those that recorded nothing this run
+export function mergeRecordedContracts(
+  stored: RecordedContracts,
+  seenNow: { [assetId: string]: { [chain: string]: string[] } },
+  now = Math.round(Date.now() / 1000)
+): RecordedContracts {
+  const result: RecordedContracts = {};
+  for (const assetId of new Set([...Object.keys(stored), ...Object.keys(seenNow)])) {
+    const contracts = mergeAssetContracts(stored[assetId], seenNow[assetId] ?? {}, now);
+    if (Object.keys(contracts).length) result[assetId] = contracts;
+  }
   return result;
 }

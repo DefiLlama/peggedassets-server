@@ -1,7 +1,7 @@
 import * as sdk from "@defillama/sdk";
 import path from "path";
 import { PeggedAsset } from "../../peggedData/types";
-import { RecordedContracts } from "./contractRecorder";
+import { RECORDED_CONTRACTS_TTL_DAYS, RecordedContracts } from "./contractRecorder";
 
 export type ChainContracts = { [chain: string]: string[] };
 
@@ -43,16 +43,19 @@ export async function getChainContracts(asset: PeggedAsset, recorded: RecordedCo
     } catch (e) {}
   }
 
-  for (const [chain, addresses] of Object.entries(recorded[asset.id] ?? {})) Object.keys(addresses).forEach((address) => add(chain, address));
+  const cutoff = Date.now() / 1000 - RECORDED_CONTRACTS_TTL_DAYS * 86400;
+  for (const [chain, addresses] of Object.entries(recorded[asset.id] ?? {}))
+    for (const [address, lastSeen] of Object.entries(addresses)) if (lastSeen >= cutoff) add(chain, address);
 
-  // the asset definition's own address: "chain:address" is unambiguous, a bare address is assumed ethereum only when nothing else is known
+  // the asset definition's own address: "chain:address" is unambiguous; a bare EVM address is ethereum unless another source already placed it, other bare ids are skipped
   const bare: string[] = [];
   for (const raw of [asset.address].flat()) {
     const match = raw?.match(/^([a-z0-9_]+):(?!:)(.+)$/i);
     if (match) add(match[1].toLowerCase(), match[2]);
     else if (raw) bare.push(raw);
   }
-  if (!Object.keys(byChain).length) bare.forEach((address) => add("ethereum", address));
+  const known = new Set(Object.values(byChain).flatMap((addresses) => [...addresses].map((address) => address.toLowerCase())));
+  bare.filter((address) => /^0x[0-9a-fA-F]{40}$/.test(address) && !known.has(address.toLowerCase())).forEach((address) => add("ethereum", address));
 
   const result: ChainContracts = {};
   for (const [chain, addresses] of Object.entries(byChain)) result[chain] = [...addresses];
