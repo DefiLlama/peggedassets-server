@@ -10241,6 +10241,9 @@ export default [
         pharos: {
           issued: ["0xa39986f96b80d04e8d7aeaaf47175f47c23fd0f4"],
         },
+        mantle: {
+          issued: ["0x3B274e3fE48e34F032920F766f750bDeAFD80068"],
+        },
       },
     },
   },
@@ -13182,6 +13185,9 @@ export default [
         },
         robinhood: {
           issued: ["0xF83D9FA66162B887dCA53D246ca7c3706C9D6E2c"], // ccip burn and mint
+        },
+        mantle: {
+          issued: ["0x133229E0AdFf22c6F1AD287D199ea09d35E4427B"],
         },
       },
     },
