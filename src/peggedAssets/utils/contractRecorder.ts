@@ -49,17 +49,26 @@ export function installContractRecorder() {
   }
 }
 
-// merge this run into the stored map (address -> last seen unix seconds), pruning addresses unseen for ttlDays
-export function mergeRecordedContracts(stored: RecordedContracts | undefined, ttlDays = 7): RecordedContracts {
-  const now = Math.round(Date.now() / 1000);
-  const cutoff = now - ttlDays * 86400;
-  const result: RecordedContracts = {};
-  for (const [assetId, chains] of Object.entries(stored ?? {}))
-    for (const [chain, addresses] of Object.entries(chains))
-      for (const [address, lastSeen] of Object.entries(addresses))
-        if (lastSeen >= cutoff) ((result[assetId] ??= {})[chain] ??= {})[address] = lastSeen;
+export function getSeenContracts(): { [assetId: string]: { [chain: string]: string[] } } {
+  const result: { [assetId: string]: { [chain: string]: string[] } } = {};
   for (const [assetId, chains] of Object.entries(seen))
-    for (const [chain, addresses] of Object.entries(chains))
-      for (const address of addresses) ((result[assetId] ??= {})[chain] ??= {})[address] = now;
+    for (const [chain, addresses] of Object.entries(chains)) (result[assetId] ??= {})[chain] = [...addresses];
+  return result;
+}
+
+// merge one asset's seen addresses into its stored map (address -> last seen unix seconds), pruning addresses unseen for ttlDays
+export function mergeAssetContracts(
+  stored: RecordedContracts[string] | undefined,
+  seenNow: { [chain: string]: string[] },
+  now = Math.round(Date.now() / 1000),
+  ttlDays = 7
+): RecordedContracts[string] {
+  const cutoff = now - ttlDays * 86400;
+  const result: RecordedContracts[string] = {};
+  for (const [chain, addresses] of Object.entries(stored ?? {}))
+    for (const [address, lastSeen] of Object.entries(addresses))
+      if (lastSeen >= cutoff) (result[chain] ??= {})[address] = lastSeen;
+  for (const [chain, addresses] of Object.entries(seenNow))
+    for (const address of addresses) (result[chain] ??= {})[address] = now;
   return result;
 }

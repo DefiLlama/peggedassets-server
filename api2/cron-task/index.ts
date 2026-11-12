@@ -7,13 +7,14 @@ process.on('uncaughtException', (error) => {
 })
 
 import * as rates from "../../src/getRates";
+import { loadRecordedContracts } from "../../src/peggedAssets/utils/recordedContractsStore";
 import { getChainContracts } from "../../src/peggedAssets/utils/chainContracts";
 import sluggifyPegged from "../../src/peggedAssets/utils/sluggifyPegged";
 import peggedAssets from "../../src/peggedData/peggedData";
 import * as sdk from "@defillama/sdk";
 import { normalizeChain } from "../../src/utils/normalizeChain";
 import { CacheType, cache, clearOldCacheFiles, initCache, processQueuedCacheResets, resetCacheAssetsFromEnv, saveCache } from "../cache";
-import { readFromPGCache, storeRouteData } from "../file-cache";
+import { storeRouteData } from "../file-cache";
 import { chainCacheSlug } from "../utils/cachePath";
 import { craftChainDominanceResponse } from "../routes/getChainDominance";
 import { getStablecoinData } from "../routes/getStableCoin";
@@ -88,7 +89,11 @@ async function run() {
   await saveCache()
 
   async function storePeggedAssets() {
-    const recordedContracts = (await readFromPGCache('stablecoin-contracts-seen')) ?? {}
+    const recordedContracts = await loadRecordedContracts().catch((e) => {
+      console.error('Failed to load recorded contracts:', e)
+      return {}
+    })
+    if (!Object.keys(recordedContracts).length) console.warn('No recorded contracts yet: chainContracts only has chainConfig data until the supply cron has run')
     for (const peggedAssetData of allStablecoinsData.peggedAssets) {
       const { id } = peggedAssetData
       try {
