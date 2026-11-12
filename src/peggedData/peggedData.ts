@@ -3485,49 +3485,6 @@ export default [
     auditLinks: ["https://github.com/aave/gho-core/tree/main/audits"],
     twitter: "https://twitter.com/GHOAave",
     wiki: "https://docs.gho.xyz",
-    chainConfig: {
-      chains: {
-        ethereum: {
-          issued: ["0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f"],
-        },
-        monad: {
-          bridgedFromETH: ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
-          bridge: "ccip",
-        },
-        arbitrum: {
-          bridgedFromETH: ["0x7dfF72693f6A4149b17e7C6314655f6A9F7c8B33"],
-          bridge: "ccip",
-        },
-        base: {
-          bridgedFromETH: ["0x6Bb7a212910682DCFdbd5BCBb3e28FB4E8da10Ee"],
-          bridge: "ccip",
-        },
-        avax: {
-          bridgedFromETH: ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
-          bridge: "ccip",
-        },
-        xdai: {
-          bridgedFromETH: ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
-          bridge: "ccip",
-        },
-        ink: {
-          bridgedFromETH: ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
-          bridge: "ccip",
-        },
-        mantle: {
-          bridgedFromETH: ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
-          bridge: "ccip",
-        },
-        plasma: {
-          bridgedFromETH: ["0xb77E872A68C62CfC0dFb02C067Ecc3DA23B4bbf3"],
-          bridge: "ccip",
-        },
-        xlayer: {
-          bridgedFromETH: ["0xDe6539018B095353A40753Dc54C91C68c9487D4E"],
-          bridge: "ccip",
-        },
-      },
-    },
   },
   {
     id: "119",
