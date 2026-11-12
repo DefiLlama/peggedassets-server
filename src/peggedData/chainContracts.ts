@@ -387,6 +387,18 @@ const chainContracts: { [id: string]: { [chain: string]: string[] } } = {
     "taiko": ["0xc8F4518ed4bAB9a972808a493107926cE8237068"],
     "xdai": ["0xaBEf652195F98A91E490f047A5006B71c85f058d"],
   },
+  "118": {
+    "ethereum": ["0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f"],
+    "monad": ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
+    "arbitrum": ["0x7dfF72693f6A4149b17e7C6314655f6A9F7c8B33"],
+    "base": ["0x6Bb7a212910682DCFdbd5BCBb3e28FB4E8da10Ee"],
+    "avax": ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
+    "xdai": ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
+    "ink": ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
+    "mantle": ["0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73"],
+    "plasma": ["0xb77E872A68C62CfC0dFb02C067Ecc3DA23B4bbf3"],
+    "xlayer": ["0xDe6539018B095353A40753Dc54C91C68c9487D4E"],
+  },
   "119": {
     "arbitrum": ["0x93C9932E4afa59201F0B5E63f7d816516F1669fE"],
     "bsc": ["0xc5f0f7b66764f6ec8c8dff7ba683102295e16409"],

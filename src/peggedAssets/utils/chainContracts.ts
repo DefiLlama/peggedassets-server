@@ -19,7 +19,7 @@ export async function getChainContracts(asset: PeggedAsset): Promise<ChainContra
   } else if (asset.chainConfig) {
     for (const [chain, config] of Object.entries(asset.chainConfig.chains)) {
       for (const [key, value] of Object.entries(config)) {
-        if (key !== "issued" && !key.startsWith("bridgedFrom")) continue;
+        if (!["issued", "cosmosIssued"].includes(key) && !key.startsWith("bridgedFrom") && !key.startsWith("cosmosBridgedFrom")) continue;
         [value].flat().forEach((address) => add(chain, address));
       }
     }
