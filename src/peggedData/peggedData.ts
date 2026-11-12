@@ -14518,5 +14518,41 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "484",
+    name: "Brazilian Real Stablecoin",
+    address: "base:0x0000006238e3c7797ae71827da303560bae1b125",
+    symbol: "BRS",
+    url: "https://www.nora.finance/",
+    description:
+      "BRS (Brazilian Real Stablecoin) is a stablecoin issued by Nora Finance, pegged 1:1 to the Brazilian real (BRL) and fully backed. It is natively deployed on Base, Solana, Polygon and Ethereum.",
+    mintRedeemDescription:
+      "BRS is minted and burned on demand, 1:1 for Brazilian reais. Nora Finance coordinates the infrastructure, while approved partners participate in primary issuance and redemption. Monthly proof of reserves is published on Nora's transparency page and by Fact Finance.",
+    onCoinGecko: "true",
+    gecko_id: "nora-brazil-real",
+    cmcId: null,
+    pegType: "peggedREAL",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: ["https://www.nora.finance/transparency", "https://fact.finance/en/reserves/nora/"],
+    twitter: "https://x.com/norafinancexyz",
+    wiki: "https://www.nora.finance/docs/integrate/core-concepts/brs-token",
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x0000006238e3c7797ae71827da303560bae1b125"],
+        },
+        solana: {
+          issued: ["BRSxQRUaGswjLs7ewcH7uXj3r7SgmfKSSLLXyCKHZtUo"],
+        },
+        polygon: {
+          issued: ["0x0000006238e3c7797ae71827da303560bae1b125"],
+        },
+        ethereum: {
+          issued: ["0x0000006238e3c7797ae71827da303560bae1b125"],
+        },
+      },
+    },
   }
 ] as PeggedAsset[];
