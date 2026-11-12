@@ -54,7 +54,7 @@ const chainContracts: { [id: string]: { [chain: string]: string[] } } = {
     "reinetwork": ["0x988a631Caf24E14Bb77EE0f5cA881e8B5dcfceC7"],
     "rsk": ["0x779ded0c9e1022225f8e0630b35a9b54be713736","0xef213441a85df4d7acbdae0cf78004e1e486bb96"],
     "scroll": ["0xf55bec9cafdbe8730f096aa55dad6d22d44099df"],
-    "sei": ["0xB75D0B03c06A926e488e2659DF1A861F860bD3d1"],
+    "sei": ["0xB75D0B03c06A926e488e2659DF1A861F860bD3d1","0x9151434b16b9763660705744891fa906f660ecc5"],
     "shiden": ["0x818ec0A7Fe18Ff94269904fCED6AE3DaE6d6dC0b"],
     "solana": ["Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB","Dn4noZ5jgGfkntzcQSUZ8czkreiZ1ForXYoV2H8Dm7S1","Bn113WT6rbdgwrm12UJtnmNqGqZjY4it2WoUQuQopFVn","5goWRao6a3yNC4d6UjMdQxonkCMvKBwdpubU3qhfcdf1","DNhZkUaxHXYvpxZ7LNnHtss8sQgdAfd1ZYS1fB7LKWUZ","8qJSyQprMC57TWKaYEmetUR3UUiTP2M3hXdcvFhkZdmv","E77cpQ4VncGmcAXX16LHFFzNBEBb2U7Ar7LBmZNfCgwL","FwEHs3kJEdMa2qZHv7SgzCiFXUQPEycEXksfBkwmS8gj","B2wfeYz5VtBnQVrX4M8F6FeDrprVrzKPws5qg1in8bzR"],
     "soneium": ["0x102d758f688a4C1C5a80b116bD945d4455460282"],

@@ -42,7 +42,7 @@ export async function getChainContracts(asset: PeggedAsset): Promise<ChainContra
           ? Object.keys(config).some(
               (k) => k === "issued" || k === "cosmosIssued" || k.toLowerCase() === `bridgedfrom${sourceChain === "ethereum" ? "eth" : sourceChain}`
             )
-          : !!manual?.[token.chain];
+          : !!manual?.[token.chain] && sourceChain === "ethereum"; // manual entries are native/ethereum-bridged
         if (!covered) add(token.chain, token.address);
       }
     } catch (e) {}
