@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import { sumSingleBalance } from "../helper/generalUtil";
 import { PeggedIssuanceAdapter, Balances, ChainBlocks, ChainContracts } from "../peggedAsset.type";
 import axios from "axios";
@@ -43,6 +44,7 @@ async function hermeticaMinted(decimals: number) {
     _chainBlocks: ChainBlocks
   ) {
     const balances = {} as Balances;
+    recordContract(USDhContract);
     const [contractAddress, contractName] = USDhContract.split('.');
 
     const res = await fetchWithRetry(`${API_URL}/${contractAddress}/${contractName}/get-total-supply`, {

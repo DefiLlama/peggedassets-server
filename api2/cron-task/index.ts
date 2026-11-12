@@ -13,7 +13,7 @@ import peggedAssets from "../../src/peggedData/peggedData";
 import * as sdk from "@defillama/sdk";
 import { normalizeChain } from "../../src/utils/normalizeChain";
 import { CacheType, cache, clearOldCacheFiles, initCache, processQueuedCacheResets, resetCacheAssetsFromEnv, saveCache } from "../cache";
-import { storeRouteData } from "../file-cache";
+import { readFromPGCache, storeRouteData } from "../file-cache";
 import { chainCacheSlug } from "../utils/cachePath";
 import { craftChainDominanceResponse } from "../routes/getChainDominance";
 import { getStablecoinData } from "../routes/getStableCoin";
@@ -88,6 +88,7 @@ async function run() {
   await saveCache()
 
   async function storePeggedAssets() {
+    const recordedContracts = (await readFromPGCache('stablecoin-contracts-seen')) ?? {}
     for (const peggedAssetData of allStablecoinsData.peggedAssets) {
       const { id } = peggedAssetData
       try {
@@ -103,7 +104,7 @@ async function run() {
           (chainData as any).tokens = removeEmptyItems((chainData as any).tokens)
         }
         data.tokens = removeEmptyItems(data.tokens)
-        const chainContracts = await getChainContracts(peggedAssets.find((a) => a.id === id)!)
+        const chainContracts = await getChainContracts(peggedAssets.find((a) => a.id === id)!, recordedContracts)
         if (chainContracts) data.chainContracts = peggedAssetData.chainContracts = chainContracts
         await storeRouteData('stablecoin/' + id, data)
       } catch (e) {

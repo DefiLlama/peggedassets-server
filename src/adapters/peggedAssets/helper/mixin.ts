@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import axios from "axios";
 const retry = require("async-retry");
 import { Balances, ChainBlocks } from "../peggedAsset.type";
@@ -23,6 +24,7 @@ export const mixinSupply = async (
     let balances = {} as Balances;
 
     for (let assetId of assetIds) {
+      recordContract(assetId);
       const supply = await fetchMixinSupply(assetId);
       sumSingleBalance(
         balances,

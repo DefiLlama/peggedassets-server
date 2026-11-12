@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 const sdk = require("@defillama/sdk");
 import { ChainApi, chains } from "@defillama/sdk";
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
@@ -325,6 +326,7 @@ async function reinetworkBridged(address: string, decimals: number) {
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
+    recordContract(address);
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>

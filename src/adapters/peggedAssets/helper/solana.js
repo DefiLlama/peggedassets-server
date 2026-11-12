@@ -1,7 +1,9 @@
+const { recordContract } = require("../../../peggedAssets/utils/contractRecorder");
 const { chains } = require("@defillama/sdk");
 
 // total supply of a mint as a ui amount (number); `<CHAIN>_RPC` env overrides the endpoint
 async function getTokenSupply(token, chain = "solana") {
+  recordContract(token);
   const { uiAmount } = await chains.svm.getTokenSupply({ chain, token });
   return uiAmount;
 }

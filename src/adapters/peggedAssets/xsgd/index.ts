@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import { addChainExports, rippleGetTotalSupply } from "../helper/getSupply";
 import { sumSingleBalance } from "../helper/generalUtil";
 import { Balances, ChainContracts, ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
@@ -36,6 +37,7 @@ async function hederaMinted() {
     const balances = {} as Balances;
     const tokenId = "0.0.1985922"; // XSGD token on Hedera
     const decimals = 6;
+    recordContract(tokenId);
     const url = `https://mainnet-public.mirrornode.hedera.com/api/v1/tokens/${tokenId}`;
     const issuance = await retry(async (_bail: any) => axios.get(url));
     const supply = issuance?.data?.total_supply;
@@ -54,6 +56,7 @@ async function zilliqaMinted() {
     // XSGD proxy contract address
     const proxyAddress = "0x173ca6770aa56eb00511dac8e6e13b3d7f16a5a5";
     
+    recordContract(proxyAddress);
     const res = await axios.post("https://api.zilliqa.com/", {
       id: "1",
       jsonrpc: "2.0",

@@ -3,7 +3,10 @@ import PromisePool from "@supercharge/promise-pool";
 import storePeggedAssets from "./../peggedAssets/storePeggedAssets/storePegged";
 import peggedAssets from "./../peggedData/peggedData";
 import { sendMessage } from "./../utils/discord";
+import { readFromPGCache, writeToPGCache } from "../../api2/file-cache";
+import { mergeRecordedContracts } from "../peggedAssets/utils/contractRecorder";
 
+const RECORDED_CONTRACTS_CACHE = 'stablecoin-contracts-seen'
 const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json'
 
 const handler = async () => {
@@ -96,6 +99,14 @@ const handler = async () => {
       console.log(`  • [${fs.length}] ${errMsg}`);
       for (const f of fs.slice(0, 5)) console.log(`      - ${f.name} (id=${f.id})`);
       if (fs.length > 5) console.log(`      ... and ${fs.length - 5} more`);
+    }
+  }
+
+  if (process.env.DRY_RUN_MODE !== 'true') {
+    try {
+      await writeToPGCache(RECORDED_CONTRACTS_CACHE, mergeRecordedContracts(await readFromPGCache(RECORDED_CONTRACTS_CACHE) ?? undefined));
+    } catch (e) {
+      console.error('Failed to store recorded contracts:', e);
     }
   }
 

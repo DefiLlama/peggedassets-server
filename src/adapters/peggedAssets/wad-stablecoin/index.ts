@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 /**
  * WAD (Whale Asset Dollar) stablecoin adapter
  *
@@ -76,6 +77,7 @@ async function voiMinted() {
   return async function (_ts: any, _block: any, _chainBlocks: ChainBlocks) {
     const balances = {} as Balances;
 
+    recordContract(String(WAD_VOI_APP_ID));
     const appRes = await retry(
       async (_bail: any) =>
         await axios.get(`${VOI_INDEXER}/v2/applications/${WAD_VOI_APP_ID}`, {

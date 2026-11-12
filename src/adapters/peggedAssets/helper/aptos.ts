@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import { chains } from "@defillama/sdk";
 
 const { aptos } = chains;
@@ -15,6 +16,7 @@ export async function getResources(account: string, type?: string): Promise<any>
 
 // supply of a `0x1::coin::CoinInfo<T>` resource held by `account`, in whole units
 export async function getTotalSupply(account: string, type?: string) {
+  recordContract(account);
   const resource = await getResources(account, type);
   const decimals = resource?.data?.decimals;
   const supply = resource?.data?.supply?.vec?.[0]?.integer?.vec?.[0]?.value;
@@ -24,6 +26,7 @@ export async function getTotalSupply(account: string, type?: string) {
 // `token` is either a coin type (`addr::module::Name`), a coin module account holding the
 // `CoinInfo<T>` resource, or a fungible asset metadata object address. Returns whole units.
 export async function getTokenSupply(token: string): Promise<number> {
+  recordContract(token);
   if (aptos.isFungibleAssetAddress(token)) {
     const resources: any[] = await aptos.getResources({ account: token });
     const coinInfo = resources.find((r) => typeof r.type === "string" && r.type.startsWith(COIN_INFO_PREFIX));
@@ -57,6 +60,7 @@ export async function function_view({
   ledgerVersion?: number;
   chain?: string;
 }) {
+  if (/supply/.test(functionStr)) recordContract(args[0]);
   const response = await aptos.view({ chain, function: functionStr, typeArguments: type_arguments, args, ledgerVersion });
   return response.length === 1 ? response[0] : response;
 }
