@@ -1,4 +1,5 @@
 import peggedAssets from "../../src/peggedData/peggedData";
+import { getPeggedPrice } from "../../src/adapters/peggedAssets/prices";
 import { getTimestampAtStartOfDay } from "../../src/utils/date";
 import { pegTypeFxTicker } from "../../src/utils/fxRates";
 import { normalizeChain } from "../../src/utils/normalizeChain";
@@ -62,7 +63,7 @@ export function craftChainDominanceResponse(chain: string | undefined) {
     const peggedGeckoID = pegged.gecko_id;
 
     let fallbackPrice = 1;
-    const historicalPrice = lastPrices?.[peggedGeckoID];
+    const historicalPrice = getPeggedPrice(lastPrices, peggedGeckoID);
     if (pegType === "peggedVAR") {
       fallbackPrice = 0;
     } else if (pegType !== "peggedUSD" && !historicalPrice) {
