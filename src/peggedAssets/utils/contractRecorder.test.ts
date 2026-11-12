@@ -4,7 +4,9 @@ import {
   installContractRecorder,
   mergeAssetContracts,
   mergeRecordedContracts,
+  isSupplyMethod,
   recordContract,
+  recordSupplyRead,
   runWithContractRecording,
 } from "./contractRecorder";
 
@@ -64,4 +66,15 @@ test("mergeAssetContracts refreshes seen addresses and prunes stale ones", () =>
   expect(mergeAssetContracts(stored, { ethereum: ["0xnew", "0xrecent"] }, now)).toEqual({
     ethereum: { "0xrecent": now, "0xnew": now },
   });
+});
+
+test("recordSupplyRead records only supply methods", () => {
+  expect(isSupplyMethod("0x1::coin::supply")).toBe(true);
+  expect(isSupplyMethod("ft_total_supply")).toBe(true);
+  expect(isSupplyMethod("ft_balance_of")).toBe(false);
+  runWithContractRecording(scope("test-f", "aptos"), () => {
+    recordSupplyRead("0x1::coin::supply", "0xcoin");
+    recordSupplyRead("ft_balance_of", "0xnot-a-supply");
+  });
+  expect(getSeenContracts()["test-f"]).toEqual({ aptos: ["0xcoin"] });
 });

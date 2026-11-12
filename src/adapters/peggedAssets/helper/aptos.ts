@@ -1,4 +1,4 @@
-import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
+import { recordContract, recordSupplyRead } from "../../../peggedAssets/utils/contractRecorder";
 import { chains } from "@defillama/sdk";
 
 const { aptos } = chains;
@@ -60,7 +60,7 @@ export async function function_view({
   ledgerVersion?: number;
   chain?: string;
 }) {
-  if (/supply/.test(functionStr)) recordContract(args[0]);
+  recordSupplyRead(functionStr, args[0]);
   const response = await aptos.view({ chain, function: functionStr, typeArguments: type_arguments, args, ledgerVersion });
   return response.length === 1 ? response[0] : response;
 }

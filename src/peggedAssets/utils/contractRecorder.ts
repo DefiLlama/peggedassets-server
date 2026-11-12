@@ -18,10 +18,19 @@ export function recordContract(address: string | undefined | null, chain?: strin
   ((seen[scope.assetId] ??= {})[chain ?? scope.chain] ??= new Set()).add(address);
 }
 
+// single definition of "this call reads a token supply": EVM abis are matched strictly, non-EVM view/method names loosely
+const isEvmSupplyAbi = (abi: string) => /totalSupply/i.test(abi);
+export const isSupplyMethod = (method: string) => /supply/i.test(method);
+
+// non-EVM helpers call this with the method they are about to run and the token it reads
+export function recordSupplyRead(method: string, token: string | undefined | null, chain?: string) {
+  if (isSupplyMethod(method)) recordContract(token, chain);
+}
+
 function recordSupplyCall(chain: string, params: any) {
   try {
     const abi = typeof params?.abi === "string" ? params.abi : params?.abi?.name;
-    if (!/totalSupply/i.test(String(abi))) return;
+    if (!isEvmSupplyAbi(String(abi))) return;
     const targets = params.calls ? params.calls.map((c: any) => (typeof c === "string" ? c : c?.target ?? params.target)) : [params.target];
     targets.forEach((target: string) => recordContract(target, chain));
   } catch (e) {}

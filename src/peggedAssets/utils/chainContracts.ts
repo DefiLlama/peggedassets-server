@@ -7,10 +7,13 @@ export type ChainContracts = { [chain: string]: string[] };
 
 // token deployments per chain (display-name keys): chainConfig + bridge-config tokens + addresses the supply pipeline recorded
 export async function getChainContracts(asset: PeggedAsset, recorded: RecordedContracts = {}): Promise<ChainContracts | undefined> {
-  const byChain: { [chain: string]: Set<string> } = {};
+  // per chain: dedupe key -> first-seen address; only pure-hex addresses are case-folded, base58/coin-type identifiers (solana, sui, cardano, ...) stay exact
+  const byChain: { [chain: string]: Map<string, string> } = {};
   const add = (chain: string, address: string) => {
     const label = sdk.chainUtils.getChainLabelFromKey(chain);
-    (byChain[label] ??= new Set()).add(address);
+    const key = /^0x[0-9a-f]+$/i.test(address) ? address.toLowerCase() : address;
+    const seen = (byChain[label] ??= new Map());
+    if (!seen.has(key)) seen.set(key, address);
   };
 
   for (const [chain, config] of Object.entries(asset.chainConfig?.chains ?? {})) {
@@ -40,7 +43,9 @@ export async function getChainContracts(asset: PeggedAsset, recorded: RecordedCo
           );
         if (!covered) add(token.chain, token.address);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error(`chainContracts: failed to load ${file} for asset ${asset.id}:`, e)
+    }
   }
 
   const cutoff = Date.now() / 1000 - RECORDED_CONTRACTS_TTL_DAYS * 86400;
@@ -54,10 +59,10 @@ export async function getChainContracts(asset: PeggedAsset, recorded: RecordedCo
     if (match) add(match[1].toLowerCase(), match[2]);
     else if (raw) bare.push(raw);
   }
-  const known = new Set(Object.values(byChain).flatMap((addresses) => [...addresses].map((address) => address.toLowerCase())));
+  const known = new Set(Object.values(byChain).flatMap((addresses) => [...addresses.values()].map((address) => address.toLowerCase())));
   bare.filter((address) => /^0x[0-9a-fA-F]{40}$/.test(address) && !known.has(address.toLowerCase())).forEach((address) => add("ethereum", address));
 
   const result: ChainContracts = {};
-  for (const [chain, addresses] of Object.entries(byChain)) result[chain] = [...addresses];
+  for (const [chain, addresses] of Object.entries(byChain)) result[chain] = [...addresses.values()];
   return Object.keys(result).length ? result : undefined;
 }

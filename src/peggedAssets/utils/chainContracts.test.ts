@@ -57,3 +57,10 @@ test("recorded addresses older than the ttl are ignored", async () => {
 test("returns undefined when nothing is known", async () => {
   expect(await getChainContracts(asset({}))).toBeUndefined();
 });
+test("hex addresses dedupe case-insensitively, case-sensitive identifiers do not", async () => {
+  const result = await getChainContracts(
+    asset({ chainConfig: { chains: { ethereum: { issued: ["0xAbC0000000000000000000000000000000000001"] }, solana: { issued: ["MintAbc"] } } } }),
+    { test: { ethereum: { "0xabc0000000000000000000000000000000000001": now() }, solana: { mintabc: now() } } }
+  );
+  expect(result).toEqual({ Ethereum: ["0xAbC0000000000000000000000000000000000001"], Solana: ["MintAbc", "mintabc"] });
+});

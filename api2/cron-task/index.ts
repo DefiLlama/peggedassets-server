@@ -94,6 +94,7 @@ async function run() {
       return {}
     })
     if (!Object.keys(recordedContracts).length) console.warn('No recorded contracts yet: chainContracts only has chainConfig data until the supply cron has run')
+    const noContracts: string[] = []
     for (const peggedAssetData of allStablecoinsData.peggedAssets) {
       const { id } = peggedAssetData
       try {
@@ -111,11 +112,13 @@ async function run() {
         data.tokens = removeEmptyItems(data.tokens)
         const chainContracts = await getChainContracts(peggedAssets.find((a) => a.id === id)!, recordedContracts)
         if (chainContracts) data.chainContracts = peggedAssetData.chainContracts = chainContracts
+        else noContracts.push(id)
         await storeRouteData('stablecoin/' + id, data)
       } catch (e) {
         console.error('Error fetching asset data', e)
       }
     }
+    if (noContracts.length) console.warn(`chainContracts: ${noContracts.length} assets have no contracts (no chainConfig, nothing recorded): ${noContracts.join(',')}`)
   }
 
   async function storeStablecoinDominance() {
