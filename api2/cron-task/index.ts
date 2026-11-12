@@ -7,6 +7,7 @@ process.on('uncaughtException', (error) => {
 })
 
 import * as rates from "../../src/getRates";
+import { getChainContracts } from "../../src/peggedAssets/utils/chainContracts";
 import sluggifyPegged from "../../src/peggedAssets/utils/sluggifyPegged";
 import peggedAssets from "../../src/peggedData/peggedData";
 import * as sdk from "@defillama/sdk";
@@ -102,6 +103,8 @@ async function run() {
           (chainData as any).tokens = removeEmptyItems((chainData as any).tokens)
         }
         data.tokens = removeEmptyItems(data.tokens)
+        const chainContracts = await getChainContracts(peggedAssets.find((a) => a.id === id)!)
+        if (chainContracts) data.chainContracts = peggedAssetData.chainContracts = chainContracts
         await storeRouteData('stablecoin/' + id, data)
       } catch (e) {
         console.error('Error fetching asset data', e)
