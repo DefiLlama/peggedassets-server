@@ -4248,9 +4248,9 @@ export default [
     symbol: "CADC",
     url: "https://loon.finance/cadc",
     description:
-      "CADC is a Canadian dollar stablecoin, fully backed 1:1 by Canadian dollars held at ATB Financial.",
+      "CADC is a Canadian dollar stablecoin. At least $1.00 CAD is held in a reserve account at ATB Financial for each CADC issued.",
     mintRedeemDescription:
-      "CADC is issued by CADC Reserve Trust, managed by Loon Payments Inc., under a prospectus and Ontario Securities Commission decision. It is redeemable 1:1 for Canadian dollars, with reserves held at ATB Financial and monthly third-party attestations.",
+      "CADC is issued by CADC Reserve Trust under a prospectus filed with Canadian securities regulators. Loon Payments Inc., a FINTRAC-registered MSB, is the servicer and administrator, Odyssey Trust Company is the trustee and ATB Financial is the custodian. Authorized Participants mint and redeem CADC 1:1 for Canadian dollars, and reserves are attested monthly.",
     onCoinGecko: "true",
     gecko_id: "cad-coin",
     cmcId: "8690",
