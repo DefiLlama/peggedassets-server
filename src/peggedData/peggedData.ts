@@ -11349,42 +11349,49 @@ export default [
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         bsc: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         base: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         xdai: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         polygon: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         wc: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         celo: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
       },
@@ -11412,42 +11419,49 @@ export default [
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         bsc: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         base: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         xdai: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         polygon: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         wc: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         celo: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
       },
@@ -11475,42 +11489,49 @@ export default [
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         bsc: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         base: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         xdai: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         polygon: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         wc: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         celo: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
       },
@@ -11538,42 +11559,49 @@ export default [
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         bsc: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         base: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         xdai: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         polygon: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         wc: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         celo: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
       },
@@ -11601,42 +11629,49 @@ export default [
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         bsc: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         base: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         xdai: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         polygon: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         wc: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         celo: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
       },
