@@ -461,6 +461,16 @@ export async function rippleGetTotalSupply(token: string): Promise<number> {
   return Number(await chains.xrpl.getTokenSupply(token));
 }
 
+// amount of a ripple token ("<currencyCode>.<issuerAddress>") held by `account`, read from the account's trust
+// line with the issuer; 0 when there is no such line. Throws on a malformed address so a typo can't count as 0.
+export async function rippleGetTokenBalance(token: string, account: string): Promise<number> {
+  const { currency, issuer } = chains.xrpl.parseToken(token);
+  if (!chains.xrpl.isValidAddress(account)) throw new Error(`ripple: invalid account ${account}`);
+  if (account === issuer) return 0; // an issuer never holds its own token
+  const balance = Number(await chains.xrpl.getTokenBalance({ account, currency, issuer }));
+  return balance > 0 ? balance : 0; // a negative balance is owed by `account`, not held
+}
+
 // asset params (total, decimals, reserve, unit-name, ...) of an Algorand Standard Asset
 export async function algorandGetAssetParams(assetId: string | number) {
   return chains.algorand.getAssetInfo({ assetId });
@@ -521,6 +531,17 @@ function getUnreleased({
           try { balance = await solanaGetTokenBalance(token, account) } catch (e: any) {
             if (!String(e?.message ?? "").includes("empty token accounts")) throw e;
           }
+          sumSingleBalance(balances, pegType, balance);
+        }
+      }
+      return balances;
+    }
+
+    if (api.chain === 'ripple') {
+      // issued: "<currencyCode>.<issuerAddress>"; unreleased: the issuer's own XRPL accounts holding that token
+      for (const token of issued) {
+        for (const account of unreleased) {
+          const balance = await rippleGetTokenBalance(token, account)
           sumSingleBalance(balances, pegType, balance);
         }
       }
