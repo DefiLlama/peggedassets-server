@@ -4244,13 +4244,13 @@ export default [
   {
     id: "145",
     name: "CAD Coin",
-    address: "0xcadc0acd4b445166f12d2c07eac6e2544fbe2eef",
+    address: "0x49A6F6aeAB68eA001bEaa4815186eb22FBDcCF2A",
     symbol: "CADC",
-    url: "https://paytrie.com/cadc",
+    url: "https://loon.finance/cadc",
     description:
-      "CADC tokens are fully backed 1:1 with Canadian Dollars held in a bank account in Canada.",
+      "CADC is a Canadian dollar stablecoin, fully backed 1:1 by Canadian dollars held at ATB Financial.",
     mintRedeemDescription:
-      "CADC is issued by PAYTRIE AB Inc., a FINTRAC regulated Money Services Business (M19690633), and backed by fully reserved assets, and redeemable on a 1:1 basis for Canadian dollars",
+      "CADC is issued by CADC Reserve Trust, managed by Loon Payments Inc., under a prospectus and Ontario Securities Commission decision. It is redeemable 1:1 for Canadian dollars, with reserves held at ATB Financial and monthly third-party attestations.",
     onCoinGecko: "true",
     gecko_id: "cad-coin",
     cmcId: "8690",
@@ -4258,21 +4258,21 @@ export default [
     pegMechanism: "fiat-backed",
     priceSource: "coingecko",
     auditLinks: null,
-    twitter: "https://twitter.com/PayTrie",
-    wiki: "https://faq.paytrie.com/help/what-is-the-cadc-address",
+    twitter: "https://x.com/LoonFinance",
+    wiki: "https://loon.finance/transparency",
     chainConfig: {
       chains: {
         ethereum: {
-          issued: ["0xcaDC0acd4B445166f12d2C07EAc6E2544FbE2Eef"],
-        },
-        polygon: {
-          issued: ["0x9de41aFF9f55219D5bf4359F167d1D0c772A396D"],
-        },
-        arbitrum: {
-          issued: ["0x2b28E826b55e399F4d4699b85f68666AC51e6f70"],
+          issued: ["0x49A6F6aeAB68eA001bEaa4815186eb22FBDcCF2A"],
         },
         base: {
-          issued: ["0x043eb4b75d0805c43d7c834902e335621983cf03"],
+          issued: ["0x5e63E9C06c3F2c779EF29a8071F94F5a724eB5e4"],
+        },
+        polygon: {
+          issued: ["0x74D9423a2886618522F7C992Edf647ea707A38eb"],
+        },
+        solana: {
+          issued: ["52spLAAFjKMwhNJ3TL2PUAUGYGgXsbvipP4whRtBp82S"],
         },
       },
     },
