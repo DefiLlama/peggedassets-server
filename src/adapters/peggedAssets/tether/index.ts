@@ -289,7 +289,7 @@ async function tronUnreleased() {
   };
 }
 
-async function usdtApiMinted(key: string) {
+async function usdtApiMinted(key: string, issued: string[] = []) {
   // would be better to replace with different api or on-chain calls
   return async function (
     _timestamp: number,
@@ -297,6 +297,7 @@ async function usdtApiMinted(key: string) {
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
+    issued.forEach((address) => recordContract(address));
     const res = await getTetherTransparency();
     const issuance = res.data.usdt;
     const totalSupply = parseInt(issuance[key]);
@@ -903,9 +904,12 @@ const adapter: PeggedIssuanceAdapter = {
     ),
   },
   klaytn: {
-    minted: usdtApiMinted("totaltokens_kaia"),
+    minted: usdtApiMinted("totaltokens_kaia", chainContracts.klaytn.issued),
     unreleased: usdtApiUnreleased("reserve_balance_kaia"),
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
+  },
+  base: {
+    ethereum: bridgedSupply("base", 6, chainContracts.base.bridgedFromETH),
   },
   canto: {
     ethereum: bridgedSupply("canto", 6, chainContracts.canto.bridgedFromETH),
