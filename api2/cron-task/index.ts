@@ -16,6 +16,7 @@ import { storeRouteData } from "../file-cache";
 import { chainCacheSlug } from "../utils/cachePath";
 import { craftChainDominanceResponse } from "../routes/getChainDominance";
 import { getStablecoinData } from "../routes/getStableCoin";
+import { buildV2Files } from "../v2/build";
 import storeStablecoins from "./getStableCoins";
 import { craftStablecoinChainsResponse } from "./getStablecoinChains";
 import { craftStablecoinPricesResponse } from "./getStablecoinPrices";
@@ -85,6 +86,8 @@ async function run() {
   await storeRouteData('stablecoincharts2/all-dominance-chain-breakdown', { dominanceMap, chainChartMap, })
   await storeRouteData('stablecoincharts2/recent-protocol-data', recentProtocolData)
   await saveCache()
+
+  await buildV2Files()
 
   async function storePeggedAssets() {
     for (const peggedAssetData of allStablecoinsData.peggedAssets) {
