@@ -95,6 +95,7 @@ async function run() {
     })
     if (!Object.keys(recordedContracts).length) console.warn('No recorded contracts yet: chainContracts only has chainConfig data until the supply cron has run')
     const noContracts: string[] = []
+    const stablecoinContracts: any[] = []
     for (const peggedAssetData of allStablecoinsData.peggedAssets) {
       const { id } = peggedAssetData
       try {
@@ -111,13 +112,16 @@ async function run() {
         }
         data.tokens = removeEmptyItems(data.tokens)
         const chainContracts = await getChainContracts(peggedAssets.find((a) => a.id === id)!, recordedContracts)
-        if (chainContracts) data.chainContracts = peggedAssetData.chainContracts = chainContracts
-        else noContracts.push(id)
+        if (chainContracts) {
+          const { name, symbol, gecko_id, pegType, pegMechanism } = peggedAssetData
+          stablecoinContracts.push({ id, name, symbol, gecko_id, pegType, pegMechanism, chainContracts })
+        } else noContracts.push(id)
         await storeRouteData('stablecoin/' + id, data)
       } catch (e) {
         console.error('Error fetching asset data', e)
       }
     }
+    await storeRouteData('stablecoincontracts', { stablecoins: stablecoinContracts })
     if (noContracts.length) console.warn(`chainContracts: ${noContracts.length} assets have no contracts (no chainConfig, nothing recorded): ${noContracts.join(',')}`)
   }
 
