@@ -14481,5 +14481,59 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "484",
+    name: "Braza USD",
+    address: "ripple:5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc",
+    symbol: "USDB",
+    url: "https://www.brazabank.com.br/",
+    description:
+      "USDB is a stablecoin pegged 1:1 to the US dollar, issued by Braza Crypto, part of Braza Group. Its reserves are held at Braza Bank, a foreign exchange bank regulated by the Central Bank of Brazil, and per the whitepaper can include USD deposits, US and Brazilian government bonds, corporate bonds, money market funds and receivables from collateralized loans.",
+    mintRedeemDescription:
+      "Braza clients deposit US dollars into Braza Crypto's reserve account at Braza Bank and receive USDB 1:1, and redeem by returning USDB to Braza Crypto, which pays out US dollars through Braza Bank. Retail users access USDB through the Braza On app.",
+    onCoinGecko: "false",
+    gecko_id: "braza-usd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: null,
+    wiki: null,
+    chainConfig: {
+      chains: {
+        ripple: {
+          issued: ["5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc"],
+        },
+      },
+    },
+  },
+  {
+    id: "485",
+    name: "Braza BRL",
+    address: "ripple:4242524C00000000000000000000000000000000.rH5CJsqvNqZGxrMyGaqLEoMWRYcVTAPZMt",
+    symbol: "BBRL",
+    url: "https://www.brazabank.com.br/",
+    description:
+      "BBRL is a stablecoin pegged 1:1 to the Brazilian real, issued by Braza Crypto, part of Braza Group. Its reserves are held at Braza Bank, a foreign exchange bank regulated by the Central Bank of Brazil, in cash, cash equivalents and BRL government securities.",
+    mintRedeemDescription:
+      "Braza clients deposit Brazilian reais into Braza Crypto's reserve account at Braza Bank and receive BBRL 1:1, and redeem by returning BBRL to Braza Crypto, which pays out reais through Braza Bank.",
+    onCoinGecko: "false",
+    gecko_id: "braza-brl",
+    cmcId: "38483",
+    pegType: "peggedREAL",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: null,
+    wiki: null,
+    chainConfig: {
+      chains: {
+        ripple: {
+          issued: ["4242524C00000000000000000000000000000000.rH5CJsqvNqZGxrMyGaqLEoMWRYcVTAPZMt"],
+        },
+      },
+    },
   }
 ] as PeggedAsset[];
