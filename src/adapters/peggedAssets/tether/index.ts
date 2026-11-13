@@ -909,7 +909,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("klaytn", 6, chainContracts.klaytn.bridgedFromETH),
   },
   base: {
-    ethereum: bridgedSupply("base", 6, chainContracts.base.bridgedFromETH),
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("base", 6, chainContracts.base.bridgedFromETH, "base", "ethereum"),
+        bridgedSupply("base", 6, chainContracts.base.layerzeroFromETH, "layerzero", "ethereum"),
+      ],
+      "peggedUSD"
+    ),
   },
   canto: {
     ethereum: bridgedSupply("canto", 6, chainContracts.canto.bridgedFromETH),

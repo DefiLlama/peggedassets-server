@@ -272,10 +272,8 @@ export const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x94fa70d079d76279e1815ce403e9b985bccc82ac"], // seems there is no direct bridge from ETH. but users can withdraw to defichain using cake defi?
   },
   base: {
-    bridgedFromETH: [
-      "0xfde4c96c8593536e31f229ea8f37b2ada2699bb2", // canonical bridge USDT
-      "0x264d6474802ef8bc1bc05f89f7d640d1e93c5330", // NativeOFT zUSDT (lz:base), listed here so the manual entry keeps the generated layerzero token
-    ],
+    bridgedFromETH: ["0xfde4c96c8593536e31f229ea8f37b2ada2699bb2"], // canonical bridge USDT
+    layerzeroFromETH: ["0x264d6474802ef8bc1bc05f89f7d640d1e93c5330"], // NativeOFT zUSDT (lz:base); a manual base entry replaces the generated layerzero one
   },
   klaytn: {
     issued: ["0xd077a400968890eacc75cdc901f0356c943e4fdb"], // USD₮; supply comes from the Tether API
