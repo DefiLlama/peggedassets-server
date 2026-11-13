@@ -35,8 +35,17 @@ const handler = async () => {
       const startTime = Date.now();
       let success = false;
       let errorObject: any;
+      // Count every http request made by this asset's run (rpc per chain, indexer, apis...) and write the
+      // per-chain totals to the adapter-calls index, same as the tvl and dimensions runs. See sdk.callStats
+      const callStatsMeta = {
+        application: 'stablecoins',
+        type: 'pegged-asset',
+        name: asset.gecko_id || asset.module || asset.name,
+        id: asset.id,
+        runType: 'cron-task',
+      };
       try {
-        await storePeggedAssets([i])
+        await sdk.callStats.run(callStatsMeta, () => storePeggedAssets([i]), { skipElastic: process.env.DRY_RUN_MODE === 'true' })
         success = true;
         successCount++;
       } catch (e: any) {
