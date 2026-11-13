@@ -12443,6 +12443,9 @@ export default [
         bsc: {
           issued: ["0x1f8955e640cbd9abc3c3bb408c9e2e1f5f20dfe6"],
         },
+        solana: {
+          issued: ["ZPFtoCe7WWqG4N3ZFRccS8T9SMBeHsd1Vmgv2i7ondo"],
+        },
       },
     },
   },

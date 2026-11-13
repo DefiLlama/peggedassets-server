@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import { ChainApi } from "@defillama/sdk";
 import { sumSingleBalance } from "../helper/generalUtil";
 import {
@@ -12,6 +13,7 @@ const factory = 'factory/osmo1s794h9rxggytja3a4pmwul53u98k06zy2qtrdvjnfuxruh7s8y
 async function osmosisMinted (token: string, decimals: number, pegType: PeggedAssetType) {
   return async function (_api: ChainApi) {
     let balances = {} as Balances;
+    recordContract(token);
     const url = `https://rest-osmosis.ecostake.com/osmosis/superfluid/v1beta1/supply?denom=${token}`
     const { data } = await axios.get(url)
     const amount = parseInt(data.amount.amount) / 10 ** decimals

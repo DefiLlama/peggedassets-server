@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import { chains } from "@defillama/sdk";
 
 const { stellar } = chains;
@@ -5,6 +6,7 @@ const { stellar } = chains;
 // assetID is "CODE:ISSUER" (or "CODE-ISSUER"); returns the circulating supply in whole units (7 decimals):
 // authorized trustlines + accounts authorized to maintain liabilities + Soroban contracts + liquidity pools + claimable balances
 export async function getTotalSupply(assetID: string): Promise<number> {
+  recordContract(assetID);
   const { supply, authorizedToMaintainLiabilities, decimals } = await stellar.getAssetSupply({ asset: assetID });
   return Number(BigInt(supply) + BigInt(authorizedToMaintainLiabilities)) / 10 ** decimals;
 }
@@ -12,6 +14,7 @@ export async function getTotalSupply(assetID: string): Promise<number> {
 // resolve a Soroban contract: a Stellar Asset Contract maps back to its classic asset, any other token
 // exposes total_supply() / decimals()
 export async function getTotalSupplyByContract(contract: string): Promise<number> {
+  recordContract(contract);
   const classic = await stellar.getSacClassicAsset({ contractId: contract });
   if (classic) return getTotalSupply(stellar.assetToString(classic));
   const supply = await stellar.getSorobanTokenTotalSupply({ contractId: contract });

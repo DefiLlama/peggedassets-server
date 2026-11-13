@@ -7,6 +7,8 @@ process.on('uncaughtException', (error) => {
 })
 
 import * as rates from "../../src/getRates";
+import { loadRecordedContracts } from "../../src/peggedAssets/utils/recordedContractsStore";
+import { getChainContracts } from "../../src/peggedAssets/utils/chainContracts";
 import sluggifyPegged from "../../src/peggedAssets/utils/sluggifyPegged";
 import peggedAssets from "../../src/peggedData/peggedData";
 import * as sdk from "@defillama/sdk";
@@ -87,6 +89,13 @@ async function run() {
   await saveCache()
 
   async function storePeggedAssets() {
+    const recordedContracts = await loadRecordedContracts().catch((e) => {
+      console.error('Failed to load recorded contracts:', e)
+      return {}
+    })
+    if (!Object.keys(recordedContracts).length) console.warn('No recorded contracts yet: chainContracts only has chainConfig data until the supply cron has run')
+    const noContracts: string[] = []
+    const stablecoinContracts: any[] = []
     for (const peggedAssetData of allStablecoinsData.peggedAssets) {
       const { id } = peggedAssetData
       try {
@@ -102,11 +111,18 @@ async function run() {
           (chainData as any).tokens = removeEmptyItems((chainData as any).tokens)
         }
         data.tokens = removeEmptyItems(data.tokens)
+        const chainContracts = await getChainContracts(peggedAssets.find((a) => a.id === id)!, recordedContracts)
+        if (chainContracts) {
+          const { name, symbol, gecko_id, pegType, pegMechanism } = peggedAssetData
+          stablecoinContracts.push({ id, name, symbol, gecko_id, pegType, pegMechanism, chainContracts })
+        } else noContracts.push(id)
         await storeRouteData('stablecoin/' + id, data)
       } catch (e) {
         console.error('Error fetching asset data', e)
       }
     }
+    await storeRouteData('stablecoincontracts', { stablecoins: stablecoinContracts })
+    if (noContracts.length) console.warn(`chainContracts: ${noContracts.length} assets have no contracts (no chainConfig, nothing recorded): ${noContracts.join(',')}`)
   }
 
   async function storeStablecoinDominance() {

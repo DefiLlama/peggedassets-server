@@ -1,3 +1,4 @@
+const { recordContract } = require("../../../peggedAssets/utils/contractRecorder");
 const { chains } = require("@defillama/sdk");
 const { starknet } = chains;
 
@@ -14,6 +15,7 @@ async function multiCall({ abi, target, calls = [], allAbi = [] }) {
 }
 
 async function getTotalSupply(tokenAddress) {
+  recordContract(tokenAddress);
   const decimals = await call({ target: tokenAddress, abi: defaultAbis.decimals, });
   const supply = await call({ target: tokenAddress, abi: defaultAbis.totalSupply, });
   return supply / 10 ** decimals;

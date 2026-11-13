@@ -13,7 +13,10 @@ import {
   dailyPeggedBalances,
   hourlyPeggedBalances,
 } from "../utils/getLastRecord";
+import { installContractRecorder, runWithContractRecording } from "../utils/contractRecorder";
 import storeNewPeggedBalances from "./storeNewPeggedBalances";
+
+installContractRecorder();
 
 type ChainBlocks = {
   [chain: string]: number;
@@ -60,7 +63,7 @@ async function getPeggedAsset(
       peggedBalances[chain] = peggedBalances[chain] || {};
       
       const balance = await Promise.race([
-        issuanceFunction(api, ethBlock, chainBlocks) as Promise<PeggedTokenBalance>,
+        runWithContractRecording({ assetId: peggedAsset.id, chain, issuanceType }, () => issuanceFunction(api, ethBlock, chainBlocks)) as Promise<PeggedTokenBalance>,
         new Promise<never>((_, reject) =>
           setTimeout(() => reject(new Error(`Issuance function for chain ${chain} exceeded the timeout limit`)), timeoutMs)
         ),

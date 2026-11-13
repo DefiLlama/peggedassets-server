@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import { ChainBlocks, PeggedIssuanceAdapter } from "../peggedAsset.type";
 const sdk = require("@defillama/sdk");
 
@@ -13,6 +14,7 @@ async function scrollMinted() {
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
+    recordContract(chainContracts.scroll.issued);
     const totalSupply = (
       await sdk.api.abi.call({
         abi: "function vaultInfo(address vault) external view returns (tuple( uint128 conjureLimit ,  uint128 totalConjured))",
