@@ -8214,6 +8214,7 @@ export default [
           issued: [
             "4555525100000000000000000000000000000000.rDk1xiArDMjDqnrR2yWypwQAKg4mKnQYvs",
           ],
+          unreleased: ["rsTXamYqHPDaNQPKejfRavmwPevuAkPQeT"], // Quantoz treasury, funded directly by the issuer
         },
         algorand: {
           issued: ["2768422954"],
@@ -8256,6 +8257,7 @@ export default [
           issued: [
             "5553445100000000000000000000000000000000.rDk1xiArDMjDqnrR2yWypwQAKg4mKnQYvs",
           ],
+          unreleased: ["rsTXamYqHPDaNQPKejfRavmwPevuAkPQeT"], // Quantoz treasury, funded directly by the issuer
         },
         algorand: {
           issued: ["2768603795"],
