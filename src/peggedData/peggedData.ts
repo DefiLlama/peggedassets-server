@@ -9169,7 +9169,7 @@ export default [
     description: "USDU is a US dollar stablecoin with a modular design. It has no built-in minting logic: only modules approved by the USDU DAO (governed on Aragon) can mint and burn it, each with its own mint limit. Today these are two bridge modules that accept USDC and USDT, deploy them into yield-bearing strategy vaults and let anyone mint or redeem permissionlessly. Yield becomes protocol revenue streamed to holders who stake USDU. The DAO can add further module types, such as lending markets.",
     mintRedeemDescription: "Anyone can mint USDU by depositing a supported backing asset (USDC or USDT) through a DAO-approved swap module, and redeem by returning USDU to the same module. Fees and capacity are set per module, and new backing assets can be added by the DAO.",
     onCoinGecko: "false",
-    gecko_id: "usdu",
+    gecko_id: null,
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
