@@ -15,7 +15,7 @@ import {
 import { call as nearCall } from "../helper/near";
 
 
-// all multichain
+// bsc, avax, arbitrum, aurora, boba, fantom, optimism and polygon are Frax's own canonical FRAX, tagged "frax" in bridgeData.ts
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x853d955acef822db058eb8505911ed77f175b99e"],
