@@ -585,4 +585,7 @@ export const chainContracts: ChainContracts = {
   arc: {
     issued: ["0x3600000000000000000000000000000000000000"], // Circle-issued native USDC
   },
+  adi: {
+    bridgedFromETH: ["0x9cb8142aebbcdc60af7c97af897a67a8f3ca71c2"], // USDC.e, CCIP lock/release from Ethereum
+  },
 };
