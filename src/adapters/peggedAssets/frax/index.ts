@@ -120,9 +120,16 @@ type BalanceSheetLine = {
 const isFraxFamily = (line: BalanceSheetLine) =>
   FRAX_FAMILY.has((line.tokenAddress ?? "").toLowerCase());
 
+// FRAX the protocol provides as AMM liquidity (Curve/Convex, UniV3, Fraxswap LPs) can be bought by
+// anyone, so it stays circulating, as crvUSD counts its PegKeeper liquidity. Matched on the sheet's
+// descriptions, e.g. "FRAX staked in Convex FRAX/USDe", "Quantity of FRAX in UniV3 LP #548162 frxETH/FRAX".
+const isLiquidityPosition = (line: BalanceSheetLine) =>
+  /\bLP\b|staked in Convex/i.test(line.description ?? "");
+
 // circulating legacy FRAX = FRAX-family liabilities (supply on every chain, net of FRAX held in the
-// Fraxtal L1 bridge and in FXB bond contracts) minus FRAX-family tokens the protocol owns
-// (directly, as sFRAX, or inside its LP positions). Values are USD, converted back to FRAX units.
+// Fraxtal L1 bridge and in FXB bond contracts) minus FRAX-family tokens the protocol owns off-market
+// (held directly, sFRAX posted as collateral, FraxFerry inventory, idle Fraxlend FRAX). Its LP
+// positions are not subtracted (see isLiquidityPosition). Values are USD, converted back to FRAX units.
 async function fraxMinted() {
   return async function (
     _timestamp: number,
@@ -151,7 +158,7 @@ async function fraxMinted() {
         .filter(isFraxFamily)
         .reduce((sum, l) => sum + l.totalValueUsd, 0);
       const fraxOwnedUsd = assets
-        .filter((a) => a.category.startsWith("asset:owned:") && isFraxFamily(a))
+        .filter((a) => a.category.startsWith("asset:owned:") && isFraxFamily(a) && !isLiquidityPosition(a))
         .reduce((sum, a) => sum + a.totalValueUsd, 0);
 
       const supply = (fraxLiabilitiesUsd - fraxOwnedUsd) / fraxPrice;
