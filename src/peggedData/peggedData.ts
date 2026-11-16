@@ -7859,7 +7859,9 @@ export default [
           bridge: "ccip",
         },
         monad: {
-          issued: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
+          bridgedFromETH: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
+          bridge: "ccip",
+          decimals: 6, // Monad USD1 has 6 decimals, the rest of USD1 uses 18
         },
         mantle: {
           bridgedFromETH: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
