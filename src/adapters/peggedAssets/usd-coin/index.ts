@@ -1104,6 +1104,15 @@ const adapter: PeggedIssuanceAdapter = {
   plasma: {
     minted: chainMinted("plasma", 6),
   },
+  "0g": {
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("0g", 6, [chainContracts["0g"].bridgedFromETH[0]], "ccip", "ethereum"),
+        bridgedSupply("0g", 6, [chainContracts["0g"].bridgedFromETH[1]], "layerzero", "ethereum"),
+      ],
+      "peggedUSD"
+    ),
+  },
 };
 
 export default adapter;

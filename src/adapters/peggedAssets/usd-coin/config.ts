@@ -594,4 +594,10 @@ export const chainContracts: ChainContracts = {
   plasma: {
     issued: ["0x2d661C89D812261039AF9764eceaAee884f5F67F"], // Circle-issued native USDC
   },
+  "0g": {
+    bridgedFromETH: [
+      "0x1f3AA82227281cA364bFb3d253B0f1af1Da6473E", // USDC.e, CCIP lock/release from Ethereum
+      "0x8a2b28364102bea189d99a475c494330ef2bdd0b", // HydraOFT USDC.e (Stargate), wired by hand since 0g is in lzConfig.excludeChains
+    ],
+  },
 };
