@@ -7871,10 +7871,6 @@ export default [
           bridgedFromETH: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
           bridge: "ccip",
         },
-        mantle: {
-          bridgedFromETH: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
-          bridge: "ccip",
-        },
       },
     },
   },
