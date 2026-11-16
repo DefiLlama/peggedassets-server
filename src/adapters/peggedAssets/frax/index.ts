@@ -120,22 +120,34 @@ type BalanceSheetLine = {
 const isFraxFamily = (line: BalanceSheetLine) =>
   FRAX_FAMILY.has((line.tokenAddress ?? "").toLowerCase());
 
-// FRAX the protocol provides as AMM liquidity (Curve/Convex, UniV3, Fraxswap LPs) can be bought by
-// anyone, so it stays circulating, as crvUSD counts its PegKeeper liquidity. Matched on the sheet's
-// descriptions, e.g. "FRAX staked in Convex FRAX/USDe", "Quantity of FRAX in UniV3 LP #548162 frxETH/FRAX".
-const isLiquidityPosition = (line: BalanceSheetLine) =>
-  /\bLP\b|staked in Convex/i.test(line.description ?? "");
+// Protocol-owned FRAX deployed where others can get it stays circulating: AMM liquidity (Curve/Convex,
+// UniV3, Fraxswap LPs) can be bought, as crvUSD counts its PegKeeper liquidity, and idle FRAX in Fraxlend
+// pairs can be borrowed. Matched on the sheet's descriptions, e.g. "FRAX staked in Convex FRAX/USDe",
+// "Quantity of FRAX in UniV3 LP #548162 frxETH/FRAX", "Fraxlend AMO V3 - idle FRAX".
+const isAvailableToMarket = (line: BalanceSheetLine) =>
+  /\bLP\b|staked in Convex|Fraxlend/i.test(line.description ?? "");
+
+// Reads below (Frax balance-sheet API, NEAR view call) only serve the current state. Refuse older
+// timestamps so a historical refill fails for this chain instead of storing today's value on past days.
+// Must throw outside any try/catch that swallows errors into empty balances.
+const MAX_STALENESS_SECONDS = 6 * 60 * 60;
+function assertCurrentTimestamp(apiOrTimestamp: any, label: string) {
+  const ts = typeof apiOrTimestamp === "number" ? apiOrTimestamp : apiOrTimestamp?.timestamp;
+  if (typeof ts === "number" && Date.now() / 1e3 - ts > MAX_STALENESS_SECONDS)
+    throw new Error(`[frax] ${label} only serves current data, cannot compute it at ${new Date(ts * 1e3).toISOString()}`);
+}
 
 // circulating legacy FRAX = FRAX-family liabilities (supply on every chain, net of FRAX held in the
 // Fraxtal L1 bridge and in FXB bond contracts) minus FRAX-family tokens the protocol owns off-market
-// (held directly, sFRAX posted as collateral, FraxFerry inventory, idle Fraxlend FRAX). Its LP
-// positions are not subtracted (see isLiquidityPosition). Values are USD, converted back to FRAX units.
+// (held directly, sFRAX posted as Compound collateral, FraxFerry inventory). Its LP positions and idle
+// Fraxlend FRAX are not subtracted (see isAvailableToMarket). Values are USD, converted back to FRAX units.
 async function fraxMinted() {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
+    assertCurrentTimestamp(_timestamp, "Frax balance sheet");
     let balances = {} as Balances;
     try {
       const response = await axios.get(
@@ -158,7 +170,7 @@ async function fraxMinted() {
         .filter(isFraxFamily)
         .reduce((sum, l) => sum + l.totalValueUsd, 0);
       const fraxOwnedUsd = assets
-        .filter((a) => a.category.startsWith("asset:owned:") && isFraxFamily(a) && !isLiquidityPosition(a))
+        .filter((a) => a.category.startsWith("asset:owned:") && isFraxFamily(a) && !isAvailableToMarket(a))
         .reduce((sum, a) => sum + a.totalValueUsd, 0);
 
       const supply = (fraxLiabilitiesUsd - fraxOwnedUsd) / fraxPrice;
@@ -177,6 +189,7 @@ async function nearBridged(address: string, decimals: number) {
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
+    assertCurrentTimestamp(_timestamp, "NEAR ft_total_supply");
     let balances = {} as Balances;
     const supply = await nearCall(address, "ft_total_supply");
     sumSingleBalance(
