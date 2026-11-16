@@ -1092,6 +1092,9 @@ const adapter: PeggedIssuanceAdapter = {
   arc: {
     minted: chainMinted("arc", 6),
   },
+  adi: {
+    ethereum: bridgedSupply("adi", 6, chainContracts.adi.bridgedFromETH, "ccip", "ethereum"),
+  },
 };
 
 export default adapter;
