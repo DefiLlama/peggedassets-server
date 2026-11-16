@@ -130,7 +130,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xcca4e6302510d555b654b3eab9c0fcb223bcfdf0"],
   },
   ronin: {
-    bridgeOnETH: ["0xc2e3a3c18ccb634622b57ff119a1c8c7f12e8c0c"],
+    bridgeOnETH: ["0xE77aD12b305cD90eEe6b769Ac6490a42c0039d67"], // CCIP SiloedUSDCTokenPool lockbox for Ronin (getLockBox)
     issued: ["0x0b7007c13325c48911f73a2dad5fa5dcbf808adc"],
   },
   aurora: {
