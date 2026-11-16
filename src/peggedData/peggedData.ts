@@ -7380,6 +7380,10 @@ export default [
           bridgedFromETH: ["0x8210c0634AB8f273806e4b7866E9Db353773c44B"],
           bridge: "ccip",
         },
+        xrplevm: {
+          bridgedFromETH: ["0x5E54c1bbc5F19C7A39CC6ff7dbdFBdF438a3CD60"],
+          bridge: "axelar",
+        },
       },
     },
   },
