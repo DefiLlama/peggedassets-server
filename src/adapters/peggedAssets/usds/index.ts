@@ -6,8 +6,8 @@ import { Balances, PeggedIssuanceAdapter } from "../peggedAsset.type";
 const USDS = "0xdC035D45d973E3EC169d2276DDab16f1e407384F";
 const SUSDS = "0xa3931d71877C0E7a3148CB7Eb4463524FEc27fbD";
 const XDAI_BRIDGE = "0x4aa42145Aa6Ebf72e164C9bBC74fbD3788045016"; // xDAI bridge on Ethereum
-// GIP-118: the xDAI bridge swapped its DAI/sDAI collateral for USDS/sUSDS on 2025-11-07. It held
-// no USDS or sUSDS before that, and the DAI adapter keeps counting the DAI/sDAI era.
+// GIP-118: the xDAI bridge swapped its DAI/sDAI collateral for USDS/sUSDS on 2025-11-07 (the DAI
+// adapter counts the DAI/sDAI era). It held no USDS or sUSDS before, so earlier days skip the calls.
 const XDAI_USDS_FROM = 1762473600; // 2025-11-07 00:00 UTC
 
 const chainContracts = {
@@ -36,6 +36,7 @@ function xdaiBridgeCollateral() {
   return async (_api: ChainApi) => {
     if (_api.timestamp && _api.timestamp < XDAI_USDS_FROM) return {};
     const api = await getApi("ethereum", _api);
+    await api.getBlock(); // pin every call below to one block
     const [usds, shares] = await Promise.all([
       api.call({ abi: "erc20:balanceOf", target: USDS, params: [XDAI_BRIDGE] }),
       api.call({ abi: "erc20:balanceOf", target: SUSDS, params: [XDAI_BRIDGE] }),
@@ -46,7 +47,8 @@ function xdaiBridgeCollateral() {
       params: [shares],
     });
     const balances = {} as Balances;
-    sumSingleBalance(balances, "peggedUSD", (Number(usds) + Number(assets)) / 1e18, "gnosis", false, "ethereum");
+    const total = BigInt(usds) + BigInt(assets);
+    sumSingleBalance(balances, "peggedUSD", Number(total) / 1e18, "xdaibridge", false, "ethereum");
     return balances;
   };
 }
