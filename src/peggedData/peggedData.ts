@@ -8208,7 +8208,8 @@ export default [
           issued: ["0x8df723295214ea6f21026eeeb4382d475f146f9f"],
         },
         polygon: {
-          issued: ["0xd571edb2ef29df10fcd6200fd6d0ed2389983db3"],
+          bridgedFromETH: ["0xd571edb2ef29df10fcd6200fd6d0ed2389983db3"],
+          bridge: "layerzero",
         },
         ripple: {
           issued: [
