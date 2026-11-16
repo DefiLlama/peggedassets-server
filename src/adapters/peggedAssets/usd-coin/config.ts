@@ -588,4 +588,7 @@ export const chainContracts: ChainContracts = {
   adi: {
     bridgedFromETH: ["0x9cb8142aebbcdc60af7c97af897a67a8f3ca71c2"], // USDC.e, CCIP lock/release from Ethereum
   },
+  plasma: {
+    issued: ["0x2d661C89D812261039AF9764eceaAee884f5F67F"], // Circle-issued native USDC
+  },
 };

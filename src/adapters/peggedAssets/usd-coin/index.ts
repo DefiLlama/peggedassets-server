@@ -1095,6 +1095,9 @@ const adapter: PeggedIssuanceAdapter = {
   adi: {
     ethereum: bridgedSupply("adi", 6, chainContracts.adi.bridgedFromETH, "ccip", "ethereum"),
   },
+  plasma: {
+    minted: chainMinted("plasma", 6),
+  },
 };
 
 export default adapter;
