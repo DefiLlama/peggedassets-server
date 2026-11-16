@@ -65,7 +65,7 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["USDC", 'USDC.e'],
-        excludeChains: ["aurora"], // Aurora USDC is Near-native USDC bridged over; tracked as bridgedFromNear in usd-coin/config.ts
+        excludeChains: ["aurora", "0g"], // Aurora USDC is Near-native USDC bridged over; tracked as bridgedFromNear in usd-coin/config.ts. 0g: CCIP USDC.e + Stargate OFT tracked by hand in usd-coin/config.ts
       },
       hyperlaneConfig: {
         // Default matching by gecko_id "usd-coin" and symbol "USDC".

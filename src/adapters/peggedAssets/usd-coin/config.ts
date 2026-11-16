@@ -457,7 +457,10 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xD33Db7EC50A98164cC865dfaa64666906d79319C"],
   },
   wemix: {
-    bridgedFromETH: ["0xcdf764933b9a9ebb2c5da904b9715f3cf981572a"],
+    bridgedFromETH: [
+      "0xcdf764933b9a9ebb2c5da904b9715f3cf981572a", // una.USDC
+      "0x44bB111010DfFfb3695F9a1B66aa879976199e7b", // USDC.e, CCIP lock/release from Ethereum
+    ],
   },
   kroma: {
     bridgedFromETH: ["0x0257e4d92c00c9efcca1d641b224d7d09cfa4522"],
@@ -587,5 +590,14 @@ export const chainContracts: ChainContracts = {
   },
   adi: {
     bridgedFromETH: ["0x9cb8142aebbcdc60af7c97af897a67a8f3ca71c2"], // USDC.e, CCIP lock/release from Ethereum
+  },
+  plasma: {
+    issued: ["0x2d661C89D812261039AF9764eceaAee884f5F67F"], // Circle-issued native USDC
+  },
+  "0g": {
+    bridgedFromETH: [
+      "0x1f3AA82227281cA364bFb3d253B0f1af1Da6473E", // USDC.e, CCIP lock/release from Ethereum
+      "0x8a2b28364102bea189d99a475c494330ef2bdd0b", // HydraOFT USDC.e (Stargate), wired by hand since 0g is in lzConfig.excludeChains
+    ],
   },
 };
