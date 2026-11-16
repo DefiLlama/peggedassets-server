@@ -80,6 +80,17 @@ export async function resetCacheAssetsFromEnv() {
   await resetCachedAssets(ids)
 }
 
+// After rewriting daily prices in DDB: STABLECOINS_CACHE_RESET_PRICES=true pnpm run api2-cron-task
+export async function resetCachePricesFromEnv() {
+  if (process.env.STABLECOINS_CACHE_RESET_PRICES !== 'true') return
+  const data = await readFromPGCache(cacheFile)
+  if (data?.historicalPrices) {
+    delete data.historicalPrices
+    await writeToPGCache(cacheFile, data)
+  }
+  console.log('Reset cached stablecoin price history')
+}
+
 // R2 queue of asset ids ({ [id]: queuedAt }) to reset, e.g. after a backfill.
 // Must run before initCache(CacheType.CRON).
 export async function processQueuedCacheResets() {
