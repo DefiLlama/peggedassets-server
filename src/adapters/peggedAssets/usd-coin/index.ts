@@ -981,7 +981,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("zkfair", 18, chainContracts.zkfair.bridgedFromETH),
   },
   wemix: {
-    ethereum: bridgedSupply("wemix", 6, chainContracts.wemix.bridgedFromETH),
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("wemix", 6, [chainContracts.wemix.bridgedFromETH[0]]),
+        bridgedSupply("wemix", 6, [chainContracts.wemix.bridgedFromETH[1]], "ccip", "ethereum"),
+      ],
+      "peggedUSD"
+    ),
   },
 /*   kroma: {
     ethereum: bridgedSupply("kroma", 6, chainContracts.kroma.bridgedFromETH),

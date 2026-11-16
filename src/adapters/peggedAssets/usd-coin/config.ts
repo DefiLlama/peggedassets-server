@@ -457,7 +457,10 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xD33Db7EC50A98164cC865dfaa64666906d79319C"],
   },
   wemix: {
-    bridgedFromETH: ["0xcdf764933b9a9ebb2c5da904b9715f3cf981572a"],
+    bridgedFromETH: [
+      "0xcdf764933b9a9ebb2c5da904b9715f3cf981572a", // una.USDC
+      "0x44bB111010DfFfb3695F9a1B66aa879976199e7b", // USDC.e, CCIP lock/release from Ethereum
+    ],
   },
   kroma: {
     bridgedFromETH: ["0x0257e4d92c00c9efcca1d641b224d7d09cfa4522"],
