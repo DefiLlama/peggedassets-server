@@ -79,9 +79,7 @@ const chainContracts: ChainContracts = {
       "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
     ], // axelar
   },
-  fraxtal: {
-    bridgedFromETH: ["0xfc00000000000000000000000000000000000001"],
-  },
+  // no fraxtal entry: Fraxtal's 0xfc00...0001 is frxUSD, tracked by Frax USD (id 235)
 };
 
 /*
@@ -89,6 +87,42 @@ Frax works differently from other stables, bridged amounts don't matter.
 See: https://docs.frax.finance/cross-chain/bridge
 */
 
+// Legacy FRAX-family tokens on the Frax balance sheet, matched by address (lowercase).
+// The sheet also carries frxUSD, sfrxUSD, FXB bonds, FPI and borrowed USDT, which are not FRAX supply;
+// frxUSD is counted by Frax USD (id 235). Match by address, not symbol: the sheet labels Fraxtal's
+// frxUSD (0xfc00...0001) as "FRAX".
+const FRAX_FAMILY = new Set(
+  [
+    "0x853d955aCEf822Db058eb8505911ED77F175b99e", // FRAX, ethereum
+    "0x17FC002b466eEc40DaE837Fc4bE5c67993ddBd6F", // FRAX, arbitrum
+    "0xE4B9e004389d91e4134a28F19BD833cBA1d994B6", // FRAX, aurora
+    "0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64", // FRAX, avalanche
+    "0x7562F525106F5d54E891e005867Bf489B5988CD9", // FRAX, boba
+    "0x90C97F71E18723b0Cf0dfa30ee176Ab653E89F40", // FRAX, bsc
+    "0xdc301622e621166BD8E82f2cA0A26c13Ad0BE355", // FRAX, fantom
+    "0x2E3D870790dC77A83DD1d18184Acc7439A53f475", // FRAX, optimism
+    "0x45c32fA6DF82ead1e2EF74d17b76547EDdFaFF89", // FRAX, polygon
+    "0xb4C1544cb4163f4C2ECa1aE9Ce999F63892d912A", // FRAX, zksync era
+    "0xFf8544feD5379D9ffa8D47a74cE6b91e632AC44D", // FRAX, polygon zkevm
+    "0xff000000000000000000000000000000000001Fd", // LFRAX (legacy FRAX), fraxtal
+    "0xA663B02CF0a4b149d2aD41910CB81e23e1c41c32", // sFRAX (staked FRAX), ethereum: protocol-owned only
+  ].map((a) => a.toLowerCase())
+);
+
+type BalanceSheetLine = {
+  category: string;
+  tokenAddress?: string;
+  tokenSymbol?: string;
+  totalValueUsd: number;
+  description?: string;
+};
+
+const isFraxFamily = (line: BalanceSheetLine) =>
+  FRAX_FAMILY.has((line.tokenAddress ?? "").toLowerCase());
+
+// circulating legacy FRAX = FRAX-family liabilities (supply on every chain, net of FRAX held in the
+// Fraxtal L1 bridge and in FXB bond contracts) minus FRAX-family tokens the protocol owns
+// (directly, as sFRAX, or inside its LP positions). Values are USD, converted back to FRAX units.
 async function fraxMinted() {
   return async function (
     _timestamp: number,
@@ -101,13 +135,26 @@ async function fraxMinted() {
         "https://api.frax.finance/v2/frax/balance-sheet/latest"
       );
       const data = response.data;
+      const liabilities: BalanceSheetLine[] = data.liabilities;
+      const assets: BalanceSheetLine[] = data.assets;
+      const fraxPrice: number = data.tokenPriceUsd?.FRAX;
+      if (!Array.isArray(liabilities) || !Array.isArray(assets) || !(fraxPrice > 0))
+        throw new Error("unexpected Frax balance-sheet shape");
 
-      // Calculate total supply
-      const totalSupply =
-        data.totalLiabilities -
-        data.categorySummaryUsd["asset:owned:frax"] -
-        data.totalLockedLiquidity;
-      const supply = totalSupply;
+      // a FRAX-labelled supply line on a token we don't know: likely a new deployment to add above
+      for (const l of liabilities)
+        if (l.category === "liability:remaining_frax_supply" && /^L?FRAX$/.test(l.tokenSymbol ?? "") &&
+          !isFraxFamily(l) && Math.abs(l.totalValueUsd) > 1)
+          console.warn(`[frax] unrecognised FRAX supply line, not counted: ${l.tokenAddress} ${l.description}`);
+
+      const fraxLiabilitiesUsd = liabilities
+        .filter(isFraxFamily)
+        .reduce((sum, l) => sum + l.totalValueUsd, 0);
+      const fraxOwnedUsd = assets
+        .filter((a) => a.category.startsWith("asset:owned:") && isFraxFamily(a))
+        .reduce((sum, a) => sum + a.totalValueUsd, 0);
+
+      const supply = (fraxLiabilitiesUsd - fraxOwnedUsd) / fraxPrice;
       sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
       return balances;
     } catch (error) {
@@ -242,13 +289,6 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.osmosis.bridgedFromETH,
       18,
       "Axelar"
-    ),
-  },
-  fraxtal: {
-    ethereum: bridgedSupply(
-      "fraxtal",
-      18,
-      chainContracts.fraxtal.bridgedFromETH
     ),
   },
   era: {
