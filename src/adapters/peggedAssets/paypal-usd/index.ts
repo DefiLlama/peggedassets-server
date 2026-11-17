@@ -69,6 +69,9 @@ const chainContracts = {
   solana: {
     issued: ["2b1kV6DkPAnxd5ixfnxCpjxmKwqjjaYmCZfHsFu24GXo"],
   },
+  stellar: {
+    issued: ["PYUSD:GDQE7IXJ4HUHV6RQHIUPRJSEZE4DRS5WY577O2FY6YQ5LVWZ7JZTU2V5"], // SAC CCCRWH6Q3FNP3I2I57BDLM5AFAT7O6OF6GKQOC6SSJNDAVRZ57SPHGU2
+  },
   // Polygon and X Layer are on Paxos' burn-and-mint OFT mesh, like Arbitrum: the Ethereum peer
   // 0xa2c323fe5a74adffad2bf3e007e36bb029606444 holds no PYUSD and burns on send, so this supply is
   // already out of Ethereum's totalSupply. Marking it issued keeps the generated config from netting
