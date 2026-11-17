@@ -392,6 +392,12 @@ export const chainContracts: ChainContracts = {
     bridgeOnETH: ["0x6d4f9f9f8f0155509ecd6Ac6c544fF27999845CC"], // vb usdt (origin) on ethmainnet
     bridgedFromETH: ["0x2DCa96907fde857dd3D816880A0df407eeB2D2F2"], // vb usdt on katana
   },
+  xlayer: {
+    bridgedFromETH: [
+      "0x779Ded0c9e1022225f8E0630b35a9b54bE713736", // USDT0
+      "0x1E4a5963aBFD975d8c9021ce480b42188849D41d", // USDT via the Agglayer LxLy bridge (pre-USDT0)
+    ],
+  },
   etlk: {
     bridgedFromETH: ["0x2C03058C8AFC06713be23e58D2febC8337dbfE6A"], // Wrapped Asset Bridge
   },
