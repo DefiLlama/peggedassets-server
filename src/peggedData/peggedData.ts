@@ -620,7 +620,7 @@ export default [
     gecko_id: "alchemix-usd",
     cmcId: "8614",
     pegType: "peggedUSD",
-    pegMechanism: "algorithmic",
+    pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: ["https://github.com/runtimeverification/publications/blob/main/reports/smart-contracts/Alchemix_v2.pdf"],
     twitter: "https://twitter.com/AlchemixFi",
@@ -629,13 +629,19 @@ export default [
       chains: {
         ethereum: {
           issued: ["0xbc6da0fe9ad5f3b0d58160288917aa56653660e9"],
-          unreleased: ["0x9735f7d3ea56b454b24ffd74c58e9bd85cfad31b"],
+          unreleased: [
+            "0xF49818b5d7dE5B0DBfcCb3Ddcd14e1f0AA1A6f01", // Multichain wrapper, locked since 2023-07
+            "0x1825377Ece03098F35951E9600cF3a3CF718BEBf", // alUSD Mainnet Elixir Safe
+          ],
         },
         arbitrum: {
+          issued: ["0xCB8FA9a76b8e203D8C3797bF438d8FB81Ea3326A"],
           bridgedFromETH: ["0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0"],
         },
         optimism: {
-          bridgedFromETH: ["0xb2c22A9fb4FC02eb9D1d337655Ce079a04a526C7", "0xCB8FA9a76b8e203D8C3797bF438d8FB81Ea3326A"],
+          issued: ["0xCB8FA9a76b8e203D8C3797bF438d8FB81Ea3326A"],
+          unreleased: ["0xb29617209961DB995dD30a4AB94BA0034A4284f9"], // Optimism Elixir Safe
+          bridgedFromETH: ["0xb2c22A9fb4FC02eb9D1d337655Ce079a04a526C7"],
         },
         fantom: {
           bridgedFromETH: ["0xB67FA6deFCe4042070Eb1ae1511Dcd6dcc6a532E"],
