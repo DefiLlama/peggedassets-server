@@ -22,6 +22,7 @@ import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { mixinSupply } from "../helper/mixin";
 import { call as nearCall } from "../helper/near";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
+import { getCircleSolanaPremint } from "../helper/circleSolanaPremint";
 import * as sui from "../helper/sui";
 import * as starknet from "../helper/starknet";
 import {
@@ -107,6 +108,10 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
 async function solanaUnreleased() {
   return async function () {
     let balances = {} as Balances;
+    sumSingleBalance(balances, "peggedUSD", await getCircleSolanaPremint(
+      "usdc",
+      chainContracts["solana"].issued[0]
+    ));
     for (let unreleasedAddress of chainContracts["solana"].unreleased) {
       sumSingleBalance(balances, "peggedUSD", await solanaGetTokenBalance(
         chainContracts["solana"].issued[0],
