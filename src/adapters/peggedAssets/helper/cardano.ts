@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import { chains } from "@defillama/sdk";
 
 const { cardano } = chains;
@@ -11,6 +12,7 @@ export async function getAsset(assetID: string) {
 }
 
 export async function getTotalSupply(assetID: string): Promise<number> {
+  recordContract(assetID);
   const { supply, decimals } = await cardano.getAssetSupply({ assetId: assetID });
   if (decimals === undefined) throw new Error(`cardano: no decimals in the metadata of asset ${assetID}`);
   return Number(supply) / 10 ** decimals;

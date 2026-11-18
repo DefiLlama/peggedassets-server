@@ -28,6 +28,7 @@ export default function setRoutes(router: Router) {
   router.get("/stablecoinchains", defaultFileHandler);
   router.get("/stablecoins", defaultFileHandler);
   router.get("/stablecoin/:stablecoin", defaultFileHandler);
+  router.get("/stablecoincontracts", defaultFileHandler);
 
   router.get("/charts/all/:peggedID", ew(async (req: any, res: any) => {
     let { peggedID } = req.params;

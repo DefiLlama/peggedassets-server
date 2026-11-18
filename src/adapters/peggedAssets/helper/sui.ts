@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import { chains } from "@defillama/sdk";
 
 const { sui } = chains;
@@ -45,6 +46,7 @@ export async function getDynamicFieldObject(
 
 // supply / 10 ** decimals from coinMetadata
 export async function getTokenSupply(token: string): Promise<number> {
+  recordContract(token);
   const { normalized } = await sui.getTokenSupply({ coinType: token });
   return normalized;
 }
@@ -58,6 +60,7 @@ const SUI_WORMHOLE_TOKEN_REGISTRY = "0x334881831bd89287554a6121087e498fa023ce52c
 
 // total supply (whole units) of a Wormhole wrapped coin, `coinAddress` being the package of `<addr>::coin::COIN`
 export async function getWormholeWrappedSupply(coinAddress: string): Promise<number> {
+  recordContract(coinAddress);
   const wrappedAsset = await getDynamicFieldObject(
     SUI_WORMHOLE_TOKEN_REGISTRY,
     `${SUI_WORMHOLE_TOKEN_BRIDGE}::token_registry::Key<${coinAddress}::coin::COIN>`
