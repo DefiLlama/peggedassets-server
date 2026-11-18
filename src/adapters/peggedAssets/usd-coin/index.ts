@@ -1013,6 +1013,9 @@ const adapter: PeggedIssuanceAdapter = {
   nibiru: {
     ethereum: bridgedSupply("nibiru", 6, chainContracts.nibiru.bridgedFromETH),
   },
+  somnia_tokyo: {
+    somnia: bridgedSupply("somnia_tokyo", 6, chainContracts.somnia_tokyo.bridgedFromSomnia, "hyperlane", "somnia"),
+  },
   sei: {
     noble: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromNoble),
     minted: circleAPIChainMinted("SEI"),

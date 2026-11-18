@@ -145,6 +145,10 @@ export const chainContracts: ChainContracts = {
     USDC bridged independently, and near dev claims aurora's USDC may be a subset of near's
     */
   },
+  // Somnia Tokyo (chainId 50321): Hyperlane synthetic of Somnia's USDC.e, which is locked in the collateral router on Somnia
+  somnia_tokyo: {
+    bridgedFromSomnia: ["0xb8cea44875c3d3b84804d6b025faefbd2e8fe3ae"],
+  },
   fuse: {
     bridgedFromETH: [
       "0x620fd5fa44be6af63715ef4e65ddfa0387ad13f5",

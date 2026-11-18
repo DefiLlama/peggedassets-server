@@ -1,3 +1,4 @@
+import "../env";
 import * as sdk from "@defillama/sdk";
 import PromisePool from "@supercharge/promise-pool";
 import storePeggedAssets from "./../peggedAssets/storePeggedAssets/storePegged";

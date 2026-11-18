@@ -11341,6 +11341,11 @@ export default [
         somnia: {
           issued: ["0x00000022dA000002656c64D9eA6011ea952D008A"],
         },
+        // Somnia Tokyo (chainId 50321): Hyperlane synthetic, backed 1:1 by USDso locked in the collateral router on Somnia
+        somnia_tokyo: {
+          bridgedFromSomnia: ["0xcEa80aEb6ed4Ed526d71f34EfED047904C0e387a"],
+          bridge: "hyperlane",
+        },
       },
     },
   },

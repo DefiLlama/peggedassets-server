@@ -1,6 +1,7 @@
 process.env.SKIP_RPC_CHECK = 'true'
 
 require("dotenv").config();
+import "../../env";
 const path = require("path");
 import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../peggedData/peggedData";

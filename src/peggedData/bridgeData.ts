@@ -2012,6 +2012,10 @@ export const bridgeInfo = {
     name: "LayerZero",
     link: "https://layerzero.network/",
   },
+  hyperlane: {
+    name: "Hyperlane",
+    link: "https://hyperlane.xyz/",
+  },
   circle: {
     name: "Circle xReserve",
     link: "https://www.circle.com/",
