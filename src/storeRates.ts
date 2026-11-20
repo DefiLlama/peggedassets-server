@@ -12,7 +12,7 @@ export const handler = async (_event: any) => {
   for (let i = 0; i < 5; i++) {
     try {
       const currentDate = new Date(Date.now());
-      const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+      const month = ("0" + (currentDate.getUTCMonth() + 1)).slice(-2);
       const day = ("0" + currentDate.getUTCDate()).slice(-2);
       const currentDateFormatted = `${currentDate.getUTCFullYear()}-${month}-${day}`;
       const url = `https://openexchangerates.org/api/historical/${currentDateFormatted}.json?app_id=019357e37fe74858b56d5a9c30e89dd1`;
@@ -27,7 +27,7 @@ export const handler = async (_event: any) => {
         rates: rates,
       });
     } catch (e) {
-      if (i >= 5) {
+      if (i >= 4) {
         throw e;
       } else {
         console.error(e);
