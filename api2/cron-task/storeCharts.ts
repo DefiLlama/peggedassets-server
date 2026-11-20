@@ -10,6 +10,7 @@ import { buildFxRateMap, lookupFxRate, pegTypeFxTicker } from "../../src/utils/f
 import { cache } from "../cache";
 import { storeRouteData } from "../file-cache";
 import { chainCacheSlug } from "../utils/cachePath";
+import { getEffectiveDailyHistory } from "./getEffectiveDailyHistory";
 
 type TokenBalance = {
   [token: string]: number | undefined;
@@ -222,11 +223,7 @@ export function craftChartsResponse(
     };
   }
 
-  const lastDailyItem = historicalPrices[historicalPrices.length - 1];
-  if (lastPrices && lastPrices.SK > lastDailyItem.SK && lastDailyItem.SK + secondsInHour * 25 > lastPrices.SK) {
-    lastPrices.SK = lastDailyItem.SK;
-    historicalPrices[historicalPrices.length - 1] = lastPrices;
-  }
+  const effectivePrices = getEffectiveDailyHistory(historicalPrices, lastPrices);
 
   historicalPeggedBalances.forEach((peggedBalance) => {
     let { historicalBalance: _historicalBalance, pegged, lastTimestamp } = peggedBalance;
@@ -250,7 +247,7 @@ export function craftChartsResponse(
       let itemBalance: any = {};
 
       const closestPriceIndex = timestampsBinarySearch(priceTimestamps, timestamp, pricesCompareFn);
-      const closestPrices = extractResultOfBinarySearch(historicalPrices, closestPriceIndex);
+      const closestPrices = extractResultOfBinarySearch(effectivePrices, closestPriceIndex);
 
       let fallbackPrice = 1;
       const historicalPrice = getPeggedPrice(closestPrices?.prices, peggedGeckoID);

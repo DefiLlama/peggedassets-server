@@ -24,7 +24,9 @@ export default async function handler() {
 
   // store hourly prices in db
   await dynamodb.put({ PK: hourlyPeggedPrices, SK: hourTimestamp, prices: prices, })
-  await dynamodb.put({ PK: dailyPeggedPrices, SK: dayTimestamp, prices: prices, })
+  // first write of the day wins, as for daily balances
+  await dynamodb.put({ PK: dailyPeggedPrices, SK: dayTimestamp, prices: prices, }, { ConditionExpression: "attribute_not_exists(PK)" })
+    .catch((e: any) => { if (e?.name !== "ConditionalCheckFailedException") throw e })
 
   const highestSK = cache.historicalPrices.reduce((highest, item) => Math.max(highest, item.SK), -1)
   const newItems = await getHistoricalValues(dailyPeggedPrices, highestSK)
