@@ -14546,5 +14546,32 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "484",
+    name: "Own eUSD",
+    address: "robinhood:0x8B84D644CECaeE6d21373F37E1bA00f85eD7CdB7",
+    symbol: "eUSD",
+    url: "https://own.money",
+    description:
+      "eUSD is an overcollateralized US dollar stablecoin on Robinhood Chain, minted by Own against tokenized stocks, ETH, stock/eUSD LP positions and USD stablecoins.",
+    mintRedeemDescription:
+      "eUSD is minted by opening a CDP in an Own EUSDManager (tokenized stocks, WETH) or EUSDLiquidityManager (LP positions), or 1:1 against USDG in the eUSD PSM. Holders can redeem eUSD for collateral at the oracle price through the managers, or 1:1 for USDG through the PSM.",
+    onCoinGecko: "true",
+    gecko_id: "own-eusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: ["https://github.com/own-protocol/own-v2/tree/main/audits"],
+    twitter: "https://x.com/owndotmoney",
+    wiki: "https://docs.own.money",
+    chainConfig: {
+      chains: {
+        robinhood: {
+          issued: ["0x8B84D644CECaeE6d21373F37E1bA00f85eD7CdB7"],
+        },
+      },
+    },
   }
 ] as PeggedAsset[];
