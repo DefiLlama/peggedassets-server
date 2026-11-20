@@ -409,7 +409,8 @@ async function balanceOfCauldron(
     token,
     cauldronAddress,
     true,
-    chain
+    chain,
+    chainBlocks
   );
 }
 
