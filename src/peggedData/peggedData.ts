@@ -14554,9 +14554,9 @@ export default [
     symbol: "eUSD",
     url: "https://own.money",
     description:
-      "eUSD is an overcollateralized US dollar stablecoin on Robinhood Chain, minted by Own against tokenized stocks, ETH, stock/eUSD LP positions and USD stablecoins.",
+      "eUSD is a US dollar stablecoin on Robinhood Chain issued by Own. Part of the supply is minted from overcollateralized CDPs on tokenized stocks, ETH and stock/eUSD LP positions; the rest is minted 1:1 against USDG held in the eUSD PSM.",
     mintRedeemDescription:
-      "eUSD is minted by opening a CDP in an Own EUSDManager (tokenized stocks, WETH) or EUSDLiquidityManager (LP positions), or 1:1 against USDG in the eUSD PSM. Holders can redeem eUSD for collateral at the oracle price through the managers, or 1:1 for USDG through the PSM.",
+      "CDP-backed eUSD is minted by borrowing against overcollateralized tokenized stocks and WETH (EUSDManager) or LP positions (EUSDLiquidityManager), and can be redeemed for that collateral at the oracle price. PSM-backed eUSD is minted 1:1 against USDG held in the eUSD PSM, and redeemed 1:1 for that USDG.",
     onCoinGecko: "true",
     gecko_id: "own-eusd",
     cmcId: null,
