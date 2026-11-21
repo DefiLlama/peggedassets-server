@@ -16,13 +16,29 @@ import getTVLOfRecordClosestToTimestamp from "../../utils/shared/getRecordCloses
 import { getLastRecord } from "../utils/getLastRecord";
 import {
   createBlock,
-  getActiveBlock,
+  getAssetBlock,
   getRemainingBlockTime,
   removeBlock
 } from "./assetBlocking";
+import { ChainDrop, chainDrops } from "./chainDrops";
+import { ExtrapolationMetadata, protectChainDrops } from "./chainProtection";
 import { reconcileDailyFromHourly } from "./reconcileDailyFromHourly";
 
 type PKconverted = (id: string) => string;
+
+function getNativeSupply(balance: any, pegType: string) {
+  const minted = balance?.minted?.[pegType];
+  const unreleased = balance?.unreleased?.[pegType];
+  return (typeof minted === "number" && Number.isFinite(minted) ? minted : 0) -
+    (typeof unreleased === "number" && Number.isFinite(unreleased) ? unreleased : 0);
+}
+
+export class ZeroCirculatingError extends Error {
+  constructor(unixTimestamp: number) {
+    super(`Returned 0 total circulating at timestamp ${unixTimestamp}`);
+    this.name = "ZeroCirculatingError";
+  }
+}
 
 function logPromote(peggedAsset: PeggedAsset, daySK: number, reason: string, isReplacement?: boolean) {
   const iso = new Date(daySK * 1000).toISOString().slice(0, 10);
@@ -82,7 +98,8 @@ export default async (
   peggedBalances: PeggedAssetIssuance,
   hourlyPeggedBalances: PKconverted,
   dailyPeggedBalances: PKconverted,
-  extrapolationMetadata?: { extrapolated: boolean; extrapolatedChains: Array<{ chain: string; timestamp: number }> }
+  extrapolationMetadata: ExtrapolationMetadata = { extrapolated: false, extrapolatedChains: [] },
+  breakIfIssuanceIsZero: boolean = false,
 ) => {
   const hourlyPK = hourlyPeggedBalances(peggedAsset.id);
   const pegType = peggedAsset.pegType;
@@ -103,7 +120,9 @@ export default async (
 
   let lastHourlyPeggedObject: any;
   let lastHourlyCirculating = 0;
-  const currentCirculating = peggedBalances.totalCirculating.circulating[pegType] ?? 0;
+  let currentCirculating = peggedBalances.totalCirculating.circulating[pegType] ?? 0;
+  let acceptedDropAdjustment = 0;
+  let pendingChainAlerts: ChainDrop[] = [];
 
   const loadLastHourlyIfNeeded = async () => {
     if (isDryRun) {
@@ -137,9 +156,34 @@ export default async (
     }
   };
 
+  const activeBlock = isForceUpdate ? null : await getAssetBlock(peggedAsset.id);
+  const now = getCurrentUnixTimestamp();
+  const willAutoForceUpdate = activeBlock !== null &&
+    activeBlock.expiresAt <= now && now - activeBlock.expiresAt <= 2 * HOUR;
+
+  if (!isDryRun) await loadLastHourlyIfNeeded();
+  if (!isDryRun && !isForceUpdate && !willAutoForceUpdate) {
+    pendingChainAlerts = protectChainDrops(
+      lastHourlyPeggedObject, peggedBalances, pegType, peggedAsset, unixTimestamp, extrapolationMetadata,
+    );
+    for (const alert of pendingChainAlerts) {
+      console.warn(`Chain protection: ${peggedAsset.name} on ${alert.chain}: ${alert.previous} → ${alert.missing ? "missing" : alert.current} (${alert.protection})`);
+      if (alert.protection === "accepted") {
+        const previousSupply = getNativeSupply(lastHourlyPeggedObject?.[alert.chain], pegType);
+        const currentSupply = getNativeSupply(peggedBalances[alert.chain], pegType);
+        acceptedDropAdjustment += Math.max(previousSupply - currentSupply, 0);
+      }
+    }
+    currentCirculating = peggedBalances.totalCirculating.circulating[pegType] ?? 0;
+  }
+  const dropBaseline = lastHourlyCirculating - acceptedDropAdjustment;
+
+  if (breakIfIssuanceIsZero && currentCirculating === 0 && acceptedDropAdjustment === 0) {
+    throw new ZeroCirculatingError(unixTimestamp);
+  }
+
   // Skip blocking checks in force update mode
   if (!isForceUpdate) {
-    const activeBlock = await getActiveBlock(peggedAsset.id);
     if (activeBlock) {
       const blockExpiresAt = new Date(activeBlock.expiresAt * 1000).toISOString();
       const remainingTime = getRemainingBlockTime(activeBlock);
@@ -188,12 +232,12 @@ export default async (
       } else if (activeBlock.expiresAt > now) {
         if (!isDryRun) {
           await loadLastHourlyIfNeeded();
-          const baselineCirculating = lastHourlyPeggedObject.totalCirculating?.circulating?.[pegType] ?? 0;
+          const baselineCirculating = lastHourlyCirculating;
 
           const spikeStillThere =
             baselineCirculating * 2 < currentCirculating && baselineCirculating !== 0;
           const dropStillThere =
-            baselineCirculating / 2 > currentCirculating && currentCirculating !== 0;
+            dropBaseline / 2 > currentCirculating && currentCirculating !== 0;
 
           if (!spikeStillThere && !dropStillThere) {
             await removeBlock(peggedAsset.id);
@@ -276,11 +320,11 @@ export default async (
       }
       
       if (
-        lastHourlyCirculating / 2 > currentCirculating &&
+        dropBaseline / 2 > currentCirculating &&
         currentCirculating !== 0 &&
         Math.abs(lastHourlyPeggedObject.SK - unixTimestamp) < 12 * HOUR
       ) {
-        const change = `${humanizeNumber(lastHourlyCirculating)} to ${humanizeNumber(currentCirculating)}`;
+        const change = `${humanizeNumber(dropBaseline)} to ${humanizeNumber(currentCirculating)}`;
         const errorMessage = `Circulating for ${peggedAsset.name} has dropped >50% within one hour (${change})`;
         if (process.env.OUTDATED_WEBHOOK) {
           try {
@@ -304,31 +348,13 @@ export default async (
         console.log(`⚠️ [FORCE UPDATE] Detected spike for ${peggedAsset.name} (${change}) - proceeding anyway`);
       }
       if (
-        lastHourlyCirculating / 2 > currentCirculating &&
+        dropBaseline / 2 > currentCirculating &&
         currentCirculating !== 0
       ) {
-        const change = `${humanizeNumber(lastHourlyCirculating)} to ${humanizeNumber(currentCirculating)}`;
+        const change = `${humanizeNumber(dropBaseline)} to ${humanizeNumber(currentCirculating)}`;
         console.log(`⚠️ [FORCE UPDATE] Detected drop for ${peggedAsset.name} (${change}) - proceeding anyway`);
       }
     }
-
-    await Promise.all(
-      Object.entries(peggedBalances).map(async ([chain, issuance]) => {
-        const prevCirculating = lastHourlyPeggedObject[chain]
-          ? lastHourlyPeggedObject[chain].circulating[pegType]
-          : 0;
-        if (
-          issuance.circulating[pegType] === 0 &&
-          prevCirculating !== 0 &&
-          prevCirculating !== undefined
-        ) {
-          console.error(
-            `Circulating has dropped to 0 on chain "${chain}" (previous circulating was ${prevCirculating})`,
-            peggedAsset.name
-          );
-        }
-      })
-    );
   } else {
     // DRY mode: default baseline
     lastHourlyPeggedObject = {
@@ -388,6 +414,7 @@ export default async (
   }
 
   await dynamodb.put(itemToStore);
+  chainDrops.push(...pendingChainAlerts);
 
   const { wasPromoted } = await checkAndReplaceDailyWithHourly(
     peggedAsset,
@@ -419,4 +446,3 @@ export default async (
     await dynamodb.put(dailyItemToStore);
   }
 };
-

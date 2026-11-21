@@ -1,6 +1,8 @@
 import "../env";
 import * as sdk from "@defillama/sdk";
 import PromisePool from "@supercharge/promise-pool";
+import { chainDrops } from "./../peggedAssets/storePeggedAssets/chainDrops";
+import { postChainDrops } from "./../peggedAssets/storePeggedAssets/postChainDrops";
 import storePeggedAssets from "./../peggedAssets/storePeggedAssets/storePegged";
 import peggedAssets from "./../peggedData/peggedData";
 import { sendMessage } from "./../utils/discord";
@@ -156,6 +158,7 @@ handler()
       console.log('--- SUMMARY_JSON_END ---');
     }
     await postSummaryDigest(summary);
+    await postChainDrops(chainDrops.splice(0));
     console.log("done");
     console.log("saving cache");
     await saveSdkInternalCache();
@@ -164,6 +167,7 @@ handler()
   })
   .catch(async (e) => {
     console.error('Fatal error in handler:', e);
+    try { await postChainDrops(chainDrops.splice(0)); } catch (error) { console.error('Failed to flush chain alerts:', error); }
     try { await saveSdkInternalCache(); } catch { }
     process.exit(2);
   });
