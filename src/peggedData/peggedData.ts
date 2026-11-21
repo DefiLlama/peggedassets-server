@@ -14562,7 +14562,7 @@ export default [
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
-    priceSource: "coingecko",
+    priceSource: "defillama",
     auditLinks: ["https://github.com/own-protocol/own-v2/tree/main/audits"],
     twitter: "https://x.com/owndotmoney",
     wiki: "https://docs.own.money",
