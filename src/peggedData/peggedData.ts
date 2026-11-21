@@ -3000,7 +3000,7 @@ export default [
   {
     id: "103",
     name: "NXUSD",
-    address: "0xf14f4ce569cb3679e99d5059909e23b07bd2f387",
+    address: "avax:0xf14f4ce569cb3679e99d5059909e23b07bd2f387",
     symbol: "NXUSD",
     url: "https://nxusd.nereus.finance/",
     description:
@@ -10511,7 +10511,7 @@ export default [
   {
     id: "350",
     name: "Citrea USD",
-    address: "0x8D82c4E3c936C7B5724A382a9c5a4E6Eb7aB6d5D",
+    address: "citrea:0x8D82c4E3c936C7B5724A382a9c5a4E6Eb7aB6d5D",
     symbol: "ctUSD",
     url: "https://citrea.xyz/",
     description: "ctUSD is the native, compliant stablecoin for the Citrea ecosystem, designed to serve as the foundational liquidity standard for Bitcoin applications. Issued by MoonPay, and fully backed 1:1 by U.S. Treasury bills and cash, it eliminates liquidity fragmentation while providing seamless banking rails between on-chain Bitcoin collateral and off-chain fiat systems.",
@@ -10721,7 +10721,7 @@ export default [
   {
     id: "356",
     name: "US Sonic Dollar",
-    address: "0x000000000eCcFf26B795F73fb0A70d48da657fEf",
+    address: "sonic:0x000000000eCcFf26B795F73fb0A70d48da657fEf",
     symbol: "USSD",
     url: "https://www.soniclabs.com/ussd",
     description: "USSD is Sonic's flagship stablecoin - backed 1:1 by U.S. Treasuries and fully compliant with the GENIUS Act.",
@@ -12630,7 +12630,7 @@ export default [
   {
     id: "413",
     name: "SoulPeg USD",
-    address: "0x40ff3dea2eec93a7b71879874dc4407918da77a6",
+    address: "bsc:0x40ff3dea2eec93a7b71879874dc4407918da77a6",
     symbol: "SPUSD",
     url: "https://www.soulpeg.io/",
     description:
