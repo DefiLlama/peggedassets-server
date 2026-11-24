@@ -69,11 +69,24 @@ const chainContracts = {
   solana: {
     issued: ["2b1kV6DkPAnxd5ixfnxCpjxmKwqjjaYmCZfHsFu24GXo"],
   },
+  stellar: {
+    issued: ["PYUSD:GDQE7IXJ4HUHV6RQHIUPRJSEZE4DRS5WY577O2FY6YQ5LVWZ7JZTU2V5"], // SAC CCCRWH6Q3FNP3I2I57BDLM5AFAT7O6OF6GKQOC6SSJNDAVRZ57SPHGU2
+  },
+  // Polygon and X Layer are on Paxos' burn-and-mint OFT mesh, like Arbitrum: the Ethereum peer
+  // 0xa2c323fe5a74adffad2bf3e007e36bb029606444 holds no PYUSD and burns on send, so this supply is
+  // already out of Ethereum's totalSupply. Marking it issued keeps the generated config from netting
+  // it out of Ethereum a second time. The Polygon token shares the PYUSD0_A address, but its PYUSD0 OFT
+  // (0x26d27d5a...) has no peers left, so new supply only arrives through the Paxos OFT (0x2292e82e...).
+  polygon: {
+    issued: ["0x99aF3EeA856556646C98c8B9b2548Fe815240750"],
+  },
+  xlayer: {
+    issued: ["0x87b4a8176B3Df6b71e26CC095edcAf4Db07506B4"],
+  },
   // PYUSD0 (Everdawn OFT mesh): every deployment below is minted against PYUSD locked in the LayerZero
   // adapter 0x3cd2b89c49d130c08f1d683225b2e5deb63ff876 on ARBITRUM (its balance equals the sum of these
   // supplies), so they are debited from Arbitrum. LZ metadata pegs them to Ethereum, which is why they
   // are excluded from the generated layerzeroConfig via bridgeConfig.lzConfig.excludeChains.
-  // Polygon PYUSD0 is backed elsewhere (not that lockbox) and stays in the generated config.
   flow: {
     bridgedFromArbitrum: [PYUSD0_A],
     bridge: "layerzero",

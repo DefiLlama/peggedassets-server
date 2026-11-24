@@ -1066,6 +1066,15 @@ const adapter: PeggedIssuanceAdapter = {
   katana: {
     ethereum: bridgedSupply("katana", 6, chainContracts.katana.bridgedFromETH),
   },
+  xlayer: {
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("xlayer", 6, [chainContracts.xlayer.bridgedFromETH[0]], "layerzero", "ethereum"), // USDT0
+        bridgedSupply("xlayer", 6, [chainContracts.xlayer.bridgedFromETH[1]]), // Agglayer LxLy bridge
+      ],
+      "peggedUSD"
+    ),
+  },
   etlk: {
     ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab") // Etherlink's Wrapped Asset Bridge
   },
