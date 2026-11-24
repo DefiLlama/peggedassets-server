@@ -62,10 +62,11 @@ export const chainContracts: ChainContracts = {
     bridgedFromCelo: ["DHpoYejUDqzByb6HAdaLWF7KZvwUv2vWYDY9cTENNZui"], // allbridge
     bridgedFromFantom: ["Grk6b4UMRWkgyq4Y6S1BnNRF4hRgtnMFp7Sorkv6Ez4u"], // allbridge
     // Circle's pre-mint token accounts (incl. 7VHUFJ...'s) are read from its registry in solanaUnreleased.
+    // 41zCUJ... is intentionally NOT listed: it is a custodial deposit/sweep wallet (customer funds in transit),
+    // and Circle's own Solana circulating figure counts it as circulating.
     unreleased: [
-      "41zCUJsKk6cMB94DDtm99qWmyMZfp4GkAhhuz4xTwePu",
       "42qwJUTbKf3D8ULfWadUSjnHf6pkJ4H1VjCcfSKHvDTN",  // wormhole to FOGO
-    ], // study https://solscan.io/token/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v#holders
+    ],
   },
   fogo: {
     bridgedFromSol: ['uSd2czE61Evaf76RNbq4KPpXnkiL3irdzgLFUMe3NoG']
