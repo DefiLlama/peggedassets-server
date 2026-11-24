@@ -59,7 +59,6 @@ const ethereumChainContract: ChainContract = {
     "0xbb02a884621fb8f5bfd263a67f58b65df5b090f3",
     "0xc319eea1e792577c319723b5e60a15da3857e7da",
     "0xffbf4892822e0d552cff317f65e1ee7b5d3d9ae6",
-    "0x289424add4a1a503870eb475fd8bf1d586b134ed",
     "0x6371efe5cd6e3d2d7c477935b7669401143b7985",
     "0xbc36fde44a7fd8f545d459452ef9539d7a14dd63",
     "0x00380cb5858664078f2289180cc32f74440ac923",
@@ -409,7 +408,8 @@ async function balanceOfCauldron(
     token,
     cauldronAddress,
     true,
-    chain
+    chain,
+    chainBlocks
   );
 }
 

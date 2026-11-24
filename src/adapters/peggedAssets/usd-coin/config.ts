@@ -130,7 +130,7 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xcca4e6302510d555b654b3eab9c0fcb223bcfdf0"],
   },
   ronin: {
-    bridgeOnETH: ["0xc2e3a3c18ccb634622b57ff119a1c8c7f12e8c0c"],
+    bridgeOnETH: ["0xE77aD12b305cD90eEe6b769Ac6490a42c0039d67"], // CCIP SiloedUSDCTokenPool lockbox for Ronin (getLockBox)
     issued: ["0x0b7007c13325c48911f73a2dad5fa5dcbf808adc"],
   },
   aurora: {
@@ -144,6 +144,10 @@ export const chainContracts: ChainContracts = {
     rainbow bridge and celer bridge contracts on ethereum for both aurora and near to have
     USDC bridged independently, and near dev claims aurora's USDC may be a subset of near's
     */
+  },
+  // Somnia Tokyo (chainId 50321): Hyperlane synthetic of Somnia's USDC.e, which is locked in the collateral router on Somnia
+  somnia_tokyo: {
+    bridgedFromSomnia: ["0xb8cea44875c3d3b84804d6b025faefbd2e8fe3ae"],
   },
   fuse: {
     bridgedFromETH: [
@@ -457,7 +461,10 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0xD33Db7EC50A98164cC865dfaa64666906d79319C"],
   },
   wemix: {
-    bridgedFromETH: ["0xcdf764933b9a9ebb2c5da904b9715f3cf981572a"],
+    bridgedFromETH: [
+      "0xcdf764933b9a9ebb2c5da904b9715f3cf981572a", // una.USDC
+      "0x44bB111010DfFfb3695F9a1B66aa879976199e7b", // USDC.e, CCIP lock/release from Ethereum
+    ],
   },
   kroma: {
     bridgedFromETH: ["0x0257e4d92c00c9efcca1d641b224d7d09cfa4522"],
@@ -584,5 +591,17 @@ export const chainContracts: ChainContracts = {
   },
   arc: {
     issued: ["0x3600000000000000000000000000000000000000"], // Circle-issued native USDC
+  },
+  adi: {
+    bridgedFromETH: ["0x9cb8142aebbcdc60af7c97af897a67a8f3ca71c2"], // USDC.e, CCIP lock/release from Ethereum
+  },
+  plasma: {
+    issued: ["0x2d661C89D812261039AF9764eceaAee884f5F67F"], // Circle-issued native USDC
+  },
+  "0g": {
+    bridgedFromETH: [
+      "0x1f3AA82227281cA364bFb3d253B0f1af1Da6473E", // USDC.e, CCIP lock/release from Ethereum
+      "0x8a2b28364102bea189d99a475c494330ef2bdd0b", // HydraOFT USDC.e (Stargate), wired by hand since 0g is in lzConfig.excludeChains
+    ],
   },
 };

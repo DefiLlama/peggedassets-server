@@ -65,7 +65,7 @@ export default [
     bridgeConfig: {
       lzConfig: {
         symbols: ["USDC", 'USDC.e'],
-        excludeChains: ["aurora"], // Aurora USDC is Near-native USDC bridged over; tracked as bridgedFromNear in usd-coin/config.ts
+        excludeChains: ["aurora", "0g"], // Aurora USDC is Near-native USDC bridged over; tracked as bridgedFromNear in usd-coin/config.ts. 0g: CCIP USDC.e + Stargate OFT tracked by hand in usd-coin/config.ts
       },
       hyperlaneConfig: {
         // Default matching by gecko_id "usd-coin" and symbol "USDC".
@@ -3000,7 +3000,7 @@ export default [
   {
     id: "103",
     name: "NXUSD",
-    address: "0xf14f4ce569cb3679e99d5059909e23b07bd2f387",
+    address: "avax:0xf14f4ce569cb3679e99d5059909e23b07bd2f387",
     symbol: "NXUSD",
     url: "https://nxusd.nereus.finance/",
     description:
@@ -7380,6 +7380,10 @@ export default [
           bridgedFromETH: ["0x8210c0634AB8f273806e4b7866E9Db353773c44B"],
           bridge: "ccip",
         },
+        xrplevm: {
+          bridgedFromETH: ["0x5E54c1bbc5F19C7A39CC6ff7dbdFBdF438a3CD60"],
+          bridge: "axelar",
+        },
       },
     },
   },
@@ -7836,7 +7840,8 @@ export default [
     chainConfig: {
       chains: {
         abcore: {
-          issued: ["0x111111d2bf19e43c34263401e0cad979ed1cdb61"],
+          bridgedFromETH: ["0x111111d2bf19e43c34263401e0cad979ed1cdb61"],
+          bridge: "ccip",
         },
         bsc: {
           issued: ["0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d"],
@@ -7854,10 +7859,17 @@ export default [
           issued: ["0x05fabd1b12e39967a3c24e91b7b8f67719a6dacee74f3c8b9fb7d93e855437d2"],
         },
         plume_mainnet: {
-          issued: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
+          bridgedFromETH: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
+          bridge: "ccip",
         },
         monad: {
-          issued: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
+          bridgedFromETH: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
+          bridge: "ccip",
+          decimals: 6, // Monad USD1 has 6 decimals, the rest of USD1 uses 18
+        },
+        mantle: {
+          bridgedFromETH: ["0x111111d2bf19e43C34263401e0CAd979eD1cdb61"],
+          bridge: "ccip",
         },
       },
     },
@@ -8208,7 +8220,8 @@ export default [
           issued: ["0x8df723295214ea6f21026eeeb4382d475f146f9f"],
         },
         polygon: {
-          issued: ["0xd571edb2ef29df10fcd6200fd6d0ed2389983db3"],
+          bridgedFromETH: ["0xd571edb2ef29df10fcd6200fd6d0ed2389983db3"],
+          bridge: "layerzero",
         },
         ripple: {
           issued: [
@@ -10498,7 +10511,7 @@ export default [
   {
     id: "350",
     name: "Citrea USD",
-    address: "0x8D82c4E3c936C7B5724A382a9c5a4E6Eb7aB6d5D",
+    address: "citrea:0x8D82c4E3c936C7B5724A382a9c5a4E6Eb7aB6d5D",
     symbol: "ctUSD",
     url: "https://citrea.xyz/",
     description: "ctUSD is the native, compliant stablecoin for the Citrea ecosystem, designed to serve as the foundational liquidity standard for Bitcoin applications. Issued by MoonPay, and fully backed 1:1 by U.S. Treasury bills and cash, it eliminates liquidity fragmentation while providing seamless banking rails between on-chain Bitcoin collateral and off-chain fiat systems.",
@@ -10647,6 +10660,10 @@ export default [
           bridgedFromETH: ["0x3D78455E22D5dd49709eC135A59CB1c5a87AC3C6"],
           bridge: "ccip",
         },
+        solana: {
+          bridgedFromETH: ["HAYQtfJEQ9DbDbaHEhxfGsWbSZ3ywthdsVB3PuB72DYe"],
+          bridge: "ccip",
+        },
       },
     },
   },
@@ -10704,7 +10721,7 @@ export default [
   {
     id: "356",
     name: "US Sonic Dollar",
-    address: "0x000000000eCcFf26B795F73fb0A70d48da657fEf",
+    address: "sonic:0x000000000eCcFf26B795F73fb0A70d48da657fEf",
     symbol: "USSD",
     url: "https://www.soniclabs.com/ussd",
     description: "USSD is Sonic's flagship stablecoin - backed 1:1 by U.S. Treasuries and fully compliant with the GENIUS Act.",
@@ -11324,6 +11341,11 @@ export default [
         somnia: {
           issued: ["0x00000022dA000002656c64D9eA6011ea952D008A"],
         },
+        // Somnia Tokyo (chainId 50321): Hyperlane synthetic, backed 1:1 by USDso locked in the collateral router on Somnia
+        somnia_tokyo: {
+          bridgedFromSomnia: ["0xcEa80aEb6ed4Ed526d71f34EfED047904C0e387a"],
+          bridge: "hyperlane",
+        },
       },
     },
   },
@@ -11349,42 +11371,49 @@ export default [
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         bsc: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         base: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         xdai: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         polygon: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         wc: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         celo: {
           issued: ["0x0dc4f92879b7670e5f4e4e6e3c801d229129d90d"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
       },
@@ -11412,42 +11441,49 @@ export default [
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         bsc: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         base: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         xdai: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         polygon: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         wc: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         celo: {
           issued: ["0xD76f5Faf6888e24D9F04Bf92a0c8B921FE4390e0"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
       },
@@ -11475,42 +11511,49 @@ export default [
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         bsc: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         base: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         xdai: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         polygon: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         wc: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         celo: {
           issued: ["0x61D450a098b6a7f69fC4b98CE68198fe59768651"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
       },
@@ -11538,42 +11581,49 @@ export default [
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         bsc: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         base: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         xdai: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         polygon: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         wc: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         celo: {
           issued: ["0x8a1D45e102e886510e891d2Ec656a708991e2D76"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
       },
@@ -11601,42 +11651,49 @@ export default [
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         bsc: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         base: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         xdai: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         polygon: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         wc: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
         celo: {
           issued: ["0x337e7456b420bd3481e7fa61fa9850343d610d34"],
           unreleased: [
             "0xB6C9e6451A4B4F65249f60dE4fD12Da1088A2807", // Ripio minting wallet
+            "0x7e3022272b9d6386Eb36569c8E5b7a2457D48d5C", // Ripio distribution wallet: received the minting wallet's balances on 2026-11-11/12
           ],
         },
       },
@@ -12573,7 +12630,7 @@ export default [
   {
     id: "413",
     name: "SoulPeg USD",
-    address: "0x40ff3dea2eec93a7b71879874dc4407918da77a6",
+    address: "bsc:0x40ff3dea2eec93a7b71879874dc4407918da77a6",
     symbol: "SPUSD",
     url: "https://www.soulpeg.io/",
     description:
@@ -14492,6 +14549,33 @@ export default [
   },
   {
     id: "484",
+    name: "Own eUSD",
+    address: "robinhood:0x8B84D644CECaeE6d21373F37E1bA00f85eD7CdB7",
+    symbol: "eUSD",
+    url: "https://own.money",
+    description:
+      "eUSD is a US dollar stablecoin on Robinhood Chain issued by Own. Part of the supply is minted from overcollateralized CDPs on tokenized stocks, ETH and stock/eUSD LP positions; the rest is minted 1:1 against USDG held in the eUSD PSM.",
+    mintRedeemDescription:
+      "CDP-backed eUSD is minted by borrowing against overcollateralized tokenized stocks and WETH (EUSDManager) or LP positions (EUSDLiquidityManager), and can be redeemed for that collateral at the oracle price. PSM-backed eUSD is minted 1:1 against USDG held in the eUSD PSM, and redeemed 1:1 for that USDG.",
+    onCoinGecko: "true",
+    gecko_id: "own-eusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://github.com/own-protocol/own-v2/tree/main/audits"],
+    twitter: "https://x.com/owndotmoney",
+    wiki: "https://docs.own.money",
+    chainConfig: {
+      chains: {
+        robinhood: {
+          issued: ["0x8B84D644CECaeE6d21373F37E1bA00f85eD7CdB7"],
+        },
+      },
+    },
+  },
+  {
+    id: "485",
     name: "CAD Coin",
     address: "0x49A6F6aeAB68eA001bEaa4815186eb22FBDcCF2A",
     symbol: "CADC",

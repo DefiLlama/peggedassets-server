@@ -48,6 +48,9 @@ const chainContracts: ChainContracts = {
   arc: {
     issued: ["0xbEf5f6d51CB62b58e6A8f77868681825C6fe21c1"], // Circle-issued native EURC
   },
+  plasma: {
+    issued: ["0x3EE196E78d4d4248b849B8E1C7F44C5457FAFD2C"], // Circle-issued native EURC
+  },
 };
 
 async function chainMinted(chain: string, decimals: number) {
@@ -207,6 +210,9 @@ const adapter: PeggedIssuanceAdapter = {
   },
   arc: {
     minted: chainMinted("arc", 6),
+  },
+  plasma: {
+    minted: chainMinted("plasma", 6),
   },
 };
 
