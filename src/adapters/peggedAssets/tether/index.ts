@@ -15,10 +15,6 @@ import {
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { mixinSupply } from "../helper/mixin";
 import { call as nearCall } from "../helper/near";
-import {
-  getBalance as ontologyGetBalance,
-  getTotalSupply as ontologyGetTotalSupply,
-} from "../helper/ontology";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
 import {
   getTokenBalance as tronGetTokenBalance,
@@ -351,45 +347,6 @@ async function getCardanoSupply() {
     let balances = {} as Balances;
     const supply = await getTotalSupply(chainContracts.cardano.bridgedFromETH[0]);
     sumSingleBalance(balances, "peggedUSD", supply, "wan", true);
-    return balances;
-  };
-}
-
-async function ontologyBridged() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const polyUSDTAddress = chainContracts.ontology.bridgedFromETH[0];
-    const polyUSDTReserveAddress = chainContracts.ontology.unreleased[0];
-    const polyNetworkSupply = await ontologyGetTotalSupply(
-      polyUSDTAddress,
-      "oep4"
-    );
-    const polyNetworkReserve = await ontologyGetBalance(
-      polyUSDTAddress,
-      "oep4",
-      polyUSDTReserveAddress
-    );
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      polyNetworkSupply - polyNetworkReserve,
-      polyUSDTAddress,
-      true
-    );
-
-    const celerUSDTAddress = chainContracts.ontology.bridgedFromETH[1];
-    const celerSupply = await ontologyGetTotalSupply(celerUSDTAddress, "orc20");
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      celerSupply,
-      celerUSDTAddress,
-      true
-    );
     return balances;
   };
 }
@@ -907,9 +864,9 @@ const adapter: PeggedIssuanceAdapter = {
     unreleased: chainUnreleased("kava", 6, chainContracts.kava.unreleased[0]),
     ethereum: kavaBridged(),
   },
-  ontology: {
-    //ethereum: ontologyBridged(),
-  },
+  // ontology: {
+  //   //ethereum: ontologyBridged(),
+  // },
   sx: {
     ethereum: bridgedSupply("sx", 6, chainContracts.sx.bridgedFromETH),
   },
@@ -1085,7 +1042,8 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("occ", 6, chainContracts.occ.bridgedFromETH),
   },
   sei: {
-    kava: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromKava),
+    kava: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromKava, "layerzero", "kava"),
+    ethereum: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromETH, "layerzero", "ethereum"),
   },
   zircuit: {
     ethereum: bridgedSupply("zircuit", 6, chainContracts.zircuit.bridgedFromETH)
@@ -1107,6 +1065,15 @@ const adapter: PeggedIssuanceAdapter = {
   },
   katana: {
     ethereum: bridgedSupply("katana", 6, chainContracts.katana.bridgedFromETH),
+  },
+  xlayer: {
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("xlayer", 6, [chainContracts.xlayer.bridgedFromETH[0]], "layerzero", "ethereum"), // USDT0
+        bridgedSupply("xlayer", 6, [chainContracts.xlayer.bridgedFromETH[1]]), // Agglayer LxLy bridge
+      ],
+      "peggedUSD"
+    ),
   },
   etlk: {
     ethereum: bridgedSupply("etlk", 6, chainContracts.etlk.bridgedFromETH, "wab") // Etherlink's Wrapped Asset Bridge

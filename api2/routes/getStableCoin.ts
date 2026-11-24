@@ -1,6 +1,7 @@
 
 import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../src/peggedData/peggedData";
+import { getPeggedPrice } from "../../src/adapters/peggedAssets/prices";
 import { cache } from "../cache";
 
 type HistoricalTvls = AWS.DynamoDB.DocumentClient.ItemList | undefined;
@@ -26,7 +27,7 @@ export function getStablecoinData(peggedID: string | undefined) {
   response.chainBalances = {};
   const currentChainBalances: { [chain: string]: object } = {};
   response.currentChainBalances = currentChainBalances;
-  response.price = prices[peggedData.gecko_id] ?? null;
+  response.price = getPeggedPrice(prices, peggedData.gecko_id) ?? null;
 
   Object.entries(lastBalancesHourlyRecord!).map(([chain, issuances]: any) => {
     const normalizedChain = chain;

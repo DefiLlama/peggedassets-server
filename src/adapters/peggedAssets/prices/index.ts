@@ -14,6 +14,9 @@ export async function getPrices(assets: any[]) {
     return 'coingecko:' + token.gecko_id;
   }
   assets.forEach((token) => {
+    // prices are keyed by gecko_id: without one, every such asset would write to
+    // the same "null" key and share whichever price was stored there last
+    if (!token.gecko_id) return;
     mapping[getTokenAddress(token)] = token.gecko_id;
   })
   const tokens = Object.keys(mapping)
@@ -33,4 +36,14 @@ export async function getPrices(assets: any[]) {
   finalRes["m-2"] = 1
   finalRes["terrausd"] = 0
   return finalRes
+}
+
+// Price lookup for a pegged asset. Assets without a gecko_id never have a price
+// entry; this also ignores the "null" key left in older stored price records.
+export function getPeggedPrice(
+  prices: Record<string, number | null> | undefined,
+  geckoId: string | null | undefined
+): number | null | undefined {
+  if (!geckoId) return undefined;
+  return prices?.[geckoId];
 }

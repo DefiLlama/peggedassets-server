@@ -27,6 +27,8 @@ type PegType =
   | "peggedPEN" //peruvian sol
   | "peggedKRW" //South Korean won
   | "peggedHKD" //Hong Kong dollar
+  | "peggedAED" //UAE dirham
+  | "peggedIDR" //Indonesian rupiah
 
 type PegMechanism = "algorithmic" | "fiat-backed" | "crypto-backed";
 
@@ -69,8 +71,10 @@ export type PeggedAsset = {
 };
 
 // map of llama chain key -> contract config consumed by addChainExports.
-// per-chain keys: issued | unreleased | reserves | bridgedFromETH | bridgeOnETH | bridgeOnSolana | bridgedFrom<Chain> | bridge.
-// values are address strings or arrays of address strings.
+// per-chain keys: issued | unreleased | reserves | bridgedFromETH | bridgeOnETH | bridgeOnSolana | bridgedFrom<Chain> | bridge | decimals.
+// values are address strings or arrays of address strings, except `decimals`.
+// `decimals` (number) overrides the asset-wide decimals for this chain's bridgedFrom* / cosmos* supplies,
+// for a chain whose token uses different decimals than the rest (issued supplies read decimals on-chain).
 // `bridge` names the bridge (id from bridgeData.bridgeInfo, e.g. "layerzero", "ccip") used by the
 // bridgedFrom* entries on that chain; without it the token address is looked up in bridgeData's
 // address mapping and otherwise reported as "not-found".
@@ -78,7 +82,8 @@ export type ChainConfig = {
   decimals?: number; // token decimals passed to addChainExports (default 18)
   chains: {
     [chain: string]: {
-      [key: string]: string | string[];
+      decimals?: number;
+      [key: string]: string | string[] | number | undefined;
     };
   };
 };

@@ -7,7 +7,6 @@ import {
 } from "../peggedAsset.type";
 import { BENTOBOX_ABI } from "./abis/bentobox";
 import { CAULDRON_V1_ABI } from "./abis/cauldron-v1";
-import * as nibiruHelper from "../helper/nibiru";
 
 
 type Address = `0x${string}`;
@@ -60,7 +59,6 @@ const ethereumChainContract: ChainContract = {
     "0xbb02a884621fb8f5bfd263a67f58b65df5b090f3",
     "0xc319eea1e792577c319723b5e60a15da3857e7da",
     "0xffbf4892822e0d552cff317f65e1ee7b5d3d9ae6",
-    "0x289424add4a1a503870eb475fd8bf1d586b134ed",
     "0x6371efe5cd6e3d2d7c477935b7669401143b7985",
     "0xbc36fde44a7fd8f545d459452ef9539d7a14dd63",
     "0x00380cb5858664078f2289180cc32f74440ac923",
@@ -209,25 +207,14 @@ async function chainReleased(
   ) {
     const balances: Balances = {};
 
-    let totalSupply;
-    if (chain === 'nibiru') {
-      totalSupply = await nibiruHelper.call({
-        abi: { name: 'totalSupply' },
+    const totalSupply = (
+      await sdk.api.abi.call({
+        abi: "erc20:totalSupply",
         target: address,
         block: _chainBlocks?.[chain],
-      });
-      // Convert hex string to number
-      totalSupply = parseInt(totalSupply, 16);
-    } else {
-      totalSupply = (
-        await sdk.api.abi.call({
-          abi: "erc20:totalSupply",
-          target: address,
-          block: _chainBlocks?.[chain],
-          chain: chain,
-        })
-      ).output;
-    }
+        chain: chain,
+      })
+    ).output;
 
     sumSingleBalance(
       balances,
@@ -253,16 +240,7 @@ async function chainUnreleased(
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) => {
-    let ownerPromise;
-    if (chain === 'nibiru') {
-      ownerPromise = nibiruHelper.call({
-        abi: { name: 'owner' },
-        target: address,
-        block: _chainBlocks?.[chain],
-      }).then(result => `0x${result.slice(26)}` as Address); // Convert the last 20 bytes to address with proper type
-    } else {
-      ownerPromise = ownerOf(address, chain, _chainBlocks);
-    }
+    const ownerPromise = ownerOf(address, chain, _chainBlocks);
 
     const [
       ownerBalance,
@@ -272,15 +250,6 @@ async function chainUnreleased(
     ] = await Promise.all([
       ownerPromise.then(
         async (owner) => {
-          if (chain === 'nibiru') {
-            const result = await nibiruHelper.call({
-              abi: { name: 'balanceOf' },
-              target: address,
-              params: [owner],
-              block: _chainBlocks?.[chain],
-            });
-            return parseInt(result, 16);
-          }
           return (
             await sdk.api.erc20.balanceOf({
               target: address,
@@ -439,7 +408,8 @@ async function balanceOfCauldron(
     token,
     cauldronAddress,
     true,
-    chain
+    chain,
+    chainBlocks
   );
 }
 

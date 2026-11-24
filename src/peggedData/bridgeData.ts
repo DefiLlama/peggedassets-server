@@ -100,7 +100,7 @@ export default {
     sourceChain: formattedSourceChains.eth,
   },
   "0x3Ca3fEFA944753b43c751336A5dF531bDD6598B6": {
-    bridge: "multichain",
+    bridge: "passport", // USDC on Theta, "wrapped by passport.meter.io"
     sourceChain: formattedSourceChains.eth,
   },
   "0xfa9343c3897324496a05fc75abed6bac29f8a40f": {
@@ -132,7 +132,7 @@ export default {
     sourceChain: formattedSourceChains.eth,
   },
   "0x45c32fA6DF82ead1e2EF74d17b76547EDdFaFF89": {
-    bridge: "multichain",
+    bridge: "frax",
     sourceChain: formattedSourceChains.eth,
   },
   "0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c": {
@@ -144,7 +144,7 @@ export default {
     sourceChain: formattedSourceChains.eth,
   },
   "0x2E3D870790dC77A83DD1d18184Acc7439A53f475": {
-    bridge: "multichain",
+    bridge: "frax",
     sourceChain: formattedSourceChains.eth,
   },
   "0x1A93B23281CC1CDE4C4741353F3064709A16197d": {
@@ -164,27 +164,27 @@ export default {
     sourceChain: formattedSourceChains.eth,
   },
   "0xdc301622e621166BD8E82f2cA0A26c13Ad0BE355": {
-    bridge: "multichain",
+    bridge: "frax",
     sourceChain: formattedSourceChains.eth,
   },
   "0x7562F525106F5d54E891e005867Bf489B5988CD9": {
-    bridge: "multichain",
+    bridge: "frax",
     sourceChain: formattedSourceChains.eth,
   },
   "0xE4B9e004389d91e4134a28F19BD833cBA1d994B6": {
-    bridge: "multichain",
+    bridge: "frax",
     sourceChain: formattedSourceChains.eth,
   },
   "0x17FC002b466eEc40DaE837Fc4bE5c67993ddBd6F": {
-    bridge: "multichain",
+    bridge: "frax",
     sourceChain: formattedSourceChains.eth,
   },
   "0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64": {
-    bridge: "multichain",
+    bridge: "frax",
     sourceChain: formattedSourceChains.eth,
   },
   "0x90c97f71e18723b0cf0dfa30ee176ab653e89f40": {
-    bridge: "multichain",
+    bridge: "frax",
     sourceChain: formattedSourceChains.eth,
   },
   "0x1f858232892f9968d05bb5a69d1a02b14ea6fa57d97549481345838a13339889": {
@@ -276,7 +276,7 @@ export default {
     sourceChain: formattedSourceChains.eth,
   },
   "0x3c751Feb00364CA9e2d0105c40F0b423abf1DEE3": {
-    bridge: "multichain",
+    bridge: "passport", // USDT on Theta and Moonbeam, "wrapped by passport.meter.io"
     sourceChain: formattedSourceChains.eth,
   },
   "0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844": {
@@ -1002,7 +1002,7 @@ export default {
   "0x7B37d0787A3424A0810E02b24743a45eBd5530B2": {
     bridge: "passport",
     sourceChain: formattedSourceChains.bsc,
-  }, // this is a BUSD multichain address on Theta but a BUSD meter.passport address on Moonbeam
+  }, // BUSD.bsc "wrapped by passport.meter.io" on both Theta and Moonbeam
   "0x47ac0Fb4F2D84898e4D9E7b4DaB3C24507a6D503": {
     bridge: "bsc",
     sourceChain: formattedSourceChains.eth,
@@ -1782,6 +1782,10 @@ export default {
 } as BridgeMapping;
 
 export const bridgeInfo = {
+  "elysium": {
+    name: "Elysium",
+    link: "https://elysium.kinetiq.xyz/bridge",
+  },
   issued: {
     name: "Natively Issued",
   },
@@ -1895,6 +1899,10 @@ export const bridgeInfo = {
   gnosis: {
     name: "Gnosis Chain OmniBridge",
     link: "https://omni.gnosischain.com/",
+  },
+  xdaibridge: {
+    name: "Gnosis Chain xDai Bridge",
+    link: "https://bridge.gnosischain.com/",
   },
   rsk: {
     name: "RSK Token Bridge",
@@ -2018,7 +2026,7 @@ export const bridgeInfo = {
   },
   hyperlane: {
     name: "Hyperlane",
-    link: "https://www.hyperlane.xyz/",
+    link: "https://hyperlane.xyz/",
   },
   circle: {
     name: "Circle xReserve",
@@ -2027,5 +2035,9 @@ export const bridgeInfo = {
   ethena: {
     name: "Ethena",
     link: "https://ethena.fi/",
+  },
+  frax: {
+    name: "Frax Bridge",
+    link: "https://docs.frax.finance/cross-chain/bridge",
   },
 } as BridgeInfo;

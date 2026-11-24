@@ -33,7 +33,9 @@ export type PeggedAssetType =
   | "peggedCLP"
   | "peggedPEN"
   | "peggedHKD"
-  | "peggedKRW";
+  | "peggedKRW"
+  | "peggedAED"
+  | "peggedIDR";
 
 type StringNumber = string;
 type PeggedBalances = {

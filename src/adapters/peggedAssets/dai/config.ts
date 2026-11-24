@@ -11,7 +11,7 @@ export const chainContracts: ChainContracts = {
     ],
     bridgedFromPolygon: ["4Fo67MYQpVhZj9R7jQTd63FPAnWbPpaafAUxsMGX2geP"], // wormhole
     bridgedFromAvax: ["EgQ3yNtVhdHz7g1ZhjfGbxhFKMPPaFkz8QHXM5RBZBgi"], // allbridge
-    bridgedFromFantom: ["HjUhUzi6fVkY1BndaSc4Dcg2mCzvnqzXjVJtXsj78ver"], // allbridge
+    // bridgedFromFantom: ["HjUhUzi6fVkY1BndaSc4Dcg2mCzvnqzXjVJtXsj78ver"], // allbridge, ~1k of re-bridged multichain DAI; exceeds fantom's non-multichain supply after the hack cutoff
   },
   polygon: {
     bridgedFromETH: [
@@ -136,10 +136,10 @@ export const chainContracts: ChainContracts = {
   starknet: {
     bridgeOnETH: ["0x0437465dfb5b79726e35f08559b0cbea55bb585c"],
   },
-  ontology: {
-    bridgedFromETH: ["7b956c0c11fcffb9c9227ca1925ba4c3486b36f1"], // poly network
-    unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"],
-  },
+  // ontology: {
+  //   bridgedFromETH: ["7b956c0c11fcffb9c9227ca1925ba4c3486b36f1"], // poly network
+  //   unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"],
+  // },
   sx: {
     bridgedFromETH: ["0x53813CD4aCD7145A716B4686b195511FA93e4Cb7"], // celer
   },

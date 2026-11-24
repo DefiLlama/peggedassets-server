@@ -1,6 +1,7 @@
 process.env.SKIP_RPC_CHECK = 'true'
 
 require("dotenv").config();
+import "../../env";
 const path = require("path");
 import * as sdk from "@defillama/sdk";
 import peggedAssets from "../../peggedData/peggedData";
@@ -9,6 +10,7 @@ import { extractIssuanceFromSnapshot, getClosestSnapshotForChain } from "../../u
 import { PeggedIssuanceAdapter } from "./peggedAsset.type";
 import { DEAD_CHAINS } from "../../utils/deadChains";
 import { importAdapter } from "../../peggedAssets/utils/importAdapter";
+import { excludeHackedBridges } from "../../peggedData/hackedBridges";
 const {
   humanizeNumber,
 } = require("@defillama/sdk/build/computeTVL/humanizeNumber");
@@ -95,6 +97,10 @@ async function getPeggedAsset(
           Bridge data not found on chain ${chain}. Use sumSingleBalance from helper/generalUtil to add bridge data.`
         );
       }
+
+      const removed = excludeHackedBridges(balance as any, pegType, _unixTimestamp);
+      if (removed)
+        console.log(`[${adapterLabel}] Excluded ${humanizeNumber(removed)} from hacked bridge(s) on ${chain} (${issuanceType})`);
 
       peggedBalances[chain] = peggedBalances[chain] || {};
       peggedBalances[chain][issuanceType] = balance as PeggedTokenBalance;
@@ -240,9 +246,17 @@ const passedFile = path.resolve(process.cwd(), process.argv[2]);
 const dummyFn = () => { };
 const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json';
 
+// `paypal-usd`, `paypal-usd/index`, `paypal-usd/index.ts` and `120` all name the same asset.
+// Resolving the asset matters: it is what loads bridgeConfig (LayerZero / Hyperlane) and chainConfig,
+// so a path that does not resolve silently tests the manual adapter alone.
+function getAssetDirFromPath(filePath: string): string {
+  const pathParts = filePath.replace(/\.ts$/, "").split(path.sep).filter(Boolean);
+  if (pathParts[pathParts.length - 1] === "index") pathParts.pop();
+  return pathParts[pathParts.length - 1];
+}
+
 function getStablecoinIdFromPath(filePath: string): string {
-  const pathParts = filePath.split(path.sep);
-  const stablecoinDir = pathParts[pathParts.length - 1];
+  const stablecoinDir = getAssetDirFromPath(filePath);
 
   if (/^\d+$/.test(stablecoinDir)) {
     return stablecoinDir;
@@ -256,13 +270,12 @@ function getStablecoinIdFromPath(filePath: string): string {
     return peggedAsset.id;
   }
 
-  console.warn(`[WARNING] Could not determine stablecoin ID for path: ${filePath}, using folder name: ${stablecoinDir}`);
+  console.warn(`[WARNING] Could not determine stablecoin ID for path: ${filePath}, using folder name: ${stablecoinDir}. No peggedData entry matched, so bridgeConfig (LayerZero / Hyperlane) and chainConfig will NOT be applied: this run tests the manual adapter only.`);
   return stablecoinDir;
 }
 
 function getAdapterLabelFromPath(filePath: string): string {
-  const parts = filePath.split(path.sep);
-  const last = parts[parts.length - 1] || 'unknown-adapter';
+  const last = getAssetDirFromPath(filePath) || 'unknown-adapter';
   if (/^\d+$/.test(last)) {
     const found = peggedAssets.find(p => p.id === last);
     return (found?.gecko_id || found?.name || last) as string;
@@ -340,8 +353,6 @@ function getAdapterLabelFromPath(filePath: string): string {
     extrapolated: false,
     extrapolatedChains: [] as Array<{ chain: string; timestamp: number }>
   };
-
-  await initializeSdkInternalCache()
 
   let peggedBalancesPromises = Object.entries(module).map(
     async ([chain, issuances]) => {
@@ -511,22 +522,6 @@ function handleError(error: string) {
 
 process.on("unhandledRejection", handleError);
 process.on("uncaughtException", handleError);
-
-async function initializeSdkInternalCache() {
-  let currentCache = await sdk.cache.readCache(INTERNAL_CACHE_FILE)
-  const ONE_MONTH = 60 * 60 * 24 * 30
-  if (!currentCache || !currentCache.startTime || (Date.now() / 1000 - currentCache.startTime > ONE_MONTH)) {
-    currentCache = {
-      startTime: Math.round(Date.now() / 1000),
-    }
-    await sdk.cache.writeCache(INTERNAL_CACHE_FILE, currentCache)
-  }
-  sdk.sdkCache.startCache(currentCache)
-}
-
-async function saveSdkInternalCache() {
-  await sdk.cache.writeCache(INTERNAL_CACHE_FILE, sdk.sdkCache.retriveCache())
-}
 
 function safeHumanizeNumber(value: any): string {
   if (value === null || value === undefined) {

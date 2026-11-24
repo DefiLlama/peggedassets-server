@@ -2,7 +2,6 @@ import { addChainExports } from "../helper/getSupply";
 import {  PeggedIssuanceAdapter } from "../peggedAsset.type";
 import { function_view } from "../helper/aptos";
 import { Balances } from "../peggedAsset.type";
-import { call as nibiruCall } from "../helper/nibiru";
 
 async function moveSupply(): Promise<Balances> {
   const balances = {} as Balances;
@@ -13,20 +12,6 @@ async function moveSupply(): Promise<Balances> {
     args: [chainContracts.move.issued[0]],
   });
   balances["peggedUSD"] = Number(resp.vec[0]) / 1e8;
-
-  return balances;
-}
-
-async function nibiruSupply(): Promise<Balances> {
-  const balances = {} as Balances;
-  
-  const totalSupply = await nibiruCall({
-    target: chainContracts.nibiru.issued[0],
-    abi: { name: 'totalSupply' }
-  });
-  
-  // Convert from hex to number and divide by 1e18 (assuming 18 decimals)
-  balances["peggedUSD"] = parseInt(totalSupply, 16) / 1e18;
 
   return balances;
 }
@@ -93,10 +78,7 @@ const adapter: PeggedIssuanceAdapter = {
     move: {
         minted: moveSupply,
     },
-    
-    nibiru: {
-        minted: nibiruSupply,
-    }
+    // nibiru is a regular EVM chain for the sdk, so `issued` above is handled by addChainExports
 };
 
 export default adapter;

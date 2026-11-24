@@ -36,4 +36,15 @@ export default async function handler() {
     }
   })
   cache.historicalPrices.push(...newItems)
+
+  // older records (including ones already in the cache) stored every asset without
+  // a gecko_id under one shared "null" key; drop it so it isn't served or used
+  cache.historicalPrices.forEach(item => {
+    if (!item?.prices) return
+    delete item.prices["null"]
+    // the coins api served some prices as strings (frankencoin, 2025-01 to 2026-03) and those days are stored as such
+    for (const [key, value] of Object.entries(item.prices)) {
+      if (typeof value === "string") item.prices[key] = Number(value)
+    }
+  })
 }
