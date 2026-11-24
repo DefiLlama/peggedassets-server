@@ -13830,6 +13830,7 @@ export default [
           issued: ["0x59863989d080B22476DB95656d0C3CC18be92214"],
           unreleased: [
             "0x1c1f3cd3bcBcaAF16E9566C686cfd975E49bBd64",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
           ],
         },
         base: {
@@ -13885,6 +13886,7 @@ export default [
           issued: ["0xC4ed6Aba5373D78E160F4df39e011F078Be54df8"],
           unreleased: [
             "0xEA4375e9059dECd71D247260f8f1184c58928027",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
           ],
         },
         base: {
@@ -13940,6 +13942,7 @@ export default [
           issued: ["0xa16d5DB80A45157E0e451750B81FF0CC0b61d558"],
           unreleased: [
             "0xe66213650A22Fa78546bBFbcCc647ee9BAb75A8a",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
           ],
         },
         base: {
@@ -13995,6 +13998,7 @@ export default [
           issued: ["0xb96aA6babCcD738d6644ADd4912fE5eFbEBF5a25"],
           unreleased: [
             "0xa2421459B2b15c8a2Ab53995C6C6A31648506F1c",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
           ],
         },
         base: {
@@ -14050,6 +14054,7 @@ export default [
           issued: ["0x899438713f62B04d6CD8e8709986F7256fB6E3d9"],
           unreleased: [
             "0x0dBA6EE13D767292CB09dF386963338bdb104ee2",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
           ],
         },
         base: {
@@ -14105,6 +14110,7 @@ export default [
           issued: ["0xe8dbC4680235cCAeFf48e4C0B0EaceeBb89E5e17"],
           unreleased: [
             "0xdC5953c8c6335B5010E19415afB46B86983814E5",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
           ],
         },
         base: {
@@ -14160,6 +14166,7 @@ export default [
           issued: ["0x1edF5E61B6a4Fe19FEf3A695328F61aAa07728eA"],
           unreleased: [
             "0x95DCB54CE0AF55824A94cA7Ec5901F51938a8C06",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
           ],
         },
         base: {
