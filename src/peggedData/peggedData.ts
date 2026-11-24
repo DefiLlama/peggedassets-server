@@ -4243,7 +4243,7 @@ export default [
   },
   {
     id: "145",
-    name: "CAD Coin",
+    name: "Legacy CAD Coin",
     address: "0xcadc0acd4b445166f12d2c07eac6e2544fbe2eef",
     symbol: "CADC",
     url: "https://paytrie.com/cadc",
@@ -4251,12 +4251,12 @@ export default [
       "CADC tokens are fully backed 1:1 with Canadian Dollars held in a bank account in Canada.",
     mintRedeemDescription:
       "CADC is issued by PAYTRIE AB Inc., a FINTRAC regulated Money Services Business (M19690633), and backed by fully reserved assets, and redeemable on a 1:1 basis for Canadian dollars",
-    onCoinGecko: "true",
-    gecko_id: "cad-coin",
-    cmcId: "8690",
+    onCoinGecko: "false",
+    gecko_id: "legacy-cad-coin",
+    cmcId: null,
     pegType: "peggedCAD",
     pegMechanism: "fiat-backed",
-    priceSource: "coingecko",
+    priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/PayTrie",
     wiki: "https://faq.paytrie.com/help/what-is-the-cadc-address",
@@ -14576,6 +14576,42 @@ export default [
   },
   {
     id: "485",
+    name: "CAD Coin",
+    address: "0x49A6F6aeAB68eA001bEaa4815186eb22FBDcCF2A",
+    symbol: "CADC",
+    url: "https://loon.finance/cadc",
+    description:
+      "CADC is a Canadian dollar stablecoin. At least $1.00 CAD is held in a reserve account at ATB Financial for each CADC issued.",
+    mintRedeemDescription:
+      "CADC is issued by CADC Reserve Trust under a prospectus filed with Canadian securities regulators. Loon Payments Inc., a FINTRAC-registered MSB, is the servicer and administrator, Odyssey Trust Company is the trustee and ATB Financial is the custodian. Authorized Participants mint and redeem CADC 1:1 for Canadian dollars, and reserves are attested monthly.",
+    onCoinGecko: "true",
+    gecko_id: "cad-coin",
+    cmcId: "8690",
+    pegType: "peggedCAD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/LoonFinance",
+    wiki: "https://loon.finance/transparency",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x49A6F6aeAB68eA001bEaa4815186eb22FBDcCF2A"],
+        },
+        base: {
+          issued: ["0x5e63E9C06c3F2c779EF29a8071F94F5a724eB5e4"],
+        },
+        polygon: {
+          issued: ["0x74D9423a2886618522F7C992Edf647ea707A38eb"],
+        },
+        solana: {
+          issued: ["52spLAAFjKMwhNJ3TL2PUAUGYGgXsbvipP4whRtBp82S"],
+        },
+      },
+    },
+  },
+  {
+    id: "486",
     name: "Tenbin Brazilian Real",
     address: "ethereum:0x4c1b46adb8877e389171ec6ef67b385094c0afad",
     symbol: "tBRL",
@@ -14602,7 +14638,7 @@ export default [
     },
   },
   {
-    id: "486",
+    id: "487",
     name: "Tenbin Mexican Peso",
     address: "ethereum:0x8d015afcb6f437010653352eb1e58152c4e23734",
     symbol: "tMXN",

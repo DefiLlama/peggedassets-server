@@ -8,7 +8,6 @@ import { sendMessage } from "./../utils/discord";
 const INTERNAL_CACHE_FILE = 'pegged-assets-cache/sdk-cache.json'
 
 const handler = async () => {
-  await initializeSdkInternalCache() // initialize sdk cache - this will cache abi call responses and reduce the number of calls to the blockchain
   const peggedIndexes = Array.from(Array(peggedAssets.length).keys());
   // randomize the order of the pegged indexes
   peggedIndexes.sort(() => Math.random() - 0.5)
@@ -158,31 +157,12 @@ handler()
     await postSummaryDigest(summary);
     console.log("done");
     console.log("saving cache");
-    await saveSdkInternalCache();
     const failOnError = process.env.FAIL_ON_ERROR === 'true';
     process.exit(failOnError && summary.failures.length > 0 ? 1 : 0);
   })
   .catch(async (e) => {
     console.error('Fatal error in handler:', e);
-    try { await saveSdkInternalCache(); } catch { }
     process.exit(2);
   });
 
 
-
-async function initializeSdkInternalCache() {
-  let currentCache = await sdk.cache.readCache(INTERNAL_CACHE_FILE)
-  sdk.log('cache size:', JSON.stringify(currentCache).length, 'chains:', Object.keys(currentCache))
-  const ONE_MONTH = 60 * 60 * 24 * 30
-  if (!currentCache || !currentCache.startTime || (Date.now() / 1000 - currentCache.startTime > ONE_MONTH)) {
-    currentCache = {
-      startTime: Math.round(Date.now() / 1000),
-    }
-    await sdk.cache.writeCache(INTERNAL_CACHE_FILE, currentCache)
-  }
-  sdk.sdkCache.startCache(currentCache)
-}
-
-async function saveSdkInternalCache() {
-  await sdk.cache.writeCache(INTERNAL_CACHE_FILE, sdk.sdkCache.retriveCache())
-}
