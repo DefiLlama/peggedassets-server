@@ -9177,6 +9177,7 @@ export default [
     auditLinks: ["https://usdu.finance/documents/BlockBite-USDU-Security-Audit-2025.pdf"],
     twitter: "https://x.com/USDUfinance",
     wiki: "https://usdu.finance/docs",
+    doublecounted: true,
     chainConfig: {
       chains: {
         ethereum: {
@@ -14492,7 +14493,7 @@ export default [
   },
   {
     id: "484",
-    name: "EURU (USDU Finance)",
+    name: "EURU",
     address: "ethereum:0x6e30d56cb23068dE5A084D4A4f2A909823424F06",
     symbol: "EURU",
     url: "https://usdu.finance/",
@@ -14507,6 +14508,7 @@ export default [
     auditLinks: ["https://usdu.finance/documents/BlockBite-USDU-Security-Audit-2025.pdf"],
     twitter: "https://x.com/USDUfinance",
     wiki: "https://usdu.finance/docs",
+    doublecounted: true,
     chainConfig: {
       chains: {
         ethereum: {
@@ -14517,7 +14519,7 @@ export default [
   },
   {
     id: "485",
-    name: "CHFU (USDU Finance)",
+    name: "CHFU",
     address: "ethereum:0x4B43F48A665E2F15C4913a76CF67509672396146",
     symbol: "CHFU",
     url: "https://usdu.finance/",
@@ -14532,6 +14534,7 @@ export default [
     auditLinks: ["https://usdu.finance/documents/BlockBite-USDU-Security-Audit-2025.pdf"],
     twitter: "https://x.com/USDUfinance",
     wiki: "https://usdu.finance/docs",
+    doublecounted: true,
     chainConfig: {
       chains: {
         ethereum: {
