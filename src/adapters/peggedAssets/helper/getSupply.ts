@@ -7,7 +7,6 @@ import * as tezos from "../helper/tezos";
 import * as stellar from "../helper/stellar";
 import { getTotalSupply as tronGetTotalSupply, getTokenBalance as tronGetTokenBalance } from "../helper/tron";
 import * as starknet from "../helper/starknet";
-import { getZilliqaTokenSupply } from "../helper/zilliqa";
 import type {
   Balances,
   ChainBlocks,
@@ -31,8 +30,10 @@ const tweleveHoursAgo = () => Math.round(Date.now() / 1000) - 12 * 60 * 60;
 
 export async function getApi(chain: string, _api: ChainApi) {
   if (chain === _api.chain) return _api;
-  const api = new ChainApi({ chain });
-  if (_api.timestamp && _api.timestamp < tweleveHoursAgo()) await api.getBlock()
+  // Historical run: keep the timestamp so the cross-chain api resolves that day's block, not latest.
+  const historical = !!_api.timestamp && _api.timestamp < tweleveHoursAgo();
+  const api = new ChainApi(historical ? { chain, timestamp: _api.timestamp } : { chain });
+  if (historical) await api.getBlock()
   return api;
 }
 
@@ -145,6 +146,15 @@ export function fogoMintedOrBridged(targets: string[], pegType?: PeggedAssetType
     }
     return balances;
   };
+}
+
+// ZRC-2 total supply in whole tokens; decimals come from the contract init params (6 when the contract has none)
+async function getZilliqaTokenSupply(contract: string): Promise<number> {
+  const [supply, decimals] = await Promise.all([
+    chains.zilliqa.getTokenTotalSupply({ token: contract }),
+    chains.zilliqa.getTokenDecimals({ token: contract }),
+  ]);
+  return Number(supply) / 10 ** (decimals ?? 6);
 }
 
 export function zilliqaMintedOrBridged(
@@ -271,6 +281,9 @@ export function addChainExports(config: any, adapter: any = {}, {
     if (!adapter[chain])
       adapter[chain] = {};
     if (pegType) chainConfig.pegType = pegType;
+    // per-chain `decimals` overrides the asset-wide default for this chain's own token
+    // (bridgedFrom* / cosmos* supplies); bridgeOnETH reads the Ethereum token, so it keeps the asset-wide value.
+    const chainDecimals: number = typeof chainConfig.decimals === "number" ? chainConfig.decimals : decimals;
 
     const cExports = adapter[chain]
     Object.keys(chainConfig).forEach((key) => {
@@ -279,6 +292,7 @@ export function addChainExports(config: any, adapter: any = {}, {
           cExports.ethereum = supplyInEthereumBridge(config.ethereum.issued[0], chainConfig.bridgeOnETH[0], decimals, pegType as any);
           break;
         case 'pegType':
+        case 'decimals': // per-chain override, applied via chainDecimals
         case 'issuedABI': // consumed by getIssued together with `issued`
         case 'bridge': // bridge name for bridgedFrom* keys (e.g. "layerzero"); without it the token address is looked up in bridgeMapping
           break;
@@ -288,10 +302,10 @@ export function addChainExports(config: any, adapter: any = {}, {
           break;
         case "cosmosIssued":
           // cosmos LCD supply query: value is a denom (or array of denoms) queried
-          // on `chain` via cosmosSupply. decimals comes from the options arg.
+          // on `chain` via cosmosSupply. decimals: the chain's `decimals` key, else the options arg.
           if (!Array.isArray(chainConfig.cosmosIssued)) chainConfig.cosmosIssued = [chainConfig.cosmosIssued]
           if (!cExports.minted)
-            cExports.minted = cosmosSupply(chain, chainConfig.cosmosIssued, decimals, "", pegType as any)
+            cExports.minted = cosmosSupply(chain, chainConfig.cosmosIssued, chainDecimals, "", pegType as any)
           break;
         case "unreleased":
         case "reserves":
@@ -304,7 +318,7 @@ export function addChainExports(config: any, adapter: any = {}, {
             if (chain === 'solana')
               cExports.ethereum = solanaMintedOrBridged(chainConfig[key], pegType as any, chainConfig.bridge, "ethereum")
             else
-              cExports.ethereum = bridgedSupply(chain, decimals, chainConfig.bridgedFromETH, chainConfig.bridge, "ethereum", pegType as any)
+              cExports.ethereum = bridgedSupply(chain, chainDecimals, chainConfig.bridgedFromETH, chainConfig.bridge, "ethereum", pegType as any)
           }
           break;
         default: {
@@ -314,7 +328,7 @@ export function addChainExports(config: any, adapter: any = {}, {
             const srcChain = key.slice("cosmosBridgedFrom".length).toLowerCase()
             if (!Array.isArray(chainConfig[key])) chainConfig[key] = [chainConfig[key]]
             if (!cExports[srcChain])
-              cExports[srcChain] = cosmosSupply(chain, chainConfig[key], decimals, srcChain, pegType as any)
+              cExports[srcChain] = cosmosSupply(chain, chainConfig[key], chainDecimals, srcChain, pegType as any)
           } else if (key.startsWith("bridgedFrom")) {
             let srcChain = key.slice("bridgedFrom".length).toLowerCase()
             if (srcChain === "eth") srcChain = "ethereum"
@@ -325,7 +339,7 @@ export function addChainExports(config: any, adapter: any = {}, {
               else if (chain === 'sui' || chain === 'cardano')
                 cExports[srcChain] = getIssued({ issued: chainConfig[key], pegType: pegType as PeggedAssetType })
               else
-                cExports[srcChain] = bridgedSupply(chain, decimals, chainConfig[key], chainConfig.bridge, srcChain, pegType as any)
+                cExports[srcChain] = bridgedSupply(chain, chainDecimals, chainConfig[key], chainConfig.bridge, srcChain, pegType as any)
             }
           } else
             console.log(`Ignored: Unknown key ${key} in ${chain} config for addChainExports`)
@@ -451,6 +465,16 @@ export async function rippleGetTotalSupply(token: string): Promise<number> {
   return Number(await chains.xrpl.getTokenSupply(token));
 }
 
+// amount of a ripple token ("<currencyCode>.<issuerAddress>") held by `account`, read from the account's trust
+// line with the issuer; 0 when there is no such line. Throws on a malformed address so a typo can't count as 0.
+export async function rippleGetTokenBalance(token: string, account: string): Promise<number> {
+  const { currency, issuer } = chains.xrpl.parseToken(token);
+  if (!chains.xrpl.isValidAddress(account)) throw new Error(`ripple: invalid account ${account}`);
+  if (account === issuer) return 0; // an issuer never holds its own token
+  const balance = Number(await chains.xrpl.getTokenBalance({ account, currency, issuer }));
+  return balance > 0 ? balance : 0; // a negative balance is owed by `account`, not held
+}
+
 // asset params (total, decimals, reserve, unit-name, ...) of an Algorand Standard Asset
 export async function algorandGetAssetParams(assetId: string | number) {
   return chains.algorand.getAssetInfo({ assetId });
@@ -511,6 +535,17 @@ function getUnreleased({
           try { balance = await solanaGetTokenBalance(token, account) } catch (e: any) {
             if (!String(e?.message ?? "").includes("empty token accounts")) throw e;
           }
+          sumSingleBalance(balances, pegType, balance);
+        }
+      }
+      return balances;
+    }
+
+    if (api.chain === 'ripple') {
+      // issued: "<currencyCode>.<issuerAddress>"; unreleased: the issuer's own XRPL accounts holding that token
+      for (const token of issued) {
+        for (const account of unreleased) {
+          const balance = await rippleGetTokenBalance(token, account)
           sumSingleBalance(balances, pegType, balance);
         }
       }

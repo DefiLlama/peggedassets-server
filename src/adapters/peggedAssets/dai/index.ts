@@ -10,10 +10,6 @@ import {
   terraSupply,
   osmosisSupply,
 } from "../helper/getSupply";
-import {
-  getTotalSupply as ontologyGetTotalSupply,
-  getBalance as ontologyGetBalance,
-} from "../helper/ontology";
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { call as nearCall } from "../helper/near";
 import {
@@ -153,54 +149,6 @@ async function getCardanoSupply() {
   };
 }
 
-async function reinetworkMinted(address: string, decimals: number) {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const res = await retry(
-      async (_bail: any) =>
-        await axios.get(
-          `https://scan.rei.network/api?module=token&action=getToken&contractaddress=${address}`
-        )
-    );
-    const totalSupply = parseInt(res.data.result.totalSupply) / 10 ** decimals;
-    sumSingleBalance(balances, "peggedUSD", totalSupply, address, true);
-    return balances;
-  };
-}
-
-async function ontologyBridged() {
-  return async function (
-    _timestamp: number,
-    _ethBlock: number,
-    _chainBlocks: ChainBlocks
-  ) {
-    let balances = {} as Balances;
-    const polyDAIAddress = chainContracts.ontology.bridgedFromETH[0];
-    const polyDAIReserveAddress = chainContracts.ontology.unreleased[0];
-    const polyNetworkSupply = await ontologyGetTotalSupply(
-      polyDAIAddress,
-      "oep4"
-    );
-    const polyNetworkReserve = await ontologyGetBalance(
-      polyDAIAddress,
-      "oep4",
-      polyDAIReserveAddress
-    );
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      polyNetworkSupply - polyNetworkReserve,
-      polyDAIAddress,
-      true
-    );
-    return balances;
-  };
-}
-
 async function nearBridged(address: string, decimals: number) {
   return async function (
     _timestamp: number,
@@ -244,7 +192,6 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: solanaMintedOrBridged(chainContracts.solana.bridgedFromETH),
     polygon: solanaMintedOrBridged(chainContracts.solana.bridgedFromPolygon),
     avax: solanaMintedOrBridged(chainContracts.solana.bridgedFromAvax),
-    fantom: solanaMintedOrBridged(chainContracts.solana.bridgedFromFantom),
   },
   polygon: {
     ethereum: bridgedSupply(

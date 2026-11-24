@@ -11,6 +11,29 @@ require("dotenv").config();
 // This directory (src/adapters/peggedAssets) — the same cwd `npm test` uses.
 const PEGGED_DIR = __dirname;
 const TEST_SCRIPT = path.join(PEGGED_DIR, "test.ts");
+// Remembers the last asset run (git-ignored) so it is offered first: Enter re-runs it.
+const LAST_RUN_FILE = path.join(PEGGED_DIR, ".last-test-run.json");
+const LAST_RUN_VALUE = "__last_run__";
+
+type LastRun = { value: string; pegType: string };
+
+function readLastRun(): LastRun | null {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(LAST_RUN_FILE, "utf8"));
+    if (parsed && typeof parsed.value === "string" && typeof parsed.pegType === "string") return parsed;
+  } catch {
+    /* no previous run */
+  }
+  return null;
+}
+
+function writeLastRun(run: LastRun) {
+  try {
+    fs.writeFileSync(LAST_RUN_FILE, JSON.stringify(run, null, 2) + "\n");
+  } catch {
+    /* best effort */
+  }
+}
 
 type Choice = {
   value: string; // path passed to test.ts (relative to PEGGED_DIR)
@@ -65,7 +88,7 @@ function gitChangedKeys(): Set<string> {
   return keys;
 }
 
-function buildChoices(): Choice[] {
+function buildChoices(lastRun: LastRun | null): Choice[] {
   const changed = gitChangedKeys();
   const choices: Choice[] = [];
 
@@ -105,6 +128,10 @@ function buildChoices(): Choice[] {
     return a.name.localeCompare(b.name);
   });
 
+  // The previous run goes first so a bare Enter repeats it.
+  const last = lastRun && choices.find((c) => c.value === lastRun.value && c.pegType === lastRun.pegType);
+  if (last) choices.unshift({ ...last, value: LAST_RUN_VALUE, tag: "last", name: `[last run] ${last.name}` });
+
   return choices;
 }
 
@@ -138,15 +165,15 @@ function fuzzyFilter(input: string, choices: Choice[]): Choice[] {
   return scored.map((s) => s.c);
 }
 
-function runTest(choice: Choice): Promise<void> {
+function runTest(choice: Choice, target: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const startTime = Date.now();
     console.log(
-      `\n> npx ts-node --transpile-only test.ts ${choice.value} ${choice.pegType}\n`
+      `\n> npx ts-node --transpile-only test.ts ${target} ${choice.pegType}\n`
     );
     const child = childProcess.spawn(
       "npx",
-      ["ts-node", "--transpile-only", TEST_SCRIPT, choice.value, choice.pegType],
+      ["ts-node", "--transpile-only", TEST_SCRIPT, target, choice.pegType],
       { cwd: PEGGED_DIR, stdio: "inherit", env: process.env }
     );
     child.on("error", reject);
@@ -158,9 +185,10 @@ function runTest(choice: Choice): Promise<void> {
 }
 
 async function main() {
-  const choices = buildChoices();
+  let lastRun = readLastRun();
+  let choices = buildChoices(lastRun);
   console.log(
-    `Loaded ${choices.length} pegged assets ` +
+    `Loaded ${choices.filter((c) => c.tag !== "last").length} pegged assets ` +
       `(${choices.filter((c) => c.tag === "changed").length} changed, ` +
       `${choices.filter((c) => c.tag === "dead").length} dead).`
   );
@@ -168,12 +196,13 @@ async function main() {
   const prompt = (inquirer as any).default ?? inquirer;
 
   while (true) {
-    // inquirer v14 ships a native `search` (autocomplete) prompt.
+    // inquirer v14 ships a native `search` (autocomplete) prompt. With no input the
+    // first entry is highlighted, so Enter runs the previous run when there is one.
     const { value } = await prompt.prompt([
       {
         type: "search",
         name: "value",
-        message: "Select a pegged asset to test:",
+        message: lastRun ? "Select a pegged asset to test (Enter = last run):" : "Select a pegged asset to test:",
         pageSize: 20,
         source: async (input: string) =>
           fuzzyFilter(input ?? "", choices).map((c) => ({
@@ -183,7 +212,12 @@ async function main() {
       } as any,
     ]);
     const choice = choices.find((c) => c.value === value)!;
-    await runTest(choice);
+    // the "[last run]" entry carries a sentinel value; resolve it to the real target
+    const target = choice.tag === "last" ? lastRun!.value : choice.value;
+    await runTest(choice, target);
+    lastRun = { value: target, pegType: choice.pegType };
+    writeLastRun(lastRun);
+    choices = buildChoices(lastRun);
   }
 }
 

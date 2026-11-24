@@ -15,7 +15,7 @@ import {
 import { call as nearCall } from "../helper/near";
 
 
-// all multichain
+// bsc, avax, arbitrum, aurora, boba, fantom, optimism and polygon are Frax's own canonical FRAX, tagged "frax" in bridgeData.ts
 const chainContracts: ChainContracts = {
   ethereum: {
     issued: ["0x853d955acef822db058eb8505911ed77f175b99e"],
@@ -79,9 +79,7 @@ const chainContracts: ChainContracts = {
       "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
     ], // axelar
   },
-  fraxtal: {
-    bridgedFromETH: ["0xfc00000000000000000000000000000000000001"],
-  },
+  // no fraxtal entry: Fraxtal's 0xfc00...0001 is frxUSD, tracked by Frax USD (id 235)
 };
 
 /*
@@ -89,25 +87,93 @@ Frax works differently from other stables, bridged amounts don't matter.
 See: https://docs.frax.finance/cross-chain/bridge
 */
 
+// Legacy FRAX-family tokens on the Frax balance sheet, matched by address (lowercase).
+// The sheet also carries frxUSD, sfrxUSD, FXB bonds, FPI and borrowed USDT, which are not FRAX supply;
+// frxUSD is counted by Frax USD (id 235). Match by address, not symbol: the sheet labels Fraxtal's
+// frxUSD (0xfc00...0001) as "FRAX".
+const FRAX_FAMILY = new Set(
+  [
+    "0x853d955aCEf822Db058eb8505911ED77F175b99e", // FRAX, ethereum
+    "0x17FC002b466eEc40DaE837Fc4bE5c67993ddBd6F", // FRAX, arbitrum
+    "0xE4B9e004389d91e4134a28F19BD833cBA1d994B6", // FRAX, aurora
+    "0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64", // FRAX, avalanche
+    "0x7562F525106F5d54E891e005867Bf489B5988CD9", // FRAX, boba
+    "0x90C97F71E18723b0Cf0dfa30ee176Ab653E89F40", // FRAX, bsc
+    "0xdc301622e621166BD8E82f2cA0A26c13Ad0BE355", // FRAX, fantom
+    "0x2E3D870790dC77A83DD1d18184Acc7439A53f475", // FRAX, optimism
+    "0x45c32fA6DF82ead1e2EF74d17b76547EDdFaFF89", // FRAX, polygon
+    "0xb4C1544cb4163f4C2ECa1aE9Ce999F63892d912A", // FRAX, zksync era
+    "0xFf8544feD5379D9ffa8D47a74cE6b91e632AC44D", // FRAX, polygon zkevm
+    "0xff000000000000000000000000000000000001Fd", // LFRAX (legacy FRAX), fraxtal
+    "0xA663B02CF0a4b149d2aD41910CB81e23e1c41c32", // sFRAX (staked FRAX), ethereum: protocol-owned only
+  ].map((a) => a.toLowerCase())
+);
+
+type BalanceSheetLine = {
+  category: string;
+  tokenAddress?: string;
+  tokenSymbol?: string;
+  totalValueUsd: number;
+  description?: string;
+};
+
+const isFraxFamily = (line: BalanceSheetLine) =>
+  FRAX_FAMILY.has((line.tokenAddress ?? "").toLowerCase());
+
+// Protocol-owned FRAX deployed where others can get it stays circulating: AMM liquidity (Curve/Convex,
+// UniV3, Fraxswap LPs) can be bought, as crvUSD counts its PegKeeper liquidity, and idle FRAX in Fraxlend
+// pairs can be borrowed. Matched on the sheet's descriptions, e.g. "FRAX staked in Convex FRAX/USDe",
+// "Quantity of FRAX in UniV3 LP #548162 frxETH/FRAX", "Fraxlend AMO V3 - idle FRAX".
+const isAvailableToMarket = (line: BalanceSheetLine) =>
+  /\bLP\b|staked in Convex|Fraxlend/i.test(line.description ?? "");
+
+// Reads below (Frax balance-sheet API, NEAR view call) only serve the current state. Refuse older
+// timestamps so a historical refill fails for this chain instead of storing today's value on past days.
+// Must throw outside any try/catch that swallows errors into empty balances.
+const MAX_STALENESS_SECONDS = 6 * 60 * 60;
+function assertCurrentTimestamp(apiOrTimestamp: any, label: string) {
+  const ts = typeof apiOrTimestamp === "number" ? apiOrTimestamp : apiOrTimestamp?.timestamp;
+  if (typeof ts === "number" && Date.now() / 1e3 - ts > MAX_STALENESS_SECONDS)
+    throw new Error(`[frax] ${label} only serves current data, cannot compute it at ${new Date(ts * 1e3).toISOString()}`);
+}
+
+// circulating legacy FRAX = FRAX-family liabilities (supply on every chain, net of FRAX held in the
+// Fraxtal L1 bridge and in FXB bond contracts) minus FRAX-family tokens the protocol owns off-market
+// (held directly, sFRAX posted as Compound collateral, FraxFerry inventory). Its LP positions and idle
+// Fraxlend FRAX are not subtracted (see isAvailableToMarket). Values are USD, converted back to FRAX units.
 async function fraxMinted() {
   return async function (
     _timestamp: number,
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
+    assertCurrentTimestamp(_timestamp, "Frax balance sheet");
     let balances = {} as Balances;
     try {
       const response = await axios.get(
         "https://api.frax.finance/v2/frax/balance-sheet/latest"
       );
       const data = response.data;
+      const liabilities: BalanceSheetLine[] = data.liabilities;
+      const assets: BalanceSheetLine[] = data.assets;
+      const fraxPrice: number = data.tokenPriceUsd?.FRAX;
+      if (!Array.isArray(liabilities) || !Array.isArray(assets) || !(fraxPrice > 0))
+        throw new Error("unexpected Frax balance-sheet shape");
 
-      // Calculate total supply
-      const totalSupply =
-        data.totalLiabilities -
-        data.categorySummaryUsd["asset:owned:frax"] -
-        data.totalLockedLiquidity;
-      const supply = totalSupply;
+      // a FRAX-labelled supply line on a token we don't know: likely a new deployment to add above
+      for (const l of liabilities)
+        if (l.category === "liability:remaining_frax_supply" && /^L?FRAX$/.test(l.tokenSymbol ?? "") &&
+          !isFraxFamily(l) && Math.abs(l.totalValueUsd) > 1)
+          console.warn(`[frax] unrecognised FRAX supply line, not counted: ${l.tokenAddress} ${l.description}`);
+
+      const fraxLiabilitiesUsd = liabilities
+        .filter(isFraxFamily)
+        .reduce((sum, l) => sum + l.totalValueUsd, 0);
+      const fraxOwnedUsd = assets
+        .filter((a) => a.category.startsWith("asset:owned:") && isFraxFamily(a) && !isAvailableToMarket(a))
+        .reduce((sum, a) => sum + a.totalValueUsd, 0);
+
+      const supply = (fraxLiabilitiesUsd - fraxOwnedUsd) / fraxPrice;
       sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
       return balances;
     } catch (error) {
@@ -123,6 +189,7 @@ async function nearBridged(address: string, decimals: number) {
     _ethBlock: number,
     _chainBlocks: ChainBlocks
   ) {
+    assertCurrentTimestamp(_timestamp, "NEAR ft_total_supply");
     let balances = {} as Balances;
     const supply = await nearCall(address, "ft_total_supply");
     sumSingleBalance(
@@ -242,13 +309,6 @@ const adapter: PeggedIssuanceAdapter = {
       chainContracts.osmosis.bridgedFromETH,
       18,
       "Axelar"
-    ),
-  },
-  fraxtal: {
-    ethereum: bridgedSupply(
-      "fraxtal",
-      18,
-      chainContracts.fraxtal.bridgedFromETH
     ),
   },
   era: {

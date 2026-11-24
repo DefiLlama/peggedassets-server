@@ -7,6 +7,7 @@ import type { LayerZeroConfig } from "../helper/bridgeConfig";
 const layerzeroConfig: LayerZeroConfig = {
   sourceChain: "ethereum",
   tokens: [
+    { chain: "anubi", address: "0x6f0ca9a07690905cfbfc6c75ac8f69fcea4ebd38", decimals: 18 }, // NativeOFT USDe (lz:anubis)
     { chain: "arbitrum", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:arbitrum)
     { chain: "avax", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:avalanche)
     { chain: "base", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:base)
@@ -31,7 +32,8 @@ const layerzeroConfig: LayerZeroConfig = {
     { chain: "robinhood", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:robinhood)
     { chain: "scroll", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:scroll)
     { chain: "swellchain", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:swell)
-    { chain: "tempo", address: "0x20c0000000000000000000002f52d5cc21a3207b", decimals: 6 }, // ERC20 USDE (lz:tempo)
+    { chain: "tempo", address: "0x20c0000000000000000000002f52d5cc21a3207b", decimals: 6 }, // ERC20 USDe (lz:tempo)
+    { chain: "tron", address: "0xd472876d3fecd73b8759c46c918ff0134d0bf593", decimals: 18 }, // NativeOFT USDe (lz:tron)
     { chain: "xlayer", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:xlayer)
     { chain: "zircuit", address: "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34", decimals: 18 }, // NativeOFT USDe (lz:zircuit)
   ],

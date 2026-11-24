@@ -7,6 +7,7 @@ import type { LayerZeroConfig } from "../helper/bridgeConfig";
 const layerzeroConfig: LayerZeroConfig = {
   sourceChain: "ethereum",
   tokens: [
+    { chain: "anubi", address: "0xa6db5061a613176ab8f8ae868bf22c1c3dd88363", decimals: 18 }, // NativeOFT USDS (lz:anubis)
     { chain: "avax", address: "0x86ff09db814ac346a7c6fe2cd648f27706d1d470", decimals: 18 }, // ERC20 USDS (lz:avalanche)
   ],
 };

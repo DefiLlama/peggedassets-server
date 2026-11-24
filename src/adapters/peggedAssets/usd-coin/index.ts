@@ -21,12 +21,8 @@ import {
 import { getTotalSupply as kavaGetTotalSupply } from "../helper/kava";
 import { mixinSupply } from "../helper/mixin";
 import { call as nearCall } from "../helper/near";
-import { call as nibiruCall } from "../helper/nibiru";
-import {
-  getBalance as ontologyGetBalance,
-  getTotalSupply as ontologyGetTotalSupply,
-} from "../helper/ontology";
 import { getTokenBalance as solanaGetTokenBalance } from "../helper/solana";
+import { getCircleSolanaPremint } from "../helper/circleSolanaPremint";
 import * as sui from "../helper/sui";
 import * as starknet from "../helper/starknet";
 import {
@@ -112,6 +108,10 @@ async function chainUnreleased(chain: string, decimals: number, owner: string) {
 async function solanaUnreleased() {
   return async function () {
     let balances = {} as Balances;
+    sumSingleBalance(balances, "peggedUSD", await getCircleSolanaPremint(
+      "usdc",
+      chainContracts["solana"].issued[0]
+    ));
     for (let unreleasedAddress of chainContracts["solana"].unreleased) {
       sumSingleBalance(balances, "peggedUSD", await solanaGetTokenBalance(
         chainContracts["solana"].issued[0],
@@ -279,41 +279,6 @@ async function karuraMinted(address: string, decimals: number) {
   };
 }
 
-async function ontologyBridged() {
-  return async function () {
-    let balances = {} as Balances;
-    const polyUSDCAddress = chainContracts.ontology.bridgedFromETH[0];
-    const polyUSDCReserveAddress = chainContracts.ontology.unreleased[0];
-    const polyNetworkSupply = await ontologyGetTotalSupply(
-      polyUSDCAddress,
-      "oep4"
-    );
-    const polyNetworkReserve = await ontologyGetBalance(
-      polyUSDCAddress,
-      "oep4",
-      polyUSDCReserveAddress
-    );
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      polyNetworkSupply - polyNetworkReserve,
-      polyUSDCAddress,
-      true
-    );
-
-    const celerUSDCAddress = chainContracts.ontology.bridgedFromETH[1];
-    const celerSupply = await ontologyGetTotalSupply(celerUSDCAddress, "orc20");
-    sumSingleBalance(
-      balances,
-      "peggedUSD",
-      celerSupply,
-      celerUSDCAddress,
-      true
-    );
-    return balances;
-  };
-}
-
 async function nearBridged(address: string, decimals: number) {
   return async function () {
     let balances = {} as Balances;
@@ -462,25 +427,6 @@ async function rippleMinted() {
     const usdcToken = chainContracts.ripple.issued[0]; // "5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"
     const supply = await rippleGetTotalSupply(usdcToken);
     if (supply) sumSingleBalance(balances, "peggedUSD", supply, "issued", false);
-    return balances;
-  };
-}
-
-async function nibiruBridged() {
-  return async function () {
-    const balances = {} as Balances;
-
-    for (const contract of chainContracts.nibiru.bridgedFromETH) {
-      const totalSupply = await nibiruCall({
-        target: contract,
-        abi: { name: 'totalSupply' }
-      });
-
-      // Convert from hex to number and divide by 1e6 (USDC has 6 decimals)
-      const supply = parseInt(totalSupply, 16) / 1e6;
-      sumSingleBalance(balances, "peggedUSD", supply, contract, true);
-    }
-
     return balances;
   };
 }
@@ -996,6 +942,12 @@ const adapter: PeggedIssuanceAdapter = {
       6
     ),
   },
+  elysium: {
+    hyperliquid: bridgedSupply(
+      "elysium", 6, chainContracts.elysium.bridgedFromHyperliquid,
+      "elysium", "hyperliquid"
+    ),
+  },
   sonic: {
     minted: chainMinted("sonic", 6),
   //  ethereum: bridgedSupply("sonic", 6, chainContracts.sonic.bridgedFromETH), fix wrongly assigned as bridged
@@ -1034,7 +986,13 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("zkfair", 18, chainContracts.zkfair.bridgedFromETH),
   },
   wemix: {
-    ethereum: bridgedSupply("wemix", 6, chainContracts.wemix.bridgedFromETH),
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("wemix", 6, [chainContracts.wemix.bridgedFromETH[0]]),
+        bridgedSupply("wemix", 6, [chainContracts.wemix.bridgedFromETH[1]], "ccip", "ethereum"),
+      ],
+      "peggedUSD"
+    ),
   },
 /*   kroma: {
     ethereum: bridgedSupply("kroma", 6, chainContracts.kroma.bridgedFromETH),
@@ -1058,7 +1016,10 @@ const adapter: PeggedIssuanceAdapter = {
     ethereum: bridgedSupply("ink", 6, chainContracts.ink.bridgedFromETH),
   },
   nibiru: {
-    ethereum: nibiruBridged(),
+    ethereum: bridgedSupply("nibiru", 6, chainContracts.nibiru.bridgedFromETH),
+  },
+  somnia_tokyo: {
+    somnia: bridgedSupply("somnia_tokyo", 6, chainContracts.somnia_tokyo.bridgedFromSomnia, "hyperlane", "somnia"),
   },
   sei: {
     noble: bridgedSupply("sei", 6, chainContracts.sei.bridgedFromNoble),
@@ -1144,6 +1105,21 @@ const adapter: PeggedIssuanceAdapter = {
   },
   arc: {
     minted: chainMinted("arc", 6),
+  },
+  adi: {
+    ethereum: bridgedSupply("adi", 6, chainContracts.adi.bridgedFromETH, "ccip", "ethereum"),
+  },
+  plasma: {
+    minted: chainMinted("plasma", 6),
+  },
+  "0g": {
+    ethereum: sumMultipleBalanceFunctions(
+      [
+        bridgedSupply("0g", 6, [chainContracts["0g"].bridgedFromETH[0]], "ccip", "ethereum"),
+        bridgedSupply("0g", 6, [chainContracts["0g"].bridgedFromETH[1]], "layerzero", "ethereum"),
+      ],
+      "peggedUSD"
+    ),
   },
 };
 

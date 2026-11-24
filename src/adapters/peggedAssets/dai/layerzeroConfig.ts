@@ -7,6 +7,7 @@ import type { LayerZeroConfig } from "../helper/bridgeConfig";
 const layerzeroConfig: LayerZeroConfig = {
   sourceChain: "ethereum",
   tokens: [
+    { chain: "anubi", address: "0x9ab7638f85ecfb449cef84d11e2da69694b3b792", decimals: 18 }, // NativeOFT DAI (lz:anubis)
     { chain: "arbitrum", address: "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1", decimals: 18 }, // ERC20 DAI (lz:arbitrum)
     { chain: "bsc", address: "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3", decimals: 18 }, // ERC20 DAI (lz:bsc)
     { chain: "fantom", address: "0x91a40c733c97a6e1bf876eaf9ed8c08102eb491f", decimals: 18 }, // NativeOFT DAI (lz:fantom)

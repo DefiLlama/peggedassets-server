@@ -4,7 +4,12 @@ const chainContracts = {
   },
   monad: {
     bridgedFromETH: ["0x0Bb150DFa86EA5d7742F07FEfCD8E8edA81D64eF"],
-  }
+    bridge: "ccip",
+  },
+  bsc: {
+    bridgedFromETH: ["0x0Bb150DFa86EA5d7742F07FEfCD8E8edA81D64eF"],
+    bridge: "ccip",
+  },
 };
 
 import { addChainExports } from "../helper/getSupply";

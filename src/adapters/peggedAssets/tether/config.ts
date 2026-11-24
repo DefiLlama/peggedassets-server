@@ -246,13 +246,13 @@ export const chainContracts: ChainContracts = {
       "0xaf37E8B6C9ED7f6318979f56Fc287d76c30847ff", // usdt0
     ],
   },
-  ontology: {
-    bridgedFromETH: [
-      "ac654837a90eee8fccabd87a2d4fc7637484f01a", // poly network
-      "0xd85e30c5d372942810c86c4ac9d7b3bb24cc1965", // celer
-    ],
-    unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"], // poly network reserve
-  },
+  // ontology: {
+  //   bridgedFromETH: [
+  //     "ac654837a90eee8fccabd87a2d4fc7637484f01a", // poly network
+  //     "0xd85e30c5d372942810c86c4ac9d7b3bb24cc1965", // celer
+  //   ],
+  //   unreleased: ["AVaijxNJvAXYdNMVSYAfT8wVTh8tNHcTBM"], // poly network reserve
+  // },
   sx: {
     bridgedFromETH: ["0x03Cc0D20B5eA163Aa3c0851235f4653F6Fe61017"], // celer
   },
@@ -362,7 +362,10 @@ export const chainContracts: ChainContracts = {
     bridgedFromETH: ["0x7277Cc818e3F3FfBb169c6Da9CC77Fc2d2a34895"],
   },
   sei: {
-    bridgedFromKava: ["0xB75D0B03c06A926e488e2659DF1A861F860bD3d1"],
+    // both are LayerZero/Stargate OFTs, wired by hand in index.ts; sei is in lzConfig.excludeChains so
+    // the generated config does not add USDT.kava again under "ethereum"
+    bridgedFromKava: ["0xB75D0B03c06A926e488e2659DF1A861F860bD3d1"], // USDT.kava
+    bridgedFromETH: ["0x9151434b16b9763660705744891fa906f660ecc5"], // USDT0
   },
   zircuit: {
     bridgedFromETH: ["0x46dDa6a5a559d861c06EC9a95Fb395f5C3Db0742"],
@@ -388,6 +391,12 @@ export const chainContracts: ChainContracts = {
   katana: {
     bridgeOnETH: ["0x6d4f9f9f8f0155509ecd6Ac6c544fF27999845CC"], // vb usdt (origin) on ethmainnet
     bridgedFromETH: ["0x2DCa96907fde857dd3D816880A0df407eeB2D2F2"], // vb usdt on katana
+  },
+  xlayer: {
+    bridgedFromETH: [
+      "0x779Ded0c9e1022225f8E0630b35a9b54bE713736", // USDT0
+      "0x1E4a5963aBFD975d8c9021ce480b42188849D41d", // USDT via the Agglayer LxLy bridge (pre-USDT0)
+    ],
   },
   etlk: {
     bridgedFromETH: ["0x2C03058C8AFC06713be23e58D2febC8337dbfE6A"], // Wrapped Asset Bridge
