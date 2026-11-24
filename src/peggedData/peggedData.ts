@@ -620,7 +620,7 @@ export default [
     gecko_id: "alchemix-usd",
     cmcId: "8614",
     pegType: "peggedUSD",
-    pegMechanism: "algorithmic",
+    pegMechanism: "crypto-backed",
     priceSource: "defillama",
     auditLinks: ["https://github.com/runtimeverification/publications/blob/main/reports/smart-contracts/Alchemix_v2.pdf"],
     twitter: "https://twitter.com/AlchemixFi",
@@ -629,13 +629,19 @@ export default [
       chains: {
         ethereum: {
           issued: ["0xbc6da0fe9ad5f3b0d58160288917aa56653660e9"],
-          unreleased: ["0x9735f7d3ea56b454b24ffd74c58e9bd85cfad31b"],
+          unreleased: [
+            "0xF49818b5d7dE5B0DBfcCb3Ddcd14e1f0AA1A6f01", // Multichain wrapper, locked since 2023-07
+            "0x1825377Ece03098F35951E9600cF3a3CF718BEBf", // alUSD Mainnet Elixir Safe
+          ],
         },
         arbitrum: {
+          issued: ["0xCB8FA9a76b8e203D8C3797bF438d8FB81Ea3326A"],
           bridgedFromETH: ["0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0"],
         },
         optimism: {
-          bridgedFromETH: ["0xb2c22A9fb4FC02eb9D1d337655Ce079a04a526C7", "0xCB8FA9a76b8e203D8C3797bF438d8FB81Ea3326A"],
+          issued: ["0xCB8FA9a76b8e203D8C3797bF438d8FB81Ea3326A"],
+          unreleased: ["0xb29617209961DB995dD30a4AB94BA0034A4284f9"], // Optimism Elixir Safe
+          bridgedFromETH: ["0xb2c22A9fb4FC02eb9D1d337655Ce079a04a526C7"],
         },
         fantom: {
           bridgedFromETH: ["0xB67FA6deFCe4042070Eb1ae1511Dcd6dcc6a532E"],
@@ -4243,7 +4249,7 @@ export default [
   },
   {
     id: "145",
-    name: "CAD Coin",
+    name: "Legacy CAD Coin",
     address: "0xcadc0acd4b445166f12d2c07eac6e2544fbe2eef",
     symbol: "CADC",
     url: "https://paytrie.com/cadc",
@@ -4251,12 +4257,12 @@ export default [
       "CADC tokens are fully backed 1:1 with Canadian Dollars held in a bank account in Canada.",
     mintRedeemDescription:
       "CADC is issued by PAYTRIE AB Inc., a FINTRAC regulated Money Services Business (M19690633), and backed by fully reserved assets, and redeemable on a 1:1 basis for Canadian dollars",
-    onCoinGecko: "true",
-    gecko_id: "cad-coin",
-    cmcId: "8690",
+    onCoinGecko: "false",
+    gecko_id: "legacy-cad-coin",
+    cmcId: null,
     pegType: "peggedCAD",
     pegMechanism: "fiat-backed",
-    priceSource: "coingecko",
+    priceSource: "defillama",
     auditLinks: null,
     twitter: "https://twitter.com/PayTrie",
     wiki: "https://faq.paytrie.com/help/what-is-the-cadc-address",
@@ -6174,28 +6180,6 @@ export default [
       lzConfig: {
         symbols: ["USDS"],
       }
-    },
-    chainConfig: {
-      chains: {
-        ethereum: {
-          issued: ["0xdC035D45d973E3EC169d2276DDab16f1e407384F"],
-        },
-        base: {
-          issued: ["0x820c137fa70c8691f0e44dc420a5e53c168921dc"],
-        },
-        arbitrum: {
-          bridgedFromETH: ["0x6491c05A82219b8D1479057361ff1654749b876b"],
-        },
-        optimism: {
-          issued: ["0x4F13a96EC5C4Cf34e442b46Bbd98a0791F20edC3"],
-        },
-        unichain: {
-          issued: ["0x7E10036Acc4B56d4dFCa3b77810356CE52313F9C"],
-        },
-        solana: {
-          bridgedFromETH: ["USDSwr9ApdHk5bvJKMjzff41FfuX8bSxdKcR81vTwcA"],
-        },
-      },
     },
   },
   {
@@ -8561,6 +8545,15 @@ export default [
         mantle: {
           issued: ["0x063C1d1ef6e9099Ce3E8e9AD5C6173d12C49C086"],
         },
+        // Hyperlane USDG: hyp_warp_token_usdg_v2.aleo mints
+        // shield_arc22_usdg.aleo against these two collateral escrows.
+        // https://github.com/hyperlane-xyz/hyperlane-registry/blob/main/deployments/warp_routes/USDG/aleo-config.yaml
+        aleo: {
+          bridgeOnETH: ["0xe5A2cCf532919f93855F324c1F8a7996065f53Da"],
+          // PDA seeds: ["hyperlane_token", "-", "escrow"] for
+          // AhNVa6VpZwDwgD3U66CGUwCMRcFSFiTfBse2D495SPxW.
+          bridgeOnSolana: ["AijEjuEXnmgEWsBT9kyxosWG7iiFkU1dkeF6WEX5dZDg"],
+        },
       },
     },
   },
@@ -9179,17 +9172,18 @@ export default [
     address: "ethereum:0xdde3eC717f220Fc6A29D6a4Be73F91DA5b718e55",
     symbol: "USDU",
     url: "https://usdu.finance/",
-    description: "USDU is a next-generation stablecoin designed to bring deep liquidity and yield-backed stability to the decentralized finance ecosystem. It is a yield-collateralized stablecoin, fully backed by on-chain lending income from credit-rated markets.",
-    mintRedeemDescription: "USDU uses modular adapters (e.g., Curve, Morpho) to mint or redeem stablecoins based on liquidity conditions. Anyone can interact with the protocol by providing the opposite side of liquidity.",
+    description: "USDU is a US dollar stablecoin with a modular design. It has no built-in minting logic: only modules approved by the USDU DAO (governed on Aragon) can mint and burn it, each with its own mint limit. Today these are two bridge modules that accept USDC and USDT, deploy them into yield-bearing strategy vaults and let anyone mint or redeem permissionlessly. Yield becomes protocol revenue streamed to holders who stake USDU. The DAO can add further module types, such as lending markets.",
+    mintRedeemDescription: "Anyone can mint USDU by depositing a supported backing asset (USDC or USDT) through a DAO-approved swap module, and redeem by returning USDU to the same module. Fees and capacity are set per module, and new backing assets can be added by the DAO.",
     onCoinGecko: "false",
     gecko_id: "usdu-finance",
     cmcId: null,
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
     priceSource: "defillama",
-    auditLinks: "https://usdu.finance/wp-content/uploads/2025/07/BlockBite-USDU-Security-Audit-2025.pdf",
+    auditLinks: ["https://usdu.finance/documents/BlockBite-USDU-Security-Audit-2025.pdf"],
     twitter: "https://x.com/USDUfinance",
-    wiki: "https://usdu.gitbook.io/docs/",
+    wiki: "https://usdu.finance/docs",
+    doublecounted: true,
     chainConfig: {
       chains: {
         ethereum: {
@@ -14576,6 +14570,171 @@ export default [
   },
   {
     id: "485",
+    name: "CAD Coin",
+    address: "0x49A6F6aeAB68eA001bEaa4815186eb22FBDcCF2A",
+    symbol: "CADC",
+    url: "https://loon.finance/cadc",
+    description:
+      "CADC is a Canadian dollar stablecoin. At least $1.00 CAD is held in a reserve account at ATB Financial for each CADC issued.",
+    mintRedeemDescription:
+      "CADC is issued by CADC Reserve Trust under a prospectus filed with Canadian securities regulators. Loon Payments Inc., a FINTRAC-registered MSB, is the servicer and administrator, Odyssey Trust Company is the trustee and ATB Financial is the custodian. Authorized Participants mint and redeem CADC 1:1 for Canadian dollars, and reserves are attested monthly.",
+    onCoinGecko: "true",
+    gecko_id: "cad-coin",
+    cmcId: "8690",
+    pegType: "peggedCAD",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: null,
+    twitter: "https://x.com/LoonFinance",
+    wiki: "https://loon.finance/transparency",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x49A6F6aeAB68eA001bEaa4815186eb22FBDcCF2A"],
+        },
+        base: {
+          issued: ["0x5e63E9C06c3F2c779EF29a8071F94F5a724eB5e4"],
+        },
+        polygon: {
+          issued: ["0x74D9423a2886618522F7C992Edf647ea707A38eb"],
+        },
+        solana: {
+          issued: ["52spLAAFjKMwhNJ3TL2PUAUGYGgXsbvipP4whRtBp82S"],
+        },
+      },
+    },
+  },
+  {
+    id: "486",
+    name: "Tenbin Brazilian Real",
+    address: "ethereum:0x4c1b46adb8877e389171ec6ef67b385094c0afad",
+    symbol: "tBRL",
+    url: "https://tenbinlabs.xyz/",
+    description:
+      "Tenbin Brazilian Real (tBRL) is Tenbin Labs' Brazilian real token on Ethereum. Tenbin issues FX tokens that track the currency through USD stablecoin collateral hedged with CME futures, rather than holding the local currency.",
+    mintRedeemDescription:
+      "tBRL is minted and redeemed through Tenbin's issuance protocol by approved participants. Other users buy and sell it on the secondary market.",
+    onCoinGecko: "true",
+    gecko_id: "tenbin-brazilian-real",
+    cmcId: null,
+    pegType: "peggedREAL",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.tenbinlabs.xyz"],
+    twitter: "https://x.com/tenbinlabs",
+    wiki: "https://docs.tenbinlabs.xyz",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x4c1b46adb8877e389171ec6ef67b385094c0afad"],
+        },
+      },
+    },
+  },
+  {
+    id: "487",
+    name: "Tenbin Mexican Peso",
+    address: "ethereum:0x8d015afcb6f437010653352eb1e58152c4e23734",
+    symbol: "tMXN",
+    url: "https://tenbinlabs.xyz/",
+    description:
+      "Tenbin Mexican Peso (tMXN) is Tenbin Labs' Mexican peso token on Ethereum. Tenbin issues FX tokens that track the currency through USD stablecoin collateral hedged with CME futures, rather than holding the local currency.",
+    mintRedeemDescription:
+      "tMXN is minted and redeemed through Tenbin's issuance protocol by approved participants. Other users buy and sell it on the secondary market.",
+    onCoinGecko: "true",
+    gecko_id: "tenbin-mexican-peso",
+    cmcId: null,
+    pegType: "peggedMXN",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.tenbinlabs.xyz"],
+    twitter: "https://x.com/tenbinlabs",
+    wiki: "https://docs.tenbinlabs.xyz",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x8d015afcb6f437010653352eb1e58152c4e23734"],
+        },
+      },
+    },
+  },
+  {
+    id: "488",
+    name: "EURU",
+    address: "ethereum:0x6e30d56cb23068dE5A084D4A4f2A909823424F06",
+    symbol: "EURU",
+    url: "https://usdu.finance/",
+    description: "EURU is a euro stablecoin with a modular design. It has no built-in minting logic: only modules approved by the USDU DAO (governed on Aragon) can mint and burn it, each with its own mint limit. Today these are two bridge modules that accept EURC and dEURO, deploy them into yield-bearing strategy vaults and let anyone mint or redeem permissionlessly. Yield becomes protocol revenue streamed to holders who stake EURU. The DAO can add further module types, such as lending markets.",
+    mintRedeemDescription: "Anyone can mint EURU by depositing a supported backing asset (EURC or dEURO) through a DAO-approved swap module, and redeem by returning EURU to the same module. Fees and capacity are set per module, and new backing assets can be added by the DAO.",
+    onCoinGecko: "false",
+    gecko_id: "euru",
+    cmcId: null,
+    pegType: "peggedEUR",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://usdu.finance/documents/BlockBite-USDU-Security-Audit-2025.pdf"],
+    twitter: "https://x.com/USDUfinance",
+    wiki: "https://usdu.finance/docs",
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x6e30d56cb23068dE5A084D4A4f2A909823424F06"],
+        },
+      },
+    },
+  },
+  {
+    id: "489",
+    name: "CHFU",
+    address: "ethereum:0x4B43F48A665E2F15C4913a76CF67509672396146",
+    symbol: "CHFU",
+    url: "https://usdu.finance/",
+    description: "CHFU is a Swiss franc stablecoin with a modular design. It has no built-in minting logic: only modules approved by the USDU DAO (governed on Aragon) can mint and burn it, each with its own mint limit. Today this is a bridge module that accepts ZCHF, deploy them into yield-bearing strategy vaults and let anyone mint or redeem permissionlessly. Yield becomes protocol revenue streamed to holders who stake CHFU. The DAO can add further module types, such as lending markets.",
+    mintRedeemDescription: "Anyone can mint CHFU by depositing a supported backing asset (ZCHF) through a DAO-approved swap module, and redeem by returning CHFU to the same module. Fees and capacity are set per module, and new backing assets can be added by the DAO.",
+    onCoinGecko: "false",
+    gecko_id: "chfu",
+    cmcId: null,
+    pegType: "peggedCHF",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://usdu.finance/documents/BlockBite-USDU-Security-Audit-2025.pdf"],
+    twitter: "https://x.com/USDUfinance",
+    wiki: "https://usdu.finance/docs",
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x4B43F48A665E2F15C4913a76CF67509672396146"],
+        },
+      },
+    },
+  },
+  {
+    id: "490",
+    name: "USAD",
+    address: "aleo:usad_stablecoin.aleo",
+    symbol: "USAD",
+    url: "https://aleo.org/usad/",
+    description:
+      "USAD is a US dollar-pegged stablecoin issued by Paxos Labs on Aleo, with private balances and transfers. It is backed 1:1 by USDG held in an Ethereum vault.",
+    mintRedeemDescription:
+      "Users deposit USDG to mint USAD on Aleo and redeem USAD for USDG on Ethereum. USDG can then be redeemed for US dollars through Paxos.",
+    onCoinGecko: "true",
+    gecko_id: "usad",
+    module: "usad",
+    cmcId: "39542",
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "coingecko",
+    auditLinks: [],
+    twitter: "https://x.com/aleohq",
+    wiki: "https://aleo.org/usad/",
+    // Its USDG backing is already included in tracked stablecoin supply.
+    doublecounted: true,
+  },
+  {
+    id: "491",
     name: "Braza USD",
     address: "ripple:5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc",
     symbol: "USDB",
@@ -14602,7 +14761,7 @@ export default [
     },
   },
   {
-    id: "486",
+    id: "492",
     name: "Braza BRL",
     address: "ripple:4242524C00000000000000000000000000000000.rH5CJsqvNqZGxrMyGaqLEoMWRYcVTAPZMt",
     symbol: "BBRL",
@@ -14627,5 +14786,5 @@ export default [
         },
       },
     },
-  }
+  },
 ] as PeggedAsset[];

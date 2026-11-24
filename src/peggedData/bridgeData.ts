@@ -283,10 +283,6 @@ export default {
     bridge: "multichain",
     sourceChain: formattedSourceChains.eth,
   },
-  "0xCB8FA9a76b8e203D8C3797bF438d8FB81Ea3326A": {
-    bridge: "multichain",
-    sourceChain: formattedSourceChains.eth,
-  },
   "0x922d641a426dcffaef11680e5358f34d97d112e1": {
     bridge: "multichain",
     sourceChain: formattedSourceChains.eth,
@@ -1771,6 +1767,14 @@ export default {
     bridge: "circle",
     sourceChain: formattedSourceChains.eth,
   },
+  "0xe5A2cCf532919f93855F324c1F8a7996065f53Da": {
+    bridge: "hyperlane",
+    sourceChain: formattedSourceChains.eth,
+  },
+  AijEjuEXnmgEWsBT9kyxosWG7iiFkU1dkeF6WEX5dZDg: {
+    bridge: "hyperlane",
+    sourceChain: formattedSourceChains.sol,
+  },
 } as BridgeMapping;
 
 export const bridgeInfo = {
@@ -1891,6 +1895,10 @@ export const bridgeInfo = {
   gnosis: {
     name: "Gnosis Chain OmniBridge",
     link: "https://omni.gnosischain.com/",
+  },
+  xdaibridge: {
+    name: "Gnosis Chain xDai Bridge",
+    link: "https://bridge.gnosischain.com/",
   },
   rsk: {
     name: "RSK Token Bridge",

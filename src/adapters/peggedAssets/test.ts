@@ -354,8 +354,6 @@ function getAdapterLabelFromPath(filePath: string): string {
     extrapolatedChains: [] as Array<{ chain: string; timestamp: number }>
   };
 
-  await initializeSdkInternalCache()
-
   let peggedBalancesPromises = Object.entries(module).map(
     async ([chain, issuances]) => {
       if (typeof issuances !== "object" || issuances === null) {
@@ -524,22 +522,6 @@ function handleError(error: string) {
 
 process.on("unhandledRejection", handleError);
 process.on("uncaughtException", handleError);
-
-async function initializeSdkInternalCache() {
-  let currentCache = await sdk.cache.readCache(INTERNAL_CACHE_FILE)
-  const ONE_MONTH = 60 * 60 * 24 * 30
-  if (!currentCache || !currentCache.startTime || (Date.now() / 1000 - currentCache.startTime > ONE_MONTH)) {
-    currentCache = {
-      startTime: Math.round(Date.now() / 1000),
-    }
-    await sdk.cache.writeCache(INTERNAL_CACHE_FILE, currentCache)
-  }
-  sdk.sdkCache.startCache(currentCache)
-}
-
-async function saveSdkInternalCache() {
-  await sdk.cache.writeCache(INTERNAL_CACHE_FILE, sdk.sdkCache.retriveCache())
-}
 
 function safeHumanizeNumber(value: any): string {
   if (value === null || value === undefined) {
