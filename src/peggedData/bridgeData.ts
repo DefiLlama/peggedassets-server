@@ -1892,6 +1892,10 @@ export const bridgeInfo = {
     name: "Gnosis Chain OmniBridge",
     link: "https://omni.gnosischain.com/",
   },
+  xdaibridge: {
+    name: "Gnosis Chain xDai Bridge",
+    link: "https://bridge.gnosischain.com/",
+  },
   rsk: {
     name: "RSK Token Bridge",
     link: "https://tokenbridge.rsk.co/",
