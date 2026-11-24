@@ -14707,6 +14707,7 @@ export default [
       "Users deposit USDG to mint USAD on Aleo and redeem USAD for USDG on Ethereum. USDG can then be redeemed for US dollars through Paxos.",
     onCoinGecko: "true",
     gecko_id: "usad",
+    module: "usad",
     cmcId: "39542",
     pegType: "peggedUSD",
     pegMechanism: "crypto-backed",
