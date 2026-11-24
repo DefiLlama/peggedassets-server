@@ -14609,5 +14609,59 @@ export default [
         },
       },
     },
+  },
+  {
+    id: "486",
+    name: "Tenbin Brazilian Real",
+    address: "ethereum:0x4c1b46adb8877e389171ec6ef67b385094c0afad",
+    symbol: "tBRL",
+    url: "https://tenbinlabs.xyz/",
+    description:
+      "Tenbin Brazilian Real (tBRL) is Tenbin Labs' Brazilian real token on Ethereum. Tenbin issues FX tokens that track the currency through USD stablecoin collateral hedged with CME futures, rather than holding the local currency.",
+    mintRedeemDescription:
+      "tBRL is minted and redeemed through Tenbin's issuance protocol by approved participants. Other users buy and sell it on the secondary market.",
+    onCoinGecko: "true",
+    gecko_id: "tenbin-brazilian-real",
+    cmcId: null,
+    pegType: "peggedREAL",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.tenbinlabs.xyz"],
+    twitter: "https://x.com/tenbinlabs",
+    wiki: "https://docs.tenbinlabs.xyz",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x4c1b46adb8877e389171ec6ef67b385094c0afad"],
+        },
+      },
+    },
+  },
+  {
+    id: "487",
+    name: "Tenbin Mexican Peso",
+    address: "ethereum:0x8d015afcb6f437010653352eb1e58152c4e23734",
+    symbol: "tMXN",
+    url: "https://tenbinlabs.xyz/",
+    description:
+      "Tenbin Mexican Peso (tMXN) is Tenbin Labs' Mexican peso token on Ethereum. Tenbin issues FX tokens that track the currency through USD stablecoin collateral hedged with CME futures, rather than holding the local currency.",
+    mintRedeemDescription:
+      "tMXN is minted and redeemed through Tenbin's issuance protocol by approved participants. Other users buy and sell it on the secondary market.",
+    onCoinGecko: "true",
+    gecko_id: "tenbin-mexican-peso",
+    cmcId: null,
+    pegType: "peggedMXN",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.tenbinlabs.xyz"],
+    twitter: "https://x.com/tenbinlabs",
+    wiki: "https://docs.tenbinlabs.xyz",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0x8d015afcb6f437010653352eb1e58152c4e23734"],
+        },
+      },
+    },
   }
 ] as PeggedAsset[];
