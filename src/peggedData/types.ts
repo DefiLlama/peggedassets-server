@@ -71,7 +71,7 @@ export type PeggedAsset = {
 };
 
 // map of llama chain key -> contract config consumed by addChainExports.
-// per-chain keys: issued | unreleased | reserves | bridgedFromETH | bridgeOnETH | bridgedFrom<Chain> | bridge | decimals.
+// per-chain keys: issued | unreleased | reserves | bridgedFromETH | bridgeOnETH | bridgeOnSolana | bridgedFrom<Chain> | bridge | decimals.
 // values are address strings or arrays of address strings, except `decimals`.
 // `decimals` (number) overrides the asset-wide decimals for this chain's bridgedFrom* / cosmos* supplies,
 // for a chain whose token uses different decimals than the rest (issued supplies read decimals on-chain).
