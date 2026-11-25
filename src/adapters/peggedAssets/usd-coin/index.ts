@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 const sdk = require("@defillama/sdk");
 import { getTotalSupply as aptosGetTotalSupply, function_view } from "../helper/aptos";
 import { getTotalSupply } from "../helper/cardano";
@@ -243,6 +244,7 @@ async function suiWormholeBridged(): Promise<Balances> {
 
 async function reinetworkBridged(address: string, decimals: number) {
   return async function () {
+    recordContract(address);
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
@@ -259,6 +261,7 @@ async function reinetworkBridged(address: string, decimals: number) {
 
 async function karuraMinted(address: string, decimals: number) {
   return async function () {
+    recordContract(address);
     let balances = {} as Balances;
     const res = await retry(
       async (_bail: any) =>
@@ -435,6 +438,7 @@ async function stacksBridged() {
   return async function () {
     const balances = {} as Balances;
     for (const contract of chainContracts.stacks.bridgedFromETH) {
+      recordContract(contract);
       const res = await retry(
         async (_bail: any) =>
           await axios.get(

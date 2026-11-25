@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import { chains } from "@defillama/sdk";
 const BigNumber = require("bignumber.js");
 
@@ -5,6 +6,7 @@ const { tezos } = chains;
 
 // `TEZOS_TZKT` env overrides the TzKT url. `decimals` overrides the token metadata; 0 is a valid value.
 export async function getTotalSupply(contract: string, decimals?: number) {
+  recordContract(contract);
   const [token] = await tezos.tzkt({ path: '/v1/tokens', params: { contract, limit: 1 } });
   if (!token) throw new Error(`tezos: no token found for contract ${contract}`);
   const d = decimals ?? tezos.parseDecimals(token.metadata?.decimals);

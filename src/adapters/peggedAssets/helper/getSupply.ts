@@ -1,3 +1,4 @@
+import { recordContract } from "../../../peggedAssets/utils/contractRecorder";
 import { ChainApi, chains } from "@defillama/sdk";
 import * as aptos from "../helper/aptos";
 import * as cardano from "../helper/cardano";
@@ -164,6 +165,7 @@ export function fogoMintedOrBridged(targets: string[], pegType?: PeggedAssetType
 
 // ZRC-2 total supply in whole tokens; decimals come from the contract init params (6 when the contract has none)
 async function getZilliqaTokenSupply(contract: string): Promise<number> {
+  recordContract(contract);
   const [supply, decimals] = await Promise.all([
     chains.zilliqa.getTokenTotalSupply({ token: contract }),
     chains.zilliqa.getTokenDecimals({ token: contract }),
@@ -197,6 +199,7 @@ export function tonTokenSupply(address: string, bridgeName?: string, bridgedFrom
     _chainBlocks: ChainBlocks
   ) {
     let balances = {} as Balances;
+    recordContract(address);
     const { supply } = await chains.ton.getJettonSupply({ address });
     const amount = Number(supply) / 10 ** 6;
     bridgeName
@@ -261,6 +264,7 @@ export function cosmosSupply(
   ) {
     let balances = {} as Balances;
     for (let token of tokens) {
+      recordContract(token);
       const amount = await chains.cosmos.totalSupply({ chain, denom: token });
       sumSingleBalance(
         balances,
@@ -375,6 +379,7 @@ function getIssued({
   return async (api: ChainApi) => {
     const balances = {} as Balances;
     const issuedList = typeof issued === "string" ? [issued] : issued;
+    issuedList.forEach((i) => recordContract(i));
     if (api.chain === "solana") {
       for (const i of issuedList) {
         const supply = await solanaGetTokenSupply(i)
@@ -479,6 +484,7 @@ function getIssued({
 // ripple token format: "<currencyCode>.<issuerAddress>" (currency as 3-char code or 40-char hex);
 // the issuer's obligations for that currency, 0 when there are none. `XRPL_RPC` env overrides the nodes.
 export async function rippleGetTotalSupply(token: string): Promise<number> {
+  recordContract(token);
   return Number(await chains.xrpl.getTokenSupply(token));
 }
 
@@ -499,12 +505,14 @@ export async function algorandGetAssetParams(assetId: string | number) {
 
 // total supply of an Algorand Standard Asset, scaled by its own decimals
 export async function algorandGetTotalSupply(assetId: string | number): Promise<number> {
+  recordContract(String(assetId));
   const params = await algorandGetAssetParams(assetId);
   return Number(params.total) / 10 ** params.decimals;
 }
 
 // total supply of an ICRC-1 ledger canister, scaled by the ledger's own decimals
 export async function icpGetTotalSupply(canisterId: string): Promise<number> {
+  recordContract(canisterId);
   const [supply, decimals] = await Promise.all([
     chains.icp.getIcrcTotalSupply({ ledger: canisterId }),
     chains.icp.getIcrcDecimals({ ledger: canisterId }),
