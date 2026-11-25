@@ -13831,18 +13831,22 @@ export default [
           unreleased: [
             "0x1c1f3cd3bcBcaAF16E9566C686cfd975E49bBd64",
             "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
+            "0x3F5C58f0b2400Cd82eA7ea6c3B5794a1228f3Df9",
           ],
         },
         base: {
           issued: ["0xf016413834E6D1A14F3D628B11D6Ef725a6bdbDD"],
           unreleased: [
             "0x1c1f3cd3bcBcaAF16E9566C686cfd975E49bBd64",
+            "0xF5463D06C7635dd704DD0cd1F0058f4e58b5A64B",
+            "0x3F5C58f0b2400Cd82eA7ea6c3B5794a1228f3Df9",
           ],
         },
         polygon: {
           issued: ["0x50464bE58912745447E24EB3bbDedcee10D3E056"],
           unreleased: [
             "0x1c1f3cd3bcBcaAF16E9566C686cfd975E49bBd64",
+            "0x3F5C58f0b2400Cd82eA7ea6c3B5794a1228f3Df9",
           ],
         },
         ethereum: {
@@ -13943,12 +13947,14 @@ export default [
           unreleased: [
             "0xe66213650A22Fa78546bBFbcCc647ee9BAb75A8a",
             "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
+            "0x3F5C58f0b2400Cd82eA7ea6c3B5794a1228f3Df9",
           ],
         },
         base: {
           issued: ["0xD70ad085684b2A9f4B5d54D7BDB2ecA37a273216"],
           unreleased: [
             "0xe66213650A22Fa78546bBFbcCc647ee9BAb75A8a",
+            "0x3F5C58f0b2400Cd82eA7ea6c3B5794a1228f3Df9",
           ],
         },
         polygon: {
