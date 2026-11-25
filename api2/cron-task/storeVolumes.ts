@@ -5,6 +5,7 @@
 import * as sdk from '@defillama/sdk';
 import { storeRouteData } from '../file-cache';
 import { chainCacheSlug } from '../utils/cachePath';
+import peggedAssets from '../../src/peggedData/peggedData';
 
 interface DailyVolume {
   timestamp: number;
@@ -15,6 +16,28 @@ interface DailyVolume {
 }
 
 const R2_STORE_KEY = 'stablecoins/dailyVolumes';
+
+// The R2 volume cache keys tokens by ticker, not by stablecoin id, and it
+// uppercases them. 49 of the 416 entries in peggedData share a ticker with at
+// least one other, some with four others, so `volume/chart-token-<TICKER>` for
+// those is the sum of every coin using that ticker. There is no way to split it
+// back apart here: the per-coin figures are already added together by the time
+// this cron reads them.
+//
+// Serve those as empty rather than attributing one coin's chart to another.
+const ambiguousTokenKeys: Set<string> = (() => {
+  const counts: Record<string, number> = {};
+  for (const asset of peggedAssets as Array<any>) {
+    const symbol = typeof asset?.symbol === 'string' ? asset.symbol.toUpperCase() : '';
+    if (!symbol) continue;
+    counts[symbol] = (counts[symbol] ?? 0) + 1;
+  }
+  return new Set(Object.keys(counts).filter((symbol) => counts[symbol] > 1));
+})();
+
+const isAmbiguousTokenKey = (token: string) =>
+  ambiguousTokenKeys.has(String(token).toUpperCase());
+
 export async function storeVolumesRoutes() {
   const r2stablecoinVolumeCache: Record<string, DailyVolume> = await sdk.cache.readCache(R2_STORE_KEY, { readFromR2Cache: true });
   
@@ -134,12 +157,17 @@ export async function storeVolumesRoutes() {
     }
   }
 
+  const skippedTokenKeys: Array<string> = [];
   for (const [token, chartItems] of Object.entries(chartTokenTotal)) {
-    await storeRouteData(`volume/chart-token-${token}`, sortByFirstItemIsNumber(chartItems));
+    const ambiguous = isAmbiguousTokenKey(token);
+    if (ambiguous) skippedTokenKeys.push(token);
+    await storeRouteData(`volume/chart-token-${token}`, ambiguous ? [] : sortByFirstItemIsNumber(chartItems));
   }
   for (const [token, chartItems] of Object.entries(chartTokenChainBreakdownTotal)) {
-    await storeRouteData(`volume/chart-token-${token}-chain-breakdown`, sortByFirstItemIsNumber(chartItems));
+    await storeRouteData(`volume/chart-token-${token}-chain-breakdown`, isAmbiguousTokenKey(token) ? [] : sortByFirstItemIsNumber(chartItems));
   }
+  if (skippedTokenKeys.length)
+    console.log(`volume: served ${skippedTokenKeys.length} shared-ticker token charts as empty: ${skippedTokenKeys.sort().join(', ')}`);
   
   console.log('stored volume cache from R2'); 
   
