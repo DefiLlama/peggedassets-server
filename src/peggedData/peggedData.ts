@@ -14733,4 +14733,33 @@ export default [
     // Its USDG backing is already included in tracked stablecoin supply.
     doublecounted: true,
   },
+  {
+    id: "491",
+    name: "Alchemix alUSDb",
+    address: "base:0x877014E21c32feA108B6A1f45f367efc9a2d9B9F",
+    symbol: "alUSDb",
+    url: "https://alchemix.fi/",
+    description:
+      "alUSDb is the synthetic dollar of Alchemix V3 on Base. It is a separate token from alUSD: it is minted only by the Base Alchemist as debt against USDC deposited into the Alchemix yield vault on Base, and it is not bridged to or from other chains.",
+    mintRedeemDescription:
+      "Users deposit USDC into the Alchemix yield vault on Base and borrow alUSDb against the vault shares through the Alchemist. alUSDb is burned when a borrower repays, or when a holder stakes it in the Transmuter, which pays out the underlying vault shares at face value after a fixed term (earlier exit pays a fee).",
+    onCoinGecko: "false",
+    gecko_id: "alchemix-usd-base",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.alchemix.fi/user/safety/security"],
+    twitter: "https://twitter.com/AlchemixFi",
+    wiki: "https://wiki.defillama.com/wiki/Alchemix",
+    // Backed by USDC held in the Base yield vault, which is already tracked stablecoin supply.
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x877014E21c32feA108B6A1f45f367efc9a2d9B9F"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
