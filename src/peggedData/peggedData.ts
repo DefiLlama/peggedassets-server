@@ -15172,7 +15172,7 @@ export default [
   {
     id: "493",
     name: "Braza USD",
-    address: "ripple:5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc",Expand commentComment on line R14739
+    address: "ripple:5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc",
     symbol: "USDB",
     url: "https://www.brazabank.com.br/",
     description:
@@ -15191,7 +15191,8 @@ export default [
     chainConfig: {
       chains: {
         ripple: {
-          issued: ["5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc"],Expand commentComment on line R14758
+          issued: ["5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc"],
+          unreleased: ["rP1rFtLizETzwySJQTRKzLk7F5ZH7NmPqv"], // Braza treasury (Domain brazagroup.com/stablecoins), funded directly by the issuer
         },
       },
     },
@@ -15219,6 +15220,7 @@ export default [
       chains: {
         ripple: {
           issued: ["4242524C00000000000000000000000000000000.rH5CJsqvNqZGxrMyGaqLEoMWRYcVTAPZMt"],
+          unreleased: ["rP1rFtLizETzwySJQTRKzLk7F5ZH7NmPqv"], // Braza treasury (Domain brazagroup.com/stablecoins), funded directly by the issuer
         },
       },
     },
