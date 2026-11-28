@@ -462,6 +462,7 @@ export default [
     gecko_id: "husd",
     cmcId: "4779",
     pegType: "peggedUSD",
+    deadFrom: "2022-11-01",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: null,
