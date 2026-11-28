@@ -41,3 +41,19 @@ test("ethereum unreleased: before FiRM deployment only checks anDOLA without que
   assert.equal(logsQueried, false);
   assert.equal(res.peggedUSD, 5);
 });
+
+test("L2 unreleased: sums Fed farmer balances and drops retired farmers after their end block", async () => {
+  const VELO_V2 = "0x8bbd036d018657e454f679e7c4726f7a8ece2773";
+  const VELO_V1 = "0xfed67cc40e9c5934f157221169d772b328cb138e";
+  const OPTI_CCTP = "0x9060a61994f700632d16d6d2938ca3c7a1d344cb";
+  const bals: Record<string, string> = { [VELO_V2]: dola(3), [VELO_V1]: dola(10), [OPTI_CCTP]: dola(1) };
+  const apiAt = (block: number): any => ({
+    getBlock: async () => block,
+    multiCall: async ({ target, calls }: { target: string; calls: string[] }) => {
+      assert.equal(target.toLowerCase(), "0x8ae125e8653821e851f12a49f7765db9a9ce7384");
+      return calls.map((c) => bals[c.toLowerCase()] ?? "0");
+    },
+  });
+  assert.equal((await (adapter.optimism.unreleased as any)(apiAt(100000000))).peggedUSD, 14);
+  assert.equal((await (adapter.optimism.unreleased as any)(apiAt(120000000))).peggedUSD, 4);
+});
