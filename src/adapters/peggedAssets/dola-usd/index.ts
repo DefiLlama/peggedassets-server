@@ -9,6 +9,24 @@ const AN_DOLA = "0x7Fcb7DAC61eE35b3D4a51117A7c58D53f0a8a670";
 const FIRM_START_BLOCK = 16159015;
 const DECIMALS = 18;
 
+// Inverse Fed "farmer" contracts on L2s hold DOLA bridged over by their mainnet Fed before it is
+// deployed as liquidity. Inverse excludes these balances from DOLA's circulating supply
+// (incomeSrcAd / oldIncomeSrcAds in inverse-web config/feds-params.ts).
+const L2_FARMERS: Record<string, { address: string; endBlock?: number }[]> = {
+  optimism: [
+    { address: "0x8Bbd036d018657E454F679E7C4726F7a8ECE2773" }, // Velo Fed farmer (Velodrome v2)
+    { address: "0xFED67cC40E9C5934F157221169d772B328cb138E", endBlock: 106217226 }, // Velo Fed farmer (Velodrome v1, retired)
+    { address: "0x9060A61994F700632D16D6d2938CA3C7a1D344Cb" }, // OptiCCTP Fed farmer
+  ],
+  arbitrum: [
+    { address: "0x1992AF61FBf8ee38741bcc57d636CAA22A1a7702" }, // ArbiFed farmer
+  ],
+  base: [
+    { address: "0x2457937668a345305FE08736F407Fba3F39cbF2f" }, // Aero Fed farmer
+    { address: "0xe96e99a5A3512468A4aaFC317D77C6Fa0289F5f3" }, // BaseCCTP Fed farmer
+  ],
+};
+
 const chainContracts = {
   ethereum: {
     issued: [DOLA],
@@ -72,5 +90,23 @@ const adapter: PeggedIssuanceAdapter = addChainExports(chainContracts, undefined
   pegType: "peggedUSD",
 });
 adapter.ethereum.unreleased = ethereumUnreleased;
+
+function l2FarmerUnreleased(chain: keyof typeof chainContracts) {
+  const token = (chainContracts[chain] as any).bridgedFromETH[0];
+  return async (api: ChainApi) => {
+    const block = await api.getBlock();
+    const farmers = L2_FARMERS[chain].filter((f) => !f.endBlock || block < f.endBlock).map((f) => f.address);
+    const balances = {} as Balances;
+    if (!farmers.length) return balances;
+    const rawBalances = await api.multiCall({ target: token, abi: "erc20:balanceOf", calls: farmers });
+    let total = BigInt(0);
+    for (const b of rawBalances) total += BigInt(b);
+    sumSingleBalance(balances, "peggedUSD", Number(total) / 10 ** DECIMALS);
+    return balances;
+  };
+}
+
+for (const chain of Object.keys(L2_FARMERS) as (keyof typeof chainContracts)[])
+  adapter[chain].unreleased = l2FarmerUnreleased(chain);
 
 export default adapter;
