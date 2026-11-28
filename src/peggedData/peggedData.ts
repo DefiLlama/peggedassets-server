@@ -421,37 +421,6 @@ export default [
     auditLinks: "https://inverse.finance/audits",
     twitter: "https://twitter.com/InverseFinance",
     wiki: "https://wiki.defillama.com/wiki/DOLA",
-    chainConfig: {
-      chains: {
-        ethereum: {
-          issued: ["0x865377367054516e17014CcdED1e7d814EDC9ce4"],
-        },
-        fantom: {
-          bridgedFromETH: ["0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c"],
-        },
-        optimism: {
-          bridgedFromETH: ["0x8aE125E8653821E851F12A49F7765db9a9ce7384"],
-        },
-        bsc: {
-          bridgedFromETH: ["0x2f29bc0ffaf9bff337b31cbe6cb5fb3bf12e5840"],
-        },
-        arbitrum: {
-          bridgedFromETH: ["0x6a7661795c374c0bfc635934efaddff3a7ee23b6"],
-        },
-        polygon: {
-          bridgedFromETH: ["0xbc2b48bc930ddc4e5cfb2e87a45c379aab3aac5c"],
-          bridge: "polygon",
-        },
-        avax: {
-          bridgedFromETH: ["0x221743dc9e954be4f86844649bf19b43d6f8366d"],
-          bridge: "multichain",
-        },
-        base: {
-          bridgedFromETH: ["0x4621b7A9c75199271F773Ebd9A499dbd165c3191"],
-          bridge: "base",
-        },
-      },
-    },
   },
   {
     id: "16",
@@ -493,6 +462,7 @@ export default [
     gecko_id: "husd",
     cmcId: "4779",
     pegType: "peggedUSD",
+    deadFrom: "2022-11-01",
     pegMechanism: "fiat-backed",
     priceSource: "defillama",
     auditLinks: null,
@@ -13805,6 +13775,404 @@ export default [
     },
   },
   {
+    id: "451",
+    name: "Twin Argentine Peso",
+    address: "arbitrum:0x59863989d080B22476DB95656d0C3CC18be92214",
+    symbol: "ARGt",
+    url: "https://twin.finance/stablecoins",
+    description:
+      "ARGt is an Argentine peso stablecoin for payments and settlement, issued by Twin Finance S.A.S. (Uruguay) and pegged 1:1 to the ARS.",
+    mintRedeemDescription:
+      "Twin Finance S.A.S. mints and redeems ARGt at 1:1 with the ARS for authorized integrators (exchanges, wallets and fintechs) that have completed its onboarding and compliance process; minting and redemption follow the Twin Stablecoins Terms of Service (https://cdn.twin.finance/docs/TwinStablecoins_TermsOfService.pdf). Reserves are held in Argentine government securities. Twin publishes periodic reserve reports, each accompanied by an agreed-upon procedures report from an independent accounting firm.",
+    onCoinGecko: "false",
+    gecko_id: "twin-argt",
+    cmcId: null,
+    pegType: "peggedARS",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/twinfinance_",
+    wiki: "https://twin.finance/transparency",
+    module: "twin-argt",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x59863989d080B22476DB95656d0C3CC18be92214"],
+          unreleased: [
+            "0x1c1f3cd3bcBcaAF16E9566C686cfd975E49bBd64",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
+            "0x3F5C58f0b2400Cd82eA7ea6c3B5794a1228f3Df9",
+          ],
+        },
+        base: {
+          issued: ["0xf016413834E6D1A14F3D628B11D6Ef725a6bdbDD"],
+          unreleased: [
+            "0x1c1f3cd3bcBcaAF16E9566C686cfd975E49bBd64",
+            "0xF5463D06C7635dd704DD0cd1F0058f4e58b5A64B",
+            "0x3F5C58f0b2400Cd82eA7ea6c3B5794a1228f3Df9",
+          ],
+        },
+        polygon: {
+          issued: ["0x50464bE58912745447E24EB3bbDedcee10D3E056"],
+          unreleased: [
+            "0x1c1f3cd3bcBcaAF16E9566C686cfd975E49bBd64",
+            "0x3F5C58f0b2400Cd82eA7ea6c3B5794a1228f3Df9",
+          ],
+        },
+        ethereum: {
+          issued: ["0x59863989d080B22476DB95656d0C3CC18be92214"],
+          unreleased: [
+            "0x1c1f3cd3bcBcaAF16E9566C686cfd975E49bBd64",
+          ],
+        },
+        avax: {
+          issued: ["0x2E4e93eCA2E16E4989b894e188B7F7fC0175703B"],
+          unreleased: [
+            "0x1c1f3cd3bcBcaAF16E9566C686cfd975E49bBd64",
+          ],
+        },
+      },
+    },
+  },
+  {
+    id: "452",
+    name: "Twin Brazilian Real",
+    address: "arbitrum:0xC4ed6Aba5373D78E160F4df39e011F078Be54df8",
+    symbol: "BRAt",
+    url: "https://twin.finance/stablecoins",
+    description:
+      "BRAt is a Brazilian real stablecoin for payments and settlement, issued by Twin Finance S.A.S. (Uruguay) and pegged 1:1 to the BRL.",
+    mintRedeemDescription:
+      "Twin Finance S.A.S. mints and redeems BRAt at 1:1 with the BRL for authorized integrators (exchanges, wallets and fintechs) that have completed its onboarding and compliance process; minting and redemption follow the Twin Stablecoins Terms of Service (https://cdn.twin.finance/docs/TwinStablecoins_TermsOfService.pdf). Reserves are held in BRL-denominated stablecoins. Twin publishes periodic reserve reports, each accompanied by an agreed-upon procedures report from an independent accounting firm.",
+    onCoinGecko: "false",
+    gecko_id: "twin-brat",
+    cmcId: null,
+    pegType: "peggedREAL",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/twinfinance_",
+    wiki: "https://twin.finance/transparency",
+    module: "twin-brat",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xC4ed6Aba5373D78E160F4df39e011F078Be54df8"],
+          unreleased: [
+            "0xEA4375e9059dECd71D247260f8f1184c58928027",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
+          ],
+        },
+        base: {
+          issued: ["0xFEE29845569570F8e0119291dff77B7b93283aaB"],
+          unreleased: [
+            "0xEA4375e9059dECd71D247260f8f1184c58928027",
+          ],
+        },
+        polygon: {
+          issued: ["0x59863989d080B22476DB95656d0C3CC18be92214"],
+          unreleased: [
+            "0xEA4375e9059dECd71D247260f8f1184c58928027",
+          ],
+        },
+        ethereum: {
+          issued: ["0xFEE29845569570F8e0119291dff77B7b93283aaB"],
+          unreleased: [
+            "0xEA4375e9059dECd71D247260f8f1184c58928027",
+          ],
+        },
+        avax: {
+          issued: ["0xC4ed6Aba5373D78E160F4df39e011F078Be54df8"],
+          unreleased: [
+            "0xEA4375e9059dECd71D247260f8f1184c58928027",
+          ],
+        },
+      },
+    },
+  },
+  {
+    id: "453",
+    name: "Twin Colombian Peso",
+    address: "arbitrum:0xa16d5DB80A45157E0e451750B81FF0CC0b61d558",
+    symbol: "COLt",
+    url: "https://twin.finance/stablecoins",
+    description:
+      "COLt is a Colombian peso stablecoin for payments and settlement, issued by Twin Finance S.A.S. (Uruguay) and pegged 1:1 to the COP.",
+    mintRedeemDescription:
+      "Twin Finance S.A.S. mints and redeems COLt at 1:1 with the COP for authorized integrators (exchanges, wallets and fintechs) that have completed its onboarding and compliance process; minting and redemption follow the Twin Stablecoins Terms of Service (https://cdn.twin.finance/docs/TwinStablecoins_TermsOfService.pdf). Reserves are held in USD-denominated stablecoins, translated to COP at the reference exchange rate. Twin publishes periodic reserve reports, each accompanied by an agreed-upon procedures report from an independent accounting firm.",
+    onCoinGecko: "false",
+    gecko_id: "twin-colt",
+    cmcId: null,
+    pegType: "peggedCOP",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/twinfinance_",
+    wiki: "https://twin.finance/transparency",
+    module: "twin-colt",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xa16d5DB80A45157E0e451750B81FF0CC0b61d558"],
+          unreleased: [
+            "0xe66213650A22Fa78546bBFbcCc647ee9BAb75A8a",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
+            "0x3F5C58f0b2400Cd82eA7ea6c3B5794a1228f3Df9",
+          ],
+        },
+        base: {
+          issued: ["0xD70ad085684b2A9f4B5d54D7BDB2ecA37a273216"],
+          unreleased: [
+            "0xe66213650A22Fa78546bBFbcCc647ee9BAb75A8a",
+            "0x3F5C58f0b2400Cd82eA7ea6c3B5794a1228f3Df9",
+          ],
+        },
+        polygon: {
+          issued: ["0x1EA02bA45fC146F534b371c49fBB2a4c86dce93d"],
+          unreleased: [
+            "0xe66213650A22Fa78546bBFbcCc647ee9BAb75A8a",
+          ],
+        },
+        ethereum: {
+          issued: ["0xf016413834E6D1A14F3D628B11D6Ef725a6bdbDD"],
+          unreleased: [
+            "0xe66213650A22Fa78546bBFbcCc647ee9BAb75A8a",
+          ],
+        },
+        avax: {
+          issued: ["0xe8dbC4680235cCAeFf48e4C0B0EaceeBb89E5e17"],
+          unreleased: [
+            "0xe66213650A22Fa78546bBFbcCc647ee9BAb75A8a",
+          ],
+        },
+      },
+    },
+  },
+  {
+    id: "454",
+    name: "Twin Mexican Peso",
+    address: "arbitrum:0xb96aA6babCcD738d6644ADd4912fE5eFbEBF5a25",
+    symbol: "MEXt",
+    url: "https://twin.finance/stablecoins",
+    description:
+      "MEXt is a Mexican peso stablecoin for payments and settlement, issued by Twin Finance S.A.S. (Uruguay) and pegged 1:1 to the MXN.",
+    mintRedeemDescription:
+      "Twin Finance S.A.S. mints and redeems MEXt at 1:1 with the MXN for authorized integrators (exchanges, wallets and fintechs) that have completed its onboarding and compliance process; minting and redemption follow the Twin Stablecoins Terms of Service (https://cdn.twin.finance/docs/TwinStablecoins_TermsOfService.pdf). Reserves are held in USD-denominated stablecoins and tokenized Mexican government bonds, translated to MXN where applicable at the reference exchange rate. Twin publishes periodic reserve reports, each accompanied by an agreed-upon procedures report from an independent accounting firm.",
+    onCoinGecko: "false",
+    gecko_id: "twin-mext",
+    cmcId: null,
+    pegType: "peggedMXN",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/twinfinance_",
+    wiki: "https://twin.finance/transparency",
+    module: "twin-mext",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xb96aA6babCcD738d6644ADd4912fE5eFbEBF5a25"],
+          unreleased: [
+            "0xa2421459B2b15c8a2Ab53995C6C6A31648506F1c",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
+          ],
+        },
+        base: {
+          issued: ["0x59863989d080B22476DB95656d0C3CC18be92214"],
+          unreleased: [
+            "0xa2421459B2b15c8a2Ab53995C6C6A31648506F1c",
+          ],
+        },
+        polygon: {
+          issued: ["0xb9A848a8E1AFf1a16A27F1AD3B66D873d5C38D62"],
+          unreleased: [
+            "0xa2421459B2b15c8a2Ab53995C6C6A31648506F1c",
+          ],
+        },
+        ethereum: {
+          issued: ["0x25DF36D0ec7D26EC791316167A5E949e65c9F8E5"],
+          unreleased: [
+            "0xa2421459B2b15c8a2Ab53995C6C6A31648506F1c",
+          ],
+        },
+        avax: {
+          issued: ["0x899438713f62B04d6CD8e8709986F7256fB6E3d9"],
+          unreleased: [
+            "0xa2421459B2b15c8a2Ab53995C6C6A31648506F1c",
+          ],
+        },
+      },
+    },
+  },
+  {
+    id: "455",
+    name: "Twin Peruvian Sol",
+    address: "arbitrum:0x899438713f62B04d6CD8e8709986F7256fB6E3d9",
+    symbol: "PERt",
+    url: "https://twin.finance/stablecoins",
+    description:
+      "PERt is a Peruvian sol stablecoin for payments and settlement, issued by Twin Finance S.A.S. (Uruguay) and pegged 1:1 to the PEN.",
+    mintRedeemDescription:
+      "Twin Finance S.A.S. mints and redeems PERt at 1:1 with the PEN for authorized integrators (exchanges, wallets and fintechs) that have completed its onboarding and compliance process; minting and redemption follow the Twin Stablecoins Terms of Service (https://cdn.twin.finance/docs/TwinStablecoins_TermsOfService.pdf). Reserves are held in USD-denominated stablecoins, translated to PEN at the reference exchange rate. Twin publishes periodic reserve reports, each accompanied by an agreed-upon procedures report from an independent accounting firm.",
+    onCoinGecko: "false",
+    gecko_id: "twin-pert",
+    cmcId: null,
+    pegType: "peggedPEN",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/twinfinance_",
+    wiki: "https://twin.finance/transparency",
+    module: "twin-pert",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x899438713f62B04d6CD8e8709986F7256fB6E3d9"],
+          unreleased: [
+            "0x0dBA6EE13D767292CB09dF386963338bdb104ee2",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
+          ],
+        },
+        base: {
+          issued: ["0xD09ABA2969B822d66DC4Bc3bB58eE520Bcf9f0C3"],
+          unreleased: [
+            "0x0dBA6EE13D767292CB09dF386963338bdb104ee2",
+          ],
+        },
+        polygon: {
+          issued: ["0x53Bd6E8Af3DA05781afC98729378424f66c9Da52"],
+          unreleased: [
+            "0x0dBA6EE13D767292CB09dF386963338bdb104ee2",
+          ],
+        },
+        ethereum: {
+          issued: ["0x6d937FF125CAeb81B33EE166be50f482d61e1466"],
+          unreleased: [
+            "0x0dBA6EE13D767292CB09dF386963338bdb104ee2",
+          ],
+        },
+        avax: {
+          issued: ["0xa16d5DB80A45157E0e451750B81FF0CC0b61d558"],
+          unreleased: [
+            "0x0dBA6EE13D767292CB09dF386963338bdb104ee2",
+          ],
+        },
+      },
+    },
+  },
+  {
+    id: "456",
+    name: "Twin Chilean Peso",
+    address: "arbitrum:0xe8dbC4680235cCAeFf48e4C0B0EaceeBb89E5e17",
+    symbol: "CHLt",
+    url: "https://twin.finance/stablecoins",
+    description:
+      "CHLt is a Chilean peso stablecoin for payments and settlement, issued by Twin Finance S.A.S. (Uruguay) and pegged 1:1 to the CLP.",
+    mintRedeemDescription:
+      "Twin Finance S.A.S. mints and redeems CHLt at 1:1 with the CLP for authorized integrators (exchanges, wallets and fintechs) that have completed its onboarding and compliance process; minting and redemption follow the Twin Stablecoins Terms of Service (https://cdn.twin.finance/docs/TwinStablecoins_TermsOfService.pdf). Reserves are held in USD-denominated stablecoins, translated to CLP at the reference exchange rate. Twin publishes periodic reserve reports, each accompanied by an agreed-upon procedures report from an independent accounting firm.",
+    onCoinGecko: "false",
+    gecko_id: "twin-chlt",
+    cmcId: null,
+    pegType: "peggedCLP",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/twinfinance_",
+    wiki: "https://twin.finance/transparency",
+    module: "twin-chlt",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0xe8dbC4680235cCAeFf48e4C0B0EaceeBb89E5e17"],
+          unreleased: [
+            "0xdC5953c8c6335B5010E19415afB46B86983814E5",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
+          ],
+        },
+        base: {
+          issued: ["0x95ef2370166b250e7CE3b8F236c7e7E9feD12c2e"],
+          unreleased: [
+            "0xdC5953c8c6335B5010E19415afB46B86983814E5",
+          ],
+        },
+        polygon: {
+          issued: ["0xfa658f62CA6cacaa769035AdBcbeD9Bf75f9f72D"],
+          unreleased: [
+            "0xdC5953c8c6335B5010E19415afB46B86983814E5",
+          ],
+        },
+        ethereum: {
+          issued: ["0x350fc4F9aA8Fd42db5e8a7242E80beaeD76Db7bb"],
+          unreleased: [
+            "0xdC5953c8c6335B5010E19415afB46B86983814E5",
+          ],
+        },
+        avax: {
+          issued: ["0xb96aA6babCcD738d6644ADd4912fE5eFbEBF5a25"],
+          unreleased: [
+            "0xdC5953c8c6335B5010E19415afB46B86983814E5",
+          ],
+        },
+      },
+    },
+  },
+  {
+    id: "457",
+    name: "Twin Bolivian Boliviano",
+    address: "arbitrum:0x1edF5E61B6a4Fe19FEf3A695328F61aAa07728eA",
+    symbol: "BOLt",
+    url: "https://twin.finance/stablecoins",
+    description:
+      "BOLt is a Bolivian boliviano stablecoin for payments and settlement, issued by Twin Finance S.A.S. (Uruguay) and pegged 1:1 to the BOB.",
+    mintRedeemDescription:
+      "Twin Finance S.A.S. mints and redeems BOLt at 1:1 with the BOB for authorized integrators (exchanges, wallets and fintechs) that have completed its onboarding and compliance process; minting and redemption follow the Twin Stablecoins Terms of Service (https://cdn.twin.finance/docs/TwinStablecoins_TermsOfService.pdf). Reserves are held in USD-denominated stablecoins, translated to BOB at the reference exchange rate. Twin publishes periodic reserve reports, each accompanied by an agreed-upon procedures report from an independent accounting firm.",
+    onCoinGecko: "false",
+    gecko_id: "twin-bolt",
+    cmcId: null,
+    pegType: "peggedBOB",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: null,
+    twitter: "https://x.com/twinfinance_",
+    wiki: "https://twin.finance/transparency",
+    module: "twin-bolt",
+    chainConfig: {
+      chains: {
+        arbitrum: {
+          issued: ["0x1edF5E61B6a4Fe19FEf3A695328F61aAa07728eA"],
+          unreleased: [
+            "0x95DCB54CE0AF55824A94cA7Ec5901F51938a8C06",
+            "0x023A5FD6C13C01855B5aE5F75BED5455caAEAf0b",
+          ],
+        },
+        base: {
+          issued: ["0x1d2E8C1Fe82ab2AD8dc43eD98A2F507Dfb5b4995"],
+          unreleased: [
+            "0x95DCB54CE0AF55824A94cA7Ec5901F51938a8C06",
+          ],
+        },
+        polygon: {
+          issued: ["0x20ECA820D3cd00ed9C9f2861Cdf6429baCD8ed55"],
+          unreleased: [
+            "0x95DCB54CE0AF55824A94cA7Ec5901F51938a8C06",
+          ],
+        },
+        ethereum: {
+          issued: ["0x619FB742CB2B77361793DAaEBac8017642178a56"],
+          unreleased: [
+            "0x95DCB54CE0AF55824A94cA7Ec5901F51938a8C06",
+          ],
+        },
+        avax: {
+          issued: ["0x1edF5E61B6a4Fe19FEf3A695328F61aAa07728eA"],
+          unreleased: [
+            "0x95DCB54CE0AF55824A94cA7Ec5901F51938a8C06",
+          ],
+        },
+      },
+    },
+  },
+  {
     id: "458",
     name: "Dirham-Backed Stablecoin",
     address: "adi:0x1211f0cfe66739433c1330e21f4951b80e813479",
@@ -14735,8 +15103,76 @@ export default [
   },
   {
     id: "491",
+    name: "Alchemix alUSDb",
+    address: "base:0x877014E21c32feA108B6A1f45f367efc9a2d9B9F",
+    symbol: "alUSDb",
+    url: "https://alchemix.fi/",
+    description:
+      "alUSDb is the synthetic dollar of Alchemix V3 on Base. It is a separate token from alUSD: it is minted only by the Base Alchemist as debt against USDC deposited into the Alchemix yield vault on Base, and it is not bridged to or from other chains.",
+    mintRedeemDescription:
+      "Users deposit USDC into the Alchemix yield vault on Base and borrow alUSDb against the vault shares through the Alchemist. alUSDb is burned when a borrower repays, or when a holder stakes it in the Transmuter, which pays out the underlying vault shares at face value after a fixed term (earlier exit pays a fee).",
+    onCoinGecko: "false",
+    gecko_id: "alchemix-usd-base",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "crypto-backed",
+    priceSource: "defillama",
+    auditLinks: ["https://docs.alchemix.fi/user/safety/security"],
+    twitter: "https://twitter.com/AlchemixFi",
+    wiki: "https://wiki.defillama.com/wiki/Alchemix",
+    // Backed by USDC held in the Base yield vault, which is already tracked stablecoin supply.
+    doublecounted: true,
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x877014E21c32feA108B6A1f45f367efc9a2d9B9F"],
+        },
+      },
+    },
+  },
+  {
+    id: "492",
+    name: "Brazilian Real Stablecoin",
+    address: "base:0x0000006238e3c7797ae71827da303560bae1b125",
+    symbol: "BRS",
+    url: "https://www.nora.finance/",
+    description:
+      "BRS (Brazilian Real Stablecoin) is a stablecoin issued by Nora Finance, pegged 1:1 to the Brazilian real (BRL) and fully backed. It is natively deployed on Base, Solana, Polygon, Ethereum and Optimism.",
+    mintRedeemDescription:
+      "BRS is minted and burned on demand, 1:1 for Brazilian reais. Nora Finance coordinates the infrastructure, while approved partners participate in primary issuance and redemption. Monthly proof of reserves is published on Nora's transparency page and by Fact Finance.",
+    onCoinGecko: "true",
+    gecko_id: "nora-brazil-real",
+    cmcId: null,
+    pegType: "peggedREAL",
+    pegMechanism: "fiat-backed",
+    priceSource: "coingecko",
+    auditLinks: ["https://www.nora.finance/transparency", "https://fact.finance/en/reserves/nora/"],
+    twitter: "https://x.com/norafinancexyz",
+    wiki: "https://www.nora.finance/docs/integrate/core-concepts/brs-token",
+    chainConfig: {
+      chains: {
+        base: {
+          issued: ["0x0000006238e3c7797ae71827da303560bae1b125"],
+        },
+        solana: {
+          issued: ["BRSxQRUaGswjLs7ewcH7uXj3r7SgmfKSSLLXyCKHZtUo"],
+        },
+        polygon: {
+          issued: ["0x0000006238e3c7797ae71827da303560bae1b125"],
+        },
+        ethereum: {
+          issued: ["0x0000006238e3c7797ae71827da303560bae1b125"],
+        },
+        optimism: {
+          issued: ["0x0000006238e3c7797ae71827da303560bae1b125"],
+        },
+      },
+    },
+  },
+  {
+    id: "493",
     name: "Braza USD",
-    address: "ripple:5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc",
+    address: "ripple:5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc",Expand commentComment on line R14739
     symbol: "USDB",
     url: "https://www.brazabank.com.br/",
     description:
@@ -14755,13 +15191,13 @@ export default [
     chainConfig: {
       chains: {
         ripple: {
-          issued: ["5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc"],
+          issued: ["5553444200000000000000000000000000000000.rB3y9EPnq1ZrZP3aXgfyfdXQThzdXMrLMc"],Expand commentComment on line R14758
         },
       },
     },
   },
   {
-    id: "492",
+    id: "494",
     name: "Braza BRL",
     address: "ripple:4242524C00000000000000000000000000000000.rH5CJsqvNqZGxrMyGaqLEoMWRYcVTAPZMt",
     symbol: "BBRL",

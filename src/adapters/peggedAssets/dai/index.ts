@@ -86,6 +86,28 @@ async function chainMinted(chain: string, decimals: number) {
   };
 }
 
+const LITE_PSM = "0xf6e72Db5454dd049d0788e411b06CfAF16853042";
+
+async function litePsmBuffer() {
+  return async function (
+    _timestamp: number,
+    _ethBlock: number,
+    _chainBlocks: ChainBlocks
+  ) {
+    let balances = {} as Balances;
+    const buffer = (
+      await sdk.api.erc20.balanceOf({
+        target: chainContracts.ethereum.issued[0],
+        owner: LITE_PSM,
+        block: _chainBlocks?.ethereum,
+        chain: "ethereum",
+      })
+    ).output;
+    sumSingleBalance(balances, "peggedUSD", buffer / 10 ** 18, "issued", false);
+    return balances;
+  };
+}
+
 async function fromETH(
   owner: string,
   decimals: number,
@@ -186,6 +208,7 @@ async function kavaBridged() {
 const adapter: PeggedIssuanceAdapter = {
   ethereum: {
     minted: chainMinted("ethereum", 18),
+    unreleased: litePsmBuffer(),
 
   },
   solana: {
