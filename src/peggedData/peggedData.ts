@@ -15225,4 +15225,44 @@ export default [
       },
     },
   },
+  {
+    id: "495",
+    name: "QUSD",
+    address: "ethereum:0xb57bf3c50f20096723b46645f741f632aef220fa",
+    symbol: "QUSD",
+    url: "https://qvtx.net",
+    description:
+      "QUSD is a fiat-backed USD stablecoin issued by QVTX (Quantvestrix Inc.), a sovereign digital financial infrastructure provider. Each QUSD token is fully collateralized by fiat deposits held in reserve.",
+    mintRedeemDescription:
+      "QUSD is minted by locking fiat collateral through the QVTX treasury and burned on redemption, both 1:1.",
+    onCoinGecko: "false",
+    gecko_id: null,
+    module: "qvtx-qusd",
+    cmcId: null,
+    pegType: "peggedUSD",
+    pegMechanism: "fiat-backed",
+    priceSource: "defillama",
+    auditLinks: [],
+    twitter: "https://twitter.com/qvtxnet",
+    wiki: "https://qvtx.net",
+    chainConfig: {
+      chains: {
+        ethereum: {
+          issued: ["0xb57bf3c50f20096723b46645f741f632aef220fa"],
+        },
+        bsc: {
+          issued: ["0x63C4664CeB3e93ef22d1E56826395Fb1C927C118"],
+        },
+        polygon: {
+          issued: ["0x8d58dEbF89740Da1416d5f1904E4286096174B5A"],
+        },
+        base: {
+          issued: ["0x02DAE538b3Cf726c04990520454Dd7AD42550b3F"],
+        },
+        arbitrum: {
+          issued: ["0x04321b4Dd2A87dc285E51Fb809acF23D5ca18E17"],
+        },
+      },
+    },
+  },
 ] as PeggedAsset[];
